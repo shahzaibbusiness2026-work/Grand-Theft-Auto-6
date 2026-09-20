@@ -13,14 +13,15 @@ const COLS = [
       { label: "Missions", href: "/missions" },
       { label: "Map", href: "/map" },
       { label: "Collectibles", href: "/collectibles" },
-      { label: "News", href: "/news" },
+      { label: "Radio Stations", href: "/radio" },
     ],
   },
   {
-    title: "Community",
+    title: "Community & Intel",
     links: [
       { label: "Blog", href: "/blog" },
       { label: "Guides", href: "/guides" },
+      { label: "Cheats & Codes", href: "/cheats" },
       { label: "Tools", href: "/tools" },
       { label: "Dashboard", href: "/dashboard" },
     ],
@@ -28,27 +29,27 @@ const COLS = [
   {
     title: "Support",
     links: [
-      { label: "FAQ", href: "/contact" },
-      { label: "Help Center", href: "/contact" },
+      { label: "About Atlas", href: "/about" },
       { label: "Contact Us", href: "/contact" },
       { label: "Report Bug", href: "/contact" },
+      { label: "Editorial Admin", href: "/admin" },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Privacy Policy", href: "/contact" },
-      { label: "Terms of Service", href: "/contact" },
-      { label: "Cookie Policy", href: "/contact" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+      { label: "Cookie Policy", href: "/cookies" },
     ],
   },
 ];
 
 const SOCIALS = [
-  { icon: Instagram, label: "Instagram", href: "#" },
-  { icon: Twitter, label: "Twitter / X", href: "#" },
-  { icon: Youtube, label: "YouTube", href: "#" },
-  { icon: Gamepad2, label: "Discord", href: "#" },
+  { icon: Instagram, label: "Rockstar Games Instagram", href: "https://www.instagram.com/rockstargames" },
+  { icon: Twitter, label: "Rockstar Games X / Twitter", href: "https://twitter.com/rockstargames" },
+  { icon: Youtube, label: "Rockstar Games YouTube", href: "https://www.youtube.com/@RockstarGames" },
+  { icon: Gamepad2, label: "GTA Community Discord", href: "https://discord.gg/gta" },
 ];
 
 export function Footer() {
@@ -70,7 +71,9 @@ export function Footer() {
               <a
                 key={label}
                 href={href}
-                aria-label={`Follow us on ${label}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-accent/40 text-accent transition-colors hover:bg-accent hover:text-white"
               >
                 <Icon className="h-4 w-4" />
@@ -102,11 +105,11 @@ export function Footer() {
             © 2026 GTA 6 Atlas. Unofficial fan site — not affiliated with Rockstar Games or Take-Two Interactive.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/contact" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
             <span className="text-border" aria-hidden="true">|</span>
-            <Link href="/contact" className="hover:text-primary transition-colors">Terms of Service</Link>
+            <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
             <span className="text-border" aria-hidden="true">|</span>
-            <Link href="/contact" className="hover:text-primary transition-colors">Cookie Policy</Link>
+            <Link href="/cookies" className="hover:text-primary transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>

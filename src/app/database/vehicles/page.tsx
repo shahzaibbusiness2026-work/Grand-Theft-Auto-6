@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Car,
   Bike,
@@ -252,7 +253,7 @@ export default function VehicleDatabasePage() {
             </div>
             <div className="no-scrollbar mt-5 flex gap-4 overflow-x-auto pb-1">
               {topVehicles.map((v) => (
-                <a key={v.rank} href="/vehicles/visione" className="card-surface w-48 shrink-0 overflow-hidden">
+                <Link key={v.rank} href="/vehicles/visione" className="card-surface w-48 shrink-0 overflow-hidden">
                   <div className="relative h-24">
                     <Image
                       src={v.img}
@@ -270,7 +271,7 @@ export default function VehicleDatabasePage() {
                     <p className="text-[9px] uppercase tracking-wider text-muted-foreground">Top Speed</p>
                     <p className="mt-0.5 font-display text-sm font-extrabold text-accent">{v.stat}</p>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
           </div>

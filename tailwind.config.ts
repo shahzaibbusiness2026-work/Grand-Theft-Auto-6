@@ -43,6 +43,14 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        elevated: {
+          DEFAULT: "hsl(var(--elevated))",
+          foreground: "hsl(var(--elevated-foreground))",
+        },
+        coral: {
+          DEFAULT: "hsl(var(--coral))",
+          accent: "#F3A398",
+        },
         neon: {
           cyan: "#00F0FF",
           cyber: "#00F0FF",

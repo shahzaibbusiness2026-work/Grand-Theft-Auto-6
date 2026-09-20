@@ -46,10 +46,10 @@ export default function ContactPage() {
           <div className="relative px-6 py-12 sm:px-10">
             <p className="section-eyebrow text-accent">Contact Us</p>
             <h1 className="mt-3 max-w-md font-display text-4xl font-extrabold leading-tight">
-              We'd Love to <br /> Hear from <span className="text-primary">You!</span>
+              We&apos;d Love to <br /> Hear from <span className="text-primary">You!</span>
             </h1>
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-              Have questions, feedback, or need help? Send us a message and we'll get back to you as soon as possible.
+              Have questions, feedback, or need help? Send us a message and we&apos;ll get back to you as soon as possible.
             </p>
           </div>
         </div>

@@ -227,7 +227,7 @@ export function CollectiblesClient() {
             <HelpCircle className="h-10 w-10 text-slate-500 mx-auto mb-3" />
             <h3 className="font-display text-lg font-bold text-white">No Collectibles Found</h3>
             <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
-              No items match your filter criteria. Try expanding your search or selecting "All Categories".
+              No items match your filter criteria. Try expanding your search or selecting &quot;All Categories&quot;.
             </p>
             <button
               onClick={() => {

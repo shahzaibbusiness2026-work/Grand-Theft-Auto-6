@@ -39,6 +39,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/news",
     "/about",
     "/contact",
+    "/privacy",
+    "/terms",
+    "/cookies",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: lastUpdated,

@@ -28,6 +28,13 @@ export async function POST(req: Request) {
       );
     }
 
+    if (query.trim().length > 500) {
+      return NextResponse.json(
+        { error: "Query exceeds maximum allowed length of 500 characters." },
+        { status: 400 }
+      );
+    }
+
     const q = query.toLowerCase().trim();
 
     // 1. Vehicle Queries

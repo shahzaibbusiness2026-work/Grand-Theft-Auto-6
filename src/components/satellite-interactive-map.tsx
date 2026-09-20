@@ -44,6 +44,9 @@ import {
   FileText,
   Copy,
   Layers2,
+  Target,
+  ShoppingBag,
+  Flame,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

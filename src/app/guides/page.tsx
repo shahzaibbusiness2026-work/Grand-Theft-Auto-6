@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   Search,
   Clock,
@@ -191,7 +192,7 @@ export default function GuidesPage() {
               <Donut value={42} size={92} label="42%" />
               <div>
                 <p className="text-[13px] font-bold">60 / 142 Guides Read</p>
-                <p className="mt-1 text-xs text-muted-foreground">Keep going, you're doing great!</p>
+                <p className="mt-1 text-xs text-muted-foreground">Keep going, you&apos;re doing great!</p>
                 <Button variant="outline" size="sm" className="mt-3 h-8">
                   View My Progress
                 </Button>
@@ -202,7 +203,7 @@ export default function GuidesPage() {
           <div className="card-surface p-5">
             <div className="flex items-center justify-between">
               <h2 className="font-display text-sm font-extrabold uppercase tracking-wider">Popular This Week</h2>
-              <a href="/guides" className="text-xs font-semibold text-accent">View All</a>
+              <Link href="/guides" className="text-xs font-semibold text-accent">View All</Link>
             </div>
             <ul className="mt-4 space-y-3">
               {weekTop.map((w, i) => (

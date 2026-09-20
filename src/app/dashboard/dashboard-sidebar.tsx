@@ -241,7 +241,7 @@ export function DashboardSidebar({
         <div className="space-y-1">
           {!isCollapsed && (
             <p className="px-2.5 pb-1 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-[#00F0FF]/80">
-              // Tracker Modules
+              {"// Tracker Modules"}
             </p>
           )}
           <nav className="space-y-1" aria-label="Tracker Sections">
@@ -346,7 +346,7 @@ export function DashboardSidebar({
         <div className="space-y-1 pt-2 border-t border-white/10">
           {!isCollapsed && (
             <p className="px-2.5 pb-1 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-amber-400/90">
-              // Atlas Intelligence
+              {"// Atlas Intelligence"}
             </p>
           )}
           <nav className="space-y-1" aria-label="Atlas Features">
