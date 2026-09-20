@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Map, Newspaper, Car } from "lucide-react";
 import { HeroBackground } from "./HeroBackground";
 import { Countdown } from "./Countdown";
@@ -16,31 +17,23 @@ export function HeroSection() {
 
       {/* Accessible heading for SEO */}
       <h1 id="hero-heading" className="sr-only">
-        Grand Theft Auto VI — A new city. Every detail.
+        Grand Theft Auto VI — Official Database & Interactive Atlas
       </h1>
 
       {/* 2. MAIN HERO CONTENT (Left Column) */}
       <div className="relative z-10 mx-auto w-full max-w-7xl flex flex-col justify-center flex-1">
-        <div className="flex flex-col items-start text-left space-y-4 sm:space-y-5 max-w-2xl">
-          {/* Eyebrow Tag */}
-          <p className="font-mono text-xs sm:text-[13px] font-bold uppercase tracking-[0.25em] text-slate-400">
-            YOUR GUIDE TO VICE CITY
-          </p>
-
-          {/* Main Headline */}
-          <div className="space-y-0.5">
-            <h2 className="text-4xl sm:text-6xl lg:text-[4.5rem] font-black tracking-tight leading-[1.02] text-white">
-              A new city.
-            </h2>
-            <h2 className="text-4xl sm:text-6xl lg:text-[4.5rem] font-black tracking-tight leading-[1.02] bg-gradient-to-r from-[#e879f9] via-[#f472b6] to-[#fb7185] bg-clip-text text-transparent">
-              Every detail.
-            </h2>
+        <div className="flex flex-col items-start text-left space-y-5 max-w-2xl">
+          {/* Official Grand Theft Auto VI Logo */}
+          <div className="pt-1 pb-1">
+            <Image
+              src="/img/gta6-official-logo.png"
+              alt="Grand Theft Auto VI"
+              width={520}
+              height={350}
+              priority
+              className="w-auto h-28 sm:h-36 lg:h-44 object-contain filter drop-shadow-[0_16px_36px_rgba(0,0,0,0.85)] hover:scale-[1.02] transition-transform duration-300"
+            />
           </div>
-
-          {/* Narrative Pitch */}
-          <p className="text-sm sm:text-base text-slate-300 max-w-md leading-relaxed font-normal pt-1">
-            Explore the latest stories, discover vehicles and weapons, and plan your next adventure.
-          </p>
 
           {/* Countdown Card */}
           <Countdown />
