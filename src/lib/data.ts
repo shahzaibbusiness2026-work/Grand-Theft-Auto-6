@@ -10,6 +10,18 @@ export interface Character {
   img: string;
   filter?: string;
   featured?: boolean;
+  alias?: string;
+  voiceActor?: string;
+  origin?: string;
+  specialty?: string;
+  perk?: string;
+  vehicle?: string;
+  weapons?: string[];
+  affiliation?: string;
+  status?: "Active" | "Incarcerated" | "Under Surveillance" | "Civilian" | "Unknown";
+  quote?: string;
+  bio?: string[];
+  tags?: string[];
 }
 
 export const roleColor: Record<Character["role"], string> = {
@@ -21,18 +33,282 @@ export const roleColor: Record<Character["role"], string> = {
 };
 
 export const characters: Character[] = [
-  { id: "lucia", name: "Lucia Caminos", role: "Protagonist", desc: "A newly released prison inmate trying to build a better life.", img: "/img/char-lucia.jpg", featured: true },
-  { id: "jason", name: "Jason Duval", role: "Protagonist", desc: "A veteran, smuggler and Lucia's partner in crime.", img: "/img/char-jason.jpg", featured: true },
-  { id: "cal", name: "Cal Hampton", role: "Antagonist", desc: "Ruthless businessman with ties across Leonida.", img: "/img/char-cal.jpg", featured: true },
-  { id: "heder", name: "Brian Heder", role: "Supporting", desc: "Owner of Brian's Boat Works & Marina with deep ties across the waterfront.", img: "/img/char-cop.jpg", featured: true },
-  { id: "roxy", name: "Roxy Michaels", role: "Civilian", desc: "Vice City influencer and member of the Real Dimez duo.", img: "/img/char-roxy.jpg" },
-  { id: "bobbie", name: "Boobie Ike", role: "Supporting", desc: "Real estate mogul and fixer behind Boobie Ike Real Estate.", img: "/img/char-bobbie.jpg", featured: true },
-  { id: "dre", name: "Dre'Quan Priest", role: "Supporting", desc: "Community leader and street icon caught between two worlds.", img: "/img/char-dre.jpg", featured: true },
-  { id: "raul", name: "Raul Bautista", role: "Supporting", desc: "Boat mechanic and aviator who knows every dock in Leonida.", img: "/img/char-raul.jpg", featured: true },
-  { id: "dimez", name: "Real Dimez (Bae-Luxe)", role: "Civilian", desc: "High-profile nightlife duo making waves across Vice City clubs.", img: "/img/char-dimez.jpg", featured: true },
-  { id: "pamela", name: "Pamela Scott", role: "Civilian", desc: "Radio host of Wave 103 and voice of the coast.", img: "/img/char-pamela.jpg" },
-  { id: "phil", name: "Phil Cassidy", role: "Supporting", desc: "Demolitions expert with a storied past.", img: "/img/char-phil.jpg" },
-  { id: "grace", name: "Grace Anzora", role: "Law Enforcement", desc: "Detective chasing the Bonnie & Clyde of Leonida.", img: "/img/char-grace.jpg" },
+  {
+    id: "lucia",
+    name: "Lucia Caminos",
+    role: "Protagonist",
+    desc: "A fierce, strategic criminal rebuilding her life after release from the Leonida State Penitentiary.",
+    img: "/img/char-lucia.jpg",
+    featured: true,
+    alias: "The Mastermind",
+    voiceActor: "Manni L. Perez (Casting / Trailer Leak)",
+    origin: "Vice City Metro / Leonida Penitentiary",
+    specialty: "High-stakes Armed Robberies & Infiltration",
+    perk: "Tactical Reflexes (Bullet Time) & Lockpicking",
+    vehicle: "Bravado Banshee (Modified)",
+    weapons: ["Custom Glock 21", "M4 Tactical Carbine", "Sawed-off Shotgun"],
+    affiliation: "Jason Duval (Partner in Crime)",
+    status: "Active",
+    quote: "The only way we're gonna get through this is by sticking together, being a team.",
+    bio: [
+      "Lucia is the first female protagonist in the 3D Grand Theft Auto universe. Emerging from the Leonida State Penitentiary under supervised release, she immediately seeks to reclaim autonomy in a state fueled by greed, corruption, and social media excess.",
+      "Partnered with Jason, Lucia acts as the calculated tactician during armed heists, balancing high-risk convenience store raids with coordinated bank vault infiltrations across Vice City."
+    ],
+    tags: ["Dual Protagonist", "Heist Leader", "Ex-Convict", "Vice City"]
+  },
+  {
+    id: "jason",
+    name: "Jason Duval",
+    role: "Protagonist",
+    desc: "A veteran smuggler and Lucia's loyal partner handling logistics, heavy weapons, and high-speed escapes.",
+    img: "/img/char-jason.jpg",
+    featured: true,
+    alias: "The Enforcer",
+    voiceActor: "Gregory Connors (Confirmed / Speculated)",
+    origin: "Port Gellhorn & Keys Smuggling Routes",
+    specialty: "Off-Road Getaways & Heavy Weapons Combat",
+    perk: "Smuggler Eagle Eye (POI & Cache Detection)",
+    vehicle: "Declasse Tulip 1972 Muscle Car",
+    weapons: ["Vom Feuer Heavy Pistol", "Combat Shotgun", "Micro SMG"],
+    affiliation: "Lucia Caminos (Partner in Crime)",
+    status: "Active",
+    quote: "Trust. That's what it comes down to. You and me against the whole damn state.",
+    bio: [
+      "Jason is a hardened tactical operator with deep roots in the coastal and off-road smuggling corridors of the Leonida Keys and Port Gellhorn.",
+      "His relationship with Lucia forms the emotional and operational core of Grand Theft Auto VI, navigating criminal syndicates, corrupt federal agencies, and ruthless competitors."
+    ],
+    tags: ["Dual Protagonist", "Smuggler", "Getaway Driver", "Leonida Keys"]
+  },
+  {
+    id: "cal",
+    name: "Cal Hampton",
+    role: "Antagonist",
+    desc: "A ruthless real estate magnate and corporate predator buying up distressed waterfront properties across Leonida.",
+    img: "/img/char-cal.jpg",
+    featured: true,
+    alias: "The Developer",
+    voiceActor: "Rockstar Ensemble Cast",
+    origin: "Biscayne Bay & Vice City Financial District",
+    specialty: "Hostile Takeovers & Private Security Contracts",
+    perk: "Political Immunity & Paramilitary Enforcers",
+    vehicle: "Enus Jubilee Luxury SUV",
+    weapons: ["Concealed Snub-nose .38", "Contract Bodyguards"],
+    affiliation: "Hampton Financial Holdings",
+    status: "Active",
+    quote: "Every inch of this coastline has a price tag. Some people just don't know when to cash out.",
+    bio: [
+      "Cal Hampton represents the ruthless hyper-capitalist machine dominating modern Vice City. Through predatory zoning, intimidation, and shell companies, Hampton is reshaping Leonida's shoreline.",
+      "His financial empire frequently collides with street syndicates and independent operators who refuse to surrender valuable waterfront turf."
+    ],
+    tags: ["Antagonist", "Billionaire", "Corporate Crime", "Biscayne Bay"]
+  },
+  {
+    id: "heder",
+    name: "Brian Heder",
+    role: "Supporting",
+    desc: "Owner of Brian's Boat Works & Marina with deep ties across the waterfront, contraband docks, and inlet channels.",
+    img: "/img/char-cop.jpg",
+    featured: true,
+    alias: "The Dockmaster",
+    voiceActor: "Rockstar Ensemble Cast",
+    origin: "Vice Port & North Keys Channel",
+    specialty: "Marine Engine Tuning & Contraband Compartments",
+    perk: "Waterway Extraction & Safe Harbors",
+    vehicle: "Shitzu Jetmax Speedboat",
+    weapons: ["Pump Shotgun", "Flare Gun"],
+    affiliation: "Independent Waterfront Contractors",
+    status: "Active",
+    quote: "If the Coast Guard is chasing you, you took the wrong canal. If I'm guiding you, you're invisible.",
+    bio: [
+      "Brian Heder has operated dry docks, marinas, and boat repair facilities across Leonida for over two decades. His intimate knowledge of shallow tidal channels makes him indispensable to coastal runners.",
+      "A trusted fence and equipment specialist, Heder provides customized vessels and covert stash locations along the southern archipelago."
+    ],
+    tags: ["Maritime Logistics", "Boat Mechanic", "Vice Port", "Safehouses"]
+  },
+  {
+    id: "bobbie",
+    name: "Boobie Ike",
+    role: "Supporting",
+    desc: "Real estate mogul, underground financier, and influential nightlife fixer across Vice City's club circuit.",
+    img: "/img/char-bobbie.jpg",
+    featured: true,
+    alias: "The Fixer",
+    voiceActor: "Rockstar Ensemble Cast",
+    origin: "Starfish Island & Little Haiti",
+    specialty: "Commercial Money Laundering & High-Society Influence",
+    perk: "Heat Reduction & Asset Protection",
+    vehicle: "Grotti Turismo Classic",
+    weapons: ["Engraved Ceramic Pistol"],
+    affiliation: "Boobie Ike Real Estate & Nightlife Group",
+    status: "Under Surveillance",
+    quote: "In Vice City, legitimacy is just an outfit you put on after sunset.",
+    bio: [
+      "Boobie Ike operates at the lucrative intersection of luxury property management and underground capital allocation.",
+      "With key holdings across premier nightclubs and commercial districts, Ike is capable of cleaning dirty cash and brokering peace between rival factions."
+    ],
+    tags: ["Real Estate", "Nightclub Owner", "Money Laundering", "Starfish Island"]
+  },
+  {
+    id: "dre",
+    name: "Dre'Quan Priest",
+    role: "Supporting",
+    desc: "Respected community figure and street icon navigating the cultural pulse of Vice City's vibrant urban districts.",
+    img: "/img/char-dre.jpg",
+    featured: true,
+    alias: "Priest",
+    voiceActor: "Rockstar Ensemble Cast",
+    origin: "South Beach & Little Haiti",
+    specialty: "Street Intelligence & Neighborhood Network",
+    perk: "District Safehouses & Backup Crew",
+    vehicle: "Albany Cavalcade XL",
+    weapons: ["AP Pistol", "Assault Rifle"],
+    affiliation: "Local Neighborhood Coalition",
+    status: "Active",
+    quote: "You want to survive in this city, you gotta respect the streets that built it.",
+    bio: [
+      "Dre'Quan Priest is a charismatic leader whose influence spans music, street culture, and community advocacy across Vice City.",
+      "His deep connections provide critical intelligence regarding rival operations, corrupt police sweeps, and high-value cargo shipments."
+    ],
+    tags: ["Community Leader", "Urban Street Network", "Vice City Metro"]
+  },
+  {
+    id: "raul",
+    name: "Raul Bautista",
+    role: "Supporting",
+    desc: "Expert boat mechanic, seaplane pilot, and veteran of covert transport routes across the Gulf of Leonida.",
+    img: "/img/char-raul.jpg",
+    featured: true,
+    alias: "El Capitán",
+    voiceActor: "Rockstar Ensemble Cast",
+    origin: "Grassrivers & Western Keys",
+    specialty: "Seaplane Piloting & Swampland Navigation",
+    perk: "Air Cargo Drops & Amphibious Extraction",
+    vehicle: "Dodo Amphibious Seaplane",
+    weapons: ["Double-Barrel Shotgun", "Hunting Rifle"],
+    affiliation: "Grassrivers Aviation",
+    status: "Active",
+    quote: "The swamp keeps secrets better than any bank vault. Just don't stall your engine.",
+    bio: [
+      "Raul Bautista has logged thousands of flight hours skimming treetops over the Everglades and navigating airboats through treacherous swamp networks.",
+      "Whether landing in remote mangrove coves or dropping emergency supplies, Bautista delivers without asking unnecessary questions."
+    ],
+    tags: ["Pilot", "Swamp Guide", "Grassrivers", "Air Extraction"]
+  },
+  {
+    id: "dimez",
+    name: "Real Dimez (Bae-Luxe)",
+    role: "Civilian",
+    desc: "Viral social media duo and high-profile nightlife personalities setting trends and broadcasting Vice City's wild side.",
+    img: "/img/char-dimez.jpg",
+    featured: true,
+    alias: "The Influencers",
+    voiceActor: "Rockstar Ensemble Cast",
+    origin: "Ocean Drive & Malibu Club",
+    specialty: "Viral Livestreaming & Public Relations Chaos",
+    perk: "Crowd Distraction & Paparazzi Interference",
+    vehicle: "Pegassi Torero XO (Pink Wrap)",
+    weapons: ["Smartphone (Camera / Livestream)"],
+    affiliation: "Real Dimez Media Group",
+    status: "Civilian",
+    quote: "If it's not trending on Leonida Feed within five minutes, did it even happen?",
+    bio: [
+      "The Real Dimez duo exemplifies the hyper-online lifestyle of contemporary Leonida, broadcasting VIP parties, supercar rallies, and spontaneous street drama.",
+      "Their viral broadcasts frequently capture illicit activities inadvertently, creating unpredictable dilemmas for both criminals and law enforcement."
+    ],
+    tags: ["Social Media", "Ocean Drive", "Nightlife", "Pop Culture"]
+  },
+  {
+    id: "roxy",
+    name: "Roxy Michaels",
+    role: "Civilian",
+    desc: "Glamorous socialite and fashion entrepreneur navigating Vice City's ultra-wealthy elite.",
+    img: "/img/char-roxy.jpg",
+    featured: false,
+    alias: "Roxy",
+    voiceActor: "Rockstar Ensemble Cast",
+    origin: "Starfish Island & Ocean Beach",
+    specialty: "High-Society Networking & VIP Access",
+    perk: "Access to Exclusive Galas & Mansions",
+    vehicle: "Pfister Comet S2 Cabrio",
+    weapons: ["Taser / Pepper Spray"],
+    affiliation: "Leonida Fashion Week Committee",
+    status: "Civilian",
+    quote: "Everyone in Vice City has an angle. At least mine has couture attached.",
+    bio: [
+      "Roxy Michaels is a key fixture among Vice City's international elite, hosting charity galas that mask backdoor corporate negotiations.",
+      "Her private gatherings often serve as prime reconnaissance targets for high-value asset retrieval and heist preparation."
+    ],
+    tags: ["Socialite", "VIP Access", "Starfish Island", "Fashion"]
+  },
+  {
+    id: "pamela",
+    name: "Pamela Scott",
+    role: "Civilian",
+    desc: "Legendary radio personality and voice of Wave 103, broadcasting synth-wave beats and satirical Leonida news.",
+    img: "/img/char-pamela.jpg",
+    featured: false,
+    alias: "Wave 103 Host",
+    voiceActor: "Rockstar Ensemble Cast",
+    origin: "Vice City Downtown Radio Tower",
+    specialty: "Radio Broadcasting & Media Commentary",
+    perk: "Public Broadcast Announcements",
+    vehicle: "Karin Dilettante Hybrid",
+    weapons: ["Studio Microphone"],
+    affiliation: "Wave 103 FM / Leonida Public Broadcasting",
+    status: "Civilian",
+    quote: "You're tuned to Wave 103. The sun is setting, the neon is buzzing, and someone just robbed a liquor store on 5th.",
+    bio: [
+      "Pamela Scott's smooth voice and biting commentary have soundtracked Vice City drives for years, chronicling everything from hurricane warnings to high-speed police chases.",
+      "Her broadcasts provide live atmospheric color commentary as players complete campaign milestones."
+    ],
+    tags: ["Radio Host", "Wave 103", "Downtown", "Media"]
+  },
+  {
+    id: "phil",
+    name: "Phil Cassidy",
+    role: "Supporting",
+    desc: "Eccentric munitions dealer, demolitions veteran, and fan-favorite legacy arms contractor operating in Leonida.",
+    img: "/img/char-phil.jpg",
+    featured: false,
+    alias: "The Demolitionist",
+    voiceActor: "Rockstar Ensemble Cast",
+    origin: "Leonida County Backwoods",
+    specialty: "Military Explosives & Heavy Ordnance",
+    perk: "Discounted High-Explosive Loadouts",
+    vehicle: "Vapid Sandking XL (Camo)",
+    weapons: ["RPG-7", "C4 Satchel Charges", "Combat LMG"],
+    affiliation: "Cassidy Munitions Supply",
+    status: "Active",
+    quote: "If you can't blow your way through the front door, you're not using enough boom, son!",
+    bio: [
+      "A storied veteran of past conflicts and arms trades, Phil Cassidy continues his tradition of supplying military-grade ordnance from heavily fortified rural compounds.",
+      "He provides custom breaching charges and anti-materiel weapons necessary for cracking armored bank transports."
+    ],
+    tags: ["Arms Dealer", "Explosives", "Legacy Character", "Heavy Weapons"]
+  },
+  {
+    id: "grace",
+    name: "Grace Anzora",
+    role: "Law Enforcement",
+    desc: "Lead Detective for the Leonida State Police Organized Crime Division, heading the task force hunting Lucia & Jason.",
+    img: "/img/char-grace.jpg",
+    featured: false,
+    alias: "Detective Anzora",
+    voiceActor: "Rockstar Ensemble Cast",
+    origin: "State Police Headquarters, Vice City",
+    specialty: "Forensic Investigation & Tactical Ambush Planning",
+    perk: "Heightened Police Response & Roadblock Deployment",
+    vehicle: "Vapid Stanier Unmarked Interceptor",
+    weapons: ["Glock 22 .40 S&W", "Tactical 12-Gauge Shotgun"],
+    affiliation: "Leonida State Police Organized Crime Task Force",
+    status: "Active",
+    quote: "They think they're Bonnie and Clyde. But in this state, the house always wins.",
+    bio: [
+      "Detective Grace Anzora is an incorruptible investigator with an obsessive determination to dismantle armed robbery rings operating along the I-97 transit corridor.",
+      "Leading an inter-agency task force, Anzora tracks Lucia and Jason's escalating heists, analyzing surveillance footage to predict their next high-stakes target."
+    ],
+    tags: ["Detective", "Law Enforcement", "State Police", "Antagonist Force"]
+  },
 ];
 
 /* ------------------------------------------------------------------ */

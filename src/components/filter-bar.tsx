@@ -10,15 +10,21 @@ interface FilterBarProps {
   placeholder: string;
   selects?: { label: string; options: string[] }[];
   className?: string;
+  onSearch?: (query: string) => void;
+  onSelect?: (label: string, value: string) => void;
 }
 
 /** Search + dropdowns + grid/list toggle row used on database pages. */
-export function FilterBar({ placeholder, selects = [], className }: FilterBarProps) {
+export function FilterBar({ placeholder, selects = [], className, onSearch, onSelect }: FilterBarProps) {
   return (
     <div className={cn("flex flex-wrap items-center gap-3", className)}>
       <div className="relative min-w-[220px] flex-1">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <Input placeholder={placeholder} className="pl-9" />
+        <Input 
+          placeholder={placeholder} 
+          className="pl-9" 
+          onChange={(e) => onSearch?.(e.target.value)}
+        />
       </div>
       {selects.map((s) => (
         <Select
@@ -26,6 +32,7 @@ export function FilterBar({ placeholder, selects = [], className }: FilterBarPro
           className="w-36"
           options={s.options.map((o) => ({ value: o, label: o }))}
           defaultValue={s.options[0]}
+          onChange={(e) => onSelect?.(s.label, e.target.value)}
         />
       ))}
       <div className="flex items-center gap-1 rounded-lg border border-input p-1">
