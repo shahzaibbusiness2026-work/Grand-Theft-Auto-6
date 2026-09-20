@@ -525,60 +525,80 @@ export default function AdminWeaponsPage() {
                   </h4>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <div>
-                      <label className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1">
+                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
                         Damage Rating
                       </label>
-                      <input
-                        type="text"
-                        value={editingWeapon.damage || ""}
-                        onChange={(e) =>
-                          setEditingWeapon({ ...editingWeapon, damage: e.target.value })
-                        }
-                        placeholder="e.g. 38"
-                        className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={editingWeapon.damage || ""}
+                          onChange={(e) =>
+                            setEditingWeapon({ ...editingWeapon, damage: e.target.value })
+                          }
+                          placeholder="e.g. 38"
+                          className="w-full pl-3 pr-10 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-rose-400 pointer-events-none">
+                          DMG
+                        </span>
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1">
+                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
                         Effective Range
                       </label>
-                      <input
-                        type="text"
-                        value={editingWeapon.range || ""}
-                        onChange={(e) =>
-                          setEditingWeapon({ ...editingWeapon, range: e.target.value })
-                        }
-                        placeholder="e.g. 45m"
-                        className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={editingWeapon.range || ""}
+                          onChange={(e) =>
+                            setEditingWeapon({ ...editingWeapon, range: e.target.value })
+                          }
+                          placeholder="e.g. 45"
+                          className="w-full pl-3 pr-8 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-emerald-400 pointer-events-none">
+                          m
+                        </span>
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1">
+                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
                         Rate of Fire
                       </label>
-                      <input
-                        type="text"
-                        value={editingWeapon.rateOfFire || ""}
-                        onChange={(e) =>
-                          setEditingWeapon({ ...editingWeapon, rateOfFire: e.target.value })
-                        }
-                        placeholder="e.g. 650 RPM"
-                        className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={editingWeapon.rateOfFire || ""}
+                          onChange={(e) =>
+                            setEditingWeapon({ ...editingWeapon, rateOfFire: e.target.value })
+                          }
+                          placeholder="e.g. 650"
+                          className="w-full pl-3 pr-10 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-amber-400 pointer-events-none">
+                          RPM
+                        </span>
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1">
+                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
                         Magazine Size
                       </label>
-                      <input
-                        type="text"
-                        value={editingWeapon.magazineSize || ""}
-                        onChange={(e) =>
-                          setEditingWeapon({ ...editingWeapon, magazineSize: e.target.value })
-                        }
-                        placeholder="e.g. 16 rounds"
-                        className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={editingWeapon.magazineSize || ""}
+                          onChange={(e) =>
+                            setEditingWeapon({ ...editingWeapon, magazineSize: e.target.value })
+                          }
+                          placeholder="e.g. 16"
+                          className="w-full pl-3 pr-10 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-indigo-400 pointer-events-none">
+                          RDS
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -627,37 +647,42 @@ export default function AdminWeaponsPage() {
                 </div>
 
                 {/* Verification Checklist (Image 6) */}
-                <div className="pt-2 border-t border-[var(--admin-border)] space-y-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)]">
-                    Source Corroboration Checklist
-                  </h4>
-                  <div className="p-3 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] space-y-2 text-xs">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                <div className="pt-2 border-t border-[var(--admin-border)] space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)]">
+                      Source Corroboration Checklist
+                    </h4>
+                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                      2 of 3 Verified
+                    </span>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] space-y-2.5 text-xs">
+                    <label className="flex items-center gap-2.5 cursor-pointer group">
                       <input
                         type="checkbox"
                         defaultChecked
-                        className="rounded border-[var(--admin-border)] text-[var(--admin-primary)]"
+                        className="w-4 h-4 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
                       />
-                      <span className="text-[var(--admin-text)]">
+                      <span className="text-[var(--admin-text)] font-medium group-hover:text-[var(--admin-primary)] transition-colors">
                         Corroborated in Official Trailer 1 (Timestamp verified)
                       </span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2.5 cursor-pointer group">
                       <input
                         type="checkbox"
                         defaultChecked
-                        className="rounded border-[var(--admin-border)] text-[var(--admin-primary)]"
+                        className="w-4 h-4 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
                       />
-                      <span className="text-[var(--admin-text)]">
+                      <span className="text-[var(--admin-text)] font-medium group-hover:text-[var(--admin-primary)] transition-colors">
                         Weapon model matches real-world firearm blueprint
                       </span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2.5 cursor-pointer group">
                       <input
                         type="checkbox"
-                        className="rounded border-[var(--admin-border)] text-[var(--admin-primary)]"
+                        className="w-4 h-4 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
                       />
-                      <span className="text-[var(--admin-text)]">
+                      <span className="text-[var(--admin-text-muted)] font-medium group-hover:text-[var(--admin-text)] transition-colors">
                         In-game audio sample corroborated by sound designer review
                       </span>
                     </label>

@@ -190,11 +190,16 @@ export default function AdminOverviewPage() {
               {needsAttentionItems.map((item) => (
                 <div
                   key={item.id}
-                  className="p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-surface)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-[var(--admin-primary)]/40 transition-colors"
+                  className={cn(
+                    "p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-surface)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-[var(--admin-primary)]/40 hover:bg-[var(--admin-card)] transition-all shadow-sm",
+                    item.badgeColor === "amber" && "border-l-4 border-l-amber-500",
+                    item.badgeColor === "rose" && "border-l-4 border-l-rose-500",
+                    item.badgeColor === "indigo" && "border-l-4 border-l-indigo-500"
+                  )}
                 >
-                  <div className="space-y-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-xs text-[var(--admin-text)] truncate">
+                  <div className="space-y-1.5 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-extrabold text-xs text-[var(--admin-text)] tracking-tight truncate">
                         {item.title}
                       </span>
                       <span className="text-[11px] text-[var(--admin-text-muted)] font-medium">
@@ -202,7 +207,7 @@ export default function AdminOverviewPage() {
                       </span>
                       <span
                         className={cn(
-                          "px-2 py-0.5 rounded-md text-[10px] font-bold uppercase border",
+                          "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border",
                           item.badgeColor === "amber" &&
                             "bg-amber-500/10 text-amber-400 border-amber-500/30",
                           item.badgeColor === "rose" &&
@@ -211,6 +216,14 @@ export default function AdminOverviewPage() {
                             "bg-indigo-500/10 text-indigo-400 border-indigo-500/30"
                         )}
                       >
+                        <span
+                          className={cn(
+                            "w-1.5 h-1.5 rounded-full",
+                            item.badgeColor === "amber" && "bg-amber-400",
+                            item.badgeColor === "rose" && "bg-rose-400",
+                            item.badgeColor === "indigo" && "bg-indigo-400"
+                          )}
+                        />
                         {item.badge}
                       </span>
                     </div>
@@ -221,7 +234,7 @@ export default function AdminOverviewPage() {
 
                   <Link
                     href={item.actionUrl}
-                    className="inline-flex items-center justify-center gap-1 px-3.5 py-1.5 rounded-lg bg-[var(--admin-elevated)] hover:bg-[var(--admin-primary)] hover:text-white border border-[var(--admin-border)] text-xs font-bold text-[var(--admin-text)] transition-colors shrink-0"
+                    className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--admin-elevated)] hover:bg-[var(--admin-primary)] hover:text-white border border-[var(--admin-border)] text-xs font-bold text-[var(--admin-text)] transition-all shadow-sm shrink-0 active:scale-95"
                   >
                     <span>{item.actionLabel}</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -430,28 +443,43 @@ export default function AdminOverviewPage() {
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border-subtle)]">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border-subtle)] hover:border-[var(--admin-border)] transition-colors">
+                <div className="flex items-center gap-2.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
                   <span className="font-semibold text-[var(--admin-text)]">Interactive Map</span>
                 </div>
-                <span className="font-mono text-[11px] text-emerald-400">99.9% Uptime</span>
+                <span className="px-2 py-0.5 rounded-md font-mono text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                  99.9% Uptime
+                </span>
               </div>
 
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border-subtle)]">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border-subtle)] hover:border-[var(--admin-border)] transition-colors">
+                <div className="flex items-center gap-2.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
                   <span className="font-semibold text-[var(--admin-text)]">Vehicle Comparisons</span>
                 </div>
-                <span className="font-mono text-[11px] text-emerald-400">Operational</span>
+                <span className="px-2 py-0.5 rounded-md font-mono text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                  Operational
+                </span>
               </div>
 
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border-subtle)]">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border-subtle)] hover:border-[var(--admin-border)] transition-colors">
+                <div className="flex items-center gap-2.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
                   <span className="font-semibold text-[var(--admin-text)]">Completion Tracker</span>
                 </div>
-                <span className="font-mono text-[11px] text-emerald-400">Operational</span>
+                <span className="px-2 py-0.5 rounded-md font-mono text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                  Operational
+                </span>
               </div>
             </div>
           </div>

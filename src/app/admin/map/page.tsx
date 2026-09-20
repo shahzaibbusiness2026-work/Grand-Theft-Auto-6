@@ -447,9 +447,12 @@ export default function AdminMapPage() {
                     top: `${m.coordinates.y}%`,
                   }}
                 >
+                  {isSelected && (
+                    <span className="absolute -inset-2 rounded-2xl border-2 border-indigo-400/80 animate-ping opacity-75 pointer-events-none" />
+                  )}
                   <div
                     className={cn(
-                      "p-1.5 rounded-xl border shadow-lg flex items-center justify-center transition-colors",
+                      "relative p-1.5 rounded-xl border shadow-lg flex items-center justify-center transition-colors",
                       isSelected
                         ? "bg-[var(--admin-primary)] border-white text-white ring-4 ring-[var(--admin-primary)]/40"
                         : "bg-[var(--admin-surface)] border-[var(--admin-border)] text-[var(--admin-primary)] hover:border-[var(--admin-primary)]"

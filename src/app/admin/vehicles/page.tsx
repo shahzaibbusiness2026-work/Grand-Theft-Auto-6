@@ -434,35 +434,47 @@ export default function AdminVehiclesPage() {
           expandableRowRender={(v) => (
             <div className="space-y-4 py-1">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="p-3 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
-                  <span className="text-[10px] uppercase font-bold text-[var(--admin-text-muted)]">
-                    Top Speed
-                  </span>
-                  <p className="text-sm font-mono font-bold text-[var(--admin-text)] mt-0.5">
+                <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] hover:border-[var(--admin-primary)]/40 transition-colors shadow-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-[var(--admin-text-muted)]">
+                      Top Speed
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-[var(--admin-primary)]">MPH</span>
+                  </div>
+                  <p className="text-base font-mono font-black text-[var(--admin-text)] mt-1 tracking-tight">
                     {v.topSpeed || "—"}
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
-                  <span className="text-[10px] uppercase font-bold text-[var(--admin-text-muted)]">
-                    Acceleration
-                  </span>
-                  <p className="text-sm font-mono font-bold text-[var(--admin-text)] mt-0.5">
+                <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] hover:border-[var(--admin-primary)]/40 transition-colors shadow-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-[var(--admin-text-muted)]">
+                      Acceleration
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-amber-400">0-60</span>
+                  </div>
+                  <p className="text-base font-mono font-black text-[var(--admin-text)] mt-1 tracking-tight">
                     {v.acceleration || "—"}
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
-                  <span className="text-[10px] uppercase font-bold text-[var(--admin-text-muted)]">
-                    Handling
-                  </span>
-                  <p className="text-sm font-mono font-bold text-[var(--admin-text)] mt-0.5">
+                <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] hover:border-[var(--admin-primary)]/40 transition-colors shadow-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-[var(--admin-text-muted)]">
+                      Handling
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-emerald-400">INDEX</span>
+                  </div>
+                  <p className="text-base font-mono font-black text-[var(--admin-text)] mt-1 tracking-tight">
                     {v.handling || "—"}
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
-                  <span className="text-[10px] uppercase font-bold text-[var(--admin-text-muted)]">
-                    Weight
-                  </span>
-                  <p className="text-sm font-mono font-bold text-[var(--admin-text)] mt-0.5">
+                <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] hover:border-[var(--admin-primary)]/40 transition-colors shadow-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-[var(--admin-text-muted)]">
+                      Curb Weight
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-purple-400">MASS</span>
+                  </div>
+                  <p className="text-base font-mono font-black text-[var(--admin-text)] mt-1 tracking-tight">
                     {v.weight || "—"}
                   </p>
                 </div>
@@ -715,60 +727,80 @@ export default function AdminVehiclesPage() {
                   </h4>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <div>
-                      <label className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1">
+                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
                         Top Speed
                       </label>
-                      <input
-                        type="text"
-                        value={editingVehicle.topSpeed || ""}
-                        onChange={(e) =>
-                          setEditingVehicle({ ...editingVehicle, topSpeed: e.target.value })
-                        }
-                        placeholder="e.g. 155 mph"
-                        className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={editingVehicle.topSpeed || ""}
+                          onChange={(e) =>
+                            setEditingVehicle({ ...editingVehicle, topSpeed: e.target.value })
+                          }
+                          placeholder="e.g. 155"
+                          className="w-full pl-3 pr-10 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-[var(--admin-text-muted)] pointer-events-none">
+                          mph
+                        </span>
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1">
+                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
                         Acceleration
                       </label>
-                      <input
-                        type="text"
-                        value={editingVehicle.acceleration || ""}
-                        onChange={(e) =>
-                          setEditingVehicle({ ...editingVehicle, acceleration: e.target.value })
-                        }
-                        placeholder="e.g. 3.4s"
-                        className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={editingVehicle.acceleration || ""}
+                          onChange={(e) =>
+                            setEditingVehicle({ ...editingVehicle, acceleration: e.target.value })
+                          }
+                          placeholder="e.g. 3.4"
+                          className="w-full pl-3 pr-8 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-[var(--admin-text-muted)] pointer-events-none">
+                          sec
+                        </span>
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1">
+                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
                         Handling
                       </label>
-                      <input
-                        type="text"
-                        value={editingVehicle.handling || ""}
-                        onChange={(e) =>
-                          setEditingVehicle({ ...editingVehicle, handling: e.target.value })
-                        }
-                        placeholder="e.g. 84 / 100"
-                        className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={editingVehicle.handling || ""}
+                          onChange={(e) =>
+                            setEditingVehicle({ ...editingVehicle, handling: e.target.value })
+                          }
+                          placeholder="e.g. 84"
+                          className="w-full pl-3 pr-12 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-[var(--admin-text-muted)] pointer-events-none">
+                          / 100
+                        </span>
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1">
+                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
                         Weight
                       </label>
-                      <input
-                        type="text"
-                        value={editingVehicle.weight || ""}
-                        onChange={(e) =>
-                          setEditingVehicle({ ...editingVehicle, weight: e.target.value })
-                        }
-                        placeholder="e.g. 1,420 kg"
-                        className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={editingVehicle.weight || ""}
+                          onChange={(e) =>
+                            setEditingVehicle({ ...editingVehicle, weight: e.target.value })
+                          }
+                          placeholder="e.g. 1,420"
+                          className="w-full pl-3 pr-8 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-[var(--admin-text-muted)] pointer-events-none">
+                          kg
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>

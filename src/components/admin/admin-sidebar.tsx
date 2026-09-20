@@ -182,15 +182,18 @@ export function AdminSidebar({
                       onClick={() => onCloseMobile?.()}
                       title={isCollapsed ? item.label : undefined}
                       className={cn(
-                        "group flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-150 relative",
+                        "group flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-150 relative overflow-hidden",
                         isActive
-                          ? "bg-[var(--admin-primary)] text-white shadow-sm shadow-[var(--admin-primary)]/30 font-bold"
+                          ? "bg-[var(--admin-primary)] text-white shadow-md shadow-[var(--admin-primary)]/25 font-bold"
                           : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
                       )}
                     >
+                      {isActive && (
+                        <span className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-white/90 shadow-sm" />
+                      )}
                       <Icon
                         className={cn(
-                          "w-4 h-4 shrink-0 transition-transform group-hover:scale-110",
+                          "w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110",
                           isActive ? "text-white" : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-text)]"
                         )}
                       />
@@ -201,7 +204,7 @@ export function AdminSidebar({
                       {!isCollapsed && item.badge && (
                         <span
                           className={cn(
-                            "px-1.5 py-0.5 text-[10px] font-bold rounded-full transition-colors",
+                            "px-1.5 py-0.5 text-[10px] font-black rounded-full transition-colors",
                             isActive
                               ? "bg-white/20 text-white"
                               : item.badgeVariant === "warning"

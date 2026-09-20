@@ -322,48 +322,60 @@ export default function AdminComparisonsPage() {
                 </h3>
               </div>
 
-              <div className="rounded-xl border border-[var(--admin-border)] overflow-hidden bg-[var(--admin-surface)]">
+              <div className="rounded-xl border border-[var(--admin-border)] overflow-hidden bg-[var(--admin-surface)] shadow-sm">
                 <table className="w-full text-center text-xs">
                   <thead>
                     <tr className="border-b border-[var(--admin-border)] bg-[var(--admin-elevated)]">
-                      <th className="p-3 text-left font-bold uppercase text-[var(--admin-text-muted)]">
-                        Attribute
+                      <th className="p-3.5 text-left font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
+                        Technical Specification
                       </th>
-                      <th className="p-3 font-bold text-[var(--admin-text)]">
-                        Bravado Banshee GTS
+                      <th className="p-3.5 font-black text-[var(--admin-text)]">
+                        <div className="flex items-center justify-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-indigo-500" />
+                          <span>Bravado Banshee GTS</span>
+                        </div>
                       </th>
-                      <th className="p-3 font-bold text-[var(--admin-text)]">
-                        Pegassi Zorrusso
+                      <th className="p-3.5 font-black text-[var(--admin-text)]">
+                        <div className="flex items-center justify-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-purple-500" />
+                          <span>Pegassi Zorrusso</span>
+                        </div>
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[var(--admin-border-subtle)] font-mono">
-                    <tr className="hover:bg-[var(--admin-elevated)]/30">
-                      <td className="p-3 text-left font-sans font-bold text-[var(--admin-text)]">
+                    <tr className="hover:bg-[var(--admin-elevated)]/30 transition-colors">
+                      <td className="p-3.5 text-left font-sans font-bold text-[var(--admin-text)]">
                         Top Speed
                       </td>
-                      <td className="p-3 font-bold text-emerald-400 bg-emerald-500/10">
-                        155 mph 🏆
+                      <td className="p-3.5">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg font-black text-emerald-400 bg-emerald-500/10 border border-emerald-500/30">
+                          155 mph <Trophy className="w-3.5 h-3.5 text-amber-400 inline" />
+                        </span>
                       </td>
-                      <td className="p-3 text-[var(--admin-text)]">148 mph</td>
+                      <td className="p-3.5 text-[var(--admin-text-muted)] font-medium">148 mph</td>
                     </tr>
-                    <tr className="hover:bg-[var(--admin-elevated)]/30">
-                      <td className="p-3 text-left font-sans font-bold text-[var(--admin-text)]">
-                        Acceleration (0-60)
+                    <tr className="hover:bg-[var(--admin-elevated)]/30 transition-colors">
+                      <td className="p-3.5 text-left font-sans font-bold text-[var(--admin-text)]">
+                        Acceleration (0-60 mph)
                       </td>
-                      <td className="p-3 text-[var(--admin-text)]">3.4s</td>
-                      <td className="p-3 font-bold text-emerald-400 bg-emerald-500/10">
-                        3.1s 🏆
+                      <td className="p-3.5 text-[var(--admin-text-muted)] font-medium">3.4s</td>
+                      <td className="p-3.5">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg font-black text-emerald-400 bg-emerald-500/10 border border-emerald-500/30">
+                          3.1s <Trophy className="w-3.5 h-3.5 text-amber-400 inline" />
+                        </span>
                       </td>
                     </tr>
-                    <tr className="hover:bg-[var(--admin-elevated)]/30">
-                      <td className="p-3 text-left font-sans font-bold text-[var(--admin-text)]">
+                    <tr className="hover:bg-[var(--admin-elevated)]/30 transition-colors">
+                      <td className="p-3.5 text-left font-sans font-bold text-[var(--admin-text)]">
                         Handling Score
                       </td>
-                      <td className="p-3 font-bold text-emerald-400 bg-emerald-500/10">
-                        84 / 100 🏆
+                      <td className="p-3.5">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg font-black text-emerald-400 bg-emerald-500/10 border border-emerald-500/30">
+                          84 / 100 <Trophy className="w-3.5 h-3.5 text-amber-400 inline" />
+                        </span>
                       </td>
-                      <td className="p-3 text-[var(--admin-text)]">80 / 100</td>
+                      <td className="p-3.5 text-[var(--admin-text-muted)] font-medium">80 / 100</td>
                     </tr>
                   </tbody>
                 </table>
