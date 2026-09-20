@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#160a26"/><stop offset="1" stop-color="#050208"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9a6a33"/><stop offset="1" stop-color="#6b4420"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <circle cx="200" cy="150" r="110" fill="#f0459c" opacity=".12"/>
+  <!-- parachute -->
+  <path d="M120 60a80 46 0 0 1 160 0q-40 18-80 18t-80-18Z" fill="#f0459c"/>
+  <path d="M128 66l52 74M272 66l-52 74M200 78v62" stroke="#e6c79a" stroke-width="3"/>
+  <!-- crate -->
+  <g>
+    <rect x="130" y="140" width="140" height="110" rx="8" fill="url(#wood)"/>
+    <rect x="130" y="140" width="140" height="18" fill="#4a2f14"/>
+    <rect x="188" y="140" width="24" height="110" fill="#4a2f14" opacity=".6"/>
+    <path d="M140 160l120 80M260 160l-120 80" stroke="#4a2f14" stroke-width="6" opacity=".5"/>
+  </g>
+  <ellipse cx="200" cy="262" rx="110" ry="12" fill="#000" opacity=".5"/>
+</svg>

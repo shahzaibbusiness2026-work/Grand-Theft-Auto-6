@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a0b26"/><stop offset="1" stop-color="#050208"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8d93a1"/><stop offset="1" stop-color="#3a3f4a"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <circle cx="520" cy="80" r="90" fill="#a855f7" opacity=".12"/>
+  <circle cx="120" cy="300" r="70" fill="#f0459c" opacity=".1"/>
+  <g filter="url(#glow)">
+    <!-- barrel + suppressor -->
+    <rect x="430" y="150" width="150" height="14" rx="7" fill="url(#metal)"/>
+    <rect x="560" y="146" width="60" height="22" rx="11" fill="#20242c"/>
+    <!-- handguard -->
+    <rect x="330" y="142" width="110" height="30" rx="8" fill="#2b303b"/>
+    <rect x="345" y="150" width="80" height="4" fill="#12151b"/>
+    <rect x="345" y="160" width="80" height="4" fill="#12151b"/>
+    <!-- receiver -->
+    <rect x="220" y="138" width="120" height="42" rx="6" fill="url(#metal)"/>
+    <rect x="228" y="126" width="90" height="12" rx="6" fill="#20242c"/>
+    <!-- sight -->
+    <rect x="250" y="104" width="46" height="22" rx="4" fill="#20242c"/>
+    <circle cx="273" cy="115" r="6" fill="#f0459c"/>
+    <!-- mag -->
+    <path d="M282 180q6 44 34 58l26-10q-22-16-26-48Z" fill="#2b303b"/>
+    <!-- grip + stock -->
+    <path d="M240 180l-10 40 22 4 8-40Z" fill="#20242c"/>
+    <path d="M220 142l-70 6q-16 2-16 18v22q0 12 12 12h28l16-24Z" fill="#2b303b"/>
+    <!-- trigger -->
+    <path d="M268 182q10 12 22 10" stroke="#12151b" stroke-width="6" fill="none"/>
+  </g>
+  <ellipse cx="340" cy="300" rx="240" ry="14" fill="#a855f7" opacity=".15"/>
+</svg>

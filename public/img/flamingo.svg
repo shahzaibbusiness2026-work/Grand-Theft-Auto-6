@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fd4e8"/><stop offset="1" stop-color="#c9f2ec"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3ec6c0"/><stop offset="1" stop-color="#1e9e9a"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="url(#sky)"/>
+  <rect y="200" width="400" height="100" fill="url(#water)"/>
+  <circle cx="330" cy="60" r="26" fill="#fff6d8" opacity=".9"/>
+  <ellipse cx="200" cy="238" rx="120" ry="10" fill="#ffffff" opacity=".25"/>
+  <!-- flamingo -->
+  <path d="M196 210c-4-40 2-66 22-80 14-10 16-26 6-34-8-7-22-4-26 6" fill="none" stroke="#f0459c" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="196" cy="98" r="12" fill="#f0459c"/>
+  <path d="M206 96l16 6-14 6Z" fill="#3b2430"/>
+  <ellipse cx="192" cy="212" rx="34" ry="22" fill="#f0459c"/>
+  <path d="M166 208q-18 2-24 14 16 4 30-4Z" fill="#d1338a"/>
+  <path d="M192 234l-2 40M204 234l6 26-8 16" stroke="#d1338a" stroke-width="5" fill="none" stroke-linecap="round"/>
+</svg>

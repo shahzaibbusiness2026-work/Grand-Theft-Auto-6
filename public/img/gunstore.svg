@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400">
+  <defs>
+    <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b1055"/><stop offset="1" stop-color="#7a2d6e"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#dusk)"/>
+  <rect y="330" width="640" height="70" fill="#170a29"/>
+  <!-- building -->
+  <rect x="120" y="120" width="400" height="210" rx="6" fill="#e8ddca"/>
+  <rect x="120" y="120" width="400" height="40" fill="#c9bda6"/>
+  <rect x="140" y="90" width="360" height="52" rx="8" fill="#b3202e"/>
+  <text x="320" y="126" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="30" fill="#ffe9c4" letter-spacing="4">AMMU-NATION</text>
+  <!-- windows / door -->
+  <rect x="150" y="180" width="120" height="110" rx="4" fill="#3b2430"/>
+  <rect x="370" y="180" width="120" height="110" rx="4" fill="#3b2430"/>
+  <rect x="290" y="190" width="60" height="140" rx="4" fill="#241420"/>
+  <g stroke="#f0459c" stroke-width="3" opacity=".7">
+    <path d="M160 200h100M160 230h100M380 200h100M380 230h100"/>
+  </g>
+  <!-- target sign -->
+  <circle cx="320" cy="160" r="14" fill="#ffe9c4"/><circle cx="320" cy="160" r="8" fill="#b3202e"/><circle cx="320" cy="160" r="3" fill="#ffe9c4"/>
+  <!-- palms -->
+  <g stroke="#12042e" stroke-width="10" fill="none" stroke-linecap="round">
+    <path d="M60 400q6-90-4-130M56 272q-30-18-52-8M56 272q-8-34-30-44M56 272q26-22 48-16"/>
+    <path d="M590 400q-6-90 4-130M594 272q30-18 52-8M594 272q8-34 30-44M594 272q-26-22-48-16"/>
+  </g>
+  <ellipse cx="320" cy="352" rx="240" ry="10" fill="#f0459c" opacity=".15"/>
+</svg>

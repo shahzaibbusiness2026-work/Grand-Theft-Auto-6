@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b1055"/><stop offset=".45" stop-color="#7a2d6e"/><stop offset=".75" stop-color="#e05a7a"/><stop offset="1" stop-color="#f2784b"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd75e"/><stop offset="1" stop-color="#f0459c"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b0f63"/><stop offset="1" stop-color="#12042e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="300" fill="url(#sky)"/>
+  <circle cx="400" cy="270" r="110" fill="url(#sun)"/>
+  <g fill="#2b1055">
+    <rect x="0" y="272" width="800" height="6"/><rect x="0" y="286" width="800" height="8"/><rect x="0" y="302" width="800" height="10"/>
+  </g>
+  <!-- skyline -->
+  <g fill="#1d0b33">
+    <rect x="40" y="180" width="34" height="120"/><rect x="86" y="150" width="26" height="150"/><rect x="120" y="200" width="40" height="100"/><rect x="170" y="120" width="30" height="180"/><rect x="210" y="170" width="24" height="130"/><rect x="560" y="160" width="30" height="140"/><rect x="600" y="120" width="26" height="180"/><rect x="636" y="190" width="40" height="110"/><rect x="686" y="150" width="28" height="150"/><rect x="724" y="200" width="36" height="100"/>
+  </g>
+  <g fill="#f0459c" opacity=".8">
+    <rect x="92" y="160" width="4" height="4"/><rect x="100" y="176" width="4" height="4"/><rect x="176" y="132" width="4" height="4"/><rect x="184" y="150" width="4" height="4"/><rect x="606" y="132" width="4" height="4"/><rect x="692" y="162" width="4" height="4"/><rect x="700" y="180" width="4" height="4"/>
+  </g>
+  <!-- sea -->
+  <rect y="300" width="800" height="150" fill="url(#sea)"/>
+  <g stroke="#f0459c" stroke-width="3" opacity=".5">
+    <path d="M330 320h140M310 344h180M350 370h100M290 400h220"/>
+  </g>
+  <!-- palms -->
+  <g stroke="#12042e" stroke-width="12" fill="none" stroke-linecap="round">
+    <path d="M90 450q8-110-6-160M84 292q-38-22-66-10M84 292q-10-42-38-54M84 292q32-28 60-20M84 292q6-44 28-58"/>
+    <path d="M710 450q-8-110 6-160M716 292q38-22 66-10M716 292q10-42 38-54M716 292q-32-28-60-20M716 292q-6-44-28-58"/>
+  </g>
+  <!-- neon sign -->
+  <g font-family="sans-serif" font-weight="800">
+    <text x="400" y="120" text-anchor="middle" font-size="64" fill="#f5d0fe" opacity=".95" letter-spacing="14">VICE</text>
+    <text x="400" y="150" text-anchor="middle" font-size="16" fill="#f0459c" letter-spacing="10">CITY • LEONIDA</text>
+  </g>
+</svg>

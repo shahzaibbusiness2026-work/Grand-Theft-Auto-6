@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b1055"/><stop offset=".55" stop-color="#7a2d6e"/><stop offset="1" stop-color="#f2784b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".7" cy=".3" r=".6">
+      <stop offset="0" stop-color="#ffd9a0" stop-opacity=".8"/><stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#bg)"/>
+  <circle cx="300" cy="140" r="130" fill="url(#glow)"/>
+  <circle cx="70" cy="90" r="14" fill="#f0459c" opacity=".35"/>
+  <circle cx="340" cy="330" r="10" fill="#a855f7" opacity=".4"/>
+  <circle cx="40" cy="300" r="8" fill="#f2784b" opacity=".5"/>
+  <!-- shoulders / tank -->
+  <path d="M60 500c10-110 70-150 140-150s130 40 140 150Z" fill="#efe9e2"/>
+  <path d="M120 500c4-70 36-104 80-104s76 34 80 104Z" fill="#d9a066"/>
+  <!-- neck + head -->
+  <rect x="172" y="270" width="56" height="70" rx="22" fill="#c98d55"/>
+  <circle cx="200" cy="220" r="86" fill="#d9a066"/>
+  <!-- stubble -->
+  <path d="M132 238a86 86 0 0 0 136 0c-8 60-40 84-68 84s-60-24-68-84Z" fill="#8a5a33" opacity=".55"/>
+  <!-- cap backwards -->
+  <path d="M114 208a86 86 0 0 1 172 0c-30-26-58-38-86-38s-56 12-86 38Z" fill="#7a2d3a"/>
+  <path d="M114 208c30-18 58-26 86-26s56 8 86 26l8 22c-34-20-64-30-94-30s-60 10-94 30Z" fill="#5d2029"/>
+  <rect x="252" y="196" width="52" height="26" rx="12" fill="#5d2029"/>
+  <!-- face -->
+  <circle cx="170" cy="222" r="7" fill="#2e1a10"/><circle cx="230" cy="222" r="7" fill="#2e1a10"/>
+  <path d="M156 202q14-8 28-2M216 200q14-6 28 2" stroke="#2e1a10" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M186 268q14 10 28 0" stroke="#2e1a10" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M200 232l-6 22h12Z" fill="#b97c46"/>
+</svg>

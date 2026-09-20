@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <defs>
+    <radialGradient id="ocean" cx=".55" cy=".45" r=".9">
+      <stop offset="0" stop-color="#0a2b3a"/><stop offset=".55" stop-color="#061d29"/><stop offset="1" stop-color="#02101a"/>
+    </radialGradient>
+    <linearGradient id="land" x1="0" y1="0" x2=".4" y2="1">
+      <stop offset="0" stop-color="#1d2e21"/><stop offset=".5" stop-color="#16261b"/><stop offset="1" stop-color="#0f1d14"/>
+    </linearGradient>
+    <radialGradient id="cityGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffb45e" stop-opacity=".28"/><stop offset=".6" stop-color="#ff7ac0" stop-opacity=".1"/><stop offset="1" stop-color="#ff7ac0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="portGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffd28a" stop-opacity=".22"/><stop offset="1" stop-color="#ffd28a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <clipPath id="landClip">
+      <path d="M300 0C310 60 330 90 350 130c15 40 22 80 30 130 6 40 12 80 20 120 6 40 12 80 24 120 10 34 24 60 44 82 16 18 40 30 66 34 22 3 44-6 58-22 18-20 30-46 38-76 10-38 18-78 22-118 4-44 6-88 8-132 2-48 8-96 16-140 6-36 14-80 20-128Z"/>
+    </clipPath>
+    <clipPath id="cityClip"><rect x="528" y="458" width="126" height="146" rx="8"/></clipPath>
+    <clipPath id="wetClip">
+      <path d="M424 430q44-20 96-8 52 12 62 48 9 36-20 64-32 30-86 27-54-3-70-42-14-37 18-89Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- ocean -->
+  <rect width="900" height="700" fill="url(#ocean)"/>
+  <g stroke="#8fe8ff" stroke-width="1" fill="none" opacity=".05">
+    <path d="M0 90q60-7 120 0t120 0 120 0 120 0 120 0 120 0 120 0 120 0"/>
+    <path d="M0 210q60-7 120 0t120 0 120 0 120 0 120 0 120 0 120 0 120 0"/>
+    <path d="M0 330q60-7 120 0t120 0 120 0 120 0 120 0 120 0 120 0 120 0"/>
+    <path d="M0 450q60-7 120 0t120 0 120 0 120 0 120 0 120 0 120 0 120 0"/>
+    <path d="M0 570q60-7 120 0t120 0 120 0 120 0 120 0 120 0 120 0 120 0"/>
+    <path d="M0 660q60-7 120 0t120 0 120 0 120 0 120 0 120 0 120 0 120 0"/>
+  </g>
+  <!-- faint lat/long grid -->
+  <g stroke="#9fd8e8" stroke-width=".6" opacity=".07">
+    <path d="M150 0v700M300 0v700M450 0v700M600 0v700M750 0v700M0 140h900M0 280h900M0 420h900M0 560h900"/>
+  </g>
+
+  <!-- shallow shelf -->
+  <path d="M300 0C310 60 330 90 350 130c15 40 22 80 30 130 6 40 12 80 20 120 6 40 12 80 24 120 10 34 24 60 44 82 16 18 40 30 66 34 22 3 44-6 58-22 18-20 30-46 38-76 10-38 18-78 22-118 4-44 6-88 8-132 2-48 8-96 16-140 6-36 14-80 20-128Z"
+        fill="none" stroke="#2ec5d9" stroke-width="16" opacity=".18"/>
+  <path d="M300 0C310 60 330 90 350 130c15 40 22 80 30 130 6 40 12 80 20 120 6 40 12 80 24 120 10 34 24 60 44 82 16 18 40 30 66 34 22 3 44-6 58-22 18-20 30-46 38-76 10-38 18-78 22-118 4-44 6-88 8-132 2-48 8-96 16-140 6-36 14-80 20-128Z"
+        fill="none" stroke="#57dcf0" stroke-width="5" opacity=".22"/>
+
+  <!-- the keys -->
+  <g fill="#16261b" stroke="#57dcf0" stroke-width="1.4" stroke-opacity=".3">
+    <ellipse cx="498" cy="638" rx="13" ry="7" transform="rotate(-14 498 638)"/>
+    <ellipse cx="462" cy="654" rx="11" ry="6" transform="rotate(-12 462 654)"/>
+    <ellipse cx="426" cy="664" rx="12" ry="6" transform="rotate(-8 426 664)"/>
+    <ellipse cx="390" cy="672" rx="9" ry="5" transform="rotate(-8 390 672)"/>
+    <ellipse cx="356" cy="678" rx="8" ry="4.5" transform="rotate(-6 356 678)"/>
+  </g>
+
+  <!-- main landmass -->
+  <path d="M300 0C310 60 330 90 350 130c15 40 22 80 30 130 6 40 12 80 20 120 6 40 12 80 24 120 10 34 24 60 44 82 16 18 40 30 66 34 22 3 44-6 58-22 18-20 30-46 38-76 10-38 18-78 22-118 4-44 6-88 8-132 2-48 8-96 16-140 6-36 14-80 20-128Z"
+        fill="url(#land)"/>
+
+  <!-- terrain detail clipped to land -->
+  <g clip-path="url(#landClip)">
+    <!-- northern forests -->
+    <g fill="#20382690">
+      <ellipse cx="390" cy="60" rx="80" ry="46"/><ellipse cx="520" cy="46" rx="90" ry="40"/>
+      <ellipse cx="620" cy="90" rx="70" ry="48"/><ellipse cx="440" cy="150" rx="90" ry="52"/>
+      <ellipse cx="580" cy="170" rx="80" ry="50"/><ellipse cx="370" cy="230" rx="60" ry="44"/>
+    </g>
+    <!-- mount kalaga ridges -->
+    <g stroke="#3d5245" stroke-width="2.5" fill="none" opacity=".9" stroke-linecap="round">
+      <path d="M382 96l17-26 17 26"/><path d="M424 84l20-31 20 31"/><path d="M472 94l16-25 16 25"/><path d="M514 86l18-27 18 27"/><path d="M560 96l14-22 14 22"/>
+    </g>
+    <!-- farmland plots -->
+    <g fill="#2c3524" opacity=".55">
+      <rect x="404" y="242" width="34" height="22" rx="2"/><rect x="444" y="236" width="40" height="26" rx="2"/>
+      <rect x="490" y="244" width="30" height="20" rx="2"/><rect x="528" y="238" width="44" height="24" rx="2"/>
+      <rect x="580" y="248" width="36" height="22" rx="2"/><rect x="412" y="272" width="42" height="20" rx="2"/>
+      <rect x="462" y="270" width="36" height="24" rx="2"/><rect x="506" y="276" width="44" height="20" rx="2"/>
+      <rect x="558" y="280" width="38" height="22" rx="2"/><rect x="604" y="284" width="34" height="18" rx="2"/>
+    </g>
+    <!-- grasslands wetland -->
+    <path d="M424 430q44-20 96-8 52 12 62 48 9 36-20 64-32 30-86 27-54-3-70-42-14-37 18-89Z" fill="#13271a"/>
+    <g clip-path="url(#wetClip)" stroke="#1f3d29" stroke-width="3" opacity=".8">
+      <path d="M400 436h200M400 448h200M400 460h200M400 472h200M400 484h200M400 496h200M400 508h200M400 520h200M400 532h200M400 544h200"/>
+    </g>
+    <!-- coastal sand line -->
+    <path d="M350 130c15 40 22 80 30 130 6 40 12 80 20 120 6 40 12 80 24 120 10 34 24 60 44 82" fill="none" stroke="#8a7a52" stroke-width="3" opacity=".35"/>
+    <!-- terrain grain -->
+    <rect x="280" y="0" width="440" height="700" filter="url(#grain)" opacity=".07"/>
+  </g>
+
+  <!-- lake leonida -->
+  <path d="M452 322q22-24 58-22 40 2 54 26 13 22-4 41-19 21-55 21-38 0-55-23-13-20 2-43Z" fill="#0a2b3a" stroke="#2ec5d9" stroke-width="1.6" stroke-opacity=".4"/>
+  <path d="M466 332q18-14 44-12 26 2 34 16" fill="none" stroke="#57dcf0" stroke-width="1.2" opacity=".35"/>
+
+  <!-- rivers -->
+  <g fill="none" stroke="#1d6f8c" stroke-width="3" opacity=".9" stroke-linecap="round">
+    <path d="M556 348c34 18 58 36 78 56"/>
+    <path d="M472 366c-14 44-24 86-32 128-6 28-10 54-12 78"/>
+  </g>
+
+  <!-- vice city glow + grid -->
+  <ellipse cx="590" cy="528" rx="92" ry="80" fill="url(#cityGlow)"/>
+  <g clip-path="url(#cityClip)" stroke="#7d8a94" stroke-width=".8" opacity=".5">
+    <path d="M528 470h126M528 482h126M528 494h126M528 506h126M528 518h126M528 530h126M528 542h126M528 554h126M528 566h126M528 578h126M528 590h126"/>
+    <path d="M540 458v146M552 458v146M564 458v146M576 458v146M588 458v146M600 458v146M612 458v146M624 458v146M636 458v146M648 458v146"/>
+  </g>
+  <g clip-path="url(#cityClip)" fill="#39424c" opacity=".55">
+    <rect x="540" y="470" width="10" height="10"/><rect x="564" y="482" width="10" height="10"/><rect x="600" y="470" width="10" height="10"/>
+    <rect x="552" y="506" width="10" height="10"/><rect x="588" y="494" width="10" height="10"/><rect x="624" y="518" width="10" height="10"/>
+    <rect x="564" y="542" width="10" height="10"/><rect x="612" y="554" width="10" height="10"/><rect x="540" y="566" width="10" height="10"/>
+  </g>
+  <!-- port gellhorn -->
+  <ellipse cx="646" cy="386" rx="46" ry="40" fill="url(#portGlow)"/>
+  <g stroke="#7d8a94" stroke-width=".8" opacity=".45">
+    <path d="M626 366h40M626 376h40M626 386h40M626 396h40M634 358v46M646 358v46M658 358v46"/>
+  </g>
+
+  <!-- highways -->
+  <g fill="none" stroke="#e8b45f" stroke-width="3" opacity=".75" stroke-linecap="round" filter="url(#glow)">
+    <path d="M440 0c-8 90-4 180 12 260 10 50 34 70 48 100 12 28 16 60 26 92 12 38 26 68 40 96 12 24 26 44 38 58"/>
+    <path d="M676 0c-6 80-12 160-16 240-4 80-10 150-20 210-8 48-24 95-44 134"/>
+  </g>
+  <g fill="none" stroke="#9aa7b0" stroke-width="1.4" opacity=".45" stroke-linecap="round">
+    <path d="M398 300c52 12 102 20 162 16 40-4 70-16 96-28"/>
+    <path d="M416 208c48 8 96 6 144-6 42-10 78-26 108-44"/>
+    <path d="M428 470c44 10 88 26 122 52"/>
+    <path d="M470 120c30 34 44 78 48 124"/>
+    <path d="M598 200c8 46 4 92-10 136"/>
+    <path d="M364 340c40-8 80-6 118 6"/>
+  </g>
+
+  <!-- cities + labels -->
+  <g filter="url(#glow)">
+    <circle cx="646" cy="386" r="4.5" fill="#fff"/>
+    <circle cx="592" cy="556" r="5.5" fill="#fff"/>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" font-weight="700" fill="#aebec7">
+    <text x="392" y="52" font-size="17" letter-spacing="5" opacity=".9">NORTHERN WILDS</text>
+    <text x="386" y="122" font-size="12" letter-spacing="3.5" opacity=".65">MOUNT KALAGA</text>
+    <text x="504" y="342" font-size="14" letter-spacing="3" fill="#5fc7dd" text-anchor="middle" opacity=".95">LAKE LEONIDA</text>
+    <text x="492" y="502" font-size="14" letter-spacing="4" text-anchor="middle" opacity=".75">GRASSRIVERS</text>
+    <text x="632" y="368" font-size="13" letter-spacing="2.5" text-anchor="end" opacity=".85">PORT GELLHORN</text>
+    <text x="590" y="536" font-size="21" letter-spacing="4" text-anchor="middle" fill="#ffffff">VICE CITY</text>
+    <text x="424" y="692" font-size="12" letter-spacing="3.5" text-anchor="middle" opacity=".6">THE KEYS</text>
+    <text x="120" y="560" font-size="12" letter-spacing="4" opacity=".45">GULF OF MEXICO</text>
+    <text x="700" y="230" font-size="12" letter-spacing="4" opacity=".45">ATLANTIC</text>
+  <text x="600" y="210" font-size="17" letter-spacing="4" text-anchor="middle" opacity=".9">LEONIDA STATE</text>
+  </g>
+</svg>

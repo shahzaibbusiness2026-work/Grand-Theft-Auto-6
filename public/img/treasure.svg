@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8ed8f0"/><stop offset="1" stop-color="#ffe9c4"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7d9a4"/><stop offset="1" stop-color="#e0b877"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a5a2b"/><stop offset="1" stop-color="#5d3a18"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="240" fill="url(#sky)"/>
+  <rect y="240" width="640" height="160" fill="url(#sand)"/>
+  <circle cx="540" cy="70" r="34" fill="#fff6d8"/>
+  <path d="M60 240q10-70 40-90M100 240q-6-60-30-84" stroke="#2e8a6b" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- chest -->
+  <g>
+    <path d="M200 220q120-70 240 0v30H200Z" fill="#6b4420"/>
+    <rect x="200" y="240" width="240" height="110" rx="10" fill="url(#wood)"/>
+    <rect x="200" y="240" width="240" height="14" fill="#3f2a12"/>
+    <rect x="300" y="236" width="40" height="46" rx="6" fill="#d9b64a"/>
+    <circle cx="320" cy="258" r="7" fill="#3f2a12"/>
+    <!-- coins -->
+    <circle cx="250" cy="230" r="12" fill="#ffd75e"/><circle cx="285" cy="222" r="12" fill="#ffca3a"/><circle cx="330" cy="220" r="12" fill="#ffd75e"/><circle cx="372" cy="226" r="12" fill="#ffca3a"/><circle cx="400" cy="234" r="10" fill="#ffd75e"/>
+    <circle cx="310" cy="206" r="10" fill="#ffe28a"/><circle cx="352" cy="208" r="9" fill="#ffe28a"/>
+  </g>
+  <circle cx="320" cy="220" r="90" fill="#ffd75e" opacity=".25"/>
+</svg>
