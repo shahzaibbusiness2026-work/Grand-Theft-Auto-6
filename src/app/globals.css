@@ -223,3 +223,273 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   GTA 6 ATLAS ADMIN DASHBOARD — BRIGHT (LIGHT) THEME RULES
+   Ensures all cards, text, inputs, dropdowns, tables, and borders align with
+   the bright theme when active.
+   ========================================================================== */
+
+/* Surfaces & Containers */
+.light .bg-\[\#0B0E14\],
+.light .bg-\[\#090d16\],
+.light .bg-\[\#070A10\] {
+  background-color: #f8fafc !important;
+}
+
+.light .bg-\[\#111622\],
+.light .bg-\[\#131b2e\],
+.light .bg-\[\#101522\] {
+  background-color: #ffffff !important;
+}
+
+.light .bg-\[\#0E131D\],
+.light .bg-\[\#0f1524\],
+.light .bg-\[\#1a243c\] {
+  background-color: #f1f5f9 !important;
+}
+
+.light .bg-\[\#182030\] {
+  background-color: #e2e8f0 !important;
+}
+
+.light .bg-\[\#141B2A\] {
+  background-color: #f1f5f9 !important;
+}
+
+.light .bg-\[\#1B2138\] {
+  background-color: #e0e7ff !important;
+}
+
+.light .bg-\[\#1B2138\]\/40 {
+  background-color: rgba(224, 231, 255, 0.6) !important;
+}
+
+.light .bg-\[\#0E131D\]\/80,
+.light .bg-\[\#0E131D\]\/50 {
+  background-color: rgba(241, 245, 249, 0.85) !important;
+}
+
+.light .bg-\[\#111622\]\/50,
+.light .bg-\[\#111622\]\/80,
+.light .bg-\[\#111622\]\/90 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.light .bg-\[\#0B0E14\]\/90,
+.light .bg-\[\#0B0E14\]\/95 {
+  background-color: rgba(248, 250, 252, 0.95) !important;
+}
+
+/* Borders */
+.light .border-\[\#1C2436\],
+.light .border-\[\#22304e\],
+.light .border-\[\#192338\] {
+  border-color: #e2e8f0 !important;
+}
+
+.light .border-\[\#243048\] {
+  border-color: #cbd5e1 !important;
+}
+
+.light .border-\[\#182030\] {
+  border-color: #e2e8f0 !important;
+}
+
+.light .divide-\[\#182030\] > :not([hidden]) ~ :not([hidden]),
+.light .divide-\[\#1C2436\] > :not([hidden]) ~ :not([hidden]) {
+  border-color: #e2e8f0 !important;
+}
+
+/* Typography */
+.light .text-white,
+.light .text-\[\#F8FAFC\],
+.light .text-\[\#f8fafc\] {
+  color: #0f172a !important;
+}
+
+.light .text-\[\#E2E8F0\] {
+  color: #1e293b !important;
+}
+
+.light .text-\[\#CBD5E1\] {
+  color: #334155 !important;
+}
+
+.light .text-\[\#94A3B8\],
+.light .text-\[\#94a3b8\] {
+  color: #64748b !important;
+}
+
+.light .text-\[\#64748B\] {
+  color: #64748b !important;
+}
+
+/* Interactive Inputs, Textareas, and Dropdown Selects */
+.light input:not([type="checkbox"]):not([type="radio"]),
+.light textarea,
+.light select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.light input:not([type="checkbox"]):not([type="radio"]):focus,
+.light textarea:focus,
+.light select:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 1px #6366f1 !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.light select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Checkboxes */
+.light input[type="checkbox"] {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Badges & Status Pills */
+.light .bg-\[\#2A2015\] {
+  background-color: #fef3c7 !important;
+}
+.light .border-\[\#4A3818\] {
+  border-color: #fcd34d !important;
+}
+.light .text-\[\#E5A83B\] {
+  color: #b45309 !important;
+}
+
+.light .bg-\[\#3C2415\] {
+  background-color: #ffedd5 !important;
+}
+.light .border-\[\#5A3818\] {
+  border-color: #fdba74 !important;
+}
+.light .text-\[\#F59E0B\] {
+  color: #c2410c !important;
+}
+
+.light .bg-\[\#064E3B\]\/40 {
+  background-color: #d1fae5 !important;
+}
+.light .border-\[\#065F46\] {
+  border-color: #a7f3d0 !important;
+}
+.light .text-\[\#34D399\] {
+  color: #047857 !important;
+}
+
+.light .bg-\[\#1E293B\] {
+  background-color: #f1f5f9 !important;
+}
+.light .border-\[\#334155\] {
+  border-color: #cbd5e1 !important;
+}
+
+.light .bg-\[\#312E81\] {
+  background-color: #e0e7ff !important;
+}
+.light .border-\[\#4338CA\] {
+  border-color: #c7d2fe !important;
+}
+.light .text-\[\#A5B4FC\] {
+  color: #4338ca !important;
+}
+
+.light .bg-\[\#3730A3\]\/50 {
+  background-color: rgba(99, 102, 241, 0.12) !important;
+  color: #4f46e5 !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+.light .bg-\[\#3730A3\]\/30 {
+  background-color: rgba(99, 102, 241, 0.08) !important;
+}
+
+/* Callout & Alert Boxes */
+.light .bg-amber-500\/5 {
+  background-color: #fffbeb !important;
+}
+.light .border-amber-500\/20 {
+  border-color: #fde68a !important;
+}
+.light .text-amber-400 {
+  color: #d97706 !important;
+}
+
+/* Hover States for Interactive Elements */
+.light .hover\:bg-\[\#141B2A\]:hover,
+.light .hover\:bg-\[\#182030\]:hover,
+.light .hover\:bg-\[\#0E131D\]:hover {
+  background-color: #f1f5f9 !important;
+}
+
+.light .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+.light .hover\:border-\[\#6366F1\]\/50:hover,
+.light .hover\:border-\[\#6366F1\]:hover {
+  border-color: #6366f1 !important;
+}
+
+/* Dropdown Menus, Popovers, & Modals */
+.light [role="menu"],
+.light [role="region"][aria-label="Notification Center"],
+.light [role="dialog"] > div {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* KBD & Code Elements */
+.light kbd,
+.light code {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+/* Form Inputs, Textareas, Selects - Disabled & Placeholder */
+.light input:disabled,
+.light textarea:disabled,
+.light select:disabled {
+  background-color: #f1f5f9 !important;
+  color: #94a3b8 !important;
+  border-color: #e2e8f0 !important;
+  cursor: not-allowed;
+}
+
+/* Table Elements */
+.light th {
+  background-color: #f8fafc !important;
+  color: #64748b !important;
+  border-color: #e2e8f0 !important;
+}
+
+.light tr:hover td {
+  background-color: #f8fafc;
+}
+
+/* Scrollbars in Light Mode */
+.light ::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-color: #f8fafc;
+}
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+

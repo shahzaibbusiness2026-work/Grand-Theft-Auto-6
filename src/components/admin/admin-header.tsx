@@ -67,6 +67,7 @@ export function AdminHeader({
 }: AdminHeaderProps) {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -76,6 +77,10 @@ export function AdminHeader({
   const profileRef = useRef<HTMLDivElement>(null);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const markAllRead = () => {
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
@@ -189,6 +194,29 @@ export function AdminHeader({
             <kbd className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono font-medium bg-[#182030] border border-[#243048] rounded text-[#64748B] shrink-0">
               ⌘ K
             </kbd>
+          </button>
+
+          {/* Bright / Dark Theme Toggle Button */}
+          <button
+            type="button"
+            onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
+            aria-label={
+              mounted && resolvedTheme === "light"
+                ? "Switch to Dark Mode"
+                : "Switch to Bright Mode"
+            }
+            title={
+              mounted && resolvedTheme === "light"
+                ? "Switch to Dark Mode"
+                : "Switch to Bright Mode"
+            }
+            className="p-2 rounded-xl text-[#94A3B8] hover:text-white hover:bg-[#141B2A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]"
+          >
+            {mounted && resolvedTheme === "light" ? (
+              <Moon className="w-4 h-4 text-indigo-600" />
+            ) : (
+              <Sun className="w-4 h-4 text-amber-400 hover:text-amber-300" />
+            )}
           </button>
 
           {/* Notifications Bell with unread dot */}
