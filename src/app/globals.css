@@ -31,6 +31,23 @@
     --color-surface: 223 48% 8%;
     --color-neon-magenta: 250 100% 83%;
     --color-neon-cyan: 7 81% 77%;
+
+    /* GTA 6 Atlas Admin Design System Tokens (Dark Mode Default) */
+    --admin-bg: #0c101c;
+    --admin-surface: #111728;
+    --admin-card: #151d30;
+    --admin-elevated: #1b253d;
+    --admin-border: #232f4c;
+    --admin-border-subtle: #1c263e;
+    --admin-text: #f3f5fa;
+    --admin-text-muted: #8e9bb3;
+    --admin-primary: #6366f1;
+    --admin-primary-hover: #4f46e5;
+    --admin-accent: #818cf8;
+    --admin-success: #10b981;
+    --admin-warning: #f59e0b;
+    --admin-danger: #ef4444;
+    --admin-info: #0ea5e9;
   }
 
   .light {
@@ -57,6 +74,23 @@
     --border: 220 29% 88%; /* #D8DEEA */
     --input: 219 14% 55%; /* #7B879C */
     --ring: 255 58% 53%; /* #6340CC */
+
+    /* GTA 6 Atlas Admin Design System Tokens (Light Mode) */
+    --admin-bg: #f5f7fb;
+    --admin-surface: #ffffff;
+    --admin-card: #ffffff;
+    --admin-elevated: #f0f3f9;
+    --admin-border: #dbe2ef;
+    --admin-border-subtle: #e8edf5;
+    --admin-text: #111827;
+    --admin-text-muted: #64748b;
+    --admin-primary: #6366f1;
+    --admin-primary-hover: #4f46e5;
+    --admin-accent: #4f46e5;
+    --admin-success: #059669;
+    --admin-warning: #d97706;
+    --admin-danger: #dc2626;
+    --admin-info: #0284c7;
   }
 
   * { @apply border-border; }
