@@ -1,57 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { Shield, Zap, Car, MapPin, Sparkles, ArrowRight, Quote } from "lucide-react";
-import { SectionHeader } from "@/components/section-header";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { 
+  Shield, 
+  Zap, 
+  Car, 
+  MapPin, 
+  Sparkles, 
+  ArrowRight, 
+  Crown,
+  Handshake,
+  Quote
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { characters, Character } from "@/lib/data";
 import { CharacterDetailModal } from "@/components/character-detail-modal";
-
-const PROTAGONISTS = [
-  {
-    id: "lucia",
-    name: "Lucia Caminos",
-    role: "Lead Protagonist",
-    alias: "The Mastermind",
-    quote: "The only way we're gonna get through this is by sticking together, being a team.",
-    voiceActor: "Manni L. Perez (Confirmed / Casting)",
-    origin: "Vice City Metro / Leonida Penitentiary",
-    specialty: "High-stakes Armed Robberies & Infiltration",
-    perk: "Tactical Reflexes (Bullet Time) & Lockpicking",
-    vehicle: "Bravado Banshee (Modified)",
-    img: "/img/char-lucia.jpg",
-    accentColor: "from-pink-600 via-purple-600 to-rose-500",
-    borderGlow: "border-pink-500/30 shadow-[0_0_30px_rgba(236,72,153,0.15)]",
-    tagColor: "bg-pink-500/15 text-pink-400 border-pink-500/30",
-  },
-  {
-    id: "jason",
-    name: "Jason Duval",
-    role: "Co-Protagonist",
-    alias: "The Enforcer",
-    quote: "Trust. That's what it comes down to. You and me against the whole damn state.",
-    voiceActor: "Gregory Connors (Confirmed / Speculated)",
-    origin: "Port Gellhorn & Keys Smuggling Routes",
-    specialty: "Off-Road Getaway & Heavy Weapons Logistics",
-    perk: "Smuggler Eagle Eye (POI & Cache Detection)",
-    vehicle: "Declasse Tulip 1972 Muscle Car",
-    img: "/img/char-jason.jpg",
-    accentColor: "from-cyan-500 via-blue-600 to-purple-600",
-    borderGlow: "border-cyan-500/30 shadow-[0_0_30px_rgba(6,182,212,0.15)]",
-    tagColor: "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
-  },
-];
 
 export function ProtagonistsShowcase() {
   const [activeTab, setActiveTab] = useState<"both" | "lucia" | "jason">("both");
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
+  const openDossier = (id: string) => {
+    const matched = characters.find((c) => c.id === id);
+    if (matched) setSelectedCharacter(matched);
+  };
+
   return (
     <section aria-labelledby="protagonists-heading" className="container-site pt-16">
+      {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-pink-400">
@@ -68,7 +45,7 @@ export function ProtagonistsShowcase() {
           </p>
         </div>
 
-        {/* View mode buttons */}
+        {/* View mode toggle buttons */}
         <div className="flex items-center gap-1 rounded-xl border border-border bg-card p-1">
           <button
             onClick={() => setActiveTab("both")}
@@ -107,150 +84,299 @@ export function ProtagonistsShowcase() {
       </div>
 
       {/* Showcase Cards Grid */}
-      <div className="mt-8 grid gap-6 lg:grid-cols-2">
-        {PROTAGONISTS.filter(
-          (p) => activeTab === "both" || activeTab === p.id
-        ).map((p) => (
+      <div className="mt-8 grid gap-8 lg:grid-cols-2">
+        {/* CARD 1: LUCIA CAMINOS */}
+        {(activeTab === "both" || activeTab === "lucia") && (
           <div
-            key={p.id}
             className={cn(
-              "group relative overflow-hidden rounded-3xl border bg-card/90 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 shadow-xl",
-              p.borderGlow,
-              activeTab !== "both" && "lg:col-span-2"
+              "group relative overflow-hidden rounded-[28px] sm:rounded-[32px] bg-white border-2 border-pink-400/80 shadow-[0_0_35px_rgba(244,114,182,0.45),0_15px_35px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1",
+              activeTab === "lucia" && "lg:col-span-2 max-w-4xl mx-auto w-full"
             )}
           >
-            {/* Ambient background glow */}
-            <div
-              className={cn(
-                "pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-25 blur-3xl bg-gradient-to-br",
-                p.accentColor
-              )}
-            />
-
-            <div className="flex flex-col md:flex-row h-full">
-              {/* Character Portrait — 100% Clear & Visible with Natural 3:4 Aspect Ratio (No Washed Out Overlays) */}
-              <div className="relative w-full md:w-[42%] min-h-[360px] md:min-h-[480px] overflow-hidden bg-[#070b14] shrink-0 border-b md:border-b-0 md:border-r border-white/10">
+            <div className="flex flex-col lg:flex-row h-full">
+              {/* Left Column: Lucia Portrait & Artwork Overlays */}
+              <div className="relative w-full lg:w-[45%] min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] overflow-hidden bg-slate-900 shrink-0 select-none">
                 <Image
-                  src={p.img}
-                  alt={p.name}
+                  src="/img/char-lucia.jpg"
+                  alt="Lucia Caminos"
                   fill
                   priority
-                  sizes="(max-width: 768px) 100vw, 420px"
-                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 480px"
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 />
-                
-                {/* Mobile-only bottom fade so text below doesn't collide */}
-                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0B1020] to-transparent md:hidden pointer-events-none" />
-                
-                {/* Role Badge Overlay */}
-                <div className="absolute top-4 left-4">
-                  <span className={cn("inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider backdrop-blur-md shadow-lg", p.tagColor)}>
-                    <Sparkles className="w-3 h-3" />
-                    {p.role}
-                  </span>
+
+                {/* Soft gradient blend into the white right content pane */}
+                <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/40 to-white pointer-events-none" />
+                <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+
+                {/* Top-Left Pill Badge: LEAD PROTAGONIST */}
+                <div className="absolute top-4 left-4 z-10">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-[#5b1434]/90 border border-pink-400/50 px-3.5 py-1 text-xs font-black uppercase tracking-wider text-white backdrop-blur-md shadow-lg">
+                    <Crown className="w-3.5 h-3.5 text-pink-300" />
+                    <span>LEAD PROTAGONIST</span>
+                  </div>
+                </div>
+
+                {/* Left VI Watermark & Vice City Cursive Script */}
+                <div className="absolute top-16 left-4 z-10 pointer-events-none">
+                  <div className="font-display text-5xl sm:text-6xl font-black text-pink-500/85 drop-shadow-[0_0_20px_rgba(236,72,153,0.7)] tracking-tighter leading-none">
+                    VI
+                  </div>
+                  <div className="-mt-3 sm:-mt-4 text-2xl sm:text-3xl font-serif italic text-pink-400 font-bold drop-shadow-[0_0_15px_rgba(236,72,153,0.8)] -rotate-12">
+                    Vice City
+                  </div>
+                </div>
+
+                {/* Bottom-Left Tagline */}
+                <div className="absolute bottom-5 left-5 z-10 pointer-events-none">
+                  <p className="font-mono text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                    A BRIGHTER<br />TOMORROW<br />TOGETHER.
+                  </p>
+                  <div className="w-14 h-0.5 bg-pink-500 mt-1 shadow-[0_0_8px_#ec4899]" />
                 </div>
               </div>
 
-              {/* Character Dossier Content — Clean, Structured 2x2 Layout */}
-              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-[#0B1020]/95">
+              {/* Right Column: White Content Pane */}
+              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-white text-slate-900">
                 <div className="space-y-4">
-                  {/* Top Metadata Row */}
-                  <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-white/10">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-pink-400">
-                        CONFIRMED DOSSIER
-                      </span>
-                      <span className="w-1 h-1 rounded-full bg-pink-400" />
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400">
-                        Active
-                      </span>
-                    </div>
-                    <span className="font-mono text-xs font-bold text-cyan-300 bg-cyan-950/50 border border-cyan-500/30 px-2.5 py-0.5 rounded-lg shadow-sm">
-                      {p.alias}
+                  {/* Top Dossier Header */}
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono text-[11px] font-black uppercase tracking-[0.25em] text-pink-600">
+                      CONFIRMED DOSSIER
+                    </span>
+                    <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
+                      The Mastermind
                     </span>
                   </div>
 
-                  {/* Character Name & Role Subtitle */}
+                  {/* Character Name */}
                   <div>
-                    <h3 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-wide text-white">
-                      {p.name}
+                    <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 leading-none">
+                      <span className="text-pink-600">LUCIA</span> CAMINOS
                     </h3>
-                    <p className="text-xs font-mono text-pink-300/80 font-bold uppercase tracking-wider mt-0.5">
-                      {p.role} • State of Leonida
+                  </div>
+
+                  {/* Quote Box */}
+                  <div className="rounded-2xl bg-pink-50/70 border border-pink-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
+                    <Quote className="w-5 h-5 text-pink-500 shrink-0 mt-0.5 rotate-180" />
+                    <p className="text-xs sm:text-[13px] italic font-medium text-pink-700 leading-relaxed">
+                      &ldquo;The only way we&apos;re gonna get through this is by sticking together, being a team.&rdquo;
                     </p>
                   </div>
 
-                  {/* Character Quote */}
-                  <blockquote className="flex items-start gap-2.5 rounded-xl border border-pink-500/20 bg-pink-950/15 p-3 text-xs italic text-pink-200/90 shadow-sm">
-                    <Quote className="h-4 w-4 shrink-0 text-pink-400 opacity-90 mt-0.5" />
-                    <span>&ldquo;{p.quote}&rdquo;</span>
-                  </blockquote>
-
-                  {/* Attribute Specs: Organized 2x2 Grid with Badges */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-2.5 hover:border-pink-500/30 transition-colors">
-                      <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase text-slate-400">
-                        <Zap className="h-3 w-3 text-amber-400 shrink-0" />
-                        <span>Special Ability</span>
+                  {/* Specs List: Vertical 4-Row Key-Value Stack */}
+                  <div className="space-y-3 pt-1">
+                    {/* Special Ability */}
+                    <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
+                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                        <Zap className="w-4 h-4 text-amber-500 shrink-0" />
+                        <span>Special Ability:</span>
                       </div>
-                      <p className="mt-1 text-xs font-bold text-white leading-snug">
-                        {p.perk}
-                      </p>
+                      <span className="font-bold text-slate-900 leading-snug">
+                        Tactical Reflexes (Bullet Time) &amp; Lockpicking
+                      </span>
                     </div>
 
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-2.5 hover:border-pink-500/30 transition-colors">
-                      <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase text-slate-400">
-                        <Shield className="h-3 w-3 text-pink-400 shrink-0" />
-                        <span>Specialty</span>
+                    {/* Specialty */}
+                    <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
+                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                        <Shield className="w-4 h-4 text-pink-500 shrink-0" />
+                        <span>Specialty:</span>
                       </div>
-                      <p className="mt-1 text-xs font-bold text-white leading-snug">
-                        {p.specialty}
-                      </p>
+                      <span className="font-bold text-slate-900 leading-snug">
+                        High-stakes Armed Robberies &amp; Infiltration
+                      </span>
                     </div>
 
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-2.5 hover:border-pink-500/30 transition-colors">
-                      <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase text-slate-400">
-                        <Car className="h-3 w-3 text-purple-400 shrink-0" />
-                        <span>Signature Ride</span>
+                    {/* Signature Ride */}
+                    <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
+                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                        <Car className="w-4 h-4 text-purple-500 shrink-0" />
+                        <span>Signature Ride:</span>
                       </div>
-                      <p className="mt-1 text-xs font-bold text-white leading-snug">
-                        {p.vehicle}
-                      </p>
+                      <span className="font-bold text-slate-900 leading-snug">
+                        Bravado Banshee (Modified)
+                      </span>
                     </div>
 
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-2.5 hover:border-pink-500/30 transition-colors">
-                      <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase text-slate-400">
-                        <MapPin className="h-3 w-3 text-cyan-400 shrink-0" />
-                        <span>Territory</span>
+                    {/* Territory */}
+                    <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
+                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                        <MapPin className="w-4 h-4 text-purple-500 shrink-0" />
+                        <span>Territory:</span>
                       </div>
-                      <p className="mt-1 text-xs font-bold text-white leading-snug">
-                        {p.origin}
-                      </p>
+                      <span className="font-bold text-slate-900 leading-snug">
+                        Vice City Metro / Leonida Penitentiary
+                      </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Footer CTA */}
-                <div className="mt-5 pt-3.5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-                  <span className="text-[11px] text-slate-400">
-                    Actor: <strong className="text-white">{p.voiceActor}</strong>
-                  </span>
+                {/* Footer Row */}
+                <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
+                  <div className="text-xs">
+                    <span className="text-slate-500">Actor: </span>
+                    <span className="font-bold text-slate-900">Manni L. Perez</span>
+                    <p className="text-[11px] text-slate-500">(Confirmed / Casting)</p>
+                  </div>
                   <button
                     type="button"
-                    onClick={() => {
-                      const matched = characters.find((c) => c.id === p.id);
-                      if (matched) setSelectedCharacter(matched);
-                    }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white transition-all shadow-md shadow-pink-500/25 active:scale-95"
+                    onClick={() => openDossier("lucia")}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 shadow-md shadow-pink-500/30 transition-all hover:scale-105 active:scale-95"
                   >
                     <span>View Dossier</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
             </div>
           </div>
-        ))}
+        )}
+
+        {/* CARD 2: JASON DUVAL */}
+        {(activeTab === "both" || activeTab === "jason") && (
+          <div
+            className={cn(
+              "group relative overflow-hidden rounded-[28px] sm:rounded-[32px] bg-white border-2 border-cyan-400/80 shadow-[0_0_35px_rgba(56,189,248,0.45),0_15px_35px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1",
+              activeTab === "jason" && "lg:col-span-2 max-w-4xl mx-auto w-full"
+            )}
+          >
+            <div className="flex flex-col lg:flex-row h-full">
+              {/* Left Column: Jason Portrait & Artwork Overlays */}
+              <div className="relative w-full lg:w-[45%] min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] overflow-hidden bg-slate-900 shrink-0 select-none">
+                <Image
+                  src="/img/char-jason.jpg"
+                  alt="Jason Duval"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 480px"
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                />
+
+                {/* Soft gradient blend into the white right content pane */}
+                <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/40 to-white pointer-events-none" />
+                <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+
+                {/* Top-Left Pill Badge: CO-PROTAGONIST */}
+                <div className="absolute top-4 left-4 z-10">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-[#0c4a6e]/90 border border-cyan-400/50 px-3.5 py-1 text-xs font-black uppercase tracking-wider text-white backdrop-blur-md shadow-lg">
+                    <Handshake className="w-3.5 h-3.5 text-cyan-300" />
+                    <span>CO-PROTAGONIST</span>
+                  </div>
+                </div>
+
+                {/* Left VI Watermark */}
+                <div className="absolute top-16 left-4 z-10 pointer-events-none">
+                  <div className="font-display text-5xl sm:text-6xl font-black text-cyan-400/75 drop-shadow-[0_0_20px_rgba(6,182,212,0.7)] tracking-tighter leading-none">
+                    VI
+                  </div>
+                </div>
+
+                {/* Bottom-Left Tagline */}
+                <div className="absolute bottom-5 left-5 z-10 pointer-events-none">
+                  <p className="font-mono text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                    SAME<br />STREETS<br />HIGHER<br />STAKES...
+                  </p>
+                  <div className="w-14 h-0.5 bg-cyan-400 mt-1 shadow-[0_0_8px_#22d3ee]" />
+                </div>
+              </div>
+
+              {/* Right Column: White Content Pane */}
+              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-white text-slate-900">
+                <div className="space-y-4">
+                  {/* Top Dossier Header */}
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono text-[11px] font-black uppercase tracking-[0.25em] text-blue-600">
+                      CONFIRMED DOSSIER
+                    </span>
+                    <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
+                      The Enforcer
+                    </span>
+                  </div>
+
+                  {/* Character Name */}
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 leading-none">
+                      <span className="text-blue-600">JASON</span> DUVAL
+                    </h3>
+                  </div>
+
+                  {/* Quote Box */}
+                  <div className="rounded-2xl bg-sky-50/70 border border-sky-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
+                    <Quote className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 rotate-180" />
+                    <p className="text-xs sm:text-[13px] italic font-medium text-sky-800 leading-relaxed">
+                      &ldquo;Trust. That&apos;s what it comes down to. You and me against the whole damn state.&rdquo;
+                    </p>
+                  </div>
+
+                  {/* Specs List: Vertical 4-Row Key-Value Stack */}
+                  <div className="space-y-3 pt-1">
+                    {/* Special Ability */}
+                    <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
+                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                        <Zap className="w-4 h-4 text-sky-500 shrink-0" />
+                        <span>Special Ability:</span>
+                      </div>
+                      <span className="font-bold text-slate-900 leading-snug">
+                        Smuggler Eagle Eye (POI &amp; Cache Detection)
+                      </span>
+                    </div>
+
+                    {/* Specialty */}
+                    <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
+                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                        <Shield className="w-4 h-4 text-sky-500 shrink-0" />
+                        <span>Specialty:</span>
+                      </div>
+                      <span className="font-bold text-slate-900 leading-snug">
+                        Off-Road Getaway &amp; Heavy Weapons Logistics
+                      </span>
+                    </div>
+
+                    {/* Signature Ride */}
+                    <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
+                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                        <Car className="w-4 h-4 text-sky-500 shrink-0" />
+                        <span>Signature Ride:</span>
+                      </div>
+                      <span className="font-bold text-slate-900 leading-snug">
+                        Declasse Tulip 1972 Muscle Car
+                      </span>
+                    </div>
+
+                    {/* Territory */}
+                    <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
+                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                        <MapPin className="w-4 h-4 text-sky-500 shrink-0" />
+                        <span>Territory:</span>
+                      </div>
+                      <span className="font-bold text-slate-900 leading-snug">
+                        Port Gellhorn &amp; Keys Smuggling Routes
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer Row */}
+                <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
+                  <div className="text-xs">
+                    <span className="text-slate-500">Actor: </span>
+                    <span className="font-bold text-slate-900">Gregory Connors</span>
+                    <p className="text-[11px] text-slate-500">(Confirmed / Speculated)</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => openDossier("jason")}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 shadow-md shadow-blue-500/30 transition-all hover:scale-105 active:scale-95"
+                  >
+                    <span>View Dossier</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Character Profile Detail Modal */}
