@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useId } from "react";
+import React, { useId, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -104,6 +104,18 @@ export function AdminSidebar({
   const pathname = usePathname();
   const id = useId();
 
+  // Keyboard shortcut Ctrl+B / Cmd+B to toggle sidebar
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "b") {
+        e.preventDefault();
+        onToggleCollapse?.();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onToggleCollapse]);
+
   return (
     <>
       {/* Mobile Backdrop */}
@@ -125,45 +137,63 @@ export function AdminSidebar({
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
+        {/* Floating Edge Collapse Button (Desktop Only, Never Overlaps Content) */}
+        {onToggleCollapse && (
+          <button
+            type="button"
+            onClick={onToggleCollapse}
+            aria-expanded={!isCollapsed}
+            aria-label={isCollapsed ? "Expand sidebar navigation (⌘B)" : "Collapse sidebar navigation (⌘B)"}
+            title={isCollapsed ? "Expand sidebar (⌘B)" : "Collapse sidebar (⌘B)"}
+            className={cn(
+              "hidden lg:flex items-center justify-center absolute -right-3 top-5 z-50",
+              "w-6 h-6 rounded-full bg-[#111622] border border-[#1C2436] text-[#94A3B8]",
+              "hover:text-white hover:border-[#6366F1] hover:bg-[#182030] shadow-md transition-all",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]"
+            )}
+          >
+            {isCollapsed ? (
+              <ChevronRight className="w-3.5 h-3.5" />
+            ) : (
+              <ChevronLeft className="w-3.5 h-3.5" />
+            )}
+          </button>
+        )}
+
         {/* Brand Header */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-[#1C2436]">
+        <div
+          className={cn(
+            "h-16 flex items-center border-b border-[#1C2436] px-4",
+            isCollapsed ? "justify-center px-0" : "justify-between"
+          )}
+        >
           <Link
             href="/admin"
-            className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] rounded-xl p-1"
+            className={cn(
+              "flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] rounded-xl p-1",
+              isCollapsed && "justify-center"
+            )}
           >
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white font-black text-xs shadow-md shadow-purple-500/20">
               VI
             </div>
             {!isCollapsed && (
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-sm tracking-tight text-white">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="font-bold text-sm tracking-tight text-white truncate">
                   GTA 6 Atlas
                 </span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1C2336] text-[#818CF8] border border-[#2B3652]">
+                <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1C2336] text-[#818CF8] border border-[#2B3652] shrink-0">
                   Admin
                 </span>
               </div>
             )}
           </Link>
-
-          {/* Desktop collapse toggle */}
-          {onToggleCollapse && (
-            <button
-              type="button"
-              onClick={onToggleCollapse}
-              aria-expanded={!isCollapsed}
-              aria-label={isCollapsed ? "Expand sidebar navigation" : "Collapse sidebar navigation"}
-              className="hidden lg:flex items-center justify-center h-7 w-7 rounded-lg text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
-            >
-              {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-            </button>
-          )}
         </div>
 
         {/* Navigation Sections */}
         <nav
           aria-label="Main Navigation Menu"
-          className="flex-1 overflow-y-auto px-3 py-4 space-y-6 scrollbar-thin scrollbar-thumb-[var(--admin-border)]"
+          className="flex-1 overflow-y-auto px-3 py-4 space-y-5 scrollbar-thin scrollbar-thumb-[#1C2436]"
         >
           {ADMIN_NAV_SECTIONS.map((section, sectionIdx) => {
             const headingId = `nav-heading-${id}-${sectionIdx}`;
@@ -178,7 +208,7 @@ export function AdminSidebar({
                 {!isCollapsed && (
                   <p
                     id={headingId}
-                    className="px-3 text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)] select-none"
+                    className="px-3 text-[10px] font-bold uppercase tracking-wider text-[#64748B] select-none"
                   >
                     {section.title}
                   </p>
@@ -201,7 +231,7 @@ export function AdminSidebar({
                           isActive
                             ? "bg-[#3730A3]/50 text-white border border-[#4F46E5]/40 font-bold shadow-sm"
                             : "text-[#94A3B8] hover:text-white hover:bg-[#141B2A]",
-                          isCollapsed && "justify-center px-0"
+                          isCollapsed && "justify-center px-0 w-10 h-10 mx-auto"
                         )}
                       >
                         <Icon
@@ -218,7 +248,7 @@ export function AdminSidebar({
                         {!isCollapsed && item.badge && (
                           <span
                             className={cn(
-                              "px-1.5 py-0.5 rounded-full text-[10px] font-bold",
+                              "px-1.5 py-0.5 rounded-full text-[10px] font-bold shrink-0",
                               isActive
                                 ? "bg-[#4F46E5] text-white"
                                 : "bg-[#1C2436] text-[#94A3B8]"
@@ -247,13 +277,13 @@ export function AdminSidebar({
         </nav>
 
         {/* Sidebar Footer */}
-        <div className="p-3 border-t border-[var(--admin-border)] space-y-2 bg-[var(--admin-surface)]">
+        <div className="p-3 border-t border-[#1C2436] space-y-2 bg-[#0B0E14]">
           {isCollapsed ? (
             <Tooltip content="View Public Site" position="right">
               <Link
                 href="/"
                 target="_blank"
-                className="flex items-center justify-center p-2 rounded-xl text-xs font-medium text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+                className="flex items-center justify-center w-10 h-10 mx-auto rounded-xl text-xs font-medium text-[#94A3B8] hover:text-white hover:bg-[#141B2A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]"
                 aria-label="View Public Site (opens in new tab)"
               >
                 <ExternalLink className="w-4 h-4 shrink-0" />
@@ -263,24 +293,30 @@ export function AdminSidebar({
             <Link
               href="/"
               target="_blank"
-              className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+              className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-[#94A3B8] hover:text-white hover:bg-[#141B2A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]"
             >
               <ExternalLink className="w-4 h-4 shrink-0" />
               <span className="truncate">Public Portal</span>
             </Link>
           )}
 
-          {!isCollapsed && (
-            <div className="p-2.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] flex items-center gap-3">
-              <div className="relative">
+          {isCollapsed ? (
+            <Tooltip content="Jason Vance (Administrator)" position="right">
+              <div className="w-8 h-8 mx-auto rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-inner cursor-pointer">
+                AD
+              </div>
+            </Tooltip>
+          ) : (
+            <div className="p-2.5 rounded-xl bg-[#111622] border border-[#1C2436] flex items-center gap-3">
+              <div className="relative shrink-0">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-inner">
                   AD
                 </div>
-                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[var(--admin-card)]" />
+                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#111622]" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold text-[var(--admin-text)] truncate">Administrator</p>
-                <p className="text-[10px] text-[var(--admin-text-muted)] truncate">admin@atlas-gta6.com</p>
+                <p className="text-xs font-bold text-white truncate">Administrator</p>
+                <p className="text-[10px] text-[#64748B] truncate">admin@atlas-gta6.com</p>
               </div>
             </div>
           )}
