@@ -25,10 +25,10 @@ export function HeroBackground() {
       </div>
 
       {/* 3. Atmospheric dark overlay preserving #090d16 background tone while revealing skyline */}
-      <div className="absolute inset-0 bg-[#090d16]/40" />
+      <div className="absolute inset-0 bg-[#090d16]/25" />
 
       {/* 4. Subtle center vignette for contrast behind centered countdown */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#090d16]/60 via-transparent to-[#090d16]/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#090d16]/40 via-transparent to-[#090d16]/70" />
 
       {/* 5. Edge vignettes */}
       <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#090d16] to-transparent" />

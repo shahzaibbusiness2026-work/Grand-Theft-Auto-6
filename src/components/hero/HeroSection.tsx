@@ -28,7 +28,7 @@ export function HeroSection() {
         <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
           <Link
             href="/map"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 px-7 py-3.5 text-sm font-black text-white transition-all shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 active:scale-95"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#00D2FF] via-[#00A3FF] to-[#0066FF] hover:from-[#38BDF8] hover:to-[#0055EE] px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all shadow-[0_0_30px_rgba(0,210,255,0.45)] hover:shadow-[0_0_40px_rgba(0,210,255,0.7)] active:scale-95"
           >
             <span>Explore the Atlas</span>
             <ArrowRight className="h-4 w-4 text-white" />
@@ -36,10 +36,10 @@ export function HeroSection() {
 
           <Link
             href="/map-explorer"
-            className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-black/40 hover:bg-white/10 px-7 py-3.5 text-sm font-bold text-white transition-all backdrop-blur-md hover:border-pink-400/50 active:scale-95 shadow-sm"
+            className="inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 bg-black/60 hover:bg-black/80 px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all backdrop-blur-xl hover:border-[#00F0FF]/60 active:scale-95 shadow-lg"
           >
             <span>Open Interactive Map</span>
-            <Map className="h-4 w-4 text-pink-300" />
+            <Map className="h-4 w-4 text-[#00F0FF]" />
           </Link>
         </div>
       </div>
