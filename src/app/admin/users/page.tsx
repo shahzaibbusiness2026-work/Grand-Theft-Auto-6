@@ -6,17 +6,18 @@ import {
   UserPlus,
   Search,
   CheckCircle2,
-  Clock,
-  AlertTriangle,
   Mail,
   User,
   Check,
   X,
   Lock,
-  Sparkles
+  Edit,
+  RotateCcw,
 } from "lucide-react";
 import { Drawer } from "@/components/admin/drawer";
 import { useToast } from "@/components/admin/toast";
+import { Button } from "@/components/admin/ui/button";
+import { Badge } from "@/components/admin/ui/badge";
 import {
   INITIAL_ADMIN_USERS,
   AdminUser,
@@ -28,6 +29,9 @@ export default function AdminUsersPage() {
   const [users, setUsers] = useState<AdminUser[]>(INITIAL_ADMIN_USERS);
   const [searchQuery, setSearchQuery] = useState("");
   const [isInviteOpen, setIsInviteOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState<AdminUser | null>(null);
+  const [emailError, setEmailError] = useState("");
+
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
@@ -42,7 +46,17 @@ export default function AdminUsersPage() {
   );
 
   const handleInviteUser = () => {
-    if (!newUser.name.trim() || !newUser.email.trim()) return;
+    if (!newUser.name.trim()) {
+      setEmailError("Please provide the full name.");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newUser.email)) {
+      setEmailError("Please enter a valid email address (e.g. name@domain.com).");
+      return;
+    }
+    setEmailError("");
+
     const created: AdminUser = {
       id: `usr-${Date.now()}`,
       name: newUser.name,
@@ -65,6 +79,19 @@ export default function AdminUsersPage() {
       description: `Invitation email dispatched to ${created.email}.`,
       type: "success",
     });
+  };
+
+  const handleSaveRole = () => {
+    if (!editingUser) return;
+    setUsers((prev) =>
+      prev.map((u) => (u.id === editingUser.id ? editingUser : u))
+    );
+    showToast({
+      title: "User Role Updated",
+      description: `Updated role for ${editingUser.name} to ${editingUser.role}.`,
+      type: "success",
+    });
+    setEditingUser(null);
   };
 
   const permissionsMatrix = [
@@ -91,13 +118,17 @@ export default function AdminUsersPage() {
           </p>
         </div>
 
-        <button
-          onClick={() => setIsInviteOpen(true)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--admin-primary)] hover:opacity-90 text-white text-xs font-black uppercase tracking-wider transition-colors shadow-md shadow-[var(--admin-primary)]/25"
+        <Button
+          variant="primary"
+          size="md"
+          onClick={() => {
+            setEmailError("");
+            setIsInviteOpen(true);
+          }}
+          leftIcon={<UserPlus className="w-4 h-4" />}
         >
-          <UserPlus className="w-4 h-4" />
-          <span>Invite User</span>
-        </button>
+          Invite User
+        </Button>
       </div>
 
       {/* Users Table */}
@@ -107,6 +138,8 @@ export default function AdminUsersPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--admin-text-muted)]" />
             <input
               type="text"
+              id="user-search"
+              aria-label="Search team by name or email"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search team by name or email..."
@@ -118,85 +151,83 @@ export default function AdminUsersPage() {
           </span>
         </div>
 
-        <table className="w-full text-left text-xs">
-          <thead>
-            <tr className="border-b border-[var(--admin-border)] bg-[var(--admin-surface)] text-[var(--admin-text-muted)]">
-              <th className="p-3.5 font-bold uppercase">Team Member</th>
-              <th className="p-3.5 font-bold uppercase">Assigned Role</th>
-              <th className="p-3.5 font-bold uppercase">Account Status</th>
-              <th className="p-3.5 font-bold uppercase">Last Active</th>
-              <th className="p-3.5 font-bold uppercase text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--admin-border-subtle)]">
-            {filteredUsers.map((u) => (
-              <tr key={u.id} className="hover:bg-[var(--admin-elevated)]/40 transition-colors">
-                <td className="p-3.5">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-xs">
-                      {u.avatar}
-                    </div>
-                    <div>
-                      <p className="font-bold text-[var(--admin-text)]">{u.name}</p>
-                      <p className="text-[11px] text-[var(--admin-text-muted)]">{u.email}</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="p-3.5">
-                  <span
-                    className={cn(
-                      "px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase border",
-                      u.role === "Administrator" &&
-                        "bg-indigo-500/10 text-indigo-400 border-indigo-500/30",
-                      u.role === "Editor" &&
-                        "bg-purple-500/10 text-purple-400 border-purple-500/30",
-                      u.role === "Publisher" &&
-                        "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                    )}
-                  >
-                    {u.role}
-                  </span>
-                </td>
-                <td className="p-3.5">
-                  <span
-                    className={cn(
-                      "inline-flex items-center gap-1 text-[11px] font-semibold",
-                      u.status === "active" ? "text-emerald-400" : "text-amber-400"
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        "w-1.5 h-1.5 rounded-full",
-                        u.status === "active" ? "bg-emerald-400" : "bg-amber-400"
-                      )}
-                    />
-                    <span className="capitalize">{u.status}</span>
-                  </span>
-                </td>
-                <td className="p-3.5 text-[var(--admin-text-muted)] font-mono text-[11px]">
-                  {u.lastActivity}
-                </td>
-                <td className="p-3.5 text-right">
-                  <button
-                    onClick={() => {
-                      showToast({
-                        title: "Role Editor",
-                        description: `Editing permissions for ${u.name}.`,
-                        type: "info",
-                      });
-                    }}
-                    className="text-xs font-bold text-[var(--admin-primary)] hover:underline"
-                  >
-                    Edit Role
-                  </button>
-                </td>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <thead>
+              <tr className="border-b border-[var(--admin-border)] bg-[var(--admin-surface)] text-[var(--admin-text-muted)]">
+                <th scope="col" className="p-3.5 font-bold uppercase">Team Member</th>
+                <th scope="col" className="p-3.5 font-bold uppercase">Assigned Role</th>
+                <th scope="col" className="p-3.5 font-bold uppercase">Account Status</th>
+                <th scope="col" className="p-3.5 font-bold uppercase">Last Active</th>
+                <th scope="col" className="p-3.5 font-bold uppercase text-right">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-[var(--admin-border-subtle)]">
+              {filteredUsers.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="p-8 text-center text-[var(--admin-text-muted)]">
+                    No team members found matching &quot;{searchQuery}&quot;.
+                  </td>
+                </tr>
+              ) : (
+                filteredUsers.map((u) => (
+                  <tr key={u.id} className="hover:bg-[var(--admin-elevated)]/40 transition-colors">
+                    <td className="p-3.5">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-inner">
+                          {u.avatar}
+                        </div>
+                        <div>
+                          <p className="font-bold text-[var(--admin-text)]">{u.name}</p>
+                          <p className="text-[11px] text-[var(--admin-text-muted)]">{u.email}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-3.5">
+                      <Badge
+                        variant={
+                          u.role === "Administrator"
+                            ? "primary"
+                            : u.role === "Publisher"
+                            ? "success"
+                            : "neutral"
+                        }
+                        size="sm"
+                      >
+                        {u.role}
+                      </Badge>
+                    </td>
+                    <td className="p-3.5">
+                      <Badge
+                        variant={u.status === "active" ? "success" : "warning"}
+                        size="sm"
+                        dot
+                      >
+                        {u.status}
+                      </Badge>
+                    </td>
+                    <td className="p-3.5 text-[var(--admin-text-muted)] font-mono text-[11px]">
+                      {u.lastActivity}
+                    </td>
+                    <td className="p-3.5 text-right">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setEditingUser(u)}
+                        leftIcon={<Edit className="w-3.5 h-3.5" />}
+                      >
+                        Edit Role
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      {/* Role Permissions Comparison Matrix (Image 12) */}
+      {/* Role Permissions Comparison Matrix */}
       <div className="rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 space-y-4 shadow-sm">
         <div>
           <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--admin-text)]">
@@ -211,10 +242,10 @@ export default function AdminUsersPage() {
           <table className="w-full text-left text-xs">
             <thead>
               <tr className="border-b border-[var(--admin-border)] bg-[var(--admin-elevated)] text-[var(--admin-text-muted)]">
-                <th className="p-3.5 font-bold uppercase">System Capability</th>
-                <th className="p-3.5 font-bold uppercase text-center w-36">Administrator</th>
-                <th className="p-3.5 font-bold uppercase text-center w-36">Publisher</th>
-                <th className="p-3.5 font-bold uppercase text-center w-36">Editor</th>
+                <th scope="col" className="p-3.5 font-bold uppercase">System Capability</th>
+                <th scope="col" className="p-3.5 font-bold uppercase text-center w-36">Administrator</th>
+                <th scope="col" className="p-3.5 font-bold uppercase text-center w-36">Publisher</th>
+                <th scope="col" className="p-3.5 font-bold uppercase text-center w-36">Editor</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[var(--admin-border-subtle)]">
@@ -223,23 +254,23 @@ export default function AdminUsersPage() {
                   <td className="p-3.5 font-medium text-[var(--admin-text)]">{perm.name}</td>
                   <td className="p-3.5 text-center">
                     {perm.admin ? (
-                      <Check className="w-4 h-4 text-emerald-400 mx-auto" />
+                      <Check className="w-4 h-4 text-emerald-400 mx-auto" aria-label="Permitted" />
                     ) : (
-                      <X className="w-4 h-4 text-[var(--admin-text-muted)] opacity-40 mx-auto" />
+                      <X className="w-4 h-4 text-[var(--admin-text-muted)] opacity-40 mx-auto" aria-label="Not permitted" />
                     )}
                   </td>
                   <td className="p-3.5 text-center">
                     {perm.publisher ? (
-                      <Check className="w-4 h-4 text-emerald-400 mx-auto" />
+                      <Check className="w-4 h-4 text-emerald-400 mx-auto" aria-label="Permitted" />
                     ) : (
-                      <X className="w-4 h-4 text-[var(--admin-text-muted)] opacity-40 mx-auto" />
+                      <X className="w-4 h-4 text-[var(--admin-text-muted)] opacity-40 mx-auto" aria-label="Not permitted" />
                     )}
                   </td>
                   <td className="p-3.5 text-center">
                     {perm.editor ? (
-                      <Check className="w-4 h-4 text-emerald-400 mx-auto" />
+                      <Check className="w-4 h-4 text-emerald-400 mx-auto" aria-label="Permitted" />
                     ) : (
-                      <X className="w-4 h-4 text-[var(--admin-text-muted)] opacity-40 mx-auto" />
+                      <X className="w-4 h-4 text-[var(--admin-text-muted)] opacity-40 mx-auto" aria-label="Not permitted" />
                     )}
                   </td>
                 </tr>
@@ -249,7 +280,110 @@ export default function AdminUsersPage() {
         </div>
       </div>
 
-      {/* Invite User Slide-over Drawer (Image 12) */}
+      {/* Edit Role Drawer */}
+      <Drawer
+        isOpen={!!editingUser}
+        onClose={() => setEditingUser(null)}
+        title={editingUser ? `Edit User: ${editingUser.name}` : "Edit User Role"}
+        subtitle={editingUser ? `Email: ${editingUser.email}` : undefined}
+        size="md"
+        footer={
+          <>
+            <Button
+              variant="secondary"
+              size="md"
+              onClick={() => setEditingUser(null)}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              size="md"
+              onClick={handleSaveRole}
+            >
+              Save Changes
+            </Button>
+          </>
+        }
+      >
+        {editingUser && (
+          <div className="space-y-4 text-xs">
+            <div>
+              <label
+                htmlFor="edit-user-name"
+                className="block font-bold text-[var(--admin-text)] mb-1"
+              >
+                Full Name
+              </label>
+              <input
+                id="edit-user-name"
+                type="text"
+                value={editingUser.name}
+                onChange={(e) =>
+                  setEditingUser({ ...editingUser, name: e.target.value })
+                }
+                className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="edit-user-role"
+                className="block font-bold text-[var(--admin-text)] mb-1"
+              >
+                Assigned Role
+              </label>
+              <select
+                id="edit-user-role"
+                value={editingUser.role}
+                onChange={(e) =>
+                  setEditingUser({
+                    ...editingUser,
+                    role: e.target.value as AdminUser["role"],
+                  })
+                }
+                className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
+              >
+                <option value="Editor">Editor (Draft & research records)</option>
+                <option value="Publisher">Publisher (Publish articles & guides)</option>
+                <option value="Administrator">Administrator (Full root access)</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="edit-user-status"
+                className="block font-bold text-[var(--admin-text)] mb-1"
+              >
+                Account Status
+              </label>
+              <select
+                id="edit-user-status"
+                value={editingUser.status}
+                onChange={(e) =>
+                  setEditingUser({
+                    ...editingUser,
+                    status: e.target.value as AdminUser["status"],
+                  })
+                }
+                className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
+              >
+                <option value="active">Active</option>
+                <option value="pending">Pending Invitation</option>
+              </select>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] space-y-1">
+              <span className="font-bold text-[var(--admin-text)]">Security Audit:</span>
+              <p className="text-[11px] text-[var(--admin-text-muted)] leading-relaxed">
+                Role modifications take effect immediately across all active browser sessions.
+              </p>
+            </div>
+          </div>
+        )}
+      </Drawer>
+
+      {/* Invite User Slide-over Drawer */}
       <Drawer
         isOpen={isInviteOpen}
         onClose={() => setIsInviteOpen(false)}
@@ -258,53 +392,82 @@ export default function AdminUsersPage() {
         size="md"
         footer={
           <>
-            <button
+            <Button
+              variant="secondary"
+              size="md"
               onClick={() => setIsInviteOpen(false)}
-              className="px-4 py-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-elevated)] text-xs font-bold text-[var(--admin-text)]"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="primary"
+              size="md"
               onClick={handleInviteUser}
-              className="px-5 py-2 rounded-xl bg-[var(--admin-primary)] text-xs font-bold text-white shadow-md shadow-[var(--admin-primary)]/20 hover:opacity-90"
             >
               Send Invitation
-            </button>
+            </Button>
           </>
         }
       >
         <div className="space-y-4 text-xs">
+          {emailError && (
+            <div
+              role="alert"
+              className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/25 text-rose-400 font-medium"
+            >
+              {emailError}
+            </div>
+          )}
+
           <div>
-            <label className="block font-bold text-[var(--admin-text)] mb-1">
+            <label
+              htmlFor="invite-user-name"
+              className="block font-bold text-[var(--admin-text)] mb-1"
+            >
               Full Name
             </label>
             <input
+              id="invite-user-name"
               type="text"
               value={newUser.name}
-              onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+              onChange={(e) => {
+                setNewUser({ ...newUser, name: e.target.value });
+                if (emailError) setEmailError("");
+              }}
               placeholder="e.g. Jordan Hayes"
               className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
             />
           </div>
 
           <div>
-            <label className="block font-bold text-[var(--admin-text)] mb-1">
+            <label
+              htmlFor="invite-user-email"
+              className="block font-bold text-[var(--admin-text)] mb-1"
+            >
               Email Address
             </label>
             <input
+              id="invite-user-email"
               type="email"
               value={newUser.email}
-              onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+              onChange={(e) => {
+                setNewUser({ ...newUser, email: e.target.value });
+                if (emailError) setEmailError("");
+              }}
               placeholder="jordan@atlas-gta6.com"
               className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
             />
           </div>
 
           <div>
-            <label className="block font-bold text-[var(--admin-text)] mb-1">
+            <label
+              htmlFor="invite-user-role"
+              className="block font-bold text-[var(--admin-text)] mb-1"
+            >
               Assigned Role
             </label>
             <select
+              id="invite-user-role"
               value={newUser.role}
               onChange={(e) =>
                 setNewUser({ ...newUser, role: e.target.value as AdminUser["role"] })

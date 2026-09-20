@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -13,12 +13,9 @@ import {
   ChevronRight,
   ShieldCheck,
   CheckCircle2,
-  AlertTriangle,
   ExternalLink,
-  LogOut,
   Settings as SettingsIcon,
   User,
-  Sparkles
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CommandMenu } from "./command-menu";
@@ -27,12 +24,66 @@ interface AdminHeaderProps {
   onOpenMobileMenu?: () => void;
 }
 
+interface NotificationItem {
+  id: string;
+  title: string;
+  desc: string;
+  time: string;
+  read: boolean;
+}
+
+const INITIAL_NOTIFICATIONS: NotificationItem[] = [
+  {
+    id: "1",
+    title: "Source Verified",
+    desc: "Morgan Kim verified source for Bravado Banshee GTS.",
+    time: "12m ago",
+    read: false,
+  },
+  {
+    id: "2",
+    title: "Marker Displaced",
+    desc: "Vice City Metro map marker coordinates require recalibration.",
+    time: "1h ago",
+    read: false,
+  },
+  {
+    id: "3",
+    title: "Article Scheduled",
+    desc: '"Comparing database records" scheduled for Sep 24, 2026.',
+    time: "3h ago",
+    read: false,
+  },
+];
+
 export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [notifications, setNotifications] = useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
+
+  const notificationsRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
+
+  const markAllRead = () => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+  };
+
+  // Close dropdowns on escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (isNotificationsOpen) setIsNotificationsOpen(false);
+        if (isProfileOpen) setIsProfileOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isNotificationsOpen, isProfileOpen]);
 
   // Generate breadcrumbs from pathname
   const segments = pathname.split("/").filter(Boolean);
@@ -48,29 +99,34 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
         {/* Left Side: Mobile Menu & Breadcrumbs */}
         <div className="flex items-center gap-3 min-w-0">
           <button
+            type="button"
             onClick={onOpenMobileMenu}
-            className="lg:hidden p-2 rounded-xl text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors"
-            aria-label="Open mobile menu"
+            className="lg:hidden p-2 rounded-xl text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+            aria-label="Open mobile navigation menu"
           >
             <Menu className="w-5 h-5" />
           </button>
 
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-1.5 text-xs text-[var(--admin-text-muted)] overflow-hidden truncate">
+          <nav
+            aria-label="Breadcrumb"
+            className="flex items-center gap-1.5 text-xs text-[var(--admin-text-muted)] overflow-hidden truncate"
+          >
             <Link
               href="/admin"
-              className="hover:text-[var(--admin-text)] font-semibold transition-colors flex items-center gap-1"
+              className="hover:text-[var(--admin-text)] font-semibold transition-colors flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded"
             >
               <span>Atlas</span>
             </Link>
             {breadcrumbs.length > 1 ? (
               breadcrumbs.slice(1).map((crumb, i) => (
                 <React.Fragment key={crumb.url}>
-                  <ChevronRight className="w-3.5 h-3.5 shrink-0 opacity-50" />
+                  <ChevronRight className="w-3.5 h-3.5 shrink-0 opacity-50" aria-hidden="true" />
                   <Link
                     href={crumb.url}
+                    aria-current={i === breadcrumbs.length - 2 ? "page" : undefined}
                     className={cn(
-                      "truncate transition-colors",
+                      "truncate transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded",
                       i === breadcrumbs.length - 2
                         ? "text-[var(--admin-text)] font-bold"
                         : "hover:text-[var(--admin-text)] font-medium"
@@ -82,8 +138,10 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
               ))
             ) : (
               <>
-                <ChevronRight className="w-3.5 h-3.5 shrink-0 opacity-50" />
-                <span className="text-[var(--admin-text)] font-bold">Overview</span>
+                <ChevronRight className="w-3.5 h-3.5 shrink-0 opacity-50" aria-hidden="true" />
+                <span className="text-[var(--admin-text)] font-bold" aria-current="page">
+                  Overview
+                </span>
               </>
             )}
           </nav>
@@ -93,8 +151,10 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Quick Search Trigger */}
           <button
+            type="button"
             onClick={() => setIsSearchOpen(true)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-xs text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:border-[var(--admin-primary)] transition-all shadow-sm group"
+            aria-keyshortcuts="Control+K Meta+K"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-xs text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:border-[var(--admin-primary)] transition-all shadow-sm group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
           >
             <Search className="w-3.5 h-3.5 text-[var(--admin-text-muted)] group-hover:text-[var(--admin-primary)]" />
             <span className="hidden md:inline font-medium">Quick search...</span>
@@ -105,10 +165,11 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
 
           {/* Theme Toggle Button */}
           <button
+            type="button"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors shadow-sm"
+            className="p-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
             title={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
-            aria-label="Toggle theme"
+            aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
           >
             {resolvedTheme === "dark" ? (
               <Sun className="w-4 h-4 text-amber-400 animate-in spin-in-90 duration-200" />
@@ -118,14 +179,26 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
           </button>
 
           {/* Notifications Popover Trigger */}
-          <div className="relative">
+          <div className="relative" ref={notificationsRef}>
             <button
-              onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-              className="p-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors shadow-sm relative"
-              aria-label="Notifications"
+              type="button"
+              onClick={() => {
+                setIsNotificationsOpen(!isNotificationsOpen);
+                if (isProfileOpen) setIsProfileOpen(false);
+              }}
+              aria-haspopup="true"
+              aria-expanded={isNotificationsOpen}
+              aria-label={
+                unreadCount > 0
+                  ? `Notifications (${unreadCount} unread)`
+                  : "Notifications (none unread)"
+              }
+              className="p-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors shadow-sm relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
             >
               <Bell className="w-4 h-4" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-indigo-500 ring-2 ring-[var(--admin-surface)]" />
+              {unreadCount > 0 && (
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[var(--admin-primary)] ring-2 ring-[var(--admin-surface)]" />
+              )}
             </button>
 
             {/* Notifications Dropdown */}
@@ -134,60 +207,74 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
                 <div
                   className="fixed inset-0 z-40"
                   onClick={() => setIsNotificationsOpen(false)}
+                  aria-hidden="true"
                 />
-                <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-[var(--admin-surface)] border border-[var(--admin-border)] shadow-xl z-50 p-4 space-y-3 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div
+                  role="region"
+                  aria-label="Notification Center"
+                  className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-[var(--admin-surface)] border border-[var(--admin-border)] shadow-xl z-50 p-4 space-y-3 animate-in fade-in slide-in-from-top-2 duration-150"
+                >
                   <div className="flex items-center justify-between pb-2 border-b border-[var(--admin-border-subtle)]">
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-xs text-[var(--admin-text)]">Notifications</span>
-                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[var(--admin-primary)] text-white">
-                        3 new
-                      </span>
+                      {unreadCount > 0 ? (
+                        <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[var(--admin-primary)] text-white">
+                          {unreadCount} new
+                        </span>
+                      ) : (
+                        <span className="px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-[var(--admin-elevated)] text-[var(--admin-text-muted)]">
+                          All caught up
+                        </span>
+                      )}
                     </div>
-                    <button
-                      onClick={() => setIsNotificationsOpen(false)}
-                      className="text-[11px] text-[var(--admin-primary)] font-semibold hover:underline"
-                    >
-                      Mark all read
-                    </button>
+                    {unreadCount > 0 && (
+                      <button
+                        type="button"
+                        onClick={markAllRead}
+                        className="text-[11px] text-[var(--admin-primary)] font-semibold hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)] rounded"
+                      >
+                        Mark all read
+                      </button>
+                    )}
                   </div>
 
-                  <div className="space-y-2 text-xs">
-                    <div className="p-2.5 rounded-xl bg-[var(--admin-elevated)] border border-[var(--admin-border-subtle)] space-y-1">
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold text-[var(--admin-text)]">Source Verified</span>
-                        <span className="text-[10px] text-[var(--admin-text-muted)]">12m ago</span>
+                  <div className="space-y-2 text-xs max-h-72 overflow-y-auto">
+                    {notifications.length === 0 ? (
+                      <div className="py-8 text-center text-[var(--admin-text-muted)]">
+                        <CheckCircle2 className="w-8 h-8 mx-auto mb-2 text-emerald-400 opacity-60" />
+                        <p className="text-xs font-semibold">No notifications</p>
                       </div>
-                      <p className="text-[11px] text-[var(--admin-text-muted)]">
-                        Morgan Kim verified source for <strong>Bravado Banshee GTS</strong>.
-                      </p>
-                    </div>
-
-                    <div className="p-2.5 rounded-xl bg-[var(--admin-elevated)] border border-[var(--admin-border-subtle)] space-y-1">
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold text-[var(--admin-text)]">Marker Displaced</span>
-                        <span className="text-[10px] text-[var(--admin-text-muted)]">1h ago</span>
-                      </div>
-                      <p className="text-[11px] text-[var(--admin-text-muted)]">
-                        Vice City Metro map marker coordinates require recalibration.
-                      </p>
-                    </div>
-
-                    <div className="p-2.5 rounded-xl bg-[var(--admin-elevated)] border border-[var(--admin-border-subtle)] space-y-1">
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold text-[var(--admin-text)]">Article Scheduled</span>
-                        <span className="text-[10px] text-[var(--admin-text-muted)]">3h ago</span>
-                      </div>
-                      <p className="text-[11px] text-[var(--admin-text-muted)]">
-                        &quot;Comparing database records&quot; scheduled for Sep 24, 2026.
-                      </p>
-                    </div>
+                    ) : (
+                      notifications.map((item) => (
+                        <div
+                          key={item.id}
+                          className={cn(
+                            "p-2.5 rounded-xl border space-y-1 transition-colors",
+                            item.read
+                              ? "bg-[var(--admin-card)]/50 border-[var(--admin-border-subtle)] opacity-70"
+                              : "bg-[var(--admin-elevated)] border-[var(--admin-border)]"
+                          )}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-bold text-[var(--admin-text)] flex items-center gap-1.5">
+                              {!item.read && (
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--admin-primary)]" />
+                              )}
+                              {item.title}
+                            </span>
+                            <span className="text-[10px] text-[var(--admin-text-muted)]">{item.time}</span>
+                          </div>
+                          <p className="text-[11px] text-[var(--admin-text-muted)]">{item.desc}</p>
+                        </div>
+                      ))
+                    )}
                   </div>
 
                   <div className="pt-2 border-t border-[var(--admin-border-subtle)] text-center">
                     <Link
                       href="/admin/activity"
                       onClick={() => setIsNotificationsOpen(false)}
-                      className="text-xs font-bold text-[var(--admin-primary)] hover:underline"
+                      className="text-xs font-bold text-[var(--admin-primary)] hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)] rounded"
                     >
                       View full audit activity →
                     </Link>
@@ -198,11 +285,17 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
           </div>
 
           {/* User Profile Menu */}
-          <div className="relative">
+          <div className="relative" ref={profileRef}>
             <button
-              onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] hover:bg-[var(--admin-elevated)] transition-colors shadow-sm"
-              aria-label="User profile"
+              type="button"
+              onClick={() => {
+                setIsProfileOpen(!isProfileOpen);
+                if (isNotificationsOpen) setIsNotificationsOpen(false);
+              }}
+              aria-haspopup="true"
+              aria-expanded={isProfileOpen}
+              aria-label="User profile menu"
+              className="flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] hover:bg-[var(--admin-elevated)] transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
             >
               <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-[10px]">
                 AD
@@ -210,7 +303,9 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
               <span className="hidden sm:inline text-xs font-bold text-[var(--admin-text)]">
                 Admin
               </span>
-              <span className="text-[10px] text-[var(--admin-text-muted)]">▾</span>
+              <span className="text-[10px] text-[var(--admin-text-muted)]" aria-hidden="true">
+                ▾
+              </span>
             </button>
 
             {/* Profile Dropdown */}
@@ -219,8 +314,13 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
                 <div
                   className="fixed inset-0 z-40"
                   onClick={() => setIsProfileOpen(false)}
+                  aria-hidden="true"
                 />
-                <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-[var(--admin-surface)] border border-[var(--admin-border)] shadow-xl z-50 p-2 space-y-1 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div
+                  role="menu"
+                  aria-label="User actions"
+                  className="absolute right-0 mt-2 w-56 rounded-2xl bg-[var(--admin-surface)] border border-[var(--admin-border)] shadow-xl z-50 p-2 space-y-1 animate-in fade-in slide-in-from-top-2 duration-150"
+                >
                   <div className="px-3 py-2 border-b border-[var(--admin-border-subtle)]">
                     <p className="text-xs font-bold text-[var(--admin-text)]">Administrator</p>
                     <p className="text-[10px] text-[var(--admin-text-muted)] truncate">admin@atlas-gta6.com</p>
@@ -230,18 +330,20 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
                   </div>
 
                   <Link
+                    role="menuitem"
                     href="/admin/users"
                     onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
                   >
                     <User className="w-3.5 h-3.5" />
                     <span>My Profile & Team</span>
                   </Link>
 
                   <Link
+                    role="menuitem"
                     href="/admin/settings"
                     onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
                   >
                     <SettingsIcon className="w-3.5 h-3.5" />
                     <span>Site Settings</span>
@@ -250,9 +352,10 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
                   <div className="border-t border-[var(--admin-border-subtle)] my-1" />
 
                   <Link
+                    role="menuitem"
                     href="/"
                     target="_blank"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
                     <span>View Public Site</span>

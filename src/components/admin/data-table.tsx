@@ -4,15 +4,9 @@ import React, { useState } from "react";
 import {
   ChevronDown,
   ChevronUp,
-  MoreHorizontal,
   ChevronLeft,
   ChevronRight,
-  Check,
-  Trash2,
-  Archive,
-  Edit,
-  ExternalLink,
-  ChevronRight as RowExpandIcon
+  ChevronRight as RowExpandIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -24,7 +18,7 @@ export interface Column<T> {
   className?: string;
 }
 
-export interface DataTableProps<T extends { id: string }> {
+export interface DataTableProps<T extends { id: string; name?: string; title?: string }> {
   data: T[];
   columns: Column<T>[];
   keyExtractor?: (item: T) => string;
@@ -41,7 +35,7 @@ export interface DataTableProps<T extends { id: string }> {
   className?: string;
 }
 
-export function DataTable<T extends { id: string }>({
+export function DataTable<T extends { id: string; name?: string; title?: string }>({
   data,
   columns,
   selectable = false,
@@ -100,7 +94,7 @@ export function DataTable<T extends { id: string }>({
   const isAllSelected =
     data.length > 0 && selectedIds.length === data.length;
 
-  const toggleExpand = (id: string, e: React.MouseEvent) => {
+  const toggleExpand = (id: string, e: React.MouseEvent | React.KeyboardEvent) => {
     e.stopPropagation();
     setExpandedRowId((prev) => (prev === id ? null : id));
   };
@@ -109,23 +103,28 @@ export function DataTable<T extends { id: string }>({
     <div className={cn("space-y-3", className)}>
       {/* Bulk Action Bar (when rows are selected) */}
       {selectable && selectedIds.length > 0 && (
-        <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--admin-primary)]/10 border border-[var(--admin-primary)]/30 text-xs animate-in slide-in-from-top-1">
+        <div
+          role="region"
+          aria-label="Bulk actions"
+          className="flex items-center justify-between p-3 rounded-xl bg-[var(--admin-primary)]/10 border border-[var(--admin-primary)]/30 text-xs animate-in slide-in-from-top-1"
+        >
           <div className="flex items-center gap-2">
             <span className="font-bold text-[var(--admin-primary)]">
               {selectedIds.length} selected
             </span>
-            <span className="text-[var(--admin-text-muted)]">•</span>
+            <span className="text-[var(--admin-text-muted)]" aria-hidden="true">
+              •
+            </span>
             <button
+              type="button"
               onClick={() => onSelectAll?.(false)}
-              className="text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:underline"
+              className="text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded"
             >
               Clear selection
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
-            {bulkActions}
-          </div>
+          <div className="flex items-center gap-2">{bulkActions}</div>
         </div>
       )}
 
@@ -137,45 +136,73 @@ export function DataTable<T extends { id: string }>({
             <thead>
               <tr className="border-b border-[var(--admin-border)] bg-[var(--admin-surface)] text-[var(--admin-text-muted)]">
                 {selectable && (
-                  <th className="p-3.5 w-10 text-center">
+                  <th scope="col" className="p-3.5 w-10 text-center">
                     <input
                       type="checkbox"
+                      aria-label="Select all rows"
                       checked={isAllSelected}
                       onChange={(e) => onSelectAll?.(e.target.checked)}
-                      className="rounded border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
+                      className="rounded border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-primary)] focus:ring-2 focus:ring-[var(--admin-primary)] focus:ring-offset-1 focus:ring-offset-[var(--admin-bg)]"
                     />
                   </th>
                 )}
-                {expandableRowRender && <th className="p-3.5 w-8" />}
-                {columns.map((col) => (
-                  <th
-                    key={col.key}
-                    onClick={() => col.sortable && handleSort(col.key)}
-                    className={cn(
-                      "p-3.5 font-bold uppercase tracking-wider select-none",
-                      col.sortable && "cursor-pointer hover:text-[var(--admin-text)]",
-                      col.className
-                    )}
-                  >
-                    <div className="flex items-center gap-1.5">
-                      <span>{col.header}</span>
-                      {col.sortable && (
-                        <span className="text-[10px]">
-                          {sortConfig?.key === col.key ? (
-                            sortConfig.direction === "asc" ? (
-                              <ChevronUp className="w-3.5 h-3.5 text-[var(--admin-primary)]" />
-                            ) : (
-                              <ChevronDown className="w-3.5 h-3.5 text-[var(--admin-primary)]" />
-                            )
-                          ) : (
-                            <ChevronDown className="w-3 h-3 opacity-30" />
-                          )}
-                        </span>
+                {expandableRowRender && <th scope="col" className="p-3.5 w-8" aria-label="Row expansion" />}
+                {columns.map((col) => {
+                  const isSorted = sortConfig?.key === col.key;
+                  const sortDir = isSorted
+                    ? sortConfig.direction === "asc"
+                      ? "ascending"
+                      : "descending"
+                    : "none";
+
+                  return (
+                    <th
+                      key={col.key}
+                      scope="col"
+                      aria-sort={col.sortable ? sortDir : undefined}
+                      tabIndex={col.sortable ? 0 : undefined}
+                      role={col.sortable ? "button" : undefined}
+                      onClick={() => col.sortable && handleSort(col.key)}
+                      onKeyDown={(e) => {
+                        if (col.sortable && (e.key === "Enter" || e.key === " ")) {
+                          e.preventDefault();
+                          handleSort(col.key);
+                        }
+                      }}
+                      className={cn(
+                        "p-3.5 font-bold uppercase tracking-wider select-none outline-none",
+                        col.sortable &&
+                          "cursor-pointer hover:text-[var(--admin-text)] focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] focus-visible:ring-inset rounded",
+                        col.className
                       )}
-                    </div>
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span>{col.header}</span>
+                        {col.sortable && (
+                          <span className="text-[10px]" aria-hidden="true">
+                            {isSorted ? (
+                              sortConfig.direction === "asc" ? (
+                                <ChevronUp className="w-3.5 h-3.5 text-[var(--admin-primary)]" />
+                              ) : (
+                                <ChevronDown className="w-3.5 h-3.5 text-[var(--admin-primary)]" />
+                              )
+                            ) : (
+                              <ChevronDown className="w-3 h-3 opacity-30" />
+                            )}
+                          </span>
+                        )}
+                      </div>
+                    </th>
+                  );
+                })}
+                {actions && (
+                  <th
+                    scope="col"
+                    className="p-3.5 w-16 text-right font-bold uppercase tracking-wider"
+                  >
+                    Actions
                   </th>
-                ))}
-                {actions && <th className="p-3.5 w-16 text-right font-bold uppercase tracking-wider">Actions</th>}
+                )}
               </tr>
             </thead>
 
@@ -199,6 +226,7 @@ export function DataTable<T extends { id: string }>({
                 paginatedData.map((item) => {
                   const isSelected = selectedIds.includes(item.id);
                   const isExpanded = expandedRowId === item.id;
+                  const rowLabel = item.name || item.title || `Row ${item.id}`;
 
                   return (
                     <React.Fragment key={item.id}>
@@ -219,9 +247,10 @@ export function DataTable<T extends { id: string }>({
                           >
                             <input
                               type="checkbox"
+                              aria-label={`Select ${rowLabel}`}
                               checked={isSelected}
                               onChange={() => onSelectRow?.(item.id)}
-                              className="rounded border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
+                              className="rounded border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-primary)] focus:ring-2 focus:ring-[var(--admin-primary)] focus:ring-offset-1 focus:ring-offset-[var(--admin-bg)]"
                             />
                           </td>
                         )}
@@ -229,8 +258,16 @@ export function DataTable<T extends { id: string }>({
                         {expandableRowRender && (
                           <td className="p-3.5 text-center">
                             <button
+                              type="button"
+                              aria-expanded={isExpanded}
+                              aria-controls={`row-details-${item.id}`}
+                              aria-label={
+                                isExpanded
+                                  ? `Collapse details for ${rowLabel}`
+                                  : `Expand details for ${rowLabel}`
+                              }
                               onClick={(e) => toggleExpand(item.id, e)}
-                              className="p-1 rounded text-[var(--admin-text-muted)] hover:text-[var(--admin-text)]"
+                              className="p-1 rounded text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
                             >
                               <RowExpandIcon
                                 className={cn(
@@ -262,9 +299,12 @@ export function DataTable<T extends { id: string }>({
                         )}
                       </tr>
 
-                      {/* Expanded Row View (Image 18) */}
+                      {/* Expanded Row View */}
                       {isExpanded && expandableRowRender && (
-                        <tr className="bg-[var(--admin-elevated)]/40 border-b border-[var(--admin-border-subtle)]">
+                        <tr
+                          id={`row-details-${item.id}`}
+                          className="bg-[var(--admin-elevated)]/40 border-b border-[var(--admin-border-subtle)]"
+                        >
                           <td
                             colSpan={
                               columns.length +
@@ -287,7 +327,10 @@ export function DataTable<T extends { id: string }>({
         </div>
 
         {/* Pagination Bar */}
-        <div className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-surface)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--admin-text-muted)]">
+        <nav
+          aria-label="Table pagination"
+          className="p-4 border-t border-[var(--admin-border)] bg-[var(--admin-surface)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--admin-text-muted)]"
+        >
           <div className="flex items-center gap-2">
             <span>
               Showing{" "}
@@ -304,29 +347,33 @@ export function DataTable<T extends { id: string }>({
 
           <div className="flex items-center gap-1.5">
             <button
+              type="button"
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="p-1.5 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-              aria-label="Previous page"
+              className="p-1.5 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+              aria-label="Go to previous page"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
 
             {Array.from({ length: totalPages }).map((_, i) => {
               const page = i + 1;
-              // Show only nearby pages if too many
               if (
                 page === 1 ||
                 page === totalPages ||
                 (page >= currentPage - 1 && page <= currentPage + 1)
               ) {
+                const isCurrent = currentPage === page;
                 return (
                   <button
                     key={page}
+                    type="button"
                     onClick={() => setCurrentPage(page)}
+                    aria-label={`Go to page ${page}`}
+                    aria-current={isCurrent ? "page" : undefined}
                     className={cn(
-                      "w-8 h-8 rounded-lg font-bold transition-colors text-xs",
-                      currentPage === page
+                      "w-8 h-8 rounded-lg font-bold transition-colors text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
+                      isCurrent
                         ? "bg-[var(--admin-primary)] text-white shadow-sm"
                         : "border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
                     )}
@@ -339,7 +386,11 @@ export function DataTable<T extends { id: string }>({
                 (page === currentPage + 2 && page < totalPages)
               ) {
                 return (
-                  <span key={page} className="px-1 text-[var(--admin-text-muted)]">
+                  <span
+                    key={page}
+                    className="px-1 text-[var(--admin-text-muted)] select-none"
+                    aria-hidden="true"
+                  >
                     ...
                   </span>
                 );
@@ -348,15 +399,16 @@ export function DataTable<T extends { id: string }>({
             })}
 
             <button
+              type="button"
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages || totalPages === 0}
-              className="p-1.5 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-              aria-label="Next page"
+              className="p-1.5 rounded-lg border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+              aria-label="Go to next page"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-        </div>
+        </nav>
       </div>
     </div>
   );

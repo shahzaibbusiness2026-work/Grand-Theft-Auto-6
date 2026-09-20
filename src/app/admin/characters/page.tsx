@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Users, Plus, CheckCircle2, ShieldAlert } from "lucide-react";
 import { DataTable, Column } from "@/components/admin/data-table";
+import { Badge } from "@/components/admin/ui/badge";
 
 interface CharacterRecord {
   id: string;
@@ -14,7 +15,7 @@ interface CharacterRecord {
 }
 
 export default function AdminCharactersPage() {
-  const [characters, setCharacters] = useState<CharacterRecord[]>([
+  const [characters] = useState<CharacterRecord[]>([
     { id: "char-1", name: "Lucia Caminos", role: "Lead Protagonist", actor: "Manni L. Perez (Confirmed)", status: "Confirmed", territory: "Vice City Metro / Leonida Penitentiary" },
     { id: "char-2", name: "Jason Duval", role: "Lead Protagonist", actor: "Dylan Rourke (Casting Lead)", status: "Confirmed", territory: "Port Gellhorn / Kelly County" },
     { id: "char-3", name: "Stefanie (Parole Officer)", role: "Supporting Contact", actor: "Official Trailer 1 Voice", status: "Confirmed", territory: "Leonida Corrections Facility" },
@@ -35,21 +36,27 @@ export default function AdminCharactersPage() {
         </div>
       ),
     },
-    { key: "role", header: "Story Role", sortable: true },
+    {
+      key: "role",
+      header: "Story Role",
+      sortable: true,
+      render: (c) => (
+        <Badge
+          variant={c.role === "Lead Protagonist" ? "primary" : c.role === "Key Antagonist" ? "danger" : "neutral"}
+          size="sm"
+        >
+          {c.role}
+        </Badge>
+      ),
+    },
     { key: "actor", header: "Actor / Voice Source" },
     {
       key: "status",
       header: "Status",
       render: (c) => (
-        <span
-          className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border ${
-            c.status === "Confirmed"
-              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-              : "bg-amber-500/10 text-amber-400 border-amber-500/30"
-          }`}
-        >
+        <Badge variant={c.status === "Confirmed" ? "success" : "warning"} size="sm" dot>
           {c.status}
-        </span>
+        </Badge>
       ),
     },
     { key: "territory", header: "Primary Territory" },

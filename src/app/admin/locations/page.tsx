@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { MapPin, Plus, Search, CheckCircle2, Clock, AlertTriangle, ExternalLink } from "lucide-react";
 import { DataTable, Column } from "@/components/admin/data-table";
+import { Badge } from "@/components/admin/ui/badge";
 
 interface LocationRecord {
   id: string;
@@ -14,7 +15,7 @@ interface LocationRecord {
 }
 
 export default function AdminLocationsPage() {
-  const [locations, setLocations] = useState<LocationRecord[]>([
+  const [locations] = useState<LocationRecord[]>([
     { id: "loc-1", name: "Vice City Beach", district: "Vice City Metro", type: "City District", verification: "verified", coordinates: "25.7617, -80.1918" },
     { id: "loc-2", name: "Leonida Penitentiary", district: "Leonard County", type: "Government Facility", verification: "verified", coordinates: "25.9011, -80.3542" },
     { id: "loc-3", name: "Grassrivers Wetlands", district: "Everglades Equivalent", type: "Landmark", verification: "pending", coordinates: "25.6120, -80.6010" },
@@ -38,24 +39,18 @@ export default function AdminLocationsPage() {
       key: "type",
       header: "Type",
       render: (l) => (
-        <span className="px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-[var(--admin-elevated)] border border-[var(--admin-border)]">
+        <Badge variant="neutral" size="sm">
           {l.type}
-        </span>
+        </Badge>
       ),
     },
     {
       key: "verification",
       header: "Status",
       render: (l) => (
-        <span
-          className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border ${
-            l.verification === "verified"
-              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-              : "bg-amber-500/10 text-amber-400 border-amber-500/30"
-          }`}
-        >
+        <Badge variant={l.verification === "verified" ? "success" : "warning"} size="sm" dot>
           {l.verification}
-        </span>
+        </Badge>
       ),
     },
     {

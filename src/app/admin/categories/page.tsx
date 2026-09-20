@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import { Tag, Plus, Trash2, Edit, FileText, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
+import { Button } from "@/components/admin/ui/button";
+import { Badge } from "@/components/admin/ui/badge";
+import { Tooltip } from "@/components/admin/ui/tooltip";
 
 export default function AdminCategoriesPage() {
   const { showToast } = useToast();
@@ -21,10 +24,10 @@ export default function AdminCategoriesPage() {
     if (!newCatName.trim()) return;
     const created = {
       id: `cat-${Date.now()}`,
-      name: newCatName,
-      slug: newCatName.toLowerCase().replace(/\s+/g, "-"),
+      name: newCatName.trim(),
+      slug: newCatName.trim().toLowerCase().replace(/\s+/g, "-"),
       count: 0,
-      description: newCatDesc || "No description provided.",
+      description: newCatDesc.trim() || "No description provided.",
     };
     setCategories([...categories, created]);
     setNewCatName("");
@@ -32,6 +35,16 @@ export default function AdminCategoriesPage() {
     showToast({
       title: "Category Created",
       description: `"${created.name}" added to taxonomy.`,
+      type: "success",
+    });
+  };
+
+  const handleDeleteCategory = (id: string) => {
+    const cat = categories.find((c) => c.id === id);
+    setCategories((prev) => prev.filter((c) => c.id !== id));
+    showToast({
+      title: "Category Deleted",
+      description: `"${cat?.name || "Category"}" removed from taxonomy.`,
       type: "success",
     });
   };
@@ -52,25 +65,44 @@ export default function AdminCategoriesPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Categories List (8 cols) */}
-        <div className="lg:col-span-8 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] overflow-hidden">
-          <table className="w-full text-left text-xs">
+        <div className="lg:col-span-8 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] overflow-hidden shadow-sm">
+          <table className="w-full text-left text-xs" aria-label="Content categories">
             <thead>
               <tr className="border-b border-[var(--admin-border)] bg-[var(--admin-surface)] text-[var(--admin-text-muted)]">
-                <th className="p-3.5 font-bold uppercase">Category</th>
-                <th className="p-3.5 font-bold uppercase">Slug</th>
-                <th className="p-3.5 font-bold uppercase">Articles</th>
-                <th className="p-3.5 font-bold uppercase">Description</th>
+                <th scope="col" className="p-3.5 font-bold uppercase">Category</th>
+                <th scope="col" className="p-3.5 font-bold uppercase">Slug</th>
+                <th scope="col" className="p-3.5 font-bold uppercase">Articles</th>
+                <th scope="col" className="p-3.5 font-bold uppercase">Description</th>
+                <th scope="col" className="p-3.5 font-bold uppercase text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[var(--admin-border-subtle)]">
               {categories.map((c) => (
-                <tr key={c.id} className="hover:bg-[var(--admin-elevated)]/40">
-                  <td className="p-3.5 font-bold text-[var(--admin-text)]">{c.name}</td>
-                  <td className="p-3.5 font-mono text-[var(--admin-text-muted)]">{c.slug}</td>
-                  <td className="p-3.5 font-mono font-bold text-[var(--admin-primary)]">
-                    {c.count} items
+                <tr key={c.id} className="hover:bg-[var(--admin-elevated)]/40 transition-colors">
+                  <td className="p-3.5 font-bold text-[var(--admin-text)]">
+                    <div className="flex items-center gap-2">
+                      <Tag className="w-3.5 h-3.5 text-[var(--admin-primary)]" />
+                      {c.name}
+                    </div>
                   </td>
-                  <td className="p-3.5 text-[var(--admin-text-muted)]">{c.description}</td>
+                  <td className="p-3.5 font-mono text-[var(--admin-text-muted)]">{c.slug}</td>
+                  <td className="p-3.5">
+                    <Badge variant="primary" size="sm">{c.count} items</Badge>
+                  </td>
+                  <td className="p-3.5 text-[var(--admin-text-muted)] max-w-[240px] truncate">{c.description}</td>
+                  <td className="p-3.5 text-right">
+                    <Tooltip content="Delete category">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleDeleteCategory(c.id)}
+                        className="text-[var(--admin-text-muted)] hover:text-rose-400 hover:bg-rose-500/10 h-7 w-7"
+                        aria-label={`Delete category: ${c.name}`}
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </Button>
+                    </Tooltip>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -78,41 +110,46 @@ export default function AdminCategoriesPage() {
         </div>
 
         {/* Add Category Form (4 cols) */}
-        <div className="lg:col-span-4 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-surface)] p-5 space-y-4 text-xs">
+        <div className="lg:col-span-4 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-surface)] p-5 space-y-4 text-xs shadow-sm">
           <h3 className="font-bold uppercase tracking-wider text-[var(--admin-text)]">
             Create New Category
           </h3>
           <form onSubmit={handleAddCategory} className="space-y-3">
             <div>
-              <label className="block font-bold text-[var(--admin-text)] mb-1">
+              <label htmlFor="new-cat-name" className="block font-bold text-[var(--admin-text)] mb-1">
                 Category Name
               </label>
               <input
+                id="new-cat-name"
                 type="text"
                 value={newCatName}
                 onChange={(e) => setNewCatName(e.target.value)}
                 placeholder="e.g. Weapons Lore"
-                className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
+                className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] focus:ring-1 focus:ring-[var(--admin-primary)] transition-all"
               />
             </div>
             <div>
-              <label className="block font-bold text-[var(--admin-text)] mb-1">
+              <label htmlFor="new-cat-desc" className="block font-bold text-[var(--admin-text)] mb-1">
                 Description
               </label>
               <textarea
+                id="new-cat-desc"
                 rows={3}
                 value={newCatDesc}
                 onChange={(e) => setNewCatDesc(e.target.value)}
                 placeholder="Brief summary of what articles belong here..."
-                className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
+                className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] focus:ring-1 focus:ring-[var(--admin-primary)] transition-all resize-none"
               />
             </div>
-            <button
+            <Button
               type="submit"
-              className="w-full py-2.5 rounded-xl bg-[var(--admin-primary)] text-white font-bold text-xs shadow-md shadow-[var(--admin-primary)]/20 hover:opacity-90"
+              variant="primary"
+              className="w-full"
+              disabled={!newCatName.trim()}
+              leftIcon={<Plus className="w-4 h-4" />}
             >
               Add Category
-            </button>
+            </Button>
           </form>
         </div>
       </div>

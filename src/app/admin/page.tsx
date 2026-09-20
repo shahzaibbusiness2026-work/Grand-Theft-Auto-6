@@ -25,6 +25,9 @@ import {
 } from "lucide-react";
 import { StatCard } from "@/components/admin/stat-card";
 import { useToast } from "@/components/admin/toast";
+import { Button } from "@/components/admin/ui/button";
+import { Badge } from "@/components/admin/ui/badge";
+import { Tooltip } from "@/components/admin/ui/tooltip";
 import {
   INITIAL_ADMIN_ARTICLES,
   INITIAL_ADMIN_VEHICLES,
@@ -70,7 +73,7 @@ export default function AdminOverviewPage() {
       category: "Vehicle Record",
       issue: "2 unverified sources require corroboration against trailer timestamps.",
       badge: "Pending Source",
-      badgeColor: "amber",
+      badgeVariant: "warning" as const,
       actionUrl: "/admin/vehicles?edit=veh-1",
       actionLabel: "Review Record",
     },
@@ -80,7 +83,7 @@ export default function AdminOverviewPage() {
       category: "Tool Marker",
       issue: "1 displaced marker coordinates outside Leonida boundary.",
       badge: "Marker Error",
-      badgeColor: "rose",
+      badgeVariant: "danger" as const,
       actionUrl: "/admin/map?marker=mark-1",
       actionLabel: "Recalibrate",
     },
@@ -90,7 +93,7 @@ export default function AdminOverviewPage() {
       category: "Article Draft",
       issue: "Editorial review pending before public scheduled release.",
       badge: "In Review",
-      badgeColor: "indigo",
+      badgeVariant: "info" as const,
       actionUrl: "/admin/articles?edit=art-2",
       actionLabel: "Editorial Review",
     },
@@ -105,9 +108,9 @@ export default function AdminOverviewPage() {
             <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight">
               Editorial & System Overview
             </h1>
-            <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">
+            <Badge variant="primary" size="sm" className="hidden sm:inline-flex gap-1">
               <ShieldCheck className="w-3 h-3" /> Live Atlas v1.4.2
-            </span>
+            </Badge>
           </div>
           <p className="text-xs text-[var(--admin-text-muted)] mt-1">
             Real-time status of content publications, database asset verifications, and system health.
@@ -115,21 +118,22 @@ export default function AdminOverviewPage() {
         </div>
 
         <div className="flex items-center gap-2.5">
-          <button
+          <Button
+            variant="secondary"
+            size="sm"
             onClick={handleRunAudit}
-            disabled={isAuditing}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] hover:bg-[var(--admin-elevated)] text-xs font-bold text-[var(--admin-text)] transition-colors disabled:opacity-50 shadow-sm"
+            isLoading={isAuditing}
+            leftIcon={<RefreshCw className="w-3.5 h-3.5" />}
           >
-            <RefreshCw className={cn("w-3.5 h-3.5 text-[var(--admin-primary)]", isAuditing && "animate-spin")} />
-            <span>{isAuditing ? "Auditing System..." : "Run Health Audit"}</span>
-          </button>
+            {isAuditing ? "Auditing System..." : "Run Health Audit"}
+          </Button>
 
           <Link
             href="/admin/articles?action=new"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--admin-primary)] hover:opacity-90 text-white text-xs font-black uppercase tracking-wider transition-colors shadow-md shadow-[var(--admin-primary)]/25"
+            className="inline-flex items-center gap-2 px-3 h-8 rounded-xl bg-[var(--admin-primary)] text-white text-xs font-bold hover:opacity-90 shadow-md shadow-[var(--admin-primary)]/25 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--admin-bg)]"
           >
             <Plus className="w-4 h-4" />
-            <span>New Article</span>
+            New Article
           </Link>
         </div>
       </div>
@@ -192,9 +196,9 @@ export default function AdminOverviewPage() {
                   key={item.id}
                   className={cn(
                     "p-4 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-surface)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-[var(--admin-primary)]/40 hover:bg-[var(--admin-card)] transition-all shadow-sm",
-                    item.badgeColor === "amber" && "border-l-4 border-l-amber-500",
-                    item.badgeColor === "rose" && "border-l-4 border-l-rose-500",
-                    item.badgeColor === "indigo" && "border-l-4 border-l-indigo-500"
+                    item.badgeVariant === "warning" && "border-l-4 border-l-amber-500",
+                    item.badgeVariant === "danger" && "border-l-4 border-l-rose-500",
+                    item.badgeVariant === "info" && "border-l-4 border-l-indigo-500"
                   )}
                 >
                   <div className="space-y-1.5 min-w-0">
@@ -205,27 +209,9 @@ export default function AdminOverviewPage() {
                       <span className="text-[11px] text-[var(--admin-text-muted)] font-medium">
                         • {item.category}
                       </span>
-                      <span
-                        className={cn(
-                          "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border",
-                          item.badgeColor === "amber" &&
-                            "bg-amber-500/10 text-amber-400 border-amber-500/30",
-                          item.badgeColor === "rose" &&
-                            "bg-rose-500/10 text-rose-400 border-rose-500/30",
-                          item.badgeColor === "indigo" &&
-                            "bg-indigo-500/10 text-indigo-400 border-indigo-500/30"
-                        )}
-                      >
-                        <span
-                          className={cn(
-                            "w-1.5 h-1.5 rounded-full",
-                            item.badgeColor === "amber" && "bg-amber-400",
-                            item.badgeColor === "rose" && "bg-rose-400",
-                            item.badgeColor === "indigo" && "bg-indigo-400"
-                          )}
-                        />
+                      <Badge variant={item.badgeVariant} size="sm" dot>
                         {item.badge}
-                      </span>
+                      </Badge>
                     </div>
                     <p className="text-xs text-[var(--admin-text-muted)] leading-relaxed">
                       {item.issue}
@@ -234,9 +220,9 @@ export default function AdminOverviewPage() {
 
                   <Link
                     href={item.actionUrl}
-                    className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--admin-elevated)] hover:bg-[var(--admin-primary)] hover:text-white border border-[var(--admin-border)] text-xs font-bold text-[var(--admin-text)] transition-all shadow-sm shrink-0 active:scale-95"
+                    className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-transparent text-[var(--admin-text)] border border-[var(--admin-border)] hover:bg-[var(--admin-elevated)] hover:border-[var(--admin-primary)]/50 text-xs font-bold transition-all shrink-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
                   >
-                    <span>{item.actionLabel}</span>
+                    {item.actionLabel}
                     <ChevronRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -255,7 +241,7 @@ export default function AdminOverviewPage() {
               </div>
               <Link
                 href="/admin/activity"
-                className="text-xs font-bold text-[var(--admin-primary)] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[var(--admin-primary)] hover:underline flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded-md px-1"
               >
                 <span>View full audit log</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -263,14 +249,15 @@ export default function AdminOverviewPage() {
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
+              <table className="w-full text-left text-xs" aria-label="Recent activity log">
+                <caption className="sr-only">Recent editorial changes and database updates</caption>
                 <thead>
                   <tr className="border-b border-[var(--admin-border)] text-[var(--admin-text-muted)] bg-[var(--admin-surface)]">
-                    <th className="p-3 font-bold uppercase tracking-wider">Record / Title</th>
-                    <th className="p-3 font-bold uppercase tracking-wider">Type</th>
-                    <th className="p-3 font-bold uppercase tracking-wider">Action</th>
-                    <th className="p-3 font-bold uppercase tracking-wider">Editor</th>
-                    <th className="p-3 font-bold uppercase tracking-wider text-right">Time</th>
+                    <th scope="col" className="p-3 font-bold uppercase tracking-wider">Record / Title</th>
+                    <th scope="col" className="p-3 font-bold uppercase tracking-wider">Type</th>
+                    <th scope="col" className="p-3 font-bold uppercase tracking-wider">Action</th>
+                    <th scope="col" className="p-3 font-bold uppercase tracking-wider">Editor</th>
+                    <th scope="col" className="p-3 font-bold uppercase tracking-wider text-right">Time</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[var(--admin-border-subtle)]">
@@ -279,9 +266,7 @@ export default function AdminOverviewPage() {
                       Bravado Banshee GTS
                     </td>
                     <td className="p-3">
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/30">
-                        Vehicle
-                      </span>
+                      <Badge variant="primary" size="sm">Vehicle</Badge>
                     </td>
                     <td className="p-3 text-[var(--admin-text-muted)]">Source verified</td>
                     <td className="p-3 text-[var(--admin-text)] font-medium">Morgan Kim</td>
@@ -294,9 +279,7 @@ export default function AdminOverviewPage() {
                       Vice City Metro Station
                     </td>
                     <td className="p-3">
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                        Marker
-                      </span>
+                      <Badge variant="success" size="sm">Marker</Badge>
                     </td>
                     <td className="p-3 text-[var(--admin-text-muted)]">Moved coordinates</td>
                     <td className="p-3 text-[var(--admin-text)] font-medium">Alex Rivera</td>
@@ -309,9 +292,7 @@ export default function AdminOverviewPage() {
                       Trailer details to verify
                     </td>
                     <td className="p-3">
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">
-                        Article
-                      </span>
+                      <Badge variant="info" size="sm">Article</Badge>
                     </td>
                     <td className="p-3 text-[var(--admin-text-muted)]">Saved draft</td>
                     <td className="p-3 text-[var(--admin-text)] font-medium">Jamie Lee</td>
@@ -324,9 +305,7 @@ export default function AdminOverviewPage() {
                       Combat Pistol (9mm)
                     </td>
                     <td className="p-3">
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-pink-500/10 text-pink-400 border border-pink-500/30">
-                        Weapon
-                      </span>
+                      <Badge variant="danger" size="sm">Weapon</Badge>
                     </td>
                     <td className="p-3 text-[var(--admin-text-muted)]">Updated stats</td>
                     <td className="p-3 text-[var(--admin-text)] font-medium">Daniel Torres</td>
@@ -401,9 +380,9 @@ export default function AdminOverviewPage() {
                   <span className="text-xs font-bold text-[var(--admin-text)] line-clamp-1">
                     Weapon balance preview
                   </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 shrink-0">
+                  <Badge variant="warning" size="sm">
                     Sep 24
-                  </span>
+                  </Badge>
                 </div>
                 <p className="text-[11px] text-[var(--admin-text-muted)]">
                   Analysis • 5 min read • By Daniel Torres
@@ -415,9 +394,9 @@ export default function AdminOverviewPage() {
                   <span className="text-xs font-bold text-[var(--admin-text)] line-clamp-1">
                     Leonida district breakdown
                   </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 shrink-0">
+                  <Badge variant="warning" size="sm">
                     Sep 26
-                  </span>
+                  </Badge>
                 </div>
                 <p className="text-[11px] text-[var(--admin-text-muted)]">
                   Guides • 8 min read • By Jamie Lee
@@ -427,7 +406,7 @@ export default function AdminOverviewPage() {
 
             <Link
               href="/admin/articles?tab=scheduled"
-              className="block text-center text-xs font-bold text-[var(--admin-primary)] hover:underline pt-1"
+              className="block text-center text-xs font-bold text-[var(--admin-primary)] hover:underline pt-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded-md"
             >
               Manage publishing schedule →
             </Link>
@@ -442,44 +421,44 @@ export default function AdminOverviewPage() {
               <Server className="w-4 h-4 text-[var(--admin-text-muted)]" />
             </div>
 
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3 text-xs" role="region" aria-label="Tool health status">
               <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border-subtle)] hover:border-[var(--admin-border)] transition-colors">
                 <div className="flex items-center gap-2.5">
-                  <span className="relative flex h-2 w-2">
+                  <span className="relative flex h-2 w-2" aria-hidden="true">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
                   <span className="font-semibold text-[var(--admin-text)]">Interactive Map</span>
                 </div>
-                <span className="px-2 py-0.5 rounded-md font-mono text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                <Badge variant="success" size="sm">
                   99.9% Uptime
-                </span>
+                </Badge>
               </div>
 
               <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border-subtle)] hover:border-[var(--admin-border)] transition-colors">
                 <div className="flex items-center gap-2.5">
-                  <span className="relative flex h-2 w-2">
+                  <span className="relative flex h-2 w-2" aria-hidden="true">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
                   <span className="font-semibold text-[var(--admin-text)]">Vehicle Comparisons</span>
                 </div>
-                <span className="px-2 py-0.5 rounded-md font-mono text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                <Badge variant="success" size="sm">
                   Operational
-                </span>
+                </Badge>
               </div>
 
               <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border-subtle)] hover:border-[var(--admin-border)] transition-colors">
                 <div className="flex items-center gap-2.5">
-                  <span className="relative flex h-2 w-2">
+                  <span className="relative flex h-2 w-2" aria-hidden="true">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
                   <span className="font-semibold text-[var(--admin-text)]">Completion Tracker</span>
                 </div>
-                <span className="px-2 py-0.5 rounded-md font-mono text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                <Badge variant="success" size="sm">
                   Operational
-                </span>
+                </Badge>
               </div>
             </div>
           </div>

@@ -9,16 +9,14 @@ import {
   Upload,
   Trash2,
   Copy,
-  ExternalLink,
-  AlertTriangle,
-  CheckCircle2,
-  FileText,
-  Filter,
   Check,
-  X
+  RotateCcw,
+  FileText,
 } from "lucide-react";
 import { Modal } from "@/components/admin/modal";
 import { useToast } from "@/components/admin/toast";
+import { Button } from "@/components/admin/ui/button";
+import { Badge } from "@/components/admin/ui/badge";
 import {
   INITIAL_ADMIN_MEDIA,
   AdminMediaAsset,
@@ -35,6 +33,7 @@ export default function AdminMediaPage() {
   const [selectedAssetId, setSelectedAssetId] = useState<string>(
     INITIAL_ADMIN_MEDIA[0]?.id || "med-1"
   );
+  const [copied, setCopied] = useState(false);
 
   // Upload simulation
   const [isUploading, setIsUploading] = useState(false);
@@ -61,6 +60,17 @@ export default function AdminMediaPage() {
       return true;
     });
   }, [assets, selectedType, selectedLicense, searchQuery]);
+
+  const hasActiveFilters =
+    searchQuery.trim().length > 0 ||
+    selectedType !== "all" ||
+    selectedLicense !== "all";
+
+  const resetFilters = () => {
+    setSearchQuery("");
+    setSelectedType("all");
+    setSelectedLicense("all");
+  };
 
   const handleSimulateUpload = () => {
     setIsUploading(true);
@@ -110,6 +120,18 @@ export default function AdminMediaPage() {
     });
   };
 
+  const handleCopyUrl = () => {
+    if (!selectedAsset) return;
+    navigator.clipboard.writeText(selectedAsset.url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+    showToast({
+      title: "URL Copied",
+      description: "Asset link copied to clipboard.",
+      type: "info",
+    });
+  };
+
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Page Header */}
@@ -126,47 +148,62 @@ export default function AdminMediaPage() {
 
         <div className="flex items-center gap-3">
           {/* View mode toggle */}
-          <div className="flex items-center p-1 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
+          <div
+            role="group"
+            aria-label="View mode toggle"
+            className="flex items-center p-1 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]"
+          >
             <button
+              type="button"
+              aria-pressed={viewMode === "grid"}
               onClick={() => setViewMode("grid")}
               className={cn(
-                "p-1.5 rounded-lg transition-colors",
+                "p-1.5 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
                 viewMode === "grid"
                   ? "bg-[var(--admin-primary)] text-white"
                   : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)]"
               )}
               title="Grid View"
+              aria-label="Grid View"
             >
               <Grid className="w-4 h-4" />
             </button>
             <button
+              type="button"
+              aria-pressed={viewMode === "list"}
               onClick={() => setViewMode("list")}
               className={cn(
-                "p-1.5 rounded-lg transition-colors",
+                "p-1.5 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
                 viewMode === "list"
                   ? "bg-[var(--admin-primary)] text-white"
                   : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)]"
               )}
               title="List View"
+              aria-label="List View"
             >
               <List className="w-4 h-4" />
             </button>
           </div>
 
-          <button
+          <Button
+            variant="primary"
+            size="md"
             onClick={handleSimulateUpload}
-            disabled={isUploading}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--admin-primary)] hover:opacity-90 text-white text-xs font-black uppercase tracking-wider transition-colors shadow-md shadow-[var(--admin-primary)]/25 disabled:opacity-50"
+            isLoading={isUploading}
+            leftIcon={<Upload className="w-4 h-4" />}
           >
-            <Upload className="w-4 h-4" />
-            <span>Upload Assets</span>
-          </button>
+            Upload Assets
+          </Button>
         </div>
       </div>
 
-      {/* Upload Progress Bar (Image 10) */}
+      {/* Upload Progress Bar */}
       {isUploading && (
-        <div className="p-3.5 rounded-xl border border-[var(--admin-primary)]/40 bg-[var(--admin-primary)]/10 flex items-center justify-between gap-4 text-xs animate-in slide-in-from-top-1">
+        <div
+          role="status"
+          aria-live="polite"
+          className="p-3.5 rounded-xl border border-[var(--admin-primary)]/40 bg-[var(--admin-primary)]/10 flex items-center justify-between gap-4 text-xs animate-in slide-in-from-top-1"
+        >
           <div className="flex items-center gap-3 min-w-0 flex-1">
             <Upload className="w-4 h-4 text-[var(--admin-primary)] animate-bounce shrink-0" />
             <div className="flex-1 space-y-1">
@@ -190,59 +227,108 @@ export default function AdminMediaPage() {
       )}
 
       {/* Filters Bar */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div className="relative sm:col-span-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--admin-text-muted)]" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search media by filename..."
-            className="w-full pl-9 pr-4 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-          />
+      <div className="space-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="relative sm:col-span-1">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--admin-text-muted)]" />
+            <input
+              type="text"
+              id="media-search"
+              aria-label="Search media by filename"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search media by filename..."
+              className="w-full pl-9 pr-4 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
+            />
+          </div>
+
+          <div>
+            <select
+              id="media-type-filter"
+              aria-label="Filter by media type"
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
+            >
+              <option value="all">All Media Types</option>
+              <option value="Image">Raster Images (JPG/PNG)</option>
+              <option value="Vector">Vector Graphics (SVG)</option>
+              <option value="Video">Video Clips (MP4)</option>
+            </select>
+          </div>
+
+          <div>
+            <select
+              id="media-license-filter"
+              aria-label="Filter by media license"
+              value={selectedLicense}
+              onChange={(e) => setSelectedLicense(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
+            >
+              <option value="all">All Licenses</option>
+              <option value="Internal illustration">Internal Illustration</option>
+              <option value="Rockstar Games (unverified)">Rockstar Games (Fair Use)</option>
+              <option value="Community">Community Created</option>
+            </select>
+          </div>
         </div>
 
-        <div>
-          <select
-            value={selectedType}
-            onChange={(e) => setSelectedType(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-          >
-            <option value="all">All Media Types</option>
-            <option value="Image">Raster Images (JPG/PNG)</option>
-            <option value="Vector">Vector Graphics (SVG)</option>
-            <option value="Video">Video Clips (MP4)</option>
-          </select>
-        </div>
-
-        <div>
-          <select
-            value={selectedLicense}
-            onChange={(e) => setSelectedLicense(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-          >
-            <option value="all">All Licenses</option>
-            <option value="Internal illustration">Internal Illustration</option>
-            <option value="Rockstar Games (unverified)">Rockstar Games (Fair Use)</option>
-            <option value="Community">Community Created</option>
-          </select>
-        </div>
+        {/* Active Filters Reset Bar */}
+        {hasActiveFilters && (
+          <div className="flex items-center gap-2 text-xs">
+            <span className="text-[var(--admin-text-muted)] font-medium">
+              Filtered results:
+            </span>
+            <span className="font-bold text-[var(--admin-text)]">
+              {filteredAssets.length} of {assets.length} assets
+            </span>
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="inline-flex items-center gap-1 text-[var(--admin-primary)] hover:underline font-bold ml-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)] rounded"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>Reset filters</span>
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Main Grid: Gallery & Right Inspector (Image 10 & 15) */}
+      {/* Main Grid: Gallery & Right Inspector */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Gallery / List View (8 cols) */}
         <div className="lg:col-span-8 space-y-4">
-          {viewMode === "grid" ? (
+          {filteredAssets.length === 0 ? (
+            <div className="py-16 text-center space-y-3 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)]">
+              <ImageIcon className="w-10 h-10 text-[var(--admin-text-muted)] mx-auto opacity-50" />
+              <p className="text-xs font-semibold text-[var(--admin-text)]">
+                No media assets found
+              </p>
+              {hasActiveFilters && (
+                <Button variant="secondary" size="sm" onClick={resetFilters}>
+                  Clear all filters
+                </Button>
+              )}
+            </div>
+          ) : viewMode === "grid" ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {filteredAssets.map((asset) => {
                 const isSelected = selectedAsset?.id === asset.id;
                 return (
                   <div
                     key={asset.id}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`Select asset ${asset.filename}`}
                     onClick={() => setSelectedAssetId(asset.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setSelectedAssetId(asset.id);
+                      }
+                    }}
                     className={cn(
-                      "rounded-2xl border bg-[var(--admin-card)] overflow-hidden cursor-pointer transition-all group relative",
+                      "rounded-2xl border bg-[var(--admin-card)] overflow-hidden cursor-pointer transition-all group relative outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
                       isSelected
                         ? "border-[var(--admin-primary)] ring-2 ring-[var(--admin-primary)]/30 shadow-md"
                         : "border-[var(--admin-border)] hover:border-[var(--admin-border-subtle)]"
@@ -283,11 +369,11 @@ export default function AdminMediaPage() {
               <table className="w-full text-left text-xs">
                 <thead>
                   <tr className="border-b border-[var(--admin-border)] bg-[var(--admin-surface)] text-[var(--admin-text-muted)]">
-                    <th className="p-3 font-bold uppercase">Filename</th>
-                    <th className="p-3 font-bold uppercase">Type</th>
-                    <th className="p-3 font-bold uppercase">Dimensions</th>
-                    <th className="p-3 font-bold uppercase">Size</th>
-                    <th className="p-3 font-bold uppercase">Usage</th>
+                    <th scope="col" className="p-3 font-bold uppercase">Filename</th>
+                    <th scope="col" className="p-3 font-bold uppercase">Type</th>
+                    <th scope="col" className="p-3 font-bold uppercase">Dimensions</th>
+                    <th scope="col" className="p-3 font-bold uppercase">Size</th>
+                    <th scope="col" className="p-3 font-bold uppercase">Usage</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[var(--admin-border-subtle)]">
@@ -296,9 +382,18 @@ export default function AdminMediaPage() {
                     return (
                       <tr
                         key={asset.id}
+                        tabIndex={0}
+                        role="button"
+                        aria-label={`Select ${asset.filename}`}
                         onClick={() => setSelectedAssetId(asset.id)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            setSelectedAssetId(asset.id);
+                          }
+                        }}
                         className={cn(
-                          "cursor-pointer transition-colors",
+                          "cursor-pointer transition-colors outline-none focus-visible:bg-[var(--admin-elevated)]",
                           isSelected
                             ? "bg-[var(--admin-primary)]/10"
                             : "hover:bg-[var(--admin-elevated)]"
@@ -308,9 +403,9 @@ export default function AdminMediaPage() {
                           {asset.filename}
                         </td>
                         <td className="p-3">
-                          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[var(--admin-elevated)] border border-[var(--admin-border)]">
+                          <Badge variant="neutral" size="sm">
                             {asset.type}
-                          </span>
+                          </Badge>
                         </td>
                         <td className="p-3 font-mono text-[var(--admin-text-muted)]">
                           {asset.dimensions}
@@ -338,13 +433,15 @@ export default function AdminMediaPage() {
                 <h3 className="font-bold uppercase tracking-wider text-[var(--admin-text)]">
                   Asset Inspector
                 </h3>
-                <button
+                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={() => setIsDeleteModalOpen(true)}
-                  className="p-1.5 rounded-lg text-rose-400 hover:bg-rose-500/10 transition-colors"
-                  title="Delete Asset"
+                  aria-label={`Delete ${selectedAsset.filename}`}
+                  className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10"
                 >
                   <Trash2 className="w-4 h-4" />
-                </button>
+                </Button>
               </div>
 
               {/* Preview Box */}
@@ -378,10 +475,14 @@ export default function AdminMediaPage() {
 
               {/* Alt text & Credit inputs */}
               <div>
-                <label className="block font-bold text-[var(--admin-text)] mb-1">
+                <label
+                  htmlFor="asset-alt-text"
+                  className="block font-bold text-[var(--admin-text)] mb-1"
+                >
                   Alt Text (Accessibility)
                 </label>
                 <input
+                  id="asset-alt-text"
                   type="text"
                   value={selectedAsset.altText}
                   onChange={(e) => {
@@ -397,10 +498,14 @@ export default function AdminMediaPage() {
               </div>
 
               <div>
-                <label className="block font-bold text-[var(--admin-text)] mb-1">
+                <label
+                  htmlFor="asset-license"
+                  className="block font-bold text-[var(--admin-text)] mb-1"
+                >
                   License / Copyright
                 </label>
                 <select
+                  id="asset-license"
                   value={selectedAsset.license}
                   onChange={(e) => {
                     const val = e.target.value as AdminMediaAsset["license"];
@@ -419,7 +524,7 @@ export default function AdminMediaPage() {
                 </select>
               </div>
 
-              {/* Used By Section (Image 10 & 15) */}
+              {/* Used By Section */}
               <div className="space-y-2 pt-2 border-t border-[var(--admin-border)]">
                 <span className="font-bold text-[var(--admin-text)]">
                   Used By ({selectedAsset.usedBy.length} items)
@@ -451,20 +556,15 @@ export default function AdminMediaPage() {
               </div>
 
               <div className="pt-2">
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(selectedAsset.url);
-                    showToast({
-                      title: "URL Copied",
-                      description: "Asset link copied to clipboard.",
-                      type: "info",
-                    });
-                  }}
-                  className="w-full py-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-elevated)] hover:bg-[var(--admin-card)] text-xs font-bold text-[var(--admin-text)] flex items-center justify-center gap-2 transition-colors"
+                <Button
+                  variant="secondary"
+                  size="md"
+                  onClick={handleCopyUrl}
+                  className="w-full"
+                  leftIcon={copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 >
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>Copy CDN URL</span>
-                </button>
+                  {copied ? "Copied!" : "Copy CDN URL"}
+                </Button>
               </div>
             </div>
           ) : (
@@ -475,7 +575,7 @@ export default function AdminMediaPage() {
         </div>
       </div>
 
-      {/* Delete Confirmation Modal (Image 15) */}
+      {/* Delete Confirmation Modal */}
       <Modal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
@@ -488,18 +588,20 @@ export default function AdminMediaPage() {
         variant="danger"
         footer={
           <>
-            <button
+            <Button
+              variant="secondary"
+              size="md"
               onClick={() => setIsDeleteModalOpen(false)}
-              className="px-4 py-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-elevated)] text-xs font-bold text-[var(--admin-text)]"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="danger"
+              size="md"
               onClick={handleDeleteConfirmed}
-              className="px-5 py-2 rounded-xl bg-rose-600 text-xs font-bold text-white shadow-md shadow-rose-600/20 hover:opacity-90"
             >
               Confirm Delete
-            </button>
+            </Button>
           </>
         }
       />

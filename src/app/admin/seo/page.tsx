@@ -4,17 +4,15 @@ import React, { useState } from "react";
 import {
   Search,
   Globe,
-  ArrowRight,
   Plus,
   Trash2,
-  CheckCircle2,
   AlertTriangle,
-  ExternalLink,
-  Shield,
+  RotateCcw,
   Save,
-  RotateCcw
 } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
+import { Button } from "@/components/admin/ui/button";
+import { Badge } from "@/components/admin/ui/badge";
 import {
   INITIAL_ADMIN_SEO,
   AdminSeoSettings,
@@ -66,7 +64,7 @@ export default function AdminSeoPage() {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
+    <div className="space-y-6 animate-in fade-in duration-200 pb-16">
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
         <div>
@@ -81,28 +79,29 @@ export default function AdminSeoPage() {
 
         {hasUnsavedChanges && (
           <div className="flex items-center gap-2">
-            <button
-              onClick={handleDiscard}
-              className="px-3.5 py-1.5 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-xs font-bold text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors"
-            >
+            <Button variant="secondary" size="sm" onClick={handleDiscard}>
               Discard
-            </button>
-            <button
-              onClick={handleSaveAll}
-              className="px-4 py-1.5 rounded-xl bg-[var(--admin-primary)] text-xs font-bold text-white shadow-md shadow-[var(--admin-primary)]/20 hover:opacity-90 transition-opacity"
-            >
+            </Button>
+            <Button variant="primary" size="sm" onClick={handleSaveAll}>
               Save Changes
-            </button>
+            </Button>
           </div>
         )}
       </div>
 
-      {/* Tabs (Image 11) */}
-      <div className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2">
+      {/* Tabs */}
+      <div
+        role="tablist"
+        aria-label="SEO configuration sections"
+        className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2"
+      >
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "defaults"}
           onClick={() => setActiveTab("defaults")}
           className={cn(
-            "px-4 py-2 rounded-xl text-xs font-bold transition-all",
+            "px-4 py-2 rounded-xl text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "defaults"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -111,9 +110,12 @@ export default function AdminSeoPage() {
           Metadata Defaults
         </button>
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "redirects"}
           onClick={() => setActiveTab("redirects")}
           className={cn(
-            "px-4 py-2 rounded-xl text-xs font-bold transition-all",
+            "px-4 py-2 rounded-xl text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "redirects"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -122,9 +124,12 @@ export default function AdminSeoPage() {
           URL Redirects ({seoConfig.redirects.length})
         </button>
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "indexing"}
           onClick={() => setActiveTab("indexing")}
           className={cn(
-            "px-4 py-2 rounded-xl text-xs font-bold transition-all",
+            "px-4 py-2 rounded-xl text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "indexing"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -139,10 +144,11 @@ export default function AdminSeoPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-8 p-6 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] space-y-5 shadow-sm text-xs">
             <div>
-              <label className="block font-bold text-[var(--admin-text)] mb-1">
+              <label htmlFor="seo-title-template" className="block font-bold text-[var(--admin-text)] mb-1">
                 Global Title Template
               </label>
               <input
+                id="seo-title-template"
                 type="text"
                 value={seoConfig.titleTemplate}
                 onChange={(e) => handleUpdate({ titleTemplate: e.target.value })}
@@ -155,7 +161,7 @@ export default function AdminSeoPage() {
 
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label className="font-bold text-[var(--admin-text)]">
+                <label htmlFor="seo-meta-desc" className="font-bold text-[var(--admin-text)]">
                   Default Meta Description
                 </label>
                 <span
@@ -168,6 +174,7 @@ export default function AdminSeoPage() {
                 </span>
               </div>
               <textarea
+                id="seo-meta-desc"
                 rows={3}
                 value={seoConfig.metaDescription}
                 onChange={(e) => handleUpdate({ metaDescription: e.target.value })}
@@ -176,10 +183,11 @@ export default function AdminSeoPage() {
             </div>
 
             <div>
-              <label className="block font-bold text-[var(--admin-text)] mb-1">
+              <label htmlFor="seo-base-url" className="block font-bold text-[var(--admin-text)] mb-1">
                 Canonical Base URL
               </label>
               <input
+                id="seo-base-url"
                 type="text"
                 value={seoConfig.canonicalBaseUrl}
                 onChange={(e) => handleUpdate({ canonicalBaseUrl: e.target.value })}
@@ -188,10 +196,11 @@ export default function AdminSeoPage() {
             </div>
 
             <div>
-              <label className="block font-bold text-[var(--admin-text)] mb-1">
+              <label htmlFor="seo-preview-image" className="block font-bold text-[var(--admin-text)] mb-1">
                 Social Share Image (Open Graph / Twitter Card)
               </label>
               <input
+                id="seo-preview-image"
                 type="text"
                 value={seoConfig.socialPreviewImage}
                 onChange={(e) => handleUpdate({ socialPreviewImage: e.target.value })}
@@ -200,7 +209,7 @@ export default function AdminSeoPage() {
             </div>
           </div>
 
-          {/* Right Column: Google Search Live Preview (Image 11) */}
+          {/* Right Column: Google Search Live Preview */}
           <div className="lg:col-span-4 p-6 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-surface)] space-y-4 shadow-sm">
             <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)] flex items-center gap-2">
               <Globe className="w-4 h-4 text-indigo-400" />
@@ -226,31 +235,32 @@ export default function AdminSeoPage() {
         </div>
       )}
 
-      {/* Tab 2: Redirects (Image 11) */}
+      {/* Tab 2: Redirects */}
       {activeTab === "redirects" && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-xs text-[var(--admin-text-muted)]">
               Manage HTTP 301 (Permanent) and 302 (Temporary) URL forwarding rules.
             </p>
-            <button
+            <Button
+              variant="primary"
+              size="sm"
               onClick={handleAddRedirect}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[var(--admin-primary)] text-white text-xs font-bold hover:opacity-90 transition-opacity"
+              leftIcon={<Plus className="w-3.5 h-3.5" />}
             >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Add Redirect</span>
-            </button>
+              Add Redirect
+            </Button>
           </div>
 
           <div className="rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] overflow-hidden">
             <table className="w-full text-left text-xs">
               <thead>
                 <tr className="border-b border-[var(--admin-border)] bg-[var(--admin-surface)] text-[var(--admin-text-muted)]">
-                  <th className="p-3.5 font-bold uppercase">From Path</th>
-                  <th className="p-3.5 font-bold uppercase">To Destination Path</th>
-                  <th className="p-3.5 font-bold uppercase">Type</th>
-                  <th className="p-3.5 font-bold uppercase">Status</th>
-                  <th className="p-3.5 font-bold uppercase text-right">Action</th>
+                  <th scope="col" className="p-3.5 font-bold uppercase">From Path</th>
+                  <th scope="col" className="p-3.5 font-bold uppercase">To Destination Path</th>
+                  <th scope="col" className="p-3.5 font-bold uppercase">Type</th>
+                  <th scope="col" className="p-3.5 font-bold uppercase">Status</th>
+                  <th scope="col" className="p-3.5 font-bold uppercase text-right">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--admin-border-subtle)]">
@@ -259,6 +269,7 @@ export default function AdminSeoPage() {
                     <td className="p-3.5 font-mono text-[var(--admin-text)]">
                       <input
                         type="text"
+                        aria-label={`Redirect from path for row ${idx + 1}`}
                         value={red.fromUrl}
                         onChange={(e) => {
                           const updated = [...seoConfig.redirects];
@@ -271,6 +282,7 @@ export default function AdminSeoPage() {
                     <td className="p-3.5 font-mono text-[var(--admin-primary)]">
                       <input
                         type="text"
+                        aria-label={`Redirect destination path for row ${idx + 1}`}
                         value={red.toUrl}
                         onChange={(e) => {
                           const updated = [...seoConfig.redirects];
@@ -282,6 +294,7 @@ export default function AdminSeoPage() {
                     </td>
                     <td className="p-3.5">
                       <select
+                        aria-label={`Redirect status code for row ${idx + 1}`}
                         value={red.type}
                         onChange={(e) => {
                           const updated = [...seoConfig.redirects];
@@ -296,31 +309,36 @@ export default function AdminSeoPage() {
                     </td>
                     <td className="p-3.5">
                       <button
+                        type="button"
                         onClick={() => {
                           const updated = [...seoConfig.redirects];
                           updated[idx].enabled = !updated[idx].enabled;
                           handleUpdate({ redirects: updated });
                         }}
-                        className={cn(
-                          "px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase border",
-                          red.enabled
-                            ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                            : "bg-rose-500/10 text-rose-400 border-rose-500/30"
-                        )}
+                        className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded-full"
                       >
-                        {red.enabled ? "Active" : "Disabled"}
+                        <Badge
+                          variant={red.enabled ? "success" : "danger"}
+                          size="sm"
+                          dot
+                        >
+                          {red.enabled ? "Active" : "Disabled"}
+                        </Badge>
                       </button>
                     </td>
                     <td className="p-3.5 text-right">
-                      <button
+                      <Button
+                        variant="ghost"
+                        size="icon"
                         onClick={() => {
                           const updated = seoConfig.redirects.filter((_, i) => i !== idx);
                           handleUpdate({ redirects: updated });
                         }}
-                        className="p-1 rounded text-rose-400 hover:bg-rose-500/10"
+                        aria-label={`Delete redirect ${red.fromUrl}`}
+                        className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
-                      </button>
+                      </Button>
                     </td>
                   </tr>
                 ))}
@@ -338,14 +356,14 @@ export default function AdminSeoPage() {
           </h3>
 
           <div className="space-y-3">
-            <label className="flex items-start gap-3 p-3.5 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border)] cursor-pointer">
+            <label className="flex items-start gap-3 p-3.5 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border)] cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={seoConfig.excludeDraftsAndArchived}
                 onChange={(e) =>
                   handleUpdate({ excludeDraftsAndArchived: e.target.checked })
                 }
-                className="mt-0.5 rounded border-[var(--admin-border)] text-[var(--admin-primary)]"
+                className="mt-0.5 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
               />
               <div>
                 <span className="font-bold text-[var(--admin-text)]">
@@ -357,11 +375,11 @@ export default function AdminSeoPage() {
               </div>
             </label>
 
-            <label className="flex items-start gap-3 p-3.5 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border)] cursor-pointer">
+            <label className="flex items-start gap-3 p-3.5 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border)] cursor-pointer select-none">
               <input
                 type="checkbox"
                 defaultChecked
-                className="mt-0.5 rounded border-[var(--admin-border)] text-[var(--admin-primary)]"
+                className="mt-0.5 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
               />
               <div>
                 <span className="font-bold text-[var(--admin-text)]">
@@ -375,12 +393,37 @@ export default function AdminSeoPage() {
           </div>
 
           <div className="pt-3 border-t border-[var(--admin-border)]">
-            <label className="block font-bold text-[var(--admin-text)] mb-2">
+            <label htmlFor="robots-preview" className="block font-bold text-[var(--admin-text)] mb-2">
               Virtual robots.txt Output
             </label>
-            <pre className="p-4 rounded-xl bg-[#090d16] border border-[var(--admin-border)] text-xs font-mono text-emerald-400 overflow-x-auto leading-relaxed">
+            <pre
+              id="robots-preview"
+              className="p-4 rounded-xl bg-[#090d16] border border-[var(--admin-border)] text-xs font-mono text-emerald-400 overflow-x-auto leading-relaxed"
+            >
               {`User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: ${seoConfig.canonicalBaseUrl}/sitemap.xml`}
             </pre>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Sticky Unsaved Changes Bar */}
+      {hasUnsavedChanges && (
+        <div
+          role="region"
+          aria-label="Unsaved changes alert"
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-4 px-5 py-3 rounded-2xl bg-[var(--admin-surface)] border border-[var(--admin-border)] shadow-2xl backdrop-blur-xl animate-in slide-in-from-bottom-3 duration-200"
+        >
+          <div className="flex items-center gap-2 text-xs">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" aria-hidden="true" />
+            <span className="font-bold text-[var(--admin-text)]">Unsaved SEO Changes</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="secondary" size="sm" onClick={handleDiscard}>
+              Discard
+            </Button>
+            <Button variant="primary" size="sm" onClick={handleSaveAll}>
+              Save Changes
+            </Button>
           </div>
         </div>
       )}

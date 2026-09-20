@@ -35,7 +35,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     ({ duration = 4000, ...toast }: Omit<ToastMessage, "id">) => {
       const id = Math.random().toString(36).substring(2, 9);
       const newToast: ToastMessage = { id, duration, ...toast };
-      setToasts((prev) => [...prev, newToast]);
+
+      // Keep max 3 concurrent toasts to prevent clutter
+      setToasts((prev) => [...prev.slice(-2), newToast]);
 
       if (duration > 0) {
         setTimeout(() => {
@@ -49,8 +51,13 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={{ toasts, showToast, removeToast }}>
       {children}
-      {/* Toast Container */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2 max-w-md w-full pointer-events-none">
+      {/* Accessible Toast Container */}
+      <div
+        role="region"
+        aria-live="polite"
+        aria-label="Notifications"
+        className="fixed bottom-6 right-6 z-50 flex flex-col gap-2 max-w-md w-full pointer-events-none"
+      >
         {toasts.map((t) => {
           const typeIcons = {
             success: <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />,
@@ -62,6 +69,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           return (
             <div
               key={t.id}
+              role="status"
               className={cn(
                 "pointer-events-auto flex items-center justify-between gap-3 p-3.5 rounded-xl border shadow-xl bg-[var(--admin-surface)] text-[var(--admin-text)] border-[var(--admin-border)] animate-in slide-in-from-bottom-2 fade-in duration-200"
               )}
@@ -81,19 +89,22 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               <div className="flex items-center gap-2 shrink-0">
                 {t.action && (
                   <button
+                    type="button"
                     onClick={() => {
                       t.action?.onClick();
                       removeToast(t.id);
                     }}
-                    className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold text-[var(--admin-primary)] bg-[var(--admin-primary)]/10 hover:bg-[var(--admin-primary)]/20 transition-colors"
+                    className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold text-[var(--admin-primary)] bg-[var(--admin-primary)]/10 hover:bg-[var(--admin-primary)]/20 transition-colors focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] focus-visible:outline-none"
                   >
                     <RotateCcw className="w-3 h-3" />
                     <span>{t.action.label}</span>
                   </button>
                 )}
                 <button
+                  type="button"
                   onClick={() => removeToast(t.id)}
-                  className="p-1 rounded-md text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors"
+                  className="p-1 rounded-md text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] focus-visible:outline-none"
+                  aria-label="Dismiss notification"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>

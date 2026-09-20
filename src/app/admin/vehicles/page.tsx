@@ -4,28 +4,25 @@ import React, { useState, useMemo } from "react";
 import {
   Car,
   Search,
-  Filter,
   Plus,
   AlertTriangle,
   CheckCircle2,
   Clock,
-  Archive,
-  MoreHorizontal,
   Edit,
-  ExternalLink,
-  ChevronDown,
   RefreshCw,
   SlidersHorizontal,
-  Eye,
   Trash2,
-  Sparkles,
-  Link as LinkIcon
+  RotateCcw,
+  Link as LinkIcon,
+  X,
 } from "lucide-react";
 import { DataTable, Column } from "@/components/admin/data-table";
 import { Drawer } from "@/components/admin/drawer";
 import { Modal } from "@/components/admin/modal";
 import { LoadingSkeleton } from "@/components/admin/loading-skeleton";
 import { useToast } from "@/components/admin/toast";
+import { Button } from "@/components/admin/ui/button";
+import { Badge } from "@/components/admin/ui/badge";
 import {
   INITIAL_ADMIN_VEHICLES,
   AdminVehicle,
@@ -88,6 +85,17 @@ export default function AdminVehiclesPage() {
     verification: vehicles.filter((v) => v.verification !== "verified").length,
     drafts: vehicles.filter((v) => v.status === "draft").length,
     archived: vehicles.filter((v) => v.status === "archived").length,
+  };
+
+  const hasActiveFilters =
+    searchQuery.trim().length > 0 ||
+    selectedClass !== "all" ||
+    selectedVerification !== "all";
+
+  const resetFilters = () => {
+    setSearchQuery("");
+    setSelectedClass("all");
+    setSelectedVerification("all");
   };
 
   const handleSelectRow = (id: string) => {
@@ -179,9 +187,9 @@ export default function AdminVehiclesPage() {
       header: "Class",
       sortable: true,
       render: (v) => (
-        <span className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--admin-elevated)] border border-[var(--admin-border-subtle)] text-[var(--admin-text)]">
+        <Badge variant="neutral" size="sm">
           {v.class}
-        </span>
+        </Badge>
       ),
     },
     {
@@ -198,45 +206,46 @@ export default function AdminVehiclesPage() {
       key: "verification",
       header: "Verification",
       sortable: true,
-      render: (v) => (
-        <span
-          className={cn(
-            "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase border",
-            v.verification === "verified"
-              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-              : v.verification === "pending_source"
-              ? "bg-amber-500/10 text-amber-400 border-amber-500/30"
-              : "bg-rose-500/10 text-rose-400 border-rose-500/30"
-          )}
-        >
-          {v.verification === "verified" && <CheckCircle2 className="w-3 h-3" />}
-          {v.verification === "pending_source" && <Clock className="w-3 h-3" />}
-          {v.verification === "unverified" && <AlertTriangle className="w-3 h-3" />}
-          <span>{v.verification.replace("_", " ")}</span>
-        </span>
-      ),
+      render: (v) => {
+        const variantMap: Record<AdminVehicle["verification"], "success" | "warning" | "danger"> = {
+          verified: "success",
+          pending_source: "warning",
+          unverified: "danger",
+        };
+        const iconMap: Record<AdminVehicle["verification"], React.ReactNode> = {
+          verified: <CheckCircle2 className="w-3 h-3" />,
+          pending_source: <Clock className="w-3 h-3" />,
+          unverified: <AlertTriangle className="w-3 h-3" />,
+        };
+        return (
+          <Badge
+            variant={variantMap[v.verification]}
+            size="sm"
+            dot
+            icon={iconMap[v.verification]}
+          >
+            {v.verification.replace("_", " ")}
+          </Badge>
+        );
+      },
     },
     {
       key: "status",
       header: "Status",
       sortable: true,
-      render: (v) => (
-        <span
-          className={cn(
-            "px-2 py-0.5 rounded-md text-[10px] font-bold uppercase border",
-            v.status === "published" &&
-              "bg-indigo-500/10 text-indigo-400 border-indigo-500/30",
-            v.status === "draft" &&
-              "bg-[var(--admin-elevated)] text-[var(--admin-text-muted)] border-[var(--admin-border)]",
-            v.status === "review" &&
-              "bg-amber-500/10 text-amber-400 border-amber-500/30",
-            v.status === "archived" &&
-              "bg-rose-500/10 text-rose-400 border-rose-500/30"
-          )}
-        >
-          {v.status}
-        </span>
-      ),
+      render: (v) => {
+        const variantMap: Record<AdminVehicle["status"], "primary" | "neutral" | "warning" | "danger"> = {
+          published: "primary",
+          draft: "neutral",
+          review: "warning",
+          archived: "danger",
+        };
+        return (
+          <Badge variant={variantMap[v.status]} size="sm">
+            {v.status}
+          </Badge>
+        );
+      },
     },
     {
       key: "updatedAt",
@@ -265,29 +274,35 @@ export default function AdminVehiclesPage() {
         </div>
 
         <div className="flex items-center gap-2.5">
-          <button
+          <Button
+            variant="secondary"
+            size="icon"
             onClick={() => {
               setIsLoading(true);
               setTimeout(() => setIsLoading(false), 700);
             }}
-            className="p-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] hover:bg-[var(--admin-elevated)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] transition-colors shadow-sm"
+            aria-label="Refresh records"
             title="Refresh records / test skeleton"
           >
             <RefreshCw className={cn("w-4 h-4", isLoading && "animate-spin")} />
-          </button>
+          </Button>
 
-          <button
+          <Button
+            variant="primary"
+            size="md"
             onClick={() => setIsNewModalOpen(true)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--admin-primary)] hover:opacity-90 text-white text-xs font-black uppercase tracking-wider transition-colors shadow-md shadow-[var(--admin-primary)]/25"
+            leftIcon={<Plus className="w-4 h-4" />}
           >
-            <Plus className="w-4 h-4" />
-            <span>Add Vehicle</span>
-          </button>
+            Add Vehicle
+          </Button>
         </div>
       </div>
 
-      {/* Warning Callout Banner (Image 2) */}
-      <div className="p-3.5 rounded-xl border border-amber-500/30 bg-amber-500/10 flex items-start gap-3 text-xs text-amber-200">
+      {/* Warning Callout Banner */}
+      <div
+        role="alert"
+        className="p-3.5 rounded-xl border border-amber-500/30 bg-amber-500/10 flex items-start gap-3 text-xs text-amber-200"
+      >
         <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
         <div className="space-y-0.5">
           <span className="font-bold text-amber-300">Placeholder records disclaimer:</span>
@@ -297,12 +312,19 @@ export default function AdminVehiclesPage() {
         </div>
       </div>
 
-      {/* Filter Tabs (Image 2) */}
-      <div className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2 overflow-x-auto scrollbar-none">
+      {/* Filter Tabs */}
+      <div
+        role="tablist"
+        aria-label="Filter vehicles by status"
+        className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2 overflow-x-auto scrollbar-none"
+      >
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "all"}
           onClick={() => setActiveTab("all")}
           className={cn(
-            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "all"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
@@ -315,9 +337,12 @@ export default function AdminVehiclesPage() {
         </button>
 
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "verification"}
           onClick={() => setActiveTab("verification")}
           className={cn(
-            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "verification"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
@@ -330,9 +355,12 @@ export default function AdminVehiclesPage() {
         </button>
 
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "drafts"}
           onClick={() => setActiveTab("drafts")}
           className={cn(
-            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "drafts"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
@@ -345,9 +373,12 @@ export default function AdminVehiclesPage() {
         </button>
 
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "archived"}
           onClick={() => setActiveTab("archived")}
           className={cn(
-            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "archived"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
@@ -361,47 +392,75 @@ export default function AdminVehiclesPage() {
       </div>
 
       {/* Search & Select Filters Bar */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-        <div className="relative sm:col-span-2">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--admin-text-muted)]" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Filter vehicles by name, code, manufacturer..."
-            className="w-full pl-9 pr-4 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-          />
+      <div className="space-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="relative sm:col-span-2">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--admin-text-muted)]" />
+            <input
+              type="text"
+              id="vehicle-search"
+              aria-label="Filter vehicles by name, code, manufacturer"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Filter vehicles by name, code, manufacturer..."
+              className="w-full pl-9 pr-4 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
+            />
+          </div>
+
+          <div>
+            <select
+              id="vehicle-class-filter"
+              aria-label="Filter by vehicle class"
+              value={selectedClass}
+              onChange={(e) => setSelectedClass(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
+            >
+              <option value="all">All Vehicle Classes</option>
+              <option value="Sports">Sports</option>
+              <option value="SUV">SUV</option>
+              <option value="Sedan">Sedan</option>
+              <option value="Motorcycle">Motorcycle</option>
+              <option value="Truck">Truck</option>
+              <option value="Off-Road">Off-Road</option>
+              <option value="Boat">Boat</option>
+            </select>
+          </div>
+
+          <div>
+            <select
+              id="vehicle-verification-filter"
+              aria-label="Filter by verification status"
+              value={selectedVerification}
+              onChange={(e) => setSelectedVerification(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
+            >
+              <option value="all">All Verification Statuses</option>
+              <option value="verified">Verified</option>
+              <option value="pending_source">Pending Source</option>
+              <option value="unverified">Unverified</option>
+            </select>
+          </div>
         </div>
 
-        <div>
-          <select
-            value={selectedClass}
-            onChange={(e) => setSelectedClass(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-          >
-            <option value="all">All Vehicle Classes</option>
-            <option value="Sports">Sports</option>
-            <option value="SUV">SUV</option>
-            <option value="Sedan">Sedan</option>
-            <option value="Motorcycle">Motorcycle</option>
-            <option value="Truck">Truck</option>
-            <option value="Off-Road">Off-Road</option>
-            <option value="Boat">Boat</option>
-          </select>
-        </div>
-
-        <div>
-          <select
-            value={selectedVerification}
-            onChange={(e) => setSelectedVerification(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-          >
-            <option value="all">All Verification Statuses</option>
-            <option value="verified">Verified</option>
-            <option value="pending_source">Pending Source</option>
-            <option value="unverified">Unverified</option>
-          </select>
-        </div>
+        {/* Active Filters Reset Bar */}
+        {hasActiveFilters && (
+          <div className="flex items-center gap-2 text-xs">
+            <span className="text-[var(--admin-text-muted)] font-medium">
+              Filtered results:
+            </span>
+            <span className="font-bold text-[var(--admin-text)]">
+              {filteredVehicles.length} of {vehicles.length} vehicles
+            </span>
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="inline-flex items-center gap-1 text-[var(--admin-primary)] hover:underline font-bold ml-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)] rounded"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>Reset filters</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Main Table or Loading Skeleton */}
@@ -415,20 +474,35 @@ export default function AdminVehiclesPage() {
           selectedIds={selectedIds}
           onSelectRow={handleSelectRow}
           onSelectAll={handleSelectAll}
+          emptyState={
+            <div className="py-8 text-center space-y-3">
+              <Car className="w-8 h-8 text-[var(--admin-text-muted)] mx-auto opacity-50" />
+              <p className="text-xs font-semibold text-[var(--admin-text)]">
+                No vehicles matched your criteria
+              </p>
+              {hasActiveFilters && (
+                <Button variant="secondary" size="sm" onClick={resetFilters}>
+                  Clear all filters
+                </Button>
+              )}
+            </div>
+          }
           bulkActions={
             <div className="flex items-center gap-2">
-              <button
+              <Button
+                variant="secondary"
+                size="sm"
                 onClick={() => handleBulkStatusChange("published")}
-                className="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30 transition-colors"
               >
                 Publish Selected
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="danger"
+                size="sm"
                 onClick={() => handleBulkStatusChange("archived")}
-                className="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-500/20 text-rose-400 hover:bg-rose-500/30 transition-colors"
               >
                 Archive Selected
-              </button>
+              </Button>
             </div>
           }
           expandableRowRender={(v) => (
@@ -480,7 +554,7 @@ export default function AdminVehiclesPage() {
                 </div>
               </div>
 
-              {/* Sources Section (Image 18) */}
+              {/* Sources Section */}
               <div className="space-y-2">
                 <span className="text-xs font-bold text-[var(--admin-text)]">
                   Corroborating Evidence ({v.sources.length} sources)
@@ -503,16 +577,12 @@ export default function AdminVehiclesPage() {
                             ({s.type} • {s.date})
                           </span>
                         </div>
-                        <span
-                          className={cn(
-                            "px-2 py-0.5 rounded text-[10px] font-bold uppercase",
-                            s.status === "verified"
-                              ? "bg-emerald-500/10 text-emerald-400"
-                              : "bg-amber-500/10 text-amber-400"
-                          )}
+                        <Badge
+                          variant={s.status === "verified" ? "success" : "warning"}
+                          size="sm"
                         >
                           {s.status}
-                        </span>
+                        </Badge>
                       </div>
                     ))}
                   </div>
@@ -520,13 +590,16 @@ export default function AdminVehiclesPage() {
               </div>
 
               <div className="flex items-center gap-2 pt-2">
-                <button
+                <Button
+                  variant="primary"
+                  size="sm"
                   onClick={() => setEditingVehicle(v)}
-                  className="px-3 py-1.5 rounded-lg bg-[var(--admin-primary)] text-white text-xs font-bold hover:opacity-90 transition-opacity"
                 >
                   Edit Full Record
-                </button>
-                <button
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
                   onClick={() => {
                     setVehicles((prev) =>
                       prev.map((item) =>
@@ -539,28 +612,29 @@ export default function AdminVehiclesPage() {
                       type: "success",
                     });
                   }}
-                  className="px-3 py-1.5 rounded-lg bg-[var(--admin-elevated)] border border-[var(--admin-border)] text-[var(--admin-text)] text-xs font-bold hover:bg-[var(--admin-card)] transition-colors"
                 >
                   Verify Sources
-                </button>
+                </Button>
               </div>
             </div>
           )}
           actions={(v) => (
             <div className="flex items-center justify-end gap-1.5">
-              <button
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={() => setEditingVehicle(v)}
-                className="p-1.5 rounded-lg text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors"
+                aria-label={`Edit ${v.displayName}`}
                 title="Edit vehicle"
               >
                 <Edit className="w-4 h-4" />
-              </button>
+              </Button>
             </div>
           )}
         />
       )}
 
-      {/* Edit Vehicle Drawer (Image 3) */}
+      {/* Edit Vehicle Drawer */}
       <Drawer
         isOpen={!!editingVehicle}
         onClose={() => setEditingVehicle(null)}
@@ -573,29 +647,38 @@ export default function AdminVehiclesPage() {
         size="2xl"
         footer={
           <>
-            <button
+            <Button
+              variant="secondary"
+              size="md"
               onClick={() => setEditingVehicle(null)}
-              className="px-4 py-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-elevated)] text-xs font-bold text-[var(--admin-text)] hover:bg-[var(--admin-surface)] transition-colors"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="primary"
+              size="md"
               onClick={handleSaveDrawer}
-              className="px-5 py-2 rounded-xl bg-[var(--admin-primary)] text-xs font-bold text-white hover:opacity-90 transition-opacity shadow-md shadow-[var(--admin-primary)]/20"
             >
               Save Changes
-            </button>
+            </Button>
           </>
         }
       >
         {editingVehicle && (
           <div className="space-y-6">
             {/* Drawer Tabs */}
-            <div className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2">
+            <div
+              role="tablist"
+              aria-label="Edit vehicle tabs"
+              className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2"
+            >
               <button
+                type="button"
+                role="tab"
+                aria-selected={drawerTab === "specs"}
                 onClick={() => setDrawerTab("specs")}
                 className={cn(
-                  "px-3 py-1.5 rounded-lg text-xs font-bold transition-colors",
+                  "px-3 py-1.5 rounded-lg text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
                   drawerTab === "specs"
                     ? "bg-[var(--admin-primary)] text-white"
                     : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -604,9 +687,12 @@ export default function AdminVehiclesPage() {
                 Specifications & Identity
               </button>
               <button
+                type="button"
+                role="tab"
+                aria-selected={drawerTab === "sources"}
                 onClick={() => setDrawerTab("sources")}
                 className={cn(
-                  "px-3 py-1.5 rounded-lg text-xs font-bold transition-colors",
+                  "px-3 py-1.5 rounded-lg text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
                   drawerTab === "sources"
                     ? "bg-[var(--admin-primary)] text-white"
                     : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -615,9 +701,12 @@ export default function AdminVehiclesPage() {
                 Sources & Verification ({editingVehicle.sources.length})
               </button>
               <button
+                type="button"
+                role="tab"
+                aria-selected={drawerTab === "revisions"}
                 onClick={() => setDrawerTab("revisions")}
                 className={cn(
-                  "px-3 py-1.5 rounded-lg text-xs font-bold transition-colors",
+                  "px-3 py-1.5 rounded-lg text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
                   drawerTab === "revisions"
                     ? "bg-[var(--admin-primary)] text-white"
                     : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -632,10 +721,14 @@ export default function AdminVehiclesPage() {
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                    <label
+                      htmlFor="edit-vehicle-name"
+                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                    >
                       Display Name
                     </label>
                     <input
+                      id="edit-vehicle-name"
                       type="text"
                       value={editingVehicle.displayName}
                       onChange={(e) =>
@@ -646,10 +739,14 @@ export default function AdminVehiclesPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                    <label
+                      htmlFor="edit-vehicle-manufacturer"
+                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                    >
                       Manufacturer
                     </label>
                     <input
+                      id="edit-vehicle-manufacturer"
                       type="text"
                       value={editingVehicle.manufacturer}
                       onChange={(e) =>
@@ -662,10 +759,14 @@ export default function AdminVehiclesPage() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                    <label
+                      htmlFor="edit-vehicle-class"
+                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                    >
                       Class
                     </label>
                     <select
+                      id="edit-vehicle-class"
                       value={editingVehicle.class}
                       onChange={(e) =>
                         setEditingVehicle({
@@ -686,10 +787,14 @@ export default function AdminVehiclesPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                    <label
+                      htmlFor="edit-vehicle-status"
+                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                    >
                       Publication Status
                     </label>
                     <select
+                      id="edit-vehicle-status"
                       value={editingVehicle.status}
                       onChange={(e) =>
                         setEditingVehicle({
@@ -708,10 +813,14 @@ export default function AdminVehiclesPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                  <label
+                    htmlFor="edit-vehicle-summary"
+                    className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                  >
                     Summary & Field Notes
                   </label>
                   <textarea
+                    id="edit-vehicle-summary"
                     rows={3}
                     value={editingVehicle.summary}
                     onChange={(e) =>
@@ -727,11 +836,15 @@ export default function AdminVehiclesPage() {
                   </h4>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <div>
-                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
+                      <label
+                        htmlFor="edit-spec-speed"
+                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
+                      >
                         Top Speed
                       </label>
                       <div className="relative">
                         <input
+                          id="edit-spec-speed"
                           type="text"
                           value={editingVehicle.topSpeed || ""}
                           onChange={(e) =>
@@ -746,11 +859,15 @@ export default function AdminVehiclesPage() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
+                      <label
+                        htmlFor="edit-spec-accel"
+                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
+                      >
                         Acceleration
                       </label>
                       <div className="relative">
                         <input
+                          id="edit-spec-accel"
                           type="text"
                           value={editingVehicle.acceleration || ""}
                           onChange={(e) =>
@@ -765,11 +882,15 @@ export default function AdminVehiclesPage() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
+                      <label
+                        htmlFor="edit-spec-handling"
+                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
+                      >
                         Handling
                       </label>
                       <div className="relative">
                         <input
+                          id="edit-spec-handling"
                           type="text"
                           value={editingVehicle.handling || ""}
                           onChange={(e) =>
@@ -784,11 +905,15 @@ export default function AdminVehiclesPage() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
+                      <label
+                        htmlFor="edit-spec-weight"
+                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
+                      >
                         Weight
                       </label>
                       <div className="relative">
                         <input
+                          id="edit-spec-weight"
                           type="text"
                           value={editingVehicle.weight || ""}
                           onChange={(e) =>
@@ -814,7 +939,9 @@ export default function AdminVehiclesPage() {
                   <p className="text-xs text-[var(--admin-text-muted)]">
                     Evidence corroborating the presence and appearance of this vehicle in GTA 6.
                   </p>
-                  <button
+                  <Button
+                    variant="secondary"
+                    size="sm"
                     onClick={() => {
                       const newSource = {
                         id: `src-${Date.now()}`,
@@ -828,10 +955,9 @@ export default function AdminVehiclesPage() {
                         sources: [...editingVehicle.sources, newSource],
                       });
                     }}
-                    className="px-2.5 py-1 rounded-lg bg-[var(--admin-elevated)] border border-[var(--admin-border)] text-xs font-bold text-[var(--admin-text)] hover:bg-[var(--admin-card)] transition-colors"
                   >
                     + Add Source
-                  </button>
+                  </Button>
                 </div>
 
                 <div className="space-y-2">
@@ -846,17 +972,20 @@ export default function AdminVehiclesPage() {
                           {s.type} • {s.date}
                         </p>
                       </div>
-                      <button
+                      <Button
+                        variant="ghost"
+                        size="icon"
                         onClick={() => {
                           setEditingVehicle({
                             ...editingVehicle,
                             sources: editingVehicle.sources.filter((_, i) => i !== idx),
                           });
                         }}
-                        className="p-1 rounded text-rose-400 hover:bg-rose-500/10"
+                        aria-label={`Remove source ${s.title}`}
+                        className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
-                      </button>
+                      </Button>
                     </div>
                   ))}
                 </div>
@@ -913,27 +1042,33 @@ export default function AdminVehiclesPage() {
         description="Create a new vehicle placeholder in the Atlas database."
         footer={
           <>
-            <button
+            <Button
+              variant="secondary"
+              size="md"
               onClick={() => setIsNewModalOpen(false)}
-              className="px-4 py-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-elevated)] text-xs font-bold text-[var(--admin-text)]"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="primary"
+              size="md"
               onClick={handleCreateVehicle}
-              className="px-5 py-2 rounded-xl bg-[var(--admin-primary)] text-xs font-bold text-white shadow-md shadow-[var(--admin-primary)]/20"
             >
               Create Record
-            </button>
+            </Button>
           </>
         }
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+            <label
+              htmlFor="new-vehicle-name"
+              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+            >
               Vehicle Model Name
             </label>
             <input
+              id="new-vehicle-name"
               type="text"
               value={newVehicleData.name}
               onChange={(e) =>
@@ -945,10 +1080,14 @@ export default function AdminVehiclesPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+            <label
+              htmlFor="new-vehicle-manufacturer"
+              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+            >
               Manufacturer
             </label>
             <input
+              id="new-vehicle-manufacturer"
               type="text"
               value={newVehicleData.manufacturer}
               onChange={(e) =>
@@ -960,10 +1099,14 @@ export default function AdminVehiclesPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+            <label
+              htmlFor="new-vehicle-class"
+              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+            >
               Class
             </label>
             <select
+              id="new-vehicle-class"
               value={newVehicleData.class}
               onChange={(e) =>
                 setNewVehicleData({

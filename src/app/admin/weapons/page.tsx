@@ -9,19 +9,16 @@ import {
   CheckCircle2,
   Clock,
   Edit,
-  Trash2,
   SlidersHorizontal,
-  ExternalLink,
-  ShieldCheck,
-  Flame,
   Target,
-  Zap,
-  RotateCcw
+  RotateCcw,
 } from "lucide-react";
 import { DataTable, Column } from "@/components/admin/data-table";
 import { Drawer } from "@/components/admin/drawer";
 import { Modal } from "@/components/admin/modal";
 import { useToast } from "@/components/admin/toast";
+import { Button } from "@/components/admin/ui/button";
+import { Badge } from "@/components/admin/ui/badge";
 import {
   INITIAL_ADMIN_WEAPONS,
   AdminWeapon,
@@ -39,6 +36,15 @@ export default function AdminWeaponsPage() {
   // Drawer / Full Edit state
   const [editingWeapon, setEditingWeapon] = useState<AdminWeapon | null>(null);
   const [drawerMode, setDrawerMode] = useState<"quick" | "full">("quick");
+
+  // Dynamic Source Corroboration Checklist
+  const [corroborationChecklist, setCorroborationChecklist] = useState({
+    trailer: true,
+    blueprint: true,
+    audio: false,
+  });
+
+  const verifiedChecklistCount = Object.values(corroborationChecklist).filter(Boolean).length;
 
   // New Weapon Modal
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
@@ -77,6 +83,17 @@ export default function AdminWeaponsPage() {
     SMG: weapons.filter((w) => w.category === "SMG").length,
     Shotgun: weapons.filter((w) => w.category === "Shotgun").length,
     Heavy: weapons.filter((w) => w.category === "Heavy").length,
+  };
+
+  const hasActiveFilters =
+    searchQuery.trim().length > 0 ||
+    activeCategory !== "all" ||
+    selectedVerification !== "all";
+
+  const resetFilters = () => {
+    setSearchQuery("");
+    setActiveCategory("all");
+    setSelectedVerification("all");
   };
 
   const handleSaveDrawer = () => {
@@ -147,9 +164,9 @@ export default function AdminWeaponsPage() {
       header: "Category",
       sortable: true,
       render: (w) => (
-        <span className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--admin-elevated)] border border-[var(--admin-border-subtle)] text-[var(--admin-text)]">
+        <Badge variant="neutral" size="sm">
           {w.category}
-        </span>
+        </Badge>
       ),
     },
     {
@@ -166,43 +183,46 @@ export default function AdminWeaponsPage() {
       key: "verification",
       header: "Verification",
       sortable: true,
-      render: (w) => (
-        <span
-          className={cn(
-            "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase border",
-            w.verification === "verified"
-              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-              : w.verification === "pending_source"
-              ? "bg-amber-500/10 text-amber-400 border-amber-500/30"
-              : "bg-rose-500/10 text-rose-400 border-rose-500/30"
-          )}
-        >
-          {w.verification === "verified" && <CheckCircle2 className="w-3 h-3" />}
-          {w.verification === "pending_source" && <Clock className="w-3 h-3" />}
-          {w.verification === "unverified" && <AlertTriangle className="w-3 h-3" />}
-          <span>{w.verification.replace("_", " ")}</span>
-        </span>
-      ),
+      render: (w) => {
+        const variantMap: Record<AdminWeapon["verification"], "success" | "warning" | "danger"> = {
+          verified: "success",
+          pending_source: "warning",
+          unverified: "danger",
+        };
+        const iconMap: Record<AdminWeapon["verification"], React.ReactNode> = {
+          verified: <CheckCircle2 className="w-3 h-3" />,
+          pending_source: <Clock className="w-3 h-3" />,
+          unverified: <AlertTriangle className="w-3 h-3" />,
+        };
+        return (
+          <Badge
+            variant={variantMap[w.verification]}
+            size="sm"
+            dot
+            icon={iconMap[w.verification]}
+          >
+            {w.verification.replace("_", " ")}
+          </Badge>
+        );
+      },
     },
     {
       key: "status",
       header: "Status",
       sortable: true,
-      render: (w) => (
-        <span
-          className={cn(
-            "px-2 py-0.5 rounded-md text-[10px] font-bold uppercase border",
-            w.status === "published" &&
-              "bg-indigo-500/10 text-indigo-400 border-indigo-500/30",
-            w.status === "draft" &&
-              "bg-[var(--admin-elevated)] text-[var(--admin-text-muted)] border-[var(--admin-border)]",
-            w.status === "review" &&
-              "bg-amber-500/10 text-amber-400 border-amber-500/30"
-          )}
-        >
-          {w.status}
-        </span>
-      ),
+      render: (w) => {
+        const variantMap: Record<AdminWeapon["status"], "primary" | "neutral" | "warning" | "danger"> = {
+          published: "primary",
+          draft: "neutral",
+          review: "warning",
+          archived: "danger",
+        };
+        return (
+          <Badge variant={variantMap[w.status]} size="sm">
+            {w.status}
+          </Badge>
+        );
+      },
     },
     {
       key: "updatedAt",
@@ -229,21 +249,29 @@ export default function AdminWeaponsPage() {
           </p>
         </div>
 
-        <button
+        <Button
+          variant="primary"
+          size="md"
           onClick={() => setIsNewModalOpen(true)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--admin-primary)] hover:opacity-90 text-white text-xs font-black uppercase tracking-wider transition-colors shadow-md shadow-[var(--admin-primary)]/25"
+          leftIcon={<Plus className="w-4 h-4" />}
         >
-          <Plus className="w-4 h-4" />
-          <span>Add Weapon</span>
-        </button>
+          Add Weapon
+        </Button>
       </div>
 
-      {/* Category Tabs (Image 5) */}
-      <div className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2 overflow-x-auto scrollbar-none">
+      {/* Category Tabs */}
+      <div
+        role="tablist"
+        aria-label="Filter weapons by category"
+        className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2 overflow-x-auto scrollbar-none"
+      >
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeCategory === "all"}
           onClick={() => setActiveCategory("all")}
           className={cn(
-            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeCategory === "all"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
@@ -258,9 +286,12 @@ export default function AdminWeaponsPage() {
         {(["Pistol", "Rifle", "SMG", "Shotgun", "Heavy"] as const).map((cat) => (
           <button
             key={cat}
+            type="button"
+            role="tab"
+            aria-selected={activeCategory === cat}
             onClick={() => setActiveCategory(cat)}
             className={cn(
-              "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+              "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
               activeCategory === cat
                 ? "bg-[var(--admin-primary)] text-white shadow-sm"
                 : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
@@ -275,30 +306,56 @@ export default function AdminWeaponsPage() {
       </div>
 
       {/* Search & Verification Filter */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div className="relative sm:col-span-2">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--admin-text-muted)]" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search weapons by name, caliber, or code..."
-            className="w-full pl-9 pr-4 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-          />
+      <div className="space-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="relative sm:col-span-2">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--admin-text-muted)]" />
+            <input
+              type="text"
+              id="weapon-search"
+              aria-label="Search weapons by name, caliber, or code"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search weapons by name, caliber, or code..."
+              className="w-full pl-9 pr-4 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
+            />
+          </div>
+
+          <div>
+            <select
+              id="weapon-verification-filter"
+              aria-label="Filter by verification status"
+              value={selectedVerification}
+              onChange={(e) => setSelectedVerification(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
+            >
+              <option value="all">All Verification Statuses</option>
+              <option value="verified">Verified</option>
+              <option value="pending_source">Pending Source</option>
+              <option value="unverified">Unverified</option>
+            </select>
+          </div>
         </div>
 
-        <div>
-          <select
-            value={selectedVerification}
-            onChange={(e) => setSelectedVerification(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-          >
-            <option value="all">All Verification Statuses</option>
-            <option value="verified">Verified</option>
-            <option value="pending_source">Pending Source</option>
-            <option value="unverified">Unverified</option>
-          </select>
-        </div>
+        {/* Active Filters Reset Bar */}
+        {hasActiveFilters && (
+          <div className="flex items-center gap-2 text-xs">
+            <span className="text-[var(--admin-text-muted)] font-medium">
+              Filtered results:
+            </span>
+            <span className="font-bold text-[var(--admin-text)]">
+              {filteredWeapons.length} of {weapons.length} weapons
+            </span>
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="inline-flex items-center gap-1 text-[var(--admin-primary)] hover:underline font-bold ml-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)] rounded"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>Reset filters</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Weapons Data Table */}
@@ -315,8 +372,23 @@ export default function AdminWeaponsPage() {
         onSelectAll={(all) =>
           setSelectedIds(all ? filteredWeapons.map((w) => w.id) : [])
         }
+        emptyState={
+          <div className="py-8 text-center space-y-3">
+            <Crosshair className="w-8 h-8 text-[var(--admin-text-muted)] mx-auto opacity-50" />
+            <p className="text-xs font-semibold text-[var(--admin-text)]">
+              No weapons matched your criteria
+            </p>
+            {hasActiveFilters && (
+              <Button variant="secondary" size="sm" onClick={resetFilters}>
+                Clear all filters
+              </Button>
+            )}
+          </div>
+        }
         bulkActions={
-          <button
+          <Button
+            variant="secondary"
+            size="sm"
             onClick={() => {
               setWeapons((prev) =>
                 prev.map((w) =>
@@ -330,38 +402,42 @@ export default function AdminWeaponsPage() {
               });
               setSelectedIds([]);
             }}
-            className="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 transition-colors"
           >
             Verify Selected
-          </button>
+          </Button>
         }
         actions={(w) => (
           <div className="flex items-center justify-end gap-1.5">
-            <button
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => {
                 setEditingWeapon(w);
                 setDrawerMode("quick");
               }}
-              className="p-1.5 rounded-lg text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors"
+              aria-label={`Quick edit ${w.name}`}
               title="Quick edit"
             >
               <Edit className="w-4 h-4" />
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => {
                 setEditingWeapon(w);
                 setDrawerMode("full");
               }}
-              className="p-1.5 rounded-lg text-[var(--admin-primary)] hover:bg-[var(--admin-primary)]/10 transition-colors"
+              aria-label={`Full specifications for ${w.name}`}
               title="Full specifications"
+              className="text-[var(--admin-primary)]"
             >
               <SlidersHorizontal className="w-4 h-4" />
-            </button>
+            </Button>
           </div>
         )}
       />
 
-      {/* Edit Weapon Drawer (Image 5 & Image 6) */}
+      {/* Edit Weapon Drawer */}
       <Drawer
         isOpen={!!editingWeapon}
         onClose={() => setEditingWeapon(null)}
@@ -376,31 +452,37 @@ export default function AdminWeaponsPage() {
         size={drawerMode === "full" ? "2xl" : "lg"}
         footer={
           <>
-            <button
+            <Button
+              variant="secondary"
+              size="md"
               onClick={() => setEditingWeapon(null)}
-              className="px-4 py-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-elevated)] text-xs font-bold text-[var(--admin-text)] hover:bg-[var(--admin-surface)] transition-colors"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="primary"
+              size="md"
               onClick={handleSaveDrawer}
-              className="px-5 py-2 rounded-xl bg-[var(--admin-primary)] text-xs font-bold text-white hover:opacity-90 transition-opacity shadow-md shadow-[var(--admin-primary)]/20"
             >
               Save Changes
-            </button>
+            </Button>
           </>
         }
       >
         {editingWeapon && (
           <div className="space-y-6">
-            {/* Quick Edit Mode (Image 5) */}
+            {/* Quick Edit Mode */}
             {drawerMode === "quick" ? (
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                  <label
+                    htmlFor="quick-weapon-name"
+                    className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                  >
                     Weapon Name
                   </label>
                   <input
+                    id="quick-weapon-name"
                     type="text"
                     value={editingWeapon.name}
                     onChange={(e) =>
@@ -412,10 +494,14 @@ export default function AdminWeaponsPage() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                    <label
+                      htmlFor="quick-weapon-category"
+                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                    >
                       Category
                     </label>
                     <select
+                      id="quick-weapon-category"
                       value={editingWeapon.category}
                       onChange={(e) =>
                         setEditingWeapon({
@@ -435,10 +521,14 @@ export default function AdminWeaponsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                    <label
+                      htmlFor="quick-weapon-ammo"
+                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                    >
                       Ammunition
                     </label>
                     <input
+                      id="quick-weapon-ammo"
                       type="text"
                       value={editingWeapon.ammunition}
                       onChange={(e) =>
@@ -451,10 +541,14 @@ export default function AdminWeaponsPage() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                    <label
+                      htmlFor="quick-weapon-verification"
+                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                    >
                       Verification Status
                     </label>
                     <select
+                      id="quick-weapon-verification"
                       value={editingWeapon.verification}
                       onChange={(e) =>
                         setEditingWeapon({
@@ -471,10 +565,14 @@ export default function AdminWeaponsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                    <label
+                      htmlFor="quick-weapon-status"
+                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                    >
                       Status
                     </label>
                     <select
+                      id="quick-weapon-status"
                       value={editingWeapon.status}
                       onChange={(e) =>
                         setEditingWeapon({
@@ -492,10 +590,14 @@ export default function AdminWeaponsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+                  <label
+                    htmlFor="quick-weapon-notes"
+                    className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+                  >
                     Editorial Notes
                   </label>
                   <textarea
+                    id="quick-weapon-notes"
                     rows={3}
                     value={editingWeapon.notes || ""}
                     onChange={(e) =>
@@ -506,17 +608,19 @@ export default function AdminWeaponsPage() {
                 </div>
 
                 <div className="pt-2">
-                  <button
+                  <Button
+                    variant="secondary"
+                    size="md"
                     onClick={() => setDrawerMode("full")}
-                    className="w-full py-2.5 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-elevated)] hover:bg-[var(--admin-card)] text-xs font-bold text-[var(--admin-primary)] flex items-center justify-center gap-2 transition-colors"
+                    className="w-full text-[var(--admin-primary)]"
+                    leftIcon={<SlidersHorizontal className="w-4 h-4" />}
                   >
-                    <SlidersHorizontal className="w-4 h-4" />
-                    <span>Open Full Specifications Form</span>
-                  </button>
+                    Open Full Specifications Form
+                  </Button>
                 </div>
               </div>
             ) : (
-              /* Full Specs Form (Image 6) */
+              /* Full Specs Form */
               <div className="space-y-6">
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)] mb-3 flex items-center gap-2">
@@ -525,11 +629,15 @@ export default function AdminWeaponsPage() {
                   </h4>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <div>
-                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
+                      <label
+                        htmlFor="full-spec-damage"
+                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
+                      >
                         Damage Rating
                       </label>
                       <div className="relative">
                         <input
+                          id="full-spec-damage"
                           type="text"
                           value={editingWeapon.damage || ""}
                           onChange={(e) =>
@@ -544,11 +652,15 @@ export default function AdminWeaponsPage() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
+                      <label
+                        htmlFor="full-spec-range"
+                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
+                      >
                         Effective Range
                       </label>
                       <div className="relative">
                         <input
+                          id="full-spec-range"
                           type="text"
                           value={editingWeapon.range || ""}
                           onChange={(e) =>
@@ -563,11 +675,15 @@ export default function AdminWeaponsPage() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
+                      <label
+                        htmlFor="full-spec-rof"
+                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
+                      >
                         Rate of Fire
                       </label>
                       <div className="relative">
                         <input
+                          id="full-spec-rof"
                           type="text"
                           value={editingWeapon.rateOfFire || ""}
                           onChange={(e) =>
@@ -582,11 +698,15 @@ export default function AdminWeaponsPage() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1">
+                      <label
+                        htmlFor="full-spec-mag"
+                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
+                      >
                         Magazine Size
                       </label>
                       <div className="relative">
                         <input
+                          id="full-spec-mag"
                           type="text"
                           value={editingWeapon.magazineSize || ""}
                           onChange={(e) =>
@@ -609,10 +729,14 @@ export default function AdminWeaponsPage() {
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1">
+                      <label
+                        htmlFor="full-spec-acquisition"
+                        className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1"
+                      >
                         Acquisition Method
                       </label>
                       <input
+                        id="full-spec-acquisition"
                         type="text"
                         value={editingWeapon.acquisitionMethod || ""}
                         onChange={(e) =>
@@ -627,10 +751,14 @@ export default function AdminWeaponsPage() {
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1">
+                      <label
+                        htmlFor="full-spec-location"
+                        className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1"
+                      >
                         Linked Map Location
                       </label>
                       <input
+                        id="full-spec-location"
                         type="text"
                         value={editingWeapon.linkedLocation || ""}
                         onChange={(e) =>
@@ -646,43 +774,86 @@ export default function AdminWeaponsPage() {
                   </div>
                 </div>
 
-                {/* Verification Checklist (Image 6) */}
+                {/* Interactive Verification Checklist */}
                 <div className="pt-2 border-t border-[var(--admin-border)] space-y-2.5">
                   <div className="flex items-center justify-between">
                     <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)]">
                       Source Corroboration Checklist
                     </h4>
-                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                      2 of 3 Verified
-                    </span>
+                    <Badge
+                      variant={verifiedChecklistCount === 3 ? "success" : "warning"}
+                      size="sm"
+                    >
+                      {verifiedChecklistCount} of 3 Verified
+                    </Badge>
                   </div>
                   <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] space-y-2.5 text-xs">
-                    <label className="flex items-center gap-2.5 cursor-pointer group">
+                    <label className="flex items-center gap-2.5 cursor-pointer group select-none">
                       <input
                         type="checkbox"
-                        defaultChecked
+                        checked={corroborationChecklist.trailer}
+                        onChange={(e) =>
+                          setCorroborationChecklist((prev) => ({
+                            ...prev,
+                            trailer: e.target.checked,
+                          }))
+                        }
                         className="w-4 h-4 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
                       />
-                      <span className="text-[var(--admin-text)] font-medium group-hover:text-[var(--admin-primary)] transition-colors">
+                      <span
+                        className={cn(
+                          "font-medium transition-colors",
+                          corroborationChecklist.trailer
+                            ? "text-[var(--admin-text)]"
+                            : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-text)]"
+                        )}
+                      >
                         Corroborated in Official Trailer 1 (Timestamp verified)
                       </span>
                     </label>
-                    <label className="flex items-center gap-2.5 cursor-pointer group">
+                    <label className="flex items-center gap-2.5 cursor-pointer group select-none">
                       <input
                         type="checkbox"
-                        defaultChecked
+                        checked={corroborationChecklist.blueprint}
+                        onChange={(e) =>
+                          setCorroborationChecklist((prev) => ({
+                            ...prev,
+                            blueprint: e.target.checked,
+                          }))
+                        }
                         className="w-4 h-4 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
                       />
-                      <span className="text-[var(--admin-text)] font-medium group-hover:text-[var(--admin-primary)] transition-colors">
+                      <span
+                        className={cn(
+                          "font-medium transition-colors",
+                          corroborationChecklist.blueprint
+                            ? "text-[var(--admin-text)]"
+                            : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-text)]"
+                        )}
+                      >
                         Weapon model matches real-world firearm blueprint
                       </span>
                     </label>
-                    <label className="flex items-center gap-2.5 cursor-pointer group">
+                    <label className="flex items-center gap-2.5 cursor-pointer group select-none">
                       <input
                         type="checkbox"
+                        checked={corroborationChecklist.audio}
+                        onChange={(e) =>
+                          setCorroborationChecklist((prev) => ({
+                            ...prev,
+                            audio: e.target.checked,
+                          }))
+                        }
                         className="w-4 h-4 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
                       />
-                      <span className="text-[var(--admin-text-muted)] font-medium group-hover:text-[var(--admin-text)] transition-colors">
+                      <span
+                        className={cn(
+                          "font-medium transition-colors",
+                          corroborationChecklist.audio
+                            ? "text-[var(--admin-text)]"
+                            : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-text)]"
+                        )}
+                      >
                         In-game audio sample corroborated by sound designer review
                       </span>
                     </label>
@@ -690,12 +861,13 @@ export default function AdminWeaponsPage() {
                 </div>
 
                 <div>
-                  <button
+                  <Button
+                    variant="link"
+                    size="sm"
                     onClick={() => setDrawerMode("quick")}
-                    className="text-xs text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:underline"
                   >
                     ← Switch back to Quick Edit
-                  </button>
+                  </Button>
                 </div>
               </div>
             )}
@@ -711,27 +883,33 @@ export default function AdminWeaponsPage() {
         description="Create a weapon record to track in the Leonida database."
         footer={
           <>
-            <button
+            <Button
+              variant="secondary"
+              size="md"
               onClick={() => setIsNewModalOpen(false)}
-              className="px-4 py-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-elevated)] text-xs font-bold text-[var(--admin-text)]"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="primary"
+              size="md"
               onClick={handleCreateWeapon}
-              className="px-5 py-2 rounded-xl bg-[var(--admin-primary)] text-xs font-bold text-white shadow-md shadow-[var(--admin-primary)]/20"
             >
               Create Weapon Record
-            </button>
+            </Button>
           </>
         }
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+            <label
+              htmlFor="new-weapon-name"
+              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+            >
               Weapon Name
             </label>
             <input
+              id="new-weapon-name"
               type="text"
               value={newWeaponData.name}
               onChange={(e) =>
@@ -743,10 +921,14 @@ export default function AdminWeaponsPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+            <label
+              htmlFor="new-weapon-category"
+              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+            >
               Category
             </label>
             <select
+              id="new-weapon-category"
               value={newWeaponData.category}
               onChange={(e) =>
                 setNewWeaponData({
@@ -766,10 +948,14 @@ export default function AdminWeaponsPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[var(--admin-text)] mb-1">
+            <label
+              htmlFor="new-weapon-ammo"
+              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
+            >
               Ammunition Type
             </label>
             <input
+              id="new-weapon-ammo"
               type="text"
               value={newWeaponData.ammunition}
               onChange={(e) =>

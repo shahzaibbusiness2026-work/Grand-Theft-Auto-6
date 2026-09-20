@@ -13,6 +13,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { StatCard } from "@/components/admin/stat-card";
+import { Badge } from "@/components/admin/ui/badge";
 import { cn } from "@/lib/utils";
 
 export default function AdminAnalyticsPage() {
@@ -45,6 +46,15 @@ export default function AdminAnalyticsPage() {
     { term: "Service Carbine location", count: "1,220", ctr: "81%", hasNoResults: false },
   ];
 
+  const getTypeBadgeVariant = (type: string) => {
+    switch (type) {
+      case "Vehicle": return "primary" as const;
+      case "Weapon": return "danger" as const;
+      case "Location": return "success" as const;
+      default: return "neutral" as const;
+    }
+  };
+
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
       {/* Page Header */}
@@ -60,10 +70,12 @@ export default function AdminAnalyticsPage() {
         </div>
 
         <div className="flex items-center gap-2">
+          <label htmlFor="time-range" className="sr-only">Time range</label>
           <select
+            id="time-range"
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value)}
-            className="px-3.5 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs font-bold text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
+            className="px-3.5 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs font-bold text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] focus:ring-1 focus:ring-[var(--admin-primary)]"
           >
             <option value="24h">Last 24 hours</option>
             <option value="7d">Last 7 days (Sep 14 - Sep 20)</option>
@@ -73,7 +85,7 @@ export default function AdminAnalyticsPage() {
         </div>
       </div>
 
-      {/* 3 Metric Cards (Image 13) */}
+      {/* 3 Metric Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <StatCard
           label="Total Page Views"
@@ -101,7 +113,7 @@ export default function AdminAnalyticsPage() {
         />
       </div>
 
-      {/* 4 Data Tables Grid (Image 13) */}
+      {/* 4 Data Tables Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Table 1: Top Articles */}
         <div className="rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-5 space-y-4 shadow-sm">
@@ -109,22 +121,24 @@ export default function AdminAnalyticsPage() {
             Top Articles & Editorial
           </h2>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs" aria-label="Top performing articles">
               <thead>
                 <tr className="border-b border-[var(--admin-border)] text-[var(--admin-text-muted)] bg-[var(--admin-surface)]">
-                  <th className="p-3 font-bold uppercase">Article Title</th>
-                  <th className="p-3 font-bold uppercase">Category</th>
-                  <th className="p-3 font-bold uppercase text-right">Views</th>
-                  <th className="p-3 font-bold uppercase text-right">Avg Time</th>
+                  <th scope="col" className="p-3 font-bold uppercase">Article Title</th>
+                  <th scope="col" className="p-3 font-bold uppercase">Category</th>
+                  <th scope="col" className="p-3 font-bold uppercase text-right">Views</th>
+                  <th scope="col" className="p-3 font-bold uppercase text-right">Avg Time</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--admin-border-subtle)]">
                 {topArticles.map((art, i) => (
-                  <tr key={i} className="hover:bg-[var(--admin-elevated)]/40">
+                  <tr key={i} className="hover:bg-[var(--admin-elevated)]/40 transition-colors">
                     <td className="p-3 font-bold text-[var(--admin-text)] truncate max-w-[200px]">
                       {art.title}
                     </td>
-                    <td className="p-3 text-[var(--admin-text-muted)]">{art.category}</td>
+                    <td className="p-3">
+                      <Badge variant="neutral" size="sm">{art.category}</Badge>
+                    </td>
                     <td className="p-3 text-right font-mono font-bold text-[var(--admin-text)]">
                       {art.views}
                     </td>
@@ -144,23 +158,23 @@ export default function AdminAnalyticsPage() {
             Popular Database Pages
           </h2>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs" aria-label="Most viewed database pages">
               <thead>
                 <tr className="border-b border-[var(--admin-border)] text-[var(--admin-text-muted)] bg-[var(--admin-surface)]">
-                  <th className="p-3 font-bold uppercase">Record</th>
-                  <th className="p-3 font-bold uppercase">Type</th>
-                  <th className="p-3 font-bold uppercase text-right">Views</th>
-                  <th className="p-3 font-bold uppercase text-right">Uniques</th>
+                  <th scope="col" className="p-3 font-bold uppercase">Record</th>
+                  <th scope="col" className="p-3 font-bold uppercase">Type</th>
+                  <th scope="col" className="p-3 font-bold uppercase text-right">Views</th>
+                  <th scope="col" className="p-3 font-bold uppercase text-right">Uniques</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--admin-border-subtle)]">
                 {popularDatabasePages.map((page, i) => (
-                  <tr key={i} className="hover:bg-[var(--admin-elevated)]/40">
+                  <tr key={i} className="hover:bg-[var(--admin-elevated)]/40 transition-colors">
                     <td className="p-3 font-bold text-[var(--admin-text)]">{page.name}</td>
                     <td className="p-3">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[var(--admin-elevated)] border border-[var(--admin-border)]">
+                      <Badge variant={getTypeBadgeVariant(page.type)} size="sm">
                         {page.type}
-                      </span>
+                      </Badge>
                     </td>
                     <td className="p-3 text-right font-mono font-bold text-[var(--admin-text)]">
                       {page.views}
@@ -181,18 +195,18 @@ export default function AdminAnalyticsPage() {
             Interactive Tool Usage
           </h2>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs" aria-label="Interactive tool usage statistics">
               <thead>
                 <tr className="border-b border-[var(--admin-border)] text-[var(--admin-text-muted)] bg-[var(--admin-surface)]">
-                  <th className="p-3 font-bold uppercase">Tool Name</th>
-                  <th className="p-3 font-bold uppercase text-right">Sessions</th>
-                  <th className="p-3 font-bold uppercase text-right">Avg Duration</th>
-                  <th className="p-3 font-bold uppercase text-right">Retention</th>
+                  <th scope="col" className="p-3 font-bold uppercase">Tool Name</th>
+                  <th scope="col" className="p-3 font-bold uppercase text-right">Sessions</th>
+                  <th scope="col" className="p-3 font-bold uppercase text-right">Avg Duration</th>
+                  <th scope="col" className="p-3 font-bold uppercase text-right">Retention</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--admin-border-subtle)]">
                 {toolUsage.map((tool, i) => (
-                  <tr key={i} className="hover:bg-[var(--admin-elevated)]/40">
+                  <tr key={i} className="hover:bg-[var(--admin-elevated)]/40 transition-colors">
                     <td className="p-3 font-bold text-[var(--admin-text)]">{tool.name}</td>
                     <td className="p-3 text-right font-mono font-bold text-[var(--admin-text)]">
                       {tool.sessions}
@@ -200,8 +214,8 @@ export default function AdminAnalyticsPage() {
                     <td className="p-3 text-right font-mono text-[var(--admin-text-muted)]">
                       {tool.avgDuration}
                     </td>
-                    <td className="p-3 text-right font-mono text-emerald-400 font-bold">
-                      {tool.completion}
+                    <td className="p-3 text-right">
+                      <Badge variant="success" size="sm">{tool.completion}</Badge>
                     </td>
                   </tr>
                 ))}
@@ -216,28 +230,28 @@ export default function AdminAnalyticsPage() {
             Top Search Queries & Content Gaps
           </h2>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs" aria-label="Search query performance and content gaps">
               <thead>
                 <tr className="border-b border-[var(--admin-border)] text-[var(--admin-text-muted)] bg-[var(--admin-surface)]">
-                  <th className="p-3 font-bold uppercase">Search Term</th>
-                  <th className="p-3 font-bold uppercase text-right">Volume</th>
-                  <th className="p-3 font-bold uppercase text-right">CTR</th>
-                  <th className="p-3 font-bold uppercase text-right">Status</th>
+                  <th scope="col" className="p-3 font-bold uppercase">Search Term</th>
+                  <th scope="col" className="p-3 font-bold uppercase text-right">Volume</th>
+                  <th scope="col" className="p-3 font-bold uppercase text-right">CTR</th>
+                  <th scope="col" className="p-3 font-bold uppercase text-right">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--admin-border-subtle)]">
                 {searchQueries.map((q, i) => (
-                  <tr key={i} className="hover:bg-[var(--admin-elevated)]/40">
+                  <tr key={i} className="hover:bg-[var(--admin-elevated)]/40 transition-colors">
                     <td className="p-3 font-bold text-[var(--admin-text)]">{q.term}</td>
                     <td className="p-3 text-right font-mono text-[var(--admin-text)]">{q.count}</td>
                     <td className="p-3 text-right font-mono text-[var(--admin-text-muted)]">{q.ctr}</td>
                     <td className="p-3 text-right">
                       {q.hasNoResults ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/30">
-                          <AlertTriangle className="w-3 h-3" /> No Results
-                        </span>
+                        <Badge variant="danger" size="sm" dot>
+                          No Results
+                        </Badge>
                       ) : (
-                        <span className="text-[10px] text-emerald-400 font-semibold">Answered</span>
+                        <Badge variant="success" size="sm">Answered</Badge>
                       )}
                     </td>
                   </tr>

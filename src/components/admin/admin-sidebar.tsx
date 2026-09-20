@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useId } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -25,10 +25,9 @@ import {
   ChevronLeft,
   ChevronRight,
   ExternalLink,
-  Sparkles,
-  Layers
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Tooltip } from "./ui/tooltip";
 
 interface AdminSidebarProps {
   isCollapsed?: boolean;
@@ -103,6 +102,7 @@ export function AdminSidebar({
   onCloseMobile,
 }: AdminSidebarProps) {
   const pathname = usePathname();
+  const id = useId();
 
   return (
     <>
@@ -117,6 +117,7 @@ export function AdminSidebar({
 
       {/* Sidebar Container */}
       <aside
+        aria-label="Admin Navigation"
         className={cn(
           "fixed top-0 bottom-0 left-0 z-50 flex flex-col border-r transition-all duration-300 ease-in-out",
           "bg-[var(--admin-surface)] border-[var(--admin-border)] text-[var(--admin-text)]",
@@ -129,7 +130,7 @@ export function AdminSidebar({
         <div className="h-16 flex items-center justify-between px-4 border-b border-[var(--admin-border)]">
           <Link
             href="/admin"
-            className="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded-lg p-1"
+            className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded-xl p-1"
           >
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white font-black text-sm shadow-md shadow-purple-500/20">
               VI
@@ -149,9 +150,11 @@ export function AdminSidebar({
           {/* Desktop collapse toggle */}
           {onToggleCollapse && (
             <button
+              type="button"
               onClick={onToggleCollapse}
-              className="hidden lg:flex items-center justify-center h-7 w-7 rounded-lg text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors"
-              title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              aria-expanded={!isCollapsed}
+              aria-label={isCollapsed ? "Expand sidebar navigation" : "Collapse sidebar navigation"}
+              className="hidden lg:flex items-center justify-center h-7 w-7 rounded-lg text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
             >
               {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
             </button>
@@ -159,84 +162,123 @@ export function AdminSidebar({
         </div>
 
         {/* Navigation Sections */}
-        <div className="flex-1 overflow-y-auto px-3 py-4 space-y-6 scrollbar-thin scrollbar-thumb-[var(--admin-border)]">
-          {ADMIN_NAV_SECTIONS.map((section) => (
-            <div key={section.title} className="space-y-1">
-              {!isCollapsed && (
-                <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)] select-none">
-                  {section.title}
-                </p>
-              )}
-              <div className="space-y-0.5">
-                {section.items.map((item) => {
-                  const Icon = item.icon;
-                  const isActive =
-                    item.href === "/admin"
-                      ? pathname === "/admin"
-                      : pathname.startsWith(item.href);
+        <nav
+          aria-label="Main Navigation Menu"
+          className="flex-1 overflow-y-auto px-3 py-4 space-y-6 scrollbar-thin scrollbar-thumb-[var(--admin-border)]"
+        >
+          {ADMIN_NAV_SECTIONS.map((section, sectionIdx) => {
+            const headingId = `nav-heading-${id}-${sectionIdx}`;
 
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => onCloseMobile?.()}
-                      title={isCollapsed ? item.label : undefined}
-                      className={cn(
-                        "group flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-150 relative overflow-hidden",
-                        isActive
-                          ? "bg-[var(--admin-primary)] text-white shadow-md shadow-[var(--admin-primary)]/25 font-bold"
-                          : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
-                      )}
-                    >
-                      {isActive && (
-                        <span className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-white/90 shadow-sm" />
-                      )}
-                      <Icon
+            return (
+              <div
+                key={section.title}
+                role="group"
+                aria-labelledby={!isCollapsed ? headingId : undefined}
+                className="space-y-1"
+              >
+                {!isCollapsed && (
+                  <p
+                    id={headingId}
+                    className="px-3 text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)] select-none"
+                  >
+                    {section.title}
+                  </p>
+                )}
+                <div className="space-y-0.5">
+                  {section.items.map((item) => {
+                    const Icon = item.icon;
+                    const isActive =
+                      item.href === "/admin"
+                        ? pathname === "/admin"
+                        : pathname.startsWith(item.href);
+
+                    const navLink = (
+                      <Link
+                        href={item.href}
+                        onClick={() => onCloseMobile?.()}
+                        aria-current={isActive ? "page" : undefined}
                         className={cn(
-                          "w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110",
-                          isActive ? "text-white" : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-text)]"
+                          "group flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-150 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
+                          isActive
+                            ? "bg-[var(--admin-primary)] text-white shadow-md shadow-[var(--admin-primary)]/25 font-bold"
+                            : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]",
+                          isCollapsed && "justify-center px-0"
                         )}
-                      />
-                      {!isCollapsed && (
-                        <span className="truncate flex-1">{item.label}</span>
-                      )}
-
-                      {!isCollapsed && item.badge && (
-                        <span
+                      >
+                        {isActive && (
+                          <span
+                            className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-white/90 shadow-sm"
+                            aria-hidden="true"
+                          />
+                        )}
+                        <Icon
                           className={cn(
-                            "px-1.5 py-0.5 text-[10px] font-black rounded-full transition-colors",
+                            "w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110",
                             isActive
-                              ? "bg-white/20 text-white"
-                              : item.badgeVariant === "warning"
-                              ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
-                              : "bg-[var(--admin-elevated)] text-[var(--admin-text-muted)] border border-[var(--admin-border-subtle)]"
+                              ? "text-white"
+                              : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-text)]"
                           )}
-                        >
-                          {item.badge}
-                        </span>
-                      )}
-                    </Link>
-                  );
-                })}
+                        />
+                        {!isCollapsed && (
+                          <span className="truncate flex-1">{item.label}</span>
+                        )}
+
+                        {!isCollapsed && item.badge && (
+                          <span
+                            className={cn(
+                              "px-1.5 py-0.5 text-[10px] font-black rounded-full transition-colors",
+                              isActive
+                                ? "bg-white/20 text-white"
+                                : item.badgeVariant === "warning"
+                                ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
+                                : "bg-[var(--admin-elevated)] text-[var(--admin-text-muted)] border border-[var(--admin-border-subtle)]"
+                            )}
+                          >
+                            {item.badge}
+                          </span>
+                        )}
+                      </Link>
+                    );
+
+                    if (isCollapsed) {
+                      return (
+                        <Tooltip key={item.href} content={item.label} position="right">
+                          {navLink}
+                        </Tooltip>
+                      );
+                    }
+
+                    return <React.Fragment key={item.href}>{navLink}</React.Fragment>;
+                  })}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            );
+          })}
+        </nav>
 
         {/* Sidebar Footer */}
         <div className="p-3 border-t border-[var(--admin-border)] space-y-2 bg-[var(--admin-surface)]">
-          <Link
-            href="/"
-            target="_blank"
-            className={cn(
-              "flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors",
-              isCollapsed && "justify-center px-2"
-            )}
-            title="View Public Site"
-          >
-            <ExternalLink className="w-4 h-4 shrink-0" />
-            {!isCollapsed && <span className="truncate">Public Portal</span>}
-          </Link>
+          {isCollapsed ? (
+            <Tooltip content="View Public Site" position="right">
+              <Link
+                href="/"
+                target="_blank"
+                className="flex items-center justify-center p-2 rounded-xl text-xs font-medium text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+                aria-label="View Public Site (opens in new tab)"
+              >
+                <ExternalLink className="w-4 h-4 shrink-0" />
+              </Link>
+            </Tooltip>
+          ) : (
+            <Link
+              href="/"
+              target="_blank"
+              className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+            >
+              <ExternalLink className="w-4 h-4 shrink-0" />
+              <span className="truncate">Public Portal</span>
+            </Link>
+          )}
 
           {!isCollapsed && (
             <div className="p-2.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] flex items-center gap-3">

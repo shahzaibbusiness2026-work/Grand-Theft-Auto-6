@@ -10,14 +10,15 @@ import {
   Key,
   Plus,
   Trash2,
-  CheckCircle2,
   Eye,
   EyeOff,
   GripVertical,
   Save,
-  Sparkles
+  RotateCcw,
 } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
+import { Button } from "@/components/admin/ui/button";
+import { Badge } from "@/components/admin/ui/badge";
 import {
   INITIAL_ADMIN_SETTINGS,
   AdminSiteSettings,
@@ -27,19 +28,32 @@ import { cn } from "@/lib/utils";
 export default function AdminSettingsPage() {
   const { showToast } = useToast();
   const [settings, setSettings] = useState<AdminSiteSettings>(INITIAL_ADMIN_SETTINGS);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [activeTab, setActiveTab] = useState<
     "navigation" | "sections" | "tools" | "branding" | "integrations"
   >("navigation");
 
   const handleUpdate = (updates: Partial<AdminSiteSettings>) => {
     setSettings((prev) => ({ ...prev, ...updates }));
+    setHasUnsavedChanges(true);
   };
 
   const handleSave = () => {
+    setHasUnsavedChanges(false);
     showToast({
       title: "Settings Saved",
       description: "Platform configuration and navigation menus updated.",
       type: "success",
+    });
+  };
+
+  const handleDiscard = () => {
+    setSettings(INITIAL_ADMIN_SETTINGS);
+    setHasUnsavedChanges(false);
+    showToast({
+      title: "Changes Discarded",
+      description: "Restored previous site configuration.",
+      type: "info",
     });
   };
 
@@ -55,7 +69,7 @@ export default function AdminSettingsPage() {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
+    <div className="space-y-6 animate-in fade-in duration-200 pb-16">
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
         <div>
@@ -68,21 +82,36 @@ export default function AdminSettingsPage() {
           </p>
         </div>
 
-        <button
-          onClick={handleSave}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[var(--admin-primary)] text-white text-xs font-black uppercase tracking-wider hover:opacity-90 shadow-md shadow-[var(--admin-primary)]/20 transition-all"
-        >
-          <Save className="w-4 h-4" />
-          <span>Save Settings</span>
-        </button>
+        <div className="flex items-center gap-2">
+          {hasUnsavedChanges && (
+            <Button variant="secondary" size="md" onClick={handleDiscard}>
+              Discard
+            </Button>
+          )}
+          <Button
+            variant="primary"
+            size="md"
+            onClick={handleSave}
+            leftIcon={<Save className="w-4 h-4" />}
+          >
+            Save Settings
+          </Button>
+        </div>
       </div>
 
-      {/* Sub-tabs (Image 14) */}
-      <div className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2 overflow-x-auto scrollbar-none">
+      {/* Sub-tabs */}
+      <div
+        role="tablist"
+        aria-label="Settings categories"
+        className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2 overflow-x-auto scrollbar-none"
+      >
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "navigation"}
           onClick={() => setActiveTab("navigation")}
           className={cn(
-            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "navigation"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -93,9 +122,12 @@ export default function AdminSettingsPage() {
         </button>
 
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "sections"}
           onClick={() => setActiveTab("sections")}
           className={cn(
-            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "sections"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -106,9 +138,12 @@ export default function AdminSettingsPage() {
         </button>
 
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "tools"}
           onClick={() => setActiveTab("tools")}
           className={cn(
-            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "tools"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -119,9 +154,12 @@ export default function AdminSettingsPage() {
         </button>
 
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "branding"}
           onClick={() => setActiveTab("branding")}
           className={cn(
-            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "branding"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -132,9 +170,12 @@ export default function AdminSettingsPage() {
         </button>
 
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "integrations"}
           onClick={() => setActiveTab("integrations")}
           className={cn(
-            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
             activeTab === "integrations"
               ? "bg-[var(--admin-primary)] text-white shadow-sm"
               : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
@@ -145,31 +186,32 @@ export default function AdminSettingsPage() {
         </button>
       </div>
 
-      {/* Tab 1: Navigation Menus (Image 14) */}
+      {/* Tab 1: Navigation Menus */}
       {activeTab === "navigation" && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-xs text-[var(--admin-text-muted)]">
               Configure items displayed in the public header navigation bar.
             </p>
-            <button
+            <Button
+              variant="primary"
+              size="sm"
               onClick={handleAddNav}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[var(--admin-primary)] text-white text-xs font-bold hover:opacity-90 transition-opacity"
+              leftIcon={<Plus className="w-3.5 h-3.5" />}
             >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Add Menu Item</span>
-            </button>
+              Add Menu Item
+            </Button>
           </div>
 
           <div className="rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] overflow-hidden">
             <table className="w-full text-left text-xs">
               <thead>
                 <tr className="border-b border-[var(--admin-border)] bg-[var(--admin-surface)] text-[var(--admin-text-muted)]">
-                  <th className="p-3.5 w-12 text-center">Order</th>
-                  <th className="p-3.5 font-bold uppercase">Display Label</th>
-                  <th className="p-3.5 font-bold uppercase">Destination Path</th>
-                  <th className="p-3.5 font-bold uppercase text-center w-24">Visible</th>
-                  <th className="p-3.5 font-bold uppercase text-right w-20">Actions</th>
+                  <th scope="col" className="p-3.5 w-12 text-center">Order</th>
+                  <th scope="col" className="p-3.5 font-bold uppercase">Display Label</th>
+                  <th scope="col" className="p-3.5 font-bold uppercase">Destination Path</th>
+                  <th scope="col" className="p-3.5 font-bold uppercase text-center w-24">Visible</th>
+                  <th scope="col" className="p-3.5 font-bold uppercase text-right w-20">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--admin-border-subtle)]">
@@ -181,36 +223,42 @@ export default function AdminSettingsPage() {
                     <td className="p-3.5">
                       <input
                         type="text"
+                        aria-label={`Menu label for item ${idx + 1}`}
                         value={item.label}
                         onChange={(e) => {
                           const updated = [...settings.navigationMenu];
                           updated[idx].label = e.target.value;
                           handleUpdate({ navigationMenu: updated });
                         }}
-                        className="px-2.5 py-1 rounded-lg bg-[var(--admin-surface)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] font-bold focus:outline-none"
+                        className="px-2.5 py-1 rounded-lg bg-[var(--admin-surface)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] font-bold focus:outline-none focus:border-[var(--admin-primary)]"
                       />
                     </td>
                     <td className="p-3.5 font-mono text-[var(--admin-text)]">
                       <input
                         type="text"
+                        aria-label={`Destination URL for item ${idx + 1}`}
                         value={item.url}
                         onChange={(e) => {
                           const updated = [...settings.navigationMenu];
                           updated[idx].url = e.target.value;
                           handleUpdate({ navigationMenu: updated });
                         }}
-                        className="w-full px-2.5 py-1 rounded-lg bg-[var(--admin-surface)] border border-[var(--admin-border)] text-xs font-mono focus:outline-none"
+                        className="w-full px-2.5 py-1 rounded-lg bg-[var(--admin-surface)] border border-[var(--admin-border)] text-xs font-mono focus:outline-none focus:border-[var(--admin-primary)]"
                       />
                     </td>
                     <td className="p-3.5 text-center">
                       <button
+                        type="button"
+                        role="switch"
+                        aria-checked={item.visible}
+                        aria-label={`Toggle visibility for ${item.label}`}
                         onClick={() => {
                           const updated = [...settings.navigationMenu];
                           updated[idx].visible = !updated[idx].visible;
                           handleUpdate({ navigationMenu: updated });
                         }}
                         className={cn(
-                          "p-1.5 rounded-lg border transition-colors",
+                          "p-1.5 rounded-lg border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
                           item.visible
                             ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
                             : "bg-[var(--admin-elevated)] border-[var(--admin-border)] text-[var(--admin-text-muted)]"
@@ -220,15 +268,18 @@ export default function AdminSettingsPage() {
                       </button>
                     </td>
                     <td className="p-3.5 text-right">
-                      <button
+                      <Button
+                        variant="ghost"
+                        size="icon"
                         onClick={() => {
                           const updated = settings.navigationMenu.filter((_, i) => i !== idx);
                           handleUpdate({ navigationMenu: updated });
                         }}
-                        className="p-1 rounded text-rose-400 hover:bg-rose-500/10"
+                        aria-label={`Delete ${item.label}`}
+                        className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
-                      </button>
+                      </Button>
                     </td>
                   </tr>
                 ))}
@@ -238,7 +289,7 @@ export default function AdminSettingsPage() {
         </div>
       )}
 
-      {/* Tab 2: Homepage Sections (Image 14) */}
+      {/* Tab 2: Homepage Sections */}
       {activeTab === "sections" && (
         <div className="p-6 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] space-y-4 text-xs">
           <div>
@@ -262,22 +313,21 @@ export default function AdminSettingsPage() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span
-                    className={cn(
-                      "text-[10px] font-bold uppercase",
-                      sec.visible ? "text-emerald-400" : "text-[var(--admin-text-muted)]"
-                    )}
-                  >
+                  <Badge variant={sec.visible ? "success" : "neutral"} size="sm" dot>
                     {sec.visible ? "Active" : "Hidden"}
-                  </span>
+                  </Badge>
                   <button
+                    type="button"
+                    role="switch"
+                    aria-checked={sec.visible}
+                    aria-label={`Toggle ${sec.name} visibility`}
                     onClick={() => {
                       const updated = [...settings.homepageSections];
                       updated[idx].visible = !updated[idx].visible;
                       handleUpdate({ homepageSections: updated });
                     }}
                     className={cn(
-                      "p-1.5 rounded-lg border transition-colors",
+                      "p-1.5 rounded-lg border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
                       sec.visible
                         ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
                         : "bg-[var(--admin-elevated)] border-[var(--admin-border)] text-[var(--admin-text-muted)]"
@@ -292,7 +342,7 @@ export default function AdminSettingsPage() {
         </div>
       )}
 
-      {/* Tab 3: Enabled Tools (Image 14) */}
+      {/* Tab 3: Enabled Tools */}
       {activeTab === "tools" && (
         <div className="p-6 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] space-y-4 text-xs">
           <div>
@@ -315,6 +365,9 @@ export default function AdminSettingsPage() {
                 </p>
               </div>
               <button
+                type="button"
+                role="switch"
+                aria-checked={settings.enabledTools.comparisons}
                 onClick={() =>
                   handleUpdate({
                     enabledTools: {
@@ -323,14 +376,15 @@ export default function AdminSettingsPage() {
                     },
                   })
                 }
-                className={cn(
-                  "px-3 py-1 rounded-full text-xs font-bold uppercase border transition-colors",
-                  settings.enabledTools.comparisons
-                    ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                    : "bg-rose-500/10 text-rose-400 border-rose-500/30"
-                )}
+                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded-full"
               >
-                {settings.enabledTools.comparisons ? "Enabled" : "Disabled"}
+                <Badge
+                  variant={settings.enabledTools.comparisons ? "success" : "danger"}
+                  size="md"
+                  dot
+                >
+                  {settings.enabledTools.comparisons ? "Enabled" : "Disabled"}
+                </Badge>
               </button>
             </div>
 
@@ -342,6 +396,9 @@ export default function AdminSettingsPage() {
                 </p>
               </div>
               <button
+                type="button"
+                role="switch"
+                aria-checked={settings.enabledTools.interactiveMap}
                 onClick={() =>
                   handleUpdate({
                     enabledTools: {
@@ -350,14 +407,15 @@ export default function AdminSettingsPage() {
                     },
                   })
                 }
-                className={cn(
-                  "px-3 py-1 rounded-full text-xs font-bold uppercase border transition-colors",
-                  settings.enabledTools.interactiveMap
-                    ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                    : "bg-rose-500/10 text-rose-400 border-rose-500/30"
-                )}
+                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded-full"
               >
-                {settings.enabledTools.interactiveMap ? "Enabled" : "Disabled"}
+                <Badge
+                  variant={settings.enabledTools.interactiveMap ? "success" : "danger"}
+                  size="md"
+                  dot
+                >
+                  {settings.enabledTools.interactiveMap ? "Enabled" : "Disabled"}
+                </Badge>
               </button>
             </div>
 
@@ -371,6 +429,9 @@ export default function AdminSettingsPage() {
                 </p>
               </div>
               <button
+                type="button"
+                role="switch"
+                aria-checked={settings.enabledTools.completionTracker}
                 onClick={() =>
                   handleUpdate({
                     enabledTools: {
@@ -379,21 +440,22 @@ export default function AdminSettingsPage() {
                     },
                   })
                 }
-                className={cn(
-                  "px-3 py-1 rounded-full text-xs font-bold uppercase border transition-colors",
-                  settings.enabledTools.completionTracker
-                    ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                    : "bg-rose-500/10 text-rose-400 border-rose-500/30"
-                )}
+                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded-full"
               >
-                {settings.enabledTools.completionTracker ? "Enabled" : "Disabled"}
+                <Badge
+                  variant={settings.enabledTools.completionTracker ? "success" : "danger"}
+                  size="md"
+                  dot
+                >
+                  {settings.enabledTools.completionTracker ? "Enabled" : "Disabled"}
+                </Badge>
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Tab 4: Branding & Social (Image 14) */}
+      {/* Tab 4: Branding & Social */}
       {activeTab === "branding" && (
         <div className="p-6 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] space-y-4 text-xs">
           <h3 className="font-bold uppercase tracking-wider text-[var(--admin-text)]">
@@ -402,10 +464,11 @@ export default function AdminSettingsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block font-bold text-[var(--admin-text)] mb-1">
+              <label htmlFor="settings-platform-name" className="block font-bold text-[var(--admin-text)] mb-1">
                 Platform Name
               </label>
               <input
+                id="settings-platform-name"
                 type="text"
                 value={settings.platformName}
                 onChange={(e) => handleUpdate({ platformName: e.target.value })}
@@ -414,10 +477,11 @@ export default function AdminSettingsPage() {
             </div>
 
             <div>
-              <label className="block font-bold text-[var(--admin-text)] mb-1">
+              <label htmlFor="settings-copyright" className="block font-bold text-[var(--admin-text)] mb-1">
                 Footer Copyright Text
               </label>
               <input
+                id="settings-copyright"
                 type="text"
                 value={settings.copyrightText}
                 onChange={(e) => handleUpdate({ copyrightText: e.target.value })}
@@ -435,6 +499,7 @@ export default function AdminSettingsPage() {
                 </span>
                 <input
                   type="text"
+                  aria-label={`${soc.platform} profile URL`}
                   value={soc.url}
                   onChange={(e) => {
                     const updated = [...settings.socialLinks];
@@ -457,10 +522,11 @@ export default function AdminSettingsPage() {
           </h3>
 
           <div>
-            <label className="block font-bold text-[var(--admin-text)] mb-1">
+            <label htmlFor="settings-maps-key" className="block font-bold text-[var(--admin-text)] mb-1">
               Google Maps Platform API Key
             </label>
             <input
+              id="settings-maps-key"
               type="password"
               value={settings.mapsApiKey}
               onChange={(e) => handleUpdate({ mapsApiKey: e.target.value })}
@@ -469,6 +535,28 @@ export default function AdminSettingsPage() {
             <p className="text-[11px] text-[var(--admin-text-muted)] mt-1">
               Required for high-resolution satellite imagery tiles and geocoding services.
             </p>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Sticky Unsaved Changes Bar */}
+      {hasUnsavedChanges && (
+        <div
+          role="region"
+          aria-label="Unsaved settings alert"
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-4 px-5 py-3 rounded-2xl bg-[var(--admin-surface)] border border-[var(--admin-border)] shadow-2xl backdrop-blur-xl animate-in slide-in-from-bottom-3 duration-200"
+        >
+          <div className="flex items-center gap-2 text-xs">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" aria-hidden="true" />
+            <span className="font-bold text-[var(--admin-text)]">Unsaved Settings Changes</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="secondary" size="sm" onClick={handleDiscard}>
+              Discard
+            </Button>
+            <Button variant="primary" size="sm" onClick={handleSave}>
+              Save Changes
+            </Button>
           </div>
         </div>
       )}

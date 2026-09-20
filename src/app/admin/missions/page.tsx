@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Compass, Plus, Clock, CheckCircle2 } from "lucide-react";
 import { DataTable, Column } from "@/components/admin/data-table";
+import { Badge } from "@/components/admin/ui/badge";
 
 interface MissionRecord {
   id: string;
@@ -14,11 +15,19 @@ interface MissionRecord {
 }
 
 export default function AdminMissionsPage() {
-  const [missions, setMissions] = useState<MissionRecord[]>([
+  const [missions] = useState<MissionRecord[]>([
     { id: "mis-1", name: "Leonida Corrections Breakout", protagonist: "Lucia", act: "Prologue / Act 1", status: "Confirmed", objectives: "Escape penitentiary grounds with contact assistance." },
     { id: "mis-2", name: "Convenience Store Robbery", protagonist: "Both", act: "Act 1", status: "Confirmed", objectives: "Armed robbery of Vice City convenience store." },
     { id: "mis-3", name: "Port Gellhorn Airfield Infiltration", protagonist: "Jason", act: "Act 2", status: "Rumoured", objectives: "Secure contraband flight plan from hangar." },
   ]);
+
+  const getProtagonistBadge = (p: MissionRecord["protagonist"]) => {
+    switch (p) {
+      case "Lucia": return "primary" as const;
+      case "Jason": return "info" as const;
+      case "Both": return "success" as const;
+    }
+  };
 
   const columns: Column<MissionRecord>[] = [
     {
@@ -32,21 +41,24 @@ export default function AdminMissionsPage() {
         </div>
       ),
     },
-    { key: "protagonist", header: "Playable Character", sortable: true },
+    {
+      key: "protagonist",
+      header: "Playable Character",
+      sortable: true,
+      render: (m) => (
+        <Badge variant={getProtagonistBadge(m.protagonist)} size="sm">
+          {m.protagonist}
+        </Badge>
+      ),
+    },
     { key: "act", header: "Story Act" },
     {
       key: "status",
       header: "Status",
       render: (m) => (
-        <span
-          className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border ${
-            m.status === "Confirmed"
-              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-              : "bg-amber-500/10 text-amber-400 border-amber-500/30"
-          }`}
-        >
+        <Badge variant={m.status === "Confirmed" ? "success" : "warning"} size="sm" dot>
           {m.status}
-        </span>
+        </Badge>
       ),
     },
     { key: "objectives", header: "Core Objectives" },
