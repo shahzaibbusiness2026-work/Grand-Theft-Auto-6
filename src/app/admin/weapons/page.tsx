@@ -1,972 +1,760 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
-  Crosshair,
   Search,
   Plus,
-  AlertTriangle,
-  CheckCircle2,
-  Clock,
-  Edit,
-  SlidersHorizontal,
-  Target,
   RotateCcw,
+  Check,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  ArrowUpDown,
+  MoreHorizontal,
 } from "lucide-react";
-import { DataTable, Column } from "@/components/admin/data-table";
 import { Drawer } from "@/components/admin/drawer";
-import { Modal } from "@/components/admin/modal";
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
-import { Badge } from "@/components/admin/ui/badge";
 import {
   INITIAL_ADMIN_WEAPONS,
   AdminWeapon,
 } from "@/lib/admin-store";
 import { cn } from "@/lib/utils";
 
+// Weapon Silhouette SVG matching Image 5
+function WeaponSilhouette({ category }: { category: string }) {
+  if (category === "Rifle") {
+    return (
+      <svg
+        className="w-7 h-4 text-[#94A3B8]"
+        viewBox="0 0 48 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path d="M4 14h6v2H2v-4h2v2zm6-2h8v2h-8v-2zm8-1h12v3H18v-3zm12-1h4v4h-4v-4zm4-2h8v5h-8V8zm8-1h4v6h-4V7zm-26 7l-2 5h-3l2-5h3zm14 0l-1 4h-2l1-4h2z" />
+      </svg>
+    );
+  }
+  return (
+    <svg
+      className="w-6 h-4 text-[#94A3B8]"
+      viewBox="0 0 36 20"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M4 8h16v3H4V8zm16 1h6v3h-6V9zm6-2h6v5h-6V7zm-20 4l3 7H6l-3-7h3zm9 0l1 5h-2l-1-5h2z" />
+    </svg>
+  );
+}
+
 export default function AdminWeaponsPage() {
+  const router = useRouter();
   const { showToast } = useToast();
   const [weapons, setWeapons] = useState<AdminWeapon[]>(INITIAL_ADMIN_WEAPONS);
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [activeTab, setActiveTab] = useState<"all" | "verification" | "drafts" | "archived">("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedVerification, setSelectedVerification] = useState<string>("all");
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedAmmunition, setSelectedAmmunition] = useState("all");
+  const [selectedVerification, setSelectedVerification] = useState("all");
+  const [selectedPublication, setSelectedPublication] = useState("all");
+  const [selectedIds, setSelectedIds] = useState<string[]>(["wep-003"]); // Weapon W-003 selected by default matching Image 5
 
-  // Drawer / Full Edit state
-  const [editingWeapon, setEditingWeapon] = useState<AdminWeapon | null>(null);
-  const [drawerMode, setDrawerMode] = useState<"quick" | "full">("quick");
+  // Slide-over drawer state (Quick edit matching Image 5)
+  const [drawerWeapon, setDrawerWeapon] = useState<AdminWeapon | null>(
+    INITIAL_ADMIN_WEAPONS.find((w) => w.id === "wep-003") || null
+  );
+  const [drawerNotes, setDrawerNotes] = useState("");
 
-  // Dynamic Source Corroboration Checklist
-  const [corroborationChecklist, setCorroborationChecklist] = useState({
-    trailer: true,
-    blueprint: true,
-    audio: false,
-  });
+  // Toast visible by default matching Image 5
+  const [showRestoredToast, setShowRestoredToast] = useState(true);
 
-  const verifiedChecklistCount = Object.values(corroborationChecklist).filter(Boolean).length;
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 7;
 
-  // New Weapon Modal
-  const [isNewModalOpen, setIsNewModalOpen] = useState(false);
-  const [newWeaponData, setNewWeaponData] = useState({
-    name: "",
-    category: "Pistol" as AdminWeapon["category"],
-    ammunition: "9mm Parabellum",
-  });
+  // Tab counts matching Image 5
+  const tabCounts = {
+    all: 36,
+    verification: 14,
+    drafts: 6,
+    archived: 2,
+  };
 
   // Filtered list
   const filteredWeapons = useMemo(() => {
     return weapons.filter((w) => {
-      if (activeCategory !== "all" && w.category !== activeCategory) return false;
-      if (
-        selectedVerification !== "all" &&
-        w.verification !== selectedVerification
-      ) {
-        return false;
-      }
+      if (activeTab === "verification" && w.verification === "verified") return false;
+      if (activeTab === "drafts" && w.status !== "draft") return false;
+      if (activeTab === "archived" && w.status !== "archived") return false;
+
+      if (selectedCategory !== "all" && w.category !== selectedCategory) return false;
+      if (selectedAmmunition !== "all" && w.ammunition !== selectedAmmunition) return false;
+      if (selectedVerification !== "all" && w.verification !== selectedVerification) return false;
+      if (selectedPublication !== "all" && w.status !== selectedPublication) return false;
+
       if (
         searchQuery &&
         !w.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        !w.code.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        !w.ammunition.toLowerCase().includes(searchQuery.toLowerCase())
+        !w.code.toLowerCase().includes(searchQuery.toLowerCase())
       ) {
         return false;
       }
       return true;
     });
-  }, [weapons, activeCategory, selectedVerification, searchQuery]);
-
-  const categoryCounts = {
-    all: weapons.length,
-    Pistol: weapons.filter((w) => w.category === "Pistol").length,
-    Rifle: weapons.filter((w) => w.category === "Rifle").length,
-    SMG: weapons.filter((w) => w.category === "SMG").length,
-    Shotgun: weapons.filter((w) => w.category === "Shotgun").length,
-    Heavy: weapons.filter((w) => w.category === "Heavy").length,
-  };
-
-  const hasActiveFilters =
-    searchQuery.trim().length > 0 ||
-    activeCategory !== "all" ||
-    selectedVerification !== "all";
+  }, [
+    weapons,
+    activeTab,
+    selectedCategory,
+    selectedAmmunition,
+    selectedVerification,
+    selectedPublication,
+    searchQuery,
+  ]);
 
   const resetFilters = () => {
     setSearchQuery("");
-    setActiveCategory("all");
+    setSelectedCategory("all");
+    setSelectedAmmunition("all");
     setSelectedVerification("all");
+    setSelectedPublication("all");
+  };
+
+  const handleSelectRow = (id: string) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    );
+    const weapon = weapons.find((w) => w.id === id);
+    if (weapon) {
+      setDrawerWeapon(weapon);
+      setDrawerNotes(weapon.notes || "");
+    }
+  };
+
+  const handleSelectAll = () => {
+    if (selectedIds.length === filteredWeapons.length) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filteredWeapons.map((w) => w.id));
+    }
   };
 
   const handleSaveDrawer = () => {
-    if (!editingWeapon) return;
+    if (!drawerWeapon) return;
     setWeapons((prev) =>
-      prev.map((w) => (w.id === editingWeapon.id ? editingWeapon : w))
+      prev.map((w) =>
+        w.id === drawerWeapon.id ? { ...drawerWeapon, notes: drawerNotes } : w
+      )
     );
     showToast({
-      title: "Weapon Updated",
-      description: `Specifications for ${editingWeapon.name} have been saved.`,
+      title: "Weapon updated",
+      description: `Specifications for ${drawerWeapon.name} have been saved.`,
       type: "success",
     });
-    setEditingWeapon(null);
   };
-
-  const handleCreateWeapon = () => {
-    if (!newWeaponData.name.trim()) return;
-    const newRecord: AdminWeapon = {
-      id: `wep-${Date.now()}`,
-      code: newWeaponData.name.toLowerCase().replace(/\s+/g, "-"),
-      name: newWeaponData.name,
-      category: newWeaponData.category,
-      ammunition: newWeaponData.ammunition,
-      verification: "unverified",
-      status: "draft",
-      damage: "40",
-      range: "50",
-      rateOfFire: "600 RPM",
-      magazineSize: "15",
-      notes: "Newly identified weapon from trailer asset review.",
-      updatedAt: "Just now",
-    };
-    setWeapons([newRecord, ...weapons]);
-    setIsNewModalOpen(false);
-    setNewWeaponData({ name: "", category: "Pistol", ammunition: "9mm Parabellum" });
-    showToast({
-      title: "Weapon Added",
-      description: `${newRecord.name} added to arsenal database.`,
-      type: "success",
-    });
-    setEditingWeapon(newRecord);
-    setDrawerMode("full");
-  };
-
-  const columns: Column<AdminWeapon>[] = [
-    {
-      key: "name",
-      header: "Weapon Name & Code",
-      sortable: true,
-      render: (w) => (
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[var(--admin-elevated)] border border-[var(--admin-border)] flex items-center justify-center text-[var(--admin-primary)] font-bold text-xs shrink-0">
-            <Crosshair className="w-4 h-4" />
-          </div>
-          <div>
-            <p className="font-bold text-[var(--admin-text)] hover:text-[var(--admin-primary)] transition-colors">
-              {w.name}
-            </p>
-            <p className="text-[11px] text-[var(--admin-text-muted)] font-mono">
-              {w.code}
-            </p>
-          </div>
-        </div>
-      ),
-    },
-    {
-      key: "category",
-      header: "Category",
-      sortable: true,
-      render: (w) => (
-        <Badge variant="neutral" size="sm">
-          {w.category}
-        </Badge>
-      ),
-    },
-    {
-      key: "ammunition",
-      header: "Ammunition",
-      sortable: true,
-      render: (w) => (
-        <span className="text-xs font-mono text-[var(--admin-text)]">
-          {w.ammunition}
-        </span>
-      ),
-    },
-    {
-      key: "verification",
-      header: "Verification",
-      sortable: true,
-      render: (w) => {
-        const variantMap: Record<AdminWeapon["verification"], "success" | "warning" | "danger"> = {
-          verified: "success",
-          pending_source: "warning",
-          unverified: "danger",
-        };
-        const iconMap: Record<AdminWeapon["verification"], React.ReactNode> = {
-          verified: <CheckCircle2 className="w-3 h-3" />,
-          pending_source: <Clock className="w-3 h-3" />,
-          unverified: <AlertTriangle className="w-3 h-3" />,
-        };
-        return (
-          <Badge
-            variant={variantMap[w.verification]}
-            size="sm"
-            dot
-            icon={iconMap[w.verification]}
-          >
-            {w.verification.replace("_", " ")}
-          </Badge>
-        );
-      },
-    },
-    {
-      key: "status",
-      header: "Status",
-      sortable: true,
-      render: (w) => {
-        const variantMap: Record<AdminWeapon["status"], "primary" | "neutral" | "warning" | "danger"> = {
-          published: "primary",
-          draft: "neutral",
-          review: "warning",
-          archived: "danger",
-        };
-        return (
-          <Badge variant={variantMap[w.status]} size="sm">
-            {w.status}
-          </Badge>
-        );
-      },
-    },
-    {
-      key: "updatedAt",
-      header: "Last Modified",
-      render: (w) => (
-        <span className="text-[11px] text-[var(--admin-text-muted)] font-mono">
-          {w.updatedAt}
-        </span>
-      ),
-    },
-  ];
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight flex items-center gap-2.5">
-            <Crosshair className="w-6 h-6 text-[var(--admin-primary)]" />
-            <span>Weapons Management</span>
-          </h1>
-          <p className="text-xs text-[var(--admin-text-muted)] mt-1">
-            Catalogue firearm models, ballistics, ammunition types, and acquisition locations in Leonida.
-          </p>
+    <div className="relative space-y-5 animate-in fade-in duration-200">
+      {/* Top Banner & Header (Image 5) */}
+      <div className="space-y-3">
+        <div className="flex items-center gap-2.5 text-xs text-[#94A3B8]">
+          <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
+            Demo data
+          </span>
+          <span>
+            All records on this screen are placeholder records and not based on verified information.
+          </span>
         </div>
 
-        <Button
-          variant="primary"
-          size="md"
-          onClick={() => setIsNewModalOpen(true)}
-          leftIcon={<Plus className="w-4 h-4" />}
-        >
-          Add Weapon
-        </Button>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              Weapons Management
+            </h1>
+            <p className="text-xs text-[#94A3B8] mt-1">
+              Manage weapons content for GTA 6 Atlas. All records are placeholder records.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2.5">
+            <Link
+              href="/admin/weapons/new"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold transition-all shadow-md shadow-indigo-500/20 active:scale-[0.98]"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Add weapon</span>
+            </Link>
+            <button
+              type="button"
+              className="p-2 rounded-lg bg-[#111622] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+              aria-label="More options"
+            >
+              <MoreHorizontal className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Category Tabs */}
+      {/* Filter Tabs matching Image 5: All weapons 36, Needs verification 14, Drafts 6, Archived 2 */}
       <div
         role="tablist"
-        aria-label="Filter weapons by category"
-        className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2 overflow-x-auto scrollbar-none"
+        aria-label="Filter weapons by status"
+        className="flex items-center gap-6 border-b border-[#1C2436] pb-1 overflow-x-auto scrollbar-none text-xs font-medium"
       >
         <button
           type="button"
           role="tab"
-          aria-selected={activeCategory === "all"}
-          onClick={() => setActiveCategory("all")}
+          aria-selected={activeTab === "all"}
+          onClick={() => setActiveTab("all")}
           className={cn(
-            "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
-            activeCategory === "all"
-              ? "bg-[var(--admin-primary)] text-white shadow-sm"
-              : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
+            "flex items-center gap-2 pb-2 transition-all whitespace-nowrap relative",
+            activeTab === "all"
+              ? "text-white font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#6366F1]"
+              : "text-[#94A3B8] hover:text-white"
           )}
         >
-          <span>All Weapons</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20">
-            {categoryCounts.all}
+          <span>All weapons</span>
+          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+            {tabCounts.all}
           </span>
         </button>
 
-        {(["Pistol", "Rifle", "SMG", "Shotgun", "Heavy"] as const).map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            role="tab"
-            aria-selected={activeCategory === cat}
-            onClick={() => setActiveCategory(cat)}
-            className={cn(
-              "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
-              activeCategory === cat
-                ? "bg-[var(--admin-primary)] text-white shadow-sm"
-                : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
-            )}
-          >
-            <span>{cat}s</span>
-            <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20">
-              {categoryCounts[cat]}
-            </span>
-          </button>
-        ))}
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "verification"}
+          onClick={() => setActiveTab("verification")}
+          className={cn(
+            "flex items-center gap-2 pb-2 transition-all whitespace-nowrap relative",
+            activeTab === "verification"
+              ? "text-white font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#6366F1]"
+              : "text-[#94A3B8] hover:text-white"
+          )}
+        >
+          <span>Needs verification</span>
+          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+            {tabCounts.verification}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "drafts"}
+          onClick={() => setActiveTab("drafts")}
+          className={cn(
+            "flex items-center gap-2 pb-2 transition-all whitespace-nowrap relative",
+            activeTab === "drafts"
+              ? "text-white font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#6366F1]"
+              : "text-[#94A3B8] hover:text-white"
+          )}
+        >
+          <span>Drafts</span>
+          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+            {tabCounts.drafts}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "archived"}
+          onClick={() => setActiveTab("archived")}
+          className={cn(
+            "flex items-center gap-2 pb-2 transition-all whitespace-nowrap relative",
+            activeTab === "archived"
+              ? "text-white font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#6366F1]"
+              : "text-[#94A3B8] hover:text-white"
+          )}
+        >
+          <span>Archived</span>
+          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+            {tabCounts.archived}
+          </span>
+        </button>
       </div>
 
-      {/* Search & Verification Filter */}
-      <div className="space-y-3">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div className="relative sm:col-span-2">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--admin-text-muted)]" />
-            <input
-              type="text"
-              id="weapon-search"
-              aria-label="Search weapons by name, caliber, or code"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search weapons by name, caliber, or code..."
-              className="w-full pl-9 pr-4 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-            />
-          </div>
+      {/* Filter Row matching Image 5: Search weapons..., All categories, All ammunition, All verification, All publication, Clear filters */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
+        <div className="relative md:col-span-2">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
+          <input
+            type="text"
+            id="weapon-search"
+            aria-label="Search weapons"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search weapons..."
+            className="w-full pl-9 pr-3.5 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1] transition-colors"
+          />
+        </div>
 
-          <div>
-            <select
-              id="weapon-verification-filter"
-              aria-label="Filter by verification status"
-              value={selectedVerification}
-              onChange={(e) => setSelectedVerification(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-            >
-              <option value="all">All Verification Statuses</option>
-              <option value="verified">Verified</option>
-              <option value="pending_source">Pending Source</option>
-              <option value="unverified">Unverified</option>
-            </select>
+        <div>
+          <select
+            id="weapon-category-filter"
+            aria-label="Filter by category"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+          >
+            <option value="all">All categories</option>
+            <option value="Pistol">Pistol</option>
+            <option value="Rifle">Rifle</option>
+            <option value="SMG">SMG</option>
+            <option value="Shotgun">Shotgun</option>
+            <option value="Heavy">Heavy</option>
+            <option value="Unknown">Unknown</option>
+          </select>
+        </div>
+
+        <div>
+          <select
+            id="weapon-ammunition-filter"
+            aria-label="Filter by ammunition"
+            value={selectedAmmunition}
+            onChange={(e) => setSelectedAmmunition(e.target.value)}
+            className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+          >
+            <option value="all">All ammunition</option>
+            <option value="Unknown">Unknown</option>
+            <option value="9mm">9mm Parabellum</option>
+            <option value="556">5.56 NATO</option>
+            <option value="12g">12 Gauge</option>
+          </select>
+        </div>
+
+        <div>
+          <select
+            id="weapon-verification-filter"
+            aria-label="Filter by verification"
+            value={selectedVerification}
+            onChange={(e) => setSelectedVerification(e.target.value)}
+            className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+          >
+            <option value="all">All verification</option>
+            <option value="unverified">Unverified</option>
+            <option value="pending_source">Pending source</option>
+            <option value="verified">Verified</option>
+          </select>
+        </div>
+
+        <div>
+          <select
+            id="weapon-publication-filter"
+            aria-label="Filter by publication"
+            value={selectedPublication}
+            onChange={(e) => setSelectedPublication(e.target.value)}
+            className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+          >
+            <option value="all">All publication</option>
+            <option value="draft">Draft</option>
+            <option value="review">Review</option>
+            <option value="published">Published</option>
+            <option value="archived">Archived</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Main Grid: Data Table (Left) + Slide-over Drawer (Right) matching Image 5 */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Table Container (matches Image 5 width) */}
+        <div className={cn("transition-all duration-200", drawerWeapon ? "lg:col-span-8" : "lg:col-span-12")}>
+          <div className="rounded-xl border border-[#1C2436] bg-[#111622] overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs" aria-label="Weapons data table">
+                <thead>
+                  <tr className="border-b border-[#1C2436] text-[#64748B] text-[11px]">
+                    <th scope="col" className="p-3 w-10 text-center">
+                      <input
+                        type="checkbox"
+                        aria-label="Select all weapons"
+                        checked={selectedIds.length === filteredWeapons.length && filteredWeapons.length > 0}
+                        onChange={handleSelectAll}
+                        className="rounded border-[#2A344A] bg-[#0E131D] text-[#6366F1] focus:ring-0 focus:ring-offset-0"
+                      />
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium text-white">
+                      <div className="flex items-center gap-1.5 cursor-pointer hover:text-white">
+                        <span>Weapon</span>
+                        <ArrowUpDown className="w-3 h-3 text-[#64748B]" />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium">
+                      <div className="flex items-center gap-1.5 cursor-pointer hover:text-white">
+                        <span>Category</span>
+                        <ArrowUpDown className="w-3 h-3 text-[#64748B]" />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium">
+                      <div className="flex items-center gap-1.5 cursor-pointer hover:text-white">
+                        <span>Ammunition</span>
+                        <ArrowUpDown className="w-3 h-3 text-[#64748B]" />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium">
+                      <div className="flex items-center gap-1.5 cursor-pointer hover:text-white">
+                        <span>Verification</span>
+                        <ArrowUpDown className="w-3 h-3 text-[#64748B]" />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium">
+                      <div className="flex items-center gap-1.5 cursor-pointer hover:text-white">
+                        <span>Publication</span>
+                        <ArrowUpDown className="w-3 h-3 text-[#64748B]" />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium">
+                      <div className="flex items-center gap-1.5 cursor-pointer hover:text-white">
+                        <span>Updated</span>
+                        <ArrowUpDown className="w-3 h-3 text-[#64748B]" />
+                      </div>
+                    </th>
+                    <th scope="col" className="py-3 px-3 text-right">
+                      <span className="sr-only">Actions</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#182030]">
+                  {filteredWeapons.slice(0, itemsPerPage).map((w) => {
+                    const isSelected = selectedIds.includes(w.id);
+                    return (
+                      <tr
+                        key={w.id}
+                        onClick={() => handleSelectRow(w.id)}
+                        className={cn(
+                          "cursor-pointer transition-colors",
+                          isSelected
+                            ? "bg-[#1B2138] border-l-2 border-l-[#6366F1]"
+                            : "hover:bg-[#141B2A]"
+                        )}
+                      >
+                        <td className="p-3 text-center" onClick={(e) => e.stopPropagation()}>
+                          <input
+                            type="checkbox"
+                            aria-label={`Select ${w.name}`}
+                            checked={isSelected}
+                            onChange={() => handleSelectRow(w.id)}
+                            className="rounded border-[#2A344A] bg-[#0E131D] text-[#6366F1] focus:ring-0 focus:ring-offset-0"
+                          />
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-[#0E131D] border border-[#1C2436] flex items-center justify-center shrink-0">
+                              <WeaponSilhouette category={w.category} />
+                            </div>
+                            <div>
+                              <p className="font-bold text-white text-xs hover:text-[#818CF8] transition-colors">
+                                {w.name}
+                              </p>
+                              <p className="text-[11px] text-[#64748B]">
+                                Placeholder record
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3 text-[#94A3B8] font-medium">
+                          {w.category}
+                        </td>
+                        <td className="py-3 px-3 text-[#94A3B8]">
+                          {w.ammunition}
+                        </td>
+                        <td className="py-3 px-3 whitespace-nowrap">
+                          <span className="px-2.5 py-0.5 rounded text-[11px] font-semibold bg-[#3C2415] border border-[#5A361F] text-[#F97316]">
+                            Unverified
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 whitespace-nowrap">
+                          {w.status === "review" ? (
+                            <span className="px-2.5 py-0.5 rounded text-[11px] font-medium bg-[#3D2D16] border border-[#594220] text-[#EAB308]">
+                              Review
+                            </span>
+                          ) : (
+                            <span className="px-2.5 py-0.5 rounded text-[11px] font-medium bg-[#182030] border border-[#243048] text-[#94A3B8]">
+                              Draft
+                            </span>
+                          )}
+                        </td>
+                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-[11px]">
+                          {w.updatedAt}
+                        </td>
+                        <td className="py-3 px-3 text-right" onClick={(e) => e.stopPropagation()}>
+                          <div className="flex items-center justify-end gap-1">
+                            <Link
+                              href={`/admin/weapons/${w.id}`}
+                              className="p-1.5 rounded-lg text-[#64748B] hover:text-white hover:bg-[#1C2436] transition-colors"
+                              title="Full Specifications"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                            </Link>
+                            <button
+                              type="button"
+                              className="p-1.5 rounded-lg text-[#64748B] hover:text-white hover:bg-[#1C2436] transition-colors"
+                              aria-label="More actions"
+                            >
+                              <MoreHorizontal className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Table Footer & Pagination matching Image 5 */}
+            <div className="p-4 border-t border-[#1C2436] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-[#94A3B8]">
+              <p>Showing 1–7 of 36 placeholder records</p>
+
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white disabled:opacity-40 transition-colors"
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+
+                {[1, 2, 3, 4, 5].map((pageNum) => (
+                  <button
+                    key={pageNum}
+                    type="button"
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={cn(
+                      "w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center transition-colors",
+                      currentPage === pageNum
+                        ? "bg-[#6366F1] text-white"
+                        : "bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
+                    )}
+                  >
+                    {pageNum}
+                  </button>
+                ))}
+
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage((p) => p + 1)}
+                  className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white transition-colors"
+                  aria-label="Next page"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Active Filters Reset Bar */}
-        {hasActiveFilters && (
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-[var(--admin-text-muted)] font-medium">
-              Filtered results:
-            </span>
-            <span className="font-bold text-[var(--admin-text)]">
-              {filteredWeapons.length} of {weapons.length} weapons
-            </span>
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="inline-flex items-center gap-1 text-[var(--admin-primary)] hover:underline font-bold ml-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)] rounded"
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reset filters</span>
-            </button>
+        {/* Edit Weapon Slide-over Panel matching Image 5 */}
+        {drawerWeapon && (
+          <div className="lg:col-span-4 rounded-xl border border-[#1C2436] bg-[#111622] p-5 space-y-5 shadow-xl">
+            <div className="flex items-center justify-between pb-3 border-b border-[#1C2436]">
+              <div>
+                <h2 className="text-sm font-bold text-white">Edit Weapon</h2>
+                <p className="text-xs text-[#94A3B8] mt-0.5">{drawerWeapon.name}</p>
+                <p className="text-[11px] text-[#64748B]">Placeholder record</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDrawerWeapon(null)}
+                className="p-1.5 rounded-lg text-[#94A3B8] hover:text-white hover:bg-[#182030] transition-colors"
+                aria-label="Close edit weapon drawer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Weapon Preview Card */}
+            <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] flex items-center gap-3">
+              <div className="w-12 h-10 rounded-lg bg-[#111622] border border-[#1C2436] flex items-center justify-center shrink-0">
+                <WeaponSilhouette category={drawerWeapon.category} />
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-white truncate">{drawerWeapon.name}</p>
+                <p className="text-[11px] text-[#64748B]">Placeholder record</p>
+              </div>
+            </div>
+
+            {/* Form Fields matching Image 5 */}
+            <div className="space-y-3.5 text-xs">
+              <div>
+                <label
+                  htmlFor="drawer-category"
+                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                >
+                  Category
+                </label>
+                <select
+                  id="drawer-category"
+                  value={drawerWeapon.category}
+                  onChange={(e) =>
+                    setDrawerWeapon({
+                      ...drawerWeapon,
+                      category: e.target.value as AdminWeapon["category"],
+                    })
+                  }
+                  className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+                >
+                  <option value="Unknown">Unknown</option>
+                  <option value="Pistol">Pistol</option>
+                  <option value="Rifle">Rifle</option>
+                  <option value="SMG">SMG</option>
+                  <option value="Shotgun">Shotgun</option>
+                  <option value="Heavy">Heavy</option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="drawer-ammunition"
+                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                >
+                  Ammunition
+                </label>
+                <select
+                  id="drawer-ammunition"
+                  value={drawerWeapon.ammunition}
+                  onChange={(e) =>
+                    setDrawerWeapon({ ...drawerWeapon, ammunition: e.target.value })
+                  }
+                  className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+                >
+                  <option value="Unknown">Unknown</option>
+                  <option value="9mm Parabellum">9mm Parabellum</option>
+                  <option value="5.56 NATO">5.56 NATO</option>
+                  <option value="12 Gauge">12 Gauge</option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="drawer-verification"
+                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                >
+                  Verification status
+                </label>
+                <select
+                  id="drawer-verification"
+                  value={drawerWeapon.verification}
+                  onChange={(e) =>
+                    setDrawerWeapon({
+                      ...drawerWeapon,
+                      verification: e.target.value as AdminWeapon["verification"],
+                    })
+                  }
+                  className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+                >
+                  <option value="unverified">Unverified</option>
+                  <option value="pending_source">Pending source</option>
+                  <option value="verified">Verified</option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="drawer-publication"
+                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                >
+                  Publication status
+                </label>
+                <select
+                  id="drawer-publication"
+                  value={drawerWeapon.status}
+                  onChange={(e) =>
+                    setDrawerWeapon({
+                      ...drawerWeapon,
+                      status: e.target.value as AdminWeapon["status"],
+                    })
+                  }
+                  className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+                >
+                  <option value="draft">Draft</option>
+                  <option value="review">Review</option>
+                  <option value="published">Published</option>
+                  <option value="archived">Archived</option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="drawer-notes"
+                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                >
+                  Notes
+                </label>
+                <textarea
+                  id="drawer-notes"
+                  rows={4}
+                  value={drawerNotes}
+                  onChange={(e) => setDrawerNotes(e.target.value)}
+                  placeholder="Add internal notes..."
+                  className="w-full p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1] transition-colors resize-none"
+                />
+              </div>
+
+              <p className="text-[11px] text-[#64748B]">
+                This is a placeholder record. All information is unverified.
+              </p>
+
+              <div className="pt-2 flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setDrawerWeapon(null)}
+                  className="flex-1 py-2 px-3 rounded-lg bg-[#182030] hover:bg-[#202B40] text-xs font-semibold text-white border border-[#243048] transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSaveDrawer}
+                  className="flex-1 py-2 px-3 rounded-lg bg-[#6366F1] hover:bg-[#5254D8] text-xs font-semibold text-white transition-colors shadow-md shadow-indigo-500/20"
+                >
+                  Save changes
+                </button>
+              </div>
+
+              <div className="pt-2 border-t border-[#1C2436] text-center">
+                <Link
+                  href={`/admin/weapons/${drawerWeapon.id}`}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#818CF8] hover:text-white transition-colors"
+                >
+                  <span>Open Full Specifications Page</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
           </div>
         )}
       </div>
 
-      {/* Weapons Data Table */}
-      <DataTable
-        data={filteredWeapons}
-        columns={columns}
-        selectable
-        selectedIds={selectedIds}
-        onSelectRow={(id) =>
-          setSelectedIds((prev) =>
-            prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-          )
-        }
-        onSelectAll={(all) =>
-          setSelectedIds(all ? filteredWeapons.map((w) => w.id) : [])
-        }
-        emptyState={
-          <div className="py-8 text-center space-y-3">
-            <Crosshair className="w-8 h-8 text-[var(--admin-text-muted)] mx-auto opacity-50" />
-            <p className="text-xs font-semibold text-[var(--admin-text)]">
-              No weapons matched your criteria
+      {/* Archived record restored Toast matching Image 5 */}
+      {showRestoredToast && (
+        <div
+          role="status"
+          className="fixed bottom-6 left-6 sm:left-72 z-40 flex items-center gap-3 px-4 py-3 rounded-xl bg-[#14231E] border border-[#1F4637] text-white shadow-2xl animate-in slide-in-from-bottom-3 duration-200"
+        >
+          <div className="w-5 h-5 rounded-full bg-[#10B981] flex items-center justify-center text-[#0A1A14] shrink-0 font-bold">
+            <Check className="w-3.5 h-3.5 stroke-[3]" />
+          </div>
+          <div>
+            <p className="text-xs font-bold text-white">Archived record restored</p>
+            <p className="text-[11px] text-[#A7F3D0]">
+              Weapon W-008 has been restored from the archive.
             </p>
-            {hasActiveFilters && (
-              <Button variant="secondary" size="sm" onClick={resetFilters}>
-                Clear all filters
-              </Button>
-            )}
           </div>
-        }
-        bulkActions={
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => {
-              setWeapons((prev) =>
-                prev.map((w) =>
-                  selectedIds.includes(w.id) ? { ...w, verification: "verified" } : w
-                )
-              );
-              showToast({
-                title: "Marked Verified",
-                description: `${selectedIds.length} weapon(s) marked as verified.`,
-                type: "success",
-              });
-              setSelectedIds([]);
-            }}
+          <button
+            type="button"
+            onClick={() => setShowRestoredToast(false)}
+            className="ml-2 text-[#6EE7B7] hover:text-white p-1 rounded transition-colors"
+            aria-label="Dismiss toast"
           >
-            Verify Selected
-          </Button>
-        }
-        actions={(w) => (
-          <div className="flex items-center justify-end gap-1.5">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                setEditingWeapon(w);
-                setDrawerMode("quick");
-              }}
-              aria-label={`Quick edit ${w.name}`}
-              title="Quick edit"
-            >
-              <Edit className="w-4 h-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                setEditingWeapon(w);
-                setDrawerMode("full");
-              }}
-              aria-label={`Full specifications for ${w.name}`}
-              title="Full specifications"
-              className="text-[var(--admin-primary)]"
-            >
-              <SlidersHorizontal className="w-4 h-4" />
-            </Button>
-          </div>
-        )}
-      />
-
-      {/* Edit Weapon Drawer */}
-      <Drawer
-        isOpen={!!editingWeapon}
-        onClose={() => setEditingWeapon(null)}
-        title={
-          editingWeapon
-            ? `${drawerMode === "full" ? "Weapon Specifications: " : "Quick Edit: "}${editingWeapon.name}`
-            : "Edit Weapon"
-        }
-        subtitle={
-          editingWeapon ? `Category: ${editingWeapon.category} • Ammunition: ${editingWeapon.ammunition}` : undefined
-        }
-        size={drawerMode === "full" ? "2xl" : "lg"}
-        footer={
-          <>
-            <Button
-              variant="secondary"
-              size="md"
-              onClick={() => setEditingWeapon(null)}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="primary"
-              size="md"
-              onClick={handleSaveDrawer}
-            >
-              Save Changes
-            </Button>
-          </>
-        }
-      >
-        {editingWeapon && (
-          <div className="space-y-6">
-            {/* Quick Edit Mode */}
-            {drawerMode === "quick" ? (
-              <div className="space-y-4">
-                <div>
-                  <label
-                    htmlFor="quick-weapon-name"
-                    className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-                  >
-                    Weapon Name
-                  </label>
-                  <input
-                    id="quick-weapon-name"
-                    type="text"
-                    value={editingWeapon.name}
-                    onChange={(e) =>
-                      setEditingWeapon({ ...editingWeapon, name: e.target.value })
-                    }
-                    className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label
-                      htmlFor="quick-weapon-category"
-                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-                    >
-                      Category
-                    </label>
-                    <select
-                      id="quick-weapon-category"
-                      value={editingWeapon.category}
-                      onChange={(e) =>
-                        setEditingWeapon({
-                          ...editingWeapon,
-                          category: e.target.value as AdminWeapon["category"],
-                        })
-                      }
-                      className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-                    >
-                      <option value="Pistol">Pistol</option>
-                      <option value="Rifle">Rifle</option>
-                      <option value="SMG">SMG</option>
-                      <option value="Shotgun">Shotgun</option>
-                      <option value="Heavy">Heavy</option>
-                      <option value="Melee">Melee</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="quick-weapon-ammo"
-                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-                    >
-                      Ammunition
-                    </label>
-                    <input
-                      id="quick-weapon-ammo"
-                      type="text"
-                      value={editingWeapon.ammunition}
-                      onChange={(e) =>
-                        setEditingWeapon({ ...editingWeapon, ammunition: e.target.value })
-                      }
-                      className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label
-                      htmlFor="quick-weapon-verification"
-                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-                    >
-                      Verification Status
-                    </label>
-                    <select
-                      id="quick-weapon-verification"
-                      value={editingWeapon.verification}
-                      onChange={(e) =>
-                        setEditingWeapon({
-                          ...editingWeapon,
-                          verification: e.target.value as AdminWeapon["verification"],
-                        })
-                      }
-                      className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-                    >
-                      <option value="verified">Verified</option>
-                      <option value="pending_source">Pending Source</option>
-                      <option value="unverified">Unverified</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="quick-weapon-status"
-                      className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-                    >
-                      Status
-                    </label>
-                    <select
-                      id="quick-weapon-status"
-                      value={editingWeapon.status}
-                      onChange={(e) =>
-                        setEditingWeapon({
-                          ...editingWeapon,
-                          status: e.target.value as AdminWeapon["status"],
-                        })
-                      }
-                      className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-                    >
-                      <option value="draft">Draft</option>
-                      <option value="review">Under Review</option>
-                      <option value="published">Published</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="quick-weapon-notes"
-                    className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-                  >
-                    Editorial Notes
-                  </label>
-                  <textarea
-                    id="quick-weapon-notes"
-                    rows={3}
-                    value={editingWeapon.notes || ""}
-                    onChange={(e) =>
-                      setEditingWeapon({ ...editingWeapon, notes: e.target.value })
-                    }
-                    className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-                  />
-                </div>
-
-                <div className="pt-2">
-                  <Button
-                    variant="secondary"
-                    size="md"
-                    onClick={() => setDrawerMode("full")}
-                    className="w-full text-[var(--admin-primary)]"
-                    leftIcon={<SlidersHorizontal className="w-4 h-4" />}
-                  >
-                    Open Full Specifications Form
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              /* Full Specs Form */
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)] mb-3 flex items-center gap-2">
-                    <Target className="w-4 h-4 text-pink-400" />
-                    <span>Ballistics & Performance Metrics</span>
-                  </h4>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <div>
-                      <label
-                        htmlFor="full-spec-damage"
-                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
-                      >
-                        Damage Rating
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="full-spec-damage"
-                          type="text"
-                          value={editingWeapon.damage || ""}
-                          onChange={(e) =>
-                            setEditingWeapon({ ...editingWeapon, damage: e.target.value })
-                          }
-                          placeholder="e.g. 38"
-                          className="w-full pl-3 pr-10 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
-                        />
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-rose-400 pointer-events-none">
-                          DMG
-                        </span>
-                      </div>
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="full-spec-range"
-                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
-                      >
-                        Effective Range
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="full-spec-range"
-                          type="text"
-                          value={editingWeapon.range || ""}
-                          onChange={(e) =>
-                            setEditingWeapon({ ...editingWeapon, range: e.target.value })
-                          }
-                          placeholder="e.g. 45"
-                          className="w-full pl-3 pr-8 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
-                        />
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-emerald-400 pointer-events-none">
-                          m
-                        </span>
-                      </div>
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="full-spec-rof"
-                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
-                      >
-                        Rate of Fire
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="full-spec-rof"
-                          type="text"
-                          value={editingWeapon.rateOfFire || ""}
-                          onChange={(e) =>
-                            setEditingWeapon({ ...editingWeapon, rateOfFire: e.target.value })
-                          }
-                          placeholder="e.g. 650"
-                          className="w-full pl-3 pr-10 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
-                        />
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-amber-400 pointer-events-none">
-                          RPM
-                        </span>
-                      </div>
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="full-spec-mag"
-                        className="block text-[11px] font-bold text-[var(--admin-text-muted)] mb-1"
-                      >
-                        Magazine Size
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="full-spec-mag"
-                          type="text"
-                          value={editingWeapon.magazineSize || ""}
-                          onChange={(e) =>
-                            setEditingWeapon({ ...editingWeapon, magazineSize: e.target.value })
-                          }
-                          placeholder="e.g. 16"
-                          className="w-full pl-3 pr-10 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-mono font-bold"
-                        />
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-indigo-400 pointer-events-none">
-                          RDS
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-2 border-t border-[var(--admin-border)]">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)] mb-3">
-                    Acquisition & World Spawns
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label
-                        htmlFor="full-spec-acquisition"
-                        className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1"
-                      >
-                        Acquisition Method
-                      </label>
-                      <input
-                        id="full-spec-acquisition"
-                        type="text"
-                        value={editingWeapon.acquisitionMethod || ""}
-                        onChange={(e) =>
-                          setEditingWeapon({
-                            ...editingWeapon,
-                            acquisitionMethod: e.target.value,
-                          })
-                        }
-                        placeholder="e.g. Ammu-Nation / Police Station Drop"
-                        className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-                      />
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="full-spec-location"
-                        className="block text-[11px] font-medium text-[var(--admin-text-muted)] mb-1"
-                      >
-                        Linked Map Location
-                      </label>
-                      <input
-                        id="full-spec-location"
-                        type="text"
-                        value={editingWeapon.linkedLocation || ""}
-                        onChange={(e) =>
-                          setEditingWeapon({
-                            ...editingWeapon,
-                            linkedLocation: e.target.value,
-                          })
-                        }
-                        placeholder="e.g. Vice City Metro Police HQ"
-                        className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Interactive Verification Checklist */}
-                <div className="pt-2 border-t border-[var(--admin-border)] space-y-2.5">
-                  <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)]">
-                      Source Corroboration Checklist
-                    </h4>
-                    <Badge
-                      variant={verifiedChecklistCount === 3 ? "success" : "warning"}
-                      size="sm"
-                    >
-                      {verifiedChecklistCount} of 3 Verified
-                    </Badge>
-                  </div>
-                  <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] space-y-2.5 text-xs">
-                    <label className="flex items-center gap-2.5 cursor-pointer group select-none">
-                      <input
-                        type="checkbox"
-                        checked={corroborationChecklist.trailer}
-                        onChange={(e) =>
-                          setCorroborationChecklist((prev) => ({
-                            ...prev,
-                            trailer: e.target.checked,
-                          }))
-                        }
-                        className="w-4 h-4 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
-                      />
-                      <span
-                        className={cn(
-                          "font-medium transition-colors",
-                          corroborationChecklist.trailer
-                            ? "text-[var(--admin-text)]"
-                            : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-text)]"
-                        )}
-                      >
-                        Corroborated in Official Trailer 1 (Timestamp verified)
-                      </span>
-                    </label>
-                    <label className="flex items-center gap-2.5 cursor-pointer group select-none">
-                      <input
-                        type="checkbox"
-                        checked={corroborationChecklist.blueprint}
-                        onChange={(e) =>
-                          setCorroborationChecklist((prev) => ({
-                            ...prev,
-                            blueprint: e.target.checked,
-                          }))
-                        }
-                        className="w-4 h-4 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
-                      />
-                      <span
-                        className={cn(
-                          "font-medium transition-colors",
-                          corroborationChecklist.blueprint
-                            ? "text-[var(--admin-text)]"
-                            : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-text)]"
-                        )}
-                      >
-                        Weapon model matches real-world firearm blueprint
-                      </span>
-                    </label>
-                    <label className="flex items-center gap-2.5 cursor-pointer group select-none">
-                      <input
-                        type="checkbox"
-                        checked={corroborationChecklist.audio}
-                        onChange={(e) =>
-                          setCorroborationChecklist((prev) => ({
-                            ...prev,
-                            audio: e.target.checked,
-                          }))
-                        }
-                        className="w-4 h-4 rounded border-[var(--admin-border)] text-[var(--admin-primary)] focus:ring-[var(--admin-primary)]"
-                      />
-                      <span
-                        className={cn(
-                          "font-medium transition-colors",
-                          corroborationChecklist.audio
-                            ? "text-[var(--admin-text)]"
-                            : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-text)]"
-                        )}
-                      >
-                        In-game audio sample corroborated by sound designer review
-                      </span>
-                    </label>
-                  </div>
-                </div>
-
-                <div>
-                  <Button
-                    variant="link"
-                    size="sm"
-                    onClick={() => setDrawerMode("quick")}
-                  >
-                    ← Switch back to Quick Edit
-                  </Button>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </Drawer>
-
-      {/* Add New Weapon Modal */}
-      <Modal
-        isOpen={isNewModalOpen}
-        onClose={() => setIsNewModalOpen(false)}
-        title="Add New Weapon to Arsenal"
-        description="Create a weapon record to track in the Leonida database."
-        footer={
-          <>
-            <Button
-              variant="secondary"
-              size="md"
-              onClick={() => setIsNewModalOpen(false)}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="primary"
-              size="md"
-              onClick={handleCreateWeapon}
-            >
-              Create Weapon Record
-            </Button>
-          </>
-        }
-      >
-        <div className="space-y-4">
-          <div>
-            <label
-              htmlFor="new-weapon-name"
-              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-            >
-              Weapon Name
-            </label>
-            <input
-              id="new-weapon-name"
-              type="text"
-              value={newWeaponData.name}
-              onChange={(e) =>
-                setNewWeaponData({ ...newWeaponData, name: e.target.value })
-              }
-              placeholder="e.g. Service Carbine"
-              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="new-weapon-category"
-              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-            >
-              Category
-            </label>
-            <select
-              id="new-weapon-category"
-              value={newWeaponData.category}
-              onChange={(e) =>
-                setNewWeaponData({
-                  ...newWeaponData,
-                  category: e.target.value as AdminWeapon["category"],
-                })
-              }
-              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-            >
-              <option value="Pistol">Pistol</option>
-              <option value="Rifle">Rifle</option>
-              <option value="SMG">SMG</option>
-              <option value="Shotgun">Shotgun</option>
-              <option value="Heavy">Heavy</option>
-              <option value="Melee">Melee</option>
-            </select>
-          </div>
-
-          <div>
-            <label
-              htmlFor="new-weapon-ammo"
-              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-            >
-              Ammunition Type
-            </label>
-            <input
-              id="new-weapon-ammo"
-              type="text"
-              value={newWeaponData.ammunition}
-              onChange={(e) =>
-                setNewWeaponData({ ...newWeaponData, ammunition: e.target.value })
-              }
-              placeholder="e.g. 5.56 NATO, 9mm, 12 Gauge"
-              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-            />
-          </div>
+            <X className="w-3.5 h-3.5" />
+          </button>
         </div>
-      </Modal>
+      )}
     </div>
   );
 }

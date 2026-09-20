@@ -1,38 +1,27 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
-  FileText,
   Search,
   Plus,
   Edit,
   Trash2,
-  ExternalLink,
   CheckCircle2,
   Clock,
   AlertTriangle,
-  SlidersHorizontal,
-  Eye,
-  Bold,
-  Italic,
-  Heading1,
-  Heading2,
-  List,
-  ListOrdered,
-  Quote,
-  Code,
-  Link as LinkIcon,
-  Image as ImageIcon,
-  Check,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  ExternalLink,
+  MoreHorizontal,
+  FolderPlus,
+  Send,
   Calendar,
-  RotateCcw,
+  Info,
 } from "lucide-react";
-import { DataTable, Column } from "@/components/admin/data-table";
-import { Drawer } from "@/components/admin/drawer";
-import { Modal } from "@/components/admin/modal";
 import { useToast } from "@/components/admin/toast";
-import { Button } from "@/components/admin/ui/button";
-import { Badge } from "@/components/admin/ui/badge";
 import {
   INITIAL_ADMIN_ARTICLES,
   AdminArticle,
@@ -40,811 +29,708 @@ import {
 import { cn } from "@/lib/utils";
 
 export default function AdminArticlesPage() {
+  const router = useRouter();
   const { showToast } = useToast();
   const [articles, setArticles] = useState<AdminArticle[]>(INITIAL_ADMIN_ARTICLES);
   const [activeTab, setActiveTab] = useState<"all" | "draft" | "review" | "scheduled" | "published">("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedAuthor, setSelectedAuthor] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [selectedDate, setSelectedDate] = useState("all");
+  const [selectedIds, setSelectedIds] = useState<string[]>(["art-5", "art-6"]); // 2 selected by default matching Image 8
 
-  // Drawer & Editor states
-  const [editingArticle, setEditingArticle] = useState<AdminArticle | null>(null);
-  const [isFullEditorOpen, setIsFullEditorOpen] = useState(false);
-  const [hasCoverImage, setHasCoverImage] = useState(true);
-  const [articleContent, setArticleContent] = useState(
-    `The reveal trailer for Grand Theft Auto VI provided unprecedented insight into Vice City and the surrounding state of Leonida. In this breakdown, our editorial team cross-references background store signage, street names, vehicle body lines, and character dialogues against verified real-world Miami and Florida counterparts.\n\nKey timestamps examined:\n- 0:18: Ocean Drive neon signage and traffic flow\n- 0:34: Leonida Department of Corrections entrance\n- 0:52: Mud club off-road vehicles in the wetlands`
+  // Quick edit slide-over drawer state matching Image 8
+  const [quickEditArticle, setQuickEditArticle] = useState<AdminArticle | null>(
+    INITIAL_ADMIN_ARTICLES.find((a) => a.id === "art-5") || null
   );
+  const [quickTags, setQuickTags] = useState<string[]>(["Editorial", "Roundup", "Community"]);
+  const [quickDate, setQuickDate] = useState("Sep 27, 2026");
+  const [quickTime, setQuickTime] = useState("09:00");
+  const [quickTimezone, setQuickTimezone] = useState("(UTC) Coordinated Universal Time");
 
-  // Active toolbar formats
-  const [activeFormats, setActiveFormats] = useState<Record<string, boolean>>({
-    bold: false,
-    italic: false,
-    h1: false,
-    h2: false,
-    list: false,
-    quote: false,
-  });
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
-  const toggleFormat = (key: string) => {
-    setActiveFormats((prev) => ({ ...prev, [key]: !prev[key] }));
+  // Tab counts matching Image 8
+  const tabCounts = {
+    all: 128,
+    draft: 18,
+    review: 9,
+    scheduled: 4,
+    published: 97,
   };
 
-  // New Article Modal
-  const [isNewModalOpen, setIsNewModalOpen] = useState(false);
-  const [newTitle, setNewTitle] = useState("");
-  const [newCategory, setNewCategory] = useState("General");
-
-  // Filtering
   const filteredArticles = useMemo(() => {
-    return articles.filter((art) => {
-      if (activeTab !== "all" && art.status !== activeTab) return false;
-      if (selectedCategory !== "all" && art.category !== selectedCategory) return false;
+    return articles.filter((a) => {
+      if (activeTab === "draft" && a.status !== "draft") return false;
+      if (activeTab === "review" && a.status !== "review") return false;
+      if (activeTab === "scheduled" && a.status !== "scheduled") return false;
+      if (activeTab === "published" && a.status !== "published") return false;
+
+      if (selectedAuthor !== "all" && a.author.name.toLowerCase() !== selectedAuthor.toLowerCase()) return false;
+      if (selectedCategory !== "all" && a.category !== selectedCategory) return false;
+
       if (
         searchQuery &&
-        !art.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        !art.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        !art.author.name.toLowerCase().includes(searchQuery.toLowerCase())
+        !a.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        !a.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
       ) {
         return false;
       }
       return true;
     });
-  }, [articles, activeTab, selectedCategory, searchQuery]);
+  }, [articles, activeTab, selectedAuthor, selectedCategory, searchQuery]);
 
-  const tabCounts = {
-    all: articles.length,
-    draft: articles.filter((a) => a.status === "draft").length,
-    review: articles.filter((a) => a.status === "review").length,
-    scheduled: articles.filter((a) => a.status === "scheduled").length,
-    published: articles.filter((a) => a.status === "published").length,
+  const handleSelectRow = (id: string) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    );
+    const article = articles.find((a) => a.id === id);
+    if (article) {
+      setQuickEditArticle(article);
+    }
   };
 
-  const hasActiveFilters = searchQuery.trim().length > 0 || selectedCategory !== "all";
-
-  const resetFilters = () => {
-    setSearchQuery("");
-    setSelectedCategory("all");
+  const handleSelectAll = () => {
+    if (selectedIds.length === filteredArticles.length) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filteredArticles.map((a) => a.id));
+    }
   };
 
-  // Dynamic Checklist Calculation
-  const wordCount = articleContent.trim().split(/\s+/).filter(Boolean).length;
-  const checklistItems = useMemo(() => {
-    if (!editingArticle) return [];
-    return [
-      {
-        id: "cover",
-        label: "Featured cover image assigned",
-        met: hasCoverImage,
-      },
-      {
-        id: "title",
-        label: "Headline exceeds 10 characters",
-        met: editingArticle.title.length > 10,
-      },
-      {
-        id: "words",
-        label: `Word count meets guideline (${wordCount}/50 words)`,
-        met: wordCount >= 50,
-      },
-      {
-        id: "category",
-        label: "Category & taxonomy tags assigned",
-        met: editingArticle.tags.length > 0 && editingArticle.category !== "",
-      },
-    ];
-  }, [editingArticle, hasCoverImage, wordCount]);
-
-  const completedChecklistCount = checklistItems.filter((i) => i.met).length;
-
-  const handleSaveArticle = () => {
-    if (!editingArticle) return;
+  const handleSaveQuickEdit = () => {
+    if (!quickEditArticle) return;
     setArticles((prev) =>
-      prev.map((a) => (a.id === editingArticle.id ? editingArticle : a))
+      prev.map((a) => (a.id === quickEditArticle.id ? quickEditArticle : a))
     );
     showToast({
-      title: "Article Saved",
-      description: `"${editingArticle.title}" updated successfully.`,
+      title: "Article Updated",
+      description: `Quick edit saved for "${quickEditArticle.title}".`,
       type: "success",
     });
-    setEditingArticle(null);
-    setIsFullEditorOpen(false);
   };
 
-  const handleCreateArticle = () => {
-    if (!newTitle.trim()) return;
-    const newRecord: AdminArticle = {
-      id: `art-${Date.now()}`,
-      slug: newTitle.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
-      title: newTitle,
-      subtitle: "New editorial draft in progress.",
-      excerpt: "Comprehensive investigation and breakdown for Atlas readers.",
-      status: "draft",
-      category: newCategory,
-      author: { name: "Jamie Lee", avatar: "JL", role: "Editor" },
-      updatedAt: "Just now",
-      views: 0,
-      readTime: "4 min read",
-      tags: ["Analysis", "GTA 6"],
-      revisions: [
-        {
-          id: `rev-${Date.now()}`,
-          version: 1,
-          author: "Jamie Lee",
-          date: "Just now",
-          summary: "Initial article draft",
-        },
-      ],
-    };
-    setArticles([newRecord, ...articles]);
-    setIsNewModalOpen(false);
-    setNewTitle("");
-    showToast({
-      title: "Article Created",
-      description: `Draft "${newRecord.title}" created.`,
-      type: "success",
-    });
-    setEditingArticle(newRecord);
-    setIsFullEditorOpen(true);
+  const removeTag = (tagToRemove: string) => {
+    setQuickTags((prev) => prev.filter((t) => t !== tagToRemove));
   };
-
-  const columns: Column<AdminArticle>[] = [
-    {
-      key: "title",
-      header: "Title & Excerpt",
-      sortable: true,
-      render: (art) => (
-        <div className="space-y-0.5 max-w-md">
-          <p className="font-bold text-[var(--admin-text)] hover:text-[var(--admin-primary)] transition-colors line-clamp-1">
-            {art.title}
-          </p>
-          <p className="text-[11px] text-[var(--admin-text-muted)] line-clamp-1">
-            {art.excerpt}
-          </p>
-        </div>
-      ),
-    },
-    {
-      key: "category",
-      header: "Category",
-      sortable: true,
-      render: (art) => (
-        <Badge variant="neutral" size="sm">
-          {art.category}
-        </Badge>
-      ),
-    },
-    {
-      key: "status",
-      header: "Status",
-      sortable: true,
-      render: (art) => {
-        const variantMap: Record<AdminArticle["status"], "success" | "warning" | "primary" | "neutral"> = {
-          published: "success",
-          scheduled: "warning",
-          review: "primary",
-          draft: "neutral",
-          archived: "neutral",
-        };
-        const iconMap: Record<AdminArticle["status"], React.ReactNode> = {
-          published: <CheckCircle2 className="w-3 h-3" />,
-          scheduled: <Clock className="w-3 h-3" />,
-          review: <AlertTriangle className="w-3 h-3" />,
-          draft: null,
-          archived: null,
-        };
-        return (
-          <Badge
-            variant={variantMap[art.status]}
-            size="sm"
-            dot
-            icon={iconMap[art.status]}
-          >
-            {art.status}
-          </Badge>
-        );
-      },
-    },
-    {
-      key: "author",
-      header: "Author",
-      sortable: true,
-      render: (art) => (
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-[10px]">
-            {art.author.avatar}
-          </div>
-          <span className="text-xs font-medium text-[var(--admin-text)]">
-            {art.author.name}
-          </span>
-        </div>
-      ),
-    },
-    {
-      key: "views",
-      header: "Views",
-      sortable: true,
-      render: (art) => (
-        <span className="text-xs font-mono text-[var(--admin-text)]">
-          {art.views.toLocaleString()}
-        </span>
-      ),
-    },
-    {
-      key: "updatedAt",
-      header: "Last Updated",
-      render: (art) => (
-        <span className="text-[11px] text-[var(--admin-text-muted)] font-mono">
-          {art.updatedAt}
-        </span>
-      ),
-    },
-  ];
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
+    <div className="space-y-5 animate-in fade-in duration-200">
+      {/* Header matching Image 8 */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight flex items-center gap-2.5">
-            <FileText className="w-6 h-6 text-[var(--admin-primary)]" />
-            <span>Articles & Editorial</span>
-          </h1>
-          <p className="text-xs text-[var(--admin-text-muted)] mt-1">
-            Author and publish investigative reports, guides, database analyses, and trailer breakdowns.
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              Articles
+            </h1>
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
+              Demo data
+            </span>
+          </div>
+          <p className="text-xs text-[#94A3B8] mt-1">
+            Manage, edit and publish content for GTA 6 Atlas. All information is unverified and subject to change.
           </p>
         </div>
 
-        <Button
-          variant="primary"
-          size="md"
-          onClick={() => setIsNewModalOpen(true)}
-          leftIcon={<Plus className="w-4 h-4" />}
+        <Link
+          href="/admin/articles/new"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold transition-all shadow-md shadow-indigo-500/20 active:scale-[0.98] w-fit"
         >
-          New Article
-        </Button>
+          <Plus className="w-4 h-4" />
+          <span>Create article</span>
+        </Link>
       </div>
 
-      {/* Tabs */}
+      {/* Filter Tabs matching Image 8: All 128, Drafts 18, Review 9, Scheduled 4, Published 97 */}
       <div
         role="tablist"
         aria-label="Filter articles by status"
-        className="flex items-center gap-2 border-b border-[var(--admin-border)] pb-2 overflow-x-auto scrollbar-none"
+        className="flex items-center gap-2 overflow-x-auto scrollbar-none text-xs font-medium"
       >
-        {(["all", "draft", "review", "scheduled", "published"] as const).map((tab) => (
-          <button
-            key={tab}
-            type="button"
-            role="tab"
-            aria-selected={activeTab === tab}
-            onClick={() => setActiveTab(tab)}
-            className={cn(
-              "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all capitalize whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
-              activeTab === tab
-                ? "bg-[var(--admin-primary)] text-white shadow-sm"
-                : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
-            )}
-          >
-            <span>{tab === "all" ? "All Articles" : tab}</span>
-            <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20">
-              {tabCounts[tab]}
-            </span>
-          </button>
-        ))}
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "all"}
+          onClick={() => setActiveTab("all")}
+          className={cn(
+            "flex items-center gap-2 px-3 py-1.5 rounded-xl transition-all whitespace-nowrap",
+            activeTab === "all"
+              ? "bg-[#6366F1] text-white font-bold shadow-sm"
+              : "text-[#94A3B8] hover:text-white hover:bg-[#141B2A]"
+          )}
+        >
+          <span>All</span>
+          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20">
+            {tabCounts.all}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "draft"}
+          onClick={() => setActiveTab("draft")}
+          className={cn(
+            "flex items-center gap-2 px-3 py-1.5 rounded-xl transition-all whitespace-nowrap",
+            activeTab === "draft"
+              ? "bg-[#6366F1] text-white font-bold shadow-sm"
+              : "text-[#94A3B8] hover:text-white hover:bg-[#141B2A]"
+          )}
+        >
+          <span>Drafts</span>
+          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#1C2436] text-[#94A3B8]">
+            {tabCounts.draft}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "review"}
+          onClick={() => setActiveTab("review")}
+          className={cn(
+            "flex items-center gap-2 px-3 py-1.5 rounded-xl transition-all whitespace-nowrap",
+            activeTab === "review"
+              ? "bg-[#6366F1] text-white font-bold shadow-sm"
+              : "text-[#94A3B8] hover:text-white hover:bg-[#141B2A]"
+          )}
+        >
+          <span>Review</span>
+          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#1C2436] text-[#94A3B8]">
+            {tabCounts.review}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "scheduled"}
+          onClick={() => setActiveTab("scheduled")}
+          className={cn(
+            "flex items-center gap-2 px-3 py-1.5 rounded-xl transition-all whitespace-nowrap",
+            activeTab === "scheduled"
+              ? "bg-[#6366F1] text-white font-bold shadow-sm"
+              : "text-[#94A3B8] hover:text-white hover:bg-[#141B2A]"
+          )}
+        >
+          <span>Scheduled</span>
+          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#1C2436] text-[#94A3B8]">
+            {tabCounts.scheduled}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "published"}
+          onClick={() => setActiveTab("published")}
+          className={cn(
+            "flex items-center gap-2 px-3 py-1.5 rounded-xl transition-all whitespace-nowrap",
+            activeTab === "published"
+              ? "bg-[#6366F1] text-white font-bold shadow-sm"
+              : "text-[#94A3B8] hover:text-white hover:bg-[#141B2A]"
+          )}
+        >
+          <span>Published</span>
+          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#1C2436] text-[#94A3B8]">
+            {tabCounts.published}
+          </span>
+        </button>
       </div>
 
-      {/* Search & Category Filter */}
-      <div className="space-y-3">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div className="relative sm:col-span-2">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--admin-text-muted)]" />
-            <input
-              type="text"
-              id="article-search"
-              aria-label="Search articles by title, author, or excerpt"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search articles by title, author, or excerpt..."
-              className="w-full pl-9 pr-4 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-            />
-          </div>
+      {/* Filter Row: Search articles... ⌘K, All authors, All categories, Any date */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="relative md:col-span-2">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
+          <input
+            type="text"
+            id="article-search"
+            aria-label="Search articles"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search articles..."
+            className="w-full pl-9 pr-12 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1] transition-colors"
+          />
+          <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono text-[#64748B] bg-[#182030] border border-[#243048] rounded">
+            ⌘ K
+          </kbd>
+        </div>
 
-          <div>
-            <select
-              id="article-category-filter"
-              aria-label="Filter by article category"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
-            >
-              <option value="all">All Editorial Categories</option>
-              <option value="General">General</option>
-              <option value="Vehicles">Vehicles</option>
-              <option value="Guides">Guides</option>
-              <option value="Analysis">Analysis</option>
-            </select>
+        <div>
+          <select
+            id="article-author-filter"
+            aria-label="Filter by author"
+            value={selectedAuthor}
+            onChange={(e) => setSelectedAuthor(e.target.value)}
+            className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+          >
+            <option value="all">All authors</option>
+            <option value="Jamie Lee">Jamie Lee</option>
+            <option value="Morgan Kim">Morgan Kim</option>
+            <option value="Daniel Torres">Daniel Torres</option>
+            <option value="Sam Chen">Sam Chen</option>
+            <option value="Pat Riley">Pat Riley</option>
+          </select>
+        </div>
+
+        <div>
+          <select
+            id="article-category-filter"
+            aria-label="Filter by category"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+          >
+            <option value="all">All categories</option>
+            <option value="General">General</option>
+            <option value="Vehicles">Vehicles</option>
+            <option value="Guides">Guides</option>
+            <option value="Analysis">Analysis</option>
+            <option value="News">News</option>
+            <option value="Editorial">Editorial</option>
+          </select>
+        </div>
+
+        <div>
+          <select
+            id="article-date-filter"
+            aria-label="Filter by date"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
+          >
+            <option value="all">Any date</option>
+            <option value="today">Today</option>
+            <option value="week">Past 7 days</option>
+            <option value="month">Past 30 days</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Main Grid: Data Table (Left) + Quick Edit Drawer (Right) matching Image 8 */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Table Container */}
+        <div className={cn("transition-all duration-200", quickEditArticle ? "lg:col-span-8" : "lg:col-span-12")}>
+          <div className="rounded-xl border border-[#1C2436] bg-[#111622] overflow-hidden">
+            {/* Bulk Actions Header (Image 8: 2 selected, Assign category, Request review, Archive, Clear selection) */}
+            {selectedIds.length > 0 && (
+              <div className="p-3 bg-[#0E131D] border-b border-[#1C2436] flex items-center justify-between flex-wrap gap-3 text-xs">
+                <div className="flex items-center gap-3">
+                  <span className="font-semibold text-white">
+                    {selectedIds.length} selected
+                  </span>
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] text-white border border-[#243048] font-medium transition-colors"
+                  >
+                    <FolderPlus className="w-3.5 h-3.5 text-[#818CF8]" />
+                    <span>Assign category</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] text-white border border-[#243048] font-medium transition-colors"
+                  >
+                    <Send className="w-3.5 h-3.5 text-[#38BDF8]" />
+                    <span>Request review</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] text-white border border-[#243048] font-medium transition-colors"
+                  >
+                    <Trash2 className="w-3.5 h-3.5 text-[#EF4444]" />
+                    <span>Archive</span>
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedIds([])}
+                  className="text-xs text-[#818CF8] hover:underline"
+                >
+                  Clear selection
+                </button>
+              </div>
+            )}
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs" aria-label="Articles table">
+                <thead>
+                  <tr className="border-b border-[#1C2436] text-[#64748B] text-[11px]">
+                    <th scope="col" className="p-3 w-10 text-center">
+                      <input
+                        type="checkbox"
+                        aria-label="Select all articles"
+                        checked={selectedIds.length === filteredArticles.length && filteredArticles.length > 0}
+                        onChange={handleSelectAll}
+                        className="rounded border-[#2A344A] bg-[#0E131D] text-[#6366F1] focus:ring-0 focus:ring-offset-0"
+                      />
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium text-white">
+                      Title
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium">
+                      Status
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium">
+                      Category
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium">
+                      Author
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium">
+                      Updated ↓
+                    </th>
+                    <th scope="col" className="py-3 px-3 font-medium">
+                      Publication date
+                    </th>
+                    <th scope="col" className="py-3 px-3 text-right">
+                      <span className="sr-only">Actions</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#182030]">
+                  {filteredArticles.slice(0, itemsPerPage).map((art) => {
+                    const isSelected = selectedIds.includes(art.id);
+
+                    return (
+                      <tr
+                        key={art.id}
+                        onClick={() => handleSelectRow(art.id)}
+                        className={cn(
+                          "cursor-pointer transition-colors",
+                          isSelected
+                            ? "bg-[#1B2138] border-l-2 border-l-[#6366F1]"
+                            : "hover:bg-[#141B2A]"
+                        )}
+                      >
+                        <td className="p-3 text-center" onClick={(e) => e.stopPropagation()}>
+                          <input
+                            type="checkbox"
+                            aria-label={`Select ${art.title}`}
+                            checked={isSelected}
+                            onChange={() => handleSelectRow(art.id)}
+                            className="rounded border-[#2A344A] bg-[#0E131D] text-[#6366F1] focus:ring-0 focus:ring-offset-0"
+                          />
+                        </td>
+                        <td className="py-3 px-3 max-w-xs">
+                          <p className="font-bold text-white text-xs hover:text-[#818CF8] transition-colors line-clamp-1">
+                            {art.title}
+                          </p>
+                          <p className="text-[11px] text-[#64748B] line-clamp-1 mt-0.5">
+                            {art.subtitle || art.excerpt}
+                          </p>
+                        </td>
+                        <td className="py-3 px-3 whitespace-nowrap">
+                          {art.status === "published" && (
+                            <span className="px-2.5 py-0.5 rounded text-[11px] font-semibold bg-[#0F2A1D] border border-[#1C5338] text-[#34D399]">
+                              Published
+                            </span>
+                          )}
+                          {art.status === "review" && (
+                            <span className="px-2.5 py-0.5 rounded text-[11px] font-semibold bg-[#3D2D16] border border-[#594220] text-[#EAB308]">
+                              Review
+                            </span>
+                          )}
+                          {art.status === "scheduled" && (
+                            <span className="px-2.5 py-0.5 rounded text-[11px] font-semibold bg-[#162744] border border-[#234375] text-[#38BDF8]">
+                              Scheduled
+                            </span>
+                          )}
+                          {art.status === "draft" && (
+                            <span className="px-2.5 py-0.5 rounded text-[11px] font-medium bg-[#182030] border border-[#243048] text-[#94A3B8]">
+                              Draft
+                            </span>
+                          )}
+                        </td>
+                        <td className="py-3 px-3 text-[#94A3B8] font-medium">
+                          {art.category}
+                        </td>
+                        <td className="py-3 px-3 whitespace-nowrap">
+                          <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 rounded-full bg-[#182030] border border-[#243048] flex items-center justify-center text-[10px] font-bold text-[#94A3B8]">
+                              {art.author.avatar}
+                            </div>
+                            <span className="text-white text-xs">{art.author.name}</span>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-[11px]">
+                          {art.updatedAt}
+                        </td>
+                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-[11px]">
+                          {art.publishedAt || art.scheduledFor || "—"}
+                        </td>
+                        <td className="py-3 px-3 text-right" onClick={(e) => e.stopPropagation()}>
+                          <div className="flex items-center justify-end gap-1">
+                            <Link
+                              href={`/admin/articles/${art.id}`}
+                              className="p-1.5 rounded-lg text-[#64748B] hover:text-white hover:bg-[#1C2436] transition-colors"
+                              title="Full Editor"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                            </Link>
+                            <button
+                              type="button"
+                              className="p-1.5 rounded-lg text-[#64748B] hover:text-white hover:bg-[#1C2436] transition-colors"
+                              aria-label="More actions"
+                            >
+                              <MoreHorizontal className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Pagination matching Image 8 */}
+            <div className="p-4 border-t border-[#1C2436] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-[#94A3B8]">
+              <p>Showing 1–6 of 128 articles</p>
+
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white disabled:opacity-40 transition-colors"
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+
+                <button
+                  type="button"
+                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#6366F1] text-white"
+                >
+                  1
+                </button>
+                <button
+                  type="button"
+                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
+                >
+                  2
+                </button>
+                <button
+                  type="button"
+                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
+                >
+                  3
+                </button>
+                <button
+                  type="button"
+                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
+                >
+                  4
+                </button>
+                <button
+                  type="button"
+                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
+                >
+                  5
+                </button>
+                <span className="px-1 text-[#64748B]">...</span>
+                <button
+                  type="button"
+                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
+                >
+                  22
+                </button>
+
+                <button
+                  type="button"
+                  className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white transition-colors"
+                  aria-label="Next page"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Active Filters Reset Bar */}
-        {hasActiveFilters && (
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-[var(--admin-text-muted)] font-medium">
-              Filtered results:
-            </span>
-            <span className="font-bold text-[var(--admin-text)]">
-              {filteredArticles.length} of {articles.length} articles
-            </span>
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="inline-flex items-center gap-1 text-[var(--admin-primary)] hover:underline font-bold ml-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)] rounded"
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reset filters</span>
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* Articles Table */}
-      <DataTable
-        data={filteredArticles}
-        columns={columns}
-        selectable
-        selectedIds={selectedIds}
-        onSelectRow={(id) =>
-          setSelectedIds((prev) =>
-            prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-          )
-        }
-        onSelectAll={(all) =>
-          setSelectedIds(all ? filteredArticles.map((a) => a.id) : [])
-        }
-        emptyState={
-          <div className="py-8 text-center space-y-3">
-            <FileText className="w-8 h-8 text-[var(--admin-text-muted)] mx-auto opacity-50" />
-            <p className="text-xs font-semibold text-[var(--admin-text)]">
-              No articles matched your criteria
-            </p>
-            {hasActiveFilters && (
-              <Button variant="secondary" size="sm" onClick={resetFilters}>
-                Clear all filters
-              </Button>
-            )}
-          </div>
-        }
-        bulkActions={
-          <div className="flex items-center gap-2">
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => {
-                setArticles((prev) =>
-                  prev.map((a) =>
-                    selectedIds.includes(a.id) ? { ...a, status: "published" } : a
-                  )
-                );
-                showToast({
-                  title: "Published Selected",
-                  description: `${selectedIds.length} article(s) published live.`,
-                  type: "success",
-                });
-                setSelectedIds([]);
-              }}
-            >
-              Publish Selected
-            </Button>
-          </div>
-        }
-        actions={(art) => (
-          <div className="flex items-center justify-end gap-1.5">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                setEditingArticle(art);
-                setIsFullEditorOpen(true);
-              }}
-              aria-label={`Edit ${art.title}`}
-              title="Launch full editor"
-            >
-              <Edit className="w-4 h-4" />
-            </Button>
-          </div>
-        )}
-      />
-
-      {/* Full Screen Article Editor Overlay */}
-      {isFullEditorOpen && editingArticle && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Full-screen article editor"
-          className="fixed inset-0 z-50 bg-[var(--admin-surface)] flex flex-col overflow-y-auto animate-in fade-in duration-200"
-        >
-          {/* Top Bar */}
-          <div className="h-16 px-6 border-b border-[var(--admin-border)] bg-[var(--admin-card)] flex items-center justify-between gap-4 sticky top-0 z-30">
-            <div className="flex items-center gap-3 min-w-0">
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => setIsFullEditorOpen(false)}
-              >
-                ← Back
-              </Button>
-              <div className="min-w-0">
-                <p className="text-xs font-bold text-[var(--admin-text)] truncate">
-                  {editingArticle.title || "Untitled Article Draft"}
-                </p>
-                <p className="text-[10px] text-[var(--admin-text-muted)] truncate">
-                  Author: {editingArticle.author.name} • Status: {editingArticle.status}
-                </p>
+        {/* Quick Edit Slide-over Panel matching Image 8 */}
+        {quickEditArticle && (
+          <div className="lg:col-span-4 rounded-xl border border-[#1C2436] bg-[#111622] p-5 space-y-4 shadow-xl">
+            <div className="flex items-center justify-between pb-2 border-b border-[#1C2436]">
+              <div>
+                <h2 className="text-sm font-bold text-white">Quick edit</h2>
+                <p className="text-xs text-[#64748B]">Edit key details for this article.</p>
               </div>
+              <button
+                type="button"
+                onClick={() => setQuickEditArticle(null)}
+                className="p-1 rounded text-[#94A3B8] hover:text-white"
+                aria-label="Close quick edit"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
 
-            <div className="flex items-center gap-2.5">
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={handleSaveArticle}
-              >
-                Save Draft
-              </Button>
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={() => {
-                  setEditingArticle({ ...editingArticle, status: "published" });
-                  setArticles((prev) =>
-                    prev.map((a) =>
-                      a.id === editingArticle.id ? { ...editingArticle, status: "published" } : a
-                    )
-                  );
-                  showToast({
-                    title: "Article Published",
-                    description: `"${editingArticle.title}" is now live on the public atlas.`,
-                    type: "success",
-                  });
-                  setIsFullEditorOpen(false);
-                }}
-              >
-                Publish Article
-              </Button>
-            </div>
-          </div>
-
-          {/* Editor Body: 2 Columns */}
-          <div className="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {/* Main Content (8 cols) */}
-            <div className="lg:col-span-8 space-y-4">
-              {/* Cover Image Placeholder */}
-              <div
-                onClick={() => {
-                  setHasCoverImage(!hasCoverImage);
-                  showToast({
-                    title: hasCoverImage ? "Cover Image Removed" : "Cover Image Attached",
-                    description: hasCoverImage
-                      ? "Removed featured banner."
-                      : "Default 1920x1080 banner applied.",
-                    type: "info",
-                  });
-                }}
-                className={cn(
-                  "h-44 rounded-2xl border-2 border-dashed flex flex-col items-center justify-center text-center p-4 cursor-pointer transition-colors group",
-                  hasCoverImage
-                    ? "border-emerald-500/40 bg-emerald-500/5"
-                    : "border-[var(--admin-border)] bg-[var(--admin-card)] hover:border-[var(--admin-primary)]"
-                )}
-              >
-                <ImageIcon
-                  className={cn(
-                    "w-8 h-8 mb-2 transition-colors",
-                    hasCoverImage ? "text-emerald-400" : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-primary)]"
-                  )}
-                />
-                <p className="text-xs font-bold text-[var(--admin-text)]">
-                  {hasCoverImage ? "Featured Cover Image Attached (Click to toggle)" : "Attach Featured Cover Image"}
-                </p>
-                <p className="text-[11px] text-[var(--admin-text-muted)] mt-0.5">
-                  1920x1080 banner or browse media library.
-                </p>
-              </div>
-
-              {/* Title & Subtitle */}
-              <div className="space-y-2">
+            <div className="space-y-3.5 text-xs">
+              <div>
+                <label
+                  htmlFor="quick-title"
+                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                >
+                  Title
+                </label>
                 <input
+                  id="quick-title"
                   type="text"
-                  aria-label="Article headline"
-                  value={editingArticle.title}
+                  value={quickEditArticle.title}
                   onChange={(e) =>
-                    setEditingArticle({ ...editingArticle, title: e.target.value })
+                    setQuickEditArticle({ ...quickEditArticle, title: e.target.value })
                   }
-                  placeholder="Article Headline..."
-                  className="w-full text-2xl font-black bg-transparent text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none"
-                />
-                <input
-                  type="text"
-                  aria-label="Article subtitle"
-                  value={editingArticle.subtitle || ""}
-                  onChange={(e) =>
-                    setEditingArticle({ ...editingArticle, subtitle: e.target.value })
-                  }
-                  placeholder="Subtitle or lead paragraph..."
-                  className="w-full text-sm font-medium bg-transparent text-[var(--admin-text-muted)] focus:outline-none"
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
                 />
               </div>
 
-              {/* Rich Text Toolbar */}
-              <div
-                role="toolbar"
-                aria-label="Text formatting options"
-                className="flex items-center gap-1 p-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-[var(--admin-text-muted)]"
-              >
-                <button
-                  type="button"
-                  aria-pressed={activeFormats.bold}
-                  aria-label="Bold text"
-                  onClick={() => toggleFormat("bold")}
-                  className={cn(
-                    "p-1.5 rounded transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)]",
-                    activeFormats.bold
-                      ? "bg-[var(--admin-primary)]/20 text-[var(--admin-primary)]"
-                      : "hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
-                  )}
+              <div>
+                <label
+                  htmlFor="quick-category"
+                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
                 >
-                  <Bold className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={activeFormats.italic}
-                  aria-label="Italic text"
-                  onClick={() => toggleFormat("italic")}
-                  className={cn(
-                    "p-1.5 rounded transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)]",
-                    activeFormats.italic
-                      ? "bg-[var(--admin-primary)]/20 text-[var(--admin-primary)]"
-                      : "hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
-                  )}
+                  Category
+                </label>
+                <select
+                  id="quick-category"
+                  value={quickEditArticle.category}
+                  onChange={(e) =>
+                    setQuickEditArticle({ ...quickEditArticle, category: e.target.value })
+                  }
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
                 >
-                  <Italic className="w-4 h-4" />
-                </button>
-                <div className="h-4 w-px bg-[var(--admin-border)]" aria-hidden="true" />
-                <button
-                  type="button"
-                  aria-pressed={activeFormats.h1}
-                  aria-label="Heading 1"
-                  onClick={() => toggleFormat("h1")}
-                  className={cn(
-                    "p-1.5 rounded transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)]",
-                    activeFormats.h1
-                      ? "bg-[var(--admin-primary)]/20 text-[var(--admin-primary)]"
-                      : "hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
-                  )}
-                >
-                  <Heading1 className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={activeFormats.h2}
-                  aria-label="Heading 2"
-                  onClick={() => toggleFormat("h2")}
-                  className={cn(
-                    "p-1.5 rounded transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)]",
-                    activeFormats.h2
-                      ? "bg-[var(--admin-primary)]/20 text-[var(--admin-primary)]"
-                      : "hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
-                  )}
-                >
-                  <Heading2 className="w-4 h-4" />
-                </button>
-                <div className="h-4 w-px bg-[var(--admin-border)]" aria-hidden="true" />
-                <button
-                  type="button"
-                  aria-pressed={activeFormats.list}
-                  aria-label="Unordered list"
-                  onClick={() => toggleFormat("list")}
-                  className={cn(
-                    "p-1.5 rounded transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)]",
-                    activeFormats.list
-                      ? "bg-[var(--admin-primary)]/20 text-[var(--admin-primary)]"
-                      : "hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
-                  )}
-                >
-                  <List className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Numbered list"
-                  className="p-1.5 rounded hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)]"
-                >
-                  <ListOrdered className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={activeFormats.quote}
-                  aria-label="Quote block"
-                  onClick={() => toggleFormat("quote")}
-                  className={cn(
-                    "p-1.5 rounded transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)]",
-                    activeFormats.quote
-                      ? "bg-[var(--admin-primary)]/20 text-[var(--admin-primary)]"
-                      : "hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]"
-                  )}
-                >
-                  <Quote className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Code block"
-                  className="p-1.5 rounded hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)]"
-                >
-                  <Code className="w-4 h-4" />
-                </button>
+                  <option value="News">News</option>
+                  <option value="General">General</option>
+                  <option value="Vehicles">Vehicles</option>
+                  <option value="Guides">Guides</option>
+                  <option value="Analysis">Analysis</option>
+                  <option value="Editorial">Editorial</option>
+                </select>
               </div>
 
-              {/* Body Textarea */}
-              <textarea
-                rows={14}
-                aria-label="Article content body"
-                value={articleContent}
-                onChange={(e) => setArticleContent(e.target.value)}
-                className="w-full p-4 rounded-2xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-sm text-[var(--admin-text)] leading-relaxed focus:outline-none focus:border-[var(--admin-primary)] font-serif"
-              />
-            </div>
-
-            {/* Right Column: Checklist & SEO Preview (4 cols) */}
-            <div className="lg:col-span-4 space-y-5">
-              {/* Dynamic Pre-Publish Checklist */}
-              <div className="p-5 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)]">
-                    Pre-Publish Checklist
-                  </h3>
-                  <Badge
-                    variant={completedChecklistCount === checklistItems.length ? "success" : "warning"}
-                    size="sm"
-                  >
-                    {completedChecklistCount} of {checklistItems.length} Met
-                  </Badge>
-                </div>
-                <div className="space-y-2 text-xs">
-                  {checklistItems.map((item) => (
-                    <div
-                      key={item.id}
-                      className={cn(
-                        "flex items-center gap-2",
-                        item.met ? "text-emerald-400" : "text-amber-400"
-                      )}
+              <div>
+                <label className="block text-[11px] font-medium text-[#94A3B8] mb-1.5">
+                  Tags
+                </label>
+                <div className="flex flex-wrap gap-1.5 p-2 rounded-xl bg-[#0E131D] border border-[#1C2436] min-h-[40px] items-center">
+                  {quickTags.map((t) => (
+                    <span
+                      key={t}
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#182030] text-[#94A3B8] text-[11px]"
                     >
-                      {item.met ? (
-                        <CheckCircle2 className="w-4 h-4 shrink-0" />
-                      ) : (
-                        <Clock className="w-4 h-4 shrink-0" />
-                      )}
-                      <span>{item.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Google SEO Live Preview Box */}
-              <div className="p-5 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] space-y-3">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)]">
-                  Google Search Result Preview
-                </h3>
-                <div className="p-4 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border)] space-y-1">
-                  <p className="text-[11px] text-emerald-400 font-mono truncate">
-                    https://atlas-gta6.com › articles › {editingArticle.slug}
-                  </p>
-                  <p className="text-sm font-bold text-indigo-400 hover:underline cursor-pointer line-clamp-1">
-                    {editingArticle.title} | GTA 6 Atlas
-                  </p>
-                  <p className="text-xs text-[var(--admin-text-muted)] line-clamp-2 leading-relaxed">
-                    {editingArticle.excerpt}
-                  </p>
-                </div>
-              </div>
-
-              {/* Meta Details */}
-              <div className="p-5 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] space-y-3 text-xs">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)]">
-                  Publication Settings
-                </h3>
-
-                <div>
-                  <span className="block font-bold text-[var(--admin-text-muted)] mb-1">
-                    Assigned Author
-                  </span>
-                  <p className="text-xs font-bold text-[var(--admin-text)]">
-                    {editingArticle.author.name} ({editingArticle.author.role})
-                  </p>
-                </div>
-
-                <div>
-                  <span className="block font-bold text-[var(--admin-text-muted)] mb-1">
-                    Tags
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {editingArticle.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-0.5 rounded-md bg-[var(--admin-elevated)] border border-[var(--admin-border)] text-[10px] font-bold text-[var(--admin-text)]"
+                      <span>{t}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeTag(t)}
+                        className="hover:text-white"
+                        aria-label={`Remove tag ${t}`}
                       >
-                        #{t}
-                      </span>
-                    ))}
+                        <X className="w-3 h-3" />
+                      </button>
+                    </span>
+                  ))}
+                  <button
+                    type="button"
+                    className="text-[#64748B] hover:text-white text-xs ml-auto"
+                    aria-label="Add tag"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-medium text-[#94A3B8] mb-1.5">
+                  Scheduled publication date
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={quickDate}
+                      onChange={(e) => setQuickDate(e.target.value)}
+                      className="w-full pl-8 pr-2 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white font-mono focus:outline-none focus:border-[#6366F1]"
+                    />
+                    <Calendar className="w-3.5 h-3.5 text-[#64748B] absolute left-2.5 top-1/2 -translate-y-1/2" />
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={quickTime}
+                      onChange={(e) => setQuickTime(e.target.value)}
+                      className="w-full pl-8 pr-2 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white font-mono focus:outline-none focus:border-[#6366F1]"
+                    />
+                    <Clock className="w-3.5 h-3.5 text-[#64748B] absolute left-2.5 top-1/2 -translate-y-1/2" />
                   </div>
                 </div>
               </div>
+
+              <div>
+                <label
+                  htmlFor="quick-tz"
+                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                >
+                  Timezone
+                </label>
+                <select
+                  id="quick-tz"
+                  value={quickTimezone}
+                  onChange={(e) => setQuickTimezone(e.target.value)}
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
+                >
+                  <option value="(UTC) Coordinated Universal Time">
+                    (UTC) Coordinated Universal Time
+                  </option>
+                  <option value="(EST) Eastern Standard Time">
+                    (EST) Eastern Standard Time
+                  </option>
+                  <option value="(PST) Pacific Standard Time">
+                    (PST) Pacific Standard Time
+                  </option>
+                </select>
+              </div>
+
+              {/* Info Notice Box matching Image 8 */}
+              <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] flex items-start gap-2.5 text-xs text-[#94A3B8]">
+                <Info className="w-4 h-4 text-[#6366F1] shrink-0 mt-0.5" />
+                <p className="text-[11px] leading-relaxed">
+                  This is a quick edit. For full editing options including content, SEO and featured image, open the article in the editor.
+                </p>
+              </div>
+
+              <div className="pt-2 space-y-2">
+                <button
+                  type="button"
+                  onClick={handleSaveQuickEdit}
+                  className="w-full py-2.5 rounded-lg bg-[#6366F1] hover:bg-[#5254D8] text-xs font-semibold text-white transition-colors shadow-md shadow-indigo-500/20"
+                >
+                  Save changes
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setQuickEditArticle(null)}
+                  className="w-full py-2 rounded-lg text-xs font-medium text-[#94A3B8] hover:text-white transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+
+              <div className="pt-2 border-t border-[#1C2436] text-center">
+                <Link
+                  href={`/admin/articles/${quickEditArticle.id}`}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#818CF8] hover:text-white transition-colors"
+                >
+                  <span>Open in Full Article Editor</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-
-      {/* Add New Article Modal */}
-      <Modal
-        isOpen={isNewModalOpen}
-        onClose={() => setIsNewModalOpen(false)}
-        title="Start New Editorial Article"
-        description="Create a new draft in the Atlas content workflow."
-        footer={
-          <>
-            <Button
-              variant="secondary"
-              size="md"
-              onClick={() => setIsNewModalOpen(false)}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="primary"
-              size="md"
-              onClick={handleCreateArticle}
-            >
-              Create & Launch Editor
-            </Button>
-          </>
-        }
-      >
-        <div className="space-y-4">
-          <div>
-            <label
-              htmlFor="new-article-title"
-              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-            >
-              Article Headline
-            </label>
-            <input
-              id="new-article-title"
-              type="text"
-              value={newTitle}
-              onChange={(e) => setNewTitle(e.target.value)}
-              placeholder="e.g. Vice City Beachfront Map Comparison"
-              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="new-article-category"
-              className="block text-xs font-bold text-[var(--admin-text)] mb-1"
-            >
-              Category
-            </label>
-            <select
-              id="new-article-category"
-              value={newCategory}
-              onChange={(e) => setNewCategory(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
-            >
-              <option value="General">General</option>
-              <option value="Vehicles">Vehicles</option>
-              <option value="Guides">Guides</option>
-              <option value="Analysis">Analysis</option>
-            </select>
-          </div>
-        </div>
-      </Modal>
+        )}
+      </div>
     </div>
   );
 }

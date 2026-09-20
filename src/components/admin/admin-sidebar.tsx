@@ -63,7 +63,7 @@ export const ADMIN_NAV_SECTIONS: NavSection[] = [
     items: [
       { label: "Articles", href: "/admin/articles", icon: FileText, badge: "128" },
       { label: "Categories & Tags", href: "/admin/categories", icon: Tag },
-      { label: "Media Library", href: "/admin/media", icon: ImageIcon, badge: "2.4k" },
+      { label: "Media", href: "/admin/media", icon: ImageIcon, badge: "2.4k" },
     ],
   },
   {
@@ -89,7 +89,7 @@ export const ADMIN_NAV_SECTIONS: NavSection[] = [
     items: [
       { label: "Users & Roles", href: "/admin/users", icon: Shield, badge: "5" },
       { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
-      { label: "SEO Settings", href: "/admin/seo", icon: Search },
+      { label: "SEO", href: "/admin/seo", icon: Search },
       { label: "Site Settings", href: "/admin/settings", icon: Settings },
     ],
   },
@@ -120,28 +120,27 @@ export function AdminSidebar({
         aria-label="Admin Navigation"
         className={cn(
           "fixed top-0 bottom-0 left-0 z-50 flex flex-col border-r transition-all duration-300 ease-in-out",
-          "bg-[var(--admin-surface)] border-[var(--admin-border)] text-[var(--admin-text)]",
+          "bg-[#0B0E14] border-[#1C2436] text-[#F8FAFC]",
           isCollapsed ? "w-20" : "w-64",
-          // Mobile responsive slide-over
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
         {/* Brand Header */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-[var(--admin-border)]">
+        <div className="h-16 flex items-center justify-between px-4 border-b border-[#1C2436]">
           <Link
             href="/admin"
-            className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded-xl p-1"
+            className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] rounded-xl p-1"
           >
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white font-black text-sm shadow-md shadow-purple-500/20">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white font-black text-xs shadow-md shadow-purple-500/20">
               VI
             </div>
             {!isCollapsed && (
-              <div className="flex flex-col overflow-hidden">
-                <span className="font-display font-black tracking-wider text-sm text-[var(--admin-text)] flex items-center gap-1.5">
-                  ATLAS <span className="text-[var(--admin-primary)]">ADMIN</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm tracking-tight text-white">
+                  GTA 6 Atlas
                 </span>
-                <span className="text-[10px] text-[var(--admin-text-muted)] font-medium truncate">
-                  Leonida Research Hub
+                <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1C2336] text-[#818CF8] border border-[#2B3652]">
+                  Admin
                 </span>
               </div>
             )}
@@ -198,40 +197,31 @@ export function AdminSidebar({
                         onClick={() => onCloseMobile?.()}
                         aria-current={isActive ? "page" : undefined}
                         className={cn(
-                          "group flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-150 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
+                          "group flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-150 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]",
                           isActive
-                            ? "bg-[var(--admin-primary)] text-white shadow-md shadow-[var(--admin-primary)]/25 font-bold"
-                            : "text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)]",
+                            ? "bg-[#3730A3]/50 text-white border border-[#4F46E5]/40 font-bold shadow-sm"
+                            : "text-[#94A3B8] hover:text-white hover:bg-[#141B2A]",
                           isCollapsed && "justify-center px-0"
                         )}
                       >
-                        {isActive && (
-                          <span
-                            className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-white/90 shadow-sm"
-                            aria-hidden="true"
-                          />
-                        )}
                         <Icon
                           className={cn(
                             "w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110",
                             isActive
-                              ? "text-white"
-                              : "text-[var(--admin-text-muted)] group-hover:text-[var(--admin-text)]"
+                              ? "text-[#818CF8]"
+                              : "text-[#64748B] group-hover:text-[#94A3B8]"
                           )}
                         />
                         {!isCollapsed && (
-                          <span className="truncate flex-1">{item.label}</span>
+                          <span className="flex-1 truncate">{item.label}</span>
                         )}
-
                         {!isCollapsed && item.badge && (
                           <span
                             className={cn(
-                              "px-1.5 py-0.5 text-[10px] font-black rounded-full transition-colors",
+                              "px-1.5 py-0.5 rounded-full text-[10px] font-bold",
                               isActive
-                                ? "bg-white/20 text-white"
-                                : item.badgeVariant === "warning"
-                                ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
-                                : "bg-[var(--admin-elevated)] text-[var(--admin-text-muted)] border border-[var(--admin-border-subtle)]"
+                                ? "bg-[#4F46E5] text-white"
+                                : "bg-[#1C2436] text-[#94A3B8]"
                             )}
                           >
                             {item.badge}

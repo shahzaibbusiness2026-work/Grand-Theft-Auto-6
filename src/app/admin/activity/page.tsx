@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
 import {
   Activity,
   Search,
@@ -15,7 +16,10 @@ import {
   Calendar,
   Sparkles,
   ShieldCheck,
-  RotateCcw
+  RotateCcw,
+  ExternalLink,
+  CheckCircle2,
+  X
 } from "lucide-react";
 import {
   INITIAL_ADMIN_ACTIVITIES,
@@ -71,15 +75,6 @@ export default function AdminActivityPage() {
     }
   };
 
-  const getRecordBadgeVariant = (type: AdminActivity["recordType"]) => {
-    switch (type) {
-      case "Vehicle": return "primary" as const;
-      case "Weapon": return "danger" as const;
-      case "Map marker": return "success" as const;
-      default: return "info" as const;
-    }
-  };
-
   const resetFilters = () => {
     setSearchQuery("");
     setSelectedAction("all");
@@ -87,42 +82,42 @@ export default function AdminActivityPage() {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
+    <div className="space-y-6 animate-in fade-in duration-200 pb-16">
+      {/* Page Header (Image 16) */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight flex items-center gap-2.5">
-            <Activity className="w-6 h-6 text-[var(--admin-primary)]" />
-            <span>Activity Log & Audit Trail</span>
-          </h1>
-          <p className="text-xs text-[var(--admin-text-muted)] mt-1">
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              Activity log
+            </h1>
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
+              Demo data
+            </span>
+          </div>
+          <p className="text-xs text-[#94A3B8] mt-1">
             Comprehensive historical log of all editorial actions, record updates, status changes, and coordinate calibrations.
           </p>
         </div>
       </div>
 
-      {/* Filters Bar */}
+      {/* Filters Bar (Image 16) */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="relative sm:col-span-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--admin-text-muted)]" />
-          <label htmlFor="activity-search" className="sr-only">Filter activity by actor or record</label>
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
           <input
-            id="activity-search"
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Filter activity by actor or record..."
-            className="w-full pl-9 pr-4 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none focus:border-[var(--admin-primary)] focus:ring-1 focus:ring-[var(--admin-primary)] transition-all"
+            className="w-full pl-9 pr-4 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1] transition-colors"
           />
         </div>
 
         <div>
-          <label htmlFor="action-filter" className="sr-only">Filter by action type</label>
           <select
-            id="action-filter"
             value={selectedAction}
             onChange={(e) => setSelectedAction(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
+            className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
           >
             <option value="all">All Actions</option>
             <option value="saved draft">Saved draft</option>
@@ -134,12 +129,10 @@ export default function AdminActivityPage() {
         </div>
 
         <div>
-          <label htmlFor="type-filter" className="sr-only">Filter by record type</label>
           <select
-            id="type-filter"
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-colors"
+            className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
           >
             <option value="all">All Record Types</option>
             <option value="Article">Articles</option>
@@ -171,30 +164,26 @@ export default function AdminActivityPage() {
         </div>
       )}
 
-      {/* Main Grid: Activity Table & Right Diff Inspector */}
+      {/* Main Grid: Activity Table & Right Diff Inspector (Image 16) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Activity Table (8 cols) */}
-        <div className="lg:col-span-8 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] overflow-hidden shadow-sm">
+        <div className="lg:col-span-8 rounded-xl border border-[#1C2436] bg-[#111622] overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs" aria-label="Activity audit log">
               <thead>
-                <tr className="border-b border-[var(--admin-border)] bg-[var(--admin-surface)] text-[var(--admin-text-muted)]">
-                  <th scope="col" className="p-3.5 font-bold uppercase">Timestamp</th>
-                  <th scope="col" className="p-3.5 font-bold uppercase">Actor</th>
-                  <th scope="col" className="p-3.5 font-bold uppercase">Action</th>
-                  <th scope="col" className="p-3.5 font-bold uppercase">Record</th>
-                  <th scope="col" className="p-3.5 font-bold uppercase">Details</th>
+                <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-[11px]">
+                  <th scope="col" className="p-3.5 font-medium">Timestamp</th>
+                  <th scope="col" className="p-3.5 font-medium">Actor</th>
+                  <th scope="col" className="p-3.5 font-medium">Action</th>
+                  <th scope="col" className="p-3.5 font-medium">Record</th>
+                  <th scope="col" className="p-3.5 font-medium">Details</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[var(--admin-border-subtle)]">
+              <tbody className="divide-y divide-[#182030]">
                 {filteredActivities.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="p-8 text-center">
-                      <div className="space-y-2">
-                        <Activity className="w-8 h-8 text-[var(--admin-text-muted)] mx-auto opacity-50" />
-                        <p className="text-xs font-bold text-[var(--admin-text)]">No matching events</p>
-                        <p className="text-xs text-[var(--admin-text-muted)]">No activity events match your current filters.</p>
-                      </div>
+                    <td colSpan={5} className="p-8 text-center text-[#64748B]">
+                      No activity events match your current filters.
                     </td>
                   </tr>
                 ) : (
@@ -204,23 +193,14 @@ export default function AdminActivityPage() {
                       <tr
                         key={act.id}
                         onClick={() => setSelectedActivityId(act.id)}
-                        tabIndex={0}
-                        role="button"
-                        aria-pressed={isSelected}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            setSelectedActivityId(act.id);
-                          }
-                        }}
                         className={cn(
-                          "cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--admin-primary)]",
+                          "cursor-pointer transition-colors",
                           isSelected
-                            ? "bg-[var(--admin-primary)]/10"
-                            : "hover:bg-[var(--admin-elevated)]/50"
+                            ? "bg-[#6366F1]/10"
+                            : "hover:bg-[#141B2A]"
                         )}
                       >
-                        <td className="p-3.5 font-mono text-[11px] text-[var(--admin-text-muted)] whitespace-nowrap">
+                        <td className="p-3.5 font-mono text-[11px] text-[#64748B] whitespace-nowrap">
                           {act.timestamp}
                         </td>
                         <td className="p-3.5 whitespace-nowrap">
@@ -228,23 +208,23 @@ export default function AdminActivityPage() {
                             <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-[9px]">
                               {act.actor.initials}
                             </div>
-                            <span className="font-semibold text-[var(--admin-text)]">
+                            <span className="font-semibold text-white">
                               {act.actor.name}
                             </span>
                           </div>
                         </td>
                         <td className="p-3.5 whitespace-nowrap">
-                          <Badge variant="neutral" size="sm">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
                             {act.action}
-                          </Badge>
+                          </span>
                         </td>
                         <td className="p-3.5 whitespace-nowrap">
-                          <div className="flex items-center gap-1.5 font-bold text-[var(--admin-text)]">
+                          <div className="flex items-center gap-1.5 font-bold text-white">
                             {getRecordIcon(act.recordType)}
                             <span className="truncate max-w-[140px]">{act.recordName}</span>
                           </div>
                         </td>
-                        <td className="p-3.5 text-[var(--admin-text-muted)] truncate max-w-[200px]">
+                        <td className="p-3.5 text-[#94A3B8] truncate max-w-[200px]">
                           {act.details}
                         </td>
                       </tr>
@@ -256,76 +236,91 @@ export default function AdminActivityPage() {
           </div>
         </div>
 
-        {/* Right Details / Diff Inspector (4 cols) */}
-        <div className="lg:col-span-4 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-surface)] p-5 space-y-4 shadow-sm text-xs">
-          <h3 className="font-bold uppercase tracking-wider text-[var(--admin-text)] pb-2 border-b border-[var(--admin-border)]">
-            Audit Record Details
-          </h3>
-
+        {/* Right Diff Inspector (4 cols, Image 16) */}
+        <div className="lg:col-span-4 rounded-xl border border-[#1C2436] bg-[#111622] p-5 space-y-4 shadow-sm">
           {selectedActivity ? (
-            <div className="space-y-4">
-              <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[var(--admin-text-muted)]">Event ID:</span>
-                  <span className="font-mono font-bold text-[var(--admin-text)]">
-                    {selectedActivity.id}
-                  </span>
+            <div className="space-y-4 text-xs">
+              <div className="flex items-center justify-between pb-2 border-b border-[#1C2436]">
+                <h3 className="font-bold uppercase tracking-wider text-white">
+                  Activity Details
+                </h3>
+                <span className="font-mono text-[10px] text-[#64748B]">
+                  #{selectedActivity.id.toUpperCase()}
+                </span>
+              </div>
+
+              {/* Event Metadata */}
+              <div className="space-y-2 p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] font-mono text-[11px]">
+                <div className="flex justify-between">
+                  <span className="text-[#64748B] font-sans">Actor:</span>
+                  <span className="text-white font-bold">{selectedActivity.actor.name}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-[var(--admin-text-muted)]">Timestamp:</span>
-                  <span className="font-mono text-[var(--admin-text)]">
-                    {selectedActivity.timestamp}
-                  </span>
+                <div className="flex justify-between">
+                  <span className="text-[#64748B] font-sans">Role:</span>
+                  <span className="text-indigo-400">{selectedActivity.actor.role}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-[var(--admin-text-muted)]">Actor:</span>
-                  <span className="font-bold text-[var(--admin-text)]">
-                    {selectedActivity.actor.name} ({selectedActivity.actor.role})
-                  </span>
+                <div className="flex justify-between">
+                  <span className="text-[#64748B] font-sans">Timestamp:</span>
+                  <span className="text-[#94A3B8]">{selectedActivity.timestamp}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-[var(--admin-text-muted)]">Record:</span>
-                  <div className="flex items-center gap-1.5">
-                    <Badge variant={getRecordBadgeVariant(selectedActivity.recordType)} size="sm">
-                      {selectedActivity.recordType}
-                    </Badge>
-                    <span className="font-bold text-[var(--admin-text)]">
-                      {selectedActivity.recordName}
+                <div className="flex justify-between">
+                  <span className="text-[#64748B] font-sans">IP Address:</span>
+                  <span className="text-[#94A3B8]">192.168.1.142</span>
+                </div>
+              </div>
+
+              {/* Field Diff Section */}
+              <div className="space-y-2">
+                <h4 className="font-semibold text-white">Modified Fields</h4>
+                <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-2">
+                  <p className="text-[11px] font-semibold text-[#94A3B8]">Field: Status</p>
+                  <div className="flex items-center gap-2 font-mono text-[11px]">
+                    <span className="px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 line-through">
+                      Draft
+                    </span>
+                    <span className="text-[#64748B]">→</span>
+                    <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      Published
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-2">
+                  <p className="text-[11px] font-semibold text-[#94A3B8]">Field: Coordinates</p>
+                  <div className="flex items-center gap-2 font-mono text-[11px]">
+                    <span className="px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 line-through">
+                      (45.2, 58.1)
+                    </span>
+                    <span className="text-[#64748B]">→</span>
+                    <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      (48.6, 62.4)
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Changes Diff Box */}
-              {selectedActivity.changes ? (
-                <div className="space-y-2">
-                  <span className="font-bold text-[var(--admin-text)]">
-                    Modified Field Diff: <code className="text-[var(--admin-primary)]">{selectedActivity.changes.field}</code>
-                  </span>
-                  <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] space-y-2 font-mono text-xs">
-                    <div className="p-2 rounded bg-rose-500/10 border border-rose-500/20 text-rose-400">
-                      - Previous: {selectedActivity.changes.from}
-                    </div>
-                    <div className="p-2 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-                      + Updated: {selectedActivity.changes.to}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-[var(--admin-text-muted)]">
-                  {selectedActivity.details}
-                </div>
-              )}
-
-              <div className="p-3.5 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] space-y-1 font-mono text-[11px] text-[var(--admin-text-muted)]">
-                <p>Client IP: 192.168.1.104</p>
-                <p>Origin: Atlas Web Admin Session</p>
-                <p>Integrity Hash: sha256-d41d8cd98f00b204</p>
+              {/* Link to Record */}
+              <div className="pt-2">
+                <Link
+                  href={
+                    selectedActivity.recordType === "Vehicle"
+                      ? "/admin/vehicles/veh-1"
+                      : selectedActivity.recordType === "Weapon"
+                      ? "/admin/weapons/w-001"
+                      : selectedActivity.recordType === "Map marker"
+                      ? "/admin/map"
+                      : "/admin/articles/art-1"
+                  }
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs font-semibold text-[#6366F1] hover:text-white hover:border-[#6366F1] transition-colors"
+                >
+                  <span>View modified record</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
           ) : (
-            <div className="text-center py-8 text-[var(--admin-text-muted)]">
-              Select an activity event from the table to view the audit diff.
+            <div className="text-center py-12 text-[#64748B]">
+              Select an event to inspect audit details.
             </div>
           )}
         </div>

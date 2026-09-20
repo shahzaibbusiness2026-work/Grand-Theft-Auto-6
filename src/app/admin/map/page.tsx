@@ -18,6 +18,9 @@ import {
   Car,
   Square,
   CircleDot,
+  Check,
+  RotateCcw,
+  Sparkles
 } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
@@ -156,99 +159,81 @@ export default function AdminMapPage() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-200">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-2 border-b border-[var(--admin-border-subtle)]">
+      {/* Page Header (Image 4) */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight flex items-center gap-2.5">
-            <Map className="w-6 h-6 text-[var(--admin-primary)]" />
-            <span>Atlas Map Manager</span>
-          </h1>
-          <p className="text-xs text-[var(--admin-text-muted)] mt-0.5">
-            Calibrate geographical markers, territory boundaries, and points of interest across Leonida.
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              Map manager
+            </h1>
+            <div className="flex items-center gap-1.5 text-xs text-[#E5A83B]">
+              <span className="w-2 h-2 rounded-full bg-[#E5A83B]" />
+              <span>Unsaved changes</span>
+            </div>
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
+              Demo data
+            </span>
+          </div>
+          <p className="text-xs text-[#94A3B8] mt-1">
+            Create and manage map markers for the interactive map. All locations and data are unverified.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Layer toggles */}
-          <div
-            role="group"
-            aria-label="Filter map layers"
-            className="hidden md:flex items-center gap-1.5 p-1 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs"
-          >
-            <button
-              type="button"
-              role="switch"
-              aria-checked={activeLayers.Official}
-              onClick={() =>
-                setActiveLayers((prev) => ({ ...prev, Official: !prev.Official }))
-              }
-              className={cn(
-                "px-2.5 py-1 rounded-lg font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
-                activeLayers.Official
-                  ? "bg-indigo-500/20 text-indigo-400"
-                  : "text-[var(--admin-text-muted)] opacity-60"
-              )}
-            >
-              Official
-            </button>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={activeLayers.Research}
-              onClick={() =>
-                setActiveLayers((prev) => ({ ...prev, Research: !prev.Research }))
-              }
-              className={cn(
-                "px-2.5 py-1 rounded-lg font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
-                activeLayers.Research
-                  ? "bg-purple-500/20 text-purple-400"
-                  : "text-[var(--admin-text-muted)] opacity-60"
-              )}
-            >
-              Research
-            </button>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={activeLayers.Community}
-              onClick={() =>
-                setActiveLayers((prev) => ({ ...prev, Community: !prev.Community }))
-              }
-              className={cn(
-                "px-2.5 py-1 rounded-lg font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
-                activeLayers.Community
-                  ? "bg-emerald-500/20 text-emerald-400"
-                  : "text-[var(--admin-text-muted)] opacity-60"
-              )}
-            >
-              Community
-            </button>
-          </div>
-
           <Button
             variant="primary"
-            size="md"
-            onClick={handleAddMarker}
-            leftIcon={<Plus className="w-4 h-4" />}
+            size="sm"
+            onClick={() => {
+              showToast({
+                title: "Changes Saved",
+                description: "Map marker configuration preserved.",
+                type: "success",
+              });
+            }}
+            className="bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-md shadow-indigo-500/20"
           >
-            Add Marker
+            Save changes
+          </Button>
+
+          <Button
+            variant="secondary"
+            size="sm"
+            className="bg-[#111622] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs px-3 py-2 rounded-lg"
+          >
+            Import
+          </Button>
+
+          <Button
+            variant="secondary"
+            size="sm"
+            className="bg-[#111622] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs px-3 py-2 rounded-lg"
+          >
+            Export
+          </Button>
+
+          <Button
+            variant="secondary"
+            size="sm"
+            className="bg-[#111622] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs px-3 py-2 rounded-lg"
+          >
+            Preview
           </Button>
         </div>
       </div>
 
-      {/* 3-Column Layout */}
+      {/* 3-Column Layout (Image 4) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-[calc(100vh-210px)] min-h-[640px]">
         {/* Column 1: Marker Directory (3 cols) */}
-        <div className="lg:col-span-3 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-surface)] flex flex-col overflow-hidden shadow-sm">
-          <div className="p-3 border-b border-[var(--admin-border)] bg-[var(--admin-card)] space-y-2">
+        <div className="lg:col-span-3 rounded-xl border border-[#1C2436] bg-[#111622] flex flex-col overflow-hidden shadow-sm">
+          <div className="p-3 border-b border-[#1C2436] bg-[#0E131D] space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)]">
+              <span className="text-xs font-bold uppercase tracking-wider text-white">
                 Markers ({filteredMarkers.length})
               </span>
               <button
                 type="button"
                 onClick={handleAddMarker}
-                className="text-[11px] font-bold text-[var(--admin-primary)] hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--admin-primary)] rounded"
+                className="text-[11px] font-semibold text-[#6366F1] hover:underline"
               >
                 + New
               </button>
@@ -256,35 +241,28 @@ export default function AdminMapPage() {
 
             {/* Search Input */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--admin-text-muted)]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#64748B]" />
               <input
                 type="text"
-                aria-label="Filter markers by name or category"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filter markers..."
-                className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-[var(--admin-surface)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] placeholder:text-[var(--admin-text-muted)] focus:outline-none focus:border-[var(--admin-primary)]"
+                className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
               />
             </div>
 
             {/* Category Filter Pills */}
-            <div
-              role="tablist"
-              aria-label="Filter markers by category"
-              className="flex items-center gap-1 overflow-x-auto scrollbar-none pt-1"
-            >
+            <div className="flex items-center gap-1 overflow-x-auto scrollbar-none pt-1">
               {(["all", "Location", "Collectibles", "Activities"] as const).map((cat) => (
                 <button
                   key={cat}
                   type="button"
-                  role="tab"
-                  aria-selected={activeCategory === cat}
                   onClick={() => setActiveCategory(cat)}
                   className={cn(
-                    "px-2.5 py-1 rounded-lg text-[10px] font-bold transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
+                    "px-2.5 py-1 rounded-lg text-[10px] font-semibold transition-colors whitespace-nowrap",
                     activeCategory === cat
-                      ? "bg-[var(--admin-primary)] text-white"
-                      : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
+                      ? "bg-[#6366F1] text-white"
+                      : "text-[#94A3B8] hover:bg-[#182030]"
                   )}
                 >
                   {cat === "all" ? "All" : cat}
@@ -294,9 +272,9 @@ export default function AdminMapPage() {
           </div>
 
           {/* Markers List */}
-          <div className="flex-1 overflow-y-auto p-2 space-y-1 scrollbar-thin scrollbar-thumb-[var(--admin-border)]">
+          <div className="flex-1 overflow-y-auto p-2 space-y-1 scrollbar-thin scrollbar-thumb-[#1C2436]">
             {filteredMarkers.length === 0 ? (
-              <div className="py-8 text-center text-xs text-[var(--admin-text-muted)]">
+              <div className="py-8 text-center text-xs text-[#64748B]">
                 No markers found matching your filters.
               </div>
             ) : (
@@ -308,10 +286,10 @@ export default function AdminMapPage() {
                     type="button"
                     onClick={() => setSelectedMarkerId(m.id)}
                     className={cn(
-                      "w-full flex items-center justify-between p-2.5 rounded-xl text-left transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
+                      "w-full flex items-center justify-between p-2.5 rounded-xl text-left transition-colors group",
                       isSelected
-                        ? "bg-[var(--admin-primary)] text-white shadow-sm"
-                        : "hover:bg-[var(--admin-elevated)] text-[var(--admin-text)]"
+                        ? "bg-[#3730A3]/50 text-white border border-[#4F46E5]/40 shadow-sm"
+                        : "hover:bg-[#141B2A] text-white"
                     )}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
@@ -320,33 +298,20 @@ export default function AdminMapPage() {
                           "p-1.5 rounded-lg border",
                           isSelected
                             ? "bg-white/20 border-white/30 text-white"
-                            : "bg-[var(--admin-card)] border-[var(--admin-border)] text-[var(--admin-primary)]"
+                            : "bg-[#0E131D] border-[#1C2436] text-indigo-400"
                         )}
-                        aria-hidden="true"
                       >
                         {getMarkerIcon(m.icon)}
                       </span>
                       <div className="min-w-0">
-                        <p className="text-xs font-bold truncate">{m.name}</p>
-                        <p
-                          className={cn(
-                            "text-[10px] truncate",
-                            isSelected ? "text-white/80" : "text-[var(--admin-text-muted)]"
-                          )}
-                        >
+                        <p className="text-xs font-semibold truncate">{m.name}</p>
+                        <p className="text-[10px] text-[#64748B] truncate">
                           {m.category} • Layer: {m.layer}
                         </p>
                       </div>
                     </div>
 
-                    <span
-                      className={cn(
-                        "text-[10px] font-mono px-1.5 py-0.5 rounded",
-                        isSelected
-                          ? "bg-white/20 text-white"
-                          : "bg-[var(--admin-card)] text-[var(--admin-text-muted)]"
-                      )}
-                    >
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#0E131D] text-[#64748B]">
                       {m.coordinates.x},{m.coordinates.y}
                     </span>
                   </button>
@@ -356,44 +321,37 @@ export default function AdminMapPage() {
           </div>
         </div>
 
-        {/* Column 2: Interactive Map Canvas (6 cols) */}
-        <div className="lg:col-span-6 rounded-2xl border border-[var(--admin-border)] bg-[#090d16] relative overflow-hidden flex flex-col shadow-inner select-none">
+        {/* Column 2: Interactive Map Canvas (6 cols, Image 4) */}
+        <div className="lg:col-span-6 rounded-xl border border-[#1C2436] bg-[#070A10] relative overflow-hidden flex flex-col shadow-inner select-none">
           {/* Top Canvas Toolbar */}
           <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between pointer-events-none">
-            <div className="pointer-events-auto flex items-center gap-2 bg-[var(--admin-surface)]/90 backdrop-blur-md border border-[var(--admin-border)] rounded-xl px-3 py-1.5 text-xs font-bold text-[var(--admin-text)] shadow-lg">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" aria-hidden="true" />
+            <div className="pointer-events-auto flex items-center gap-2 bg-[#111622]/90 backdrop-blur-md border border-[#1C2436] rounded-xl px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
               <span>Leonida State Grid (1:25000)</span>
             </div>
 
-            <div
-              role="toolbar"
-              aria-label="Map navigation controls"
-              className="pointer-events-auto flex items-center gap-1 bg-[var(--admin-surface)]/90 backdrop-blur-md border border-[var(--admin-border)] rounded-xl p-1 shadow-lg"
-            >
+            <div className="pointer-events-auto flex items-center gap-1 bg-[#111622]/90 backdrop-blur-md border border-[#1C2436] rounded-xl p-1 shadow-lg">
               <button
                 type="button"
                 onClick={() => setZoomLevel((z) => Math.min(2, z + 0.2))}
-                className="p-1.5 rounded-lg text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+                className="p-1.5 rounded-lg text-[#94A3B8] hover:text-white hover:bg-[#182030]"
                 title="Zoom in"
-                aria-label="Zoom in"
               >
                 <ZoomIn className="w-4 h-4" />
               </button>
               <button
                 type="button"
                 onClick={() => setZoomLevel((z) => Math.max(0.6, z - 0.2))}
-                className="p-1.5 rounded-lg text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+                className="p-1.5 rounded-lg text-[#94A3B8] hover:text-white hover:bg-[#182030]"
                 title="Zoom out"
-                aria-label="Zoom out"
               >
                 <ZoomOut className="w-4 h-4" />
               </button>
               <button
                 type="button"
                 onClick={() => setZoomLevel(1)}
-                className="p-1.5 rounded-lg text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+                className="p-1.5 rounded-lg text-[#94A3B8] hover:text-white hover:bg-[#182030]"
                 title="Reset zoom"
-                aria-label="Reset zoom"
               >
                 <Maximize2 className="w-4 h-4" />
               </button>
@@ -401,15 +359,15 @@ export default function AdminMapPage() {
           </div>
 
           {/* Compass Rose */}
-          <div className="absolute bottom-4 left-4 z-20 pointer-events-none flex items-center gap-2 bg-[var(--admin-surface)]/80 backdrop-blur-sm border border-[var(--admin-border)] rounded-xl px-2.5 py-1 text-[11px] font-mono font-bold text-[var(--admin-text)]">
-            <Compass className="w-4 h-4 text-indigo-400 animate-spin-slow" />
+          <div className="absolute bottom-4 left-4 z-20 pointer-events-none flex items-center gap-2 bg-[#111622]/80 backdrop-blur-sm border border-[#1C2436] rounded-xl px-2.5 py-1 text-[11px] font-mono font-bold text-white">
+            <Compass className="w-4 h-4 text-indigo-400" />
             <span>N 25°46&apos;30&quot;</span>
           </div>
 
           {/* Scale Bar */}
           <div className="absolute bottom-4 right-4 z-20 pointer-events-none flex flex-col items-end gap-1">
-            <div className="w-24 h-1.5 bg-[var(--admin-border)] border-t border-b border-indigo-400 rounded-sm" />
-            <span className="text-[10px] font-mono text-[var(--admin-text-muted)] font-bold">
+            <div className="w-24 h-1.5 bg-[#1C2436] border-t border-b border-indigo-400 rounded-sm" />
+            <span className="text-[10px] font-mono text-[#64748B] font-bold">
               1,000 meters
             </span>
           </div>
@@ -446,21 +404,18 @@ export default function AdminMapPage() {
               preserveAspectRatio="none"
               aria-hidden="true"
             >
-              {/* Main Vice City Island */}
               <path
                 d="M 20,25 Q 35,10 65,15 Q 85,20 80,50 Q 75,80 50,85 Q 25,80 15,60 Z"
                 fill="#1e293b"
                 stroke="#334155"
                 strokeWidth="0.5"
               />
-              {/* Secondary Keys Archipelago */}
               <path
                 d="M 50,88 Q 60,92 70,90 Q 75,95 65,97 Q 55,95 50,88 Z"
                 fill="#1e293b"
                 stroke="#334155"
                 strokeWidth="0.5"
               />
-              {/* Vice City Metro Roads */}
               <path
                 d="M 25,30 L 70,35 M 40,20 L 55,75 M 65,30 L 50,85"
                 stroke="#6366f1"
@@ -496,8 +451,8 @@ export default function AdminMapPage() {
                     className={cn(
                       "relative p-1.5 rounded-xl border shadow-lg flex items-center justify-center transition-colors",
                       isSelected
-                        ? "bg-[var(--admin-primary)] border-white text-white ring-4 ring-[var(--admin-primary)]/40"
-                        : "bg-[var(--admin-surface)] border-[var(--admin-border)] text-[var(--admin-primary)] hover:border-[var(--admin-primary)]"
+                        ? "bg-[#6366F1] border-white text-white ring-4 ring-[#6366F1]/40"
+                        : "bg-[#111622] border-[#1C2436] text-indigo-400 hover:border-[#6366F1]"
                     )}
                   >
                     {getMarkerIcon(m.icon)}
@@ -506,7 +461,7 @@ export default function AdminMapPage() {
                   {/* Marker tooltip on hover / selected */}
                   <div
                     className={cn(
-                      "absolute top-full mt-1.5 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md text-[10px] font-bold whitespace-nowrap bg-[var(--admin-surface)] border border-[var(--admin-border)] text-[var(--admin-text)] shadow-xl pointer-events-none transition-opacity",
+                      "absolute top-full mt-1.5 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md text-[10px] font-bold whitespace-nowrap bg-[#111622] border border-[#1C2436] text-white shadow-xl pointer-events-none transition-opacity",
                       isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                     )}
                   >
@@ -518,36 +473,35 @@ export default function AdminMapPage() {
           </div>
         </div>
 
-        {/* Column 3: Marker Details Inspector (3 cols) */}
-        <div className="lg:col-span-3 rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-surface)] flex flex-col overflow-hidden shadow-sm">
-          <div className="p-3.5 border-b border-[var(--admin-border)] bg-[var(--admin-card)] flex items-center justify-between">
+        {/* Column 3: Marker Details Inspector (3 cols, Image 4) */}
+        <div className="lg:col-span-3 rounded-xl border border-[#1C2436] bg-[#111622] flex flex-col overflow-hidden shadow-sm">
+          <div className="p-3.5 border-b border-[#1C2436] bg-[#0E131D] flex items-center justify-between">
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)]">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-white">
                 Marker Inspector
               </h3>
-              <p className="text-[11px] text-[var(--admin-text-muted)]">
+              <p className="text-[11px] text-[#64748B]">
                 {selectedMarker ? selectedMarker.id : "No selection"}
               </p>
             </div>
             {selectedMarker && (
-              <Button
-                variant="ghost"
-                size="icon"
+              <button
+                type="button"
                 onClick={handleDeleteMarker}
                 aria-label={`Delete ${selectedMarker.name}`}
-                className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10"
+                className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 p-1 rounded transition-colors"
               >
                 <Trash2 className="w-4 h-4" />
-              </Button>
+              </button>
             )}
           </div>
 
           {selectedMarker ? (
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs scrollbar-thin scrollbar-thumb-[var(--admin-border)]">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs scrollbar-thin scrollbar-thumb-[#1C2436]">
               <div>
                 <label
                   htmlFor="marker-name"
-                  className="block font-bold text-[var(--admin-text)] mb-1"
+                  className="block font-medium text-[#94A3B8] mb-1"
                 >
                   Marker Label
                 </label>
@@ -556,7 +510,7 @@ export default function AdminMapPage() {
                   type="text"
                   value={selectedMarker.name}
                   onChange={(e) => handleUpdateMarker({ name: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] font-medium"
+                  className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] font-semibold"
                 />
               </div>
 
@@ -564,7 +518,7 @@ export default function AdminMapPage() {
                 <div>
                   <label
                     htmlFor="marker-category"
-                    className="block font-bold text-[var(--admin-text)] mb-1"
+                    className="block font-medium text-[#94A3B8] mb-1"
                   >
                     Category
                   </label>
@@ -576,7 +530,7 @@ export default function AdminMapPage() {
                         category: e.target.value as AdminMapMarker["category"],
                       })
                     }
-                    className="w-full px-2.5 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
+                    className="w-full px-2.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
                   >
                     <option value="Location">Location</option>
                     <option value="Collectibles">Collectibles</option>
@@ -587,7 +541,7 @@ export default function AdminMapPage() {
                 <div>
                   <label
                     htmlFor="marker-layer"
-                    className="block font-bold text-[var(--admin-text)] mb-1"
+                    className="block font-medium text-[#94A3B8] mb-1"
                   >
                     Data Layer
                   </label>
@@ -599,7 +553,7 @@ export default function AdminMapPage() {
                         layer: e.target.value as AdminMapMarker["layer"],
                       })
                     }
-                    className="w-full px-2.5 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
+                    className="w-full px-2.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
                   >
                     <option value="Official">Official</option>
                     <option value="Research">Research</option>
@@ -610,7 +564,7 @@ export default function AdminMapPage() {
 
               {/* Icon Selector */}
               <div>
-                <label className="block font-bold text-[var(--admin-text)] mb-1.5">
+                <label className="block font-medium text-[#94A3B8] mb-1.5">
                   Pin Icon
                 </label>
                 <div
@@ -627,10 +581,10 @@ export default function AdminMapPage() {
                       aria-label={`${ic} icon`}
                       onClick={() => handleUpdateMarker({ icon: ic })}
                       className={cn(
-                        "p-2 rounded-xl border flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
+                        "p-2 rounded-xl border flex items-center justify-center transition-colors",
                         selectedMarker.icon === ic
-                          ? "bg-[var(--admin-primary)] text-white border-[var(--admin-primary)] shadow-sm"
-                          : "bg-[var(--admin-card)] border-[var(--admin-border)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)]"
+                          ? "bg-[#6366F1] text-white border-[#6366F1] shadow-sm"
+                          : "bg-[#0E131D] border-[#1C2436] text-[#64748B] hover:text-white"
                       )}
                     >
                       {getMarkerIcon(ic)}
@@ -641,14 +595,14 @@ export default function AdminMapPage() {
 
               {/* Coordinates */}
               <div>
-                <label className="block font-bold text-[var(--admin-text)] mb-1">
+                <label className="block font-medium text-[#94A3B8] mb-1">
                   Canvas Coordinates (X, Y)
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436]">
                     <label
                       htmlFor="marker-coord-x"
-                      className="text-[10px] font-bold text-[var(--admin-text-muted)] font-mono"
+                      className="text-[10px] font-bold text-[#64748B] font-mono"
                     >
                       X:
                     </label>
@@ -666,14 +620,14 @@ export default function AdminMapPage() {
                           },
                         })
                       }
-                      className="w-full bg-transparent text-xs text-[var(--admin-text)] font-mono focus:outline-none"
+                      className="w-full bg-transparent text-xs text-white font-mono focus:outline-none"
                     />
                   </div>
 
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)]">
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436]">
                     <label
                       htmlFor="marker-coord-y"
-                      className="text-[10px] font-bold text-[var(--admin-text-muted)] font-mono"
+                      className="text-[10px] font-bold text-[#64748B] font-mono"
                     >
                       Y:
                     </label>
@@ -691,11 +645,11 @@ export default function AdminMapPage() {
                           },
                         })
                       }
-                      className="w-full bg-transparent text-xs text-[var(--admin-text)] font-mono focus:outline-none"
+                      className="w-full bg-transparent text-xs text-white font-mono focus:outline-none"
                     />
                   </div>
                 </div>
-                <p className="text-[10px] text-[var(--admin-text-muted)] mt-1">
+                <p className="text-[10px] text-[#64748B] mt-1">
                   💡 Tip: Click anywhere on the map canvas to reposition this marker.
                 </p>
               </div>
@@ -704,7 +658,7 @@ export default function AdminMapPage() {
               <div>
                 <label
                   htmlFor="marker-description"
-                  className="block font-bold text-[var(--admin-text)] mb-1"
+                  className="block font-medium text-[#94A3B8] mb-1"
                 >
                   Description / Field Notes
                 </label>
@@ -713,35 +667,32 @@ export default function AdminMapPage() {
                   rows={3}
                   value={selectedMarker.description}
                   onChange={(e) => handleUpdateMarker({ description: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)]"
+                  className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
                 />
               </div>
 
               {/* Verification & Visibility */}
-              <div className="p-3 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] space-y-2">
+              <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-[var(--admin-text)]">Public Visibility</span>
+                  <span className="font-semibold text-white">Public Visibility</span>
                   <button
                     type="button"
-                    role="switch"
-                    aria-checked={selectedMarker.visible}
-                    aria-label={`Toggle public visibility for ${selectedMarker.name}`}
                     onClick={() => handleUpdateMarker({ visible: !selectedMarker.visible })}
                     className={cn(
-                      "p-1.5 rounded-lg border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]",
+                      "p-1.5 rounded-lg border transition-colors",
                       selectedMarker.visible
                         ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                        : "bg-[var(--admin-elevated)] border-[var(--admin-border)] text-[var(--admin-text-muted)]"
+                        : "bg-[#182030] border-[#1C2436] text-[#64748B]"
                     )}
                   >
                     {selectedMarker.visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                   </button>
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-[var(--admin-border-subtle)]">
+                <div className="flex items-center justify-between pt-2 border-t border-[#182030]">
                   <label
                     htmlFor="marker-verification"
-                    className="font-bold text-[var(--admin-text)]"
+                    className="font-semibold text-white"
                   >
                     Verification
                   </label>
@@ -753,7 +704,7 @@ export default function AdminMapPage() {
                         verification: e.target.value as AdminMapMarker["verification"],
                       })
                     }
-                    className="px-2 py-1 rounded-lg bg-[var(--admin-surface)] border border-[var(--admin-border)] text-[11px] text-[var(--admin-text)] focus:outline-none"
+                    className="px-2 py-1 rounded-lg bg-[#111622] border border-[#1C2436] text-[11px] text-white focus:outline-none"
                   >
                     <option value="verified">Verified</option>
                     <option value="pending">Pending</option>
@@ -766,7 +717,7 @@ export default function AdminMapPage() {
                 <Button
                   variant="primary"
                   size="md"
-                  className="w-full"
+                  className="w-full bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold py-2.5 rounded-lg"
                   onClick={() => {
                     showToast({
                       title: "Marker Saved",
@@ -780,7 +731,7 @@ export default function AdminMapPage() {
               </div>
             </div>
           ) : (
-            <div className="flex-1 flex items-center justify-center p-6 text-center text-xs text-[var(--admin-text-muted)]">
+            <div className="flex-1 flex items-center justify-center p-6 text-center text-xs text-[#64748B]">
               Select a marker from the left list or click on the map to inspect.
             </div>
           )}

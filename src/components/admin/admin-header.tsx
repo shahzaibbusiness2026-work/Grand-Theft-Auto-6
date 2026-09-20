@@ -101,35 +101,38 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
           <button
             type="button"
             onClick={onOpenMobileMenu}
-            className="lg:hidden p-2 rounded-xl text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+            className="lg:hidden p-2 rounded-xl text-[#94A3B8] hover:text-white hover:bg-[#141B2A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]"
             aria-label="Open mobile navigation menu"
           >
             <Menu className="w-5 h-5" />
           </button>
 
-          {/* Breadcrumbs */}
+          {/* Breadcrumbs (matching Image 1: Home icon > Workspace > Overview) */}
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center gap-1.5 text-xs text-[var(--admin-text-muted)] overflow-hidden truncate"
+            className="flex items-center gap-2 text-xs text-[#94A3B8] overflow-hidden truncate"
           >
             <Link
               href="/admin"
-              className="hover:text-[var(--admin-text)] font-semibold transition-colors flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded"
+              className="hover:text-white font-medium transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] rounded"
             >
-              <span>Atlas</span>
+              <svg className="w-3.5 h-3.5 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
             </Link>
             {breadcrumbs.length > 1 ? (
               breadcrumbs.slice(1).map((crumb, i) => (
                 <React.Fragment key={crumb.url}>
-                  <ChevronRight className="w-3.5 h-3.5 shrink-0 opacity-50" aria-hidden="true" />
+                  <span className="text-[#64748B] text-[11px] font-normal" aria-hidden="true">&gt;</span>
                   <Link
                     href={crumb.url}
                     aria-current={i === breadcrumbs.length - 2 ? "page" : undefined}
                     className={cn(
-                      "truncate transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] rounded",
+                      "truncate transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] rounded text-xs",
                       i === breadcrumbs.length - 2
-                        ? "text-[var(--admin-text)] font-bold"
-                        : "hover:text-[var(--admin-text)] font-medium"
+                        ? "text-white font-semibold"
+                        : "hover:text-white text-[#94A3B8] font-medium"
                     )}
                   >
                     {crumb.label}
@@ -138,8 +141,10 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
               ))
             ) : (
               <>
-                <ChevronRight className="w-3.5 h-3.5 shrink-0 opacity-50" aria-hidden="true" />
-                <span className="text-[var(--admin-text)] font-bold" aria-current="page">
+                <span className="text-[#64748B] text-[11px] font-normal" aria-hidden="true">&gt;</span>
+                <span className="text-[#94A3B8] font-medium text-xs">Workspace</span>
+                <span className="text-[#64748B] text-[11px] font-normal" aria-hidden="true">&gt;</span>
+                <span className="text-white font-semibold text-xs" aria-current="page">
                   Overview
                 </span>
               </>
@@ -147,38 +152,25 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
           </nav>
         </div>
 
-        {/* Right Side: Search Trigger, System Status, Theme Toggle, Notifications, User */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Quick Search Trigger */}
+        {/* Right Side: Search Bar, Notifications, User Profile (Image 1) */}
+        <div className="flex items-center gap-3">
+          {/* Search Bar matching Image 1: "Search records... ⌘ K" */}
           <button
             type="button"
             onClick={() => setIsSearchOpen(true)}
             aria-keyshortcuts="Control+K Meta+K"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-xs text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:border-[var(--admin-primary)] transition-all shadow-sm group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+            className="hidden sm:flex items-center justify-between w-64 md:w-72 px-3.5 py-1.5 rounded-xl border border-[#1C2436] bg-[#101522] text-xs text-[#94A3B8] hover:border-[#6366F1]/50 hover:text-white transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]"
           >
-            <Search className="w-3.5 h-3.5 text-[var(--admin-text-muted)] group-hover:text-[var(--admin-primary)]" />
-            <span className="hidden md:inline font-medium">Quick search...</span>
-            <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono font-bold bg-[var(--admin-elevated)] border border-[var(--admin-border)] rounded text-[var(--admin-text-muted)]">
-              ⌘K
+            <div className="flex items-center gap-2 min-w-0">
+              <Search className="w-3.5 h-3.5 text-[#64748B] group-hover:text-[#818CF8]" />
+              <span className="truncate">Search records...</span>
+            </div>
+            <kbd className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono font-medium bg-[#182030] border border-[#243048] rounded text-[#64748B]">
+              ⌘ K
             </kbd>
           </button>
 
-          {/* Theme Toggle Button */}
-          <button
-            type="button"
-            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
-            title={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
-            aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
-          >
-            {resolvedTheme === "dark" ? (
-              <Sun className="w-4 h-4 text-amber-400 animate-in spin-in-90 duration-200" />
-            ) : (
-              <Moon className="w-4 h-4 text-indigo-500 animate-in spin-in-90 duration-200" />
-            )}
-          </button>
-
-          {/* Notifications Popover Trigger */}
+          {/* Notifications Bell with unread dot */}
           <div className="relative" ref={notificationsRef}>
             <button
               type="button"
@@ -193,11 +185,11 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
                   ? `Notifications (${unreadCount} unread)`
                   : "Notifications (none unread)"
               }
-              className="p-2 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text-muted)] hover:text-[var(--admin-text)] hover:bg-[var(--admin-elevated)] transition-colors shadow-sm relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+              className="p-2 rounded-xl text-[#94A3B8] hover:text-white hover:bg-[#141B2A] transition-colors relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]"
             >
               <Bell className="w-4 h-4" />
               {unreadCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[var(--admin-primary)] ring-2 ring-[var(--admin-surface)]" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#EF4444] ring-2 ring-[#0B0E14]" />
               )}
             </button>
 
@@ -284,7 +276,7 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
             )}
           </div>
 
-          {/* User Profile Menu */}
+          {/* User Profile Menu (Image 1: circle avatar AD + "Administrator" + ChevronDown) */}
           <div className="relative" ref={profileRef}>
             <button
               type="button"
@@ -295,17 +287,17 @@ export function AdminHeader({ onOpenMobileMenu }: AdminHeaderProps) {
               aria-haspopup="true"
               aria-expanded={isProfileOpen}
               aria-label="User profile menu"
-              className="flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] hover:bg-[var(--admin-elevated)] transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)]"
+              className="flex items-center gap-2 p-1 sm:px-2 sm:py-1 rounded-xl hover:bg-[#141B2A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]"
             >
-              <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-[10px]">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white font-bold text-[11px] shadow-sm">
                 AD
               </div>
-              <span className="hidden sm:inline text-xs font-bold text-[var(--admin-text)]">
-                Admin
+              <span className="hidden sm:inline text-xs font-semibold text-white">
+                Administrator
               </span>
-              <span className="text-[10px] text-[var(--admin-text-muted)]" aria-hidden="true">
-                ▾
-              </span>
+              <svg className="w-3.5 h-3.5 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
             </button>
 
             {/* Profile Dropdown */}
