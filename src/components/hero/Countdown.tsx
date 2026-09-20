@@ -128,14 +128,14 @@ export function Countdown({ className }: CountdownProps) {
     <div
       suppressHydrationWarning
       className={cn(
-        "relative w-full max-w-xl sm:max-w-2xl rounded-2xl border border-white/15 bg-[#141C2E]/90 backdrop-blur-2xl p-5 sm:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.6)] select-none",
+        "relative w-full max-w-xl sm:max-w-2xl rounded-2xl border border-white/20 bg-black/30 backdrop-blur-md p-5 sm:p-7 shadow-[0_20px_60px_rgba(0,0,0,0.7)] select-none",
         className
       )}
       role="region"
       aria-label="Grand Theft Auto VI Release Countdown"
     >
       {/* Ambient Glow */}
-      <div className="pointer-events-none absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-[#B8AAFF]/20 via-[#F3A398]/15 to-[#6340CC]/20 blur-xl opacity-60 -z-10" />
+      <div className="pointer-events-none absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-purple-500/15 via-pink-500/10 to-indigo-500/15 blur-xl opacity-50 -z-10" />
 
       <span className="sr-only" aria-live="off">
         {accessibleSummary}
@@ -147,7 +147,7 @@ export function Countdown({ className }: CountdownProps) {
           <p className="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-[#B5C0D4]">
             RELEASE TIMELINE
           </p>
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400 bg-emerald-950/50 border border-emerald-800/40 rounded-full px-2.5 py-0.5">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 rounded-full px-2.5 py-0.5 backdrop-blur-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             LIVE
           </span>
@@ -158,7 +158,7 @@ export function Countdown({ className }: CountdownProps) {
           {/* Timezone Switcher */}
           <button
             onClick={() => setTimezoneMode(prev => prev === "local" ? "vice" : "local")}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-[#1C2740] hover:bg-[#253352] border border-[#33415C] text-[#B5C0D4] hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-black/40 hover:bg-black/60 border border-white/15 text-[#B5C0D4] hover:text-white transition-colors backdrop-blur-sm"
             title="Switch timezone view"
           >
             <Globe2 className="w-3 h-3 text-[#B8AAFF]" />
@@ -168,7 +168,7 @@ export function Countdown({ className }: CountdownProps) {
           {/* Copy Countdown */}
           <button
             onClick={handleCopy}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-[#1C2740] hover:bg-[#253352] border border-[#33415C] text-[#B5C0D4] hover:text-white transition-colors"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-black/40 hover:bg-black/60 border border-white/15 text-[#B5C0D4] hover:text-white transition-colors backdrop-blur-sm"
             title="Copy countdown to clipboard"
           >
             {copied ? (
@@ -189,7 +189,7 @@ export function Countdown({ className }: CountdownProps) {
             href={googleCalendarUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-[#B8AAFF] hover:bg-[#A898F0] text-[#171127] transition-colors font-black"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-[#B8AAFF] hover:bg-[#A898F0] text-[#171127] transition-colors font-black shadow-md shadow-purple-500/20"
             title="Add release window to Google Calendar"
           >
             <Calendar className="w-3 h-3" />
@@ -198,7 +198,7 @@ export function Countdown({ className }: CountdownProps) {
         </div>
       </div>
 
-      {/* 2. 4-Column Responsive Digit Grid (No leading zero) */}
+      {/* 2. 4-Column Responsive Digit Grid (Transparent Cards) */}
       <div className="grid grid-cols-4 gap-2 sm:gap-3 py-4 text-center" aria-hidden="true">
         {cells.map((cell) => {
           const isSelected = selectedUnit === cell.label;
@@ -208,14 +208,14 @@ export function Countdown({ className }: CountdownProps) {
               type="button"
               onClick={() => setSelectedUnit(isSelected ? null : cell.label)}
               className={cn(
-                "group relative flex flex-col items-center justify-center p-2.5 sm:p-4 rounded-xl transition-all border",
+                "group relative flex flex-col items-center justify-center p-2.5 sm:p-4 rounded-xl transition-all border backdrop-blur-sm",
                 isSelected
-                  ? "bg-[#1C2740] border-[#B8AAFF] shadow-lg shadow-[#B8AAFF]/15 scale-[1.03]"
-                  : "bg-[#0B1020]/75 border-white/10 hover:border-[#B8AAFF]/50 hover:bg-[#1C2740]/60"
+                  ? "bg-black/50 border-[#B8AAFF] shadow-lg shadow-purple-500/20 scale-[1.03]"
+                  : "bg-black/30 border-white/15 hover:border-[#B8AAFF]/60 hover:bg-black/45"
               )}
             >
               {/* Digit display without leading zeros */}
-              <span className="font-mono tabular-nums text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none group-hover:text-[#B8AAFF] transition-colors">
+              <span className="font-mono tabular-nums text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none drop-shadow-md group-hover:text-[#B8AAFF] transition-colors">
                 {cell.value}
               </span>
 
@@ -225,13 +225,13 @@ export function Countdown({ className }: CountdownProps) {
               </span>
 
               {/* Subtext */}
-              <span className="mt-1 text-[9px] sm:text-[10px] text-[#B5C0D4]/70 font-mono hidden sm:inline-block">
+              <span className="mt-1 text-[9px] sm:text-[10px] text-[#B5C0D4]/80 font-mono hidden sm:inline-block">
                 {cell.subtext}
               </span>
 
               {/* Active Unit Badge */}
               {isSelected && (
-                <span className="absolute -top-6 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-[#1C2740] border border-[#B8AAFF] text-[9px] font-mono text-[#B8AAFF] whitespace-nowrap shadow-md z-10">
+                <span className="absolute -top-6 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-black/80 border border-[#B8AAFF] text-[9px] font-mono text-[#B8AAFF] whitespace-nowrap shadow-md z-10 backdrop-blur-md">
                   {cell.tooltip}
                 </span>
               )}
@@ -261,7 +261,7 @@ export function Countdown({ className }: CountdownProps) {
 
         {/* The Animated Progress Track */}
         <div 
-          className="relative w-full h-2.5 rounded-full bg-[#0B1020] border border-white/10 overflow-hidden"
+          className="relative w-full h-2.5 rounded-full bg-black/40 border border-white/15 overflow-hidden backdrop-blur-sm"
           title={`Reveal to Launch Window: ${stats.percentage}% elapsed`}
         >
           <div

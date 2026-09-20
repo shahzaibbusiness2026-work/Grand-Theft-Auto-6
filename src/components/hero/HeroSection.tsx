@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, Map, Newspaper, Car } from "lucide-react";
 import { HeroBackground } from "./HeroBackground";
 import { Countdown } from "./Countdown";
@@ -20,47 +19,28 @@ export function HeroSection() {
         Grand Theft Auto VI — Official Database & Interactive Atlas
       </h1>
 
-      {/* 2. MAIN HERO CONTENT (Left Column) */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl flex flex-col justify-center flex-1">
-        <div className="flex flex-col items-start text-left space-y-5 max-w-2xl">
-          {/* Official Grand Theft Auto VI Logo */}
-          <div className="pt-1 pb-1">
-            <Image
-              src="/img/gta6-official-logo.png"
-              alt="Grand Theft Auto VI"
-              width={520}
-              height={350}
-              priority
-              className="w-auto h-28 sm:h-36 lg:h-44 object-contain filter drop-shadow-[0_16px_36px_rgba(0,0,0,0.85)] hover:scale-[1.02] transition-transform duration-300"
-            />
-          </div>
+      {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
+      <div className="relative z-10 mx-auto w-full max-w-5xl flex flex-col items-center justify-center flex-1 py-12 sm:py-20 text-center">
+        {/* Countdown Card in Center */}
+        <Countdown className="w-full max-w-xl sm:max-w-2xl mx-auto" />
 
-          {/* Countdown Card */}
-          <Countdown />
+        {/* Action Buttons Centered Below Countdown */}
+        <div className="flex flex-wrap items-center justify-center gap-3.5 pt-6">
+          <Link
+            href="/map"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#a78bfa] hover:bg-[#b599f9] px-6 py-3 text-sm font-bold text-slate-950 transition-all shadow-lg hover:shadow-purple-500/25 active:scale-95"
+          >
+            <span>Explore the Atlas</span>
+            <ArrowRight className="h-4 w-4 text-slate-950" />
+          </Link>
 
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3.5 pt-1">
-            <Link
-              href="/map"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#a78bfa] hover:bg-[#b599f9] px-6 py-3.5 text-sm font-bold text-slate-950 transition-all shadow-lg hover:shadow-purple-500/25 active:scale-95"
-            >
-              <span>Explore the Atlas</span>
-              <ArrowRight className="h-4 w-4 text-slate-950" />
-            </Link>
-
-            <Link
-              href="/map-explorer"
-              className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-purple-400/30 bg-purple-950/25 hover:bg-purple-950/45 px-6 py-3.5 text-sm font-semibold text-white transition-all backdrop-blur-md active:scale-95"
-            >
-              <span>Open interactive map</span>
-              <Map className="h-4 w-4 text-purple-300" />
-            </Link>
-          </div>
-
-          {/* Sub-disclaimer */}
-          <p className="text-[11px] text-slate-400/80 font-medium">
-            Independent fan platform • Unofficial
-          </p>
+          <Link
+            href="/map-explorer"
+            className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-black/30 hover:bg-black/50 px-6 py-3 text-sm font-semibold text-white transition-all backdrop-blur-md active:scale-95"
+          >
+            <span>Open Interactive Map</span>
+            <Map className="h-4 w-4 text-purple-300" />
+          </Link>
         </div>
       </div>
 
