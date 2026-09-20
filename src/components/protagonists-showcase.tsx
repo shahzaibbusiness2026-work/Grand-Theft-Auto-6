@@ -128,91 +128,124 @@ export function ProtagonistsShowcase() {
             />
 
             <div className="flex flex-col md:flex-row h-full">
-              {/* Character Portrait — Perfectly Fitted in Natural 3:4 Aspect Ratio */}
-              <div className="relative w-full md:w-[42%] min-h-[340px] md:min-h-[460px] overflow-hidden bg-gradient-to-b from-black/60 to-black/20 shrink-0">
+              {/* Character Portrait — 100% Clear & Visible with Natural 3:4 Aspect Ratio (No Washed Out Overlays) */}
+              <div className="relative w-full md:w-[42%] min-h-[360px] md:min-h-[480px] overflow-hidden bg-[#070b14] shrink-0 border-b md:border-b-0 md:border-r border-white/10">
                 <Image
                   src={p.img}
                   alt={p.name}
                   fill
                   priority
-                  sizes="(max-width: 768px) 100vw, 360px"
+                  sizes="(max-width: 768px) 100vw, 420px"
                   className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-card pointer-events-none" />
                 
-                {/* Badge Overlay */}
+                {/* Mobile-only bottom fade so text below doesn't collide */}
+                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0B1020] to-transparent md:hidden pointer-events-none" />
+                
+                {/* Role Badge Overlay */}
                 <div className="absolute top-4 left-4">
-                  <span className={cn("inline-flex items-center gap-1 rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider backdrop-blur-md shadow-md", p.tagColor)}>
+                  <span className={cn("inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider backdrop-blur-md shadow-lg", p.tagColor)}>
+                    <Sparkles className="w-3 h-3" />
                     {p.role}
                   </span>
                 </div>
               </div>
 
-              {/* Character Dossier Content */}
-              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1">
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-mono font-black uppercase tracking-[0.2em] text-pink-400">
-                      CONFIRMED DOSSIER
-                    </span>
-                    <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 px-2.5 py-0.5 rounded-lg">
+              {/* Character Dossier Content — Clean, Structured 2x2 Layout */}
+              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-[#0B1020]/95">
+                <div className="space-y-4">
+                  {/* Top Metadata Row */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-white/10">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-pink-400">
+                        CONFIRMED DOSSIER
+                      </span>
+                      <span className="w-1 h-1 rounded-full bg-pink-400" />
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400">
+                        Active
+                      </span>
+                    </div>
+                    <span className="font-mono text-xs font-bold text-cyan-300 bg-cyan-950/50 border border-cyan-500/30 px-2.5 py-0.5 rounded-lg shadow-sm">
                       {p.alias}
                     </span>
                   </div>
 
-                  <h3 className="mt-1.5 font-display text-2xl sm:text-3xl font-black uppercase tracking-wide text-foreground">
-                    {p.name}
-                  </h3>
+                  {/* Character Name & Role Subtitle */}
+                  <div>
+                    <h3 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-wide text-white">
+                      {p.name}
+                    </h3>
+                    <p className="text-xs font-mono text-pink-300/80 font-bold uppercase tracking-wider mt-0.5">
+                      {p.role} • State of Leonida
+                    </p>
+                  </div>
 
                   {/* Character Quote */}
-                  <blockquote className="mt-3 flex items-start gap-2.5 rounded-xl border border-pink-500/20 bg-pink-950/10 p-3 text-xs italic text-pink-200/90">
+                  <blockquote className="flex items-start gap-2.5 rounded-xl border border-pink-500/20 bg-pink-950/15 p-3 text-xs italic text-pink-200/90 shadow-sm">
                     <Quote className="h-4 w-4 shrink-0 text-pink-400 opacity-90 mt-0.5" />
                     <span>&ldquo;{p.quote}&rdquo;</span>
                   </blockquote>
 
-                  {/* Attribute Specs */}
-                  <div className="mt-5 space-y-2.5 text-xs">
-                    <div className="flex items-center gap-2">
-                      <Zap className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-                      <span className="text-muted-foreground">Special Ability:</span>
-                      <strong className="text-foreground font-semibold">{p.perk}</strong>
+                  {/* Attribute Specs: Organized 2x2 Grid with Badges */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                    <div className="rounded-xl border border-white/10 bg-white/5 p-2.5 hover:border-pink-500/30 transition-colors">
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase text-slate-400">
+                        <Zap className="h-3 w-3 text-amber-400 shrink-0" />
+                        <span>Special Ability</span>
+                      </div>
+                      <p className="mt-1 text-xs font-bold text-white leading-snug">
+                        {p.perk}
+                      </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Shield className="h-3.5 w-3.5 text-pink-400 shrink-0" />
-                      <span className="text-muted-foreground">Specialty:</span>
-                      <strong className="text-foreground font-semibold">{p.specialty}</strong>
+
+                    <div className="rounded-xl border border-white/10 bg-white/5 p-2.5 hover:border-pink-500/30 transition-colors">
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase text-slate-400">
+                        <Shield className="h-3 w-3 text-pink-400 shrink-0" />
+                        <span>Specialty</span>
+                      </div>
+                      <p className="mt-1 text-xs font-bold text-white leading-snug">
+                        {p.specialty}
+                      </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Car className="h-3.5 w-3.5 text-purple-400 shrink-0" />
-                      <span className="text-muted-foreground">Signature Ride:</span>
-                      <strong className="text-foreground font-semibold">{p.vehicle}</strong>
+
+                    <div className="rounded-xl border border-white/10 bg-white/5 p-2.5 hover:border-pink-500/30 transition-colors">
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase text-slate-400">
+                        <Car className="h-3 w-3 text-purple-400 shrink-0" />
+                        <span>Signature Ride</span>
+                      </div>
+                      <p className="mt-1 text-xs font-bold text-white leading-snug">
+                        {p.vehicle}
+                      </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
-                      <span className="text-muted-foreground">Territory:</span>
-                      <strong className="text-foreground font-semibold">{p.origin}</strong>
+
+                    <div className="rounded-xl border border-white/10 bg-white/5 p-2.5 hover:border-pink-500/30 transition-colors">
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase text-slate-400">
+                        <MapPin className="h-3 w-3 text-cyan-400 shrink-0" />
+                        <span>Territory</span>
+                      </div>
+                      <p className="mt-1 text-xs font-bold text-white leading-snug">
+                        {p.origin}
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Footer CTA */}
-                <div className="mt-6 pt-4 border-t border-border/60 flex items-center justify-between gap-3">
-                  <span className="text-[11px] text-muted-foreground">
-                    Actor: <strong className="text-foreground">{p.voiceActor}</strong>
+                <div className="mt-5 pt-3.5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                  <span className="text-[11px] text-slate-400">
+                    Actor: <strong className="text-white">{p.voiceActor}</strong>
                   </span>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const matched = characters.find(c => c.id === p.id);
-                        if (matched) setSelectedCharacter(matched);
-                      }}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white transition-all shadow-md shadow-pink-500/20 active:scale-95"
-                    >
-                      <span>View Dossier</span>
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const matched = characters.find((c) => c.id === p.id);
+                      if (matched) setSelectedCharacter(matched);
+                    }}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white transition-all shadow-md shadow-pink-500/25 active:scale-95"
+                  >
+                    <span>View Dossier</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
                 </div>
               </div>
             </div>
