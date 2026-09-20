@@ -25,21 +25,21 @@ export function HeroSection() {
         <Countdown className="w-full max-w-xl sm:max-w-3xl mx-auto" />
 
         {/* Action Buttons Centered Below Countdown */}
-        <div className="flex flex-wrap items-center justify-center gap-3.5 pt-6">
+        <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
           <Link
             href="/map"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#a78bfa] hover:bg-[#b599f9] px-6 py-3 text-sm font-bold text-slate-950 transition-all shadow-lg hover:shadow-purple-500/25 active:scale-95"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 px-7 py-3.5 text-sm font-black text-white transition-all shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 active:scale-95"
           >
             <span>Explore the Atlas</span>
-            <ArrowRight className="h-4 w-4 text-slate-950" />
+            <ArrowRight className="h-4 w-4 text-white" />
           </Link>
 
           <Link
             href="/map-explorer"
-            className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-black/30 hover:bg-black/50 px-6 py-3 text-sm font-semibold text-white transition-all backdrop-blur-md active:scale-95"
+            className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-black/40 hover:bg-white/10 px-7 py-3.5 text-sm font-bold text-white transition-all backdrop-blur-md hover:border-pink-400/50 active:scale-95 shadow-sm"
           >
             <span>Open Interactive Map</span>
-            <Map className="h-4 w-4 text-purple-300" />
+            <Map className="h-4 w-4 text-pink-300" />
           </Link>
         </div>
       </div>

@@ -139,13 +139,13 @@ export function Countdown({ className }: CountdownProps) {
       </span>
 
       {/* 1. Header Bar: Tag & Interactive Controls */}
-      <div className="pb-3 border-b border-white/15 flex flex-wrap items-center justify-between gap-3">
+      <div className="pb-3.5 border-b border-white/15 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
-          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-[#B5C0D4] drop-shadow-sm">
+          <p className="font-mono text-xs font-black uppercase tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-cyan-300 drop-shadow-[0_2px_10px_rgba(244,114,182,0.35)]">
             RELEASE TIMELINE
           </p>
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400 bg-emerald-950/30 border border-emerald-500/30 rounded-full px-2.5 py-0.5 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider text-pink-400 bg-pink-950/40 border border-pink-500/30 rounded-full px-2.5 py-0.5 backdrop-blur-md shadow-[0_0_12px_rgba(236,72,153,0.2)]">
+            <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse" />
             LIVE
           </span>
         </div>
@@ -155,27 +155,27 @@ export function Countdown({ className }: CountdownProps) {
           {/* Timezone Switcher */}
           <button
             onClick={() => setTimezoneMode(prev => prev === "local" ? "vice" : "local")}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-transparent hover:bg-white/10 border border-white/20 text-[#B5C0D4] hover:text-white transition-colors backdrop-blur-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-bold uppercase tracking-wider bg-black/40 hover:bg-white/10 border border-white/15 hover:border-pink-500/40 text-slate-200 hover:text-white transition-all backdrop-blur-md shadow-sm"
             title="Switch timezone view"
           >
-            <Globe2 className="w-3 h-3 text-[#B8AAFF]" />
+            <Globe2 className="w-3.5 h-3.5 text-pink-400" />
             <span>{timezoneMode === "local" ? "My Time" : "Vice City (EDT)"}</span>
           </button>
 
           {/* Copy Countdown */}
           <button
             onClick={handleCopy}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-transparent hover:bg-white/10 border border-white/20 text-[#B5C0D4] hover:text-white transition-colors backdrop-blur-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-bold uppercase tracking-wider bg-black/40 hover:bg-white/10 border border-white/15 hover:border-pink-500/40 text-slate-200 hover:text-white transition-all backdrop-blur-md shadow-sm"
             title="Copy countdown to clipboard"
           >
             {copied ? (
               <>
-                <Check className="w-3 h-3 text-emerald-400" />
+                <Check className="w-3.5 h-3.5 text-emerald-400" />
                 <span className="text-emerald-400">Copied</span>
               </>
             ) : (
               <>
-                <Copy className="w-3 h-3 text-[#B8AAFF]" />
+                <Copy className="w-3.5 h-3.5 text-pink-400" />
                 <span>Share</span>
               </>
             )}
@@ -186,17 +186,17 @@ export function Countdown({ className }: CountdownProps) {
             href={googleCalendarUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-[#B8AAFF] hover:bg-[#A898F0] text-[#171127] transition-colors font-black shadow-md shadow-purple-500/20"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-[11px] font-black uppercase tracking-wider bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white transition-all shadow-lg shadow-pink-500/25 active:scale-95"
             title="Add release window to Google Calendar"
           >
-            <Calendar className="w-3 h-3" />
+            <Calendar className="w-3.5 h-3.5" />
             <span>Remind Me</span>
           </a>
         </div>
       </div>
 
-      {/* 2. 4-Column Responsive Digit Grid (Totally Transparent Cards) */}
-      <div className="grid grid-cols-4 gap-2 sm:gap-4 py-5 text-center" aria-hidden="true">
+      {/* 2. 4-Column Responsive Digit Grid (Totally Transparent Cards with Vice City Neon Accents) */}
+      <div className="grid grid-cols-4 gap-2.5 sm:gap-4 py-5 text-center" aria-hidden="true">
         {cells.map((cell) => {
           const isSelected = selectedUnit === cell.label;
           return (
@@ -205,30 +205,30 @@ export function Countdown({ className }: CountdownProps) {
               type="button"
               onClick={() => setSelectedUnit(isSelected ? null : cell.label)}
               className={cn(
-                "group relative flex flex-col items-center justify-center p-3 sm:p-5 rounded-2xl transition-all border",
+                "group relative flex flex-col items-center justify-center p-3.5 sm:p-5 rounded-2xl transition-all border backdrop-blur-md",
                 isSelected
-                  ? "bg-white/10 border-[#B8AAFF] shadow-lg shadow-purple-500/20 scale-[1.03]"
-                  : "bg-transparent border-white/15 hover:border-[#B8AAFF]/60 hover:bg-white/5"
+                  ? "bg-pink-950/30 border-pink-500 shadow-[0_0_30px_rgba(236,72,153,0.35)] scale-[1.03]"
+                  : "bg-black/25 border-white/10 hover:border-pink-500/40 hover:bg-black/40 hover:shadow-[0_0_25px_rgba(236,72,153,0.2)]"
               )}
             >
               {/* Digit display without leading zeros */}
-              <span className="font-mono tabular-nums text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] group-hover:text-[#B8AAFF] transition-colors">
+              <span className="font-mono tabular-nums text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)] drop-shadow-[0_0_24px_rgba(236,72,153,0.3)] group-hover:text-pink-200 transition-colors">
                 {cell.value}
               </span>
 
               {/* Unit Label */}
-              <span className="mt-2 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#B5C0D4] drop-shadow group-hover:text-white transition-colors">
+              <span className="mt-2.5 font-mono text-[11px] sm:text-xs font-black uppercase tracking-[0.2em] text-pink-400/90 drop-shadow group-hover:text-pink-300 transition-colors">
                 {cell.label}
               </span>
 
               {/* Subtext */}
-              <span className="mt-1 text-[9px] sm:text-[10px] text-[#B5C0D4]/80 font-mono hidden sm:inline-block">
+              <span className="mt-1 text-[9px] sm:text-[10px] text-slate-300/70 font-mono hidden sm:inline-block">
                 {cell.subtext}
               </span>
 
               {/* Active Unit Badge */}
               {isSelected && (
-                <span className="absolute -top-6 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-black/80 border border-[#B8AAFF] text-[9px] font-mono text-[#B8AAFF] whitespace-nowrap shadow-md z-10 backdrop-blur-md">
+                <span className="absolute -top-6 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded bg-black/90 border border-pink-500 text-[10px] font-mono text-pink-300 whitespace-nowrap shadow-xl z-10 backdrop-blur-md">
                   {cell.tooltip}
                 </span>
               )}
@@ -237,50 +237,50 @@ export function Countdown({ className }: CountdownProps) {
         })}
       </div>
 
-      {/* 3. Percentage Completion Progress Bar (Totally Transparent) */}
-      <div className="pt-4 border-t border-white/15 space-y-2">
+      {/* 3. Percentage Completion Progress Bar (Vice City Neon Palette) */}
+      <div className="pt-4 border-t border-white/15 space-y-2.5">
         <div className="flex items-center justify-between text-xs">
-          <div className="flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-[#B8AAFF]" />
-            <span className="font-bold uppercase tracking-wider text-[11px] text-white drop-shadow">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-pink-400" />
+            <span className="font-black uppercase tracking-wider text-xs text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-200 to-purple-200 drop-shadow">
               Journey to Leonida
             </span>
           </div>
-          <div className="flex items-center gap-2 font-mono text-xs">
-            <span className="text-[#B5C0D4] text-[11px] hidden sm:inline drop-shadow">
+          <div className="flex items-center gap-2.5 font-mono text-xs">
+            <span className="text-slate-300/80 text-[11px] hidden sm:inline drop-shadow">
               {stats.elapsedDays}d elapsed / {stats.remainingDays}d to go
             </span>
-            <span className="font-black text-sm text-[#B8AAFF] tabular-nums drop-shadow">
-              {mounted ? `${stats.percentage}%` : "--%"} <span className="text-[10px] font-normal text-[#B5C0D4]">Complete</span>
+            <span className="font-black text-sm sm:text-base text-pink-400 tabular-nums drop-shadow-[0_0_12px_rgba(236,72,153,0.4)]">
+              {mounted ? `${stats.percentage}%` : "--%"} <span className="text-[10px] font-normal text-slate-300/70">Complete</span>
             </span>
           </div>
         </div>
 
-        {/* The Animated Progress Track (Totally Transparent) */}
+        {/* The Animated Progress Track */}
         <div 
-          className="relative w-full h-2.5 rounded-full bg-white/10 border border-white/20 overflow-hidden"
+          className="relative w-full h-3 rounded-full bg-black/50 border border-white/15 overflow-hidden backdrop-blur-sm p-0.5 shadow-inner"
           title={`Reveal to Launch Window: ${stats.percentage}% elapsed`}
         >
           <div
-            className="h-full rounded-full bg-gradient-to-r from-[#6340CC] via-[#B8AAFF] to-[#F3A398] transition-all duration-1000 ease-out relative"
+            className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 via-pink-500 to-rose-400 transition-all duration-1000 ease-out relative shadow-[0_0_15px_rgba(236,72,153,0.5)]"
             style={{ width: `${mounted ? stats.percentage : 0}%` }}
           >
             {/* Shimmer effect */}
-            <div className="absolute inset-0 bg-white/30 animate-pulse" />
+            <div className="absolute inset-0 bg-white/35 animate-pulse" />
           </div>
         </div>
 
         {/* Milestone Labels */}
-        <div className="flex items-center justify-between text-[10px] font-mono text-[#B5C0D4] drop-shadow-sm">
+        <div className="flex items-center justify-between text-[11px] font-mono text-slate-300/80 drop-shadow-sm">
           <span>Reveal Trailer (Dec 2023)</span>
-          <span className="text-white font-medium">Current Intel</span>
+          <span className="text-pink-300 font-bold drop-shadow-[0_0_8px_rgba(236,72,153,0.4)]">Current Intel</span>
           <span>Target Launch (Nov 2026)</span>
         </div>
       </div>
 
       {/* 4. Footer Note */}
       <div className="pt-3 text-center">
-        <p className="font-mono text-[10px] sm:text-[11px] text-[#B5C0D4] font-medium drop-shadow-sm">
+        <p className="font-mono text-[10px] sm:text-[11px] text-slate-400 font-medium drop-shadow-sm">
           {SITE_CONFIG.isReleaseDateConfirmed
             ? "Official Confirmed Launch Date"
             : "Anticipated window • Date to be confirmed by Rockstar Games"}
