@@ -21,8 +21,8 @@ export function HeroSection() {
 
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
       <div className="relative z-10 mx-auto w-full max-w-5xl flex flex-col items-center justify-center flex-1 py-12 sm:py-20 text-center">
-        {/* Countdown Card in Center */}
-        <Countdown className="w-full max-w-xl sm:max-w-2xl mx-auto" />
+        {/* Countdown in Center */}
+        <Countdown className="w-full max-w-xl sm:max-w-3xl mx-auto" />
 
         {/* Action Buttons Centered Below Countdown */}
         <div className="flex flex-wrap items-center justify-center gap-3.5 pt-6">

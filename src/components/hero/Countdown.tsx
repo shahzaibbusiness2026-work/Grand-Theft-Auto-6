@@ -128,26 +128,23 @@ export function Countdown({ className }: CountdownProps) {
     <div
       suppressHydrationWarning
       className={cn(
-        "relative w-full max-w-xl sm:max-w-2xl rounded-2xl border border-white/20 bg-black/30 backdrop-blur-md p-5 sm:p-7 shadow-[0_20px_60px_rgba(0,0,0,0.7)] select-none",
+        "relative w-full max-w-xl sm:max-w-3xl bg-transparent select-none",
         className
       )}
       role="region"
       aria-label="Grand Theft Auto VI Release Countdown"
     >
-      {/* Ambient Glow */}
-      <div className="pointer-events-none absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-purple-500/15 via-pink-500/10 to-indigo-500/15 blur-xl opacity-50 -z-10" />
-
       <span className="sr-only" aria-live="off">
         {accessibleSummary}
       </span>
 
       {/* 1. Header Bar: Tag & Interactive Controls */}
-      <div className="pb-3.5 border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+      <div className="pb-3 border-b border-white/15 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
-          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-[#B5C0D4]">
+          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-[#B5C0D4] drop-shadow-sm">
             RELEASE TIMELINE
           </p>
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 rounded-full px-2.5 py-0.5 backdrop-blur-sm">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400 bg-emerald-950/30 border border-emerald-500/30 rounded-full px-2.5 py-0.5 backdrop-blur-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             LIVE
           </span>
@@ -158,7 +155,7 @@ export function Countdown({ className }: CountdownProps) {
           {/* Timezone Switcher */}
           <button
             onClick={() => setTimezoneMode(prev => prev === "local" ? "vice" : "local")}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-black/40 hover:bg-black/60 border border-white/15 text-[#B5C0D4] hover:text-white transition-colors backdrop-blur-sm"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-transparent hover:bg-white/10 border border-white/20 text-[#B5C0D4] hover:text-white transition-colors backdrop-blur-sm"
             title="Switch timezone view"
           >
             <Globe2 className="w-3 h-3 text-[#B8AAFF]" />
@@ -168,7 +165,7 @@ export function Countdown({ className }: CountdownProps) {
           {/* Copy Countdown */}
           <button
             onClick={handleCopy}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-black/40 hover:bg-black/60 border border-white/15 text-[#B5C0D4] hover:text-white transition-colors backdrop-blur-sm"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-transparent hover:bg-white/10 border border-white/20 text-[#B5C0D4] hover:text-white transition-colors backdrop-blur-sm"
             title="Copy countdown to clipboard"
           >
             {copied ? (
@@ -198,8 +195,8 @@ export function Countdown({ className }: CountdownProps) {
         </div>
       </div>
 
-      {/* 2. 4-Column Responsive Digit Grid (Transparent Cards) */}
-      <div className="grid grid-cols-4 gap-2 sm:gap-3 py-4 text-center" aria-hidden="true">
+      {/* 2. 4-Column Responsive Digit Grid (Totally Transparent Cards) */}
+      <div className="grid grid-cols-4 gap-2 sm:gap-4 py-5 text-center" aria-hidden="true">
         {cells.map((cell) => {
           const isSelected = selectedUnit === cell.label;
           return (
@@ -208,19 +205,19 @@ export function Countdown({ className }: CountdownProps) {
               type="button"
               onClick={() => setSelectedUnit(isSelected ? null : cell.label)}
               className={cn(
-                "group relative flex flex-col items-center justify-center p-2.5 sm:p-4 rounded-xl transition-all border backdrop-blur-sm",
+                "group relative flex flex-col items-center justify-center p-3 sm:p-5 rounded-2xl transition-all border",
                 isSelected
-                  ? "bg-black/50 border-[#B8AAFF] shadow-lg shadow-purple-500/20 scale-[1.03]"
-                  : "bg-black/30 border-white/15 hover:border-[#B8AAFF]/60 hover:bg-black/45"
+                  ? "bg-white/10 border-[#B8AAFF] shadow-lg shadow-purple-500/20 scale-[1.03]"
+                  : "bg-transparent border-white/15 hover:border-[#B8AAFF]/60 hover:bg-white/5"
               )}
             >
               {/* Digit display without leading zeros */}
-              <span className="font-mono tabular-nums text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none drop-shadow-md group-hover:text-[#B8AAFF] transition-colors">
+              <span className="font-mono tabular-nums text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] group-hover:text-[#B8AAFF] transition-colors">
                 {cell.value}
               </span>
 
               {/* Unit Label */}
-              <span className="mt-2 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#94A3BD] group-hover:text-white transition-colors">
+              <span className="mt-2 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#B5C0D4] drop-shadow group-hover:text-white transition-colors">
                 {cell.label}
               </span>
 
@@ -240,28 +237,28 @@ export function Countdown({ className }: CountdownProps) {
         })}
       </div>
 
-      {/* 3. Percentage Completion Progress Bar */}
-      <div className="pt-3 border-t border-white/10 space-y-2">
+      {/* 3. Percentage Completion Progress Bar (Totally Transparent) */}
+      <div className="pt-4 border-t border-white/15 space-y-2">
         <div className="flex items-center justify-between text-xs">
           <div className="flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-[#B8AAFF]" />
-            <span className="font-bold uppercase tracking-wider text-[11px] text-white">
+            <span className="font-bold uppercase tracking-wider text-[11px] text-white drop-shadow">
               Journey to Leonida
             </span>
           </div>
           <div className="flex items-center gap-2 font-mono text-xs">
-            <span className="text-[#94A3BD] text-[11px] hidden sm:inline">
+            <span className="text-[#B5C0D4] text-[11px] hidden sm:inline drop-shadow">
               {stats.elapsedDays}d elapsed / {stats.remainingDays}d to go
             </span>
-            <span className="font-black text-sm text-[#B8AAFF] tabular-nums">
-              {mounted ? `${stats.percentage}%` : "--%"} <span className="text-[10px] font-normal text-[#94A3BD]">Complete</span>
+            <span className="font-black text-sm text-[#B8AAFF] tabular-nums drop-shadow">
+              {mounted ? `${stats.percentage}%` : "--%"} <span className="text-[10px] font-normal text-[#B5C0D4]">Complete</span>
             </span>
           </div>
         </div>
 
-        {/* The Animated Progress Track */}
+        {/* The Animated Progress Track (Totally Transparent) */}
         <div 
-          className="relative w-full h-2.5 rounded-full bg-black/40 border border-white/15 overflow-hidden backdrop-blur-sm"
+          className="relative w-full h-2.5 rounded-full bg-white/10 border border-white/20 overflow-hidden"
           title={`Reveal to Launch Window: ${stats.percentage}% elapsed`}
         >
           <div
@@ -269,21 +266,21 @@ export function Countdown({ className }: CountdownProps) {
             style={{ width: `${mounted ? stats.percentage : 0}%` }}
           >
             {/* Shimmer effect */}
-            <div className="absolute inset-0 bg-white/25 animate-pulse" />
+            <div className="absolute inset-0 bg-white/30 animate-pulse" />
           </div>
         </div>
 
         {/* Milestone Labels */}
-        <div className="flex items-center justify-between text-[10px] font-mono text-[#94A3BD]">
+        <div className="flex items-center justify-between text-[10px] font-mono text-[#B5C0D4] drop-shadow-sm">
           <span>Reveal Trailer (Dec 2023)</span>
-          <span className="text-[#B5C0D4]">Current Intel</span>
+          <span className="text-white font-medium">Current Intel</span>
           <span>Target Launch (Nov 2026)</span>
         </div>
       </div>
 
       {/* 4. Footer Note */}
-      <div className="pt-2 text-center">
-        <p className="font-mono text-[10px] sm:text-[11px] text-[#94A3BD] font-medium">
+      <div className="pt-3 text-center">
+        <p className="font-mono text-[10px] sm:text-[11px] text-[#B5C0D4] font-medium drop-shadow-sm">
           {SITE_CONFIG.isReleaseDateConfirmed
             ? "Official Confirmed Launch Date"
             : "Anticipated window • Date to be confirmed by Rockstar Games"}
