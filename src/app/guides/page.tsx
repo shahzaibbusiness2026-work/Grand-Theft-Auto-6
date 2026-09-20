@@ -40,7 +40,7 @@ const weekTop = [
   { title: "Hidden Packages Locations", read: "11 min read", views: "12.6K", img: "/img/treasure.svg" },
   { title: "Best Properties to Buy", read: "10 min read", views: "10.9K", img: "/img/hero-dark.jpg" },
   { title: "All Secret Vehicles & How to Unlock", read: "17 min read", views: "9.2K", img: "/img/car-purple.jpg" },
-  { title: "Skill Progression Guide", read: "6 min read", views: "8.1K", img: "/img/char-jason.svg" },
+  { title: "Skill Progression Guide", read: "6 min read", views: "8.1K", img: "/img/char-jason.jpg" },
 ];
 
 export default function GuidesPage() {

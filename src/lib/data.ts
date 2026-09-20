@@ -24,12 +24,12 @@ export const characters: Character[] = [
   { id: "lucia", name: "Lucia Caminos", role: "Protagonist", desc: "A newly released prison inmate trying to build a better life.", img: "/img/char-lucia.jpg", featured: true },
   { id: "jason", name: "Jason Duval", role: "Protagonist", desc: "A veteran, smuggler and Lucia's partner in crime.", img: "/img/char-jason.jpg", featured: true },
   { id: "cal", name: "Cal Hampton", role: "Antagonist", desc: "Ruthless businessman with ties across Leonida.", img: "/img/char-cal.jpg", featured: true },
-  { id: "heder", name: "Officer Brian Heder", role: "Law Enforcement", desc: "Experienced officer working to uphold the law.", img: "/img/char-cop.jpg", featured: true },
-  { id: "roxy", name: "Roxy Michaels", role: "Civilian", desc: "Vice City influencer with secrets of her own.", img: "/img/char-roxy.jpg" },
-  { id: "bobbie", name: "Bobbie Ike", role: "Supporting", desc: "Street-smart fixer and longtime friend of Jason.", img: "/img/char-bobbie.jpg" },
-  { id: "dre", name: "Dre'Quan Priest", role: "Supporting", desc: "Community leader caught between two worlds.", img: "/img/char-dre.jpg" },
-  { id: "raul", name: "Raul Bautista", role: "Supporting", desc: "Boat mechanic who knows every dock in Leonida.", img: "/img/char-raul.jpg" },
-  { id: "dimez", name: "Real Dimez", role: "Antagonist", desc: "Rising kingpin of the Leonida Keys.", img: "/img/char-dimez.jpg" },
+  { id: "heder", name: "Brian Heder", role: "Supporting", desc: "Owner of Brian's Boat Works & Marina with deep ties across the waterfront.", img: "/img/char-cop.jpg", featured: true },
+  { id: "roxy", name: "Roxy Michaels", role: "Civilian", desc: "Vice City influencer and member of the Real Dimez duo.", img: "/img/char-roxy.jpg" },
+  { id: "bobbie", name: "Boobie Ike", role: "Supporting", desc: "Real estate mogul and fixer behind Boobie Ike Real Estate.", img: "/img/char-bobbie.jpg", featured: true },
+  { id: "dre", name: "Dre'Quan Priest", role: "Supporting", desc: "Community leader and street icon caught between two worlds.", img: "/img/char-dre.jpg", featured: true },
+  { id: "raul", name: "Raul Bautista", role: "Supporting", desc: "Boat mechanic and aviator who knows every dock in Leonida.", img: "/img/char-raul.jpg", featured: true },
+  { id: "dimez", name: "Real Dimez (Bae-Luxe)", role: "Civilian", desc: "High-profile nightlife duo making waves across Vice City clubs.", img: "/img/char-dimez.jpg", featured: true },
   { id: "pamela", name: "Pamela Scott", role: "Civilian", desc: "Radio host of Wave 103 and voice of the coast.", img: "/img/char-pamela.jpg" },
   { id: "phil", name: "Phil Cassidy", role: "Supporting", desc: "Demolitions expert with a storied past.", img: "/img/char-phil.jpg" },
   { id: "grace", name: "Grace Anzora", role: "Law Enforcement", desc: "Detective chasing the Bonnie & Clyde of Leonida.", img: "/img/char-grace.jpg" },
@@ -225,7 +225,7 @@ export const articles: Article[] = [
 export const popularPosts: Article[] = [
   { title: "Vice City Map Analysis & Secrets", excerpt: "", date: "May 12, 2025", read: "", img: "/img/vice-sunset.svg" },
   { title: "New Vehicles Confirmed in GTA 6", excerpt: "", date: "May 8, 2025", read: "", img: "/img/car-pink.jpg" },
-  { title: "Meet the New Characters", excerpt: "", date: "May 6, 2025", read: "", img: "/img/char-jason.svg" },
+  { title: "Meet the New Characters", excerpt: "", date: "May 6, 2025", read: "", img: "/img/char-jason.jpg" },
   { title: "Everything About GTA 6 Missions", excerpt: "", date: "May 4, 2025", read: "", img: "/img/hero-dark.jpg" },
 ];
 
@@ -336,7 +336,7 @@ export const featuredGuides = [
 
 export const popularGuides = [
   { title: "Nightclub Ownership Guide", desc: "Manage and profit from nightclubs in Vice City.", tag: "Money & Economy", read: "21 min read", views: "31.4K", img: "/img/hero-dark.jpg" },
-  { title: "All Main Characters Explained", desc: "Backgrounds and unique abilities of all playable characters.", tag: "Characters", read: "21 min read", views: "27.8K", img: "/img/char-jason.svg" },
+  { title: "All Main Characters Explained", desc: "Backgrounds and unique abilities of all playable characters.", tag: "Characters", read: "21 min read", views: "27.8K", img: "/img/char-jason.jpg" },
   { title: "Best Stunt Jumps Locations", desc: "Find all stunt jumps and earn big rewards.", tag: "Activities", read: "14 min read", views: "22.1K", img: "/img/car-orange.jpg" },
   { title: "Heists & Big Score Guide", desc: "Crews and approaches for all major heists and robberies.", tag: "Story & Missions", read: "24 min read", views: "19.6K", img: "/img/hero-dark.jpg", filter: "hue-rotate(30deg)" },
   { title: "Fastest Cars in GTA 6", desc: "Top speed, stats and locations of the fastest vehicles.", tag: "Vehicles", read: "13 min read", views: "17.2K", img: "/img/car-pink.jpg" },
@@ -346,7 +346,7 @@ export const popularGuides = [
 
 export const trackerCategories = [
   { label: "Story Missions", pct: 39, done: 12, total: 31, img: "/img/vice-sunset.svg" },
-  { label: "Side Missions", pct: 48, done: 18, total: 37, img: "/img/char-jason.svg" },
+  { label: "Side Missions", pct: 48, done: 18, total: 37, img: "/img/char-jason.jpg" },
   { label: "Collectibles", pct: 42, done: 42, total: 100, img: "/img/flamingo.svg" },
   { label: "Random Events", pct: 68, done: 15, total: 22, img: "/img/car-pickup.jpg" },
   { label: "Activities", pct: 48, done: 21, total: 44, img: "/img/boat.jpg" },
