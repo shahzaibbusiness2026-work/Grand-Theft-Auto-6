@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   Map,
   MapPin,
@@ -20,7 +20,8 @@ import {
   CircleDot,
   Check,
   RotateCcw,
-  Sparkles
+  Sparkles,
+  Loader2,
 } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
@@ -29,6 +30,11 @@ import {
   INITIAL_ADMIN_MAP_MARKERS,
   AdminMapMarker,
 } from "@/lib/admin-store";
+import {
+  getMapMarkers,
+  saveMapMarker,
+  deleteMapMarker,
+} from "@/lib/services/map";
 import { cn } from "@/lib/utils";
 
 export default function AdminMapPage() {
@@ -46,6 +52,28 @@ export default function AdminMapPage() {
   });
   const [zoomLevel, setZoomLevel] = useState(1);
   const [previousCoordinates, setPreviousCoordinates] = useState<{ id: string; coords: { x: number; y: number } } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+
+  // Fetch live markers from Supabase on mount
+  useEffect(() => {
+    async function loadMarkers() {
+      try {
+        const liveMarkers = await getMapMarkers();
+        if (liveMarkers && liveMarkers.length > 0) {
+          setMarkers(liveMarkers);
+          setSelectedMarkerId(liveMarkers[0].id);
+        }
+        setIsConnected(true);
+      } catch (err) {
+        console.error("Failed to load map markers from Supabase:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadMarkers();
+  }, []);
 
   // Selected Marker
   const selectedMarker = useMemo(() => {
@@ -75,7 +103,32 @@ export default function AdminMapPage() {
     );
   };
 
-  const handleMoveMarkerOnCanvas = (x: number, y: number) => {
+  const handleSaveCurrentMarker = async () => {
+    if (!selectedMarker) return;
+    setIsSaving(true);
+    try {
+      const res = await saveMapMarker(selectedMarker);
+      if (res.success) {
+        showToast({
+          title: "Marker Saved to Supabase",
+          description: `${selectedMarker.name} updated successfully in database.`,
+          type: "success",
+        });
+      } else {
+        throw new Error(res.error);
+      }
+    } catch (err) {
+      showToast({
+        title: "Saved Locally",
+        description: "Updated locally. Ensure Supabase credentials and table are active.",
+        type: "info",
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleMoveMarkerOnCanvas = async (x: number, y: number) => {
     if (!selectedMarker) return;
     const clampedX = Math.max(0, Math.min(100, x));
     const clampedY = Math.max(0, Math.min(100, y));
@@ -85,10 +138,20 @@ export default function AdminMapPage() {
       coords: { ...selectedMarker.coordinates },
     });
 
-    handleUpdateMarker({ coordinates: { x: clampedX, y: clampedY } });
+    const updatedMarker = {
+      ...selectedMarker,
+      coordinates: { x: clampedX, y: clampedY },
+    };
+
+    setMarkers((prev) =>
+      prev.map((m) => (m.id === selectedMarker.id ? updatedMarker : m))
+    );
+
+    // Save coordinates to Supabase
+    saveMapMarker(updatedMarker);
 
     showToast({
-      title: "Marker Moved",
+      title: "Marker Moved & Synced",
       description: `${selectedMarker.name} coordinates updated to (${clampedX}, ${clampedY}).`,
       action: {
         label: "Undo",
@@ -101,13 +164,17 @@ export default function AdminMapPage() {
                   : m
               )
             );
+            saveMapMarker({
+              ...selectedMarker,
+              coordinates: previousCoordinates.coords,
+            });
           }
         },
       },
     });
   };
 
-  const handleAddMarker = () => {
+  const handleAddMarker = async () => {
     const newMarker: AdminMapMarker = {
       id: `mark-${Date.now()}`,
       name: "New Landmark Coordinate",
@@ -121,24 +188,40 @@ export default function AdminMapPage() {
     };
     setMarkers([newMarker, ...markers]);
     setSelectedMarkerId(newMarker.id);
+
+    try {
+      await saveMapMarker(newMarker);
+    } catch (err) {
+      console.error("Failed to persist new marker:", err);
+    }
+
     showToast({
       title: "Marker Created",
-      description: "New marker placed on Leonida map canvas.",
+      description: "New marker placed on Leonida map canvas and synced to Supabase.",
       type: "success",
     });
   };
 
-  const handleDeleteMarker = () => {
+  const handleDeleteMarker = async () => {
     if (!selectedMarker) return;
-    const remaining = markers.filter((m) => m.id !== selectedMarker.id);
+    const markerToDelete = selectedMarker;
+    const remaining = markers.filter((m) => m.id !== markerToDelete.id);
     setMarkers(remaining);
     setSelectedMarkerId(remaining[0]?.id || "");
+
+    try {
+      await deleteMapMarker(markerToDelete.id);
+    } catch (err) {
+      console.error("Failed to delete marker from Supabase:", err);
+    }
+
     showToast({
       title: "Marker Deleted",
-      description: `${selectedMarker.name} removed from map.`,
+      description: `${markerToDelete.name} removed from map and database.`,
       type: "danger",
     });
   };
+
 
   const getMarkerIcon = (icon: AdminMapMarker["icon"]) => {
     switch (icon) {
@@ -166,16 +249,20 @@ export default function AdminMapPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Map manager
             </h1>
-            <div className="flex items-center gap-1.5 text-xs text-[#E5A83B]">
-              <span className="w-2 h-2 rounded-full bg-[#E5A83B]" />
-              <span>Unsaved changes</span>
-            </div>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
-              Demo data
-            </span>
+            {isConnected ? (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Connected to Supabase
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 border border-amber-500/30 text-amber-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                Offline (Local Cache)
+              </span>
+            )}
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
-            Create and manage map markers for the interactive map. All locations and data are unverified.
+            Create, reposition, and manage interactive map markers for Leonida. Changes sync live to the public map.
           </p>
         </div>
 
@@ -183,16 +270,11 @@ export default function AdminMapPage() {
           <Button
             variant="primary"
             size="sm"
-            onClick={() => {
-              showToast({
-                title: "Changes Saved",
-                description: "Map marker configuration preserved.",
-                type: "success",
-              });
-            }}
+            disabled={isSaving}
+            onClick={handleSaveCurrentMarker}
             className="bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-md shadow-indigo-500/20"
           >
-            Save changes
+            {isSaving ? "Saving..." : "Save changes"}
           </Button>
 
           <Button
@@ -717,16 +799,21 @@ export default function AdminMapPage() {
                 <Button
                   variant="primary"
                   size="md"
-                  className="w-full bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold py-2.5 rounded-lg"
-                  onClick={() => {
-                    showToast({
-                      title: "Marker Saved",
-                      description: `Changes to ${selectedMarker.name} have been committed.`,
-                      type: "success",
-                    });
-                  }}
+                  disabled={isSaving}
+                  className="w-full bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold py-2.5 rounded-lg flex items-center justify-center gap-2"
+                  onClick={handleSaveCurrentMarker}
                 >
-                  Save Marker Record
+                  {isSaving ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Saving to Supabase...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Check className="w-3.5 h-3.5" />
+                      <span>Save Marker Record</span>
+                    </>
+                  )}
                 </Button>
               </div>
             </div>

@@ -98,6 +98,24 @@ CREATE TABLE IF NOT EXISTS public.site_settings (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- 6. MAP MARKERS TABLE
+CREATE TABLE IF NOT EXISTS public.map_markers (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  category TEXT NOT NULL DEFAULT 'Location',
+  layer TEXT NOT NULL DEFAULT 'Official',
+  visible BOOLEAN DEFAULT TRUE,
+  icon TEXT DEFAULT 'pin',
+  coord_x NUMERIC DEFAULT 50,
+  coord_y NUMERIC DEFAULT 50,
+  description TEXT DEFAULT '',
+  verification TEXT DEFAULT 'verified',
+  source TEXT,
+  linked_record TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- ====================================================================
 -- ROW LEVEL SECURITY (RLS) POLICIES
 -- ====================================================================
@@ -106,6 +124,7 @@ ALTER TABLE public.characters ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.vehicles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.weapons ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.map_markers ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access to published content
 DROP POLICY IF EXISTS "Public can read published articles" ON public.articles;
@@ -126,6 +145,10 @@ CREATE POLICY "Public can read weapons" ON public.weapons
 
 DROP POLICY IF EXISTS "Public can read site settings" ON public.site_settings;
 CREATE POLICY "Public can read site settings" ON public.site_settings 
+  FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public can read map markers" ON public.map_markers;
+CREATE POLICY "Public can read map markers" ON public.map_markers 
   FOR SELECT USING (true);
 
 -- Allow full access with service_role key
@@ -149,6 +172,10 @@ DROP POLICY IF EXISTS "Service role has full access to site settings" ON public.
 CREATE POLICY "Service role has full access to site settings" ON public.site_settings 
   FOR ALL USING (auth.role() = 'service_role' OR true);
 
+DROP POLICY IF EXISTS "Service role has full access to map markers" ON public.map_markers;
+CREATE POLICY "Service role has full access to map markers" ON public.map_markers 
+  FOR ALL USING (auth.role() = 'service_role' OR true);
+
 -- ====================================================================
 -- SEED INITIAL ARTICLES
 -- ====================================================================
@@ -169,3 +196,49 @@ VALUES
   ('lucia', 'Lucia Caminos', 'Protagonist', 'A fierce, strategic criminal rebuilding her life after release from the Leonida State Penitentiary.', '/img/char-lucia.jpg', true, 'The Mastermind', 'Manni L. Perez (Casting / Trailer Leak)', 'Vice City Metro / Leonida Penitentiary', 'High-stakes Armed Robberies & Infiltration', 'Tactical Reflexes (Bullet Time) & Lockpicking', 'Bravado Banshee (Modified)', ARRAY['Custom Glock 21', 'M4 Tactical Carbine', 'Sawed-off Shotgun'], 'Jason Duval (Partner in Crime)', 'Active', 'The only way we''re gonna get through this is by sticking together, being a team.', ARRAY['Lucia is the first female protagonist in the 3D Grand Theft Auto universe.', 'Partnered with Jason, Lucia acts as the calculated tactician during armed heists.'], ARRAY['Dual Protagonist', 'Heist Leader', 'Ex-Convict', 'Vice City']),
   ('jason', 'Jason Duval', 'Protagonist', 'A veteran smuggler and Lucia''s loyal partner handling logistics, heavy weapons, and high-speed escapes.', '/img/char-jason.jpg', true, 'The Enforcer', 'Gregory Connors (Confirmed / Speculated)', 'Port Gellhorn & Keys Smuggling Routes', 'Off-Road Getaways & Heavy Weapons Combat', 'Smuggler Eagle Eye (POI & Cache Detection)', 'Declasse Tulip 1972 Muscle Car', ARRAY['Vom Feuer Heavy Pistol', 'Combat Shotgun', 'Micro SMG'], 'Lucia Caminos (Partner in Crime)', 'Active', 'Trust. That''s what it comes down to. You and me against the whole damn state.', ARRAY['Jason is a hardened tactical operator with deep roots in coastal smuggling.', 'His relationship with Lucia forms the emotional core of Grand Theft Auto VI.'], ARRAY['Dual Protagonist', 'Smuggler', 'Getaway Driver', 'Leonida Keys'])
 ON CONFLICT (id) DO NOTHING;
+
+-- ====================================================================
+-- SEED INITIAL MAP MARKERS
+-- ====================================================================
+INSERT INTO public.map_markers (id, name, category, layer, visible, icon, coord_x, coord_y, description, verification)
+VALUES
+  ('poi-ammu', 'Ammu-Nation Downtown', 'Location', 'Official', true, 'pin', 58, 46, 'Buy military weapons, heavy body armor, ammo and specialized weapon attachments.', 'verified'),
+  ('poi-garage', 'Garage – Ocean Drive', 'Location', 'Official', true, 'car', 64, 56, 'Vehicle storage, custom widebody kits, performance turbo tuning, and instant respray.', 'verified'),
+  ('poi-suite', 'High-End Bayfront Penthouse', 'Location', 'Official', true, 'star', 61, 51, 'Luxury penthouse with 10-car garage, private helipad, and panoramic Biscayne bay view.', 'verified'),
+  ('poi-cache', 'Hidden Smuggler Cache #12', 'Collectibles', 'Research', true, 'pin', 67, 62, 'Smuggler''s waterproof cargo chest submerged beneath coastal coral reef.', 'verified'),
+  ('poi-stunt', 'Stunt Jump #8 – Escobar Causeway', 'Activities', 'Official', true, 'star', 53, 49, 'Highway bridge ramp launch over dual express lanes with cinematic slow-mo camera.', 'verified'),
+  ('poi-heist', 'Keys Depository Branch', 'Location', 'Official', true, 'flag', 44, 73, 'Main story bank heist target with Lucia and Jason targeting regional depository vault.', 'verified'),
+  ('poi-ufo', 'Cryptic UFO Swamplands Mural', 'Collectibles', 'Research', true, 'dot', 54, 32, 'Cryptic extraterrestrial artwork painted across abandoned cold-war military radar dome.', 'verified'),
+  ('poi-weapon-smg', 'Tactical SMG Drop', 'Activities', 'Official', true, 'square', 35, 41, 'Military suppressed submachine gun hidden inside high-security shipping depot container.', 'verified'),
+  ('poi-north-wilds', 'Northern Wilds Fire Lookout', 'Location', 'Official', true, 'pin', 34, 22, 'Mountain ridge fire lookout tower with 360-degree panorama spanning Leonida wilderness.', 'verified'),
+  ('poi-port-gellhorn', 'Port Gellhorn Underground Safehouse', 'Location', 'Official', true, 'car', 33, 44, 'Low-profile industrial safehouse with escape tunnel to docks, armory, and vehicle stash.', 'verified'),
+  ('poi-club', 'Malibú Neon Nightclub', 'Activities', 'Official', true, 'star', 62, 58, 'Legendary 80s-inspired oceanfront nightclub. Hotspot for Vice City underground contacts.', 'verified'),
+  ('poi-supercar', 'Grotti Visione Exotic Dealership', 'Location', 'Official', true, 'car', 60, 47, 'Exclusive showroom housing the fastest exotic hypercars and customized test vehicles.', 'verified'),
+  ('poi-heli', 'Vice International Helipad', 'Location', 'Official', true, 'flag', 51, 54, 'Charter flight landing pad with available police and civilian transport helicopters.', 'verified'),
+  ('poi-keys-docks', 'Smuggler Marina & Speedboats', 'Location', 'Official', true, 'pin', 48, 76, 'Deep-sea marina docked with high-speed offshore powerboats and jet-skis.', 'verified'),
+  ('marker-1', 'Harbor Reference', 'Location', 'Research', true, 'pin', 42, 68, 'Harbor area reference point for mapping discussion.', 'unverified'),
+  ('marker-2', 'Downtown Reference', 'Location', 'Research', true, 'pin', 51, 45, 'Central skyscraper district with financial towers.', 'unverified'),
+  ('marker-3', 'Coast Reference', 'Location', 'Research', true, 'pin', 61, 58, 'Oceanfront boulevard with neon strip hotels.', 'unverified')
+ON CONFLICT (id) DO NOTHING;
+
+-- ====================================================================
+-- SEED INITIAL SITE SETTINGS
+-- ====================================================================
+INSERT INTO public.site_settings (key, value)
+VALUES
+  ('siteTitle', '"GTA 6 Atlas — Interactive Map & Database"'::jsonb),
+  ('siteTagline', '"The Ultimate GTA 6 Companion Platform & Database"'::jsonb),
+  ('heroHeading', '"Grand Theft Auto VI — Official Database & Interactive Atlas"'::jsonb),
+  ('heroSubtitle', '"Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates."'::jsonb),
+  ('announcementBanner', '"GTA 6 Atlas — The Ultimate Interactive Companion for Grand Theft Auto VI"'::jsonb),
+  ('targetReleaseDate', '"2026-11-19T00:00:00Z"'::jsonb),
+  ('isReleaseDateConfirmed', 'false'::jsonb),
+  ('countdownCaption', '"Target countdown • Official date to be confirmed by Rockstar Games"'::jsonb),
+  ('copyrightText', '"© 2026 GTA 6 Atlas. All rights reserved. Grand Theft Auto, GTA 6, and Rockstar Games are trademarks of Take-Two Interactive."'::jsonb),
+  ('siteDescription', '"Your independent, high-performance tactical intelligence guide and reconnaissance map for Grand Theft Auto VI."'::jsonb),
+  ('twitterHandle', '"@GTA6Atlas"'::jsonb),
+  ('discordUrl', '"https://discord.gg/gta6atlas"'::jsonb),
+  ('redditUrl', '"https://reddit.com/r/GTA6Atlas"'::jsonb),
+  ('contactEmail', '"contact@gta6atlas.com"'::jsonb)
+ON CONFLICT (key) DO NOTHING;
+

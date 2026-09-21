@@ -4,8 +4,13 @@ import Link from "next/link";
 import { ArrowRight, Map, Newspaper, Car } from "lucide-react";
 import { HeroBackground } from "./HeroBackground";
 import { Countdown } from "./Countdown";
+import type { ComprehensiveSiteSettings } from "@/lib/services/settings";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  settings?: ComprehensiveSiteSettings;
+}
+
+export function HeroSection({ settings }: HeroSectionProps) {
   return (
     <section
       aria-labelledby="hero-heading"
@@ -16,13 +21,18 @@ export function HeroSection() {
 
       {/* Accessible heading for SEO */}
       <h1 id="hero-heading" className="sr-only">
-        Grand Theft Auto VI — Official Database & Interactive Atlas
+        {settings?.heroHeading || "Grand Theft Auto VI — Official Database & Interactive Atlas"}
       </h1>
 
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
       <div className="relative z-10 mx-auto w-full max-w-5xl flex flex-col items-center justify-center flex-1 py-12 sm:py-20 text-center">
         {/* Countdown in Center */}
-        <Countdown className="w-full max-w-xl sm:max-w-3xl mx-auto" />
+        <Countdown
+          className="w-full max-w-xl sm:max-w-3xl mx-auto"
+          targetDate={settings?.targetReleaseDate}
+          caption={settings?.countdownCaption}
+          isConfirmed={settings?.isReleaseDateConfirmed}
+        />
 
         {/* Action Buttons Centered Below Countdown */}
         <div className="flex flex-wrap items-center justify-center gap-4 pt-6">

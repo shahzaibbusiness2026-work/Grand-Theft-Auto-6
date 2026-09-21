@@ -58,10 +58,21 @@ function getCompletionStats() {
 
 interface CountdownProps {
   className?: string;
+  targetDate?: string;
+  caption?: string;
+  isConfirmed?: boolean;
 }
 
-export function Countdown({ className }: CountdownProps) {
-  const [t, setT] = useState(() => getRemainingTime(LAUNCH_DATE));
+export function Countdown({ className, targetDate, caption, isConfirmed }: CountdownProps) {
+  const launchDate = useMemo(() => {
+    if (targetDate) {
+      const d = new Date(targetDate);
+      if (!isNaN(d.getTime())) return d;
+    }
+    return LAUNCH_DATE;
+  }, [targetDate]);
+
+  const [t, setT] = useState(() => getRemainingTime(launchDate));
   const [stats, setStats] = useState(() => getCompletionStats());
   const [mounted, setMounted] = useState(false);
   const [timezoneMode, setTimezoneMode] = useState<"local" | "vice">("local");
@@ -69,17 +80,17 @@ export function Countdown({ className }: CountdownProps) {
   const [selectedUnit, setSelectedUnit] = useState<string | null>(null);
 
   useEffect(() => {
-    setT(getRemainingTime(LAUNCH_DATE));
+    setT(getRemainingTime(launchDate));
     setStats(getCompletionStats());
     setMounted(true);
 
     const interval = setInterval(() => {
-      setT(getRemainingTime(LAUNCH_DATE));
+      setT(getRemainingTime(launchDate));
       setStats(getCompletionStats());
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [launchDate]);
 
   // Format numbers without leading zeroes
   const formatNoLeadingZero = (num: number) => String(num);
@@ -285,9 +296,9 @@ export function Countdown({ className }: CountdownProps) {
       {/* 4. Footer Note */}
       <div className="pt-3 text-center">
         <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-300/80 font-medium">
-          {SITE_CONFIG.isReleaseDateConfirmed
+          {caption || (isConfirmed ?? SITE_CONFIG.isReleaseDateConfirmed
             ? "Official Confirmed Launch Date"
-            : "Anticipated window • Date to be confirmed by Rockstar Games"}
+            : "Anticipated window • Date to be confirmed by Rockstar Games")}
         </p>
       </div>
     </div>

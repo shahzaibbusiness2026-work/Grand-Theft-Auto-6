@@ -3,6 +3,7 @@ import { Instagram, Twitter, Youtube, Gamepad2, Mail, ArrowRight, Sparkles } fro
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getSiteSettings } from "@/lib/services/settings";
 
 const COLS = [
   {
@@ -45,29 +46,31 @@ const COLS = [
   },
 ];
 
-const SOCIALS = [
-  { icon: Instagram, label: "Rockstar Games Instagram", href: "https://www.instagram.com/rockstargames" },
-  { icon: Twitter, label: "Rockstar Games X / Twitter", href: "https://twitter.com/rockstargames" },
-  { icon: Youtube, label: "Rockstar Games YouTube", href: "https://www.youtube.com/@RockstarGames" },
-  { icon: Gamepad2, label: "GTA Community Discord", href: "https://discord.gg/gta" },
-];
+export async function Footer() {
+  const settings = await getSiteSettings();
 
-export function Footer() {
+  const socials = [
+    { icon: Instagram, label: "Rockstar Games Instagram", href: "https://www.instagram.com/rockstargames" },
+    { icon: Twitter, label: "GTA 6 Atlas X / Twitter", href: settings.twitterHandle ? `https://twitter.com/${settings.twitterHandle.replace('@', '')}` : "https://twitter.com/rockstargames" },
+    { icon: Youtube, label: "Rockstar Games YouTube", href: "https://www.youtube.com/@RockstarGames" },
+    { icon: Gamepad2, label: "GTA Community Discord", href: settings.discordUrl || "https://discord.gg/gta" },
+  ];
+
   return (
     <footer className="border-t border-border/60 bg-card/40">
       <div className="container-site grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-6">
         <div className="lg:col-span-2">
           <Logo />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Your ultimate guide to Grand Theft Auto 6. Explore every location,
-            character, vehicle, mission and secret across Leonida.
+            {settings.siteDescription ||
+              "Your ultimate guide to Grand Theft Auto 6. Explore every location, character, vehicle, mission and secret across Leonida."}
           </p>
           <p className="mt-2 max-w-xs text-xs text-muted-foreground/70">
             GTA 6 Atlas is an unofficial fan site and is not affiliated with
             Rockstar Games or Take-Two Interactive.
           </p>
           <div className="mt-5 flex items-center gap-3">
-            {SOCIALS.map(({ icon: Icon, label, href }) => (
+            {socials.map(({ icon: Icon, label, href }) => (
               <a
                 key={label}
                 href={href}
@@ -102,7 +105,8 @@ export function Footer() {
       <div className="border-t border-border/60">
         <div className="container-site flex flex-col items-center justify-between gap-4 py-6 text-[13px] text-muted-foreground sm:flex-row">
           <p>
-            © 2026 GTA 6 Atlas. Unofficial fan site — not affiliated with Rockstar Games or Take-Two Interactive.
+            {settings.copyrightText ||
+              "© 2026 GTA 6 Atlas. Unofficial fan site — not affiliated with Rockstar Games or Take-Two Interactive."}
           </p>
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>

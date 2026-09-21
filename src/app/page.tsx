@@ -19,6 +19,7 @@ import { NewsletterForm } from "@/components/newsletter-form";
 import { HomeSatelliteMap } from "@/components/home-satellite-map";
 import { getPublicArticles } from "@/lib/services/articles";
 import { getPublicCharacters } from "@/lib/services/characters";
+import { getSiteSettings } from "@/lib/services/settings";
 import { roleColor } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -36,9 +37,10 @@ const TRAILERS = [
 ];
 
 export default async function HomePage() {
-  const [allArticles, allCharacters] = await Promise.all([
+  const [allArticles, allCharacters, settings] = await Promise.all([
     getPublicArticles(),
     getPublicCharacters(),
+    getSiteSettings(),
   ]);
 
   const newsPosts = allArticles.slice(0, 3);
@@ -47,7 +49,7 @@ export default async function HomePage() {
   return (
     <SiteShell>
       {/* 1 — CINEMATIC AAA HERO SECTION */}
-      <HeroSection />
+      <HeroSection settings={settings} />
 
       {/* QUICK STATS ATLAS STRIP */}
       <section className="container-site pt-1 sm:pt-2">

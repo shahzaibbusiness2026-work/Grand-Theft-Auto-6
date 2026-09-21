@@ -58,6 +58,8 @@ import {
   toggleMapCompleted,
   setMapNote,
 } from "@/lib/user-store";
+import { getMapMarkers } from "@/lib/services/map";
+import { AdminMapMarker } from "@/lib/admin-store";
 
 export interface MapPOI {
   id: string;
@@ -73,6 +75,49 @@ export interface MapPOI {
   color: string;
   icon: any;
   verified?: boolean;
+}
+
+function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
+  let iconComponent: any = MapPin;
+  let color = "bg-amber-500";
+  const catLower = (m.category || "").toLowerCase();
+
+  if (m.icon === "car") { iconComponent = Car; color = "bg-cyan-500"; }
+  else if (m.icon === "star") { iconComponent = Star; color = "bg-amber-500"; }
+  else if (m.icon === "flag") { iconComponent = Flag; color = "bg-rose-500"; }
+  else if (m.icon === "square") { iconComponent = Crosshair; color = "bg-orange-500"; }
+  else if (m.icon === "dot") { iconComponent = Egg; color = "bg-emerald-500"; }
+  else if (catLower.includes("shop")) { iconComponent = ShoppingBag; color = "bg-emerald-500"; }
+  else if (catLower.includes("garage")) { iconComponent = Warehouse; color = "bg-[#00F0FF]"; }
+  else if (catLower.includes("prop")) { iconComponent = Building2; color = "bg-indigo-500"; }
+  else if (catLower.includes("collect")) { iconComponent = Gem; color = "bg-purple-500"; }
+  else if (catLower.includes("weapon")) { iconComponent = Crosshair; color = "bg-[#FF0055]"; }
+
+  let filterCategory = "poi";
+  if (catLower.includes("shop")) filterCategory = "shops";
+  else if (catLower.includes("garage")) filterCategory = "garages";
+  else if (catLower.includes("collect")) filterCategory = "collectibles";
+  else if (catLower.includes("weapon")) filterCategory = "weapons";
+  else if (catLower.includes("activ") || catLower.includes("stunt")) filterCategory = "activities";
+  else if (catLower.includes("prop") || catLower.includes("estate")) filterCategory = "properties";
+  else if (catLower.includes("easter") || catLower.includes("secret")) filterCategory = "easter_eggs";
+  else if (catLower.includes("vehic") || catLower.includes("car")) filterCategory = "vehicles";
+
+  return {
+    id: m.id,
+    title: m.name,
+    category: filterCategory,
+    type: `${m.layer} ${m.category}`,
+    district: m.category,
+    desc: m.description || "Point of interest in Leonida.",
+    img: "/img/hero-dark.jpg",
+    hours: "Open 24/7",
+    top: `${m.coordinates.y}%`,
+    left: `${m.coordinates.x}%`,
+    color,
+    icon: iconComponent,
+    verified: m.verification === "verified",
+  };
 }
 
 const CATEGORY_FILTERS = [
@@ -349,12 +394,29 @@ export function SatelliteInteractiveMap({
     easter_eggs: true,
   });
 
+  const [allPOIs, setAllPOIs] = useState<MapPOI[]>(POIS);
   const [selectedPOI, setSelectedPOI] = useState<MapPOI | null>(POIS[0]);
   const [collectedPOIs, setCollectedPOIs] = useState<Record<string, boolean>>({
     "poi-ammu": true,
     "poi-garage": true,
     "poi-suite": true,
   });
+
+  useEffect(() => {
+    async function loadLiveMapMarkers() {
+      try {
+        const markers = await getMapMarkers();
+        if (markers && markers.length > 0) {
+          const livePois = markers.map(adminMarkerToPoi);
+          setAllPOIs(livePois);
+          setSelectedPOI((prev) => (prev ? livePois.find(p => p.id === prev.id) || livePois[0] : livePois[0]));
+        }
+      } catch (err) {
+        console.error("Failed to load map markers in interactive map:", err);
+      }
+    }
+    loadLiveMapMarkers();
+  }, []);
   const [userNotes, setUserNotes] = useState<Record<string, string>>({});
   const [favoriteLocations, setFavoriteLocations] = useState<string[]>([]);
   const [copiedShare, setCopiedShare] = useState(false);
@@ -614,7 +676,7 @@ export function SatelliteInteractiveMap({
 
   // Filtered POIs
   const visiblePOIs = useMemo(() => {
-    return POIS.filter((p) => {
+    return allPOIs.filter((p) => {
       const isCategoryChecked = checkedFilters.all || checkedFilters[p.category];
       const matchesSearch =
         searchQuery.trim() === "" ||
@@ -624,7 +686,7 @@ export function SatelliteInteractiveMap({
         p.type.toLowerCase().includes(searchQuery.toLowerCase());
       return isCategoryChecked && matchesSearch;
     });
-  }, [checkedFilters, searchQuery]);
+  }, [allPOIs, checkedFilters, searchQuery]);
 
   const verifiedTotal = Object.values(collectedPOIs).filter(Boolean).length;
 

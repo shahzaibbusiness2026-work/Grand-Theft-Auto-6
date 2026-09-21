@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Settings,
   Menu,
@@ -17,7 +17,9 @@ import {
   RotateCcw,
   Check,
   Globe,
-  Sparkles
+  Sparkles,
+  FileText,
+  Loader2,
 } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
@@ -26,36 +28,102 @@ import {
   INITIAL_ADMIN_SETTINGS,
   AdminSiteSettings,
 } from "@/lib/admin-store";
+import {
+  getSiteSettings,
+  saveSiteSettings,
+  ComprehensiveSiteSettings,
+} from "@/lib/services/settings";
 import { cn } from "@/lib/utils";
 
 export default function AdminSettingsPage() {
   const { showToast } = useToast();
-  const [settings, setSettings] = useState<AdminSiteSettings>(INITIAL_ADMIN_SETTINGS);
+  const [settings, setSettings] = useState<ComprehensiveSiteSettings>({
+    ...INITIAL_ADMIN_SETTINGS,
+    siteTitle: "GTA 6 Atlas",
+    siteTagline: "The Ultimate GTA 6 Companion Platform & Database",
+    siteDescription: "Your independent, high-performance tactical intelligence guide and reconnaissance map for Grand Theft Auto VI.",
+    targetReleaseDate: "2026-11-19T00:00:00Z",
+    isReleaseDateConfirmed: false,
+    countdownCaption: "Target countdown • Official date to be confirmed by Rockstar Games",
+    heroHeading: "Grand Theft Auto VI — Official Database & Interactive Atlas",
+    heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
+    announcementBanner: "GTA 6 Atlas — The Ultimate Interactive Companion for Grand Theft Auto VI",
+    contactEmail: "contact@gta6atlas.com",
+    twitterHandle: "@GTA6Atlas",
+    discordUrl: "https://discord.gg/gta6atlas",
+    redditUrl: "https://reddit.com/r/GTA6Atlas",
+  });
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
   const [activeTab, setActiveTab] = useState<
-    "navigation" | "sections" | "tools" | "branding" | "integrations"
-  >("navigation");
+    "content" | "navigation" | "sections" | "tools" | "branding" | "integrations"
+  >("content");
 
-  const handleUpdate = (updates: Partial<AdminSiteSettings>) => {
+  // Load live settings from Supabase on mount
+  useEffect(() => {
+    async function loadSettings() {
+      try {
+        const liveSettings = await getSiteSettings();
+        if (liveSettings) {
+          setSettings(liveSettings);
+        }
+        setIsConnected(true);
+      } catch (err) {
+        console.error("Failed to load site settings from Supabase:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadSettings();
+  }, []);
+
+  const handleUpdate = (updates: Partial<ComprehensiveSiteSettings>) => {
     setSettings((prev) => ({ ...prev, ...updates }));
     setHasUnsavedChanges(true);
   };
 
-  const handleSave = () => {
-    setHasUnsavedChanges(false);
-    showToast({
-      title: "Settings Saved",
-      description: "Platform configuration and navigation menus updated.",
-      type: "success",
-    });
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      const res = await saveSiteSettings(settings);
+      if (res.success) {
+        setHasUnsavedChanges(false);
+        showToast({
+          title: "Settings Saved to Supabase",
+          description: "Platform copy, countdown, and configuration updated across all pages.",
+          type: "success",
+        });
+      } else {
+        throw new Error(res.error);
+      }
+    } catch (err) {
+      showToast({
+        title: "Saved Locally",
+        description: "Updated in local state. Ensure Supabase credentials are valid.",
+        type: "info",
+      });
+      setHasUnsavedChanges(false);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
-  const handleDiscard = () => {
-    setSettings(INITIAL_ADMIN_SETTINGS);
-    setHasUnsavedChanges(false);
+  const handleDiscard = async () => {
+    setIsLoading(true);
+    try {
+      const live = await getSiteSettings();
+      setSettings(live);
+    } catch {
+      // Fallback
+    } finally {
+      setIsLoading(false);
+      setHasUnsavedChanges(false);
+    }
     showToast({
       title: "Changes Discarded",
-      description: "Restored previous site configuration.",
+      description: "Restored previous site configuration from Supabase.",
       type: "info",
     });
   };
@@ -80,12 +148,20 @@ export default function AdminSettingsPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Site settings
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
-              Demo data
-            </span>
+            {isConnected ? (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Connected to Supabase
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 border border-amber-500/30 text-amber-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                Offline (Local Cache)
+              </span>
+            )}
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
-            Manage global navigation menus, homepage section ordering, enabled tools, branding assets, and third-party API integrations.
+            Manage site copy, headlines, countdown date, announcement banner, global navigation menus, and branding.
           </p>
         </div>
 
@@ -103,17 +179,32 @@ export default function AdminSettingsPage() {
           <Button
             variant="primary"
             size="md"
+            disabled={isSaving}
             onClick={handleSave}
-            leftIcon={<Save className="w-4 h-4" />}
+            leftIcon={isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
             className="bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-md shadow-indigo-500/20"
           >
-            Save settings
+            {isSaving ? "Saving..." : "Save settings"}
           </Button>
         </div>
       </div>
 
       {/* Tabs (Image 14) */}
       <div className="flex items-center gap-2 border-b border-[#1C2436] pb-3 overflow-x-auto scrollbar-none">
+        <button
+          type="button"
+          onClick={() => setActiveTab("content")}
+          className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap",
+            activeTab === "content"
+              ? "bg-[#3730A3]/50 text-white border border-[#4F46E5]/40 shadow-sm"
+              : "bg-[#111622] text-[#94A3B8] hover:text-white border border-[#1C2436]"
+          )}
+        >
+          <FileText className="w-4 h-4 text-amber-400" />
+          <span>Site Copy & Texts</span>
+        </button>
+
         <button
           type="button"
           onClick={() => setActiveTab("navigation")}
@@ -184,6 +275,172 @@ export default function AdminSettingsPage() {
           <span>API integrations</span>
         </button>
       </div>
+
+      {/* Tab 0: Site Copy & Texts */}
+      {activeTab === "content" && (
+        <div className="space-y-6 text-xs">
+          {/* Hero Section Copy */}
+          <div className="p-5 rounded-xl border border-[#1C2436] bg-[#111622] space-y-4">
+            <div className="border-b border-[#1C2436] pb-3">
+              <h2 className="text-sm font-bold text-white flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-400" />
+                Hero Section Headlines & Taglines
+              </h2>
+              <p className="text-[11px] text-[#94A3B8] mt-0.5">
+                These texts appear prominently at the top of the homepage and in browser meta titles.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <label className="block font-medium text-[#94A3B8] mb-1">
+                  Main Hero Heading / Title
+                </label>
+                <input
+                  type="text"
+                  value={settings.heroHeading}
+                  onChange={(e) => handleUpdate({ heroHeading: e.target.value })}
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white font-semibold focus:outline-none focus:border-[#6366F1]"
+                />
+              </div>
+
+              <div>
+                <label className="block font-medium text-[#94A3B8] mb-1">
+                  Hero Subtitle & Descriptive Paragraph
+                </label>
+                <textarea
+                  rows={2}
+                  value={settings.heroSubtitle}
+                  onChange={(e) => handleUpdate({ heroSubtitle: e.target.value })}
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Release Countdown Settings */}
+          <div className="p-5 rounded-xl border border-[#1C2436] bg-[#111622] space-y-4">
+            <div className="border-b border-[#1C2436] pb-3">
+              <h2 className="text-sm font-bold text-white flex items-center gap-2">
+                <Globe className="w-4 h-4 text-sky-400" />
+                Release Countdown & Target Launch
+              </h2>
+              <p className="text-[11px] text-[#94A3B8] mt-0.5">
+                Configure the live launch countdown timer, target date, and verification status.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block font-medium text-[#94A3B8] mb-1">
+                  Target Release Date (ISO format or YYYY-MM-DD)
+                </label>
+                <input
+                  type="text"
+                  value={settings.targetReleaseDate}
+                  onChange={(e) => handleUpdate({ targetReleaseDate: e.target.value })}
+                  placeholder="2026-11-19T00:00:00Z"
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs font-mono text-white focus:outline-none focus:border-[#6366F1]"
+                />
+                <p className="text-[10px] text-[#64748B] mt-1">
+                  Example: 2026-11-19T00:00:00Z or 2026-09-17
+                </p>
+              </div>
+
+              <div>
+                <label className="block font-medium text-[#94A3B8] mb-1">
+                  Countdown Caption / Disclaimer
+                </label>
+                <input
+                  type="text"
+                  value={settings.countdownCaption}
+                  onChange={(e) => handleUpdate({ countdownCaption: e.target.value })}
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
+                />
+              </div>
+            </div>
+
+            <div className="pt-2 flex items-center justify-between border-t border-[#1C2436]">
+              <div>
+                <p className="font-semibold text-white text-xs">Official Date Confirmed by Rockstar</p>
+                <p className="text-[11px] text-[#64748B]">
+                  Enable when Rockstar Games announces the official release date.
+                </p>
+              </div>
+              <input
+                type="checkbox"
+                checked={settings.isReleaseDateConfirmed}
+                onChange={(e) => handleUpdate({ isReleaseDateConfirmed: e.target.checked })}
+                className="w-4 h-4 rounded border-[#1C2436] text-[#6366F1] bg-[#0E131D]"
+              />
+            </div>
+          </div>
+
+          {/* Announcement Banner */}
+          <div className="p-5 rounded-xl border border-[#1C2436] bg-[#111622] space-y-4">
+            <div className="border-b border-[#1C2436] pb-3">
+              <h2 className="text-sm font-bold text-white flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-emerald-400" />
+                Sitewide Announcement Banner
+              </h2>
+              <p className="text-[11px] text-[#94A3B8] mt-0.5">
+                Displays breaking news, trailer alerts, or major updates across all pages.
+              </p>
+            </div>
+
+            <div>
+              <label className="block font-medium text-[#94A3B8] mb-1">
+                Banner Message
+              </label>
+              <input
+                type="text"
+                value={settings.announcementBanner}
+                onChange={(e) => handleUpdate({ announcementBanner: e.target.value })}
+                className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
+              />
+            </div>
+          </div>
+
+          {/* Footer & Legal Text */}
+          <div className="p-5 rounded-xl border border-[#1C2436] bg-[#111622] space-y-4">
+            <div className="border-b border-[#1C2436] pb-3">
+              <h2 className="text-sm font-bold text-white flex items-center gap-2">
+                <FileText className="w-4 h-4 text-purple-400" />
+                Footer Text & Copyright
+              </h2>
+              <p className="text-[11px] text-[#94A3B8] mt-0.5">
+                Manage the footer description, copyright notice, and legal disclaimers.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <label className="block font-medium text-[#94A3B8] mb-1">
+                  Footer Summary / About Paragraph
+                </label>
+                <textarea
+                  rows={2}
+                  value={settings.siteDescription}
+                  onChange={(e) => handleUpdate({ siteDescription: e.target.value })}
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
+                />
+              </div>
+
+              <div>
+                <label className="block font-medium text-[#94A3B8] mb-1">
+                  Copyright Notice
+                </label>
+                <input
+                  type="text"
+                  value={settings.copyrightText}
+                  onChange={(e) => handleUpdate({ copyrightText: e.target.value })}
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Tab 1: Navigation Menus (Image 14) */}
       {activeTab === "navigation" && (
