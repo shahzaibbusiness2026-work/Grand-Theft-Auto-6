@@ -17,7 +17,9 @@ import { ProtagonistsShowcase } from "@/components/protagonists-showcase";
 import { YouTubeLite } from "@/components/youtube-lite";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { HomeSatelliteMap } from "@/components/home-satellite-map";
-import { characters, roleColor, articles } from "@/lib/data";
+import { getPublicArticles } from "@/lib/services/articles";
+import { getPublicCharacters } from "@/lib/services/characters";
+import { roleColor } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 
@@ -33,11 +35,15 @@ const TRAILERS = [
   { id: "FKUW7_I4QwA", title: "Official Trailer 2", caption: "More gameplay, more Leonida" },
 ];
 
-// Safe array slicing — won't crash if data array is shorter
-const newsPosts = articles.slice(0, 3);
-const blogPosts = articles.slice(5, 8);
+export default async function HomePage() {
+  const [allArticles, allCharacters] = await Promise.all([
+    getPublicArticles(),
+    getPublicCharacters(),
+  ]);
 
-export default function HomePage() {
+  const newsPosts = allArticles.slice(0, 3);
+  const blogPosts = allArticles.slice(3, 6);
+
   return (
     <SiteShell>
       {/* 1 — CINEMATIC AAA HERO SECTION */}
@@ -91,7 +97,7 @@ export default function HomePage() {
           viewAllLabel="View All Characters"
         />
         <div className="rail no-scrollbar flex gap-4 overflow-x-auto pb-3">
-          {characters.slice(0, 8).map((c) => (
+          {allCharacters.slice(0, 8).map((c) => (
             <Link
               key={c.id}
               href={`/characters#${c.id}`}

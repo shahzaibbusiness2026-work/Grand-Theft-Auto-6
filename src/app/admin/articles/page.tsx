@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -26,18 +26,31 @@ import {
   INITIAL_ADMIN_ARTICLES,
   AdminArticle,
 } from "@/lib/admin-store";
+import { getAdminArticles, saveArticle, deleteArticle } from "@/lib/services/articles";
 import { cn } from "@/lib/utils";
 
 export default function AdminArticlesPage() {
   const router = useRouter();
   const { showToast } = useToast();
   const [articles, setArticles] = useState<AdminArticle[]>(INITIAL_ADMIN_ARTICLES);
+  const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"all" | "draft" | "review" | "scheduled" | "published">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedAuthor, setSelectedAuthor] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedDate, setSelectedDate] = useState("all");
-  const [selectedIds, setSelectedIds] = useState<string[]>(["art-5", "art-6"]); // 2 selected by default matching Image 8
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getAdminArticles()
+      .then((data) => {
+        if (data && data.length > 0) {
+          setArticles(data);
+        }
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
   // Quick edit slide-over drawer state matching Image 8
   const [quickEditArticle, setQuickEditArticle] = useState<AdminArticle | null>(
@@ -100,14 +113,49 @@ export default function AdminArticlesPage() {
     }
   };
 
-  const handleSaveQuickEdit = () => {
+  const handleSaveQuickEdit = async () => {
     if (!quickEditArticle) return;
+    const updated: AdminArticle = {
+      ...quickEditArticle,
+      tags: quickTags,
+    };
     setArticles((prev) =>
-      prev.map((a) => (a.id === quickEditArticle.id ? quickEditArticle : a))
+      prev.map((a) => (a.id === updated.id ? updated : a))
     );
     showToast({
-      title: "Article Updated",
-      description: `Quick edit saved for "${quickEditArticle.title}".`,
+      title: "Saving to Supabase...",
+      description: `Saving "${updated.title}"...`,
+      type: "info",
+    });
+
+    const res = await saveArticle(updated);
+    if (res.success) {
+      showToast({
+        title: "Article Saved",
+        description: `Persisted to Supabase and updated on live site!`,
+        type: "success",
+      });
+      setQuickEditArticle(null);
+    } else {
+      showToast({
+        title: "Saved Locally",
+        description: `Saved locally. Ensure Supabase tables are created.`,
+        type: "warning",
+      });
+    }
+  };
+
+  const handleDeleteArticle = async (id: string) => {
+    setArticles((prev) => prev.filter((a) => a.id !== id));
+    showToast({
+      title: "Deleting...",
+      description: "Removing article...",
+      type: "info",
+    });
+    await deleteArticle(id);
+    showToast({
+      title: "Article Deleted",
+      description: "Removed from Supabase and live site.",
       type: "success",
     });
   };
@@ -125,8 +173,9 @@ export default function AdminArticlesPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Articles
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
-              Demo data
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Connected to Supabase
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">

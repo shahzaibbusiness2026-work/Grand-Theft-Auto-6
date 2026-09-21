@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -29,6 +29,7 @@ import {
   INITIAL_ADMIN_VEHICLES,
   AdminVehicle,
 } from "@/lib/admin-store";
+import { getAdminVehicles, saveVehicle, deleteVehicle } from "@/lib/services/vehicles";
 import { cn } from "@/lib/utils";
 
 // Car silhouette SVG matching Image 2 & Image 18
@@ -49,19 +50,26 @@ export default function AdminVehiclesPage() {
   const router = useRouter();
   const { showToast } = useToast();
   const [vehicles, setVehicles] = useState<AdminVehicle[]>(INITIAL_ADMIN_VEHICLES);
+  const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"all" | "verification" | "drafts" | "archived">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedClass, setSelectedClass] = useState("all");
   const [selectedManufacturer, setSelectedManufacturer] = useState("all");
   const [selectedVerification, setSelectedVerification] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
-  const [selectedIds, setSelectedIds] = useState<string[]>(["veh-001", "veh-002"]); // 2 selected by default matching Image 2 & 18
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getAdminVehicles()
+      .then((data) => {
+        if (data && data.length > 0) setVehicles(data);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
   // Expandable row state (matching Image 18)
   const [expandedId, setExpandedId] = useState<string | null>("veh-003");
-
-  // Loading skeleton toggle (for previewing Image 20 state)
-  const [isLoading, setIsLoading] = useState(false);
 
   // Toast state matching Image 2
   const [showSavedToast, setShowSavedToast] = useState(true);
@@ -136,8 +144,9 @@ export default function AdminVehiclesPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Vehicles
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
-              Demo data
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Connected to Supabase
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">

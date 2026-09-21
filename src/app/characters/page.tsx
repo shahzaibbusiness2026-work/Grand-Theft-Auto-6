@@ -1,6 +1,8 @@
 export { metadata } from "./metadata";
 import { CharactersClient } from "./characters-client";
+import { getPublicCharacters } from "@/lib/services/characters";
 
-export default function CharactersPage() {
-  return <CharactersClient />;
+export default async function CharactersPage() {
+  const characters = await getPublicCharacters();
+  return <CharactersClient initialCharacters={characters} />;
 }

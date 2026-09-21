@@ -8,9 +8,14 @@ import { Badge } from "@/components/ui/badge";
 import { SectionHeader } from "@/components/section-header";
 import { NewsletterBar } from "@/components/newsletter-bar";
 import { ArticleCard, PopularRow, CategoryList } from "@/components/article-card";
-import { articles, popularPosts, newsCategories, featuredArticle } from "@/lib/data";
+import { popularPosts, newsCategories, featuredArticle } from "@/lib/data";
+import { getPublicArticles } from "@/lib/services/articles";
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  const liveArticles = await getPublicArticles();
+  const heroArticle = liveArticles[0] || featuredArticle;
+  const listArticles = liveArticles.length > 1 ? liveArticles.slice(1, 7) : liveArticles;
+
   return (
     <SiteShell>
       {/* HERO */}
@@ -35,8 +40,8 @@ export default function NewsPage() {
         <article className="card-surface grid overflow-hidden md:grid-cols-2">
           <div className="relative h-56 md:h-full min-h-[220px]">
             <Image
-              src={featuredArticle.img}
-              alt={`${featuredArticle.title} - Featured GTA 6 Article`}
+              src={heroArticle.img}
+              alt={`${heroArticle.title} - Featured GTA 6 Article`}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover object-top"
@@ -46,16 +51,16 @@ export default function NewsPage() {
           </div>
           <div className="flex flex-col justify-center p-6">
             <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
-              <time dateTime={featuredArticle.date}>{featuredArticle.date}</time>
+              <time dateTime={heroArticle.date}>{heroArticle.date}</time>
               <span className="text-border" aria-hidden="true">•</span>
               <span className="flex items-center gap-1">
-                <Clock className="h-3 w-3" aria-hidden="true" /> {featuredArticle.read}
+                <Clock className="h-3 w-3" aria-hidden="true" /> {heroArticle.read}
               </span>
             </div>
             <h2 className="mt-3 font-display text-lg font-extrabold leading-snug">
-              {featuredArticle.title}
+              {heroArticle.title}
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{featuredArticle.excerpt}</p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{heroArticle.excerpt}</p>
             <Button href="/blog" size="sm" className="mt-5 w-fit">
               Read More <ArrowRight className="h-3.5 w-3.5" />
             </Button>
@@ -69,7 +74,7 @@ export default function NewsPage() {
         <div>
           <SectionHeader title="Latest Articles" />
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {articles.slice(0, 6).map((a) => (
+            {listArticles.map((a) => (
               <ArticleCard key={a.title} article={a} />
             ))}
           </div>

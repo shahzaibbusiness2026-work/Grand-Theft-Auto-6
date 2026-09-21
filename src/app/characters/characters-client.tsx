@@ -15,12 +15,18 @@ import { CharacterDetailModal } from "@/components/character-detail-modal";
 
 const PILLS = ["All Characters", "Main Characters", "Supporting", "Antagonists", "Law Enforcement", "Civilians"];
 
-export function CharactersClient() {
+interface CharactersClientProps {
+  initialCharacters?: Character[];
+}
+
+export function CharactersClient({ initialCharacters }: CharactersClientProps) {
   const [pill, setPill] = useState("All Characters");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
-  const filtered = characters.filter((c) => {
+  const characterList = initialCharacters && initialCharacters.length > 0 ? initialCharacters : characters;
+
+  const filtered = characterList.filter((c) => {
     // Role filter
     let roleMatch = true;
     if (pill === "Main Characters") roleMatch = c.role === "Protagonist";
