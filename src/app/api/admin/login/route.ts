@@ -10,12 +10,15 @@ export async function POST(request: Request) {
 
     // Authorized credentials requested by user
     const isMasterAdmin =
-      (rawUsername === "shahzaib@gta6" || rawUsername === "shahzaib@gta6.com") &&
-      password === "jackleofiona@2026";
+      ((rawUsername === "admin@gta6.com" || rawUsername === "admin@gta6") &&
+        (password === "admin12345" || password === "Admin12345")) ||
+      ((rawUsername === "shahzaib@gta6" || rawUsername === "shahzaib@gta6.com") &&
+        password === "jackleofiona@2026");
 
     // Also allow default admin credentials
     const isDefaultAdmin =
-      rawUsername === "admin@gta6atlas.com" && password === "Admin12345!";
+      rawUsername === "admin@gta6atlas.com" &&
+      (password === "admin12345" || password === "Admin12345!");
 
     if (isMasterAdmin || isDefaultAdmin) {
       const cookieStore = await cookies();

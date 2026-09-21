@@ -70,7 +70,7 @@ export default function AdminLoginPage() {
                 autoComplete="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="shahzaib@gta6"
+                placeholder="admin@gta6.com"
                 className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-[#1C2436] text-white text-sm placeholder-[#374151] focus:outline-none focus:border-[#6366F1] transition-colors"
               />
             </div>
