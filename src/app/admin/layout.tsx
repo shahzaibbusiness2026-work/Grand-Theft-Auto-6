@@ -11,7 +11,16 @@ function AdminHeader() {
   const supabase = createClient();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+    } catch {
+      // Ignore network errors on logout
+    }
+    try {
+      await supabase.auth.signOut();
+    } catch {
+      // Ignore supabase errors on logout
+    }
     router.push("/admin/login");
     router.refresh();
   };

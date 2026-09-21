@@ -10,7 +10,7 @@ export default function AdminLoginPage() {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") || "/admin";
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,20 +20,27 @@ export default function AdminLoginPage() {
     setError("");
     setLoading(true);
 
-    const supabase = createClient();
-    const { error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
 
-    if (authError) {
-      setError(authError.message);
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        setError(data.error || "Invalid username or password");
+        setLoading(false);
+        return;
+      }
+
+      router.push(redirectTo);
+      router.refresh();
+    } catch {
+      setError("An unexpected network error occurred. Please try again.");
       setLoading(false);
-      return;
     }
-
-    router.push(redirectTo);
-    router.refresh();
   };
 
   return (
@@ -51,19 +58,19 @@ export default function AdminLoginPage() {
         {/* Login Card */}
         <div className="rounded-2xl border border-[#1C2436] bg-[#0E131D] p-8">
           <form onSubmit={handleLogin} className="space-y-5">
-            {/* Email */}
+            {/* Username / Email */}
             <div>
-              <label htmlFor="email" className="block text-xs font-semibold text-[#94A3B8] mb-1.5">
-                Email Address
+              <label htmlFor="username" className="block text-xs font-semibold text-[#94A3B8] mb-1.5">
+                Username or Email Address
               </label>
               <input
-                id="email"
-                type="email"
+                id="username"
+                type="text"
                 required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@gta6atlas.com"
+                autoComplete="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="shahzaib@gta6"
                 className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-[#1C2436] text-white text-sm placeholder-[#374151] focus:outline-none focus:border-[#6366F1] transition-colors"
               />
             </div>
