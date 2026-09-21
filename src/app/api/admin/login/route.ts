@@ -6,12 +6,11 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const rawUsername = (body.username || body.email || "").trim().toLowerCase();
-    const password = body.password || "";
+    const password = (body.password || "").trim();
 
     // Authorized credentials requested by user
     const isPasswordMatch =
-      password === "admin12345" ||
-      password === "Admin12345" ||
+      password.toLowerCase() === "admin12345" ||
       password === "Admin12345!" ||
       password === "jackleofiona@2026";
 

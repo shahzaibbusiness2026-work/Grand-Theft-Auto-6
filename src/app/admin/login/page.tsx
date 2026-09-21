@@ -35,8 +35,12 @@ export default function AdminLoginPage() {
         return;
       }
 
-      router.push(redirectTo);
-      router.refresh();
+      // Ensure client cookie is set and perform hard navigation to bypass client router cache
+      try {
+        document.cookie = "gta6_admin_session=true; path=/; max-age=604800; SameSite=Lax";
+      } catch {}
+
+      window.location.href = redirectTo;
     } catch {
       setError("An unexpected network error occurred. Please try again.");
       setLoading(false);
