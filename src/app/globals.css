@@ -492,4 +492,97 @@
   background: #94a3b8;
 }
 
+/* ==========================================================================
+   ADMIN SIDEBAR & NOTIFICATION BADGES — BRIGHT THEME
+   Ensures sidebar tabs, icons, and notification badges are crisp and vivid,
+   eliminating dark/blackish appearance in light mode.
+   ========================================================================== */
+.light aside[aria-label="Admin Navigation"] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+.light aside[aria-label="Admin Navigation"] > div:first-child {
+  border-color: #e2e8f0 !important;
+}
+
+.light aside[aria-label="Admin Navigation"] p[id^="nav-heading-"] {
+  color: #94a3b8 !important;
+}
+
+/* Inactive nav links */
+.light aside[aria-label="Admin Navigation"] a:not([aria-current="page"]) {
+  color: #475569 !important;
+}
+
+.light aside[aria-label="Admin Navigation"] a:not([aria-current="page"]):hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+.light aside[aria-label="Admin Navigation"] a:not([aria-current="page"]) svg {
+  color: #64748b !important;
+}
+
+.light aside[aria-label="Admin Navigation"] a:not([aria-current="page"]):hover svg {
+  color: #4f46e5 !important;
+}
+
+/* Active nav link */
+.light aside[aria-label="Admin Navigation"] a[aria-current="page"] {
+  background-color: #eef2ff !important;
+  border-color: #c7d2fe !important;
+  color: #4338ca !important;
+  box-shadow: 0 1px 2px rgba(99, 102, 241, 0.08) !important;
+}
+
+.light aside[aria-label="Admin Navigation"] a[aria-current="page"] svg {
+  color: #4f46e5 !important;
+}
+
+.light aside[aria-label="Admin Navigation"] a[aria-current="page"] span {
+  color: #4338ca !important;
+}
+
+/* Sidebar Notification Badges */
+.light aside[aria-label="Admin Navigation"] span.rounded-full {
+  background-color: #f1f5f9 !important;
+  color: #475569 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light aside[aria-label="Admin Navigation"] a[aria-current="page"] span.rounded-full {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+.light aside[aria-label="Admin Navigation"] span.rounded-full.bg-amber-950\/60,
+.light aside[aria-label="Admin Navigation"] span.rounded-full[class*="amber"] {
+  background-color: #fef3c7 !important;
+  color: #92400e !important;
+  border: 1px solid #fde68a !important;
+}
+
+/* Sidebar Footer & User Profile */
+.light aside[aria-label="Admin Navigation"] > div:last-child {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+.light aside[aria-label="Admin Navigation"] .bg-\[\#111622\] {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+.light aside[aria-label="Admin Navigation"] .bg-\[\#111622\] p.text-white {
+  color: #0f172a !important;
+}
+
+.light aside[aria-label="Admin Navigation"] .bg-\[\#111622\] p.text-\[\#64748B\] {
+  color: #64748b !important;
+}
+
+
 

@@ -248,9 +248,11 @@ export function AdminSidebar({
                         {!isCollapsed && item.badge && (
                           <span
                             className={cn(
-                              "px-1.5 py-0.5 rounded-full text-[10px] font-bold shrink-0",
+                              "px-1.5 py-0.5 rounded-full text-[10px] font-bold shrink-0 transition-colors",
                               isActive
                                 ? "bg-[#4F46E5] text-white"
+                                : item.badgeVariant === "warning"
+                                ? "bg-amber-950/60 text-amber-400 border border-amber-500/30"
                                 : "bg-[#1C2436] text-[#94A3B8]"
                             )}
                           >
