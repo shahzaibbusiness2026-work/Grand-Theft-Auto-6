@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/client";
+import { createClient as createServerSupabase } from "@/lib/supabase/server";
 
 import { INITIAL_ADMIN_SEO, AdminSeoSettings } from "@/lib/admin-store";
 

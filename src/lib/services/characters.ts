@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/client";
+import { createClient as createServerSupabase } from "@/lib/supabase/server";
 
 import { characters as fallbackCharacters, Character } from "@/lib/data";
 

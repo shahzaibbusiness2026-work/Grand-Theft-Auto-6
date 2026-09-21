@@ -2,44 +2,56 @@
 
 import Link from "next/link";
 import { Newspaper, ArrowRight } from "lucide-react";
+import type { Article } from "@/lib/data";
 
-interface UpdateItem {
-  id: string;
-  title: string;
-  date: string;
-  badge: "Official" | "Rumor";
-  image: string;
-  href: string;
-}
-
-const UPDATES: UpdateItem[] = [
+const FALLBACK_UPDATES = [
   {
     id: "up-1",
     title: "GTA 6 Trailer 2 Breaks Records with 120M Views",
-    date: "2 days ago",
-    badge: "Official",
+    date: "Recent",
+    badge: "Official" as const,
     image: "/img/hero-dark.jpg",
     href: "/news",
   },
   {
     id: "up-2",
     title: "Rockstar Confirms New Gameplay Details",
-    date: "4 days ago",
-    badge: "Official",
+    date: "Recent",
+    badge: "Official" as const,
     image: "/img/char-lucia.jpg",
     href: "/news",
   },
   {
     id: "up-3",
     title: "Vice City Map Leak Sparks New Speculation",
-    date: "1 week ago",
-    badge: "Rumor",
+    date: "Recent",
+    badge: "Rumor" as const,
     image: "/img/satellite-map-hd.jpg",
     href: "/news",
   },
 ];
 
-export function CompanionUpdatesCard() {
+interface CompanionUpdatesCardProps {
+  /** Live articles from Supabase passed down from the server page */
+  articles?: Article[];
+}
+
+export function CompanionUpdatesCard({ articles }: CompanionUpdatesCardProps) {
+  // Map Supabase Article objects to display format, fall back to static if empty
+  const updates =
+    articles && articles.length > 0
+      ? articles.map((a, i) => ({
+          id: `live-${i}`,
+          title: a.title,
+          date: a.date,
+          badge: (a.tag && ["Analysis", "Deep Dive", "Exclusive", "Confirmed"].includes(a.tag)
+            ? "Official"
+            : "Rumor") as "Official" | "Rumor",
+          image: a.img,
+          href: "/news",
+        }))
+      : FALLBACK_UPDATES;
+
   return (
     <div className="flex flex-col justify-between rounded-3xl border border-white/10 bg-[#0a0f1d]/90 p-5 sm:p-6 shadow-xl backdrop-blur-xl">
       {/* Header */}
@@ -59,7 +71,7 @@ export function CompanionUpdatesCard() {
 
       {/* Articles list */}
       <div className="my-3 space-y-3">
-        {UPDATES.map((item) => (
+        {updates.map((item) => (
           <Link
             key={item.id}
             href={item.href}

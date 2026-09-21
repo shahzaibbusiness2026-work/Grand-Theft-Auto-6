@@ -1,17 +1,54 @@
 "use client";
 
 import Link from "next/link";
-import { Shield, ArrowRight, Calendar, Flame, Trophy } from "lucide-react";
+import { Shield, ArrowRight, Car, Crosshair, Newspaper, Users } from "lucide-react";
+
+interface SiteStats {
+  totalVehicles: number;
+  totalWeapons: number;
+  totalArticles: number;
+  totalCharacters: number;
+}
 
 interface CompanionHeroProps {
   userName?: string;
   completionRate?: number;
+  /** Live DB counts from Supabase, passed in from the server page */
+  siteStats?: SiteStats;
 }
 
 export function CompanionHero({
   userName = "ZUHAIB",
   completionRate = 72,
+  siteStats,
 }: CompanionHeroProps) {
+  const stats = [
+    {
+      label: "Vehicles",
+      value: siteStats?.totalVehicles ?? "—",
+      icon: Car,
+      color: "text-[#00F0FF]",
+    },
+    {
+      label: "Weapons",
+      value: siteStats?.totalWeapons ?? "—",
+      icon: Crosshair,
+      color: "text-amber-400",
+    },
+    {
+      label: "Articles",
+      value: siteStats?.totalArticles ?? "—",
+      icon: Newspaper,
+      color: "text-purple-400",
+    },
+    {
+      label: "Characters",
+      value: siteStats?.totalCharacters ?? "—",
+      icon: Users,
+      color: "text-emerald-400",
+    },
+  ];
+
   return (
     <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0c1222] shadow-2xl">
       {/* Background artwork: cinematic dusk/sunset city skyline with car and palms */}
@@ -60,50 +97,46 @@ export function CompanionHero({
           </div>
         </div>
 
-        {/* Right column: Level 12 Legend Badge + Neon Script */}
+        {/* Right column: Live Atlas DB Stats + Shield Badge */}
         <div className="flex flex-col items-start lg:items-end gap-4 self-end lg:self-auto">
-          {/* Level 12 Card */}
+          {/* Live Stats Card */}
           <div className="rounded-2xl border border-border bg-card/90 p-4 shadow-2xl backdrop-blur-xl min-w-[260px] sm:min-w-[280px]">
-            {/* Top row: Shield + Level Title */}
-            <div className="flex items-center gap-3 border-b border-border pb-3">
+            {/* Top row: Shield + Title */}
+            <div className="flex items-center gap-3 border-b border-border pb-3 mb-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted border border-border text-foreground shadow-inner">
                 <Shield className="h-5 w-5 text-cyan-400" />
               </div>
               <div>
                 <div className="font-display text-sm font-extrabold uppercase tracking-wider text-foreground">
-                  LEVEL 12
+                  ATLAS DATABASE
                 </div>
                 <div className="text-[11px] font-semibold text-muted-foreground">
-                  Vice City Legend
+                  Live Leonida Intel
                 </div>
               </div>
             </div>
 
-            {/* Bottom mini stats */}
-            <div className="grid grid-cols-3 gap-2 pt-3 text-center">
-              <div className="flex flex-col items-center">
-                <div className="flex items-center gap-1 text-[11px] font-bold text-foreground">
-                  <Calendar className="h-3 w-3 text-amber-400" />
-                  <span>28</span>
-                </div>
-                <span className="text-[9px] text-muted-foreground font-medium">Days Active</span>
-              </div>
-
-              <div className="flex flex-col items-center border-x border-border px-1">
-                <div className="flex items-center gap-1 text-[11px] font-bold text-foreground">
-                  <Flame className="h-3 w-3 text-amber-400" />
-                  <span>142</span>
-                </div>
-                <span className="text-[9px] text-muted-foreground font-medium">Items Found</span>
-              </div>
-
-              <div className="flex flex-col items-center">
-                <div className="flex items-center gap-1 text-[11px] font-bold text-foreground">
-                  <Trophy className="h-3 w-3 text-yellow-400" />
-                  <span>12</span>
-                </div>
-                <span className="text-[9px] text-muted-foreground font-medium">Achievements</span>
-              </div>
+            {/* Live counts grid */}
+            <div className="grid grid-cols-2 gap-2.5">
+              {stats.map((stat) => {
+                const Icon = stat.icon;
+                return (
+                  <div
+                    key={stat.label}
+                    className="flex items-center gap-2 rounded-xl bg-white/[0.04] border border-white/[0.06] p-2"
+                  >
+                    <Icon className={`h-3.5 w-3.5 shrink-0 ${stat.color}`} />
+                    <div className="min-w-0">
+                      <p className="text-[11px] font-black text-foreground leading-none">
+                        {stat.value}
+                      </p>
+                      <p className="text-[9px] text-muted-foreground mt-0.5 truncate">
+                        {stat.label}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 

@@ -13,8 +13,13 @@ import { CompanionUpdatesCard } from "@/components/dashboard/companion-updates-c
 import { CompanionAiCard } from "@/components/dashboard/companion-ai-card";
 import { CompanionQuoteCard } from "@/components/dashboard/companion-quote-card";
 import { X } from "lucide-react";
+import type { DashboardStats } from "@/lib/services/queries";
 
-export function DashboardView() {
+interface DashboardViewProps {
+  liveStats: DashboardStats;
+}
+
+export function DashboardView({ liveStats }: DashboardViewProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -58,10 +63,19 @@ export function DashboardView() {
         {/* Scrollable Dashboard Body */}
         <main className="flex-1 overflow-y-auto px-4 py-6 sm:px-6 lg:px-8 space-y-6">
           <div className="mx-auto max-w-[1540px] space-y-6 pb-12">
-            {/* Hero Welcome Card */}
-            <CompanionHero userName="ZUHAIB" completionRate={72} />
+            {/* Hero Welcome Card — shows live DB counts as site stats */}
+            <CompanionHero
+              userName="ZUHAIB"
+              completionRate={72}
+              siteStats={{
+                totalVehicles: liveStats.totalVehicles,
+                totalWeapons: liveStats.totalWeapons,
+                totalArticles: liveStats.totalArticles,
+                totalCharacters: liveStats.totalCharacters,
+              }}
+            />
 
-            {/* Row 1: Progress (72%), Continue Mission, Today's Goals */}
+            {/* Row 1: Progress (local storage), Continue Mission, Today's Goals */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <CompanionProgressCard overallPercent={72} />
               <CompanionContinueCard
@@ -75,11 +89,12 @@ export function DashboardView() {
               <CompanionGoalsCard />
             </div>
 
-            {/* Row 2: Recent Activity, Recommended For You, Latest Updates */}
+            {/* Row 2: Recent Activity, Recommendations (live vehicles), Latest Updates (live articles) */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <CompanionActivityCard />
               <CompanionRecommendationsCard />
-              <CompanionUpdatesCard />
+              {/* Latest Updates now receives live articles from Supabase */}
+              <CompanionUpdatesCard articles={liveStats.latestArticles} />
             </div>
 
             {/* Row 3: Ask GTA 6 AI, Atmospheric Quote */}
