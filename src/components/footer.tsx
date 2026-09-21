@@ -2,8 +2,8 @@ import Link from "next/link";
 import { Instagram, Twitter, Youtube, Gamepad2, Mail, ArrowRight, Sparkles } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { getSiteSettings } from "@/lib/services/settings";
+import { getSiteSettings } from "@/lib/services/queries";
+
 
 const COLS = [
   {

@@ -24,7 +24,9 @@ const CATEGORIES = [
   "Plane",
 ];
 
-export function VehiclesClient() {
+export function VehiclesClient({ initialVehicles }: { initialVehicles?: CanonicalVehicle[] }) {
+  const vehicles = initialVehicles && initialVehicles.length > 0 ? initialVehicles : canonicalVehicles;
+
   const [search, setSearch] = useState("");
   const [selectedCat, setSelectedCat] = useState("All Types");
   const [sortBy, setSortBy] = useState<"speed" | "power" | "price" | "name">("speed");
@@ -52,7 +54,7 @@ export function VehiclesClient() {
   };
 
   const filteredVehicles = useMemo(() => {
-    return canonicalVehicles
+    return vehicles
       .filter((v) => {
         const matchesCat =
           selectedCat === "All Types" ||
@@ -69,7 +71,8 @@ export function VehiclesClient() {
         if (sortBy === "price") return (b.price || 0) - (a.price || 0);
         return a.name.localeCompare(b.name);
       });
-  }, [search, selectedCat, sortBy]);
+  }, [vehicles, search, selectedCat, sortBy]);
+
 
   return (
     <div className="space-y-8">

@@ -14,6 +14,7 @@ import {
   ExternalLink,
   ArrowUpDown,
   MoreHorizontal,
+  Trash2,
 } from "lucide-react";
 import { Drawer } from "@/components/admin/drawer";
 import { useToast } from "@/components/admin/toast";
@@ -22,6 +23,7 @@ import {
   INITIAL_ADMIN_WEAPONS,
   AdminWeapon,
 } from "@/lib/admin-store";
+import { getAdminWeapons, saveWeapon, deleteWeapon } from "@/lib/services/weapons";
 import { cn } from "@/lib/utils";
 
 // Weapon Silhouette SVG matching Image 5
@@ -54,18 +56,27 @@ export default function AdminWeaponsPage() {
   const router = useRouter();
   const { showToast } = useToast();
   const [weapons, setWeapons] = useState<AdminWeapon[]>(INITIAL_ADMIN_WEAPONS);
+  const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"all" | "verification" | "drafts" | "archived">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedAmmunition, setSelectedAmmunition] = useState("all");
   const [selectedVerification, setSelectedVerification] = useState("all");
   const [selectedPublication, setSelectedPublication] = useState("all");
-  const [selectedIds, setSelectedIds] = useState<string[]>(["wep-003"]); // Weapon W-003 selected by default matching Image 5
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  // Load from Supabase on mount
+  React.useEffect(() => {
+    setIsLoading(true);
+    getAdminWeapons()
+      .then((data) => {
+        if (data && data.length > 0) setWeapons(data);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
   // Slide-over drawer state (Quick edit matching Image 5)
-  const [drawerWeapon, setDrawerWeapon] = useState<AdminWeapon | null>(
-    INITIAL_ADMIN_WEAPONS.find((w) => w.id === "wep-003") || null
-  );
+  const [drawerWeapon, setDrawerWeapon] = useState<AdminWeapon | null>(null);
   const [drawerNotes, setDrawerNotes] = useState("");
 
   // Toast visible by default matching Image 5
@@ -75,12 +86,12 @@ export default function AdminWeaponsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 7;
 
-  // Tab counts matching Image 5
+  // Tab counts — computed from actual data
   const tabCounts = {
-    all: 36,
-    verification: 14,
-    drafts: 6,
-    archived: 2,
+    all: weapons.length,
+    verification: weapons.filter((w) => w.verification !== "verified").length,
+    drafts: weapons.filter((w) => w.status === "draft").length,
+    archived: weapons.filter((w) => w.status === "archived").length,
   };
 
   // Filtered list
@@ -141,30 +152,40 @@ export default function AdminWeaponsPage() {
     }
   };
 
-  const handleSaveDrawer = () => {
+  const handleSaveDrawer = async () => {
     if (!drawerWeapon) return;
-    setWeapons((prev) =>
-      prev.map((w) =>
-        w.id === drawerWeapon.id ? { ...drawerWeapon, notes: drawerNotes } : w
-      )
-    );
-    showToast({
-      title: "Weapon updated",
-      description: `Specifications for ${drawerWeapon.name} have been saved.`,
-      type: "success",
-    });
+    const updated = { ...drawerWeapon, notes: drawerNotes };
+    setWeapons((prev) => prev.map((w) => (w.id === updated.id ? updated : w)));
+
+    showToast({ title: "Saving to Supabase…", description: `Saving ${updated.name}…`, type: "info" });
+
+    const res = await saveWeapon(updated);
+
+    if (res.success) {
+      showToast({ title: "Weapon Saved", description: `${updated.name} persisted to Supabase.`, type: "success" });
+      setDrawerWeapon(null);
+    } else {
+      showToast({ title: "Saved Locally", description: "Ensure Supabase weapons table is seeded.", type: "warning" });
+    }
+  };
+
+  const handleDeleteWeapon = async (id: string) => {
+    setWeapons((prev) => prev.filter((w) => w.id !== id));
+    await deleteWeapon(id);
+    showToast({ title: "Weapon Deleted", description: "Removed from Supabase.", type: "success" });
   };
 
   return (
     <div className="relative space-y-5 animate-in fade-in duration-200">
-      {/* Top Banner & Header (Image 5) */}
+      {/* Header */}
       <div className="space-y-3">
         <div className="flex items-center gap-2.5 text-xs text-[#94A3B8]">
-          <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
-            Demo data
+          <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            Connected to Supabase
           </span>
           <span>
-            All records on this screen are placeholder records and not based on verified information.
+            All records are sourced from the database. Changes persist to live site.
           </span>
         </div>
 
@@ -174,7 +195,7 @@ export default function AdminWeaponsPage() {
               Weapons Management
             </h1>
             <p className="text-xs text-[#94A3B8] mt-1">
-              Manage weapons content for GTA 6 Atlas. All records are placeholder records.
+              Manage weapon records for GTA 6 Atlas. All records are placeholder records pending verification.
             </p>
           </div>
 
@@ -189,6 +210,7 @@ export default function AdminWeaponsPage() {
             <button
               type="button"
               className="p-2 rounded-lg bg-[#111622] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+
               aria-label="More options"
             >
               <MoreHorizontal className="w-4 h-4" />

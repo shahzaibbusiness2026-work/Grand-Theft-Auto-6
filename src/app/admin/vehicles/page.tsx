@@ -111,10 +111,10 @@ export default function AdminVehiclesPage() {
   ]);
 
   const tabCounts = {
-    all: 84,
-    verification: 12,
-    drafts: 8,
-    archived: 3,
+    all: vehicles.length,
+    verification: vehicles.filter((v) => v.verification !== "verified").length,
+    drafts: vehicles.filter((v) => v.status === "draft").length,
+    archived: vehicles.filter((v) => v.status === "archived").length,
   };
 
   const handleSelectRow = (id: string) => {
@@ -131,9 +131,40 @@ export default function AdminVehiclesPage() {
     }
   };
 
+  const handleSaveVehicle = async (vehicle: AdminVehicle) => {
+    showToast({ title: "Saving…", description: `Saving ${vehicle.name}…`, type: "info" });
+    const res = await saveVehicle(vehicle);
+    if (res.success) {
+      showToast({ title: "Vehicle Saved", description: `${vehicle.name} persisted to Supabase.`, type: "success" });
+    } else {
+      showToast({ title: "Error", description: res.error || "Failed to save.", type: "danger" });
+    }
+
+  };
+
+  const handleDeleteVehicle = async (id: string) => {
+    setVehicles((prev) => prev.filter((v) => v.id !== id));
+    setSelectedIds((prev) => prev.filter((i) => i !== id));
+    await deleteVehicle(id);
+    showToast({ title: "Vehicle Deleted", description: "Removed from Supabase.", type: "success" });
+  };
+
+  const handleArchiveSelected = async () => {
+    for (const id of selectedIds) {
+      const vehicle = vehicles.find((v) => v.id === id);
+      if (vehicle) await saveVehicle({ ...vehicle, status: "archived" });
+    }
+    setVehicles((prev) =>
+      prev.map((v) => (selectedIds.includes(v.id) ? { ...v, status: "archived" as const } : v))
+    );
+    setSelectedIds([]);
+    showToast({ title: "Archived", description: `${selectedIds.length} vehicle(s) archived.`, type: "success" });
+  };
+
   const toggleExpand = (id: string) => {
     setExpandedId((prev) => (prev === id ? null : id));
   };
+
 
   return (
     <div className="space-y-5 animate-in fade-in duration-200">
@@ -590,6 +621,7 @@ export default function AdminVehiclesPage() {
                 </button>
                 <button
                   type="button"
+                  onClick={handleArchiveSelected}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] text-white border border-[#243048] font-semibold transition-colors"
                 >
                   <Trash2 className="w-3 h-3 text-[#EF4444]" />
@@ -606,6 +638,7 @@ export default function AdminVehiclesPage() {
               </div>
             </div>
           )}
+
 
           {/* Table Footer & Pagination matching Image 2 */}
           <div className="p-4 border-t border-[#1C2436] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-[#94A3B8]">

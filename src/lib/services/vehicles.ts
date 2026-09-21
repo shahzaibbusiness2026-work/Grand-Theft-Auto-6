@@ -2,7 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { createClient as createServerSupabase } from "@/lib/supabase/client";
+
 import { vehicles as fallbackVehicles, Vehicle } from "@/lib/data";
 import { INITIAL_ADMIN_VEHICLES, AdminVehicle } from "@/lib/admin-store";
 

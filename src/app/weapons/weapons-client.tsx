@@ -31,7 +31,9 @@ const rarityStyles: Record<string, string> = {
   Common: "bg-muted text-muted-foreground border-border",
 };
 
-export function WeaponsClient() {
+export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWeapon[] }) {
+  const weapons = initialWeapons && initialWeapons.length > 0 ? initialWeapons : canonicalWeapons;
+
   const [search, setSearch] = useState("");
   const [selectedCat, setSelectedCat] = useState("All Categories");
   const [sortBy, setSortBy] = useState<"damage" | "fireRate" | "range" | "price">("damage");
@@ -52,8 +54,9 @@ export function WeaponsClient() {
   };
 
   const filteredWeapons = useMemo(() => {
-    return canonicalWeapons
+    return weapons
       .filter((w) => {
+
         const matchesCat = selectedCat === "All Categories" || w.klass === selectedCat;
         const matchesSearch =
           w.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -68,7 +71,8 @@ export function WeaponsClient() {
         if (sortBy === "price") return (b.price || 0) - (a.price || 0);
         return 0;
       });
-  }, [search, selectedCat, sortBy]);
+  }, [weapons, search, selectedCat, sortBy]);
+
 
   return (
     <div className="space-y-8">

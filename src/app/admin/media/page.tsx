@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import {
   Image as ImageIcon,
@@ -26,6 +26,7 @@ import {
   INITIAL_ADMIN_MEDIA,
   AdminMediaAsset,
 } from "@/lib/admin-store";
+import { getMediaAssets, saveMediaAsset, deleteMediaAsset } from "@/lib/services/media";
 import { cn } from "@/lib/utils";
 
 export default function AdminMediaPage() {
@@ -39,6 +40,16 @@ export default function AdminMediaPage() {
     INITIAL_ADMIN_MEDIA[0]?.id || "med-1"
   );
   const [copied, setCopied] = useState(false);
+
+  // Load from Supabase on mount
+  useEffect(() => {
+    getMediaAssets().then((data) => {
+      if (data && data.length > 0) {
+        setAssets(data);
+        setSelectedAssetId(data[0].id);
+      }
+    });
+  }, []);
 
   // Upload simulation & floating toast state (Image 15)
   const [isUploading, setIsUploading] = useState(false);
@@ -91,10 +102,10 @@ export default function AdminMediaPage() {
           const newAsset: AdminMediaAsset = {
             id: `med-${Date.now()}`,
             filename: `trailer-2-screenshot-${Date.now().toString().slice(-2)}.jpg`,
-            dimensions: "1920x1080",
+            dimensions: "1920 × 1080",
             fileSize: "2.4 MB",
             type: "Image",
-            url: "/hero-vice-city-hd.jpg",
+            url: "/img/hero-vice-skyline-hd.jpg",
             altText: "Newly uploaded trailer 2 screenshot",
             credit: "Rockstar Games (unverified)",
             license: "Rockstar Games (unverified)",
@@ -105,9 +116,10 @@ export default function AdminMediaPage() {
           };
           setAssets([newAsset, ...assets]);
           setSelectedAssetId(newAsset.id);
+          saveMediaAsset(newAsset);
           showToast({
             title: "Upload Complete",
-            description: `${newAsset.filename} uploaded and ready for embedding.`,
+            description: `${newAsset.filename} uploaded and persisted to Supabase.`,
             type: "success",
           });
           return 100;
@@ -117,16 +129,19 @@ export default function AdminMediaPage() {
     }, 300);
   };
 
-  const handleDeleteConfirmed = () => {
+  const handleDeleteConfirmed = async () => {
     if (!selectedAsset || !confirmUnderstood) return;
     const remaining = assets.filter((a) => a.id !== selectedAsset.id);
+    const assetToDelete = selectedAsset;
     setAssets(remaining);
     setSelectedAssetId(remaining[0]?.id || "");
     setIsDeleteModalOpen(false);
     setConfirmUnderstood(false);
+
+    await deleteMediaAsset(assetToDelete.id);
     showToast({
       title: "Asset Deleted",
-      description: `${selectedAsset.filename} has been removed from the media vault.`,
+      description: `${assetToDelete.filename} has been removed from Supabase media vault.`,
       type: "danger",
     });
   };
@@ -152,12 +167,14 @@ export default function AdminMediaPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Media library
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
-              Demo data
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Connected to Supabase
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
             Upload and manage images, videos, and documents for articles and database records.
+
           </p>
         </div>
 

@@ -65,14 +65,15 @@ export default function AdminArticlesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  // Tab counts matching Image 8
+  // Tab counts dynamically calculated from articles
   const tabCounts = {
-    all: 128,
-    draft: 18,
-    review: 9,
-    scheduled: 4,
-    published: 97,
+    all: articles.length,
+    draft: articles.filter((a) => a.status === "draft").length,
+    review: articles.filter((a) => a.status === "review").length,
+    scheduled: articles.filter((a) => a.status === "scheduled").length,
+    published: articles.filter((a) => a.status === "published").length,
   };
+
 
   const filteredArticles = useMemo(() => {
     return articles.filter((a) => {

@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Play, Star, ArrowRight, Sparkles, User, Shield, Zap, Car } from "lucide-react";
-import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
+
 import { Badge } from "@/components/ui/badge";
 import { Select } from "@/components/ui/select";
 import { SectionHeader } from "@/components/section-header";
@@ -50,8 +50,9 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
   });
 
   return (
-    <SiteShell>
+    <>
       {/* 1. HERO BANNER — Clean Split Layout (No Text Overlap, Natural Portrait Proportions) */}
+
       <section className="container-site pt-8">
         <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-[#0B1020] via-[#141C2E] to-[#0B1020] p-6 sm:p-10 shadow-2xl">
           {/* Ambient Lighting */}
@@ -337,6 +338,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
         character={selectedCharacter}
         onClose={() => setSelectedCharacter(null)}
       />
-    </SiteShell>
+    </>
   );
 }
+

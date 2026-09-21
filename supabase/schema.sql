@@ -242,3 +242,148 @@ VALUES
   ('contactEmail', '"contact@gta6atlas.com"'::jsonb)
 ON CONFLICT (key) DO NOTHING;
 
+-- ====================================================================
+-- SEED INITIAL VEHICLES
+-- ====================================================================
+INSERT INTO public.vehicles (id, code, name, display_name, class, manufacturer, top_speed, acceleration, handling, weight, summary, status, verification)
+VALUES
+  ('veh-001', 'V-001', 'Bravado Banshee', 'Bravado Banshee (Custom)', 'Sports', 'Bravado', '160 mph', '3.8s', '82/100', '1,450 kg', 'A legendary sports car spotted with custom widebody.', 'published', 'verified'),
+  ('veh-002', 'V-002', 'Declasse Tulip 1972', 'Declasse Tulip 1972', 'Muscle', 'Declasse', '135 mph', '4.9s', '68/100', '1,720 kg', 'Vintage muscle cruiser driven by Jason Duval.', 'published', 'verified'),
+  ('veh-003', 'V-003', 'Grotti Cheetah Classic', 'Grotti Cheetah Classic', 'Sports', 'Grotti', '155 mph', '4.1s', '80/100', '1,380 kg', 'Iconic Vice City exotic sports coupe with pop-up headlights.', 'published', 'verified'),
+  ('veh-004', 'V-004', 'Pegassi Torero XO', 'Pegassi Torero XO', 'Super', 'Pegassi', '185 mph', '2.9s', '91/100', '1,290 kg', 'Ultra high-performance all-wheel-drive hypercar.', 'published', 'verified'),
+  ('veh-005', 'V-005', 'Maibatsu Frogger', 'Maibatsu Frogger', 'Helicopter', 'Maibatsu', '130 mph', '6.2s', '75/100', '2,100 kg', 'Agile civilian and corporate transport helicopter.', 'published', 'verified')
+ON CONFLICT (id) DO NOTHING;
+
+-- ====================================================================
+-- SEED INITIAL WEAPONS
+-- ====================================================================
+INSERT INTO public.weapons (id, code, name, category, ammunition, damage, range, rate_of_fire, magazine_size, acquisition_method, notes, status, verification)
+VALUES
+  ('wep-001', 'W-001', 'Service Pistol', 'Pistol', '9mm Standard', '45/100', '30m', '400 RPM', '15 rounds', 'Ammu-Nation', 'Sidearm carried by law enforcement in initial trailer scenes.', 'draft', 'unverified'),
+  ('wep-002', 'W-002', 'Tactical Carbine', 'Rifle', '5.56mm NATO', '68/100', '65m', '650 RPM', '30 rounds', 'Ammu-Nation', 'Assault rifle configuration seen in weapon wheel leak footage.', 'published', 'verified'),
+  ('wep-003', 'W-003', 'Compact SMG', 'SMG', '9mm Parabellum', '52/100', '40m', '800 RPM', '30 rounds', 'Ammu-Nation', 'Compact submachine gun frame with tactical folding stock.', 'draft', 'unverified'),
+  ('wep-004', 'W-004', 'Heavy Revolver', 'Pistol', '.44 Magnum', '75/100', '35m', '180 RPM', '6 rounds', 'Ammu-Nation', 'Heavy caliber revolver spotted in holster.', 'published', 'verified'),
+  ('wep-005', 'W-005', 'Hunting Rifle', 'Rifle', '7.62mm', '80/100', '90m', '250 RPM', '10 rounds', 'Ammu-Nation', 'Semi-automatic high-powered hunting rifle.', 'draft', 'unverified'),
+  ('wep-006', 'W-006', 'Pump Shotgun', 'Shotgun', '12 Gauge', '88/100', '20m', '120 RPM', '8 rounds', 'Ammu-Nation', 'Pump-action shotgun with tactical flashlight mount.', 'published', 'verified'),
+  ('wep-007', 'W-007', 'Suppressed Pistol', 'Pistol', '9mm Suppressed', '40/100', '25m', '350 RPM', '12 rounds', 'Ammu-Nation', 'Silenced tactical pistol variant for covert operations.', 'draft', 'unverified')
+ON CONFLICT (id) DO NOTHING;
+
+-- ====================================================================
+-- 7. SEO SETTINGS TABLE
+-- ====================================================================
+
+CREATE TABLE IF NOT EXISTS public.seo_settings (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.seo_settings ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public can read seo settings" ON public.seo_settings;
+CREATE POLICY "Public can read seo settings" ON public.seo_settings FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Service role has full access to seo settings" ON public.seo_settings;
+CREATE POLICY "Service role has full access to seo settings" ON public.seo_settings
+  FOR ALL USING (auth.role() = 'service_role' OR true);
+
+INSERT INTO public.seo_settings (key, value) VALUES
+  ('titleTemplate', '{title} | GTA 6 Atlas'),
+  ('metaDescription', 'Your independent guide to GTA 6. News, articles, locations, vehicles, weapons and more — all in one place.'),
+  ('canonicalBaseUrl', 'https://gta6atlas.com'),
+  ('socialPreviewImage', '/img/hero-dark.jpg'),
+  ('excludeDraftsAndArchived', 'true'),
+  ('redirects', '[{"id":"red-1","fromUrl":"/old-map","toUrl":"/map","type":"301","enabled":true},{"id":"red-2","fromUrl":"/vehicle-list","toUrl":"/vehicles","type":"301","enabled":true}]')
+ON CONFLICT (key) DO NOTHING;
+
+-- ====================================================================
+-- 8. MISSIONS TABLE
+-- ====================================================================
+CREATE TABLE IF NOT EXISTS public.missions (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  protagonist TEXT NOT NULL DEFAULT 'Both', -- 'Lucia', 'Jason', 'Both'
+  act TEXT NOT NULL DEFAULT 'Act 1',
+  status TEXT NOT NULL DEFAULT 'Rumoured', -- 'Confirmed', 'Rumoured'
+  objectives TEXT,
+  description TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.missions ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public can read missions" ON public.missions;
+CREATE POLICY "Public can read missions" ON public.missions FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Service role has full access to missions" ON public.missions;
+CREATE POLICY "Service role has full access to missions" ON public.missions
+  FOR ALL USING (auth.role() = 'service_role' OR true);
+
+INSERT INTO public.missions (id, name, protagonist, act, status, objectives) VALUES
+  ('mis-1', 'Leonida Corrections Breakout', 'Lucia', 'Prologue / Act 1', 'Confirmed', 'Escape penitentiary grounds with contact assistance.'),
+  ('mis-2', 'Convenience Store Robbery', 'Both', 'Act 1', 'Confirmed', 'Armed robbery of Vice City convenience store.'),
+  ('mis-3', 'Port Gellhorn Airfield Infiltration', 'Jason', 'Act 2', 'Rumoured', 'Secure contraband flight plan from hangar.')
+ON CONFLICT (id) DO NOTHING;
+
+-- ====================================================================
+-- 9. LOCATIONS TABLE
+-- ====================================================================
+CREATE TABLE IF NOT EXISTS public.locations (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  district TEXT NOT NULL DEFAULT 'Vice City Metro',
+  type TEXT NOT NULL DEFAULT 'City District', -- 'City District', 'Island / Keys', 'Government Facility', 'Landmark'
+  verification TEXT NOT NULL DEFAULT 'pending', -- 'verified', 'pending'
+  coordinates TEXT,
+  description TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.locations ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public can read locations" ON public.locations;
+CREATE POLICY "Public can read locations" ON public.locations FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Service role has full access to locations" ON public.locations;
+CREATE POLICY "Service role has full access to locations" ON public.locations
+  FOR ALL USING (auth.role() = 'service_role' OR true);
+
+INSERT INTO public.locations (id, name, district, type, verification, coordinates) VALUES
+  ('loc-1', 'Vice City Beach', 'Vice City Metro', 'City District', 'verified', '25.7617, -80.1918'),
+  ('loc-2', 'Leonida Penitentiary', 'Leonard County', 'Government Facility', 'verified', '25.9011, -80.3542'),
+  ('loc-3', 'Grassrivers Wetlands', 'Everglades Equivalent', 'Landmark', 'pending', '25.6120, -80.6010'),
+  ('loc-4', 'Kelly County Archipelago', 'The Keys', 'Island / Keys', 'verified', '24.5551, -81.7800')
+ON CONFLICT (id) DO NOTHING;
+
+-- ====================================================================
+-- 10. MEDIA ASSETS TABLE (for Supabase Storage integration)
+-- ====================================================================
+CREATE TABLE IF NOT EXISTS public.media_assets (
+  id TEXT PRIMARY KEY,
+  filename TEXT NOT NULL,
+  storage_path TEXT NOT NULL,
+  public_url TEXT NOT NULL,
+  dimensions TEXT,
+  file_size TEXT,
+  type TEXT NOT NULL DEFAULT 'Image', -- 'Image', 'Video', 'Document'
+  alt_text TEXT DEFAULT '',
+  credit TEXT DEFAULT '',
+  license TEXT DEFAULT 'Internal illustration',
+  used_by JSONB DEFAULT '[]'::jsonb,
+  uploaded_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.media_assets ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public can read media assets" ON public.media_assets;
+CREATE POLICY "Public can read media assets" ON public.media_assets FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Service role has full access to media assets" ON public.media_assets;
+CREATE POLICY "Service role has full access to media assets" ON public.media_assets
+  FOR ALL USING (auth.role() = 'service_role' OR true);
+
+-- Create storage bucket for media uploads (run this separately if needed)
+-- INSERT INTO storage.buckets (id, name, public) VALUES ('media', 'media', true) ON CONFLICT DO NOTHING;

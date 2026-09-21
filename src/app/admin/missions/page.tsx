@@ -1,25 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
-import { Compass, Plus, Clock, CheckCircle2 } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Compass, Plus, Clock, CheckCircle2, Trash2 } from "lucide-react";
 import { DataTable, Column } from "@/components/admin/data-table";
 import { Badge } from "@/components/admin/ui/badge";
-
-interface MissionRecord {
-  id: string;
-  name: string;
-  protagonist: "Lucia" | "Jason" | "Both";
-  act: string;
-  status: "Confirmed" | "Rumoured";
-  objectives: string;
-}
+import { getMissions, saveMission, deleteMission } from "@/lib/services/missions";
+import type { MissionRecord } from "@/lib/services/missions";
+import { useToast } from "@/components/admin/toast";
 
 export default function AdminMissionsPage() {
-  const [missions] = useState<MissionRecord[]>([
-    { id: "mis-1", name: "Leonida Corrections Breakout", protagonist: "Lucia", act: "Prologue / Act 1", status: "Confirmed", objectives: "Escape penitentiary grounds with contact assistance." },
-    { id: "mis-2", name: "Convenience Store Robbery", protagonist: "Both", act: "Act 1", status: "Confirmed", objectives: "Armed robbery of Vice City convenience store." },
-    { id: "mis-3", name: "Port Gellhorn Airfield Infiltration", protagonist: "Jason", act: "Act 2", status: "Rumoured", objectives: "Secure contraband flight plan from hangar." },
-  ]);
+  const { showToast } = useToast();
+  const [missions, setMissions] = useState<MissionRecord[]>([]);
+
+  useEffect(() => {
+    getMissions().then(setMissions);
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    setMissions((prev) => prev.filter((m) => m.id !== id));
+    await deleteMission(id);
+    showToast({ title: "Mission Deleted", description: "Removed from Supabase.", type: "success" });
+  };
 
   const getProtagonistBadge = (p: MissionRecord["protagonist"]) => {
     switch (p) {

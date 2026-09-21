@@ -17,10 +17,9 @@ import { ProtagonistsShowcase } from "@/components/protagonists-showcase";
 import { YouTubeLite } from "@/components/youtube-lite";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { HomeSatelliteMap } from "@/components/home-satellite-map";
-import { getPublicArticles } from "@/lib/services/articles";
-import { getPublicCharacters } from "@/lib/services/characters";
-import { getSiteSettings } from "@/lib/services/settings";
+import { getPublicArticles, getPublicCharacters, getSiteSettings } from "@/lib/services/queries";
 import { roleColor } from "@/lib/data";
+
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 

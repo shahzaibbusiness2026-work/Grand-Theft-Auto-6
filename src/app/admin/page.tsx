@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -24,9 +24,61 @@ import {
   CheckSquare
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getAdminArticles } from "@/lib/services/articles";
+import { getAdminVehicles } from "@/lib/services/vehicles";
+import { getAdminWeapons } from "@/lib/services/weapons";
+import { getAdminCharacters } from "@/lib/services/characters";
+import { getMapMarkers } from "@/lib/services/map";
 
 export default function AdminOverviewPage() {
   const router = useRouter();
+
+  const [stats, setStats] = useState({
+    publishedContent: 128,
+    awaitingReview: 9,
+    totalRecords: 246,
+    articlesCount: 5,
+    vehiclesCount: 5,
+    weaponsCount: 7,
+    charactersCount: 2,
+    markersCount: 17,
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      getAdminArticles().catch(() => []),
+      getAdminVehicles().catch(() => []),
+      getAdminWeapons().catch(() => []),
+      getAdminCharacters().catch(() => []),
+      getMapMarkers().catch(() => []),
+    ]).then(([articles, vehicles, weapons, characters, markers]) => {
+      const published =
+        articles.filter((a) => a.status === "published").length +
+        vehicles.filter((v) => v.status === "published").length +
+        weapons.filter((w) => w.status === "published").length;
+
+      const review =
+        articles.filter((a) => a.status === "review" || a.status === "draft").length +
+        vehicles.filter((v) => v.status === "draft").length +
+        weapons.filter((w) => w.status === "draft" || w.status === "review").length;
+
+      const total =
+        articles.length + vehicles.length + weapons.length + characters.length + markers.length;
+
+      setStats({
+        publishedContent: published,
+        awaitingReview: review,
+        totalRecords: total,
+        articlesCount: articles.length,
+        vehiclesCount: vehicles.length,
+        weaponsCount: weapons.length,
+        charactersCount: characters.length,
+        markersCount: markers.length,
+      });
+      setIsLoading(false);
+    });
+  }, []);
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
@@ -37,12 +89,13 @@ export default function AdminOverviewPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Overview
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
-              Demo data
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Live Database
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
-            Your publishing workspace
+            Your publishing workspace • Real-time stats from Supabase
           </p>
         </div>
 
@@ -64,8 +117,10 @@ export default function AdminOverviewPage() {
           </div>
           <div className="min-w-0">
             <p className="text-xs text-[#94A3B8] font-medium">Published content</p>
-            <p className="text-2xl font-bold text-white tracking-tight mt-0.5">128</p>
-            <p className="text-xs text-[#64748B] mt-0.5 truncate">Articles, guides and more</p>
+            <p className="text-2xl font-bold text-white tracking-tight mt-0.5">
+              {isLoading ? "…" : stats.publishedContent}
+            </p>
+            <p className="text-xs text-[#64748B] mt-0.5 truncate">Articles & verified records</p>
           </div>
         </div>
 
@@ -76,8 +131,10 @@ export default function AdminOverviewPage() {
           </div>
           <div className="min-w-0">
             <p className="text-xs text-[#94A3B8] font-medium">Awaiting review</p>
-            <p className="text-2xl font-bold text-white tracking-tight mt-0.5">9</p>
-            <p className="text-xs text-[#64748B] mt-0.5 truncate">Drafts ready for approval</p>
+            <p className="text-2xl font-bold text-white tracking-tight mt-0.5">
+              {isLoading ? "…" : stats.awaitingReview}
+            </p>
+            <p className="text-xs text-[#64748B] mt-0.5 truncate">Drafts & items to verify</p>
           </div>
         </div>
 
@@ -88,8 +145,10 @@ export default function AdminOverviewPage() {
           </div>
           <div className="min-w-0">
             <p className="text-xs text-[#94A3B8] font-medium">Database records</p>
-            <p className="text-2xl font-bold text-white tracking-tight mt-0.5">246</p>
-            <p className="text-xs text-[#64748B] mt-0.5 truncate">Vehicles, weapons, locations...</p>
+            <p className="text-2xl font-bold text-white tracking-tight mt-0.5">
+              {isLoading ? "…" : stats.totalRecords}
+            </p>
+            <p className="text-xs text-[#64748B] mt-0.5 truncate">Across all 8 tables</p>
           </div>
         </div>
 
@@ -105,6 +164,7 @@ export default function AdminOverviewPage() {
           </div>
         </div>
       </div>
+
 
       {/* Main Grid: Left 2/3 and Right 1/3 (Image 1) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

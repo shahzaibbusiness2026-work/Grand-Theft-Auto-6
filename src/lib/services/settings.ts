@@ -2,9 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { createClient as createServerSupabase } from "@/lib/supabase/client";
 import { SITE_CONFIG } from "@/lib/constants";
 import { INITIAL_ADMIN_SETTINGS, AdminSiteSettings } from "@/lib/admin-store";
+
 
 export interface ComprehensiveSiteSettings extends AdminSiteSettings {
   siteTitle: string;

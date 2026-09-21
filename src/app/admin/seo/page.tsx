@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Search,
   Globe,
@@ -21,6 +21,7 @@ import {
   INITIAL_ADMIN_SEO,
   AdminSeoSettings,
 } from "@/lib/admin-store";
+import { getSeoSettings, saveSeoSettings } from "@/lib/services/seo";
 import { cn } from "@/lib/utils";
 
 export default function AdminSeoPage() {
@@ -28,6 +29,15 @@ export default function AdminSeoPage() {
   const [activeTab, setActiveTab] = useState<"defaults" | "redirects" | "indexing">("defaults");
   const [seoConfig, setSeoConfig] = useState<AdminSeoSettings>(INITIAL_ADMIN_SEO);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+
+  // Load from Supabase on mount
+  useEffect(() => {
+    getSeoSettings().then((data) => {
+      setSeoConfig(data);
+      setIsConnected(true);
+    });
+  }, []);
 
   // Character count calculation
   const descLength = seoConfig.metaDescription.length;
@@ -37,24 +47,30 @@ export default function AdminSeoPage() {
     setHasUnsavedChanges(true);
   };
 
-  const handleSaveAll = () => {
-    setHasUnsavedChanges(false);
-    showToast({
-      title: "SEO Settings Saved",
-      description: "Metadata fallbacks, sitemap configurations, and redirects deployed.",
-      type: "success",
-    });
+  const handleSaveAll = async () => {
+    showToast({ title: "Saving…", description: "Saving SEO settings to Supabase…", type: "info" });
+    const res = await saveSeoSettings(seoConfig);
+    if (res.success) {
+      setHasUnsavedChanges(false);
+      showToast({
+        title: "SEO Settings Saved",
+        description: "Metadata, sitemap configs, and redirects deployed to Supabase.",
+        type: "success",
+      });
+    } else {
+      showToast({ title: "Error", description: res.error || "Failed to save SEO settings.", type: "danger" });
+    }
+
   };
 
   const handleDiscard = () => {
-    setSeoConfig(INITIAL_ADMIN_SEO);
-    setHasUnsavedChanges(false);
-    showToast({
-      title: "Changes Discarded",
-      description: "Restored previous SEO settings.",
-      type: "info",
+    getSeoSettings().then((data) => {
+      setSeoConfig(data);
+      setHasUnsavedChanges(false);
+      showToast({ title: "Changes Discarded", description: "Restored from Supabase.", type: "info" });
     });
   };
+
 
   const handleAddRedirect = () => {
     const newRed = {

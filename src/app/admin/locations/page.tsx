@@ -1,26 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
-import { MapPin, Plus, Search, CheckCircle2, Clock, AlertTriangle, ExternalLink } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { MapPin, Plus, Search, CheckCircle2, Clock, AlertTriangle, ExternalLink, Trash2 } from "lucide-react";
 import { DataTable, Column } from "@/components/admin/data-table";
 import { Badge } from "@/components/admin/ui/badge";
-
-interface LocationRecord {
-  id: string;
-  name: string;
-  district: string;
-  type: "City District" | "Island / Keys" | "Government Facility" | "Landmark";
-  verification: "verified" | "pending";
-  coordinates: string;
-}
+import { getLocations, saveLocation, deleteLocation } from "@/lib/services/locations";
+import type { LocationRecord } from "@/lib/services/locations";
+import { useToast } from "@/components/admin/toast";
 
 export default function AdminLocationsPage() {
-  const [locations] = useState<LocationRecord[]>([
-    { id: "loc-1", name: "Vice City Beach", district: "Vice City Metro", type: "City District", verification: "verified", coordinates: "25.7617, -80.1918" },
-    { id: "loc-2", name: "Leonida Penitentiary", district: "Leonard County", type: "Government Facility", verification: "verified", coordinates: "25.9011, -80.3542" },
-    { id: "loc-3", name: "Grassrivers Wetlands", district: "Everglades Equivalent", type: "Landmark", verification: "pending", coordinates: "25.6120, -80.6010" },
-    { id: "loc-4", name: "Kelly County Archipelago", district: "The Keys", type: "Island / Keys", verification: "verified", coordinates: "24.5551, -81.7800" },
-  ]);
+  const { showToast } = useToast();
+  const [locations, setLocations] = useState<LocationRecord[]>([]);
+
+  useEffect(() => {
+    getLocations().then(setLocations);
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    setLocations((prev) => prev.filter((l) => l.id !== id));
+    await deleteLocation(id);
+    showToast({ title: "Location Deleted", description: "Removed from Supabase.", type: "success" });
+  };
 
   const columns: Column<LocationRecord>[] = [
     {

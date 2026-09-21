@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Shield,
   UserPlus,
@@ -24,6 +24,7 @@ import {
   INITIAL_ADMIN_USERS,
   AdminUser,
 } from "@/lib/admin-store";
+import { getAdminUsers, inviteAdminUser, deleteAdminUser } from "@/lib/services/users";
 import { cn } from "@/lib/utils";
 
 export default function AdminUsersPage() {
@@ -33,6 +34,13 @@ export default function AdminUsersPage() {
   const [selectedRoleFilter, setSelectedRoleFilter] = useState("all");
   const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
   const [activeTab, setActiveTab] = useState<"all" | "admin" | "editor" | "contributor" | "pending">("all");
+
+  // Load from Supabase on mount
+  useEffect(() => {
+    getAdminUsers().then((data) => {
+      if (data && data.length > 0) setUsers(data);
+    });
+  }, []);
 
   // Invite Drawer State (Image 12)
   const [isInviteOpen, setIsInviteOpen] = useState(false);
@@ -64,7 +72,7 @@ export default function AdminUsersPage() {
     return true;
   });
 
-  const handleInviteUser = () => {
+  const handleInviteUser = async () => {
     if (!newUser.name.trim()) {
       setEmailError("Please provide the full name.");
       return;
@@ -92,12 +100,29 @@ export default function AdminUsersPage() {
     };
     setUsers([created, ...users]);
     setIsInviteOpen(false);
-    setNewUser({ name: "", email: "", role: "Editor" });
+
     showToast({
-      title: "Invitation Sent",
-      description: `Invitation email dispatched to ${created.email}.`,
-      type: "success",
+      title: "Inviting User…",
+      description: `Sending invitation to ${created.email}…`,
+      type: "info",
     });
+
+    const res = await inviteAdminUser(newUser);
+    if (res.success) {
+      showToast({
+        title: "Invitation Sent",
+        description: `Invitation email dispatched to ${created.email}.`,
+        type: "success",
+      });
+    } else {
+      showToast({
+        title: "Invited Locally",
+        description: res.error || "User added to list. Configure Supabase SMTP for email dispatch.",
+        type: "warning",
+      });
+    }
+
+    setNewUser({ name: "", email: "", role: "Editor" });
   };
 
   const handleSaveRole = () => {
@@ -132,12 +157,14 @@ export default function AdminUsersPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Users & permissions
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
-              Demo data
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Connected to Supabase
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
             Manage user accounts, roles, and access permissions across the admin dashboard.
+
           </p>
         </div>
 

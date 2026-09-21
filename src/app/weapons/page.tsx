@@ -5,8 +5,47 @@ import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";
 import { WeaponsClient } from "./weapons-client";
+import { getPublicWeapons } from "@/lib/services/queries";
+import type { CanonicalWeapon } from "@/lib/canonical-data";
+import { canonicalWeapons } from "@/lib/canonical-data";
 
-export default function WeaponsPage() {
+export default async function WeaponsPage() {
+  let weapons: CanonicalWeapon[] = canonicalWeapons;
+  try {
+    const dbWeapons = await getPublicWeapons();
+
+    if (dbWeapons && dbWeapons.length > 0) {
+      weapons = dbWeapons.map((w) => {
+        const canonicalMatch = canonicalWeapons.find((cw) => cw.id === w.id || cw.name.toLowerCase() === w.name.toLowerCase());
+        return {
+          id: w.id,
+          slug: canonicalMatch?.slug || w.id,
+          name: w.name,
+          klass: (w.category as CanonicalWeapon["klass"]) || canonicalMatch?.klass || "Pistol",
+          damage: canonicalMatch?.damage ?? 50,
+          fireRate: canonicalMatch?.fireRate ?? 50,
+          accuracy: canonicalMatch?.accuracy ?? 50,
+          range: canonicalMatch?.range ?? 50,
+          handling: canonicalMatch?.handling ?? 50,
+          reloadTime: canonicalMatch?.reloadTime ?? "2.5s",
+          magazineSize: parseInt(w.magazineSize || "15", 10) || 15,
+          ammoType: w.ammunition || canonicalMatch?.ammoType || "9mm Standard",
+          price: canonicalMatch?.price ?? null,
+          priceDisplay: canonicalMatch?.priceDisplay ?? "TBD",
+          rarity: canonicalMatch?.rarity || "Common",
+          locations: canonicalMatch?.locations || [w.acquisitionMethod || "Ammu-Nation"],
+          attachments: canonicalMatch?.attachments || [],
+          confidence: w.verification === "verified" ? "CONFIRMED" : "SPECULATION",
+          source: w.notes || canonicalMatch?.source || "In-game Database",
+          description: w.notes || canonicalMatch?.description || `${w.name} in Grand Theft Auto VI.`,
+          img: canonicalMatch?.img || "/img/hero-dark.jpg",
+        };
+      });
+    }
+  } catch {
+    // fallback to canonicalWeapons
+  }
+
   return (
     <SiteShell>
       {/* HERO */}
@@ -43,8 +82,9 @@ export default function WeaponsPage() {
 
       {/* INTERACTIVE WEAPONS CATALOG */}
       <section className="container-site py-10">
-        <WeaponsClient />
+        <WeaponsClient initialWeapons={weapons} />
       </section>
     </SiteShell>
   );
 }
+

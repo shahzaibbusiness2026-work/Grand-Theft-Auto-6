@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Users, Plus, CheckCircle2, ShieldAlert } from "lucide-react";
+import { Users, Plus, CheckCircle2, ShieldAlert, Trash2 } from "lucide-react";
 import { DataTable, Column } from "@/components/admin/data-table";
 import { Badge } from "@/components/admin/ui/badge";
 import { getAdminCharacters } from "@/lib/services/characters";
+import { deleteCharacter } from "@/lib/services/characters";
+import { useToast } from "@/components/admin/toast";
 
 interface CharacterRecord {
   id: string;
@@ -16,6 +18,7 @@ interface CharacterRecord {
 }
 
 export default function AdminCharactersPage() {
+  const { showToast } = useToast();
   const [characters, setCharacters] = useState<CharacterRecord[]>([
     { id: "char-1", name: "Lucia Caminos", role: "Lead Protagonist", actor: "Manni L. Perez (Confirmed)", status: "Confirmed", territory: "Vice City Metro / Leonida Penitentiary" },
     { id: "char-2", name: "Jason Duval", role: "Lead Protagonist", actor: "Dylan Rourke (Casting Lead)", status: "Confirmed", territory: "Port Gellhorn / Kelly County" },
@@ -39,6 +42,12 @@ export default function AdminCharactersPage() {
       }
     });
   }, []);
+
+  const handleDelete = async (id: string) => {
+    setCharacters((prev) => prev.filter((c) => c.id !== id));
+    await deleteCharacter(id);
+    showToast({ title: "Character Deleted", description: "Removed from Supabase.", type: "success" });
+  };
 
   const columns: Column<CharacterRecord>[] = [
     {

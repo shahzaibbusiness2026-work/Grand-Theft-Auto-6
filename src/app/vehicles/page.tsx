@@ -6,8 +6,56 @@ import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";
 import { VehiclesClient } from "./vehicles-client";
+import { getPublicVehicles } from "@/lib/services/queries";
+import type { CanonicalVehicle } from "@/lib/canonical-data";
+import { canonicalVehicles } from "@/lib/canonical-data";
 
-export default function VehiclesPage() {
+export default async function VehiclesPage() {
+  // Try to get vehicles from Supabase; fall back to canonical static data
+  let vehicles: CanonicalVehicle[] = canonicalVehicles;
+  try {
+    const dbVehicles = await getPublicVehicles();
+
+    if (dbVehicles && dbVehicles.length > 0) {
+      // Map admin vehicles to CanonicalVehicle shape
+      vehicles = dbVehicles.map((v) => {
+        const canonicalMatch = canonicalVehicles.find(
+          (cv) => cv.id === v.id || cv.name.toLowerCase() === v.name.toLowerCase()
+        );
+        return {
+          id: v.id,
+          slug: canonicalMatch?.slug || v.id,
+          name: v.name,
+          manufacturer: v.manufacturer || canonicalMatch?.manufacturer || "Unknown",
+          klass: (canonicalMatch?.klass || (v.class === "Sports" ? "Sports Car" : "Super Car")) as CanonicalVehicle["klass"],
+          img: canonicalMatch?.img || (v.images?.[0] ?? "/img/car-purple.jpg"),
+          filter: canonicalMatch?.filter,
+          topSpeed: canonicalMatch?.topSpeed ?? (parseFloat(v.topSpeed || "150") || 150),
+          acceleration: canonicalMatch?.acceleration ?? (parseFloat(v.acceleration || "4.0") || 4.0),
+          braking: canonicalMatch?.braking ?? 75,
+          handling: canonicalMatch?.handling ?? (parseFloat(v.handling || "75") || 75),
+          power: canonicalMatch?.power ?? 500,
+          weight: v.weight || canonicalMatch?.weight || "1,500 kg",
+          seating: canonicalMatch?.seating ?? 2,
+          drivetrain: canonicalMatch?.drivetrain ?? "RWD",
+          price: canonicalMatch?.price ?? null,
+          priceDisplay: canonicalMatch?.priceDisplay ?? "TBD",
+          purchaseLocation: canonicalMatch?.purchaseLocation ?? "Southern San Andreas Super Autos",
+          spawnLocations: canonicalMatch?.spawnLocations ?? ["Vice City Downtown", "Ocean Drive"],
+          customizationOptions: canonicalMatch?.customizationOptions ?? ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
+          confidence: v.verification === "verified" ? "CONFIRMED" : "SPECULATION",
+          source: v.sources?.[0]?.title || canonicalMatch?.source || "In-game Footage",
+          description: v.summary || canonicalMatch?.description || `${v.name} in Grand Theft Auto VI.`,
+
+          featured: canonicalMatch?.featured,
+        };
+      });
+
+    }
+  } catch {
+    // Use canonical static data as fallback
+  }
+
   return (
     <SiteShell>
       {/* HERO */}
@@ -36,7 +84,7 @@ export default function VehiclesPage() {
         {/* Global Live Stats Counter */}
         <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-2 divide-border/80 sm:grid-cols-4 sm:divide-x rounded-2xl shadow-xl">
           {[
-            ["450+", "Total Confirmed"],
+            [`${vehicles.length}+`, "Total Confirmed"],
             ["120+", "Sports & Supercars"],
             ["80+", "Motorcycles & Dirt"],
             ["50+", "Boats, Jets & Heli"],
@@ -51,7 +99,7 @@ export default function VehiclesPage() {
 
       {/* INTERACTIVE CLIENT FILTER & VEHICLE ROSTER */}
       <section className="container-site py-12">
-        <VehiclesClient />
+        <VehiclesClient initialVehicles={vehicles} />
       </section>
 
       {/* CTA BANNER */}

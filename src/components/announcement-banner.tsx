@@ -1,4 +1,5 @@
-import { getSiteSettings } from "@/lib/services/settings";
+import { getSiteSettings } from "@/lib/services/queries";
+
 import { Radio, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
