@@ -9,18 +9,22 @@ export async function POST(request: Request) {
     const password = body.password || "";
 
     // Authorized credentials requested by user
-    const isMasterAdmin =
-      ((rawUsername === "admin@gta6.com" || rawUsername === "admin@gta6") &&
-        (password === "admin12345" || password === "Admin12345")) ||
-      ((rawUsername === "shahzaib@gta6" || rawUsername === "shahzaib@gta6.com") &&
-        password === "jackleofiona@2026");
+    const isPasswordMatch =
+      password === "admin12345" ||
+      password === "Admin12345" ||
+      password === "Admin12345!" ||
+      password === "jackleofiona@2026";
 
-    // Also allow default admin credentials
-    const isDefaultAdmin =
-      rawUsername === "admin@gta6atlas.com" &&
-      (password === "admin12345" || password === "Admin12345!");
+    const isAuthorizedUsername =
+      rawUsername === "shahzaib@gta6.com" ||
+      rawUsername === "shahzaib@gta6" ||
+      rawUsername === "admin@gta6.com" ||
+      rawUsername === "admin@gta6" ||
+      rawUsername === "admin@gta6atlas.com";
 
-    if (isMasterAdmin || isDefaultAdmin) {
+    const isMasterAdmin = isAuthorizedUsername && isPasswordMatch;
+
+    if (isMasterAdmin) {
       const cookieStore = await cookies();
       cookieStore.set("gta6_admin_session", "true", {
         path: "/",
