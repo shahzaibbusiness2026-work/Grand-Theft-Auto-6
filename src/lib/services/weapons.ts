@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { assertAdmin } from "@/lib/auth/assert-admin";
 
 import { INITIAL_ADMIN_WEAPONS, AdminWeapon } from "@/lib/admin-store";
 
@@ -97,6 +98,7 @@ export async function getPublicWeapons(): Promise<AdminWeapon[]> {
  */
 export async function saveWeapon(weapon: Partial<AdminWeapon> & { name: string; id?: string }) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const id = weapon.id || `wep-${Date.now()}`;
 
@@ -135,6 +137,7 @@ export async function saveWeapon(weapon: Partial<AdminWeapon> & { name: string; 
  */
 export async function deleteWeapon(id: string) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { error } = await supabase.from("weapons").delete().eq("id", id);
     if (error) throw error;

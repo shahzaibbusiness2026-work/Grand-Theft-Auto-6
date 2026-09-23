@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   CheckSquare,
   Plus,
@@ -19,62 +17,21 @@ import { Button } from "@/components/admin/ui/button";
 import { Badge } from "@/components/admin/ui/badge";
 import { Tooltip } from "@/components/admin/ui/tooltip";
 import { cn } from "@/lib/utils";
-
-interface AdminTask {
-  id: string;
-  title: string;
-  assignee: string;
-  priority: "high" | "medium" | "low";
-  dueDate: string;
-  completed: boolean;
-  category: string;
-}
-
-const INITIAL_TASKS: AdminTask[] = [
-  {
-    id: "task-1",
-    title: "Corroborate Banshee GTS speedometer in trailer 1 frame 0:42",
-    assignee: "Morgan Kim",
-    priority: "high",
-    dueDate: "Sep 22, 2026",
-    completed: false,
-    category: "Vehicles",
-  },
-  {
-    id: "task-2",
-    title: "Recalibrate Vice City Metro station coordinates on interactive map",
-    assignee: "Alex Rivera",
-    priority: "high",
-    dueDate: "Sep 23, 2026",
-    completed: false,
-    category: "Map",
-  },
-  {
-    id: "task-3",
-    title: "Complete editorial proofread on 'Trailer details to verify'",
-    assignee: "Jamie Lee",
-    priority: "medium",
-    dueDate: "Sep 24, 2026",
-    completed: false,
-    category: "Articles",
-  },
-  {
-    id: "task-4",
-    title: "Audit license permissions for 24 trailer screenshots",
-    assignee: "Elena Rostova",
-    priority: "low",
-    dueDate: "Sep 28, 2026",
-    completed: true,
-    category: "Media",
-  },
-];
+import { getTasks, saveTask, deleteTask, AdminTask } from "@/lib/services/tasks";
 
 export default function AdminTasksPage() {
   const { showToast } = useToast();
-  const [tasks, setTasks] = useState<AdminTask[]>(INITIAL_TASKS);
+  const [tasks, setTasks] = useState<AdminTask[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [filterStatus, setFilterStatus] = useState<"all" | "pending" | "completed">("all");
   const [filterPriority, setFilterPriority] = useState<string>("all");
+
+  useEffect(() => {
+    getTasks()
+      .then((data) => setTasks(data))
+      .finally(() => setIsLoading(false));
+  }, []);
 
   const filteredTasks = useMemo(() => {
     return tasks.filter((task) => {
@@ -87,29 +44,37 @@ export default function AdminTasksPage() {
 
   const hasActiveFilters = filterStatus !== "all" || filterPriority !== "all";
 
-  const toggleTask = (id: string) => {
+  const toggleTask = async (id: string) => {
+    const target = tasks.find((t) => t.id === id);
+    if (!target) return;
+    const updated = { ...target, completed: !target.completed };
+
     setTasks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+      prev.map((t) => (t.id === id ? updated : t))
     );
+    await saveTask(updated);
+
     showToast({
       title: "Task Status Updated",
-      description: "Task completion status changed.",
+      description: "Task completion status synced to Supabase.",
       type: "info",
     });
   };
 
-  const handleDeleteTask = (id: string, e: React.MouseEvent) => {
+  const handleDeleteTask = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
     const taskToDelete = tasks.find((t) => t.id === id);
     setTasks((prev) => prev.filter((t) => t.id !== id));
+    await deleteTask(id);
+
     showToast({
       title: "Task Deleted",
-      description: `"${taskToDelete?.title || "Task"}" removed from queue.`,
+      description: `"${taskToDelete?.title || "Task"}" removed from Supabase queue.`,
       type: "success",
     });
   };
 
-  const handleAddTask = (e: React.FormEvent) => {
+  const handleAddTask = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTaskTitle.trim()) return;
     const created: AdminTask = {
@@ -117,15 +82,17 @@ export default function AdminTasksPage() {
       title: newTaskTitle.trim(),
       assignee: "Administrator",
       priority: "medium",
-      dueDate: "Sep 25, 2026",
+      dueDate: new Date(Date.now() + 86400000 * 3).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
       completed: false,
       category: "General",
     };
     setTasks([created, ...tasks]);
     setNewTaskTitle("");
+    await saveTask(created);
+
     showToast({
       title: "Task Created",
-      description: `"${created.title}" added to queue.`,
+      description: `"${created.title}" saved to Supabase tasks.`,
       type: "success",
     });
   };

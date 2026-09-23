@@ -4,7 +4,7 @@ import React from "react";
 import { AdminLayoutShell } from "@/components/admin/admin-layout";
 import { ToastProvider } from "@/components/admin/toast";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 function AdminHeader() {
   const router = useRouter();
@@ -46,6 +46,14 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const isLoginPage = pathname === "/admin/login";
+
+  // Clean, standalone entry screen without admin sidebar/header background
+  if (isLoginPage) {
+    return <ToastProvider>{children}</ToastProvider>;
+  }
+
   return (
     <ToastProvider>
       <AdminHeader />

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Database, 
   CheckCircle2, 
@@ -16,6 +16,9 @@ import {
   X
 } from "lucide-react";
 import { INITIAL_DATABASE_ASSETS, DatabaseAsset } from "@/lib/admin-data";
+import { getAdminVehicles } from "@/lib/services/vehicles";
+import { getAdminWeapons } from "@/lib/services/weapons";
+import { getLocations } from "@/lib/services/locations";
 import { cn } from "@/lib/utils";
 
 export default function AdminDatabasePage() {
@@ -23,6 +26,47 @@ export default function AdminDatabasePage() {
   const [selectedCategory, setSelectedCategory] = useState<"all" | "vehicle" | "weapon" | "location">("all");
   const [selectedStatus, setSelectedStatus] = useState<"all" | "verified" | "unconfirmed" | "deprecated">("all");
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    Promise.all([
+      getAdminVehicles().catch(() => []),
+      getAdminWeapons().catch(() => []),
+      getLocations().catch(() => []),
+    ]).then(([vehicles, weapons, locations]) => {
+      const vAssets: DatabaseAsset[] = vehicles.map(v => ({
+        id: v.id,
+        name: v.name,
+        category: "vehicle",
+        status: v.verification === "verified" ? "verified" : "unconfirmed",
+        source: v.manufacturer ? `Manufacturer: ${v.manufacturer}` : "Trailer 1 Footages",
+        lastVerified: new Date().toISOString().substring(0, 10),
+        verifier: v.lastEditor || "Atlas Editor",
+        details: v.summary || `${v.name} (${v.class})`
+      }));
+      const wAssets: DatabaseAsset[] = weapons.map(w => ({
+        id: w.id,
+        name: w.name,
+        category: "weapon",
+        status: w.verification === "verified" ? "verified" : "unconfirmed",
+        source: w.acquisitionMethod || "Ammu-Nation",
+        lastVerified: new Date().toISOString().substring(0, 10),
+        verifier: "Atlas Weaponry",
+        details: w.notes || `${w.name} (${w.category})`
+      }));
+      const lAssets: DatabaseAsset[] = locations.map(l => ({
+        id: l.id,
+        name: l.name,
+        category: "location",
+        status: l.verification === "verified" ? "verified" : "unconfirmed",
+        source: l.district || "State of Leonida",
+        lastVerified: new Date().toISOString().substring(0, 10),
+        verifier: "Atlas Cartography",
+        details: l.description || `${l.name} (${l.type})`
+      }));
+      const combined = [...vAssets, ...wAssets, ...lAssets];
+      if (combined.length > 0) setAssets(combined);
+    });
+  }, []);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   // Form state

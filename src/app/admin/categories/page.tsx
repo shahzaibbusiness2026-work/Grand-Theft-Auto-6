@@ -1,50 +1,55 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tag, Plus, Trash2, Edit, FileText, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
 import { Badge } from "@/components/admin/ui/badge";
 import { Tooltip } from "@/components/admin/ui/tooltip";
+import { getCategories, saveCategory, deleteCategory, AdminCategory } from "@/lib/services/categories";
 
 export default function AdminCategoriesPage() {
   const { showToast } = useToast();
-  const [categories, setCategories] = useState([
-    { id: "cat-1", name: "General", slug: "general", count: 18, description: "Broad announcements, trailers, and press releases" },
-    { id: "cat-2", name: "Vehicles", slug: "vehicles", count: 32, description: "Car breakdowns, performance comparisons, and manufacturer specs" },
-    { id: "cat-3", name: "Guides", slug: "guides", count: 24, description: "Walkthroughs, map tutorials, and navigation tips" },
-    { id: "cat-4", name: "Analysis", slug: "analysis", count: 42, description: "In-depth research, leaked frame cross-references, and lore" },
-  ]);
+  const [categories, setCategories] = useState<AdminCategory[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [newCatName, setNewCatName] = useState("");
   const [newCatDesc, setNewCatDesc] = useState("");
 
-  const handleAddCategory = (e: React.FormEvent) => {
+  useEffect(() => {
+    getCategories()
+      .then((data) => setCategories(data))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  const handleAddCategory = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newCatName.trim()) return;
-    const created = {
+    const created: AdminCategory = {
       id: `cat-${Date.now()}`,
       name: newCatName.trim(),
       slug: newCatName.trim().toLowerCase().replace(/\s+/g, "-"),
       count: 0,
       description: newCatDesc.trim() || "No description provided.",
     };
-    setCategories([...categories, created]);
+    setCategories((prev) => [...prev, created]);
     setNewCatName("");
     setNewCatDesc("");
+    await saveCategory(created);
     showToast({
       title: "Category Created",
-      description: `"${created.name}" added to taxonomy.`,
+      description: `"${created.name}" saved to Supabase taxonomy.`,
       type: "success",
     });
   };
 
-  const handleDeleteCategory = (id: string) => {
+  const handleDeleteCategory = async (id: string) => {
     const cat = categories.find((c) => c.id === id);
     setCategories((prev) => prev.filter((c) => c.id !== id));
+    await deleteCategory(id);
     showToast({
       title: "Category Deleted",
-      description: `"${cat?.name || "Category"}" removed from taxonomy.`,
+      description: `"${cat?.name || "Category"}" removed from Supabase taxonomy.`,
       type: "success",
     });
   };

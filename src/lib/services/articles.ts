@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { assertAdmin } from "@/lib/auth/assert-admin";
 
 import { articles as fallbackArticles, Article } from "@/lib/data";
 import { INITIAL_ADMIN_ARTICLES, AdminArticle } from "@/lib/admin-store";
@@ -120,6 +121,7 @@ export async function getAdminArticles(): Promise<AdminArticle[]> {
  */
 export async function saveArticle(article: Partial<AdminArticle> & { title: string; excerpt: string }) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
 
     const id = article.id || `art-${Date.now()}`;
@@ -173,6 +175,7 @@ export async function saveArticle(article: Partial<AdminArticle> & { title: stri
  */
 export async function deleteArticle(id: string) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { error } = await supabase.from("articles").delete().eq("id", id);
 

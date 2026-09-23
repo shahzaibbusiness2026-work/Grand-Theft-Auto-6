@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { assertAdmin } from "@/lib/auth/assert-admin";
 
 import { vehicles as fallbackVehicles, Vehicle } from "@/lib/data";
 import { INITIAL_ADMIN_VEHICLES, AdminVehicle } from "@/lib/admin-store";
@@ -112,6 +113,7 @@ export async function getAdminVehicles(): Promise<AdminVehicle[]> {
  */
 export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?: string }) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const id = v.id || v.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
@@ -153,6 +155,7 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
  */
 export async function deleteVehicle(id: string) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { error } = await supabase.from("vehicles").delete().eq("id", id);
     if (error) throw error;

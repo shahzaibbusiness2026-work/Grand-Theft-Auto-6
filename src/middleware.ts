@@ -43,6 +43,17 @@ export async function middleware(request: NextRequest) {
   const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
   const isLoginPage = request.nextUrl.pathname === "/admin/login";
 
+  const isAdminApiRoute = request.nextUrl.pathname.startsWith("/api/admin");
+  const isLoginApi = request.nextUrl.pathname === "/api/admin/login";
+
+  // Protect admin API routes
+  if (isAdminApiRoute && !isLoginApi && !isAuthenticated) {
+    return NextResponse.json(
+      { success: false, error: "Unauthorized: Admin session required." },
+      { status: 401 }
+    );
+  }
+
   // Redirect to login if accessing admin without authentication
   if (isAdminRoute && !isLoginPage && !isAuthenticated) {
     const loginUrl = new URL("/admin/login", request.url);
@@ -59,5 +70,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/api/admin/:path*"],
 };

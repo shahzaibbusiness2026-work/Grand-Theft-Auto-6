@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
-
+import { assertAdmin } from "@/lib/auth/assert-admin";
 
 export interface LocationRecord {
   id: string;
@@ -33,6 +33,7 @@ export async function getLocations(): Promise<LocationRecord[]> {
 
 export async function saveLocation(location: Partial<LocationRecord> & { name: string }) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const id = location.id || `loc-${Date.now()}`;
     const { error } = await supabase.from("locations").upsert({ ...location, id, updated_at: new Date().toISOString() }, { onConflict: "id" });
@@ -46,6 +47,7 @@ export async function saveLocation(location: Partial<LocationRecord> & { name: s
 
 export async function deleteLocation(id: string) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { error } = await supabase.from("locations").delete().eq("id", id);
     if (error) throw error;

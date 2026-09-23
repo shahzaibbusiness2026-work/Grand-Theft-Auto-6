@@ -22,6 +22,8 @@ import {
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
 import { cn } from "@/lib/utils";
+import { getAdminVehicles } from "@/lib/services/vehicles";
+import { getAdminWeapons } from "@/lib/services/weapons";
 
 interface AttributeConfig {
   id: string;
@@ -40,12 +42,44 @@ export default function AdminComparisonsPage() {
   const [hideEmptyAttributes, setHideEmptyAttributes] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Live vehicles & weapons from Supabase
+  const [availableVehicles, setAvailableVehicles] = useState<{ id: string; name: string; type: string; status: string }[]>([]);
+  const [availableWeapons, setAvailableWeapons] = useState<{ id: string; name: string; type: string; status: string }[]>([]);
+
   // Selected vehicles (up to 3)
   const [selectedVehicles, setSelectedVehicles] = useState([
-    { id: "veh-001", name: "Vehicle V-001", type: "Vehicle", status: "Unverified" },
-    { id: "veh-002", name: "Vehicle V-002", type: "Vehicle", status: "Unverified" },
-    { id: "veh-003", name: "Vehicle V-003", type: "Vehicle", status: "Unverified" },
+    { id: "veh-001", name: "Bravado Banshee", type: "Sports", status: "Verified" },
+    { id: "veh-002", name: "Declasse Tulip 1972", type: "Muscle", status: "Verified" },
+    { id: "veh-003", name: "Grotti Cheetah Classic", type: "Sports", status: "Verified" },
   ]);
+
+  React.useEffect(() => {
+    getAdminVehicles().then((data) => {
+      if (data && data.length > 0) {
+        const mapped = data.map((v) => ({
+          id: v.id,
+          name: v.name,
+          type: v.class,
+          status: v.verification === "verified" ? "Verified" : "Unverified",
+        }));
+        setAvailableVehicles(mapped);
+        setSelectedVehicles(mapped.slice(0, 3));
+      }
+    });
+
+    getAdminWeapons().then((data) => {
+      if (data && data.length > 0) {
+        setAvailableWeapons(
+          data.map((w) => ({
+            id: w.id,
+            name: w.name,
+            type: w.category,
+            status: w.verification === "verified" ? "Verified" : "Unverified",
+          }))
+        );
+      }
+    });
+  }, []);
 
   // Attributes
   const [attributes, setAttributes] = useState<AttributeConfig[]>([

@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
-
+import { assertAdmin } from "@/lib/auth/assert-admin";
 
 export interface MissionRecord {
   id: string;
@@ -32,6 +32,7 @@ export async function getMissions(): Promise<MissionRecord[]> {
 
 export async function saveMission(mission: Partial<MissionRecord> & { name: string }) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const id = mission.id || `mis-${Date.now()}`;
     const { error } = await supabase.from("missions").upsert({ ...mission, id, updated_at: new Date().toISOString() }, { onConflict: "id" });
@@ -45,6 +46,7 @@ export async function saveMission(mission: Partial<MissionRecord> & { name: stri
 
 export async function deleteMission(id: string) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { error } = await supabase.from("missions").delete().eq("id", id);
     if (error) throw error;
