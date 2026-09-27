@@ -5,6 +5,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 
 import { characters as fallbackCharacters, Character } from "@/lib/data";
+import { logActivity } from "./activity";
 
 export interface AdminCharacter {
   id: string;
@@ -108,7 +109,13 @@ export async function getPublicCharacters(): Promise<Character[]> {
       .order("created_at", { ascending: true });
 
     if (!error && data && data.length > 0) {
-      return (data as DatabaseCharacterRow[]).map(rowToCharacter);
+      const dbChars = (data as DatabaseCharacterRow[]).map(rowToCharacter);
+      const dbIds = new Set(dbChars.map((c) => c.id.toLowerCase()));
+      const dbNames = new Set(dbChars.map((c) => c.name.toLowerCase()));
+      const remaining = fallbackCharacters.filter(
+        (c) => !dbIds.has(c.id.toLowerCase()) && !dbNames.has(c.name.toLowerCase())
+      );
+      return [...dbChars, ...remaining];
     }
   } catch {
     // Graceful fallback
@@ -129,7 +136,12 @@ export async function getAdminCharacters(): Promise<AdminCharacter[]> {
       .order("updated_at", { ascending: false });
 
     if (!error && data && data.length > 0) {
-      return (data as DatabaseCharacterRow[]).map(rowToAdminCharacter);
+      const dbChars = (data as DatabaseCharacterRow[]).map(rowToAdminCharacter);
+      const dbIds = new Set(dbChars.map((c) => c.id.toLowerCase()));
+      const remaining = FALLBACK_ADMIN_CHARACTERS.filter(
+        (c) => !dbIds.has(c.id.toLowerCase())
+      );
+      return [...dbChars, ...remaining];
     }
   } catch {
     // Graceful fallback
@@ -138,11 +150,14 @@ export async function getAdminCharacters(): Promise<AdminCharacter[]> {
   return FALLBACK_ADMIN_CHARACTERS;
 }
 
+import { assertAdmin } from "@/lib/auth/assert-admin";
+
 /**
  * Save or update a character in Supabase
  */
 export async function saveCharacter(char: Partial<Character> & { name: string; id?: string }) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const id = char.id || char.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
@@ -171,6 +186,13 @@ export async function saveCharacter(char: Partial<Character> & { name: string; i
     const { error } = await supabase.from("characters").upsert(payload, { onConflict: "id" });
     if (error) throw error;
 
+    await logActivity({
+      action: char.id ? "update" : "create",
+      targetType: "character",
+      targetId: id,
+      targetLabel: char.name,
+    });
+
     revalidatePath("/characters");
     revalidatePath("/");
     revalidatePath("/admin/characters");
@@ -187,9 +209,12 @@ export async function saveCharacter(char: Partial<Character> & { name: string; i
  */
 export async function deleteCharacter(id: string) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { error } = await supabase.from("characters").delete().eq("id", id);
     if (error) throw error;
+
+    await logActivity({ action: "delete", targetType: "character", targetId: id });
 
     revalidatePath("/characters");
     revalidatePath("/");

@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
+import { logActivity } from "./activity";
 
 export interface LocationRecord {
   id: string;
@@ -27,6 +28,13 @@ export async function getLocations(): Promise<LocationRecord[]> {
     const supabase = await createServerSupabase();
     const { data, error } = await supabase.from("locations").select("*").order("created_at", { ascending: true });
     if (!error && data && data.length > 0) return data as LocationRecord[];
+
+    // Fallback to site_settings persistence
+    const { data: setting } = await supabase.from("site_settings").select("value").eq("key", "locations_data").single();
+    if (setting?.value) {
+      const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed as LocationRecord[];
+    }
   } catch { /* fallback */ }
   return FALLBACK_LOCATIONS;
 }
@@ -36,9 +44,32 @@ export async function saveLocation(location: Partial<LocationRecord> & { name: s
     await assertAdmin();
     const supabase = createAdminClient();
     const id = location.id || `loc-${Date.now()}`;
-    const { error } = await supabase.from("locations").upsert({ ...location, id, updated_at: new Date().toISOString() }, { onConflict: "id" });
-    if (error) throw error;
+    const itemToSave = { ...location, id, updated_at: new Date().toISOString() };
+
+    const { error } = await supabase.from("locations").upsert(itemToSave, { onConflict: "id" });
+    if (error) {
+      // Table doesn't exist, persist in site_settings
+      const current = await getLocations();
+      const idx = current.findIndex((l) => l.id === id);
+      const updated = idx >= 0
+        ? current.map((l, i) => (i === idx ? { ...l, ...location, id } : l))
+        : [...current, itemToSave as LocationRecord];
+      await supabase.from("site_settings").upsert(
+        { key: "locations_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
+        { onConflict: "key" }
+      );
+    }
+
+    await logActivity({
+      action: location.id ? "update" : "create",
+      targetType: "location",
+      targetId: id,
+      targetLabel: location.name,
+    });
+
     revalidatePath("/admin/locations");
+    revalidatePath("/locations");
+    revalidatePath("/map");
     return { success: true, id };
   } catch (err) {
     return { success: false, error: String(err) };
@@ -50,10 +81,24 @@ export async function deleteLocation(id: string) {
     await assertAdmin();
     const supabase = createAdminClient();
     const { error } = await supabase.from("locations").delete().eq("id", id);
-    if (error) throw error;
+    if (error) {
+      // Table doesn't exist, update in site_settings
+      const current = await getLocations();
+      const updated = current.filter((l) => l.id !== id);
+      await supabase.from("site_settings").upsert(
+        { key: "locations_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
+        { onConflict: "key" }
+      );
+    }
+
+    await logActivity({ action: "delete", targetType: "location", targetId: id });
+
     revalidatePath("/admin/locations");
+    revalidatePath("/locations");
+    revalidatePath("/map");
     return { success: true };
   } catch (err) {
     return { success: false, error: String(err) };
   }
 }
+

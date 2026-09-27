@@ -18,7 +18,7 @@ export default async function VehiclesPage() {
 
     if (dbVehicles && dbVehicles.length > 0) {
       // Map admin vehicles to CanonicalVehicle shape
-      vehicles = dbVehicles.map((v) => {
+      const dbMapped = dbVehicles.map((v) => {
         const canonicalMatch = canonicalVehicles.find(
           (cv) => cv.id === v.id || cv.name.toLowerCase() === v.name.toLowerCase()
         );
@@ -46,11 +46,16 @@ export default async function VehiclesPage() {
           confidence: canonicalMatch?.confidence ?? "CONFIRMED",
           source: canonicalMatch?.source || "In-game Footage",
           description: canonicalMatch?.description || `${v.name} in Grand Theft Auto VI.`,
-
           featured: canonicalMatch?.featured ?? v.featured,
         };
       });
 
+      const dbIds = new Set(dbVehicles.map((v) => v.id.toLowerCase()));
+      const dbNames = new Set(dbVehicles.map((v) => v.name.toLowerCase()));
+      const remainingCanonical = canonicalVehicles.filter(
+        (cv) => !dbIds.has(cv.id.toLowerCase()) && !dbNames.has(cv.name.toLowerCase())
+      );
+      vehicles = [...dbMapped, ...remainingCanonical];
     }
   } catch {
     // Use canonical static data as fallback

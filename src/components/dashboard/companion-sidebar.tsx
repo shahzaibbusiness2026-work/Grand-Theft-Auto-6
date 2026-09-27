@@ -28,19 +28,19 @@ interface CompanionSidebarProps {
 }
 
 const NAV_ITEMS = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutGrid },
-  { href: "/map", label: "Interactive Map", icon: MapPin },
-  { href: "/vehicles", label: "Vehicles", icon: Car },
-  { href: "/weapons", label: "Weapons", icon: Crosshair },
-  { href: "/missions", label: "Missions", icon: Target },
-  { href: "/properties", label: "Properties", icon: Building2 },
-  { href: "/tools", label: "Money Tools", icon: Coins },
-  { href: "/tools/loadout-builder", label: "Loadout Builder", icon: Layers },
-  { href: "/collectibles", label: "Collectibles", icon: Sparkles },
-  { href: "/guides", label: "Guides", icon: BookOpen },
-  { href: "/news", label: "News", icon: Newspaper },
-  { href: "/ai", label: "Ask GTA 6 AI", icon: Bot },
-  { href: "/blog", label: "Community", icon: Users },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutGrid, color: "text-amber-400 group-hover:text-amber-300 light:text-amber-600 bg-amber-500/10 border-amber-500/25" },
+  { href: "/map", label: "Interactive Map", icon: MapPin, color: "text-cyan-400 group-hover:text-cyan-300 light:text-cyan-600 bg-cyan-500/10 border-cyan-500/25" },
+  { href: "/vehicles", label: "Vehicles", icon: Car, color: "text-amber-400 group-hover:text-amber-300 light:text-amber-600 bg-amber-500/10 border-amber-500/25" },
+  { href: "/weapons", label: "Weapons", icon: Crosshair, color: "text-rose-400 group-hover:text-rose-300 light:text-rose-600 bg-rose-500/10 border-rose-500/25" },
+  { href: "/missions", label: "Missions", icon: Target, color: "text-emerald-400 group-hover:text-emerald-300 light:text-emerald-600 bg-emerald-500/10 border-emerald-500/25" },
+  { href: "/properties", label: "Properties", icon: Building2, color: "text-purple-400 group-hover:text-purple-300 light:text-purple-600 bg-purple-500/10 border-purple-500/25" },
+  { href: "/tools", label: "Money Tools", icon: Coins, color: "text-yellow-400 group-hover:text-yellow-300 light:text-yellow-600 bg-yellow-500/10 border-yellow-500/25" },
+  { href: "/tools/loadout-builder", label: "Loadout Builder", icon: Layers, color: "text-sky-400 group-hover:text-sky-300 light:text-sky-600 bg-sky-500/10 border-sky-500/25" },
+  { href: "/collectibles", label: "Collectibles", icon: Sparkles, color: "text-fuchsia-400 group-hover:text-fuchsia-300 light:text-fuchsia-600 bg-fuchsia-500/10 border-fuchsia-500/25" },
+  { href: "/guides", label: "Guides", icon: BookOpen, color: "text-orange-400 group-hover:text-orange-300 light:text-orange-600 bg-orange-500/10 border-orange-500/25" },
+  { href: "/news", label: "News", icon: Newspaper, color: "text-indigo-400 group-hover:text-indigo-300 light:text-indigo-600 bg-indigo-500/10 border-indigo-500/25" },
+  { href: "/ai", label: "Ask GTA 6 AI", icon: Bot, color: "text-[#00F0FF] group-hover:text-cyan-200 light:text-cyan-600 bg-cyan-400/10 border-cyan-400/25" },
+  { href: "/blog", label: "Community", icon: Users, color: "text-pink-400 group-hover:text-pink-300 light:text-pink-600 bg-pink-500/10 border-pink-500/25" },
 ];
 
 export function CompanionSidebar({ onItemClick, className }: CompanionSidebarProps) {
@@ -49,7 +49,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
   return (
     <aside
       className={cn(
-        "flex h-full w-64 flex-col justify-between border-r border-white/[0.08] bg-[#04060d] text-slate-200 select-none overflow-y-auto no-scrollbar",
+        "flex h-full w-64 flex-col justify-between border-r border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#04060d] dark:bg-[#04060d] text-slate-200 dark:text-slate-200 select-none overflow-y-auto no-scrollbar transition-colors",
         className
       )}
     >
@@ -81,18 +81,25 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
               href={item.href}
               onClick={onItemClick}
               className={cn(
-                "group flex items-center gap-3.5 rounded-xl px-3.5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-200",
+                "group flex items-center gap-3 rounded-xl px-2.5 py-2 text-xs font-semibold tracking-wide transition-all duration-200",
                 isActive
                   ? "bg-amber-500/20 text-white font-bold shadow-[0_0_16px_rgba(245,158,11,0.25)] border border-amber-500/40"
-                  : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-200"
+                  : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-100"
               )}
             >
-              <Icon
+              <div
                 className={cn(
-                  "h-4 w-4 shrink-0 transition-transform duration-200 group-hover:scale-110",
-                  isActive ? "text-amber-400" : "text-slate-400 group-hover:text-slate-200"
+                  "flex h-7 w-7 items-center justify-center rounded-lg border transition-all duration-200 shrink-0",
+                  isActive
+                    ? "bg-amber-500/30 text-amber-400 border-amber-500/50 shadow-[0_0_10px_rgba(245,158,11,0.4)] scale-105"
+                    : cn(
+                        "group-hover:scale-110 group-hover:shadow-[0_0_8px_rgba(255,255,255,0.15)]",
+                        item.color
+                      )
                 )}
-              />
+              >
+                <Icon className="h-4 w-4" />
+              </div>
               <span className="truncate">{item.label}</span>
             </Link>
           );

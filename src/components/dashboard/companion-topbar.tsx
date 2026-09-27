@@ -5,6 +5,8 @@ import { Search, Moon, Sun, Bell, ChevronDown, Menu } from "lucide-react";
 import { useTheme } from "next-themes";
 import { CommandPalette } from "@/components/command-palette";
 
+import { cn } from "@/lib/utils";
+
 interface CompanionTopBarProps {
   onMenuToggle?: () => void;
   userName?: string;
@@ -18,7 +20,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
 
   return (
     <>
-      <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/[0.08] bg-[#070b14]/85 px-4 sm:px-6 backdrop-blur-xl">
+      <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#070b14]/85 dark:bg-[#070b14]/85 bg-white/90 px-4 sm:px-6 backdrop-blur-xl transition-colors">
         {/* Left: Mobile hamburger + Search bar */}
         <div className="flex items-center gap-3 flex-1 max-w-xl">
           {onMenuToggle && (
@@ -50,17 +52,32 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
 
         {/* Right: Controls & User Profile */}
         <div className="flex items-center gap-2 sm:gap-3 ml-4">
-          {/* Theme switcher */}
+          {/* Enhanced Theme switcher with Bright Mode Glow */}
           <button
             type="button"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-slate-300 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
-            title="Toggle theme"
+            className={cn(
+              "flex h-9 px-2.5 items-center gap-1.5 rounded-xl border transition-all active:scale-95 shadow-sm",
+              resolvedTheme === "light"
+                ? "border-amber-400/60 bg-amber-50 text-amber-700 shadow-[0_0_12px_rgba(245,158,11,0.35)] ring-1 ring-amber-400/40"
+                : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-[#00F0FF]/40 hover:bg-white/[0.08] hover:text-[#00F0FF]"
+            )}
+            title={`Switch to ${resolvedTheme === "dark" ? "Bright Mode" : "Dark Mode"}`}
           >
             {resolvedTheme === "light" ? (
-              <Sun className="h-4 w-4 text-amber-400" />
+              <>
+                <Sun className="h-4 w-4 text-amber-500 fill-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.9)] animate-pulse" />
+                <span className="hidden sm:inline font-mono text-[10px] font-black uppercase tracking-wider text-amber-700">
+                  Bright
+                </span>
+              </>
             ) : (
-              <Moon className="h-4 w-4 text-[#00F0FF]" />
+              <>
+                <Moon className="h-4 w-4 text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.7)]" />
+                <span className="hidden sm:inline font-mono text-[10px] font-black uppercase tracking-wider text-slate-400">
+                  Dark
+                </span>
+              </>
             )}
           </button>
 

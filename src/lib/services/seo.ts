@@ -6,6 +6,8 @@ import { createClient as createServerSupabase } from "@/lib/supabase/server";
 
 import { INITIAL_ADMIN_SEO, AdminSeoSettings } from "@/lib/admin-store";
 
+import { assertAdmin } from "@/lib/auth/assert-admin";
+
 export interface DatabaseSeoRow {
   key: string;
   value: string;
@@ -37,6 +39,13 @@ export async function getSeoSettings(): Promise<AdminSeoSettings> {
         redirects: map["redirects"] ? JSON.parse(map["redirects"]) : DEFAULT_SEO.redirects,
       };
     }
+
+    // Fallback to site_settings
+    const { data: setting } = await supabase.from("site_settings").select("value").eq("key", "seo_settings_data").single();
+    if (setting?.value) {
+      const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
+      return { ...DEFAULT_SEO, ...parsed };
+    }
   } catch {
     // Graceful fallback
   }
@@ -49,6 +58,7 @@ export async function getSeoSettings(): Promise<AdminSeoSettings> {
  */
 export async function saveSeoSettings(seo: Partial<AdminSeoSettings>) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
 
     const pairs: { key: string; value: string }[] = [];
@@ -62,7 +72,7 @@ export async function saveSeoSettings(seo: Partial<AdminSeoSettings>) {
     if (seo.redirects !== undefined)
       pairs.push({ key: "redirects", value: JSON.stringify(seo.redirects) });
 
-    await Promise.all(
+    const results = await Promise.all(
       pairs.map((pair) =>
         supabase.from("seo_settings").upsert(
           { key: pair.key, value: pair.value, updated_at: new Date().toISOString() },
@@ -70,6 +80,17 @@ export async function saveSeoSettings(seo: Partial<AdminSeoSettings>) {
         )
       )
     );
+
+    const hasError = results.some((r) => r.error);
+    if (hasError) {
+      // Table missing, persist to site_settings
+      const current = await getSeoSettings();
+      const updated = { ...current, ...seo };
+      await supabase.from("site_settings").upsert(
+        { key: "seo_settings_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
+        { onConflict: "key" }
+      );
+    }
 
     revalidatePath("/admin/seo");
     revalidatePath("/");

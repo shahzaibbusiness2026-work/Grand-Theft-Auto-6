@@ -6,6 +6,7 @@ import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
 import { INITIAL_ADMIN_WEAPONS, AdminWeapon } from "@/lib/admin-store";
+import { logActivity } from "./activity";
 
 export interface DatabaseWeaponRow {
   id: string;
@@ -122,6 +123,13 @@ export async function saveWeapon(weapon: Partial<AdminWeapon> & { name: string; 
     const { error } = await supabase.from("weapons").upsert(payload, { onConflict: "id" });
     if (error) throw error;
 
+    await logActivity({
+      action: weapon.id ? "update" : "create",
+      targetType: "weapon",
+      targetId: id,
+      targetLabel: weapon.name,
+    });
+
     revalidatePath("/weapons");
     revalidatePath("/admin/weapons");
 
@@ -141,6 +149,8 @@ export async function deleteWeapon(id: string) {
     const supabase = createAdminClient();
     const { error } = await supabase.from("weapons").delete().eq("id", id);
     if (error) throw error;
+
+    await logActivity({ action: "delete", targetType: "weapon", targetId: id });
 
     revalidatePath("/weapons");
     revalidatePath("/admin/weapons");

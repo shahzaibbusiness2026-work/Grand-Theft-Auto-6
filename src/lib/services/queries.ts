@@ -52,19 +52,52 @@ export async function getSiteSettings(): Promise<ComprehensiveSiteSettings> {
 }
 
 /* ------------------------------------------------------------------ */
+import { getLocations, LocationRecord } from "./locations";
+import { getMissions, MissionRecord } from "./missions";
+
+/* ------------------------------------------------------------------ */
 /* DASHBOARD STATS QUERY                                               */
 /* ------------------------------------------------------------------ */
+export interface DashboardVehicleItem {
+  id: string;
+  name: string;
+  class: string;
+  topSpeed: string;
+  acceleration?: string;
+  priceDisplay: string;
+  img: string;
+  manufacturer?: string;
+}
+
+export interface DashboardWeaponItem {
+  id: string;
+  name: string;
+  category: string;
+  damage: string;
+  range?: string;
+  acquisitionMethod: string;
+  priceDisplay?: string;
+  rarity?: string;
+  attachments?: string[];
+}
+
 export interface DashboardStats {
   totalVehicles: number;
   totalWeapons: number;
   totalCharacters: number;
   totalArticles: number;
   totalMapMarkers: number;
+  totalLocations: number;
+  totalMissions: number;
   latestArticles: Article[];
+  featuredVehicles: DashboardVehicleItem[];
+  featuredWeapons: DashboardWeaponItem[];
+  featuredLocations: LocationRecord[];
+  activeMission?: MissionRecord | null;
 }
 
 /**
- * Fetch aggregated stats + latest articles for the Dashboard page.
+ * Fetch aggregated stats + latest articles + live vehicles, weapons, locations for Dashboard.
  * Uses anon key (public read) — safe for SSR without auth.
  * All queries run in parallel via Promise.allSettled for performance.
  */
@@ -75,36 +108,101 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     totalCharacters: 0,
     totalArticles: 0,
     totalMapMarkers: 0,
+    totalLocations: 0,
+    totalMissions: 0,
     latestArticles: fallbackArticles.slice(0, 3),
+    featuredVehicles: [],
+    featuredWeapons: [],
+    featuredLocations: [],
+    activeMission: null,
   };
 
   try {
     const supabase = await createServerSupabase();
 
-    // Run all count queries in parallel for performance
-    const [vehiclesRes, weaponsRes, charsRes, articlesRes, markersRes, latestRes] =
-      await Promise.allSettled([
-        supabase.from("vehicles").select("id", { count: "exact", head: true }).eq("status", "published"),
-        supabase.from("weapons").select("id", { count: "exact", head: true }).eq("status", "published"),
-        supabase.from("characters").select("id", { count: "exact", head: true }),
-        supabase.from("articles").select("id", { count: "exact", head: true }).eq("status", "published"),
-        supabase.from("map_markers").select("id", { count: "exact", head: true }),
-        supabase
-          .from("articles")
-          .select("title, excerpt, published_at, cover_image, read_time, tag, category")
-          .eq("status", "published")
-          .order("published_at", { ascending: false })
-          .limit(3),
-      ]);
+    // Run all count and data queries in parallel for performance
+    const [
+      vehiclesCountRes,
+      weaponsCountRes,
+      charsRes,
+      articlesRes,
+      markersRes,
+      latestRes,
+      locsRes,
+      missRes,
+      vehiclesDataRes,
+      weaponsDataRes,
+    ] = await Promise.allSettled([
+      supabase.from("vehicles").select("id", { count: "exact", head: true }).eq("status", "published"),
+      supabase.from("weapons").select("id", { count: "exact", head: true }).eq("status", "published"),
+      supabase.from("characters").select("id", { count: "exact", head: true }),
+      supabase.from("articles").select("id", { count: "exact", head: true }).eq("status", "published"),
+      supabase.from("map_markers").select("id", { count: "exact", head: true }),
+      supabase
+        .from("articles")
+        .select("title, excerpt, published_at, cover_image, read_time, tag, category")
+        .eq("status", "published")
+        .order("published_at", { ascending: false })
+        .limit(3),
+      getLocations(),
+      getMissions(),
+      supabase
+        .from("vehicles")
+        .select("id, name, class, top_speed, acceleration, price_display, images, manufacturer")
+        .eq("status", "published")
+        .order("created_at", { ascending: true })
+        .limit(4),
+      supabase
+        .from("weapons")
+        .select("id, name, category, damage, range, acquisition_method, price_display, rarity, attachments")
+        .eq("status", "published")
+        .order("created_at", { ascending: true })
+        .limit(4),
+    ]);
 
     const stats: DashboardStats = {
-      totalVehicles: vehiclesRes.status === "fulfilled" ? (vehiclesRes.value.count ?? 0) : 0,
-      totalWeapons: weaponsRes.status === "fulfilled" ? (weaponsRes.value.count ?? 0) : 0,
+      totalVehicles: vehiclesCountRes.status === "fulfilled" ? (vehiclesCountRes.value.count ?? 0) : 0,
+      totalWeapons: weaponsCountRes.status === "fulfilled" ? (weaponsCountRes.value.count ?? 0) : 0,
       totalCharacters: charsRes.status === "fulfilled" ? (charsRes.value.count ?? 0) : 0,
       totalArticles: articlesRes.status === "fulfilled" ? (articlesRes.value.count ?? 0) : 0,
       totalMapMarkers: markersRes.status === "fulfilled" ? (markersRes.value.count ?? 0) : 0,
+      totalLocations: locsRes.status === "fulfilled" ? locsRes.value.length : 0,
+      totalMissions: missRes.status === "fulfilled" ? missRes.value.length : 0,
       latestArticles: defaults.latestArticles,
+      featuredVehicles: [],
+      featuredWeapons: [],
+      featuredLocations: locsRes.status === "fulfilled" ? locsRes.value.slice(0, 4) : [],
+      activeMission: missRes.status === "fulfilled" && missRes.value.length > 0 ? missRes.value[0] : null,
     };
+
+    // Map live vehicles
+    if (vehiclesDataRes.status === "fulfilled" && vehiclesDataRes.value.data) {
+      stats.featuredVehicles = vehiclesDataRes.value.data.map((row: any) => ({
+        id: row.id,
+        name: row.name,
+        class: row.class || "Sports",
+        topSpeed: row.top_speed || "180 mph",
+        acceleration: row.acceleration || "3.5s",
+        priceDisplay: row.price_display || "$150,000",
+        img: Array.isArray(row.images) && row.images[0] ? row.images[0] : "/img/car-purple.jpg",
+        manufacturer: row.manufacturer || "Grotti",
+      }));
+    }
+
+    // Map live weapons
+    if (weaponsDataRes.status === "fulfilled" && weaponsDataRes.value.data) {
+      stats.featuredWeapons = weaponsDataRes.value.data.map((row: any) => ({
+        id: row.id,
+        name: row.name,
+        category: row.category || "Assault Rifle",
+        damage: row.damage || "60/100",
+        range: row.range || "65m",
+        acquisitionMethod: row.acquisition_method || "Ammu-Nation",
+        priceDisplay: row.price_display || "$10,000",
+        rarity: row.rarity || "Common",
+        attachments: Array.isArray(row.attachments) ? row.attachments : [],
+      }));
+    }
 
     // Map latest articles to the Article type
     if (latestRes.status === "fulfilled" && !latestRes.value.error && latestRes.value.data?.length) {

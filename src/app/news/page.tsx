@@ -10,12 +10,17 @@ import { NewsletterBar } from "@/components/newsletter-bar";
 import { ArticleCard, PopularRow, CategoryList } from "@/components/article-card";
 import { popularPosts, newsCategories, featuredArticle } from "@/lib/data";
 import { getPublicArticles } from "@/lib/services/queries";
+import { getCategories } from "@/lib/services/categories";
 
 
 export default async function NewsPage() {
-  const liveArticles = await getPublicArticles();
+  const [liveArticles, categoriesData] = await Promise.all([
+    getPublicArticles(),
+    getCategories(),
+  ]);
   const heroArticle = liveArticles[0] || featuredArticle;
   const listArticles = liveArticles.length > 1 ? liveArticles.slice(1, 7) : liveArticles;
+  const categories = categoriesData.map((c) => ({ label: c.name, count: c.count }));
 
   return (
     <SiteShell>
@@ -67,7 +72,7 @@ export default async function NewsPage() {
             </Button>
           </div>
         </article>
-        <CategoryList categories={newsCategories} />
+        <CategoryList categories={categories} />
       </section>
 
       {/* LATEST + POPULAR */}

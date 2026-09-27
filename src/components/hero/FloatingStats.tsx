@@ -63,13 +63,75 @@ const STATS: StatItem[] = [
   },
 ];
 
-export function FloatingStats() {
+export interface FloatingStatsProps {
+  stats?: {
+    totalCharacters?: number;
+    totalVehicles?: number;
+    totalWeapons?: number;
+    totalMissions?: number;
+    totalLocations?: number;
+    totalMapMarkers?: number;
+  };
+}
+
+export function FloatingStats({ stats }: FloatingStatsProps) {
+  const items: StatItem[] = [
+    {
+      metric: stats?.totalCharacters !== undefined ? `${stats.totalCharacters}` : "500+",
+      label: "Characters",
+      href: "/characters",
+      icon: Users,
+      iconColor: "text-amber-500 dark:text-amber-400",
+      iconBg: "bg-amber-500/15 border-amber-500/30",
+    },
+    {
+      metric: stats?.totalVehicles !== undefined ? `${stats.totalVehicles}` : "200+",
+      label: "Vehicles",
+      href: "/vehicles",
+      icon: Car,
+      iconColor: "text-sky-500 dark:text-cyan-400",
+      iconBg: "bg-sky-500/15 border-sky-500/30",
+    },
+    {
+      metric: stats?.totalWeapons !== undefined ? `${stats.totalWeapons}` : "300+",
+      label: "Weapons",
+      href: "/weapons",
+      icon: Crosshair,
+      iconColor: "text-orange-500 dark:text-orange-400",
+      iconBg: "bg-orange-500/15 border-orange-500/30",
+    },
+    {
+      metric: stats?.totalMissions !== undefined ? `${stats.totalMissions}` : "400+",
+      label: "Missions",
+      href: "/missions",
+      icon: Target,
+      iconColor: "text-emerald-500 dark:text-emerald-400",
+      iconBg: "bg-emerald-500/15 border-emerald-500/30",
+    },
+    {
+      metric: stats?.totalLocations !== undefined ? `${stats.totalLocations}` : "800+",
+      label: "Locations",
+      href: "/locations",
+      icon: MapPin,
+      iconColor: "text-amber-500 dark:text-amber-400",
+      iconBg: "bg-amber-500/15 border-amber-500/30",
+    },
+    {
+      metric: stats?.totalMapMarkers !== undefined ? `${stats.totalMapMarkers}` : "100%",
+      label: stats?.totalMapMarkers !== undefined ? "Map Intel" : "Completion",
+      href: "/map",
+      icon: Trophy,
+      iconColor: "text-yellow-500 dark:text-yellow-400",
+      iconBg: "bg-yellow-500/15 border-yellow-500/30",
+    },
+  ];
+
   return (
     <div className="w-full rounded-2xl sm:rounded-3xl border border-border bg-card/90 dark:bg-card/75 backdrop-blur-2xl px-4 py-3 sm:px-6 lg:px-8 shadow-lg text-card-foreground">
       <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
         {/* 6 Stats Horizontal Bar */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-2 w-full lg:w-auto flex-1">
-          {STATS.map((stat) => {
+          {items.map((stat) => {
             const Icon = stat.icon;
             return (
               <Link

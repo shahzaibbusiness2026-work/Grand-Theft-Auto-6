@@ -25,6 +25,8 @@ import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
 import { FavoriteButton } from "@/components/favorite-button";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 
+import { getPublicVehicles } from "@/lib/services/queries";
+
 export function generateStaticParams() {
   const slugs: { slug: string }[] = [];
   canonicalVehicles.forEach((v) => {
@@ -38,7 +40,39 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const vehicle = canonicalVehicles.find((v) => v.slug === slug || v.id === slug);
+  let vehicle = canonicalVehicles.find((v) => v.slug === slug || v.id === slug);
+  if (!vehicle) {
+    const dbVehicles = await getPublicVehicles();
+    const dbMatch = dbVehicles.find((v) => v.id === slug || v.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug);
+    if (dbMatch) {
+      vehicle = {
+        id: dbMatch.id,
+        slug: dbMatch.id,
+        name: dbMatch.name,
+        manufacturer: "Unknown",
+        klass: (dbMatch.klass === "Sports" ? "Sports Car" : "Super Car") as CanonicalVehicle["klass"],
+        img: dbMatch.img || "/img/car-purple.jpg",
+        filter: dbMatch.filter || "sports",
+        topSpeed: dbMatch.topSpeed ?? 150,
+        acceleration: 4.0,
+        braking: 75,
+        handling: 75,
+        power: dbMatch.power ?? 500,
+        weight: "1,500 kg",
+        seating: 2,
+        drivetrain: "RWD",
+        price: null,
+        priceDisplay: dbMatch.price || "TBD",
+        purchaseLocation: "Southern San Andreas Super Autos",
+        spawnLocations: ["Vice City Downtown", "Ocean Drive"],
+        customizationOptions: ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
+        confidence: "CONFIRMED",
+        source: "In-game Footage",
+        description: `${dbMatch.name} in Grand Theft Auto VI.`,
+        featured: dbMatch.featured,
+      };
+    }
+  }
   if (!vehicle) return { title: "Vehicle Not Found — GTA 6 Atlas" };
 
   return {
@@ -54,9 +88,43 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function VehicleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const vehicle =
-    canonicalVehicles.find((v) => v.slug === slug || v.id === slug) ??
-    canonicalVehicles[0];
+  let vehicle = canonicalVehicles.find((v) => v.slug === slug || v.id === slug);
+  if (!vehicle) {
+    const dbVehicles = await getPublicVehicles();
+    const dbMatch = dbVehicles.find((v) => v.id === slug || v.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug);
+    if (dbMatch) {
+      vehicle = {
+        id: dbMatch.id,
+        slug: dbMatch.id,
+        name: dbMatch.name,
+        manufacturer: "Unknown",
+        klass: (dbMatch.klass === "Sports" ? "Sports Car" : "Super Car") as CanonicalVehicle["klass"],
+        img: dbMatch.img || "/img/car-purple.jpg",
+        filter: dbMatch.filter || "sports",
+        topSpeed: dbMatch.topSpeed ?? 150,
+        acceleration: 4.0,
+        braking: 75,
+        handling: 75,
+        power: dbMatch.power ?? 500,
+        weight: "1,500 kg",
+        seating: 2,
+        drivetrain: "RWD",
+        price: null,
+        priceDisplay: dbMatch.price || "TBD",
+        purchaseLocation: "Southern San Andreas Super Autos",
+        spawnLocations: ["Vice City Downtown", "Ocean Drive"],
+        customizationOptions: ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
+        confidence: "CONFIRMED",
+        source: "In-game Footage",
+        description: `${dbMatch.name} in Grand Theft Auto VI.`,
+        featured: dbMatch.featured,
+      };
+    }
+  }
+
+  if (!vehicle) {
+    vehicle = canonicalVehicles[0];
+  }
 
   if (!vehicle) {
     notFound();

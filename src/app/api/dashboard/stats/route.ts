@@ -4,6 +4,7 @@ import { articles as fallbackArticles } from "@/lib/data";
 import type { DatabaseArticleRow } from "@/lib/services/articles";
 
 // Revalidate cache every 60 seconds for near-real-time data
+export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
 /**

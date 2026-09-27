@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
+import { logActivity } from "./activity";
 
 export interface MissionRecord {
   id: string;
@@ -13,6 +14,8 @@ export interface MissionRecord {
   status: "Confirmed" | "Rumoured";
   objectives: string;
   description?: string;
+  district?: string;
+  location?: string;
 }
 
 const FALLBACK_MISSIONS: MissionRecord[] = [
@@ -26,6 +29,13 @@ export async function getMissions(): Promise<MissionRecord[]> {
     const supabase = await createServerSupabase();
     const { data, error } = await supabase.from("missions").select("*").order("created_at", { ascending: true });
     if (!error && data && data.length > 0) return data as MissionRecord[];
+
+    // Fallback to site_settings persistence
+    const { data: setting } = await supabase.from("site_settings").select("value").eq("key", "missions_data").single();
+    if (setting?.value) {
+      const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed as MissionRecord[];
+    }
   } catch { /* fallback */ }
   return FALLBACK_MISSIONS;
 }
@@ -35,9 +45,31 @@ export async function saveMission(mission: Partial<MissionRecord> & { name: stri
     await assertAdmin();
     const supabase = createAdminClient();
     const id = mission.id || `mis-${Date.now()}`;
-    const { error } = await supabase.from("missions").upsert({ ...mission, id, updated_at: new Date().toISOString() }, { onConflict: "id" });
-    if (error) throw error;
+    const itemToSave = { ...mission, id, updated_at: new Date().toISOString() };
+
+    const { error } = await supabase.from("missions").upsert(itemToSave, { onConflict: "id" });
+    if (error) {
+      // Table doesn't exist, persist in site_settings
+      const current = await getMissions();
+      const idx = current.findIndex((m) => m.id === id);
+      const updated = idx >= 0
+        ? current.map((m, i) => (i === idx ? { ...m, ...mission, id } : m))
+        : [...current, itemToSave as MissionRecord];
+      await supabase.from("site_settings").upsert(
+        { key: "missions_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
+        { onConflict: "key" }
+      );
+    }
+
+    await logActivity({
+      action: mission.id ? "update" : "create",
+      targetType: "mission",
+      targetId: id,
+      targetLabel: mission.name,
+    });
+
     revalidatePath("/admin/missions");
+    revalidatePath("/missions");
     return { success: true, id };
   } catch (err) {
     return { success: false, error: String(err) };
@@ -49,8 +81,20 @@ export async function deleteMission(id: string) {
     await assertAdmin();
     const supabase = createAdminClient();
     const { error } = await supabase.from("missions").delete().eq("id", id);
-    if (error) throw error;
+    if (error) {
+      // Table doesn't exist, update in site_settings
+      const current = await getMissions();
+      const updated = current.filter((m) => m.id !== id);
+      await supabase.from("site_settings").upsert(
+        { key: "missions_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
+        { onConflict: "key" }
+      );
+    }
+
+    await logActivity({ action: "delete", targetType: "mission", targetId: id });
+
     revalidatePath("/admin/missions");
+    revalidatePath("/missions");
     return { success: true };
   } catch (err) {
     return { success: false, error: String(err) };

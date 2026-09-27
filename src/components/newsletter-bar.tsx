@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
+import { subscribeNewsletter } from "@/lib/services/newsletter";
+
 interface NewsletterBarProps {
   title?: string;
   text?: string;
@@ -25,10 +27,14 @@ export function NewsletterBar({
     e.preventDefault();
     if (!email) return;
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 800));
+    const res = await subscribeNewsletter(email);
     setLoading(false);
-    setStatus("success");
-    setEmail("");
+    if (res.success) {
+      setStatus("success");
+      setEmail("");
+    } else {
+      setStatus("error");
+    }
   }
 
   return (

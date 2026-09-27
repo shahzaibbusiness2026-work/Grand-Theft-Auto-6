@@ -10,15 +10,19 @@ interface CompanionContinueCardProps {
   totalObjectives?: number;
   location?: string;
   playTime?: string;
+  protagonist?: string;
+  objectivesText?: string;
 }
 
 export function CompanionContinueCard({
-  missionTitle = "The Jewel Store Job",
-  missionType = "Main Mission",
+  missionTitle = "Welcome to Leonida",
+  missionType = "Main Story",
   completedObjectives = 3,
-  totalObjectives = 5,
-  location = "Rockford Hills",
-  playTime = "2h 14m",
+  totalObjectives = 4,
+  location = "Vice City Downtown",
+  playTime = "45m",
+  protagonist = "Lucia",
+  objectivesText,
 }: CompanionContinueCardProps) {
   const percent = Math.round((completedObjectives / totalObjectives) * 100);
 
@@ -44,13 +48,18 @@ export function CompanionContinueCard({
         {/* Mission image preview */}
         <div className="relative h-28 w-full overflow-hidden rounded-2xl border border-white/10">
           <img
-            src="/img/apartment.jpg"
+            src="/img/char-lucia.jpg"
             alt="Mission thumbnail"
-            className="h-full w-full object-cover brightness-75 contrast-125"
+            className="h-full w-full object-cover brightness-90 contrast-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#070b14] via-transparent to-transparent" />
-          <div className="absolute top-2 left-2.5 rounded-full bg-amber-500 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-slate-950 shadow-sm">
-            {missionType}
+          <div className="absolute top-2 left-2.5 flex items-center gap-1.5">
+            <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-slate-950 shadow-sm">
+              {missionType}
+            </span>
+            <span className="rounded-full bg-cyan-400 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-slate-950 shadow-sm">
+              {protagonist}
+            </span>
           </div>
         </div>
 

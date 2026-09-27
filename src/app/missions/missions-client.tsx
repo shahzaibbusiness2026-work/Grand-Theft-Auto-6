@@ -16,7 +16,7 @@ import {
   Sparkles,
   ArrowRight,
 } from "lucide-react";
-import { canonicalMissions, CanonicalMission } from "@/lib/canonical-data";
+import { canonicalMissions as missionsFallback, CanonicalMission } from "@/lib/canonical-data";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ConfidenceBadge } from "@/components/confidence-badge";
@@ -25,7 +25,8 @@ const TYPES = ["All Types", "Main Story", "Side Contract", "Heist"];
 const CHARACTERS = ["All Characters", "Lucia", "Jason", "Both"];
 const DIFFICULTIES = ["All Difficulties", "Easy", "Medium", "Hard", "Extreme"];
 
-export function MissionsClient() {
+export function MissionsClient({ initialMissions }: { initialMissions?: CanonicalMission[] }) {
+  const missions = initialMissions && initialMissions.length > 0 ? initialMissions : missionsFallback;
   const [search, setSearch] = useState("");
   const [selectedType, setSelectedType] = useState("All Types");
   const [selectedChar, setSelectedChar] = useState("All Characters");
@@ -33,7 +34,7 @@ export function MissionsClient() {
   const [sortBy, setSortBy] = useState<"default" | "reward" | "title">("default");
 
   const filteredMissions = useMemo(() => {
-    return canonicalMissions
+    return missions
       .filter((m) => {
         const matchesType = selectedType === "All Types" || m.type === selectedType;
         const matchesChar =
@@ -52,7 +53,7 @@ export function MissionsClient() {
         if (sortBy === "title") return a.title.localeCompare(b.title);
         return a.id.localeCompare(b.id);
       });
-  }, [search, selectedType, selectedChar, selectedDiff, sortBy]);
+      }, [missions, search, selectedType, selectedChar, selectedDiff, sortBy]);
 
   return (
     <div className="space-y-8">

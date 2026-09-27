@@ -5,6 +5,8 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 
 import { INITIAL_ADMIN_MAP_MARKERS, AdminMapMarker } from "@/lib/admin-store";
+import { assertAdmin } from "@/lib/auth/assert-admin";
+import { logActivity } from "./activity";
 
 export interface DatabaseMapMarkerRow {
   id: string;
@@ -68,6 +70,7 @@ export async function getMapMarkers(): Promise<AdminMapMarker[]> {
  */
 export async function saveMapMarker(marker: Partial<AdminMapMarker> & { name: string; id?: string }) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const id = marker.id || `mark-${Date.now()}`;
 
@@ -90,6 +93,13 @@ export async function saveMapMarker(marker: Partial<AdminMapMarker> & { name: st
     const { error } = await supabase.from("map_markers").upsert(payload, { onConflict: "id" });
     if (error) throw error;
 
+    await logActivity({
+      action: marker.id ? "update" : "create",
+      targetType: "map_marker",
+      targetId: id,
+      targetLabel: marker.name,
+    });
+
     revalidatePath("/map");
     revalidatePath("/map-explorer");
     revalidatePath("/admin/map");
@@ -107,9 +117,12 @@ export async function saveMapMarker(marker: Partial<AdminMapMarker> & { name: st
  */
 export async function deleteMapMarker(id: string) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { error } = await supabase.from("map_markers").delete().eq("id", id);
     if (error) throw error;
+
+    await logActivity({ action: "delete", targetType: "map_marker", targetId: id });
 
     revalidatePath("/map");
     revalidatePath("/map-explorer");

@@ -16,7 +16,7 @@ import {
   Eye,
   SlidersHorizontal,
 } from "lucide-react";
-import { canonicalCollectibles, type CanonicalCollectible } from "@/lib/canonical-data";
+import { canonicalCollectibles as collectiblesFallback, type CanonicalCollectible } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import {
   getStoredUserState,
@@ -37,7 +37,8 @@ const COLLECTIBLE_CATEGORIES = [
   "Easter Eggs",
 ] as const;
 
-export function CollectiblesClient() {
+export function CollectiblesClient({ initialCollectibles }: { initialCollectibles?: CanonicalCollectible[] }) {
+  const collectibles = initialCollectibles && initialCollectibles.length > 0 ? initialCollectibles : collectiblesFallback;
   const [userState, setUserState] = useState<UserState | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("All");
@@ -60,16 +61,16 @@ export function CollectiblesClient() {
   }, [userState]);
 
   const districts = useMemo(() => {
-    const list = Array.from(new Set(canonicalCollectibles.map((c) => c.district)));
+    const list = Array.from(new Set(collectibles.map((c) => c.district)));
     return ["All", ...list];
   }, []);
 
-  const totalCount = canonicalCollectibles.length;
-  const collectedCount = canonicalCollectibles.filter((c) => completedIds.includes(c.id)).length;
+  const totalCount = collectibles.length;
+  const collectedCount = collectibles.filter((c) => completedIds.includes(c.id)).length;
   const progressPercent = Math.round((collectedCount / (totalCount || 1)) * 100);
 
   const filteredItems = useMemo(() => {
-    return canonicalCollectibles.filter((item) => {
+    return collectibles.filter((item) => {
       if (selectedCategory !== "All" && item.category !== selectedCategory) {
         return false;
       }
@@ -199,8 +200,8 @@ export function CollectiblesClient() {
         <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-800">
           {COLLECTIBLE_CATEGORIES.map((cat) => {
             const count = cat === "All"
-              ? canonicalCollectibles.length
-              : canonicalCollectibles.filter((c) => c.category === cat).length;
+              ? collectibles.length
+              : collectibles.filter((c) => c.category === cat).length;
             const isSelected = selectedCategory === cat;
             return (
               <button

@@ -1,15 +1,85 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { createHash } from "crypto";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createAdminSessionToken } from "@/lib/auth/session";
 
 /**
  * Admin login endpoint.
- * Supports Supabase Auth and master admin credentials with auto-provisioning.
- * On success, sets an httpOnly server cookie for middleware auth checks.
+ * Supports Supabase Auth and a single env-configured master admin account.
+ * On success, sets a cryptographically signed httpOnly server cookie for middleware auth checks.
+ *
+ * Master credentials come from env (ADMIN_MASTER_EMAILS / ADMIN_MASTER_PASSWORD).
+ * The defaults below exist only for local/dev convenience — set real values in
+ * production and rotate them, because defaults ship in the repo.
  */
+
+const MASTER_EMAILS = (process.env.ADMIN_MASTER_EMAILS || "shahzaib@gta6.com,admin@gta6.com")
+  .split(",")
+  .map((e) => e.trim().toLowerCase())
+  .filter(Boolean);
+
+const MASTER_PASSWORD = process.env.ADMIN_MASTER_PASSWORD || "admin12345";
+
+/* ------------------------------------------------------------------ */
+/* Simple in-memory rate limiting: 5 failed attempts / 10 min / IP     */
+/* (per server instance; sufficient to slow credential stuffing)       */
+/* ------------------------------------------------------------------ */
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const failedAttempts = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const entry = failedAttempts.get(ip);
+  if (!entry) return false;
+  if (Date.now() > entry.resetAt) {
+    failedAttempts.delete(ip);
+    return false;
+  }
+  return entry.count >= RATE_LIMIT_MAX;
+}
+
+function recordFailure(ip: string) {
+  const entry = failedAttempts.get(ip);
+  if (!entry || Date.now() > entry.resetAt) {
+    failedAttempts.set(ip, { count: 1, resetAt: Date.now() + RATE_LIMIT_WINDOW_MS });
+  } else {
+    entry.count += 1;
+  }
+}
+
+function timingSafeEqualStr(a: string, b: string): boolean {
+  const ha = createHash("sha256").update(a).digest();
+  const hb = createHash("sha256").update(b).digest();
+  return createHash("sha256").update(ha).digest().equals(createHash("sha256").update(hb).digest());
+}
+
+async function setAdminCookie(cookieStore: Awaited<ReturnType<typeof cookies>>, email: string) {
+  const token = await createAdminSessionToken(email);
+  cookieStore.set("gta6_admin_session", token, {
+    path: "/",
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 60 * 60 * 24 * 7,
+  });
+}
+
 export async function POST(request: Request) {
   try {
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      request.headers.get("x-real-ip") ||
+      "unknown";
+
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { success: false, error: "Too many failed attempts. Try again in 10 minutes." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const rawUsername = (body.username || body.email || "").trim().toLowerCase();
     const password = (body.password || "").trim();
@@ -25,20 +95,8 @@ export async function POST(request: Request) {
       ? rawUsername
       : `${rawUsername.replace(/@.*$/, "")}@gta6.com`;
 
-    const isMasterPassword =
-      password.toLowerCase() === "admin12345" ||
-      password === "Admin12345!" ||
-      password === "jackleofiona@2026";
-
-    const isMasterUsername =
-      rawUsername === "admin@gta6.com" ||
-      rawUsername === "admin@gta6" ||
-      rawUsername === "shahzaib@gta6.com" ||
-      rawUsername === "shahzaib@gta6" ||
-      rawUsername === "admin@gta6atlas.com" ||
-      rawUsername === "admin";
-
-    const isMasterAdmin = isMasterUsername && isMasterPassword;
+    const isMasterAdmin =
+      MASTER_EMAILS.includes(rawUsername) && timingSafeEqualStr(password, MASTER_PASSWORD);
 
     // 1. Try signing in directly via Supabase Auth
     try {
@@ -50,13 +108,7 @@ export async function POST(request: Request) {
 
       if (!error && data.session) {
         const cookieStore = await cookies();
-        cookieStore.set("gta6_admin_session", "true", {
-          path: "/",
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "lax",
-          maxAge: 60 * 60 * 24 * 7,
-        });
+        await setAdminCookie(cookieStore, data.user?.email || email);
 
         return NextResponse.json({
           success: true,
@@ -67,9 +119,9 @@ export async function POST(request: Request) {
       // Continue to master admin check if Supabase Auth client had an error
     }
 
-    // 2. If credentials match authorized master admin
+    // 2. If credentials match the configured master admin, auto-provision
+    //    the Supabase auth user (so future logins go through Supabase Auth)
     if (isMasterAdmin) {
-      // Ensure user exists in Supabase Auth for future auth calls
       try {
         const adminClient = createAdminClient();
         await adminClient.auth.admin.createUser({
@@ -83,19 +135,15 @@ export async function POST(request: Request) {
       }
 
       const cookieStore = await cookies();
-      cookieStore.set("gta6_admin_session", "true", {
-        path: "/",
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 7,
-      });
+      await setAdminCookie(cookieStore, email);
 
       return NextResponse.json({
         success: true,
         user: { email, role: "admin" },
       });
     }
+
+    recordFailure(ip);
 
     return NextResponse.json(
       { success: false, error: "Invalid email or password." },

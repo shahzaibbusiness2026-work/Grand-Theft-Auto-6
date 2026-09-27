@@ -17,7 +17,8 @@ import {
   Building,
   Navigation,
 } from "lucide-react";
-import { canonicalLocations, type CanonicalLocation } from "@/lib/canonical-data";
+import { type CanonicalLocation } from "@/lib/canonical-data";
+import { canonicalLocations as locationsFallback } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
 import { cn } from "@/lib/utils";
@@ -33,19 +34,20 @@ const LOCATION_CATEGORIES = [
   "Collectible",
 ] as const;
 
-export function LocationsClient() {
+export function LocationsClient({ initialLocations }: { initialLocations?: CanonicalLocation[] }) {
+  const locations = initialLocations && initialLocations.length > 0 ? initialLocations : locationsFallback;
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("All");
   const [selectedThreat, setSelectedThreat] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const districts = useMemo(() => {
-    const set = new Set(canonicalLocations.map((l) => l.district));
+    const set = new Set(locations.map((l) => l.district));
     return ["All", ...Array.from(set)];
   }, []);
 
   const filteredLocations = useMemo(() => {
-    return canonicalLocations.filter((item) => {
+    return locations.filter((item) => {
       if (selectedCategory !== "All" && item.category !== selectedCategory) {
         return false;
       }
@@ -92,7 +94,7 @@ export function LocationsClient() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="card-carbon p-4 text-center">
           <span className="font-display text-2xl sm:text-3xl font-black text-white">
-            {canonicalLocations.length}
+            {locations.length}
           </span>
           <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mt-1">
             Confirmed POIs
@@ -108,7 +110,7 @@ export function LocationsClient() {
         </div>
         <div className="card-carbon p-4 text-center border-emerald-500/20 bg-emerald-950/10">
           <span className="font-display text-2xl sm:text-3xl font-black text-emerald-400">
-            {canonicalLocations.filter((l) => l.verified).length}
+            {locations.filter((l) => l.verified).length}
           </span>
           <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
             Trailer Verified
@@ -170,8 +172,8 @@ export function LocationsClient() {
           {LOCATION_CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat;
             const count = cat === "All"
-              ? canonicalLocations.length
-              : canonicalLocations.filter((l) => l.category === cat).length;
+              ? locations.length
+              : locations.filter((l) => l.category === cat).length;
             return (
               <button
                 key={cat}

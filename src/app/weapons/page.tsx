@@ -15,7 +15,7 @@ export default async function WeaponsPage() {
     const dbWeapons = await getPublicWeapons();
 
     if (dbWeapons && dbWeapons.length > 0) {
-      weapons = dbWeapons.map((w) => {
+      const dbMapped = dbWeapons.map((w) => {
         const canonicalMatch = canonicalWeapons.find((cw) => cw.id === w.id || cw.name.toLowerCase() === w.name.toLowerCase());
         return {
           id: w.id,
@@ -35,12 +35,19 @@ export default async function WeaponsPage() {
           rarity: canonicalMatch?.rarity || "Common",
           locations: canonicalMatch?.locations || [w.acquisitionMethod || "Ammu-Nation"],
           attachments: canonicalMatch?.attachments || [],
-          confidence: w.verification === "verified" ? "CONFIRMED" : "SPECULATION",
+          confidence: (w.verification === "verified" ? "CONFIRMED" : "SPECULATION") as CanonicalWeapon["confidence"],
           source: w.notes || canonicalMatch?.source || "In-game Database",
           description: w.notes || canonicalMatch?.description || `${w.name} in Grand Theft Auto VI.`,
           img: canonicalMatch?.img || "/img/hero-dark.jpg",
         };
       });
+
+      const dbIds = new Set(dbWeapons.map((w) => w.id.toLowerCase()));
+      const dbNames = new Set(dbWeapons.map((w) => w.name.toLowerCase()));
+      const remainingCanonical = canonicalWeapons.filter(
+        (cw) => !dbIds.has(cw.id.toLowerCase()) && !dbNames.has(cw.name.toLowerCase())
+      );
+      weapons = [...dbMapped, ...remainingCanonical];
     }
   } catch {
     // fallback to canonicalWeapons

@@ -7,20 +7,19 @@ import { SectionHeader } from "@/components/section-header";
 import { NewsletterBar } from "@/components/newsletter-bar";
 import { ArticleCard, PopularRow, CategoryList } from "@/components/article-card";
 import { articles, popularPosts } from "@/lib/data";
+import { getPublicArticles } from "@/lib/services/queries";
+import { getCategories } from "@/lib/services/categories";
 
-const blogCategories = [
-  { label: "All Posts", count: 128 },
-  { label: "News", count: 34 },
-  { label: "Trailers", count: 18 },
-  { label: "Gameplay", count: 24 },
-  { label: "Characters", count: 16 },
-  { label: "Vehicles", count: 12 },
-  { label: "Guides", count: 10 },
-  { label: "Updates", count: 14 },
-];
+export default async function BlogPage() {
+  const [liveArticles, categoriesData] = await Promise.all([
+    getPublicArticles(),
+    getCategories(),
+  ]);
 
-export default function BlogPage() {
-  const featured = articles[5]; // Release date article w/ vice sign vibe
+  const featured = liveArticles[0] || articles[5];
+  const listArticles = liveArticles.length > 1 ? liveArticles.slice(1) : articles;
+  const blogCategories = categoriesData.map((c) => ({ label: c.name, count: c.count }));
+
   return (
     <SiteShell>
       {/* HERO */}

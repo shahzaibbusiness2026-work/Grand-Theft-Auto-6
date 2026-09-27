@@ -7,6 +7,7 @@ import { assertAdmin } from "@/lib/auth/assert-admin";
 
 import { vehicles as fallbackVehicles, Vehicle } from "@/lib/data";
 import { INITIAL_ADMIN_VEHICLES, AdminVehicle } from "@/lib/admin-store";
+import { logActivity } from "./activity";
 
 export interface DatabaseVehicleRow {
   id: string;
@@ -139,6 +140,13 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
     const { error } = await supabase.from("vehicles").upsert(payload, { onConflict: "id" });
     if (error) throw error;
 
+    await logActivity({
+      action: v.id ? "update" : "create",
+      targetType: "vehicle",
+      targetId: id,
+      targetLabel: v.name,
+    });
+
     revalidatePath("/vehicles");
     revalidatePath("/");
     revalidatePath("/admin/vehicles");
@@ -159,6 +167,8 @@ export async function deleteVehicle(id: string) {
     const supabase = createAdminClient();
     const { error } = await supabase.from("vehicles").delete().eq("id", id);
     if (error) throw error;
+
+    await logActivity({ action: "delete", targetType: "vehicle", targetId: id });
 
     revalidatePath("/vehicles");
     revalidatePath("/");

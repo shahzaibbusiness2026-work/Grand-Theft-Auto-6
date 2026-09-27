@@ -584,5 +584,154 @@
   color: #64748b !important;
 }
 
+/* ==========================================================================
+   COMPANION PLAYER DASHBOARD — BRIGHT (LIGHT) THEME & ICON ENHANCEMENTS
+   Provides vibrant, luminous aesthetics and crystal-clear contrast for
+   the companion dashboard when switched to bright mood.
+   ========================================================================== */
+
+/* Dashboard Viewport & Surfaces */
+.light .bg-\[\#070b14\],
+.light .bg-\[\#04060d\] {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+.light .bg-\[\#070b14\]\/85 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.light .bg-\[\#0a0f1d\],
+.light .bg-\[\#0c1220\],
+.light .bg-\[\#131c2e\] {
+  background-color: #ffffff !important;
+}
+
+.light .bg-\[\#0a0f1d\]\/90,
+.light .bg-\[\#0c1220\]\/95 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Borders */
+.light .border-white\/10,
+.light .border-white\/5,
+.light .border-white\/\[0\.08\],
+.light .border-white\/\[0\.06\],
+.light .border-white\/\[0\.04\],
+.light .border-white\/\[0\.03\],
+.light .border-white\/\[0\.02\] {
+  border-color: #e2e8f0 !important;
+}
+
+/* Internal Card Sub-Surfaces & Chips */
+.light .bg-white\/\[0\.02\],
+.light .bg-white\/\[0\.03\],
+.light .bg-white\/\[0\.04\],
+.light .bg-white\/\[0\.06\] {
+  background-color: #f8fafc !important;
+}
+
+.light .hover\:bg-white\/\[0\.04\]:hover,
+.light .hover\:bg-white\/\[0\.06\]:hover,
+.light .hover\:bg-white\/\[0\.08\]:hover {
+  background-color: #f1f5f9 !important;
+}
+
+/* Companion Typography in Bright Mode */
+.light .text-slate-100,
+.light .text-slate-200 {
+  color: #0f172a !important;
+}
+
+.light .text-slate-300,
+.light .text-slate-400 {
+  color: #475569 !important;
+}
+
+.light .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Enhanced Bright Mode Icon Vibrancy */
+.light .text-amber-400,
+.light .light\:text-amber-600 {
+  color: #d97706 !important;
+}
+
+.light .text-cyan-400,
+.light .text-\[\#00F0FF\],
+.light .light\:text-cyan-600 {
+  color: #0284c7 !important;
+}
+
+.light .text-rose-400,
+.light .light\:text-rose-600 {
+  color: #e11d48 !important;
+}
+
+.light .text-emerald-400,
+.light .light\:text-emerald-600 {
+  color: #059669 !important;
+}
+
+.light .text-purple-400,
+.light .light\:text-purple-600 {
+  color: #7c3aed !important;
+}
+
+.light .text-yellow-400,
+.light .light\:text-yellow-600 {
+  color: #ca8a04 !important;
+}
+
+.light .text-sky-400,
+.light .light\:text-sky-600 {
+  color: #0284c7 !important;
+}
+
+.light .text-fuchsia-400,
+.light .light\:text-fuchsia-600 {
+  color: #c026d3 !important;
+}
+
+.light .text-orange-400,
+.light .light\:text-orange-600 {
+  color: #ea580c !important;
+}
+
+.light .text-indigo-400,
+.light .light\:text-indigo-600 {
+  color: #4f46e5 !important;
+}
+
+.light .text-pink-400,
+.light .light\:text-pink-600 {
+  color: #db2777 !important;
+}
+
+/* Sidebar navigation tiles in Bright Mode */
+.light aside .flex.h-7.w-7.rounded-lg {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  background-color: #f1f5f9;
+}
+
+.light aside a:hover .flex.h-7.w-7.rounded-lg {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Radiant glow for bright mode badges */
+.light .shadow-\[0_0_12px_rgba\(245\,158\,11\,0\.35\)\] {
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.45) !important;
+}
+
+.light .shadow-\[0_0_12px_rgba\(0\,240\,255\,0\.25\)\] {
+  box-shadow: 0 0 16px rgba(2, 132, 199, 0.35) !important;
+}
+
+.light .shadow-\[0_0_12px_rgba\(244\,63\,94\,0\.25\)\] {
+  box-shadow: 0 0 16px rgba(225, 29, 72, 0.35) !important;
+}
+
 
 

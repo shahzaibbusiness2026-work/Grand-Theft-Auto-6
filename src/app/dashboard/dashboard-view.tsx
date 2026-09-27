@@ -10,6 +10,9 @@ import { CompanionGoalsCard } from "@/components/dashboard/companion-goals-card"
 import { CompanionActivityCard } from "@/components/dashboard/companion-activity-card";
 import { CompanionRecommendationsCard } from "@/components/dashboard/companion-recommendations-card";
 import { CompanionUpdatesCard } from "@/components/dashboard/companion-updates-card";
+import { CompanionMapSection } from "@/components/dashboard/companion-map-section";
+import { CompanionVehiclesSection } from "@/components/dashboard/companion-vehicles-section";
+import { CompanionWeaponsSection } from "@/components/dashboard/companion-weapons-section";
 import { CompanionAiCard } from "@/components/dashboard/companion-ai-card";
 import { CompanionQuoteCard } from "@/components/dashboard/companion-quote-card";
 import { X } from "lucide-react";
@@ -23,7 +26,7 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-[#070b14] text-slate-100 antialiased select-none">
+    <div className="flex h-screen w-full overflow-hidden bg-[#070b14] dark:bg-[#070b14] text-slate-100 dark:text-slate-100 antialiased select-none transition-colors">
       {/* 1. Desktop Fixed Sidebar */}
       <div className="hidden md:flex shrink-0">
         <CompanionSidebar />
@@ -75,29 +78,50 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
               }}
             />
 
-            {/* Row 1: Progress (local storage), Continue Mission, Today's Goals */}
+            {/* Row 1: Progress (local storage), Continue Mission (Real GTA 6 Mission from DB), Today's Goals */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <CompanionProgressCard overallPercent={72} />
               <CompanionContinueCard
-                missionTitle="The Jewel Store Job"
-                missionType="Main Mission"
+                missionTitle={liveStats.activeMission?.name || "Welcome to Leonida"}
+                missionType={liveStats.activeMission?.act || "Main Story"}
                 completedObjectives={3}
-                totalObjectives={5}
-                location="Rockford Hills"
-                playTime="2h 14m"
+                totalObjectives={4}
+                location={liveStats.activeMission?.district || "Vice City Downtown"}
+                playTime="45m"
+                protagonist={liveStats.activeMission?.protagonist || "Lucia"}
+                objectivesText={liveStats.activeMission?.objectives}
               />
               <CompanionGoalsCard />
             </div>
 
-            {/* Row 2: Recent Activity, Recommendations (live vehicles), Latest Updates (live articles) */}
+            {/* Row 2: Live Mapped Territorities & Interactive Map Section */}
+            <CompanionMapSection
+              locations={liveStats.featuredLocations}
+              totalMarkers={liveStats.totalMapMarkers || 24}
+              totalLocations={liveStats.totalLocations || 14}
+            />
+
+            {/* Row 3: Live Verified Fleet / Vehicles Showcase */}
+            <CompanionVehiclesSection
+              vehicles={liveStats.featuredVehicles}
+              totalVehicles={liveStats.totalVehicles}
+            />
+
+            {/* Row 4: Live Verified Armory / Weapons Showcase */}
+            <CompanionWeaponsSection
+              weapons={liveStats.featuredWeapons}
+              totalWeapons={liveStats.totalWeapons}
+            />
+
+            {/* Row 5: Recent Activity, Recommendations, Latest Updates (live articles) */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <CompanionActivityCard />
               <CompanionRecommendationsCard />
-              {/* Latest Updates now receives live articles from Supabase */}
+              {/* Latest Updates receives live articles from Supabase */}
               <CompanionUpdatesCard articles={liveStats.latestArticles} />
             </div>
 
-            {/* Row 3: Ask GTA 6 AI, Atmospheric Quote */}
+            {/* Row 6: Ask GTA 6 AI, Atmospheric Quote */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
               <div className="lg:col-span-8">
                 <CompanionAiCard />

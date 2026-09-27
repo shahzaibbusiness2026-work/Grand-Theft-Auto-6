@@ -22,6 +22,8 @@ import { canonicalWeapons, CanonicalWeapon } from "@/lib/canonical-data";
 import { FavoriteButton } from "@/components/favorite-button";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 
+import { getPublicWeapons } from "@/lib/services/queries";
+
 export function generateStaticParams() {
   const slugs: { slug: string }[] = [];
   canonicalWeapons.forEach((w) => {
@@ -35,7 +37,36 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const weapon = canonicalWeapons.find((w) => w.slug === slug || w.id === slug);
+  let weapon = canonicalWeapons.find((w) => w.slug === slug || w.id === slug);
+  if (!weapon) {
+    const dbWeapons = await getPublicWeapons();
+    const dbMatch = dbWeapons.find((w) => w.id === slug || w.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug);
+    if (dbMatch) {
+      weapon = {
+        id: dbMatch.id,
+        slug: dbMatch.id,
+        name: dbMatch.name,
+        klass: (dbMatch.category as CanonicalWeapon["klass"]) || "Pistol",
+        damage: 50,
+        fireRate: 50,
+        accuracy: 50,
+        range: 50,
+        handling: 50,
+        reloadTime: "2.5s",
+        magazineSize: parseInt(dbMatch.magazineSize || "15", 10) || 15,
+        ammoType: dbMatch.ammunition || "9mm Standard",
+        price: null,
+        priceDisplay: "TBD",
+        rarity: "Common",
+        locations: [dbMatch.acquisitionMethod || "Ammu-Nation"],
+        attachments: [],
+        confidence: dbMatch.verification === "verified" ? "CONFIRMED" : "SPECULATION",
+        source: dbMatch.notes || "In-game Database",
+        description: dbMatch.notes || `${dbMatch.name} in Grand Theft Auto VI.`,
+        img: "/img/hero-dark.jpg",
+      };
+    }
+  }
   if (!weapon) return { title: "Weapon Not Found — GTA 6 Atlas" };
 
   return {
@@ -51,9 +82,40 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function WeaponDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const weapon =
-    canonicalWeapons.find((w) => w.slug === slug || w.id === slug) ??
-    canonicalWeapons[0];
+  let weapon = canonicalWeapons.find((w) => w.slug === slug || w.id === slug);
+  if (!weapon) {
+    const dbWeapons = await getPublicWeapons();
+    const dbMatch = dbWeapons.find((w) => w.id === slug || w.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug);
+    if (dbMatch) {
+      weapon = {
+        id: dbMatch.id,
+        slug: dbMatch.id,
+        name: dbMatch.name,
+        klass: (dbMatch.category as CanonicalWeapon["klass"]) || "Pistol",
+        damage: 50,
+        fireRate: 50,
+        accuracy: 50,
+        range: 50,
+        handling: 50,
+        reloadTime: "2.5s",
+        magazineSize: parseInt(dbMatch.magazineSize || "15", 10) || 15,
+        ammoType: dbMatch.ammunition || "9mm Standard",
+        price: null,
+        priceDisplay: "TBD",
+        rarity: "Common",
+        locations: [dbMatch.acquisitionMethod || "Ammu-Nation"],
+        attachments: [],
+        confidence: dbMatch.verification === "verified" ? "CONFIRMED" : "SPECULATION",
+        source: dbMatch.notes || "In-game Database",
+        description: dbMatch.notes || `${dbMatch.name} in Grand Theft Auto VI.`,
+        img: "/img/hero-dark.jpg",
+      };
+    }
+  }
+
+  if (!weapon) {
+    weapon = canonicalWeapons[0];
+  }
 
   if (!weapon) {
     notFound();

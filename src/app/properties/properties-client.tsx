@@ -20,7 +20,7 @@ import {
   Clock,
   Layers,
 } from "lucide-react";
-import { canonicalProperties, type CanonicalProperty } from "@/lib/canonical-data";
+import { canonicalProperties as propertiesFallback, type CanonicalProperty } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
 import { cn } from "@/lib/utils";
@@ -35,7 +35,8 @@ const PROPERTY_TYPES = [
   "Marina Dock",
 ] as const;
 
-export function PropertiesClient() {
+export function PropertiesClient({ initialProperties }: { initialProperties?: CanonicalProperty[] }) {
+  const properties = initialProperties && initialProperties.length > 0 ? initialProperties : propertiesFallback;
   const [selectedType, setSelectedType] = useState<string>("All");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -43,12 +44,12 @@ export function PropertiesClient() {
   const [showCompareModal, setShowCompareModal] = useState<boolean>(false);
 
   const districts = useMemo(() => {
-    const list = Array.from(new Set(canonicalProperties.map((p) => p.district)));
+    const list = Array.from(new Set(properties.map((p) => p.district)));
     return ["All", ...list];
   }, []);
 
   const filteredProperties = useMemo(() => {
-    return canonicalProperties.filter((item) => {
+    return properties.filter((item) => {
       if (selectedType !== "All" && item.type !== selectedType) {
         return false;
       }
@@ -81,7 +82,7 @@ export function PropertiesClient() {
 
   const comparedProps = useMemo(() => {
     return compareIds
-      .map((id) => canonicalProperties.find((p) => p.id === id))
+      .map((id) => properties.find((p) => p.id === id))
       .filter(Boolean) as CanonicalProperty[];
   }, [compareIds]);
 
@@ -91,7 +92,7 @@ export function PropertiesClient() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="card-carbon p-4 text-center">
           <span className="font-display text-2xl sm:text-3xl font-black text-white">
-            {canonicalProperties.length}
+            {properties.length}
           </span>
           <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mt-1">
             Confirmed Properties
@@ -195,8 +196,8 @@ export function PropertiesClient() {
           {PROPERTY_TYPES.map((type) => {
             const isSelected = selectedType === type;
             const count = type === "All"
-              ? canonicalProperties.length
-              : canonicalProperties.filter((p) => p.type === type).length;
+              ? properties.length
+              : properties.filter((p) => p.type === type).length;
             return (
               <button
                 key={type}

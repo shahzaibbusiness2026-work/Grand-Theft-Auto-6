@@ -17,7 +17,7 @@ import { ProtagonistsShowcase } from "@/components/protagonists-showcase";
 import { YouTubeLite } from "@/components/youtube-lite";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { HomeSatelliteMap } from "@/components/home-satellite-map";
-import { getPublicArticles, getPublicCharacters, getSiteSettings } from "@/lib/services/queries";
+import { getPublicArticles, getPublicCharacters, getSiteSettings, getDashboardStats } from "@/lib/services/queries";
 import { roleColor } from "@/lib/data";
 
 import { cn } from "@/lib/utils";
@@ -36,10 +36,11 @@ const TRAILERS = [
 ];
 
 export default async function HomePage() {
-  const [allArticles, allCharacters, settings] = await Promise.all([
+  const [allArticles, allCharacters, settings, stats] = await Promise.all([
     getPublicArticles(),
     getPublicCharacters(),
     getSiteSettings(),
+    getDashboardStats(),
   ]);
 
   const newsPosts = allArticles.slice(0, 3);
@@ -52,7 +53,7 @@ export default async function HomePage() {
 
       {/* QUICK STATS ATLAS STRIP */}
       <section className="container-site pt-1 sm:pt-2">
-        <FloatingStats />
+        <FloatingStats stats={stats} />
       </section>
 
       {/* 2 — LATEST TRAILERS */}

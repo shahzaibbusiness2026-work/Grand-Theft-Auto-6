@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { verifyAdminSessionToken } from "@/lib/auth/session";
 
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next({
@@ -29,16 +30,19 @@ export async function middleware(request: NextRequest) {
 
   let hasSupabaseSession = false;
   try {
+    // getUser() validates the JWT against Supabase's server — getSession()
+    // only trusts cookie claims and can be spoofed by a crafted sb cookie.
     const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    hasSupabaseSession = !!session;
+      data: { user },
+    } = await supabase.auth.getUser();
+    hasSupabaseSession = !!user;
   } catch {
     // Supabase unreachable or paused
   }
 
-  const hasAdminCookie = request.cookies.get("gta6_admin_session")?.value === "true";
-  const isAuthenticated = hasSupabaseSession || hasAdminCookie;
+  const adminCookieValue = request.cookies.get("gta6_admin_session")?.value;
+  const sessionCheck = await verifyAdminSessionToken(adminCookieValue);
+  const isAuthenticated = hasSupabaseSession || sessionCheck.valid;
 
   const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
   const isLoginPage = request.nextUrl.pathname === "/admin/login";

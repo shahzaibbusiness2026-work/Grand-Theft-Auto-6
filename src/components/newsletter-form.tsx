@@ -5,9 +5,11 @@ import { ArrowRight, Mail, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+import { subscribeNewsletter } from "@/lib/services/newsletter";
+
 /**
  * Newsletter subscription form with proper success/error state feedback.
- * Currently a frontend-only mock — swap onSubmit for a real API call.
+ * Persists email subscriptions to Supabase site_settings.
  */
 export function NewsletterForm() {
   const [email, setEmail] = useState("");
@@ -18,11 +20,14 @@ export function NewsletterForm() {
     e.preventDefault();
     if (!email) return;
     setLoading(true);
-    // Simulate API call — replace with real newsletter API (Resend, Mailchimp, etc.)
-    await new Promise((r) => setTimeout(r, 900));
+    const res = await subscribeNewsletter(email);
     setLoading(false);
-    setStatus("success");
-    setEmail("");
+    if (res.success) {
+      setStatus("success");
+      setEmail("");
+    } else {
+      setStatus("error");
+    }
   }
 
   if (status === "success") {

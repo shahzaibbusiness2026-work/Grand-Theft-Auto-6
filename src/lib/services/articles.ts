@@ -7,6 +7,7 @@ import { assertAdmin } from "@/lib/auth/assert-admin";
 
 import { articles as fallbackArticles, Article } from "@/lib/data";
 import { INITIAL_ADMIN_ARTICLES, AdminArticle } from "@/lib/admin-store";
+import { logActivity } from "./activity";
 
 export interface DatabaseArticleRow {
   id: string;
@@ -159,6 +160,14 @@ export async function saveArticle(article: Partial<AdminArticle> & { title: stri
 
     if (error) throw error;
 
+    await logActivity({
+      action: article.id ? "update" : "create",
+      targetType: "article",
+      targetId: id,
+      targetLabel: article.title,
+      detail: { status: payload.status },
+    });
+
     revalidatePath("/news");
     revalidatePath("/");
     revalidatePath("/admin/articles");
@@ -180,6 +189,8 @@ export async function deleteArticle(id: string) {
     const { error } = await supabase.from("articles").delete().eq("id", id);
 
     if (error) throw error;
+
+    await logActivity({ action: "delete", targetType: "article", targetId: id });
 
     revalidatePath("/news");
     revalidatePath("/");

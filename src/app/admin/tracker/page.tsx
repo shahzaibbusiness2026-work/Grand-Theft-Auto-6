@@ -1,19 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CheckCircle2, Plus, Sliders, Trophy, Sparkles, ToggleLeft, ToggleRight } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
 import { Badge } from "@/components/admin/ui/badge";
 import { cn } from "@/lib/utils";
-
-interface TrackerCategory {
-  id: string;
-  name: string;
-  weight: number;
-  totalItems: number;
-  active: boolean;
-}
+import { getTrackerCategories, saveTrackerCategories, TrackerCategory } from "@/lib/services/tracker";
 
 export default function AdminTrackerPage() {
   const { showToast } = useToast();
@@ -25,19 +18,25 @@ export default function AdminTrackerPage() {
     { id: "trk-5", name: "Hobbies & Pastimes", weight: 5, totalItems: 25, active: true },
   ]);
 
+  useEffect(() => {
+    getTrackerCategories().then((data) => {
+      if (data && data.length > 0) setCategories(data);
+    });
+  }, []);
+
   const totalWeight = categories.filter((c) => c.active).reduce((sum, c) => sum + c.weight, 0);
   const totalItems = categories.filter((c) => c.active).reduce((sum, c) => sum + c.totalItems, 0);
 
-  const toggleCategory = (id: string) => {
-    setCategories((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, active: !c.active } : c))
-    );
+  const toggleCategory = async (id: string) => {
+    const updated = categories.map((c) => (c.id === id ? { ...c, active: !c.active } : c));
+    setCategories(updated);
     const cat = categories.find((c) => c.id === id);
     showToast({
       title: `Category ${cat?.active ? "Disabled" : "Enabled"}`,
       description: `"${cat?.name}" ${cat?.active ? "excluded from" : "included in"} completion formula.`,
       type: "info",
     });
+    await saveTrackerCategories(updated);
   };
 
   return (
