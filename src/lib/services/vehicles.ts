@@ -29,6 +29,40 @@ export interface DatabaseVehicleRow {
   updated_at?: string | null;
 }
 
+/** Full public vehicle row including the catalog columns added in schema v2. */
+export interface VehicleCatalogRow extends DatabaseVehicleRow {
+  slug?: string | null;
+  confidence?: string | null;
+  source?: string | null;
+  price?: number | null;
+  price_display?: string | null;
+  seating?: number | null;
+  drivetrain?: string | null;
+  power_hp?: number | null;
+}
+
+/**
+ * Fetch published vehicles with ALL catalog columns, unmapped.
+ * Lets public pages prefer live admin edits over canonical static stats.
+ */
+export async function getPublicVehicleCatalog(): Promise<VehicleCatalogRow[]> {
+  try {
+    const supabase = await createServerSupabase();
+    const { data, error } = await supabase
+      .from("vehicles")
+      .select("*")
+      .eq("status", "published")
+      .order("created_at", { ascending: true });
+
+    if (!error && data && data.length > 0) {
+      return data as VehicleCatalogRow[];
+    }
+  } catch {
+    // Graceful fallback
+  }
+  return [];
+}
+
 function rowToVehicle(row: DatabaseVehicleRow): Vehicle {
   const speedNum = parseInt(row.top_speed || "180", 10) || 180;
   const powerNum = parseInt(row.acceleration || "600", 10) || 600;

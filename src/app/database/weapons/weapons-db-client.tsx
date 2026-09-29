@@ -23,6 +23,21 @@ import { Button } from "@/components/ui/button";
 import { dbWeapons, topWeapons, weaponCategories } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
+export interface DbWeaponCard {
+  name: string;
+  klass: string;
+  price: string;
+  rarity: string;
+  stats: number[];
+}
+
+export interface DbTopWeapon {
+  rank: number;
+  name: string;
+  klass: string;
+  score: string;
+}
+
 const types = [
   ["All Weapons", 118],
   ["Pistols", 18],
@@ -46,7 +61,10 @@ const rarityVariant: Record<string, "pink" | "green" | "blue" | "yellow" | "defa
 
 const statLabels = ["Damage", "Fire Rate", "Accuracy", "Range"];
 
-export function WeaponsDbClient() {
+export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; top?: DbTopWeapon[] }) {
+  const cards = weapons && weapons.length > 0 ? weapons : dbWeapons;
+  const topList = top && top.length > 0 ? top : topWeapons;
+  const total = cards.length;
   const [type, setType] = useState<string>("All Weapons");
   const [price, setPrice] = useState<number[]>([0, 2000000]);
 
@@ -174,7 +192,7 @@ export function WeaponsDbClient() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {dbWeapons.map((w, i) => (
+            {cards.map((w, i) => (
               <article key={w.name} className="group card-surface overflow-hidden">
                 <div className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-neon-purple/15 to-black/30">
                   <img src="/img/rifle.svg" alt={w.name} className="h-full w-full object-cover mix-blend-lighten" style={{ filter: `hue-rotate(${i * 35}deg) brightness(1.35)` }} />
@@ -244,7 +262,7 @@ export function WeaponsDbClient() {
               <a href="/database/weapons" className="text-xs font-semibold text-accent">View All</a>
             </div>
             <ul className="mt-4 space-y-3">
-              {topWeapons.map((w) => (
+              {topList.map((w) => (
                 <li key={w.rank} className="flex items-center gap-3">
                   <span className={cn("flex h-6 w-6 items-center justify-center rounded-md font-display text-xs font-extrabold", w.rank === 1 ? "bg-accent text-white" : w.rank === 2 ? "bg-neon-purple text-white" : w.rank === 3 ? "bg-neon-orange text-white" : "bg-muted text-muted-foreground")}>
                     {w.rank}

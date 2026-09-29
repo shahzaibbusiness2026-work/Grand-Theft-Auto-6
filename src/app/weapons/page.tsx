@@ -5,42 +5,57 @@ import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";
 import { WeaponsClient } from "./weapons-client";
-import { getPublicWeapons } from "@/lib/services/queries";
+import { getPublicWeaponCatalog, type WeaponCatalogRow } from "@/lib/services/weapons";
 import type { CanonicalWeapon } from "@/lib/canonical-data";
 import { canonicalWeapons } from "@/lib/canonical-data";
+
+const num = (s?: string | null): number | null => {
+  const n = parseFloat((s || "").replace(/,/g, ""));
+  return Number.isFinite(n) ? n : null;
+};
+
+/** Map a live DB row to the display shape — DB values WIN over canonical stats. */
+function dbToDisplay(w: WeaponCatalogRow, c?: CanonicalWeapon): CanonicalWeapon {
+  return {
+    id: w.id,
+    slug: w.slug || c?.slug || w.id,
+    name: w.name,
+    klass: (w.category as CanonicalWeapon["klass"]) || c?.klass || "Pistol",
+    damage: num(w.damage) ?? c?.damage ?? 50,
+    fireRate: num(w.rate_of_fire) ?? c?.fireRate ?? 50,
+    accuracy: num(w.range) ?? c?.accuracy ?? 50,
+    range: num(w.range) ?? c?.range ?? 50,
+    handling: c?.handling ?? 50,
+    reloadTime: c?.reloadTime ?? "2.5s",
+    magazineSize: num(w.magazine_size) ?? c?.magazineSize ?? 15,
+    ammoType: w.ammunition || c?.ammoType || "9mm Standard",
+    price: c?.price ?? null,
+    priceDisplay: w.price_display || c?.priceDisplay || "TBD",
+    rarity: (w.rarity as CanonicalWeapon["rarity"]) || c?.rarity || "Common",
+    locations: c?.locations || [w.acquisition_method || "Ammu-Nation"],
+    attachments: w.attachments || c?.attachments || [],
+    confidence: (w.confidence as CanonicalWeapon["confidence"]) ||
+      (w.verification === "verified" ? "CONFIRMED" : "SPECULATION"),
+    source: c?.source || "In-game Database",
+    description: w.notes || c?.description || `${w.name} in Grand Theft Auto VI.`,
+    img: c?.img || "/img/hero-dark.jpg",
+  };
+}
 
 export default async function WeaponsPage() {
   let weapons: CanonicalWeapon[] = canonicalWeapons;
   try {
-    const dbWeapons = await getPublicWeapons();
+    const dbWeapons = await getPublicWeaponCatalog();
 
     if (dbWeapons && dbWeapons.length > 0) {
-      const dbMapped = dbWeapons.map((w) => {
-        const canonicalMatch = canonicalWeapons.find((cw) => cw.id === w.id || cw.name.toLowerCase() === w.name.toLowerCase());
-        return {
-          id: w.id,
-          slug: canonicalMatch?.slug || w.id,
-          name: w.name,
-          klass: (w.category as CanonicalWeapon["klass"]) || canonicalMatch?.klass || "Pistol",
-          damage: canonicalMatch?.damage ?? 50,
-          fireRate: canonicalMatch?.fireRate ?? 50,
-          accuracy: canonicalMatch?.accuracy ?? 50,
-          range: canonicalMatch?.range ?? 50,
-          handling: canonicalMatch?.handling ?? 50,
-          reloadTime: canonicalMatch?.reloadTime ?? "2.5s",
-          magazineSize: parseInt(w.magazineSize || "15", 10) || 15,
-          ammoType: w.ammunition || canonicalMatch?.ammoType || "9mm Standard",
-          price: canonicalMatch?.price ?? null,
-          priceDisplay: canonicalMatch?.priceDisplay ?? "TBD",
-          rarity: canonicalMatch?.rarity || "Common",
-          locations: canonicalMatch?.locations || [w.acquisitionMethod || "Ammu-Nation"],
-          attachments: canonicalMatch?.attachments || [],
-          confidence: (w.verification === "verified" ? "CONFIRMED" : "SPECULATION") as CanonicalWeapon["confidence"],
-          source: w.notes || canonicalMatch?.source || "In-game Database",
-          description: w.notes || canonicalMatch?.description || `${w.name} in Grand Theft Auto VI.`,
-          img: canonicalMatch?.img || "/img/hero-dark.jpg",
-        };
-      });
+      const dbMapped = dbWeapons.map((w) =>
+        dbToDisplay(
+          w,
+          canonicalWeapons.find(
+            (cw) => cw.id.toLowerCase() === w.id.toLowerCase() || cw.name.toLowerCase() === w.name.toLowerCase()
+          )
+        )
+      );
 
       const dbIds = new Set(dbWeapons.map((w) => w.id.toLowerCase()));
       const dbNames = new Set(dbWeapons.map((w) => w.name.toLowerCase()));

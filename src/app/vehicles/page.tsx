@@ -6,49 +6,64 @@ import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";
 import { VehiclesClient } from "./vehicles-client";
-import { getPublicVehicles } from "@/lib/services/queries";
+import { getPublicVehicleCatalog, type VehicleCatalogRow } from "@/lib/services/vehicles";
 import type { CanonicalVehicle } from "@/lib/canonical-data";
 import { canonicalVehicles } from "@/lib/canonical-data";
 
+const num = (s?: string | null): number | null => {
+  const n = parseFloat((s || "").replace(/,/g, ""));
+  return Number.isFinite(n) ? n : null;
+};
+
+/** Map a live DB row to the display shape — DB values WIN over canonical stats. */
+function dbToDisplay(v: VehicleCatalogRow, c?: CanonicalVehicle): CanonicalVehicle {
+  return {
+    id: v.id,
+    slug: v.slug || c?.slug || v.id,
+    name: v.name,
+    manufacturer: v.manufacturer || c?.manufacturer || "Unknown",
+    klass: (v.class === "Sports"
+      ? "Sports Car"
+      : v.class === "Super"
+        ? "Super Car"
+        : (v.class as CanonicalVehicle["klass"])) || c?.klass || "Sports Car",
+    img: v.images?.[0] || c?.img || "/img/car-purple.jpg",
+    filter: c?.filter,
+    topSpeed: num(v.top_speed) ?? c?.topSpeed ?? 150,
+    acceleration: num(v.acceleration) ?? c?.acceleration ?? 4.0,
+    braking: c?.braking ?? 75,
+    handling: num(v.handling) ?? c?.handling ?? 75,
+    power: v.power_hp ?? c?.power ?? 500,
+    weight: v.weight || c?.weight || "1,500 kg",
+    seating: v.seating ?? c?.seating ?? 2,
+    drivetrain: (v.drivetrain as CanonicalVehicle["drivetrain"]) || c?.drivetrain || "RWD",
+    price: v.price ?? c?.price ?? null,
+    priceDisplay: v.price_display || c?.priceDisplay || "TBD",
+    purchaseLocation: c?.purchaseLocation || "Southern San Andreas Super Autos",
+    spawnLocations: c?.spawnLocations ?? ["Vice City Downtown", "Ocean Drive"],
+    customizationOptions: c?.customizationOptions ?? ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
+    confidence: (v.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "CONFIRMED",
+    source: v.source || c?.source || "In-game Footage",
+    description: v.summary || c?.description || `${v.name} in Grand Theft Auto VI.`,
+    featured: c?.featured ?? true,
+  };
+}
+
 export default async function VehiclesPage() {
-  // Try to get vehicles from Supabase; fall back to canonical static data
+  // Live Supabase data first (admin edits win); canonical static entries fill the rest.
   let vehicles: CanonicalVehicle[] = canonicalVehicles;
   try {
-    const dbVehicles = await getPublicVehicles();
+    const dbVehicles = await getPublicVehicleCatalog();
 
     if (dbVehicles && dbVehicles.length > 0) {
-      // Map admin vehicles to CanonicalVehicle shape
-      const dbMapped = dbVehicles.map((v) => {
-        const canonicalMatch = canonicalVehicles.find(
-          (cv) => cv.id === v.id || cv.name.toLowerCase() === v.name.toLowerCase()
-        );
-        return {
-          id: v.id,
-          slug: canonicalMatch?.slug || v.id,
-          name: v.name,
-          manufacturer: canonicalMatch?.manufacturer || "Unknown",
-          klass: (canonicalMatch?.klass || (v.klass === "Sports" ? "Sports Car" : "Super Car")) as CanonicalVehicle["klass"],
-          img: canonicalMatch?.img || v.img || "/img/car-purple.jpg",
-          filter: canonicalMatch?.filter || v.filter,
-          topSpeed: canonicalMatch?.topSpeed ?? v.topSpeed ?? 150,
-          acceleration: canonicalMatch?.acceleration ?? 4.0,
-          braking: canonicalMatch?.braking ?? 75,
-          handling: canonicalMatch?.handling ?? 75,
-          power: canonicalMatch?.power ?? v.power ?? 500,
-          weight: canonicalMatch?.weight || "1,500 kg",
-          seating: canonicalMatch?.seating ?? 2,
-          drivetrain: canonicalMatch?.drivetrain ?? "RWD",
-          price: canonicalMatch?.price ?? null,
-          priceDisplay: canonicalMatch?.priceDisplay ?? (v.price || "TBD"),
-          purchaseLocation: canonicalMatch?.purchaseLocation ?? "Southern San Andreas Super Autos",
-          spawnLocations: canonicalMatch?.spawnLocations ?? ["Vice City Downtown", "Ocean Drive"],
-          customizationOptions: canonicalMatch?.customizationOptions ?? ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
-          confidence: canonicalMatch?.confidence ?? "CONFIRMED",
-          source: canonicalMatch?.source || "In-game Footage",
-          description: canonicalMatch?.description || `${v.name} in Grand Theft Auto VI.`,
-          featured: canonicalMatch?.featured ?? v.featured,
-        };
-      });
+      const dbMapped = dbVehicles.map((v) =>
+        dbToDisplay(
+          v,
+          canonicalVehicles.find(
+            (cv) => cv.id.toLowerCase() === v.id.toLowerCase() || cv.name.toLowerCase() === v.name.toLowerCase()
+          )
+        )
+      );
 
       const dbIds = new Set(dbVehicles.map((v) => v.id.toLowerCase()));
       const dbNames = new Set(dbVehicles.map((v) => v.name.toLowerCase()));

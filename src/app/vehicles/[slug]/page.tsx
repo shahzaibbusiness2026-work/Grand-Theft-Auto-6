@@ -25,7 +25,58 @@ import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
 import { FavoriteButton } from "@/components/favorite-button";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 
-import { getPublicVehicles } from "@/lib/services/queries";
+import { getPublicVehicleCatalog, type VehicleCatalogRow } from "@/lib/services/vehicles";
+
+const num = (s?: string | null): number | null => {
+  const n = parseFloat((s || "").replace(/,/g, ""));
+  return Number.isFinite(n) ? n : null;
+};
+
+/** Resolve a vehicle by slug: canonical first for rich fields, live DB values override stats. */
+async function resolveVehicle(slug: string): Promise<CanonicalVehicle | undefined> {
+  const canonical = canonicalVehicles.find((v) => v.slug === slug || v.id === slug);
+  try {
+    const rows = await getPublicVehicleCatalog();
+    const row: VehicleCatalogRow | undefined = rows.find(
+      (r) => r.slug === slug || r.id === slug || r.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug
+    );
+    if (row) {
+      const c = canonical ||
+        canonicalVehicles.find(
+          (cv) => cv.id.toLowerCase() === row.id.toLowerCase() || cv.name.toLowerCase() === row.name.toLowerCase()
+        );
+      return {
+        id: row.id,
+        slug: row.slug || c?.slug || row.id,
+        name: row.name,
+        manufacturer: row.manufacturer || c?.manufacturer || "Unknown",
+        klass: (row.class === "Sports" ? "Sports Car" : row.class === "Super" ? "Super Car" : row.class) as CanonicalVehicle["klass"],
+        img: row.images?.[0] || c?.img || "/img/car-purple.jpg",
+        filter: c?.filter,
+        topSpeed: num(row.top_speed) ?? c?.topSpeed ?? 150,
+        acceleration: num(row.acceleration) ?? c?.acceleration ?? 4.0,
+        braking: c?.braking ?? 75,
+        handling: num(row.handling) ?? c?.handling ?? 75,
+        power: row.power_hp ?? c?.power ?? 500,
+        weight: row.weight || c?.weight || "1,500 kg",
+        seating: row.seating ?? c?.seating ?? 2,
+        drivetrain: (row.drivetrain as CanonicalVehicle["drivetrain"]) || c?.drivetrain || "RWD",
+        price: row.price ?? c?.price ?? null,
+        priceDisplay: row.price_display || c?.priceDisplay || "TBD",
+        purchaseLocation: c?.purchaseLocation || "Southern San Andreas Super Autos",
+        spawnLocations: c?.spawnLocations ?? ["Vice City Downtown", "Ocean Drive"],
+        customizationOptions: c?.customizationOptions ?? ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
+        confidence: (row.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "CONFIRMED",
+        source: row.source || c?.source || "In-game Footage",
+        description: row.summary || c?.description || `${row.name} in Grand Theft Auto VI.`,
+        featured: c?.featured ?? true,
+      };
+    }
+  } catch {
+    // DB unreachable — canonical lookup stands
+  }
+  return canonical;
+}
 
 export function generateStaticParams() {
   const slugs: { slug: string }[] = [];
@@ -40,39 +91,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  let vehicle = canonicalVehicles.find((v) => v.slug === slug || v.id === slug);
-  if (!vehicle) {
-    const dbVehicles = await getPublicVehicles();
-    const dbMatch = dbVehicles.find((v) => v.id === slug || v.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug);
-    if (dbMatch) {
-      vehicle = {
-        id: dbMatch.id,
-        slug: dbMatch.id,
-        name: dbMatch.name,
-        manufacturer: "Unknown",
-        klass: (dbMatch.klass === "Sports" ? "Sports Car" : "Super Car") as CanonicalVehicle["klass"],
-        img: dbMatch.img || "/img/car-purple.jpg",
-        filter: dbMatch.filter || "sports",
-        topSpeed: dbMatch.topSpeed ?? 150,
-        acceleration: 4.0,
-        braking: 75,
-        handling: 75,
-        power: dbMatch.power ?? 500,
-        weight: "1,500 kg",
-        seating: 2,
-        drivetrain: "RWD",
-        price: null,
-        priceDisplay: dbMatch.price || "TBD",
-        purchaseLocation: "Southern San Andreas Super Autos",
-        spawnLocations: ["Vice City Downtown", "Ocean Drive"],
-        customizationOptions: ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
-        confidence: "CONFIRMED",
-        source: "In-game Footage",
-        description: `${dbMatch.name} in Grand Theft Auto VI.`,
-        featured: dbMatch.featured,
-      };
-    }
-  }
+  const vehicle = await resolveVehicle(slug);
   if (!vehicle) return { title: "Vehicle Not Found — GTA 6 Atlas" };
 
   return {
@@ -88,39 +107,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function VehicleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  let vehicle = canonicalVehicles.find((v) => v.slug === slug || v.id === slug);
-  if (!vehicle) {
-    const dbVehicles = await getPublicVehicles();
-    const dbMatch = dbVehicles.find((v) => v.id === slug || v.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug);
-    if (dbMatch) {
-      vehicle = {
-        id: dbMatch.id,
-        slug: dbMatch.id,
-        name: dbMatch.name,
-        manufacturer: "Unknown",
-        klass: (dbMatch.klass === "Sports" ? "Sports Car" : "Super Car") as CanonicalVehicle["klass"],
-        img: dbMatch.img || "/img/car-purple.jpg",
-        filter: dbMatch.filter || "sports",
-        topSpeed: dbMatch.topSpeed ?? 150,
-        acceleration: 4.0,
-        braking: 75,
-        handling: 75,
-        power: dbMatch.power ?? 500,
-        weight: "1,500 kg",
-        seating: 2,
-        drivetrain: "RWD",
-        price: null,
-        priceDisplay: dbMatch.price || "TBD",
-        purchaseLocation: "Southern San Andreas Super Autos",
-        spawnLocations: ["Vice City Downtown", "Ocean Drive"],
-        customizationOptions: ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
-        confidence: "CONFIRMED",
-        source: "In-game Footage",
-        description: `${dbMatch.name} in Grand Theft Auto VI.`,
-        featured: dbMatch.featured,
-      };
-    }
-  }
+  let vehicle = await resolveVehicle(slug);
 
   if (!vehicle) {
     vehicle = canonicalVehicles[0];

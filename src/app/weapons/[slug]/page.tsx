@@ -35,6 +35,35 @@ export function generateStaticParams() {
   return slugs;
 }
 
+/** Build a CanonicalWeapon from a DB row when no canonical match exists (DB stats win). */
+function dbWeaponToCanonical(dbMatch: NonNullable<Awaited<ReturnType<typeof getPublicWeapons>>>[number]): CanonicalWeapon {
+  const priceMatch = /\$\d[\d,]*/.exec(dbMatch.notes || "");
+  const rarityMatch = /Rarity:\s*(\w+)/.exec(dbMatch.notes || "");
+  return {
+    id: dbMatch.id,
+    slug: dbMatch.id,
+    name: dbMatch.name,
+    klass: (dbMatch.category as CanonicalWeapon["klass"]) || "Pistol",
+    damage: parseInt(dbMatch.damage || "", 10) || 50,
+    fireRate: parseInt(dbMatch.rateOfFire || "", 10) || 50,
+    accuracy: parseInt(dbMatch.range || "", 10) || 50,
+    range: parseInt(dbMatch.range || "", 10) || 50,
+    handling: 50,
+    reloadTime: "2.5s",
+    magazineSize: parseInt(dbMatch.magazineSize || "15", 10) || 15,
+    ammoType: dbMatch.ammunition || "9mm Standard",
+    price: null,
+    priceDisplay: priceMatch?.[0] || "TBD",
+    rarity: (rarityMatch?.[1] as CanonicalWeapon["rarity"]) || "Common",
+    locations: [dbMatch.acquisitionMethod || "Ammu-Nation"],
+    attachments: [],
+    confidence: dbMatch.verification === "verified" ? "CONFIRMED" : "SPECULATION",
+    source: dbMatch.notes || "In-game Database",
+    description: dbMatch.notes || `${dbMatch.name} in Grand Theft Auto VI.`,
+    img: "/img/hero-dark.jpg",
+  };
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   let weapon = canonicalWeapons.find((w) => w.slug === slug || w.id === slug);
@@ -42,29 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const dbWeapons = await getPublicWeapons();
     const dbMatch = dbWeapons.find((w) => w.id === slug || w.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug);
     if (dbMatch) {
-      weapon = {
-        id: dbMatch.id,
-        slug: dbMatch.id,
-        name: dbMatch.name,
-        klass: (dbMatch.category as CanonicalWeapon["klass"]) || "Pistol",
-        damage: 50,
-        fireRate: 50,
-        accuracy: 50,
-        range: 50,
-        handling: 50,
-        reloadTime: "2.5s",
-        magazineSize: parseInt(dbMatch.magazineSize || "15", 10) || 15,
-        ammoType: dbMatch.ammunition || "9mm Standard",
-        price: null,
-        priceDisplay: "TBD",
-        rarity: "Common",
-        locations: [dbMatch.acquisitionMethod || "Ammu-Nation"],
-        attachments: [],
-        confidence: dbMatch.verification === "verified" ? "CONFIRMED" : "SPECULATION",
-        source: dbMatch.notes || "In-game Database",
-        description: dbMatch.notes || `${dbMatch.name} in Grand Theft Auto VI.`,
-        img: "/img/hero-dark.jpg",
-      };
+      weapon = dbWeaponToCanonical(dbMatch);
     }
   }
   if (!weapon) return { title: "Weapon Not Found — GTA 6 Atlas" };
@@ -87,29 +94,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
     const dbWeapons = await getPublicWeapons();
     const dbMatch = dbWeapons.find((w) => w.id === slug || w.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug);
     if (dbMatch) {
-      weapon = {
-        id: dbMatch.id,
-        slug: dbMatch.id,
-        name: dbMatch.name,
-        klass: (dbMatch.category as CanonicalWeapon["klass"]) || "Pistol",
-        damage: 50,
-        fireRate: 50,
-        accuracy: 50,
-        range: 50,
-        handling: 50,
-        reloadTime: "2.5s",
-        magazineSize: parseInt(dbMatch.magazineSize || "15", 10) || 15,
-        ammoType: dbMatch.ammunition || "9mm Standard",
-        price: null,
-        priceDisplay: "TBD",
-        rarity: "Common",
-        locations: [dbMatch.acquisitionMethod || "Ammu-Nation"],
-        attachments: [],
-        confidence: dbMatch.verification === "verified" ? "CONFIRMED" : "SPECULATION",
-        source: dbMatch.notes || "In-game Database",
-        description: dbMatch.notes || `${dbMatch.name} in Grand Theft Auto VI.`,
-        img: "/img/hero-dark.jpg",
-      };
+      weapon = dbWeaponToCanonical(dbMatch);
     }
   }
 

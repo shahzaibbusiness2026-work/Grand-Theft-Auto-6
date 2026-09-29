@@ -26,6 +26,37 @@ export interface DatabaseWeaponRow {
   updated_at?: string | null;
 }
 
+/** Full public weapon row including the catalog columns added in schema v2. */
+export interface WeaponCatalogRow extends DatabaseWeaponRow {
+  slug?: string | null;
+  confidence?: string | null;
+  price_display?: string | null;
+  rarity?: string | null;
+  attachments?: string[] | null;
+}
+
+/**
+ * Fetch published weapons with ALL catalog columns, unmapped.
+ * Lets public pages prefer live admin edits over canonical static stats.
+ */
+export async function getPublicWeaponCatalog(): Promise<WeaponCatalogRow[]> {
+  try {
+    const supabase = await createServerSupabase();
+    const { data, error } = await supabase
+      .from("weapons")
+      .select("*")
+      .eq("status", "published")
+      .order("created_at", { ascending: true });
+
+    if (!error && data && data.length > 0) {
+      return data as WeaponCatalogRow[];
+    }
+  } catch {
+    // Graceful fallback
+  }
+  return [];
+}
+
 function rowToAdminWeapon(row: DatabaseWeaponRow): AdminWeapon {
   return {
     id: row.id,

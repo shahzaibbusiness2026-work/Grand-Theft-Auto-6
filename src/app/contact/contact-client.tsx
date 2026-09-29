@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { NewsletterBar } from "@/components/newsletter-bar";
 import { faqs } from "@/lib/data";
+import { submitContactMessage } from "@/lib/services/contact";
 import { cn } from "@/lib/utils";
 
 const contactCards = [
@@ -37,14 +38,21 @@ export function ContactClient() {
   const [open, setOpen] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setError("");
+    const result = await submitContactMessage(form);
+    setLoading(false);
+    if (result.success) {
       setSubmitted(true);
-    }, 600);
+      setForm({ name: "", email: "", subject: "", message: "" });
+    } else {
+      setError(result.message || "Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -115,14 +123,43 @@ export function ContactClient() {
         ) : (
           <form className="card-surface p-6" onSubmit={handleSubmit}>
             <h2 className="font-display text-lg font-bold">Send Us a Message</h2>
+            {submitted && (
+              <p className="mt-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-400">
+                Message sent! Our team will get back to you within 24 hours.
+              </p>
+            )}
+            {error && (
+              <p className="mt-3 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm font-semibold text-rose-400">
+                {error}
+              </p>
+            )}
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <Input placeholder="Your Name" required />
-              <Input placeholder="Your Email" type="email" required />
+              <Input
+                placeholder="Your Name"
+                required
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+              />
+              <Input
+                placeholder="Your Email"
+                type="email"
+                required
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+              />
             </div>
-            <Input placeholder="Subject" className="mt-4" required />
+            <Input
+              placeholder="Subject"
+              className="mt-4"
+              required
+              value={form.subject}
+              onChange={(e) => setForm({ ...form, subject: e.target.value })}
+            />
             <textarea
               placeholder="Message"
               required
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
               className="mt-4 min-h-[140px] w-full rounded-lg border border-input bg-card px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
             <Button type="submit" className="mt-5 w-full" disabled={loading}>
