@@ -30,6 +30,22 @@ import { Button } from "@/components/ui/button";
 import { dbVehicles, topVehicles } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
+export interface DbVehicleCard {
+  name: string;
+  klass: string;
+  price: string;
+  img: string;
+  stats: number[];
+}
+
+export interface DbTopVehicle {
+  rank: number;
+  name: string;
+  stat: string;
+  img: string;
+  filter?: string;
+}
+
 const types = [
   { label: "All Vehicles", count: 312, icon: Car },
   { label: "Cars", count: 178, icon: Car },
@@ -59,7 +75,10 @@ const statIcons = [
   { icon: ShieldCheck, label: "Braking" },
 ];
 
-export function VehiclesDbClient() {
+export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]; top?: DbTopVehicle[] }) {
+  const cards = vehicles && vehicles.length > 0 ? vehicles : dbVehicles;
+  const topList = top && top.length > 0 ? top : topVehicles;
+  const total = cards.length;
   const [type, setType] = useState("All Vehicles");
   const [price, setPrice] = useState<number[]>([0, 4000000]);
 
@@ -181,7 +200,7 @@ export function VehiclesDbClient() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {dbVehicles.map((v, i) => (
+            {cards.map((v, i) => (
               <article key={v.name} className="group card-surface overflow-hidden">
                 <div className="relative h-36 overflow-hidden">
                   <Image
@@ -233,7 +252,7 @@ export function VehiclesDbClient() {
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
-            <p className="text-xs text-muted-foreground">Showing 1 to 12 of 312 vehicles</p>
+            <p className="text-xs text-muted-foreground">Showing 1 to {Math.min(12, total)} of {total} vehicles</p>
           </div>
 
           {/* TOP VEHICLES */}
@@ -251,7 +270,7 @@ export function VehiclesDbClient() {
               </div>
             </div>
             <div className="no-scrollbar mt-5 flex gap-4 overflow-x-auto pb-1">
-              {topVehicles.map((v) => (
+              {topList.map((v) => (
                 <Link key={v.rank} href="/vehicles/visione" className="card-surface w-48 shrink-0 overflow-hidden">
                   <div className="relative h-24">
                     <Image

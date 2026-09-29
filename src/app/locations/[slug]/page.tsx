@@ -14,13 +14,54 @@ import {
   Sparkles,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
-import { canonicalLocations } from "@/lib/canonical-data";
+import { canonicalLocations, type CanonicalLocation } from "@/lib/canonical-data";
+import { getLocations } from "@/lib/services/locations";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
 import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+/** Resolve a location from live Supabase data, mapped to the canonical shape. */
+async function resolveLocation(slug: string): Promise<CanonicalLocation | undefined> {
+  const canonical = canonicalLocations.find((l) => l.slug === slug || l.id === slug);
+  try {
+    const dbRows = (await getLocations()) as Array<{
+      id: string; slug?: string; name: string; district: string; category?: string;
+      verification: string; coordinates?: string; description?: string; hours?: string;
+      threat_level?: string; img?: string; confidence?: string; source?: string;
+    }>;
+    const row = dbRows?.find(
+      (r) => r.slug === slug || r.id === slug || r.name.toLowerCase() === slug.replace(/-/g, " ")
+    );
+    if (row) {
+      const coordMatch = /top\s+([\d.]+%?),\s*left\s+([\d.]+%?)/.exec(row.coordinates || "");
+      return {
+        id: row.id,
+        slug: row.slug || slug,
+        name: row.name,
+        district: row.district,
+        category: (row.category as CanonicalLocation["category"]) || canonical?.category || "Point of Interest",
+        desc: row.description || canonical?.desc || "",
+        top: coordMatch?.[1] || canonical?.top || "50%",
+        left: coordMatch?.[2] || canonical?.left || "50%",
+        hours: row.hours || canonical?.hours || "Unknown",
+        threatLevel: (row.threat_level as CanonicalLocation["threatLevel"]) || canonical?.threatLevel || "Low",
+        relatedVehicles: canonical?.relatedVehicles,
+        relatedWeapons: canonical?.relatedWeapons,
+        relatedMissions: canonical?.relatedMissions,
+        confidence: (row.confidence as CanonicalLocation["confidence"]) || canonical?.confidence || "REPORTED",
+        source: row.source || canonical?.source || "Atlas Admin",
+        img: row.img || canonical?.img || "/img/map-dark.svg",
+        verified: row.verification === "verified",
+      };
+    }
+  } catch {
+    // DB unreachable — canonical lookup stands
+  }
+  return canonical;
 }
 
 export async function generateStaticParams() {
@@ -31,7 +72,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const loc = canonicalLocations.find((l) => l.slug === slug);
+  const loc = await resolveLocation(slug);
 
   if (!loc) {
     return {
@@ -47,7 +88,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function LocationDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const loc = canonicalLocations.find((l) => l.slug === slug);
+  const loc = await resolveLocation(slug);
 
   if (!loc) {
     notFound();

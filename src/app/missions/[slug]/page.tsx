@@ -22,8 +22,49 @@ import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ThemeImage } from "@/components/theme-image";
-import { canonicalMissions, canonicalLocations, canonicalVehicles, canonicalWeapons } from "@/lib/canonical-data";
+import { canonicalMissions, canonicalLocations, canonicalVehicles, canonicalWeapons, type CanonicalMission } from "@/lib/canonical-data";
+import { getMissions } from "@/lib/services/missions";
 import { ConfidenceBadge } from "@/components/confidence-badge";
+
+/** Resolve a mission from live Supabase data, mapped to the canonical shape. */
+async function resolveMission(slug: string): Promise<CanonicalMission | undefined> {
+  const canonical = canonicalMissions.find((m) => m.slug === slug || m.id === slug);
+  try {
+    const dbRows = (await getMissions()) as Array<{
+      id: string; slug?: string; name: string; protagonist: string; act?: string;
+      mission_type?: string; difficulty?: string; duration?: string; district?: string;
+      cash_reward_display?: string; other_rewards?: string[]; requirements?: string[];
+      objectives?: string; description?: string; status: string; confidence?: string;
+    }>;
+    const row = dbRows?.find((r) => r.slug === slug || r.id === slug);
+    if (row) {
+      const objectives = (row.objectives || "").split("\n").map((s) => s.trim()).filter(Boolean);
+      return {
+        ...(canonical || ({} as CanonicalMission)),
+        id: row.id,
+        slug: row.slug || slug,
+        title: row.name,
+        type: (row.mission_type as CanonicalMission["type"]) || canonical?.type || "Main Story",
+        character: (row.protagonist as CanonicalMission["character"]) || canonical?.character || "Both",
+        difficulty: (row.difficulty as CanonicalMission["difficulty"]) || canonical?.difficulty || "Medium",
+        duration: row.duration || canonical?.duration || "15-20 min",
+        district: row.district || canonical?.district || "Vice City",
+        cashRewardDisplay: row.cash_reward_display || canonical?.cashRewardDisplay || "TBD",
+        otherRewards: row.other_rewards || canonical?.otherRewards || [],
+        requirements: row.requirements || canonical?.requirements || [],
+        objectives: objectives.length > 0 ? objectives : canonical?.objectives || [],
+        confidence: (row.confidence as CanonicalMission["confidence"]) || canonical?.confidence || "REPORTED",
+        description: row.description || canonical?.description || "",
+        source: canonical?.source || "Atlas Admin",
+        img: canonical?.img || "/img/hero-dark.jpg",
+        guideTips: canonical?.guideTips || [],
+      };
+    }
+  } catch {
+    // DB unreachable — canonical lookup stands
+  }
+  return canonical;
+}
 
 export function generateStaticParams() {
   return canonicalMissions.map((m) => ({ slug: m.slug }));
@@ -31,7 +72,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const mission = canonicalMissions.find((m) => m.slug === slug || m.id === slug);
+  const mission = await resolveMission(slug);
   if (!mission) return { title: "Mission Not Found — GTA 6 Atlas" };
 
   return {
@@ -47,9 +88,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function MissionDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const mission =
-    canonicalMissions.find((m) => m.slug === slug || m.id === slug) ??
-    canonicalMissions[0];
+  const mission = (await resolveMission(slug)) ?? canonicalMissions[0];
 
   if (!mission) {
     notFound();
