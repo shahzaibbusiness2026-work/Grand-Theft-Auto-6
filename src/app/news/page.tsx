@@ -21,6 +21,8 @@ export default async function NewsPage() {
   const heroArticle = liveArticles[0] || featuredArticle;
   const listArticles = liveArticles.length > 1 ? liveArticles.slice(1, 7) : liveArticles;
   const categories = categoriesData.map((c) => ({ label: c.name, count: c.count }));
+  // Popular sidebar reflects live content; static list only when DB is empty.
+  const popular = liveArticles.length > 0 ? liveArticles.slice(0, 5) : popularPosts;
 
   return (
     <SiteShell>
@@ -93,7 +95,7 @@ export default async function NewsPage() {
         <div>
           <SectionHeader title="Popular Posts" />
           <div className="card-surface divide-y divide-border px-4 py-1">
-            {popularPosts.map((p) => (
+            {popular.map((p) => (
               <PopularRow key={p.title} article={p} />
             ))}
           </div>
