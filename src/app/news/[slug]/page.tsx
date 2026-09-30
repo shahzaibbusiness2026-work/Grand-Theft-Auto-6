@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = await getPublicArticleBySlug(slug);
   if (!article) {
-    return { title: "Article Not Found" };
+    notFound();
   }
 
   const seo = await getSeoSettings();

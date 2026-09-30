@@ -32,9 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const collectible = canonicalCollectibles.find((c) => c.slug === slug);
 
   if (!collectible) {
-    return {
-      title: "Collectible Not Found — GTA 6 Atlas",
-    };
+    notFound();
   }
 
   return {

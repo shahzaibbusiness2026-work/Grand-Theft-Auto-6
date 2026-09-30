@@ -92,7 +92,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const vehicle = await resolveVehicle(slug);
-  if (!vehicle) return { title: "Vehicle Not Found — GTA 6 Atlas" };
+  if (!vehicle) notFound();
 
   return {
     title: `${vehicle.name} (${vehicle.klass}) — GTA 6 Stats, Speed & Location`,

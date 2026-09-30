@@ -73,7 +73,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const mission = await resolveMission(slug);
-  if (!mission) return { title: "Mission Not Found — GTA 6 Atlas" };
+  if (!mission) notFound();
 
   return {
     title: `${mission.title} — GTA 6 Mission Guide & Walkthrough`,

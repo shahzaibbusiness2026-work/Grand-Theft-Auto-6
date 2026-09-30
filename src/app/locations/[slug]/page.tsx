@@ -75,9 +75,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const loc = await resolveLocation(slug);
 
   if (!loc) {
-    return {
-      title: "Location Not Found — GTA 6 Atlas",
-    };
+    notFound();
   }
 
   return {

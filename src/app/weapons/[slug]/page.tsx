@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       weapon = dbWeaponToCanonical(dbMatch);
     }
   }
-  if (!weapon) return { title: "Weapon Not Found — GTA 6 Atlas" };
+  if (!weapon) notFound();
 
   return {
     title: `${weapon.name} (${weapon.klass}) — GTA 6 Stats, Attachments & Locations`,

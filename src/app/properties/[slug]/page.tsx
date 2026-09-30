@@ -37,9 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const prop = canonicalProperties.find((p) => p.slug === slug);
 
   if (!prop) {
-    return {
-      title: "Property Not Found — GTA 6 Atlas",
-    };
+    notFound();
   }
 
   return {
