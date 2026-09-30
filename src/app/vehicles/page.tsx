@@ -79,7 +79,7 @@ export default async function VehiclesPage() {
   return (
     <SiteShell>
       {/* HERO */}
-      <section className="container-site pt-12 sm:pt-16">
+      <section className="container-site pt-8 sm:pt-10">
         <div className="card-surface relative overflow-hidden rounded-3xl border-border/80 shadow-2xl">
           <ThemeImage
             dark="/img/car-purple.jpg"
@@ -118,12 +118,12 @@ export default async function VehiclesPage() {
       </section>
 
       {/* INTERACTIVE CLIENT FILTER & VEHICLE ROSTER */}
-      <section className="container-site py-12">
+      <section className="container-site py-8">
         <VehiclesClient initialVehicles={vehicles} />
       </section>
 
       {/* CTA BANNER */}
-      <section className="container-site pb-16">
+      <section className="container-site pb-10">
         <div className="card-surface relative overflow-hidden rounded-3xl border-border/80">
           <ThemeImage
             dark="/img/car-purple.jpg"

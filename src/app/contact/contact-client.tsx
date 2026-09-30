@@ -58,7 +58,7 @@ export function ContactClient() {
   return (
     <>
       {/* HERO */}
-      <section className="container-site pt-8">
+      <section className="container-site pt-6">
         <div className="card-surface relative overflow-hidden bg-gradient-to-br from-card via-card/80 to-primary/5">
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
           <div className="pointer-events-none absolute right-1/4 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
@@ -75,7 +75,7 @@ export function ContactClient() {
       </section>
 
       {/* CARDS + FORM */}
-      <section className="container-site grid gap-6 py-10 lg:grid-cols-[320px_1fr]">
+      <section className="container-site grid gap-6 py-7 lg:grid-cols-[320px_1fr]">
         <div className="space-y-4">
           {contactCards.map((c) => (
             <div key={c.title} className="card-surface flex items-start gap-4 p-4">
@@ -170,7 +170,7 @@ export function ContactClient() {
       </section>
 
       {/* FAQ */}
-      <section className="container-site pb-12">
+      <section className="container-site pb-8">
         <h2 className="mb-6 font-display text-xl font-extrabold">Frequently Asked Questions</h2>
         <div className="space-y-3">
           {faqs.map((f, i) => (
@@ -198,7 +198,7 @@ export function ContactClient() {
         </div>
       </section>
 
-      <section className="container-site pb-16">
+      <section className="container-site pb-10">
         <NewsletterBar />
       </section>
     </>

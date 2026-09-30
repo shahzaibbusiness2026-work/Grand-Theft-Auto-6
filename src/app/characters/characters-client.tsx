@@ -53,7 +53,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
     <>
       {/* 1. HERO BANNER — Clean Split Layout (No Text Overlap, Natural Portrait Proportions) */}
 
-      <section className="container-site pt-8">
+      <section className="container-site pt-6">
         <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-[#0B1020] via-[#141C2E] to-[#0B1020] p-6 sm:p-10 shadow-2xl">
           {/* Ambient Lighting */}
           <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-pink-500/15 blur-3xl" />
@@ -162,7 +162,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
       </section>
 
       {/* 2. FEATURED CHARACTERS — Perfectly Proportioned 3:4 Portrait Cards with Interactive Click */}
-      <section className="container-site py-12">
+      <section className="container-site py-8">
         <SectionHeader 
           title="Featured Characters" 
           viewAllHref="#all-characters" 
@@ -239,7 +239,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
       </section>
 
       {/* 3. ALL CHARACTERS GRID — Perfectly Proportioned Portrait Grid with Interactive Click */}
-      <section id="all-characters" className="container-site pb-12">
+      <section id="all-characters" className="container-site pb-8">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="font-display text-xl font-black uppercase tracking-wide text-white">
@@ -303,7 +303,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
       </section>
 
       {/* 4. STORIES BANNER */}
-      <section className="container-site pb-16">
+      <section className="container-site pb-10">
         <div className="card-surface grid gap-6 p-6 lg:grid-cols-2 lg:items-center rounded-3xl border border-white/10">
           <div className="relative h-56 overflow-hidden rounded-2xl">
             <Image

@@ -71,7 +71,7 @@ export default async function WeaponsPage() {
   return (
     <SiteShell>
       {/* HERO */}
-      <section className="container-site pt-8">
+      <section className="container-site pt-6">
         <div className="card-surface relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
           <ThemeImage
             dark="/img/hero-dark.jpg"
@@ -103,7 +103,7 @@ export default async function WeaponsPage() {
       </section>
 
       {/* INTERACTIVE WEAPONS CATALOG */}
-      <section className="container-site py-10">
+      <section className="container-site py-7">
         <WeaponsClient initialWeapons={weapons} />
       </section>
     </SiteShell>

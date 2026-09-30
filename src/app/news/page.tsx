@@ -27,7 +27,7 @@ export default async function NewsPage() {
   return (
     <SiteShell>
       {/* HERO */}
-      <section className="container-site pt-8">
+      <section className="container-site pt-6">
         <div className="card-surface relative overflow-hidden bg-gradient-to-br from-card via-card/85 to-primary/5">
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
           <div className="pointer-events-none absolute right-1/3 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
@@ -44,7 +44,7 @@ export default async function NewsPage() {
       </section>
 
       {/* FEATURED + CATEGORIES */}
-      <section className="container-site grid gap-6 py-10 lg:grid-cols-[1fr_300px]">
+      <section className="container-site grid gap-6 py-7 lg:grid-cols-[1fr_300px]">
         <article className="card-surface grid overflow-hidden md:grid-cols-2">
           <div className="relative h-56 md:h-full min-h-[220px]">
             <Image
@@ -82,7 +82,7 @@ export default async function NewsPage() {
       </section>
 
       {/* LATEST + POPULAR */}
-      <section className="container-site grid gap-6 pb-12 lg:grid-cols-[1fr_300px]">
+      <section className="container-site grid gap-6 pb-8 lg:grid-cols-[1fr_300px]">
         <div>
           <SectionHeader title="Latest Articles" />
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -104,7 +104,7 @@ export default async function NewsPage() {
         </div>
       </section>
 
-      <section className="container-site pb-16">
+      <section className="container-site pb-10">
         <NewsletterBar title="Never Miss an Update" text="Subscribe to our newsletter and get the latest GTA 6 news & exclusive articles straight to your inbox." />
       </section>
     </SiteShell>

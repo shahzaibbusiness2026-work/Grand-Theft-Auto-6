@@ -20,7 +20,7 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   return (
-    <div className={cn("mb-6 flex items-end justify-between gap-4", className)}>
+    <div className={cn("mb-4 flex items-end justify-between gap-4", className)}>
       <div>
         <h2 id={id} className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">
           {title}

@@ -80,7 +80,7 @@ export default async function MissionsPage() {
   return (
     <SiteShell>
       {/* HERO */}
-      <section className="container-site pt-8">
+      <section className="container-site pt-6">
         <div className="card-surface relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
           <ThemeImage
             dark="/img/hero-dark.jpg"
@@ -119,7 +119,7 @@ export default async function MissionsPage() {
       </section>
 
       {/* INTERACTIVE MISSIONS FINDER */}
-      <section className="container-site py-10">
+      <section className="container-site py-7">
         <MissionsClient initialMissions={missions} />
       </section>
     </SiteShell>

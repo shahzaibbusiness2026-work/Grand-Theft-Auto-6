@@ -102,7 +102,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
 
   return (
     <SiteShell>
-      <section className="container-site pt-6 pb-16">
+      <section className="container-site pt-6 pb-10">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap mb-4">
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>

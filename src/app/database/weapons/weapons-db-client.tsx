@@ -71,7 +71,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
   return (
     <>
       {/* HERO */}
-      <section className="w-full px-4 pt-8 sm:px-6 md:px-8 lg:px-10">
+      <section className="w-full px-4 pt-6 sm:px-6 md:px-8 lg:px-10">
         <div className="card-surface relative overflow-hidden bg-gradient-to-br from-card via-card/85 to-primary/5">
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
           <div className="pointer-events-none absolute left-1/3 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />

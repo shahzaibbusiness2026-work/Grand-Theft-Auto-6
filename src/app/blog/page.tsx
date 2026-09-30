@@ -32,7 +32,7 @@ export default async function BlogPage() {
   return (
     <SiteShell>
       {/* HERO */}
-      <section className="container-site pt-8">
+      <section className="container-site pt-6">
         <div className="card-surface relative overflow-hidden bg-gradient-to-br from-card via-card/85 to-primary/5">
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
           <div className="pointer-events-none absolute right-1/3 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
@@ -50,7 +50,7 @@ export default async function BlogPage() {
 
       {/* FEATURED */}
       {featured && (
-        <section className="container-site grid gap-6 py-10 lg:grid-cols-[1fr_300px]">
+        <section className="container-site grid gap-6 py-7 lg:grid-cols-[1fr_300px]">
           <div>
             <SectionHeader title="Featured Article" />
             <a href={`/news/${featured.slug}`} className="card-surface block overflow-hidden">
@@ -103,7 +103,7 @@ export default async function BlogPage() {
       )}
 
       {/* GRID */}
-      <section className="container-site pb-12">
+      <section className="container-site pb-8">
         <SectionHeader title="Latest from the Blog" />
         {listArticles.length > 0 ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -118,7 +118,7 @@ export default async function BlogPage() {
         )}
       </section>
 
-      <section className="container-site pb-16">
+      <section className="container-site pb-10">
         <NewsletterBar title="Never Miss an Update" text="Subscribe to our newsletter and get the latest GTA 6 news, trailers and exclusive content straight to your inbox." />
       </section>
     </SiteShell>

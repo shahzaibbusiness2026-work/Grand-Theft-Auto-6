@@ -179,7 +179,7 @@ export default async function ArticleDetailPage({ params }: Props) {
         </div>
 
         {related.length > 0 && (
-          <section className="mt-12 pb-4">
+          <section className="mt-8 pb-4">
             <h2 className="font-display text-xl font-extrabold">More from GTA 6 Atlas</h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {related.map((a) => (
@@ -189,7 +189,7 @@ export default async function ArticleDetailPage({ params }: Props) {
           </section>
         )}
 
-        <section className="pb-16">
+        <section className="pb-10">
           <NewsletterBar
             title="Never Miss an Update"
             text="Subscribe to our newsletter and get the latest GTA 6 news & exclusive articles straight to your inbox."

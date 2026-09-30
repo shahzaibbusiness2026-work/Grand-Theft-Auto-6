@@ -57,7 +57,7 @@ export default async function HomePage() {
       </section>
 
       {/* 2 — LATEST TRAILERS */}
-      <section aria-labelledby="trailers-heading" className="container-site pt-12 sm:pt-14">
+      <section aria-labelledby="trailers-heading" className="container-site pt-8 sm:pt-10">
         <SectionHeader id="trailers-heading" title="Latest Trailers" subtitle="Watch the official reveals" viewAllHref="/news" viewAllLabel="View All Trailers" />
         <div className="grid gap-5 lg:grid-cols-2">
           {TRAILERS.map((t) => (
@@ -78,7 +78,7 @@ export default async function HomePage() {
       </section>
 
       {/* 3 — INTERACTIVE MAP */}
-      <section aria-labelledby="map-heading" className="container-site pt-14">
+      <section aria-labelledby="map-heading" className="container-site pt-9">
         <SectionHeader
           id="map-heading"
           title="Interactive World Map"
@@ -90,7 +90,7 @@ export default async function HomePage() {
       </section>
 
       {/* 4 — CHARACTERS */}
-      <section aria-labelledby="characters-heading" className="container-site pt-14">
+      <section aria-labelledby="characters-heading" className="container-site pt-9">
         <SectionHeader
           id="characters-heading"
           title="Characters"
@@ -132,7 +132,7 @@ export default async function HomePage() {
       <ProtagonistsShowcase />
 
       {/* 6 — NEWS & BLOG */}
-      <section aria-labelledby="news-heading" className="container-site pt-14">
+      <section aria-labelledby="news-heading" className="container-site pt-9">
         <SectionHeader id="news-heading" title="News & Articles" subtitle="Stay updated with the latest" viewAllHref="/news" viewAllLabel="View All News" />
         <div className="grid gap-6 lg:grid-cols-2">
           {/* News half */}
@@ -202,7 +202,7 @@ export default async function HomePage() {
       </section>
 
       {/* 7 — NEWSLETTER */}
-      <section aria-labelledby="newsletter-heading" className="container-site py-16">
+      <section aria-labelledby="newsletter-heading" className="container-site py-8">
         <div className="card-surface relative overflow-hidden min-h-[380px]">
           <Image
             src="/img/hero-dark.jpg"
