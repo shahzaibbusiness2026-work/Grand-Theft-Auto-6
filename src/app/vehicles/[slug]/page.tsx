@@ -107,11 +107,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function VehicleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  let vehicle = await resolveVehicle(slug);
-
-  if (!vehicle) {
-    vehicle = canonicalVehicles[0];
-  }
+  const vehicle = await resolveVehicle(slug);
 
   if (!vehicle) {
     notFound();

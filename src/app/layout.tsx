@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { getSeoSettings } from "@/lib/services/seo";
+import { getSiteSettings } from "@/lib/services/settings";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -20,59 +22,77 @@ const inter = Inter({
   preload: true,
 });
 
-const siteUrl = "https://gta6atlas.com";
+const FALLBACK_SITE_URL = "https://gta6atlas.com";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: "GTA 6 Atlas — Your Ultimate GTA 6 Companion",
-    template: "%s | GTA 6 Atlas",
-  },
-  description:
-    "Explore the world of GTA 6 with the most complete fan database. Interactive maps, missions, vehicles, characters, weapons and more for Grand Theft Auto 6.",
-  keywords: [
-    "GTA 6",
-    "Grand Theft Auto 6",
-    "GTA 6 map",
-    "GTA 6 characters",
-    "GTA 6 vehicles",
-    "GTA 6 missions",
-    "Leonida",
-    "Vice City",
-    "GTA 6 guide",
-  ],
-  authors: [{ name: "GTA 6 Atlas" }],
-  creator: "GTA 6 Atlas",
-  robots: { index: true, follow: true },
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteUrl,
-    siteName: "GTA 6 Atlas",
-    title: "GTA 6 Atlas — Your Ultimate GTA 6 Companion",
-    description:
-      "The most complete GTA 6 fan database. Maps, missions, vehicles, characters and more.",
-    images: [
-      {
-        url: "/img/hero-dark.jpg",
-        width: 1200,
-        height: 630,
-        alt: "GTA 6 Atlas — Leonida skyline",
-      },
+/**
+ * Site-wide metadata is CMS-driven (admin → SEO settings / site settings),
+ * with bundled fallbacks when Supabase is unreachable. Per-page `alternates`
+ * are set by each page — the layout must NOT set a default canonical, or
+ * every child page would inherit canonical "/" and conflict.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const [seo, settings] = await Promise.all([getSeoSettings(), getSiteSettings()]);
+
+  const baseUrl = seo.canonicalBaseUrl?.startsWith("http")
+    ? seo.canonicalBaseUrl
+    : FALLBACK_SITE_URL;
+  const siteTitle = settings.siteTitle || "GTA 6 Atlas";
+  const description = seo.metaDescription || settings.siteDescription;
+  const ogImage = seo.socialPreviewImage || "/img/hero-dark.jpg";
+  // Title template from the CMS; fall back to the classic "%s | Site" form.
+  const template = seo.titleTemplate?.includes("%s")
+    ? seo.titleTemplate
+    : `%s | ${siteTitle}`;
+
+  return {
+    metadataBase: new URL(baseUrl),
+    title: {
+      default: siteTitle,
+      template,
+    },
+    description,
+    keywords: [
+      "GTA 6",
+      "Grand Theft Auto 6",
+      "GTA 6 map",
+      "GTA 6 characters",
+      "GTA 6 vehicles",
+      "GTA 6 missions",
+      "Leonida",
+      "Vice City",
+      "GTA 6 guide",
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "GTA 6 Atlas — Your Ultimate GTA 6 Companion",
-    description:
-      "The most complete GTA 6 fan database. Maps, missions, vehicles, characters and more.",
-    images: ["/img/hero-dark.jpg"],
-    creator: "@gta6atlas",
-  },
-};
+    authors: [{ name: siteTitle }],
+    creator: siteTitle,
+    robots: { index: true, follow: true },
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: baseUrl,
+      siteName: siteTitle,
+      title: siteTitle,
+      description,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: `${siteTitle} — Leonida skyline`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteTitle,
+      description,
+      images: [ogImage],
+      creator: settings.twitterHandle || "@gta6atlas",
+    },
+  };
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const siteUrl = FALLBACK_SITE_URL;
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [

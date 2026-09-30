@@ -19,7 +19,7 @@ export default async function NewsPage() {
     getCategories(),
   ]);
   const heroArticle = liveArticles[0] || featuredArticle;
-  const listArticles = liveArticles.length > 1 ? liveArticles.slice(1, 7) : liveArticles;
+  const listArticles = liveArticles.slice(1);
   const categories = categoriesData.map((c) => ({ label: c.name, count: c.count }));
   // Popular sidebar reflects live content; static list only when DB is empty.
   const popular = liveArticles.length > 0 ? liveArticles.slice(0, 5) : popularPosts;
@@ -69,7 +69,11 @@ export default async function NewsPage() {
               {heroArticle.title}
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{heroArticle.excerpt}</p>
-            <Button href="/blog" size="sm" className="mt-5 w-fit">
+            <Button
+              href={heroArticle.slug ? `/news/${heroArticle.slug}` : "/blog"}
+              size="sm"
+              className="mt-5 w-fit"
+            >
               Read More <ArrowRight className="h-3.5 w-3.5" />
             </Button>
           </div>
@@ -83,13 +87,11 @@ export default async function NewsPage() {
           <SectionHeader title="Latest Articles" />
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {listArticles.map((a) => (
-              <ArticleCard key={a.title} article={a} />
+              <ArticleCard key={a.slug || a.title} article={a} />
             ))}
-          </div>
-          <div className="mt-8 flex justify-center">
-            <Button variant="outline" size="sm" className="h-10 px-6">
-              Load More Articles
-            </Button>
+            {listArticles.length === 0 && (
+              <p className="text-sm text-muted-foreground">No further articles yet — check back soon.</p>
+            )}
           </div>
         </div>
         <div>

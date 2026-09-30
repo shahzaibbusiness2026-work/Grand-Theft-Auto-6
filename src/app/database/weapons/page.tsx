@@ -1,9 +1,17 @@
+import type { Metadata } from "next";
 import { AppShell } from "@/components/app-shell";
 import { WeaponsDbClient, type DbWeaponCard, type DbTopWeapon } from "./weapons-db-client";
-import { getAdminWeapons } from "@/lib/services/weapons";
+import { getPublicWeaponCatalog, type WeaponCatalogRow } from "@/lib/services/weapons";
 import { canonicalWeapons } from "@/lib/canonical-data";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Weapon Database",
+  description:
+    "Browse every confirmed GTA 6 weapon with live stats — damage, fire rate, range and handling, updated from the Atlas CMS.",
+  alternates: { canonical: "/database/weapons" },
+};
 
 function parseScore(s?: string | null): number {
   const n = parseInt((s || "").split("/")[0], 10);
@@ -11,12 +19,12 @@ function parseScore(s?: string | null): number {
 }
 
 export default async function WeaponDatabasePage() {
-  // Live catalog from Supabase; falls back to the built-in sample client-side.
+  // Live published catalog from Supabase via the public anon client;
+  // falls back to the built-in sample client-side when empty.
   let weapons: DbWeaponCard[] = [];
   let top: DbTopWeapon[] = [];
   try {
-    const rows = await getAdminWeapons();
-    const published = rows.filter((w) => w.status === "published");
+    const published: WeaponCatalogRow[] = await getPublicWeaponCatalog();
     weapons = published.map((w) => {
       const canonical = canonicalWeapons.find(
         (c) => c.id.toLowerCase() === w.id.toLowerCase() || c.name.toLowerCase() === w.name.toLowerCase()
@@ -27,11 +35,11 @@ export default async function WeaponDatabasePage() {
       return {
         name: w.name,
         klass: w.category,
-        price: canonical?.priceDisplay || priceMatch?.[0] || "TBD",
-        rarity: canonical?.rarity || rarityMatch?.[1] || "Common",
+        price: canonical?.priceDisplay || w.price_display || priceMatch?.[0] || "TBD",
+        rarity: canonical?.rarity || w.rarity || rarityMatch?.[1] || "Common",
         stats: [
           parseScore(w.damage),
-          parseScore(w.rateOfFire),
+          parseScore(w.rate_of_fire),
           parseScore(w.range),
           Math.max(20, Math.min(99, 100 - parseScore(w.damage))),
         ],

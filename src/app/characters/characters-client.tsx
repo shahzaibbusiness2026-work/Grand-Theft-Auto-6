@@ -93,7 +93,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               <button
                 type="button"
                 onClick={() => {
-                  const lucia = characters.find((c) => c.id === "lucia");
+                  const lucia = characterList.find((c) => c.id === 'lucia');
                   if (lucia) setSelectedCharacter(lucia);
                 }}
                 className="group relative w-36 sm:w-44 aspect-[3/4] rounded-2xl overflow-hidden border border-pink-500/40 bg-black/60 shadow-xl hover:shadow-[0_0_25px_rgba(236,72,153,0.35)] transition-all hover:scale-105 text-left"
@@ -118,7 +118,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               <button
                 type="button"
                 onClick={() => {
-                  const jason = characters.find((c) => c.id === "jason");
+                  const jason = characterList.find((c) => c.id === 'jason');
                   if (jason) setSelectedCharacter(jason);
                 }}
                 className="group relative w-36 sm:w-44 aspect-[3/4] rounded-2xl overflow-hidden border border-cyan-500/40 bg-black/60 shadow-xl hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] transition-all hover:scale-105 text-left"
@@ -169,7 +169,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
           viewAllLabel="View All Characters" 
         />
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {characters.filter((c) => c.featured).map((c, i) => (
+          {characterList.filter((c) => c.featured).map((c, i) => (
             <article 
               key={c.id} 
               onClick={() => setSelectedCharacter(c)}
@@ -341,4 +341,5 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
     </>
   );
 }
+
 

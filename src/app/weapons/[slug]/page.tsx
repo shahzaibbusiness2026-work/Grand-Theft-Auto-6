@@ -99,10 +99,6 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
   }
 
   if (!weapon) {
-    weapon = canonicalWeapons[0];
-  }
-
-  if (!weapon) {
     notFound();
   }
 

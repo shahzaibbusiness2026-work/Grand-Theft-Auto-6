@@ -7,10 +7,22 @@ import {
   canonicalProperties,
   canonicalCollectibles,
 } from "@/lib/canonical-data";
+import { getSeoSettings } from "@/lib/services/seo";
+import { getPublicArticles } from "@/lib/services/articles";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://gta6atlas.com";
-  const lastUpdated = new Date("2026-09-13T00:00:00Z");
+export const dynamic = "force-dynamic";
+
+/**
+ * DB/CMS-driven sitemap:
+ *  - base URL comes from the admin SEO settings (canonicalBaseUrl)
+ *  - published articles are included with their real published dates
+ *  - canonical catalog routes stay static (they are code-defined content)
+ */
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const seo = await getSeoSettings();
+  const baseUrl = seo.canonicalBaseUrl?.startsWith("http")
+    ? seo.canonicalBaseUrl
+    : "https://gta6atlas.com";
 
   // Core Static Routes
   const staticRoutes = [
@@ -37,6 +49,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/cheats",
     "/guides",
     "/news",
+    "/blog",
+    "/database/vehicles",
+    "/database/weapons",
     "/about",
     "/contact",
     "/privacy",
@@ -44,15 +59,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/cookies",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: lastUpdated,
+    lastModified: new Date(),
     changeFrequency: "daily" as const,
     priority: route === "" ? 1.0 : 0.8,
   }));
 
+  // Published CMS articles (respects excludeDraftsAndArchived — the public
+  // query already filters to status = "published").
+  let articleRoutes: MetadataRoute.Sitemap = [];
+  if (seo.excludeDraftsAndArchived !== false) {
+    try {
+      const articles = await getPublicArticles();
+      articleRoutes = articles
+        .filter((a) => a.slug)
+        .map((a) => ({
+          url: `${baseUrl}/news/${a.slug}`,
+          lastModified: new Date(),
+          changeFrequency: "weekly" as const,
+          priority: 0.7,
+        }));
+    } catch {
+      // Sitemap still ships without articles if the DB is unreachable
+    }
+  }
+
   // Dynamic Vehicle Routes
   const vehicleRoutes = canonicalVehicles.map((v) => ({
     url: `${baseUrl}/vehicles/${v.slug}`,
-    lastModified: lastUpdated,
+    lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
@@ -60,7 +94,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic Weapon Routes
   const weaponRoutes = canonicalWeapons.map((w) => ({
     url: `${baseUrl}/weapons/${w.slug}`,
-    lastModified: lastUpdated,
+    lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
@@ -68,7 +102,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic Mission Routes
   const missionRoutes = canonicalMissions.map((m) => ({
     url: `${baseUrl}/missions/${m.slug}`,
-    lastModified: lastUpdated,
+    lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
@@ -76,7 +110,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic Location Routes
   const locationRoutes = canonicalLocations.map((l) => ({
     url: `${baseUrl}/locations/${l.slug}`,
-    lastModified: lastUpdated,
+    lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
@@ -84,7 +118,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic Property Routes
   const propertyRoutes = canonicalProperties.map((p) => ({
     url: `${baseUrl}/properties/${p.slug}`,
-    lastModified: lastUpdated,
+    lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
@@ -92,13 +126,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic Collectible Routes
   const collectibleRoutes = canonicalCollectibles.map((c) => ({
     url: `${baseUrl}/collectibles/${c.slug}`,
-    lastModified: lastUpdated,
+    lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
 
   return [
     ...staticRoutes,
+    ...articleRoutes,
     ...vehicleRoutes,
     ...weaponRoutes,
     ...missionRoutes,

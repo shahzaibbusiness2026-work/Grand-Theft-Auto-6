@@ -6,8 +6,9 @@ import type { Article } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 export function ArticleCard({ article, className }: { article: Article; className?: string }) {
+  const href = article.slug ? `/news/${article.slug}` : "/news";
   return (
-    <article className={cn("group card-surface overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-neon-cyan", className)}>
+    <Link href={href} className={cn("group card-surface block overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-neon-cyan", className)}>
       <div className="relative h-40 overflow-hidden">
         <Image
           src={article.img}
@@ -39,13 +40,16 @@ export function ArticleCard({ article, className }: { article: Article; classNam
           Read More <ArrowRight className="h-3 w-3" aria-hidden="true" />
         </span>
       </div>
-    </article>
+    </Link>
   );
 }
 
 export function PopularRow({ article }: { article: Article }) {
   return (
-    <Link href="/blog" className="flex items-center gap-3 py-2.5 hover:text-accent transition-colors">
+    <Link
+      href={article.slug ? `/news/${article.slug}` : "/blog"}
+      className="flex items-center gap-3 py-2.5 hover:text-accent transition-colors"
+    >
       <div className="relative h-11 w-14 shrink-0 overflow-hidden rounded-md">
         <Image
           src={article.img}
@@ -73,7 +77,7 @@ export function CategoryList({ categories }: { categories: { label: string; coun
       <ul className="space-y-1">
         {categories.map((c, i) => (
           <li key={c.label}>
-            <a
+            <Link
               href="/news"
               className={cn(
                 "flex items-center justify-between rounded-md px-2.5 py-2 text-[13px] transition-colors hover:bg-muted",
@@ -85,7 +89,7 @@ export function CategoryList({ categories }: { categories: { label: string; coun
                 {c.label}
               </span>
               <span className="text-[11px]" aria-label={`${c.count} articles`}>{c.count}</span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
