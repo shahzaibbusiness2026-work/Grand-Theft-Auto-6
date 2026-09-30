@@ -118,6 +118,9 @@ CREATE TABLE IF NOT EXISTS public.map_markers (
 
 -- ====================================================================
 -- ROW LEVEL SECURITY (RLS) POLICIES
+-- HARDENED: public read-only; ALL writes require the service_role key.
+-- (An earlier version used "OR true" policies which let ANY visitor edit
+-- the database with the public anon key — never reintroduce that.)
 -- ====================================================================
 ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.characters ENABLE ROW LEVEL SECURITY;
@@ -126,55 +129,45 @@ ALTER TABLE public.weapons ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.map_markers ENABLE ROW LEVEL SECURITY;
 
--- Allow public read access to published content
+-- Public read access
 DROP POLICY IF EXISTS "Public can read published articles" ON public.articles;
-CREATE POLICY "Public can read published articles" ON public.articles 
-  FOR SELECT USING (status = 'published' OR true);
+CREATE POLICY "Public can read published articles" ON public.articles
+  FOR SELECT USING (status = 'published');
 
 DROP POLICY IF EXISTS "Public can read characters" ON public.characters;
-CREATE POLICY "Public can read characters" ON public.characters 
-  FOR SELECT USING (true);
+CREATE POLICY "Public can read characters" ON public.characters FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Public can read vehicles" ON public.vehicles;
-CREATE POLICY "Public can read vehicles" ON public.vehicles 
-  FOR SELECT USING (true);
+CREATE POLICY "Public can read vehicles" ON public.vehicles FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Public can read weapons" ON public.weapons;
-CREATE POLICY "Public can read weapons" ON public.weapons 
-  FOR SELECT USING (true);
+CREATE POLICY "Public can read weapons" ON public.weapons FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Public can read site settings" ON public.site_settings;
-CREATE POLICY "Public can read site settings" ON public.site_settings 
-  FOR SELECT USING (true);
+CREATE POLICY "Public can read site settings" ON public.site_settings FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Public can read map markers" ON public.map_markers;
-CREATE POLICY "Public can read map markers" ON public.map_markers 
-  FOR SELECT USING (true);
+CREATE POLICY "Public can read map markers" ON public.map_markers FOR SELECT USING (true);
 
--- Allow full access with service_role key
-DROP POLICY IF EXISTS "Service role has full access to articles" ON public.articles;
-CREATE POLICY "Service role has full access to articles" ON public.articles 
-  FOR ALL USING (auth.role() = 'service_role' OR true);
-
-DROP POLICY IF EXISTS "Service role has full access to characters" ON public.characters;
-CREATE POLICY "Service role has full access to characters" ON public.characters 
-  FOR ALL USING (auth.role() = 'service_role' OR true);
-
-DROP POLICY IF EXISTS "Service role has full access to vehicles" ON public.vehicles;
-CREATE POLICY "Service role has full access to vehicles" ON public.vehicles 
-  FOR ALL USING (auth.role() = 'service_role' OR true);
-
-DROP POLICY IF EXISTS "Service role has full access to weapons" ON public.weapons;
-CREATE POLICY "Service role has full access to weapons" ON public.weapons 
-  FOR ALL USING (auth.role() = 'service_role' OR true);
-
-DROP POLICY IF EXISTS "Service role has full access to site settings" ON public.site_settings;
-CREATE POLICY "Service role has full access to site settings" ON public.site_settings 
-  FOR ALL USING (auth.role() = 'service_role' OR true);
-
-DROP POLICY IF EXISTS "Service role has full access to map markers" ON public.map_markers;
-CREATE POLICY "Service role has full access to map markers" ON public.map_markers 
-  FOR ALL USING (auth.role() = 'service_role' OR true);
+-- Write access: service_role only. A shared DO block keeps this consistent.
+DO $$
+DECLARE t TEXT;
+BEGIN
+  FOREACH t IN ARRAY ARRAY[
+    'articles','characters','vehicles','weapons','site_settings','map_markers',
+    'seo_settings','missions','locations','media_assets'
+  ] LOOP
+    IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema='public' AND table_name=t) THEN
+      EXECUTE format('DROP POLICY IF EXISTS "Service role has full access to %1$s" ON public.%1$I', t);
+      EXECUTE format('DROP POLICY IF EXISTS "Service role can insert %1$s" ON public.%1$I', t);
+      EXECUTE format('CREATE POLICY "Service role can insert %1$s" ON public.%1$I FOR INSERT WITH CHECK (auth.role() = ''service_role'')', t);
+      EXECUTE format('DROP POLICY IF EXISTS "Service role can update %1$s" ON public.%1$I', t);
+      EXECUTE format('CREATE POLICY "Service role can update %1$s" ON public.%1$I FOR UPDATE USING (auth.role() = ''service_role'')', t);
+      EXECUTE format('DROP POLICY IF EXISTS "Service role can delete %1$s" ON public.%1$I', t);
+      EXECUTE format('CREATE POLICY "Service role can delete %1$s" ON public.%1$I FOR DELETE USING (auth.role() = ''service_role'')', t);
+    END IF;
+  END LOOP;
+END $$;
 
 -- ====================================================================
 -- SEED INITIAL ARTICLES
@@ -284,8 +277,12 @@ DROP POLICY IF EXISTS "Public can read seo settings" ON public.seo_settings;
 CREATE POLICY "Public can read seo settings" ON public.seo_settings FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Service role has full access to seo settings" ON public.seo_settings;
-CREATE POLICY "Service role has full access to seo settings" ON public.seo_settings
-  FOR ALL USING (auth.role() = 'service_role' OR true);
+CREATE POLICY "Service role can insert seo settings" ON public.seo_settings
+  FOR INSERT WITH CHECK (auth.role() = 'service_role');
+CREATE POLICY "Service role can update seo settings" ON public.seo_settings
+  FOR UPDATE USING (auth.role() = 'service_role');
+CREATE POLICY "Service role can delete seo settings" ON public.seo_settings
+  FOR DELETE USING (auth.role() = 'service_role');
 
 INSERT INTO public.seo_settings (key, value) VALUES
   ('titleTemplate', '{title} | GTA 6 Atlas'),
@@ -317,8 +314,12 @@ DROP POLICY IF EXISTS "Public can read missions" ON public.missions;
 CREATE POLICY "Public can read missions" ON public.missions FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Service role has full access to missions" ON public.missions;
-CREATE POLICY "Service role has full access to missions" ON public.missions
-  FOR ALL USING (auth.role() = 'service_role' OR true);
+CREATE POLICY "Service role can insert missions" ON public.missions
+  FOR INSERT WITH CHECK (auth.role() = 'service_role');
+CREATE POLICY "Service role can update missions" ON public.missions
+  FOR UPDATE USING (auth.role() = 'service_role');
+CREATE POLICY "Service role can delete missions" ON public.missions
+  FOR DELETE USING (auth.role() = 'service_role');
 
 INSERT INTO public.missions (id, name, protagonist, act, status, objectives) VALUES
   ('mis-1', 'Leonida Corrections Breakout', 'Lucia', 'Prologue / Act 1', 'Confirmed', 'Escape penitentiary grounds with contact assistance.'),
@@ -347,8 +348,12 @@ DROP POLICY IF EXISTS "Public can read locations" ON public.locations;
 CREATE POLICY "Public can read locations" ON public.locations FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Service role has full access to locations" ON public.locations;
-CREATE POLICY "Service role has full access to locations" ON public.locations
-  FOR ALL USING (auth.role() = 'service_role' OR true);
+CREATE POLICY "Service role can insert locations" ON public.locations
+  FOR INSERT WITH CHECK (auth.role() = 'service_role');
+CREATE POLICY "Service role can update locations" ON public.locations
+  FOR UPDATE USING (auth.role() = 'service_role');
+CREATE POLICY "Service role can delete locations" ON public.locations
+  FOR DELETE USING (auth.role() = 'service_role');
 
 INSERT INTO public.locations (id, name, district, type, verification, coordinates) VALUES
   ('loc-1', 'Vice City Beach', 'Vice City Metro', 'City District', 'verified', '25.7617, -80.1918'),
@@ -382,8 +387,12 @@ DROP POLICY IF EXISTS "Public can read media assets" ON public.media_assets;
 CREATE POLICY "Public can read media assets" ON public.media_assets FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Service role has full access to media assets" ON public.media_assets;
-CREATE POLICY "Service role has full access to media assets" ON public.media_assets
-  FOR ALL USING (auth.role() = 'service_role' OR true);
+CREATE POLICY "Service role can insert media assets" ON public.media_assets
+  FOR INSERT WITH CHECK (auth.role() = 'service_role');
+CREATE POLICY "Service role can update media assets" ON public.media_assets
+  FOR UPDATE USING (auth.role() = 'service_role');
+CREATE POLICY "Service role can delete media assets" ON public.media_assets
+  FOR DELETE USING (auth.role() = 'service_role');
 
 -- Create storage bucket for media uploads (run this separately if needed)
 -- INSERT INTO storage.buckets (id, name, public) VALUES ('media', 'media', true) ON CONFLICT DO NOTHING;

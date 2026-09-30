@@ -3,8 +3,27 @@ import { createClient } from "@/lib/supabase/server";
 import { verifyAdminSessionToken } from "@/lib/auth/session";
 
 /**
- * Asserts that the current server request has an active, authorized admin session.
- * Verifies either the secure httpOnly `gta6_admin_session` cryptographic cookie or an active Supabase user session.
+ * Emails allowed to administer the site (ADMIN_MASTER_EMAILS, comma-separated).
+ * Kept in sync with the login route.
+ */
+export function getMasterAdminEmails(): string[] {
+  return (process.env.ADMIN_MASTER_EMAILS || "shahzaib@gta6.com,admin@gta6.com")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+/**
+ * Asserts that the current server request is made by an authorized admin.
+ *
+ * Authorization requires ONE of:
+ *  1. A valid, cryptographically signed `gta6_admin_session` cookie
+ *     (set only by /api/admin/login after credential verification), or
+ *  2. A Supabase Auth session whose user email is explicitly listed in
+ *     ADMIN_MASTER_EMAILS.
+ *
+ * A regular authenticated Supabase user is NOT an admin — granting admin
+ * powers to any signed-in user would be a privilege-escalation hole.
  * Throws an Error if unauthorized.
  */
 export async function assertAdmin(): Promise<{ authorized: true; userId?: string }> {
@@ -20,7 +39,8 @@ export async function assertAdmin(): Promise<{ authorized: true; userId?: string
     const supabase = await createClient();
     // getUser() validates the JWT server-side; getSession() does not.
     const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
+    const email = user?.email?.toLowerCase();
+    if (user && email && getMasterAdminEmails().includes(email)) {
       return { authorized: true, userId: user.id };
     }
   } catch (err) {

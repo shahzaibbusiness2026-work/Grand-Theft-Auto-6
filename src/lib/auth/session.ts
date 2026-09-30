@@ -4,10 +4,21 @@
  * Works seamlessly in Next.js Middleware (Edge runtime), Route Handlers, and Server Actions.
  */
 
-const SESSION_SECRET =
-  process.env.ADMIN_SESSION_SECRET ||
-  process.env.SUPABASE_SERVICE_ROLE_KEY ||
-  "gta6-atlas-super-secure-fallback-secret-2026";
+/**
+ * Resolves the HMAC signing secret. Fails closed: without ADMIN_SESSION_SECRET
+ * sessions cannot be signed or verified. A hardcoded fallback would let anyone
+ * forge admin cookies, and reusing SUPABASE_SERVICE_ROLE_KEY would rotate
+ * sessions whenever the DB key rotates.
+ */
+function getSessionSecret(): string {
+  const secret = process.env.ADMIN_SESSION_SECRET;
+  if (!secret) {
+    throw new Error(
+      "ADMIN_SESSION_SECRET is not set. Add it to your environment before using admin sessions."
+    );
+  }
+  return secret;
+}
 
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -37,7 +48,7 @@ function bufferToHex(buffer: ArrayBuffer): string {
 export async function createAdminSessionToken(email: string): Promise<string> {
   const expiresAt = Date.now() + SEVEN_DAYS_MS;
   const payload = `${email}:${expiresAt}`;
-  const key = await getCryptoKey(SESSION_SECRET);
+  const key = await getCryptoKey(getSessionSecret());
   const signatureBuffer = await crypto.subtle.sign(
     "HMAC",
     key,
@@ -72,7 +83,7 @@ export async function verifyAdminSessionToken(
     if (Date.now() > Number(expiresAt)) return { valid: false };
 
     const payload = `${email}:${expiresAt}`;
-    const key = await getCryptoKey(SESSION_SECRET);
+    const key = await getCryptoKey(getSessionSecret());
     const expectedSigBuffer = await crypto.subtle.sign(
       "HMAC",
       key,

@@ -9,8 +9,8 @@ export default function AdminLoginPage() {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") || "/admin";
 
-  const [email, setEmail] = useState("admin@gta6.com");
-  const [password, setPassword] = useState("admin12345");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -52,24 +52,6 @@ export default function AdminLoginPage() {
           </div>
           <h1 className="text-2xl font-black text-white tracking-tight">GTA 6 Atlas</h1>
           <p className="text-sm text-[#64748B] mt-1">Admin Dashboard — Authorized Access Only</p>
-        </div>
-
-        {/* Quick Credentials Info Banner */}
-        <div className="mb-4 p-3.5 rounded-2xl border border-[#6366F1]/30 bg-[#111622] text-xs shadow-md">
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="font-bold text-white text-xs">Admin Access Credentials</span>
-            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#6366F1]/20 text-[#818CF8] border border-[#6366F1]/30">
-              Pre-filled
-            </span>
-          </div>
-          <div className="space-y-1 font-mono text-[11px] text-[#94A3B8]">
-            <p>
-              Username: <span className="text-white font-semibold">admin@gta6.com</span> <span className="text-[#64748B]">(or shahzaib@gta6.com)</span>
-            </p>
-            <p>
-              Password: <span className="text-white font-semibold">admin12345</span>
-            </p>
-          </div>
         </div>
 
         {/* Login Card */}

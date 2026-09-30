@@ -2,53 +2,95 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { verifyAdminSessionToken } from "@/lib/auth/session";
+import { getMasterAdminEmails } from "@/lib/auth/assert-admin";
+
+/** Cached CMS-managed 301/302 redirects (seo_settings.redirects). */
+type RedirectRule = { id: string; fromUrl: string; toUrl: string; type: string; enabled: boolean };
+let redirectCache: { rules: RedirectRule[]; fetchedAt: number } | null = null;
+const REDIRECT_CACHE_TTL_MS = 5 * 60 * 1000;
+
+async function getCmsRedirects(): Promise<RedirectRule[]> {
+  if (redirectCache && Date.now() - redirectCache.fetchedAt < REDIRECT_CACHE_TTL_MS) {
+    return redirectCache.rules;
+  }
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/seo_settings?select=value&key=eq.redirects`,
+      { headers: { apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "" } }
+    );
+    if (!res.ok) throw new Error(`seo_settings fetch failed: ${res.status}`);
+    const rows = (await res.json()) as { value: string }[];
+    const parsed = rows[0]?.value ? (JSON.parse(rows[0].value) as RedirectRule[]) : [];
+    redirectCache = { rules: Array.isArray(parsed) ? parsed : [], fetchedAt: Date.now() };
+  } catch {
+    // Serve without redirects if the CMS is unreachable; retry after TTL.
+    redirectCache = { rules: redirectCache?.rules ?? [], fetchedAt: Date.now() };
+  }
+  return redirectCache.rules;
+}
 
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next({
     request: { headers: request.headers },
   });
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value)
-          );
-          cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options)
-          );
-        },
-      },
-    }
-  );
+  const { pathname } = request.nextUrl;
 
-  let hasSupabaseSession = false;
-  try {
-    // getUser() validates the JWT against Supabase's server — getSession()
-    // only trusts cookie claims and can be spoofed by a crafted sb cookie.
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    hasSupabaseSession = !!user;
-  } catch {
-    // Supabase unreachable or paused
+  // CMS-managed redirects (admin SEO page). Skipped for admin/API paths.
+  if (!pathname.startsWith("/admin") && !pathname.startsWith("/api")) {
+    const rules = await getCmsRedirects();
+    const match = rules.find((r) => r.enabled && r.fromUrl === pathname);
+    if (match && match.toUrl && match.toUrl !== pathname) {
+      const status = match.type === "302" ? 302 : 301;
+      return NextResponse.redirect(new URL(match.toUrl, request.url), status);
+    }
+    return response;
   }
 
+  // ------------------------------------------------------------------
+  // Admin surfaces: a signed admin cookie is the ONLY credential.
+  // A plain Supabase session must never grant admin access — any visitor
+  // can create a Supabase account, which would be privilege escalation.
+  // ------------------------------------------------------------------
   const adminCookieValue = request.cookies.get("gta6_admin_session")?.value;
   const sessionCheck = await verifyAdminSessionToken(adminCookieValue);
-  const isAuthenticated = hasSupabaseSession || sessionCheck.valid;
 
-  const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
-  const isLoginPage = request.nextUrl.pathname === "/admin/login";
+  let isMasterSupabaseAdmin = false;
+  if (!sessionCheck.valid) {
+    // Supabase session is honored only when the user is an explicitly
+    // listed master admin (same policy as assertAdmin in server actions).
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return request.cookies.getAll();
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value }) =>
+              request.cookies.set(name, value)
+            );
+            cookiesToSet.forEach(({ name, value, options }) =>
+              response.cookies.set(name, value, options)
+            );
+          },
+        },
+      }
+    );
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      const email = user?.email?.toLowerCase();
+      isMasterSupabaseAdmin = !!email && getMasterAdminEmails().includes(email);
+    } catch {
+      // Supabase unreachable or paused
+    }
+  }
 
-  const isAdminApiRoute = request.nextUrl.pathname.startsWith("/api/admin");
-  const isLoginApi = request.nextUrl.pathname === "/api/admin/login";
+  const isAuthenticated = sessionCheck.valid || isMasterSupabaseAdmin;
+  const isLoginPage = pathname === "/admin/login";
+  const isAdminApiRoute = pathname.startsWith("/api/admin");
+  const isLoginApi = pathname === "/api/admin/login";
 
   // Protect admin API routes
   if (isAdminApiRoute && !isLoginApi && !isAuthenticated) {
@@ -59,9 +101,9 @@ export async function middleware(request: NextRequest) {
   }
 
   // Redirect to login if accessing admin without authentication
-  if (isAdminRoute && !isLoginPage && !isAuthenticated) {
+  if (pathname.startsWith("/admin") && !isLoginPage && !isAuthenticated) {
     const loginUrl = new URL("/admin/login", request.url);
-    loginUrl.searchParams.set("redirectTo", request.nextUrl.pathname);
+    loginUrl.searchParams.set("redirectTo", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
@@ -74,5 +116,9 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/:path*"],
+  matcher: [
+    "/admin/:path*",
+    "/api/admin/:path*",
+    "/((?!_next/static|_next/image|favicon.ico|img|uploads).*)",
+  ],
 };

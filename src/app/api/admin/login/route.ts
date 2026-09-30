@@ -7,12 +7,18 @@ import { createAdminSessionToken } from "@/lib/auth/session";
 
 /**
  * Admin login endpoint.
- * Supports Supabase Auth and a single env-configured master admin account.
- * On success, sets a cryptographically signed httpOnly server cookie for middleware auth checks.
  *
- * Master credentials come from env (ADMIN_MASTER_EMAILS / ADMIN_MASTER_PASSWORD).
- * The defaults below exist only for local/dev convenience — set real values in
- * production and rotate them, because defaults ship in the repo.
+ * Two credential paths, both restricted to explicitly authorized admins:
+ *  1. Supabase Auth — the signed-in user's email must be listed in
+ *     ADMIN_MASTER_EMAILS; everyone else is rejected with 401.
+ *  2. Master credentials (ADMIN_MASTER_EMAILS / ADMIN_MASTER_PASSWORD).
+ *     The master account is auto-provisioned in Supabase Auth on first login.
+ *
+ * On success a cryptographically signed httpOnly cookie is set, which
+ * middleware and assertAdmin() treat as the admin credential.
+ *
+ * There is NO default password: if ADMIN_MASTER_PASSWORD is unset the master
+ * path is disabled entirely (fail closed).
  */
 
 const MASTER_EMAILS = (process.env.ADMIN_MASTER_EMAILS || "shahzaib@gta6.com,admin@gta6.com")
@@ -20,7 +26,7 @@ const MASTER_EMAILS = (process.env.ADMIN_MASTER_EMAILS || "shahzaib@gta6.com,adm
   .map((e) => e.trim().toLowerCase())
   .filter(Boolean);
 
-const MASTER_PASSWORD = process.env.ADMIN_MASTER_PASSWORD || "admin12345";
+const MASTER_PASSWORD = process.env.ADMIN_MASTER_PASSWORD;
 
 /* ------------------------------------------------------------------ */
 /* Simple in-memory rate limiting: 5 failed attempts / 10 min / IP     */
@@ -96,9 +102,13 @@ export async function POST(request: Request) {
       : `${rawUsername.replace(/@.*$/, "")}@gta6.com`;
 
     const isMasterAdmin =
-      MASTER_EMAILS.includes(rawUsername) && timingSafeEqualStr(password, MASTER_PASSWORD);
+      !!MASTER_PASSWORD &&
+      MASTER_EMAILS.includes(rawUsername) &&
+      timingSafeEqualStr(password, MASTER_PASSWORD);
 
-    // 1. Try signing in directly via Supabase Auth
+    // 1. Try signing in via Supabase Auth — but only master-admin emails may
+    //    obtain an admin session. Any other Supabase account is rejected here,
+    //    otherwise every registered user would become an admin.
     try {
       const supabase = await createClient();
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -107,13 +117,20 @@ export async function POST(request: Request) {
       });
 
       if (!error && data.session) {
-        const cookieStore = await cookies();
-        await setAdminCookie(cookieStore, data.user?.email || email);
-
-        return NextResponse.json({
-          success: true,
-          user: { email: data.user?.email || email, role: "admin" },
-        });
+        const userEmail = (data.user?.email || email).toLowerCase();
+        if (MASTER_EMAILS.includes(userEmail)) {
+          const cookieStore = await cookies();
+          await setAdminCookie(cookieStore, userEmail);
+          return NextResponse.json({
+            success: true,
+            user: { email: userEmail, role: "admin" },
+          });
+        }
+        recordFailure(ip);
+        return NextResponse.json(
+          { success: false, error: "This account does not have admin access." },
+          { status: 403 }
+        );
       }
     } catch {
       // Continue to master admin check if Supabase Auth client had an error
