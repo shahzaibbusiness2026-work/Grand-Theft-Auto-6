@@ -136,19 +136,30 @@ export async function POST(request: Request) {
       // Continue to master admin check if Supabase Auth client had an error
     }
 
-    // 2. If credentials match the configured master admin, auto-provision
-    //    the Supabase auth user (so future logins go through Supabase Auth)
+    // 2. If credentials match the configured master admin, ensure the
+    //    Supabase auth user exists AND its password matches the env value —
+    //    otherwise a stale, previously-defaulted password would keep working.
     if (isMasterAdmin) {
       try {
         const adminClient = createAdminClient();
-        await adminClient.auth.admin.createUser({
+        const { error: createError } = await adminClient.auth.admin.createUser({
           email,
           password,
           email_confirm: true,
           user_metadata: { role: "admin", name: "Administrator" },
         });
+        if (createError) {
+          // User likely already exists — rotate its password to the env value.
+          const { data: list } = await adminClient.auth.admin.listUsers();
+          const existing = list?.users?.find(
+            (u) => (u.email || "").toLowerCase() === email
+          );
+          if (existing?.id) {
+            await adminClient.auth.admin.updateUserById(existing.id, { password });
+          }
+        }
       } catch {
-        // User may already exist or Supabase auth already provisioned
+        // Provisioning is best-effort; the signed cookie is what grants access.
       }
 
       const cookieStore = await cookies();
