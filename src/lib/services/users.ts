@@ -5,6 +5,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { INITIAL_ADMIN_USERS, AdminUser } from "@/lib/admin-store";
 
 import { assertAdmin } from "@/lib/auth/assert-admin";
+import { logActivity } from "./activity";
 
 /**
  * Fetch users from Supabase Auth admin API (with fallback)
@@ -113,6 +114,28 @@ export async function inviteAdminUser(data: { name: string; email: string; role:
     revalidatePath("/admin/users");
     return { success: true, id: userId };
   } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
+/**
+ * Update a user's role in Supabase Auth metadata.
+ */
+export async function updateAdminUserRole(id: string, role: AdminUser["role"]) {
+  try {
+    await assertAdmin();
+    const supabase = createAdminClient();
+    const { error } = await supabase.auth.admin.updateUserById(id, {
+      user_metadata: { role },
+    });
+    if (error) throw error;
+
+    await logActivity({ action: "update", targetType: "user", targetId: id, detail: { role } });
+
+    revalidatePath("/admin/users");
+    return { success: true };
+  } catch (err) {
+    console.error("Failed to update user role:", err);
     return { success: false, error: String(err) };
   }
 }

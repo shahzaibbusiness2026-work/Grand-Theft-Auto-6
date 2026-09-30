@@ -399,14 +399,15 @@ export default function AdminSeoPage() {
               size="md"
               onClick={() => {
                 showToast({
-                  title: "Sitemap Generated",
-                  description: "Fresh XML sitemap dispatched to search engine ping endpoints.",
-                  type: "success",
+                  title: "Sitemap is live",
+                  description:
+                    "The sitemap is generated automatically at /sitemap.xml from live database content — it already includes published articles and catalog pages.",
+                  type: "info",
                 });
               }}
               className="bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs"
             >
-              Re-generate sitemap now
+              View sitemap status
             </Button>
           </div>
 
@@ -414,25 +415,22 @@ export default function AdminSeoPage() {
           <div className="p-6 rounded-xl border border-[#1C2436] bg-[#111622] space-y-4 shadow-sm text-xs">
             <h3 className="font-bold uppercase tracking-wider text-white">Robots.txt Directives</h3>
             <p className="text-[#94A3B8]">
-              Define crawling permissions for Googlebot, Bingbot, and AI scrapers.
+              Define crawling permissions for Googlebot, Bingbot, and AI scrapers. Leave empty to
+              serve the app default.
             </p>
 
             <textarea
               rows={6}
-              defaultValue={`User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: https://gta6atlas.com/sitemap.xml`}
+              value={seoConfig.robotsTxt || ""}
+              onChange={(e) => handleUpdate({ robotsTxt: e.target.value })}
+              placeholder={`User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://gta6atlas.com/sitemap.xml`}
               className="w-full p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] font-mono text-xs text-white leading-relaxed focus:outline-none focus:border-[#6366F1]"
             />
 
             <Button
               variant="secondary"
               size="md"
-              onClick={() => {
-                showToast({
-                  title: "Robots.txt Saved",
-                  description: "Crawling instructions updated successfully.",
-                  type: "success",
-                });
-              }}
+              onClick={handleSaveAll}
               className="bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs"
             >
               Save robots.txt

@@ -626,47 +626,62 @@ export default function AdminSettingsPage() {
         </div>
       )}
 
-      {/* Tab 4: Branding & Social (Image 14) */}
+      {/* Tab 4: Branding & Social */}
       {activeTab === "branding" && (
         <div className="p-6 rounded-xl border border-[#1C2436] bg-[#111622] space-y-4 text-xs">
           <div>
-            <label className="block font-medium text-[#94A3B8] mb-1">Site Title</label>
+            <label htmlFor="settings-site-title" className="block font-medium text-[#94A3B8] mb-1">Site Title</label>
             <input
+              id="settings-site-title"
               type="text"
-              defaultValue="GTA 6 Atlas - Interactive Map & Database"
-              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
+              value={settings.siteTitle || ""}
+              onChange={(e) => handleUpdate({ siteTitle: e.target.value })}
+              placeholder="GTA 6 Atlas"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
+            />
+            <p className="text-[10px] text-[#64748B] mt-1">Used in the browser tab, metadata and sitemap.</p>
+          </div>
+
+          <div>
+            <label htmlFor="settings-twitter" className="block font-medium text-[#94A3B8] mb-1">Twitter / X Handle</label>
+            <input
+              id="settings-twitter"
+              type="text"
+              value={settings.twitterHandle || ""}
+              onChange={(e) => handleUpdate({ twitterHandle: e.target.value })}
+              placeholder="@GTA6Atlas"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
             />
           </div>
 
           <div>
-            <label className="block font-medium text-[#94A3B8] mb-1">Twitter / X Handle</label>
+            <label htmlFor="settings-discord" className="block font-medium text-[#94A3B8] mb-1">Discord Community Invite URL</label>
             <input
+              id="settings-discord"
               type="text"
-              defaultValue="@GTA6Atlas"
-              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
-            />
-          </div>
-
-          <div>
-            <label className="block font-medium text-[#94A3B8] mb-1">Discord Community Invite URL</label>
-            <input
-              type="text"
-              defaultValue="https://discord.gg/gta6atlas"
-              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
+              value={settings.discordUrl || ""}
+              onChange={(e) => handleUpdate({ discordUrl: e.target.value })}
+              placeholder="https://discord.gg/…"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
             />
           </div>
         </div>
       )}
 
-      {/* Tab 5: API Integrations (Image 14) */}
+      {/* Tab 5: API Integrations — placeholders until analytics services are configured */}
       {activeTab === "integrations" && (
         <div className="p-6 rounded-xl border border-[#1C2436] bg-[#111622] space-y-4 text-xs">
+          <p className="text-[#64748B]">
+            Analytics and webhook integrations are not configured yet. Values entered here are
+            placeholders — connect Google Analytics / Cloudflare / Discord in code before use.
+          </p>
           <div>
             <label className="block font-medium text-[#94A3B8] mb-1">Google Analytics 4 Measurement ID</label>
             <input
               type="text"
-              defaultValue="G-GTA6ATLAS26"
-              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white font-mono focus:outline-none focus:border-[#6366F1]"
+              defaultValue=""
+              placeholder="G-XXXXXXXXXX"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] font-mono focus:outline-none focus:border-[#6366F1]"
             />
           </div>
 
@@ -674,8 +689,9 @@ export default function AdminSettingsPage() {
             <label className="block font-medium text-[#94A3B8] mb-1">Cloudflare Web Analytics Token</label>
             <input
               type="text"
-              defaultValue="cf_token_84920a9bc412"
-              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white font-mono focus:outline-none focus:border-[#6366F1]"
+              defaultValue=""
+              placeholder="cf_token_…"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] font-mono focus:outline-none focus:border-[#6366F1]"
             />
           </div>
 
@@ -683,8 +699,9 @@ export default function AdminSettingsPage() {
             <label className="block font-medium text-[#94A3B8] mb-1">Discord Webhook for Editorial Alerts</label>
             <input
               type="text"
-              defaultValue="https://discord.com/api/webhooks/1234567890/atlas-alerts"
-              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white font-mono focus:outline-none focus:border-[#6366F1]"
+              defaultValue=""
+              placeholder="https://discord.com/api/webhooks/…"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] font-mono focus:outline-none focus:border-[#6366F1]"
             />
           </div>
         </div>
@@ -692,3 +709,4 @@ export default function AdminSettingsPage() {
     </div>
   );
 }
+

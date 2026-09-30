@@ -476,6 +476,9 @@ export interface Article {
   img: string;
   filter?: string;
   tag?: string;
+  /** CMS slug for DB-backed articles; static fallback articles have none. */
+  slug?: string;
+  category?: string;
 }
 
 export const featuredArticle: Article = {

@@ -101,7 +101,9 @@ function rowToAdminVehicle(row: DatabaseVehicleRow): AdminVehicle {
 }
 
 /**
- * Fetch vehicles for public frontend (with fallback)
+ * Fetch vehicles for public frontend.
+ * Static fallback only on connection failure — an empty table means the CMS
+ * has no published vehicles and must be shown as such.
  */
 export async function getPublicVehicles(): Promise<Vehicle[]> {
   try {
@@ -112,18 +114,20 @@ export async function getPublicVehicles(): Promise<Vehicle[]> {
       .eq("status", "published")
       .order("created_at", { ascending: true });
 
-    if (!error && data && data.length > 0) {
+    if (!error && data) {
       return (data as DatabaseVehicleRow[]).map(rowToVehicle);
     }
+    console.error("getPublicVehicles: database error", error?.message);
   } catch {
-    // Graceful fallback
+    // Connection failure — fall back to bundled content
   }
 
   return fallbackVehicles;
 }
 
 /**
- * Fetch vehicles for Admin Dashboard (with fallback)
+ * Fetch vehicles for Admin Dashboard. DB-authoritative: an empty table
+ * returns an empty list rather than ghost demo rows.
  */
 export async function getAdminVehicles(): Promise<AdminVehicle[]> {
   try {
@@ -133,14 +137,37 @@ export async function getAdminVehicles(): Promise<AdminVehicle[]> {
       .select("*")
       .order("updated_at", { ascending: false });
 
-    if (!error && data && data.length > 0) {
+    if (!error && data) {
       return (data as DatabaseVehicleRow[]).map(rowToAdminVehicle);
     }
+    console.error("getAdminVehicles: database error", error?.message);
   } catch {
-    // Graceful fallback
+    // Connection failure — fall back to bundled content
   }
 
   return INITIAL_ADMIN_VEHICLES;
+}
+
+/**
+ * Fetch a single vehicle (any status) for the admin editor.
+ */
+export async function getAdminVehicleById(id: string): Promise<AdminVehicle | null> {
+  if (!id || id === "new") return null;
+  try {
+    await assertAdmin();
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("vehicles")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+
+    if (!error && data) return rowToAdminVehicle(data as DatabaseVehicleRow);
+    if (error) console.error("getAdminVehicleById: database error", error.message);
+  } catch (err) {
+    console.error("getAdminVehicleById:", err);
+  }
+  return null;
 }
 
 /**

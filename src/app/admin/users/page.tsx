@@ -24,12 +24,18 @@ import {
   INITIAL_ADMIN_USERS,
   AdminUser,
 } from "@/lib/admin-store";
-import { getAdminUsers, inviteAdminUser, deleteAdminUser } from "@/lib/services/users";
+import {
+  getAdminUsers,
+  inviteAdminUser,
+  deleteAdminUser,
+  updateAdminUserRole,
+} from "@/lib/services/users";
 import { cn } from "@/lib/utils";
 
 export default function AdminUsersPage() {
   const { showToast } = useToast();
   const [users, setUsers] = useState<AdminUser[]>(INITIAL_ADMIN_USERS);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRoleFilter, setSelectedRoleFilter] = useState("all");
   const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
@@ -38,7 +44,8 @@ export default function AdminUsersPage() {
   // Load from Supabase on mount
   useEffect(() => {
     getAdminUsers().then((data) => {
-      if (data && data.length > 0) setUsers(data);
+      setUsers(data);
+      setIsLoading(false);
     });
   }, []);
 
@@ -125,17 +132,50 @@ export default function AdminUsersPage() {
     setNewUser({ name: "", email: "", role: "Editor" });
   };
 
-  const handleSaveRole = () => {
+  const handleSaveRole = async () => {
     if (!editingUser) return;
+    const target = editingUser;
     setUsers((prev) =>
-      prev.map((u) => (u.id === editingUser.id ? editingUser : u))
+      prev.map((u) => (u.id === target.id ? target : u))
     );
-    showToast({
-      title: "User Role Updated",
-      description: `Updated role for ${editingUser.name} to ${editingUser.role}.`,
-      type: "success",
-    });
     setEditingUser(null);
+    showToast({
+      title: "Saving role…",
+      description: `Updating ${target.name} to ${target.role}.`,
+      type: "info",
+    });
+    const res = await updateAdminUserRole(target.id, target.role);
+    if (res.success) {
+      showToast({
+        title: "User Role Updated",
+        description: `Updated role for ${target.name} to ${target.role}.`,
+        type: "success",
+      });
+    } else {
+      showToast({
+        title: "Role update failed",
+        description: res.error || "Could not persist the role change.",
+        type: "danger",
+      });
+    }
+  };
+
+  const handleDeleteUser = async (user: AdminUser) => {
+    setUsers((prev) => prev.filter((u) => u.id !== user.id));
+    const res = await deleteAdminUser(user.id);
+    if (res.success) {
+      showToast({
+        title: "User Removed",
+        description: `${user.name} was removed from Supabase Auth.`,
+        type: "success",
+      });
+    } else {
+      showToast({
+        title: "Delete failed",
+        description: res.error || "Could not delete the user.",
+        type: "danger",
+      });
+    }
   };
 
   const permissionsMatrix = [
@@ -409,13 +449,22 @@ export default function AdminUsersPage() {
                       {u.lastActivity}
                     </td>
                     <td className="p-3.5 text-right">
-                      <button
-                        type="button"
-                        onClick={() => setEditingUser(u)}
-                        className="text-xs text-[#6366F1] hover:underline font-semibold"
-                      >
-                        Edit role
-                      </button>
+                      <div className="flex items-center justify-end gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setEditingUser(u)}
+                          className="text-xs text-[#6366F1] hover:underline font-semibold"
+                        >
+                          Edit role
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteUser(u)}
+                          className="text-xs text-[#64748B] hover:text-[#F87171] font-semibold"
+                        >
+                          Remove
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -655,3 +704,4 @@ export default function AdminUsersPage() {
     </div>
   );
 }
+

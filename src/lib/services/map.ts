@@ -45,7 +45,8 @@ function rowToMarker(row: DatabaseMapMarkerRow): AdminMapMarker {
 }
 
 /**
- * Fetch map markers for public interactive map and admin dashboard (with fallback)
+ * Fetch map markers for the public interactive map and admin dashboard.
+ * Static fallback only on connection failure — an empty table is an empty map.
  */
 export async function getMapMarkers(): Promise<AdminMapMarker[]> {
   try {
@@ -55,11 +56,12 @@ export async function getMapMarkers(): Promise<AdminMapMarker[]> {
       .select("*")
       .order("created_at", { ascending: true });
 
-    if (!error && data && data.length > 0) {
+    if (!error && data) {
       return (data as DatabaseMapMarkerRow[]).map(rowToMarker);
     }
+    console.error("getMapMarkers: database error", error?.message);
   } catch {
-    // Graceful fallback
+    // Connection failure — fall back to bundled markers
   }
 
   return INITIAL_ADMIN_MAP_MARKERS;

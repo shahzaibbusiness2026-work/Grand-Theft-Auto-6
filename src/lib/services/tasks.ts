@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { assertAdmin } from "@/lib/auth/assert-admin";
 
 export interface AdminTask {
   id: string;
@@ -79,6 +80,7 @@ export async function getTasks(): Promise<AdminTask[]> {
  */
 export async function saveTask(task: AdminTask) {
   try {
+    await assertAdmin();
     const current = await getTasks();
     const existingIndex = current.findIndex((t) => t.id === task.id);
     let updated: AdminTask[];
@@ -111,6 +113,7 @@ export async function saveTask(task: AdminTask) {
  */
 export async function deleteTask(id: string) {
   try {
+    await assertAdmin();
     const current = await getTasks();
     const updated = current.filter((t) => t.id !== id);
 

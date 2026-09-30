@@ -34,15 +34,22 @@ export default function AdminOverviewPage() {
   const router = useRouter();
 
   const [stats, setStats] = useState({
-    publishedContent: 128,
-    awaitingReview: 9,
-    totalRecords: 246,
-    articlesCount: 5,
-    vehiclesCount: 5,
-    weaponsCount: 7,
-    charactersCount: 2,
-    markersCount: 17,
+    publishedContent: 0,
+    awaitingReview: 0,
+    totalRecords: 0,
+    articlesCount: 0,
+    vehiclesCount: 0,
+    weaponsCount: 0,
+    charactersCount: 0,
+    markersCount: 0,
   });
+  const [recentEdits, setRecentEdits] = useState<
+    { id: string; title: string; type: string; editor: string; time: string; href: string }[]
+  >([]);
+  const [scheduled, setScheduled] = useState<
+    { id: string; title: string; date: string; category: string }[]
+  >([]);
+  const [attention, setAttention] = useState({ drafts: 0, unverifiedVehicles: 0, pendingMarkers: 0 });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -76,6 +83,75 @@ export default function AdminOverviewPage() {
         charactersCount: characters.length,
         markersCount: markers.length,
       });
+
+      setAttention({
+        drafts: articles.filter((a) => a.status === "review" || a.status === "draft").length,
+        unverifiedVehicles: vehicles.filter(
+          (v) => v.verification === "unverified" || v.verification === "pending_source"
+        ).length,
+        pendingMarkers: markers.filter((m) => m.verification === "pending" || m.verification === "unverified")
+          .length,
+      });
+
+      // Recent edits across content types, newest first
+      const edits = [
+        ...articles.map((a) => ({
+          id: a.id,
+          title: a.title,
+          type: "Article",
+          editor: a.author?.name || "Atlas Staff",
+          time: a.updatedAt,
+          href: `/admin/articles/${a.id}`,
+        })),
+        ...vehicles.map((v) => ({
+          id: v.id,
+          title: v.name,
+          type: "Vehicle",
+          editor: v.lastEditor || "Atlas Staff",
+          time: v.updatedAt,
+          href: `/admin/vehicles/${v.id}`,
+        })),
+        ...weapons.map((w) => ({
+          id: w.id,
+          title: w.name,
+          type: "Weapon",
+          editor: "Atlas Staff",
+          time: w.updatedAt,
+          href: `/admin/weapons/${w.id}`,
+        })),
+      ]
+        .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
+        .slice(0, 4)
+        .map((e) => ({
+          ...e,
+          time: new Date(e.time).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "2-digit",
+          }),
+        }));
+      setRecentEdits(edits);
+
+      setScheduled(
+        articles
+          .filter((a) => a.status === "scheduled")
+          .slice(0, 4)
+          .map((a) => ({
+            id: a.id,
+            title: a.title,
+            date: a.scheduledFor
+              ? new Date(a.scheduledFor).toLocaleString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "2-digit",
+                })
+              : "Unscheduled",
+            category: a.category,
+          }))
+      );
+
       setIsLoading(false);
     });
   }, []);
@@ -190,31 +266,6 @@ export default function AdminOverviewPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#182030]">
-                  {/* Row 1: Verify vehicle sources */}
-                  <tr className="hover:bg-[#141B2A] transition-colors">
-                    <td className="py-3.5 pr-4">
-                      <div className="flex items-center gap-3">
-                        <Car className="w-4 h-4 text-[#94A3B8] shrink-0" />
-                        <div>
-                          <p className="font-semibold text-white">Verify vehicle sources</p>
-                          <p className="text-[11px] text-[#64748B]">Check and confirm information sources</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="py-3.5 text-[#94A3B8] whitespace-nowrap">
-                      12 records
-                    </td>
-                    <td className="py-3.5 text-right whitespace-nowrap">
-                      <Link
-                        href="/admin/vehicles"
-                        className="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold transition-colors"
-                      >
-                        Review
-                      </Link>
-                    </td>
-                  </tr>
-
-                  {/* Row 2: Articles awaiting approval */}
                   <tr className="hover:bg-[#141B2A] transition-colors">
                     <td className="py-3.5 pr-4">
                       <div className="flex items-center gap-3">
@@ -226,7 +277,7 @@ export default function AdminOverviewPage() {
                       </div>
                     </td>
                     <td className="py-3.5 text-[#94A3B8] whitespace-nowrap">
-                      9 drafts
+                      {attention.drafts} {attention.drafts === 1 ? "record" : "records"}
                     </td>
                     <td className="py-3.5 text-right whitespace-nowrap">
                       <Link
@@ -238,31 +289,29 @@ export default function AdminOverviewPage() {
                     </td>
                   </tr>
 
-                  {/* Row 3: Missing image credits */}
                   <tr className="hover:bg-[#141B2A] transition-colors">
                     <td className="py-3.5 pr-4">
                       <div className="flex items-center gap-3">
-                        <ImageIcon className="w-4 h-4 text-[#94A3B8] shrink-0" />
+                        <Car className="w-4 h-4 text-[#94A3B8] shrink-0" />
                         <div>
-                          <p className="font-semibold text-white">Missing image credits</p>
-                          <p className="text-[11px] text-[#64748B]">Add source attributions for media files</p>
+                          <p className="font-semibold text-white">Verify vehicle sources</p>
+                          <p className="text-[11px] text-[#64748B]">Check and confirm information sources</p>
                         </div>
                       </div>
                     </td>
                     <td className="py-3.5 text-[#94A3B8] whitespace-nowrap">
-                      4 assets
+                      {attention.unverifiedVehicles} {attention.unverifiedVehicles === 1 ? "record" : "records"}
                     </td>
                     <td className="py-3.5 text-right whitespace-nowrap">
                       <Link
-                        href="/admin/media"
+                        href="/admin/vehicles"
                         className="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold transition-colors"
                       >
-                        Fix credits
+                        Review
                       </Link>
                     </td>
                   </tr>
 
-                  {/* Row 4: Map markers to verify */}
                   <tr className="hover:bg-[#141B2A] transition-colors">
                     <td className="py-3.5 pr-4">
                       <div className="flex items-center gap-3">
@@ -274,7 +323,7 @@ export default function AdminOverviewPage() {
                       </div>
                     </td>
                     <td className="py-3.5 text-[#94A3B8] whitespace-nowrap">
-                      7 markers
+                      {attention.pendingMarkers} {attention.pendingMarkers === 1 ? "marker" : "markers"}
                     </td>
                     <td className="py-3.5 text-right whitespace-nowrap">
                       <Link
@@ -320,97 +369,34 @@ export default function AdminOverviewPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#182030]">
-                  {/* Row 1 */}
-                  <tr className="hover:bg-[#141B2A] transition-colors">
-                    <td className="py-3 pr-4 font-semibold text-white">
-                      Bravado Banshee (Unconfirmed)
-                    </td>
-                    <td className="py-3">
-                      <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-[#182030] text-[#94A3B8] border border-[#243048]">
-                        Vehicle
-                      </span>
-                    </td>
-                    <td className="py-3 text-[#94A3B8]">Alex Carter</td>
-                    <td className="py-3 text-[#64748B] whitespace-nowrap">2 hours ago</td>
-                    <td className="py-3 text-right">
-                      <Link
-                        href="/admin/vehicles?edit=veh-1"
-                        className="inline-flex p-1.5 rounded-lg bg-[#182030] text-[#94A3B8] hover:text-white border border-[#243048] transition-colors"
-                        aria-label="Edit Bravado Banshee"
-                      >
-                        <Edit2 className="w-3.5 h-3.5" />
-                      </Link>
-                    </td>
-                  </tr>
-
-                  {/* Row 2 */}
-                  <tr className="hover:bg-[#141B2A] transition-colors">
-                    <td className="py-3 pr-4 font-semibold text-white">
-                      Vice City Beach
-                    </td>
-                    <td className="py-3">
-                      <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-[#182030] text-[#94A3B8] border border-[#243048]">
-                        Location
-                      </span>
-                    </td>
-                    <td className="py-3 text-[#94A3B8]">Taylor Kim</td>
-                    <td className="py-3 text-[#64748B] whitespace-nowrap">4 hours ago</td>
-                    <td className="py-3 text-right">
-                      <Link
-                        href="/admin/locations"
-                        className="inline-flex p-1.5 rounded-lg bg-[#182030] text-[#94A3B8] hover:text-white border border-[#243048] transition-colors"
-                        aria-label="Edit Vice City Beach"
-                      >
-                        <Edit2 className="w-3.5 h-3.5" />
-                      </Link>
-                    </td>
-                  </tr>
-
-                  {/* Row 3 */}
-                  <tr className="hover:bg-[#141B2A] transition-colors">
-                    <td className="py-3 pr-4 font-semibold text-white">
-                      GTA 6: Everything We Know
-                    </td>
-                    <td className="py-3">
-                      <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-[#182030] text-[#94A3B8] border border-[#243048]">
-                        Article
-                      </span>
-                    </td>
-                    <td className="py-3 text-[#94A3B8]">Morgan Lee</td>
-                    <td className="py-3 text-[#64748B] whitespace-nowrap">6 hours ago</td>
-                    <td className="py-3 text-right">
-                      <Link
-                        href="/admin/articles?edit=art-1"
-                        className="inline-flex p-1.5 rounded-lg bg-[#182030] text-[#94A3B8] hover:text-white border border-[#243048] transition-colors"
-                        aria-label="Edit article"
-                      >
-                        <Edit2 className="w-3.5 h-3.5" />
-                      </Link>
-                    </td>
-                  </tr>
-
-                  {/* Row 4 */}
-                  <tr className="hover:bg-[#141B2A] transition-colors">
-                    <td className="py-3 pr-4 font-semibold text-white">
-                      Assault Rifle (Unverified)
-                    </td>
-                    <td className="py-3">
-                      <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-[#182030] text-[#94A3B8] border border-[#243048]">
-                        Weapon
-                      </span>
-                    </td>
-                    <td className="py-3 text-[#94A3B8]">Jordan Patel</td>
-                    <td className="py-3 text-[#64748B] whitespace-nowrap">1 day ago</td>
-                    <td className="py-3 text-right">
-                      <Link
-                        href="/admin/weapons"
-                        className="inline-flex p-1.5 rounded-lg bg-[#182030] text-[#94A3B8] hover:text-white border border-[#243048] transition-colors"
-                        aria-label="Edit weapon"
-                      >
-                        <Edit2 className="w-3.5 h-3.5" />
-                      </Link>
-                    </td>
-                  </tr>
+                  {recentEdits.length === 0 && (
+                    <tr>
+                      <td colSpan={5} className="py-6 text-center text-[#64748B]">
+                        No recent edits yet.
+                      </td>
+                    </tr>
+                  )}
+                  {recentEdits.map((e) => (
+                    <tr key={e.id} className="hover:bg-[#141B2A] transition-colors">
+                      <td className="py-3 pr-4 font-semibold text-white">{e.title}</td>
+                      <td className="py-3">
+                        <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-[#182030] text-[#94A3B8] border border-[#243048]">
+                          {e.type}
+                        </span>
+                      </td>
+                      <td className="py-3 text-[#94A3B8]">{e.editor}</td>
+                      <td className="py-3 text-[#64748B] whitespace-nowrap">{e.time}</td>
+                      <td className="py-3 text-right">
+                        <Link
+                          href={e.href}
+                          className="inline-flex p-1.5 rounded-lg bg-[#182030] text-[#94A3B8] hover:text-white border border-[#243048] transition-colors"
+                          aria-label={`Edit ${e.title}`}
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -508,53 +494,26 @@ export default function AdminOverviewPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#182030]">
-                  <tr className="hover:bg-[#141B2A] transition-colors">
-                    <td className="py-3 pr-2 font-semibold text-white truncate max-w-[140px]">
-                      Exploring Vice City&apos;s Districts
-                    </td>
-                    <td className="py-3 text-[#94A3B8] whitespace-nowrap">Mar 15, 2025</td>
-                    <td className="py-3 text-right">
-                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#0F243A] text-[#38BDF8] border border-[#1B3E60]">
-                        Scheduled
-                      </span>
-                    </td>
-                  </tr>
-
-                  <tr className="hover:bg-[#141B2A] transition-colors">
-                    <td className="py-3 pr-2 font-semibold text-white truncate max-w-[140px]">
-                      All Confirmed Vehicles (So Far)
-                    </td>
-                    <td className="py-3 text-[#94A3B8] whitespace-nowrap">Mar 18, 2025</td>
-                    <td className="py-3 text-right">
-                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#0F243A] text-[#38BDF8] border border-[#1B3E60]">
-                        Scheduled
-                      </span>
-                    </td>
-                  </tr>
-
-                  <tr className="hover:bg-[#141B2A] transition-colors">
-                    <td className="py-3 pr-2 font-semibold text-white truncate max-w-[140px]">
-                      Weapon Customization Guide
-                    </td>
-                    <td className="py-3 text-[#94A3B8] whitespace-nowrap">Mar 22, 2025</td>
-                    <td className="py-3 text-right">
-                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#182030] text-[#94A3B8] border border-[#243048]">
-                        Draft
-                      </span>
-                    </td>
-                  </tr>
-
-                  <tr className="hover:bg-[#141B2A] transition-colors">
-                    <td className="py-3 pr-2 font-semibold text-white truncate max-w-[140px]">
-                      Map Locations Breakdown
-                    </td>
-                    <td className="py-3 text-[#94A3B8] whitespace-nowrap">Mar 25, 2025</td>
-                    <td className="py-3 text-right">
-                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#0F243A] text-[#38BDF8] border border-[#1B3E60]">
-                        Scheduled
-                      </span>
-                    </td>
-                  </tr>
+                  {scheduled.length === 0 && (
+                    <tr>
+                      <td colSpan={3} className="py-6 text-center text-[#64748B]">
+                        No scheduled articles. Schedule one from the article editor.
+                      </td>
+                    </tr>
+                  )}
+                  {scheduled.map((a) => (
+                    <tr key={a.id} className="hover:bg-[#141B2A] transition-colors">
+                      <td className="py-3 pr-2 font-semibold text-white truncate max-w-[140px]">
+                        {a.title}
+                      </td>
+                      <td className="py-3 text-[#94A3B8] whitespace-nowrap">{a.date}</td>
+                      <td className="py-3 text-right">
+                        <span className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#0F243A] text-[#38BDF8] border border-[#1B3E60]">
+                          Scheduled
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

@@ -98,7 +98,13 @@ function rowToAdminCharacter(row: DatabaseCharacterRow): AdminCharacter {
 }
 
 /**
- * Fetch characters for public pages (with fallback)
+ * Fetch characters for public pages.
+ *
+ * The `characters` table is the single source of truth (the full canonical
+ * roster is seeded by supabase/03_content_seo_upgrade.sql +
+ * scripts/seed-characters.mjs). The static list is used ONLY when the
+ * database is unreachable — an empty table must show an empty state, never
+ * resurrect deleted characters.
  */
 export async function getPublicCharacters(): Promise<Character[]> {
   try {
@@ -108,24 +114,21 @@ export async function getPublicCharacters(): Promise<Character[]> {
       .select("*")
       .order("created_at", { ascending: true });
 
-    if (!error && data && data.length > 0) {
-      const dbChars = (data as DatabaseCharacterRow[]).map(rowToCharacter);
-      const dbIds = new Set(dbChars.map((c) => c.id.toLowerCase()));
-      const dbNames = new Set(dbChars.map((c) => c.name.toLowerCase()));
-      const remaining = fallbackCharacters.filter(
-        (c) => !dbIds.has(c.id.toLowerCase()) && !dbNames.has(c.name.toLowerCase())
-      );
-      return [...dbChars, ...remaining];
+    if (!error && data) {
+      return (data as DatabaseCharacterRow[]).map(rowToCharacter);
     }
+    console.error("getPublicCharacters: database error", error?.message);
   } catch {
-    // Graceful fallback
+    // Graceful fallback only on connection failure
   }
 
   return fallbackCharacters;
 }
 
 /**
- * Fetch characters for Admin Dashboard (with fallback)
+ * Fetch characters for Admin Dashboard.
+ * DB-authoritative: only falls back to the static roster when the database
+ * is unreachable, never when the table is simply empty.
  */
 export async function getAdminCharacters(): Promise<AdminCharacter[]> {
   try {
@@ -135,14 +138,10 @@ export async function getAdminCharacters(): Promise<AdminCharacter[]> {
       .select("*")
       .order("updated_at", { ascending: false });
 
-    if (!error && data && data.length > 0) {
-      const dbChars = (data as DatabaseCharacterRow[]).map(rowToAdminCharacter);
-      const dbIds = new Set(dbChars.map((c) => c.id.toLowerCase()));
-      const remaining = FALLBACK_ADMIN_CHARACTERS.filter(
-        (c) => !dbIds.has(c.id.toLowerCase())
-      );
-      return [...dbChars, ...remaining];
+    if (!error && data) {
+      return (data as DatabaseCharacterRow[]).map(rowToAdminCharacter);
     }
+    console.error("getAdminCharacters: database error", error?.message);
   } catch {
     // Graceful fallback
   }

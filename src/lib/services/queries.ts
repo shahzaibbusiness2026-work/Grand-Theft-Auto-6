@@ -177,31 +177,54 @@ export async function getDashboardStats(): Promise<DashboardStats> {
 
     // Map live vehicles
     if (vehiclesDataRes.status === "fulfilled" && vehiclesDataRes.value.data) {
-      stats.featuredVehicles = vehiclesDataRes.value.data.map((row: any) => ({
-        id: row.id,
-        name: row.name,
-        class: row.class || "Sports",
-        topSpeed: row.top_speed || "180 mph",
-        acceleration: row.acceleration || "3.5s",
-        priceDisplay: row.price_display || "$150,000",
-        img: Array.isArray(row.images) && row.images[0] ? row.images[0] : "/img/car-purple.jpg",
-        manufacturer: row.manufacturer || "Grotti",
-      }));
+      stats.featuredVehicles = vehiclesDataRes.value.data.map(
+        (row: {
+          id: string;
+          name: string;
+          class?: string;
+          top_speed?: string;
+          acceleration?: string;
+          price_display?: string;
+          images?: string[];
+          manufacturer?: string;
+        }) => ({
+          id: row.id,
+          name: row.name,
+          class: row.class || "Sports",
+          topSpeed: row.top_speed || "180 mph",
+          acceleration: row.acceleration || "3.5s",
+          priceDisplay: row.price_display || "$150,000",
+          img: Array.isArray(row.images) && row.images[0] ? row.images[0] : "/img/car-purple.jpg",
+          manufacturer: row.manufacturer || "Grotti",
+        })
+      );
     }
 
     // Map live weapons
     if (weaponsDataRes.status === "fulfilled" && weaponsDataRes.value.data) {
-      stats.featuredWeapons = weaponsDataRes.value.data.map((row: any) => ({
-        id: row.id,
-        name: row.name,
-        category: row.category || "Assault Rifle",
-        damage: row.damage || "60/100",
-        range: row.range || "65m",
-        acquisitionMethod: row.acquisition_method || "Ammu-Nation",
-        priceDisplay: row.price_display || "$10,000",
-        rarity: row.rarity || "Common",
-        attachments: Array.isArray(row.attachments) ? row.attachments : [],
-      }));
+      stats.featuredWeapons = weaponsDataRes.value.data.map(
+        (row: {
+          id: string;
+          name: string;
+          category?: string;
+          damage?: string;
+          range?: string;
+          acquisition_method?: string;
+          price_display?: string;
+          rarity?: string;
+          attachments?: string[];
+        }) => ({
+          id: row.id,
+          name: row.name,
+          category: row.category || "Assault Rifle",
+          damage: row.damage || "60/100",
+          range: row.range || "65m",
+          acquisitionMethod: row.acquisition_method || "Ammu-Nation",
+          priceDisplay: row.price_display || "$10,000",
+          rarity: row.rarity || "Common",
+          attachments: Array.isArray(row.attachments) ? row.attachments : [],
+        })
+      );
     }
 
     // Map latest articles to the Article type
@@ -219,6 +242,8 @@ export async function getDashboardStats(): Promise<DashboardStats> {
         read: row.read_time || "4 min read",
         img: row.cover_image || "/img/hero-dark.jpg",
         tag: row.tag || row.category || "News",
+        slug: row.slug,
+        category: row.category,
       }));
     }
 

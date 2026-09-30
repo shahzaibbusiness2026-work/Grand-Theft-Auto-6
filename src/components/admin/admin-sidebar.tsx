@@ -22,6 +22,8 @@ import {
   BarChart3,
   Search,
   Settings,
+  Mail,
+  Database,
   ChevronLeft,
   ChevronRight,
   ExternalLink,
@@ -54,25 +56,26 @@ export const ADMIN_NAV_SECTIONS: NavSection[] = [
     title: "Workspace",
     items: [
       { label: "Overview", href: "/admin", icon: LayoutDashboard },
-      { label: "Tasks", href: "/admin/tasks", icon: CheckSquare, badge: "3", badgeVariant: "warning" },
+      { label: "Tasks", href: "/admin/tasks", icon: CheckSquare },
       { label: "Activity", href: "/admin/activity", icon: Activity },
     ],
   },
   {
     title: "Content",
     items: [
-      { label: "Articles", href: "/admin/articles", icon: FileText, badge: "128" },
+      { label: "Articles", href: "/admin/articles", icon: FileText },
       { label: "Categories & Tags", href: "/admin/categories", icon: Tag },
-      { label: "Media", href: "/admin/media", icon: ImageIcon, badge: "2.4k" },
+      { label: "Media", href: "/admin/media", icon: ImageIcon },
+      { label: "Messages", href: "/admin/messages", icon: Mail },
     ],
   },
   {
     title: "Game Database",
     items: [
-      { label: "Vehicles", href: "/admin/vehicles", icon: Car, badge: "84" },
-      { label: "Weapons", href: "/admin/weapons", icon: Crosshair, badge: "36" },
-      { label: "Locations", href: "/admin/locations", icon: MapPin, badge: "52" },
-      { label: "Characters", href: "/admin/characters", icon: Users, badge: "18" },
+      { label: "Vehicles", href: "/admin/vehicles", icon: Car },
+      { label: "Weapons", href: "/admin/weapons", icon: Crosshair },
+      { label: "Locations", href: "/admin/locations", icon: MapPin },
+      { label: "Characters", href: "/admin/characters", icon: Users },
       { label: "Missions", href: "/admin/missions", icon: Compass },
     ],
   },
@@ -87,10 +90,11 @@ export const ADMIN_NAV_SECTIONS: NavSection[] = [
   {
     title: "Administration",
     items: [
-      { label: "Users & Roles", href: "/admin/users", icon: Shield, badge: "5" },
+      { label: "Users & Roles", href: "/admin/users", icon: Shield },
       { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
       { label: "SEO", href: "/admin/seo", icon: Search },
       { label: "Site Settings", href: "/admin/settings", icon: Settings },
+      { label: "Database", href: "/admin/database", icon: Database },
     ],
   },
 ];

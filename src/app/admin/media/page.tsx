@@ -26,7 +26,7 @@ import {
   INITIAL_ADMIN_MEDIA,
   AdminMediaAsset,
 } from "@/lib/admin-store";
-import { getMediaAssets, saveMediaAsset, deleteMediaAsset } from "@/lib/services/media";
+import { getMediaAssets, saveMediaAsset, deleteMediaAsset, uploadMediaFile } from "@/lib/services/media";
 import { cn } from "@/lib/utils";
 
 export default function AdminMediaPage() {
@@ -40,6 +40,7 @@ export default function AdminMediaPage() {
     INITIAL_ADMIN_MEDIA[0]?.id || "med-1"
   );
   const [copied, setCopied] = useState(false);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   // Load from Supabase on mount
   useEffect(() => {
@@ -51,12 +52,11 @@ export default function AdminMediaPage() {
     });
   }, []);
 
-  // Upload simulation & floating toast state (Image 15)
+  // Upload state
   const [isUploading, setIsUploading] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState(72);
-  const [showUploadToast, setShowUploadToast] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
-  // Delete modal state (Image 10)
+  // Delete modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [confirmUnderstood, setConfirmUnderstood] = useState(false);
 
@@ -90,43 +90,65 @@ export default function AdminMediaPage() {
     setSelectedLicense("all");
   };
 
-  const handleSimulateUpload = () => {
+  const handleFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+
     setIsUploading(true);
-    setShowUploadToast(true);
-    setUploadProgress(15);
-    const interval = setInterval(() => {
-      setUploadProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setIsUploading(false);
-          const newAsset: AdminMediaAsset = {
-            id: `med-${Date.now()}`,
-            filename: `trailer-2-screenshot-${Date.now().toString().slice(-2)}.jpg`,
-            dimensions: "1920 × 1080",
-            fileSize: "2.4 MB",
-            type: "Image",
-            url: "/img/hero-vice-skyline-hd.jpg",
-            altText: "Newly uploaded trailer 2 screenshot",
-            credit: "Rockstar Games (unverified)",
-            license: "Rockstar Games (unverified)",
-            usedBy: [
-              { id: "art-1", title: "Vice City Map Reveal Analysis", publishedDate: "Sep 18, 2026" }
-            ],
-            uploadedAt: "Just now",
-          };
-          setAssets([newAsset, ...assets]);
-          setSelectedAssetId(newAsset.id);
-          saveMediaAsset(newAsset);
-          showToast({
-            title: "Upload Complete",
-            description: `${newAsset.filename} uploaded and persisted to Supabase.`,
-            type: "success",
-          });
-          return 100;
-        }
-        return prev + 25;
+    setUploadProgress(30);
+    // FormData is posted to the server action, which uploads to the
+    // `media` Storage bucket via the service-role client.
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("altText", file.name.replace(/\.[a-z0-9]+$/i, "").replace(/[-_]+/g, " "));
+
+    const timer = setInterval(() => setUploadProgress((p) => Math.min(90, p + 10)), 250);
+
+    const result = await uploadMediaFile(formData);
+
+    clearInterval(timer);
+    setUploadProgress(100);
+    setIsUploading(false);
+    setUploadProgress(0);
+
+    if (result.success && result.asset) {
+      setAssets((prev) => [result.asset as AdminMediaAsset, ...prev]);
+      setSelectedAssetId(result.id);
+      showToast({
+        title: "Upload Complete",
+        description: `${result.asset.filename} uploaded to Supabase Storage.`,
+        type: "success",
       });
-    }, 300);
+    } else {
+      showToast({
+        title: "Upload Failed",
+        description: result.error || "The file could not be uploaded.",
+        type: "danger",
+      });
+    }
+  };
+
+  const handleSaveAssetMetadata = async () => {
+    if (!selectedAsset) return;
+    const res = await saveMediaAsset({
+      ...selectedAsset,
+      id: selectedAsset.id,
+      filename: selectedAsset.filename,
+    });
+    if (res.success) {
+      showToast({
+        title: "Asset Saved",
+        description: "Alt text and license updated in Supabase.",
+        type: "success",
+      });
+    } else {
+      showToast({
+        title: "Save Failed",
+        description: res.error || "Could not save asset metadata.",
+        type: "danger",
+      });
+    }
   };
 
   const handleDeleteConfirmed = async () => {
@@ -179,10 +201,18 @@ export default function AdminMediaPage() {
         </div>
 
         <div className="flex items-center gap-3">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*,video/*"
+            onChange={handleFileSelected}
+            className="hidden"
+            aria-hidden="true"
+          />
           <Button
             variant="primary"
             size="md"
-            onClick={handleSimulateUpload}
+            onClick={() => fileInputRef.current?.click()}
             isLoading={isUploading}
             leftIcon={<Upload className="w-4 h-4" />}
             className="bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-md shadow-indigo-500/20"
@@ -191,6 +221,22 @@ export default function AdminMediaPage() {
           </Button>
         </div>
       </div>
+
+      {/* Upload progress bar */}
+      {isUploading && (
+        <div className="rounded-xl border border-[#1C2436] bg-[#111622] p-3">
+          <div className="flex items-center justify-between text-[11px] text-[#94A3B8] mb-1.5">
+            <span>Uploading to Supabase Storage…</span>
+            <span className="font-mono">{uploadProgress}%</span>
+          </div>
+          <div className="h-1.5 w-full rounded-full bg-[#0E131D] overflow-hidden">
+            <div
+              className="h-full rounded-full bg-[#6366F1] transition-all duration-200"
+              style={{ width: `${uploadProgress}%` }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Filters Bar & View Mode Toggle */}
       <div className="space-y-3">
@@ -513,6 +559,16 @@ export default function AdminMediaPage() {
                 </select>
               </div>
 
+              <Button
+                variant="primary"
+                size="md"
+                onClick={handleSaveAssetMetadata}
+                className="w-full bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold py-2 rounded-lg"
+                leftIcon={<Check className="w-4 h-4" />}
+              >
+                Save alt text & license
+              </Button>
+
               {/* Used By Section */}
               <div className="space-y-2 pt-2 border-t border-[#1C2436]">
                 <span className="font-semibold text-white">
@@ -563,44 +619,6 @@ export default function AdminMediaPage() {
           )}
         </div>
       </div>
-
-      {/* Floating Bottom-Right Upload Toast (Image 15) */}
-      {showUploadToast && (
-        <div className="fixed bottom-6 right-6 z-50 w-96 rounded-2xl border border-[#1C2436] bg-[#111622] p-4 shadow-2xl animate-in slide-in-from-bottom-5">
-          <div className="flex items-start justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#182030] flex items-center justify-center text-indigo-400">
-                <Upload className="w-4 h-4 animate-bounce" />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-white">Uploading 3 files...</p>
-                <p className="text-[11px] text-[#94A3B8]">
-                  {uploadProgress}% - 2.4 MB of 3.3 MB
-                </p>
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={() => setShowUploadToast(false)}
-              className="text-[#64748B] hover:text-white p-1 rounded transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="mt-3 space-y-1.5">
-            <div className="w-full h-1.5 rounded-full bg-[#0E131D] overflow-hidden">
-              <div
-                className="h-full bg-[#6366F1] transition-all duration-300"
-                style={{ width: `${uploadProgress}%` }}
-              />
-            </div>
-            <p className="text-[10px] text-[#64748B] font-mono truncate">
-              trailer-2-screenshot-04.jpg
-            </p>
-          </div>
-        </div>
-      )}
 
       {/* Delete Used Asset Modal (Image 10) */}
       {isDeleteModalOpen && (

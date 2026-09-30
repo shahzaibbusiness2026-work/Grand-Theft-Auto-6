@@ -11,9 +11,8 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  ExternalLink,
+  Edit,
   ArrowUpDown,
-  MoreHorizontal,
   Trash2,
 } from "lucide-react";
 import { Drawer } from "@/components/admin/drawer";
@@ -69,9 +68,7 @@ export default function AdminWeaponsPage() {
   React.useEffect(() => {
     setIsLoading(true);
     getAdminWeapons()
-      .then((data) => {
-        if (data && data.length > 0) setWeapons(data);
-      })
+      .then((data) => setWeapons(data || []))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -165,14 +162,21 @@ export default function AdminWeaponsPage() {
       showToast({ title: "Weapon Saved", description: `${updated.name} persisted to Supabase.`, type: "success" });
       setDrawerWeapon(null);
     } else {
-      showToast({ title: "Saved Locally", description: "Ensure Supabase weapons table is seeded.", type: "warning" });
+      showToast({ title: "Save failed", description: res.error || "Could not save the weapon.", type: "danger" });
     }
   };
 
   const handleDeleteWeapon = async (id: string) => {
+    const target = weapons.find((w) => w.id === id);
     setWeapons((prev) => prev.filter((w) => w.id !== id));
-    await deleteWeapon(id);
-    showToast({ title: "Weapon Deleted", description: "Removed from Supabase.", type: "success" });
+    const res = await deleteWeapon(id);
+    if (res.success) {
+      showToast({ title: "Weapon Deleted", description: `${target?.name || "Weapon"} removed from Supabase.`, type: "success" });
+    } else {
+      showToast({ title: "Delete failed", description: res.error || "Could not delete the weapon.", type: "danger" });
+      const data = await getAdminWeapons();
+      setWeapons(data || []);
+    }
   };
 
   return (
@@ -207,14 +211,6 @@ export default function AdminWeaponsPage() {
               <Plus className="w-4 h-4" />
               <span>Add weapon</span>
             </Link>
-            <button
-              type="button"
-              className="p-2 rounded-lg bg-[#111622] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
-
-              aria-label="More options"
-            >
-              <MoreHorizontal className="w-4 h-4" />
-            </button>
           </div>
         </div>
       </div>
@@ -506,16 +502,18 @@ export default function AdminWeaponsPage() {
                             <Link
                               href={`/admin/weapons/${w.id}`}
                               className="p-1.5 rounded-lg text-[#64748B] hover:text-white hover:bg-[#1C2436] transition-colors"
-                              title="Full Specifications"
+                              title="Edit weapon"
                             >
-                              <ExternalLink className="w-3.5 h-3.5" />
+                              <Edit className="w-3.5 h-3.5" />
                             </Link>
                             <button
                               type="button"
-                              className="p-1.5 rounded-lg text-[#64748B] hover:text-white hover:bg-[#1C2436] transition-colors"
-                              aria-label="More actions"
+                              onClick={() => handleDeleteWeapon(w.id)}
+                              className="p-1.5 rounded-lg text-[#64748B] hover:text-[#F87171] hover:bg-[#1C2436] transition-colors"
+                              aria-label="Delete weapon"
+                              title="Delete"
                             >
-                              <MoreHorizontal className="w-3.5 h-3.5" />
+                              <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           </div>
                         </td>
@@ -528,7 +526,9 @@ export default function AdminWeaponsPage() {
 
             {/* Table Footer & Pagination matching Image 5 */}
             <div className="p-4 border-t border-[#1C2436] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-[#94A3B8]">
-              <p>Showing 1–7 of 36 placeholder records</p>
+              <p>
+                Showing {weapons.length} records from Supabase (drafts and published)
+              </p>
 
               <div className="flex items-center gap-1.5">
                 <button
@@ -744,7 +744,6 @@ export default function AdminWeaponsPage() {
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#818CF8] hover:text-white transition-colors"
                 >
                   <span>Open Full Specifications Page</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>

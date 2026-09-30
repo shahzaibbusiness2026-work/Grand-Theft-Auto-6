@@ -4,6 +4,7 @@ export interface AdminArticle {
   title: string;
   subtitle?: string;
   excerpt: string;
+  content?: string;
   status: "draft" | "review" | "scheduled" | "published" | "archived";
   category: string;
   author: {
@@ -21,6 +22,7 @@ export interface AdminArticle {
   seoTitle?: string;
   seoDescription?: string;
   canonicalUrl?: string;
+  ogImage?: string;
   revisions: {
     id: string;
     version: number;
@@ -144,6 +146,8 @@ export interface AdminSeoSettings {
   canonicalBaseUrl: string;
   socialPreviewImage: string;
   excludeDraftsAndArchived: boolean;
+  /** Optional custom robots.txt body. When empty, the app serves a default. */
+  robotsTxt?: string;
   redirects: {
     id: string;
     fromUrl: string;

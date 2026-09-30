@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { assertAdmin } from "@/lib/auth/assert-admin";
 import { SITE_CONFIG } from "@/lib/constants";
 import { INITIAL_ADMIN_SETTINGS, AdminSiteSettings } from "@/lib/admin-store";
 
@@ -71,6 +72,7 @@ export async function getSiteSettings(): Promise<ComprehensiveSiteSettings> {
  */
 export async function saveSiteSettings(settings: Partial<ComprehensiveSiteSettings>) {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
 
     const upsertPromises = Object.entries(settings).map(([key, value]) =>

@@ -18,8 +18,6 @@ import {
   SlidersHorizontal,
   Trash2,
   RotateCcw,
-  ExternalLink,
-  MoreHorizontal,
   Filter,
   Bookmark,
   Check,
@@ -62,9 +60,7 @@ export default function AdminVehiclesPage() {
   useEffect(() => {
     setIsLoading(true);
     getAdminVehicles()
-      .then((data) => {
-        if (data && data.length > 0) setVehicles(data);
-      })
+      .then((data) => setVehicles(data || []))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -131,22 +127,18 @@ export default function AdminVehiclesPage() {
     }
   };
 
-  const handleSaveVehicle = async (vehicle: AdminVehicle) => {
-    showToast({ title: "Saving…", description: `Saving ${vehicle.name}…`, type: "info" });
-    const res = await saveVehicle(vehicle);
-    if (res.success) {
-      showToast({ title: "Vehicle Saved", description: `${vehicle.name} persisted to Supabase.`, type: "success" });
-    } else {
-      showToast({ title: "Error", description: res.error || "Failed to save.", type: "danger" });
-    }
-
-  };
-
   const handleDeleteVehicle = async (id: string) => {
+    const target = vehicles.find((v) => v.id === id);
     setVehicles((prev) => prev.filter((v) => v.id !== id));
     setSelectedIds((prev) => prev.filter((i) => i !== id));
-    await deleteVehicle(id);
-    showToast({ title: "Vehicle Deleted", description: "Removed from Supabase.", type: "success" });
+    const res = await deleteVehicle(id);
+    if (res.success) {
+      showToast({ title: "Vehicle Deleted", description: `${target?.name || "Vehicle"} removed from Supabase.`, type: "success" });
+    } else {
+      showToast({ title: "Delete failed", description: res.error || "Could not delete the vehicle.", type: "danger" });
+      const data = await getAdminVehicles();
+      setVehicles(data || []);
+    }
   };
 
   const handleArchiveSelected = async () => {
@@ -558,16 +550,18 @@ export default function AdminVehiclesPage() {
                             <Link
                               href={`/admin/vehicles/${v.id}`}
                               className="p-1.5 rounded-lg text-[#64748B] hover:text-white hover:bg-[#1C2436] transition-colors"
-                              title="Full Specifications"
+                              title="Edit vehicle"
                             >
-                              <ExternalLink className="w-3.5 h-3.5" />
+                              <Edit className="w-3.5 h-3.5" />
                             </Link>
                             <button
                               type="button"
-                              className="p-1.5 rounded-lg text-[#64748B] hover:text-white hover:bg-[#1C2436] transition-colors"
-                              aria-label="More actions"
+                              onClick={() => handleDeleteVehicle(v.id)}
+                              className="p-1.5 rounded-lg text-[#64748B] hover:text-[#F87171] hover:bg-[#1C2436] transition-colors"
+                              aria-label="Delete vehicle"
+                              title="Delete"
                             >
-                              <MoreHorizontal className="w-3.5 h-3.5" />
+                              <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           </div>
                         </td>

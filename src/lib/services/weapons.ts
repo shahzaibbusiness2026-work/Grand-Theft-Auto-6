@@ -83,7 +83,8 @@ function rowToAdminWeapon(row: DatabaseWeaponRow): AdminWeapon {
 }
 
 /**
- * Fetch all weapons for the Admin Dashboard (with fallback)
+ * Fetch all weapons for the Admin Dashboard. DB-authoritative: an empty
+ * table returns an empty list rather than ghost demo rows.
  */
 export async function getAdminWeapons(): Promise<AdminWeapon[]> {
   try {
@@ -93,18 +94,21 @@ export async function getAdminWeapons(): Promise<AdminWeapon[]> {
       .select("*")
       .order("updated_at", { ascending: false });
 
-    if (!error && data && data.length > 0) {
+    if (!error && data) {
       return (data as DatabaseWeaponRow[]).map(rowToAdminWeapon);
     }
+    console.error("getAdminWeapons: database error", error?.message);
   } catch {
-    // Graceful fallback
+    // Connection failure — fall back to bundled content
   }
 
   return INITIAL_ADMIN_WEAPONS;
 }
 
 /**
- * Fetch weapons for public frontend (with fallback to empty array)
+ * Fetch weapons for public frontend.
+ * Returns an empty list when the table is empty or unreachable — public
+ * pages render their own empty/fallback state.
  */
 export async function getPublicWeapons(): Promise<AdminWeapon[]> {
   try {
@@ -115,14 +119,37 @@ export async function getPublicWeapons(): Promise<AdminWeapon[]> {
       .eq("status", "published")
       .order("created_at", { ascending: true });
 
-    if (!error && data && data.length > 0) {
+    if (!error && data) {
       return (data as DatabaseWeaponRow[]).map(rowToAdminWeapon);
     }
+    console.error("getPublicWeapons: database error", error?.message);
   } catch {
-    // Graceful fallback
+    // Connection failure
   }
 
   return [];
+}
+
+/**
+ * Fetch a single weapon (any status) for the admin editor.
+ */
+export async function getAdminWeaponById(id: string): Promise<AdminWeapon | null> {
+  if (!id || id === "new") return null;
+  try {
+    await assertAdmin();
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("weapons")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+
+    if (!error && data) return rowToAdminWeapon(data as DatabaseWeaponRow);
+    if (error) console.error("getAdminWeaponById: database error", error.message);
+  } catch (err) {
+    console.error("getAdminWeaponById:", err);
+  }
+  return null;
 }
 
 /**

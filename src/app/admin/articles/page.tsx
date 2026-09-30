@@ -8,22 +8,14 @@ import {
   Plus,
   Edit,
   Trash2,
-  CheckCircle2,
-  Clock,
-  AlertTriangle,
   ChevronLeft,
   ChevronRight,
   X,
   ExternalLink,
-  MoreHorizontal,
-  FolderPlus,
-  Send,
-  Calendar,
   Info,
 } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
 import {
-  INITIAL_ADMIN_ARTICLES,
   AdminArticle,
 } from "@/lib/admin-store";
 import { getAdminArticles, saveArticle, deleteArticle } from "@/lib/services/articles";
@@ -32,8 +24,8 @@ import { cn } from "@/lib/utils";
 export default function AdminArticlesPage() {
   const router = useRouter();
   const { showToast } = useToast();
-  const [articles, setArticles] = useState<AdminArticle[]>(INITIAL_ADMIN_ARTICLES);
-  const [isLoading, setIsLoading] = useState(false);
+  const [articles, setArticles] = useState<AdminArticle[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"all" | "draft" | "review" | "scheduled" | "published">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedAuthor, setSelectedAuthor] = useState("all");
@@ -41,25 +33,21 @@ export default function AdminArticlesPage() {
   const [selectedDate, setSelectedDate] = useState("all");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  useEffect(() => {
+  const loadArticles = () => {
     setIsLoading(true);
     getAdminArticles()
-      .then((data) => {
-        if (data && data.length > 0) {
-          setArticles(data);
-        }
-      })
+      .then((data) => setArticles(data || []))
       .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    loadArticles();
   }, []);
 
-  // Quick edit slide-over drawer state matching Image 8
-  const [quickEditArticle, setQuickEditArticle] = useState<AdminArticle | null>(
-    INITIAL_ADMIN_ARTICLES.find((a) => a.id === "art-5") || null
-  );
-  const [quickTags, setQuickTags] = useState<string[]>(["Editorial", "Roundup", "Community"]);
-  const [quickDate, setQuickDate] = useState("Sep 27, 2026");
-  const [quickTime, setQuickTime] = useState("09:00");
-  const [quickTimezone, setQuickTimezone] = useState("(UTC) Coordinated Universal Time");
+  // Quick edit slide-over drawer state
+  const [quickEditArticle, setQuickEditArticle] = useState<AdminArticle | null>(null);
+  const [quickTags, setQuickTags] = useState<string[]>([]);
+  const [quickTagInput, setQuickTagInput] = useState("");
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -96,22 +84,50 @@ export default function AdminArticlesPage() {
     });
   }, [articles, activeTab, selectedAuthor, selectedCategory, searchQuery]);
 
+  const totalPages = Math.max(1, Math.ceil(filteredArticles.length / itemsPerPage));
+  const pageArticles = filteredArticles.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Reset to page 1 when filters change the result set
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab, selectedAuthor, selectedCategory, searchQuery]);
+
+  const authors = useMemo(
+    () => Array.from(new Set(articles.map((a) => a.author.name))).sort(),
+    [articles]
+  );
+  const categories = useMemo(
+    () => Array.from(new Set(articles.map((a) => a.category))).sort(),
+    [articles]
+  );
+
   const handleSelectRow = (id: string) => {
     setSelectedIds((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
-    const article = articles.find((a) => a.id === id);
-    if (article) {
-      setQuickEditArticle(article);
-    }
   };
 
   const handleSelectAll = () => {
-    if (selectedIds.length === filteredArticles.length) {
+    if (selectedIds.length === pageArticles.length) {
       setSelectedIds([]);
     } else {
-      setSelectedIds(filteredArticles.map((a) => a.id));
+      setSelectedIds(pageArticles.map((a) => a.id));
     }
+  };
+
+  const openQuickEdit = (article: AdminArticle) => {
+    setQuickEditArticle(article);
+    setQuickTags(article.tags || []);
+    setQuickTagInput("");
+  };
+
+  const addQuickTag = () => {
+    const t = quickTagInput.trim();
+    if (t && !quickTags.includes(t)) setQuickTags([...quickTags, t]);
+    setQuickTagInput("");
   };
 
   const handleSaveQuickEdit = async () => {
@@ -137,28 +153,52 @@ export default function AdminArticlesPage() {
         type: "success",
       });
       setQuickEditArticle(null);
+      loadArticles();
     } else {
       showToast({
-        title: "Saved Locally",
-        description: `Saved locally. Ensure Supabase tables are created.`,
-        type: "warning",
+        title: "Save failed",
+        description: res.error || "Could not save the article.",
+        type: "danger",
       });
     }
   };
 
   const handleDeleteArticle = async (id: string) => {
+    const target = articles.find((a) => a.id === id);
     setArticles((prev) => prev.filter((a) => a.id !== id));
+    setSelectedIds((prev) => prev.filter((i) => i !== id));
     showToast({
       title: "Deleting...",
       description: "Removing article...",
       type: "info",
     });
-    await deleteArticle(id);
-    showToast({
-      title: "Article Deleted",
-      description: "Removed from Supabase and live site.",
-      type: "success",
-    });
+    const res = await deleteArticle(id);
+    if (res.success) {
+      showToast({
+        title: "Article Deleted",
+        description: "Removed from Supabase and live site.",
+        type: "success",
+      });
+    } else {
+      showToast({
+        title: "Delete failed",
+        description: res.error || "Could not delete the article.",
+        type: "danger",
+      });
+      loadArticles();
+    }
+  };
+
+  const handleArchiveSelected = async () => {
+    const targets = articles.filter((a) => selectedIds.includes(a.id) && a.status !== "archived");
+    if (targets.length === 0) return;
+    showToast({ title: "Archiving…", description: `${targets.length} article(s)…`, type: "info" });
+    for (const t of targets) {
+      await saveArticle({ ...t, status: "archived" });
+    }
+    setSelectedIds([]);
+    showToast({ title: "Archived", description: `${targets.length} article(s) moved to archive.`, type: "success" });
+    loadArticles();
   };
 
   const removeTag = (tagToRemove: string) => {
@@ -317,11 +357,9 @@ export default function AdminArticlesPage() {
             className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
           >
             <option value="all">All authors</option>
-            <option value="Jamie Lee">Jamie Lee</option>
-            <option value="Morgan Kim">Morgan Kim</option>
-            <option value="Daniel Torres">Daniel Torres</option>
-            <option value="Sam Chen">Sam Chen</option>
-            <option value="Pat Riley">Pat Riley</option>
+            {authors.map((name) => (
+              <option key={name} value={name}>{name}</option>
+            ))}
           </select>
         </div>
 
@@ -334,12 +372,9 @@ export default function AdminArticlesPage() {
             className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1] transition-colors"
           >
             <option value="all">All categories</option>
-            <option value="General">General</option>
-            <option value="Vehicles">Vehicles</option>
-            <option value="Guides">Guides</option>
-            <option value="Analysis">Analysis</option>
-            <option value="News">News</option>
-            <option value="Editorial">Editorial</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
           </select>
         </div>
 
@@ -364,7 +399,7 @@ export default function AdminArticlesPage() {
         {/* Table Container */}
         <div className={cn("transition-all duration-200", quickEditArticle ? "lg:col-span-8" : "lg:col-span-12")}>
           <div className="rounded-xl border border-[#1C2436] bg-[#111622] overflow-hidden">
-            {/* Bulk Actions Header (Image 8: 2 selected, Assign category, Request review, Archive, Clear selection) */}
+            {/* Bulk Actions Header */}
             {selectedIds.length > 0 && (
               <div className="p-3 bg-[#0E131D] border-b border-[#1C2436] flex items-center justify-between flex-wrap gap-3 text-xs">
                 <div className="flex items-center gap-3">
@@ -373,20 +408,7 @@ export default function AdminArticlesPage() {
                   </span>
                   <button
                     type="button"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] text-white border border-[#243048] font-medium transition-colors"
-                  >
-                    <FolderPlus className="w-3.5 h-3.5 text-[#818CF8]" />
-                    <span>Assign category</span>
-                  </button>
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] text-white border border-[#243048] font-medium transition-colors"
-                  >
-                    <Send className="w-3.5 h-3.5 text-[#38BDF8]" />
-                    <span>Request review</span>
-                  </button>
-                  <button
-                    type="button"
+                    onClick={handleArchiveSelected}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] text-white border border-[#243048] font-medium transition-colors"
                   >
                     <Trash2 className="w-3.5 h-3.5 text-[#EF4444]" />
@@ -411,7 +433,7 @@ export default function AdminArticlesPage() {
                       <input
                         type="checkbox"
                         aria-label="Select all articles"
-                        checked={selectedIds.length === filteredArticles.length && filteredArticles.length > 0}
+                        checked={selectedIds.length === pageArticles.length && pageArticles.length > 0}
                         onChange={handleSelectAll}
                         className="rounded border-[#2A344A] bg-[#0E131D] text-[#6366F1] focus:ring-0 focus:ring-offset-0"
                       />
@@ -440,15 +462,33 @@ export default function AdminArticlesPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#182030]">
-                  {filteredArticles.slice(0, itemsPerPage).map((art) => {
+                  {isLoading && (
+                    <tr>
+                      <td colSpan={8} className="p-8 text-center text-[#64748B]">
+                        Loading articles…
+                      </td>
+                    </tr>
+                  )}
+                  {!isLoading && pageArticles.length === 0 && (
+                    <tr>
+                      <td colSpan={8} className="p-8 text-center text-[#94A3B8]">
+                        <p className="font-semibold text-white text-xs">No articles found.</p>
+                        <p className="text-[11px] text-[#64748B] mt-1">
+                          {articles.length === 0
+                            ? "Create your first article to get started."
+                            : "Try adjusting the filters or search."}
+                        </p>
+                      </td>
+                    </tr>
+                  )}
+                  {pageArticles.map((art) => {
                     const isSelected = selectedIds.includes(art.id);
 
                     return (
                       <tr
                         key={art.id}
-                        onClick={() => handleSelectRow(art.id)}
                         className={cn(
-                          "cursor-pointer transition-colors",
+                          "transition-colors",
                           isSelected
                             ? "bg-[#1B2138] border-l-2 border-l-[#6366F1]"
                             : "hover:bg-[#141B2A]"
@@ -521,10 +561,21 @@ export default function AdminArticlesPage() {
                             </Link>
                             <button
                               type="button"
+                              onClick={() => openQuickEdit(art)}
                               className="p-1.5 rounded-lg text-[#64748B] hover:text-white hover:bg-[#1C2436] transition-colors"
-                              aria-label="More actions"
+                              aria-label="Quick edit"
+                              title="Quick edit"
                             >
-                              <MoreHorizontal className="w-3.5 h-3.5" />
+                              <Edit className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteArticle(art.id)}
+                              className="p-1.5 rounded-lg text-[#64748B] hover:text-[#F87171] hover:bg-[#1C2436] transition-colors"
+                              aria-label="Delete article"
+                              title="Delete"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           </div>
                         </td>
@@ -535,9 +586,13 @@ export default function AdminArticlesPage() {
               </table>
             </div>
 
-            {/* Pagination matching Image 8 */}
+            {/* Pagination */}
             <div className="p-4 border-t border-[#1C2436] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-[#94A3B8]">
-              <p>Showing 1–6 of 128 articles</p>
+              <p>
+                Showing {pageArticles.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}–
+                {(currentPage - 1) * itemsPerPage + pageArticles.length} of{" "}
+                {filteredArticles.length} articles
+              </p>
 
               <div className="flex items-center gap-1.5">
                 <button
@@ -550,47 +605,29 @@ export default function AdminArticlesPage() {
                   <ChevronLeft className="w-4 h-4" />
                 </button>
 
-                <button
-                  type="button"
-                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#6366F1] text-white"
-                >
-                  1
-                </button>
-                <button
-                  type="button"
-                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-                >
-                  2
-                </button>
-                <button
-                  type="button"
-                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-                >
-                  3
-                </button>
-                <button
-                  type="button"
-                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-                >
-                  4
-                </button>
-                <button
-                  type="button"
-                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-                >
-                  5
-                </button>
-                <span className="px-1 text-[#64748B]">...</span>
-                <button
-                  type="button"
-                  className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-                >
-                  22
-                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .slice(Math.max(0, Math.min(currentPage - 3, totalPages - 5)), Math.max(5, Math.min(currentPage + 2, totalPages)))
+                  .map((p) => (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setCurrentPage(p)}
+                      className={cn(
+                        "w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center transition-colors",
+                        p === currentPage
+                          ? "bg-[#6366F1] text-white"
+                          : "bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
+                      )}
+                    >
+                      {p}
+                    </button>
+                  ))}
 
                 <button
                   type="button"
-                  className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white transition-colors"
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white disabled:opacity-40 transition-colors"
                   aria-label="Next page"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -682,68 +719,24 @@ export default function AdminArticlesPage() {
                       </button>
                     </span>
                   ))}
-                  <button
-                    type="button"
-                    className="text-[#64748B] hover:text-white text-xs ml-auto"
+                  <input
+                    type="text"
+                    value={quickTagInput}
+                    onChange={(e) => setQuickTagInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === ",") {
+                        e.preventDefault();
+                        addQuickTag();
+                      }
+                    }}
+                    placeholder="Add tag…"
                     aria-label="Add tag"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                  </button>
+                    className="flex-1 min-w-[80px] bg-transparent text-[11px] text-white placeholder-[#64748B] focus:outline-none"
+                  />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-[11px] font-medium text-[#94A3B8] mb-1.5">
-                  Scheduled publication date
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={quickDate}
-                      onChange={(e) => setQuickDate(e.target.value)}
-                      className="w-full pl-8 pr-2 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white font-mono focus:outline-none focus:border-[#6366F1]"
-                    />
-                    <Calendar className="w-3.5 h-3.5 text-[#64748B] absolute left-2.5 top-1/2 -translate-y-1/2" />
-                  </div>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={quickTime}
-                      onChange={(e) => setQuickTime(e.target.value)}
-                      className="w-full pl-8 pr-2 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white font-mono focus:outline-none focus:border-[#6366F1]"
-                    />
-                    <Clock className="w-3.5 h-3.5 text-[#64748B] absolute left-2.5 top-1/2 -translate-y-1/2" />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="quick-tz"
-                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
-                >
-                  Timezone
-                </label>
-                <select
-                  id="quick-tz"
-                  value={quickTimezone}
-                  onChange={(e) => setQuickTimezone(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
-                >
-                  <option value="(UTC) Coordinated Universal Time">
-                    (UTC) Coordinated Universal Time
-                  </option>
-                  <option value="(EST) Eastern Standard Time">
-                    (EST) Eastern Standard Time
-                  </option>
-                  <option value="(PST) Pacific Standard Time">
-                    (PST) Pacific Standard Time
-                  </option>
-                </select>
-              </div>
-
-              {/* Info Notice Box matching Image 8 */}
+              {/* Info Notice Box */}
               <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] flex items-start gap-2.5 text-xs text-[#94A3B8]">
                 <Info className="w-4 h-4 text-[#6366F1] shrink-0 mt-0.5" />
                 <p className="text-[11px] leading-relaxed">
@@ -784,3 +777,4 @@ export default function AdminArticlesPage() {
     </div>
   );
 }
+

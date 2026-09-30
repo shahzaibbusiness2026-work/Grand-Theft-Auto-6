@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { assertAdmin } from "@/lib/auth/assert-admin";
+import { logActivity } from "./activity";
 
 export interface AdminCategory {
   id: string;
@@ -39,10 +41,12 @@ export async function getCategories(): Promise<AdminCategory[]> {
       categories = settingData.value as AdminCategory[];
     }
 
-    // 2. Fetch live article counts from Supabase articles table
+    // 2. Fetch live published-article counts from the articles table.
+    //    Only published posts count toward the public-facing numbers.
     const { data: articles } = await supabase
       .from("articles")
-      .select("category");
+      .select("category")
+      .eq("status", "published");
 
     if (articles && articles.length > 0) {
       const counts: Record<string, number> = {};
@@ -71,6 +75,7 @@ export async function getCategories(): Promise<AdminCategory[]> {
  */
 export async function saveCategory(category: AdminCategory) {
   try {
+    await assertAdmin();
     const current = await getCategories();
     const existingIndex = current.findIndex((c) => c.id === category.id);
     let updated: AdminCategory[];
@@ -89,8 +94,16 @@ export async function saveCategory(category: AdminCategory) {
 
     if (error) throw error;
 
+    await logActivity({
+      action: existingIndex >= 0 ? "update" : "create",
+      targetType: "category",
+      targetId: category.id,
+      targetLabel: category.name,
+    });
+
     revalidatePath("/admin/categories");
     revalidatePath("/admin/articles");
+    revalidatePath("/news");
     return { success: true, id: category.id };
   } catch (err) {
     console.error("Error saving category:", err);
@@ -103,7 +116,9 @@ export async function saveCategory(category: AdminCategory) {
  */
 export async function deleteCategory(id: string) {
   try {
+    await assertAdmin();
     const current = await getCategories();
+    const deleted = current.find((c) => c.id === id);
     const updated = current.filter((c) => c.id !== id);
 
     const adminSupabase = createAdminClient();
@@ -113,7 +128,12 @@ export async function deleteCategory(id: string) {
 
     if (error) throw error;
 
+    if (deleted) {
+      await logActivity({ action: "delete", targetType: "category", targetId: id, targetLabel: deleted.name });
+    }
+
     revalidatePath("/admin/categories");
+    revalidatePath("/news");
     return { success: true };
   } catch (err) {
     console.error("Error deleting category:", err);
