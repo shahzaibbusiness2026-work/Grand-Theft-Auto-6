@@ -43,14 +43,16 @@ const buckets = await bucketsRes.json();
 console.log(buckets.map ? buckets.map((b) => `${b.name}(${b.public ? "public" : "private"})`).join(", ") : JSON.stringify(buckets));
 
 console.log("\n== ANON READ PROBES ==");
+// NOTE: PostgREST applies RLS silently — a filtered read returns 200 with 0
+// rows (not an error). "0 rows" therefore means "RLS is filtering correctly".
 const drafts = await restCall(anonKey, `/articles?select=id,title,status&status=neq.published`);
-console.log("anon read non-published articles:", !drafts.ok ? `blocked ✓ (${drafts.status})` : `LEAKED ${drafts.body.length} rows`);
+console.log("anon read non-published articles:", !drafts.ok ? `blocked (${drafts.status})` : `${drafts.body.length} rows visible (0 = correctly filtered)`);
 
 const settings = await restCall(anonKey, `/site_settings?select=key&limit=3`);
 console.log("anon read site_settings:", !settings.ok ? `blocked (${settings.status})` : `ok ${settings.body.length} keys (public read intended)`);
 
 const contactRead = await restCall(anonKey, `/contact_messages?select=id&limit=1`);
-console.log("anon read contact_messages:", !contactRead.ok ? `blocked ✓ (${contactRead.status})` : "LEAKED — BAD");
+console.log("anon read contact_messages:", !contactRead.ok ? `blocked (${contactRead.status})` : `${contactRead.body.length} rows visible (0 = correctly filtered)`);
 
 console.log("\n== ANON WRITE PROBES (must fail; probe row removed if it succeeds) ==");
 const probeRow = {
@@ -67,7 +69,11 @@ if (ins.ok) {
 }
 
 const upd = await restCall(anonKey, `/site_settings?key=eq.siteTitle`, { method: "PATCH", body: JSON.stringify({ value: "hacked" }) });
-console.log("anon UPDATE site_settings:", !upd.ok ? "blocked ✓" : "SUCCEEDED — CRITICAL RLS HOLE");
+// A PATCH matching rows filtered by RLS returns 200 with an empty body, so we
+// must confirm whether the value actually changed to know if RLS held.
+const after = await restCall(serviceKey, `/site_settings?select=value&key=eq.siteTitle`);
+const changed = JSON.stringify(after.body?.[0]?.value || "") === JSON.stringify("hacked");
+console.log("anon UPDATE site_settings:", upd.ok && !changed ? "blocked ✓ (0 rows affected)" : changed ? "SUCCEEDED — CRITICAL RLS HOLE (restore siteTitle!)" : "blocked ✓");
 
 console.log("\n== PUBLIC SIGN-UP PROBE ==");
 const email = `audit-probe-${Date.now()}@example.com`;
