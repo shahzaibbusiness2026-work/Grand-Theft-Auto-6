@@ -14,7 +14,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative w-full overflow-hidden bg-background pt-10 pb-6 sm:pt-14 sm:pb-8 lg:pt-16 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-[640px] lg:min-h-[700px] flex flex-col justify-between transition-colors duration-300"
+      className="relative w-full overflow-hidden bg-background pt-8 pb-6 sm:pt-10 sm:pb-7 lg:pt-12 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-[600px] lg:min-h-[640px] flex flex-col justify-between transition-colors duration-300"
     >
       {/* 1. CINEMATIC BACKGROUND CANVAS */}
       <HeroBackground />
@@ -25,7 +25,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
       </h1>
 
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
-      <div className="relative z-10 mx-auto w-full max-w-5xl flex flex-col items-center justify-center flex-1 py-12 sm:py-20 text-center">
+      <div className="relative z-10 mx-auto w-full max-w-5xl flex flex-col items-center justify-center flex-1 py-8 sm:py-14 text-center">
         {/* Countdown in Center */}
         <Countdown
           className="w-full max-w-xl sm:max-w-3xl mx-auto"
@@ -55,7 +55,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
       </div>
 
       {/* 3. BOTTOM QUICK-ACCESS FEATURE BAR */}
-      <div className="relative z-10 w-full border-t border-slate-200 dark:border-white/10 pt-5 mt-8 max-w-7xl mx-auto transition-colors">
+      <div className="relative z-10 w-full border-t border-slate-200 dark:border-white/10 pt-5 mt-6 max-w-7xl mx-auto transition-colors">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {/* Feature 1: Latest stories */}
           <Link href="/news" className="group flex items-center gap-4 transition-colors">

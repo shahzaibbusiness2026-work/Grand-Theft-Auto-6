@@ -17,18 +17,35 @@ import { ProtagonistsShowcase } from "@/components/protagonists-showcase";
 import { YouTubeLite } from "@/components/youtube-lite";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { HomeSatelliteMap } from "@/components/home-satellite-map";
-import { getPublicArticles, getPublicCharacters, getSiteSettings, getDashboardStats } from "@/lib/services/queries";
+import { getPublicArticles, getPublicCharacters, getDashboardStats } from "@/lib/services/queries";
 import { roleColor } from "@/lib/data";
 
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import { getSiteSettings } from "@/lib/services/settings";
 
-export const metadata: Metadata = {
-  title: "GTA 6 Atlas — Your Ultimate GTA 6 Companion",
-  description:
-    "Explore the world of GTA 6 with the most complete fan database. Interactive maps, missions, vehicles, characters, weapons and more for Grand Theft Auto 6.",
-  alternates: { canonical: "/" },
-};
+/**
+ * Homepage metadata comes from the CMS (site settings) so the owner controls
+ * it from the admin dashboard; bundled defaults apply when the DB is down.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  const title = settings.siteTitle || "GTA 6 Atlas — Your Ultimate GTA 6 Companion";
+  const description =
+    settings.siteDescription ||
+    "Explore the world of GTA 6 with the most complete fan database. Interactive maps, missions, vehicles, characters, weapons and more for Grand Theft Auto 6.";
+  return {
+    title,
+    description,
+    alternates: { canonical: "/" },
+    openGraph: {
+      title,
+      description,
+      url: "/",
+      images: [{ url: "/img/hero-dark.jpg", width: 1200, height: 630, alt: title }],
+    },
+  };
+}
 
 const TRAILERS = [
   { id: "QdBZY2fkU-0", title: "Official Trailer 1", caption: "Watch the official reveal trailer" },
@@ -57,7 +74,7 @@ export default async function HomePage() {
       </section>
 
       {/* 2 — LATEST TRAILERS */}
-      <section aria-labelledby="trailers-heading" className="container-site pt-8 sm:pt-10">
+      <section aria-labelledby="trailers-heading" className="container-site pt-6 sm:pt-8">
         <SectionHeader id="trailers-heading" title="Latest Trailers" subtitle="Watch the official reveals" viewAllHref="/news" viewAllLabel="View All Trailers" />
         <div className="grid gap-5 lg:grid-cols-2">
           {TRAILERS.map((t) => (
@@ -78,7 +95,7 @@ export default async function HomePage() {
       </section>
 
       {/* 3 — INTERACTIVE MAP */}
-      <section aria-labelledby="map-heading" className="container-site pt-9">
+      <section aria-labelledby="map-heading" className="container-site pt-6">
         <SectionHeader
           id="map-heading"
           title="Interactive World Map"
@@ -90,7 +107,7 @@ export default async function HomePage() {
       </section>
 
       {/* 4 — CHARACTERS */}
-      <section aria-labelledby="characters-heading" className="container-site pt-9">
+      <section aria-labelledby="characters-heading" className="container-site pt-6">
         <SectionHeader
           id="characters-heading"
           title="Characters"
@@ -132,7 +149,7 @@ export default async function HomePage() {
       <ProtagonistsShowcase />
 
       {/* 6 — NEWS & BLOG */}
-      <section aria-labelledby="news-heading" className="container-site pt-9">
+      <section aria-labelledby="news-heading" className="container-site pt-6">
         <SectionHeader id="news-heading" title="News & Articles" subtitle="Stay updated with the latest" viewAllHref="/news" viewAllLabel="View All News" />
         <div className="grid gap-6 lg:grid-cols-2">
           {/* News half */}
@@ -143,7 +160,7 @@ export default async function HomePage() {
             </div>
             <div className="space-y-4">
               {newsPosts.map((a) => (
-                <Link key={a.title} href="/news" className="group flex gap-4">
+                <Link key={a.slug || a.title} href={a.slug ? `/news/${a.slug}` : "/news"} className="group flex gap-4">
                   <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-lg">
                     <Image
                       src={a.img}
@@ -175,7 +192,7 @@ export default async function HomePage() {
             </div>
             <div className="space-y-4">
               {blogPosts.map((a) => (
-                <Link key={a.title} href="/blog" className="group flex gap-4">
+                <Link key={a.slug || a.title} href={a.slug ? `/news/${a.slug}` : "/blog"} className="group flex gap-4">
                   <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-lg">
                     <Image
                       src={a.img}
@@ -202,8 +219,8 @@ export default async function HomePage() {
       </section>
 
       {/* 7 — NEWSLETTER */}
-      <section aria-labelledby="newsletter-heading" className="container-site py-8">
-        <div className="card-surface relative overflow-hidden min-h-[380px]">
+      <section aria-labelledby="newsletter-heading" className="container-site py-6">
+        <div className="card-surface relative overflow-hidden min-h-[340px]">
           <Image
             src="/img/hero-dark.jpg"
             alt="GTA 6 Vice City Skyline"
@@ -212,7 +229,7 @@ export default async function HomePage() {
             className="object-cover object-right opacity-75 brightness-110 pointer-events-none"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-transparent pointer-events-none" />
-          <div className="relative px-6 py-12 sm:px-10">
+          <div className="relative px-6 py-9 sm:px-10">
             <p className="section-eyebrow text-accent">Newsletter</p>
             <h2 id="newsletter-heading" className="mt-3 max-w-md font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
               Never Miss <br /> an <span className="text-accent text-glow-amber">Update</span>
@@ -221,7 +238,7 @@ export default async function HomePage() {
               Subscribe to our newsletter and get the latest GTA 6 news, articles, trailers and exclusive updates straight to your inbox.
             </p>
             <NewsletterForm />
-            <div className="mt-8 grid max-w-lg grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="mt-6 grid max-w-lg grid-cols-1 gap-4 sm:grid-cols-3">
               {[
                 { title: "Latest News", desc: "Get all official updates and announcements." },
                 { title: "Exclusive Content", desc: "Early access to articles, screenshots and more." },

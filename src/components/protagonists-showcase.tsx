@@ -27,7 +27,7 @@ export function ProtagonistsShowcase() {
   };
 
   return (
-    <section aria-labelledby="protagonists-heading" className="container-site pt-16">
+    <section aria-labelledby="protagonists-heading" className="container-site pt-6">
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>

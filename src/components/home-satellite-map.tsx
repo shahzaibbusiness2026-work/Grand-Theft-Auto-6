@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Plus,
   Minus,
@@ -82,11 +83,13 @@ export function HomeSatelliteMap() {
           style={{ transform: `scale(${zoom})` }}
         >
           {/* Ultra-HD Satellite Map */}
-          <img
+          <Image
             src="/img/satellite-map-hd.jpg"
             alt="Leonida & Vice City High Definition Satellite Map"
+            fill
+            sizes="100vw"
             className={cn(
-              "h-full w-full object-cover select-none pointer-events-none transition-all duration-300",
+              "object-cover select-none pointer-events-none transition-all duration-300",
               !satelliteMode && "invert hue-rotate-180 brightness-90 saturate-150"
             )}
           />
