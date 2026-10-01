@@ -63,36 +63,36 @@ export function MoneyMakerClient() {
       case "High":
         return "text-rose-400 bg-rose-500/10 border-rose-500/30";
       default:
-        return "text-slate-400 bg-slate-800 border-slate-700";
+        return "text-muted-foreground bg-muted border-border";
     }
   };
 
   return (
     <div className="space-y-8">
       {/* Questionnaire Interactive Finder */}
-      <div className="card-carbon p-6 md:p-8 border-primary/30 bg-gradient-to-br from-slate-900/95 via-slate-950 to-primary/5 space-y-6">
+      <div className="card-carbon p-6 md:p-8 border-primary/30 bg-gradient-to-br from-card via-card to-primary/5 dark:from-slate-900/95 dark:via-slate-950 space-y-6">
         <div className="flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-primary" />
-          <h2 className="font-display text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
+          <h2 className="font-display text-lg sm:text-xl font-bold text-foreground uppercase tracking-wide">
             Intelligent Method Recommender
           </h2>
         </div>
-        <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+        <p className="text-xs text-muted-foreground max-w-2xl leading-relaxed">
           Select your current bankroll, preferred squad size, and risk appetite. The algorithm will filter and recommend the optimal grind route for maximum hourly return.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
           {/* Question 1: Playstyle */}
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+            <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
               <User className="h-3.5 w-3.5 text-accent" /> Squad Preference
             </label>
-            <div className="grid grid-cols-3 gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+            <div className="grid grid-cols-3 gap-1.5 bg-card p-1 rounded-xl border border-border text-xs">
               <button
                 onClick={() => setPlaystyle("any")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  playstyle === "any" ? "bg-primary text-white" : "text-slate-400 hover:text-white"
+                  playstyle === "any" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Any
@@ -101,7 +101,7 @@ export function MoneyMakerClient() {
                 onClick={() => setPlaystyle("solo")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  playstyle === "solo" ? "bg-primary text-white" : "text-slate-400 hover:text-white"
+                  playstyle === "solo" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Solo
@@ -110,7 +110,7 @@ export function MoneyMakerClient() {
                 onClick={() => setPlaystyle("coop")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  playstyle === "coop" ? "bg-primary text-white" : "text-slate-400 hover:text-white"
+                  playstyle === "coop" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Co-Op
@@ -120,15 +120,15 @@ export function MoneyMakerClient() {
 
           {/* Question 2: Starting Capital */}
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+            <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
               <DollarSign className="h-3.5 w-3.5 text-amber-400" /> Starting Bankroll
             </label>
-            <div className="grid grid-cols-3 gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+            <div className="grid grid-cols-3 gap-1.5 bg-card p-1 rounded-xl border border-border text-xs">
               <button
                 onClick={() => setCapital("any")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  capital === "any" ? "bg-primary text-white" : "text-slate-400 hover:text-white"
+                  capital === "any" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Any
@@ -137,7 +137,7 @@ export function MoneyMakerClient() {
                 onClick={() => setCapital("broke")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  capital === "broke" ? "bg-primary text-white" : "text-slate-400 hover:text-white"
+                  capital === "broke" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 &lt;$50k
@@ -146,7 +146,7 @@ export function MoneyMakerClient() {
                 onClick={() => setCapital("mid")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  capital === "mid" ? "bg-primary text-white" : "text-slate-400 hover:text-white"
+                  capital === "mid" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 &lt;$1M
@@ -156,15 +156,15 @@ export function MoneyMakerClient() {
 
           {/* Question 3: Risk Tolerance */}
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+            <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
               <ShieldAlert className="h-3.5 w-3.5 text-rose-400" /> Risk & Police Heat
             </label>
-            <div className="grid grid-cols-4 gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+            <div className="grid grid-cols-4 gap-1 bg-card p-1 rounded-xl border border-border text-xs">
               <button
                 onClick={() => setRisk("any")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  risk === "any" ? "bg-primary text-white" : "text-slate-400 hover:text-white"
+                  risk === "any" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Any
@@ -173,7 +173,7 @@ export function MoneyMakerClient() {
                 onClick={() => setRisk("Low")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  risk === "Low" ? "bg-emerald-500/20 text-emerald-300" : "text-slate-400 hover:text-white"
+                  risk === "Low" ? "bg-emerald-500/20 text-emerald-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Low
@@ -182,7 +182,7 @@ export function MoneyMakerClient() {
                 onClick={() => setRisk("Medium")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  risk === "Medium" ? "bg-amber-500/20 text-amber-300" : "text-slate-400 hover:text-white"
+                  risk === "Medium" ? "bg-amber-500/20 text-amber-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Med
@@ -191,7 +191,7 @@ export function MoneyMakerClient() {
                 onClick={() => setRisk("High")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  risk === "High" ? "bg-rose-500/20 text-rose-300" : "text-slate-400 hover:text-white"
+                  risk === "High" ? "bg-rose-500/20 text-rose-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 High
@@ -205,15 +205,15 @@ export function MoneyMakerClient() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: List of Methods */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-400">
+          <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-muted-foreground">
             <span>Methods Matrix ({filteredMethods.length})</span>
             <span className="text-primary font-mono">Ranked by Hourly Yield</span>
           </div>
 
           {filteredMethods.length === 0 ? (
             <div className="card-carbon p-8 text-center space-y-2">
-              <HelpCircle className="h-8 w-8 text-slate-500 mx-auto" />
-              <p className="text-xs text-slate-400">No methods match these strict criteria.</p>
+              <HelpCircle className="h-8 w-8 text-muted-foreground mx-auto" />
+              <p className="text-xs text-muted-foreground">No methods match these strict criteria.</p>
               <button
                 onClick={() => {
                   setPlaystyle("any");
@@ -236,11 +236,11 @@ export function MoneyMakerClient() {
                     "w-full text-left p-4 rounded-xl border transition-all duration-200 block",
                     isSelected
                       ? "border-primary bg-primary/15 shadow-[0_0_15px_rgba(244,63,94,0.25)]"
-                      : "border-slate-800 bg-slate-900/70 hover:border-slate-700 hover:bg-slate-900"
+                      : "border-border bg-card hover:border-border hover:bg-card"
                   )}
                 >
                   <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border">
                       {m.category}
                     </span>
                     <span
@@ -252,13 +252,13 @@ export function MoneyMakerClient() {
                     </span>
                   </div>
 
-                  <h3 className="font-display text-sm font-bold text-white mb-1 line-clamp-1">
+                  <h3 className="font-display text-sm font-bold text-foreground mb-1 line-clamp-1">
                     {m.title}
                   </h3>
 
                   <div className="flex items-center justify-between text-xs font-mono pt-1">
                     <span className="text-emerald-400 font-bold">{m.moneyPerHourDisplay}</span>
-                    <span className="text-slate-400">{m.timeToPayout}</span>
+                    <span className="text-muted-foreground">{m.timeToPayout}</span>
                   </div>
                 </button>
               );
@@ -285,7 +285,7 @@ export function MoneyMakerClient() {
                 <ConfidenceBadge confidence={activeMethod.confidence} source={activeMethod.source} />
               </div>
 
-              <h1 className="font-display text-2xl sm:text-3xl font-black text-white leading-tight">
+              <h1 className="font-display text-2xl sm:text-3xl font-black text-foreground leading-tight">
                 {activeMethod.title}
               </h1>
 
@@ -304,32 +304,32 @@ export function MoneyMakerClient() {
 
             {/* Quick Metrics */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-center">
-              <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+              <div className="p-3 rounded-xl bg-background border border-border">
+                <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
                   Min Capital
                 </span>
                 <span className="text-xs font-bold text-amber-400 truncate block">
                   {activeMethod.minInvestmentDisplay}
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+              <div className="p-3 rounded-xl bg-background border border-border">
+                <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
                   Time Payout
                 </span>
-                <span className="text-xs font-bold text-slate-200 truncate block">
+                <span className="text-xs font-bold text-foreground truncate block">
                   {activeMethod.timeToPayout}
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+              <div className="p-3 rounded-xl bg-background border border-border">
+                <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
                   Difficulty
                 </span>
-                <span className="text-xs font-bold text-white truncate block">
+                <span className="text-xs font-bold text-foreground truncate block">
                   {activeMethod.difficulty}
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+              <div className="p-3 rounded-xl bg-background border border-border">
+                <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
                   Player Mode
                 </span>
                 <span className="text-xs font-bold text-accent truncate block">
@@ -340,19 +340,19 @@ export function MoneyMakerClient() {
 
             {/* Strategy Steps */}
             <div className="space-y-3">
-              <h3 className="font-display text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <h3 className="font-display text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
                 <TrendingUp className="h-4 w-4 text-primary" /> Step-by-Step Execution Plan
               </h3>
               <div className="space-y-2.5">
                 {activeMethod.strategySteps.map((step, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-start gap-3"
+                    className="p-3.5 rounded-xl bg-background/80 border border-border/80 flex items-start gap-3"
                   >
                     <span className="flex-shrink-0 h-5 w-5 rounded-full bg-primary/20 text-primary flex items-center justify-center font-mono font-bold text-xs">
                       {idx + 1}
                     </span>
-                    <p className="text-xs text-slate-200 leading-relaxed pt-0.5">{step}</p>
+                    <p className="text-xs text-foreground leading-relaxed pt-0.5">{step}</p>
                   </div>
                 ))}
               </div>
@@ -360,10 +360,10 @@ export function MoneyMakerClient() {
 
             {/* Requirements Checklist */}
             <div className="space-y-3">
-              <h3 className="font-display text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <h3 className="font-display text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-accent" /> Prerequisites & Unlocks
               </h3>
-              <ul className="space-y-1.5 text-xs text-slate-300 font-mono">
+              <ul className="space-y-1.5 text-xs text-muted-foreground font-mono">
                 {activeMethod.requirements.map((req) => (
                   <li key={req} className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-accent" /> {req}
@@ -373,12 +373,12 @@ export function MoneyMakerClient() {
             </div>
 
             {/* Link to Money Calculator */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="p-4 rounded-xl bg-background border border-border flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
-                <span className="text-xs font-bold text-white uppercase tracking-wide block">
+                <span className="text-xs font-bold text-foreground uppercase tracking-wide block">
                   Calculate Custom Target Timeline
                 </span>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-muted-foreground">
                   Input your vehicle or property goal and see exact days needed using this method.
                 </p>
               </div>

@@ -205,15 +205,15 @@ export default function ToolsPage() {
     <SiteShell>
       <div className="container-site py-8">
         {/* Header Hero */}
-        <div className="card-carbon p-8 md:p-12 mb-10 border-primary/30 relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-primary/10">
+        <div className="card-carbon p-8 md:p-12 mb-10 border-primary/30 relative overflow-hidden bg-gradient-to-br from-card via-card to-primary/10 dark:from-slate-900 dark:via-slate-950">
           <div className="relative z-10 max-w-2xl space-y-4">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-primary">
               <Sparkles className="h-3 w-3" /> Complete Utility Suite
             </div>
-            <h1 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+            <h1 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
               GTA 6 ATLAS <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">TOOLBOX</span>
             </h1>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               Explore all 15 fully interactive utilities engineered for Grand Theft Auto VI.
               From satellite map navigation and comparison duels to financial simulators, loadout builders, and grounded AI.
             </p>
@@ -226,11 +226,11 @@ export default function ToolsPage() {
             const catTools = ALL_TOOLS.filter((t) => t.category === cat);
             return (
               <section key={cat} className="space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                  <h2 className="font-display text-lg font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <div className="flex items-center justify-between border-b border-border pb-2">
+                  <h2 className="font-display text-lg font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-primary" /> {cat}
                   </h2>
-                  <span className="text-xs font-mono text-slate-400">
+                  <span className="text-xs font-mono text-muted-foreground">
                     {catTools.length} Utilities
                   </span>
                 </div>
@@ -242,28 +242,28 @@ export default function ToolsPage() {
                       <Link
                         key={t.id}
                         href={t.href}
-                        className="card-carbon p-6 flex flex-col justify-between border border-slate-800 hover:border-primary/60 transition-all duration-200 group bg-slate-900/70 hover:bg-slate-900 hover:shadow-[0_0_20px_rgba(244,63,94,0.15)]"
+                        className="card-carbon p-6 flex flex-col justify-between border border-border hover:border-primary/60 transition-all duration-200 group bg-card hover:bg-card hover:shadow-[0_0_20px_rgba(244,63,94,0.15)]"
                       >
                         <div className="space-y-3">
                           <div className="flex items-center justify-between">
-                            <span className="p-2.5 rounded-xl bg-slate-800 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span className="p-2.5 rounded-xl bg-muted text-primary group-hover:bg-primary group-hover:text-foreground transition-colors">
                               <IconComponent className="h-5 w-5" />
                             </span>
-                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-950 text-slate-400 border border-slate-800 font-mono">
+                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-background text-muted-foreground border border-border font-mono">
                               {t.badge}
                             </span>
                           </div>
 
-                          <h3 className="font-display text-lg font-bold text-white group-hover:text-primary transition-colors">
+                          <h3 className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors">
                             {t.name}
                           </h3>
 
-                          <p className="text-xs text-slate-300 leading-relaxed">
+                          <p className="text-xs text-muted-foreground leading-relaxed">
                             {t.desc}
                           </p>
                         </div>
 
-                        <div className="pt-4 mt-4 border-t border-slate-800/60 flex items-center justify-between text-xs font-semibold text-accent group-hover:text-white transition-colors">
+                        <div className="pt-4 mt-4 border-t border-border/60 flex items-center justify-between text-xs font-semibold text-accent group-hover:text-foreground transition-colors">
                           <span>Launch Tool</span>
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </div>
@@ -277,16 +277,16 @@ export default function ToolsPage() {
         </div>
 
         {/* Suggest / Contact Bar */}
-        <div className="card-carbon p-6 md:p-8 mt-16 border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 bg-slate-900/60">
+        <div className="card-carbon p-6 md:p-8 mt-16 border-border flex flex-col sm:flex-row items-center justify-between gap-6 bg-card/60">
           <div className="flex items-center gap-4">
             <span className="h-12 w-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center flex-shrink-0">
               <Wrench className="h-6 w-6" />
             </span>
             <div>
-              <h3 className="font-display text-base font-bold text-white uppercase tracking-wider">
+              <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wider">
                 Need a Custom Leonida Tool?
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-muted-foreground mt-0.5">
                 Our suite is continuously updated as new official Rockstar disclosures and mechanics drop.
               </p>
             </div>

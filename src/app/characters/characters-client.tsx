@@ -26,6 +26,9 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
 
   const characterList = initialCharacters && initialCharacters.length > 0 ? initialCharacters : characters;
 
+  const luciaChar = characterList.find((c) => c.id === 'lucia');
+  const jasonChar = characterList.find((c) => c.id === 'jason');
+
   const filtered = characterList.filter((c) => {
     // Role filter
     let roleMatch = true;
@@ -54,7 +57,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
       {/* 1. HERO BANNER — Clean Split Layout (No Text Overlap, Natural Portrait Proportions) */}
 
       <section className="container-site pt-6">
-        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-[#0B1020] via-[#141C2E] to-[#0B1020] p-6 sm:p-10 shadow-2xl">
+        <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-card via-card to-primary/5 dark:from-[#0B1020] dark:via-[#141C2E] dark:to-[#0B1020] p-6 sm:p-10 shadow-2xl">
           {/* Ambient Lighting */}
           <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-pink-500/15 blur-3xl" />
           <div className="pointer-events-none absolute right-0 top-1/2 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
@@ -67,14 +70,14 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 CONFIRMED ROSTER & LORE
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
                 Meet the People of{" "}
                 <span className="bg-gradient-to-r from-pink-400 via-purple-300 to-cyan-300 bg-clip-text text-transparent">
                   Leonida
                 </span>
               </h1>
 
-              <p className="max-w-xl text-sm sm:text-base text-slate-300 leading-relaxed">
+              <p className="max-w-xl text-sm sm:text-base text-muted-foreground leading-relaxed">
                 Explore verified intelligence dossiers, voice casting, criminal records, and syndicate affiliations across Vice City and the State of Leonida.
               </p>
 
@@ -92,16 +95,13 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               {/* Lucia Spotlight */}
               <button
                 type="button"
-                onClick={() => {
-                  const lucia = characterList.find((c) => c.id === 'lucia');
-                  if (lucia) setSelectedCharacter(lucia);
-                }}
+                onClick={() => setSelectedCharacter(luciaChar || null)}
                 className="group relative w-36 sm:w-44 aspect-[3/4] rounded-2xl overflow-hidden border border-pink-500/40 bg-black/60 shadow-xl hover:shadow-[0_0_25px_rgba(236,72,153,0.35)] transition-all hover:scale-105 text-left"
                 title="View Lucia Caminos Profile"
               >
                 <Image
-                  src="/img/char-lucia.jpg"
-                  alt="Lucia Caminos"
+                  src={luciaChar?.img || "/img/char-lucia.jpg"}
+                  alt={luciaChar?.name || "Lucia Caminos"}
                   fill
                   priority
                   sizes="200px"
@@ -110,23 +110,20 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 inset-x-2 text-center">
                   <span className="text-[10px] font-mono font-black uppercase tracking-wider text-pink-400 block">Lead Protagonist</span>
-                  <strong className="text-xs sm:text-sm font-black text-white block truncate drop-shadow">Lucia Caminos</strong>
+                  <strong className="text-xs sm:text-sm font-black text-foreground block truncate drop-shadow">{luciaChar?.name || "Lucia Caminos"}</strong>
                 </div>
               </button>
 
               {/* Jason Spotlight */}
               <button
                 type="button"
-                onClick={() => {
-                  const jason = characterList.find((c) => c.id === 'jason');
-                  if (jason) setSelectedCharacter(jason);
-                }}
+                onClick={() => setSelectedCharacter(jasonChar || null)}
                 className="group relative w-36 sm:w-44 aspect-[3/4] rounded-2xl overflow-hidden border border-cyan-500/40 bg-black/60 shadow-xl hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] transition-all hover:scale-105 text-left"
                 title="View Jason Duval Profile"
               >
                 <Image
-                  src="/img/char-jason.jpg"
-                  alt="Jason Duval"
+                  src={jasonChar?.img || "/img/char-jason.jpg"}
+                  alt={jasonChar?.name || "Jason Duval"}
                   fill
                   priority
                   sizes="200px"
@@ -135,7 +132,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 inset-x-2 text-center">
                   <span className="text-[10px] font-mono font-black uppercase tracking-wider text-cyan-400 block">Co-Protagonist</span>
-                  <strong className="text-xs sm:text-sm font-black text-white block truncate drop-shadow">Jason Duval</strong>
+                  <strong className="text-xs sm:text-sm font-black text-foreground block truncate drop-shadow">{jasonChar?.name || "Jason Duval"}</strong>
                 </div>
               </button>
             </div>
@@ -151,8 +148,8 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               className={cn(
                 "shrink-0 rounded-full border px-4 py-1.5 text-[13px] font-semibold transition-all",
                 pill === p
-                  ? "border-transparent bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold shadow-md shadow-pink-500/25"
-                  : "border-white/10 bg-card text-muted-foreground hover:text-foreground hover:border-white/20"
+                  ? "border-transparent bg-gradient-to-r from-pink-500 to-purple-600 text-foreground font-bold shadow-md shadow-pink-500/25"
+                  : "border-border bg-card text-muted-foreground hover:text-foreground hover:border-border"
               )}
             >
               {p}
@@ -174,7 +171,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               key={c.id} 
               onClick={() => setSelectedCharacter(c)}
               className={cn(
-                "group relative card-surface overflow-hidden rounded-2xl border border-white/10 hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_0_30px_rgba(236,72,153,0.2)] cursor-pointer",
+                "group relative card-surface overflow-hidden rounded-2xl border border-border hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_0_30px_rgba(236,72,153,0.2)] cursor-pointer",
                 i === 0 && "border-pink-500/60"
               )}
             >
@@ -192,17 +189,17 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 
                 {/* Top Badge */}
                 <div className="absolute left-3 top-3 flex items-center gap-1.5">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pink-500 text-white shadow-md shadow-pink-500/40">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pink-500 text-foreground shadow-md shadow-pink-500/40">
                     <Star className="h-3 w-3 fill-current" />
                   </span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 border border-white/20 text-white backdrop-blur-md">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 border border-border text-foreground backdrop-blur-md">
                     {c.role}
                   </span>
                 </div>
 
                 {/* Hover CTA prompt */}
                 <div className="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="inline-flex items-center justify-center w-full gap-1.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-pink-500/30">
+                  <span className="inline-flex items-center justify-center w-full gap-1.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 px-3 py-2 text-xs font-bold text-foreground shadow-lg shadow-pink-500/30">
                     <span>View Dossier</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>
@@ -212,7 +209,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               {/* Card Meta Content */}
               <div className="p-4 bg-[#0B1020]/90">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-display text-base font-bold text-white group-hover:text-pink-300 transition-colors">
+                  <h3 className="font-display text-base font-bold text-foreground group-hover:text-pink-300 transition-colors">
                     {c.name}
                   </h3>
                   {c.alias && (
@@ -222,12 +219,12 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                   )}
                 </div>
 
-                <p className="mt-2 text-xs leading-relaxed text-slate-300 line-clamp-2">
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">
                   {c.desc}
                 </p>
 
                 {c.specialty && (
-                  <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center gap-2 text-[11px] text-slate-400">
+                  <div className="mt-3 pt-2.5 border-t border-border flex items-center gap-2 text-[11px] text-muted-foreground">
                     <Shield className="w-3.5 h-3.5 text-pink-400 shrink-0" />
                     <span className="truncate">{c.specialty}</span>
                   </div>
@@ -242,7 +239,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
       <section id="all-characters" className="container-site pb-8">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="font-display text-xl font-black uppercase tracking-wide text-white">
+            <h2 className="font-display text-xl font-black uppercase tracking-wide text-foreground">
               All Characters
             </h2>
             <p className="mt-1 text-xs font-mono text-pink-400">
@@ -251,7 +248,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
           </div>
           <div className="flex items-center gap-3">
             <span className="text-[13px] text-muted-foreground">Filter:</span>
-            <span className="text-xs font-mono font-bold text-slate-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
+            <span className="text-xs font-mono font-bold text-muted-foreground bg-muted/40 border border-border px-3 py-1.5 rounded-lg">
               {pill}
             </span>
           </div>
@@ -262,7 +259,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
             <article 
               key={c.id} 
               onClick={() => setSelectedCharacter(c)}
-              className="group card-surface overflow-hidden rounded-xl border border-white/10 hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer shadow-md hover:shadow-[0_0_20px_rgba(236,72,153,0.2)]"
+              className="group card-surface overflow-hidden rounded-xl border border-border hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer shadow-md hover:shadow-[0_0_20px_rgba(236,72,153,0.2)]"
             >
               {/* Natural 3:4 Aspect Ratio Image */}
               <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/40">
@@ -277,20 +274,20 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                 
                 {/* Role badge tag */}
-                <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-mono font-black uppercase tracking-wider bg-black/70 border border-white/20 text-white backdrop-blur-md">
+                <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-mono font-black uppercase tracking-wider bg-black/70 border border-border text-foreground backdrop-blur-md">
                   {c.role}
                 </span>
 
                 {/* Hover overlay indicator */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-[11px] font-bold text-white bg-pink-600 px-2.5 py-1 rounded-lg shadow-lg">
+                  <span className="text-[11px] font-bold text-foreground bg-pink-600 px-2.5 py-1 rounded-lg shadow-lg">
                     Dossier &rarr;
                   </span>
                 </div>
               </div>
 
               <div className="p-3 bg-[#0B1020]/95">
-                <h3 className="truncate font-display text-[13px] font-bold text-white group-hover:text-pink-300 transition-colors">
+                <h3 className="truncate font-display text-[13px] font-bold text-foreground group-hover:text-pink-300 transition-colors">
                   {c.name}
                 </h3>
                 <p className="mt-0.5 text-[11px] font-mono text-pink-400/90 truncate">
@@ -304,7 +301,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
 
       {/* 4. STORIES BANNER */}
       <section className="container-site pb-10">
-        <div className="card-surface grid gap-6 p-6 lg:grid-cols-2 lg:items-center rounded-3xl border border-white/10">
+        <div className="card-surface grid gap-6 p-6 lg:grid-cols-2 lg:items-center rounded-3xl border border-border">
           <div className="relative h-56 overflow-hidden rounded-2xl">
             <Image
               src="/img/boat.jpg"
@@ -314,19 +311,19 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               className="object-cover"
               loading="lazy"
             />
-            <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-pink-500/40 transition-transform hover:scale-110">
+            <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-foreground shadow-lg shadow-pink-500/40 transition-transform hover:scale-110">
               <Play className="h-5 w-5 fill-current" />
             </span>
           </div>
           <div>
             <p className="section-eyebrow text-pink-400">Character Stories</p>
-            <h2 className="mt-3 font-display text-2xl font-extrabold leading-snug text-white">
+            <h2 className="mt-3 font-display text-2xl font-extrabold leading-snug text-foreground">
               Every Character Has <br /> A Story
             </h2>
-            <p className="mt-3 text-sm text-slate-300 leading-relaxed">
+            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
               Dive deeper into their background, relationships, and impact on the criminal underworld of GTA 6.
             </p>
-            <Button href="/blog" className="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold">
+            <Button href="/blog" className="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-foreground font-bold">
               Explore Character Stories <ArrowRight className="h-4 w-4" />
             </Button>
           </div>

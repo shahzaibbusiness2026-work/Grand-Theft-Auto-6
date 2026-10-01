@@ -14,17 +14,35 @@ import {
   Quote
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { characters, Character } from "@/lib/data";
+import type { Character } from "@/lib/data";
 import { CharacterDetailModal } from "@/components/character-detail-modal";
 
-export function ProtagonistsShowcase() {
+interface ProtagonistsShowcaseProps {
+  /** Live characters from the CMS; falls back to bundled key art copy. */
+  characters?: Character[];
+}
+
+export function ProtagonistsShowcase({ characters: liveCharacters }: ProtagonistsShowcaseProps) {
   const [activeTab, setActiveTab] = useState<"both" | "lucia" | "jason">("both");
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
-  const openDossier = (id: string) => {
-    const matched = characters.find((c) => c.id === id);
-    if (matched) setSelectedCharacter(matched);
+  const lucia = liveCharacters?.find((c) => c.id === "lucia");
+  const jason = liveCharacters?.find((c) => c.id === "jason");
+
+  const openDossier = (character: Character | null | undefined) => {
+    if (character) setSelectedCharacter(character);
   };
+
+  const coloredName = (name: string | undefined, fallback: [string, string]) => {
+    const parts = (name || `${fallback[0]} ${fallback[1]}`).trim().split(/\s+/);
+    if (parts.length < 2) return { first: parts[0] || fallback[0], rest: fallback[1] };
+    return { first: parts[0], rest: parts.slice(1).join(" ") };
+  };
+  const actorName = (voiceActor: string | undefined, fallback: string) =>
+    (voiceActor || fallback).replace(/\s*\(.*\)\s*$/, "");
+
+  const luciaName = coloredName(lucia?.name, ["LUCIA", "CAMINOS"]);
+  const jasonName = coloredName(jason?.name, ["JASON", "DUVAL"]);
 
   return (
     <section aria-labelledby="protagonists-heading" className="container-site pt-6">
@@ -97,16 +115,16 @@ export function ProtagonistsShowcase() {
               {/* Left Column: Lucia Portrait & Artwork Overlays */}
               <div className="relative w-full lg:w-[45%] min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] overflow-hidden bg-slate-900 shrink-0 select-none">
                 <Image
-                  src="/img/char-lucia.jpg"
-                  alt="Lucia Caminos"
+                  src={lucia?.img || "/img/char-lucia.jpg"}
+                  alt={lucia?.name || "Lucia Caminos"}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 480px"
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
 
                 {/* Soft gradient blend into the white right content pane */}
-                <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/40 to-white pointer-events-none" />
+                <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/20 to-white pointer-events-none" />
                 <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
 
                 {/* Top-Left Pill Badge: LEAD PROTAGONIST */}
@@ -145,14 +163,14 @@ export function ProtagonistsShowcase() {
                       CONFIRMED DOSSIER
                     </span>
                     <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
-                      The Mastermind
+                      {lucia?.alias || "The Mastermind"}
                     </span>
                   </div>
 
                   {/* Character Name */}
                   <div>
                     <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 leading-none">
-                      <span className="text-pink-600">LUCIA</span> CAMINOS
+                      <span className="text-pink-600">{luciaName.first}</span> {luciaName.rest}
                     </h3>
                   </div>
 
@@ -160,7 +178,7 @@ export function ProtagonistsShowcase() {
                   <div className="rounded-2xl bg-pink-50/70 border border-pink-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
                     <Quote className="w-5 h-5 text-pink-500 shrink-0 mt-0.5 rotate-180" />
                     <p className="text-xs sm:text-[13px] italic font-medium text-pink-700 leading-relaxed">
-                      &ldquo;The only way we&apos;re gonna get through this is by sticking together, being a team.&rdquo;
+                      &ldquo;{lucia?.quote || "The only way we're gonna get through this is by sticking together, being a team."}&rdquo;
                     </p>
                   </div>
 
@@ -173,7 +191,7 @@ export function ProtagonistsShowcase() {
                         <span>Special Ability:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        Tactical Reflexes (Bullet Time) &amp; Lockpicking
+                        {lucia?.perk || "Tactical Reflexes (Bullet Time) & Lockpicking"}
                       </span>
                     </div>
 
@@ -184,7 +202,7 @@ export function ProtagonistsShowcase() {
                         <span>Specialty:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        High-stakes Armed Robberies &amp; Infiltration
+                        {lucia?.specialty || "High-stakes Armed Robberies & Infiltration"}
                       </span>
                     </div>
 
@@ -195,7 +213,7 @@ export function ProtagonistsShowcase() {
                         <span>Signature Ride:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        Bravado Banshee (Modified)
+                        {lucia?.vehicle || "Bravado Banshee (Modified)"}
                       </span>
                     </div>
 
@@ -206,7 +224,7 @@ export function ProtagonistsShowcase() {
                         <span>Territory:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        Vice City Metro / Leonida Penitentiary
+                        {lucia?.origin || "Vice City Metro / Leonida Penitentiary"}
                       </span>
                     </div>
                   </div>
@@ -216,12 +234,12 @@ export function ProtagonistsShowcase() {
                 <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
                   <div className="text-xs">
                     <span className="text-slate-500">Actor: </span>
-                    <span className="font-bold text-slate-900">Manni L. Perez</span>
+                    <span className="font-bold text-slate-900">{actorName(lucia?.voiceActor, "Manni L. Perez")}</span>
                     <p className="text-[11px] text-slate-500">(Confirmed / Casting)</p>
                   </div>
                   <button
                     type="button"
-                    onClick={() => openDossier("lucia")}
+                    onClick={() => openDossier(lucia)}
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 shadow-md shadow-pink-500/30 transition-all hover:scale-105 active:scale-95"
                   >
                     <span>View Dossier</span>
@@ -245,16 +263,16 @@ export function ProtagonistsShowcase() {
               {/* Left Column: Jason Portrait & Artwork Overlays */}
               <div className="relative w-full lg:w-[45%] min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] overflow-hidden bg-slate-900 shrink-0 select-none">
                 <Image
-                  src="/img/char-jason.jpg"
-                  alt="Jason Duval"
+                  src={jason?.img || "/img/char-jason.jpg"}
+                  alt={jason?.name || "Jason Duval"}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 480px"
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
 
                 {/* Soft gradient blend into the white right content pane */}
-                <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/40 to-white pointer-events-none" />
+                <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/20 to-white pointer-events-none" />
                 <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
 
                 {/* Top-Left Pill Badge: CO-PROTAGONIST */}
@@ -290,14 +308,14 @@ export function ProtagonistsShowcase() {
                       CONFIRMED DOSSIER
                     </span>
                     <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
-                      The Enforcer
+                      {jason?.alias || "The Enforcer"}
                     </span>
                   </div>
 
                   {/* Character Name */}
                   <div>
                     <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 leading-none">
-                      <span className="text-blue-600">JASON</span> DUVAL
+                      <span className="text-blue-600">{jasonName.first}</span> {jasonName.rest}
                     </h3>
                   </div>
 
@@ -305,7 +323,7 @@ export function ProtagonistsShowcase() {
                   <div className="rounded-2xl bg-sky-50/70 border border-sky-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
                     <Quote className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 rotate-180" />
                     <p className="text-xs sm:text-[13px] italic font-medium text-sky-800 leading-relaxed">
-                      &ldquo;Trust. That&apos;s what it comes down to. You and me against the whole damn state.&rdquo;
+                      &ldquo;{jason?.quote || "Trust. That's what it comes down to. You and me against the whole damn state."}&rdquo;
                     </p>
                   </div>
 
@@ -318,7 +336,7 @@ export function ProtagonistsShowcase() {
                         <span>Special Ability:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        Smuggler Eagle Eye (POI &amp; Cache Detection)
+                        {jason?.perk || "Smuggler Eagle Eye (POI & Cache Detection)"}
                       </span>
                     </div>
 
@@ -329,7 +347,7 @@ export function ProtagonistsShowcase() {
                         <span>Specialty:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        Off-Road Getaway &amp; Heavy Weapons Logistics
+                        {jason?.specialty || "Off-Road Getaway & Heavy Weapons Logistics"}
                       </span>
                     </div>
 
@@ -340,7 +358,7 @@ export function ProtagonistsShowcase() {
                         <span>Signature Ride:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        Declasse Tulip 1972 Muscle Car
+                        {jason?.vehicle || "Declasse Tulip 1972 Muscle Car"}
                       </span>
                     </div>
 
@@ -351,7 +369,7 @@ export function ProtagonistsShowcase() {
                         <span>Territory:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        Port Gellhorn &amp; Keys Smuggling Routes
+                        {jason?.origin || "Port Gellhorn & Keys Smuggling Routes"}
                       </span>
                     </div>
                   </div>
@@ -361,12 +379,12 @@ export function ProtagonistsShowcase() {
                 <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
                   <div className="text-xs">
                     <span className="text-slate-500">Actor: </span>
-                    <span className="font-bold text-slate-900">Gregory Connors</span>
+                    <span className="font-bold text-slate-900">{actorName(jason?.voiceActor, "Gregory Connors")}</span>
                     <p className="text-[11px] text-slate-500">(Confirmed / Speculated)</p>
                   </div>
                   <button
                     type="button"
-                    onClick={() => openDossier("jason")}
+                    onClick={() => openDossier(jason)}
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 shadow-md shadow-blue-500/30 transition-all hover:scale-105 active:scale-95"
                   >
                     <span>View Dossier</span>

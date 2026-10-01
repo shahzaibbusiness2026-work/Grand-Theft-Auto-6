@@ -121,9 +121,9 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
   return (
     <div className="space-y-8">
       {/* Mode Switcher */}
-      <div className="card-surface p-4 rounded-2xl border border-white/10 flex flex-wrap items-center justify-between gap-4">
+      <div className="card-surface p-4 rounded-2xl border border-border flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mr-2 flex items-center gap-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mr-2 flex items-center gap-1">
             <Sparkles className="h-3.5 w-3.5 text-amber-400" /> Presets:
           </span>
           {BUSINESS_PRESETS.map((p) => (
@@ -133,8 +133,8 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
               className={cn(
                 "rounded-xl px-3 py-1.5 text-xs font-semibold transition-all border",
                 bizA.name === p.name
-                  ? "border-accent bg-accent/20 text-white font-bold shadow-sm"
-                  : "border-white/10 bg-black/40 text-slate-300 hover:border-white/20 hover:text-white"
+                  ? "border-accent bg-accent/20 text-foreground font-bold shadow-sm"
+                  : "border-border bg-black/40 text-muted-foreground hover:border-border hover:text-foreground"
               )}
             >
               {p.name.split(" ")[0]} {p.name.split(" ")[1]}
@@ -147,8 +147,8 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
           className={cn(
             "rounded-xl px-3.5 py-1.5 text-xs font-bold transition-all border",
             compareMode
-              ? "border-[#00F0FF] bg-[#00F0FF]/20 text-[#00F0FF]"
-              : "border-white/15 bg-white/5 text-slate-300 hover:text-white"
+              ? "border-cyan-500 dark:border-[#00F0FF] bg-[#00F0FF]/20 text-cyan-600 dark:text-[#00F0FF]"
+              : "border-border bg-muted/40 text-muted-foreground hover:text-foreground"
           )}
         >
           <Layers className="h-3.5 w-3.5 inline mr-1.5" />
@@ -161,31 +161,31 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
         {/* BUSINESS A */}
         <div className={cn("space-y-6", !compareMode && "lg:col-span-12 grid lg:grid-cols-12 gap-8 items-start space-y-0")}>
           {/* Inputs */}
-          <div className={cn("card-surface p-6 rounded-3xl border border-white/10 shadow-xl space-y-4", !compareMode && "lg:col-span-5")}>
-            <div className="flex items-center justify-between pb-3 border-b border-white/10">
-              <h3 className="font-display text-base font-black uppercase text-white flex items-center gap-2">
+          <div className={cn("card-surface p-6 rounded-3xl border border-border shadow-xl space-y-4", !compareMode && "lg:col-span-5")}>
+            <div className="flex items-center justify-between pb-3 border-b border-border">
+              <h3 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2">
                 <Building2 className="h-4 w-4 text-accent" /> {bizA.name}
               </h3>
             </div>
 
             {/* Purchase Price */}
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1 flex justify-between">
+              <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                 <span>Property Purchase Price ($)</span>
-                <span className="font-mono text-[#00F0FF] font-bold">${bizA.purchasePrice.toLocaleString()}</span>
+                <span className="font-mono text-cyan-600 dark:text-[#00F0FF] font-bold">${bizA.purchasePrice.toLocaleString()}</span>
               </label>
               <input
                 type="number"
                 step={50000}
                 value={bizA.purchasePrice}
                 onChange={(e) => setBizA({ ...bizA, purchasePrice: Number(e.target.value) })}
-                className="w-full rounded-xl border border-white/10 bg-black/50 p-2.5 text-xs font-mono text-white focus:border-accent focus:outline-none"
+                className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
               />
             </div>
 
             {/* Upgrade Cost */}
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1 flex justify-between">
+              <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                 <span>Renovation & Security Upgrades ($)</span>
                 <span className="font-mono text-amber-400 font-bold">${bizA.upgradeCost.toLocaleString()}</span>
               </label>
@@ -194,13 +194,13 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 step={25000}
                 value={bizA.upgradeCost}
                 onChange={(e) => setBizA({ ...bizA, upgradeCost: Number(e.target.value) })}
-                className="w-full rounded-xl border border-white/10 bg-black/50 p-2.5 text-xs font-mono text-white focus:border-accent focus:outline-none"
+                className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
               />
             </div>
 
             {/* Gross Revenue */}
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1 flex justify-between">
+              <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                 <span>Gross Revenue / Hour ($)</span>
                 <span className="font-mono text-emerald-400 font-bold">${bizA.grossRevenuePerHour.toLocaleString()}</span>
               </label>
@@ -209,13 +209,13 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 step={1000}
                 value={bizA.grossRevenuePerHour}
                 onChange={(e) => setBizA({ ...bizA, grossRevenuePerHour: Number(e.target.value) })}
-                className="w-full rounded-xl border border-white/10 bg-black/50 p-2.5 text-xs font-mono text-white focus:border-accent focus:outline-none"
+                className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
               />
             </div>
 
             {/* Operating Cost */}
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1 flex justify-between">
+              <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                 <span>Staff Wages & Supplies / Hour ($)</span>
                 <span className="font-mono text-rose-400 font-bold">${bizA.operatingCostPerHour.toLocaleString()}</span>
               </label>
@@ -224,13 +224,13 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 step={500}
                 value={bizA.operatingCostPerHour}
                 onChange={(e) => setBizA({ ...bizA, operatingCostPerHour: Number(e.target.value) })}
-                className="w-full rounded-xl border border-white/10 bg-black/50 p-2.5 text-xs font-mono text-white focus:border-accent focus:outline-none"
+                className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
               />
             </div>
 
             {/* Hours per day */}
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1 flex justify-between">
+              <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                 <span>Session Playtime: {bizA.hoursPerDay} hrs/day</span>
               </label>
               <input
@@ -246,25 +246,25 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
           </div>
 
           {/* Results Display */}
-          <div className={cn("card-surface p-6 rounded-3xl border border-white/10 shadow-2xl space-y-6 bg-gradient-to-br from-[#070b15] to-[#040810]", !compareMode && "lg:col-span-7")}>
+          <div className={cn("card-surface p-6 rounded-3xl border border-border shadow-2xl space-y-6 bg-gradient-to-br from-card to-primary/5 dark:from-[#070b15] dark:to-[#040810]", !compareMode && "lg:col-span-7")}>
             <div>
-              <span className="text-[10px] uppercase font-bold text-slate-400">Total Upfront Capital Required</span>
-              <div className="font-display text-3xl font-black text-white mt-1">
+              <span className="text-[10px] uppercase font-bold text-muted-foreground">Total Upfront Capital Required</span>
+              <div className="font-display text-3xl font-black text-foreground mt-1">
                 ${metricsA.totalInvestment.toLocaleString()}
               </div>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <div className="rounded-2xl border border-white/10 bg-black/40 p-3.5 text-center">
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Net Profit / Hr</span>
+              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Net Profit / Hr</span>
                 <span className="font-mono text-lg font-black text-emerald-400">+${metricsA.netProfitPerHour.toLocaleString()}</span>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-black/40 p-3.5 text-center">
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Daily Cash Take</span>
-                <span className="font-mono text-lg font-black text-white">+${metricsA.netProfitPerDay.toLocaleString()}</span>
+              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Daily Cash Take</span>
+                <span className="font-mono text-lg font-black text-foreground">+${metricsA.netProfitPerDay.toLocaleString()}</span>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-black/40 p-3.5 text-center">
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Weekly Payout</span>
+              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Weekly Payout</span>
                 <span className="font-mono text-lg font-black text-purple-300">+${metricsA.netProfitPerWeek.toLocaleString()}</span>
               </div>
             </div>
@@ -273,17 +273,17 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
               <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-center">
                 <Clock className="h-4 w-4 text-amber-400 mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-amber-300">{metricsA.breakEvenHours} hrs</span>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Break-Even ({metricsA.breakEvenDays} days)</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Break-Even ({metricsA.breakEvenDays} days)</span>
               </div>
-              <div className="rounded-2xl border border-[#00F0FF]/30 bg-[#00F0FF]/10 p-3.5 text-center">
-                <TrendingUp className="h-4 w-4 text-[#00F0FF] mx-auto mb-1" />
-                <span className="font-mono text-lg font-black text-[#00F0FF]">{metricsA.annualRoiPct}%</span>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Annual Return Rate</span>
+              <div className="rounded-2xl border border-cyan-500 dark:border-[#00F0FF]/30 bg-[#00F0FF]/10 p-3.5 text-center">
+                <TrendingUp className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF] mx-auto mb-1" />
+                <span className="font-mono text-lg font-black text-cyan-600 dark:text-[#00F0FF]">{metricsA.annualRoiPct}%</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Annual Return Rate</span>
               </div>
             </div>
 
-            <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-              <Button onClick={handleCopy} className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold">
+            <div className="pt-3 border-t border-border flex items-center justify-between">
+              <Button onClick={handleCopy} className="bg-muted/50 hover:bg-muted/60 text-foreground text-xs font-bold">
                 {copied ? <Check className="h-3.5 w-3.5 mr-1 text-emerald-400" /> : <Copy className="h-3.5 w-3.5 mr-1" />}
                 <span>{copied ? "Copied!" : "Copy Cashflow Breakdown"}</span>
               </Button>
@@ -295,29 +295,29 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
         {compareMode && (
           <div className="space-y-6">
             {/* Inputs B */}
-            <div className="card-surface p-6 rounded-3xl border border-white/10 shadow-xl space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <h3 className="font-display text-base font-black uppercase text-white flex items-center gap-2">
-                  <Building2 className="h-4 w-4 text-[#00F0FF]" /> {bizB.name}
+            <div className="card-surface p-6 rounded-3xl border border-border shadow-xl space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-border">
+                <h3 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2">
+                  <Building2 className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> {bizB.name}
                 </h3>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1 flex justify-between">
+                <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                   <span>Purchase Price ($)</span>
-                  <span className="font-mono text-[#00F0FF] font-bold">${bizB.purchasePrice.toLocaleString()}</span>
+                  <span className="font-mono text-cyan-600 dark:text-[#00F0FF] font-bold">${bizB.purchasePrice.toLocaleString()}</span>
                 </label>
                 <input
                   type="number"
                   step={50000}
                   value={bizB.purchasePrice}
                   onChange={(e) => setBizB({ ...bizB, purchasePrice: Number(e.target.value) })}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 p-2.5 text-xs font-mono text-white focus:border-[#00F0FF] focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1 flex justify-between">
+                <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                   <span>Upgrades ($)</span>
                   <span className="font-mono text-amber-400 font-bold">${bizB.upgradeCost.toLocaleString()}</span>
                 </label>
@@ -326,12 +326,12 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                   step={25000}
                   value={bizB.upgradeCost}
                   onChange={(e) => setBizB({ ...bizB, upgradeCost: Number(e.target.value) })}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 p-2.5 text-xs font-mono text-white focus:border-[#00F0FF] focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1 flex justify-between">
+                <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                   <span>Gross Revenue / Hr ($)</span>
                   <span className="font-mono text-emerald-400 font-bold">${bizB.grossRevenuePerHour.toLocaleString()}</span>
                 </label>
@@ -340,12 +340,12 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                   step={1000}
                   value={bizB.grossRevenuePerHour}
                   onChange={(e) => setBizB({ ...bizB, grossRevenuePerHour: Number(e.target.value) })}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 p-2.5 text-xs font-mono text-white focus:border-[#00F0FF] focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1 flex justify-between">
+                <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                   <span>Operating Cost / Hr ($)</span>
                   <span className="font-mono text-rose-400 font-bold">${bizB.operatingCostPerHour.toLocaleString()}</span>
                 </label>
@@ -354,12 +354,12 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                   step={500}
                   value={bizB.operatingCostPerHour}
                   onChange={(e) => setBizB({ ...bizB, operatingCostPerHour: Number(e.target.value) })}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 p-2.5 text-xs font-mono text-white focus:border-[#00F0FF] focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1 flex justify-between">
+                <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                   <span>Playtime: {bizB.hoursPerDay} hrs/day</span>
                 </label>
                 <input
@@ -375,25 +375,25 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
             </div>
 
             {/* Results Display B */}
-            <div className="card-surface p-6 rounded-3xl border border-white/10 shadow-2xl space-y-6 bg-gradient-to-br from-[#070b15] to-[#040810]">
+            <div className="card-surface p-6 rounded-3xl border border-border shadow-2xl space-y-6 bg-gradient-to-br from-card to-primary/5 dark:from-[#070b15] dark:to-[#040810]">
               <div>
-                <span className="text-[10px] uppercase font-bold text-slate-400">Total Upfront Capital Required</span>
-                <div className="font-display text-3xl font-black text-white mt-1">
+                <span className="text-[10px] uppercase font-bold text-muted-foreground">Total Upfront Capital Required</span>
+                <div className="font-display text-3xl font-black text-foreground mt-1">
                   ${metricsB.totalInvestment.toLocaleString()}
                 </div>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <div className="rounded-2xl border border-white/10 bg-black/40 p-3.5 text-center">
-                  <span className="block text-[10px] uppercase font-bold text-slate-400">Net Profit / Hr</span>
+                <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+                  <span className="block text-[10px] uppercase font-bold text-muted-foreground">Net Profit / Hr</span>
                   <span className="font-mono text-lg font-black text-emerald-400">+${metricsB.netProfitPerHour.toLocaleString()}</span>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-black/40 p-3.5 text-center">
-                  <span className="block text-[10px] uppercase font-bold text-slate-400">Daily Cash Take</span>
-                  <span className="font-mono text-lg font-black text-white">+${metricsB.netProfitPerDay.toLocaleString()}</span>
+                <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+                  <span className="block text-[10px] uppercase font-bold text-muted-foreground">Daily Cash Take</span>
+                  <span className="font-mono text-lg font-black text-foreground">+${metricsB.netProfitPerDay.toLocaleString()}</span>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-black/40 p-3.5 text-center">
-                  <span className="block text-[10px] uppercase font-bold text-slate-400">Weekly Payout</span>
+                <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+                  <span className="block text-[10px] uppercase font-bold text-muted-foreground">Weekly Payout</span>
                   <span className="font-mono text-lg font-black text-purple-300">+${metricsB.netProfitPerWeek.toLocaleString()}</span>
                 </div>
               </div>
@@ -402,12 +402,12 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-center">
                   <Clock className="h-4 w-4 text-amber-400 mx-auto mb-1" />
                   <span className="font-mono text-lg font-black text-amber-300">{metricsB.breakEvenHours} hrs</span>
-                  <span className="block text-[10px] uppercase font-bold text-slate-400">Break-Even ({metricsB.breakEvenDays} days)</span>
+                  <span className="block text-[10px] uppercase font-bold text-muted-foreground">Break-Even ({metricsB.breakEvenDays} days)</span>
                 </div>
-                <div className="rounded-2xl border border-[#00F0FF]/30 bg-[#00F0FF]/10 p-3.5 text-center">
-                  <TrendingUp className="h-4 w-4 text-[#00F0FF] mx-auto mb-1" />
-                  <span className="font-mono text-lg font-black text-[#00F0FF]">{metricsB.annualRoiPct}%</span>
-                  <span className="block text-[10px] uppercase font-bold text-slate-400">Annual Return Rate</span>
+                <div className="rounded-2xl border border-cyan-500 dark:border-[#00F0FF]/30 bg-[#00F0FF]/10 p-3.5 text-center">
+                  <TrendingUp className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF] mx-auto mb-1" />
+                  <span className="font-mono text-lg font-black text-cyan-600 dark:text-[#00F0FF]">{metricsB.annualRoiPct}%</span>
+                  <span className="block text-[10px] uppercase font-bold text-muted-foreground">Annual Return Rate</span>
                 </div>
               </div>
             </div>
@@ -416,11 +416,11 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
       </div>
 
       {/* VERIFIED ASSET NOTE */}
-      <div className="card-surface p-6 rounded-3xl border border-white/10 text-xs text-slate-300 space-y-2">
-        <h4 className="font-display text-sm font-bold text-white flex items-center gap-1.5">
-          <Info className="h-4 w-4 text-[#00F0FF]" /> Verified Economic Grounding
+      <div className="card-surface p-6 rounded-3xl border border-border text-xs text-muted-foreground space-y-2">
+        <h4 className="font-display text-sm font-bold text-foreground flex items-center gap-1.5">
+          <Info className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> Verified Economic Grounding
         </h4>
-        <p className="leading-relaxed text-slate-400">
+        <p className="leading-relaxed text-muted-foreground">
           Nightclub safe capacities, chop shop salvage yields, and warehouse delivery cycles are modeled after confirmed mechanics from GTA 6 trailer footage and verified asset registries. All values reflect net margins after daily recurring syndicate fees.
         </p>
       </div>

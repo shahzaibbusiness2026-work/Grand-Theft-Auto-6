@@ -121,8 +121,8 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
                 key={label}
                 onClick={() => setType(label)}
                 className={cn(
-                  "flex w-full items-center justify-between rounded-lg px-3 py-2 text-[13px] font-semibold text-muted-foreground hover:text-white",
-                  type === label && "border border-accent/50 bg-accent/10 text-white"
+                  "flex w-full items-center justify-between rounded-lg px-3 py-2 text-[13px] font-semibold text-muted-foreground hover:text-foreground",
+                  type === label && "border border-accent/50 bg-accent/10 text-foreground"
                 )}
               >
                 <span className="flex items-center gap-2.5">
@@ -177,7 +177,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
         <div className="space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex gap-4 text-[13px] font-semibold">
-              <button className="border-b-2 border-accent pb-2 text-white">All Weapons <span className="text-muted-foreground">118</span></button>
+              <button className="border-b-2 border-accent pb-2 text-foreground">All Weapons <span className="text-muted-foreground">118</span></button>
               <button className="pb-2 text-muted-foreground">Owned / Unlocked <span>58</span></button>
               <button className="pb-2 text-muted-foreground">Recently Viewed <span>8</span></button>
             </div>
@@ -199,7 +199,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
                   <Badge variant={rarityVariant[w.rarity] ?? "gray"} className="absolute left-2 top-2 uppercase">
                     {w.rarity}
                   </Badge>
-                  <span className="absolute right-2 top-2 flex gap-1.5 text-white">
+                  <span className="absolute right-2 top-2 flex gap-1.5 text-foreground">
                     <Bookmark className="h-3.5 w-3.5" />
                     <Heart className="h-3.5 w-3.5" />
                   </span>
@@ -226,7 +226,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
               <ChevronLeft className="h-4 w-4" />
             </Button>
             {["1", "2", "3", "…", "6"].map((p) => (
-              <button key={p} className={cn("h-8 w-8 rounded-lg text-[13px] font-bold", p === "1" ? "bg-gradient-to-r from-primary to-accent text-white" : "bg-card text-muted-foreground hover:text-white")}>
+              <button key={p} className={cn("h-8 w-8 rounded-lg text-[13px] font-bold", p === "1" ? "bg-gradient-to-r from-primary to-accent text-foreground" : "bg-card text-muted-foreground hover:text-foreground")}>
                 {p}
               </button>
             ))}
@@ -264,7 +264,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
             <ul className="mt-4 space-y-3">
               {topList.map((w) => (
                 <li key={w.rank} className="flex items-center gap-3">
-                  <span className={cn("flex h-6 w-6 items-center justify-center rounded-md font-display text-xs font-extrabold", w.rank === 1 ? "bg-accent text-white" : w.rank === 2 ? "bg-neon-purple text-white" : w.rank === 3 ? "bg-neon-orange text-white" : "bg-muted text-muted-foreground")}>
+                  <span className={cn("flex h-6 w-6 items-center justify-center rounded-md font-display text-xs font-extrabold", w.rank === 1 ? "bg-accent text-foreground" : w.rank === 2 ? "bg-neon-purple text-foreground" : w.rank === 3 ? "bg-neon-orange text-foreground" : "bg-muted text-muted-foreground")}>
                     {w.rank}
                   </span>
                   <div className="flex-1">

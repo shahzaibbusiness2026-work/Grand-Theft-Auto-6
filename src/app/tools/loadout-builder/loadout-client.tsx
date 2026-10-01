@@ -222,22 +222,22 @@ export function LoadoutClient() {
       {/* Top Presets Selector */}
       <div className="card-carbon p-5 border-primary/20 space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
             <Sparkles className="h-4 w-4 text-primary" /> Tactical Archetype Presets
           </span>
-          <span className="text-[10px] text-slate-500 font-mono">1-Click Setup</span>
+          <span className="text-[10px] text-muted-foreground font-mono">1-Click Setup</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {PRESET_LOADOUTS.map((preset) => (
             <button
               key={preset.name}
               onClick={() => applyPreset(preset)}
-              className="text-left p-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-primary/50 transition-all group"
+              className="text-left p-3 rounded-xl bg-card/90 border border-border hover:border-primary/50 transition-all group"
             >
               <span className="text-[10px] font-bold uppercase tracking-wider text-accent block">
                 {preset.role}
               </span>
-              <span className="font-display text-xs font-bold text-white group-hover:text-primary transition-colors block mt-0.5">
+              <span className="font-display text-xs font-bold text-foreground group-hover:text-primary transition-colors block mt-0.5">
                 {preset.name}
               </span>
             </button>
@@ -253,26 +253,26 @@ export function LoadoutClient() {
           <div className="card-carbon p-6 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                   Loadout Designation
                 </label>
                 <input
                   type="text"
                   value={loadoutName}
                   onChange={(e) => setLoadoutName(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-primary font-display font-bold"
+                  className="w-full bg-card border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary font-display font-bold"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                   Tactical Role
                 </label>
                 <input
                   type="text"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-primary font-mono text-xs"
+                  className="w-full bg-card border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary font-mono text-xs"
                 />
               </div>
             </div>
@@ -286,13 +286,13 @@ export function LoadoutClient() {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
                   Slot 1: Primary Weapon
                 </span>
-                <span className="text-[10px] font-mono text-slate-400">{primaryWeapon.klass}</span>
+                <span className="text-[10px] font-mono text-muted-foreground">{primaryWeapon.klass}</span>
               </div>
 
               <select
                 value={primaryId}
                 onChange={(e) => setPrimaryId(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-primary font-semibold"
+                className="w-full bg-card border border-border rounded-xl p-2.5 text-xs text-foreground focus:outline-none focus:border-primary font-semibold"
               >
                 {primaryPool.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -301,16 +301,16 @@ export function LoadoutClient() {
                 ))}
               </select>
 
-              <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800 text-[11px] font-mono space-y-1">
-                <div className="flex justify-between text-slate-400">
+              <div className="p-3 rounded-lg bg-background/80 border border-border text-[11px] font-mono space-y-1">
+                <div className="flex justify-between text-muted-foreground">
                   <span>Damage:</span>
-                  <span className="text-white font-bold">{primaryWeapon.damage} pts</span>
+                  <span className="text-foreground font-bold">{primaryWeapon.damage} pts</span>
                 </div>
-                <div className="flex justify-between text-slate-400">
+                <div className="flex justify-between text-muted-foreground">
                   <span>Fire Rate:</span>
-                  <span className="text-white font-bold">{primaryWeapon.fireRate} rpm</span>
+                  <span className="text-foreground font-bold">{primaryWeapon.fireRate} rpm</span>
                 </div>
-                <div className="flex justify-between text-slate-400">
+                <div className="flex justify-between text-muted-foreground">
                   <span>Magazine:</span>
                   <span className="text-accent">{primaryWeapon.magazineSize} rds</span>
                 </div>
@@ -323,13 +323,13 @@ export function LoadoutClient() {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-accent">
                   Slot 2: Secondary Sidearm
                 </span>
-                <span className="text-[10px] font-mono text-slate-400">{secondaryWeapon.klass}</span>
+                <span className="text-[10px] font-mono text-muted-foreground">{secondaryWeapon.klass}</span>
               </div>
 
               <select
                 value={secondaryId}
                 onChange={(e) => setSecondaryId(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-primary font-semibold"
+                className="w-full bg-card border border-border rounded-xl p-2.5 text-xs text-foreground focus:outline-none focus:border-primary font-semibold"
               >
                 {secondaryPool.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -338,16 +338,16 @@ export function LoadoutClient() {
                 ))}
               </select>
 
-              <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800 text-[11px] font-mono space-y-1">
-                <div className="flex justify-between text-slate-400">
+              <div className="p-3 rounded-lg bg-background/80 border border-border text-[11px] font-mono space-y-1">
+                <div className="flex justify-between text-muted-foreground">
                   <span>Damage:</span>
-                  <span className="text-white font-bold">{secondaryWeapon.damage} pts</span>
+                  <span className="text-foreground font-bold">{secondaryWeapon.damage} pts</span>
                 </div>
-                <div className="flex justify-between text-slate-400">
+                <div className="flex justify-between text-muted-foreground">
                   <span>Handling:</span>
-                  <span className="text-white font-bold">{secondaryWeapon.handling}%</span>
+                  <span className="text-foreground font-bold">{secondaryWeapon.handling}%</span>
                 </div>
-                <div className="flex justify-between text-slate-400">
+                <div className="flex justify-between text-muted-foreground">
                   <span>Reload:</span>
                   <span className="text-accent">{secondaryWeapon.reloadTime}</span>
                 </div>
@@ -357,16 +357,16 @@ export function LoadoutClient() {
             {/* Slot 3: Melee */}
             <div className="card-carbon p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                   Slot 3: Melee / Silent
                 </span>
-                <span className="text-[10px] font-mono text-slate-400">{meleeWeapon.klass}</span>
+                <span className="text-[10px] font-mono text-muted-foreground">{meleeWeapon.klass}</span>
               </div>
 
               <select
                 value={meleeId}
                 onChange={(e) => setMeleeId(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-primary font-semibold"
+                className="w-full bg-card border border-border rounded-xl p-2.5 text-xs text-foreground focus:outline-none focus:border-primary font-semibold"
               >
                 {meleePool.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -375,12 +375,12 @@ export function LoadoutClient() {
                 ))}
               </select>
 
-              <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800 text-[11px] font-mono space-y-1">
-                <div className="flex justify-between text-slate-400">
+              <div className="p-3 rounded-lg bg-background/80 border border-border text-[11px] font-mono space-y-1">
+                <div className="flex justify-between text-muted-foreground">
                   <span>Impact:</span>
-                  <span className="text-white font-bold">{meleeWeapon.damage} pts</span>
+                  <span className="text-foreground font-bold">{meleeWeapon.damage} pts</span>
                 </div>
-                <div className="flex justify-between text-slate-400">
+                <div className="flex justify-between text-muted-foreground">
                   <span>Silent CQC:</span>
                   <span className="text-emerald-400 font-bold">100% Undetected</span>
                 </div>
@@ -393,13 +393,13 @@ export function LoadoutClient() {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">
                   Slot 4: Heavy / Tactical Support
                 </span>
-                <span className="text-[10px] font-mono text-slate-400">{heavyWeapon.klass}</span>
+                <span className="text-[10px] font-mono text-muted-foreground">{heavyWeapon.klass}</span>
               </div>
 
               <select
                 value={heavyId}
                 onChange={(e) => setHeavyId(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-primary font-semibold"
+                className="w-full bg-card border border-border rounded-xl p-2.5 text-xs text-foreground focus:outline-none focus:border-primary font-semibold"
               >
                 {heavyPool.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -408,14 +408,14 @@ export function LoadoutClient() {
                 ))}
               </select>
 
-              <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800 text-[11px] font-mono space-y-1">
-                <div className="flex justify-between text-slate-400">
+              <div className="p-3 rounded-lg bg-background/80 border border-border text-[11px] font-mono space-y-1">
+                <div className="flex justify-between text-muted-foreground">
                   <span>Stopping Power:</span>
                   <span className="text-amber-400 font-bold">{heavyWeapon.damage} pts</span>
                 </div>
-                <div className="flex justify-between text-slate-400">
+                <div className="flex justify-between text-muted-foreground">
                   <span>Range:</span>
-                  <span className="text-white font-bold">{heavyWeapon.range} m</span>
+                  <span className="text-foreground font-bold">{heavyWeapon.range} m</span>
                 </div>
               </div>
             </div>
@@ -424,10 +424,10 @@ export function LoadoutClient() {
           {/* Tactical Gear Multi-Picker (Up to 3) */}
           <div className="card-carbon p-6 space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
                 <Shield className="h-4 w-4 text-emerald-400" /> Tactical Equipment ({selectedGear.length}/3 Slots)
               </span>
-              <span className="text-[10px] font-mono text-slate-400">Max 3 Items</span>
+              <span className="text-[10px] font-mono text-muted-foreground">Max 3 Items</span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
@@ -441,7 +441,7 @@ export function LoadoutClient() {
                       "text-left p-3 rounded-xl border text-xs font-semibold transition-all flex items-center justify-between",
                       isEquipped
                         ? "border-emerald-500 bg-emerald-950/20 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.2)]"
-                        : "border-slate-800 bg-slate-900/60 text-slate-400 hover:border-slate-700 hover:text-white"
+                        : "border-border bg-card/60 text-muted-foreground hover:border-border hover:text-foreground"
                     )}
                   >
                     <span className="truncate pr-1">{gear}</span>
@@ -457,7 +457,7 @@ export function LoadoutClient() {
         <div className="space-y-6">
           {/* Performance Radar Card */}
           <div className="card-carbon p-6 space-y-5 border-primary/30">
-            <h3 className="font-display text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
               <Gauge className="h-4 w-4 text-primary" /> Loadout Combat Metrics
             </h3>
 
@@ -465,12 +465,12 @@ export function LoadoutClient() {
               {/* Firepower */}
               <div>
                 <div className="flex justify-between mb-1">
-                  <span className="text-slate-400 flex items-center gap-1">
+                  <span className="text-muted-foreground flex items-center gap-1">
                     <Crosshair className="h-3.5 w-3.5 text-rose-400" /> Firepower
                   </span>
                   <span className="text-rose-400 font-bold">{ratings.firepower} / 100</span>
                 </div>
-                <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div className="h-full bg-rose-500 rounded-full transition-all" style={{ width: `${ratings.firepower}%` }} />
                 </div>
               </div>
@@ -478,12 +478,12 @@ export function LoadoutClient() {
               {/* Accuracy & Precision */}
               <div>
                 <div className="flex justify-between mb-1">
-                  <span className="text-slate-400 flex items-center gap-1">
+                  <span className="text-muted-foreground flex items-center gap-1">
                     <Zap className="h-3.5 w-3.5 text-amber-400" /> Precision
                   </span>
                   <span className="text-amber-400 font-bold">{ratings.precision} / 100</span>
                 </div>
-                <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div className="h-full bg-amber-400 rounded-full transition-all" style={{ width: `${ratings.precision}%` }} />
                 </div>
               </div>
@@ -491,12 +491,12 @@ export function LoadoutClient() {
               {/* Mobility */}
               <div>
                 <div className="flex justify-between mb-1">
-                  <span className="text-slate-400 flex items-center gap-1">
+                  <span className="text-muted-foreground flex items-center gap-1">
                     <Weight className="h-3.5 w-3.5 text-accent" /> Mobility & Sprint
                   </span>
                   <span className="text-accent font-bold">{ratings.mobility}%</span>
                 </div>
-                <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div className="h-full bg-accent rounded-full transition-all" style={{ width: `${ratings.mobility}%` }} />
                 </div>
               </div>
@@ -504,12 +504,12 @@ export function LoadoutClient() {
               {/* Stealth Rating */}
               <div>
                 <div className="flex justify-between mb-1">
-                  <span className="text-slate-400 flex items-center gap-1">
+                  <span className="text-muted-foreground flex items-center gap-1">
                     <Shield className="h-3.5 w-3.5 text-emerald-400" /> Concealment / Stealth
                   </span>
                   <span className="text-emerald-400 font-bold">{ratings.stealth} / 100</span>
                 </div>
-                <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div className="h-full bg-emerald-400 rounded-full transition-all" style={{ width: `${ratings.stealth}%` }} />
                 </div>
               </div>
@@ -536,25 +536,25 @@ export function LoadoutClient() {
 
           {/* Saved Builds Shelf */}
           <div className="card-carbon p-6 space-y-4">
-            <h4 className="font-display text-sm font-bold text-white uppercase tracking-wider">
+            <h4 className="font-display text-sm font-bold text-foreground uppercase tracking-wider">
               Saved Armory Builds ({userState?.savedLoadouts.length || 0})
             </h4>
 
             {(userState?.savedLoadouts.length || 0) === 0 ? (
-              <p className="text-xs text-slate-400">No saved loadouts yet. Configure and save above.</p>
+              <p className="text-xs text-muted-foreground">No saved loadouts yet. Configure and save above.</p>
             ) : (
               <div className="space-y-3">
                 {userState?.savedLoadouts.map((saved) => (
                   <div
                     key={saved.id}
-                    className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between gap-3 group"
+                    className="p-3 rounded-xl bg-background/80 border border-border flex items-center justify-between gap-3 group"
                   >
                     <div className="min-w-0 flex-1">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-primary block">
                         {saved.role}
                       </span>
-                      <h5 className="text-xs font-bold text-white truncate">{saved.name}</h5>
-                      <span className="text-[10px] text-slate-500 font-mono">
+                      <h5 className="text-xs font-bold text-foreground truncate">{saved.name}</h5>
+                      <span className="text-[10px] text-muted-foreground font-mono">
                         {saved.equipment.length} items equipped
                       </span>
                     </div>
@@ -571,7 +571,7 @@ export function LoadoutClient() {
                           setSelectedGear(saved.equipment);
                           if (saved.notes) setNotes(saved.notes);
                         }}
-                        className="btn-ghost text-xs p-1.5 text-accent hover:text-white"
+                        className="btn-ghost text-xs p-1.5 text-accent hover:text-foreground"
                         title="Load this build into builder"
                       >
                         Load

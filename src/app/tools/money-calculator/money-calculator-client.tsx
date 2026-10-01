@@ -87,8 +87,8 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
   return (
     <div className="space-y-10">
       {/* Top Presets Bar */}
-      <div className="card-surface p-4 rounded-2xl border border-white/10 flex flex-wrap items-center gap-2">
-        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mr-2 flex items-center gap-1">
+      <div className="card-surface p-4 rounded-2xl border border-border flex flex-wrap items-center gap-2">
+        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mr-2 flex items-center gap-1">
           <Sparkles className="h-3.5 w-3.5 text-amber-400" /> Quick Goal Presets:
         </span>
         {PRESETS.map((p) => (
@@ -98,8 +98,8 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
             className={cn(
               "rounded-xl px-3 py-1.5 text-xs font-semibold transition-all border",
               targetMoney === p.target
-                ? "border-accent bg-accent/20 text-white font-bold shadow-sm"
-                : "border-white/10 bg-black/40 text-slate-300 hover:border-white/20 hover:text-white"
+                ? "border-accent bg-accent/20 text-foreground font-bold shadow-sm"
+                : "border-border bg-black/40 text-muted-foreground hover:border-border hover:text-foreground"
             )}
           >
             {p.label}
@@ -110,14 +110,14 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
       {/* Main Calculator Grid */}
       <div className="grid gap-8 lg:grid-cols-12 items-start">
         {/* INPUTS COLUMN (5 cols) */}
-        <div className="lg:col-span-5 card-surface p-6 rounded-3xl border border-white/10 shadow-xl space-y-5">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <h2 className="font-display text-base font-black uppercase text-white flex items-center gap-2">
+        <div className="lg:col-span-5 card-surface p-6 rounded-3xl border border-border shadow-xl space-y-5">
+          <div className="flex items-center justify-between pb-3 border-b border-border">
+            <h2 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2">
               <Calculator className="h-4 w-4 text-accent" /> Financial Parameters
             </h2>
             <button
               onClick={handleReset}
-              className="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
+              className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
             >
               <RotateCcw className="h-3 w-3" /> Reset
             </button>
@@ -125,7 +125,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
 
           {/* Current Money */}
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1.5 flex justify-between">
+            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
               <span>Current Bankroll / Cash ($)</span>
               <span className="font-mono text-emerald-400 font-bold">${currentMoney.toLocaleString()}</span>
             </label>
@@ -135,15 +135,15 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               step={5000}
               value={currentMoney}
               onChange={(e) => setCurrentMoney(Math.max(0, Number(e.target.value)))}
-              className="w-full rounded-xl border border-white/10 bg-black/50 p-3 text-sm font-mono text-white focus:border-accent focus:outline-none"
+              className="w-full rounded-xl border border-border bg-black/50 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
           {/* Target Money */}
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1.5 flex justify-between">
+            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
               <span>Target Asset Goal ($)</span>
-              <span className="font-mono text-[#00F0FF] font-bold">${targetMoney.toLocaleString()}</span>
+              <span className="font-mono text-cyan-600 dark:text-[#00F0FF] font-bold">${targetMoney.toLocaleString()}</span>
             </label>
             <input
               type="number"
@@ -151,13 +151,13 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               step={10000}
               value={targetMoney}
               onChange={(e) => setTargetMoney(Math.max(1, Number(e.target.value)))}
-              className="w-full rounded-xl border border-white/10 bg-black/50 p-3 text-sm font-mono text-white focus:border-accent focus:outline-none"
+              className="w-full rounded-xl border border-border bg-black/50 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
           {/* Income Per Mission */}
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1.5 flex justify-between">
+            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
               <span>Average Income Per Mission / Heist Cut ($)</span>
               <span className="font-mono text-amber-400 font-bold">${incomePerMission.toLocaleString()}</span>
             </label>
@@ -167,13 +167,13 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               step={5000}
               value={incomePerMission}
               onChange={(e) => setIncomePerMission(Math.max(1, Number(e.target.value)))}
-              className="w-full rounded-xl border border-white/10 bg-black/50 p-3 text-sm font-mono text-white focus:border-accent focus:outline-none"
+              className="w-full rounded-xl border border-border bg-black/50 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
           {/* Income Per Hour */}
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1.5 flex justify-between">
+            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
               <span>Estimated Hourly Grind Rate ($/hr)</span>
               <span className="font-mono text-purple-400 font-bold">${incomePerHour.toLocaleString()} / hr</span>
             </label>
@@ -183,13 +183,13 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               step={10000}
               value={incomePerHour}
               onChange={(e) => setIncomePerHour(Math.max(1, Number(e.target.value)))}
-              className="w-full rounded-xl border border-white/10 bg-black/50 p-3 text-sm font-mono text-white focus:border-accent focus:outline-none"
+              className="w-full rounded-xl border border-border bg-black/50 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
           {/* Hours per day */}
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1.5 flex justify-between">
+            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
               <span>Daily Playing Commitment (Hours/Day)</span>
               <span className="font-mono text-amber-400 font-bold">{hoursPerDay} hrs/day</span>
             </label>
@@ -202,7 +202,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               onChange={(e) => setHoursPerDay(Number(e.target.value))}
               className="w-full accent-amber-500"
             />
-            <div className="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+            <div className="flex justify-between text-[10px] text-muted-foreground mt-1 font-mono">
               <span>30m Casual</span>
               <span>2.5h Regular</span>
               <span>6h Dedicated</span>
@@ -214,22 +214,22 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
         {/* OUTPUTS / STATS (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
           {/* Progress Card */}
-          <div className="card-surface p-6 rounded-3xl border border-white/10 shadow-2xl bg-gradient-to-br from-[#0e0717] via-[#070b15] to-[#040810]">
+          <div className="card-surface p-6 rounded-3xl border border-border shadow-2xl bg-gradient-to-br from-card via-card to-primary/5 dark:from-[#0e0717] dark:via-[#070b15] dark:to-[#040810]">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <span className="text-[10px] uppercase font-bold text-slate-400">Total Money Remaining</span>
-                <div className="font-display text-3xl sm:text-4xl font-black text-white mt-0.5">
+                <span className="text-[10px] uppercase font-bold text-muted-foreground">Total Money Remaining</span>
+                <div className="font-display text-3xl sm:text-4xl font-black text-foreground mt-0.5">
                   ${calculations.remaining.toLocaleString()}
                 </div>
               </div>
               <div className="text-right">
-                <span className="font-mono text-2xl font-black text-[#00F0FF]">{calculations.progressPct}%</span>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Achieved</span>
+                <span className="font-mono text-2xl font-black text-cyan-600 dark:text-[#00F0FF]">{calculations.progressPct}%</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Achieved</span>
               </div>
             </div>
 
             {/* Progress Bar */}
-            <div className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-black/60 border border-white/10">
+            <div className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-black/60 border border-border">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-accent via-purple-500 to-[#00F0FF] transition-all duration-500"
                 style={{ width: `${calculations.progressPct}%` }}
@@ -238,38 +238,38 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
 
             {/* 4 Output Metrics */}
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="rounded-2xl border border-white/10 bg-black/40 p-3.5 text-center">
+              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
                 <Briefcase className="h-4 w-4 text-accent mx-auto mb-1" />
-                <span className="font-mono text-lg font-black text-white">{calculations.missionsNeeded}</span>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Missions Needed</span>
+                <span className="font-mono text-lg font-black text-foreground">{calculations.missionsNeeded}</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Missions Needed</span>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-black/40 p-3.5 text-center">
-                <Clock className="h-4 w-4 text-[#00F0FF] mx-auto mb-1" />
-                <span className="font-mono text-lg font-black text-white">{calculations.hoursNeeded}h</span>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Hours Needed</span>
+              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+                <Clock className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF] mx-auto mb-1" />
+                <span className="font-mono text-lg font-black text-foreground">{calculations.hoursNeeded}h</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Hours Needed</span>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-black/40 p-3.5 text-center">
+              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
                 <Calendar className="h-4 w-4 text-amber-400 mx-auto mb-1" />
-                <span className="font-mono text-lg font-black text-white">{calculations.daysNeeded}</span>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Playing Days</span>
+                <span className="font-mono text-lg font-black text-foreground">{calculations.daysNeeded}</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Playing Days</span>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-black/40 p-3.5 text-center">
+              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
                 <TrendingUp className="h-4 w-4 text-emerald-400 mx-auto mb-1" />
                 <span className="font-mono text-xs font-black text-emerald-300 block truncate">
                   {calculations.completionDateStr}
                 </span>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Target Date</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Target Date</span>
               </div>
             </div>
 
             {/* Copy & Share actions */}
-            <div className="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+            <div className="mt-6 pt-4 border-t border-border flex flex-wrap items-center justify-between gap-3">
               <Button
                 onClick={handleCopySummary}
-                className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold"
+                className="bg-muted/50 hover:bg-muted/60 text-foreground text-xs font-bold"
               >
                 {copied ? <Check className="h-3.5 w-3.5 mr-1 text-emerald-400" /> : <Copy className="h-3.5 w-3.5 mr-1" />}
                 <span>{copied ? "Calculations Copied!" : "Copy Result Summary"}</span>
@@ -277,7 +277,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
 
               <Link
                 href="/tools/business-profit-calculator"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-foreground transition-colors"
               >
                 <span>Calculate Business Passive ROI</span>
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -286,20 +286,20 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
           </div>
 
           {/* RECOMMENDED METHODS FOR THIS GAP */}
-          <div className="card-surface p-6 rounded-3xl border border-white/10">
-            <h3 className="font-display text-base font-bold uppercase tracking-wider text-white mb-3 flex items-center gap-2">
+          <div className="card-surface p-6 rounded-3xl border border-border">
+            <h3 className="font-display text-base font-bold uppercase tracking-wider text-foreground mb-3 flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-emerald-400" /> Recommended Grind Paths
             </h3>
             <div className="space-y-2.5">
               {canonicalMoneyMethods.slice(0, 3).map((m) => (
-                <div key={m.id} className="rounded-2xl border border-white/5 bg-black/40 p-3.5 flex items-center justify-between gap-3">
+                <div key={m.id} className="rounded-2xl border border-border bg-black/40 p-3.5 flex items-center justify-between gap-3">
                   <div>
-                    <h4 className="font-display text-sm font-bold text-white">{m.title}</h4>
-                    <p className="text-[11px] text-slate-400">{m.timeToPayout} &bull; Difficulty: {m.difficulty}</p>
+                    <h4 className="font-display text-sm font-bold text-foreground">{m.title}</h4>
+                    <p className="text-[11px] text-muted-foreground">{m.timeToPayout} &bull; Difficulty: {m.difficulty}</p>
                   </div>
                   <div className="text-right">
                     <span className="font-mono font-bold text-emerald-400 text-xs">{m.moneyPerHourDisplay}</span>
-                    <span className="block text-[9px] uppercase font-black text-slate-500">{m.confidence}</span>
+                    <span className="block text-[9px] uppercase font-black text-muted-foreground">{m.confidence}</span>
                   </div>
                 </div>
               ))}
@@ -309,23 +309,23 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
       </div>
 
       {/* FORMULA EXPLANATION & FAQ */}
-      <div className="grid gap-6 md:grid-cols-2 pt-6 border-t border-white/10">
-        <div className="card-surface p-6 rounded-3xl border border-white/10 space-y-3">
-          <h3 className="font-display text-base font-bold text-white flex items-center gap-2">
-            <Info className="h-4 w-4 text-[#00F0FF]" /> How the Formula Works
+      <div className="grid gap-6 md:grid-cols-2 pt-6 border-t border-border">
+        <div className="card-surface p-6 rounded-3xl border border-border space-y-3">
+          <h3 className="font-display text-base font-bold text-foreground flex items-center gap-2">
+            <Info className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> How the Formula Works
           </h3>
-          <p className="text-xs leading-relaxed text-slate-300">
+          <p className="text-xs leading-relaxed text-muted-foreground">
             The remaining cash needed is calculated via <code className="bg-black/60 px-1.5 py-0.5 rounded text-amber-400">Target - Current Cash</code>.
-            Total grinding hours equal <code className="bg-black/60 px-1.5 py-0.5 rounded text-[#00F0FF]">Remaining / Hourly Earnings</code>.
+            Total grinding hours equal <code className="bg-black/60 px-1.5 py-0.5 rounded text-cyan-600 dark:text-[#00F0FF]">Remaining / Hourly Earnings</code>.
             Real-world days needed equal <code className="bg-black/60 px-1.5 py-0.5 rounded text-amber-400">Hours Needed / Daily Playtime</code>.
           </p>
         </div>
 
-        <div className="card-surface p-6 rounded-3xl border border-white/10 space-y-3">
-          <h3 className="font-display text-base font-bold text-white flex items-center gap-2">
+        <div className="card-surface p-6 rounded-3xl border border-border space-y-3">
+          <h3 className="font-display text-base font-bold text-foreground flex items-center gap-2">
             <HelpCircle className="h-4 w-4 text-accent" /> Money Calculator FAQ
           </h3>
-          <p className="text-xs leading-relaxed text-slate-300">
+          <p className="text-xs leading-relaxed text-muted-foreground">
             <strong>Are these payout values guaranteed?</strong> All payout figures are grounded in verified leak metadata and Rockstar gameplay trailers. Real release game economy may receive day-one balancing passes.
           </p>
         </div>

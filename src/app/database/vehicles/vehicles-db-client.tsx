@@ -126,8 +126,8 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
                 key={t.label}
                 onClick={() => setType(t.label)}
                 className={cn(
-                  "flex w-full items-center justify-between rounded-lg px-3 py-2 text-[13px] font-semibold text-muted-foreground hover:text-white",
-                  type === t.label && "border border-accent/50 bg-accent/10 text-white"
+                  "flex w-full items-center justify-between rounded-lg px-3 py-2 text-[13px] font-semibold text-muted-foreground hover:text-foreground",
+                  type === t.label && "border border-accent/50 bg-accent/10 text-foreground"
                 )}
               >
                 <span className="flex items-center gap-2.5">
@@ -185,7 +185,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
         <div className="space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex gap-4 text-[13px] font-semibold">
-              <button className="border-b-2 border-accent pb-2 text-white">All Vehicles <span className="text-muted-foreground">312</span></button>
+              <button className="border-b-2 border-accent pb-2 text-foreground">All Vehicles <span className="text-muted-foreground">312</span></button>
               <button className="pb-2 text-muted-foreground">Owned / Saved <span>0</span></button>
               <button className="pb-2 text-muted-foreground">Recently Viewed <span>6</span></button>
             </div>
@@ -211,7 +211,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   {i === 0 && <Badge className="absolute left-2 top-2 border-primary/50 bg-primary/20 text-primary backdrop-blur">Featured</Badge>}
-                  <span className="absolute right-2 top-2 flex gap-1.5 text-white">
+                  <span className="absolute right-2 top-2 flex gap-1.5 text-foreground">
                     <Bookmark className="h-3.5 w-3.5" />
                     <Heart className="h-3.5 w-3.5" />
                   </span>
@@ -244,7 +244,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
                 <ChevronLeft className="h-4 w-4" />
               </Button>
               {["1", "2", "3", "…", "13"].map((p) => (
-                <button key={p} className={cn("h-8 w-8 rounded-lg text-[13px] font-bold", p === "1" ? "bg-gradient-to-r from-primary to-accent text-white" : "bg-card text-muted-foreground hover:text-white")}>
+                <button key={p} className={cn("h-8 w-8 rounded-lg text-[13px] font-bold", p === "1" ? "bg-gradient-to-r from-primary to-accent text-foreground" : "bg-card text-muted-foreground hover:text-foreground")}>
                   {p}
                 </button>
               ))}
@@ -263,7 +263,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
               </h2>
               <div className="flex gap-3 text-xs font-semibold text-muted-foreground">
                 {["Top Speed", "Best Handling", "Most Expensive", "Most Popular"].map((t, i) => (
-                  <button key={t} className={cn(i === 0 && "text-white")}>
+                  <button key={t} className={cn(i === 0 && "text-foreground")}>
                     {t}
                   </button>
                 ))}
@@ -280,7 +280,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
                       sizes="192px"
                       className="object-cover"
                     />
-                    <span className="absolute left-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent font-display text-xs font-extrabold text-white">
+                    <span className="absolute left-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent font-display text-xs font-extrabold text-foreground">
                       {v.rank}
                     </span>
                   </div>

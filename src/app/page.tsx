@@ -145,8 +145,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 5 — PROTAGONIST SHOWCASE (LUCIA & JASON) */}
-      <ProtagonistsShowcase />
+      {/* 5 — PROTAGONIST SHOWCASE (LUCIA & JASON, CMS-DRIVEN) */}
+      <ProtagonistsShowcase characters={allCharacters} />
 
       {/* 6 — NEWS & BLOG */}
       <section aria-labelledby="news-heading" className="container-site pt-6">

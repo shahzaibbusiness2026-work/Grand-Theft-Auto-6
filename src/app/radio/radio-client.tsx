@@ -108,26 +108,26 @@ export function RadioClient({ initialStations }: { initialStations?: RadioStatio
     <div className="container-site py-12 sm:py-16 space-y-10">
       {/* Header */}
       <div className="max-w-3xl space-y-3">
-        <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#B8AAFF]">
+        <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-primary">
           Audio & Broadcast Guide
         </p>
-        <h1 className="font-display text-3xl sm:text-5xl font-black text-white tracking-tight">
+        <h1 className="font-display text-3xl sm:text-5xl font-black text-foreground tracking-tight">
           Leonida Radio Stations & Soundtrack
         </h1>
-        <p className="text-base sm:text-lg text-[#B5C0D4] leading-relaxed">
+        <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
           Tune into the iconic frequencies of Vice City and the surrounding state of Leonida. Browse confirmed and legacy radio stations, disc jockeys, and curated tracklists.
         </p>
       </div>
 
       {/* Search */}
       <div className="relative max-w-md">
-        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3BD]" />
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
         <input
           type="text"
           placeholder="Search stations, genres, or hosts..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#33415C] bg-[#141C2E] text-xs text-white placeholder-[#94A3BD] focus:outline-none focus:border-[#B8AAFF]"
+          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-card text-xs text-foreground placeholder-[#94A3BD] focus:outline-none focus:border-primary"
         />
       </div>
 
@@ -144,26 +144,26 @@ export function RadioClient({ initialStations }: { initialStations?: RadioStatio
                 className={cn(
                   "p-5 rounded-2xl border text-left transition-all flex flex-col justify-between gap-4",
                   isSelected
-                    ? "border-[#B8AAFF] bg-[#1C2740] shadow-xl shadow-[#B8AAFF]/5"
-                    : "border-[#33415C] bg-[#141C2E] hover:border-[#66748F] hover:bg-[#1C2740]/50"
+                    ? "border-primary bg-muted shadow-xl shadow-[#B8AAFF]/5"
+                    : "border-border bg-card hover:border-primary/40 hover:bg-muted/50"
                 )}
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-[#B8AAFF]">
+                    <span className="font-mono text-xs font-bold text-primary">
                       {station.frequency}
                     </span>
-                    <Radio className="w-4 h-4 text-[#94A3BD]" />
+                    <Radio className="w-4 h-4 text-muted-foreground" />
                   </div>
-                  <h3 className="font-display text-lg font-bold text-white">
+                  <h3 className="font-display text-lg font-bold text-foreground">
                     {station.name}
                   </h3>
-                  <p className="text-xs text-[#94A3BD]">{station.genre}</p>
+                  <p className="text-xs text-muted-foreground">{station.genre}</p>
                 </div>
 
-                <div className="pt-3 border-t border-[#33415C]/60 flex items-center justify-between text-[11px] text-[#B5C0D4]">
+                <div className="pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-muted-foreground">
                   <span>Host: <strong>{station.host}</strong></span>
-                  <span className="text-[#B8AAFF] font-semibold">{station.tracks.length} tracks</span>
+                  <span className="text-primary font-semibold">{station.tracks.length} tracks</span>
                 </div>
               </button>
             );
@@ -171,10 +171,10 @@ export function RadioClient({ initialStations }: { initialStations?: RadioStatio
         </div>
 
         {/* Selected Station Detail Box */}
-        <div className="rounded-2xl border border-[#33415C] bg-[#141C2E] p-6 space-y-6 self-start">
+        <div className="rounded-2xl border border-border bg-card p-6 space-y-6 self-start">
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold px-2 py-0.5 rounded-md bg-[#1C2740] text-[#B8AAFF] border border-[#33415C]">
+              <span className="font-mono text-xs font-bold px-2 py-0.5 rounded-md bg-muted text-primary border border-border">
                 {activeStation.frequency}
               </span>
               <span className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
@@ -182,31 +182,31 @@ export function RadioClient({ initialStations }: { initialStations?: RadioStatio
                 Broadcasting
               </span>
             </div>
-            <h2 className="font-display text-2xl font-black text-white">
+            <h2 className="font-display text-2xl font-black text-foreground">
               {activeStation.name}
             </h2>
-            <p className="text-xs text-[#B5C0D4] leading-relaxed">
+            <p className="text-xs text-muted-foreground leading-relaxed">
               {activeStation.description}
             </p>
           </div>
 
-          <div className="space-y-3 pt-4 border-t border-[#33415C]">
-            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#94A3BD]">
+          <div className="space-y-3 pt-4 border-t border-border">
+            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-muted-foreground">
               <span>Confirmed & Featured Tracks</span>
-              <Disc className="w-4 h-4 text-[#B8AAFF]" />
+              <Disc className="w-4 h-4 text-primary" />
             </div>
 
             <div className="space-y-2">
               {activeStation.tracks.map((track, i) => (
                 <div 
                   key={i}
-                  className="p-3 rounded-xl bg-[#1C2740] border border-[#33415C]/50 flex items-center gap-3 text-xs"
+                  className="p-3 rounded-xl bg-muted border border-border/50 flex items-center gap-3 text-xs"
                 >
-                  <span className="font-mono text-[11px] text-[#94A3BD] w-4">
+                  <span className="font-mono text-[11px] text-muted-foreground w-4">
                     0{i + 1}
                   </span>
-                  <Music2 className="w-3.5 h-3.5 text-[#B8AAFF] shrink-0" />
-                  <span className="font-medium text-white line-clamp-1">{track}</span>
+                  <Music2 className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span className="font-medium text-foreground line-clamp-1">{track}</span>
                 </div>
               ))}
             </div>
