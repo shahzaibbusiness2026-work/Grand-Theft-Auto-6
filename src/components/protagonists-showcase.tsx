@@ -29,6 +29,15 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
   const lucia = liveCharacters?.find((c) => c.id === "lucia");
   const jason = liveCharacters?.find((c) => c.id === "jason");
 
+  /**
+   * Dual view: cards are ~half width, so a side-by-side portrait pane would
+   * be ~260px wide but stretch to the full (tall) card height — massively
+   * over-zooming the 0.78:1 key art. Stack image-on-top with a wide banner
+   * crop instead. Single view: the card spans both columns, so the
+   * side-by-side dossier layout has correct proportions.
+   */
+  const stacked = activeTab === "both";
+
   const openDossier = (character: Character | null | undefined) => {
     if (character) setSelectedCharacter(character);
   };
@@ -111,9 +120,16 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
               activeTab === "lucia" && "lg:col-span-2 max-w-4xl mx-auto w-full"
             )}
           >
-            <div className="flex flex-col lg:flex-row h-full">
+            <div className={cn("flex flex-col h-full", !stacked && "lg:flex-row")}>
               {/* Left Column: Lucia Portrait & Artwork Overlays */}
-              <div className="relative w-full lg:w-[45%] min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] overflow-hidden bg-slate-900 shrink-0 select-none">
+              <div
+                className={cn(
+                  "relative w-full overflow-hidden bg-slate-900 shrink-0 select-none",
+                  stacked
+                    ? "aspect-[4/3] sm:aspect-[16/10]"
+                    : "min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] lg:w-[45%]"
+                )}
+              >
                 <Image
                   src={lucia?.img || "/img/char-lucia.jpg"}
                   alt={lucia?.name || "Lucia Caminos"}
@@ -124,8 +140,12 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                 />
 
                 {/* Soft gradient blend into the white right content pane */}
-                <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/20 to-white pointer-events-none" />
-                <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+                {!stacked && (
+                  <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/20 to-white pointer-events-none" />
+                )}
+                {!stacked && (
+                  <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+                )}
 
                 {/* Top-Left Pill Badge: LEAD PROTAGONIST */}
                 <div className="absolute top-4 left-4 z-10">
@@ -186,7 +206,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   <div className="space-y-3 pt-1">
                     {/* Special Ability */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
-                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                      <div className="flex items-center gap-2 text-muted-foreground font-semibold w-36 sm:w-40 shrink-0">
                         <Zap className="w-4 h-4 text-amber-500 shrink-0" />
                         <span>Special Ability:</span>
                       </div>
@@ -197,7 +217,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
 
                     {/* Specialty */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
-                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                      <div className="flex items-center gap-2 text-muted-foreground font-semibold w-36 sm:w-40 shrink-0">
                         <Shield className="w-4 h-4 text-pink-500 shrink-0" />
                         <span>Specialty:</span>
                       </div>
@@ -208,7 +228,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
 
                     {/* Signature Ride */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
-                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                      <div className="flex items-center gap-2 text-muted-foreground font-semibold w-36 sm:w-40 shrink-0">
                         <Car className="w-4 h-4 text-purple-500 shrink-0" />
                         <span>Signature Ride:</span>
                       </div>
@@ -219,7 +239,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
 
                     {/* Territory */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
-                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                      <div className="flex items-center gap-2 text-muted-foreground font-semibold w-36 sm:w-40 shrink-0">
                         <MapPin className="w-4 h-4 text-purple-500 shrink-0" />
                         <span>Territory:</span>
                       </div>
@@ -233,9 +253,9 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                 {/* Footer Row */}
                 <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
                   <div className="text-xs">
-                    <span className="text-slate-500">Actor: </span>
+                    <span className="text-muted-foreground">Actor: </span>
                     <span className="font-bold text-slate-900">{actorName(lucia?.voiceActor, "Manni L. Perez")}</span>
-                    <p className="text-[11px] text-slate-500">(Confirmed / Casting)</p>
+                    <p className="text-[11px] text-muted-foreground">(Confirmed / Casting)</p>
                   </div>
                   <button
                     type="button"
@@ -259,9 +279,16 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
               activeTab === "jason" && "lg:col-span-2 max-w-4xl mx-auto w-full"
             )}
           >
-            <div className="flex flex-col lg:flex-row h-full">
+            <div className={cn("flex flex-col h-full", !stacked && "lg:flex-row")}>
               {/* Left Column: Jason Portrait & Artwork Overlays */}
-              <div className="relative w-full lg:w-[45%] min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] overflow-hidden bg-slate-900 shrink-0 select-none">
+              <div
+                className={cn(
+                  "relative w-full overflow-hidden bg-slate-900 shrink-0 select-none",
+                  stacked
+                    ? "aspect-[4/3] sm:aspect-[16/10]"
+                    : "min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] lg:w-[45%]"
+                )}
+              >
                 <Image
                   src={jason?.img || "/img/char-jason.jpg"}
                   alt={jason?.name || "Jason Duval"}
@@ -272,8 +299,12 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                 />
 
                 {/* Soft gradient blend into the white right content pane */}
-                <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/20 to-white pointer-events-none" />
-                <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+                {!stacked && (
+                  <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/20 to-white pointer-events-none" />
+                )}
+                {!stacked && (
+                  <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+                )}
 
                 {/* Top-Left Pill Badge: CO-PROTAGONIST */}
                 <div className="absolute top-4 left-4 z-10">
@@ -331,7 +362,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   <div className="space-y-3 pt-1">
                     {/* Special Ability */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
-                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                      <div className="flex items-center gap-2 text-muted-foreground font-semibold w-36 sm:w-40 shrink-0">
                         <Zap className="w-4 h-4 text-sky-500 shrink-0" />
                         <span>Special Ability:</span>
                       </div>
@@ -342,7 +373,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
 
                     {/* Specialty */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
-                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                      <div className="flex items-center gap-2 text-muted-foreground font-semibold w-36 sm:w-40 shrink-0">
                         <Shield className="w-4 h-4 text-sky-500 shrink-0" />
                         <span>Specialty:</span>
                       </div>
@@ -353,7 +384,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
 
                     {/* Signature Ride */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
-                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                      <div className="flex items-center gap-2 text-muted-foreground font-semibold w-36 sm:w-40 shrink-0">
                         <Car className="w-4 h-4 text-sky-500 shrink-0" />
                         <span>Signature Ride:</span>
                       </div>
@@ -364,7 +395,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
 
                     {/* Territory */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
-                      <div className="flex items-center gap-2 text-slate-500 font-semibold w-36 sm:w-40 shrink-0">
+                      <div className="flex items-center gap-2 text-muted-foreground font-semibold w-36 sm:w-40 shrink-0">
                         <MapPin className="w-4 h-4 text-sky-500 shrink-0" />
                         <span>Territory:</span>
                       </div>
@@ -378,9 +409,9 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                 {/* Footer Row */}
                 <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
                   <div className="text-xs">
-                    <span className="text-slate-500">Actor: </span>
+                    <span className="text-muted-foreground">Actor: </span>
                     <span className="font-bold text-slate-900">{actorName(jason?.voiceActor, "Gregory Connors")}</span>
-                    <p className="text-[11px] text-slate-500">(Confirmed / Speculated)</p>
+                    <p className="text-[11px] text-muted-foreground">(Confirmed / Speculated)</p>
                   </div>
                   <button
                     type="button"
