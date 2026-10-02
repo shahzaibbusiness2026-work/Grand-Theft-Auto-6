@@ -107,7 +107,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
       case "Restricted Area":
         return "text-rose-400 bg-rose-500/10 border-rose-500/30";
       default:
-        return "text-slate-400 bg-slate-800 border-slate-700";
+        return "text-muted-foreground bg-muted border-border";
     }
   };
 
@@ -115,7 +115,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
     <SiteShell>
       <div className="container-site py-8">
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs text-slate-400 mb-6 font-mono">
+        <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6 font-mono">
           <Link href="/" className="hover:text-primary transition-colors">
             Home
           </Link>
@@ -131,7 +131,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
         <div className="mb-6">
           <Link
             href="/locations"
-            className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-accent transition-colors font-semibold"
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent transition-colors font-semibold"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Back to All Locations
           </Link>
@@ -169,18 +169,18 @@ export default async function LocationDetailPage({ params }: PageProps) {
                 <span>{loc.district}, State of Leonida</span>
               </div>
 
-              <p className="text-sm text-slate-300 leading-relaxed pt-2">
+              <p className="text-sm text-muted-foreground leading-relaxed pt-2">
                 {loc.desc}
               </p>
             </div>
 
             {/* Photo / Visual */}
             <div className="card-carbon overflow-hidden">
-              <div className="relative h-72 sm:h-96 w-full bg-slate-950">
+              <div className="relative h-72 sm:h-96 w-full bg-background">
                 <img src={loc.img} alt={loc.name} className="h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-slate-300 bg-slate-950/80 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-800">
-                  <span className="font-mono text-slate-300">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
+                  <span className="font-mono text-muted-foreground">
                     Map Grid: Top {loc.top} / Left {loc.left}
                   </span>
                   <Link
@@ -196,14 +196,14 @@ export default async function LocationDetailPage({ params }: PageProps) {
             {/* Operating Intel & Associated Assets */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="card-carbon p-5 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                   <Clock className="h-4 w-4 text-accent" /> Hours of Operation
                 </div>
                 <p className="text-sm font-semibold text-white font-mono">{loc.hours}</p>
               </div>
 
               <div className="card-carbon p-5 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                   <ShieldAlert className="h-4 w-4 text-primary" /> Security & Heat Rating
                 </div>
                 <p className="text-sm font-semibold text-white font-mono">
@@ -220,11 +220,11 @@ export default async function LocationDetailPage({ params }: PageProps) {
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {(loc.relatedVehicles?.length || 0) > 0 && (
-                    <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+                    <div className="p-4 rounded-xl bg-card border border-border space-y-2">
                       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
                         <Car className="h-4 w-4" /> Spawning Vehicles
                       </div>
-                      <ul className="text-xs text-slate-200 font-mono space-y-1">
+                      <ul className="text-xs text-foreground font-mono space-y-1">
                         {loc.relatedVehicles?.map((v) => (
                           <li key={v} className="flex items-center gap-1.5">
                             <span className="h-1.5 w-1.5 rounded-full bg-primary" /> {v}
@@ -235,11 +235,11 @@ export default async function LocationDetailPage({ params }: PageProps) {
                   )}
 
                   {(loc.relatedWeapons?.length || 0) > 0 && (
-                    <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+                    <div className="p-4 rounded-xl bg-card border border-border space-y-2">
                       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400">
                         <Crosshair className="h-4 w-4" /> Available Armory
                       </div>
-                      <ul className="text-xs text-slate-200 font-mono space-y-1">
+                      <ul className="text-xs text-foreground font-mono space-y-1">
                         {loc.relatedWeapons?.map((w) => (
                           <li key={w} className="flex items-center gap-1.5">
                             <span className="h-1.5 w-1.5 rounded-full bg-amber-400" /> {w}
@@ -260,7 +260,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
               <h3 className="font-display text-base font-bold text-white uppercase tracking-wider">
                 Tactical Navigation
               </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-muted-foreground leading-relaxed">
                 Open the interactive satellite map focused on {loc.name}. Synchronize coordinates and add custom field notes.
               </p>
               <Link
@@ -277,7 +277,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
                 Nearby in {loc.district}
               </h4>
               {nearbyLocations.length === 0 ? (
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-muted-foreground">
                   No other confirmed locations in this specific sector yet.
                 </p>
               ) : (
@@ -286,9 +286,9 @@ export default async function LocationDetailPage({ params }: PageProps) {
                     <Link
                       key={item.id}
                       href={`/locations/${item.slug}`}
-                      className="block p-3 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors group"
+                      className="block p-3 rounded-lg bg-card border border-border hover:border-primary/40 transition-colors group"
                     >
-                      <div className="text-[10px] uppercase font-bold text-slate-400 mb-0.5">
+                      <div className="text-[10px] uppercase font-bold text-muted-foreground mb-0.5">
                         {item.category}
                       </div>
                       <div className="text-xs font-bold text-white group-hover:text-primary transition-colors line-clamp-1">

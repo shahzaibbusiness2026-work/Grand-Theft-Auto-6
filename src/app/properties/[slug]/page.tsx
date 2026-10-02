@@ -67,7 +67,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
     <SiteShell>
       <div className="container-site py-8">
         {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 text-xs text-slate-400 mb-6 font-mono">
+        <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6 font-mono">
           <Link href="/" className="hover:text-primary transition-colors">
             Home
           </Link>
@@ -83,7 +83,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
         <div className="mb-6">
           <Link
             href="/properties"
-            className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-accent transition-colors font-semibold"
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent transition-colors font-semibold"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Back to All Properties
           </Link>
@@ -100,7 +100,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                   <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-primary/20 text-primary border border-primary/30">
                     {prop.type}
                   </span>
-                  <span className="text-xs text-slate-300 flex items-center gap-1 font-medium">
+                  <span className="text-xs text-muted-foreground flex items-center gap-1 font-medium">
                     <MapPin className="h-3.5 w-3.5 text-accent" /> {prop.district}
                   </span>
                   <ConfidenceBadge confidence={prop.confidence} source={prop.source} />
@@ -116,18 +116,18 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 {prop.priceDisplay}
               </div>
 
-              <p className="text-sm text-slate-300 leading-relaxed pt-1">
+              <p className="text-sm text-muted-foreground leading-relaxed pt-1">
                 {prop.desc}
               </p>
             </div>
 
             {/* Photo / Visual */}
             <div className="card-carbon overflow-hidden">
-              <div className="relative h-72 sm:h-96 w-full bg-slate-950">
+              <div className="relative h-72 sm:h-96 w-full bg-background">
                 <img src={prop.img} alt={prop.name} className="h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-slate-300 bg-slate-950/80 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-800">
-                  <span className="font-mono text-slate-300">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
+                  <span className="font-mono text-muted-foreground">
                     Map Location: Top {prop.mapCoords.top} / Left {prop.mapCoords.left}
                   </span>
                   <Link
@@ -147,32 +147,32 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                   <TrendingUp className="h-4 w-4" /> Passive Revenue & ROI Breakdown
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-center">
-                  <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+                  <div className="p-3 rounded-xl bg-muted/80 border border-border">
+                    <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
                       Per Hour
                     </span>
                     <span className="text-base font-black text-emerald-400">
                       ${hourly.toLocaleString()}
                     </span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+                  <div className="p-3 rounded-xl bg-muted/80 border border-border">
+                    <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
                       Daily (24h)
                     </span>
                     <span className="text-base font-black text-emerald-400">
                       ${dailyIncome.toLocaleString()}
                     </span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+                  <div className="p-3 rounded-xl bg-muted/80 border border-border">
+                    <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
                       Weekly (7d)
                     </span>
                     <span className="text-base font-black text-emerald-400">
                       ${weeklyIncome.toLocaleString()}
                     </span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+                  <div className="p-3 rounded-xl bg-muted/80 border border-border">
+                    <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
                       Break-Even
                     </span>
                     <span className="text-base font-black text-amber-400">
@@ -182,11 +182,11 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 </div>
               </div>
             ) : (
-              <div className="card-carbon p-6 space-y-2 border-slate-800">
-                <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <div className="card-carbon p-6 space-y-2 border-border">
+                <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                   Residential / Private Safehouse
                 </div>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   This property is an exclusive private residence or story safehouse with zero operational overhead and maximum vehicle staging security.
                 </p>
               </div>
@@ -198,7 +198,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 <h3 className="font-display text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
                   <Layers className="h-4 w-4 text-primary" /> Included Features
                 </h3>
-                <ul className="space-y-2 text-xs text-slate-300">
+                <ul className="space-y-2 text-xs text-muted-foreground">
                   {prop.features.map((f) => (
                     <li key={f} className="flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -212,7 +212,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 <h3 className="font-display text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-accent" /> Available Upgrades
                 </h3>
-                <ul className="space-y-2 text-xs text-slate-300">
+                <ul className="space-y-2 text-xs text-muted-foreground">
                   {prop.upgrades.map((u) => (
                     <li key={u} className="flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
@@ -232,20 +232,20 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 Property Summary
               </h3>
               <div className="space-y-2.5 text-xs font-mono">
-                <div className="flex justify-between py-1.5 border-b border-slate-800">
-                  <span className="text-slate-400">Price:</span>
+                <div className="flex justify-between py-1.5 border-b border-border">
+                  <span className="text-muted-foreground">Price:</span>
                   <span className="font-bold text-amber-400">{prop.priceDisplay}</span>
                 </div>
-                <div className="flex justify-between py-1.5 border-b border-slate-800">
-                  <span className="text-slate-400">Garage:</span>
+                <div className="flex justify-between py-1.5 border-b border-border">
+                  <span className="text-muted-foreground">Garage:</span>
                   <span className="font-bold text-white">{prop.garageCapacity} Vehicles</span>
                 </div>
-                <div className="flex justify-between py-1.5 border-b border-slate-800">
-                  <span className="text-slate-400">District:</span>
+                <div className="flex justify-between py-1.5 border-b border-border">
+                  <span className="text-muted-foreground">District:</span>
                   <span className="text-accent font-semibold">{prop.district}</span>
                 </div>
-                <div className="flex justify-between py-1.5 border-b border-slate-800">
-                  <span className="text-slate-400">Classification:</span>
+                <div className="flex justify-between py-1.5 border-b border-border">
+                  <span className="text-muted-foreground">Classification:</span>
                   <span className="text-white font-semibold">{prop.confidence}</span>
                 </div>
               </div>
@@ -268,7 +268,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                   <Link
                     key={item.id}
                     href={`/properties/${item.slug}`}
-                    className="block p-3 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors group"
+                    className="block p-3 rounded-lg bg-card border border-border hover:border-primary/40 transition-colors group"
                   >
                     <div className="text-[10px] uppercase font-bold text-primary mb-0.5">
                       {item.type}

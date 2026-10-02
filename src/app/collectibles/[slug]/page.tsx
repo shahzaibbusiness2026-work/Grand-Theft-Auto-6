@@ -57,7 +57,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
     <SiteShell>
       <div className="container-site py-8">
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs text-slate-400 mb-6 font-mono">
+        <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6 font-mono">
           <Link href="/" className="hover:text-primary transition-colors">
             Home
           </Link>
@@ -73,7 +73,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
         <div className="mb-6">
           <Link
             href="/collectibles"
-            className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-accent transition-colors font-semibold"
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent transition-colors font-semibold"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Back to All Collectibles
           </Link>
@@ -89,7 +89,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                 <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-primary/20 text-primary border border-primary/30">
                   {collectible.category}
                 </span>
-                <span className="text-xs text-slate-300 flex items-center gap-1 font-medium">
+                <span className="text-xs text-muted-foreground flex items-center gap-1 font-medium">
                   <MapPin className="h-3.5 w-3.5 text-accent" /> {collectible.district}
                 </span>
                 <ConfidenceBadge confidence={collectible.confidence} source={collectible.source} />
@@ -99,21 +99,21 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                 {collectible.title}
               </h1>
 
-              <p className="text-sm text-slate-300 leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {collectible.description}
               </p>
             </div>
 
             {/* Photo / Image */}
             <div className="card-carbon overflow-hidden">
-              <div className="relative h-72 sm:h-96 w-full bg-slate-950">
+              <div className="relative h-72 sm:h-96 w-full bg-background">
                 <img
                   src={collectible.img}
                   alt={collectible.title}
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-slate-300 bg-slate-950/80 backdrop-blur-md px-3 py-2 rounded-lg border border-slate-800">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-3 py-2 rounded-lg border border-border">
                   <span className="flex items-center gap-1.5 font-mono">
                     <Compass className="h-4 w-4 text-accent" /> Relative Map Coordinates: Top {collectible.coordinates.top} / Left {collectible.coordinates.left}
                   </span>
@@ -132,7 +132,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
               <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-wider">
                 <Lightbulb className="h-4 w-4" /> Discovery Guide & Tactics
               </div>
-              <p className="text-sm text-slate-200 leading-relaxed">
+              <p className="text-sm text-foreground leading-relaxed">
                 {collectible.guideTip}
               </p>
             </div>
@@ -143,15 +143,15 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                 Requirements & Unlocks
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                <div className="p-4 rounded-xl bg-card border border-border space-y-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
                     Prerequisites
                   </span>
-                  <p className="text-xs text-slate-200 font-mono">
+                  <p className="text-xs text-foreground font-mono">
                     {collectible.requirements}
                   </p>
                 </div>
-                <div className="p-4 rounded-xl bg-slate-900 border border-amber-500/20 space-y-1">
+                <div className="p-4 rounded-xl bg-card border border-amber-500/20 space-y-1">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1">
                     <Trophy className="h-3 w-3" /> Reward Upon Collection
                   </span>
@@ -170,7 +170,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
               <h3 className="font-display text-base font-bold text-white uppercase tracking-wider">
                 Atlas Status
               </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-muted-foreground leading-relaxed">
                 Track this collectible along with all other 100% completion milestones across Leonida.
               </p>
               <Link
@@ -189,22 +189,22 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
 
             {/* Data Source Audit */}
             <div className="card-carbon p-6 space-y-3">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 <ShieldCheck className="h-4 w-4 text-emerald-400" /> Data Confidence Audit
               </div>
               <div className="text-xs space-y-2">
-                <div className="flex justify-between py-1 border-b border-slate-800">
-                  <span className="text-slate-400">Classification:</span>
+                <div className="flex justify-between py-1 border-b border-border">
+                  <span className="text-muted-foreground">Classification:</span>
                   <span className="font-bold text-white">{collectible.confidence}</span>
                 </div>
-                <div className="flex justify-between py-1 border-b border-slate-800">
-                  <span className="text-slate-400">Verified Source:</span>
-                  <span className="text-slate-300 text-right truncate max-w-[160px]">
+                <div className="flex justify-between py-1 border-b border-border">
+                  <span className="text-muted-foreground">Verified Source:</span>
+                  <span className="text-muted-foreground text-right truncate max-w-[160px]">
                     {collectible.source}
                   </span>
                 </div>
                 <div className="flex justify-between py-1">
-                  <span className="text-slate-400">District:</span>
+                  <span className="text-muted-foreground">District:</span>
                   <span className="text-accent font-semibold">{collectible.district}</span>
                 </div>
               </div>
@@ -220,9 +220,9 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                   <Link
                     key={item.id}
                     href={`/collectibles/${item.slug}`}
-                    className="block p-3 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors group"
+                    className="block p-3 rounded-lg bg-card border border-border hover:border-primary/40 transition-colors group"
                   >
-                    <div className="text-[10px] uppercase font-bold text-slate-400 mb-0.5">
+                    <div className="text-[10px] uppercase font-bold text-muted-foreground mb-0.5">
                       {item.category}
                     </div>
                     <div className="text-xs font-bold text-white group-hover:text-primary transition-colors line-clamp-1">

@@ -80,12 +80,12 @@ export function PricingClient() {
     <div className="space-y-12">
       {/* Billing Cycle Switcher */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <span className={cn("text-xs font-semibold", !annualBilling ? "text-white" : "text-slate-400")}>
+        <span className={cn("text-xs font-semibold", !annualBilling ? "text-white" : "text-muted-foreground")}>
           Monthly Billing
         </span>
         <button
           onClick={() => setAnnualBilling(!annualBilling)}
-          className="relative h-7 w-14 rounded-full bg-slate-800 p-1 border border-slate-700 transition-colors focus:outline-none"
+          className="relative h-7 w-14 rounded-full bg-muted p-1 border border-border transition-colors focus:outline-none"
         >
           <div
             className={cn(
@@ -94,7 +94,7 @@ export function PricingClient() {
             )}
           />
         </button>
-        <span className={cn("text-xs font-semibold flex items-center gap-1.5", annualBilling ? "text-white" : "text-slate-400")}>
+        <span className={cn("text-xs font-semibold flex items-center gap-1.5", annualBilling ? "text-white" : "text-muted-foreground")}>
           Annual Billing
           <span className="rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold px-2 py-0.5 border border-emerald-500/30">
             Save 33%
@@ -105,27 +105,27 @@ export function PricingClient() {
       {/* Pricing Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {/* Tier 1: Free Explorer */}
-        <div className="card-carbon p-8 flex flex-col justify-between border-slate-800 bg-slate-900/60">
+        <div className="card-carbon p-8 flex flex-col justify-between border-border bg-card/60">
           <div className="space-y-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mb-1">
                 Standard Access
               </span>
               <h3 className="font-display text-2xl font-black text-white">Free Explorer</h3>
-              <p className="text-xs text-slate-300 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 Essential utilities for casual explorers tracking their story journey.
               </p>
             </div>
 
             <div className="flex items-baseline gap-1 font-mono">
               <span className="text-4xl font-black text-white">$0</span>
-              <span className="text-xs text-slate-400 font-sans">/ forever free</span>
+              <span className="text-xs text-muted-foreground font-sans">/ forever free</span>
             </div>
 
-            <ul className="space-y-3 text-xs text-slate-300 pt-4 border-t border-slate-800">
+            <ul className="space-y-3 text-xs text-muted-foreground pt-4 border-t border-border">
               {FREE_FEATURES.map((feat) => (
                 <li key={feat} className="flex items-start gap-2.5">
-                  <Check className="h-4 w-4 text-slate-400 flex-shrink-0 mt-0.5" />
+                  <Check className="h-4 w-4 text-muted-foreground flex-shrink-0 mt-0.5" />
                   <span>{feat}</span>
                 </li>
               ))}
@@ -136,7 +136,7 @@ export function PricingClient() {
             <button
               disabled={!isPro}
               onClick={handleTogglePro}
-              className="btn-ghost w-full py-3 text-xs font-bold uppercase tracking-wider border border-slate-800 text-slate-400 hover:text-white disabled:opacity-60"
+              className="btn-ghost w-full py-3 text-xs font-bold uppercase tracking-wider border border-border text-muted-foreground hover:text-white disabled:opacity-60"
             >
               {!isPro ? "Current Active Plan" : "Downgrade to Free"}
             </button>
@@ -144,7 +144,7 @@ export function PricingClient() {
         </div>
 
         {/* Tier 2: Vice City Pro */}
-        <div className="card-carbon p-8 flex flex-col justify-between border-primary/50 relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-primary/10 shadow-[0_0_30px_rgba(244,63,94,0.15)]">
+        <div className="dark-panel card-carbon p-8 flex flex-col justify-between border-primary/50 relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-primary/10 shadow-[0_0_30px_rgba(244,63,94,0.15)]">
           <div className="absolute top-0 right-0 bg-gradient-to-l from-primary to-accent text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-bl-xl shadow-md">
             Launching Soon
           </div>
@@ -155,7 +155,7 @@ export function PricingClient() {
                 <Crown className="h-4 w-4 text-amber-400" /> Premium VIP Membership
               </div>
               <h3 className="font-display text-2xl font-black text-white">Vice City Pro</h3>
-              <p className="text-xs text-slate-300 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 Advanced calculators, unlimited AI intelligence, and 4-way duels.
               </p>
             </div>
@@ -164,12 +164,12 @@ export function PricingClient() {
               <span className="text-4xl font-black text-white">
                 {annualBilling ? "$39.99" : "$4.99"}
               </span>
-              <span className="text-xs text-slate-400 font-sans">
+              <span className="text-xs text-muted-foreground font-sans">
                 {annualBilling ? "/ year ($3.33/mo)" : "/ month"}
               </span>
             </div>
 
-            <ul className="space-y-3 text-xs text-slate-200 pt-4 border-t border-slate-800">
+            <ul className="space-y-3 text-xs text-foreground pt-4 border-t border-border">
               {PRO_FEATURES.map((feat) => (
                 <li key={feat} className="flex items-start gap-2.5">
                   <Check className="h-4 w-4 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -208,7 +208,7 @@ export function PricingClient() {
 
       {/* Success Modal */}
       {showSuccessModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-muted/50 backdrop-blur-md">
           <div className="card-carbon p-8 max-w-md w-full border-primary/40 space-y-6 text-center animate-fade-in shadow-2xl">
             <div className="h-16 w-16 rounded-full bg-primary/20 text-primary flex items-center justify-center mx-auto shadow-lg shadow-primary/30">
               <Crown className="h-8 w-8 text-amber-400" />
@@ -218,12 +218,12 @@ export function PricingClient() {
               <h3 className="font-display text-2xl font-black text-white uppercase tracking-tight">
                 Welcome to Vice City Pro!
               </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-muted-foreground leading-relaxed">
                 Your account now has full unrestricted access to 4-way duels, unlimited Ask GTA 6 AI queries, and cloud JSON tracker backups.
               </p>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-xs font-mono text-emerald-400">
+            <div className="p-3 rounded-xl bg-muted/50 border border-border text-xs font-mono text-emerald-400">
               ✓ Pro Membership Active & Persisted Locally
             </div>
 

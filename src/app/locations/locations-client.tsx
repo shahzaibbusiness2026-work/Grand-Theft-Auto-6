@@ -84,7 +84,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
       case "Restricted Area":
         return "text-rose-400 bg-rose-500/10 border-rose-500/30";
       default:
-        return "text-slate-400 bg-slate-800 border-slate-700";
+        return "text-muted-foreground bg-muted border-border";
     }
   };
 
@@ -96,7 +96,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
           <span className="font-display text-2xl sm:text-3xl font-black text-white">
             {locations.length}
           </span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mt-1">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mt-1">
             Confirmed POIs
           </span>
         </div>
@@ -130,7 +130,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
       <div className="card-carbon p-5 space-y-4">
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
               value={searchQuery}
@@ -144,7 +144,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
             <select
               value={selectedDistrict}
               onChange={(e) => setSelectedDistrict(e.target.value)}
-              className="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-primary"
+              className="bg-card border border-border rounded-xl px-3 py-2 text-xs text-foreground focus:outline-none focus:border-primary"
             >
               {districts.map((d) => (
                 <option key={d} value={d}>
@@ -156,7 +156,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
             <select
               value={selectedThreat}
               onChange={(e) => setSelectedThreat(e.target.value)}
-              className="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-primary"
+              className="bg-card border border-border rounded-xl px-3 py-2 text-xs text-foreground focus:outline-none focus:border-primary"
             >
               <option value="All">All Danger Levels</option>
               <option value="Low">Low Threat</option>
@@ -168,7 +168,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-800">
+        <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
           {LOCATION_CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat;
             const count = cat === "All"
@@ -182,7 +182,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                   "text-xs px-3 py-1.5 rounded-full font-semibold transition-all border",
                   isSelected
                     ? "border-primary bg-primary text-white shadow-[0_0_12px_rgba(244,63,94,0.4)]"
-                    : "border-slate-800 bg-slate-900/80 text-slate-300 hover:border-slate-700 hover:bg-slate-900"
+                    : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
                 )}
               >
                 {cat} <span className="opacity-60 text-[10px]">({count})</span>
@@ -196,9 +196,9 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredLocations.length === 0 ? (
           <div className="col-span-full card-carbon p-12 text-center">
-            <HelpCircle className="h-10 w-10 text-slate-500 mx-auto mb-3" />
+            <HelpCircle className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
             <h3 className="font-display text-lg font-bold text-white">No Locations Found</h3>
-            <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
+            <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
               No points of interest match your current search and filter settings.
             </p>
             <button
@@ -218,11 +218,11 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
             return (
               <div
                 key={item.id}
-                className="card-carbon overflow-hidden flex flex-col justify-between border border-slate-800 hover:border-slate-700 transition-all duration-200 group bg-slate-900/60"
+                className="card-carbon overflow-hidden flex flex-col justify-between border border-border hover:border-primary/40 transition-all duration-200 group bg-card/60"
               >
                 <div>
                   {/* Thumbnail Image Header */}
-                  <div className="relative h-44 w-full overflow-hidden bg-slate-950">
+                  <div className="relative h-44 w-full overflow-hidden bg-background">
                     <Image
                       src={item.img}
                       alt={`${item.name} - GTA 6 Location`}
@@ -248,7 +248,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
 
                     {/* Bottom Category & Confidence */}
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-900/90 text-slate-200 border border-slate-700">
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted/80 text-foreground border border-border">
                         {item.category}
                       </span>
                       <ConfidenceBadge confidence={item.confidence} source={item.source} size="sm" />
@@ -268,20 +268,20 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                       </h3>
                     </Link>
 
-                    <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
                       {item.desc}
                     </p>
 
                     {/* Meta info chips */}
-                    <div className="space-y-1.5 pt-1 text-[11px] font-mono text-slate-400">
+                    <div className="space-y-1.5 pt-1 text-[11px] font-mono text-muted-foreground">
                       <div className="flex items-center gap-1.5">
-                        <Clock className="h-3 w-3 text-slate-500" />
+                        <Clock className="h-3 w-3 text-muted-foreground" />
                         <span className="truncate">{item.hours}</span>
                       </div>
 
                       {/* Associated Vehicles or Weapons */}
                       {(item.relatedVehicles?.length || 0) > 0 && (
-                        <div className="flex items-center gap-1.5 text-slate-300 truncate">
+                        <div className="flex items-center gap-1.5 text-muted-foreground truncate">
                           <Car className="h-3 w-3 text-primary flex-shrink-0" />
                           <span className="truncate">
                             Vehicles: {item.relatedVehicles?.join(", ")}
@@ -290,7 +290,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                       )}
 
                       {(item.relatedWeapons?.length || 0) > 0 && (
-                        <div className="flex items-center gap-1.5 text-slate-300 truncate">
+                        <div className="flex items-center gap-1.5 text-muted-foreground truncate">
                           <Crosshair className="h-3 w-3 text-amber-400 flex-shrink-0" />
                           <span className="truncate">
                             Armory: {item.relatedWeapons?.join(", ")}
@@ -302,7 +302,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                 </div>
 
                 {/* Card Footer Actions */}
-                <div className="p-4 pt-0 flex items-center justify-between gap-2 border-t border-slate-800/60 mt-3">
+                <div className="p-4 pt-0 flex items-center justify-between gap-2 border-t border-border/60 mt-3">
                   <Link
                     href={`/map?poi=${item.id}`}
                     className="text-xs font-semibold text-accent hover:underline flex items-center gap-1 py-1"

@@ -312,11 +312,11 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 p-4 bg-muted/50 backdrop-blur-md animate-fade-in">
+      <div className="relative w-full max-w-2xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col">
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 py-3.5 border-b border-slate-800">
-          <Search className="h-5 w-5 text-slate-400 mr-3 flex-shrink-0" />
+        <div className="flex items-center px-4 py-3.5 border-b border-border">
+          <Search className="h-5 w-5 text-muted-foreground mr-3 flex-shrink-0" />
           <input
             ref={inputRef}
             type="text"
@@ -331,20 +331,20 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
           {query && (
             <button
               onClick={() => setQuery("")}
-              className="p-1 text-slate-400 hover:text-white"
+              className="p-1 text-muted-foreground hover:text-white"
             >
               <X className="h-4 w-4" />
             </button>
           )}
-          <kbd className="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-mono font-semibold text-slate-400 bg-slate-800 rounded border border-slate-700">
+          <kbd className="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-mono font-semibold text-muted-foreground bg-muted rounded border border-border">
             ESC
           </kbd>
         </div>
 
         {/* Results List */}
-        <div ref={listRef} className="max-h-96 overflow-y-auto p-2 divide-y divide-slate-800/40">
+        <div ref={listRef} className="max-h-96 overflow-y-auto p-2 divide-y divide-border">
           {filteredResults.length === 0 ? (
-            <div className="p-8 text-center text-xs text-slate-400">
+            <div className="p-8 text-center text-xs text-muted-foreground">
               No results found for &ldquo;{query}&rdquo;. Try &ldquo;map&rdquo;, &ldquo;grotti&rdquo;, &ldquo;m4&rdquo;, or &ldquo;malibu&rdquo;.
             </div>
           ) : (
@@ -357,11 +357,11 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                   onMouseEnter={() => setSelectedIndex(index)}
                   className={cn(
                     "flex items-center justify-between p-3 rounded-xl cursor-pointer transition-colors",
-                    isSelected ? "bg-primary/20 text-white" : "hover:bg-slate-800/50 text-slate-300"
+                    isSelected ? "bg-primary/20 text-white" : "hover:bg-muted/50 text-muted-foreground"
                   )}
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="p-2 rounded-lg bg-slate-800 border border-slate-700/60 flex-shrink-0">
+                    <div className="p-2 rounded-lg bg-muted border border-border flex-shrink-0">
                       {getCategoryIcon(item.category)}
                     </div>
                     <div className="min-w-0">
@@ -369,11 +369,11 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                         <span className="font-display text-sm font-bold text-white truncate">
                           {item.title}
                         </span>
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-slate-800 text-slate-400 font-mono">
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-muted text-muted-foreground font-mono">
                           {item.category}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-400 truncate">{item.subtitle}</p>
+                      <p className="text-xs text-muted-foreground truncate">{item.subtitle}</p>
                     </div>
                   </div>
 
@@ -390,7 +390,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
         </div>
 
         {/* Bottom Footer Helper */}
-        <div className="px-4 py-2.5 bg-slate-950/80 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+        <div className="px-4 py-2.5 bg-muted/50 border-t border-border flex items-center justify-between text-[11px] text-muted-foreground font-mono">
           <span>Navigate with &uarr; &darr; arrow keys</span>
           <span>Press Enter to select</span>
         </div>
