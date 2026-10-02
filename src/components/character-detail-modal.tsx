@@ -60,7 +60,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
       aria-labelledby="modal-character-name"
     >
       <div 
-        className="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-[#0B1020] text-slate-100 shadow-[0_25px_70px_rgba(0,0,0,0.85)] my-auto"
+        className="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-border bg-[#0B1020] text-slate-100 shadow-[0_25px_70px_rgba(0,0,0,0.85)] my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Ambient Top Glow */}
@@ -69,7 +69,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 border border-white/20 text-slate-300 hover:text-white hover:bg-white/10 hover:border-pink-500/50 transition-all backdrop-blur-md"
+          className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 border border-border text-muted-foreground hover:text-white hover:bg-muted/50 hover:border-pink-500/50 transition-all backdrop-blur-md"
           aria-label="Close modal"
         >
           <X className="h-5 w-5" />
@@ -77,7 +77,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
 
         <div className="grid md:grid-cols-12 gap-0">
           {/* Left Column: Perfectly Framed Character Portrait */}
-          <div className="relative md:col-span-5 bg-gradient-to-b from-black/80 to-[#141C2E] min-h-[380px] md:min-h-[540px] flex items-center justify-center overflow-hidden border-b md:border-b-0 md:border-r border-white/10">
+          <div className="relative md:col-span-5 bg-gradient-to-b from-black/80 to-[#141C2E] min-h-[380px] md:min-h-[540px] flex items-center justify-center overflow-hidden border-b md:border-b-0 md:border-r border-border">
             <div className="relative w-full h-full min-h-[380px] md:min-h-[540px]">
               <Image
                 src={character.img}
@@ -136,7 +136,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   {character.name}
                 </h2>
 
-                <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
                   {character.desc}
                 </p>
               </div>
@@ -152,11 +152,11 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
               {/* Biography Section */}
               {character.bio && character.bio.length > 0 && (
                 <div className="space-y-2.5">
-                  <h3 className="text-xs font-mono font-extrabold uppercase tracking-wider text-slate-400">
+                  <h3 className="text-xs font-mono font-extrabold uppercase tracking-wider text-muted-foreground">
                     Background & Narrative Role
                   </h3>
                   {character.bio.map((paragraph, idx) => (
-                    <p key={idx} className="text-xs sm:text-[13px] text-slate-300 leading-relaxed">
+                    <p key={idx} className="text-xs sm:text-[13px] text-muted-foreground leading-relaxed">
                       {paragraph}
                     </p>
                   ))}
@@ -166,64 +166,64 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
               {/* Technical Dossier Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 {character.origin && (
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 flex items-start gap-2.5">
+                  <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[10px] font-mono uppercase text-slate-400 block">Territory / Origin</span>
+                      <span className="text-[10px] font-mono uppercase text-muted-foreground block">Territory / Origin</span>
                       <strong className="text-xs font-semibold text-white">{character.origin}</strong>
                     </div>
                   </div>
                 )}
 
                 {character.vehicle && (
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 flex items-start gap-2.5">
+                  <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <Car className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[10px] font-mono uppercase text-slate-400 block">Signature Ride</span>
+                      <span className="text-[10px] font-mono uppercase text-muted-foreground block">Signature Ride</span>
                       <strong className="text-xs font-semibold text-white">{character.vehicle}</strong>
                     </div>
                   </div>
                 )}
 
                 {character.perk && (
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 flex items-start gap-2.5">
+                  <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <Zap className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[10px] font-mono uppercase text-slate-400 block">Special Perk / Ability</span>
+                      <span className="text-[10px] font-mono uppercase text-muted-foreground block">Special Perk / Ability</span>
                       <strong className="text-xs font-semibold text-white">{character.perk}</strong>
                     </div>
                   </div>
                 )}
 
                 {character.specialty && (
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 flex items-start gap-2.5">
+                  <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <Shield className="w-4 h-4 text-pink-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[10px] font-mono uppercase text-slate-400 block">Specialty</span>
+                      <span className="text-[10px] font-mono uppercase text-muted-foreground block">Specialty</span>
                       <strong className="text-xs font-semibold text-white">{character.specialty}</strong>
                     </div>
                   </div>
                 )}
 
                 {character.affiliation && (
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 flex items-start gap-2.5 sm:col-span-2">
+                  <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5 sm:col-span-2">
                     <Radio className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[10px] font-mono uppercase text-slate-400 block">Known Affiliation</span>
+                      <span className="text-[10px] font-mono uppercase text-muted-foreground block">Known Affiliation</span>
                       <strong className="text-xs font-semibold text-white">{character.affiliation}</strong>
                     </div>
                   </div>
                 )}
 
                 {character.weapons && character.weapons.length > 0 && (
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 sm:col-span-2 space-y-1.5">
+                  <div className="rounded-xl border border-border bg-muted/40 p-3 sm:col-span-2 space-y-1.5">
                     <div className="flex items-center gap-2">
                       <Crosshair className="w-4 h-4 text-rose-400 shrink-0" />
-                      <span className="text-[10px] font-mono uppercase text-slate-400">Weapon Loadout</span>
+                      <span className="text-[10px] font-mono uppercase text-muted-foreground">Weapon Loadout</span>
                     </div>
                     <div className="flex flex-wrap gap-1.5 pt-0.5">
                       {character.weapons.map((w) => (
-                        <span key={w} className="px-2 py-0.5 rounded-md bg-black/50 border border-white/15 text-[11px] font-mono text-slate-200">
+                        <span key={w} className="px-2 py-0.5 rounded-md bg-muted/70 border border-border text-[11px] font-mono text-foreground">
                           {w}
                         </span>
                       ))}
@@ -236,7 +236,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
               {character.tags && character.tags.length > 0 && (
                 <div className="flex flex-wrap items-center gap-1.5 pt-1">
                   {character.tags.map((tag) => (
-                    <span key={tag} className="text-[10px] font-mono text-slate-400 bg-white/5 border border-white/10 px-2.5 py-0.5 rounded-full">
+                    <span key={tag} className="text-[10px] font-mono text-muted-foreground bg-muted/40 border border-border px-2.5 py-0.5 rounded-full">
                       #{tag}
                     </span>
                   ))}
@@ -246,15 +246,15 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
             </div>
 
             {/* Modal Footer */}
-            <div className="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-              <span className="text-[11px] text-slate-400">
+            <div className="mt-6 pt-4 border-t border-border flex flex-wrap items-center justify-between gap-3">
+              <span className="text-[11px] text-muted-foreground">
                 Voice Actor: <strong className="text-white">{character.voiceActor || "Rockstar Games Cast"}</strong>
               </span>
 
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleShare}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 hover:text-white transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-muted/40 hover:bg-muted/50 border border-border text-foreground hover:text-white transition-all"
                 >
                   {copied ? (
                     <>

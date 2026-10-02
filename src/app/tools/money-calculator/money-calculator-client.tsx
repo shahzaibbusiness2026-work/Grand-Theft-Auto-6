@@ -99,7 +99,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               "rounded-xl px-3 py-1.5 text-xs font-semibold transition-all border",
               targetMoney === p.target
                 ? "border-accent bg-accent/20 text-foreground font-bold shadow-sm"
-                : "border-border bg-black/40 text-muted-foreground hover:border-border hover:text-foreground"
+                : "border-border bg-muted/60 text-muted-foreground hover:border-border hover:text-foreground"
             )}
           >
             {p.label}
@@ -135,7 +135,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               step={5000}
               value={currentMoney}
               onChange={(e) => setCurrentMoney(Math.max(0, Number(e.target.value)))}
-              className="w-full rounded-xl border border-border bg-black/50 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
+              className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
@@ -151,7 +151,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               step={10000}
               value={targetMoney}
               onChange={(e) => setTargetMoney(Math.max(1, Number(e.target.value)))}
-              className="w-full rounded-xl border border-border bg-black/50 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
+              className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
@@ -167,7 +167,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               step={5000}
               value={incomePerMission}
               onChange={(e) => setIncomePerMission(Math.max(1, Number(e.target.value)))}
-              className="w-full rounded-xl border border-border bg-black/50 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
+              className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
@@ -183,7 +183,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               step={10000}
               value={incomePerHour}
               onChange={(e) => setIncomePerHour(Math.max(1, Number(e.target.value)))}
-              className="w-full rounded-xl border border-border bg-black/50 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
+              className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
@@ -229,7 +229,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
             </div>
 
             {/* Progress Bar */}
-            <div className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-black/60 border border-border">
+            <div className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-muted/80 border border-border">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-accent via-purple-500 to-[#00F0FF] transition-all duration-500"
                 style={{ width: `${calculations.progressPct}%` }}
@@ -238,25 +238,25 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
 
             {/* 4 Output Metrics */}
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+              <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <Briefcase className="h-4 w-4 text-accent mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-foreground">{calculations.missionsNeeded}</span>
                 <span className="block text-[10px] uppercase font-bold text-muted-foreground">Missions Needed</span>
               </div>
 
-              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+              <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <Clock className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF] mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-foreground">{calculations.hoursNeeded}h</span>
                 <span className="block text-[10px] uppercase font-bold text-muted-foreground">Hours Needed</span>
               </div>
 
-              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+              <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <Calendar className="h-4 w-4 text-amber-400 mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-foreground">{calculations.daysNeeded}</span>
                 <span className="block text-[10px] uppercase font-bold text-muted-foreground">Playing Days</span>
               </div>
 
-              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+              <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <TrendingUp className="h-4 w-4 text-emerald-400 mx-auto mb-1" />
                 <span className="font-mono text-xs font-black text-emerald-300 block truncate">
                   {calculations.completionDateStr}
@@ -292,7 +292,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
             </h3>
             <div className="space-y-2.5">
               {canonicalMoneyMethods.slice(0, 3).map((m) => (
-                <div key={m.id} className="rounded-2xl border border-border bg-black/40 p-3.5 flex items-center justify-between gap-3">
+                <div key={m.id} className="rounded-2xl border border-border bg-muted/60 p-3.5 flex items-center justify-between gap-3">
                   <div>
                     <h4 className="font-display text-sm font-bold text-foreground">{m.title}</h4>
                     <p className="text-[11px] text-muted-foreground">{m.timeToPayout} &bull; Difficulty: {m.difficulty}</p>
@@ -315,9 +315,9 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
             <Info className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> How the Formula Works
           </h3>
           <p className="text-xs leading-relaxed text-muted-foreground">
-            The remaining cash needed is calculated via <code className="bg-black/60 px-1.5 py-0.5 rounded text-amber-400">Target - Current Cash</code>.
-            Total grinding hours equal <code className="bg-black/60 px-1.5 py-0.5 rounded text-cyan-600 dark:text-[#00F0FF]">Remaining / Hourly Earnings</code>.
-            Real-world days needed equal <code className="bg-black/60 px-1.5 py-0.5 rounded text-amber-400">Hours Needed / Daily Playtime</code>.
+            The remaining cash needed is calculated via <code className="bg-muted/80 px-1.5 py-0.5 rounded text-amber-400">Target - Current Cash</code>.
+            Total grinding hours equal <code className="bg-muted/80 px-1.5 py-0.5 rounded text-cyan-600 dark:text-[#00F0FF]">Remaining / Hourly Earnings</code>.
+            Real-world days needed equal <code className="bg-muted/80 px-1.5 py-0.5 rounded text-amber-400">Hours Needed / Daily Playtime</code>.
           </p>
         </div>
 

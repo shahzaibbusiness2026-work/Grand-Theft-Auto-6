@@ -58,27 +58,27 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
   return (
     <div className="space-y-8">
       {/* Controls Container */}
-      <div className="card-surface p-5 rounded-3xl border border-white/10 shadow-xl space-y-4">
+      <div className="card-surface p-5 rounded-3xl border border-border shadow-xl space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           {/* Search */}
           <div className="relative flex-1 max-w-md">
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search missions, districts, or objectives..."
-              className="w-full rounded-xl border border-white/10 bg-black/40 py-2.5 pl-10 pr-4 text-xs text-white placeholder:text-slate-500 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+              className="w-full rounded-xl border-border bg-muted/60 py-2.5 pl-10 pr-4 text-xs text-white placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             />
           </div>
 
           {/* Sort pills */}
-          <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-black/30 p-1">
+          <div className="flex items-center gap-1 rounded-xl border border-border bg-muted/50 p-1">
             <button
               onClick={() => setSortBy("default")}
               className={cn(
                 "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                sortBy === "default" ? "bg-accent text-white font-bold" : "text-slate-400 hover:text-white"
+                sortBy === "default" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
               )}
             >
               Default
@@ -87,7 +87,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
               onClick={() => setSortBy("reward")}
               className={cn(
                 "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                sortBy === "reward" ? "bg-accent text-white font-bold" : "text-slate-400 hover:text-white"
+                sortBy === "reward" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
               )}
             >
               Highest Payout
@@ -96,7 +96,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
               onClick={() => setSortBy("title")}
               className={cn(
                 "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                sortBy === "title" ? "bg-accent text-white font-bold" : "text-slate-400 hover:text-white"
+                sortBy === "title" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
               )}
             >
               Title A–Z
@@ -105,10 +105,10 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
         </div>
 
         {/* Filter Pills */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-border">
           {/* Type */}
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Mission Type:</span>
+            <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Mission Type:</span>
             <div className="flex flex-wrap gap-1">
               {TYPES.map((t) => (
                 <button
@@ -117,8 +117,8 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   className={cn(
                     "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
                     selectedType === t
-                      ? "bg-[#00F0FF] text-black font-bold shadow-sm"
-                      : "bg-white/5 text-slate-400 hover:text-white"
+                      ? "bg-cyan-500 dark:bg-[#00F0FF] text-black font-bold shadow-sm"
+                      : "bg-muted/40 text-muted-foreground hover:text-white"
                   )}
                 >
                   {t}
@@ -129,7 +129,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
           {/* Character */}
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Operative:</span>
+            <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Operative:</span>
             <div className="flex flex-wrap gap-1">
               {CHARACTERS.map((c) => (
                 <button
@@ -139,7 +139,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                     "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
                     selectedChar === c
                       ? "bg-accent text-white font-bold shadow-sm"
-                      : "bg-white/5 text-slate-400 hover:text-white"
+                      : "bg-muted/40 text-muted-foreground hover:text-white"
                   )}
                 >
                   {c}
@@ -150,7 +150,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
           {/* Difficulty */}
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Threat Level:</span>
+            <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Threat Level:</span>
             <div className="flex flex-wrap gap-1">
               {DIFFICULTIES.map((d) => (
                 <button
@@ -160,7 +160,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                     "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
                     selectedDiff === d
                       ? "bg-amber-400 text-black font-bold shadow-sm"
-                      : "bg-white/5 text-slate-400 hover:text-white"
+                      : "bg-muted/40 text-muted-foreground hover:text-white"
                   )}
                 >
                   {d}
@@ -174,15 +174,15 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
       {/* Grid of Missions */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Showing <span className="text-white font-mono">{filteredMissions.length}</span> Verified Missions & Contracts
           </p>
         </div>
 
         {filteredMissions.length === 0 ? (
-          <div className="card-surface p-12 text-center rounded-3xl border border-white/10">
+          <div className="card-surface p-12 text-center rounded-3xl border border-border">
             <p className="font-display text-lg font-bold text-white">No missions found matching your filters</p>
-            <p className="text-xs text-slate-400 mt-1">Try resetting your search query or selecting &ldquo;All Types&rdquo;.</p>
+            <p className="text-xs text-muted-foreground mt-1">Try resetting your search query or selecting &ldquo;All Types&rdquo;.</p>
             <button
               onClick={() => {
                 setSearch("");
@@ -200,7 +200,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
             {filteredMissions.map((m) => (
               <div
                 key={m.id}
-                className="group card-surface relative rounded-3xl border border-white/10 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-2xl"
+                className="group card-surface relative rounded-3xl border border-border overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-2xl"
               >
                 {/* Image Banner */}
                 <div className="relative h-44 overflow-hidden bg-black/60">
@@ -223,10 +223,10 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   </div>
 
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-amber-400 bg-black/80 px-2 py-0.5 rounded border border-white/10 backdrop-blur">
+                    <span className="font-mono text-xs font-bold text-amber-400 bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
                       {m.cashRewardDisplay}
                     </span>
-                    <span className="text-[10px] font-semibold text-slate-300 bg-black/80 px-2 py-0.5 rounded border border-white/10 backdrop-blur">
+                    <span className="text-[10px] font-semibold text-muted-foreground bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
                       ⏱ {m.duration}
                     </span>
                   </div>
@@ -235,26 +235,26 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                 {/* Content */}
                 <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#00F0FF] uppercase mb-1">
+                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-cyan-600 dark:text-[#00F0FF] uppercase mb-1">
                       <Users className="h-3 w-3" />
                       <span>{m.character} &bull; {m.district}</span>
                     </div>
                     <h3 className="font-display text-base font-black text-white group-hover:text-accent transition-colors leading-snug">
                       {m.title}
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-slate-300 line-clamp-2">
+                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">
                       {m.description}
                     </p>
                   </div>
 
                   {/* Objectives summary */}
-                  <div className="rounded-2xl border border-white/5 bg-black/40 p-3 space-y-1 text-xs">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Key Objective:</span>
-                    <p className="text-[11px] text-slate-200 truncate">🎯 {m.objectives[0]}</p>
+                  <div className="rounded-2xl border-border bg-muted/60 p-3 space-y-1 text-xs">
+                    <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Key Objective:</span>
+                    <p className="text-[11px] text-foreground truncate">🎯 {m.objectives[0]}</p>
                   </div>
 
                   {/* Card Footer */}
-                  <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+                  <div className="pt-2 border-t border-border flex items-center justify-between">
                     <span className={cn(
                       "text-[10px] font-black uppercase px-2 py-0.5 rounded border",
                       m.difficulty === "Easy" && "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",

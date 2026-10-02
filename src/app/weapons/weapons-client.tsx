@@ -27,7 +27,7 @@ const rarityStyles: Record<string, string> = {
   Featured: "bg-accent/15 text-accent border-accent/40",
   Legendary: "bg-amber-500/15 text-amber-400 border-amber-500/40",
   Epic: "bg-purple-500/15 text-purple-400 border-purple-500/40",
-  Rare: "bg-[#00F0FF]/15 text-[#00F0FF] border-[#00F0FF]/40",
+  Rare: "bg-cyan-500 dark:bg-[#00F0FF]/15 text-cyan-600 dark:text-[#00F0FF] border-cyan-500 dark:border-[#00F0FF]/40",
   Common: "bg-muted text-muted-foreground border-border",
 };
 
@@ -77,26 +77,26 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
   return (
     <div className="space-y-8">
       {/* Controls */}
-      <div className="card-surface p-5 rounded-2xl border border-white/10 shadow-lg space-y-4">
+      <div className="card-surface p-5 rounded-2xl border border-border shadow-lg space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="relative flex-1 max-w-md">
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search firearms, shotguns, sniper rifles..."
-              className="w-full rounded-xl border border-white/10 bg-black/40 py-2.5 pl-10 pr-4 text-xs text-white placeholder:text-slate-500 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+              className="w-full rounded-xl border-border bg-muted/60 py-2.5 pl-10 pr-4 text-xs text-white placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-black/30 p-1">
+            <div className="flex items-center gap-1 rounded-xl border border-border bg-muted/50 p-1">
               <button
                 onClick={() => setSortBy("damage")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "damage" ? "bg-accent text-white font-bold" : "text-slate-400 hover:text-white"
+                  sortBy === "damage" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
                 )}
               >
                 Damage
@@ -105,7 +105,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("fireRate")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "fireRate" ? "bg-accent text-white font-bold" : "text-slate-400 hover:text-white"
+                  sortBy === "fireRate" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
                 )}
               >
                 Fire Rate
@@ -114,7 +114,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("range")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "range" ? "bg-accent text-white font-bold" : "text-slate-400 hover:text-white"
+                  sortBy === "range" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
                 )}
               >
                 Range
@@ -123,7 +123,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("price")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "price" ? "bg-accent text-white font-bold" : "text-slate-400 hover:text-white"
+                  sortBy === "price" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
                 )}
               >
                 Price
@@ -141,7 +141,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
         </div>
 
         {/* Category Pills */}
-        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
+        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-border">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
@@ -150,7 +150,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 "rounded-lg px-3 py-1 text-xs font-semibold transition-all",
                 selectedCat === cat
                   ? "bg-gradient-to-r from-primary to-accent text-white font-bold shadow-sm"
-                  : "bg-white/5 text-slate-400 hover:text-white"
+                  : "bg-muted/40 text-muted-foreground hover:text-white"
               )}
             >
               {cat}
@@ -162,15 +162,15 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
       {/* Grid of Weapons */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Showing <span className="text-white font-mono">{filteredWeapons.length}</span> Verified Weapons
           </p>
         </div>
 
         {filteredWeapons.length === 0 ? (
-          <div className="card-surface p-12 text-center rounded-2xl border border-white/10">
+          <div className="card-surface p-12 text-center rounded-2xl border border-border">
             <p className="font-display text-lg font-bold text-white">No weapons found</p>
-            <p className="text-xs text-slate-400 mt-1">Try resetting your search query.</p>
+            <p className="text-xs text-muted-foreground mt-1">Try resetting your search query.</p>
           </div>
         ) : (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -179,10 +179,10 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
               return (
                 <div
                   key={w.id}
-                  className="group card-surface relative rounded-3xl border border-white/10 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl"
+                  className="group card-surface relative rounded-3xl border border-border overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl"
                 >
                   {/* Weapon image */}
-                  <div className="relative h-44 overflow-hidden bg-gradient-to-br from-[#0c0517] via-black/90 to-[#170a1f] p-4 flex items-center justify-center">
+                  <div className="relative h-44 overflow-hidden bg-gradient-to-br from-card dark:from-[#0c0517] via-black/90 to-[#170a1f] p-4 flex items-center justify-center">
                     <Image
                       src={w.img}
                       alt={`${w.name} - GTA 6 Weapon (${w.klass})`}
@@ -223,13 +223,13 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       <h3 className="font-display text-base font-black text-white group-hover:text-accent transition-colors truncate">
                         {w.name}
                       </h3>
-                      <p className="text-[11px] text-slate-400 mt-0.5">{w.klass} &bull; {w.ammoType}</p>
+                      <p className="text-[11px] text-muted-foreground mt-0.5">{w.klass} &bull; {w.ammoType}</p>
                     </div>
 
                     {/* Stats */}
-                    <div className="space-y-2 border-t border-white/10 pt-3 text-xs">
+                    <div className="space-y-2 border-t border-border pt-3 text-xs">
                       <div>
-                        <div className="flex justify-between text-[11px] font-semibold text-slate-300">
+                        <div className="flex justify-between text-[11px] font-semibold text-muted-foreground">
                           <span>Damage</span>
                           <span className="font-mono text-white font-bold">{w.damage}/100</span>
                         </div>
@@ -237,7 +237,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       </div>
 
                       <div>
-                        <div className="flex justify-between text-[11px] font-semibold text-slate-300">
+                        <div className="flex justify-between text-[11px] font-semibold text-muted-foreground">
                           <span>Fire Rate</span>
                           <span className="font-mono text-white font-bold">{w.fireRate}/100</span>
                         </div>
@@ -246,8 +246,8 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                     </div>
 
                     {/* Footer */}
-                    <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-                      <span className="font-mono text-xs font-black text-[#00F0FF]">{w.priceDisplay}</span>
+                    <div className="pt-3 border-t border-border flex items-center justify-between">
+                      <span className="font-mono text-xs font-black text-cyan-600 dark:text-[#00F0FF]">{w.priceDisplay}</span>
                       <Link
                         href={`/weapons/${w.slug}`}
                         className="inline-flex items-center gap-1 text-xs font-bold text-accent hover:text-white transition-colors"

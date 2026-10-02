@@ -134,7 +134,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 "rounded-xl px-3 py-1.5 text-xs font-semibold transition-all border",
                 bizA.name === p.name
                   ? "border-accent bg-accent/20 text-foreground font-bold shadow-sm"
-                  : "border-border bg-black/40 text-muted-foreground hover:border-border hover:text-foreground"
+                  : "border-border bg-muted/60 text-muted-foreground hover:border-border hover:text-foreground"
               )}
             >
               {p.name.split(" ")[0]} {p.name.split(" ")[1]}
@@ -147,7 +147,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
           className={cn(
             "rounded-xl px-3.5 py-1.5 text-xs font-bold transition-all border",
             compareMode
-              ? "border-cyan-500 dark:border-[#00F0FF] bg-[#00F0FF]/20 text-cyan-600 dark:text-[#00F0FF]"
+              ? "border-cyan-500 dark:border-[#00F0FF] bg-cyan-500 dark:bg-[#00F0FF]/20 text-cyan-600 dark:text-[#00F0FF]"
               : "border-border bg-muted/40 text-muted-foreground hover:text-foreground"
           )}
         >
@@ -179,7 +179,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 step={50000}
                 value={bizA.purchasePrice}
                 onChange={(e) => setBizA({ ...bizA, purchasePrice: Number(e.target.value) })}
-                className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
+                className="w-full rounded-xl border border-border bg-muted/70 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
               />
             </div>
 
@@ -194,7 +194,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 step={25000}
                 value={bizA.upgradeCost}
                 onChange={(e) => setBizA({ ...bizA, upgradeCost: Number(e.target.value) })}
-                className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
+                className="w-full rounded-xl border border-border bg-muted/70 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
               />
             </div>
 
@@ -209,7 +209,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 step={1000}
                 value={bizA.grossRevenuePerHour}
                 onChange={(e) => setBizA({ ...bizA, grossRevenuePerHour: Number(e.target.value) })}
-                className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
+                className="w-full rounded-xl border border-border bg-muted/70 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
               />
             </div>
 
@@ -224,7 +224,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 step={500}
                 value={bizA.operatingCostPerHour}
                 onChange={(e) => setBizA({ ...bizA, operatingCostPerHour: Number(e.target.value) })}
-                className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
+                className="w-full rounded-xl border border-border bg-muted/70 p-2.5 text-xs font-mono text-foreground focus:border-accent focus:outline-none"
               />
             </div>
 
@@ -255,15 +255,15 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+              <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <span className="block text-[10px] uppercase font-bold text-muted-foreground">Net Profit / Hr</span>
                 <span className="font-mono text-lg font-black text-emerald-400">+${metricsA.netProfitPerHour.toLocaleString()}</span>
               </div>
-              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+              <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <span className="block text-[10px] uppercase font-bold text-muted-foreground">Daily Cash Take</span>
                 <span className="font-mono text-lg font-black text-foreground">+${metricsA.netProfitPerDay.toLocaleString()}</span>
               </div>
-              <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+              <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <span className="block text-[10px] uppercase font-bold text-muted-foreground">Weekly Payout</span>
                 <span className="font-mono text-lg font-black text-purple-300">+${metricsA.netProfitPerWeek.toLocaleString()}</span>
               </div>
@@ -275,7 +275,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 <span className="font-mono text-lg font-black text-amber-300">{metricsA.breakEvenHours} hrs</span>
                 <span className="block text-[10px] uppercase font-bold text-muted-foreground">Break-Even ({metricsA.breakEvenDays} days)</span>
               </div>
-              <div className="rounded-2xl border border-cyan-500 dark:border-[#00F0FF]/30 bg-[#00F0FF]/10 p-3.5 text-center">
+              <div className="rounded-2xl border border-cyan-500 dark:border-[#00F0FF]/30 bg-cyan-500 dark:bg-[#00F0FF]/10 p-3.5 text-center">
                 <TrendingUp className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF] mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-cyan-600 dark:text-[#00F0FF]">{metricsA.annualRoiPct}%</span>
                 <span className="block text-[10px] uppercase font-bold text-muted-foreground">Annual Return Rate</span>
@@ -312,7 +312,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                   step={50000}
                   value={bizB.purchasePrice}
                   onChange={(e) => setBizB({ ...bizB, purchasePrice: Number(e.target.value) })}
-                  className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-muted/70 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
                 />
               </div>
 
@@ -326,7 +326,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                   step={25000}
                   value={bizB.upgradeCost}
                   onChange={(e) => setBizB({ ...bizB, upgradeCost: Number(e.target.value) })}
-                  className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-muted/70 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
                 />
               </div>
 
@@ -340,7 +340,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                   step={1000}
                   value={bizB.grossRevenuePerHour}
                   onChange={(e) => setBizB({ ...bizB, grossRevenuePerHour: Number(e.target.value) })}
-                  className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-muted/70 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
                 />
               </div>
 
@@ -354,7 +354,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                   step={500}
                   value={bizB.operatingCostPerHour}
                   onChange={(e) => setBizB({ ...bizB, operatingCostPerHour: Number(e.target.value) })}
-                  className="w-full rounded-xl border border-border bg-black/50 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-muted/70 p-2.5 text-xs font-mono text-foreground focus:border-cyan-500 dark:border-[#00F0FF] focus:outline-none"
                 />
               </div>
 
@@ -384,15 +384,15 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+                <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                   <span className="block text-[10px] uppercase font-bold text-muted-foreground">Net Profit / Hr</span>
                   <span className="font-mono text-lg font-black text-emerald-400">+${metricsB.netProfitPerHour.toLocaleString()}</span>
                 </div>
-                <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+                <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                   <span className="block text-[10px] uppercase font-bold text-muted-foreground">Daily Cash Take</span>
                   <span className="font-mono text-lg font-black text-foreground">+${metricsB.netProfitPerDay.toLocaleString()}</span>
                 </div>
-                <div className="rounded-2xl border border-border bg-black/40 p-3.5 text-center">
+                <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                   <span className="block text-[10px] uppercase font-bold text-muted-foreground">Weekly Payout</span>
                   <span className="font-mono text-lg font-black text-purple-300">+${metricsB.netProfitPerWeek.toLocaleString()}</span>
                 </div>
@@ -404,7 +404,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                   <span className="font-mono text-lg font-black text-amber-300">{metricsB.breakEvenHours} hrs</span>
                   <span className="block text-[10px] uppercase font-bold text-muted-foreground">Break-Even ({metricsB.breakEvenDays} days)</span>
                 </div>
-                <div className="rounded-2xl border border-cyan-500 dark:border-[#00F0FF]/30 bg-[#00F0FF]/10 p-3.5 text-center">
+                <div className="rounded-2xl border border-cyan-500 dark:border-[#00F0FF]/30 bg-cyan-500 dark:bg-[#00F0FF]/10 p-3.5 text-center">
                   <TrendingUp className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF] mx-auto mb-1" />
                   <span className="font-mono text-lg font-black text-cyan-600 dark:text-[#00F0FF]">{metricsB.annualRoiPct}%</span>
                   <span className="block text-[10px] uppercase font-bold text-muted-foreground">Annual Return Rate</span>

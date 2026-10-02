@@ -139,19 +139,19 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
 
             {/* Quick Metrics Bar */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
-              <div className="rounded-2xl border border-white/10 bg-black/50 p-3 text-center">
+              <div className="rounded-2xl border border-white/10 bg-muted/70 p-3 text-center">
                 <span className="block text-[10px] uppercase font-bold text-slate-400">Operative</span>
                 <span className="font-display text-sm font-black text-accent">{mission.character}</span>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-black/50 p-3 text-center">
+              <div className="rounded-2xl border border-white/10 bg-muted/70 p-3 text-center">
                 <span className="block text-[10px] uppercase font-bold text-slate-400">Cash Payout</span>
                 <span className="font-mono text-sm font-black text-amber-400">{mission.cashRewardDisplay}</span>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-black/50 p-3 text-center">
+              <div className="rounded-2xl border border-white/10 bg-muted/70 p-3 text-center">
                 <span className="block text-[10px] uppercase font-bold text-slate-400">Duration</span>
                 <span className="font-display text-sm font-black text-white">{mission.duration}</span>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-black/50 p-3 text-center">
+              <div className="rounded-2xl border border-white/10 bg-muted/70 p-3 text-center">
                 <span className="block text-[10px] uppercase font-bold text-slate-400">Difficulty</span>
                 <span className="font-display text-sm font-black text-[#00F0FF]">{mission.difficulty}</span>
               </div>
@@ -168,7 +168,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             </h2>
             <ul className="mt-4 space-y-3">
               {mission.objectives.map((obj, i) => (
-                <li key={obj} className="flex items-start gap-3 rounded-xl border border-white/5 bg-black/40 p-3 text-xs text-slate-200">
+                <li key={obj} className="flex items-start gap-3 rounded-xl border border-white/5 bg-muted/60 p-3 text-xs text-slate-200">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/20 font-bold text-amber-400 text-[10px]">
                     {i + 1}
                   </span>
@@ -201,7 +201,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               </h2>
               <div className="mt-4 space-y-2.5">
                 {mission.choices.map((c, i) => (
-                  <div key={c} className="rounded-xl border border-white/10 bg-black/40 p-3 text-xs text-slate-300">
+                  <div key={c} className="rounded-xl border border-white/10 bg-muted/60 p-3 text-xs text-slate-300">
                     <span className="block text-[10px] uppercase font-bold text-amber-400 mb-1">
                       Approach #{i + 1}:
                     </span>

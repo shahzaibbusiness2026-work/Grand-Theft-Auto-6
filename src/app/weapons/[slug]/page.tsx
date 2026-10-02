@@ -137,7 +137,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
         </nav>
 
         {/* HERO BANNER */}
-        <div className="card-surface relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl p-6 sm:p-10">
+        <div className="card-surface relative overflow-hidden rounded-3xl border border-border shadow-2xl p-6 sm:p-10">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/10" />
 
           <div className="relative grid gap-8 lg:grid-cols-2 items-center">
@@ -153,7 +153,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 {weapon.name}
               </h1>
 
-              <p className="text-sm leading-relaxed text-slate-300">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 {weapon.description}
               </p>
 
@@ -169,15 +169,15 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
             </div>
 
             {/* Weapon Visual Showcase */}
-            <div className="relative h-64 sm:h-72 rounded-2xl border border-primary/30 bg-gradient-to-br from-[#0c0517] via-black/80 to-[#150a1d] p-6 flex items-center justify-center shadow-inner group">
+            <div className="relative h-64 sm:h-72 rounded-2xl border border-primary/30 bg-gradient-to-br from-card dark:from-[#0c0517] via-black/80 to-[#150a1d] p-6 flex items-center justify-center shadow-inner group">
               <img
                 src={weapon.img}
                 alt={weapon.name}
                 className="max-h-52 w-full object-contain mix-blend-lighten brightness-125 transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-white/10">
-                <span className="font-bold text-slate-300 uppercase tracking-wider text-[10px]">Purchase Price</span>
-                <span className="font-mono font-black text-[#00F0FF] text-sm">{weapon.priceDisplay}</span>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-border">
+                <span className="font-bold text-muted-foreground uppercase tracking-wider text-[10px]">Purchase Price</span>
+                <span className="font-mono font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{weapon.priceDisplay}</span>
               </div>
             </div>
           </div>
@@ -186,7 +186,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
         {/* BALLISTIC STATS & SPECS */}
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Stat Bars */}
-          <div className="card-surface p-6 rounded-3xl border border-white/10">
+          <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
               <Crosshair className="h-4 w-4 text-accent" /> Ballistic Combat Ratings
             </h2>
@@ -194,7 +194,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
               {statBars.map((s) => (
                 <div key={s.label} className="space-y-1.5">
                   <div className="flex justify-between text-xs font-semibold">
-                    <span className="text-slate-300">{s.label}</span>
+                    <span className="text-muted-foreground">{s.label}</span>
                     <span className="font-mono font-bold text-white">{s.value}</span>
                   </div>
                   <Progress value={s.pct} className="h-2" />
@@ -202,26 +202,26 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
               ))}
             </div>
 
-            <div className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-3.5 text-xs text-slate-300">
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase text-slate-400 mb-1">
+            <div className="mt-6 rounded-2xl border-border bg-muted/60 p-3.5 text-xs text-muted-foreground">
+              <div className="flex items-center gap-2 text-[10px] font-bold uppercase text-muted-foreground mb-1">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
                 <span>Verified Source Citation</span>
               </div>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-muted-foreground">
                 <strong>Source:</strong> {weapon.source}. Confidence level: <strong>{weapon.confidence}</strong>.
               </p>
             </div>
           </div>
 
           {/* Quick Specifications */}
-          <div className="card-surface p-6 rounded-3xl border border-white/10">
+          <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
               <Wrench className="h-4 w-4 text-primary" /> Caliber & Mechanics Specs
             </h2>
-            <dl className="mt-4 divide-y divide-white/10">
+            <dl className="mt-4 divide-y divide-border">
               {quickSpecs.map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5 text-xs">
-                  <dt className="text-slate-400 font-medium">{k}</dt>
+                  <dt className="text-muted-foreground font-medium">{k}</dt>
                   <dd className="font-bold text-white">{v}</dd>
                 </div>
               ))}
@@ -232,15 +232,15 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
         {/* ATTACHMENTS & LOCATIONS */}
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Attachments */}
-          <div className="card-surface p-6 rounded-3xl border border-white/10">
+          <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
-              <Sparkles className="h-4 w-4 text-[#00F0FF]" /> Supported Attachments & Upgrades
+              <Sparkles className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> Supported Attachments & Upgrades
             </h2>
-            <p className="text-xs text-slate-400 mt-1">Modular upgrades compatible with this firearm:</p>
+            <p className="text-xs text-muted-foreground mt-1">Modular upgrades compatible with this firearm:</p>
             <div className="mt-4 grid grid-cols-2 gap-2.5">
               {weapon.attachments.map((att) => (
-                <div key={att} className="rounded-xl border border-white/10 bg-black/40 p-3 text-xs text-slate-200 font-medium flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#00F0FF]" />
+                <div key={att} className="rounded-xl border-border bg-muted/60 p-3 text-xs text-foreground font-medium flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 dark:bg-[#00F0FF]" />
                   <span>{att}</span>
                 </div>
               ))}
@@ -248,13 +248,13 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
           </div>
 
           {/* Where to find */}
-          <div className="card-surface p-6 rounded-3xl border border-white/10">
+          <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
               <MapPin className="h-4 w-4 text-emerald-400" /> Acquisition & Drop Locations
             </h2>
             <ul className="mt-4 space-y-2.5">
               {weapon.locations.map((loc, i) => (
-                <li key={loc} className="flex items-center gap-3 rounded-xl border border-white/5 bg-black/40 p-3 text-xs text-slate-300">
+                <li key={loc} className="flex items-center gap-3 rounded-xl border-border bg-muted/60 p-3 text-xs text-muted-foreground">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent font-bold text-[10px]">
                     {i + 1}
                   </span>

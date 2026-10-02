@@ -750,5 +750,23 @@
   color: #f8fafc !important;
 }
 
+/* --------------------------------------------------------------------
+   .dark-panel — opt-in marker for components with permanent dark
+   gradients (e.g. compare winner banner). Their text stays light in
+   bright mode, exempt from the blanket .light .text-white flip.
+   -------------------------------------------------------------------- */
+.light .dark-panel,
+.light .dark-panel .text-white,
+.light .dark-panel .text-foreground {
+  color: #f8fafc !important;
+}
+.light .dark-panel .text-muted-foreground {
+  color: #e2e8f0 !important;
+}
+/* Winner banner keeps its dark base under the gradient */
+.light .dark-panel.bg-\[\#0a0f1d\] {
+  background-color: #0a0f1d !important;
+}
+
 
 

@@ -152,7 +152,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         </nav>
 
         {/* HERO BANNER */}
-        <div className="card-surface relative mt-4 overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
+        <div className="card-surface relative mt-4 overflow-hidden rounded-3xl border border-border shadow-2xl">
           <ThemeImage
             dark="/img/hero-dark.jpg"
             light="/img/hero-light.jpg"
@@ -174,7 +174,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                 {vehicle.name}
               </h1>
 
-              <p className="mt-4 max-w-lg text-sm leading-relaxed text-slate-300 font-medium">
+              <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground font-medium">
                 {vehicle.description}
               </p>
 
@@ -192,22 +192,22 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                   variant="outline"
                   className="text-xs font-semibold"
                 >
-                  <MapPin className="h-3.5 w-3.5 mr-1 text-[#00F0FF]" /> Find on Satellite Map
+                  <MapPin className="h-3.5 w-3.5 mr-1 text-cyan-600 dark:text-[#00F0FF]" /> Find on Satellite Map
                 </Button>
               </div>
             </div>
 
             {/* Vehicle Card Hero Visual */}
-            <div className="relative h-64 sm:h-80 overflow-hidden rounded-2xl border border-white/10 bg-black/60 shadow-inner group">
+            <div className="relative h-64 sm:h-80 overflow-hidden rounded-2xl border border-border bg-black/60 shadow-inner group">
               <img
                 src={vehicle.img}
                 alt={vehicle.name}
                 style={vehicle.filter ? { filter: vehicle.filter } : undefined}
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-white/10">
-                <span className="font-bold text-slate-300 uppercase tracking-wider text-[10px]">Showroom Price</span>
-                <span className="font-display font-black text-[#00F0FF] text-sm">{vehicle.priceDisplay}</span>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-border">
+                <span className="font-bold text-muted-foreground uppercase tracking-wider text-[10px]">Showroom Price</span>
+                <span className="font-display font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{vehicle.priceDisplay}</span>
               </div>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         {/* PERFORMANCE STATS & SPECIFICATIONS */}
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Performance Bars */}
-          <div className="card-surface p-6 rounded-3xl border border-white/10">
+          <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
               <Gauge className="h-4 w-4 text-accent" /> Dyno Performance Metrics
             </h2>
@@ -224,7 +224,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
               {statBars.map((s) => (
                 <div key={s.label} className="space-y-1.5">
                   <div className="flex justify-between text-xs font-semibold">
-                    <span className="flex items-center gap-1.5 text-slate-300">
+                    <span className="flex items-center gap-1.5 text-muted-foreground">
                       <s.icon className="h-3.5 w-3.5 text-accent" /> {s.label}
                     </span>
                     <span className="font-mono font-bold text-white">{s.value}</span>
@@ -235,26 +235,26 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             </div>
 
             {/* Source transparency block */}
-            <div className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-3.5 text-xs text-slate-300 space-y-1">
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase text-slate-400">
+            <div className="mt-6 rounded-2xl border-border bg-muted/60 p-3.5 text-xs text-muted-foreground space-y-1">
+              <div className="flex items-center gap-2 text-[10px] font-bold uppercase text-muted-foreground">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
                 <span>Verified Data Grounding</span>
               </div>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-muted-foreground">
                 <strong>Source:</strong> {vehicle.source}. Classified under <strong>{vehicle.confidence}</strong> standards.
               </p>
             </div>
           </div>
 
           {/* Quick Specifications Table */}
-          <div className="card-surface p-6 rounded-3xl border border-white/10">
+          <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
               <Wrench className="h-4 w-4 text-primary" /> Technical Specifications
             </h2>
-            <dl className="mt-4 divide-y divide-white/10">
+            <dl className="mt-4 divide-y divide-border">
               {quickSpecs.map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5 text-xs">
-                  <dt className="text-slate-400 font-medium">{k}</dt>
+                  <dt className="text-muted-foreground font-medium">{k}</dt>
                   <dd className="font-bold text-white">{v}</dd>
                 </div>
               ))}
@@ -265,20 +265,20 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         {/* WHERE TO FIND & CUSTOMIZATION */}
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Where to find */}
-          <div className="card-surface p-6 rounded-3xl border border-white/10">
+          <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
               <MapPin className="h-4 w-4 text-emerald-400" /> Spawn & Purchase Locations
             </h2>
             <div className="mt-4 space-y-3">
-              <div className="rounded-xl border border-white/10 bg-black/40 p-3 text-xs">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Dealership / Web Source:</span>
-                <span className="text-slate-200 font-semibold">{vehicle.purchaseLocation}</span>
+              <div className="rounded-xl border-border bg-muted/60 p-3 text-xs">
+                <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Dealership / Web Source:</span>
+                <span className="text-foreground font-semibold">{vehicle.purchaseLocation}</span>
               </div>
 
-              <span className="text-[10px] uppercase font-bold text-slate-400 block pt-2">Known Street Spawns:</span>
+              <span className="text-[10px] uppercase font-bold text-muted-foreground block pt-2">Known Street Spawns:</span>
               <ul className="space-y-2">
                 {vehicle.spawnLocations.map((loc, i) => (
-                  <li key={loc} className="flex items-center gap-3 text-xs text-slate-300">
+                  <li key={loc} className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent font-bold text-[10px]">
                       {i + 1}
                     </span>
@@ -290,15 +290,15 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
           </div>
 
           {/* Customization mods */}
-          <div className="card-surface p-6 rounded-3xl border border-white/10">
+          <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
-              <Sparkles className="h-4 w-4 text-[#00F0FF]" /> Available Mod Parts
+              <Sparkles className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> Available Mod Parts
             </h2>
-            <p className="text-xs text-slate-400 mt-1">Confirmed workshop upgrade modules supported on this chassis:</p>
+            <p className="text-xs text-muted-foreground mt-1">Confirmed workshop upgrade modules supported on this chassis:</p>
             <div className="mt-4 grid grid-cols-2 gap-2.5">
               {vehicle.customizationOptions.map((mod) => (
-                <div key={mod} className="rounded-xl border border-white/10 bg-black/40 p-3 text-xs text-slate-200 font-medium flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#00F0FF]" />
+                <div key={mod} className="rounded-xl border-border bg-muted/60 p-3 text-xs text-foreground font-medium flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 dark:bg-[#00F0FF]" />
                   <span>{mod}</span>
                 </div>
               ))}
@@ -307,12 +307,12 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         </div>
 
         {/* BOTTOM CTA */}
-        <div className="card-surface mt-6 mb-16 flex flex-col items-start justify-between gap-5 p-6 rounded-3xl border border-white/10 md:flex-row md:items-center">
+        <div className="card-surface mt-6 mb-16 flex flex-col items-start justify-between gap-5 p-6 rounded-3xl border border-border md:flex-row md:items-center">
           <div>
             <h3 className="font-display text-base font-bold text-white">
               Want to compare {vehicle.name} against other rides?
             </h3>
-            <p className="mt-1 text-xs text-slate-400">
+            <p className="mt-1 text-xs text-muted-foreground">
               Pick 2 to 4 vehicles side-by-side to find the ultimate ride for your budget and missions.
             </p>
           </div>

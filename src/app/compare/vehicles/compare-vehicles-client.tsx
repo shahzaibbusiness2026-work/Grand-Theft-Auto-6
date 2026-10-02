@@ -139,16 +139,16 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
   return (
     <div className="space-y-8">
       {/* Top Controls Header */}
-      <div className="card-surface p-5 rounded-3xl border border-white/10 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="card-surface p-5 rounded-3xl border border-border shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
             <span className="text-[10px] font-black uppercase tracking-widest text-accent">Head-to-Head Duel Mode</span>
           </div>
           <h2 className="font-display text-xl sm:text-2xl font-black uppercase text-white tracking-wide">
-            Comparing <span className="text-[#00F0FF]">{selectedVehicles.length}</span> Contenders
+            Comparing <span className="text-cyan-600 dark:text-[#00F0FF]">{selectedVehicles.length}</span> Contenders
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-muted-foreground mt-1">
             Compare 2 to 4 rides across top speed, acceleration curve, handling physics, and value.
           </p>
         </div>
@@ -157,7 +157,7 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
           {selectedSlugs.length < 4 && (
             <Button
               onClick={handleAddSlot}
-              className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs"
+              className="bg-muted/50 hover:bg-muted/60 text-white font-bold text-xs"
             >
               <Plus className="h-3.5 w-3.5 mr-1" /> Add 3rd/4th Car
             </Button>
@@ -175,7 +175,7 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
 
       {/* OVERALL WINNER & RECOMMENDATION CARD */}
       {overallWinner && (
-        <div className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-[#0a0f1d] to-[#12071a] p-6 sm:p-8 shadow-2xl">
+        <div className="dark-panel relative overflow-hidden rounded-3xl border border-amber-500/30 bg-[#0a0f1d] bg-gradient-to-r from-amber-500/10 via-[#0a0f1d] to-[#12071a] p-6 sm:p-8 shadow-2xl">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-xl">
               <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
@@ -184,14 +184,14 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
               <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white">
                 {overallWinner.vehicle.name} dominates with {overallWinner.total}/100 Performance Score
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 Based on combined power output, zero-to-sixty acceleration rate, and cornering grip, the{" "}
                 <strong>{overallWinner.vehicle.name}</strong> provides superior track dominance and getaway viability in Leonida.
               </p>
             </div>
 
             <div className="flex items-center gap-4 shrink-0">
-              <div className="h-20 w-32 rounded-xl overflow-hidden border border-white/15 bg-black/40">
+              <div className="h-20 w-32 rounded-xl overflow-hidden border border-border bg-black/40">
                 <img
                   src={overallWinner.vehicle.img}
                   alt={overallWinner.vehicle.name}
@@ -221,7 +221,7 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
               key={v.id}
               className={cn(
                 "card-surface relative rounded-3xl border p-5 flex flex-col justify-between transition-all",
-                isWinner ? "border-amber-400/60 shadow-[0_0_24px_rgba(251,191,36,0.15)]" : "border-white/10"
+                isWinner ? "border-amber-400/60 shadow-[0_0_24px_rgba(251,191,36,0.15)]" : "border-border"
               )}
             >
               {/* Header with Slot Selector & Remove */}
@@ -230,7 +230,7 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => setPickerSlotIndex(idx)}
-                      className="rounded-lg bg-white/10 px-2 py-1 text-[10px] font-bold text-slate-300 hover:bg-white/20 transition-colors"
+                      className="rounded-lg bg-muted/50 px-2 py-1 text-[10px] font-bold text-muted-foreground hover:bg-muted/60 transition-colors"
                     >
                       Slot #{idx + 1}: Swap Vehicle ▾
                     </button>
@@ -243,7 +243,7 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
                   {selectedVehicles.length > 2 && (
                     <button
                       onClick={() => handleRemoveVehicle(idx)}
-                      className="rounded-lg p-1 text-slate-400 hover:text-white hover:bg-white/10"
+                      className="rounded-lg p-1 text-muted-foreground hover:text-white hover:bg-muted/50"
                       aria-label="Remove vehicle"
                     >
                       <X className="h-4 w-4" />
@@ -252,7 +252,7 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
                 </div>
 
                 {/* Vehicle Image */}
-                <div className="relative h-44 rounded-2xl overflow-hidden border border-white/10 bg-black/60 shadow-inner mb-4">
+                <div className="relative h-44 rounded-2xl overflow-hidden border border-border bg-black/60 shadow-inner mb-4">
                   <img
                     src={v.img}
                     alt={v.name}
@@ -269,17 +269,17 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
                   {v.name}
                 </h3>
                 <div className="flex items-center justify-between text-xs mt-1">
-                  <span className="text-slate-400">{v.manufacturer}</span>
-                  <span className="font-mono font-bold text-[#00F0FF]">{v.priceDisplay}</span>
+                  <span className="text-muted-foreground">{v.manufacturer}</span>
+                  <span className="font-mono font-bold text-cyan-600 dark:text-[#00F0FF]">{v.priceDisplay}</span>
                 </div>
               </div>
 
               {/* STAT ROWS */}
-              <div className="mt-5 space-y-3 pt-4 border-t border-white/10">
+              <div className="mt-5 space-y-3 pt-4 border-t border-border">
                 {/* Top Speed */}
-                <div className="rounded-xl border border-white/5 bg-black/40 p-2.5">
+                <div className="rounded-xl border-border bg-muted/60 p-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="text-slate-400 flex items-center gap-1.5">
+                    <span className="text-muted-foreground flex items-center gap-1.5">
                       <Gauge className="h-3.5 w-3.5 text-accent" /> Top Speed
                     </span>
                     <div className="flex items-center gap-1.5">
@@ -294,9 +294,9 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
                 </div>
 
                 {/* 0-60 Launch */}
-                <div className="rounded-xl border border-white/5 bg-black/40 p-2.5">
+                <div className="rounded-xl border-border bg-muted/60 p-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="text-slate-400 flex items-center gap-1.5">
+                    <span className="text-muted-foreground flex items-center gap-1.5">
                       <Timer className="h-3.5 w-3.5 text-amber-400" /> 0–60 Launch
                     </span>
                     <div className="flex items-center gap-1.5">
@@ -311,10 +311,10 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
                 </div>
 
                 {/* Handling */}
-                <div className="rounded-xl border border-white/5 bg-black/40 p-2.5">
+                <div className="rounded-xl border-border bg-muted/60 p-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="text-slate-400 flex items-center gap-1.5">
-                      <Car className="h-3.5 w-3.5 text-[#00F0FF]" /> Handling Grip
+                    <span className="text-muted-foreground flex items-center gap-1.5">
+                      <Car className="h-3.5 w-3.5 text-cyan-600 dark:text-[#00F0FF]" /> Handling Grip
                     </span>
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-white">{v.handling}/100</span>
@@ -328,9 +328,9 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
                 </div>
 
                 {/* Braking */}
-                <div className="rounded-xl border border-white/5 bg-black/40 p-2.5">
+                <div className="rounded-xl border-border bg-muted/60 p-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="text-slate-400 flex items-center gap-1.5">
+                    <span className="text-muted-foreground flex items-center gap-1.5">
                       <Disc3 className="h-3.5 w-3.5 text-rose-400" /> Braking Power
                     </span>
                     <div className="flex items-center gap-1.5">
@@ -345,9 +345,9 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
                 </div>
 
                 {/* Power */}
-                <div className="rounded-xl border border-white/5 bg-black/40 p-2.5">
+                <div className="rounded-xl border-border bg-muted/60 p-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="text-slate-400 flex items-center gap-1.5">
+                    <span className="text-muted-foreground flex items-center gap-1.5">
                       <Zap className="h-3.5 w-3.5 text-purple-400" /> Horsepower
                     </span>
                     <div className="flex items-center gap-1.5">
@@ -363,7 +363,7 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
               </div>
 
               {/* PROS & CONS */}
-              <div className="mt-4 pt-3 border-t border-white/10 space-y-2 text-[11px]">
+              <div className="mt-4 pt-3 border-t border-border space-y-2 text-[11px]">
                 <div className="flex items-start gap-1.5 text-emerald-400">
                   <ThumbsUp className="h-3 w-3 shrink-0 mt-0.5" />
                   <span>
@@ -379,11 +379,11 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
               </div>
 
               {/* Footer Actions */}
-              <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between gap-2">
                 <FavoriteButton type="vehicles" id={v.id} showText={false} />
                 <Link
                   href={`/vehicles/${v.slug}`}
-                  className="flex-1 text-center rounded-xl bg-white/5 hover:bg-white/10 py-2 text-xs font-bold text-slate-200 hover:text-white transition-colors border border-white/10"
+                  className="flex-1 text-center rounded-xl bg-muted/40 hover:bg-muted/50 py-2 text-xs font-bold text-foreground hover:text-white transition-colors border border-border"
                 >
                   View Details
                 </Link>
@@ -396,14 +396,14 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
       {/* VEHICLE PICKER MODAL */}
       {pickerSlotIndex !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in">
-          <div className="card-surface max-w-2xl w-full max-h-[80vh] overflow-hidden rounded-3xl border border-white/20 p-6 flex flex-col">
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+          <div className="card-surface max-w-2xl w-full max-h-[80vh] overflow-hidden rounded-3xl border border-border p-6 flex flex-col">
+            <div className="flex items-center justify-between pb-4 border-b border-border">
               <h3 className="font-display text-lg font-black uppercase text-white">
                 Choose Contender for Slot #{pickerSlotIndex + 1}
               </h3>
               <button
                 onClick={() => setPickerSlotIndex(null)}
-                className="rounded-lg p-1 text-slate-400 hover:text-white hover:bg-white/10"
+                className="rounded-lg p-1 text-muted-foreground hover:text-white hover:bg-muted/50"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -420,19 +420,19 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
                       "w-full text-left rounded-2xl border p-3 flex items-center justify-between gap-3 transition-all",
                       isCurrent
                         ? "border-accent bg-accent/10 opacity-60"
-                        : "border-white/10 bg-black/40 hover:border-white/30 hover:bg-white/5"
+                        : "border-border bg-muted/60 hover:border-primary/40 hover:bg-muted/40"
                     )}
                   >
                     <div className="flex items-center gap-3">
                       <img src={cand.img} alt={cand.name} className="h-12 w-16 rounded-xl object-cover" />
                       <div>
                         <h4 className="font-display text-sm font-bold text-white">{cand.name}</h4>
-                        <p className="text-[11px] text-slate-400">{cand.klass} &bull; {cand.topSpeed} mph</p>
+                        <p className="text-[11px] text-muted-foreground">{cand.klass} &bull; {cand.topSpeed} mph</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="font-mono text-xs font-bold text-[#00F0FF]">{cand.priceDisplay}</span>
-                      <span className="block text-[10px] text-slate-400 font-semibold">{cand.confidence}</span>
+                      <span className="font-mono text-xs font-bold text-cyan-600 dark:text-[#00F0FF]">{cand.priceDisplay}</span>
+                      <span className="block text-[10px] text-muted-foreground font-semibold">{cand.confidence}</span>
                     </div>
                   </button>
                 );
