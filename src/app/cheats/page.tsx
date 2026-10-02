@@ -27,13 +27,13 @@ export default function CheatsPage() {
         </div>
 
         {/* Warning Notice */}
-        <div className="rounded-2xl border border-amber-800/40 bg-amber-950/20 p-5 sm:p-6 flex items-start gap-4 text-amber-200">
+        <div className="rounded-2xl border border-amber-500/40 dark:border-amber-800/40 bg-amber-500/10 dark:bg-amber-950/20 p-5 sm:p-6 flex items-start gap-4 text-amber-800 dark:text-amber-200">
           <ShieldAlert className="w-6 h-6 shrink-0 text-amber-400 mt-0.5" />
           <div className="text-xs sm:text-sm leading-relaxed space-y-1">
             <p className="font-bold text-white uppercase tracking-wider">
               Warning: Trophies & Achievements Will Be Disabled
             </p>
-            <p className="text-amber-200/80">
+            <p className="text-amber-800/80 dark:text-amber-200/80">
               In accordance with Rockstar Games design tradition, activating any cheat code during gameplay will immediately disable Trophies (PS5) and Achievements (Xbox / PC) for your current save session. Always create a manual backup save before inputting codes.
             </p>
           </div>
