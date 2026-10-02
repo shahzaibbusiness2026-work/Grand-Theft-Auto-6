@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   title: "100% Completion Tracker & Checklist — GTA 6 Atlas",
   description:
     "Interactive 100% completion checklist for Grand Theft Auto VI (Leonida). Track story missions, submerged caches, stranger encounters, hobbies, and achievements with local auto-save.",
-};
+  alternates: { canonical: "/tracker" },
+  };
 
 export default function TrackerPage() {
   return (

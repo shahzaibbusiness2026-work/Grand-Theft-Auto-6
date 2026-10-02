@@ -733,5 +733,22 @@
   box-shadow: 0 0 16px rgba(225, 29, 72, 0.35) !important;
 }
 
+/* --------------------------------------------------------------------
+   Dark-surface exceptions: white text on permanent dark panels (image
+   scrims, satellite HUD, video overlays) must stay white in bright mode.
+   The blanket .light .text-white rule above targets text on light cards.
+   -------------------------------------------------------------------- */
+.light [class*="bg-black"] .text-white,
+.light [class*="from-black"] .text-white,
+.light [class*="via-black"] .text-white,
+.light [class*="bg-black"].text-white {
+  color: #f8fafc !important;
+}
+
+/* Dark dossier chips keep white text (protagonist cards) */
+.light .bg-\[\#334155\] {
+  color: #f8fafc !important;
+}
+
 
 

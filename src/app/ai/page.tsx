@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   title: "Ask GTA 6 AI — Grounded Intelligence Companion | GTA 6 Atlas",
   description:
     "Ask any question about Grand Theft Auto VI. Grounded in verified Rockstar trailers, leaks, and disclosures with strict confidence ratings and zero hallucinated facts.",
-};
+  alternates: { canonical: "/ai" },
+  };
 
 export default function AIPage() {
   return (
@@ -21,7 +22,7 @@ export default function AIPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight">
             ASK <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">GTA 6 AI</span>
           </h1>
-          <p className="mt-3 text-sm text-slate-300 max-w-2xl">
+          <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
             Instant answers on verified vehicles, armory stats, safehouses, and heist strategies.
             Every response is strictly grounded in official Rockstar disclosures and validated leak archives.
           </p>

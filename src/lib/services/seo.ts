@@ -1,5 +1,6 @@
 "use server";
 
+import { cache } from "react";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
@@ -17,9 +18,10 @@ export interface DatabaseSeoRow {
 const DEFAULT_SEO = INITIAL_ADMIN_SEO;
 
 /**
- * Fetch SEO settings from Supabase (with fallback)
+ * Fetch SEO settings from Supabase (with fallback).
+ * cache() dedupes repeat calls within one request (layout, sitemap, robots).
  */
-export async function getSeoSettings(): Promise<AdminSeoSettings> {
+export const getSeoSettings = cache(async (): Promise<AdminSeoSettings> => {
   try {
     const supabase = await createServerSupabase();
     const { data, error } = await supabase.from("seo_settings").select("*");
@@ -36,6 +38,7 @@ export async function getSeoSettings(): Promise<AdminSeoSettings> {
         canonicalBaseUrl: map["canonicalBaseUrl"] ?? DEFAULT_SEO.canonicalBaseUrl,
         socialPreviewImage: map["socialPreviewImage"] ?? DEFAULT_SEO.socialPreviewImage,
         excludeDraftsAndArchived: map["excludeDraftsAndArchived"] === "true",
+        robotsTxt: map["robotsTxt"] ?? "",
         redirects: map["redirects"] ? JSON.parse(map["redirects"]) : DEFAULT_SEO.redirects,
       };
     }
@@ -51,7 +54,7 @@ export async function getSeoSettings(): Promise<AdminSeoSettings> {
   }
 
   return DEFAULT_SEO;
-}
+});
 
 /**
  * Save SEO settings to Supabase
@@ -69,6 +72,7 @@ export async function saveSeoSettings(seo: Partial<AdminSeoSettings>) {
     if (seo.socialPreviewImage !== undefined) pairs.push({ key: "socialPreviewImage", value: seo.socialPreviewImage });
     if (seo.excludeDraftsAndArchived !== undefined)
       pairs.push({ key: "excludeDraftsAndArchived", value: String(seo.excludeDraftsAndArchived) });
+    if (seo.robotsTxt !== undefined) pairs.push({ key: "robotsTxt", value: seo.robotsTxt });
     if (seo.redirects !== undefined)
       pairs.push({ key: "redirects", value: JSON.stringify(seo.redirects) });
 

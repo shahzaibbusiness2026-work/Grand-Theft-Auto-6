@@ -6,25 +6,26 @@ import { SiteShell } from "@/components/shells";
 export const metadata: Metadata = {
   title: "Cookie Policy | GTA 6 Atlas",
   description: "Learn how GTA 6 Atlas uses cookies and client storage to remember your preferences and interactive map layers.",
-};
+  alternates: { canonical: "/cookies" },
+  };
 
 export default function CookiesPage() {
   return (
     <SiteShell>
       <div className="container-site py-12 sm:py-16 max-w-4xl space-y-10">
         <div className="space-y-3">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#B8AAFF]">
+          <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-primary">
             Legal & Compliance
           </p>
           <h1 className="font-display text-3xl sm:text-5xl font-black text-white tracking-tight">
             Cookie Policy
           </h1>
-          <p className="text-xs text-[#94A3BD]">
+          <p className="text-xs text-muted-foreground">
             Last Updated: September 20, 2026
           </p>
         </div>
 
-        <div className="space-y-8 text-sm text-[#B5C0D4] leading-relaxed">
+        <div className="space-y-8 text-sm text-muted-foreground leading-relaxed">
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-white">1. What Are Cookies?</h2>
             <p>
@@ -35,22 +36,22 @@ export default function CookiesPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-white">2. How We Use Cookies & Client Storage</h2>
             <div className="space-y-4">
-              <div className="p-4 rounded-xl border border-[#33415C] bg-[#141C2E] space-y-2">
+              <div className="p-4 rounded-xl border border-border bg-card space-y-2">
                 <div className="flex items-center gap-2 text-white font-bold">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   <span>Essential & Functional Storage</span>
                 </div>
-                <p className="text-xs text-[#B5C0D4]">
+                <p className="text-xs text-muted-foreground">
                   We use browser localStorage and lightweight cookies to preserve your theme selection (Dark / Light), active map layers (satellite vs street grid), and your checklist completion percentages. These are essential for the application to function correctly.
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl border border-[#33415C] bg-[#141C2E] space-y-2">
+              <div className="p-4 rounded-xl border border-border bg-card space-y-2">
                 <div className="flex items-center gap-2 text-white font-bold">
-                  <Shield className="w-4 h-4 text-[#B8AAFF]" />
+                  <Shield className="w-4 h-4 text-primary" />
                   <span>Performance & Analytics</span>
                 </div>
-                <p className="text-xs text-[#B5C0D4]">
+                <p className="text-xs text-muted-foreground">
                   Aggregate, anonymized telemetry may be collected to assess page response times and identify server errors. We do not use invasive third-party cross-site advertising trackers.
                 </p>
               </div>

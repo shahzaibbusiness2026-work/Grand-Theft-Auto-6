@@ -75,8 +75,43 @@ export default async function ArticleDetailPage({ params }: Props) {
     .map((p) => p.trim())
     .filter(Boolean);
 
+  const seo = await getSeoSettings();
+  const base = seo.canonicalBaseUrl?.startsWith("http")
+    ? seo.canonicalBaseUrl
+    : "https://gta6atlas.com";
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${base}/` },
+          { "@type": "ListItem", position: 2, name: "News", item: `${base}/news` },
+          { "@type": "ListItem", position: 3, name: article.title, item: `${base}/news/${article.slug}` },
+        ],
+      },
+      {
+        "@type": "Article",
+        headline: article.seo_title || article.title,
+        description: article.seo_description || article.excerpt,
+        image: [article.og_image || article.cover_image || `${base}/img/hero-dark.jpg`],
+        datePublished: article.published_at || undefined,
+        dateModified: article.updated_at || article.published_at || undefined,
+        author: { "@type": "Person", name: article.author_name || "Atlas Editorial" },
+        publisher: { "@type": "Organization", name: "GTA 6 Atlas" },
+        mainEntityOfPage: `${base}/news/${article.slug}`,
+        articleSection: article.category,
+        keywords: Array.isArray(article.tags) ? article.tags.join(", ") : undefined,
+      },
+    ],
+  };
+
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article className="container-site pt-8">
         {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-muted-foreground">

@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   title: "Vice City Pro Membership — Plans & Pricing | GTA 6 Atlas",
   description:
     "Upgrade to Vice City Pro for unlimited grounded Ask GTA 6 AI queries, 4-way comparison duels, cloud completion backups, and ad-free access.",
-};
+  alternates: { canonical: "/pricing" },
+  };
 
 export default function PricingPage() {
   return (
@@ -21,7 +22,7 @@ export default function PricingPage() {
           <h1 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight">
             UNLOCK <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">VICE CITY PRO</span>
           </h1>
-          <p className="text-sm text-slate-300">
+          <p className="text-sm text-muted-foreground">
             Get the ultimate competitive edge in Grand Theft Auto VI with 4-way comparisons, unlimited AI research queries, and cloud backup synchronization.
           </p>
         </div>

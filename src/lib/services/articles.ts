@@ -1,5 +1,6 @@
 "use server";
 
+import { cache } from "react";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
@@ -103,7 +104,7 @@ function rowToAdminArticle(row: DatabaseArticleRow): AdminArticle {
  * what is published, so "admin unpublished everything" must not resurrect
  * hardcoded articles.
  */
-export async function getPublicArticles(): Promise<Article[]> {
+export const getPublicArticles = cache(async (): Promise<Article[]> => {
   try {
     const supabase = await createServerSupabase();
     const { data, error } = await supabase
@@ -121,7 +122,7 @@ export async function getPublicArticles(): Promise<Article[]> {
   }
 
   return fallbackArticles;
-}
+});
 
 /**
  * Fetch one published article (full row) by slug for the public detail page.

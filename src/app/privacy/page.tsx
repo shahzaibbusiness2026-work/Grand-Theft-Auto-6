@@ -6,25 +6,26 @@ import { SiteShell } from "@/components/shells";
 export const metadata: Metadata = {
   title: "Privacy Policy | GTA 6 Atlas",
   description: "Learn how GTA 6 Atlas collects, uses, and protects your information when using our interactive map and database tools.",
-};
+  alternates: { canonical: "/privacy" },
+  };
 
 export default function PrivacyPage() {
   return (
     <SiteShell>
       <div className="container-site py-12 sm:py-16 max-w-4xl space-y-10">
         <div className="space-y-3">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#B8AAFF]">
+          <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-primary">
             Legal & Compliance
           </p>
           <h1 className="font-display text-3xl sm:text-5xl font-black text-white tracking-tight">
             Privacy Policy
           </h1>
-          <p className="text-xs text-[#94A3BD]">
+          <p className="text-xs text-muted-foreground">
             Last Updated: September 20, 2026
           </p>
         </div>
 
-        <div className="space-y-8 text-sm text-[#B5C0D4] leading-relaxed">
+        <div className="space-y-8 text-sm text-muted-foreground leading-relaxed">
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-white">1. Overview</h2>
             <p>
@@ -65,7 +66,7 @@ export default function PrivacyPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-white">5. Contact Us</h2>
             <p>
-              If you have any questions or concerns regarding this Privacy Policy, please reach out through our <a href="/contact" className="text-[#B8AAFF] underline font-semibold">Contact Page</a>.
+              If you have any questions or concerns regarding this Privacy Policy, please reach out through our <a href="/contact" className="text-primary underline font-semibold">Contact Page</a>.
             </p>
           </section>
         </div>

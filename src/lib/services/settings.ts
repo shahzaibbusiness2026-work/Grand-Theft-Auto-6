@@ -1,5 +1,6 @@
 "use server";
 
+import { cache } from "react";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
@@ -42,9 +43,10 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
 };
 
 /**
- * Fetch all site text & settings from Supabase (with fallback)
+ * Fetch all site text & settings from Supabase (with fallback).
+ * cache() dedupes repeat calls within one request (layout + page + footer).
  */
-export async function getSiteSettings(): Promise<ComprehensiveSiteSettings> {
+export const getSiteSettings = cache(async (): Promise<ComprehensiveSiteSettings> => {
   try {
     const supabase = await createServerSupabase();
     const { data, error } = await supabase.from("site_settings").select("*");
@@ -65,7 +67,7 @@ export async function getSiteSettings(): Promise<ComprehensiveSiteSettings> {
   }
 
   return DEFAULT_SETTINGS;
-}
+});
 
 /**
  * Save entire site settings or specific keys in Supabase

@@ -6,25 +6,26 @@ import { SiteShell } from "@/components/shells";
 export const metadata: Metadata = {
   title: "Terms of Service | GTA 6 Atlas",
   description: "Terms of service and acceptable use policy for GTA 6 Atlas encyclopedia and mapping platform.",
-};
+  alternates: { canonical: "/terms" },
+  };
 
 export default function TermsPage() {
   return (
     <SiteShell>
       <div className="container-site py-12 sm:py-16 max-w-4xl space-y-10">
         <div className="space-y-3">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#B8AAFF]">
+          <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-primary">
             Legal & Compliance
           </p>
           <h1 className="font-display text-3xl sm:text-5xl font-black text-white tracking-tight">
             Terms of Service
           </h1>
-          <p className="text-xs text-[#94A3BD]">
+          <p className="text-xs text-muted-foreground">
             Last Updated: September 20, 2026
           </p>
         </div>
 
-        <div className="space-y-8 text-sm text-[#B5C0D4] leading-relaxed">
+        <div className="space-y-8 text-sm text-muted-foreground leading-relaxed">
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-white">1. Acceptance of Terms</h2>
             <p>
