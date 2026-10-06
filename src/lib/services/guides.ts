@@ -38,6 +38,7 @@ export async function getPublicGuides(): Promise<GuideRecord[]> {
 
 export async function getAdminGuides(): Promise<GuideRecord[]> {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("guides")
@@ -62,15 +63,16 @@ export async function saveGuide(guide: Partial<GuideRecord> & { title: string })
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
 
-    const { error } = await supabase.from("guides").upsert(
-      {
-        ...guide,
-        id,
-        slug,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "id" }
-    );
+    const payload = { ...guide, id, slug, updated_at: new Date().toISOString() };
+    let { error } = await supabase.from("guides").upsert(payload, { onConflict: "id" });
+    if (error?.code === "23505" && !guide.id) {
+      // New item whose generated slug is already taken — retry with a suffix.
+      const retry = await supabase.from("guides").upsert(
+        { ...payload, slug: `${slug}-${Math.random().toString(36).slice(2, 6)}` },
+        { onConflict: "id" }
+      );
+      error = retry.error;
+    }
     if (error) throw error;
 
     await logActivity({

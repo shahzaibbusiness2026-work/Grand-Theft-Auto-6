@@ -74,9 +74,11 @@ async function setAdminCookie(cookieStore: Awaited<ReturnType<typeof cookies>>, 
 
 export async function POST(request: Request) {
   try {
+    // x-real-ip is set by the edge platform and cannot be spoofed by the
+    // client; x-forwarded-for is only a fallback (first hop may vary).
     const ip =
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       request.headers.get("x-real-ip") ||
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       "unknown";
 
     if (isRateLimited(ip)) {

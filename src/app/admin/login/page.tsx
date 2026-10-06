@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Lock, LogIn, AlertCircle } from "lucide-react";
 
 export default function AdminLoginPage() {
@@ -18,10 +18,30 @@ export default function AdminLoginPage() {
   );
 }
 
+/**
+ * Only same-origin relative paths may be used as a post-login redirect.
+ * Anything else (absolute URLs, protocol-relative "//", backslash tricks)
+ * would let a crafted /admin/login?redirectTo=… link send the freshly
+ * authenticated admin to an attacker-controlled site.
+ */
+function safeRedirectTo(raw: string | null): string {
+  if (
+    raw &&
+    raw.startsWith("/") &&
+    !raw.startsWith("//") &&
+    !raw.includes("\\") &&
+    !raw.includes("://") &&
+    !raw.includes("\r") &&
+    !raw.includes("\n")
+  ) {
+    return raw;
+  }
+  return "/admin";
+}
+
 function AdminLoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") || "/admin";
+  const redirectTo = safeRedirectTo(searchParams.get("redirectTo"));
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

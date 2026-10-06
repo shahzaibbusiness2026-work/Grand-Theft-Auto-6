@@ -3,6 +3,7 @@ import { Poppins, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getSeoSettings } from "@/lib/services/seo";
 import { getSiteSettings } from "@/lib/services/settings";
+import { serializeJsonLd } from "@/lib/utils";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -130,7 +131,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://i.ytimg.com" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
         />
       </head>
       <body

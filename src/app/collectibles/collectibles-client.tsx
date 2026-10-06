@@ -329,7 +329,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 {/* Card Footer Actions */}
                 <div className="p-4 pt-0 flex items-center justify-between gap-2 border-t border-border/60 mt-2">
                   <Link
-                    href={`/map?poi=poi-ocean-drive`}
+                    href={`/map?poi=${item.id}&top=${item.coordinates.top}&left=${item.coordinates.left}`}
                     className="text-[11px] font-medium text-accent hover:underline flex items-center gap-1 py-1"
                   >
                     <MapPin className="h-3 w-3" /> Map View

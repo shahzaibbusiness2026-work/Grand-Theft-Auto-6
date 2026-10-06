@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { SafeImage } from "@/components/safe-image";
 import { Search, Heart, ArrowUpDown, SlidersHorizontal, Trophy, Car, ArrowRight, ShieldCheck } from "lucide-react";
 import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
 import { Badge } from "@/components/ui/badge";
@@ -199,7 +199,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                 >
                   {/* Vehicle Image */}
                   <div className="relative h-44 overflow-hidden bg-muted/50">
-                    <Image
+                    <SafeImage
                       src={v.img}
                       alt={`${v.name} - GTA 6 Vehicle (${v.klass})`}
                       fill
@@ -278,7 +278,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
 
                     {/* Card Footer */}
                     <div className="mt-4 flex items-center justify-between border-t border-border/40 pt-3 text-xs">
-                      <span className="font-mono font-bold text-[#00F0FF]">{v.priceDisplay}</span>
+                      <span className="font-mono font-bold text-cyan-600 dark:text-[#00F0FF]">{v.priceDisplay}</span>
                       <Link
                         href={`/vehicles/${v.slug}`}
                         className="inline-flex items-center gap-1 font-bold text-accent transition-colors hover:text-foreground"

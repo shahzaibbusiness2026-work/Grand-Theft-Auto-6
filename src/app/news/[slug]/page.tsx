@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { SafeImage } from "@/components/safe-image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock, ArrowLeft } from "lucide-react";
@@ -8,6 +8,7 @@ import { ArticleCard } from "@/components/article-card";
 import { NewsletterBar } from "@/components/newsletter-bar";
 import { getPublicArticleBySlug, getPublicArticles } from "@/lib/services/articles";
 import { getSeoSettings } from "@/lib/services/seo";
+import { serializeJsonLd } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -110,7 +111,7 @@ export default async function ArticleDetailPage({ params }: Props) {
     <SiteShell>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <article className="container-site pt-8">
         {/* Breadcrumbs */}
@@ -125,7 +126,7 @@ export default async function ArticleDetailPage({ params }: Props) {
         {/* Hero */}
         <header className="card-surface mt-4 overflow-hidden bg-gradient-to-br from-card via-card/85 to-primary/5">
           <div className="relative h-56 sm:h-72">
-            <Image
+            <SafeImage
               src={article.cover_image || "/img/hero-dark.jpg"}
               alt={article.seo_title || article.title}
               fill
@@ -203,7 +204,7 @@ export default async function ArticleDetailPage({ params }: Props) {
                     className="flex items-center gap-3 py-1 hover:text-accent transition-colors"
                   >
                     <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded-md">
-                      <Image src={a.img} alt={a.title} fill sizes="64px" className="object-cover" />
+                      <SafeImage src={a.img} alt={a.title} fill sizes="64px" className="object-cover" />
                     </div>
                     <p className="line-clamp-2 text-[13px] font-semibold leading-snug">{a.title}</p>
                   </Link>

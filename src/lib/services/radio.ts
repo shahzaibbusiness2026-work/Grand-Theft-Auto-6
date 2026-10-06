@@ -36,6 +36,7 @@ export async function getPublicRadioStations(): Promise<RadioStationRecord[]> {
 
 export async function getAdminRadioStations(): Promise<RadioStationRecord[]> {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("radio_stations")

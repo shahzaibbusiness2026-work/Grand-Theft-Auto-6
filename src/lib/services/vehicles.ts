@@ -131,6 +131,7 @@ export async function getPublicVehicles(): Promise<Vehicle[]> {
  */
 export async function getAdminVehicles(): Promise<AdminVehicle[]> {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("vehicles")

@@ -304,7 +304,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                 {/* Card Footer Actions */}
                 <div className="p-4 pt-0 flex items-center justify-between gap-2 border-t border-border/60 mt-3">
                   <Link
-                    href={`/map?poi=${item.id}`}
+                    href={`/map?poi=${item.id}&top=${item.top}&left=${item.left}`}
                     className="text-xs font-semibold text-accent hover:underline flex items-center gap-1 py-1"
                   >
                     <Navigation className="h-3.5 w-3.5" /> Locate On Map

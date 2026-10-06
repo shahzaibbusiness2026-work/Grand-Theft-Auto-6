@@ -99,8 +99,13 @@ export function ContactClient() {
             <div>
               <h3 className="font-display text-sm font-bold">Follow Us</h3>
               <div className="mt-2 flex gap-3 text-accent">
-                {[Twitter, Instagram, Youtube, Gamepad2].map((Icon, i) => (
-                  <a key={i} href="#" aria-label="social">
+                {[
+                  { Icon: Twitter, label: "GTA 6 Atlas on X (Twitter)", href: "https://x.com/GTA6Atlas" },
+                  { Icon: Instagram, label: "GTA 6 Atlas on Instagram", href: "https://instagram.com/gta6atlas" },
+                  { Icon: Youtube, label: "GTA 6 Atlas on YouTube", href: "https://youtube.com/@GTA6Atlas" },
+                  { Icon: Gamepad2, label: "GTA 6 Atlas Discord community", href: "https://discord.gg/gta6atlas" },
+                ].map(({ Icon, label, href }) => (
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
                     <Icon className="h-4 w-4" />
                   </a>
                 ))}
@@ -134,34 +139,50 @@ export function ContactClient() {
               </p>
             )}
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="contact-name" className="sr-only">Your Name</label>
+                <Input
+                  id="contact-name"
+                  placeholder="Your Name"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-email" className="sr-only">Your Email</label>
+                <Input
+                  id="contact-email"
+                  placeholder="Your Email"
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="contact-subject" className="sr-only">Subject</label>
               <Input
-                placeholder="Your Name"
+                id="contact-subject"
+                placeholder="Subject"
+                className="mt-4"
                 required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-              />
-              <Input
-                placeholder="Your Email"
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                value={form.subject}
+                onChange={(e) => setForm({ ...form, subject: e.target.value })}
               />
             </div>
-            <Input
-              placeholder="Subject"
-              className="mt-4"
-              required
-              value={form.subject}
-              onChange={(e) => setForm({ ...form, subject: e.target.value })}
-            />
-            <textarea
-              placeholder="Message"
-              required
-              value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className="mt-4 min-h-[140px] w-full rounded-lg border border-input bg-card px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            />
+            <div>
+              <label htmlFor="contact-message" className="sr-only">Message</label>
+              <textarea
+                id="contact-message"
+                placeholder="Message"
+                required
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                className="mt-4 min-h-[140px] w-full rounded-lg border border-input bg-card px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              />
+            </div>
             <Button type="submit" className="mt-5 w-full" disabled={loading}>
               {loading ? "Transmitting..." : "Send Message"} <Send className="h-4 w-4 ml-1.5" />
             </Button>
@@ -177,6 +198,7 @@ export function ContactClient() {
             <div key={f.q} className="card-surface overflow-hidden">
               <button
                 onClick={() => setOpen(open === i ? -1 : i)}
+                aria-expanded={open === i}
                 className="flex w-full items-center gap-4 px-5 py-4 text-left"
               >
                 <span className="icon-tile h-9 w-9 border border-primary/40 bg-primary/10 text-primary">

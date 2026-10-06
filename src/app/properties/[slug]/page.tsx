@@ -43,6 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${prop.name} (${prop.type}) — Property Dossier | GTA 6 Atlas`,
     description: `Official real estate breakdown for ${prop.name} in ${prop.district}. Price: ${prop.priceDisplay}, Garage: ${prop.garageCapacity} vehicles, Passive Income: ${prop.passiveIncomeDisplay}.`,
+    alternates: { canonical: `/properties/${prop.slug}` },
   };
 }
 
@@ -131,7 +132,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     Map Location: Top {prop.mapCoords.top} / Left {prop.mapCoords.left}
                   </span>
                   <Link
-                    href={`/map?poi=poi-ocean-drive`}
+                    href={`/map?poi=${prop.id}&top=${prop.mapCoords.top}&left=${prop.mapCoords.left}`}
                     className="btn-primary text-xs px-3 py-1.5 font-bold flex items-center gap-1.5"
                   >
                     <Navigation className="h-3.5 w-3.5" /> View Satellite Map

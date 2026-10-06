@@ -1,6 +1,7 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase/admin";
+import { assertAdmin } from "@/lib/auth/assert-admin";
 
 export interface ActivityEntry {
   id: string;
@@ -47,6 +48,7 @@ export async function logActivity(entry: {
  */
 export async function getActivityLog(limit = 50): Promise<ActivityEntry[]> {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("activity_log")

@@ -132,6 +132,7 @@ export async function getPublicCharacters(): Promise<Character[]> {
  */
 export async function getAdminCharacters(): Promise<AdminCharacter[]> {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("characters")

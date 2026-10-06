@@ -307,7 +307,11 @@ export function AIClient() {
             }}
             className="flex gap-2"
           >
+            <label htmlFor="ai-chat-input" className="sr-only">
+              Ask a question about GTA 6
+            </label>
             <input
+              id="ai-chat-input"
               type="text"
               value={inputQuery}
               onChange={(e) => setInputQuery(e.target.value)}
@@ -318,6 +322,7 @@ export function AIClient() {
             <button
               type="submit"
               disabled={isLoading || !inputQuery.trim()}
+              aria-label="Send question"
               className="btn-primary px-5 flex items-center justify-center font-bold disabled:opacity-50"
             >
               <Send className="h-4 w-4" />

@@ -88,6 +88,7 @@ function rowToAdminWeapon(row: DatabaseWeaponRow): AdminWeapon {
  */
 export async function getAdminWeapons(): Promise<AdminWeapon[]> {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("weapons")

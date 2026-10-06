@@ -78,6 +78,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${mission.title} — GTA 6 Mission Guide & Walkthrough`,
     description: `Full mission guide for '${mission.title}' in GTA 6: Objectives, choices & outcomes, rewards (${mission.cashRewardDisplay}), character requirements, and strategic tips.`,
+    alternates: { canonical: `/missions/${mission.slug}` },
     openGraph: {
       title: `${mission.title} — Walkthrough & Rewards`,
       description: mission.description,
@@ -246,7 +247,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               </div>
             </div>
 
-            <Button href={`/map?poi=${relatedLocation.id}`} className="bg-gradient-to-r from-primary to-accent font-bold text-xs">
+            <Button href={`/map?poi=${relatedLocation.id}&top=${relatedLocation.top}&left=${relatedLocation.left}`} className="bg-gradient-to-r from-primary to-accent font-bold text-xs">
               <MapPin className="h-3.5 w-3.5 mr-1 text-[#00F0FF]" /> Open on Satellite Radar
             </Button>
           </div>

@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${collectible.title} — Location & Guide | GTA 6 Atlas`,
     description: `Complete guide and coordinate location for ${collectible.title} in ${collectible.district}. Requirements: ${collectible.requirements}.`,
+    alternates: { canonical: `/collectibles/${collectible.slug}` },
   };
 }
 
@@ -118,7 +119,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                     <Compass className="h-4 w-4 text-accent" /> Relative Map Coordinates: Top {collectible.coordinates.top} / Left {collectible.coordinates.left}
                   </span>
                   <Link
-                    href={`/map?poi=poi-ocean-drive`}
+                    href={`/map?poi=${collectible.id}&top=${collectible.coordinates.top}&left=${collectible.coordinates.left}`}
                     className="text-primary hover:underline flex items-center gap-1 font-bold"
                   >
                     Open Live Map <ExternalLink className="h-3 w-3" />

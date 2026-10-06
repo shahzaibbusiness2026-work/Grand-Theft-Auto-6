@@ -177,6 +177,7 @@ export async function getAdminArticleById(id: string): Promise<AdminArticle | nu
  */
 export async function getAdminArticles(): Promise<AdminArticle[]> {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("articles")

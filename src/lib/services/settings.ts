@@ -70,6 +70,25 @@ export const getSiteSettings = cache(async (): Promise<ComprehensiveSiteSettings
 });
 
 /**
+ * Keys owned by specific services (or stored privately elsewhere). A settings
+ * save must never write them: it would corrupt the owning feature or publish
+ * private data through the anon-readable site_settings table.
+ */
+const RESERVED_SETTING_KEYS = new Set([
+  "newsletter_subscribers",
+  "admin_team_members",
+  "media_assets_data",
+  "admin_tasks",
+  "admin_categories",
+  "completion_tracker_config",
+  "locations_data",
+  "missions_data",
+  "seo_settings_data",
+]);
+
+const MAX_SETTING_VALUE_CHARS = 100_000;
+
+/**
  * Save entire site settings or specific keys in Supabase
  */
 export async function saveSiteSettings(settings: Partial<ComprehensiveSiteSettings>) {
@@ -77,7 +96,21 @@ export async function saveSiteSettings(settings: Partial<ComprehensiveSiteSettin
     await assertAdmin();
     const supabase = createAdminClient();
 
-    const upsertPromises = Object.entries(settings).map(([key, value]) =>
+    const entries = Object.entries(settings);
+    const reserved = entries.filter(([key]) => RESERVED_SETTING_KEYS.has(key)).map(([key]) => key);
+    if (reserved.length > 0) {
+      return {
+        success: false as const,
+        error: `These keys are managed by other features and cannot be saved here: ${reserved.join(", ")}.`,
+      };
+    }
+    for (const [, value] of entries) {
+      if (JSON.stringify(value ?? "")?.length > MAX_SETTING_VALUE_CHARS) {
+        return { success: false as const, error: "One of the values is too large to save." };
+      }
+    }
+
+    const upsertPromises = entries.map(([key, value]) =>
       supabase.from("site_settings").upsert(
         {
           key,

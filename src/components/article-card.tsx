@@ -1,16 +1,16 @@
 import Link from "next/link";
-import Image from "next/image";
+import { SafeImage } from "@/components/safe-image";
 import { ArrowRight, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Article } from "@/lib/data";
-import { cn } from "@/lib/utils";
+import { cn, toIsoDate } from "@/lib/utils";
 
 export function ArticleCard({ article, className }: { article: Article; className?: string }) {
   const href = article.slug ? `/news/${article.slug}` : "/news";
   return (
     <Link href={href} className={cn("group card-surface block overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-neon-cyan", className)}>
       <div className="relative h-40 overflow-hidden">
-        <Image
+        <SafeImage
           src={article.img}
           alt={`${article.title} - GTA 6 Article`}
           fill
@@ -24,7 +24,7 @@ export function ArticleCard({ article, className }: { article: Article; classNam
       </div>
       <div className="p-4">
         <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
-          <time dateTime={article.date}>{article.date}</time>
+          <time dateTime={toIsoDate(article.date)}>{article.date}</time>
           <span className="text-border" aria-hidden="true">•</span>
           <span className="flex items-center gap-1">
             <Clock className="h-3 w-3" aria-hidden="true" /> {article.read}
@@ -51,7 +51,7 @@ export function PopularRow({ article }: { article: Article }) {
       className="flex items-center gap-3 py-2.5 hover:text-accent transition-colors"
     >
       <div className="relative h-11 w-14 shrink-0 overflow-hidden rounded-md">
-        <Image
+        <SafeImage
           src={article.img}
           alt={article.title}
           fill
@@ -62,7 +62,7 @@ export function PopularRow({ article }: { article: Article }) {
       </div>
       <div>
         <p className="line-clamp-2 text-[13px] font-semibold leading-snug">{article.title}</p>
-        <time className="mt-0.5 block text-[11px] text-muted-foreground" dateTime={article.date}>
+        <time className="mt-0.5 block text-[11px] text-muted-foreground" dateTime={toIsoDate(article.date)}>
           {article.date}
         </time>
       </div>

@@ -97,6 +97,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${vehicle.name} (${vehicle.klass}) — GTA 6 Stats, Speed & Location`,
     description: `Full verified breakdown of the ${vehicle.name} in GTA 6: Top speed ${vehicle.topSpeed} mph, ${vehicle.acceleration}s 0-60, ${vehicle.priceDisplay} price, customization, and spawn locations.`,
+    alternates: { canonical: `/vehicles/${vehicle.slug}` },
     openGraph: {
       title: `${vehicle.name} — GTA 6 Vehicle Guide`,
       description: vehicle.description,

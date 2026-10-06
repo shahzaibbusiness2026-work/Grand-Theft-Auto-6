@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { SafeImage } from "@/components/safe-image";
 import { Search, Crosshair, ArrowRight, Trophy, Heart } from "lucide-react";
 import { canonicalWeapons, CanonicalWeapon } from "@/lib/canonical-data";
 import { Badge } from "@/components/ui/badge";
@@ -183,7 +183,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 >
                   {/* Weapon image */}
                   <div className="relative h-44 overflow-hidden bg-gradient-to-br from-card dark:from-[#0c0517] via-black/90 to-[#170a1f] p-4 flex items-center justify-center">
-                    <Image
+                    <SafeImage
                       src={w.img}
                       alt={`${w.name} - GTA 6 Weapon (${w.klass})`}
                       width={280}

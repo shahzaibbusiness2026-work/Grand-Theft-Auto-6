@@ -81,6 +81,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${loc.name} (${loc.district}) — Point of Interest Dossier | GTA 6 Atlas`,
     description: `Official intel briefing and satellite map coordinates for ${loc.name} in ${loc.district}, State of Leonida. Threat level: ${loc.threatLevel}.`,
+    alternates: { canonical: `/locations/${loc.slug}` },
   };
 }
 
@@ -184,7 +185,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
                     Map Grid: Top {loc.top} / Left {loc.left}
                   </span>
                   <Link
-                    href={`/map?poi=${loc.id}`}
+                    href={`/map?poi=${loc.id}&top=${loc.top}&left=${loc.left}`}
                     className="btn-primary text-xs px-3 py-1.5 font-bold flex items-center gap-1.5"
                   >
                     <Navigation className="h-3.5 w-3.5" /> Fly to Live Pin

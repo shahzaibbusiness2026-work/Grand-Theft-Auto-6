@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { assertAdmin } from "@/lib/auth/assert-admin";
@@ -15,6 +16,35 @@ export interface ContactMessage {
   created_at: string;
 }
 
+/* ------------------------------------------------------------------ */
+/* Best-effort in-memory throttle: 3 submissions / 10 min / IP         */
+/* (per server instance; slows scripted flooding of the inbox)         */
+/* ------------------------------------------------------------------ */
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const recentCalls = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(key: string): boolean {
+  const entry = recentCalls.get(key);
+  if (!entry) return false;
+  if (Date.now() > entry.resetAt) {
+    recentCalls.delete(key);
+    return false;
+  }
+  return entry.count >= RATE_LIMIT_MAX;
+}
+
+function recordCall(key: string) {
+  const entry = recentCalls.get(key);
+  if (!entry || Date.now() > entry.resetAt) {
+    recentCalls.set(key, { count: 1, resetAt: Date.now() + RATE_LIMIT_WINDOW_MS });
+  } else {
+    entry.count += 1;
+  }
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 /**
  * Public contact-form submission. Persists to Supabase via the service-role
  * client (the contact_messages table has no anon policies by design).
@@ -27,22 +57,44 @@ export async function submitContactMessage(input: {
   message: string;
 }): Promise<{ success: boolean; message?: string }> {
   try {
+    const hdrs = await headers();
+    const ip =
+      hdrs.get("x-real-ip") ||
+      hdrs.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      "unknown";
+
+    if (isRateLimited(`contact:${ip}`)) {
+      return { success: false, message: "Too many messages sent. Please try again later." };
+    }
+
     const name = (input.name || "").trim();
     const email = (input.email || "").trim();
+    const subject = (input.subject || "").trim();
     const message = (input.message || "").trim();
 
-    if (!name || !email.includes("@") || !message) {
+    if (!name || !email || !message) {
       return { success: false, message: "Please fill in your name, a valid email and a message." };
+    }
+    if (name.length > 100) {
+      return { success: false, message: "Name is too long (max 100 characters)." };
+    }
+    if (email.length > 254 || !EMAIL_RE.test(email)) {
+      return { success: false, message: "Please provide a valid email address." };
+    }
+    if (subject.length > 200) {
+      return { success: false, message: "Subject is too long (max 200 characters)." };
     }
     if (message.length > 5000) {
       return { success: false, message: "Message is too long (max 5000 characters)." };
     }
 
+    recordCall(`contact:${ip}`);
+
     const supabase = createAdminClient();
     const { error } = await supabase.from("contact_messages").insert({
       name,
       email,
-      subject: (input.subject || "").trim() || null,
+      subject: subject || null,
       message,
     });
     if (error) throw error;
@@ -52,7 +104,7 @@ export async function submitContactMessage(input: {
       action: "submit",
       targetType: "contact_message",
       targetLabel: `${name} <${email}>`,
-      detail: { subject: input.subject || "" },
+      detail: { subject },
     });
 
     return { success: true };
@@ -67,6 +119,7 @@ export async function submitContactMessage(input: {
  */
 export async function getContactMessages(): Promise<ContactMessage[]> {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("contact_messages")

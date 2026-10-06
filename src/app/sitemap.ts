@@ -28,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
     "/map",
+    "/map-explorer",
     "/vehicles",
     "/compare/vehicles",
     "/missions",
@@ -60,7 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: "daily" as const,
+    changeFrequency: route === "" ? ("daily" as const) : ("weekly" as const),
     priority: route === "" ? 1.0 : 0.8,
   }));
 
@@ -72,12 +73,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const articles = await getPublicArticles();
       articleRoutes = articles
         .filter((a) => a.slug)
-        .map((a) => ({
-          url: `${baseUrl}/news/${a.slug}`,
-          lastModified: new Date(),
-          changeFrequency: "weekly" as const,
-          priority: 0.7,
-        }));
+        .map((a) => {
+          // Use the article's real publish date when it parses; display dates
+          // are "Jan 5, 2026"-style strings, which Date() understands.
+          const published = a.date ? new Date(a.date) : null;
+          return {
+            url: `${baseUrl}/news/${a.slug}`,
+            lastModified: published && !Number.isNaN(published.getTime()) ? published : new Date(),
+            changeFrequency: "weekly" as const,
+            priority: 0.7,
+          };
+        });
     } catch {
       // Sitemap still ships without articles if the DB is unreachable
     }

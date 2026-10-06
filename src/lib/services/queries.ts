@@ -140,7 +140,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
       supabase.from("map_markers").select("id", { count: "exact", head: true }),
       supabase
         .from("articles")
-        .select("title, excerpt, published_at, cover_image, read_time, tag, category")
+        .select("title, slug, excerpt, published_at, cover_image, read_time, tag, category")
         .eq("status", "published")
         .order("published_at", { ascending: false })
         .limit(3),

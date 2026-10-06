@@ -37,7 +37,9 @@ export const getSeoSettings = cache(async (): Promise<AdminSeoSettings> => {
         metaDescription: map["metaDescription"] ?? DEFAULT_SEO.metaDescription,
         canonicalBaseUrl: map["canonicalBaseUrl"] ?? DEFAULT_SEO.canonicalBaseUrl,
         socialPreviewImage: map["socialPreviewImage"] ?? DEFAULT_SEO.socialPreviewImage,
-        excludeDraftsAndArchived: map["excludeDraftsAndArchived"] === "true",
+        // Default true (documented default): only an explicit "false" opts out,
+        // so a fresh DB does not silently drop articles from the sitemap.
+        excludeDraftsAndArchived: map["excludeDraftsAndArchived"] !== "false",
         robotsTxt: map["robotsTxt"] ?? "",
         redirects: map["redirects"] ? JSON.parse(map["redirects"]) : DEFAULT_SEO.redirects,
       };

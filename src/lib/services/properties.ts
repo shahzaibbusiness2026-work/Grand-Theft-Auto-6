@@ -44,6 +44,7 @@ export async function getPublicProperties(): Promise<PropertyRecord[]> {
 
 export async function getAdminProperties(): Promise<PropertyRecord[]> {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("properties")
@@ -68,15 +69,16 @@ export async function saveProperty(property: Partial<PropertyRecord> & { name: s
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
 
-    const { error } = await supabase.from("properties").upsert(
-      {
-        ...property,
-        id,
-        slug,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "id" }
-    );
+    const payload = { ...property, id, slug, updated_at: new Date().toISOString() };
+    let { error } = await supabase.from("properties").upsert(payload, { onConflict: "id" });
+    if (error?.code === "23505" && !property.id) {
+      // New item whose generated slug is already taken — retry with a suffix.
+      const retry = await supabase.from("properties").upsert(
+        { ...payload, slug: `${slug}-${Math.random().toString(36).slice(2, 6)}` },
+        { onConflict: "id" }
+      );
+      error = retry.error;
+    }
     if (error) throw error;
 
     await logActivity({

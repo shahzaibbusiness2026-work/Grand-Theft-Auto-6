@@ -39,6 +39,21 @@ export async function getLocations(): Promise<LocationRecord[]> {
   return FALLBACK_LOCATIONS;
 }
 
+/**
+ * True only when the error means the table itself is absent (pre-migration
+ * DB) — the case the site_settings fallback exists for. Every other failure
+ * (validation, connectivity, constraint) must surface instead of silently
+ * rewriting the fallback blob.
+ */
+function isMissingTableError(err: { code?: string; message?: string } | null): boolean {
+  if (!err) return false;
+  return (
+    err.code === "42P01" ||
+    err.code === "PGRST205" ||
+    /does not exist|could not find the table/i.test(err.message || "")
+  );
+}
+
 export async function saveLocation(location: Partial<LocationRecord> & { name: string }) {
   try {
     await assertAdmin();
@@ -47,6 +62,9 @@ export async function saveLocation(location: Partial<LocationRecord> & { name: s
     const itemToSave = { ...location, id, updated_at: new Date().toISOString() };
 
     const { error } = await supabase.from("locations").upsert(itemToSave, { onConflict: "id" });
+    if (error && !isMissingTableError(error)) {
+      return { success: false, error: error.message };
+    }
     if (error) {
       // Table doesn't exist, persist in site_settings
       const current = await getLocations();
@@ -81,6 +99,9 @@ export async function deleteLocation(id: string) {
     await assertAdmin();
     const supabase = createAdminClient();
     const { error } = await supabase.from("locations").delete().eq("id", id);
+    if (error && !isMissingTableError(error)) {
+      return { success: false, error: error.message };
+    }
     if (error) {
       // Table doesn't exist, update in site_settings
       const current = await getLocations();

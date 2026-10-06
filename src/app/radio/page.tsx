@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "GTA 6 Radio Stations & Soundtrack | Wave 103, Flash FM & More",
   description:
     "Listen and browse the verified and rumored radio stations in Grand Theft Auto VI: Wave 103, Flash FM, Fever 105, V-Rock, and Radio Espantoso.",
+  alternates: { canonical: "/radio" },
 };
 
 function toClientStation(s: RadioStationRecord) {

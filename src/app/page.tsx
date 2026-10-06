@@ -2,7 +2,7 @@
 // Only <Countdown> (child) is client-rendered.
 
 import Link from "next/link";
-import Image from "next/image";
+import { SafeImage } from "@/components/safe-image";
 import {
   ArrowRight,
   Clock,
@@ -20,7 +20,7 @@ import { HomeSatelliteMap } from "@/components/home-satellite-map";
 import { getPublicArticles, getPublicCharacters, getDashboardStats } from "@/lib/services/queries";
 import { roleColor } from "@/lib/data";
 
-import { cn } from "@/lib/utils";
+import { cn, toIsoDate } from "@/lib/utils";
 import type { Metadata } from "next";
 import { getSiteSettings } from "@/lib/services/settings";
 
@@ -123,7 +123,7 @@ export default async function HomePage() {
               className="group card-surface w-44 shrink-0 overflow-hidden sm:w-52 transition-transform duration-300 hover:-translate-y-1 hover:shadow-neon-cyan"
             >
               <div className="relative h-48 overflow-hidden sm:h-56">
-                <Image
+                <SafeImage
                   src={c.img}
                   alt={c.name}
                   fill
@@ -162,7 +162,7 @@ export default async function HomePage() {
               {newsPosts.map((a) => (
                 <Link key={a.slug || a.title} href={a.slug ? `/news/${a.slug}` : "/news"} className="group flex gap-4">
                   <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-lg">
-                    <Image
+                    <SafeImage
                       src={a.img}
                       alt={a.title}
                       fill
@@ -174,7 +174,7 @@ export default async function HomePage() {
                     <Badge variant="solid" className="mb-1.5">{a.tag}</Badge>
                     <h4 className="line-clamp-2 font-display text-sm font-bold leading-snug group-hover:text-accent">{a.title}</h4>
                     <p className="mt-1 flex items-center gap-2 text-[11px] text-muted-foreground">
-                      <time dateTime={a.date}>{a.date}</time>
+                      <time dateTime={toIsoDate(a.date)}>{a.date}</time>
                       <span className="text-border" aria-hidden="true">•</span>
                       <Clock className="h-3 w-3" aria-hidden="true" /> {a.read}
                     </p>
@@ -194,7 +194,7 @@ export default async function HomePage() {
               {blogPosts.map((a) => (
                 <Link key={a.slug || a.title} href={a.slug ? `/news/${a.slug}` : "/blog"} className="group flex gap-4">
                   <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-lg">
-                    <Image
+                    <SafeImage
                       src={a.img}
                       alt={a.title}
                       fill
@@ -206,7 +206,7 @@ export default async function HomePage() {
                     <Badge className="mb-1.5">{a.tag}</Badge>
                     <h4 className="line-clamp-2 font-display text-sm font-bold leading-snug group-hover:text-primary">{a.title}</h4>
                     <p className="mt-1 flex items-center gap-2 text-[11px] text-muted-foreground">
-                      <time dateTime={a.date}>{a.date}</time>
+                      <time dateTime={toIsoDate(a.date)}>{a.date}</time>
                       <span className="text-border" aria-hidden="true">•</span>
                       <Clock className="h-3 w-3" aria-hidden="true" /> {a.read}
                     </p>
@@ -221,7 +221,7 @@ export default async function HomePage() {
       {/* 7 — NEWSLETTER */}
       <section aria-labelledby="newsletter-heading" className="container-site py-6">
         <div className="card-surface relative overflow-hidden min-h-[340px]">
-          <Image
+          <SafeImage
             src="/img/hero-dark.jpg"
             alt="GTA 6 Vice City Skyline"
             fill

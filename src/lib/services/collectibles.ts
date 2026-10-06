@@ -41,6 +41,7 @@ export async function getPublicCollectibles(): Promise<CollectibleRecord[]> {
 
 export async function getAdminCollectibles(): Promise<CollectibleRecord[]> {
   try {
+    await assertAdmin();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("collectibles")
@@ -65,15 +66,16 @@ export async function saveCollectible(item: Partial<CollectibleRecord> & { title
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
 
-    const { error } = await supabase.from("collectibles").upsert(
-      {
-        ...item,
-        id,
-        slug,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "id" }
-    );
+    const payload = { ...item, id, slug, updated_at: new Date().toISOString() };
+    let { error } = await supabase.from("collectibles").upsert(payload, { onConflict: "id" });
+    if (error?.code === "23505" && !item.id) {
+      // New item whose generated slug is already taken — retry with a suffix.
+      const retry = await supabase.from("collectibles").upsert(
+        { ...payload, slug: `${slug}-${Math.random().toString(36).slice(2, 6)}` },
+        { onConflict: "id" }
+      );
+      error = retry.error;
+    }
     if (error) throw error;
 
     await logActivity({

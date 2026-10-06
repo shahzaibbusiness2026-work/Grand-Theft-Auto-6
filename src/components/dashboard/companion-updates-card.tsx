@@ -48,15 +48,15 @@ export function CompanionUpdatesCard({ articles }: CompanionUpdatesCardProps) {
             ? "Official"
             : "Rumor") as "Official" | "Rumor",
           image: a.img,
-          href: "/news",
+          href: a.slug ? `/news/${a.slug}` : "/news",
         }))
       : FALLBACK_UPDATES;
 
   return (
-    <div className="flex flex-col justify-between rounded-3xl border border-white/10 bg-[#0a0f1d]/90 p-5 sm:p-6 shadow-xl backdrop-blur-xl">
+    <div className="flex flex-col justify-between rounded-3xl border border-border bg-[#0a0f1d]/90 p-5 sm:p-6 shadow-xl backdrop-blur-xl">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-white/5">
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-200">
+      <div className="flex items-center justify-between pb-3 border-b border-border">
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-foreground">
           <Newspaper className="h-4 w-4 text-amber-400" />
           <span>LATEST UPDATES</span>
         </div>
@@ -75,10 +75,10 @@ export function CompanionUpdatesCard({ articles }: CompanionUpdatesCardProps) {
           <Link
             key={item.id}
             href={item.href}
-            className="group flex items-center justify-between gap-3 rounded-2xl border border-white/[0.03] bg-white/[0.02] p-2.5 transition-all duration-200 hover:border-white/15 hover:bg-white/[0.06]"
+            className="group flex items-center justify-between gap-3 rounded-2xl border border-white/[0.03] bg-white/[0.02] p-2.5 transition-all duration-200 hover:border-border hover:bg-white/[0.06]"
           >
             <div className="flex items-center gap-3 truncate">
-              <div className="relative h-12 w-14 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-slate-900">
+              <div className="relative h-12 w-14 shrink-0 overflow-hidden rounded-xl border border-border bg-slate-900">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -86,10 +86,10 @@ export function CompanionUpdatesCard({ articles }: CompanionUpdatesCardProps) {
                 />
               </div>
               <div className="truncate">
-                <span className="block text-xs font-bold text-white truncate group-hover:text-[#00F0FF] transition-colors">
+                <span className="block text-xs font-bold text-white truncate group-hover:text-cyan-600 dark:text-[#00F0FF] transition-colors">
                   {item.title}
                 </span>
-                <span className="block text-[10px] text-slate-400 font-medium mt-0.5">
+                <span className="block text-[10px] text-muted-foreground font-medium mt-0.5">
                   {item.date}
                 </span>
               </div>

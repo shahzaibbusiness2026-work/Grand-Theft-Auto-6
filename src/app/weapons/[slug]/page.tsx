@@ -79,6 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${weapon.name} (${weapon.klass}) — GTA 6 Stats, Attachments & Locations`,
     description: `Complete verified breakdown of the ${weapon.name} in GTA 6: Damage ${weapon.damage}, Fire rate ${weapon.fireRate}, Accuracy ${weapon.accuracy}, Price ${weapon.priceDisplay}, attachments, and drop locations.`,
+    alternates: { canonical: `/weapons/${weapon.slug}` },
     openGraph: {
       title: `${weapon.name} — GTA 6 Weapon Guide`,
       description: weapon.description,

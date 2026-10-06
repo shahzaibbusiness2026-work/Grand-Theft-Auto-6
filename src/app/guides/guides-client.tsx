@@ -62,7 +62,7 @@ const quickLinks = [
   { label: "Collectible Tracker", icon: Package, href: "/collectibles" },
   { label: "Vehicle Database", icon: Car, href: "/database/vehicles" },
   { label: "Weapon Compare", icon: Crosshair, href: "/weapons/compare" },
-  { label: "Money Calculator", icon: DollarSign, href: "/tools" },
+  { label: "Money Calculator", icon: DollarSign, href: "/tools/money-calculator" },
 ];
 
 export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {

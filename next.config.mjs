@@ -12,6 +12,13 @@ const nextConfig = {
     minimumCacheTTL: 3600,
     remotePatterns: [
       { protocol: "https", hostname: "i.ytimg.com" },
+      // CMS media uploads live in the project's Storage bucket; allow the
+      // optimizer to serve them. Any OTHER external host is intentionally
+      // not whitelisted — src/components/safe-image.tsx falls back to a
+      // plain <img> for those so an arbitrary CMS URL can't crash a page.
+      ...(process.env.NEXT_PUBLIC_SUPABASE_URL
+        ? [{ protocol: "https", hostname: new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname }]
+        : []),
     ],
   },
   async headers() {

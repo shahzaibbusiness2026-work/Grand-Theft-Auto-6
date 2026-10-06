@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import { SafeImage } from "@/components/safe-image";
 import { ChevronLeft, ChevronRight, Play, Star, ArrowRight, Sparkles, User, Shield, Zap, Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -99,7 +99,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 className="group relative w-36 sm:w-44 aspect-[3/4] rounded-2xl overflow-hidden border border-pink-500/40 bg-black/60 shadow-xl hover:shadow-[0_0_25px_rgba(236,72,153,0.35)] transition-all hover:scale-105 text-left"
                 title="View Lucia Caminos Profile"
               >
-                <Image
+                <SafeImage
                   src={luciaChar?.img || "/img/char-lucia.jpg"}
                   alt={luciaChar?.name || "Lucia Caminos"}
                   fill
@@ -121,7 +121,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 className="group relative w-36 sm:w-44 aspect-[3/4] rounded-2xl overflow-hidden border border-cyan-500/40 bg-black/60 shadow-xl hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] transition-all hover:scale-105 text-left"
                 title="View Jason Duval Profile"
               >
-                <Image
+                <SafeImage
                   src={jasonChar?.img || "/img/char-jason.jpg"}
                   alt={jasonChar?.name || "Jason Duval"}
                   fill
@@ -177,7 +177,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
             >
               {/* Perfectly Proportioned 3:4 Aspect Ratio Image Box */}
               <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/40">
-                <Image
+                <SafeImage
                   src={c.img}
                   alt={`${c.name} - GTA 6 Character (${c.role})`}
                   fill
@@ -263,7 +263,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
             >
               {/* Natural 3:4 Aspect Ratio Image */}
               <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/40">
-                <Image
+                <SafeImage
                   src={c.img}
                   alt={`${c.name} - GTA 6 Character`}
                   fill
@@ -303,7 +303,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
       <section className="container-site pb-10">
         <div className="card-surface grid gap-6 p-6 lg:grid-cols-2 lg:items-center rounded-3xl border border-border">
           <div className="relative h-56 overflow-hidden rounded-2xl">
-            <Image
+            <SafeImage
               src="/img/boat.jpg"
               alt="Vice City Character Stories"
               fill

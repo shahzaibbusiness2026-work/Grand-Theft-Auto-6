@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Weapon Comparison Duel (2–4 Firearms) — GTA 6 Atlas",
   description: "Interactive head-to-head GTA 6 firearm comparison tool. Duel 2 to 4 weapons across DPS, bullet velocity, recoil, effective range, and magazine capacity.",
+  alternates: { canonical: "/compare/weapons" },
 };
 
 export default function WeaponsComparePage() {

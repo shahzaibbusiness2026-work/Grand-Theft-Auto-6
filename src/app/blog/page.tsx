@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { SafeImage } from "@/components/safe-image";
 import { ArrowRight, Clock } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { Badge } from "@/components/ui/badge";
@@ -53,9 +53,9 @@ export default async function BlogPage() {
         <section className="container-site grid gap-6 py-7 lg:grid-cols-[1fr_300px]">
           <div>
             <SectionHeader title="Featured Article" />
-            <a href={`/news/${featured.slug}`} className="card-surface block overflow-hidden">
+            <a href={featured.slug ? `/news/${featured.slug}` : "/news"} className="card-surface block overflow-hidden">
               <div className="relative h-64">
-                <Image
+                <SafeImage
                   src={featured.img || "/img/vice-sunset.svg"}
                   alt={`${featured.title} - GTA 6 Blog`}
                   fill
