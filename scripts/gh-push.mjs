@@ -267,6 +267,13 @@ function groupFiles(name) {
       message: "fix(bright): cheats warning banner + remaining page verification\n\n- cheats page trophy-warning banner: amber-200-on-translucent-amber (unreadable in bright) now amber-800 on a soft amber tint, dark mode unchanged via dark:-variants",
       files: ["src/app/cheats/page.tsx"],
     },
+    "navgap": {
+      message: "fix(nav): snug the dropdown chevron against its nav label\n\nThe split-button chevron sat ~14px from the label (link right padding + button left padding). Link right padding is now 1px and the chevron button has no left padding, so the icon sits 1px from the text as intended; right-side padding kept for the click target.",
+      files: [
+        "src/components/navbar.tsx",
+        "scripts/gh-push.mjs",
+      ],
+    },
     "navmenus": {
       message: "nav: fold Compare into Vehicles/Weapons buttons and 100% Tracker into Missions\n\n- removes the standalone Compare top-level button\n- Vehicles, Weapons and Missions become split buttons: the label still navigates to the listing page, a chevron opens a small menu beside it (Vehicle Comparison / Weapon Comparison / 100% Tracker)\n- active styling follows the whole section: /compare/vehicles highlights Vehicles, /tracker highlights Missions, and the open item highlights inside its menu\n- mobile drawer keeps every destination as a flat list (Vehicles, Vehicle Comparison, Weapons, Weapon Comparison, Missions, 100% Tracker, Map, ...)\n- verified in-browser in both themes: all three dropdowns open with readable cards, active pills correct on /compare/weapons and /tracker, mobile drawer intact",
       files: [

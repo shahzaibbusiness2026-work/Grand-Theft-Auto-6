@@ -108,7 +108,7 @@ function SplitNavDropdown({
       <Link
         href={href}
         aria-current={active ? "page" : undefined}
-        className="rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide lg:text-[13px]"
+        className="rounded-lg py-1.5 pl-2.5 pr-px text-xs font-semibold tracking-wide lg:text-[13px]"
       >
         {label}
       </Link>
@@ -118,7 +118,7 @@ function SplitNavDropdown({
         aria-haspopup="true"
         aria-expanded={open}
         aria-label={`Show ${label} menu`}
-        className="flex items-center rounded-lg px-1 py-1.5"
+        className="flex items-center rounded-lg py-1.5 pr-1.5"
       >
         <ChevronDown
           className={cn(
