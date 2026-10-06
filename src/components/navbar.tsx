@@ -22,18 +22,20 @@ import { CommandPalette } from "@/components/command-palette";
 import { getStoredUserState } from "@/lib/user-store";
 import { cn } from "@/lib/utils";
 
-const LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/vehicles", label: "Vehicles" },
-  { href: "/weapons", label: "Weapons" },
-  { href: "/missions", label: "Missions" },
-  { href: "/map", label: "Map" },
-  { href: "/tracker", label: "100% Tracker" },
-];
+type NavLink = {
+  href: string;
+  label: string;
+  /** Extra links revealed by the chevron: the label itself still navigates
+   * to href. */
+  menu?: { href: string; label: string }[];
+};
 
-const COMPARE_LINKS = [
-  { href: "/compare/vehicles", label: "Vehicle Comparison" },
-  { href: "/compare/weapons", label: "Weapon Comparison" },
+const LINKS: NavLink[] = [
+  { href: "/", label: "Home" },
+  { href: "/vehicles", label: "Vehicles", menu: [{ href: "/compare/vehicles", label: "Vehicle Comparison" }] },
+  { href: "/weapons", label: "Weapons", menu: [{ href: "/compare/weapons", label: "Weapon Comparison" }] },
+  { href: "/missions", label: "Missions", menu: [{ href: "/tracker", label: "100% Tracker" }] },
+  { href: "/map", label: "Map" },
 ];
 
 const MORE_LINKS = [
@@ -73,6 +75,85 @@ function useDropdown() {
   return { open, setOpen, ref };
 }
 
+/**
+ * Desktop nav item with an attached dropdown (Vehicle/Weapon Comparison,
+ * 100% Tracker under Missions): the label is a normal link to the listing
+ * page, the chevron toggles a small menu of extra links. The container
+ * carries the active/hover styling so the two halves read as one control.
+ */
+function SplitNavDropdown({
+  href,
+  label,
+  menu,
+  pathname,
+}: {
+  href: string;
+  label: string;
+  menu: { href: string; label: string }[];
+  pathname: string;
+}) {
+  const { open, setOpen, ref } = useDropdown();
+  const active =
+    pathname.startsWith(href) || menu.some((m) => pathname === m.href);
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "relative flex items-center rounded-lg transition-all duration-200",
+        active
+          ? "border border-amber-500/40 bg-amber-500/10 text-amber-500 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+          : "border border-transparent text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+      )}
+    >
+      <Link
+        href={href}
+        aria-current={active ? "page" : undefined}
+        className="rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide lg:text-[13px]"
+      >
+        {label}
+      </Link>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-label={`Show ${label} menu`}
+        className="flex items-center rounded-lg px-1 py-1.5"
+      >
+        <ChevronDown
+          className={cn(
+            "h-3.5 w-3.5 transition-transform duration-200 opacity-70",
+            open && "rotate-180"
+          )}
+        />
+      </button>
+      {open && (
+        <div
+          role="menu"
+          className="absolute left-1/2 top-full z-50 mt-2.5 w-56 -translate-x-1/2 rounded-xl border border-border bg-card/95 p-1.5 shadow-2xl backdrop-blur-2xl text-card-foreground animate-in fade-in zoom-in-95 duration-150"
+        >
+          {menu.map((m) => (
+            <Link
+              key={m.href}
+              href={m.href}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "block rounded-lg px-3 py-2 text-xs font-medium tracking-wide transition-colors",
+                pathname === m.href
+                  ? "bg-amber-500/15 text-amber-500 dark:text-amber-400 font-bold"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
+            >
+              {m.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function Navbar() {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
@@ -80,7 +161,6 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [isPro, setIsPro] = useState(false);
-  const compare = useDropdown();
   const more = useDropdown();
 
   useEffect(() => {
@@ -107,10 +187,8 @@ export function Navbar() {
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
-    if ((href === "/vehicles" || href === "/weapons") && pathname.endsWith("/compare")) return false;
     return pathname.startsWith(href);
   };
-  const compareActive = pathname.endsWith("/compare");
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-xl transition-colors">
@@ -134,71 +212,31 @@ export function Navbar() {
         </div>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-2 lg:gap-3 md:flex">
-          {LINKS.map((l) => {
-            const active = isActive(l.href);
-            return (
+          {LINKS.map((l) =>
+            l.menu ? (
+              <SplitNavDropdown
+                key={l.href}
+                href={l.href}
+                label={l.label}
+                menu={l.menu}
+                pathname={pathname}
+              />
+            ) : (
               <Link
                 key={l.href}
                 href={l.href}
-                aria-current={active ? "page" : undefined}
+                aria-current={isActive(l.href) ? "page" : undefined}
                 className={cn(
                   "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
-                  active
+                  isActive(l.href)
                     ? "border border-amber-500/40 bg-amber-500/10 text-amber-500 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
                     : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
                 {l.label}
               </Link>
-            );
-          })}
-
-          {/* Compare dropdown */}
-          <div className="relative" ref={compare.ref}>
-            <button
-              type="button"
-              onClick={() => compare.setOpen((v) => !v)}
-              aria-haspopup="true"
-              aria-expanded={compare.open}
-              className={cn(
-                "flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
-                compareActive
-                  ? "border border-amber-500/40 bg-amber-500/10 text-amber-500 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
-                  : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-              )}
-            >
-              <span>Compare</span>
-              <ChevronDown
-                className={cn(
-                  "h-3.5 w-3.5 transition-transform duration-200 opacity-70",
-                  compare.open && "rotate-180"
-                )}
-              />
-            </button>
-            {compare.open && (
-              <div
-                role="menu"
-                className="absolute left-1/2 top-full z-50 mt-2.5 w-56 -translate-x-1/2 rounded-xl border border-border bg-card/95 p-1.5 shadow-2xl backdrop-blur-2xl text-card-foreground animate-in fade-in zoom-in-95 duration-150"
-              >
-                {COMPARE_LINKS.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    role="menuitem"
-                    onClick={() => compare.setOpen(false)}
-                    className={cn(
-                      "block rounded-lg px-3 py-2 text-xs font-medium tracking-wide transition-colors",
-                      pathname === l.href
-                        ? "bg-amber-500/15 text-amber-500 dark:text-amber-400 font-bold"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                    )}
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+            )
+          )}
 
           {/* More dropdown */}
           <div className="relative" ref={more.ref}>
@@ -324,7 +362,9 @@ export function Navbar() {
               <Search className="h-4 w-4" />
               <span>Search All 15 Tools, Rides, Guns...</span>
             </button>
-            {[...LINKS, ...COMPARE_LINKS, ...MORE_LINKS].map((l) => {
+            {LINKS.flatMap((l) => [{ href: l.href, label: l.label }, ...(l.menu || [])])
+              .concat(MORE_LINKS)
+              .map((l) => {
               const active = isActive(l.href);
               return (
                 <Link
