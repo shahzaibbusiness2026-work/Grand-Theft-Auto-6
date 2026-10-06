@@ -267,6 +267,13 @@ function groupFiles(name) {
       message: "fix(bright): cheats warning banner + remaining page verification\n\n- cheats page trophy-warning banner: amber-200-on-translucent-amber (unreadable in bright) now amber-800 on a soft amber tint, dark mode unchanged via dark:-variants",
       files: ["src/app/cheats/page.tsx"],
     },
+    "navlabel": {
+      message: "fix(nav): dropdown labels read 'Compare Vehicles' / 'Compare Weapons'\n\nRenames the Vehicles/Weapons dropdown items from 'Vehicle Comparison' / 'Weapon Comparison' (desktop dropdown + mobile drawer share the same data). Page titles are unchanged.",
+      files: [
+        "src/components/navbar.tsx",
+        "scripts/gh-push.mjs",
+      ],
+    },
     "navgap": {
       message: "fix(nav): snug the dropdown chevron against its nav label\n\nThe split-button chevron sat ~14px from the label (link right padding + button left padding). Link right padding is now 1px and the chevron button has no left padding, so the icon sits 1px from the text as intended; right-side padding kept for the click target.",
       files: [

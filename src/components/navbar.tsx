@@ -32,8 +32,8 @@ type NavLink = {
 
 const LINKS: NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/vehicles", label: "Vehicles", menu: [{ href: "/compare/vehicles", label: "Vehicle Comparison" }] },
-  { href: "/weapons", label: "Weapons", menu: [{ href: "/compare/weapons", label: "Weapon Comparison" }] },
+  { href: "/vehicles", label: "Vehicles", menu: [{ href: "/compare/vehicles", label: "Compare Vehicles" }] },
+  { href: "/weapons", label: "Weapons", menu: [{ href: "/compare/weapons", label: "Compare Weapons" }] },
   { href: "/missions", label: "Missions", menu: [{ href: "/tracker", label: "100% Tracker" }] },
   { href: "/map", label: "Map" },
 ];
@@ -76,7 +76,7 @@ function useDropdown() {
 }
 
 /**
- * Desktop nav item with an attached dropdown (Vehicle/Weapon Comparison,
+ * Desktop nav item with an attached dropdown (Compare Vehicles/Weapons,
  * 100% Tracker under Missions): the label is a normal link to the listing
  * page, the chevron toggles a small menu of extra links. The container
  * carries the active/hover styling so the two halves read as one control.
