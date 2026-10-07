@@ -9,6 +9,7 @@ import {
 } from "@/lib/canonical-data";
 import { getSeoSettings } from "@/lib/services/seo";
 import { getPublicArticles } from "@/lib/services/articles";
+import { ALL_RANKING_SLUGS } from "@/lib/rankings";
 
 export const dynamic = "force-dynamic";
 
@@ -53,6 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/blog",
     "/database/vehicles",
     "/database/weapons",
+    "/rankings",
     "/about",
     "/contact",
     "/privacy",
@@ -137,6 +139,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // Auto-generated ranking pages
+  const rankingRoutes = ALL_RANKING_SLUGS.map((slug) => ({
+    url: `${baseUrl}/rankings/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
   return [
     ...staticRoutes,
     ...articleRoutes,
@@ -146,5 +156,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...locationRoutes,
     ...propertyRoutes,
     ...collectibleRoutes,
+    ...rankingRoutes,
   ];
 }

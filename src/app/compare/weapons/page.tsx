@@ -1,6 +1,7 @@
 import { SiteShell } from "@/components/shells";
 import { CompareWeaponsClient } from "./compare-weapons-client";
 import { getMergedWeapons } from "@/lib/services/catalog";
+import { getComparisonWeights } from "@/lib/services/comparison";
 import { Crosshair, ShieldAlert } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -11,8 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CompareWeaponsPage() {
-  // Live Supabase catalog (admin edits win) with canonical fallback.
-  const weapons = await getMergedWeapons();
+  // Live Supabase catalog (admin edits win) + CMS-configured score weights.
+  const [weapons, weights] = await Promise.all([getMergedWeapons(), getComparisonWeights()]);
 
   return (
     <SiteShell>
@@ -30,7 +31,7 @@ export default async function CompareWeaponsPage() {
           </p>
         </div>
 
-        <CompareWeaponsClient weapons={weapons} />
+        <CompareWeaponsClient weapons={weapons} weights={weights.weapon} />
       </div>
     </SiteShell>
   );

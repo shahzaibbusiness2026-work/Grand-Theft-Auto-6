@@ -21,20 +21,26 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
+import type { VehicleScoreWeights } from "@/lib/scoring";
+import { computeVehicleScore, getVehicleBestFor, normalizeWeights } from "@/lib/scoring";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
+import { RadarChart, RADAR_COLORS } from "@/components/radar-chart";
+import { ComparisonTable, type ComparisonRowDef } from "@/components/comparison-table";
 
 interface CompareVehiclesClientProps {
   initialSlugs?: string[];
   /** Live catalog (DB + canonical merge) passed from the server page; falls back to bundled data. */
   vehicles?: CanonicalVehicle[];
+  /** CMS-configured overall-score weights. */
+  weights?: VehicleScoreWeights;
 }
 
-export function CompareVehiclesClient({ initialSlugs, vehicles }: CompareVehiclesClientProps) {
+export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: CompareVehiclesClientProps) {
   const vehicleList = vehicles && vehicles.length > 0 ? vehicles : canonicalVehicles;
 
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>(() => {
@@ -123,6 +129,10 @@ export function CompareVehiclesClient({ initialSlugs, vehicles }: CompareVehicle
   const bestBraking = useMemo(() => Math.max(...selectedVehicles.map((v) => v.braking)), [selectedVehicles]);
   const bestHandling = useMemo(() => Math.max(...selectedVehicles.map((v) => v.handling)), [selectedVehicles]);
   const bestPower = useMemo(() => Math.max(...selectedVehicles.map((v) => v.power)), [selectedVehicles]);
+  const bestTraction = useMemo(
+    () => Math.max(...selectedVehicles.map((v) => v.traction ?? 70)),
+    [selectedVehicles]
+  );
 
   // Overall Score Calculation (Speed 35%, Accel 25%, Handling 25%, Braking 15%)
   const scores = useMemo(() => {
@@ -140,6 +150,150 @@ export function CompareVehiclesClient({ initialSlugs, vehicles }: CompareVehicle
     if (scores.length === 0) return null;
     return [...scores].sort((a, b) => b.total - a.total)[0];
   }, [scores]);
+
+  // CMS-weighted Overall Scores + Best-For tags
+  const overallScores = useMemo(
+    () => selectedVehicles.map((v) => computeVehicleScore(v, weights)),
+    [selectedVehicles, weights]
+  );
+  const overallScoreLeader = useMemo(() => {
+    if (overallScores.length === 0) return null;
+    return overallScores.indexOf(Math.max(...overallScores));
+  }, [overallScores]);
+  const bestForTags = useMemo(
+    () => selectedVehicles.map((v) => getVehicleBestFor(v)),
+    [selectedVehicles]
+  );
+
+  // Radar chart data (acceleration inverted so higher = better on the chart)
+  const radarSeries = useMemo(
+    () =>
+      selectedVehicles.map((v, i) => ({
+        name: v.name,
+        color: RADAR_COLORS[i % RADAR_COLORS.length],
+        values: [
+          Math.min(100, Math.max(0, ((v.topSpeed - 80) / 150) * 100)),
+          Math.min(100, Math.max(0, ((6.5 - v.acceleration) / 5) * 100)),
+          v.braking,
+          v.handling,
+          v.traction ?? 70,
+          Math.min(100, Math.max(0, ((v.price || 0) > 0 ? Math.sqrt(2000000 / v.price!) * 30 : 30))),
+        ],
+      })),
+    [selectedVehicles]
+  );
+
+  const parseWeightNum = (s: string) => {
+    const n = parseFloat(s.replace(/,/g, ""));
+    return Number.isFinite(n) ? n : null;
+  };
+
+  const tableRows: ComparisonRowDef[] = useMemo(() => {
+    if (selectedVehicles.length < 2) return [];
+    const winnerMax = (vals: number[]) => {
+      const valid = vals.filter((v) => v != null) as number[];
+      if (valid.length === 0 || new Set(valid).size === 1) return null;
+      return vals.indexOf(Math.max(...valid));
+    };
+    const winnerMin = (vals: (number | null)[]) => {
+      const valid = vals.filter((v): v is number => v != null);
+      if (valid.length === 0 || new Set(valid).size === 1) return null;
+      return vals.indexOf(Math.min(...(valid as number[])));
+    };
+    const tractionVals = selectedVehicles.map((v) => v.traction ?? 70);
+    const corneringVals = selectedVehicles.map((v) => v.cornering ?? 70);
+    const launchVals = selectedVehicles.map((v) => v.launch ?? 70);
+    const priceVals = selectedVehicles.map((v) => v.price ?? null);
+    const weightVals = selectedVehicles.map((v) => parseWeightNum(v.weight || ""));
+    const seatVals = selectedVehicles.map((v) => v.seating ?? 0);
+
+    const rows: ComparisonRowDef[] = [
+      {
+        label: "Overall Score",
+        values: overallScores.map((s) => `${s}/100`),
+        bars: overallScores,
+        winnerIndex: new Set(overallScores).size === 1 ? null : overallScores.indexOf(Math.max(...overallScores)),
+      },
+      {
+        label: "Top Speed",
+        values: selectedVehicles.map((v) => `${v.topSpeed} mph`),
+        bars: selectedVehicles.map((v) => ((v.topSpeed - 80) / 150) * 100),
+        winnerIndex: winnerMax(selectedVehicles.map((v) => v.topSpeed)),
+      },
+      {
+        label: "0–60 Launch",
+        values: selectedVehicles.map((v) => `${v.acceleration}s`),
+        bars: selectedVehicles.map((v) => ((6.5 - v.acceleration) / 5) * 100),
+        winnerIndex: winnerMin(selectedVehicles.map((v) => v.acceleration)),
+      },
+      {
+        label: "Handling",
+        values: selectedVehicles.map((v) => `${v.handling}/100`),
+        bars: selectedVehicles.map((v) => v.handling),
+        winnerIndex: winnerMax(selectedVehicles.map((v) => v.handling)),
+      },
+      {
+        label: "Braking",
+        values: selectedVehicles.map((v) => `${v.braking}/100`),
+        bars: selectedVehicles.map((v) => v.braking),
+        winnerIndex: winnerMax(selectedVehicles.map((v) => v.braking)),
+      },
+      {
+        label: "Traction",
+        values: tractionVals.map((t) => `${t}/100`),
+        bars: tractionVals,
+        winnerIndex: winnerMax(tractionVals),
+      },
+      {
+        label: "Cornering",
+        values: corneringVals.map((t) => `${t}/100`),
+        bars: corneringVals,
+        winnerIndex: winnerMax(corneringVals),
+      },
+      {
+        label: "Launch / Takeoff",
+        values: launchVals.map((t) => `${t}/100`),
+        bars: launchVals,
+        winnerIndex: winnerMax(launchVals),
+      },
+      {
+        label: "Horsepower",
+        values: selectedVehicles.map((v) => `${v.power} HP`),
+        winnerIndex: winnerMax(selectedVehicles.map((v) => v.power)),
+      },
+      {
+        label: "Price",
+        values: selectedVehicles.map((v) => v.priceDisplay),
+        winnerIndex: winnerMin(priceVals),
+      },
+      {
+        label: "Weight",
+        values: selectedVehicles.map((v) => v.weight),
+        winnerIndex: winnerMin(weightVals),
+      },
+      {
+        label: "Seats",
+        values: seatVals.map((s) => String(s)),
+        winnerIndex: winnerMax(seatVals),
+      },
+    ];
+    return rows;
+  }, [selectedVehicles, overallScores]);
+
+  // Special features (✓ / ✗) across all selected vehicles
+  const featureUnion = useMemo(() => {
+    const set = new Set<string>();
+    selectedVehicles.forEach((v) => (v.features || []).forEach((f) => set.add(f)));
+    return Array.from(set);
+  }, [selectedVehicles]);
+  const featureMatrix = useMemo(
+    () =>
+      featureUnion.map((f) => ({
+        feature: f,
+        present: selectedVehicles.map((v) => (v.features || []).includes(f) || (f === "Weaponized" && !!v.weaponized)),
+      })),
+    [featureUnion, selectedVehicles]
+  );
 
   return (
     <div className="space-y-8">
@@ -277,6 +431,31 @@ export function CompareVehiclesClient({ initialSlugs, vehicles }: CompareVehicle
                   <span className="text-muted-foreground">{v.manufacturer}</span>
                   <span className="font-mono font-bold text-cyan-600 dark:text-[#00F0FF]">{v.priceDisplay}</span>
                 </div>
+                {bestForTags[idx]?.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {bestForTags[idx].map((t) => (
+                      <span
+                        key={t.label}
+                        className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-accent"
+                      >
+                        {t.emoji} {t.label}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {overallScores[idx] != null && (
+                  <div className="mt-2 flex items-center justify-between rounded-xl border border-amber-500/30 bg-amber-400/10 px-2.5 py-1.5">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 flex items-center gap-1">
+                      <Trophy className="h-3 w-3" /> Overall Score
+                    </span>
+                    <span className="font-mono font-black text-sm text-amber-400">
+                      {overallScores[idx]}/100
+                      {overallScoreLeader === idx && overallScores.length > 1 && (
+                        <span className="ml-1.5 text-[9px] font-black uppercase text-emerald-400">Lead</span>
+                      )}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* STAT ROWS */}
@@ -349,6 +528,24 @@ export function CompareVehiclesClient({ initialSlugs, vehicles }: CompareVehicle
                   </div>
                 </div>
 
+                {/* Traction */}
+                <div className="rounded-xl border-border bg-muted/60 p-2.5">
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="text-muted-foreground flex items-center gap-1.5">
+                      <Car className="h-3.5 w-3.5 text-emerald-400" /> Traction
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-mono font-bold text-white">{v.traction ?? 70}/100</span>
+                      {(v.traction ?? 70) === bestTraction && selectedVehicles.length > 1 && (
+                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
+                          Winner
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <Progress value={v.traction ?? 70} className="h-1.5 mt-1.5" />
+                </div>
+
                 {/* Power */}
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
                   <div className="flex justify-between items-center text-xs">
@@ -397,6 +594,58 @@ export function CompareVehiclesClient({ initialSlugs, vehicles }: CompareVehicle
           );
         })}
       </div>
+
+      {/* RADAR + FEATURE COMPARISON */}
+      {selectedVehicles.length >= 2 && (
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="card-surface rounded-3xl border border-border p-5">
+            <h3 className="font-display text-sm font-black uppercase text-white mb-1">Performance Radar</h3>
+            <p className="text-[11px] text-muted-foreground mb-3">
+              Speed • Acceleration • Braking • Handling • Traction • Value
+            </p>
+            <RadarChart
+              axes={["Speed", "Accel", "Braking", "Handling", "Traction", "Value"]}
+              series={radarSeries}
+            />
+          </div>
+
+          <div className="card-surface rounded-3xl border border-border p-5">
+            <h3 className="font-display text-sm font-black uppercase text-white mb-1">Special Features</h3>
+            <p className="text-[11px] text-muted-foreground mb-3">Weaponization, armor & ability showdown</p>
+            {featureUnion.length === 0 ? (
+              <p className="text-xs text-muted-foreground py-8 text-center">
+                None of the selected vehicles have special features listed yet.
+              </p>
+            ) : (
+              <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+                {featureMatrix.map(({ feature, present }) => (
+                  <div key={feature} className="grid gap-2 items-center" style={{ gridTemplateColumns: `1.4fr repeat(${selectedVehicles.length}, 1fr)` }}>
+                    <span className="text-[11px] font-bold text-muted-foreground">{feature}</span>
+                    {present.map((has, i) => (
+                      <span key={i} className="text-center text-sm" aria-label={has ? "Yes" : "No"}>
+                        {has ? (
+                          <span className="text-emerald-400 font-black">✓</span>
+                        ) : (
+                          <span className="text-rose-400/70">✗</span>
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )}
+            {featureUnion.length === 0 && <div />}
+          </div>
+        </div>
+      )}
+
+      {/* FULL STAT TABLE WITH WINNERS */}
+      {tableRows.length > 0 && (
+        <ComparisonTable
+          contenders={selectedVehicles.map((v, i) => ({ name: v.name, color: RADAR_COLORS[i % RADAR_COLORS.length] }))}
+          rows={tableRows}
+        />
+      )}
 
       {/* VEHICLE PICKER MODAL */}
       {pickerSlotIndex !== null && (

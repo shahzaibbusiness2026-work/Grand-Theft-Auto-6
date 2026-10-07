@@ -32,9 +32,28 @@ type NavLink = {
 
 const LINKS: NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/vehicles", label: "Vehicles", menu: [{ href: "/compare/vehicles", label: "Compare Vehicles" }] },
-  { href: "/weapons", label: "Weapons", menu: [{ href: "/compare/weapons", label: "Compare Weapons" }] },
+  {
+    href: "/vehicles",
+    label: "Vehicles",
+    menu: [
+      { href: "/compare/vehicles", label: "Compare Vehicles" },
+      { href: "/rankings/fastest-vehicles", label: "Fastest Vehicles" },
+      { href: "/rankings/best-vehicles-overall", label: "Best Vehicles Overall" },
+      { href: "/rankings", label: "All Vehicle Rankings" },
+    ],
+  },
+  {
+    href: "/weapons",
+    label: "Weapons",
+    menu: [
+      { href: "/compare/weapons", label: "Compare Weapons" },
+      { href: "/rankings/highest-dps", label: "Highest DPS Weapons" },
+      { href: "/rankings/best-weapons-overall", label: "Best Weapons Overall" },
+      { href: "/rankings", label: "All Weapon Rankings" },
+    ],
+  },
   { href: "/missions", label: "Missions", menu: [{ href: "/tracker", label: "100% Tracker" }] },
+  { href: "/rankings", label: "Rankings" },
   { href: "/map", label: "Map" },
 ];
 

@@ -13,6 +13,20 @@ import {
 import { useToast } from "@/components/admin/toast";
 import type { AdminVehicle } from "@/lib/admin-store";
 import { deleteVehicle, saveVehicle } from "@/lib/services/vehicles";
+import {
+  Section,
+  FieldRow,
+  TextField,
+  NumberField,
+  ToggleField,
+  ListField,
+} from "@/components/admin/form-fields";
+
+const VEHICLE_FEATURES = [
+  "Armor", "Bulletproof Windows", "Machine Guns", "Missiles", "Rockets", "Mines",
+  "Boost", "Jump", "Parachute", "Stealth", "Weaponized", "Remote Control",
+  "Hydraulics", "Amphibious", "Drift Tuned",
+];
 
 const EMPTY_DRAFT: AdminVehicle = {
   id: "",
@@ -80,7 +94,7 @@ export function VehicleEditor({
     if (res.success) {
       showToast({
         title: status === "published" ? "Vehicle published" : "Vehicle saved",
-        description: `${vehicle.name} was saved as ${status}.`,
+        description: "warning" in res && res.warning ? res.warning : `${vehicle.name} was saved as ${status}.`,
         type: "success",
       });
       if (!vehicle.id && res.id) router.replace(`/admin/vehicles/${res.id}`);
@@ -355,6 +369,113 @@ export function VehicleEditor({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* DEEP-DIVE SECTIONS (migration 05 fields) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
+        <Section title="Performance ratings (0–100)">
+          <FieldRow>
+            <NumberField label="Traction / Grip" value={vehicle.traction} onChange={(v) => setField("traction", v)} placeholder="85" />
+            <NumberField label="Cornering" value={vehicle.cornering} onChange={(v) => setField("cornering", v)} placeholder="80" />
+            <NumberField label="Launch / Takeoff" value={vehicle.launch} onChange={(v) => setField("launch", v)} placeholder="82" />
+            <NumberField label="Reverse speed rating" value={vehicle.reverseSpeed} onChange={(v) => setField("reverseSpeed", v)} placeholder="55" />
+            <NumberField label="Torque (lb-ft, optional)" value={vehicle.torque} onChange={(v) => setField("torque", v)} placeholder="450" />
+          </FieldRow>
+        </Section>
+
+        <Section title="Economy">
+          <FieldRow>
+            <NumberField label="Purchase price ($)" value={vehicle.price} onChange={(v) => setField("price", v)} placeholder="1500000" />
+            <TextField label="Price display" value={vehicle.priceDisplay || ""} onChange={(v) => setField("priceDisplay", v)} placeholder="$1,500,000" />
+            <NumberField label="Resale price ($)" value={vehicle.resalePrice} onChange={(v) => setField("resalePrice", v)} placeholder="750000" />
+            <NumberField label="Insurance cost ($)" value={vehicle.insuranceCost} onChange={(v) => setField("insuranceCost", v)} placeholder="12000" />
+            <NumberField label="Upgrade cost ($)" value={vehicle.upgradeCost} onChange={(v) => setField("upgradeCost", v)} placeholder="250000" />
+            <NumberField label="Repair cost ($)" value={vehicle.repairCost} onChange={(v) => setField("repairCost", v)} placeholder="8000" />
+            <NumberField label="Storage cost ($)" value={vehicle.storageCost} onChange={(v) => setField("storageCost", v)} placeholder="1500" />
+          </FieldRow>
+        </Section>
+
+        <Section title="Engine & mechanical">
+          <FieldRow>
+            <TextField label="Engine type" value={vehicle.engineType || ""} onChange={(v) => setField("engineType", v)} placeholder="V8 / Electric motor" />
+            <TextField label="Engine size" value={vehicle.engineSize || ""} onChange={(v) => setField("engineSize", v)} placeholder="5.0L" />
+            <TextField label="Transmission" value={vehicle.transmission || ""} onChange={(v) => setField("transmission", v)} placeholder="8-speed automatic" />
+            <NumberField label="Gears" value={vehicle.gears} onChange={(v) => setField("gears", v)} placeholder="8" />
+            <TextField label="Fuel type" value={vehicle.fuelType || ""} onChange={(v) => setField("fuelType", v)} placeholder="Petrol / Diesel / Electric" />
+          </FieldRow>
+          <FieldRow>
+            <ToggleField label="Turbocharged" checked={!!vehicle.turbo} onChange={(v) => setField("turbo", v)} />
+            <ToggleField label="Electric" checked={!!vehicle.electric} onChange={(v) => setField("electric", v)} />
+            <ToggleField label="Amphibious" checked={!!vehicle.amphibious} onChange={(v) => setField("amphibious", v)} />
+          </FieldRow>
+        </Section>
+
+        <Section title="Characteristics">
+          <FieldRow>
+            <NumberField label="Seating capacity" value={vehicle.seating} onChange={(v) => setField("seating", v)} placeholder="2" />
+            <NumberField label="Doors" value={vehicle.doors} onChange={(v) => setField("doors", v)} placeholder="2" />
+            <TextField label="Roof type" value={vehicle.roofType || ""} onChange={(v) => setField("roofType", v)} placeholder="Hardtop / Soft top / Open" />
+            <TextField label="Trunk / cargo capacity" value={vehicle.trunkCapacity || ""} onChange={(v) => setField("trunkCapacity", v)} placeholder="2 duffel bags" />
+            <NumberField label="Off-road capability (0–100)" value={vehicle.offroadRating} onChange={(v) => setField("offroadRating", v)} placeholder="30" />
+            <NumberField label="Water capability (0–100)" value={vehicle.waterRating} onChange={(v) => setField("waterRating", v)} placeholder="0" />
+            <NumberField label="Bullet resistance (0–100)" value={vehicle.bulletResistance} onChange={(v) => setField("bulletResistance", v)} placeholder="30" />
+            <NumberField label="Explosion resistance (0–100)" value={vehicle.explosionResistance} onChange={(v) => setField("explosionResistance", v)} placeholder="25" />
+          </FieldRow>
+          <FieldRow>
+            <ToggleField label="Convertible" checked={!!vehicle.convertible} onChange={(v) => setField("convertible", v)} />
+          </FieldRow>
+        </Section>
+
+        <Section title="Special features">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {VEHICLE_FEATURES.map((f) => (
+              <ToggleField
+                key={f}
+                label={f}
+                checked={(vehicle.features || []).includes(f)}
+                onChange={(on) =>
+                  setField("features", on
+                    ? [...(vehicle.features || []), f]
+                    : (vehicle.features || []).filter((x) => x !== f))
+                }
+              />
+            ))}
+          </div>
+          <FieldRow>
+            <NumberField label="Armor rating (0–100)" value={vehicle.armorRating} onChange={(v) => setField("armorRating", v)} placeholder="25" />
+            <NumberField label="Drift capability (0–100)" value={vehicle.driftRating} onChange={(v) => setField("driftRating", v)} placeholder="50" />
+            <TextField label="Special ability" value={vehicle.specialAbility || ""} onChange={(v) => setField("specialAbility", v)} placeholder="Rocket boost, hop, winch…" />
+          </FieldRow>
+        </Section>
+
+        <Section title="Customization & audio">
+          <ListField
+            label="Customization categories"
+            items={vehicle.customization || []}
+            onChange={(v) => setField("customization", v)}
+            hint={"One per line: Engine, Brakes, Turbo, Paint, Livery, Spoiler…"}
+          />
+          <FieldRow>
+            <NumberField label="Sound rating (0–100)" value={vehicle.soundRating} onChange={(v) => setField("soundRating", v)} placeholder="85" />
+            <TextField label="Engine sound" value={vehicle.engineSound || ""} onChange={(v) => setField("engineSound", v)} placeholder="Deep V8 rumble" />
+            <TextField label="Exhaust sound" value={vehicle.exhaustSound || ""} onChange={(v) => setField("exhaustSound", v)} placeholder="Crackle-pop overrun" />
+            <TextField label="Horn" value={vehicle.horn || ""} onChange={(v) => setField("horn", v)} placeholder="Classic triple horn" />
+            <TextField label="Turbo sound" value={vehicle.turboSound || ""} onChange={(v) => setField("turboSound", v)} placeholder="Whistle + blow-off" />
+            <TextField label="Gear shift sound" value={vehicle.gearShiftSound || ""} onChange={(v) => setField("gearShiftSound", v)} placeholder="Sequential click" />
+          </FieldRow>
+        </Section>
+
+        <Section title="Availability, gallery & tags">
+          <FieldRow>
+            <TextField label="Availability / release status" value={vehicle.availability || ""} onChange={(v) => setField("availability", v)} placeholder="Confirmed — launch roster" />
+            <TextField label="Slug" value={vehicle.slug || ""} onChange={(v) => setField("slug", v)} placeholder="grotti-visione" hint="Public URL: /vehicles/<slug>" />
+            <NumberField label="Power (HP)" value={vehicle.powerHp} onChange={(v) => setField("powerHp", v)} placeholder="720" />
+            <TextField label="Confidence" value={vehicle.confidence || ""} onChange={(v) => setField("confidence", v)} placeholder="CONFIRMED" />
+          </FieldRow>
+          <ToggleField label="Featured vehicle" checked={!!vehicle.featured} onChange={(v) => setField("featured", v)} />
+          <ListField label="Gallery image URLs" items={vehicle.gallery || []} onChange={(v) => setField("gallery", v)} hint="One URL per line" />
+          <ListField label="Tags" items={vehicle.tags || []} onChange={(v) => setField("tags", v)} hint="One per line: Racing, Luxury, Heist…" />
+        </Section>
       </div>
     </div>
   );

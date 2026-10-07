@@ -20,6 +20,10 @@ import {
   type CanonicalVehicle,
   type CanonicalWeapon,
 } from "@/lib/canonical-data";
+import {
+  VEHICLE_CLASS_DEFAULTS,
+  WEAPON_CATEGORY_DEFAULTS,
+} from "@/lib/scoring";
 
 const num = (s?: string | null): number | null => {
   const n = parseFloat((s || "").replace(/,/g, ""));
@@ -28,6 +32,11 @@ const num = (s?: string | null): number | null => {
 
 /** Map a live DB vehicle row to the display shape — DB values WIN over canonical stats. */
 function dbVehicleToDisplay(v: VehicleCatalogRow, c?: CanonicalVehicle): CanonicalVehicle {
+  // Class-based stat defaults fill NULL columns so comparisons/rankings
+  // stay meaningful before the admin enters real values.
+  const defaults = VEHICLE_CLASS_DEFAULTS[(v.class || "").trim()] || {};
+  const rating = (db: number | null | undefined, canon?: number, dflt?: number): number =>
+    db ?? canon ?? dflt ?? 60;
   return {
     id: v.id,
     slug: v.slug || c?.slug || v.id,
@@ -52,16 +61,63 @@ function dbVehicleToDisplay(v: VehicleCatalogRow, c?: CanonicalVehicle): Canonic
     priceDisplay: v.price_display || c?.priceDisplay || "TBD",
     purchaseLocation: c?.purchaseLocation || "Southern San Andreas Super Autos",
     spawnLocations: c?.spawnLocations ?? ["Vice City Downtown", "Ocean Drive"],
-    customizationOptions: c?.customizationOptions ?? ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
+    customizationOptions: v.customization?.length ? v.customization : c?.customizationOptions ?? ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
     confidence: (v.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "CONFIRMED",
     source: v.source || c?.source || "In-game Footage",
     description: v.summary || c?.description || `${v.name} in Grand Theft Auto VI.`,
-    featured: c?.featured ?? true,
+    featured: v.featured ?? c?.featured ?? true,
+
+    /* Deep-dive fields (DB first → canonical → class defaults) */
+    traction: rating(v.traction, c?.traction, defaults.traction),
+    cornering: rating(v.cornering, c?.cornering, defaults.cornering),
+    launch: rating(v.launch, c?.launch, defaults.launch),
+    reverseSpeed: rating(v.reverse_speed, c?.reverseSpeed, defaults.reverseSpeed),
+    torque: v.torque ?? c?.torque ?? undefined,
+    resalePrice: v.resale_price ?? c?.resalePrice ?? null,
+    insuranceCost: v.insurance_cost ?? c?.insuranceCost ?? null,
+    upgradeCost: v.upgrade_cost ?? c?.upgradeCost ?? null,
+    repairCost: v.repair_cost ?? c?.repairCost ?? null,
+    storageCost: v.storage_cost ?? c?.storageCost ?? null,
+    engineType: v.engine_type || c?.engineType || undefined,
+    engineSize: v.engine_size || c?.engineSize || undefined,
+    transmission: v.transmission || c?.transmission || undefined,
+    gears: v.gears ?? c?.gears ?? undefined,
+    fuelType: v.fuel_type || c?.fuelType || undefined,
+    turbo: v.turbo ?? c?.turbo ?? false,
+    electric: v.electric ?? c?.electric ?? false,
+    doors: v.doors ?? c?.doors ?? defaults.doors ?? 2,
+    convertible: v.convertible ?? c?.convertible ?? false,
+    roofType: v.roof_type || c?.roofType || undefined,
+    trunkCapacity: v.trunk_capacity || c?.trunkCapacity || undefined,
+    offroadRating: rating(v.offroad_rating, c?.offroadRating, defaults.offroadRating),
+    waterRating: rating(v.water_rating, c?.waterRating, defaults.waterRating),
+    amphibious: v.amphibious ?? c?.amphibious ?? false,
+    bulletResistance: rating(v.bullet_resistance, c?.bulletResistance, defaults.bulletResistance),
+    explosionResistance: rating(v.explosion_resistance, c?.explosionResistance, defaults.explosionResistance),
+    armorRating: rating(v.armor_rating, c?.armorRating, defaults.armorRating),
+    weaponized: v.weaponized ?? c?.weaponized ?? false,
+    driftRating: rating(v.drift_rating, c?.driftRating, defaults.driftRating),
+    specialAbility: v.special_ability || c?.specialAbility || undefined,
+    features: v.features?.length ? v.features : c?.features ?? [],
+    customization: v.customization?.length ? v.customization : c?.customization ?? [],
+    soundRating: v.sound_rating ?? c?.soundRating ?? undefined,
+    engineSound: v.engine_sound || c?.engineSound || undefined,
+    exhaustSound: v.exhaust_sound || c?.exhaustSound || undefined,
+    horn: v.horn || c?.horn || undefined,
+    turboSound: v.turbo_sound || c?.turboSound || undefined,
+    gearShiftSound: v.gear_shift_sound || c?.gearShiftSound || undefined,
+    availability: v.availability || c?.availability || "Confirmed for GTA 6",
+    gallery: v.gallery?.length ? v.gallery : c?.gallery ?? [],
+    tags: v.tags?.length ? v.tags : c?.tags ?? [],
   };
 }
 
 /** Map a live DB weapon row to the display shape — DB values WIN over canonical stats. */
 function dbWeaponToDisplay(w: WeaponCatalogRow, c?: CanonicalWeapon): CanonicalWeapon {
+  // Category-based stat defaults fill NULL columns.
+  const defaults = WEAPON_CATEGORY_DEFAULTS[(w.category || "").trim()] || {};
+  const rating = (db: number | null | undefined, canon?: number, dflt?: number): number =>
+    db ?? canon ?? dflt ?? 55;
   return {
     id: w.id,
     slug: w.slug || c?.slug || w.id,
@@ -75,7 +131,7 @@ function dbWeaponToDisplay(w: WeaponCatalogRow, c?: CanonicalWeapon): CanonicalW
     reloadTime: c?.reloadTime ?? "2.5s",
     magazineSize: num(w.magazine_size) ?? c?.magazineSize ?? 15,
     ammoType: w.ammunition || c?.ammoType || "9mm Standard",
-    price: c?.price ?? null,
+    price: w.price ?? c?.price ?? null,
     priceDisplay: w.price_display || c?.priceDisplay || "TBD",
     rarity: (w.rarity as CanonicalWeapon["rarity"]) || c?.rarity || "Common",
     locations: c?.locations || [w.acquisition_method || "Ammu-Nation"],
@@ -84,7 +140,26 @@ function dbWeaponToDisplay(w: WeaponCatalogRow, c?: CanonicalWeapon): CanonicalW
       (w.verification === "verified" ? "CONFIRMED" : "SPECULATION"),
     source: c?.source || "In-game Database",
     description: w.notes || c?.description || `${w.name} in Grand Theft Auto VI.`,
-    img: c?.img || "/img/hero-dark.jpg",
+    img: w.image || c?.img || "/img/hero-dark.jpg",
+
+    /* Deep-dive fields (DB first → canonical → category defaults) */
+    reload: rating(w.reload, c?.reload, defaults.reload),
+    ammoCapacity: w.ammo_capacity ?? c?.ammoCapacity ?? defaults.ammoCapacity ?? undefined,
+    recoil: rating(w.recoil, c?.recoil, defaults.recoil),
+    mobility: rating(w.mobility, c?.mobility, defaults.mobility),
+    projectileSpeed: rating(w.projectile_speed, c?.projectileSpeed, defaults.projectileSpeed),
+    headshotMultiplier: w.headshot_multiplier ?? c?.headshotMultiplier ?? undefined,
+    damageFalloff: rating(w.damage_falloff, c?.damageFalloff, defaults.damageFalloff),
+    fireMode: w.fire_mode || c?.fireMode || undefined,
+    features: w.features?.length ? w.features : c?.features ?? [],
+    ammoCost: w.ammo_cost ?? c?.ammoCost ?? null,
+    upgradeCost: w.upgrade_cost ?? c?.upgradeCost ?? null,
+    manufacturer: w.manufacturer || c?.manufacturer || undefined,
+    availability: w.availability || c?.availability || "Confirmed for GTA 6",
+    featured: w.featured ?? c?.featured ?? false,
+    gallery: w.gallery?.length ? w.gallery : c?.gallery ?? [],
+    tags: w.tags?.length ? w.tags : c?.tags ?? [],
+    customization: w.customization?.length ? w.customization : c?.customization ?? [],
   };
 }
 

@@ -31,6 +31,55 @@ export interface CanonicalVehicle {
   source: string;
   description: string;
   featured?: boolean;
+
+  /* ---- Deep-dive optional fields (CMS-managed, added Oct 2026) ---- */
+  // Performance ratings 0-100
+  traction?: number;
+  cornering?: number;
+  launch?: number;
+  reverseSpeed?: number;
+  torque?: number;
+  // Economy
+  resalePrice?: number | null;
+  insuranceCost?: number | null;
+  upgradeCost?: number | null;
+  repairCost?: number | null;
+  storageCost?: number | null;
+  // Engine / mechanical
+  engineType?: string;
+  engineSize?: string;
+  transmission?: string;
+  gears?: number;
+  fuelType?: string;
+  turbo?: boolean;
+  electric?: boolean;
+  // Characteristics
+  doors?: number;
+  convertible?: boolean;
+  roofType?: string;
+  trunkCapacity?: string;
+  offroadRating?: number;
+  waterRating?: number;
+  amphibious?: boolean;
+  bulletResistance?: number;
+  explosionResistance?: number;
+  // Special features & ratings
+  armorRating?: number;
+  weaponized?: boolean;
+  driftRating?: number;
+  specialAbility?: string;
+  features?: string[];
+  // Customization, audio, meta
+  customization?: string[];
+  soundRating?: number;
+  engineSound?: string;
+  exhaustSound?: string;
+  horn?: string;
+  turboSound?: string;
+  gearShiftSound?: string;
+  availability?: string;
+  gallery?: string[];
+  tags?: string[];
 }
 
 export interface CanonicalWeapon {
@@ -55,6 +104,28 @@ export interface CanonicalWeapon {
   source: string;
   description: string;
   img: string;
+
+  /* ---- Deep-dive optional fields (CMS-managed, added Oct 2026) ---- */
+  // Stats 0-100 (unless noted)
+  reload?: number; // reload speed rating (higher = faster)
+  ammoCapacity?: number; // reserve rounds
+  recoil?: number; // recoil rating (higher = more controllable)
+  mobility?: number;
+  projectileSpeed?: number;
+  headshotMultiplier?: number;
+  damageFalloff?: number; // 0-100 (higher = less falloff)
+  fireMode?: string; // Single / Burst / Automatic
+  features?: string[]; // Suppressor, Scope, Armor Penetration, ...
+  // Economy
+  ammoCost?: number | null;
+  upgradeCost?: number | null;
+  // Meta
+  manufacturer?: string;
+  availability?: string;
+  featured?: boolean;
+  gallery?: string[];
+  tags?: string[];
+  customization?: string[];
 }
 
 export interface CanonicalMission {

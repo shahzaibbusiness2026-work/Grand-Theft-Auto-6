@@ -13,6 +13,20 @@ import {
 import { useToast } from "@/components/admin/toast";
 import type { AdminWeapon } from "@/lib/admin-store";
 import { deleteWeapon, saveWeapon } from "@/lib/services/weapons";
+import {
+  Section,
+  FieldRow,
+  TextField,
+  NumberField,
+  ToggleField,
+  ListField,
+} from "@/components/admin/form-fields";
+
+const WEAPON_FEATURES = [
+  "Suppressor", "Scope", "Flashlight", "Extended Magazine", "Grip", "Laser",
+  "Muzzle Brake", "Custom Stock", "Armor Penetration", "Lock-On", "Homing",
+  "Area Damage", "Explosive Ammo", "Incendiary Ammo", "Hollow Point", "Tracer Rounds",
+];
 
 const EMPTY_DRAFT: AdminWeapon = {
   id: "",
@@ -73,7 +87,7 @@ export function WeaponEditor({
     if (res.success) {
       showToast({
         title: status === "published" ? "Weapon published" : "Weapon saved",
-        description: `${weapon.name} was saved as ${status}.`,
+        description: "warning" in res && res.warning ? res.warning : `${weapon.name} was saved as ${status}.`,
         type: "success",
       });
       if (!weapon.id && res.id) router.replace(`/admin/weapons/${res.id}`);
@@ -340,6 +354,68 @@ export function WeaponEditor({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* DEEP-DIVE SECTIONS (migration 05 fields) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
+        <Section title="Extended statistics (0–100 ratings)">
+          <FieldRow>
+            <NumberField label="Reload speed" value={weapon.reload} onChange={(v) => setField("reload", v)} placeholder="80 = fast reload" />
+            <NumberField label="Recoil control" value={weapon.recoil} onChange={(v) => setField("recoil", v)} placeholder="60" />
+            <NumberField label="Mobility" value={weapon.mobility} onChange={(v) => setField("mobility", v)} placeholder="85" />
+            <NumberField label="Projectile speed" value={weapon.projectileSpeed} onChange={(v) => setField("projectileSpeed", v)} placeholder="70" />
+            <NumberField label="Headshot multiplier" value={weapon.headshotMultiplier} onChange={(v) => setField("headshotMultiplier", v)} placeholder="2" hint="e.g. 1.5 or 2" />
+            <NumberField label="Damage falloff resistance" value={weapon.damageFalloff} onChange={(v) => setField("damageFalloff", v)} placeholder="55" hint="Higher = damage holds at range" />
+            <NumberField label="Ammo capacity (reserve)" value={weapon.ammoCapacity} onChange={(v) => setField("ammoCapacity", v)} placeholder="120" />
+          </FieldRow>
+        </Section>
+
+        <Section title="Characteristics">
+          <FieldRow>
+            <TextField label="Fire mode" value={weapon.fireMode || ""} onChange={(v) => setField("fireMode", v)} placeholder="Single / Burst / Automatic" />
+            <TextField label="Manufacturer" value={weapon.manufacturer || ""} onChange={(v) => setField("manufacturer", v)} placeholder="Hawk & Little" />
+            <TextField label="Availability / release status" value={weapon.availability || ""} onChange={(v) => setField("availability", v)} placeholder="Confirmed — launch roster" />
+            <NumberField label="Purchase price ($)" value={weapon.price} onChange={(v) => setField("price", v)} placeholder="12500" />
+            <TextField label="Price display" value={weapon.priceDisplay || ""} onChange={(v) => setField("priceDisplay", v)} placeholder="$12,500" />
+            <NumberField label="Ammunition cost ($)" value={weapon.ammoCost} onChange={(v) => setField("ammoCost", v)} placeholder="120" />
+            <NumberField label="Upgrade cost ($)" value={weapon.upgradeCost} onChange={(v) => setField("upgradeCost", v)} placeholder="45000" />
+          </FieldRow>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {WEAPON_FEATURES.map((f) => (
+              <ToggleField
+                key={f}
+                label={f}
+                checked={(weapon.features || []).includes(f)}
+                onChange={(on) =>
+                  setField("features", on
+                    ? [...(weapon.features || []), f]
+                    : (weapon.features || []).filter((x) => x !== f))
+                }
+              />
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Customization">
+          <ListField
+            label="Supported modifications"
+            items={weapon.customization || []}
+            onChange={(v) => setField("customization", v)}
+            hint={"One per line: Magazine, Scope, Suppressor, Muzzle, Skin, Camo…"}
+          />
+        </Section>
+
+        <Section title="Media & meta">
+          <FieldRow>
+            <TextField label="Image URL" value={weapon.image || ""} onChange={(v) => setField("image", v)} placeholder="/img/hero-dark.jpg or https://…" />
+            <TextField label="Rarity" value={weapon.rarity || ""} onChange={(v) => setField("rarity", v)} placeholder="Common / Rare / Epic" />
+            <TextField label="Confidence" value={weapon.confidence || ""} onChange={(v) => setField("confidence", v)} placeholder="CONFIRMED" />
+            <TextField label="Slug" value={weapon.slug || ""} onChange={(v) => setField("slug", v)} placeholder="m4-carbine" hint="Public URL: /weapons/<slug>" />
+          </FieldRow>
+          <ToggleField label="Featured weapon" checked={!!weapon.featured} onChange={(v) => setField("featured", v)} />
+          <ListField label="Gallery image URLs" items={weapon.gallery || []} onChange={(v) => setField("gallery", v)} hint="One URL per line" />
+          <ListField label="Tags" items={weapon.tags || []} onChange={(v) => setField("tags", v)} hint="One per line: Military, Sidearm…" />
+        </Section>
       </div>
     </div>
   );

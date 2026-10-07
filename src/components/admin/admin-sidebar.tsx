@@ -16,6 +16,7 @@ import {
   Users,
   Compass,
   GitCompare,
+  Sliders,
   Map,
   CheckCircle2,
   Shield,
@@ -91,6 +92,7 @@ export const ADMIN_NAV_SECTIONS: NavSection[] = [
     title: "Tools",
     items: [
       { label: "Comparisons", href: "/admin/comparisons", icon: GitCompare },
+      { label: "Comparison Settings", href: "/admin/comparison", icon: Sliders },
       { label: "Interactive Map", href: "/admin/map", icon: Map },
       { label: "Completion Tracker", href: "/admin/tracker", icon: CheckCircle2 },
     ],

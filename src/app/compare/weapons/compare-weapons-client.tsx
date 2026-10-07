@@ -20,19 +20,25 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import { canonicalWeapons, CanonicalWeapon } from "@/lib/canonical-data";
+import type { WeaponScoreWeights } from "@/lib/scoring";
+import { computeWeaponScore, getWeaponBestFor, computeDpsIndex } from "@/lib/scoring";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
+import { RadarChart, RADAR_COLORS } from "@/components/radar-chart";
+import { ComparisonTable, type ComparisonRowDef } from "@/components/comparison-table";
 
 interface CompareWeaponsClientProps {
   initialSlugs?: string[];
   /** Live catalog (DB + canonical merge) passed from the server page; falls back to bundled data. */
   weapons?: CanonicalWeapon[];
+  /** CMS-configured overall-score weights. */
+  weights?: WeaponScoreWeights;
 }
 
-export function CompareWeaponsClient({ initialSlugs, weapons }: CompareWeaponsClientProps) {
+export function CompareWeaponsClient({ initialSlugs, weapons, weights }: CompareWeaponsClientProps) {
   const weaponList = weapons && weapons.length > 0 ? weapons : canonicalWeapons;
 
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>(() => {
@@ -132,6 +138,137 @@ export function CompareWeaponsClient({ initialSlugs, weapons }: CompareWeaponsCl
     if (scores.length === 0) return null;
     return [...scores].sort((a, b) => b.total - a.total)[0];
   }, [scores]);
+
+  // CMS-weighted Overall Scores + Best-For tags + DPS index
+  const overallScores = useMemo(
+    () => selectedWeapons.map((w) => computeWeaponScore(w, weights)),
+    [selectedWeapons, weights]
+  );
+  const overallScoreLeader = useMemo(() => {
+    if (overallScores.length === 0) return null;
+    return overallScores.indexOf(Math.max(...overallScores));
+  }, [overallScores]);
+  const bestForTags = useMemo(
+    () => selectedWeapons.map((w) => getWeaponBestFor(w)),
+    [selectedWeapons]
+  );
+  const dpsIndices = useMemo(
+    () => selectedWeapons.map((w) => computeDpsIndex(w.damage, w.fireRate)),
+    [selectedWeapons]
+  );
+  const bestDps = useMemo(() => Math.max(...dpsIndices), [dpsIndices]);
+
+  // Radar chart data
+  const radarSeries = useMemo(
+    () =>
+      selectedWeapons.map((w, i) => ({
+        name: w.name,
+        color: RADAR_COLORS[i % RADAR_COLORS.length],
+        values: [w.damage, w.fireRate, w.accuracy, w.range, w.reload ?? 60, Math.min(100, (w.magazineSize / 60) * 100)],
+      })),
+    [selectedWeapons]
+  );
+
+  const tableRows: ComparisonRowDef[] = useMemo(() => {
+    if (selectedWeapons.length < 2) return [];
+    const winnerMax = (vals: number[]) => {
+      const valid = vals.filter((v) => v != null) as number[];
+      if (valid.length === 0 || new Set(valid).size === 1) return null;
+      return vals.indexOf(Math.max(...valid));
+    };
+    const winnerMin = (vals: (number | null)[]) => {
+      const valid = vals.filter((v): v is number => v != null);
+      if (valid.length === 0 || new Set(valid).size === 1) return null;
+      return vals.indexOf(Math.min(...(valid as number[])));
+    };
+    const reloadVals = selectedWeapons.map((w) => w.reload ?? 60);
+    const recoilVals = selectedWeapons.map((w) => w.recoil ?? 55);
+    const magVals = selectedWeapons.map((w) => w.magazineSize);
+    const priceVals = selectedWeapons.map((w) => w.price ?? null);
+
+    const rows: ComparisonRowDef[] = [
+      {
+        label: "Overall Score",
+        values: overallScores.map((s) => `${s}/100`),
+        bars: overallScores,
+        winnerIndex: new Set(overallScores).size === 1 ? null : overallScores.indexOf(Math.max(...overallScores)),
+      },
+      {
+        label: "DPS Index",
+        values: dpsIndices.map((d) => String(d)),
+        bars: dpsIndices,
+        winnerIndex: new Set(dpsIndices).size === 1 ? null : dpsIndices.indexOf(bestDps),
+      },
+      {
+        label: "Damage",
+        values: selectedWeapons.map((w) => `${w.damage}/100`),
+        bars: selectedWeapons.map((w) => w.damage),
+        winnerIndex: winnerMax(selectedWeapons.map((w) => w.damage)),
+      },
+      {
+        label: "Fire Rate",
+        values: selectedWeapons.map((w) => `${w.fireRate}/100`),
+        bars: selectedWeapons.map((w) => w.fireRate),
+        winnerIndex: winnerMax(selectedWeapons.map((w) => w.fireRate)),
+      },
+      {
+        label: "Accuracy",
+        values: selectedWeapons.map((w) => `${w.accuracy}/100`),
+        bars: selectedWeapons.map((w) => w.accuracy),
+        winnerIndex: winnerMax(selectedWeapons.map((w) => w.accuracy)),
+      },
+      {
+        label: "Effective Range",
+        values: selectedWeapons.map((w) => `${w.range}/100`),
+        bars: selectedWeapons.map((w) => w.range),
+        winnerIndex: winnerMax(selectedWeapons.map((w) => w.range)),
+      },
+      {
+        label: "Reload Speed",
+        values: reloadVals.map((v) => `${v}/100`),
+        bars: reloadVals,
+        winnerIndex: winnerMax(reloadVals),
+      },
+      {
+        label: "Magazine",
+        values: magVals.map((m) => `${m} rnd`),
+        winnerIndex: winnerMax(magVals),
+      },
+      {
+        label: "Recoil Control",
+        values: recoilVals.map((v) => `${v}/100`),
+        bars: recoilVals,
+        winnerIndex: winnerMax(recoilVals),
+      },
+      {
+        label: "Mobility",
+        values: selectedWeapons.map((w) => `${w.mobility ?? 70}/100`),
+        bars: selectedWeapons.map((w) => w.mobility ?? 70),
+        winnerIndex: winnerMax(selectedWeapons.map((w) => w.mobility ?? 70)),
+      },
+      {
+        label: "Price",
+        values: selectedWeapons.map((w) => w.priceDisplay),
+        winnerIndex: winnerMin(priceVals),
+      },
+    ];
+    return rows;
+  }, [selectedWeapons, overallScores, dpsIndices, bestDps]);
+
+  // Special features (✓ / ✗) across all selected weapons
+  const featureUnion = useMemo(() => {
+    const set = new Set<string>();
+    selectedWeapons.forEach((w) => (w.features || []).forEach((f) => set.add(f)));
+    return Array.from(set);
+  }, [selectedWeapons]);
+  const featureMatrix = useMemo(
+    () =>
+      featureUnion.map((f) => ({
+        feature: f,
+        present: selectedWeapons.map((w) => (w.features || []).includes(f)),
+      })),
+    [featureUnion, selectedWeapons]
+  );
 
   return (
     <div className="space-y-8">
@@ -241,6 +378,31 @@ export function CompareWeaponsClient({ initialSlugs, weapons }: CompareWeaponsCl
                   <span className="text-muted-foreground">{w.ammoType}</span>
                   <span className="font-mono font-bold text-cyan-600 dark:text-[#00F0FF]">{w.priceDisplay}</span>
                 </div>
+                {bestForTags[idx]?.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {bestForTags[idx].map((t) => (
+                      <span
+                        key={t.label}
+                        className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-accent"
+                      >
+                        {t.emoji} {t.label}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {overallScores[idx] != null && (
+                  <div className="mt-2 flex items-center justify-between rounded-xl border border-amber-500/30 bg-amber-400/10 px-2.5 py-1.5">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 flex items-center gap-1">
+                      <Trophy className="h-3 w-3" /> Overall Score
+                    </span>
+                    <span className="font-mono font-black text-sm text-amber-400">
+                      {overallScores[idx]}/100
+                      {overallScoreLeader === idx && overallScores.length > 1 && (
+                        <span className="ml-1.5 text-[9px] font-black uppercase text-emerald-400">Lead</span>
+                      )}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* STAT ROWS */}
@@ -259,6 +421,24 @@ export function CompareWeaponsClient({ initialSlugs, weapons }: CompareWeaponsCl
                     </div>
                   </div>
                   <Progress value={w.damage} className="h-1.5 mt-1.5" />
+                </div>
+
+                {/* DPS Index */}
+                <div className="rounded-xl border-border bg-muted/60 p-2.5">
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="text-muted-foreground flex items-center gap-1.5">
+                      <Zap className="h-3.5 w-3.5 text-purple-400" /> DPS Index
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-mono font-bold text-white">{dpsIndices[idx]}</span>
+                      {dpsIndices[idx] === bestDps && selectedWeapons.length > 1 && (
+                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
+                          Winner
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <Progress value={dpsIndices[idx]} className="h-1.5 mt-1.5" />
                 </div>
 
                 {/* Fire Rate */}
@@ -340,6 +520,55 @@ export function CompareWeaponsClient({ initialSlugs, weapons }: CompareWeaponsCl
           );
         })}
       </div>
+
+      {/* RADAR + FEATURE COMPARISON */}
+      {selectedWeapons.length >= 2 && (
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="card-surface rounded-3xl border border-border p-5">
+            <h3 className="font-display text-sm font-black uppercase text-white mb-1">Ballistics Radar</h3>
+            <p className="text-[11px] text-muted-foreground mb-3">
+              Damage • Fire Rate • Accuracy • Range • Reload • Magazine
+            </p>
+            <RadarChart axes={["Damage", "Fire Rate", "Accuracy", "Range", "Reload", "Mag"]} series={radarSeries} />
+          </div>
+
+          <div className="card-surface rounded-3xl border border-border p-5">
+            <h3 className="font-display text-sm font-black uppercase text-white mb-1">Special Features</h3>
+            <p className="text-[11px] text-muted-foreground mb-3">Attachments, ammunition & special traits</p>
+            {featureUnion.length === 0 ? (
+              <p className="text-xs text-muted-foreground py-8 text-center">
+                None of the selected weapons have special features listed yet.
+              </p>
+            ) : (
+              <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+                {featureMatrix.map(({ feature, present }) => (
+                  <div key={feature} className="grid gap-2 items-center" style={{ gridTemplateColumns: `1.4fr repeat(${selectedWeapons.length}, 1fr)` }}>
+                    <span className="text-[11px] font-bold text-muted-foreground">{feature}</span>
+                    {present.map((has, i) => (
+                      <span key={i} className="text-center text-sm" aria-label={has ? "Yes" : "No"}>
+                        {has ? (
+                          <span className="text-emerald-400 font-black">✓</span>
+                        ) : (
+                          <span className="text-rose-400/70">✗</span>
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )}
+            {featureUnion.length === 0 && <div />}
+          </div>
+        </div>
+      )}
+
+      {/* FULL STAT TABLE WITH WINNERS */}
+      {tableRows.length > 0 && (
+        <ComparisonTable
+          contenders={selectedWeapons.map((w, i) => ({ name: w.name, color: RADAR_COLORS[i % RADAR_COLORS.length] }))}
+          rows={tableRows}
+        />
+      )}
 
       {/* WEAPON PICKER MODAL */}
       {pickerSlotIndex !== null && (

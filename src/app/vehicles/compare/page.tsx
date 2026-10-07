@@ -1,6 +1,7 @@
 import { SiteShell } from "@/components/shells";
 import { CompareVehiclesClient } from "@/app/compare/vehicles/compare-vehicles-client";
 import { getMergedVehicles } from "@/lib/services/catalog";
+import { getComparisonWeights } from "@/lib/services/comparison";
 import { Trophy } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -11,8 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function VehiclesComparePage() {
-  // Live Supabase catalog (admin edits win) with canonical fallback.
-  const vehicles = await getMergedVehicles();
+  // Live Supabase catalog (admin edits win) + CMS-configured score weights.
+  const [vehicles, weights] = await Promise.all([getMergedVehicles(), getComparisonWeights()]);
 
   return (
     <SiteShell>
@@ -29,7 +30,7 @@ export default async function VehiclesComparePage() {
           </p>
         </div>
 
-        <CompareVehiclesClient vehicles={vehicles} />
+        <CompareVehiclesClient vehicles={vehicles} weights={weights.vehicle} />
       </div>
     </SiteShell>
   );

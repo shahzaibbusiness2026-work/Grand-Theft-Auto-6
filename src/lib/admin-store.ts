@@ -57,6 +57,56 @@ export interface AdminVehicle {
   images?: string[];
   lastEditor: string;
   updatedAt: string;
+
+  /* Deep-dive fields (migration 05) — all optional so legacy drafts stay valid */
+  slug?: string | null;
+  price?: number | null;
+  priceDisplay?: string;
+  powerHp?: number | null;
+  confidence?: string;
+  seating?: number | null;
+  traction?: number | null;
+  cornering?: number | null;
+  launch?: number | null;
+  reverseSpeed?: number | null;
+  torque?: number | null;
+  resalePrice?: number | null;
+  insuranceCost?: number | null;
+  upgradeCost?: number | null;
+  repairCost?: number | null;
+  storageCost?: number | null;
+  engineType?: string;
+  engineSize?: string;
+  transmission?: string;
+  gears?: number | null;
+  fuelType?: string;
+  turbo?: boolean;
+  electric?: boolean;
+  doors?: number | null;
+  convertible?: boolean;
+  roofType?: string;
+  trunkCapacity?: string;
+  offroadRating?: number | null;
+  waterRating?: number | null;
+  amphibious?: boolean;
+  bulletResistance?: number | null;
+  explosionResistance?: number | null;
+  armorRating?: number | null;
+  weaponized?: boolean;
+  driftRating?: number | null;
+  specialAbility?: string;
+  features?: string[];
+  customization?: string[];
+  soundRating?: number | null;
+  engineSound?: string;
+  exhaustSound?: string;
+  horn?: string;
+  turboSound?: string;
+  gearShiftSound?: string;
+  availability?: string;
+  featured?: boolean;
+  gallery?: string[];
+  tags?: string[];
 }
 
 export interface AdminWeapon {
@@ -76,6 +126,31 @@ export interface AdminWeapon {
   sourceUrl?: string;
   notes?: string;
   updatedAt: string;
+
+  /* Deep-dive fields (migration 05) — all optional so legacy drafts stay valid */
+  slug?: string | null;
+  confidence?: string;
+  rarity?: string;
+  price?: number | null;
+  priceDisplay?: string;
+  ammoCost?: number | null;
+  upgradeCost?: number | null;
+  reload?: number | null;
+  ammoCapacity?: number | null;
+  recoil?: number | null;
+  mobility?: number | null;
+  projectileSpeed?: number | null;
+  headshotMultiplier?: number | null;
+  damageFalloff?: number | null;
+  fireMode?: string;
+  features?: string[];
+  manufacturer?: string;
+  availability?: string;
+  featured?: boolean;
+  image?: string;
+  gallery?: string[];
+  tags?: string[];
+  customization?: string[];
 }
 
 export interface AdminMapMarker {

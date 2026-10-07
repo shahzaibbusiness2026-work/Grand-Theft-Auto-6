@@ -27,10 +27,8 @@ export interface DatabaseVehicleRow {
   last_editor?: string | null;
   created_at?: string | null;
   updated_at?: string | null;
-}
 
-/** Full public vehicle row including the catalog columns added in schema v2. */
-export interface VehicleCatalogRow extends DatabaseVehicleRow {
+  /* Catalog + deep-dive columns (migration 05) */
   slug?: string | null;
   confidence?: string | null;
   source?: string | null;
@@ -39,7 +37,52 @@ export interface VehicleCatalogRow extends DatabaseVehicleRow {
   seating?: number | null;
   drivetrain?: string | null;
   power_hp?: number | null;
+  traction?: number | null;
+  cornering?: number | null;
+  launch?: number | null;
+  reverse_speed?: number | null;
+  torque?: number | null;
+  resale_price?: number | null;
+  insurance_cost?: number | null;
+  upgrade_cost?: number | null;
+  repair_cost?: number | null;
+  storage_cost?: number | null;
+  engine_type?: string | null;
+  engine_size?: string | null;
+  transmission?: string | null;
+  gears?: number | null;
+  fuel_type?: string | null;
+  turbo?: boolean | null;
+  electric?: boolean | null;
+  doors?: number | null;
+  convertible?: boolean | null;
+  roof_type?: string | null;
+  trunk_capacity?: string | null;
+  offroad_rating?: number | null;
+  water_rating?: number | null;
+  amphibious?: boolean | null;
+  bullet_resistance?: number | null;
+  explosion_resistance?: number | null;
+  armor_rating?: number | null;
+  weaponized?: boolean | null;
+  drift_rating?: number | null;
+  special_ability?: string | null;
+  features?: string[] | null;
+  customization?: string[] | null;
+  sound_rating?: number | null;
+  engine_sound?: string | null;
+  exhaust_sound?: string | null;
+  horn?: string | null;
+  turbo_sound?: string | null;
+  gear_shift_sound?: string | null;
+  availability?: string | null;
+  featured?: boolean | null;
+  gallery?: string[] | null;
+  tags?: string[] | null;
 }
+
+/** Public catalog row — the DB row now carries all catalog + deep-dive columns. */
+export type VehicleCatalogRow = DatabaseVehicleRow;
 
 /**
  * Fetch published vehicles with ALL catalog columns, unmapped.
@@ -97,6 +140,54 @@ function rowToAdminVehicle(row: DatabaseVehicleRow): AdminVehicle {
     images: row.images || ["/img/car-orange.jpg"],
     lastEditor: row.last_editor || "Atlas Staff",
     updatedAt: row.updated_at || new Date().toISOString(),
+    // Deep-dive fields
+    slug: row.slug,
+    price: row.price,
+    priceDisplay: row.price_display || undefined,
+    powerHp: row.power_hp,
+    confidence: row.confidence || undefined,
+    traction: row.traction,
+    cornering: row.cornering,
+    launch: row.launch,
+    reverseSpeed: row.reverse_speed,
+    torque: row.torque,
+    resalePrice: row.resale_price,
+    insuranceCost: row.insurance_cost,
+    upgradeCost: row.upgrade_cost,
+    repairCost: row.repair_cost,
+    storageCost: row.storage_cost,
+    engineType: row.engine_type || undefined,
+    engineSize: row.engine_size || undefined,
+    transmission: row.transmission || undefined,
+    gears: row.gears,
+    fuelType: row.fuel_type || undefined,
+    turbo: row.turbo || false,
+    electric: row.electric || false,
+    doors: row.doors,
+    convertible: row.convertible || false,
+    roofType: row.roof_type || undefined,
+    trunkCapacity: row.trunk_capacity || undefined,
+    offroadRating: row.offroad_rating,
+    waterRating: row.water_rating,
+    amphibious: row.amphibious || false,
+    bulletResistance: row.bullet_resistance,
+    explosionResistance: row.explosion_resistance,
+    armorRating: row.armor_rating,
+    weaponized: row.weaponized || false,
+    driftRating: row.drift_rating,
+    specialAbility: row.special_ability || undefined,
+    features: row.features || [],
+    customization: row.customization || [],
+    soundRating: row.sound_rating,
+    engineSound: row.engine_sound || undefined,
+    exhaustSound: row.exhaust_sound || undefined,
+    horn: row.horn || undefined,
+    turboSound: row.turbo_sound || undefined,
+    gearShiftSound: row.gear_shift_sound || undefined,
+    availability: row.availability || undefined,
+    featured: row.featured || false,
+    gallery: row.gallery || [],
+    tags: row.tags || [],
   };
 }
 
@@ -172,7 +263,9 @@ export async function getAdminVehicleById(id: string): Promise<AdminVehicle | nu
 }
 
 /**
- * Save or update a vehicle in Supabase
+ * Save or update a vehicle in Supabase.
+ * Deep-dive fields are optional — if migration 05 has not been applied yet
+ * the save retries with the legacy column set instead of failing.
  */
 export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?: string }) {
   try {
@@ -180,7 +273,7 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
     const supabase = createAdminClient();
     const id = v.id || v.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-    const payload: Partial<DatabaseVehicleRow> = {
+    const payload: Record<string, unknown> = {
       id,
       code: v.code || `VEH-${id.toUpperCase()}`,
       name: v.name,
@@ -199,8 +292,78 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
       updated_at: new Date().toISOString(),
     };
 
-    const { error } = await supabase.from("vehicles").upsert(payload, { onConflict: "id" });
-    if (error) throw error;
+    // Deep-dive fields — only written when provided so partial saves don't clear data.
+    const optional: Record<string, unknown> = {
+      slug: v.slug,
+      price: v.price,
+      price_display: v.priceDisplay,
+      power_hp: v.powerHp,
+      confidence: v.confidence,
+      traction: v.traction,
+      cornering: v.cornering,
+      launch: v.launch,
+      reverse_speed: v.reverseSpeed,
+      torque: v.torque,
+      resale_price: v.resalePrice,
+      insurance_cost: v.insuranceCost,
+      upgrade_cost: v.upgradeCost,
+      repair_cost: v.repairCost,
+      storage_cost: v.storageCost,
+      engine_type: v.engineType,
+      engine_size: v.engineSize,
+      transmission: v.transmission,
+      gears: v.gears,
+      fuel_type: v.fuelType,
+      turbo: v.turbo,
+      electric: v.electric,
+      doors: v.doors,
+      convertible: v.convertible,
+      roof_type: v.roofType,
+      trunk_capacity: v.trunkCapacity,
+      offroad_rating: v.offroadRating,
+      water_rating: v.waterRating,
+      amphibious: v.amphibious,
+      bullet_resistance: v.bulletResistance,
+      explosion_resistance: v.explosionResistance,
+      armor_rating: v.armorRating,
+      weaponized: v.weaponized,
+      drift_rating: v.driftRating,
+      special_ability: v.specialAbility,
+      features: v.features,
+      customization: v.customization,
+      sound_rating: v.soundRating,
+      engine_sound: v.engineSound,
+      exhaust_sound: v.exhaustSound,
+      horn: v.horn,
+      turbo_sound: v.turboSound,
+      gear_shift_sound: v.gearShiftSound,
+      availability: v.availability,
+      featured: v.featured,
+      gallery: v.gallery,
+      tags: v.tags,
+    };
+    for (const [k, val] of Object.entries(optional)) {
+      if (val !== undefined) payload[k] = val;
+    }
+
+    let result = await supabase.from("vehicles").upsert(payload, { onConflict: "id" });
+    if (result.error && (result.error as { code?: string }).code === "42703") {
+      // A column from migration 05 is missing — retry with legacy columns only.
+      const legacyKeys = new Set([
+        "id", "code", "name", "display_name", "class", "manufacturer", "top_speed",
+        "acceleration", "handling", "weight", "summary", "images", "status",
+        "verification", "last_editor", "updated_at",
+      ]);
+      const legacy: Record<string, unknown> = {};
+      for (const [k, val] of Object.entries(payload)) {
+        if (legacyKeys.has(k)) legacy[k] = val;
+      }
+      result = await supabase.from("vehicles").upsert(legacy, { onConflict: "id" });
+      if (!result.error) {
+        return { success: true, id, warning: "Deep-dive fields skipped — run supabase/05_vehicle_weapon_upgrade.sql to enable them." };
+      }
+    }
+    if (result.error) throw result.error;
 
     await logActivity({
       action: v.id ? "update" : "create",
@@ -212,6 +375,9 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
     revalidatePath("/vehicles");
     revalidatePath("/");
     revalidatePath("/admin/vehicles");
+    revalidatePath("/compare/vehicles");
+    revalidatePath("/vehicles/compare");
+    revalidatePath("/rankings");
 
     return { success: true, id };
   } catch (err) {
