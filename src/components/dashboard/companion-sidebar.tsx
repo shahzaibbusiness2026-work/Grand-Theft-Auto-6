@@ -109,7 +109,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
       {/* Bottom Section: GO PRO & Neon Art */}
       <div className="p-3.5 space-y-4">
         {/* GO PRO Card */}
-        <div className="relative overflow-hidden rounded-2xl border border-amber-500/25 bg-gradient-to-b from-[#131c2e]/90 to-[#0c1220]/95 p-3.5 shadow-xl backdrop-blur-md">
+        <div className="dark-panel relative overflow-hidden rounded-2xl border border-amber-500/25 bg-gradient-to-b from-[#131c2e]/90 to-[#0c1220]/95 p-3.5 shadow-xl backdrop-blur-md">
           <div className="flex items-center gap-2 mb-2">
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-500/20 text-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.3)]">
               <Crown className="h-4 w-4" />

@@ -26,7 +26,7 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-[#070b14] dark:bg-[#070b14] text-slate-100 dark:text-slate-100 antialiased select-none transition-colors">
+    <div data-flip-text className="flex h-screen w-full overflow-hidden bg-[#070b14] dark:bg-[#070b14] text-slate-100 dark:text-slate-100 antialiased select-none transition-colors">
       {/* 1. Desktop Fixed Sidebar */}
       <div className="hidden md:flex shrink-0">
         <CompanionSidebar />

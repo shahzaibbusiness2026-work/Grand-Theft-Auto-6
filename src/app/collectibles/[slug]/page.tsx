@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   MapPin,
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${collectible.title} — Location & Guide | GTA 6 Atlas`,
+    title: `${collectible.title} â€” Location & Guide | GTA 6 Atlas`,
     description: `Complete guide and coordinate location for ${collectible.title} in ${collectible.district}. Requirements: ${collectible.requirements}.`,
     alternates: { canonical: `/collectibles/${collectible.slug}` },
   };
@@ -67,7 +67,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
             Collectibles
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-white truncate max-w-xs">{collectible.title}</span>
+          <span className="text-foreground truncate max-w-xs">{collectible.title}</span>
         </nav>
 
         {/* Back Link */}
@@ -96,7 +96,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                 <ConfidenceBadge confidence={collectible.confidence} source={collectible.source} />
               </div>
 
-              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
+              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground leading-tight">
                 {collectible.title}
               </h1>
 
@@ -140,7 +140,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
 
             {/* Requirements & Unlock Details */}
             <div className="card-carbon p-6 space-y-4">
-              <h3 className="font-display text-base font-bold text-white uppercase tracking-wide">
+              <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wide">
                 Requirements & Unlocks
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -168,7 +168,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
           <div className="space-y-6">
             {/* Action Box */}
             <div className="card-carbon p-6 space-y-4 border-primary/30">
-              <h3 className="font-display text-base font-bold text-white uppercase tracking-wider">
+              <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wider">
                 Atlas Status
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
@@ -196,7 +196,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
               <div className="text-xs space-y-2">
                 <div className="flex justify-between py-1 border-b border-border">
                   <span className="text-muted-foreground">Classification:</span>
-                  <span className="font-bold text-white">{collectible.confidence}</span>
+                  <span className="font-bold text-foreground">{collectible.confidence}</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-border">
                   <span className="text-muted-foreground">Verified Source:</span>
@@ -213,7 +213,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
 
             {/* Related Collectibles */}
             <div className="card-carbon p-6 space-y-4">
-              <h4 className="font-display text-sm font-bold text-white uppercase tracking-wider">
+              <h4 className="font-display text-sm font-bold text-foreground uppercase tracking-wider">
                 Other Collectibles
               </h4>
               <div className="space-y-3">
@@ -226,7 +226,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                     <div className="text-[10px] uppercase font-bold text-muted-foreground mb-0.5">
                       {item.category}
                     </div>
-                    <div className="text-xs font-bold text-white group-hover:text-primary transition-colors line-clamp-1">
+                    <div className="text-xs font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
                       {item.title}
                     </div>
                     <div className="text-[11px] text-accent mt-1 flex items-center gap-1">

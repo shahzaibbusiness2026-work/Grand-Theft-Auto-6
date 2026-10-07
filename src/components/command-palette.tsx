@@ -261,12 +261,12 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
               setSelectedIndex(0);
             }}
             placeholder="Search all 15 tools, rides, armory, missions, properties, or locations..."
-            className="w-full bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none"
+            className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              className="p-1 text-muted-foreground hover:text-white"
+              className="p-1 text-muted-foreground hover:text-foreground"
             >
               <X className="h-4 w-4" />
             </button>
@@ -292,7 +292,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                   onMouseEnter={() => setSelectedIndex(index)}
                   className={cn(
                     "flex items-center justify-between p-3 rounded-xl cursor-pointer transition-colors",
-                    isSelected ? "bg-primary/20 text-white" : "hover:bg-muted/50 text-muted-foreground"
+                    isSelected ? "bg-primary/15 text-foreground" : "hover:bg-muted/50 text-muted-foreground"
                   )}
                 >
                   <div className="flex items-center gap-3 min-w-0">
@@ -301,7 +301,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="font-display text-sm font-bold text-white truncate">
+                        <span className="font-display text-sm font-bold text-foreground truncate">
                           {item.title}
                         </span>
                         <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-muted text-muted-foreground font-mono">

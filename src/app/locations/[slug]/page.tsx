@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   MapPin,
@@ -59,7 +59,7 @@ async function resolveLocation(slug: string): Promise<CanonicalLocation | undefi
       };
     }
   } catch {
-    // DB unreachable — canonical lookup stands
+    // DB unreachable â€” canonical lookup stands
   }
   return canonical;
 }
@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${loc.name} (${loc.district}) — Point of Interest Dossier | GTA 6 Atlas`,
+    title: `${loc.name} (${loc.district}) â€” Point of Interest Dossier | GTA 6 Atlas`,
     description: `Official intel briefing and satellite map coordinates for ${loc.name} in ${loc.district}, State of Leonida. Threat level: ${loc.threatLevel}.`,
     alternates: { canonical: `/locations/${loc.slug}` },
   };
@@ -125,7 +125,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
             Locations
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-white truncate max-w-xs">{loc.name}</span>
+          <span className="text-foreground truncate max-w-xs">{loc.name}</span>
         </nav>
 
         {/* Back link */}
@@ -161,7 +161,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
                 <FavoriteButton type="locations" id={loc.id} />
               </div>
 
-              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
+              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground leading-tight">
                 {loc.name}
               </h1>
 
@@ -200,14 +200,14 @@ export default async function LocationDetailPage({ params }: PageProps) {
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                   <Clock className="h-4 w-4 text-accent" /> Hours of Operation
                 </div>
-                <p className="text-sm font-semibold text-white font-mono">{loc.hours}</p>
+                <p className="text-sm font-semibold text-foreground font-mono">{loc.hours}</p>
               </div>
 
               <div className="card-carbon p-5 space-y-2">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                   <ShieldAlert className="h-4 w-4 text-primary" /> Security & Heat Rating
                 </div>
-                <p className="text-sm font-semibold text-white font-mono">
+                <p className="text-sm font-semibold text-foreground font-mono">
                   {loc.threatLevel} (Response time &lt; 90s)
                 </p>
               </div>
@@ -216,7 +216,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
             {/* Related Vehicles & Armory */}
             {((loc.relatedVehicles?.length || 0) > 0 || (loc.relatedWeapons?.length || 0) > 0) && (
               <div className="card-carbon p-6 space-y-4">
-                <h3 className="font-display text-base font-bold text-white uppercase tracking-wider">
+                <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wider">
                   Associated Field Assets
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -258,7 +258,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
           <div className="space-y-6">
             {/* Quick Action Map Launcher */}
             <div className="card-carbon p-6 space-y-4 border-accent/30 bg-accent/5">
-              <h3 className="font-display text-base font-bold text-white uppercase tracking-wider">
+              <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wider">
                 Tactical Navigation
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
@@ -274,7 +274,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
 
             {/* Nearby District POIs */}
             <div className="card-carbon p-6 space-y-4">
-              <h4 className="font-display text-sm font-bold text-white uppercase tracking-wider">
+              <h4 className="font-display text-sm font-bold text-foreground uppercase tracking-wider">
                 Nearby in {loc.district}
               </h4>
               {nearbyLocations.length === 0 ? (
@@ -292,7 +292,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
                       <div className="text-[10px] uppercase font-bold text-muted-foreground mb-0.5">
                         {item.category}
                       </div>
-                      <div className="text-xs font-bold text-white group-hover:text-primary transition-colors line-clamp-1">
+                      <div className="text-xs font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
                         {item.name}
                       </div>
                       <div className="text-[11px] text-accent mt-1 flex items-center gap-1">

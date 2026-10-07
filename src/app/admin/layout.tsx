@@ -51,15 +51,21 @@ export default function AdminLayout({
 
   // Clean, standalone entry screen without admin sidebar/header background
   if (isLoginPage) {
-    return <ToastProvider>{children}</ToastProvider>;
+    return (
+      <ToastProvider>
+        <div data-flip-text>{children}</div>
+      </ToastProvider>
+    );
   }
 
   return (
     <ToastProvider>
-      <AdminHeader />
-      <AdminLayoutShell>
-        {children}
-      </AdminLayoutShell>
+      <div data-flip-text>
+        <AdminHeader />
+        <AdminLayoutShell>
+          {children}
+        </AdminLayoutShell>
+      </div>
     </ToastProvider>
   );
 }

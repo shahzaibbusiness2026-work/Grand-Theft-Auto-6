@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   ChevronRight,
@@ -71,7 +71,7 @@ async function resolveVehicle(slug: string): Promise<CanonicalVehicle | undefine
         description: row.summary || c?.description || `${row.name} in Grand Theft Auto VI.`,
         featured: row.featured ?? c?.featured ?? true,
 
-        /* Deep-dive fields (DB first → canonical → undefined) */
+        /* Deep-dive fields (DB first â†’ canonical â†’ undefined) */
         traction: row.traction ?? c?.traction,
         cornering: row.cornering ?? c?.cornering,
         launch: row.launch ?? c?.launch,
@@ -116,7 +116,7 @@ async function resolveVehicle(slug: string): Promise<CanonicalVehicle | undefine
       };
     }
   } catch {
-    // DB unreachable — canonical lookup stands
+    // DB unreachable â€” canonical lookup stands
   }
   return canonical;
 }
@@ -138,11 +138,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!vehicle) notFound();
 
   return {
-    title: `${vehicle.name} (${vehicle.klass}) — GTA 6 Stats, Speed & Location`,
+    title: `${vehicle.name} (${vehicle.klass}) â€” GTA 6 Stats, Speed & Location`,
     description: `Full verified breakdown of the ${vehicle.name} in GTA 6: Top speed ${vehicle.topSpeed} mph, ${vehicle.acceleration}s 0-60, ${vehicle.priceDisplay} price, customization, and spawn locations.`,
     alternates: { canonical: `/vehicles/${vehicle.slug}` },
     openGraph: {
-      title: `${vehicle.name} — GTA 6 Vehicle Guide`,
+      title: `${vehicle.name} â€” GTA 6 Vehicle Guide`,
       description: vehicle.description,
       images: [vehicle.img],
     },
@@ -165,7 +165,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
 
   const statBars = [
     { icon: Gauge, label: "Top Speed", value: `${vehicle.topSpeed} mph`, pct: speedPct },
-    { icon: Timer, label: "0–60 Launch", value: `${vehicle.acceleration}s`, pct: accelPct },
+    { icon: Timer, label: "0â€“60 Launch", value: `${vehicle.acceleration}s`, pct: accelPct },
     { icon: Disc3, label: "Braking Response", value: `${vehicle.braking}/100`, pct: brakingPct },
     { icon: Car, label: "Handling & Grip", value: `${vehicle.handling}/100`, pct: handlingPct },
     ...(vehicle.traction != null
@@ -231,7 +231,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                 <ConfidenceBadge level={vehicle.confidence} source={vehicle.source} />
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
                 {vehicle.name}
               </h1>
 
@@ -278,7 +278,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Performance Bars */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Gauge className="h-4 w-4 text-accent" /> Dyno Performance Metrics
             </h2>
             <div className="mt-6 space-y-5">
@@ -288,7 +288,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                     <span className="flex items-center gap-1.5 text-muted-foreground">
                       <s.icon className="h-3.5 w-3.5 text-accent" /> {s.label}
                     </span>
-                    <span className="font-mono font-bold text-white">{s.value}</span>
+                    <span className="font-mono font-bold text-foreground">{s.value}</span>
                   </div>
                   <Progress value={s.pct} className="h-2" />
                 </div>
@@ -309,14 +309,14 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
 
           {/* Quick Specifications Table */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Wrench className="h-4 w-4 text-primary" /> Technical Specifications
             </h2>
             <dl className="mt-4 divide-y divide-border">
               {quickSpecs.map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5 text-xs">
                   <dt className="text-muted-foreground font-medium">{k}</dt>
-                  <dd className="font-bold text-white">{v}</dd>
+                  <dd className="font-bold text-foreground">{v}</dd>
                 </div>
               ))}
             </dl>
@@ -327,7 +327,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Where to find */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <MapPin className="h-4 w-4 text-emerald-400" /> Spawn & Purchase Locations
             </h2>
             <div className="mt-4 space-y-3">
@@ -352,7 +352,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
 
           {/* Customization mods */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Sparkles className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> Available Mod Parts
             </h2>
             <p className="text-xs text-muted-foreground mt-1">Confirmed workshop upgrade modules supported on this chassis:</p>
@@ -371,7 +371,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Economy */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Wallet className="h-4 w-4 text-amber-400" /> Ownership Economy
             </h2>
             <dl className="mt-4 divide-y divide-border">
@@ -385,7 +385,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5 text-xs">
                   <dt className="text-muted-foreground font-medium">{k}</dt>
-                  <dd className="font-bold text-white">{v}</dd>
+                  <dd className="font-bold text-foreground">{v}</dd>
                 </div>
               ))}
             </dl>
@@ -393,7 +393,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
 
           {/* Special features & durability */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Layers className="h-4 w-4 text-rose-400" /> Special Features & Durability
             </h2>
             {vehicle.features?.length ? (
@@ -419,7 +419,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5 text-xs">
                   <dt className="text-muted-foreground font-medium">{k}</dt>
-                  <dd className="font-bold text-white">{v}</dd>
+                  <dd className="font-bold text-foreground">{v}</dd>
                 </div>
               ))}
             </dl>
@@ -429,7 +429,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         {/* AUDIO (rendered only when sound data exists) */}
         {(vehicle.soundRating != null || vehicle.engineSound || vehicle.exhaustSound || vehicle.horn) && (
           <div className="card-surface mt-6 p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Wrench className="h-4 w-4 text-purple-400" /> Sound Profile
             </h2>
             <dl className="mt-4 divide-y divide-border">
@@ -443,7 +443,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5 text-xs">
                   <dt className="text-muted-foreground font-medium">{k}</dt>
-                  <dd className="font-bold text-white">{v}</dd>
+                  <dd className="font-bold text-foreground">{v}</dd>
                 </div>
               ))}
             </dl>
@@ -453,7 +453,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         {/* BOTTOM CTA */}
         <div className="card-surface mt-6 mb-16 flex flex-col items-start justify-between gap-5 p-6 rounded-3xl border border-border md:flex-row md:items-center">
           <div>
-            <h3 className="font-display text-base font-bold text-white">
+            <h3 className="font-display text-base font-bold text-foreground">
               Want to compare {vehicle.name} against other rides?
             </h3>
             <p className="mt-1 text-xs text-muted-foreground">

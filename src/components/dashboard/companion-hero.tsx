@@ -50,7 +50,7 @@ export function CompanionHero({
   ];
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0c1222] shadow-2xl">
+    <div className="dark-panel relative overflow-hidden rounded-3xl border border-white/10 bg-[#0c1222] shadow-2xl">
       {/* Background artwork: cinematic dusk/sunset city skyline with car and palms */}
       <div className="absolute inset-0 z-0">
         <img
@@ -100,7 +100,7 @@ export function CompanionHero({
         {/* Right column: Live Atlas DB Stats + Shield Badge */}
         <div className="flex flex-col items-start lg:items-end gap-4 self-end lg:self-auto">
           {/* Live Stats Card */}
-          <div className="rounded-2xl border border-border bg-card/90 p-4 shadow-2xl backdrop-blur-xl min-w-[260px] sm:min-w-[280px]">
+          <div className="light-panel rounded-2xl border border-border bg-card/90 p-4 shadow-2xl backdrop-blur-xl min-w-[260px] sm:min-w-[280px]">
             {/* Top row: Shield + Title */}
             <div className="flex items-center gap-3 border-b border-border pb-3 mb-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted border border-border text-foreground shadow-inner">

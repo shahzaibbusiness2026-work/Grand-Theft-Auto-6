@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   ChevronRight,
@@ -61,7 +61,7 @@ async function resolveMission(slug: string): Promise<CanonicalMission | undefine
       };
     }
   } catch {
-    // DB unreachable — canonical lookup stands
+    // DB unreachable â€” canonical lookup stands
   }
   return canonical;
 }
@@ -76,11 +76,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!mission) notFound();
 
   return {
-    title: `${mission.title} — GTA 6 Mission Guide & Walkthrough`,
+    title: `${mission.title} â€” GTA 6 Mission Guide & Walkthrough`,
     description: `Full mission guide for '${mission.title}' in GTA 6: Objectives, choices & outcomes, rewards (${mission.cashRewardDisplay}), character requirements, and strategic tips.`,
     alternates: { canonical: `/missions/${mission.slug}` },
     openGraph: {
-      title: `${mission.title} — Walkthrough & Rewards`,
+      title: `${mission.title} â€” Walkthrough & Rewards`,
       description: mission.description,
       images: [mission.img],
     },
@@ -130,30 +130,30 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               <ConfidenceBadge level={mission.confidence} source={mission.source} />
             </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase text-foreground leading-tight">
               {mission.title}
             </h1>
 
-            <p className="text-sm leading-relaxed text-slate-300">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               {mission.description}
             </p>
 
             {/* Quick Metrics Bar */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
               <div className="rounded-2xl border border-white/10 bg-muted/70 p-3 text-center">
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Operative</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Operative</span>
                 <span className="font-display text-sm font-black text-accent">{mission.character}</span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-muted/70 p-3 text-center">
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Cash Payout</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Cash Payout</span>
                 <span className="font-mono text-sm font-black text-amber-400">{mission.cashRewardDisplay}</span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-muted/70 p-3 text-center">
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Duration</span>
-                <span className="font-display text-sm font-black text-white">{mission.duration}</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Duration</span>
+                <span className="font-display text-sm font-black text-foreground">{mission.duration}</span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-muted/70 p-3 text-center">
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Difficulty</span>
+                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Difficulty</span>
                 <span className="font-display text-sm font-black text-[#00F0FF]">{mission.difficulty}</span>
               </div>
             </div>
@@ -164,7 +164,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           {/* Objectives Checklist */}
           <div className="card-surface p-6 rounded-3xl border border-white/10">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Target className="h-4 w-4 text-accent" /> Key Objectives
             </h2>
             <ul className="mt-4 space-y-3">
@@ -197,12 +197,12 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
           <div className="space-y-6">
             {/* Choices */}
             <div className="card-surface p-6 rounded-3xl border border-white/10">
-              <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+              <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
                 <Split className="h-4 w-4 text-amber-400" /> Approaches & Branching Choices
               </h2>
               <div className="mt-4 space-y-2.5">
                 {mission.choices.map((c, i) => (
-                  <div key={c} className="rounded-xl border border-white/10 bg-muted/60 p-3 text-xs text-slate-300">
+                  <div key={c} className="rounded-xl border border-white/10 bg-muted/60 p-3 text-xs text-muted-foreground">
                     <span className="block text-[10px] uppercase font-bold text-amber-400 mb-1">
                       Approach #{i + 1}:
                     </span>
@@ -214,7 +214,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
 
             {/* Rewards & Unlocks */}
             <div className="card-surface p-6 rounded-3xl border border-white/10">
-              <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+              <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
                 <Unlock className="h-4 w-4 text-emerald-400" /> Rewards & Permanent Unlocks
               </h2>
               <div className="mt-4 flex flex-wrap gap-2">
@@ -241,9 +241,9 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             <div className="flex items-center gap-4">
               <img src={relatedLocation.img} alt={relatedLocation.name} className="h-16 w-20 rounded-2xl object-cover border border-white/10" />
               <div>
-                <span className="text-[10px] uppercase font-bold text-slate-400">Mission District & Hotspot</span>
-                <h3 className="font-display text-lg font-bold text-white">{relatedLocation.name}</h3>
-                <p className="text-xs text-slate-300">{relatedLocation.district} &bull; Threat Level: {relatedLocation.threatLevel}</p>
+                <span className="text-[10px] uppercase font-bold text-muted-foreground">Mission District & Hotspot</span>
+                <h3 className="font-display text-lg font-bold text-foreground">{relatedLocation.name}</h3>
+                <p className="text-xs text-muted-foreground">{relatedLocation.district} &bull; Threat Level: {relatedLocation.threatLevel}</p>
               </div>
             </div>
 

@@ -91,7 +91,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
       {/* Top Banner Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="card-carbon p-4 text-center">
-          <span className="font-display text-2xl sm:text-3xl font-black text-white">
+          <span className="font-display text-2xl sm:text-3xl font-black text-foreground">
             {properties.length}
           </span>
           <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mt-1">
@@ -132,7 +132,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
               <ArrowRightLeft className="h-5 w-5" />
             </span>
             <div>
-              <span className="text-xs font-bold text-white uppercase tracking-wider block">
+              <span className="text-xs font-bold text-foreground uppercase tracking-wider block">
                 Side-by-Side Property Comparison ({compareIds.length} / 2 Selected)
               </span>
               <span className="text-[11px] text-muted-foreground">
@@ -154,7 +154,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
             )}
             <button
               onClick={() => setCompareIds([])}
-              className="btn-ghost text-xs px-3 py-2 text-muted-foreground hover:text-white"
+              className="btn-ghost text-xs px-3 py-2 text-muted-foreground hover:text-foreground"
             >
               Clear
             </button>
@@ -205,7 +205,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                 className={cn(
                   "text-xs px-3 py-1.5 rounded-full font-semibold transition-all border",
                   isSelected
-                    ? "border-primary bg-primary text-white shadow-[0_0_12px_rgba(244,63,94,0.4)]"
+                    ? "border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(244,63,94,0.4)]"
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
                 )}
               >
@@ -221,7 +221,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
         {filteredProperties.length === 0 ? (
           <div className="col-span-full card-carbon p-12 text-center">
             <HelpCircle className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-            <h3 className="font-display text-lg font-bold text-white">No Properties Found</h3>
+            <h3 className="font-display text-lg font-bold text-foreground">No Properties Found</h3>
             <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
               No real estate listings match your search criteria.
             </p>
@@ -284,7 +284,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                     </div>
 
                     <Link href={`/properties/${item.slug}`}>
-                      <h3 className="font-display text-lg font-bold text-white group-hover:text-primary transition-colors leading-snug">
+                      <h3 className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
                         {item.name}
                       </h3>
                     </Link>
@@ -299,7 +299,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                         <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-0.5">
                           Garage Space
                         </span>
-                        <span className="font-bold text-white flex items-center gap-1">
+                        <span className="font-bold text-foreground flex items-center gap-1">
                           <Car className="h-3.5 w-3.5 text-primary" /> {item.garageCapacity} Vehicles
                         </span>
                       </div>
@@ -324,8 +324,8 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                       className={cn(
                         "text-xs px-3 py-1.5 rounded-lg font-semibold border transition-colors flex items-center gap-1.5",
                         isCompared
-                          ? "bg-primary text-white border-primary"
-                          : "border-border bg-muted/80 text-muted-foreground hover:text-white hover:border-slate-600"
+                          ? "bg-primary text-primary-foreground border-primary"
+                          : "border-border bg-muted/80 text-muted-foreground hover:text-foreground hover:border-slate-600"
                       )}
                     >
                       <ArrowRightLeft className="h-3 w-3" />
@@ -353,13 +353,13 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
             <div className="flex items-center justify-between border-b border-border pb-4">
               <div className="flex items-center gap-2">
                 <ArrowRightLeft className="h-5 w-5 text-primary" />
-                <h3 className="font-display text-lg font-bold text-white uppercase tracking-wide">
+                <h3 className="font-display text-lg font-bold text-foreground uppercase tracking-wide">
                   Property Duel Comparison
                 </h3>
               </div>
               <button
                 onClick={() => setShowCompareModal(false)}
-                className="p-1 rounded-lg text-muted-foreground hover:text-white hover:bg-muted"
+                className="p-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -383,7 +383,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                       <span className="text-[10px] uppercase font-bold text-primary block">
                         {p.type}
                       </span>
-                      <h4 className="font-display text-sm font-bold text-white truncate">
+                      <h4 className="font-display text-sm font-bold text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] truncate">
                         {p.name}
                       </h4>
                     </div>
@@ -400,7 +400,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                     </div>
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">Garage:</span>
-                      <span className="text-white font-bold">{p.garageCapacity} Vehicles</span>
+                      <span className="text-foreground font-bold">{p.garageCapacity} Vehicles</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">Passive Rate:</span>

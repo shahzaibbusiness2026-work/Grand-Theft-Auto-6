@@ -10,7 +10,7 @@ export function PremiumCard() {
       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
         <Crown className="h-4 w-4 text-amber-400" /> Vice City Pro
       </div>
-      <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-tight text-white">
+      <h3 className="mt-2 font-display text-base font-extrabold uppercase tracking-tight text-foreground">
         Unlock VIP Intelligence
       </h3>
       <p className="mt-1 text-xs text-muted-foreground leading-relaxed">

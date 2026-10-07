@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   ChevronRight,
@@ -126,11 +126,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!weapon) notFound();
 
   return {
-    title: `${weapon.name} (${weapon.klass}) — GTA 6 Stats, Attachments & Locations`,
+    title: `${weapon.name} (${weapon.klass}) â€” GTA 6 Stats, Attachments & Locations`,
     description: `Complete verified breakdown of the ${weapon.name} in GTA 6: Damage ${weapon.damage}, Fire rate ${weapon.fireRate}, Accuracy ${weapon.accuracy}, Price ${weapon.priceDisplay}, attachments, and drop locations.`,
     alternates: { canonical: `/weapons/${weapon.slug}` },
     openGraph: {
-      title: `${weapon.name} — GTA 6 Weapon Guide`,
+      title: `${weapon.name} â€” GTA 6 Weapon Guide`,
       description: weapon.description,
       images: [weapon.img],
     },
@@ -159,7 +159,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
   const dpsIndex = Math.round((weapon.damage * weapon.fireRate) / 100);
   const statBars = [
     { label: "Damage Impact", value: `${weapon.damage}/100`, pct: weapon.damage },
-    { label: "DPS Index (Damage × Fire Rate)", value: `${dpsIndex}`, pct: dpsIndex },
+    { label: "DPS Index (Damage Ã— Fire Rate)", value: `${dpsIndex}`, pct: dpsIndex },
     { label: "Cycle Fire Rate", value: `${weapon.fireRate}/100`, pct: weapon.fireRate },
     { label: "Accuracy Cone", value: `${weapon.accuracy}/100`, pct: weapon.accuracy },
     { label: "Effective Range", value: `${weapon.range}/100`, pct: weapon.range },
@@ -183,7 +183,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
     ["Standard Magazine", `${weapon.magazineSize} Rounds`],
     ...(weapon.ammoCapacity != null ? [["Reserve Ammo", `${weapon.ammoCapacity} Rounds`]] : []),
     ["Tactical Reload", weapon.reloadTime],
-    ...(weapon.headshotMultiplier != null ? [["Headshot Multiplier", `×${weapon.headshotMultiplier}`]] : []),
+    ...(weapon.headshotMultiplier != null ? [["Headshot Multiplier", `Ã—${weapon.headshotMultiplier}`]] : []),
     ...(weapon.availability ? [["Availability", weapon.availability]] : []),
     ["Retail Ammu-Nation Price", weapon.priceDisplay],
     ["Rarity Tier", weapon.rarity],
@@ -219,7 +219,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 <ConfidenceBadge level={weapon.confidence} source={weapon.source} />
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
                 {weapon.name}
               </h1>
 
@@ -257,7 +257,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Stat Bars */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Crosshair className="h-4 w-4 text-accent" /> Ballistic Combat Ratings
             </h2>
             <div className="mt-6 space-y-4">
@@ -265,7 +265,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 <div key={s.label} className="space-y-1.5">
                   <div className="flex justify-between text-xs font-semibold">
                     <span className="text-muted-foreground">{s.label}</span>
-                    <span className="font-mono font-bold text-white">{s.value}</span>
+                    <span className="font-mono font-bold text-foreground">{s.value}</span>
                   </div>
                   <Progress value={s.pct} className="h-2" />
                 </div>
@@ -285,14 +285,14 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
 
           {/* Quick Specifications */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Wrench className="h-4 w-4 text-primary" /> Caliber & Mechanics Specs
             </h2>
             <dl className="mt-4 divide-y divide-border">
               {quickSpecs.map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5 text-xs">
                   <dt className="text-muted-foreground font-medium">{k}</dt>
-                  <dd className="font-bold text-white">{v}</dd>
+                  <dd className="font-bold text-foreground">{v}</dd>
                 </div>
               ))}
             </dl>
@@ -303,7 +303,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Attachments */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Sparkles className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> Supported Attachments & Upgrades
             </h2>
             <p className="text-xs text-muted-foreground mt-1">Modular upgrades compatible with this firearm:</p>
@@ -319,7 +319,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
 
           {/* Where to find */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <MapPin className="h-4 w-4 text-emerald-400" /> Acquisition & Drop Locations
             </h2>
             <ul className="mt-4 space-y-2.5">
@@ -338,7 +338,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
         {/* DEEP-DIVE: FEATURES, ECONOMY & CUSTOMIZATION */}
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Layers className="h-4 w-4 text-rose-400" /> Special Traits
             </h2>
             {weapon.features?.length ? (
@@ -359,14 +359,14 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5 text-xs">
                   <dt className="text-muted-foreground font-medium">{k}</dt>
-                  <dd className="font-bold text-white">{v}</dd>
+                  <dd className="font-bold text-foreground">{v}</dd>
                 </div>
               ))}
             </dl>
           </div>
 
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Wallet className="h-4 w-4 text-amber-400" /> Weapon Economy
             </h2>
             <dl className="mt-4 divide-y divide-border">
@@ -377,7 +377,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5 text-xs">
                   <dt className="text-muted-foreground font-medium">{k}</dt>
-                  <dd className="font-bold text-white">{v}</dd>
+                  <dd className="font-bold text-foreground">{v}</dd>
                 </div>
               ))}
             </dl>

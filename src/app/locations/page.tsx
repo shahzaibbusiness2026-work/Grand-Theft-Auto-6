@@ -75,10 +75,10 @@ export default async function LocationsPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-accent mb-3">
             <MapPin className="h-3 w-3" /> State of Leonida Atlas
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             LEONIDA <span className="bg-gradient-to-r from-accent via-primary to-amber-400 bg-clip-text text-transparent">LOCATIONS & POIS</span>
           </h1>
-          <p className="mt-3 text-sm text-slate-300 max-w-2xl">
+          <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
             Directory of confirmed landmarks, nightlife venues, gun shops, luxury estates, and underground facilities across Vice City, Port Gellhorn, and the Keys.
           </p>
         </div>

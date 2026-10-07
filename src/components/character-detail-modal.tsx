@@ -60,7 +60,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
       aria-labelledby="modal-character-name"
     >
       <div 
-        className="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-border bg-[#0B1020] text-slate-100 shadow-[0_25px_70px_rgba(0,0,0,0.85)] my-auto"
+        className="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-border bg-card text-card-foreground shadow-[0_25px_70px_rgba(0,0,0,0.45)] my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Ambient Top Glow */}
@@ -77,7 +77,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
 
         <div className="grid md:grid-cols-12 gap-0">
           {/* Left Column: Perfectly Framed Character Portrait */}
-          <div className="relative md:col-span-5 bg-gradient-to-b from-black/80 to-[#141C2E] min-h-[380px] md:min-h-[540px] flex items-center justify-center overflow-hidden border-b md:border-b-0 md:border-r border-border">
+          <div className="relative md:col-span-5 bg-gradient-to-b from-black/80 to-card min-h-[380px] md:min-h-[540px] flex items-center justify-center overflow-hidden border-b md:border-b-0 md:border-r border-border">
             <div className="relative w-full h-full min-h-[380px] md:min-h-[540px]">
               <Image
                 src={character.img}
@@ -87,8 +87,8 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                 sizes="(max-width: 768px) 100vw, 420px"
                 className="object-cover object-top transition-transform duration-700 hover:scale-105"
               />
-              {/* Subtle Atmospheric Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1020] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#0B1020]/90 pointer-events-none" />
+              {/* Subtle Atmospheric Gradient Overlay (dark vignette in light theme, panel blend in dark) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-black/40 pointer-events-none dark:bg-gradient-to-t dark:from-card dark:via-transparent dark:to-transparent dark:md:bg-gradient-to-r dark:md:from-transparent dark:md:to-card/90" />
               
               {/* Badges Overlay */}
               <div className="absolute top-4 left-4 flex flex-col gap-2">
@@ -122,17 +122,17 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
               {/* Header Info */}
               <div>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] font-mono font-black uppercase tracking-[0.25em] text-pink-400">
+                  <span className="text-[11px] font-mono font-black uppercase tracking-[0.25em] text-pink-600 dark:text-pink-400">
                     OFFICIAL CHARACTER DOSSIER
                   </span>
                   {character.alias && (
-                    <span className="font-mono text-xs font-bold text-cyan-300 bg-cyan-950/40 border border-cyan-500/30 px-2.5 py-0.5 rounded-lg">
+                    <span className="font-mono text-xs font-bold text-cyan-700 dark:text-cyan-300 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2.5 py-0.5 rounded-lg">
                       {character.alias}
                     </span>
                   )}
                 </div>
 
-                <h2 id="modal-character-name" className="mt-1 font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">
+                <h2 id="modal-character-name" className="mt-1 font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-foreground">
                   {character.name}
                 </h2>
 
@@ -143,7 +143,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
 
               {/* Quote Block */}
               {character.quote && (
-                <blockquote className="flex items-start gap-3 rounded-2xl border border-pink-500/25 bg-pink-950/15 p-4 text-xs sm:text-sm italic text-pink-200/90 shadow-sm">
+                <blockquote className="flex items-start gap-3 rounded-2xl border border-pink-500/25 bg-pink-500/10 dark:bg-pink-950/15 p-4 text-xs sm:text-sm italic text-pink-700 dark:text-pink-200/90 shadow-sm">
                   <Quote className="h-5 w-5 shrink-0 text-pink-400 mt-0.5" />
                   <span>&ldquo;{character.quote}&rdquo;</span>
                 </blockquote>
@@ -170,7 +170,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                     <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
                     <div>
                       <span className="text-[10px] font-mono uppercase text-muted-foreground block">Territory / Origin</span>
-                      <strong className="text-xs font-semibold text-white">{character.origin}</strong>
+                      <strong className="text-xs font-semibold text-foreground">{character.origin}</strong>
                     </div>
                   </div>
                 )}
@@ -180,7 +180,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                     <Car className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
                     <div>
                       <span className="text-[10px] font-mono uppercase text-muted-foreground block">Signature Ride</span>
-                      <strong className="text-xs font-semibold text-white">{character.vehicle}</strong>
+                      <strong className="text-xs font-semibold text-foreground">{character.vehicle}</strong>
                     </div>
                   </div>
                 )}
@@ -190,7 +190,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                     <Zap className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                     <div>
                       <span className="text-[10px] font-mono uppercase text-muted-foreground block">Special Perk / Ability</span>
-                      <strong className="text-xs font-semibold text-white">{character.perk}</strong>
+                      <strong className="text-xs font-semibold text-foreground">{character.perk}</strong>
                     </div>
                   </div>
                 )}
@@ -200,7 +200,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                     <Shield className="w-4 h-4 text-pink-400 shrink-0 mt-0.5" />
                     <div>
                       <span className="text-[10px] font-mono uppercase text-muted-foreground block">Specialty</span>
-                      <strong className="text-xs font-semibold text-white">{character.specialty}</strong>
+                      <strong className="text-xs font-semibold text-foreground">{character.specialty}</strong>
                     </div>
                   </div>
                 )}
@@ -210,7 +210,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                     <Radio className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <div>
                       <span className="text-[10px] font-mono uppercase text-muted-foreground block">Known Affiliation</span>
-                      <strong className="text-xs font-semibold text-white">{character.affiliation}</strong>
+                      <strong className="text-xs font-semibold text-foreground">{character.affiliation}</strong>
                     </div>
                   </div>
                 )}
@@ -248,7 +248,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
             {/* Modal Footer */}
             <div className="mt-6 pt-4 border-t border-border flex flex-wrap items-center justify-between gap-3">
               <span className="text-[11px] text-muted-foreground">
-                Voice Actor: <strong className="text-white">{character.voiceActor || "Rockstar Games Cast"}</strong>
+                Voice Actor: <strong className="text-foreground">{character.voiceActor || "Rockstar Games Cast"}</strong>
               </span>
 
               <div className="flex items-center gap-2">

@@ -70,10 +70,10 @@ export default async function PropertiesPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-amber-400 mb-3">
             <Building2 className="h-3 w-3" /> Leonida Real Estate Exchange
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             PROPERTIES & <span className="bg-gradient-to-r from-amber-400 via-primary to-accent bg-clip-text text-transparent">BUSINESSES</span>
           </h1>
-          <p className="mt-3 text-sm text-slate-300 max-w-2xl">
+          <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
             Browse and compare confirmed safehouses, commercial warehouses, chop shops, and nightclubs.
             Analyze passive hourly yields, garage sizes, and side-by-side specs.
           </p>

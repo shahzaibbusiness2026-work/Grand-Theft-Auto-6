@@ -279,7 +279,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
             <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
             <span className="text-[10px] font-black uppercase tracking-widest text-accent">Ballistic Comparison Duel</span>
           </div>
-          <h2 className="font-display text-xl sm:text-2xl font-black uppercase text-white tracking-wide">
+          <h2 className="font-display text-xl sm:text-2xl font-black uppercase text-foreground tracking-wide">
             Comparing <span className="text-accent">{selectedWeapons.length}</span> Firearms
           </h2>
           <p className="text-xs text-muted-foreground mt-1">
@@ -289,7 +289,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
 
         <div className="flex flex-wrap items-center gap-2.5">
           {selectedSlugs.length < 4 && (
-            <Button onClick={handleAddSlot} className="bg-muted/50 hover:bg-muted/60 text-white font-bold text-xs">
+            <Button onClick={handleAddSlot} className="bg-muted/50 hover:bg-muted/60 text-foreground font-bold text-xs">
               <Plus className="h-3.5 w-3.5 mr-1" /> Add 3rd/4th Gun
             </Button>
           )}
@@ -356,7 +356,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                   {selectedWeapons.length > 2 && (
                     <button
                       onClick={() => handleRemove(idx)}
-                      className="rounded-lg p-1 text-muted-foreground hover:text-white hover:bg-muted/50"
+                      className="rounded-lg p-1 text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -371,7 +371,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                   </span>
                 </div>
 
-                <h3 className="font-display text-base font-black uppercase text-white truncate">
+                <h3 className="font-display text-base font-black uppercase text-foreground truncate">
                   {w.name}
                 </h3>
                 <div className="flex items-center justify-between text-xs mt-1">
@@ -392,7 +392,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                 )}
                 {overallScores[idx] != null && (
                   <div className="mt-2 flex items-center justify-between rounded-xl border border-amber-500/30 bg-amber-400/10 px-2.5 py-1.5">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 flex items-center gap-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-amber-700 dark:text-amber-300 flex items-center gap-1">
                       <Trophy className="h-3 w-3" /> Overall Score
                     </span>
                     <span className="font-mono font-black text-sm text-amber-400">
@@ -412,7 +412,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-muted-foreground">Damage</span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-white">{w.damage}/100</span>
+                      <span className="font-mono font-bold text-foreground">{w.damage}/100</span>
                       {w.damage === bestDamage && (
                         <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
                           Winner
@@ -430,7 +430,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                       <Zap className="h-3.5 w-3.5 text-purple-400" /> DPS Index
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-white">{dpsIndices[idx]}</span>
+                      <span className="font-mono font-bold text-foreground">{dpsIndices[idx]}</span>
                       {dpsIndices[idx] === bestDps && selectedWeapons.length > 1 && (
                         <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
                           Winner
@@ -446,7 +446,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-muted-foreground">Fire Rate</span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-white">{w.fireRate}/100</span>
+                      <span className="font-mono font-bold text-foreground">{w.fireRate}/100</span>
                       {w.fireRate === bestFireRate && (
                         <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
                           Winner
@@ -462,7 +462,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-muted-foreground">Accuracy</span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-white">{w.accuracy}/100</span>
+                      <span className="font-mono font-bold text-foreground">{w.accuracy}/100</span>
                       {w.accuracy === bestAccuracy && (
                         <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
                           Winner
@@ -478,7 +478,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-muted-foreground">Range</span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-white">{w.range}/100</span>
+                      <span className="font-mono font-bold text-foreground">{w.range}/100</span>
                       {w.range === bestRange && (
                         <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
                           Winner
@@ -511,7 +511,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                 <FavoriteButton type="weapons" id={w.id} showText={false} />
                 <Link
                   href={`/weapons/${w.slug}`}
-                  className="flex-1 text-center rounded-xl bg-muted/40 hover:bg-muted/50 py-2 text-xs font-bold text-foreground hover:text-white transition-colors border border-border"
+                  className="flex-1 text-center rounded-xl bg-muted/40 hover:bg-muted/50 py-2 text-xs font-bold text-foreground transition-colors border border-border"
                 >
                   Full Ballistics
                 </Link>
@@ -525,7 +525,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
       {selectedWeapons.length >= 2 && (
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="card-surface rounded-3xl border border-border p-5">
-            <h3 className="font-display text-sm font-black uppercase text-white mb-1">Ballistics Radar</h3>
+            <h3 className="font-display text-sm font-black uppercase text-foreground mb-1">Ballistics Radar</h3>
             <p className="text-[11px] text-muted-foreground mb-3">
               Damage • Fire Rate • Accuracy • Range • Reload • Magazine
             </p>
@@ -533,7 +533,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
           </div>
 
           <div className="card-surface rounded-3xl border border-border p-5">
-            <h3 className="font-display text-sm font-black uppercase text-white mb-1">Special Features</h3>
+            <h3 className="font-display text-sm font-black uppercase text-foreground mb-1">Special Features</h3>
             <p className="text-[11px] text-muted-foreground mb-3">Attachments, ammunition & special traits</p>
             {featureUnion.length === 0 ? (
               <p className="text-xs text-muted-foreground py-8 text-center">
@@ -575,12 +575,12 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in">
           <div className="card-surface max-w-2xl w-full max-h-[80vh] overflow-hidden rounded-3xl border border-border p-6 flex flex-col">
             <div className="flex items-center justify-between pb-4 border-b border-border">
-              <h3 className="font-display text-lg font-black uppercase text-white">
+              <h3 className="font-display text-lg font-black uppercase text-foreground">
                 Choose Firearm for Slot #{pickerSlotIndex + 1}
               </h3>
               <button
                 onClick={() => setPickerSlotIndex(null)}
-                className="rounded-lg p-1 text-muted-foreground hover:text-white hover:bg-muted/50"
+                className="rounded-lg p-1 text-muted-foreground hover:text-foreground hover:bg-muted/50"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -605,7 +605,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                         <img src={cand.img} alt={cand.name} className="max-h-full max-w-full object-contain mix-blend-lighten" />
                       </div>
                       <div>
-                        <h4 className="font-display text-sm font-bold text-white">{cand.name}</h4>
+                        <h4 className="font-display text-sm font-bold text-foreground">{cand.name}</h4>
                         <p className="text-[11px] text-muted-foreground">{cand.klass} &bull; Damage {cand.damage}</p>
                       </div>
                     </div>

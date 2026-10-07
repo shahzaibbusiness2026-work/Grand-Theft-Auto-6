@@ -103,7 +103,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
       {/* Overview Stat Counters */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="card-carbon p-4 text-center border-border">
-          <span className="font-display text-2xl sm:text-3xl font-black text-white">{totalCount}</span>
+          <span className="font-display text-2xl sm:text-3xl font-black text-foreground">{totalCount}</span>
           <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mt-1">
             Verified Collectibles
           </span>
@@ -169,7 +169,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 onClick={() => setFilterStatus("all")}
                 className={cn(
                   "px-3 py-1 rounded-lg font-medium transition-colors",
-                  filterStatus === "all" ? "bg-primary text-white" : "text-muted-foreground hover:text-white"
+                  filterStatus === "all" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 All
@@ -178,7 +178,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 onClick={() => setFilterStatus("uncollected")}
                 className={cn(
                   "px-3 py-1 rounded-lg font-medium transition-colors",
-                  filterStatus === "uncollected" ? "bg-amber-500/20 text-amber-300" : "text-muted-foreground hover:text-white"
+                  filterStatus === "uncollected" ? "bg-amber-500/20 text-amber-700 dark:text-amber-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Pending
@@ -187,7 +187,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 onClick={() => setFilterStatus("collected")}
                 className={cn(
                   "px-3 py-1 rounded-lg font-medium transition-colors",
-                  filterStatus === "collected" ? "bg-emerald-500/20 text-emerald-300" : "text-muted-foreground hover:text-white"
+                  filterStatus === "collected" ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Found
@@ -210,7 +210,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 className={cn(
                   "text-xs px-3 py-1.5 rounded-full font-semibold transition-all border",
                   isSelected
-                    ? "border-primary bg-primary text-white shadow-[0_0_12px_rgba(244,63,94,0.4)]"
+                    ? "border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(244,63,94,0.4)]"
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
                 )}
               >
@@ -226,7 +226,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
         {filteredItems.length === 0 ? (
           <div className="col-span-full card-carbon p-12 text-center">
             <HelpCircle className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-            <h3 className="font-display text-lg font-bold text-white">No Collectibles Found</h3>
+            <h3 className="font-display text-lg font-bold text-foreground">No Collectibles Found</h3>
             <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
               No items match your filter criteria. Try expanding your search or selecting &quot;All Categories&quot;.
             </p>
@@ -276,7 +276,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                         "absolute top-3 right-3 p-1.5 rounded-full backdrop-blur-md border transition-all",
                         isDone
                           ? "bg-emerald-500 text-white border-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.5)]"
-                          : "bg-muted/50 text-muted-foreground border-border hover:text-white hover:border-slate-500"
+                          : "bg-muted/50 text-muted-foreground border-border hover:text-foreground hover:border-slate-500"
                       )}
                       title={isDone ? "Mark as uncollected" : "Mark as collected"}
                     >
@@ -302,7 +302,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                     <Link href={`/collectibles/${item.slug}`}>
                       <h3
                         className={cn(
-                          "font-display text-base font-bold text-white group-hover:text-primary transition-colors",
+                          "font-display text-base font-bold text-foreground group-hover:text-primary transition-colors",
                           isDone && "line-through text-muted-foreground"
                         )}
                       >

@@ -80,7 +80,7 @@ export function PricingClient() {
     <div className="space-y-12">
       {/* Billing Cycle Switcher */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <span className={cn("text-xs font-semibold", !annualBilling ? "text-white" : "text-muted-foreground")}>
+        <span className={cn("text-xs font-semibold", !annualBilling ? "text-foreground" : "text-muted-foreground")}>
           Monthly Billing
         </span>
         <button
@@ -94,7 +94,7 @@ export function PricingClient() {
             )}
           />
         </button>
-        <span className={cn("text-xs font-semibold flex items-center gap-1.5", annualBilling ? "text-white" : "text-muted-foreground")}>
+        <span className={cn("text-xs font-semibold flex items-center gap-1.5", annualBilling ? "text-foreground" : "text-muted-foreground")}>
           Annual Billing
           <span className="rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold px-2 py-0.5 border border-emerald-500/30">
             Save 33%
@@ -111,14 +111,14 @@ export function PricingClient() {
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mb-1">
                 Standard Access
               </span>
-              <h3 className="font-display text-2xl font-black text-white">Free Explorer</h3>
+              <h3 className="font-display text-2xl font-black text-foreground">Free Explorer</h3>
               <p className="text-xs text-muted-foreground mt-1">
                 Essential utilities for casual explorers tracking their story journey.
               </p>
             </div>
 
             <div className="flex items-baseline gap-1 font-mono">
-              <span className="text-4xl font-black text-white">$0</span>
+              <span className="text-4xl font-black text-foreground">$0</span>
               <span className="text-xs text-muted-foreground font-sans">/ forever free</span>
             </div>
 
@@ -136,7 +136,7 @@ export function PricingClient() {
             <button
               disabled={!isPro}
               onClick={handleTogglePro}
-              className="btn-ghost w-full py-3 text-xs font-bold uppercase tracking-wider border border-border text-muted-foreground hover:text-white disabled:opacity-60"
+              className="btn-ghost w-full py-3 text-xs font-bold uppercase tracking-wider border border-border text-muted-foreground hover:text-foreground disabled:opacity-60"
             >
               {!isPro ? "Current Active Plan" : "Downgrade to Free"}
             </button>
@@ -215,7 +215,7 @@ export function PricingClient() {
             </div>
 
             <div className="space-y-2">
-              <h3 className="font-display text-2xl font-black text-white uppercase tracking-tight">
+              <h3 className="font-display text-2xl font-black text-foreground uppercase tracking-tight">
                 Welcome to Vice City Pro!
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">

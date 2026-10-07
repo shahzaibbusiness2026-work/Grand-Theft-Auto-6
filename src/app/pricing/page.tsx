@@ -19,7 +19,7 @@ export default function PricingPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-primary mb-2">
             <Crown className="h-3.5 w-3.5 text-amber-400" /> Membership Tiers
           </div>
-          <h1 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+          <h1 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             UNLOCK <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">VICE CITY PRO</span>
           </h1>
           <p className="text-sm text-muted-foreground">

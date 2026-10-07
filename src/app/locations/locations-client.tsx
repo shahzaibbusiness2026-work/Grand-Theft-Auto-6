@@ -93,7 +93,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
       {/* Top Banner Quick Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="card-carbon p-4 text-center">
-          <span className="font-display text-2xl sm:text-3xl font-black text-white">
+          <span className="font-display text-2xl sm:text-3xl font-black text-foreground">
             {locations.length}
           </span>
           <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mt-1">
@@ -181,7 +181,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                 className={cn(
                   "text-xs px-3 py-1.5 rounded-full font-semibold transition-all border",
                   isSelected
-                    ? "border-primary bg-primary text-white shadow-[0_0_12px_rgba(244,63,94,0.4)]"
+                    ? "border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(244,63,94,0.4)]"
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
                 )}
               >
@@ -197,7 +197,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
         {filteredLocations.length === 0 ? (
           <div className="col-span-full card-carbon p-12 text-center">
             <HelpCircle className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-            <h3 className="font-display text-lg font-bold text-white">No Locations Found</h3>
+            <h3 className="font-display text-lg font-bold text-foreground">No Locations Found</h3>
             <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
               No points of interest match your current search and filter settings.
             </p>
@@ -263,7 +263,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                     </div>
 
                     <Link href={`/locations/${item.slug}`}>
-                      <h3 className="font-display text-base font-bold text-white group-hover:text-primary transition-colors leading-snug">
+                      <h3 className="font-display text-base font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
                         {item.name}
                       </h3>
                     </Link>

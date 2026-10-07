@@ -18,7 +18,7 @@ export default function CheatsPage() {
           <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-primary">
             Codes & Modifiers
           </p>
-          <h1 className="font-display text-3xl sm:text-5xl font-black text-white tracking-tight">
+          <h1 className="font-display text-3xl sm:text-5xl font-black text-foreground tracking-tight">
             GTA 6 Cheats & Secret Modifiers
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
@@ -30,7 +30,7 @@ export default function CheatsPage() {
         <div className="rounded-2xl border border-amber-500/40 dark:border-amber-800/40 bg-amber-500/10 dark:bg-amber-950/20 p-5 sm:p-6 flex items-start gap-4 text-amber-800 dark:text-amber-200">
           <ShieldAlert className="w-6 h-6 shrink-0 text-amber-400 mt-0.5" />
           <div className="text-xs sm:text-sm leading-relaxed space-y-1">
-            <p className="font-bold text-white uppercase tracking-wider">
+            <p className="font-bold text-amber-700 dark:text-amber-200 uppercase tracking-wider">
               Warning: Trophies & Achievements Will Be Disabled
             </p>
             <p className="text-amber-800/80 dark:text-amber-200/80">
@@ -45,7 +45,7 @@ export default function CheatsPage() {
             <div className="w-10 h-10 rounded-xl bg-muted border border-border flex items-center justify-center text-primary">
               <Smartphone className="w-5 h-5" />
             </div>
-            <h2 className="font-display text-lg font-bold text-white">In-Game Smartphone Dialing</h2>
+            <h2 className="font-display text-lg font-bold text-foreground">In-Game Smartphone Dialing</h2>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Open your character&apos;s phone, navigate to the dial pad, and enter numbers formatted as 1-999-XXX-XXXX to trigger world effects and vehicle drops.
             </p>
@@ -55,7 +55,7 @@ export default function CheatsPage() {
             <div className="w-10 h-10 rounded-xl bg-muted border border-border flex items-center justify-center text-accent">
               <Gamepad2 className="w-5 h-5" />
             </div>
-            <h2 className="font-display text-lg font-bold text-white">Controller Button Sequences</h2>
+            <h2 className="font-display text-lg font-bold text-foreground">Controller Button Sequences</h2>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Rapidly input directional pad and face button combinations (e.g., D-Pad, Triggers, Bumpers) directly during free-roam gameplay.
             </p>
@@ -65,7 +65,7 @@ export default function CheatsPage() {
             <div className="w-10 h-10 rounded-xl bg-muted border border-border flex items-center justify-center text-primary">
               <Terminal className="w-5 h-5" />
             </div>
-            <h2 className="font-display text-lg font-bold text-white">PC Developer Console</h2>
+            <h2 className="font-display text-lg font-bold text-foreground">PC Developer Console</h2>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Press the tilde (~) key to summon the command console and type direct modifier words like PAINKILLER, TURTLE, or CATCHME.
             </p>
@@ -75,7 +75,7 @@ export default function CheatsPage() {
         {/* Status / Day One Coverage */}
         <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 space-y-4 text-center max-w-2xl mx-auto">
           <Sparkles className="w-8 h-8 text-primary mx-auto" />
-          <h2 className="font-display text-xl font-bold text-white">
+          <h2 className="font-display text-xl font-bold text-foreground">
             Day-One Code Verification Registry
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">

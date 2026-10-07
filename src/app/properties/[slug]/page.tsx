@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   Building2,
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${prop.name} (${prop.type}) — Property Dossier | GTA 6 Atlas`,
+    title: `${prop.name} (${prop.type}) â€” Property Dossier | GTA 6 Atlas`,
     description: `Official real estate breakdown for ${prop.name} in ${prop.district}. Price: ${prop.priceDisplay}, Garage: ${prop.garageCapacity} vehicles, Passive Income: ${prop.passiveIncomeDisplay}.`,
     alternates: { canonical: `/properties/${prop.slug}` },
   };
@@ -77,7 +77,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
             Properties
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-white truncate max-w-xs">{prop.name}</span>
+          <span className="text-foreground truncate max-w-xs">{prop.name}</span>
         </nav>
 
         {/* Back link */}
@@ -109,7 +109,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 <FavoriteButton type="properties" id={prop.id} />
               </div>
 
-              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
+              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground leading-tight">
                 {prop.name}
               </h1>
 
@@ -196,7 +196,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
             {/* Features & Available Upgrades */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="card-carbon p-6 space-y-3">
-                <h3 className="font-display text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <h3 className="font-display text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
                   <Layers className="h-4 w-4 text-primary" /> Included Features
                 </h3>
                 <ul className="space-y-2 text-xs text-muted-foreground">
@@ -210,7 +210,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               </div>
 
               <div className="card-carbon p-6 space-y-3">
-                <h3 className="font-display text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <h3 className="font-display text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-accent" /> Available Upgrades
                 </h3>
                 <ul className="space-y-2 text-xs text-muted-foreground">
@@ -229,7 +229,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
           <div className="space-y-6">
             {/* Quick Specs Box */}
             <div className="card-carbon p-6 space-y-4">
-              <h3 className="font-display text-base font-bold text-white uppercase tracking-wider">
+              <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wider">
                 Property Summary
               </h3>
               <div className="space-y-2.5 text-xs font-mono">
@@ -239,7 +239,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">Garage:</span>
-                  <span className="font-bold text-white">{prop.garageCapacity} Vehicles</span>
+                  <span className="font-bold text-foreground">{prop.garageCapacity} Vehicles</span>
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">District:</span>
@@ -247,7 +247,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">Classification:</span>
-                  <span className="text-white font-semibold">{prop.confidence}</span>
+                  <span className="text-foreground font-semibold">{prop.confidence}</span>
                 </div>
               </div>
 
@@ -261,7 +261,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
 
             {/* Other Properties */}
             <div className="card-carbon p-6 space-y-4">
-              <h4 className="font-display text-sm font-bold text-white uppercase tracking-wider">
+              <h4 className="font-display text-sm font-bold text-foreground uppercase tracking-wider">
                 Other Real Estate
               </h4>
               <div className="space-y-3">
@@ -274,7 +274,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     <div className="text-[10px] uppercase font-bold text-primary mb-0.5">
                       {item.type}
                     </div>
-                    <div className="text-xs font-bold text-white group-hover:text-primary transition-colors line-clamp-1">
+                    <div className="text-xs font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
                       {item.name}
                     </div>
                     <div className="text-[11px] text-amber-400 font-mono mt-1">

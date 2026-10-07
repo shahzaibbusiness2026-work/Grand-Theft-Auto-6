@@ -233,6 +233,7 @@
 /* Surfaces & Containers */
 .light .bg-\[\#0B0E14\],
 .light .bg-\[\#090d16\],
+.light .bg-\[\#080C14\],
 .light .bg-\[\#070A10\] {
   background-color: #f8fafc !important;
 }
@@ -301,27 +302,30 @@
   border-color: #e2e8f0 !important;
 }
 
-/* Typography */
-.light .text-white,
-.light .text-\[\#F8FAFC\],
-.light .text-\[\#f8fafc\] {
+/* Typography — text-color flips are scoped to [data-flip-text] roots (admin
+   dashboard + companion dashboard), whose components hardcode dark-surface
+   text. The public site must NOT be flipped: it uses intentional white text
+   on gradient CTAs, image scrims and colored buttons in both themes. */
+.light [data-flip-text] .text-white,
+.light [data-flip-text] .text-\[\#F8FAFC\],
+.light [data-flip-text] .text-\[\#f8fafc\] {
   color: #0f172a !important;
 }
 
-.light .text-\[\#E2E8F0\] {
+.light [data-flip-text] .text-\[\#E2E8F0\] {
   color: #1e293b !important;
 }
 
-.light .text-\[\#CBD5E1\] {
+.light [data-flip-text] .text-\[\#CBD5E1\] {
   color: #334155 !important;
 }
 
-.light .text-\[\#94A3B8\],
-.light .text-\[\#94a3b8\] {
+.light [data-flip-text] .text-\[\#94A3B8\],
+.light [data-flip-text] .text-\[\#94a3b8\] {
   color: #64748b !important;
 }
 
-.light .text-\[\#64748B\] {
+.light [data-flip-text] .text-\[\#64748B\] {
   color: #64748b !important;
 }
 
@@ -433,7 +437,7 @@
   background-color: #f1f5f9 !important;
 }
 
-.light .hover\:text-white:hover {
+.light [data-flip-text] .hover\:text-white:hover {
   color: #0f172a !important;
 }
 
@@ -637,18 +641,18 @@
   background-color: #f1f5f9 !important;
 }
 
-/* Companion Typography in Bright Mode */
-.light .text-slate-100,
-.light .text-slate-200 {
+/* Companion Typography in Bright Mode — scoped to [data-flip-text] roots */
+.light [data-flip-text] .text-slate-100,
+.light [data-flip-text] .text-slate-200 {
   color: #0f172a !important;
 }
 
-.light .text-slate-300,
-.light .text-slate-400 {
+.light [data-flip-text] .text-slate-300,
+.light [data-flip-text] .text-slate-400 {
   color: #475569 !important;
 }
 
-.light .text-slate-500 {
+.light [data-flip-text] .text-slate-500 {
   color: #64748b !important;
 }
 
@@ -762,6 +766,24 @@
 }
 .light .dark-panel .text-muted-foreground {
   color: #e2e8f0 !important;
+}
+.light .dark-panel .text-slate-200,
+.light .dark-panel .text-slate-300,
+.light .dark-panel .text-slate-400 {
+  color: #cbd5e1 !important;
+}
+.light .dark-panel .text-slate-500 {
+  color: #94a3b8 !important;
+}
+/* .light-panel — opt-out for genuine light cards nested inside a dark-panel
+   (e.g. the ATLAS DATABASE card on the companion hero): their text follows
+   the normal light-theme foreground. */
+.light .dark-panel .light-panel .text-foreground,
+.light .dark-panel .light-panel .text-white {
+  color: #0f172a !important;
+}
+.light .dark-panel .light-panel .text-muted-foreground {
+  color: #65728a !important;
 }
 /* Winner banner keeps its dark base under the gradient */
 .light .dark-panel.bg-\[\#0a0f1d\] {
