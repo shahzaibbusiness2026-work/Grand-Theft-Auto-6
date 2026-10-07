@@ -69,7 +69,50 @@ async function resolveVehicle(slug: string): Promise<CanonicalVehicle | undefine
         confidence: (row.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "CONFIRMED",
         source: row.source || c?.source || "In-game Footage",
         description: row.summary || c?.description || `${row.name} in Grand Theft Auto VI.`,
-        featured: c?.featured ?? true,
+        featured: row.featured ?? c?.featured ?? true,
+
+        /* Deep-dive fields (DB first → canonical → undefined) */
+        traction: row.traction ?? c?.traction,
+        cornering: row.cornering ?? c?.cornering,
+        launch: row.launch ?? c?.launch,
+        reverseSpeed: row.reverse_speed ?? c?.reverseSpeed,
+        torque: row.torque ?? c?.torque,
+        resalePrice: row.resale_price ?? c?.resalePrice ?? null,
+        insuranceCost: row.insurance_cost ?? c?.insuranceCost ?? null,
+        upgradeCost: row.upgrade_cost ?? c?.upgradeCost ?? null,
+        repairCost: row.repair_cost ?? c?.repairCost ?? null,
+        storageCost: row.storage_cost ?? c?.storageCost ?? null,
+        engineType: row.engine_type || c?.engineType,
+        engineSize: row.engine_size || c?.engineSize,
+        transmission: row.transmission || c?.transmission,
+        gears: row.gears ?? c?.gears,
+        fuelType: row.fuel_type || c?.fuelType,
+        turbo: row.turbo ?? c?.turbo ?? false,
+        electric: row.electric ?? c?.electric ?? false,
+        doors: row.doors ?? c?.doors,
+        convertible: row.convertible ?? c?.convertible ?? false,
+        roofType: row.roof_type || c?.roofType,
+        trunkCapacity: row.trunk_capacity || c?.trunkCapacity,
+        offroadRating: row.offroad_rating ?? c?.offroadRating,
+        waterRating: row.water_rating ?? c?.waterRating,
+        amphibious: row.amphibious ?? c?.amphibious ?? false,
+        bulletResistance: row.bullet_resistance ?? c?.bulletResistance,
+        explosionResistance: row.explosion_resistance ?? c?.explosionResistance,
+        armorRating: row.armor_rating ?? c?.armorRating,
+        weaponized: row.weaponized ?? c?.weaponized ?? false,
+        driftRating: row.drift_rating ?? c?.driftRating,
+        specialAbility: row.special_ability || c?.specialAbility,
+        features: row.features?.length ? row.features : c?.features ?? [],
+        customization: row.customization?.length ? row.customization : c?.customization ?? [],
+        soundRating: row.sound_rating ?? c?.soundRating,
+        engineSound: row.engine_sound || c?.engineSound,
+        exhaustSound: row.exhaust_sound || c?.exhaustSound,
+        horn: row.horn || c?.horn,
+        turboSound: row.turbo_sound || c?.turboSound,
+        gearShiftSound: row.gear_shift_sound || c?.gearShiftSound,
+        availability: row.availability || c?.availability,
+        gallery: row.gallery?.length ? row.gallery : c?.gallery ?? [],
+        tags: row.tags?.length ? row.tags : c?.tags ?? [],
       };
     }
   } catch {
@@ -125,15 +168,32 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
     { icon: Timer, label: "0–60 Launch", value: `${vehicle.acceleration}s`, pct: accelPct },
     { icon: Disc3, label: "Braking Response", value: `${vehicle.braking}/100`, pct: brakingPct },
     { icon: Car, label: "Handling & Grip", value: `${vehicle.handling}/100`, pct: handlingPct },
+    ...(vehicle.traction != null
+      ? [{ icon: Car, label: "Traction", value: `${vehicle.traction}/100`, pct: vehicle.traction }]
+      : []),
+    ...(vehicle.cornering != null
+      ? [{ icon: Car, label: "Cornering", value: `${vehicle.cornering}/100`, pct: vehicle.cornering }]
+      : []),
+    ...(vehicle.launch != null
+      ? [{ icon: Timer, label: "Launch / Takeoff", value: `${vehicle.launch}/100`, pct: vehicle.launch }]
+      : []),
   ];
 
   const quickSpecs = [
     ["Class", vehicle.klass],
     ["Manufacturer", vehicle.manufacturer],
     ["Horsepower", `${vehicle.power} HP`],
+    ...(vehicle.torque != null ? [["Torque", `${vehicle.torque} lb-ft`]] : []),
     ["Drivetrain", vehicle.drivetrain],
     ["Weight", vehicle.weight],
     ["Seating", `${vehicle.seating} Passengers`],
+    ...(vehicle.doors != null ? [["Doors", String(vehicle.doors)]] : []),
+    ...(vehicle.transmission ? [["Transmission", vehicle.transmission]] : []),
+    ...(vehicle.fuelType ? [["Fuel Type", vehicle.fuelType]] : []),
+    ...(vehicle.engineType
+      ? [["Engine", [vehicle.engineSize, vehicle.engineType].filter(Boolean).join(" ")]]
+      : []),
+    ...(vehicle.availability ? [["Availability", vehicle.availability]] : []),
     ["Estimated Price", vehicle.priceDisplay],
     ["Confidence Rating", vehicle.confidence],
   ];
@@ -306,6 +366,89 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             </div>
           </div>
         </div>
+
+        {/* DEEP-DIVE: ECONOMY, FEATURES & AUDIO */}
+        <div className="mt-6 grid gap-6 lg:grid-cols-2">
+          {/* Economy */}
+          <div className="card-surface p-6 rounded-3xl border border-border">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+              <Wallet className="h-4 w-4 text-amber-400" /> Ownership Economy
+            </h2>
+            <dl className="mt-4 divide-y divide-border">
+              {[
+                ["Showroom price", vehicle.priceDisplay],
+                ...(vehicle.resalePrice != null ? [["Resale value", `$${vehicle.resalePrice.toLocaleString()}`]] : []),
+                ...(vehicle.insuranceCost != null ? [["Insurance", `$${vehicle.insuranceCost.toLocaleString()}`]] : []),
+                ...(vehicle.upgradeCost != null ? [["Full upgrades", `$${vehicle.upgradeCost.toLocaleString()}`]] : []),
+                ...(vehicle.repairCost != null ? [["Typical repair", `$${vehicle.repairCost.toLocaleString()}`]] : []),
+                ...(vehicle.storageCost != null ? [["Storage", `$${vehicle.storageCost.toLocaleString()}`]] : []),
+              ].map(([k, v]) => (
+                <div key={k} className="flex justify-between py-2.5 text-xs">
+                  <dt className="text-muted-foreground font-medium">{k}</dt>
+                  <dd className="font-bold text-white">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* Special features & durability */}
+          <div className="card-surface p-6 rounded-3xl border border-border">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+              <Layers className="h-4 w-4 text-rose-400" /> Special Features & Durability
+            </h2>
+            {vehicle.features?.length ? (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {vehicle.features.map((f) => (
+                  <span key={f} className="rounded-full border border-accent/40 bg-accent/10 px-2.5 py-1 text-[11px] font-bold text-accent">
+                    {f}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-3 text-xs text-muted-foreground">No special features confirmed for this vehicle yet.</p>
+            )}
+            <dl className="mt-4 divide-y divide-border">
+              {[
+                ...(vehicle.armorRating != null ? [["Armor rating", `${vehicle.armorRating}/100`]] : []),
+                ...(vehicle.bulletResistance != null ? [["Bullet resistance", `${vehicle.bulletResistance}/100`]] : []),
+                ...(vehicle.explosionResistance != null ? [["Explosion resistance", `${vehicle.explosionResistance}/100`]] : []),
+                ...(vehicle.offroadRating != null ? [["Off-road capability", `${vehicle.offroadRating}/100`]] : []),
+                ...(vehicle.waterRating != null ? [["Water capability", `${vehicle.waterRating}/100`]] : []),
+                ...(vehicle.driftRating != null ? [["Drift capability", `${vehicle.driftRating}/100`]] : []),
+                ...(vehicle.specialAbility ? [["Special ability", vehicle.specialAbility]] : []),
+              ].map(([k, v]) => (
+                <div key={k} className="flex justify-between py-2.5 text-xs">
+                  <dt className="text-muted-foreground font-medium">{k}</dt>
+                  <dd className="font-bold text-white">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+
+        {/* AUDIO (rendered only when sound data exists) */}
+        {(vehicle.soundRating != null || vehicle.engineSound || vehicle.exhaustSound || vehicle.horn) && (
+          <div className="card-surface mt-6 p-6 rounded-3xl border border-border">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+              <Wrench className="h-4 w-4 text-purple-400" /> Sound Profile
+            </h2>
+            <dl className="mt-4 divide-y divide-border">
+              {[
+                ...(vehicle.soundRating != null ? [["Sound rating", `${vehicle.soundRating}/100`]] : []),
+                ...(vehicle.engineSound ? [["Engine", vehicle.engineSound]] : []),
+                ...(vehicle.exhaustSound ? [["Exhaust", vehicle.exhaustSound]] : []),
+                ...(vehicle.turboSound ? [["Turbo", vehicle.turboSound]] : []),
+                ...(vehicle.gearShiftSound ? [["Gear shift", vehicle.gearShiftSound]] : []),
+                ...(vehicle.horn ? [["Horn", vehicle.horn]] : []),
+              ].map(([k, v]) => (
+                <div key={k} className="flex justify-between py-2.5 text-xs">
+                  <dt className="text-muted-foreground font-medium">{k}</dt>
+                  <dd className="font-bold text-white">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
 
         {/* BOTTOM CTA */}
         <div className="card-surface mt-6 mb-16 flex flex-col items-start justify-between gap-5 p-6 rounded-3xl border border-border md:flex-row md:items-center">

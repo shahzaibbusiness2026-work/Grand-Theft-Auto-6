@@ -422,6 +422,16 @@ function groupFiles(name) {
         "scripts/gh-push.mjs",
       ],
     },
+    "dbtools3": {
+      message: "feat: deep-dive data on vehicle & weapon detail pages (Oct 2026)\n\n- vehicle detail page: resolveVehicle maps every new deep-dive column (DB wins); new stat bars for traction/cornering/launch; quick specs gain torque, doors, transmission, fuel type, engine, availability; new sections for Ownership Economy (resale/insurance/upgrades/repair/storage), Special Features & Durability (feature chips + armor/bullet/explosion/off-road/water/drift ratings + special ability) and Sound Profile (rating, engine, exhaust, turbo, gear shift, horn) rendered only when data exists\n- weapon detail page: DB rows deep-merge onto canonical matches (mergeDbDeepDive) so CMS edits of features/price/image/stats are visible; DPS Index bar (damage x fire rate) added to the stat bars; extended bars for reload/mobility/recoil; quick specs gain manufacturer, fire mode, reserve ammo, headshot multiplier, availability; new Special Traits + Weapon Economy sections with supported modification chips\n- admin-store AdminWeapon gains attachments passthrough; weapons service maps it through\n- typecheck clean, production build clean (139 pages incl. /rankings routes)",
+      files: [
+        "src/app/vehicles/[slug]/page.tsx",
+        "src/app/weapons/[slug]/page.tsx",
+        "src/lib/admin-store.ts",
+        "src/lib/services/weapons.ts",
+        "scripts/gh-push.mjs",
+      ],
+    },
   };
   return groups[name];
 }

@@ -144,6 +144,7 @@ export interface AdminWeapon {
   damageFalloff?: number | null;
   fireMode?: string;
   features?: string[];
+  attachments?: string[];
   manufacturer?: string;
   availability?: string;
   featured?: boolean;

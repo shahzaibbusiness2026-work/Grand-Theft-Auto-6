@@ -13,6 +13,7 @@ import {
   Sparkles,
   MapPin,
   Wrench,
+  Wallet,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
@@ -41,7 +42,7 @@ function dbWeaponToCanonical(dbMatch: NonNullable<Awaited<ReturnType<typeof getP
   const rarityMatch = /Rarity:\s*(\w+)/.exec(dbMatch.notes || "");
   return {
     id: dbMatch.id,
-    slug: dbMatch.id,
+    slug: dbMatch.slug || dbMatch.id,
     name: dbMatch.name,
     klass: (dbMatch.category as CanonicalWeapon["klass"]) || "Pistol",
     damage: parseInt(dbMatch.damage || "", 10) || 50,
@@ -52,15 +53,63 @@ function dbWeaponToCanonical(dbMatch: NonNullable<Awaited<ReturnType<typeof getP
     reloadTime: "2.5s",
     magazineSize: parseInt(dbMatch.magazineSize || "15", 10) || 15,
     ammoType: dbMatch.ammunition || "9mm Standard",
-    price: null,
-    priceDisplay: priceMatch?.[0] || "TBD",
+    price: dbMatch.price ?? null,
+    priceDisplay: dbMatch.priceDisplay || priceMatch?.[0] || "TBD",
     rarity: (rarityMatch?.[1] as CanonicalWeapon["rarity"]) || "Common",
     locations: [dbMatch.acquisitionMethod || "Ammu-Nation"],
-    attachments: [],
+    attachments: dbMatch.attachments || [],
     confidence: dbMatch.verification === "verified" ? "CONFIRMED" : "SPECULATION",
     source: dbMatch.notes || "In-game Database",
     description: dbMatch.notes || `${dbMatch.name} in Grand Theft Auto VI.`,
-    img: "/img/hero-dark.jpg",
+    img: dbMatch.image || "/img/hero-dark.jpg",
+    // Deep-dive fields
+    reload: dbMatch.reload ?? undefined,
+    ammoCapacity: dbMatch.ammoCapacity ?? undefined,
+    recoil: dbMatch.recoil ?? undefined,
+    mobility: dbMatch.mobility ?? undefined,
+    projectileSpeed: dbMatch.projectileSpeed ?? undefined,
+    headshotMultiplier: dbMatch.headshotMultiplier ?? undefined,
+    damageFalloff: dbMatch.damageFalloff ?? undefined,
+    fireMode: dbMatch.fireMode || undefined,
+    features: dbMatch.features || [],
+    ammoCost: dbMatch.ammoCost ?? null,
+    upgradeCost: dbMatch.upgradeCost ?? null,
+    manufacturer: dbMatch.manufacturer || undefined,
+    availability: dbMatch.availability || undefined,
+    featured: dbMatch.featured ?? false,
+    gallery: dbMatch.gallery || [],
+    tags: dbMatch.tags || [],
+    customization: dbMatch.customization || [],
+  };
+}
+
+/**
+ * Merge CMS deep-dive fields (and price/image) from the live DB row onto a
+ * canonical-matched weapon so admin edits are visible on the detail page.
+ */
+function mergeDbDeepDive(weapon: CanonicalWeapon, dbMatch: NonNullable<Awaited<ReturnType<typeof getPublicWeapons>>>[number]): CanonicalWeapon {
+  return {
+    ...weapon,
+    price: dbMatch.price ?? weapon.price,
+    priceDisplay: dbMatch.priceDisplay || weapon.priceDisplay,
+    img: dbMatch.image || weapon.img,
+    reload: dbMatch.reload ?? weapon.reload,
+    ammoCapacity: dbMatch.ammoCapacity ?? weapon.ammoCapacity,
+    recoil: dbMatch.recoil ?? weapon.recoil,
+    mobility: dbMatch.mobility ?? weapon.mobility,
+    projectileSpeed: dbMatch.projectileSpeed ?? weapon.projectileSpeed,
+    headshotMultiplier: dbMatch.headshotMultiplier ?? weapon.headshotMultiplier,
+    damageFalloff: dbMatch.damageFalloff ?? weapon.damageFalloff,
+    fireMode: dbMatch.fireMode || weapon.fireMode,
+    features: dbMatch.features?.length ? dbMatch.features : weapon.features,
+    ammoCost: dbMatch.ammoCost ?? weapon.ammoCost,
+    upgradeCost: dbMatch.upgradeCost ?? weapon.upgradeCost,
+    manufacturer: dbMatch.manufacturer || weapon.manufacturer,
+    availability: dbMatch.availability || weapon.availability,
+    featured: dbMatch.featured ?? weapon.featured,
+    gallery: dbMatch.gallery?.length ? dbMatch.gallery : weapon.gallery,
+    tags: dbMatch.tags?.length ? dbMatch.tags : weapon.tags,
+    customization: dbMatch.customization?.length ? dbMatch.customization : weapon.customization,
   };
 }
 
@@ -91,31 +140,51 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function WeaponDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   let weapon = canonicalWeapons.find((w) => w.slug === slug || w.id === slug);
-  if (!weapon) {
-    const dbWeapons = await getPublicWeapons();
-    const dbMatch = dbWeapons.find((w) => w.id === slug || w.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug);
-    if (dbMatch) {
-      weapon = dbWeaponToCanonical(dbMatch);
-    }
+  const dbWeapons = await getPublicWeapons().catch(() => []);
+  const dbRow = dbWeapons.find(
+    (w) => w.id === slug || w.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug
+  );
+  if (!weapon && dbRow) {
+    weapon = dbWeaponToCanonical(dbRow);
+  }
+  // CMS edits (deep-dive fields, price, image) override the canonical base.
+  if (weapon && dbRow) {
+    weapon = mergeDbDeepDive(weapon, dbRow);
   }
 
   if (!weapon) {
     notFound();
   }
 
+  const dpsIndex = Math.round((weapon.damage * weapon.fireRate) / 100);
   const statBars = [
     { label: "Damage Impact", value: `${weapon.damage}/100`, pct: weapon.damage },
+    { label: "DPS Index (Damage × Fire Rate)", value: `${dpsIndex}`, pct: dpsIndex },
     { label: "Cycle Fire Rate", value: `${weapon.fireRate}/100`, pct: weapon.fireRate },
     { label: "Accuracy Cone", value: `${weapon.accuracy}/100`, pct: weapon.accuracy },
     { label: "Effective Range", value: `${weapon.range}/100`, pct: weapon.range },
+    ...(weapon.reload != null
+      ? [{ label: "Reload Speed", value: `${weapon.reload}/100`, pct: weapon.reload }]
+      : []),
     { label: "Handling & Draw", value: `${weapon.handling}/100`, pct: weapon.handling },
+    ...(weapon.mobility != null
+      ? [{ label: "Mobility", value: `${weapon.mobility}/100`, pct: weapon.mobility }]
+      : []),
+    ...(weapon.recoil != null
+      ? [{ label: "Recoil Control", value: `${weapon.recoil}/100`, pct: weapon.recoil }]
+      : []),
   ];
 
   const quickSpecs = [
     ["Weapon Class", weapon.klass],
+    ...(weapon.manufacturer ? [["Manufacturer", weapon.manufacturer]] : []),
+    ...(weapon.fireMode ? [["Fire Mode", weapon.fireMode]] : []),
     ["Caliber / Ammo", weapon.ammoType],
     ["Standard Magazine", `${weapon.magazineSize} Rounds`],
+    ...(weapon.ammoCapacity != null ? [["Reserve Ammo", `${weapon.ammoCapacity} Rounds`]] : []),
     ["Tactical Reload", weapon.reloadTime],
+    ...(weapon.headshotMultiplier != null ? [["Headshot Multiplier", `×${weapon.headshotMultiplier}`]] : []),
+    ...(weapon.availability ? [["Availability", weapon.availability]] : []),
     ["Retail Ammu-Nation Price", weapon.priceDisplay],
     ["Rarity Tier", weapon.rarity],
     ["Confidence Rating", weapon.confidence],
@@ -263,6 +332,67 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        {/* DEEP-DIVE: FEATURES, ECONOMY & CUSTOMIZATION */}
+        <div className="mt-6 grid gap-6 lg:grid-cols-2">
+          <div className="card-surface p-6 rounded-3xl border border-border">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+              <Layers className="h-4 w-4 text-rose-400" /> Special Traits
+            </h2>
+            {weapon.features?.length ? (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {weapon.features.map((f) => (
+                  <span key={f} className="rounded-full border border-accent/40 bg-accent/10 px-2.5 py-1 text-[11px] font-bold text-accent">
+                    {f}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-3 text-xs text-muted-foreground">No special traits confirmed for this weapon yet.</p>
+            )}
+            <dl className="mt-4 divide-y divide-border">
+              {[
+                ...(weapon.damageFalloff != null ? [["Damage falloff resistance", `${weapon.damageFalloff}/100`]] : []),
+                ...(weapon.projectileSpeed != null ? [["Projectile speed", `${weapon.projectileSpeed}/100`]] : []),
+              ].map(([k, v]) => (
+                <div key={k} className="flex justify-between py-2.5 text-xs">
+                  <dt className="text-muted-foreground font-medium">{k}</dt>
+                  <dd className="font-bold text-white">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div className="card-surface p-6 rounded-3xl border border-border">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-white">
+              <Wallet className="h-4 w-4 text-amber-400" /> Weapon Economy
+            </h2>
+            <dl className="mt-4 divide-y divide-border">
+              {[
+                ["Purchase price", weapon.priceDisplay],
+                ...(weapon.ammoCost != null ? [["Ammunition cost", `$${weapon.ammoCost.toLocaleString()}`]] : []),
+                ...(weapon.upgradeCost != null ? [["Full upgrades", `$${weapon.upgradeCost.toLocaleString()}`]] : []),
+              ].map(([k, v]) => (
+                <div key={k} className="flex justify-between py-2.5 text-xs">
+                  <dt className="text-muted-foreground font-medium">{k}</dt>
+                  <dd className="font-bold text-white">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            {weapon.customization?.length ? (
+              <>
+                <p className="mt-4 text-[10px] uppercase font-bold text-muted-foreground">Supported Modifications</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {weapon.customization.map((c) => (
+                    <span key={c} className="rounded-full border border-primary/40 bg-primary/10 px-2.5 py-1 text-[11px] font-bold text-primary">
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              </>
+            ) : null}
           </div>
         </div>
       </section>

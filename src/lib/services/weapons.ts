@@ -116,6 +116,7 @@ function rowToAdminWeapon(row: DatabaseWeaponRow): AdminWeapon {
     damageFalloff: row.damage_falloff,
     fireMode: row.fire_mode || undefined,
     features: row.features || [],
+    attachments: row.attachments || [],
     manufacturer: row.manufacturer || undefined,
     availability: row.availability || undefined,
     featured: row.featured || false,
