@@ -1,5 +1,6 @@
 import { SiteShell } from "@/components/shells";
 import { TrackerClient } from "./tracker-client";
+import { getTrackerCategories } from "@/lib/services/tracker";
 import { Trophy, CheckCircle2, ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -10,7 +11,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/tracker" },
   };
 
-export default function TrackerPage() {
+export default async function TrackerPage() {
+  // Admin-configured categories (site_settings.completion_tracker_config)
+  // drive which checklist categories the public tracker shows.
+  const trackerConfig = await getTrackerCategories();
+
   return (
     <SiteShell>
       <div className="container-site py-8">
@@ -28,7 +33,7 @@ export default function TrackerPage() {
           </p>
         </div>
 
-        <TrackerClient />
+        <TrackerClient config={trackerConfig} />
       </div>
     </SiteShell>
   );

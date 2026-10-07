@@ -1,5 +1,6 @@
 import { SiteShell } from "@/components/shells";
 import { CompareVehiclesClient } from "@/app/compare/vehicles/compare-vehicles-client";
+import { getMergedVehicles } from "@/lib/services/catalog";
 import { Trophy } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/compare/vehicles" },
 };
 
-export default function VehiclesComparePage() {
+export default async function VehiclesComparePage() {
+  // Live Supabase catalog (admin edits win) with canonical fallback.
+  const vehicles = await getMergedVehicles();
+
   return (
     <SiteShell>
       <div className="container-site py-8">
@@ -25,7 +29,7 @@ export default function VehiclesComparePage() {
           </p>
         </div>
 
-        <CompareVehiclesClient />
+        <CompareVehiclesClient vehicles={vehicles} />
       </div>
     </SiteShell>
   );

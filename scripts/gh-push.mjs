@@ -368,6 +368,28 @@ function groupFiles(name) {
         "-dashbord gta6/ChatGPT Image Sep 20, 2026, 10_15_20 AM (21).png",
       ],
     },
+    "dbtools": {
+      message: "feat: wire comparison tools, search palette and tracker to the CMS (Oct 2026 audit follow-up)\n\n- new shared catalog service (src/lib/services/catalog.ts): getMergedVehicles/getMergedWeapons combine live Supabase rows with the canonical dataset — DB values win, canonical entries fill the rest; /vehicles and /weapons listings refactored onto it (no duplicated merge code)\n- comparison tools (/compare/vehicles, /compare/weapons + /vehicles/compare, /weapons/compare aliases) now render from the live catalog: vehicles/weapons created or edited in the CMS appear in the duel picker and stat cards with their real specs; bundled canonical data remains the offline fallback\n- new public GET /api/search-index route (force-dynamic): builds the Ctrl+K palette index server-side from the merged catalogs plus published articles and guides (previously unsearchable) plus canonical missions/locations/properties/collectibles and characters\n- command palette: lazily fetches /api/search-index the first time it opens, so CMS content is searchable without touching code; static bundled index remains the fallback; new News and Guide result categories with icons\n- public /tracker now renders from the admin Completion Tracker configuration (site_settings.completion_tracker_config): category tabs/cards come from active admin categories, and deactivating a category excludes its milestones from the list and the overall completion formula (matches the admin toggle's own wording); weight chips shown on category cards\n- tracker defaults now match the real 11 checklist categories (GTA-V-era placeholder categories replaced) so admin config and public page stay in sync\n- verified end-to-end: CMS-created vehicle appears in compare picker/card (239 mph), article + new vehicle found via Ctrl+K search, admin category toggle hides it publicly and reverts cleanly; typecheck + production build clean (137 pages)",
+      files: [
+        "src/lib/search-types.ts",
+        "src/lib/services/catalog.ts",
+        "src/app/api/search-index/route.ts",
+        "src/app/vehicles/page.tsx",
+        "src/app/weapons/page.tsx",
+        "src/app/compare/vehicles/compare-vehicles-client.tsx",
+        "src/app/compare/vehicles/page.tsx",
+        "src/app/vehicles/compare/page.tsx",
+        "src/app/compare/weapons/compare-weapons-client.tsx",
+        "src/app/compare/weapons/page.tsx",
+        "src/app/weapons/compare/page.tsx",
+        "src/components/command-palette.tsx",
+        "src/lib/services/tracker.ts",
+        "src/app/tracker/page.tsx",
+        "src/app/tracker/tracker-client.tsx",
+        "src/app/admin/tracker/page.tsx",
+        "scripts/gh-push.mjs",
+      ],
+    },
   };
   return groups[name];
 }

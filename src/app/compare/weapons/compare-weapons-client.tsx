@@ -28,9 +28,13 @@ import { FavoriteButton } from "@/components/favorite-button";
 
 interface CompareWeaponsClientProps {
   initialSlugs?: string[];
+  /** Live catalog (DB + canonical merge) passed from the server page; falls back to bundled data. */
+  weapons?: CanonicalWeapon[];
 }
 
-export function CompareWeaponsClient({ initialSlugs }: CompareWeaponsClientProps) {
+export function CompareWeaponsClient({ initialSlugs, weapons }: CompareWeaponsClientProps) {
+  const weaponList = weapons && weapons.length > 0 ? weapons : canonicalWeapons;
+
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>(() => {
     if (initialSlugs && initialSlugs.length >= 2) return initialSlugs.slice(0, 4);
     return ["m4-carbine", "ak-74-kalashnikov"];
@@ -45,12 +49,13 @@ export function CompareWeaponsClient({ initialSlugs }: CompareWeaponsClientProps
       const params = new URLSearchParams(window.location.search);
       const wParam = params.get("w");
       if (wParam) {
-        const slugs = wParam.split(",").filter((s) => canonicalWeapons.some((w) => w.slug === s || w.id === s));
+        const slugs = wParam.split(",").filter((s) => weaponList.some((w) => w.slug === s || w.id === s));
         if (slugs.length >= 2) {
           setSelectedSlugs(slugs.slice(0, 4));
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const syncToUrl = (slugs: string[]) => {
@@ -65,9 +70,9 @@ export function CompareWeaponsClient({ initialSlugs }: CompareWeaponsClientProps
 
   const selectedWeapons: CanonicalWeapon[] = useMemo(() => {
     return selectedSlugs
-      .map((slug) => canonicalWeapons.find((w) => w.slug === slug || w.id === slug))
+      .map((slug) => weaponList.find((w) => w.slug === slug || w.id === slug))
       .filter((w): w is CanonicalWeapon => w !== undefined);
-  }, [selectedSlugs]);
+  }, [selectedSlugs, weaponList]);
 
   const handleRemove = (index: number) => {
     if (selectedSlugs.length <= 2) return;
@@ -92,7 +97,7 @@ export function CompareWeaponsClient({ initialSlugs }: CompareWeaponsClientProps
 
   const handleAddSlot = () => {
     if (selectedSlugs.length >= 4) return;
-    const unselected = canonicalWeapons.find((w) => !selectedSlugs.includes(w.slug));
+    const unselected = weaponList.find((w) => !selectedSlugs.includes(w.slug));
     if (unselected) {
       const next = [...selectedSlugs, unselected.slug];
       setSelectedSlugs(next);
@@ -353,7 +358,7 @@ export function CompareWeaponsClient({ initialSlugs }: CompareWeaponsClientProps
             </div>
 
             <div className="overflow-y-auto mt-4 space-y-2 pr-1">
-              {canonicalWeapons.map((cand) => {
+              {weaponList.map((cand) => {
                 const isCurrent = selectedSlugs.includes(cand.slug);
                 return (
                   <button

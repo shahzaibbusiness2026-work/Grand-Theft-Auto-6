@@ -463,7 +463,20 @@ export const MILESTONES: TrackerMilestone[] = [
   },
 ];
 
-export function TrackerClient() {
+export interface TrackerCategoryConfig {
+  id: string;
+  name: string;
+  weight: number;
+  totalItems: number;
+  active: boolean;
+}
+
+interface TrackerClientProps {
+  /** Admin-configured categories (CMS); when absent the built-in list is used. */
+  config?: TrackerCategoryConfig[];
+}
+
+export function TrackerClient({ config }: TrackerClientProps) {
   const [userState, setUserState] = useState<UserState | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -492,18 +505,44 @@ export function TrackerClient() {
     return userState?.tracker.notes || {};
   }, [userState]);
 
-  // Overall Completion Calculations
-  const totalMilestones = MILESTONES.length;
+  // Admin-configured active category names (CMS-driven). Falls back to the
+  // built-in list when no config exists or the admin disabled everything.
+  const visibleCategories = useMemo(() => {
+    if (!config || config.length === 0) {
+      return TRACKER_CATEGORIES.filter((c) => c !== "All") as unknown as string[];
+    }
+    const names = config.filter((c) => c.active !== false).map((c) => c.name);
+    return names.length > 0 ? names : (TRACKER_CATEGORIES.filter((c) => c !== "All") as unknown as string[]);
+  }, [config]);
+
+  const categoryWeights = useMemo(() => {
+    const map: Record<string, number> = {};
+    config?.forEach((c) => {
+      map[c.name] = c.weight;
+    });
+    return map;
+  }, [config]);
+
+  // Milestones restricted to admin-enabled categories (CMS config mode) so
+  // deactivated categories are excluded from the list and completion formula.
+  const activeMilestones = useMemo(() => {
+    if (!config || config.length === 0) return MILESTONES;
+    const names = new Set(visibleCategories);
+    return MILESTONES.filter((m) => names.has(m.category));
+  }, [config, visibleCategories]);
+
+  // Overall Completion Calculations (restricted to admin-enabled categories)
+  const totalMilestones = activeMilestones.length;
   const totalCompleted = useMemo(() => {
-    return MILESTONES.filter((m) => completedIds.includes(m.id)).length;
-  }, [completedIds]);
+    return activeMilestones.filter((m) => completedIds.includes(m.id)).length;
+  }, [completedIds, activeMilestones]);
 
   const overallPercent = Math.round((totalCompleted / (totalMilestones || 1)) * 100);
 
   // Category-specific stats
   const categoryStats = useMemo(() => {
     const map: Record<string, { total: number; completed: number; percent: number }> = {};
-    for (const cat of TRACKER_CATEGORIES) {
+    for (const cat of visibleCategories) {
       if (cat === "All") continue;
       const catItems = MILESTONES.filter((m) => m.category === cat);
       const done = catItems.filter((m) => completedIds.includes(m.id)).length;
@@ -514,11 +553,11 @@ export function TrackerClient() {
       };
     }
     return map;
-  }, [completedIds]);
+  }, [completedIds, visibleCategories]);
 
   // Filtered Milestones
   const filteredMilestones = useMemo(() => {
-    return MILESTONES.filter((item) => {
+    return activeMilestones.filter((item) => {
       // Category filter
       if (selectedCategory !== "All" && item.category !== selectedCategory) {
         return false;
@@ -541,7 +580,7 @@ export function TrackerClient() {
 
       return true;
     });
-  }, [selectedCategory, filterStatus, searchQuery, completedIds, personalNotes]);
+  }, [activeMilestones, selectedCategory, filterStatus, searchQuery, completedIds, personalNotes]);
 
   // Actions
   const handleToggle = (id: string) => {
@@ -713,10 +752,11 @@ export function TrackerClient() {
       {/* Category Progress Badges */}
       <div className="card-carbon p-5">
         <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3 flex items-center gap-2">
-          <BookOpen className="h-4 w-4 text-primary" /> Category Completion Breakdown (11 Categories)
+          <BookOpen className="h-4 w-4 text-primary" /> Category Completion Breakdown ({visibleCategories.length}
+          {visibleCategories.length === 1 ? " Category" : " Categories"})
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3">
-          {TRACKER_CATEGORIES.filter((c) => c !== "All").map((cat) => {
+          {visibleCategories.map((cat) => {
             const stat = categoryStats[cat] || { total: 0, completed: 0, percent: 0 };
             const isSelected = selectedCategory === cat;
             return (
@@ -736,7 +776,12 @@ export function TrackerClient() {
                 </div>
                 <Progress value={stat.percent} className="h-1.5 bg-muted" />
                 <div className="flex justify-between items-center text-[10px] text-muted-foreground mt-1.5 font-mono">
-                  <span>{stat.completed} / {stat.total}</span>
+                  <span>
+                    {stat.completed} / {stat.total}
+                    {categoryWeights[cat] != null && (
+                      <span className="text-primary/80 ml-1.5">• {categoryWeights[cat]}% wt</span>
+                    )}
+                  </span>
                   {stat.percent === 100 && (
                     <span className="text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-0.5">
                       <CheckCircle2 className="h-2.5 w-2.5" /> 100%
@@ -771,7 +816,7 @@ export function TrackerClient() {
                 filterStatus === "all" ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
               )}
             >
-              All ({MILESTONES.length})
+              All ({activeMilestones.length})
             </button>
             <button
               onClick={() => setFilterStatus("pending")}
@@ -780,7 +825,7 @@ export function TrackerClient() {
                 filterStatus === "pending" ? "bg-amber-500/20 text-amber-600 dark:text-amber-400 font-semibold" : "text-muted-foreground hover:text-foreground"
               )}
             >
-              Pending ({MILESTONES.length - totalCompleted})
+              Pending ({activeMilestones.length - totalCompleted})
             </button>
             <button
               onClick={() => setFilterStatus("completed")}

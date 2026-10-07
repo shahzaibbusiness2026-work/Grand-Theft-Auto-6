@@ -11,11 +11,17 @@ import { getTrackerCategories, saveTrackerCategories, TrackerCategory } from "@/
 export default function AdminTrackerPage() {
   const { showToast } = useToast();
   const [categories, setCategories] = useState<TrackerCategory[]>([
-    { id: "trk-1", name: "Story Missions", weight: 50, totalItems: 68, active: true },
-    { id: "trk-2", name: "Strangers & Freaks", weight: 20, totalItems: 32, active: true },
-    { id: "trk-3", name: "Collectibles & Hidden Packages", weight: 15, totalItems: 100, active: true },
-    { id: "trk-4", name: "Random World Encounters", weight: 10, totalItems: 40, active: true },
-    { id: "trk-5", name: "Hobbies & Pastimes", weight: 5, totalItems: 25, active: true },
+    { id: "trk-1", name: "Story Missions", weight: 40, totalItems: 5, active: true },
+    { id: "trk-2", name: "Strangers & Freaks", weight: 8, totalItems: 3, active: true },
+    { id: "trk-3", name: "Collectibles", weight: 15, totalItems: 4, active: true },
+    { id: "trk-4", name: "Hobbies & Pastimes", weight: 7, totalItems: 4, active: true },
+    { id: "trk-5", name: "Random Events", weight: 5, totalItems: 3, active: true },
+    { id: "trk-6", name: "Miscellaneous", weight: 5, totalItems: 3, active: true },
+    { id: "trk-7", name: "Properties & Businesses", weight: 5, totalItems: 3, active: true },
+    { id: "trk-8", name: "Weapon Masteries", weight: 5, totalItems: 3, active: true },
+    { id: "trk-9", name: "Vehicle Collections", weight: 4, totalItems: 2, active: true },
+    { id: "trk-10", name: "Map Exploration", weight: 4, totalItems: 2, active: true },
+    { id: "trk-11", name: "Trophies & Achievements", weight: 2, totalItems: 3, active: true },
   ]);
 
   useEffect(() => {

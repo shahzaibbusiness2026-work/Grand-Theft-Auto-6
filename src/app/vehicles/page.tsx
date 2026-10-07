@@ -6,75 +6,11 @@ import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";
 import { VehiclesClient } from "./vehicles-client";
-import { getPublicVehicleCatalog, type VehicleCatalogRow } from "@/lib/services/vehicles";
-import type { CanonicalVehicle } from "@/lib/canonical-data";
-import { canonicalVehicles } from "@/lib/canonical-data";
-
-const num = (s?: string | null): number | null => {
-  const n = parseFloat((s || "").replace(/,/g, ""));
-  return Number.isFinite(n) ? n : null;
-};
-
-/** Map a live DB row to the display shape — DB values WIN over canonical stats. */
-function dbToDisplay(v: VehicleCatalogRow, c?: CanonicalVehicle): CanonicalVehicle {
-  return {
-    id: v.id,
-    slug: v.slug || c?.slug || v.id,
-    name: v.name,
-    manufacturer: v.manufacturer || c?.manufacturer || "Unknown",
-    klass: (v.class === "Sports"
-      ? "Sports Car"
-      : v.class === "Super"
-        ? "Super Car"
-        : (v.class as CanonicalVehicle["klass"])) || c?.klass || "Sports Car",
-    img: v.images?.[0] || c?.img || "/img/car-purple.jpg",
-    filter: c?.filter,
-    topSpeed: num(v.top_speed) ?? c?.topSpeed ?? 150,
-    acceleration: num(v.acceleration) ?? c?.acceleration ?? 4.0,
-    braking: c?.braking ?? 75,
-    handling: num(v.handling) ?? c?.handling ?? 75,
-    power: v.power_hp ?? c?.power ?? 500,
-    weight: v.weight || c?.weight || "1,500 kg",
-    seating: v.seating ?? c?.seating ?? 2,
-    drivetrain: (v.drivetrain as CanonicalVehicle["drivetrain"]) || c?.drivetrain || "RWD",
-    price: v.price ?? c?.price ?? null,
-    priceDisplay: v.price_display || c?.priceDisplay || "TBD",
-    purchaseLocation: c?.purchaseLocation || "Southern San Andreas Super Autos",
-    spawnLocations: c?.spawnLocations ?? ["Vice City Downtown", "Ocean Drive"],
-    customizationOptions: c?.customizationOptions ?? ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
-    confidence: (v.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "CONFIRMED",
-    source: v.source || c?.source || "In-game Footage",
-    description: v.summary || c?.description || `${v.name} in Grand Theft Auto VI.`,
-    featured: c?.featured ?? true,
-  };
-}
+import { getMergedVehicles } from "@/lib/services/catalog";
 
 export default async function VehiclesPage() {
   // Live Supabase data first (admin edits win); canonical static entries fill the rest.
-  let vehicles: CanonicalVehicle[] = canonicalVehicles;
-  try {
-    const dbVehicles = await getPublicVehicleCatalog();
-
-    if (dbVehicles && dbVehicles.length > 0) {
-      const dbMapped = dbVehicles.map((v) =>
-        dbToDisplay(
-          v,
-          canonicalVehicles.find(
-            (cv) => cv.id.toLowerCase() === v.id.toLowerCase() || cv.name.toLowerCase() === v.name.toLowerCase()
-          )
-        )
-      );
-
-      const dbIds = new Set(dbVehicles.map((v) => v.id.toLowerCase()));
-      const dbNames = new Set(dbVehicles.map((v) => v.name.toLowerCase()));
-      const remainingCanonical = canonicalVehicles.filter(
-        (cv) => !dbIds.has(cv.id.toLowerCase()) && !dbNames.has(cv.name.toLowerCase())
-      );
-      vehicles = [...dbMapped, ...remainingCanonical];
-    }
-  } catch {
-    // Use canonical static data as fallback
-  }
+  const vehicles = await getMergedVehicles();
 
   return (
     <SiteShell>

@@ -1,5 +1,6 @@
 import { SiteShell } from "@/components/shells";
 import { CompareWeaponsClient } from "@/app/compare/weapons/compare-weapons-client";
+import { getMergedWeapons } from "@/lib/services/catalog";
 import { Crosshair } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/compare/weapons" },
 };
 
-export default function WeaponsComparePage() {
+export default async function WeaponsComparePage() {
+  // Live Supabase catalog (admin edits win) with canonical fallback.
+  const weapons = await getMergedWeapons();
+
   return (
     <SiteShell>
       <div className="container-site py-8">
@@ -26,7 +30,7 @@ export default function WeaponsComparePage() {
           </p>
         </div>
 
-        <CompareWeaponsClient />
+        <CompareWeaponsClient weapons={weapons} />
       </div>
     </SiteShell>
   );

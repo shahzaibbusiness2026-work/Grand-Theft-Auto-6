@@ -21,6 +21,7 @@ import {
   Bot,
   Map,
   Flag,
+  Newspaper,
 } from "lucide-react";
 import {
   canonicalVehicles,
@@ -29,111 +30,106 @@ import {
   canonicalLocations,
   canonicalProperties,
   canonicalCollectibles,
-  canonicalMoneyMethods,
 } from "@/lib/canonical-data";
 import { characters } from "@/lib/data";
+import { TOOL_SEARCH_ITEMS, type SearchItem } from "@/lib/search-types";
 import { cn } from "@/lib/utils";
-
-export interface SearchItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  category: "Tool" | "Vehicle" | "Weapon" | "Mission" | "Location" | "Property" | "Collectible" | "Character";
-  href: string;
-  img?: string;
-}
 
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const TOOL_SEARCH_ITEMS: SearchItem[] = [
-  {
-    id: "tool-map",
-    title: "Interactive Satellite Map",
-    subtitle: "24 POIs, satellite topography, personal field notes & filters",
-    category: "Tool",
-    href: "/map",
-  },
-  {
-    id: "tool-tracker",
-    title: "100% Completion Tracker",
-    subtitle: "11-category completion checklist with offline backup",
-    category: "Tool",
-    href: "/tracker",
-  },
-  {
-    id: "tool-compare-vehicles",
-    title: "Vehicle Comparison Duel",
-    subtitle: "Head-to-head 2–4 vehicle stats, dyno bars & recommendation",
-    category: "Tool",
-    href: "/compare/vehicles",
-  },
-  {
-    id: "tool-compare-weapons",
-    title: "Weapon Comparison Duel",
-    subtitle: "Head-to-head firearm comparison across DPS, velocity & recoil",
-    category: "Tool",
-    href: "/compare/weapons",
-  },
-  {
-    id: "tool-money-calc",
-    title: "Money & Goal Calculator",
-    subtitle: "Calculate required missions and hours for target items",
-    category: "Tool",
-    href: "/tools/money-calculator",
-  },
-  {
-    id: "tool-business-profit",
-    title: "Business Profit Calculator",
-    subtitle: "Model hourly/daily yields and break-even payback timelines",
-    category: "Tool",
-    href: "/tools/business-profit-calculator",
-  },
-  {
-    id: "tool-money-maker",
-    title: "Money-Making Method Finder",
-    subtitle: "Find the best cash grinds based on playstyle and bankroll",
-    category: "Tool",
-    href: "/tools/money-maker",
-  },
-  {
-    id: "tool-loadout",
-    title: "Tactical Loadout Builder",
-    subtitle: "Assemble 5-slot weapon kits with firepower & mobility ratings",
-    category: "Tool",
-    href: "/tools/loadout-builder",
-  },
-  {
-    id: "tool-ai",
-    title: "Ask GTA 6 AI Assistant",
-    subtitle: "Grounded intelligence companion with confidence citations",
-    category: "Tool",
-    href: "/ai",
-  },
-  {
-    id: "tool-collectibles",
-    title: "Collectibles Finder",
-    subtitle: "Hidden packages, stunt ramps, radio masts & wildlife photos",
-    category: "Tool",
-    href: "/collectibles",
-  },
-  {
-    id: "tool-locations",
-    title: "Locations & POI Directory",
-    subtitle: "Directory of confirmed landmarks, gun shops & estates",
-    category: "Tool",
-    href: "/locations",
-  },
-  {
-    id: "tool-properties",
-    title: "Properties & Real Estate",
-    subtitle: "Safehouses, luxury penthouses, chop shops & nightclubs",
-    category: "Tool",
-    href: "/properties",
-  },
-];
+/** Bundled fallback index (used when /api/search-index hasn't loaded or fails). */
+function buildStaticIndex(): SearchItem[] {
+  const items: SearchItem[] = [...TOOL_SEARCH_ITEMS];
+
+  // Vehicles
+  canonicalVehicles.forEach((v) => {
+    items.push({
+      id: `veh-${v.id}`,
+      title: v.name,
+      subtitle: `${v.klass} • ${v.topSpeed} mph • ${v.priceDisplay}`,
+      category: "Vehicle",
+      href: `/vehicles/${v.slug}`,
+      img: v.img,
+    });
+  });
+
+  // Weapons
+  canonicalWeapons.forEach((w) => {
+    items.push({
+      id: `wep-${w.id}`,
+      title: w.name,
+      subtitle: `${w.klass} • ${w.damage} Dmg • ${w.priceDisplay}`,
+      category: "Weapon",
+      href: `/weapons/${w.slug}`,
+      img: w.img,
+    });
+  });
+
+  // Missions
+  canonicalMissions.forEach((m) => {
+    items.push({
+      id: `mis-${m.id}`,
+      title: m.title,
+      subtitle: `${m.type} • ${m.character} • ${m.cashRewardDisplay}`,
+      category: "Mission",
+      href: `/missions/${m.slug}`,
+      img: m.img,
+    });
+  });
+
+  // Locations
+  canonicalLocations.forEach((l) => {
+    items.push({
+      id: `loc-${l.id}`,
+      title: l.name,
+      subtitle: `${l.district} • Threat: ${l.threatLevel}`,
+      category: "Location",
+      href: `/locations/${l.slug}`,
+      img: l.img,
+    });
+  });
+
+  // Properties
+  canonicalProperties.forEach((p) => {
+    items.push({
+      id: `prop-${p.id}`,
+      title: p.name,
+      subtitle: `${p.type} in ${p.district} • ${p.priceDisplay}`,
+      category: "Property",
+      href: `/properties/${p.slug}`,
+      img: p.img,
+    });
+  });
+
+  // Collectibles
+  canonicalCollectibles.forEach((c) => {
+    items.push({
+      id: `col-${c.id}`,
+      title: c.title,
+      subtitle: `${c.category} in ${c.district} • ${c.reward}`,
+      category: "Collectible",
+      href: `/collectibles/${c.slug}`,
+      img: c.img,
+    });
+  });
+
+  // Characters
+  characters.forEach((c) => {
+    items.push({
+      id: `char-${c.id}`,
+      title: c.name,
+      subtitle: `${c.role} • ${c.desc.slice(0, 50)}...`,
+      category: "Character",
+      href: "/characters",
+      img: c.img,
+    });
+  });
+
+  return items;
+}
 
 export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
   const router = useRouter();
@@ -141,97 +137,32 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const [liveItems, setLiveItems] = useState<SearchItem[] | null>(null);
 
-  // Build searchable index from canonical datasets
+  // Lazily fetch the live (CMS-driven) index the first time the palette opens.
+  useEffect(() => {
+    if (!isOpen || liveItems) return;
+    let cancelled = false;
+    fetch("/api/search-index")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!cancelled && data && Array.isArray(data.items) && data.items.length > 0) {
+          setLiveItems(data.items);
+        }
+      })
+      .catch(() => {
+        // Keep the bundled static index on failure
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, liveItems]);
+
+  // Searchable index: live DB-driven items once loaded, bundled data otherwise.
   const searchIndex: SearchItem[] = useMemo(() => {
-    const items: SearchItem[] = [...TOOL_SEARCH_ITEMS];
-
-    // Vehicles
-    canonicalVehicles.forEach((v) => {
-      items.push({
-        id: `veh-${v.id}`,
-        title: v.name,
-        subtitle: `${v.klass} • ${v.topSpeed} mph • ${v.priceDisplay}`,
-        category: "Vehicle",
-        href: `/vehicles/${v.slug}`,
-        img: v.img,
-      });
-    });
-
-    // Weapons
-    canonicalWeapons.forEach((w) => {
-      items.push({
-        id: `wep-${w.id}`,
-        title: w.name,
-        subtitle: `${w.klass} • ${w.damage} Dmg • ${w.priceDisplay}`,
-        category: "Weapon",
-        href: `/weapons/${w.slug}`,
-        img: w.img,
-      });
-    });
-
-    // Missions
-    canonicalMissions.forEach((m) => {
-      items.push({
-        id: `mis-${m.id}`,
-        title: m.title,
-        subtitle: `${m.type} • ${m.character} • ${m.cashRewardDisplay}`,
-        category: "Mission",
-        href: `/missions/${m.slug}`,
-        img: m.img,
-      });
-    });
-
-    // Locations
-    canonicalLocations.forEach((l) => {
-      items.push({
-        id: `loc-${l.id}`,
-        title: l.name,
-        subtitle: `${l.district} • Threat: ${l.threatLevel}`,
-        category: "Location",
-        href: `/locations/${l.slug}`,
-        img: l.img,
-      });
-    });
-
-    // Properties
-    canonicalProperties.forEach((p) => {
-      items.push({
-        id: `prop-${p.id}`,
-        title: p.name,
-        subtitle: `${p.type} in ${p.district} • ${p.priceDisplay}`,
-        category: "Property",
-        href: `/properties/${p.slug}`,
-        img: p.img,
-      });
-    });
-
-    // Collectibles
-    canonicalCollectibles.forEach((c) => {
-      items.push({
-        id: `col-${c.id}`,
-        title: c.title,
-        subtitle: `${c.category} in ${c.district} • ${c.reward}`,
-        category: "Collectible",
-        href: `/collectibles/${c.slug}`,
-        img: c.img,
-      });
-    });
-
-    // Characters
-    characters.forEach((c) => {
-      items.push({
-        id: `char-${c.id}`,
-        title: c.name,
-        subtitle: `${c.role} • ${c.desc.slice(0, 50)}...`,
-        category: "Character",
-        href: `/characters`,
-        img: c.img,
-      });
-    });
-
-    return items;
-  }, []);
+    if (liveItems && liveItems.length > 0) return liveItems;
+    return buildStaticIndex();
+  }, [liveItems]);
 
   // Filter items
   const filteredResults = useMemo(() => {
@@ -308,6 +239,10 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
         return <Flag className="h-4 w-4 text-orange-400" />;
       case "Character":
         return <User className="h-4 w-4 text-purple-400" />;
+      case "News":
+        return <Newspaper className="h-4 w-4 text-rose-400" />;
+      case "Guide":
+        return <BookOpen className="h-4 w-4 text-lime-400" />;
     }
   };
 

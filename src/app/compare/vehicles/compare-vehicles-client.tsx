@@ -30,9 +30,13 @@ import { FavoriteButton } from "@/components/favorite-button";
 
 interface CompareVehiclesClientProps {
   initialSlugs?: string[];
+  /** Live catalog (DB + canonical merge) passed from the server page; falls back to bundled data. */
+  vehicles?: CanonicalVehicle[];
 }
 
-export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientProps) {
+export function CompareVehiclesClient({ initialSlugs, vehicles }: CompareVehiclesClientProps) {
+  const vehicleList = vehicles && vehicles.length > 0 ? vehicles : canonicalVehicles;
+
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>(() => {
     if (initialSlugs && initialSlugs.length >= 2) return initialSlugs.slice(0, 4);
     return ["grotti-visione", "pfister-comet-s2"];
@@ -47,12 +51,13 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
       const params = new URLSearchParams(window.location.search);
       const vParam = params.get("v");
       if (vParam) {
-        const slugs = vParam.split(",").filter((s) => canonicalVehicles.some((v) => v.slug === s || v.id === s));
+        const slugs = vParam.split(",").filter((s) => vehicleList.some((v) => v.slug === s || v.id === s));
         if (slugs.length >= 2) {
           setSelectedSlugs(slugs.slice(0, 4));
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Sync selected to URL
@@ -68,9 +73,9 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
 
   const selectedVehicles: CanonicalVehicle[] = useMemo(() => {
     return selectedSlugs
-      .map((slug) => canonicalVehicles.find((v) => v.slug === slug || v.id === slug))
+      .map((slug) => vehicleList.find((v) => v.slug === slug || v.id === slug))
       .filter((v): v is CanonicalVehicle => v !== undefined);
-  }, [selectedSlugs]);
+  }, [selectedSlugs, vehicleList]);
 
   const handleRemoveVehicle = (index: number) => {
     if (selectedSlugs.length <= 2) return; // Keep minimum 2
@@ -95,7 +100,7 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
 
   const handleAddSlot = () => {
     if (selectedSlugs.length >= 4) return;
-    const unselected = canonicalVehicles.find((v) => !selectedSlugs.includes(v.slug));
+    const unselected = vehicleList.find((v) => !selectedSlugs.includes(v.slug));
     if (unselected) {
       const next = [...selectedSlugs, unselected.slug];
       setSelectedSlugs(next);
@@ -410,7 +415,7 @@ export function CompareVehiclesClient({ initialSlugs }: CompareVehiclesClientPro
             </div>
 
             <div className="overflow-y-auto mt-4 space-y-2 pr-1">
-              {canonicalVehicles.map((cand) => {
+              {vehicleList.map((cand) => {
                 const isCurrent = selectedSlugs.includes(cand.slug);
                 return (
                   <button
