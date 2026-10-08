@@ -68,7 +68,7 @@ export function CompanionVehiclesSection({
                 <div className="absolute top-2 left-2 rounded-lg bg-black/70 backdrop-blur-md px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-amber-400 border border-white/10">
                   {veh.class}
                 </div>
-                <div className="absolute bottom-2 right-2 rounded-md bg-amber-500/90 px-2 py-0.5 font-mono text-[10px] font-black text-slate-950 shadow-sm">
+                <div className="absolute bottom-2 right-2 rounded-md bg-amber-500/90 px-2 py-0.5 font-mono text-[11px] font-black text-slate-950 shadow-sm">
                   {veh.priceDisplay}
                 </div>
               </div>
@@ -83,7 +83,7 @@ export function CompanionVehiclesSection({
             </div>
 
             {/* Performance Stats bar */}
-            <div className="mt-3 grid grid-cols-2 gap-2 pt-2.5 border-t border-white/5 dark:border-white/5 border-slate-200/80 text-[10px]">
+            <div className="mt-3 grid grid-cols-2 gap-2 pt-2.5 border-t border-white/5 dark:border-white/5 border-slate-200/80 text-[11px]">
               <div className="flex items-center gap-1.5 text-slate-300 dark:text-slate-300 text-slate-700">
                 <Gauge className="h-3 w-3 text-amber-400" />
                 <span className="font-mono font-bold">{veh.topSpeed}</span>

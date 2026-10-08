@@ -113,7 +113,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
       {/* LEFT SIDEBAR */}
       <aside className="space-y-6">
         <div className="card-surface p-4">
-          <h2 className="px-2 font-display text-sm font-extrabold uppercase tracking-wider">Guide Categories</h2>
+          <h2 className="px-2 font-display text-xl font-extrabold uppercase tracking-wider text-foreground">Guide Categories</h2>
           <nav className="mt-4 space-y-1">
             {liveCategories.map((c) => (
               <button
@@ -142,7 +142,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
           <div className="pointer-events-none absolute left-1/3 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
           <div className="relative p-6">
-            <h1 className="font-display text-3xl font-extrabold uppercase tracking-wide">Guides Hub</h1>
+            <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">Guides Hub</h1>
             <p className="mt-1 text-sm text-muted-foreground">Your ultimate library for mastering Vice City and beyond.</p>
             <div className="relative mt-5 max-w-md">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -154,7 +154,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
         {/* Featured */}
         <div className="card-surface p-6">
           <div className="flex items-center justify-between">
-            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider">Featured Guides</h2>
+            <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">Featured Guides</h2>
             <a href="/guides" className="flex items-center gap-1 text-xs font-semibold text-accent">
               View All <ChevronRight className="h-3 w-3" />
             </a>
@@ -187,7 +187,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
         {/* Popular list */}
         <div className="card-surface p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider">Popular Guides</h2>
+            <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">Popular Guides</h2>
             <div className="flex gap-2">
               {["Trending", "Most Viewed", "Recently Added"].map((t) => (
                 <button

@@ -96,7 +96,7 @@ export function PricingClient() {
         </button>
         <span className={cn("text-xs font-semibold flex items-center gap-1.5", annualBilling ? "text-foreground" : "text-muted-foreground")}>
           Annual Billing
-          <span className="rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold px-2 py-0.5 border border-emerald-500/30">
+          <span className="rounded-full bg-emerald-500/20 text-emerald-400 text-[11px] font-mono font-bold px-2 py-0.5 border border-emerald-500/30">
             Save 33%
           </span>
         </span>
@@ -112,7 +112,7 @@ export function PricingClient() {
                 Standard Access
               </span>
               <h3 className="font-display text-2xl font-black text-foreground">Free Explorer</h3>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
                 Essential utilities for casual explorers tracking their story journey.
               </p>
             </div>
@@ -122,7 +122,7 @@ export function PricingClient() {
               <span className="text-xs text-muted-foreground font-sans">/ forever free</span>
             </div>
 
-            <ul className="space-y-3 text-xs text-muted-foreground pt-4 border-t border-border">
+            <ul className="space-y-3 text-sm text-muted-foreground pt-4 border-t border-border">
               {FREE_FEATURES.map((feat) => (
                 <li key={feat} className="flex items-start gap-2.5">
                   <Check className="h-4 w-4 text-muted-foreground flex-shrink-0 mt-0.5" />
@@ -136,7 +136,7 @@ export function PricingClient() {
             <button
               disabled={!isPro}
               onClick={handleTogglePro}
-              className="btn-ghost w-full py-3 text-xs font-bold uppercase tracking-wider border border-border text-muted-foreground hover:text-foreground disabled:opacity-60"
+              className="btn-ghost w-full py-3 text-sm font-bold uppercase tracking-wider border border-border text-muted-foreground hover:text-foreground disabled:opacity-60"
             >
               {!isPro ? "Current Active Plan" : "Downgrade to Free"}
             </button>
@@ -145,7 +145,7 @@ export function PricingClient() {
 
         {/* Tier 2: Vice City Pro */}
         <div className="dark-panel card-carbon p-8 flex flex-col justify-between border-primary/50 relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-primary/10 shadow-[0_0_30px_rgba(244,63,94,0.15)]">
-          <div className="absolute top-0 right-0 bg-gradient-to-l from-primary to-accent text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-bl-xl shadow-md">
+          <div className="absolute top-0 right-0 bg-gradient-to-l from-primary to-accent text-primary-foreground text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-bl-xl shadow-md">
             Launching Soon
           </div>
 

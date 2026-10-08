@@ -480,7 +480,7 @@ export function ArticleEditor({
                     className="w-full pl-8 pr-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
                   />
                 </div>
-                <p className="text-[10px] text-[#64748B] mt-1">
+                <p className="text-[11px] text-[#64748B] mt-1">
                   Set with status “Scheduled” to time a release.
                 </p>
               </div>
@@ -493,9 +493,9 @@ export function ArticleEditor({
             <div className="space-y-1">
               <p className="text-[11px] font-medium text-[#64748B]">Search result preview</p>
               <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-1">
-                <p className="text-[10px] text-[#94A3B8]">GTA 6 Atlas</p>
+                <p className="text-[11px] text-[#94A3B8]">GTA 6 Atlas</p>
                 <p className="text-xs font-semibold text-[#818CF8]">{metaTitle}</p>
-                <p className="text-[10px] text-emerald-400 font-mono truncate">
+                <p className="text-[11px] text-emerald-400 font-mono truncate">
                   gta6atlas.com/news/{slug || "your-slug"}
                 </p>
                 <p className="text-[11px] text-[#94A3B8] line-clamp-2 leading-tight">{metaDescription}</p>
@@ -507,7 +507,7 @@ export function ArticleEditor({
                 <label htmlFor="meta-title-input" className="block text-[11px] font-medium text-[#94A3B8]">
                   SEO title
                 </label>
-                <span className="text-[10px] font-mono text-[#64748B]">{metaTitle.length} / 60</span>
+                <span className="text-[11px] font-mono text-[#64748B]">{metaTitle.length} / 60</span>
               </div>
               <input
                 id="meta-title-input"
@@ -524,7 +524,7 @@ export function ArticleEditor({
                 <label htmlFor="meta-desc-input" className="block text-[11px] font-medium text-[#94A3B8]">
                   Meta description
                 </label>
-                <span className="text-[10px] font-mono text-[#64748B]">
+                <span className="text-[11px] font-mono text-[#64748B]">
                   {(article.seoDescription || "").length} / 160
                 </span>
               </div>

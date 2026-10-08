@@ -37,11 +37,11 @@ export default async function BlogPage() {
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
           <div className="pointer-events-none absolute right-1/3 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
           <div className="relative px-6 py-12 sm:px-10">
-            <p className="section-eyebrow text-accent">Our Blog</p>
-            <h1 className="mt-3 font-display text-4xl font-extrabold leading-tight">
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[11px] font-black uppercase tracking-widest text-accent mb-3">Our Blog</div>
+            <h1 className="mt-3 font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
               News, Stories & <span className="text-primary">Updates</span>
             </h1>
-            <p className="mt-4 max-w-md text-sm text-muted-foreground">
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
               Stay up to date with the latest GTA 6 news, in-depth articles, exclusive insights and behind-the-scenes stories from Leonida.
             </p>
           </div>

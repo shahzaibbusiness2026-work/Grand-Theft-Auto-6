@@ -342,7 +342,7 @@ export default function AdminSettingsPage() {
                   placeholder="2026-11-19T00:00:00Z"
                   className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs font-mono text-white focus:outline-none focus:border-[#6366F1]"
                 />
-                <p className="text-[10px] text-[#64748B] mt-1">
+                <p className="text-[11px] text-[#64748B] mt-1">
                   Example: 2026-11-19T00:00:00Z or 2026-09-17
                 </p>
               </div>
@@ -512,7 +512,7 @@ export default function AdminSettingsPage() {
                           handleUpdate({ navigationMenu: updated });
                         }}
                         className={cn(
-                          "px-2 py-0.5 rounded text-[10px] font-semibold border",
+                          "px-2 py-0.5 rounded text-[11px] font-semibold border",
                           item.visible
                             ? "bg-[#064E3B]/40 text-[#34D399] border-[#065F46]"
                             : "bg-[#1E293B] text-[#64748B] border-[#334155]"
@@ -607,7 +607,7 @@ export default function AdminSettingsPage() {
               >
                 <div className="flex items-center justify-between">
                   <h3 className="text-xs font-bold text-white">{tool.name}</h3>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                     Live
                   </span>
                 </div>
@@ -639,7 +639,7 @@ export default function AdminSettingsPage() {
               placeholder="GTA 6 Atlas"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
             />
-            <p className="text-[10px] text-[#64748B] mt-1">Used in the browser tab, metadata and sitemap.</p>
+            <p className="text-[11px] text-[#64748B] mt-1">Used in the browser tab, metadata and sitemap.</p>
           </div>
 
           <div>

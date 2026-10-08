@@ -240,11 +240,11 @@ export function MoneyMakerClient() {
                   )}
                 >
                   <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border">
+                    <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border">
                       {m.category}
                     </span>
                     <span
-                      className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${riskBadge(
+                      className={`text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${riskBadge(
                         m.riskTolerance
                       )}`}
                     >
@@ -305,7 +305,7 @@ export function MoneyMakerClient() {
             {/* Quick Metrics */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-center">
               <div className="p-3 rounded-xl bg-background border border-border">
-                <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
+                <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">
                   Min Capital
                 </span>
                 <span className="text-xs font-bold text-amber-400 truncate block">
@@ -313,7 +313,7 @@ export function MoneyMakerClient() {
                 </span>
               </div>
               <div className="p-3 rounded-xl bg-background border border-border">
-                <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
+                <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">
                   Time Payout
                 </span>
                 <span className="text-xs font-bold text-foreground truncate block">
@@ -321,7 +321,7 @@ export function MoneyMakerClient() {
                 </span>
               </div>
               <div className="p-3 rounded-xl bg-background border border-border">
-                <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
+                <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">
                   Difficulty
                 </span>
                 <span className="text-xs font-bold text-foreground truncate block">
@@ -329,7 +329,7 @@ export function MoneyMakerClient() {
                 </span>
               </div>
               <div className="p-3 rounded-xl bg-background border border-border">
-                <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
+                <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">
                   Player Mode
                 </span>
                 <span className="text-xs font-bold text-accent truncate block">

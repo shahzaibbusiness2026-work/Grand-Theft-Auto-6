@@ -407,6 +407,7 @@ export function SatelliteInteractiveMap({
   const pendingDeepLinkRef = useRef<{ id: string; top?: string | null; left?: string | null } | null>(
     null
   );
+  const deepLinkTimeoutsRef = useRef<number[]>([]);
 
   useEffect(() => {
     async function loadLiveMapMarkers() {
@@ -414,17 +415,20 @@ export function SatelliteInteractiveMap({
         const markers = await getMapMarkers();
         if (markers && markers.length > 0) {
           const livePois = markers.map(adminMarkerToPoi);
-          setAllPOIs(livePois);
-          setSelectedPOI((prev) => (prev ? livePois.find(p => p.id === prev.id) || livePois[0] : livePois[0]));
+          // Merge: keep bundled POIs, overlay live/CMS markers (live wins on id conflicts)
+          const liveIds = new Set(livePois.map((m) => m.id));
+          const mergedPois = [...POIS.filter((poi) => !liveIds.has(poi.id)), ...livePois];
+          setAllPOIs(mergedPois);
+          setSelectedPOI((prev) => (prev ? mergedPois.find(p => p.id === prev.id) || mergedPois[0] : mergedPois[0]));
 
           const pending = pendingDeepLinkRef.current;
           if (pending) {
             pendingDeepLinkRef.current = null;
-            const matched = livePois.find(
+            const matched = mergedPois.find(
               (p) => p.id === pending.id || p.id === pending.id.replace(/^poi-/, "")
             );
             if (matched) {
-              setTimeout(() => focusOnPOI(matched), 250);
+              deepLinkTimeoutsRef.current.push(window.setTimeout(() => focusOnPOI(matched), 250));
             } else if (pending.top && pending.left) {
               setTimeout(() => panToCanvasPoint(pending.top!, pending.left!), 250);
             }
@@ -441,6 +445,16 @@ export function SatelliteInteractiveMap({
   const [favoriteLocations, setFavoriteLocations] = useState<string[]>([]);
   const [copiedShare, setCopiedShare] = useState(false);
   const [clusterMode, setClusterMode] = useState(false);
+
+  // Live category counts derived from the actual marker set (bundled + CMS).
+  const filterCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: allPOIs.length };
+    for (const poi of allPOIs) {
+      const key = (poi.category || "").toLowerCase().replace(/_/g, "-");
+      counts[key] = (counts[key] ?? 0) + 1;
+    }
+    return counts;
+  }, [allPOIs]);
 
   const [zoom, setZoom] = useState<number>(1.0);
   const [pan, setPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -571,13 +585,23 @@ export function SatelliteInteractiveMap({
           pendingDeepLinkRef.current = { id: targetPoiId, top: targetTop, left: targetLeft };
         }
       } else if (targetTop && targetLeft) {
-        setTimeout(() => panToCanvasPoint(targetTop, targetLeft), 250);
+        deepLinkTimeoutsRef.current.push(window.setTimeout(() => panToCanvasPoint(targetTop, targetLeft), 250));
       }
     }
     // One-time deep-link resolution: focusOnPOI's identity changes with zoom,
     // so re-running this effect would yank the user back on every zoom.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [centerMap]);
+
+  // Clear pending deep-link timeouts on unmount so a late fire cannot
+  // yank the viewport after navigation.
+  useEffect(() => {
+    const timeouts = deepLinkTimeoutsRef.current;
+    return () => {
+      timeouts.forEach((t) => window.clearTimeout(t));
+      timeouts.length = 0;
+    };
+  }, []);
 
   // Jump to district
   const jumpToDistrict = (districtId: string) => {
@@ -772,7 +796,7 @@ export function SatelliteInteractiveMap({
                 LIVE GPS
               </span>
             </div>
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-[11px] text-muted-foreground">
               HD 4K Topographic Reconnaissance • {visiblePOIs.length} Active Targets Displayed
             </p>
           </div>
@@ -854,12 +878,12 @@ export function SatelliteInteractiveMap({
                 <h3 className="font-display text-xs font-black uppercase tracking-wider text-white">
                   Map Categories
                 </h3>
-                <p className="text-[10px] text-muted-foreground">Toggle pins and POIs</p>
+                <p className="text-[11px] text-muted-foreground">Toggle pins and POIs</p>
               </div>
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => toggleFilter("all")}
-                  className="text-[10px] font-bold text-amber-400 hover:underline"
+                  className="text-[11px] font-bold text-amber-400 hover:underline"
                 >
                   {checkedFilters.all ? "Invert" : "Select All"}
                 </button>
@@ -913,7 +937,7 @@ export function SatelliteInteractiveMap({
                       <span className="truncate">{f.label}</span>
                     </span>
                     <span className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono text-muted-foreground">{f.count}</span>
+                      <span className="text-[11px] font-mono text-muted-foreground">{filterCounts[f.id] ?? 0}</span>
                       <span
                         className={cn(
                           "flex h-4 w-4 items-center justify-center rounded transition-all",
@@ -962,7 +986,7 @@ export function SatelliteInteractiveMap({
                   <h3 className="font-display text-sm font-black uppercase text-white truncate max-w-[180px]">
                     {selectedPOI.title}
                   </h3>
-                  <p className="text-[10px] text-muted-foreground font-semibold">{selectedPOI.district}</p>
+                  <p className="text-[11px] text-muted-foreground font-semibold">{selectedPOI.district}</p>
                 </div>
               </div>
               <button
@@ -1096,8 +1120,8 @@ export function SatelliteInteractiveMap({
             <button
               onClick={() => setClusterMode((prev) => !prev)}
               className={cn(
-                "flex items-center gap-1 px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-colors",
-                clusterMode ? "bg-accent text-white" : "bg-muted/50 text-muted-foreground hover:text-white"
+                "flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-colors",
+                clusterMode ? "bg-accent text-accent-foreground" : "bg-muted/50 text-muted-foreground hover:text-foreground"
               )}
             >
               <Layers2 className="h-3 w-3" />
@@ -1190,7 +1214,7 @@ export function SatelliteInteractiveMap({
                   </span>
 
                   {/* Tooltip on Hover */}
-                  <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-black/90 px-2.5 py-1 text-[10px] font-bold text-white opacity-0 shadow-2xl backdrop-blur-md border border-border group-hover:opacity-100 transition-opacity z-30">
+                  <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-black/90 px-2.5 py-1 text-[11px] font-bold text-white opacity-0 shadow-2xl backdrop-blur-md border border-border group-hover:opacity-100 transition-opacity z-30">
                     <span className="text-amber-400 block font-black">{m.title}</span>
                     <span className="text-muted-foreground font-medium text-[9px]">{m.district}</span>
                   </span>
@@ -1251,10 +1275,10 @@ export function SatelliteInteractiveMap({
         {/* ==================== 6. BOTTOM LEFT COMPASS & HINT ==================== */}
         <div className="absolute left-4 bottom-4 z-20 flex items-center gap-2">
           <div className="flex items-center gap-2 rounded-xl border border-border bg-black/80 px-3 py-1.5 backdrop-blur-xl shadow-2xl">
-            <span className="font-display text-[10px] font-black text-amber-400 tracking-wider">
+            <span className="font-display text-[11px] font-black text-amber-400 tracking-wider">
               N ▲
             </span>
-            <span className="text-[10px] text-muted-foreground font-medium">
+            <span className="text-[11px] text-muted-foreground font-medium">
               Click & Drag to Pan • Scroll to Zoom
             </span>
           </div>
@@ -1313,7 +1337,7 @@ export function SatelliteInteractiveMap({
                     <p className="flex items-center gap-1.5 truncate text-xs font-bold text-white group-hover:text-amber-400 transition-colors">
                       <MapPin className={cn("h-3.5 w-3.5 shrink-0", r.color)} /> {r.title}
                     </p>
-                    <p className="mt-1 flex items-center justify-between text-[10px] text-muted-foreground">
+                    <p className="mt-1 flex items-center justify-between text-[11px] text-muted-foreground">
                       <span>{r.type}</span>
                       <span className="font-mono text-[9px]">{r.when}</span>
                     </p>

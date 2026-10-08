@@ -300,7 +300,7 @@ export default function AdminTasksPage() {
                   >
                     {task.title}
                   </p>
-                  <div className="flex items-center gap-2 text-[10px] text-[var(--admin-text-muted)] font-medium">
+                  <div className="flex items-center gap-2 text-[11px] text-[var(--admin-text-muted)] font-medium">
                     <span>Assignee: {task.assignee}</span>
                     <span>•</span>
                     <span>Due: {task.dueDate}</span>

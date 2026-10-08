@@ -148,7 +148,7 @@ export function InteractiveCompare({
                           <img src={cand.img} alt="" style={cand.filter ? { filter: cand.filter } : undefined} className="h-8 w-10 rounded object-cover" />
                           <div className="min-w-0">
                             <p className="truncate font-semibold">{cand.name}</p>
-                            <p className="truncate text-[10px] text-muted-foreground">{cand.klass}</p>
+                            <p className="truncate text-[11px] text-muted-foreground">{cand.klass}</p>
                           </div>
                         </button>
                       ))}
@@ -285,7 +285,7 @@ export function InteractiveCompare({
                     className="h-full w-full object-cover"
                   />
                   {isSelected && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-[10px] font-bold text-white gap-1">
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-[11px] font-bold text-white gap-1">
                       <Check className="h-3 w-3 text-neon-green" /> In Duel
                     </div>
                   )}
@@ -293,7 +293,7 @@ export function InteractiveCompare({
                 <h5 className="mt-2 font-display text-xs font-bold leading-tight truncate text-foreground">
                   {entity.name}
                 </h5>
-                <p className="mt-0.5 text-[10px] text-muted-foreground truncate">{entity.klass}</p>
+                <p className="mt-0.5 text-[11px] text-muted-foreground truncate">{entity.klass}</p>
               </button>
             );
           })}

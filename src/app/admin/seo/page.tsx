@@ -191,7 +191,7 @@ export default function AdminSeoPage() {
                 </label>
                 <span
                   className={cn(
-                    "text-[10px] font-mono",
+                    "text-[11px] font-mono",
                     descLength > 160 ? "text-rose-400 font-bold" : "text-[#64748B]"
                   )}
                 >
@@ -339,7 +339,7 @@ export default function AdminSeoPage() {
                           handleUpdate({ redirects: updated });
                         }}
                         className={cn(
-                          "px-2 py-0.5 rounded text-[10px] font-semibold border",
+                          "px-2 py-0.5 rounded text-[11px] font-semibold border",
                           red.enabled
                             ? "bg-[#064E3B]/40 text-[#34D399] border-[#065F46]"
                             : "bg-[#1E293B] text-[#64748B] border-[#334155]"

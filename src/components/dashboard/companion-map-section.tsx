@@ -63,10 +63,10 @@ export function CompanionMapSection({
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="rounded-lg bg-cyan-500/10 px-2 py-0.5 font-mono text-[10px] font-bold text-cyan-400 dark:text-cyan-400 text-cyan-600 border border-cyan-500/20">
+                <span className="rounded-lg bg-cyan-500/10 px-2 py-0.5 font-mono text-[11px] font-bold text-cyan-400 dark:text-cyan-400 text-cyan-600 border border-cyan-500/20">
                   {loc.type || "Territory"}
                 </span>
-                <span className="flex items-center gap-1 text-[10px] font-semibold text-emerald-400 dark:text-emerald-400 text-emerald-600">
+                <span className="flex items-center gap-1 text-[11px] font-semibold text-emerald-400 dark:text-emerald-400 text-emerald-600">
                   <ShieldCheck className="h-3 w-3" />
                   {loc.verification === "verified" ? "Verified" : "Reported"}
                 </span>
@@ -80,7 +80,7 @@ export function CompanionMapSection({
               </p>
             </div>
 
-            <div className="mt-3 pt-2.5 border-t border-white/5 dark:border-white/5 border-slate-200/80 flex items-center justify-between text-[10px]">
+            <div className="mt-3 pt-2.5 border-t border-white/5 dark:border-white/5 border-slate-200/80 flex items-center justify-between text-[11px]">
               <span className="font-mono text-slate-400 dark:text-slate-400 text-slate-500 truncate max-w-[140px]">
                 {loc.coordinates || "Vice City GPS"}
               </span>

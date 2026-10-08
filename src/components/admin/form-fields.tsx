@@ -44,7 +44,7 @@ export function TextField({
         placeholder={placeholder}
         className={inputCls}
       />
-      {hint && <p className="mt-0.5 text-[10px] text-[#64748B]">{hint}</p>}
+      {hint && <p className="mt-0.5 text-[11px] text-[#64748B]">{hint}</p>}
     </div>
   );
 }
@@ -75,7 +75,7 @@ export function NumberField({
         placeholder={placeholder}
         className={inputCls}
       />
-      {hint && <p className="mt-0.5 text-[10px] text-[#64748B]">{hint}</p>}
+      {hint && <p className="mt-0.5 text-[11px] text-[#64748B]">{hint}</p>}
     </div>
   );
 }
@@ -124,7 +124,7 @@ export function ListField({
         placeholder={"One per line, e.g.\nMissiles\nBulletproof Windows"}
         className={inputCls + " resize-y"}
       />
-      {hint && <p className="mt-0.5 text-[10px] text-[#64748B]">{hint}</p>}
+      {hint && <p className="mt-0.5 text-[11px] text-[#64748B]">{hint}</p>}
     </div>
   );
 }

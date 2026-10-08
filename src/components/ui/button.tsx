@@ -9,15 +9,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600 text-white font-bold shadow-neon-cyan hover:from-sky-600 hover:via-cyan-600 hover:to-blue-700 hover:shadow-lg active:scale-[0.99]",
+          "bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600 text-slate-950 font-bold shadow-neon-cyan hover:from-sky-600 hover:via-cyan-600 hover:to-blue-700 hover:shadow-lg active:scale-[0.99]",
         solid: "bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-slate-950 font-black shadow-neon-amber hover:brightness-105 hover:shadow-lg",
         outline:
-          "border border-amber-500/50 bg-transparent text-amber-500 dark:text-amber-400 hover:bg-amber-500/10",
+          "border border-amber-500/50 bg-transparent text-amber-600 dark:text-amber-400 hover:bg-amber-500/10",
         "outline-pink":
-          "border border-amber-500/50 bg-transparent text-amber-500 dark:text-amber-400 hover:bg-amber-500/10",
+          "border border-amber-500/50 bg-transparent text-amber-600 dark:text-amber-400 hover:bg-amber-500/10",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/70",
         ghost: "text-foreground hover:bg-muted",
-        link: "text-amber-500 dark:text-amber-400 underline-offset-4 hover:underline",
+        link: "text-amber-600 dark:text-amber-400 underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-5",

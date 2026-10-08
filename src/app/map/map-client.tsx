@@ -94,7 +94,7 @@ export function MapClient() {
               <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-amber-500 dark:text-amber-400 mb-3">
                 <Radio className="h-3 w-3 animate-pulse" /> Official Interactive Radar
               </div>
-              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
                 LEONIDA STATE <span className="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 bg-clip-text text-transparent">SATELLITE ATLAS</span>
               </h1>
               <p className="mt-3 text-sm leading-relaxed text-slate-300 font-medium">
@@ -105,15 +105,15 @@ export function MapClient() {
             {/* Quick Stat Chips */}
             <div className="flex flex-wrap items-center gap-3">
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Total POIs</span>
-                <span className="font-display text-lg font-black text-white">312 Verified</span>
+                <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-400">Total POIs</span>
+                <span className="font-display text-lg font-black text-white">Verified</span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Resolution</span>
+                <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-400">Resolution</span>
                 <span className="font-display text-lg font-black text-[#00F0FF]">Ultra-HD 4K</span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Districts</span>
+                <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-400">Districts</span>
                 <span className="font-display text-lg font-black text-amber-400">6 Regions</span>
               </div>
             </div>
@@ -198,7 +198,7 @@ export function MapClient() {
                   {d.tags.map((t) => (
                     <span
                       key={t}
-                      className="rounded-lg bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] font-semibold text-slate-400"
+                      className="rounded-lg bg-white/5 border border-white/10 px-2 py-0.5 text-[11px] font-semibold text-slate-400"
                     >
                       {t}
                     </span>

@@ -63,10 +63,10 @@ export function CompanionWeaponsSection({
               <div>
                 {/* Category & Rarity tags */}
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="rounded-lg bg-rose-500/10 px-2 py-0.5 font-mono text-[10px] font-bold text-rose-400 dark:text-rose-400 text-rose-600 border border-rose-500/20">
+                  <span className="rounded-lg bg-rose-500/10 px-2 py-0.5 font-mono text-[11px] font-bold text-rose-400 dark:text-rose-400 text-rose-600 border border-rose-500/20">
                     {wep.category}
                   </span>
-                  <span className="font-mono text-[10px] font-black text-amber-400">
+                  <span className="font-mono text-[11px] font-black text-amber-400">
                     {wep.priceDisplay || "$10,000"}
                   </span>
                 </div>
@@ -81,7 +81,7 @@ export function CompanionWeaponsSection({
 
                 {/* Damage meter */}
                 <div className="mt-3 space-y-1">
-                  <div className="flex items-center justify-between text-[10px] font-semibold text-slate-400">
+                  <div className="flex items-center justify-between text-[11px] font-semibold text-slate-400">
                     <span>Firepower</span>
                     <span className="font-mono text-rose-400 font-bold">{wep.damage}</span>
                   </div>
@@ -95,7 +95,7 @@ export function CompanionWeaponsSection({
               </div>
 
               {/* Attachments Footer */}
-              <div className="mt-3.5 pt-2.5 border-t border-white/5 dark:border-white/5 border-slate-200/80 flex items-center justify-between text-[10px]">
+              <div className="mt-3.5 pt-2.5 border-t border-white/5 dark:border-white/5 border-slate-200/80 flex items-center justify-between text-[11px]">
                 <span className="flex items-center gap-1 text-slate-400 dark:text-slate-400 text-slate-500">
                   <Wrench className="h-3 w-3 text-cyan-400" />
                   {wep.attachments && wep.attachments.length > 0

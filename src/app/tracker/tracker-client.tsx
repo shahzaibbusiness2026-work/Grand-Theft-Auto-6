@@ -95,8 +95,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "$4,800 + High Rep",
     confidence: "OFFICIAL",
     source: "Trailer 1 Shot 32",
-    mapPoiId: "poi-ocean-drive",
-  },
+      },
   {
     id: "m-3",
     category: "Story Missions",
@@ -106,7 +105,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "$450,000 heist cut",
     confidence: "CONFIRMED",
     source: "September 2022 Leaks — 'Bank Heist Script'",
-    mapPoiId: "poi-keys",
+    mapPoiId: "poi-keys-docks",
   },
   {
     id: "m-4",
@@ -117,7 +116,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "$22,000 + Harbor Access",
     confidence: "CONFIRMED",
     source: "September 2022 Leaks — Port Gellhorn Docks",
-    mapPoiId: "poi-gellhorn",
+    mapPoiId: "poi-port-gellhorn",
   },
   {
     id: "m-5",
@@ -128,8 +127,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "$120,000 + Luxury Supercar",
     confidence: "CONFIRMED",
     source: "September 2022 Leaks & Trailer 1",
-    mapPoiId: "poi-starfish",
-  },
+      },
 
   // 2. Strangers & Freaks
   {
@@ -141,8 +139,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "$7,500 + Custom Hunting Rifle skin",
     confidence: "CONFIRMED",
     source: "September 2022 Leaks — Wildlife Event",
-    mapPoiId: "poi-grassrivers",
-  },
+      },
   {
     id: "sf-2",
     category: "Strangers & Freaks",
@@ -162,7 +159,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "$14,000 + Dock Cut %",
     confidence: "CONFIRMED",
     source: "September 2022 Leaks — Harbor Script",
-    mapPoiId: "poi-gellhorn",
+    mapPoiId: "poi-port-gellhorn",
   },
 
   // 3. Collectibles
@@ -175,8 +172,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "$250,000 total + Scuba Wet-Suit",
     confidence: "CONFIRMED",
     source: "Canonical Collectible Tracker",
-    mapPoiId: "poi-ocean-drive",
-  },
+      },
   {
     id: "col-2",
     category: "Collectibles",
@@ -186,8 +182,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "Safari Camo Outfit + Wildlife Trophy",
     confidence: "OFFICIAL",
     source: "Trailer 1 Fauna Footage",
-    mapPoiId: "poi-grassrivers",
-  },
+      },
   {
     id: "col-3",
     category: "Collectibles",
@@ -219,8 +214,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "Custom Grotti Furia Upgrade Kit",
     confidence: "OFFICIAL",
     source: "Trailer 1 Night Strip Footage",
-    mapPoiId: "poi-ocean-drive",
-  },
+      },
   {
     id: "hp-2",
     category: "Hobbies & Pastimes",
@@ -241,7 +235,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "Angler Yacht Trophy + Fishing Apparel",
     confidence: "CONFIRMED",
     source: "September 2022 Leaks — Fishing Minigame",
-    mapPoiId: "poi-keys",
+    mapPoiId: "poi-keys-docks",
   },
   {
     id: "hp-4",
@@ -252,8 +246,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "Special Fanboat Vehicle Unlock",
     confidence: "OFFICIAL",
     source: "Trailer 1 Airboat Scene",
-    mapPoiId: "poi-grassrivers",
-  },
+      },
 
   // 5. Random Events
   {
@@ -330,8 +323,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "$18,500 / day passive profit",
     confidence: "CONFIRMED",
     source: "Canonical Property Database",
-    mapPoiId: "poi-ocean-drive",
-  },
+      },
   {
     id: "pb-2",
     category: "Properties & Businesses",
@@ -341,7 +333,7 @@ export const MILESTONES: TrackerMilestone[] = [
     reward: "$12,000 / day passive profit",
     confidence: "CONFIRMED",
     source: "Canonical Property Database",
-    mapPoiId: "poi-keys",
+    mapPoiId: "poi-keys-docks",
   },
   {
     id: "pb-3",
@@ -670,13 +662,13 @@ export function TrackerClient({ config }: TrackerClientProps) {
             <Donut value={overallPercent} size={130} strokeWidth={12} color="var(--primary)" />
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
               <span className="font-display text-3xl font-black text-foreground">{overallPercent}%</span>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Total</span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Total</span>
             </div>
           </div>
           <div className="flex-1 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
               <Trophy className="h-5 w-5 text-amber-500 dark:text-amber-400" />
-              <h2 className="font-display text-lg font-bold text-foreground uppercase tracking-wide">
+              <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">
                 100% Leonida Completion
               </h2>
             </div>
@@ -698,7 +690,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
               <span className="text-xs font-bold uppercase tracking-widest text-primary flex items-center gap-2">
                 <SlidersHorizontal className="h-4 w-4" /> Data Sync & Backup
               </span>
-              <span className="text-[10px] font-mono text-muted-foreground">Local Auto-Save</span>
+              <span className="text-[11px] font-mono text-muted-foreground">Local Auto-Save</span>
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Your tracker is securely persisted in your browser. Export anytime to back up or transfer between devices.
@@ -733,7 +725,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
             <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-accent mb-2">
               <MapPin className="h-3.5 w-3.5" /> Live Map Sync
             </div>
-            <h3 className="font-display text-base font-bold text-foreground mb-2">
+            <h3 className="font-display text-base font-black text-foreground mb-2">
               Locate Milestones on Map
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
@@ -775,7 +767,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                   <span className="font-mono font-black text-accent">{stat.percent}%</span>
                 </div>
                 <Progress value={stat.percent} className="h-1.5 bg-muted" />
-                <div className="flex justify-between items-center text-[10px] text-muted-foreground mt-1.5 font-mono">
+                <div className="flex justify-between items-center text-[11px] text-muted-foreground mt-1.5 font-mono">
                   <span>
                     {stat.completed} / {stat.total}
                     {categoryWeights[cat] != null && (
@@ -893,10 +885,10 @@ export function TrackerClient({ config }: TrackerClientProps) {
                   {/* Main Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border">
+                      <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border">
                         {item.category}
                       </span>
-                      <span className="text-[10px] font-medium text-muted-foreground flex items-center gap-1">
+                      <span className="text-[11px] font-medium text-muted-foreground flex items-center gap-1">
                         <MapPin className="h-3 w-3 text-accent" /> {item.district}
                       </span>
                       <ConfidenceBadge confidence={item.confidence} source={item.source} size="sm" />
@@ -946,7 +938,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                     {/* Personal Note Box */}
                     {userNote && !isEditing && (
                       <div className="mt-2.5 p-2.5 rounded-lg bg-muted/50 border border-border text-xs text-foreground font-mono">
-                        <span className="text-primary font-bold uppercase tracking-wider text-[10px] block mb-1">
+                        <span className="text-primary font-bold uppercase tracking-wider text-[11px] block mb-1">
                           Personal Field Note:
                         </span>
                         {userNote}
@@ -956,7 +948,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                     {/* Note Editor Drawer */}
                     {isEditing && (
                       <div className="mt-3 p-3 rounded-lg bg-card border border-primary/40 shadow-lg space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">
+                        <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block">
                           Add Field Note for: {item.title}
                         </label>
                         <textarea

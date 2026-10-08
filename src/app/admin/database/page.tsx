@@ -221,24 +221,24 @@ export default function AdminDatabasePage() {
                         {ast.name}
                       </h3>
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#94A3BD] ml-8 block mt-0.5">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#94A3BD] ml-8 block mt-0.5">
                       {ast.category}
                     </span>
                   </div>
 
                   {/* Verification Badge */}
                   {ast.status === "verified" && (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
                       <CheckCircle2 className="w-3 h-3" /> Verified
                     </span>
                   )}
                   {ast.status === "unconfirmed" && (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-950/60 border border-amber-800/40 text-amber-400">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-950/60 border border-amber-800/40 text-amber-400">
                       <HelpCircle className="w-3 h-3" /> Unconfirmed
                     </span>
                   )}
                   {ast.status === "deprecated" && (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-red-950/60 border border-red-800/40 text-red-400">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-red-950/60 border border-red-800/40 text-red-400">
                       <AlertOctagon className="w-3 h-3" /> Deprecated
                     </span>
                   )}
@@ -263,7 +263,7 @@ export default function AdminDatabasePage() {
                   {ast.status !== "verified" && (
                     <button
                       onClick={() => handleUpdateStatus(ast.id, "verified")}
-                      className="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-800/50 hover:bg-emerald-900/60 text-emerald-300 font-bold text-[10px] transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-800/50 hover:bg-emerald-900/60 text-emerald-300 font-bold text-[11px] transition-colors"
                     >
                       Confirm
                     </button>
@@ -271,7 +271,7 @@ export default function AdminDatabasePage() {
                   {ast.status !== "unconfirmed" && (
                     <button
                       onClick={() => handleUpdateStatus(ast.id, "unconfirmed")}
-                      className="px-2.5 py-1 rounded-lg bg-amber-950/60 border border-amber-800/50 hover:bg-amber-900/60 text-amber-300 font-bold text-[10px] transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-amber-950/60 border border-amber-800/50 hover:bg-amber-900/60 text-amber-300 font-bold text-[11px] transition-colors"
                     >
                       Flag Unconfirmed
                     </button>
@@ -279,7 +279,7 @@ export default function AdminDatabasePage() {
                   {ast.status !== "deprecated" && (
                     <button
                       onClick={() => handleUpdateStatus(ast.id, "deprecated")}
-                      className="px-2.5 py-1 rounded-lg bg-[#1C2740] border border-[#33415C] hover:bg-red-950/40 hover:border-red-800/40 text-[#94A3BD] hover:text-red-300 font-bold text-[10px] transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-[#1C2740] border border-[#33415C] hover:bg-red-950/40 hover:border-red-800/40 text-[#94A3BD] hover:text-red-300 font-bold text-[11px] transition-colors"
                     >
                       Deprecate
                     </button>

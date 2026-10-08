@@ -57,7 +57,7 @@ export const Badge: React.FC<BadgeProps> = ({
     },
     neutral: {
       container:
-        "bg-zinc-500/10 text-zinc-400 border-zinc-500/20",
+        "bg-zinc-500/10 text-zinc-500 dark:text-zinc-400 border-zinc-500/20",
       dot: "bg-zinc-400",
     },
     primary: {
@@ -68,7 +68,7 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   const sizeStyles: Record<BadgeSize, string> = {
-    sm: "h-5 px-2 text-[10px] gap-1",
+    sm: "h-5 px-2 text-[11px] gap-1",
     md: "h-6 px-2.5 text-xs gap-1.5",
     lg: "h-7 px-3 text-xs gap-2",
   };

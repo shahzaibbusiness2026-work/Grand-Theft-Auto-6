@@ -109,7 +109,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 inset-x-2 text-center">
-                  <span className="text-[10px] font-mono font-black uppercase tracking-wider text-pink-400 block">Lead Protagonist</span>
+                  <span className="text-[11px] font-mono font-black uppercase tracking-wider text-pink-400 block">Lead Protagonist</span>
                   <strong className="text-xs sm:text-sm font-black text-white block truncate drop-shadow">{luciaChar?.name || "Lucia Caminos"}</strong>
                 </div>
               </button>
@@ -131,7 +131,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 inset-x-2 text-center">
-                  <span className="text-[10px] font-mono font-black uppercase tracking-wider text-cyan-400 block">Co-Protagonist</span>
+                  <span className="text-[11px] font-mono font-black uppercase tracking-wider text-cyan-400 block">Co-Protagonist</span>
                   <strong className="text-xs sm:text-sm font-black text-white block truncate drop-shadow">{jasonChar?.name || "Jason Duval"}</strong>
                 </div>
               </button>
@@ -192,7 +192,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pink-500 text-foreground shadow-md shadow-pink-500/40">
                     <Star className="h-3 w-3 fill-current" />
                   </span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 border border-border text-white backdrop-blur-md">
+                  <span className="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-black/70 border border-border text-white backdrop-blur-md">
                     {c.role}
                   </span>
                 </div>
@@ -213,7 +213,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                     {c.name}
                   </h3>
                   {c.alias && (
-                    <span className="text-[10px] font-mono text-cyan-700 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded">
+                    <span className="text-[11px] font-mono text-cyan-700 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded">
                       {c.alias}
                     </span>
                   )}
@@ -239,7 +239,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
       <section id="all-characters" className="container-site pb-8">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="font-display text-xl font-black uppercase tracking-wide text-foreground">
+            <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">
               All Characters
             </h2>
             <p className="mt-1 text-xs font-mono text-pink-400">
@@ -317,7 +317,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
           </div>
           <div>
             <p className="section-eyebrow text-pink-400">Character Stories</p>
-            <h2 className="mt-3 font-display text-2xl font-extrabold leading-snug text-foreground">
+            <h2 className="mt-3 font-display text-2xl font-extrabold uppercase tracking-wider leading-snug text-foreground">
               Every Character Has <br /> A Story
             </h2>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed">

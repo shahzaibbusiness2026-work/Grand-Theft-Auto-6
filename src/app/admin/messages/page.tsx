@@ -171,7 +171,7 @@ export default function AdminMessagesPage() {
                   </a>
                   <span
                     className={cn(
-                      "px-2 py-0.5 rounded text-[10px] font-semibold border capitalize",
+                      "px-2 py-0.5 rounded text-[11px] font-semibold border capitalize",
                       STATUS_STYLES[m.status]
                     )}
                   >
@@ -184,7 +184,7 @@ export default function AdminMessagesPage() {
                 <p className="text-xs text-[#94A3B8] mt-1 whitespace-pre-wrap break-words max-w-2xl">
                   {m.message}
                 </p>
-                <p className="text-[10px] text-[#64748B] mt-2 font-mono">
+                <p className="text-[11px] text-[#64748B] mt-2 font-mono">
                   {new Date(m.created_at).toLocaleString()}
                 </p>
               </div>

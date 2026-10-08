@@ -196,7 +196,7 @@ export function AdminSidebar({
                 <span className="font-bold text-sm tracking-tight text-white truncate">
                   GTA 6 Atlas
                 </span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1C2336] text-[#818CF8] border border-[#2B3652] shrink-0">
+                <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#1C2336] text-[#818CF8] border border-[#2B3652] shrink-0">
                   Admin
                 </span>
               </div>
@@ -222,7 +222,7 @@ export function AdminSidebar({
                 {!isCollapsed && (
                   <p
                     id={headingId}
-                    className="px-3 text-[10px] font-bold uppercase tracking-wider text-[#64748B] select-none"
+                    className="px-3 text-[11px] font-bold uppercase tracking-wider text-[#64748B] select-none"
                   >
                     {section.title}
                   </p>
@@ -262,7 +262,7 @@ export function AdminSidebar({
                         {!isCollapsed && item.badge && (
                           <span
                             className={cn(
-                              "px-1.5 py-0.5 rounded-full text-[10px] font-bold shrink-0 transition-colors",
+                              "px-1.5 py-0.5 rounded-full text-[11px] font-bold shrink-0 transition-colors",
                               isActive
                                 ? "bg-[#4F46E5] text-white"
                                 : item.badgeVariant === "warning"
@@ -332,7 +332,7 @@ export function AdminSidebar({
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-bold text-white truncate">Administrator</p>
-                <p className="text-[10px] text-[#64748B] truncate">admin@atlas-gta6.com</p>
+                <p className="text-[11px] text-[#64748B] truncate">admin@atlas-gta6.com</p>
               </div>
             </div>
           )}

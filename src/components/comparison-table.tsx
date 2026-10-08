@@ -64,14 +64,14 @@ export function ComparisonTable({
                   {row.winnerIndex != null ? (
                     <span
                       className={cn(
-                        "inline-flex items-center gap-1 rounded bg-emerald-500/20 text-emerald-500 dark:text-emerald-400 border border-emerald-500/30 px-2 py-0.5 text-[10px] font-black uppercase"
+                        "inline-flex items-center gap-1 rounded bg-emerald-500/20 text-emerald-500 dark:text-emerald-400 border border-emerald-500/30 px-2 py-0.5 text-[11px] font-black uppercase"
                       )}
                     >
                       <Trophy className="h-2.5 w-2.5" />
                       {contenders[row.winnerIndex]?.name.slice(0, 18)}
                     </span>
                   ) : (
-                    <span className="text-[10px] font-bold uppercase text-muted-foreground">Tie</span>
+                    <span className="text-[11px] font-bold uppercase text-muted-foreground">Tie</span>
                   )}
                 </td>
               </tr>

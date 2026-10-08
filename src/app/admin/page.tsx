@@ -162,7 +162,7 @@ export default function AdminOverviewPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h1 className="font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">
               Overview
             </h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
@@ -251,7 +251,7 @@ export default function AdminOverviewPage() {
             <div className="flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-[#F59E0B]" />
               <div>
-                <h2 className="text-sm font-bold text-white">Needs attention</h2>
+                <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-white">Needs attention</h2>
                 <p className="text-xs text-[#64748B]">Items that require your input</p>
               </div>
             </div>
@@ -345,7 +345,7 @@ export default function AdminOverviewPage() {
               <div className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-[#38BDF8]" />
                 <div>
-                  <h2 className="text-sm font-bold text-white">Recent edits</h2>
+                  <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-white">Recent edits</h2>
                   <p className="text-xs text-[#64748B]">Latest changes across your content</p>
                 </div>
               </div>
@@ -407,7 +407,7 @@ export default function AdminOverviewPage() {
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-[#818CF8]" />
               <div>
-                <h2 className="text-sm font-bold text-white">Quick actions</h2>
+                <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-white">Quick actions</h2>
                 <p className="text-xs text-[#64748B]">Create new content or records</p>
               </div>
             </div>
@@ -472,7 +472,7 @@ export default function AdminOverviewPage() {
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-[#38BDF8]" />
                 <div>
-                  <h2 className="text-sm font-bold text-white">Scheduled articles</h2>
+                  <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-white">Scheduled articles</h2>
                   <p className="text-xs text-[#64748B]">Upcoming publications</p>
                 </div>
               </div>

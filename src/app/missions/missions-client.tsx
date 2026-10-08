@@ -78,7 +78,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
               onClick={() => setSortBy("default")}
               className={cn(
                 "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                sortBy === "default" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
+                sortBy === "default" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
               Default
@@ -87,7 +87,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
               onClick={() => setSortBy("reward")}
               className={cn(
                 "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                sortBy === "reward" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
+                sortBy === "reward" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
               Highest Payout
@@ -96,7 +96,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
               onClick={() => setSortBy("title")}
               className={cn(
                 "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                sortBy === "title" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
+                sortBy === "title" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
               Title A–Z
@@ -108,7 +108,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-border">
           {/* Type */}
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Mission Type:</span>
+            <span className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Mission Type:</span>
             <div className="flex flex-wrap gap-1">
               {TYPES.map((t) => (
                 <button
@@ -129,7 +129,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
           {/* Character */}
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Operative:</span>
+            <span className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Operative:</span>
             <div className="flex flex-wrap gap-1">
               {CHARACTERS.map((c) => (
                 <button
@@ -138,7 +138,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   className={cn(
                     "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
                     selectedChar === c
-                      ? "bg-accent text-white font-bold shadow-sm"
+                      ? "bg-accent text-accent-foreground font-bold shadow-sm"
                       : "bg-muted/40 text-muted-foreground hover:text-foreground"
                   )}
                 >
@@ -150,7 +150,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
           {/* Difficulty */}
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Threat Level:</span>
+            <span className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Threat Level:</span>
             <div className="flex flex-wrap gap-1">
               {DIFFICULTIES.map((d) => (
                 <button
@@ -226,7 +226,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                     <span className="font-mono text-xs font-bold text-amber-400 bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
                       {m.cashRewardDisplay}
                     </span>
-                    <span className="text-[10px] font-semibold text-muted-foreground bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
+                    <span className="text-[11px] font-semibold text-muted-foreground bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
                       ⏱ {m.duration}
                     </span>
                   </div>
@@ -249,16 +249,16 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
                   {/* Objectives summary */}
                   <div className="rounded-2xl border-border bg-muted/60 p-3 space-y-1 text-xs">
-                    <span className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Key Objective:</span>
+                    <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">Key Objective:</span>
                     <p className="text-[11px] text-foreground truncate">🎯 {m.objectives[0]}</p>
                   </div>
 
                   {/* Card Footer */}
                   <div className="pt-2 border-t border-border flex items-center justify-between">
                     <span className={cn(
-                      "text-[10px] font-black uppercase px-2 py-0.5 rounded border",
+                      "text-[11px] font-black uppercase px-2 py-0.5 rounded border",
                       m.difficulty === "Easy" && "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",
-                      m.difficulty === "Medium" && "border-amber-500/40 text-amber-400 bg-amber-500/10",
+                      m.difficulty === "Medium" && "border-amber-500/40 text-amber-600 dark:text-amber-400 bg-amber-500/10",
                       (m.difficulty === "Hard" || m.difficulty === "Extreme") && "border-rose-500/40 text-rose-400 bg-rose-500/10"
                     )}>
                       {m.difficulty}

@@ -252,7 +252,7 @@ export default function AdminArticlesPage() {
           )}
         >
           <span>All</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] bg-white/20">
             {tabCounts.all}
           </span>
         </button>
@@ -270,7 +270,7 @@ export default function AdminArticlesPage() {
           )}
         >
           <span>Drafts</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.draft}
           </span>
         </button>
@@ -288,7 +288,7 @@ export default function AdminArticlesPage() {
           )}
         >
           <span>Review</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.review}
           </span>
         </button>
@@ -306,7 +306,7 @@ export default function AdminArticlesPage() {
           )}
         >
           <span>Scheduled</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.scheduled}
           </span>
         </button>
@@ -324,7 +324,7 @@ export default function AdminArticlesPage() {
           )}
         >
           <span>Published</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.published}
           </span>
         </button>
@@ -343,7 +343,7 @@ export default function AdminArticlesPage() {
             placeholder="Search articles..."
             className="w-full pl-9 pr-12 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1] transition-colors"
           />
-          <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono text-[#64748B] bg-[#182030] border border-[#243048] rounded">
+          <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[11px] font-mono text-[#64748B] bg-[#182030] border border-[#243048] rounded">
             ⌘ K
           </kbd>
         </div>
@@ -538,7 +538,7 @@ export default function AdminArticlesPage() {
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
                           <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 rounded-full bg-[#182030] border border-[#243048] flex items-center justify-center text-[10px] font-bold text-[#94A3B8]">
+                            <div className="w-6 h-6 rounded-full bg-[#182030] border border-[#243048] flex items-center justify-center text-[11px] font-bold text-[#94A3B8]">
                               {art.author.avatar}
                             </div>
                             <span className="text-white text-xs">{art.author.name}</span>

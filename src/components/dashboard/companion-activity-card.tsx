@@ -92,7 +92,7 @@ export function CompanionActivityCard() {
                   {item.title}
                 </span>
               </div>
-              <span className="font-mono text-[10px] text-slate-400 shrink-0">
+              <span className="font-mono text-[11px] text-slate-400 shrink-0">
                 {item.time}
               </span>
             </div>

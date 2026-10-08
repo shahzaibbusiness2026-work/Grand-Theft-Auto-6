@@ -210,7 +210,7 @@ export default function ToolsPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-primary">
               <Sparkles className="h-3 w-3" /> Complete Utility Suite
             </div>
-            <h1 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
+            <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
               GTA 6 ATLAS <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">TOOLBOX</span>
             </h1>
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -249,7 +249,7 @@ export default function ToolsPage() {
                             <span className="p-2.5 rounded-xl bg-muted text-primary group-hover:bg-primary group-hover:text-foreground transition-colors">
                               <IconComponent className="h-5 w-5" />
                             </span>
-                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-background text-muted-foreground border border-border font-mono">
+                            <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-background text-muted-foreground border border-border font-mono">
                               {t.badge}
                             </span>
                           </div>

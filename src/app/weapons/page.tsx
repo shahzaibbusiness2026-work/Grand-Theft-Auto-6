@@ -27,7 +27,7 @@ export default async function WeaponsPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-accent mb-3">
               <Crosshair className="h-3 w-3" /> Ballistics & Hardware Catalog
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
+            <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
               LEONIDA <span className="bg-gradient-to-r from-primary via-accent to-rose-400 bg-clip-text text-transparent">ARMORY</span>
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-[15px]">

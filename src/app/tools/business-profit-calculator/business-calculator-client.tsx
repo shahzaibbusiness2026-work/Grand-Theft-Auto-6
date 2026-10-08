@@ -248,7 +248,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
           {/* Results Display */}
           <div className={cn("card-surface p-6 rounded-3xl border border-border shadow-2xl space-y-6 bg-gradient-to-br from-card to-primary/5 dark:from-[#070b15] dark:to-[#040810]", !compareMode && "lg:col-span-7")}>
             <div>
-              <span className="text-[10px] uppercase font-bold text-muted-foreground">Total Upfront Capital Required</span>
+              <span className="text-[11px] uppercase font-bold text-muted-foreground">Total Upfront Capital Required</span>
               <div className="font-display text-3xl font-black text-foreground mt-1">
                 ${metricsA.totalInvestment.toLocaleString()}
               </div>
@@ -256,15 +256,15 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Net Profit / Hr</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Net Profit / Hr</span>
                 <span className="font-mono text-lg font-black text-emerald-400">+${metricsA.netProfitPerHour.toLocaleString()}</span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Daily Cash Take</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Daily Cash Take</span>
                 <span className="font-mono text-lg font-black text-foreground">+${metricsA.netProfitPerDay.toLocaleString()}</span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Weekly Payout</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Weekly Payout</span>
                 <span className="font-mono text-lg font-black text-purple-300">+${metricsA.netProfitPerWeek.toLocaleString()}</span>
               </div>
             </div>
@@ -273,12 +273,12 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
               <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-center">
                 <Clock className="h-4 w-4 text-amber-400 mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-amber-300">{metricsA.breakEvenHours} hrs</span>
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Break-Even ({metricsA.breakEvenDays} days)</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Break-Even ({metricsA.breakEvenDays} days)</span>
               </div>
               <div className="rounded-2xl border border-cyan-500 dark:border-[#00F0FF]/30 bg-cyan-500 dark:bg-[#00F0FF]/10 p-3.5 text-center">
                 <TrendingUp className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF] mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-cyan-600 dark:text-[#00F0FF]">{metricsA.annualRoiPct}%</span>
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Annual Return Rate</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Annual Return Rate</span>
               </div>
             </div>
 
@@ -377,7 +377,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
             {/* Results Display B */}
             <div className="card-surface p-6 rounded-3xl border border-border shadow-2xl space-y-6 bg-gradient-to-br from-card to-primary/5 dark:from-[#070b15] dark:to-[#040810]">
               <div>
-                <span className="text-[10px] uppercase font-bold text-muted-foreground">Total Upfront Capital Required</span>
+                <span className="text-[11px] uppercase font-bold text-muted-foreground">Total Upfront Capital Required</span>
                 <div className="font-display text-3xl font-black text-foreground mt-1">
                   ${metricsB.totalInvestment.toLocaleString()}
                 </div>
@@ -385,15 +385,15 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                  <span className="block text-[10px] uppercase font-bold text-muted-foreground">Net Profit / Hr</span>
+                  <span className="block text-[11px] uppercase font-bold text-muted-foreground">Net Profit / Hr</span>
                   <span className="font-mono text-lg font-black text-emerald-400">+${metricsB.netProfitPerHour.toLocaleString()}</span>
                 </div>
                 <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                  <span className="block text-[10px] uppercase font-bold text-muted-foreground">Daily Cash Take</span>
+                  <span className="block text-[11px] uppercase font-bold text-muted-foreground">Daily Cash Take</span>
                   <span className="font-mono text-lg font-black text-foreground">+${metricsB.netProfitPerDay.toLocaleString()}</span>
                 </div>
                 <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                  <span className="block text-[10px] uppercase font-bold text-muted-foreground">Weekly Payout</span>
+                  <span className="block text-[11px] uppercase font-bold text-muted-foreground">Weekly Payout</span>
                   <span className="font-mono text-lg font-black text-purple-300">+${metricsB.netProfitPerWeek.toLocaleString()}</span>
                 </div>
               </div>
@@ -402,12 +402,12 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-center">
                   <Clock className="h-4 w-4 text-amber-400 mx-auto mb-1" />
                   <span className="font-mono text-lg font-black text-amber-300">{metricsB.breakEvenHours} hrs</span>
-                  <span className="block text-[10px] uppercase font-bold text-muted-foreground">Break-Even ({metricsB.breakEvenDays} days)</span>
+                  <span className="block text-[11px] uppercase font-bold text-muted-foreground">Break-Even ({metricsB.breakEvenDays} days)</span>
                 </div>
                 <div className="rounded-2xl border border-cyan-500 dark:border-[#00F0FF]/30 bg-cyan-500 dark:bg-[#00F0FF]/10 p-3.5 text-center">
                   <TrendingUp className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF] mx-auto mb-1" />
                   <span className="font-mono text-lg font-black text-cyan-600 dark:text-[#00F0FF]">{metricsB.annualRoiPct}%</span>
-                  <span className="block text-[10px] uppercase font-bold text-muted-foreground">Annual Return Rate</span>
+                  <span className="block text-[11px] uppercase font-bold text-muted-foreground">Annual Return Rate</span>
                 </div>
               </div>
             </div>

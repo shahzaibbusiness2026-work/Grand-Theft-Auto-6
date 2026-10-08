@@ -235,7 +235,7 @@ export default function AdminUsersPage() {
           )}
         >
           <span>All users</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-[#182030] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-mono bg-[#182030] text-[#94A3B8]">
             {users.length}
           </span>
         </button>
@@ -251,7 +251,7 @@ export default function AdminUsersPage() {
           )}
         >
           <span>Administrators</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-[#182030] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-mono bg-[#182030] text-[#94A3B8]">
             {users.filter((u) => u.role === "Administrator").length}
           </span>
         </button>
@@ -267,7 +267,7 @@ export default function AdminUsersPage() {
           )}
         >
           <span>Editors</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-[#182030] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-mono bg-[#182030] text-[#94A3B8]">
             {users.filter((u) => u.role === "Editor").length}
           </span>
         </button>
@@ -283,7 +283,7 @@ export default function AdminUsersPage() {
           )}
         >
           <span>Contributors</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-[#182030] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-mono bg-[#182030] text-[#94A3B8]">
             {users.filter((u) => u.role === "Publisher").length}
           </span>
         </button>
@@ -299,7 +299,7 @@ export default function AdminUsersPage() {
           )}
         >
           <span>Pending invites</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-[#182030] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-mono bg-[#182030] text-[#94A3B8]">
             {users.filter((u) => u.status === "pending").length}
           </span>
         </button>

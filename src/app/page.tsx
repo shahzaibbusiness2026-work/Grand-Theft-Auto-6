@@ -85,7 +85,7 @@ export default async function HomePage() {
                   <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                 </span>
                 <div>
-                  <h3 className="font-display text-sm font-bold uppercase tracking-wide">{t.title}</h3>
+                  <h3 className="font-display text-sm font-bold uppercase tracking-wide text-foreground">{t.title}</h3>
                   <p className="text-[13px] text-muted-foreground">{t.caption}</p>
                 </div>
               </figcaption>

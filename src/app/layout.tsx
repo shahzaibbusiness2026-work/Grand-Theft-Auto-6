@@ -125,7 +125,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en" className="dark" style={{ colorScheme: "dark" }} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="dns-prefetch" href="https://i.ytimg.com" />

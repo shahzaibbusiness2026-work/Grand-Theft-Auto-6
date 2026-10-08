@@ -289,7 +289,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
                       href={`/locations/${item.slug}`}
                       className="block p-3 rounded-lg bg-card border border-border hover:border-primary/40 transition-colors group"
                     >
-                      <div className="text-[10px] uppercase font-bold text-muted-foreground mb-0.5">
+                      <div className="text-[11px] uppercase font-bold text-muted-foreground mb-0.5">
                         {item.category}
                       </div>
                       <div className="text-xs font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">

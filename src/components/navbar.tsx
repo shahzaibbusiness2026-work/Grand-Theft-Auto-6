@@ -222,7 +222,7 @@ export function Navbar() {
           {isPro && (
             <Link
               href="/pricing"
-              className="hidden lg:inline-flex items-center gap-1 rounded-full border border-amber-500/40 bg-amber-500/15 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-400"
+              className="hidden lg:inline-flex items-center gap-1 rounded-full border border-amber-500/40 bg-amber-500/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-400"
               title="Vice City Pro Active"
             >
               <Crown className="h-3 w-3" /> PRO

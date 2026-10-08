@@ -157,7 +157,7 @@ export default function AdminComparisonPage() {
                   onChange={(e) => setVehicle((w) => ({ ...w, [f.key]: Number(e.target.value) || 0 }))}
                   className={inputCls + " w-20 text-center"}
                 />
-                <span className="text-[10px] text-[#64748B] w-8 text-right">%</span>
+                <span className="text-[11px] text-[#64748B] w-8 text-right">%</span>
               </div>
             ))}
           </div>
@@ -198,7 +198,7 @@ export default function AdminComparisonPage() {
                   onChange={(e) => setWeapon((w) => ({ ...w, [f.key]: Number(e.target.value) || 0 }))}
                   className={inputCls + " w-20 text-center"}
                 />
-                <span className="text-[10px] text-[#64748B] w-8 text-right">%</span>
+                <span className="text-[11px] text-[#64748B] w-8 text-right">%</span>
               </div>
             ))}
           </div>

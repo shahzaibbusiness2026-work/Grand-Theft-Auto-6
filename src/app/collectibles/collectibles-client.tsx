@@ -214,7 +214,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
                 )}
               >
-                {cat} <span className="opacity-60 text-[10px]">({count})</span>
+                {cat} <span className="opacity-60 text-[11px]">({count})</span>
               </button>
             );
           })}
@@ -285,7 +285,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
 
                     {/* District & Category */}
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted/80 text-foreground border border-border">
+                      <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted/80 text-foreground border border-border">
                         {item.category}
                       </span>
                       <ConfidenceBadge confidence={item.confidence} source={item.source} size="sm" />

@@ -295,7 +295,7 @@ export default function AdminComparisonsPage() {
                       <Car className="w-4 h-4 text-[#94A3B8]" />
                       <div>
                         <p className="text-xs font-medium text-white">Vehicle V-001</p>
-                        <p className="text-[10px] text-[#64748B]">Vehicle</p>
+                        <p className="text-[11px] text-[#64748B]">Vehicle</p>
                       </div>
                     </div>
                     <Link
@@ -311,7 +311,7 @@ export default function AdminComparisonsPage() {
                       <Car className="w-4 h-4 text-[#94A3B8]" />
                       <div>
                         <p className="text-xs font-medium text-white">Vehicle V-002</p>
-                        <p className="text-[10px] text-[#64748B]">Vehicle</p>
+                        <p className="text-[11px] text-[#64748B]">Vehicle</p>
                       </div>
                     </div>
                     <Link
@@ -484,19 +484,19 @@ export default function AdminComparisonsPage() {
                     <th scope="col" className="pb-3 font-medium">
                       <div>
                         <p className="text-white font-semibold">Vehicle V-001</p>
-                        <p className="text-[10px] text-[#E5A83B]">Unverified</p>
+                        <p className="text-[11px] text-[#E5A83B]">Unverified</p>
                       </div>
                     </th>
                     <th scope="col" className="pb-3 font-medium">
                       <div>
                         <p className="text-white font-semibold">Vehicle V-002</p>
-                        <p className="text-[10px] text-[#E5A83B]">Unverified</p>
+                        <p className="text-[11px] text-[#E5A83B]">Unverified</p>
                       </div>
                     </th>
                     <th scope="col" className="pb-3 font-medium">
                       <div>
                         <p className="text-white font-semibold">Vehicle V-003</p>
-                        <p className="text-[10px] text-[#E5A83B]">Unverified</p>
+                        <p className="text-[11px] text-[#E5A83B]">Unverified</p>
                       </div>
                     </th>
                   </tr>

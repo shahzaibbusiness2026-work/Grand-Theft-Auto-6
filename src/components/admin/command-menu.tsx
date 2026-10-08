@@ -132,7 +132,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               <X className="w-4 h-4" />
             </button>
           )}
-          <kbd className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 text-[10px] font-mono font-bold text-[var(--admin-text-muted)] bg-[var(--admin-elevated)] border border-[var(--admin-border)] rounded-md">
+          <kbd className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 text-[11px] font-mono font-bold text-[var(--admin-text-muted)] bg-[var(--admin-elevated)] border border-[var(--admin-border)] rounded-md">
             ESC
           </kbd>
         </div>
@@ -229,7 +229,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                           {art.category} • Updated {art.updatedAt}
                         </p>
                       </div>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md uppercase bg-[var(--admin-card)] border border-[var(--admin-border)] text-[var(--admin-text-muted)]">
+                      <span className="text-[11px] font-bold px-2 py-0.5 rounded-md uppercase bg-[var(--admin-card)] border border-[var(--admin-border)] text-[var(--admin-text-muted)]">
                         {art.status}
                       </span>
                     </button>
@@ -260,7 +260,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                       </div>
                       <span
                         className={cn(
-                          "text-[10px] font-bold px-2 py-0.5 rounded-md uppercase border",
+                          "text-[11px] font-bold px-2 py-0.5 rounded-md uppercase border",
                           veh.verification === "verified"
                             ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
                             : "bg-amber-500/10 text-amber-400 border-amber-500/30"
@@ -294,7 +294,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                           {wep.category} • {wep.ammunition}
                         </p>
                       </div>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md uppercase bg-[var(--admin-card)] border border-[var(--admin-border)] text-[var(--admin-text-muted)]">
+                      <span className="text-[11px] font-bold px-2 py-0.5 rounded-md uppercase bg-[var(--admin-card)] border border-[var(--admin-border)] text-[var(--admin-text-muted)]">
                         {wep.verification}
                       </span>
                     </button>
@@ -323,7 +323,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                           {mark.category} • Layer: {mark.layer}
                         </p>
                       </div>
-                      <span className="text-[10px] font-mono text-[var(--admin-text-muted)]">
+                      <span className="text-[11px] font-mono text-[var(--admin-text-muted)]">
                         ({mark.coordinates.x}, {mark.coordinates.y})
                       </span>
                     </button>

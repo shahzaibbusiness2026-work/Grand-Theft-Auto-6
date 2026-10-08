@@ -214,7 +214,7 @@ export default function AdminActivityPage() {
                           </div>
                         </td>
                         <td className="p-3.5 whitespace-nowrap">
-                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
+                          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
                             {act.action}
                           </span>
                         </td>
@@ -244,7 +244,7 @@ export default function AdminActivityPage() {
                 <h3 className="font-bold uppercase tracking-wider text-white">
                   Activity Details
                 </h3>
-                <span className="font-mono text-[10px] text-[#64748B]">
+                <span className="font-mono text-[11px] text-[#64748B]">
                   #{selectedActivity.id.toUpperCase()}
                 </span>
               </div>

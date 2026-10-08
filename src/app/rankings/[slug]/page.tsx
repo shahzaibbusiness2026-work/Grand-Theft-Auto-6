@@ -177,7 +177,7 @@ export default async function RankingDetailPage({
                   </div>
                   <div className="text-right shrink-0">
                     <span className="block font-mono font-black text-lg text-accent">{row.display}</span>
-                    <span className="flex items-center gap-1 justify-end text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                    <span className="flex items-center gap-1 justify-end text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
                       <Trophy className="h-2.5 w-2.5" /> {row.score}/100
                     </span>
                   </div>

@@ -382,12 +382,12 @@ export default function AdminMediaPage() {
                       <p className="text-xs font-bold text-white truncate">
                         {asset.filename}
                       </p>
-                      <div className="flex items-center justify-between text-[10px] text-[#64748B] font-mono">
+                      <div className="flex items-center justify-between text-[11px] text-[#64748B] font-mono">
                         <span>{asset.dimensions}</span>
                         <span>{asset.fileSize}</span>
                       </div>
                       {asset.usedBy.length > 0 && (
-                        <span className="inline-block mt-1 text-[10px] font-semibold text-[#6366F1]">
+                        <span className="inline-block mt-1 text-[11px] font-semibold text-[#6366F1]">
                           Used in {asset.usedBy.length} article(s)
                         </span>
                       )}
@@ -436,7 +436,7 @@ export default function AdminMediaPage() {
                           {asset.filename}
                         </td>
                         <td className="p-3">
-                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
+                          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
                             {asset.type}
                           </span>
                         </td>
@@ -591,7 +591,7 @@ export default function AdminMediaPage() {
                             {item.title}
                           </span>
                         </div>
-                        <span className="text-[10px] text-[#64748B] shrink-0 font-mono">
+                        <span className="text-[11px] text-[#64748B] shrink-0 font-mono">
                           {item.publishedDate}
                         </span>
                       </div>

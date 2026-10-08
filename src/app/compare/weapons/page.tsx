@@ -23,7 +23,7 @@ export default async function CompareWeaponsPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-primary mb-3">
             <Crosshair className="h-3 w-3" /> Armory Stat Comparison
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
+          <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
             COMPARE <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">GTA 6 WEAPONS</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">

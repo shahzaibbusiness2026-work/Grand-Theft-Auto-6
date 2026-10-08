@@ -202,7 +202,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               onChange={(e) => setHoursPerDay(Number(e.target.value))}
               className="w-full accent-amber-500"
             />
-            <div className="flex justify-between text-[10px] text-muted-foreground mt-1 font-mono">
+            <div className="flex justify-between text-[11px] text-muted-foreground mt-1 font-mono">
               <span>30m Casual</span>
               <span>2.5h Regular</span>
               <span>6h Dedicated</span>
@@ -217,14 +217,14 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
           <div className="card-surface p-6 rounded-3xl border border-border shadow-2xl bg-gradient-to-br from-card via-card to-primary/5 dark:from-[#0e0717] dark:via-[#070b15] dark:to-[#040810]">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <span className="text-[10px] uppercase font-bold text-muted-foreground">Total Money Remaining</span>
+                <span className="text-[11px] uppercase font-bold text-muted-foreground">Total Money Remaining</span>
                 <div className="font-display text-3xl sm:text-4xl font-black text-foreground mt-0.5">
                   ${calculations.remaining.toLocaleString()}
                 </div>
               </div>
               <div className="text-right">
                 <span className="font-mono text-2xl font-black text-cyan-600 dark:text-[#00F0FF]">{calculations.progressPct}%</span>
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Achieved</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Achieved</span>
               </div>
             </div>
 
@@ -241,19 +241,19 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <Briefcase className="h-4 w-4 text-accent mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-foreground">{calculations.missionsNeeded}</span>
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Missions Needed</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Missions Needed</span>
               </div>
 
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <Clock className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF] mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-foreground">{calculations.hoursNeeded}h</span>
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Hours Needed</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Hours Needed</span>
               </div>
 
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <Calendar className="h-4 w-4 text-amber-400 mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-foreground">{calculations.daysNeeded}</span>
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Playing Days</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Playing Days</span>
               </div>
 
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
@@ -261,7 +261,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
                 <span className="font-mono text-xs font-black text-emerald-300 block truncate">
                   {calculations.completionDateStr}
                 </span>
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Target Date</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Target Date</span>
               </div>
             </div>
 

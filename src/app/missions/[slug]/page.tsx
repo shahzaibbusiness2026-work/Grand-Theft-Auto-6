@@ -141,19 +141,19 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             {/* Quick Metrics Bar */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Operative</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Operative</span>
                 <span className="font-display text-sm font-black text-accent">{mission.character}</span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Cash Payout</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Cash Payout</span>
                 <span className="font-mono text-sm font-black text-amber-400">{mission.cashRewardDisplay}</span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Duration</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Duration</span>
                 <span className="font-display text-sm font-black text-foreground">{mission.duration}</span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
-                <span className="block text-[10px] uppercase font-bold text-muted-foreground">Difficulty</span>
+                <span className="block text-[11px] uppercase font-bold text-muted-foreground">Difficulty</span>
                 <span className="font-display text-sm font-black text-[#00F0FF]">{mission.difficulty}</span>
               </div>
             </div>
@@ -170,7 +170,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             <ul className="mt-4 space-y-3">
               {mission.objectives.map((obj, i) => (
                 <li key={obj} className="flex items-start gap-3 rounded-xl border border-border bg-muted/60 p-3 text-xs text-slate-700 dark:text-slate-200">
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/20 font-bold text-amber-400 text-[10px]">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/20 font-bold text-amber-400 text-[11px]">
                     {i + 1}
                   </span>
                   <span className="font-medium pt-0.5">{obj}</span>
@@ -203,7 +203,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               <div className="mt-4 space-y-2.5">
                 {mission.choices.map((c, i) => (
                   <div key={c} className="rounded-xl border border-border bg-muted/60 p-3 text-xs text-muted-foreground">
-                    <span className="block text-[10px] uppercase font-bold text-amber-400 mb-1">
+                    <span className="block text-[11px] uppercase font-bold text-amber-400 mb-1">
                       Approach #{i + 1}:
                     </span>
                     <span>{c}</span>
@@ -241,7 +241,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             <div className="flex items-center gap-4">
               <img src={relatedLocation.img} alt={relatedLocation.name} className="h-16 w-20 rounded-2xl object-cover border border-border" />
               <div>
-                <span className="text-[10px] uppercase font-bold text-muted-foreground">Mission District & Hotspot</span>
+                <span className="text-[11px] uppercase font-bold text-muted-foreground">Mission District & Hotspot</span>
                 <h3 className="font-display text-lg font-bold text-foreground">{relatedLocation.name}</h3>
                 <p className="text-xs text-muted-foreground">{relatedLocation.district} &bull; Threat Level: {relatedLocation.threatLevel}</p>
               </div>

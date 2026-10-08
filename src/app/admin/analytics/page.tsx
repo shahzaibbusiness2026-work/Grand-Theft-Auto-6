@@ -232,7 +232,7 @@ export default function AdminAnalyticsPage() {
                       {art.title}
                     </td>
                     <td className="p-3">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
+                      <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
                         {art.category}
                       </span>
                     </td>
@@ -269,7 +269,7 @@ export default function AdminAnalyticsPage() {
                   <tr key={i} className="hover:bg-[#141B2A] transition-colors">
                     <td className="p-3 font-semibold text-white">{page.name}</td>
                     <td className="p-3">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
+                      <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
                         {page.type}
                       </span>
                     </td>
@@ -346,11 +346,11 @@ export default function AdminAnalyticsPage() {
                     <td className="p-3 text-right font-mono text-[#64748B]">{q.ctr}</td>
                     <td className="p-3 text-right">
                       {q.hasNoResults ? (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-red-500/10 border border-red-500/20 text-red-400">
+                        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-red-500/10 border border-red-500/20 text-red-400">
                           0 Results
                         </span>
                       ) : (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
                           Active
                         </span>
                       )}

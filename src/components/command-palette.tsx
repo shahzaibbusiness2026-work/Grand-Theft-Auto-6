@@ -271,7 +271,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
               <X className="h-4 w-4" />
             </button>
           )}
-          <kbd className="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-mono font-semibold text-muted-foreground bg-muted rounded border border-border">
+          <kbd className="hidden sm:inline-block ml-2 px-2 py-0.5 text-[11px] font-mono font-semibold text-muted-foreground bg-muted rounded border border-border">
             ESC
           </kbd>
         </div>
@@ -304,7 +304,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                         <span className="font-display text-sm font-bold text-foreground truncate">
                           {item.title}
                         </span>
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-muted text-muted-foreground font-mono">
+                        <span className="text-[11px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-muted text-muted-foreground font-mono">
                           {item.category}
                         </span>
                       </div>

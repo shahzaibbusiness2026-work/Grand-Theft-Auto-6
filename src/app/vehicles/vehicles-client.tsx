@@ -98,7 +98,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                 onClick={() => setSortBy("speed")}
                 className={cn(
                   "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                  sortBy === "speed" ? "bg-accent text-white shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
+                  sortBy === "speed" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Top Speed
@@ -107,7 +107,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                 onClick={() => setSortBy("power")}
                 className={cn(
                   "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                  sortBy === "power" ? "bg-accent text-white shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
+                  sortBy === "power" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Horsepower
@@ -116,7 +116,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                 onClick={() => setSortBy("price")}
                 className={cn(
                   "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                  sortBy === "price" ? "bg-accent text-white shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
+                  sortBy === "price" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Price
@@ -125,7 +125,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                 onClick={() => setSortBy("name")}
                 className={cn(
                   "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                  sortBy === "name" ? "bg-accent text-white shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
+                  sortBy === "name" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Name A-Z
@@ -151,7 +151,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
               className={cn(
                 "rounded-lg px-3 py-1.5 text-xs font-semibold transition-all",
                 selectedCat === cat
-                  ? "bg-gradient-to-r from-primary to-accent text-white shadow-sm font-bold"
+                  ? "bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-sm font-bold"
                   : "bg-muted/40 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
               )}
             >
@@ -183,7 +183,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                 setSearch("");
                 setSelectedCat("All Types");
               }}
-              className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-xs font-bold text-white shadow-sm"
+              className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-xs font-bold text-accent-foreground shadow-sm"
             >
               Reset Filters
             </button>
@@ -229,7 +229,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
 
                     {/* Class & Confidence Tags */}
                     <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between">
-                      <span className="inline-block rounded-full bg-black/70 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent backdrop-blur-sm border border-accent/30">
+                      <span className="inline-block rounded-full bg-black/70 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-accent backdrop-blur-sm border border-accent/30">
                         {v.klass}
                       </span>
                       <ConfidenceBadge level={v.confidence} size="sm" />
@@ -240,7 +240,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                   <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex items-start justify-between gap-2">
-                        <h3 className="font-display text-base font-bold text-foreground group-hover:text-accent transition-colors truncate">
+                        <h3 className="font-display text-base font-black text-foreground group-hover:text-accent transition-colors truncate">
                           {v.name}
                         </h3>
                       </div>

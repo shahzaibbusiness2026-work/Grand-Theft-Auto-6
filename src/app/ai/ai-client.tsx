@@ -199,7 +199,7 @@ export function AIClient() {
                           />
                         )}
                       </div>
-                      <span className="text-[10px] text-muted-foreground font-mono">{msg.timestamp}</span>
+                      <span className="text-[11px] text-muted-foreground font-mono">{msg.timestamp}</span>
                     </div>
                   )}
 
@@ -231,7 +231,7 @@ export function AIClient() {
                         <Link
                           key={idx}
                           href={tool.href}
-                          className="btn-secondary text-[10px] px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold text-accent hover:text-white"
+                          className="btn-secondary text-[11px] px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold text-accent hover:text-white"
                         >
                           {tool.label} <ArrowRight className="h-2.5 w-2.5" />
                         </Link>

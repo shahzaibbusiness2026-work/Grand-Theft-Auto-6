@@ -24,7 +24,7 @@ export default async function TrackerPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-3">
             <Trophy className="h-3 w-3" /> 100% Game Completion
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
+          <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
             LEONIDA <span className="bg-gradient-to-r from-amber-500 via-primary to-accent bg-clip-text text-transparent">COMPLETION TRACKER</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">

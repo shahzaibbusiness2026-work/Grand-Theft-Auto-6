@@ -224,7 +224,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
               )}
             >
               {/* Digit display without leading zeros */}
-              <span className="font-sans tabular-nums text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-none drop-shadow-none dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
+              <span className="font-display tabular-nums text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-none drop-shadow-none dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
                 {cell.value}
               </span>
 
@@ -240,7 +240,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
 
               {/* Active Unit Badge */}
               {isSelected && (
-                <span className="absolute -top-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded bg-slate-900 dark:bg-black/95 border border-sky-500 dark:border-[#00F0FF] text-[10px] font-mono text-sky-400 dark:text-[#00F0FF] whitespace-nowrap shadow-xl z-20 backdrop-blur-md">
+                <span className="absolute -top-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded bg-slate-900 dark:bg-black/95 border border-sky-500 dark:border-[#00F0FF] text-[11px] font-mono text-sky-400 dark:text-[#00F0FF] whitespace-nowrap shadow-xl z-20 backdrop-blur-md">
                   {cell.tooltip}
                 </span>
               )}

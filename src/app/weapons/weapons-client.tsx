@@ -25,8 +25,8 @@ const CATEGORIES = [
 
 const rarityStyles: Record<string, string> = {
   Featured: "bg-accent/15 text-accent border-accent/40",
-  Legendary: "bg-amber-500/15 text-amber-400 border-amber-500/40",
-  Epic: "bg-purple-500/15 text-purple-400 border-purple-500/40",
+  Legendary: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/40",
+  Epic: "bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/40",
   Rare: "bg-cyan-500/15 dark:bg-[#00F0FF]/15 text-cyan-700 dark:text-[#00F0FF] border-cyan-500/40 dark:border-[#00F0FF]/40",
   Common: "bg-muted text-muted-foreground border-border",
 };
@@ -96,7 +96,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("damage")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "damage" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
+                  sortBy === "damage" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Damage
@@ -105,7 +105,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("fireRate")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "fireRate" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
+                  sortBy === "fireRate" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Fire Rate
@@ -114,7 +114,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("range")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "range" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
+                  sortBy === "range" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Range
@@ -123,7 +123,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("price")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "price" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
+                  sortBy === "price" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Price
@@ -149,7 +149,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
               className={cn(
                 "rounded-lg px-3 py-1 text-xs font-semibold transition-all",
                 selectedCat === cat
-                  ? "bg-gradient-to-r from-primary to-accent text-white font-bold shadow-sm"
+                  ? "bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold shadow-sm"
                   : "bg-muted/40 text-muted-foreground hover:text-foreground"
               )}
             >

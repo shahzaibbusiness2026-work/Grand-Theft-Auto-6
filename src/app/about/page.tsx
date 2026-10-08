@@ -18,7 +18,7 @@ export default function AboutPage() {
           <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-primary">
             About GTA 6 Atlas
           </p>
-          <h1 className="font-display text-3xl sm:text-5xl font-black text-foreground tracking-tight">
+          <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
             The Authoritative Leonida Intelligence Hub
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">

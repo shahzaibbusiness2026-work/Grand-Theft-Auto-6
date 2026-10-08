@@ -44,7 +44,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
               <Search className="h-4 w-4 text-slate-400" />
               <span className="truncate">Search anything in GTA 6...</span>
             </div>
-            <kbd className="hidden sm:inline-flex items-center rounded border border-white/20 bg-white/[0.06] px-1.5 py-0.5 font-mono text-[10px] font-bold text-slate-300">
+            <kbd className="hidden sm:inline-flex items-center rounded border border-white/20 bg-white/[0.06] px-1.5 py-0.5 font-mono text-[11px] font-bold text-slate-300">
               Ctrl K
             </kbd>
           </button>
@@ -67,14 +67,14 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
             {resolvedTheme === "light" ? (
               <>
                 <Sun className="h-4 w-4 text-amber-500 fill-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.9)] animate-pulse" />
-                <span className="hidden sm:inline font-mono text-[10px] font-black uppercase tracking-wider text-amber-700">
+                <span className="hidden sm:inline font-mono text-[11px] font-black uppercase tracking-wider text-amber-700">
                   Bright
                 </span>
               </>
             ) : (
               <>
                 <Moon className="h-4 w-4 text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.7)]" />
-                <span className="hidden sm:inline font-mono text-[10px] font-black uppercase tracking-wider text-slate-400">
+                <span className="hidden sm:inline font-mono text-[11px] font-black uppercase tracking-wider text-slate-400">
                   Dark
                 </span>
               </>
@@ -99,7 +99,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
               <div className="absolute right-0 mt-2 w-72 rounded-2xl border border-white/15 bg-[#0c1220]/95 p-3 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 z-50">
                 <div className="flex items-center justify-between pb-2 border-b border-white/10">
                   <span className="font-display text-xs font-bold text-white">Notifications</span>
-                  <span className="text-[10px] text-amber-400 font-semibold">1 New</span>
+                  <span className="text-[11px] text-amber-400 font-semibold">1 New</span>
                 </div>
                 <div className="mt-2.5 p-2 rounded-xl bg-white/[0.04] border border-white/5 text-xs">
                   <p className="font-semibold text-white">Trailer 2 Breakdown Active</p>
@@ -124,7 +124,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
 
               {/* Text info */}
               <div className="hidden sm:flex flex-col text-left leading-tight">
-                <span className="text-[10px] text-slate-400 font-medium">Welcome back,</span>
+                <span className="text-[11px] text-slate-400 font-medium">Welcome back,</span>
                 <div className="flex items-center gap-1">
                   <span className="text-xs font-bold text-white tracking-wide">{userName}</span>
                   <ChevronDown className="h-3 w-3 text-slate-400" />
@@ -136,7 +136,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
               <div className="absolute right-0 mt-2 w-52 rounded-2xl border border-white/15 bg-[#0c1220]/95 p-2 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 z-50">
                 <div className="px-3 py-2 border-b border-white/10">
                   <p className="text-xs font-bold text-white">{userName}</p>
-                  <p className="text-[10px] text-cyan-400 font-mono">Vice City Legend · Lvl 12</p>
+                  <p className="text-[11px] text-cyan-400 font-mono">Vice City Legend · Lvl 12</p>
                 </div>
                 <div className="py-1">
                   <a

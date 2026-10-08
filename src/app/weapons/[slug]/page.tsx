@@ -246,7 +246,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 className="max-h-52 w-full object-contain mix-blend-lighten brightness-125 transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-border">
-                <span className="font-bold text-muted-foreground uppercase tracking-wider text-[10px]">Purchase Price</span>
+                <span className="font-bold text-muted-foreground uppercase tracking-wider text-[11px]">Purchase Price</span>
                 <span className="font-mono font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{weapon.priceDisplay}</span>
               </div>
             </div>
@@ -273,7 +273,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
             </div>
 
             <div className="mt-6 rounded-2xl border-border bg-muted/60 p-3.5 text-xs text-muted-foreground">
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase text-muted-foreground mb-1">
+              <div className="flex items-center gap-2 text-[11px] font-bold uppercase text-muted-foreground mb-1">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
                 <span>Verified Source Citation</span>
               </div>
@@ -325,7 +325,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
             <ul className="mt-4 space-y-2.5">
               {weapon.locations.map((loc, i) => (
                 <li key={loc} className="flex items-center gap-3 rounded-xl border-border bg-muted/60 p-3 text-xs text-muted-foreground">
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent font-bold text-[10px]">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent font-bold text-[11px]">
                     {i + 1}
                   </span>
                   <span>{loc}</span>
@@ -383,7 +383,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
             </dl>
             {weapon.customization?.length ? (
               <>
-                <p className="mt-4 text-[10px] uppercase font-bold text-muted-foreground">Supported Modifications</p>
+                <p className="mt-4 text-[11px] uppercase font-bold text-muted-foreground">Supported Modifications</p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {weapon.customization.map((c) => (
                     <span key={c} className="rounded-full border border-primary/40 bg-primary/10 px-2.5 py-1 text-[11px] font-bold text-primary">

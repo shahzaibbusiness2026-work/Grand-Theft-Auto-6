@@ -341,7 +341,7 @@ export default function AdminMapPage() {
                   type="button"
                   onClick={() => setActiveCategory(cat)}
                   className={cn(
-                    "px-2.5 py-1 rounded-lg text-[10px] font-semibold transition-colors whitespace-nowrap",
+                    "px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-colors whitespace-nowrap",
                     activeCategory === cat
                       ? "bg-[#6366F1] text-white"
                       : "text-[#94A3B8] hover:bg-[#182030]"
@@ -387,13 +387,13 @@ export default function AdminMapPage() {
                       </span>
                       <div className="min-w-0">
                         <p className="text-xs font-semibold truncate">{m.name}</p>
-                        <p className="text-[10px] text-[#64748B] truncate">
+                        <p className="text-[11px] text-[#64748B] truncate">
                           {m.category} • Layer: {m.layer}
                         </p>
                       </div>
                     </div>
 
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#0E131D] text-[#64748B]">
+                    <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-[#0E131D] text-[#64748B]">
                       {m.coordinates.x},{m.coordinates.y}
                     </span>
                   </button>
@@ -449,7 +449,7 @@ export default function AdminMapPage() {
           {/* Scale Bar */}
           <div className="absolute bottom-4 right-4 z-20 pointer-events-none flex flex-col items-end gap-1">
             <div className="w-24 h-1.5 bg-[#1C2436] border-t border-b border-indigo-400 rounded-sm" />
-            <span className="text-[10px] font-mono text-[#64748B] font-bold">
+            <span className="text-[11px] font-mono text-[#64748B] font-bold">
               1,000 meters
             </span>
           </div>
@@ -543,7 +543,7 @@ export default function AdminMapPage() {
                   {/* Marker tooltip on hover / selected */}
                   <div
                     className={cn(
-                      "absolute top-full mt-1.5 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md text-[10px] font-bold whitespace-nowrap bg-[#111622] border border-[#1C2436] text-white shadow-xl pointer-events-none transition-opacity",
+                      "absolute top-full mt-1.5 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md text-[11px] font-bold whitespace-nowrap bg-[#111622] border border-[#1C2436] text-white shadow-xl pointer-events-none transition-opacity",
                       isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                     )}
                   >
@@ -684,7 +684,7 @@ export default function AdminMapPage() {
                   <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436]">
                     <label
                       htmlFor="marker-coord-x"
-                      className="text-[10px] font-bold text-[#64748B] font-mono"
+                      className="text-[11px] font-bold text-[#64748B] font-mono"
                     >
                       X:
                     </label>
@@ -709,7 +709,7 @@ export default function AdminMapPage() {
                   <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436]">
                     <label
                       htmlFor="marker-coord-y"
-                      className="text-[10px] font-bold text-[#64748B] font-mono"
+                      className="text-[11px] font-bold text-[#64748B] font-mono"
                     >
                       Y:
                     </label>
@@ -731,7 +731,7 @@ export default function AdminMapPage() {
                     />
                   </div>
                 </div>
-                <p className="text-[10px] text-[#64748B] mt-1">
+                <p className="text-[11px] text-[#64748B] mt-1">
                   💡 Tip: Click anywhere on the map canvas to reposition this marker.
                 </p>
               </div>

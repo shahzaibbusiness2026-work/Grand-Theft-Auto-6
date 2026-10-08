@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 
 export function HeroBackground() {
@@ -18,7 +16,7 @@ export function HeroBackground() {
           alt="GTA VI Vice City Skyline and Muscle Car"
           fill
           priority
-          quality={100}
+          quality={80}
           sizes="100vw"
           className="object-cover object-right lg:object-center"
         />

@@ -167,7 +167,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
 
                 {/* Bottom-Left Tagline */}
                 <div className="absolute bottom-5 left-5 z-10 pointer-events-none">
-                  <p className="font-mono text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                  <p className="font-mono text-[11px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                     A BRIGHTER<br />TOMORROW<br />TOGETHER.
                   </p>
                   <div className="w-14 h-0.5 bg-pink-500 mt-1 shadow-[0_0_8px_#ec4899]" />
@@ -323,7 +323,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
 
                 {/* Bottom-Left Tagline */}
                 <div className="absolute bottom-5 left-5 z-10 pointer-events-none">
-                  <p className="font-mono text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                  <p className="font-mono text-[11px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                     SAME<br />STREETS<br />HIGHER<br />STAKES...
                   </p>
                   <div className="w-14 h-0.5 bg-cyan-400 mt-1 shadow-[0_0_8px_#22d3ee]" />
