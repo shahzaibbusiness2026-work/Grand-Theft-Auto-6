@@ -132,9 +132,11 @@ export async function POST(request: Request) {
           });
         }
         recordFailure(ip);
+        // Identical generic message as invalid credentials: do not reveal
+        // whether the email has an account (prevents user enumeration).
         return NextResponse.json(
-          { success: false, error: "This account does not have admin access." },
-          { status: 403 }
+          { success: false, error: "Invalid email or password." },
+          { status: 401 }
         );
       }
     } catch {
@@ -183,9 +185,11 @@ export async function POST(request: Request) {
       { status: 401 }
     );
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Internal authentication error";
+    // Log internally, return generic message: never expose Supabase errors,
+    // missing-env diagnostics, or stack details to the client.
+    console.error("[admin/login] authentication error:", err);
     return NextResponse.json(
-      { success: false, error: message },
+      { success: false, error: "Authentication failed. Please try again." },
       { status: 500 }
     );
   }

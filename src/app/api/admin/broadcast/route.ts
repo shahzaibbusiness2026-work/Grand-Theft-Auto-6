@@ -62,6 +62,17 @@ export async function POST(req: Request) {
     );
   }
 
+  // CSRF defense-in-depth: only accept same-origin requests for this
+  // high-impact action (sends email to the entire subscriber list).
+  const origin = req.headers.get("origin");
+  const referer = req.headers.get("referer");
+  const host = req.headers.get("host") || "";
+  const sameOrigin = (v: string | null) =>
+    !!v && (() => { try { return new URL(v).host === host; } catch { return false; } })();
+  if (origin ? !sameOrigin(origin) : !sameOrigin(referer)) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
   const resend = new Resend(apiKey);
   const from =
     process.env.BROADCAST_FROM_EMAIL || "GTA 6 Atlas <onboarding@resend.dev>";
@@ -71,31 +82,46 @@ export async function POST(req: Request) {
     .split("\n")
     .map((line) => line.trim() === "" ? "<br>" : `<p>${escapeHtml(line)}</p>`)
     .join("");
+  const htmlBody = `<!DOCTYPE html><html><body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">${htmlMessage}<hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;"><p style="font-size: 12px; color: #888;">You received this because you signed up for GTA 6 Atlas launch alerts.</p></body></html>`;
 
+  // Use Resend's batch API (up to 100 per call) instead of sequential
+  // sends: avoids Vercel function timeouts on large lists and prevents
+  // partial delivery that would cause duplicates on retry.
+  // Each recipient still gets an individual email (no BCC address leaks).
   let sent = 0;
   let failed = 0;
   const errors: string[] = [];
 
-  // Send individually to protect recipient privacy (no BCC leaks).
-  // Resend free tier: 100 emails/day — fine for a launch list.
-  for (const sub of subscribers) {
+  for (let i = 0; i < subscribers.length; i += 100) {
+    const batch = subscribers.slice(i, i + 100);
     try {
-      const { error } = await resend.emails.send({
-        from,
-        to: sub.email,
-        subject,
-        text: message,
-        html: `<!DOCTYPE html><html><body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">${htmlMessage}<hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;"><p style="font-size: 12px; color: #888;">You received this because you signed up for GTA 6 Atlas launch alerts.</p></body></html>`,
-      });
+      const { data, error } = await resend.batch.send(
+        batch.map((sub) => ({
+          from,
+          to: sub.email,
+          subject,
+          text: message,
+          html: htmlBody,
+        }))
+      );
       if (error) {
-        failed++;
-        errors.push(`${sub.email}: ${error.message}`);
+        failed += batch.length;
+        errors.push(`batch ${i / 100 + 1}: ${error.message}`);
       } else {
-        sent++;
+        // data is an array of per-email results; count successes
+        const results = Array.isArray(data) ? data : [];
+        for (const r of results) {
+          if (r && (r as { id?: string }).id) sent++;
+          else failed++;
+        }
+        // If the API returned fewer results than the batch, count the rest as failed
+        if (results.length < batch.length) failed += batch.length - results.length;
       }
     } catch (e) {
-      failed++;
-      errors.push(`${sub.email}: ${e instanceof Error ? e.message : "send failed"}`);
+      failed += batch.length;
+      errors.push(
+        `batch ${i / 100 + 1}: ${e instanceof Error ? e.message : "send failed"}`
+      );
     }
   }
 
