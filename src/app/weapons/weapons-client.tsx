@@ -149,7 +149,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
               className={cn(
                 "rounded-lg px-3 py-1 text-xs font-semibold transition-all",
                 selectedCat === cat
-                  ? "bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold shadow-sm"
+                  ? "bg-primary text-primary-foreground font-bold shadow-sm"
                   : "bg-muted/40 text-muted-foreground hover:text-foreground"
               )}
             >

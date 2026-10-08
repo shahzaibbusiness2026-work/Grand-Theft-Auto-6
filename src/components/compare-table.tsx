@@ -26,7 +26,7 @@ export function CompareTable({ labels, columns, recommendation }: CompareTablePr
           {/* Header row */}
           <div className="grid grid-cols-[160px_repeat(3,1fr)] gap-4 border-b border-border p-5">
             <div className="space-y-2">
-              <span className="flex w-full items-center gap-2 rounded-lg bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600 px-3 py-2 font-display text-[13px] font-bold text-white shadow-neon-cyan">
+              <span className="flex w-full items-center gap-2 rounded-lg bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600 px-3 py-2 font-display text-[13px] font-bold text-white shadow-sm">
                 <LayoutGrid className="h-3.5 w-3.5" /> Overview
               </span>
             </div>
@@ -58,7 +58,7 @@ export function CompareTable({ labels, columns, recommendation }: CompareTablePr
                     {typeof c.rows[row] === "number" && (
                       <div className="mx-auto mt-1.5 h-1 w-3/4 overflow-hidden rounded-full bg-muted">
                         <div
-                          className={cn("h-full rounded-full", c.best ? "bg-neon-green" : "bg-gradient-to-r from-primary to-accent")}
+                          className={cn("h-full rounded-full", c.best ? "bg-neon-green" : "bg-primary")}
                           style={{ width: `${Math.min(100, (c.rows[row] as number) || 30)}%` }}
                         />
                       </div>

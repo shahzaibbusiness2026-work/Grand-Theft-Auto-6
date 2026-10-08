@@ -244,7 +244,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                 <FavoriteButton type="vehicles" id={vehicle.id} />
                 <Button
                   href={`/compare/vehicles?v=${vehicle.slug}`}
-                  className="bg-gradient-to-r from-primary to-accent font-bold text-xs"
+                  className="bg-primary font-bold text-xs"
                 >
                   Compare in Duel <ArrowRight className="h-3.5 w-3.5 ml-1" />
                 </Button>
@@ -461,7 +461,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             </p>
           </div>
           <div className="flex gap-3">
-            <Button href={`/compare/vehicles?v=${vehicle.slug}`} className="bg-gradient-to-r from-primary to-accent text-xs font-bold">
+            <Button href={`/compare/vehicles?v=${vehicle.slug}`} className="bg-primary text-xs font-bold">
               Compare {vehicle.name} <ArrowRight className="h-3.5 w-3.5 ml-1" />
             </Button>
             <Button href="/vehicles" variant="outline" className="text-xs font-semibold">

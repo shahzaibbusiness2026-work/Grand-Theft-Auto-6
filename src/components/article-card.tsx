@@ -8,7 +8,7 @@ import { cn, toIsoDate } from "@/lib/utils";
 export function ArticleCard({ article, className }: { article: Article; className?: string }) {
   const href = article.slug ? `/news/${article.slug}` : "/news";
   return (
-    <Link href={href} className={cn("group card-surface block overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-neon-cyan", className)}>
+    <Link href={href} className={cn("group card-surface block overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-sm", className)}>
       <div className="relative h-40 overflow-hidden">
         <SafeImage
           src={article.img}

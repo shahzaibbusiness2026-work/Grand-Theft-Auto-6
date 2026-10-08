@@ -15,7 +15,7 @@ function RankingCard({ href, icon: Icon, title, description, badge }: { href: st
   return (
     <Link
       href={href}
-      className="card-surface group flex flex-col gap-2 rounded-2xl border border-border p-5 transition-all hover:-translate-y-0.5 hover:shadow-neon-cyan"
+      className="card-surface group flex flex-col gap-2 rounded-2xl border border-border p-5 transition-all hover:-translate-y-0.5 hover:shadow-sm"
     >
       <div className="flex items-center justify-between gap-2">
         <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent" aria-hidden="true"><Icon className="h-5 w-5" /></span>

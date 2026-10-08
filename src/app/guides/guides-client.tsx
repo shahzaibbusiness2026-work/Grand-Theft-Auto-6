@@ -121,7 +121,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                 onClick={() => setCat(c.label)}
                 className={cn(
                   "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-[13px] font-semibold text-muted-foreground transition-colors hover:text-foreground",
-                  cat === c.label && "border border-amber-500/50 bg-amber-500/10 text-amber-500 dark:text-amber-400 shadow-neon-amber"
+                  cat === c.label && "border border-amber-500/50 bg-amber-500/10 text-amber-500 dark:text-amber-400 shadow-sm"
                 )}
               >
                 {c.label}
@@ -195,7 +195,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                   onClick={() => setTab(t)}
                   className={cn(
                     "rounded-full px-3 py-1 text-xs font-semibold transition-all",
-                    tab === t ? "bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-slate-950 font-bold shadow-neon-amber" : "text-muted-foreground hover:text-foreground"
+                    tab === t ? "bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-slate-950 font-bold shadow-sm" : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {t}

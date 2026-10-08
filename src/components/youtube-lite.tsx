@@ -50,7 +50,7 @@ export function YouTubeLite({ videoId, title }: YouTubeLiteProps) {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/30" />
       {/* Play button */}
-      <span className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary shadow-neon-cyan transition-transform duration-300 group-hover:scale-110">
+      <span className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary shadow-sm transition-transform duration-300 group-hover:scale-110">
         <Play className="h-7 w-7 fill-white text-white ml-0.5" aria-hidden="true" />
       </span>
     </button>

@@ -226,7 +226,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
               <ChevronLeft className="h-4 w-4" />
             </Button>
             {["1", "2", "3", "…", "6"].map((p) => (
-              <button key={p} className={cn("h-8 w-8 rounded-lg text-[13px] font-bold", p === "1" ? "bg-gradient-to-r from-primary to-accent text-foreground" : "bg-card text-muted-foreground hover:text-foreground")}>
+              <button key={p} className={cn("h-8 w-8 rounded-lg text-[13px] font-bold", p === "1" ? "bg-primary text-foreground" : "bg-card text-muted-foreground hover:text-foreground")}>
                 {p}
               </button>
             ))}

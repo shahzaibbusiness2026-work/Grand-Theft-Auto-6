@@ -85,7 +85,7 @@ export default async function HomePage() {
             <figure key={t.id} className="card-surface group overflow-hidden">
               <YouTubeLite videoId={t.id} title={`GTA 6 ${t.title}`} />
               <figcaption className="flex items-center gap-3 px-5 py-4">
-                <span className="icon-tile h-9 w-9 shrink-0 rounded-full bg-gradient-to-br from-primary to-accent text-white shadow-neon-cyan" aria-hidden="true">
+                <span className="icon-tile h-9 w-9 shrink-0 rounded-full bg-gradient-to-br from-primary to-accent text-white shadow-sm" aria-hidden="true">
                   <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                 </span>
                 <div>
@@ -124,7 +124,7 @@ export default async function HomePage() {
             <Link
               key={c.id}
               href={`/characters#${c.id}`}
-              className="group card-surface w-44 shrink-0 overflow-hidden sm:w-52 transition-transform duration-300 hover:-translate-y-1 hover:shadow-neon-cyan"
+              className="group card-surface w-44 shrink-0 overflow-hidden sm:w-52 transition-transform duration-300 hover:-translate-y-1 hover:shadow-sm"
             >
               <div className="relative h-48 overflow-hidden sm:h-56">
                 <SafeImage

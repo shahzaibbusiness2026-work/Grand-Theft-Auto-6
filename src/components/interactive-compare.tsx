@@ -83,7 +83,7 @@ export function InteractiveCompare({
           {/* Header Row: Column Cards with Quick Swap Trigger */}
           <div className="grid grid-cols-[180px_repeat(3,1fr)] gap-4 border-b border-border p-5 bg-card/60">
             <div className="flex flex-col justify-between">
-              <span className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600 px-3.5 py-2 font-display text-xs font-bold uppercase tracking-wider text-white shadow-neon-cyan">
+              <span className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600 px-3.5 py-2 font-display text-xs font-bold uppercase tracking-wider text-white shadow-sm">
                 <LayoutGrid className="h-4 w-4" /> Stat Matrix
               </span>
               <p className="mt-3 text-xs text-muted-foreground">
@@ -208,7 +208,7 @@ export function InteractiveCompare({
                                 "h-full rounded-full transition-all duration-500",
                                 isBest
                                   ? "bg-neon-green shadow-[0_0_8px_rgba(16,185,129,0.7)]"
-                                  : "bg-gradient-to-r from-primary to-accent"
+                                  : "bg-primary"
                               )}
                               style={{ width: `${pct}%` }}
                             />
@@ -226,7 +226,7 @@ export function InteractiveCompare({
 
       {/* Editor's Choice Verdict Banner */}
       <div className="card-surface flex items-start gap-4 border-accent/40 bg-accent/5 p-5 rounded-2xl">
-        <span className="icon-tile h-12 w-12 shrink-0 rounded-full border border-accent/50 bg-accent/10 text-accent shadow-neon-cyan">
+        <span className="icon-tile h-12 w-12 shrink-0 rounded-full border border-accent/50 bg-accent/10 text-accent shadow-sm">
           <Trophy className="h-6 w-6" />
         </span>
         <div>

@@ -324,7 +324,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
           <Button
             onClick={handleShare}
-            className="bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold text-xs shadow-md"
+            className="bg-primary text-primary-foreground font-bold text-xs shadow-md"
           >
             {copied ? <Check className="h-3.5 w-3.5 mr-1 text-emerald-300" /> : <Share2 className="h-3.5 w-3.5 mr-1" />}
             <span>{copied ? "Link Copied!" : "Share Comparison URL"}</span>

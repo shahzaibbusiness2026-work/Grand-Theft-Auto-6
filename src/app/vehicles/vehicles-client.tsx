@@ -151,7 +151,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
               className={cn(
                 "rounded-lg px-3 py-1.5 text-xs font-semibold transition-all",
                 selectedCat === cat
-                  ? "bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-sm font-bold"
+                  ? "bg-primary text-primary-foreground shadow-sm font-bold"
                   : "bg-muted/40 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
               )}
             >

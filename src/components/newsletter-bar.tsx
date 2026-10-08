@@ -41,7 +41,7 @@ export function NewsletterBar({
     <div className={cn("card-surface relative overflow-hidden", className)}>
       <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-accent/5 to-transparent" />
       <div className="relative flex flex-col gap-5 px-6 py-6 md:flex-row md:items-center">
-        <span className="icon-tile h-14 w-14 shrink-0 rounded-full border border-primary/50 bg-primary/10 text-primary shadow-neon-cyan" aria-hidden="true">
+        <span className="icon-tile h-14 w-14 shrink-0 rounded-full border border-primary/50 bg-primary/10 text-primary shadow-sm" aria-hidden="true">
           <Mail className="h-6 w-6" />
         </span>
         <div className="flex-1">

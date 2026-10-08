@@ -229,7 +229,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
 
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <FavoriteButton type="weapons" id={weapon.id} />
-                <Button href={`/compare/weapons?w=${weapon.slug}`} className="bg-gradient-to-r from-primary to-accent text-xs font-bold">
+                <Button href={`/compare/weapons?w=${weapon.slug}`} className="bg-primary text-xs font-bold">
                   Compare in Duel <ArrowRight className="h-3.5 w-3.5 ml-1" />
                 </Button>
                 <Button href="/weapons" variant="outline" className="text-xs font-semibold">

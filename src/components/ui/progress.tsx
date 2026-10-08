@@ -14,7 +14,7 @@ const Progress = React.forwardRef<
       <div
         suppressHydrationWarning
         className={cn(
-          "h-full rounded-full bg-gradient-to-r from-primary to-accent",
+          "h-full rounded-full bg-primary",
           barClassName
         )}
         style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
