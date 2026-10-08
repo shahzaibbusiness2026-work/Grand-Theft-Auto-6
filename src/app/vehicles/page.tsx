@@ -1,5 +1,8 @@
 export { metadata } from './metadata';
 
+// Cache the rendered catalog for 1 hour (see weapons/page.tsx).
+export const revalidate = 3600;
+
 import Link from "next/link";
 import { ArrowRight, Sparkles, Trophy } from "lucide-react";
 import { SiteShell } from "@/components/shells";
@@ -16,7 +19,7 @@ export default async function VehiclesPage() {
     <SiteShell>
       {/* HERO */}
       <section className="container-site pt-8 sm:pt-10">
-        <div className="card-surface relative overflow-hidden rounded-3xl border-border/80 shadow-2xl">
+        <div className="card-surface relative overflow-hidden rounded-3xl border border-border/80 shadow-sm">
           <ThemeImage
             dark="/img/car-purple.jpg"
             light="/img/car-pink.jpg"
@@ -28,8 +31,8 @@ export default async function VehiclesPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-accent">
               <Sparkles className="h-3 w-3" /> Confirmed Roster
             </div>
-            <h1 className="mt-3 font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
-              Massive Vehicle <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Showcase</span>
+            <h1 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-foreground">
+              Vehicle Showcase
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               Browse cars, bikes, boats, planes, and helicopters confirmed for the state of Leonida. Filter by class, compare top speeds, or save favorites to your garage.
@@ -38,7 +41,7 @@ export default async function VehiclesPage() {
         </div>
 
         {/* Global Live Stats Counter */}
-        <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-2 divide-border/80 sm:grid-cols-4 sm:divide-x rounded-2xl shadow-xl">
+        <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-2 divide-border/80 sm:grid-cols-4 sm:divide-x rounded-2xl border border-border shadow-sm">
           {[
             [`${vehicles.length}+`, "Total Confirmed"],
             ["120+", "Sports & Supercars"],
