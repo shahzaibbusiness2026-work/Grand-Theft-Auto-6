@@ -125,7 +125,7 @@ export default function AdminDatabasePage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl sm:text-3xl font-black text-white tracking-tight">
+          <h1 className="font-sans text-2xl sm:text-3xl font-black text-white tracking-tight">
             Database Verification Portal
           </h1>
           <p className="text-sm text-[#94A3BD] mt-1">
@@ -199,7 +199,7 @@ export default function AdminDatabasePage() {
         {filteredAssets.length === 0 ? (
           <div className="col-span-full rounded-2xl border border-[#33415C] bg-[#141C2E] p-12 text-center">
             <HelpCircle className="w-10 h-10 text-[#94A3BD] mx-auto mb-3" />
-            <h3 className="font-display text-base font-bold text-white">No assets found</h3>
+            <h3 className="font-sans text-base font-bold text-white">No assets found</h3>
             <p className="text-xs text-[#94A3BD] mt-1">Try adjusting your filters or search keywords.</p>
           </div>
         ) : (
@@ -217,7 +217,7 @@ export default function AdminDatabasePage() {
                         {ast.category === "weapon" && <Crosshair className="w-4 h-4" />}
                         {ast.category === "location" && <MapPin className="w-4 h-4" />}
                       </span>
-                      <h3 className="font-display text-base font-bold text-white">
+                      <h3 className="font-sans text-base font-bold text-white">
                         {ast.name}
                       </h3>
                     </div>
@@ -299,7 +299,7 @@ export default function AdminDatabasePage() {
             className="w-full max-w-lg rounded-2xl border border-[#33415C] bg-[#141C2E] p-6 shadow-2xl space-y-4"
           >
             <div className="flex items-center justify-between border-b border-[#33415C] pb-3">
-              <h3 className="font-display text-base font-bold text-white">
+              <h3 className="font-sans text-base font-bold text-white">
                 Add Game Asset for Verification
               </h3>
               <button

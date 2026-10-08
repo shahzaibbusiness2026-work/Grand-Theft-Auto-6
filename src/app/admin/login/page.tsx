@@ -84,7 +84,7 @@ function AdminLoginForm() {
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#1C2436] border border-[#6366F1]/40 mb-4">
             <Lock className="w-7 h-7 text-[#6366F1]" />
           </div>
-          <h1 className="font-display text-3xl font-black uppercase tracking-tight text-white">GTA 6 Atlas</h1>
+          <h1 className="font-sans text-3xl font-black uppercase tracking-tight text-white">GTA 6 Atlas</h1>
           <p className="text-sm text-[#64748B] mt-1">Admin Dashboard — Authorized Access Only</p>
         </div>
 
