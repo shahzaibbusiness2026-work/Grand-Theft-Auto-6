@@ -1,4 +1,8 @@
 import { SiteShell } from "@/components/shells";
+// ISR: cache this public content page for 1 hour. Content changes
+// infrequently via the CMS; per-request SSR was causing multi-second loads.
+export const revalidate = 3600;
+
 import { ThemeImage } from "@/components/theme-image";
 import { MissionsClient } from "./missions-client";
 import { Sparkles, Flag, Target, Trophy } from "lucide-react";

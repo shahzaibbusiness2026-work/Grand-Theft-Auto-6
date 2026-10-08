@@ -1,4 +1,8 @@
 // Server Component — no "use client" needed here.
+// ISR: cache this public content page for 1 hour. Content changes
+// infrequently via the CMS; per-request SSR was causing multi-second loads.
+export const revalidate = 3600;
+
 // Only <Countdown> (child) is client-rendered.
 
 import Link from "next/link";

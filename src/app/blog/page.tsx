@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+// ISR: cache this public content page for 1 hour. Content changes
+// infrequently via the CMS; per-request SSR was causing multi-second loads.
+export const revalidate = 3600;
+
 import { SafeImage } from "@/components/safe-image";
 import { ArrowRight, Clock } from "lucide-react";
 import { SiteShell } from "@/components/shells";
