@@ -24,6 +24,7 @@ import {
   Search,
   Settings,
   Mail,
+  MailPlus,
   Database,
   BookOpen,
   Building2,
@@ -76,6 +77,7 @@ export const ADMIN_NAV_SECTIONS: NavSection[] = [
       { label: "Radio Stations", href: "/admin/radio", icon: RadioIcon },
       { label: "Media", href: "/admin/media", icon: ImageIcon },
       { label: "Messages", href: "/admin/messages", icon: Mail },
+      { label: "Subscribers", href: "/admin/subscribers", icon: MailPlus },
     ],
   },
   {

@@ -6,6 +6,12 @@
  * Client-safe pure definitions; scoring comes from @/lib/scoring.
  */
 import type { CanonicalVehicle, CanonicalWeapon } from "@/lib/canonical-data";
+import type { LucideIcon } from "lucide-react";
+import {
+  Gauge, Rocket, Navigation, Disc, Flag, Mountain, Swords, Shield,
+  PiggyBank, Tag, Trophy, Skull, Zap, Focus, Telescope, Flame,
+  Target, Wind, Crosshair, Bomb, Eye,
+} from "lucide-react";
 import {
   computeVehicleScore,
   computeWeaponScore,
@@ -17,7 +23,7 @@ import {
 export interface VehicleRankingDef {
   slug: string;
   title: string;
-  emoji: string;
+  icon: LucideIcon;
   description: string;
   metricLabel: string;
   value: (v: CanonicalVehicle) => number | null;
@@ -28,7 +34,7 @@ export interface VehicleRankingDef {
 export interface WeaponRankingDef {
   slug: string;
   title: string;
-  emoji: string;
+  icon: LucideIcon;
   description: string;
   metricLabel: string;
   value: (w: CanonicalWeapon) => number | null;
@@ -48,7 +54,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "fastest-vehicles",
     title: "Fastest Vehicles in GTA 6",
-    emoji: "🛣️",
+    icon: Gauge,
     description:
       "Every confirmed GTA 6 vehicle ranked by top speed. The definitive fastest cars, bikes, boats and aircraft in Grand Theft Auto VI, updated automatically from our database.",
     metricLabel: "Top Speed",
@@ -58,7 +64,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "best-acceleration",
     title: "Quickest 0–60 Acceleration",
-    emoji: "🚀",
+    icon: Rocket,
     description:
       "GTA 6 vehicles ranked by 0–60 launch. Which confirmed rides in Grand Theft Auto VI hit the mark fastest, from hypercars to superbikes.",
     metricLabel: "0–60 Time",
@@ -69,7 +75,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "best-handling",
     title: "Best Handling Vehicles",
-    emoji: "🎯",
+    icon: Navigation,
     description:
       "The best handling cars and bikes in GTA 6, ranked by grip and cornering from our vehicle database.",
     metricLabel: "Handling",
@@ -79,7 +85,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "best-braking",
     title: "Best Braking Vehicles",
-    emoji: "🛑",
+    icon: Disc,
     description: "GTA 6 vehicles with the strongest brakes, ranked from the community vehicle database.",
     metricLabel: "Braking",
     value: (v) => v.braking,
@@ -88,7 +94,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "best-racing",
     title: "Best Racing Vehicles",
-    emoji: "🏁",
+    icon: Flag,
     description:
       "The best race-day machines in GTA 6 — a composite of top speed, acceleration and handling computed from live database stats.",
     metricLabel: "Racing Score",
@@ -98,7 +104,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "best-off-road",
     title: "Best Off-Road Vehicles",
-    emoji: "🏔️",
+    icon: Mountain,
     description:
       "Best off-road vehicles in GTA 6 for the swamps, everglades and backroads of Leonida, ranked by off-road capability.",
     metricLabel: "Off-Road",
@@ -108,7 +114,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "best-weaponized",
     title: "Best Weaponized Vehicles",
-    emoji: "🔫",
+    icon: Swords,
     description:
       "Vehicles with weapons, armor and special abilities in GTA 6, ranked by combat loadout from the database.",
     metricLabel: "Combat Loadout",
@@ -118,7 +124,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "best-armored",
     title: "Best Armored Vehicles",
-    emoji: "🛡️",
+    icon: Shield,
     description:
       "The most bullet-resistant and armored vehicles in GTA 6, ranked for getaway durability.",
     metricLabel: "Defense Rating",
@@ -128,7 +134,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "cheapest-vehicles",
     title: "Cheapest Vehicles Worth Buying",
-    emoji: "💰",
+    icon: PiggyBank,
     description:
       "The cheapest confirmed vehicles in GTA 6 with a real price, ranked by value for money.",
     metricLabel: "Price",
@@ -139,7 +145,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "best-value-vehicles",
     title: "Best Value Vehicles",
-    emoji: "🏷️",
+    icon: Tag,
     description:
       "Overall performance per dollar — the best cheap-but-capable rides in GTA 6, computed automatically from database stats.",
     metricLabel: "Score per $100k",
@@ -149,7 +155,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
     slug: "best-vehicles-overall",
     title: "Best Vehicles Overall",
-    emoji: "🏆",
+    icon: Trophy,
     description:
       "Every GTA 6 vehicle ranked by our weighted Overall Score — speed, acceleration, handling, braking, traction and special features combined.",
     metricLabel: "Overall Score",
@@ -169,7 +175,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "highest-damage",
     title: "Highest Damage Weapons",
-    emoji: "💀",
+    icon: Skull,
     description:
       "GTA 6 weapons ranked by damage. The hardest-hitting guns in Grand Theft Auto VI, updated automatically from the weapon database.",
     metricLabel: "Damage",
@@ -179,7 +185,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "fastest-firing",
     title: "Fastest Firing Weapons",
-    emoji: "⚡",
+    icon: Zap,
     description: "The fastest firing weapons in GTA 6, ranked by fire rate from the live database.",
     metricLabel: "Fire Rate",
     value: (w) => w.fireRate,
@@ -188,7 +194,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "most-accurate",
     title: "Most Accurate Weapons",
-    emoji: "🎯",
+    icon: Focus,
     description: "Pinpoint accuracy — GTA 6 weapons ranked by accuracy rating from the weapon database.",
     metricLabel: "Accuracy",
     value: (w) => w.accuracy,
@@ -197,7 +203,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "best-range",
     title: "Best Long-Range Weapons",
-    emoji: "🔭",
+    icon: Telescope,
     description: "GTA 6 weapons ranked by effective range for long-distance engagements.",
     metricLabel: "Range",
     value: (w) => w.range,
@@ -206,7 +212,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "highest-dps",
     title: "Highest DPS Weapons",
-    emoji: "🔥",
+    icon: Flame,
     description:
       "DPS = Damage × rate of fire. The highest damage-per-second weapons in GTA 6, computed automatically — never manually entered.",
     metricLabel: "DPS Index",
@@ -216,7 +222,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "best-pistols",
     title: "Best Pistols",
-    emoji: "🔫",
+    icon: Target,
     description: "Every confirmed GTA 6 pistol ranked by overall combat score.",
     metricLabel: "Overall Score",
     value: (w) => (w.klass === "Pistol" ? wScore(w) : null),
@@ -225,7 +231,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "best-smgs",
     title: "Best SMGs",
-    emoji: "🔩",
+    icon: Wind,
     description: "The best submachine guns in GTA 6 ranked by overall combat score.",
     metricLabel: "Overall Score",
     value: (w) => (w.klass === "SMG" ? wScore(w) : null),
@@ -234,7 +240,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "best-assault-rifles",
     title: "Best Assault Rifles",
-    emoji: "🪖",
+    icon: Crosshair,
     description: "The best assault rifles in GTA 6 ranked by overall combat score.",
     metricLabel: "Overall Score",
     value: (w) => (w.klass === "Assault Rifle" ? wScore(w) : null),
@@ -243,7 +249,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "best-shotguns",
     title: "Best Shotguns",
-    emoji: "💥",
+    icon: Bomb,
     description: "The best shotguns in GTA 6 ranked by overall combat score.",
     metricLabel: "Overall Score",
     value: (w) => (w.klass === "Shotgun" ? wScore(w) : null),
@@ -252,7 +258,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "best-snipers",
     title: "Best Snipers",
-    emoji: "🧊",
+    icon: Eye,
     description: "The best sniper rifles in GTA 6 ranked by overall combat score.",
     metricLabel: "Overall Score",
     value: (w) => (w.klass === "Sniper Rifle" ? wScore(w) : null),
@@ -261,7 +267,7 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
   {
     slug: "best-weapons-overall",
     title: "Best Weapons Overall",
-    emoji: "🏆",
+    icon: Trophy,
     description:
       "Every GTA 6 weapon ranked by our weighted Overall Score — damage, fire rate, accuracy, range, reload, magazine and handling combined.",
     metricLabel: "Overall Score",

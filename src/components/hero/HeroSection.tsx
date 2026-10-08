@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Map, Newspaper, Car } from "lucide-react";
 import { HeroBackground } from "./HeroBackground";
 import { Countdown } from "./Countdown";
+import { HeroSignup } from "./HeroSignup";
 import type { ComprehensiveSiteSettings } from "@/lib/services/settings";
 
 interface HeroSectionProps {
@@ -52,6 +53,9 @@ export function HeroSection({ settings }: HeroSectionProps) {
             <Map className="h-4 w-4 text-sky-600 dark:text-[#00F0FF]" />
           </Link>
         </div>
+
+        {/* Pre-launch email capture under countdown */}
+        <HeroSignup />
       </div>
 
       {/* 3. BOTTOM QUICK-ACCESS FEATURE BAR */}

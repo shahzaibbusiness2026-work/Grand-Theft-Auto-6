@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import { VEHICLE_RANKINGS, WEAPON_RANKINGS } from "@/lib/rankings";
+import type { LucideIcon } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,14 +11,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/rankings" },
 };
 
-function RankingCard({ href, emoji, title, description, badge }: { href: string; emoji: string; title: string; description: string; badge: string }) {
+function RankingCard({ href, icon: Icon, title, description, badge }: { href: string; icon: LucideIcon; title: string; description: string; badge: string }) {
   return (
     <Link
       href={href}
       className="card-surface group flex flex-col gap-2 rounded-2xl border border-border p-5 transition-all hover:-translate-y-0.5 hover:shadow-neon-cyan"
     >
       <div className="flex items-center justify-between gap-2">
-        <span className="text-2xl" aria-hidden="true">{emoji}</span>
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent" aria-hidden="true"><Icon className="h-5 w-5" /></span>
         <span className="rounded-full border border-primary/40 bg-primary/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-primary">
           {badge}
         </span>
@@ -63,7 +64,7 @@ export default function RankingsIndexPage() {
               <RankingCard
                 key={r.slug}
                 href={`/rankings/${r.slug}`}
-                emoji={r.emoji}
+                icon={r.icon}
                 title={r.title}
                 description={r.description}
                 badge="Vehicles"
@@ -87,7 +88,7 @@ export default function RankingsIndexPage() {
               <RankingCard
                 key={r.slug}
                 href={`/rankings/${r.slug}`}
-                emoji={r.emoji}
+                icon={r.icon}
                 title={r.title}
                 description={r.description}
                 badge="Weapons"

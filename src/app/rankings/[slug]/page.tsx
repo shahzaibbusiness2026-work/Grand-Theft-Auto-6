@@ -99,6 +99,8 @@ export default async function RankingDetailPage({
 
   if (top.length === 0) notFound();
 
+  const HeroIcon = match.def.icon;
+
   return (
     <SiteShell>
       <div className="container-site py-8">
@@ -110,7 +112,7 @@ export default async function RankingDetailPage({
             <span className="font-semibold text-foreground">{match.def.title}</span>
           </nav>
           <div className="flex items-start gap-3">
-            <span className="text-4xl" aria-hidden="true">{match.def.emoji}</span>
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-accent/30 bg-accent/10 text-accent" aria-hidden="true"><HeroIcon className="h-7 w-7" /></span>
             <div>
               <h1 className="font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-foreground leading-tight">
                 {match.def.title}
