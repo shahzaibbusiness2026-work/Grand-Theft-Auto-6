@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { BellRing, CheckCircle2 } from "lucide-react";
+import { Mail, CheckCircle2, BellRing } from "lucide-react";
 import { subscribeNewsletter } from "@/lib/services/newsletter";
 
 /**
- * Compact email capture shown directly under the hero countdown.
+ * Email capture shown directly under the hero countdown.
  * Reuses the existing `subscribeNewsletter` server action (stores in
  * private_settings via service-role — never anon-readable).
  *
@@ -34,12 +34,12 @@ export function HeroSignup() {
   if (status === "success") {
     return (
       <div
-        className="mx-auto mt-6 flex h-[52px] max-w-md items-center justify-center gap-2.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-5 backdrop-blur"
+        className="mx-auto mt-6 flex w-full max-w-md items-center justify-center gap-2.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4"
         role="status"
       >
-        <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
-        <p className="text-[13px] font-semibold text-emerald-700 dark:text-emerald-300">
-          You&apos;re on the list — we&apos;ll ping you when the tools go live.
+        <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
+        <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+          You&apos;re on the list — we&apos;ll notify you at launch.
         </p>
       </div>
     );
@@ -48,10 +48,11 @@ export function HeroSignup() {
   return (
     <div className="mx-auto mt-6 w-full max-w-md">
       <form
-        className="flex h-[52px] items-center gap-2 rounded-full border border-white/15 bg-black/40 py-1.5 pl-5 pr-1.5 backdrop-blur-xl"
         onSubmit={handleSubmit}
         aria-label="Get notified when GTA 6 tools go live"
+        className="flex items-center gap-2 rounded-2xl border border-border bg-card p-2 pl-4 shadow-sm transition-shadow focus-within:shadow-md focus-within:border-primary/50"
       >
+        <Mail className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
         <label htmlFor="hero-signup-email" className="sr-only">
           Email address
         </label>
@@ -63,23 +64,24 @@ export function HeroSignup() {
           disabled={loading}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Get launch-day tool alerts"
-          className="h-full min-w-0 flex-1 bg-transparent text-[13px] leading-none text-white placeholder:text-slate-400 focus:outline-none disabled:opacity-60"
+          placeholder="Enter your email address"
+          className="h-10 min-w-0 flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex h-full shrink-0 items-center gap-1.5 rounded-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 px-5 text-[13px] font-bold text-white transition-all hover:from-sky-400 hover:to-indigo-500 active:scale-95 disabled:opacity-60"
+          className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-primary px-5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-hover active:scale-95 disabled:opacity-60"
         >
-          <BellRing className="h-3.5 w-3.5" aria-hidden="true" />
+          <BellRing className="h-4 w-4" aria-hidden="true" />
           {loading ? "Joining…" : "Notify me"}
         </button>
       </form>
-      <p className="mt-2 text-center text-[11px] text-slate-500 dark:text-slate-400">
-        Weapons, map, money calculator &amp; guides — straight to your inbox. No spam.
+      <p className="mt-2.5 text-center text-xs leading-relaxed text-muted-foreground">
+        Be first to know when the weapons database, interactive map and money
+        calculator go live. No spam, unsubscribe anytime.
       </p>
       {status === "error" && (
-        <p role="alert" className="mt-1.5 text-center text-[11px] font-semibold text-red-600 dark:text-red-400">
+        <p role="alert" className="mt-1.5 text-center text-xs font-semibold text-red-600 dark:text-red-400">
           Something went wrong — please try again.
         </p>
       )}
