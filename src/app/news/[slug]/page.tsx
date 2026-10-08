@@ -166,7 +166,7 @@ export default async function ArticleDetailPage({ params }: Props) {
               <p className="border-l-2 border-primary/60 pl-4 text-base leading-relaxed text-foreground/90">
                 {article.excerpt}
               </p>
-              <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground">
+              <div className="mt-6 space-y-5 text-base leading-[1.75] text-foreground/90">
                 {paragraphs.map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
