@@ -34,7 +34,7 @@ export function HeroSignup() {
   if (status === "success") {
     return (
       <div
-        className="mx-auto mt-6 flex max-w-md items-center justify-center gap-2.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-5 py-3 backdrop-blur"
+        className="mx-auto mt-6 flex h-[52px] max-w-md items-center justify-center gap-2.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-5 backdrop-blur"
         role="status"
       >
         <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
@@ -48,7 +48,7 @@ export function HeroSignup() {
   return (
     <div className="mx-auto mt-6 w-full max-w-md">
       <form
-        className="flex items-stretch gap-2 rounded-full border border-white/15 bg-black/40 p-1.5 pl-4 backdrop-blur-xl"
+        className="flex h-[52px] items-center gap-2 rounded-full border border-white/15 bg-black/40 py-1.5 pl-5 pr-1.5 backdrop-blur-xl"
         onSubmit={handleSubmit}
         aria-label="Get notified when GTA 6 tools go live"
       >
@@ -64,12 +64,12 @@ export function HeroSignup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Get launch-day tool alerts"
-          className="min-w-0 flex-1 bg-transparent text-[13px] text-white placeholder:text-slate-400 focus:outline-none disabled:opacity-60"
+          className="h-full min-w-0 flex-1 bg-transparent text-[13px] leading-none text-white placeholder:text-slate-400 focus:outline-none disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 px-5 py-2.5 text-[13px] font-bold text-white transition-all hover:from-sky-400 hover:to-indigo-500 active:scale-95 disabled:opacity-60"
+          className="inline-flex h-full shrink-0 items-center gap-1.5 rounded-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 px-5 text-[13px] font-bold text-white transition-all hover:from-sky-400 hover:to-indigo-500 active:scale-95 disabled:opacity-60"
         >
           <BellRing className="h-3.5 w-3.5" aria-hidden="true" />
           {loading ? "Joining…" : "Notify me"}
