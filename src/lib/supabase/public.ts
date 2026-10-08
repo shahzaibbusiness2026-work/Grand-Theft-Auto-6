@@ -8,7 +8,9 @@ import { createClient as createSupabaseClient } from "@supabase/supabase-js";
  * and ISR). Public content (SEO settings, articles, catalogs) doesn't need
  * user cookies — use this client so pages can be statically cached.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// Public client is intentionally untyped (any) — it's only used for
+// simple public reads where the exact row shapes are handled by callers.
+// eslint-disable-next-line
 let publicClient: any = null;
 
 export function createPublicClient() {
