@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 
 import { characters as fallbackCharacters, Character } from "@/lib/data";
@@ -108,7 +109,7 @@ function rowToAdminCharacter(row: DatabaseCharacterRow): AdminCharacter {
  */
 export async function getPublicCharacters(): Promise<Character[]> {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("characters")
       .select("*")

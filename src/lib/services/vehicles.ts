@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
@@ -90,7 +91,7 @@ export type VehicleCatalogRow = DatabaseVehicleRow;
  */
 export async function getPublicVehicleCatalog(): Promise<VehicleCatalogRow[]> {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("vehicles")
       .select("*")
@@ -198,7 +199,7 @@ function rowToAdminVehicle(row: DatabaseVehicleRow): AdminVehicle {
  */
 export async function getPublicVehicles(): Promise<Vehicle[]> {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("vehicles")
       .select("*")

@@ -3,6 +3,7 @@
 import { cache } from "react";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
@@ -131,7 +132,7 @@ export const getPublicArticles = cache(async (): Promise<Article[]> => {
 export async function getPublicArticleBySlug(slug: string): Promise<DatabaseArticleRow | null> {
   if (!slug) return null;
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("articles")
       .select("*")

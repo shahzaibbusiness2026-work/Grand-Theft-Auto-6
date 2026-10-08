@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
@@ -61,7 +62,7 @@ export type WeaponCatalogRow = DatabaseWeaponRow;
  */
 export async function getPublicWeaponCatalog(): Promise<WeaponCatalogRow[]> {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("weapons")
       .select("*")
@@ -158,7 +159,7 @@ export async function getAdminWeapons(): Promise<AdminWeapon[]> {
  */
 export async function getPublicWeapons(): Promise<AdminWeapon[]> {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("weapons")
       .select("*")

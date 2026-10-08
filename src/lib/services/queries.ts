@@ -11,6 +11,7 @@
  * All exports are server-only. Never import from client components.
  */
 
+import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { articles as fallbackArticles, Article, Character, Vehicle } from "@/lib/data";
 import { AdminWeapon } from "@/lib/admin-store";
@@ -118,7 +119,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
   };
 
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
 
     // Run all count and data queries in parallel for performance
     const [

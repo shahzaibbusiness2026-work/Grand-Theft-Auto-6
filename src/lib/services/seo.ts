@@ -3,7 +3,7 @@
 import { cache } from "react";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 
 import { INITIAL_ADMIN_SEO, AdminSeoSettings } from "@/lib/admin-store";
 
@@ -23,7 +23,7 @@ const DEFAULT_SEO = INITIAL_ADMIN_SEO;
  */
 export const getSeoSettings = cache(async (): Promise<AdminSeoSettings> => {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data, error } = await supabase.from("seo_settings").select("*");
 
     if (!error && data && data.length > 0) {

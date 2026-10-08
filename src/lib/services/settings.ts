@@ -3,7 +3,7 @@
 import { cache } from "react";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { SITE_CONFIG } from "@/lib/constants";
 import { INITIAL_ADMIN_SETTINGS, AdminSiteSettings } from "@/lib/admin-store";
@@ -48,11 +48,11 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
  */
 export const getSiteSettings = cache(async (): Promise<ComprehensiveSiteSettings> => {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data, error } = await supabase.from("site_settings").select("*");
 
     if (!error && data && data.length > 0) {
-      const settingsMap = data.reduce((acc, row) => {
+      const settingsMap = data.reduce((acc: Record<string, any>, row: any) => {
         acc[row.key] = row.value;
         return acc;
       }, {} as Record<string, any>);
