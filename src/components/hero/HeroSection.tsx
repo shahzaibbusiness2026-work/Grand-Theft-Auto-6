@@ -35,6 +35,9 @@ export function HeroSection({ settings }: HeroSectionProps) {
           isConfirmed={settings?.isReleaseDateConfirmed}
         />
 
+        {/* Email capture directly below the countdown */}
+        <HeroSignup />
+
         {/* Action Buttons Centered Below Countdown */}
         <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
           <Link
@@ -54,8 +57,6 @@ export function HeroSection({ settings }: HeroSectionProps) {
           </Link>
         </div>
 
-        {/* Pre-launch email capture under countdown */}
-        <HeroSignup />
       </div>
 
       {/* 3. BOTTOM QUICK-ACCESS FEATURE BAR */}
