@@ -26,7 +26,7 @@ export default function BusinessProfitCalculatorPage() {
             <Building2 className="h-3 w-3" /> Enterprise Cashflow Engine
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-            BUSINESS PROFIT & <span className="bg-gradient-to-r from-[#00F0FF] via-purple-500 to-accent bg-clip-text text-transparent">ROI CALCULATOR</span>
+            BUSINESS PROFIT & <span className="text-primary">ROI CALCULATOR</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
             Model passive hourly income, operating overhead, and capital recovery timelines. Compare any two Vice City commercial acquisitions side-by-side.

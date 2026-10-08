@@ -98,7 +98,7 @@ export default async function MissionsPage() {
               <Flag className="h-3 w-3" /> Campaign & Heists Archive
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
-              LEONIDA <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">MISSIONS & HEISTS</span>
+              LEONIDA <span className="text-primary">MISSIONS & HEISTS</span>
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
               Browse confirmed story chapters, multi-approach bank heists, cartel side contracts, and dynamic stranger encounters across Vice City and beyond.

@@ -65,7 +65,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
             id="protagonists-heading"
             className="mt-3 font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-foreground"
           >
-            Meet the <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Protagonists</span>
+            Meet the <span className="text-primary">Protagonists</span>
           </h2>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground">
             Two criminals bound by fate, trust, and ambition in the unforgiving underworld of Leonida.

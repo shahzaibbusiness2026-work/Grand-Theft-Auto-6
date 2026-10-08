@@ -19,7 +19,7 @@ export default function LoadoutBuilderPage() {
             <Crosshair className="h-3 w-3" /> Tactical Armory Builder
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-            GTA 6 <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">LOADOUT BUILDER</span>
+            GTA 6 <span className="text-primary">LOADOUT BUILDER</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
             Engineer your tactical weapon loadouts for Leonida heists, gang warfare, and covert wet operations.

@@ -19,7 +19,7 @@ export default function MoneyMakerPage() {
             <DollarSign className="h-3 w-3" /> Financial Advisory Engine
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-            MONEY-MAKING <span className="bg-gradient-to-r from-emerald-400 via-primary to-accent bg-clip-text text-transparent">METHOD FINDER</span>
+            MONEY-MAKING <span className="text-primary">METHOD FINDER</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
             Find the most profitable solo and co-op cash methods across Leonida. Filter by starting capital, squad size, and risk appetite to maximize your hourly earnings.

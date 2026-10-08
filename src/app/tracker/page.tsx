@@ -25,7 +25,7 @@ export default async function TrackerPage() {
             <Trophy className="h-3 w-3" /> 100% Game Completion
           </div>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
-            LEONIDA <span className="bg-gradient-to-r from-amber-500 via-primary to-accent bg-clip-text text-transparent">COMPLETION TRACKER</span>
+            LEONIDA <span className="text-primary">COMPLETION TRACKER</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
             Track your road to 100% completion across all 11 core categories in Grand Theft Auto VI.

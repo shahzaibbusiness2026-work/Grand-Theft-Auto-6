@@ -95,7 +95,7 @@ export function MapClient() {
                 <Radio className="h-3 w-3 animate-pulse" /> Official Interactive Radar
               </div>
               <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
-                LEONIDA STATE <span className="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 bg-clip-text text-transparent">SATELLITE ATLAS</span>
+                LEONIDA STATE <span className="text-primary">SATELLITE ATLAS</span>
               </h1>
               <p className="mt-3 text-sm leading-relaxed text-slate-300 font-medium">
                 Explore every street, island, mission, weapon cache, mod garage, and hidden easter egg across the entire state of Leonida in Ultra-HD 4K reconnaissance.

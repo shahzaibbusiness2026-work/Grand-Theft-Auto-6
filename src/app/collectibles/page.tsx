@@ -66,7 +66,7 @@ export default async function CollectiblesPage() {
             <Compass className="h-3 w-3" /> Leonida Collectibles Database
           </div>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
-            COLLECTIBLES <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">FINDER & GUIDE</span>
+            COLLECTIBLES <span className="text-primary">FINDER & GUIDE</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
             Locate every hidden contraband package, stunt ramp, pirate radio mast, and rare wildlife species across the State of Leonida.

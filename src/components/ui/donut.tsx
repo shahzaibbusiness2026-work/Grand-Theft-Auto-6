@@ -86,7 +86,7 @@ export function Donut({
             className={cn(
               "font-display font-extrabold tabular-nums leading-none tracking-tight",
               isLarge &&
-                "text-4xl sm:text-5xl font-black bg-gradient-to-b from-sky-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow",
+                "text-4xl sm:text-5xl font-black text-primary",
               isMedium && "text-2xl text-foreground font-black",
               isSmall && "text-[12px] font-bold text-foreground"
             )}

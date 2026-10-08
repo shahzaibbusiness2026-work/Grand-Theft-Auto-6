@@ -60,7 +60,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
           onClick={onItemClick}
           className="group inline-flex flex-col leading-none focus:outline-none"
         >
-          <span className="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 bg-clip-text font-display text-[26px] font-black tracking-tight text-transparent drop-shadow-[0_2px_12px_rgba(245,158,11,0.35)]">
+          <span className="text-primary font-display text-[26px] font-black tracking-tight">
             GTA 6
           </span>
           <span className="mt-0.5 font-mono text-[9px] font-black uppercase tracking-[0.45em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">

@@ -211,7 +211,7 @@ export default function ToolsPage() {
               <Sparkles className="h-3 w-3" /> Complete Utility Suite
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
-              GTA 6 ATLAS <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">TOOLBOX</span>
+              GTA 6 ATLAS <span className="text-primary">TOOLBOX</span>
             </h1>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Explore all 15 fully interactive utilities engineered for Grand Theft Auto VI.

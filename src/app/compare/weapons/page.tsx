@@ -24,7 +24,7 @@ export default async function CompareWeaponsPage() {
             <Crosshair className="h-3 w-3" /> Armory Stat Comparison
           </div>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
-            COMPARE <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">GTA 6 WEAPONS</span>
+            COMPARE <span className="text-primary">GTA 6 WEAPONS</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
             Select 2 to 4 confirmed firearms to compare side-by-side DPS, recoil patterns, reload timings, ammo capacities, and tactical verdicts.

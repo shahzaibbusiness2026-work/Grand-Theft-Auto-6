@@ -12,7 +12,7 @@ export function Logo({ className, href = "/" }: { className?: string; href?: str
       )}
       aria-label="GTA 6 Atlas Home"
     >
-      <span className="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 bg-clip-text font-display text-[21px] font-black tracking-tight text-transparent drop-shadow-[0_2px_10px_rgba(245,158,11,0.25)]">
+      <span className="text-primary font-display text-[21px] font-black tracking-tight">
         GTA6
       </span>
       <span className="mt-1 flex items-center gap-1 font-mono text-[11px] font-bold uppercase tracking-[0.38em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_6px_rgba(0,240,255,0.3)]">

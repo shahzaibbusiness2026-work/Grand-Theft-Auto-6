@@ -72,7 +72,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
 
               <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
                 Meet the People of{" "}
-                <span className="bg-gradient-to-r from-pink-400 via-purple-300 to-cyan-300 bg-clip-text text-transparent">
+                <span className="text-primary">
                   Leonida
                 </span>
               </h1>

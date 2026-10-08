@@ -71,7 +71,7 @@ export default async function PropertiesPage() {
             <Building2 className="h-3 w-3" /> Leonida Real Estate Exchange
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-            PROPERTIES & <span className="bg-gradient-to-r from-amber-400 via-primary to-accent bg-clip-text text-transparent">BUSINESSES</span>
+            PROPERTIES & <span className="text-primary">BUSINESSES</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
             Browse and compare confirmed safehouses, commercial warehouses, chop shops, and nightclubs.

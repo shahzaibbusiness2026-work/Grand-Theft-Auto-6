@@ -20,7 +20,7 @@ export default function PricingPage() {
             <Crown className="h-3.5 w-3.5 text-amber-400" /> Membership Tiers
           </div>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
-            UNLOCK <span className="bg-gradient-to-r from-primary via-accent to-amber-400 bg-clip-text text-transparent">VICE CITY PRO</span>
+            UNLOCK <span className="text-primary">VICE CITY PRO</span>
           </h1>
           <p className="text-sm text-muted-foreground">
             Get the ultimate competitive edge in Grand Theft Auto VI with 4-way comparisons, unlimited AI research queries, and cloud backup synchronization.

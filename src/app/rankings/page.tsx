@@ -41,7 +41,7 @@ export default function RankingsIndexPage() {
             🏆 Auto-Generated Rankings
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-            GTA 6 <span className="bg-gradient-to-r from-amber-500 via-primary to-accent bg-clip-text text-transparent">BEST OF RANKINGS</span>
+            GTA 6 <span className="text-primary">BEST OF RANKINGS</span>
           </h1>
           <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
             Every ranking below is computed automatically from our vehicle and weapon database — the same CMS data
