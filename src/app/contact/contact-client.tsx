@@ -140,7 +140,7 @@ export function ContactClient() {
             )}
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <div>
-                <label htmlFor="contact-name" className="sr-only">Your Name</label>
+                <label htmlFor="contact-name" className="mb-1.5 block text-xs font-semibold text-foreground">Your Name</label>
                 <Input
                   id="contact-name"
                   placeholder="Your Name"
@@ -150,7 +150,7 @@ export function ContactClient() {
                 />
               </div>
               <div>
-                <label htmlFor="contact-email" className="sr-only">Your Email</label>
+                <label htmlFor="contact-email" className="mb-1.5 block text-xs font-semibold text-foreground">Your Email</label>
                 <Input
                   id="contact-email"
                   placeholder="Your Email"
@@ -162,18 +162,17 @@ export function ContactClient() {
               </div>
             </div>
             <div>
-              <label htmlFor="contact-subject" className="sr-only">Subject</label>
+              <label htmlFor="contact-subject" className="mb-1.5 block text-xs font-semibold text-foreground">Subject</label>
               <Input
                 id="contact-subject"
                 placeholder="Subject"
-                className="mt-4"
                 required
                 value={form.subject}
                 onChange={(e) => setForm({ ...form, subject: e.target.value })}
               />
             </div>
             <div>
-              <label htmlFor="contact-message" className="sr-only">Message</label>
+              <label htmlFor="contact-message" className="mb-1.5 block text-xs font-semibold text-foreground">Message</label>
               <textarea
                 id="contact-message"
                 placeholder="Message"
