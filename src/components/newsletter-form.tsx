@@ -33,8 +33,8 @@ export function NewsletterForm() {
   if (status === "success") {
     return (
       <div className="mt-7 flex max-w-md items-center gap-3 rounded-xl border border-neon-green/40 bg-neon-green/10 px-5 py-4">
-        <CheckCircle className="h-5 w-5 shrink-0 text-neon-green" aria-hidden="true" />
-        <p className="text-sm font-semibold text-neon-green">
+        <CheckCircle className="h-5 w-5 shrink-0 text-emerald-700 dark:text-emerald-400" aria-hidden="true" />
+        <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">
           You&apos;re subscribed! Welcome to the Atlas community.
         </p>
       </div>

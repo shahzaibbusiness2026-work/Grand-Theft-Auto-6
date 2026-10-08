@@ -127,7 +127,7 @@ function AdminLoginForm() {
 
             {/* Error */}
             {error && (
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-red-950/40 border border-red-500/30 text-red-400 text-xs">
+              <div role="alert" className="flex items-center gap-2.5 p-3 rounded-xl bg-red-950/40 border border-red-500/30 text-red-400 text-xs">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>

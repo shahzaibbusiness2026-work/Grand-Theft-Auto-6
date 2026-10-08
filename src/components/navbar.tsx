@@ -120,7 +120,7 @@ function SplitNavDropdown({
       className={cn(
         "relative flex items-center rounded-lg transition-all duration-200",
         active
-          ? "border border-amber-500/40 bg-amber-500/10 text-amber-500 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+          ? "border border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
           : "border border-transparent text-muted-foreground hover:bg-muted/80 hover:text-foreground"
       )}
     >
@@ -160,7 +160,7 @@ function SplitNavDropdown({
               className={cn(
                 "block rounded-lg px-3 py-2 text-xs font-medium tracking-wide transition-colors",
                 pathname === m.href
-                  ? "bg-amber-500/15 text-amber-500 dark:text-amber-400 font-bold"
+                  ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 font-bold"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
             >
@@ -248,7 +248,7 @@ export function Navbar() {
                 className={cn(
                   "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
                   isActive(l.href)
-                    ? "border border-amber-500/40 bg-amber-500/10 text-amber-500 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+                    ? "border border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
                     : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
@@ -267,7 +267,7 @@ export function Navbar() {
               className={cn(
                 "flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
                 MORE_LINKS.some((l) => isActive(l.href))
-                  ? "border border-amber-500/40 bg-amber-500/10 text-amber-500 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+                  ? "border border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
                   : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
               )}
             >
@@ -293,7 +293,7 @@ export function Navbar() {
                     className={cn(
                       "block rounded-lg px-3 py-2 text-xs font-medium tracking-wide transition-colors",
                       isActive(l.href)
-                        ? "bg-amber-500/15 text-amber-500 dark:text-amber-400 font-bold"
+                        ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 font-bold"
                         : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     )}
                   >
@@ -310,7 +310,7 @@ export function Navbar() {
           {/* Ask AI Quick Button */}
           <Link
             href="/ai"
-            className="hidden sm:inline-flex items-center gap-1 rounded-lg border border-amber-500/40 bg-amber-500/10 px-2.5 py-1.5 text-xs font-bold text-amber-500 dark:text-amber-400 hover:bg-amber-500 hover:text-slate-950 transition-all shadow-sm"
+            className="hidden sm:inline-flex items-center gap-1 rounded-lg border border-amber-500/40 bg-amber-500/10 px-2.5 py-1.5 text-xs font-bold text-amber-700 dark:text-amber-400 hover:bg-amber-500 hover:text-slate-950 transition-all shadow-sm"
             title="Ask GTA 6 AI"
           >
             <Bot className="h-3.5 w-3.5" />
@@ -323,7 +323,7 @@ export function Navbar() {
             onClick={() => setPaletteOpen(true)}
             aria-label="Search the Atlas (⌘K)"
             title="Search the Atlas (⌘K)"
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-amber-500/50 hover:bg-amber-500/10 hover:text-amber-500 dark:hover:text-amber-400 focus-visible:outline-none active:scale-95"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-amber-500/50 hover:bg-amber-500/10 hover:text-amber-500 dark:hover:text-amber-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95"
           >
             <Search className="h-4 w-4" />
           </button>
@@ -376,7 +376,7 @@ export function Navbar() {
                 setMobileOpen(false);
                 setPaletteOpen(true);
               }}
-              className="mb-2 flex w-full items-center gap-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-amber-500 dark:text-amber-400 transition-colors"
+              className="mb-2 flex w-full items-center gap-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-400 transition-colors"
             >
               <Search className="h-4 w-4" />
               <span>Search All 15 Tools, Rides, Guns...</span>
@@ -395,7 +395,7 @@ export function Navbar() {
                   className={cn(
                     "rounded-xl px-4 py-2.5 text-sm font-semibold tracking-wide transition-colors",
                     active
-                      ? "bg-amber-500/15 text-amber-500 dark:text-amber-400 font-bold"
+                      ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 font-bold"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
                 >

@@ -261,11 +261,13 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
               setSelectedIndex(0);
             }}
             placeholder="Search all 15 tools, rides, armory, missions, properties, or locations..."
+            aria-label="Search the Atlas"
             className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
           {query && (
             <button
               onClick={() => setQuery("")}
+              aria-label="Clear search"
               className="p-1 text-muted-foreground hover:text-foreground"
             >
               <X className="h-4 w-4" />

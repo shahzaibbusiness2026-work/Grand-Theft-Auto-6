@@ -208,7 +208,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
       </div>
 
       {/* 2. 4-Column Responsive Digit Grid (Frosted Glass Cards with Cyan Accents) */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 py-4 text-center" aria-hidden="true">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 py-4 text-center" role="group" aria-label="Countdown units">
         {cells.map((cell) => {
           const isSelected = selectedUnit === cell.label;
           return (
@@ -216,6 +216,8 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
               key={cell.label}
               type="button"
               onClick={() => setSelectedUnit(isSelected ? null : cell.label)}
+              aria-label={`${cell.value} ${cell.label}${isSelected ? " (selected)" : ""}`}
+              aria-pressed={isSelected}
               className={cn(
                 "group relative flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-all border backdrop-blur-xl",
                 isSelected
