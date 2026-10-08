@@ -250,7 +250,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   {/* Objectives summary */}
                   <div className="rounded-2xl border-border bg-muted/60 p-3 space-y-1 text-xs">
                     <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">Key Objective:</span>
-                    <p className="text-[11px] text-foreground truncate">🎯 {m.objectives[0]}</p>
+                    <p className="text-xs text-foreground truncate">{m.objectives[0]}</p>
                   </div>
 
                   {/* Card Footer */}

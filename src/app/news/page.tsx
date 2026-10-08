@@ -36,7 +36,7 @@ export default async function NewsPage() {
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
           <div className="pointer-events-none absolute right-1/3 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
           <div className="relative px-6 py-12 sm:px-10">
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[11px] font-black uppercase tracking-widest text-accent mb-3">News & Articles</div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-accent mb-3">News & Articles</div>
             <h1 className="mt-3 max-w-lg font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
               Stay Updated with the Latest from <span className="text-primary">Leonida</span>
             </h1>
@@ -62,7 +62,7 @@ export default async function NewsPage() {
             <Badge variant="solid" className="absolute left-3 top-3 z-10">Featured</Badge>
           </div>
           <div className="flex flex-col justify-center p-6">
-            <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <time dateTime={heroArticle.date}>{heroArticle.date}</time>
               <span className="text-border" aria-hidden="true">•</span>
               <span className="flex items-center gap-1">

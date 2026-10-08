@@ -54,23 +54,25 @@ export function NewsletterBar({
             <p className="text-sm font-semibold text-neon-green">Subscribed!</p>
           </div>
         ) : (
-          <form className="flex w-full max-w-md gap-2" onSubmit={handleSubmit} aria-label="Newsletter sign-up">
-            <div className="flex-1">
-              <label htmlFor="newsletter-bar-email" className="sr-only">Email address</label>
-              <Input
-                id="newsletter-bar-email"
-                type="email"
-                placeholder="Enter your email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="email"
-                disabled={loading}
-              />
+          <form className="w-full max-w-md" onSubmit={handleSubmit} aria-label="Newsletter sign-up">
+            <label htmlFor="newsletter-bar-email" className="mb-1.5 block text-xs font-semibold text-foreground">Email address</label>
+            <div className="flex gap-2">
+              <div className="flex-1">
+                <Input
+                  id="newsletter-bar-email"
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                  disabled={loading}
+                />
+              </div>
+              <Button type="submit" className="shrink-0" disabled={loading}>
+                {loading ? "..." : "Subscribe"} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Button>
             </div>
-            <Button type="submit" className="shrink-0" disabled={loading}>
-              {loading ? "..." : "Subscribe"} <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Button>
           </form>
         )}
       </div>

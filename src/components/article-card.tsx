@@ -23,7 +23,7 @@ export function ArticleCard({ article, className }: { article: Article; classNam
         )}
       </div>
       <div className="p-4">
-        <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <time dateTime={toIsoDate(article.date)}>{article.date}</time>
           <span className="text-border" aria-hidden="true">•</span>
           <span className="flex items-center gap-1">
@@ -62,7 +62,7 @@ export function PopularRow({ article }: { article: Article }) {
       </div>
       <div>
         <p className="line-clamp-2 text-[13px] font-semibold leading-snug">{article.title}</p>
-        <time className="mt-0.5 block text-[11px] text-muted-foreground" dateTime={toIsoDate(article.date)}>
+        <time className="mt-0.5 block text-xs text-muted-foreground" dateTime={toIsoDate(article.date)}>
           {article.date}
         </time>
       </div>
@@ -88,7 +88,7 @@ export function CategoryList({ categories }: { categories: { label: string; coun
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
                 {c.label}
               </span>
-              <span className="text-[11px]" aria-label={`${c.count} articles`}>{c.count}</span>
+              <span className="text-xs" aria-label={`${c.count} articles`}>{c.count}</span>
             </Link>
           </li>
         ))}
