@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${collectible.title} â€” Location & Guide | GTA 6 Atlas`,
+    title: `${collectible.title} — Location & Guide | GTA 6 Atlas`,
     description: `Complete guide and coordinate location for ${collectible.title} in ${collectible.district}. Requirements: ${collectible.requirements}.`,
     alternates: { canonical: `/collectibles/${collectible.slug}` },
   };

@@ -4,7 +4,7 @@ import { Crosshair, Shield } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Tactical Loadout Builder & Armory Scoring â€” GTA 6 Atlas",
+  title: "GTA 6 Tactical Loadout Builder & Armory Scoring — GTA 6 Atlas",
   description:
     "Assemble and simulate custom GTA 6 weapon loadouts for heists, street wars, and recon operations. Real-time firepower, mobility, and stealth ratings with offline saving.",
 };

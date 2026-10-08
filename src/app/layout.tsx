@@ -9,7 +9,7 @@ import "./globals.css";
 const poppins = Poppins({
   subsets: ["latin"],
   // Only load weights actually used by the design system
-  weight: ["700", "800"],
+  weight: ["700", "800", "900"],
   variable: "--font-display",
   display: "swap",
   preload: true,
@@ -17,7 +17,7 @@ const poppins = Poppins({
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
   preload: true,

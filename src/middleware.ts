@@ -16,7 +16,11 @@ async function getCmsRedirects(): Promise<RedirectRule[]> {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/seo_settings?select=value&key=eq.redirects`,
-      { headers: { apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "" } }
+      {
+        headers: { apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "" },
+        // Never let a slow CMS outage hang page loads; fail fast to "no redirects".
+        signal: AbortSignal.timeout(3000),
+      }
     );
     if (!res.ok) throw new Error(`seo_settings fetch failed: ${res.status}`);
     const rows = (await res.json()) as { value: string }[];
@@ -40,9 +44,18 @@ export async function middleware(request: NextRequest) {
   if (!pathname.startsWith("/admin") && !pathname.startsWith("/api")) {
     const rules = await getCmsRedirects();
     const match = rules.find((r) => r.enabled && r.fromUrl === pathname);
-    if (match && match.toUrl && match.toUrl !== pathname) {
+    // Only honor relative redirect targets. An absolute toUrl (from a CMS
+    // typo or a compromised admin) would turn this trusted domain into an
+    // open redirect for phishing — never follow it.
+    const toUrl = match?.toUrl;
+    const isSafeTarget =
+      typeof toUrl === "string" &&
+      toUrl.startsWith("/") &&
+      !toUrl.startsWith("//") &&
+      toUrl !== pathname;
+    if (match && isSafeTarget) {
       const status = match.type === "302" ? 302 : 301;
-      return NextResponse.redirect(new URL(match.toUrl, request.url), status);
+      return NextResponse.redirect(new URL(toUrl, request.url), status);
     }
     return response;
   }

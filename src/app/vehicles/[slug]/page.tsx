@@ -116,7 +116,7 @@ async function resolveVehicle(slug: string): Promise<CanonicalVehicle | undefine
       };
     }
   } catch {
-    // DB unreachable â€” canonical lookup stands
+    // DB unreachable — canonical lookup stands
   }
   return canonical;
 }
@@ -138,11 +138,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!vehicle) notFound();
 
   return {
-    title: `${vehicle.name} (${vehicle.klass}) â€” GTA 6 Stats, Speed & Location`,
+    title: `${vehicle.name} (${vehicle.klass}) — GTA 6 Stats, Speed & Location`,
     description: `Full verified breakdown of the ${vehicle.name} in GTA 6: Top speed ${vehicle.topSpeed} mph, ${vehicle.acceleration}s 0-60, ${vehicle.priceDisplay} price, customization, and spawn locations.`,
     alternates: { canonical: `/vehicles/${vehicle.slug}` },
     openGraph: {
-      title: `${vehicle.name} â€” GTA 6 Vehicle Guide`,
+      title: `${vehicle.name} — GTA 6 Vehicle Guide`,
       description: vehicle.description,
       images: [vehicle.img],
     },
@@ -165,7 +165,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
 
   const statBars = [
     { icon: Gauge, label: "Top Speed", value: `${vehicle.topSpeed} mph`, pct: speedPct },
-    { icon: Timer, label: "0â€“60 Launch", value: `${vehicle.acceleration}s`, pct: accelPct },
+    { icon: Timer, label: "0–60 Launch", value: `${vehicle.acceleration}s`, pct: accelPct },
     { icon: Disc3, label: "Braking Response", value: `${vehicle.braking}/100`, pct: brakingPct },
     { icon: Car, label: "Handling & Grip", value: `${vehicle.handling}/100`, pct: handlingPct },
     ...(vehicle.traction != null

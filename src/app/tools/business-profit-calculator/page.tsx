@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Business Profit & ROI Calculator â€” Nightclub, Chop Shop & Warehouse",
+  title: "GTA 6 Business Profit & ROI Calculator — Nightclub, Chop Shop & Warehouse",
   description: "Calculate break-even hours, passive daily income, and annual return on investment (ROI) across GTA 6 commercial businesses and properties.",
 };
 

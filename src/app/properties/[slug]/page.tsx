@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${prop.name} (${prop.type}) â€” Property Dossier | GTA 6 Atlas`,
+    title: `${prop.name} (${prop.type}) — Property Dossier | GTA 6 Atlas`,
     description: `Official real estate breakdown for ${prop.name} in ${prop.district}. Price: ${prop.priceDisplay}, Garage: ${prop.garageCapacity} vehicles, Passive Income: ${prop.passiveIncomeDisplay}.`,
     alternates: { canonical: `/properties/${prop.slug}` },
   };

@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Money Calculator â€” Hours, Missions & Estimated Goal Date",
+  title: "GTA 6 Money Calculator — Hours, Missions & Estimated Goal Date",
   description: "Calculate how many missions, hours, and playing days you need to afford any supercar, luxury penthouse, or business in GTA 6.",
 };
 

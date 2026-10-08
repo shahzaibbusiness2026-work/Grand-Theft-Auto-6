@@ -127,22 +127,22 @@ export function MapClient() {
       </div>
 
       {/* Regional Exploration Guides */}
-      <div className="container-site pb-20 pt-8 border-t border-white/10">
+      <div className="container-site pb-20 pt-8 border-t border-border">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-500 dark:text-amber-400 mb-1">
               <Compass className="h-3.5 w-3.5" /> Regional Intel
             </div>
-            <h2 className="font-display text-2xl sm:text-3xl font-black uppercase text-white tracking-wide">
+            <h2 className="font-display text-2xl sm:text-3xl font-black uppercase text-foreground tracking-wide">
               Districts of Leonida
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-slate-400">
+            <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
               Detailed breakdown of verified mission targets, collectibles, and points of interest by region
             </p>
           </div>
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold text-slate-200 hover:text-white hover:border-amber-500/50 transition-all"
+            className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-xs font-bold text-foreground hover:text-foreground hover:border-amber-500/50 transition-all"
           >
             <span>Open 100% Progress Tracker</span>
             <ChevronRight className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400" />

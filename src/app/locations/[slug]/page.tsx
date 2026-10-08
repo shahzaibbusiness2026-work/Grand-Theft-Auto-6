@@ -59,7 +59,7 @@ async function resolveLocation(slug: string): Promise<CanonicalLocation | undefi
       };
     }
   } catch {
-    // DB unreachable â€” canonical lookup stands
+    // DB unreachable — canonical lookup stands
   }
   return canonical;
 }
@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${loc.name} (${loc.district}) â€” Point of Interest Dossier | GTA 6 Atlas`,
+    title: `${loc.name} (${loc.district}) — Point of Interest Dossier | GTA 6 Atlas`,
     description: `Official intel briefing and satellite map coordinates for ${loc.name} in ${loc.district}, State of Leonida. Threat level: ${loc.threatLevel}.`,
     alternates: { canonical: `/locations/${loc.slug}` },
   };

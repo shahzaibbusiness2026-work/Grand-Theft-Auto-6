@@ -27,7 +27,7 @@ const rarityStyles: Record<string, string> = {
   Featured: "bg-accent/15 text-accent border-accent/40",
   Legendary: "bg-amber-500/15 text-amber-400 border-amber-500/40",
   Epic: "bg-purple-500/15 text-purple-400 border-purple-500/40",
-  Rare: "bg-cyan-500 dark:bg-[#00F0FF]/15 text-cyan-600 dark:text-[#00F0FF] border-cyan-500 dark:border-[#00F0FF]/40",
+  Rare: "bg-cyan-500/15 dark:bg-[#00F0FF]/15 text-cyan-700 dark:text-[#00F0FF] border-cyan-500/40 dark:border-[#00F0FF]/40",
   Common: "bg-muted text-muted-foreground border-border",
 };
 
@@ -86,7 +86,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search firearms, shotguns, sniper rifles..."
-              className="w-full rounded-xl border-border bg-muted/60 py-2.5 pl-10 pr-4 text-xs text-white placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+              className="w-full rounded-xl border-border bg-muted/60 py-2.5 pl-10 pr-4 text-xs text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             />
           </div>
 
@@ -96,7 +96,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("damage")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "damage" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
+                  sortBy === "damage" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Damage
@@ -105,7 +105,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("fireRate")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "fireRate" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
+                  sortBy === "fireRate" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Fire Rate
@@ -114,7 +114,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("range")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "range" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
+                  sortBy === "range" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Range
@@ -123,7 +123,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 onClick={() => setSortBy("price")}
                 className={cn(
                   "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
-                  sortBy === "price" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
+                  sortBy === "price" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Price
@@ -150,7 +150,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                 "rounded-lg px-3 py-1 text-xs font-semibold transition-all",
                 selectedCat === cat
                   ? "bg-gradient-to-r from-primary to-accent text-white font-bold shadow-sm"
-                  : "bg-muted/40 text-muted-foreground hover:text-white"
+                  : "bg-muted/40 text-muted-foreground hover:text-foreground"
               )}
             >
               {cat}
@@ -163,13 +163,13 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
       <div>
         <div className="flex items-center justify-between mb-4">
           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Showing <span className="text-white font-mono">{filteredWeapons.length}</span> Verified Weapons
+            Showing <span className="text-foreground font-mono">{filteredWeapons.length}</span> Verified Weapons
           </p>
         </div>
 
         {filteredWeapons.length === 0 ? (
           <div className="card-surface p-12 text-center rounded-2xl border border-border">
-            <p className="font-display text-lg font-bold text-white">No weapons found</p>
+            <p className="font-display text-lg font-bold text-foreground">No weapons found</p>
             <p className="text-xs text-muted-foreground mt-1">Try resetting your search query.</p>
           </div>
         ) : (
@@ -220,7 +220,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                   {/* Details */}
                   <div className="p-4 flex-1 flex flex-col justify-between space-y-4">
                     <div>
-                      <h3 className="font-display text-base font-black text-white group-hover:text-accent transition-colors truncate">
+                      <h3 className="font-display text-base font-black text-foreground group-hover:text-accent transition-colors truncate">
                         {w.name}
                       </h3>
                       <p className="text-[11px] text-muted-foreground mt-0.5">{w.klass} &bull; {w.ammoType}</p>
@@ -231,7 +231,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       <div>
                         <div className="flex justify-between text-[11px] font-semibold text-muted-foreground">
                           <span>Damage</span>
-                          <span className="font-mono text-white font-bold">{w.damage}/100</span>
+                          <span className="font-mono text-foreground font-bold">{w.damage}/100</span>
                         </div>
                         <Progress value={w.damage} className="h-1.5 mt-1" />
                       </div>
@@ -239,7 +239,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       <div>
                         <div className="flex justify-between text-[11px] font-semibold text-muted-foreground">
                           <span>Fire Rate</span>
-                          <span className="font-mono text-white font-bold">{w.fireRate}/100</span>
+                          <span className="font-mono text-foreground font-bold">{w.fireRate}/100</span>
                         </div>
                         <Progress value={w.fireRate} className="h-1.5 mt-1" />
                       </div>
@@ -250,7 +250,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       <span className="font-mono text-xs font-black text-cyan-600 dark:text-[#00F0FF]">{w.priceDisplay}</span>
                       <Link
                         href={`/weapons/${w.slug}`}
-                        className="inline-flex items-center gap-1 text-xs font-bold text-accent hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-accent hover:text-foreground transition-colors"
                       >
                         <span>View Specs</span>
                         <ArrowRight className="h-3 w-3" />

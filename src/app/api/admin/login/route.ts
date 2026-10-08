@@ -21,7 +21,10 @@ import { createAdminSessionToken } from "@/lib/auth/session";
  * path is disabled entirely (fail closed).
  */
 
-const MASTER_EMAILS = (process.env.ADMIN_MASTER_EMAILS || "shahzaib@gta6.com,admin@gta6.com")
+/* Fail closed: no hardcoded fallback emails. If ADMIN_MASTER_EMAILS is unset,
+ * the master-email path is disabled entirely (same philosophy as the password).
+ * Set ADMIN_MASTER_EMAILS="you@yourdomain.com" in production env. */
+const MASTER_EMAILS = (process.env.ADMIN_MASTER_EMAILS || "")
   .split(",")
   .map((e) => e.trim().toLowerCase())
   .filter(Boolean);

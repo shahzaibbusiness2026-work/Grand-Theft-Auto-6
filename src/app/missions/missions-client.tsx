@@ -68,7 +68,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search missions, districts, or objectives..."
-              className="w-full rounded-xl border-border bg-muted/60 py-2.5 pl-10 pr-4 text-xs text-white placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+              className="w-full rounded-xl border-border bg-muted/60 py-2.5 pl-10 pr-4 text-xs text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             />
           </div>
 
@@ -78,7 +78,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
               onClick={() => setSortBy("default")}
               className={cn(
                 "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                sortBy === "default" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
+                sortBy === "default" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
               Default
@@ -87,7 +87,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
               onClick={() => setSortBy("reward")}
               className={cn(
                 "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                sortBy === "reward" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
+                sortBy === "reward" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
               Highest Payout
@@ -96,7 +96,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
               onClick={() => setSortBy("title")}
               className={cn(
                 "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
-                sortBy === "title" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-white"
+                sortBy === "title" ? "bg-accent text-white font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
               Title A–Z
@@ -118,7 +118,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                     "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
                     selectedType === t
                       ? "bg-cyan-500 dark:bg-[#00F0FF] text-black font-bold shadow-sm"
-                      : "bg-muted/40 text-muted-foreground hover:text-white"
+                      : "bg-muted/40 text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {t}
@@ -139,7 +139,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                     "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
                     selectedChar === c
                       ? "bg-accent text-white font-bold shadow-sm"
-                      : "bg-muted/40 text-muted-foreground hover:text-white"
+                      : "bg-muted/40 text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {c}
@@ -160,7 +160,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                     "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
                     selectedDiff === d
                       ? "bg-amber-400 text-black font-bold shadow-sm"
-                      : "bg-muted/40 text-muted-foreground hover:text-white"
+                      : "bg-muted/40 text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {d}
@@ -175,13 +175,13 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
       <div>
         <div className="flex items-center justify-between mb-4">
           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Showing <span className="text-white font-mono">{filteredMissions.length}</span> Verified Missions & Contracts
+            Showing <span className="text-foreground font-mono">{filteredMissions.length}</span> Verified Missions & Contracts
           </p>
         </div>
 
         {filteredMissions.length === 0 ? (
           <div className="card-surface p-12 text-center rounded-3xl border border-border">
-            <p className="font-display text-lg font-bold text-white">No missions found matching your filters</p>
+            <p className="font-display text-lg font-bold text-foreground">No missions found matching your filters</p>
             <p className="text-xs text-muted-foreground mt-1">Try resetting your search query or selecting &ldquo;All Types&rdquo;.</p>
             <button
               onClick={() => {
@@ -239,7 +239,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                       <Users className="h-3 w-3" />
                       <span>{m.character} &bull; {m.district}</span>
                     </div>
-                    <h3 className="font-display text-base font-black text-white group-hover:text-accent transition-colors leading-snug">
+                    <h3 className="font-display text-base font-black text-foreground group-hover:text-accent transition-colors leading-snug">
                       {m.title}
                     </h3>
                     <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">
@@ -266,7 +266,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
                     <Link
                       href={`/missions/${m.slug}`}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-accent hover:text-white transition-colors"
+                      className="inline-flex items-center gap-1 text-xs font-bold text-accent hover:text-foreground transition-colors"
                     >
                       <span>Full Walkthrough</span>
                       <ArrowRight className="h-3.5 w-3.5" />

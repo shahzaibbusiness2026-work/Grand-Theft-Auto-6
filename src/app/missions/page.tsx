@@ -88,7 +88,7 @@ export default async function MissionsPage() {
             alt="Leonida Missions"
             className="absolute right-0 top-0 h-full w-full object-cover lg:w-2/3 opacity-70"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-accent mb-3">
               <Flag className="h-3 w-3" /> Campaign & Heists Archive
@@ -103,7 +103,7 @@ export default async function MissionsPage() {
         </div>
 
         {/* Global Live Stats Counter */}
-        <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-white/10 sm:grid-cols-4 rounded-2xl shadow-xl border border-white/10">
+        <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border sm:grid-cols-4 rounded-2xl shadow-xl border border-border">
           {[
             ["8+", "Story Arcs & Heists"],
             ["100%", "Verified Grounding"],
@@ -112,7 +112,7 @@ export default async function MissionsPage() {
           ].map(([v, l]) => (
             <div key={l} className="flex flex-col items-center gap-1 px-4 py-5 text-center">
               <span className="font-display text-xl sm:text-2xl font-black text-accent">{v}</span>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{l}</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{l}</span>
             </div>
           ))}
         </div>

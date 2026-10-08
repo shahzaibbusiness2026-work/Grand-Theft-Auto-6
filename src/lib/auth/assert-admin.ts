@@ -5,9 +5,10 @@ import { verifyAdminSessionToken } from "@/lib/auth/session";
 /**
  * Emails allowed to administer the site (ADMIN_MASTER_EMAILS, comma-separated).
  * Kept in sync with the login route.
+ * Fail closed: no hardcoded fallback — unset means no master emails.
  */
 export function getMasterAdminEmails(): string[] {
-  return (process.env.ADMIN_MASTER_EMAILS || "shahzaib@gta6.com,admin@gta6.com")
+  return (process.env.ADMIN_MASTER_EMAILS || "")
     .split(",")
     .map((e) => e.trim().toLowerCase())
     .filter(Boolean);

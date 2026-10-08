@@ -6,7 +6,7 @@ import { Trophy } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vehicle Comparison Duel (2â€“4 Rides) â€” GTA 6 Atlas",
+  title: "Vehicle Comparison Duel (2–4 Rides) — GTA 6 Atlas",
   description: "Interactive head-to-head GTA 6 vehicle comparison tool. Duel 2 to 4 rides across top speed, acceleration, handling, braking, and showroom price.",
   alternates: { canonical: "/compare/vehicles" },
 };

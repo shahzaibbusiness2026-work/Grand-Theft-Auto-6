@@ -4,7 +4,7 @@ import { DollarSign, TrendingUp } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Money-Making Method Finder & Grinding Strategies â€” GTA 6 Atlas",
+  title: "Money-Making Method Finder & Grinding Strategies — GTA 6 Atlas",
   description:
     "Intelligent GTA 6 money-making route recommender. Discover the highest-paying heists, passive nightclub operations, and vehicle salvage strategies ranked by cash per hour.",
 };
