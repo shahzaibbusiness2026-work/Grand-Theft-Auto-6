@@ -7,7 +7,7 @@ import { getMasterAdminEmails } from "@/lib/auth/assert-admin";
 /** Cached CMS-managed 301/302 redirects (seo_settings.redirects). */
 type RedirectRule = { id: string; fromUrl: string; toUrl: string; type: string; enabled: boolean };
 let redirectCache: { rules: RedirectRule[]; fetchedAt: number } | null = null;
-const REDIRECT_CACHE_TTL_MS = 5 * 60 * 1000;
+const REDIRECT_CACHE_TTL_MS = 60 * 60 * 1000;
 
 async function getCmsRedirects(): Promise<RedirectRule[]> {
   if (redirectCache && Date.now() - redirectCache.fetchedAt < REDIRECT_CACHE_TTL_MS) {
@@ -19,7 +19,7 @@ async function getCmsRedirects(): Promise<RedirectRule[]> {
       {
         headers: { apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "" },
         // Never let a slow CMS outage hang page loads; fail fast to "no redirects".
-        signal: AbortSignal.timeout(3000),
+        signal: AbortSignal.timeout(1000),
       }
     );
     if (!res.ok) throw new Error(`seo_settings fetch failed: ${res.status}`);
