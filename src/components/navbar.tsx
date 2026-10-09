@@ -315,47 +315,50 @@ export function Navbar() {
             {more.open && (
               <div
                 role="menu"
-                className="absolute right-0 top-full z-50 mt-2.5 w-72 rounded-2xl border border-border bg-card/95 p-2 shadow-2xl backdrop-blur-2xl text-card-foreground animate-in fade-in zoom-in-95 duration-150 max-h-[28rem] overflow-y-auto"
+                className="absolute right-0 top-full z-50 mt-2.5 w-[38rem] max-w-[calc(100vw-2rem)] rounded-2xl border border-border bg-card/95 p-4 shadow-2xl backdrop-blur-2xl text-card-foreground animate-in fade-in zoom-in-95 duration-150"
               >
-                {MORE_SECTIONS.map((section, si) => (
-                  <div key={section.title}>
-                    {si > 0 && <div className="mx-2 my-1.5 border-t border-border/60" role="separator" />}
-                    <p className="px-3 pb-1 pt-1.5 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground/70">
-                      {section.title}
-                    </p>
-                    {section.links.map((l) => {
-                      const Icon = l.icon;
-                      const active = isActive(l.href);
-                      return (
-                        <Link
-                          key={l.href}
-                          href={l.href}
-                          role="menuitem"
-                          onClick={() => more.setOpen(false)}
-                          className={cn(
-                            "flex items-center gap-2.5 rounded-xl px-3 py-2 text-[13px] font-medium tracking-wide transition-colors",
-                            active
-                              ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 font-bold"
-                              : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                          )}
-                        >
-                          <span
-                            className={cn(
-                              "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-colors",
-                              active
-                                ? "border-amber-500/40 bg-amber-500/15 text-amber-700 dark:text-amber-400"
-                                : "border-border/70 bg-muted/60 text-muted-foreground"
-                            )}
-                            aria-hidden="true"
-                          >
-                            <Icon className="h-3.5 w-3.5" />
-                          </span>
-                          {l.label}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                ))}
+                <div className="grid grid-cols-3 gap-4">
+                  {MORE_SECTIONS.map((section) => (
+                    <div key={section.title}>
+                      <p className="px-2 pb-2 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground/70">
+                        {section.title}
+                      </p>
+                      <div className="space-y-0.5">
+                        {section.links.map((l) => {
+                          const Icon = l.icon;
+                          const active = isActive(l.href);
+                          return (
+                            <Link
+                              key={l.href}
+                              href={l.href}
+                              role="menuitem"
+                              onClick={() => more.setOpen(false)}
+                              className={cn(
+                                "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-medium tracking-wide transition-colors",
+                                active
+                                  ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 font-bold"
+                                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                              )}
+                            >
+                              <span
+                                className={cn(
+                                  "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-colors",
+                                  active
+                                    ? "border-amber-500/40 bg-amber-500/15 text-amber-700 dark:text-amber-400"
+                                    : "border-border/70 bg-muted/60 text-muted-foreground"
+                                )}
+                                aria-hidden="true"
+                              >
+                                <Icon className="h-3.5 w-3.5" />
+                              </span>
+                              {l.label}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
