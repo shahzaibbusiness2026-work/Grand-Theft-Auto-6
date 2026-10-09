@@ -260,7 +260,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
 
             {/* Vehicle Card Hero Visual */}
             <div className="relative h-64 sm:h-80 overflow-hidden rounded-2xl border border-border bg-black/60 shadow-inner group">
-              <img
+              <img loading="lazy"
                 src={vehicle.img}
                 alt={vehicle.name}
                 style={vehicle.filter ? { filter: vehicle.filter } : undefined}

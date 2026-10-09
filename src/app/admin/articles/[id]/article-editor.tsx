@@ -320,7 +320,7 @@ export function ArticleEditor({
             <div className="relative h-40 rounded-2xl border border-[#1C2436] overflow-hidden mt-2 bg-[#0B0E14]">
               {article.coverImage ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <img loading="lazy"
                   src={article.coverImage}
                   alt="Cover preview"
                   className="absolute inset-0 w-full h-full object-cover"

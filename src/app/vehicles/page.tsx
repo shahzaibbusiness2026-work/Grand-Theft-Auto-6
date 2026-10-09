@@ -9,6 +9,7 @@ import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";
 import { VehiclesClient } from "./vehicles-client";
+import { SectionErrorBoundary } from "@/components/section-error-boundary";
 import { getMergedVehicles } from "@/lib/services/catalog";
 
 export default async function VehiclesPage() {
@@ -58,7 +59,9 @@ export default async function VehiclesPage() {
 
       {/* INTERACTIVE CLIENT FILTER & VEHICLE ROSTER */}
       <section className="container-site py-8">
-        <VehiclesClient initialVehicles={vehicles} />
+        <SectionErrorBoundary fallbackTitle="Could not load vehicles. Please try refreshing.">
+          <VehiclesClient initialVehicles={vehicles} />
+        </SectionErrorBoundary>
       </section>
 
       {/* CTA BANNER */}

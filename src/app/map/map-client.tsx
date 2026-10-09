@@ -156,7 +156,7 @@ export function MapClient() {
               className="group rounded-3xl border border-white/10 bg-[#070c18] overflow-hidden transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-2xl flex flex-col"
             >
               <div className="relative h-44 overflow-hidden bg-black/60">
-                <img
+                <img loading="lazy"
                   src={d.img}
                   alt={d.name}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

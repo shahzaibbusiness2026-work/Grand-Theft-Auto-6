@@ -118,7 +118,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
         {/* HERO BANNER */}
         <div className="card-surface relative overflow-hidden rounded-3xl border border-border shadow-2xl p-6 sm:p-10">
           <div className="absolute right-0 top-0 h-full w-full lg:w-2/3 opacity-40">
-            <img src={mission.img} alt={mission.title} className="h-full w-full object-cover" />
+            <img loading="lazy" src={mission.img} alt={mission.title} className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
           </div>
 
@@ -239,7 +239,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
         {relatedLocation && (
           <div className="mt-8 card-surface p-6 rounded-3xl border border-border flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <img src={relatedLocation.img} alt={relatedLocation.name} className="h-16 w-20 rounded-2xl object-cover border border-border" />
+              <img loading="lazy" src={relatedLocation.img} alt={relatedLocation.name} className="h-16 w-20 rounded-2xl object-cover border border-border" />
               <div>
                 <span className="text-xs uppercase font-bold text-muted-foreground">Mission District & Hotspot</span>
                 <h3 className="font-display text-lg font-bold text-foreground">{relatedLocation.name}</h3>

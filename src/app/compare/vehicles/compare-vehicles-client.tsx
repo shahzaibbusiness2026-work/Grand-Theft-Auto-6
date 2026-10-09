@@ -351,7 +351,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
             <div className="flex items-center gap-4 shrink-0">
               <div className="h-20 w-32 rounded-xl overflow-hidden border border-border bg-black/40">
-                <img
+                <img loading="lazy"
                   src={overallWinner.vehicle.img}
                   alt={overallWinner.vehicle.name}
                   className="h-full w-full object-cover"
@@ -412,7 +412,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
                 {/* Vehicle Image */}
                 <div className="relative h-44 rounded-2xl overflow-hidden border border-border bg-black/60 shadow-inner mb-4">
-                  <img
+                  <img loading="lazy"
                     src={v.img}
                     alt={v.name}
                     style={v.filter ? { filter: v.filter } : undefined}
@@ -678,7 +678,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     )}
                   >
                     <div className="flex items-center gap-3">
-                      <img src={cand.img} alt={cand.name} className="h-12 w-16 rounded-xl object-cover" />
+                      <img loading="lazy" src={cand.img} alt={cand.name} className="h-12 w-16 rounded-xl object-cover" />
                       <div>
                         <h4 className="font-display text-sm font-bold text-foreground">{cand.name}</h4>
                         <p className="text-xs text-muted-foreground">{cand.klass} &bull; {cand.topSpeed} mph</p>

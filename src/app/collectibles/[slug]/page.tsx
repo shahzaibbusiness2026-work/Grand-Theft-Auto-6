@@ -108,7 +108,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
             {/* Photo / Image */}
             <div className="card-carbon overflow-hidden">
               <div className="relative h-72 sm:h-96 w-full bg-background">
-                <img
+                <img loading="lazy"
                   src={collectible.img}
                   alt={collectible.title}
                   className="h-full w-full object-cover"

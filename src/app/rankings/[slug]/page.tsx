@@ -150,7 +150,7 @@ export default async function RankingDetailPage({
                     {medal}
                   </span>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <img loading="lazy"
                     src={row.img}
                     alt={row.name}
                     className="h-16 w-24 shrink-0 rounded-xl border border-border object-cover"

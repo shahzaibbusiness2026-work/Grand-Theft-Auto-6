@@ -240,7 +240,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
 
             {/* Weapon Visual Showcase */}
             <div className="relative h-64 sm:h-72 rounded-2xl border border-primary/30 bg-gradient-to-br from-card dark:from-[#0c0517] via-black/80 to-[#150a1d] p-6 flex items-center justify-center shadow-inner group">
-              <img
+              <img loading="lazy"
                 src={weapon.img}
                 alt={weapon.name}
                 className="max-h-52 w-full object-contain mix-blend-lighten brightness-125 transition-transform duration-500 group-hover:scale-105"

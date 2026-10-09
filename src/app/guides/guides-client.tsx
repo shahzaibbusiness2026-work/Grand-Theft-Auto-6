@@ -163,7 +163,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
             {featuredCards.map((g) => (
               <article key={g.title} className="group card-surface w-56 shrink-0 overflow-hidden">
                 <div className="relative h-28 overflow-hidden">
-                  <img src={g.img} alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <img loading="lazy" src={g.img} alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   {g.featured && <Badge variant="solid" className="absolute left-2 top-2">Featured</Badge>}
                 </div>
                 <div className="p-3.5">
@@ -206,7 +206,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
           <ul className="mt-5 space-y-3">
             {popularCards.map((g) => (
               <li key={g.title} className="flex items-center gap-4 rounded-lg border border-border/60 p-3">
-                <img src={g.img} alt="" style={g.filter ? { filter: g.filter } : undefined} className="h-14 w-20 rounded-md object-cover" />
+                <img loading="lazy" src={g.img} alt="" style={g.filter ? { filter: g.filter } : undefined} className="h-14 w-20 rounded-md object-cover" />
                 <div className="flex-1">
                   <h3 className="text-sm font-bold">{g.title}</h3>
                   <div className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
@@ -269,7 +269,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
             {weekTop.map((w, i) => (
               <li key={w.title} className="flex items-center gap-3">
                 <span className="w-4 text-center font-display text-[13px] font-extrabold text-accent">{i + 1}</span>
-                <img src={w.img} alt="" className="h-9 w-12 rounded-md object-cover" />
+                <img loading="lazy" src={w.img} alt="" className="h-9 w-12 rounded-md object-cover" />
                 <div className="flex-1">
                   <p className="line-clamp-2 text-xs font-bold leading-snug">{w.title}</p>
                   <p className="text-xs text-muted-foreground">

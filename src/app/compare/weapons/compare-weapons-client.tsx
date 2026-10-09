@@ -320,7 +320,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
 
             <div className="flex items-center gap-4 shrink-0">
               <div className="h-20 w-32 rounded-xl overflow-hidden border border-border bg-black/60 p-2 flex items-center justify-center">
-                <img src={overallWinner.weapon.img} alt={overallWinner.weapon.name} className="max-h-full max-w-full object-contain mix-blend-lighten" />
+                <img loading="lazy" src={overallWinner.weapon.img} alt={overallWinner.weapon.name} className="max-h-full max-w-full object-contain mix-blend-lighten" />
               </div>
               <div>
                 <span className="block font-mono font-black text-2xl text-gold-light">{overallWinner.total} PTS</span>
@@ -365,7 +365,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
 
                 {/* Visual */}
                 <div className="relative h-40 rounded-2xl overflow-hidden border border-border bg-gradient-to-br from-card dark:from-[#0c0517] via-black/90 to-[#170a1f] p-4 flex items-center justify-center mb-4">
-                  <img src={w.img} alt={w.name} className="max-h-28 w-full object-contain mix-blend-lighten brightness-125" />
+                  <img loading="lazy" src={w.img} alt={w.name} className="max-h-28 w-full object-contain mix-blend-lighten brightness-125" />
                   <span className="absolute bottom-2 left-2 rounded-lg bg-black/80 px-2 py-0.5 text-xs font-bold text-accent backdrop-blur">
                     {w.klass}
                   </span>
@@ -602,7 +602,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                   >
                     <div className="flex items-center gap-3">
                       <div className="h-12 w-16 rounded-xl bg-black/60 p-1 flex items-center justify-center">
-                        <img src={cand.img} alt={cand.name} className="max-h-full max-w-full object-contain mix-blend-lighten" />
+                        <img loading="lazy" src={cand.img} alt={cand.name} className="max-h-full max-w-full object-contain mix-blend-lighten" />
                       </div>
                       <div>
                         <h4 className="font-display text-sm font-bold text-foreground">{cand.name}</h4>

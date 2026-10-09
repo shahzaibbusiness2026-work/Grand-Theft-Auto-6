@@ -12,7 +12,7 @@ export async function GET() {
   const seo = await getSeoSettings();
   const baseUrl = seo.canonicalBaseUrl?.startsWith("http")
     ? seo.canonicalBaseUrl
-    : "https://gta6atlas.com";
+    : process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://gta6atlas.com");
 
   const body =
     seo.robotsTxt && seo.robotsTxt.trim().length > 0

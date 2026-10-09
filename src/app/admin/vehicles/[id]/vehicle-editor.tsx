@@ -253,7 +253,7 @@ export function VehicleEditor({
             {imageUrl && (
               <div className="relative h-36 rounded-2xl border border-[#1C2436] overflow-hidden mt-2 bg-[#0B0E14]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={imageUrl} alt="Vehicle preview" className="absolute inset-0 w-full h-full object-cover" />
+                <img loading="lazy" src={imageUrl} alt="Vehicle preview" className="absolute inset-0 w-full h-full object-cover" />
               </div>
             )}
           </div>

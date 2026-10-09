@@ -10,6 +10,7 @@ import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";
 import { WeaponsClient } from "./weapons-client";
+import { SectionErrorBoundary } from "@/components/section-error-boundary";
 import { getMergedWeapons } from "@/lib/services/catalog";
 
 export default async function WeaponsPage() {
@@ -52,7 +53,9 @@ export default async function WeaponsPage() {
 
       {/* INTERACTIVE WEAPONS CATALOG */}
       <section className="container-site py-7">
-        <WeaponsClient initialWeapons={weapons} />
+        <SectionErrorBoundary fallbackTitle="Could not load weapons. Please try refreshing.">
+          <WeaponsClient initialWeapons={weapons} />
+        </SectionErrorBoundary>
       </section>
     </SiteShell>
   );

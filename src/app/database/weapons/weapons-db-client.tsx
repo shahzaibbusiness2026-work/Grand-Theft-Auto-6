@@ -195,7 +195,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
             {cards.map((w, i) => (
               <article key={w.name} className="group card-surface overflow-hidden">
                 <div className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-neon-purple/15 to-black/30">
-                  <img src="/img/rifle.svg" alt={w.name} className="h-full w-full object-cover mix-blend-lighten" style={{ filter: `hue-rotate(${i * 35}deg) brightness(1.35)` }} />
+                  <img loading="lazy" src="/img/rifle.svg" alt={w.name} className="h-full w-full object-cover mix-blend-lighten" style={{ filter: `hue-rotate(${i * 35}deg) brightness(1.35)` }} />
                   <Badge variant={rarityVariant[w.rarity] ?? "gray"} className="absolute left-2 top-2 uppercase">
                     {w.rarity}
                   </Badge>
@@ -242,7 +242,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
               {weaponCategories.map((c, i) => (
                 <a key={c.label} href="/database/weapons" className="card-surface flex flex-col items-center gap-2 p-3 text-center transition-colors hover:border-accent/60">
                   <div className="h-14 w-full overflow-hidden rounded-md">
-                    <img src="/img/rifle.svg" alt="" className="h-full w-full object-cover opacity-90" style={{ filter: `hue-rotate(${i * 40}deg) grayscale(0.15) brightness(1.2)` }} />
+                    <img loading="lazy" src="/img/rifle.svg" alt="" className="h-full w-full object-cover opacity-90" style={{ filter: `hue-rotate(${i * 40}deg) grayscale(0.15) brightness(1.2)` }} />
                   </div>
                   <span className="text-xs font-bold">{c.label}</span>
                   <span className="text-xs text-muted-foreground">{c.count}</span>
