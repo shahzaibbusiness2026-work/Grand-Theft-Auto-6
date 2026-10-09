@@ -13,9 +13,9 @@
     --elevated-foreground: 227 43% 97%;
     --popover: 221 40% 13%;
     --popover-foreground: 227 43% 97%;
-    --primary: 250 100% 83%; /* #B8AAFF Lavender/Violet */
-    --primary-foreground: 256 39% 11%; /* #171127 Dark text for AAA contrast */
-    --primary-hover: 250 100% 87%; /* #C9BFFF */
+    --primary: 38 42% 60%; /* #C9A86A Champagne gold */
+    --primary-foreground: 38 30% 12%; /* #241C0E Dark text for contrast */
+    --primary-hover: 38 45% 66%; /* #D4B981 Lighter champagne */
     --secondary: 221 39% 18%; /* #1C2740 */
     --secondary-foreground: 218 27% 77%; /* #B5C0D4 */
     --muted: 221 40% 13%; /* #141C2E */
@@ -27,7 +27,7 @@
     --destructive-foreground: 0 0% 100%;
     --border: 219 29% 28%; /* #33415C */
     --input: 219 17% 48%; /* #66748F */
-    --ring: 250 100% 83%; /* #B8AAFF */
+    --ring: 38 42% 60%; /* #C9A86A */
     --radius: 0.75rem;
     --color-surface: 223 48% 8%;
     --color-neon-magenta: 250 100% 83%;
@@ -61,7 +61,7 @@
     --elevated-foreground: 222 37% 15%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 37% 15%;
-    --primary: 255 58% 53%; /* #6340CC Deep Violet */
+    --primary: 38 38% 48%; /* #A98850 Deep bronze-gold */
     --primary-foreground: 0 0% 100%; /* #FFFFFF */
     --primary-hover: 255 56% 45%; /* #5232B3 */
     --secondary: 223 30% 95%; /* #EEF1F7 */
@@ -75,7 +75,7 @@
     --destructive-foreground: 0 0% 100%;
     --border: 220 29% 88%; /* #D8DEEA */
     --input: 219 14% 55%; /* #7B879C */
-    --ring: 255 58% 53%; /* #6340CC */
+    --ring: 38 38% 48%; /* #A98850 */
 
     /* GTA 6 Atlas Admin Design System Tokens (Light Mode) */
     --admin-bg: #f8fafc;
