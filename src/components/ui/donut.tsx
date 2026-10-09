@@ -98,8 +98,8 @@ export function Donut({
           <span
             className={cn(
               "font-bold uppercase text-muted-foreground",
-              isLarge && "mt-2 max-w-[130px] text-[11px] tracking-[0.22em] text-foreground/80",
-              isMedium && "mt-0.5 text-[9px] tracking-wider",
+              isLarge && "mt-2 max-w-[130px] text-xs tracking-[0.22em] text-foreground/80",
+              isMedium && "mt-0.5 text-xs tracking-wider",
               isSmall && "sr-only"
             )}
           >

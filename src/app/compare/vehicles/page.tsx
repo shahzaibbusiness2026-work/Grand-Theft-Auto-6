@@ -20,7 +20,7 @@ export default async function CompareVehiclesPage() {
       <div className="container-site py-8">
         {/* Header Hero */}
         <div className="mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-accent mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-accent mb-3">
             <Trophy className="h-3 w-3" /> Vehicle Comparison Duel
           </div>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">

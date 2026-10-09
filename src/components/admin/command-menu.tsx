@@ -132,7 +132,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               <X className="w-4 h-4" />
             </button>
           )}
-          <kbd className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 text-[11px] font-mono font-bold text-[var(--admin-text-muted)] bg-[var(--admin-elevated)] border border-[var(--admin-border)] rounded-md">
+          <kbd className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 text-xs font-mono font-bold text-[var(--admin-text-muted)] bg-[var(--admin-elevated)] border border-[var(--admin-border)] rounded-md">
             ESC
           </kbd>
         </div>
@@ -211,7 +211,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               {/* Articles Section */}
               {filteredArticles.length > 0 && (
                 <div className="pt-2 first:pt-0 space-y-1">
-                  <div className="flex items-center gap-2 px-2 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
+                  <div className="flex items-center gap-2 px-2 py-1 text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
                     <FileText className="w-3.5 h-3.5 text-indigo-400" />
                     <span>Articles ({filteredArticles.length})</span>
                   </div>
@@ -225,11 +225,11 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                         <p className="text-xs font-bold text-[var(--admin-text)] group-hover:text-[var(--admin-primary)] truncate">
                           {art.title}
                         </p>
-                        <p className="text-[11px] text-[var(--admin-text-muted)] truncate">
+                        <p className="text-xs text-[var(--admin-text-muted)] truncate">
                           {art.category} • Updated {art.updatedAt}
                         </p>
                       </div>
-                      <span className="text-[11px] font-bold px-2 py-0.5 rounded-md uppercase bg-[var(--admin-card)] border border-[var(--admin-border)] text-[var(--admin-text-muted)]">
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-md uppercase bg-[var(--admin-card)] border border-[var(--admin-border)] text-[var(--admin-text-muted)]">
                         {art.status}
                       </span>
                     </button>
@@ -240,7 +240,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               {/* Vehicles Section */}
               {filteredVehicles.length > 0 && (
                 <div className="pt-3 space-y-1">
-                  <div className="flex items-center gap-2 px-2 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
+                  <div className="flex items-center gap-2 px-2 py-1 text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
                     <Car className="w-3.5 h-3.5 text-purple-400" />
                     <span>Vehicles ({filteredVehicles.length})</span>
                   </div>
@@ -254,13 +254,13 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                         <p className="text-xs font-bold text-[var(--admin-text)] group-hover:text-[var(--admin-primary)] truncate">
                           {veh.displayName}
                         </p>
-                        <p className="text-[11px] text-[var(--admin-text-muted)] truncate">
+                        <p className="text-xs text-[var(--admin-text-muted)] truncate">
                           {veh.manufacturer} • {veh.class}
                         </p>
                       </div>
                       <span
                         className={cn(
-                          "text-[11px] font-bold px-2 py-0.5 rounded-md uppercase border",
+                          "text-xs font-bold px-2 py-0.5 rounded-md uppercase border",
                           veh.verification === "verified"
                             ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
                             : "bg-amber-500/10 text-amber-400 border-amber-500/30"
@@ -276,7 +276,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               {/* Weapons Section */}
               {filteredWeapons.length > 0 && (
                 <div className="pt-3 space-y-1">
-                  <div className="flex items-center gap-2 px-2 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
+                  <div className="flex items-center gap-2 px-2 py-1 text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
                     <Crosshair className="w-3.5 h-3.5 text-pink-400" />
                     <span>Weapons ({filteredWeapons.length})</span>
                   </div>
@@ -290,11 +290,11 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                         <p className="text-xs font-bold text-[var(--admin-text)] group-hover:text-[var(--admin-primary)] truncate">
                           {wep.name}
                         </p>
-                        <p className="text-[11px] text-[var(--admin-text-muted)] truncate">
+                        <p className="text-xs text-[var(--admin-text-muted)] truncate">
                           {wep.category} • {wep.ammunition}
                         </p>
                       </div>
-                      <span className="text-[11px] font-bold px-2 py-0.5 rounded-md uppercase bg-[var(--admin-card)] border border-[var(--admin-border)] text-[var(--admin-text-muted)]">
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-md uppercase bg-[var(--admin-card)] border border-[var(--admin-border)] text-[var(--admin-text-muted)]">
                         {wep.verification}
                       </span>
                     </button>
@@ -305,7 +305,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               {/* Map Markers Section */}
               {filteredMarkers.length > 0 && (
                 <div className="pt-3 space-y-1">
-                  <div className="flex items-center gap-2 px-2 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
+                  <div className="flex items-center gap-2 px-2 py-1 text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
                     <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Map Markers ({filteredMarkers.length})</span>
                   </div>
@@ -319,11 +319,11 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                         <p className="text-xs font-bold text-[var(--admin-text)] group-hover:text-[var(--admin-primary)] truncate">
                           {mark.name}
                         </p>
-                        <p className="text-[11px] text-[var(--admin-text-muted)] truncate">
+                        <p className="text-xs text-[var(--admin-text-muted)] truncate">
                           {mark.category} • Layer: {mark.layer}
                         </p>
                       </div>
-                      <span className="text-[11px] font-mono text-[var(--admin-text-muted)]">
+                      <span className="text-xs font-mono text-[var(--admin-text-muted)]">
                         ({mark.coordinates.x}, {mark.coordinates.y})
                       </span>
                     </button>
@@ -335,7 +335,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
         </div>
 
         {/* Footer info */}
-        <div className="px-4 py-2.5 bg-[var(--admin-card)] border-t border-[var(--admin-border)] flex items-center justify-between text-[11px] text-[var(--admin-text-muted)]">
+        <div className="px-4 py-2.5 bg-[var(--admin-card)] border-t border-[var(--admin-border)] flex items-center justify-between text-xs text-[var(--admin-text-muted)]">
           <div className="flex items-center gap-3">
             <span>
               Navigate with <kbd className="font-mono bg-[var(--admin-elevated)] px-1.5 py-0.5 rounded border border-[var(--admin-border)]">↑</kbd> <kbd className="font-mono bg-[var(--admin-elevated)] px-1.5 py-0.5 rounded border border-[var(--admin-border)]">↓</kbd>

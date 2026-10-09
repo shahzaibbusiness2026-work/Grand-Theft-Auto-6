@@ -93,7 +93,7 @@ export function RadarChart({
       {/* legend */}
       <div className="flex flex-wrap items-center justify-center gap-3">
         {series.map((s) => (
-          <span key={s.name} className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground">
+          <span key={s.name} className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
             <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: s.color }} />
             {s.name}
           </span>

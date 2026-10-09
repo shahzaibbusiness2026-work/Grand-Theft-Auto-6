@@ -21,7 +21,7 @@ export default async function TrackerPage() {
       <div className="container-site py-8">
         {/* Header Hero */}
         <div className="mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-3">
             <Trophy className="h-3 w-3" /> 100% Game Completion
           </div>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">

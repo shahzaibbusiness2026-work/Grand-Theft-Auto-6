@@ -255,7 +255,7 @@ export function Navbar() {
           {isPro && (
             <Link
               href="/pricing"
-              className="hidden lg:inline-flex items-center gap-1 rounded-full border border-amber-500/40 bg-amber-500/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-400"
+              className="hidden lg:inline-flex items-center gap-1 rounded-full border border-amber-500/40 bg-amber-500/15 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-amber-400"
               title="Vice City Pro Active"
             >
               <Crown className="h-3 w-3" /> PRO
@@ -320,7 +320,7 @@ export function Navbar() {
                 {MORE_SECTIONS.map((section, si) => (
                   <div key={section.title}>
                     {si > 0 && <div className="mx-2 my-1.5 border-t border-border/60" role="separator" />}
-                    <p className="px-3 pb-1 pt-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground/70">
+                    <p className="px-3 pb-1 pt-1.5 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground/70">
                       {section.title}
                     </p>
                     {section.links.map((l) => {

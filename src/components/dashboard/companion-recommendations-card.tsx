@@ -52,7 +52,7 @@ export function CompanionRecommendationsCard() {
             <Sparkles className="h-4 w-4 text-amber-400" />
             <span>RECOMMENDED FOR YOU</span>
           </div>
-          <p className="text-[11px] text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-400 mt-0.5">
             Based on your progress and playstyle
           </p>
         </div>
@@ -85,7 +85,7 @@ export function CompanionRecommendationsCard() {
                 <span className="block text-xs font-bold text-white truncate group-hover:text-[#00F0FF] transition-colors">
                   {item.title}
                 </span>
-                <span className="block text-[11px] text-slate-400 truncate">
+                <span className="block text-xs text-slate-400 truncate">
                   {item.subtitle}
                 </span>
               </div>

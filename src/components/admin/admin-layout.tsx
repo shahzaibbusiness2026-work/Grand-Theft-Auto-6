@@ -93,7 +93,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex flex-col items-center justify-center gap-1 py-1 px-3 rounded-xl text-[11px] font-bold transition-colors",
+                "flex flex-col items-center justify-center gap-1 py-1 px-3 rounded-xl text-xs font-bold transition-colors",
                 isActive
                   ? "text-[#6366F1]"
                   : "text-[#64748B] hover:text-white"

@@ -104,25 +104,25 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="card-carbon p-4 text-center border-border">
           <span className="font-display text-2xl sm:text-3xl font-black text-foreground">{totalCount}</span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mt-1">
             Verified Collectibles
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-emerald-500/20 bg-emerald-950/10">
           <span className="font-display text-2xl sm:text-3xl font-black text-emerald-400">{collectedCount}</span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
             Found / Collected
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-amber-500/20 bg-amber-950/10">
           <span className="font-display text-2xl sm:text-3xl font-black text-amber-400">{totalCount - collectedCount}</span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400/80 block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-400/80 block mt-1">
             Remaining To Find
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-accent/20 bg-accent/10">
           <span className="font-display text-2xl sm:text-3xl font-black text-accent">{progressPercent}%</span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-accent/80 block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-accent/80 block mt-1">
             Collection Progress
           </span>
         </div>
@@ -214,7 +214,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
                 )}
               >
-                {cat} <span className="opacity-60 text-[11px]">({count})</span>
+                {cat} <span className="opacity-60 text-xs">({count})</span>
               </button>
             );
           })}
@@ -285,7 +285,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
 
                     {/* District & Category */}
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                      <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted/80 text-foreground border border-border">
+                      <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted/80 text-foreground border border-border">
                         {item.category}
                       </span>
                       <ConfidenceBadge confidence={item.confidence} source={item.source} size="sm" />
@@ -314,7 +314,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                       {item.description}
                     </p>
 
-                    <div className="p-2.5 rounded-lg bg-muted/50 border border-border text-[11px] font-mono space-y-1">
+                    <div className="p-2.5 rounded-lg bg-muted/50 border border-border text-xs font-mono space-y-1">
                       <div className="text-amber-400 flex items-center gap-1">
                         <Trophy className="h-3 w-3 text-amber-400 flex-shrink-0" />
                         <span className="truncate">Reward: {item.reward}</span>
@@ -330,7 +330,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 <div className="p-4 pt-0 flex items-center justify-between gap-2 border-t border-border/60 mt-2">
                   <Link
                     href={`/map?poi=${item.id}&top=${item.coordinates.top}&left=${item.coordinates.left}`}
-                    className="text-[11px] font-medium text-accent hover:underline flex items-center gap-1 py-1"
+                    className="text-xs font-medium text-accent hover:underline flex items-center gap-1 py-1"
                   >
                     <MapPin className="h-3 w-3" /> Map View
                   </Link>

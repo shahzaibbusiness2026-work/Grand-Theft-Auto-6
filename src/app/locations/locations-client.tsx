@@ -96,7 +96,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
           <span className="font-display text-2xl sm:text-3xl font-black text-foreground">
             {locations.length}
           </span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mt-1">
             Confirmed POIs
           </span>
         </div>
@@ -104,7 +104,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
           <span className="font-display text-2xl sm:text-3xl font-black text-accent">
             {districts.length - 1}
           </span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-accent/80 block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-accent/80 block mt-1">
             Major Districts
           </span>
         </div>
@@ -112,7 +112,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
           <span className="font-display text-2xl sm:text-3xl font-black text-emerald-400">
             {locations.filter((l) => l.verified).length}
           </span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
             Trailer Verified
           </span>
         </div>
@@ -120,7 +120,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
           <span className="font-display text-2xl sm:text-3xl font-black text-primary">
             100%
           </span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-primary/80 block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-primary/80 block mt-1">
             Interactive Map Sync
           </span>
         </div>
@@ -185,7 +185,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
                 )}
               >
-                {cat} <span className="opacity-60 text-[11px]">({count})</span>
+                {cat} <span className="opacity-60 text-xs">({count})</span>
               </button>
             );
           })}
@@ -237,7 +237,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                       <span
                         className={cn(
-                          "text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border backdrop-blur-md",
+                          "text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded border backdrop-blur-md",
                           threatColor(item.threatLevel)
                         )}
                       >
@@ -248,7 +248,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
 
                     {/* Bottom Category & Confidence */}
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                      <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted/80 text-foreground border border-border">
+                      <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted/80 text-foreground border border-border">
                         {item.category}
                       </span>
                       <ConfidenceBadge confidence={item.confidence} source={item.source} size="sm" />
@@ -273,7 +273,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                     </p>
 
                     {/* Meta info chips */}
-                    <div className="space-y-1.5 pt-1 text-[11px] font-mono text-muted-foreground">
+                    <div className="space-y-1.5 pt-1 text-xs font-mono text-muted-foreground">
                       <div className="flex items-center gap-1.5">
                         <Clock className="h-3 w-3 text-muted-foreground" />
                         <span className="truncate">{item.hours}</span>

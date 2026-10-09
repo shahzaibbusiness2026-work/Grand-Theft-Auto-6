@@ -15,7 +15,7 @@ export default function MoneyMakerPage() {
       <div className="container-site py-8">
         {/* Header Hero */}
         <div className="mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-emerald-400 mb-3">
             <DollarSign className="h-3 w-3" /> Financial Advisory Engine
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">

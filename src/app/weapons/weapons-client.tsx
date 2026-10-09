@@ -210,7 +210,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
 
                     {/* Rarity & Confidence */}
                     <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between">
-                      <span className={cn("rounded-full border px-2 py-0.5 text-[9px] font-black uppercase tracking-wider", rarityStyles[w.rarity])}>
+                      <span className={cn("rounded-full border px-2 py-0.5 text-xs font-black uppercase tracking-wider", rarityStyles[w.rarity])}>
                         {w.rarity}
                       </span>
                       <ConfidenceBadge level={w.confidence} size="sm" />
@@ -223,13 +223,13 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       <h3 className="font-display text-base font-black text-foreground group-hover:text-accent transition-colors truncate">
                         {w.name}
                       </h3>
-                      <p className="text-[11px] text-muted-foreground mt-0.5">{w.klass} &bull; {w.ammoType}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{w.klass} &bull; {w.ammoType}</p>
                     </div>
 
                     {/* Stats */}
                     <div className="space-y-2 border-t border-border pt-3 text-xs">
                       <div>
-                        <div className="flex justify-between text-[11px] font-semibold text-muted-foreground">
+                        <div className="flex justify-between text-xs font-semibold text-muted-foreground">
                           <span>Damage</span>
                           <span className="font-mono text-foreground font-bold">{w.damage}/100</span>
                         </div>
@@ -237,7 +237,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       </div>
 
                       <div>
-                        <div className="flex justify-between text-[11px] font-semibold text-muted-foreground">
+                        <div className="flex justify-between text-xs font-semibold text-muted-foreground">
                           <span>Fire Rate</span>
                           <span className="font-mono text-foreground font-bold">{w.fireRate}/100</span>
                         </div>

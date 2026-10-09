@@ -6,7 +6,7 @@ import React from "react";
 
 export const inputCls =
   "w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]";
-export const labelCls = "block text-[11px] font-medium text-[#94A3B8] mb-1";
+export const labelCls = "block text-xs font-medium text-[#94A3B8] mb-1";
 
 export function FieldRow({ children }: { children: React.ReactNode }) {
   return <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">{children}</div>;
@@ -15,7 +15,7 @@ export function FieldRow({ children }: { children: React.ReactNode }) {
 export function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-2xl border border-[#1C2436] bg-[#0B0E14]/60 p-4 space-y-3">
-      <h3 className="text-[11px] font-black uppercase tracking-wider text-[#818CF8]">{title}</h3>
+      <h3 className="text-xs font-black uppercase tracking-wider text-[#818CF8]">{title}</h3>
       {children}
     </div>
   );
@@ -44,7 +44,7 @@ export function TextField({
         placeholder={placeholder}
         className={inputCls}
       />
-      {hint && <p className="mt-0.5 text-[11px] text-[#64748B]">{hint}</p>}
+      {hint && <p className="mt-0.5 text-xs text-[#64748B]">{hint}</p>}
     </div>
   );
 }
@@ -75,7 +75,7 @@ export function NumberField({
         placeholder={placeholder}
         className={inputCls}
       />
-      {hint && <p className="mt-0.5 text-[11px] text-[#64748B]">{hint}</p>}
+      {hint && <p className="mt-0.5 text-xs text-[#64748B]">{hint}</p>}
     </div>
   );
 }
@@ -124,7 +124,7 @@ export function ListField({
         placeholder={"One per line, e.g.\nMissiles\nBulletproof Windows"}
         className={inputCls + " resize-y"}
       />
-      {hint && <p className="mt-0.5 text-[11px] text-[#64748B]">{hint}</p>}
+      {hint && <p className="mt-0.5 text-xs text-[#64748B]">{hint}</p>}
     </div>
   );
 }

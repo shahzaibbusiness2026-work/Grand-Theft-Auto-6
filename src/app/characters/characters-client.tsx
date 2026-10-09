@@ -109,7 +109,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 inset-x-2 text-center">
-                  <span className="text-[11px] font-mono font-black uppercase tracking-wider text-pink-400 block">Lead Protagonist</span>
+                  <span className="text-xs font-mono font-black uppercase tracking-wider text-pink-400 block">Lead Protagonist</span>
                   <strong className="text-xs sm:text-sm font-black text-white block truncate drop-shadow">{luciaChar?.name || "Lucia Caminos"}</strong>
                 </div>
               </button>
@@ -131,7 +131,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 inset-x-2 text-center">
-                  <span className="text-[11px] font-mono font-black uppercase tracking-wider text-cyan-400 block">Co-Protagonist</span>
+                  <span className="text-xs font-mono font-black uppercase tracking-wider text-cyan-400 block">Co-Protagonist</span>
                   <strong className="text-xs sm:text-sm font-black text-white block truncate drop-shadow">{jasonChar?.name || "Jason Duval"}</strong>
                 </div>
               </button>
@@ -192,7 +192,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pink-500 text-foreground shadow-md shadow-pink-500/40">
                     <Star className="h-3 w-3 fill-current" />
                   </span>
-                  <span className="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-black/70 border border-border text-white backdrop-blur-md">
+                  <span className="px-2 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-black/70 border border-border text-white backdrop-blur-md">
                     {c.role}
                   </span>
                 </div>
@@ -213,7 +213,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                     {c.name}
                   </h3>
                   {c.alias && (
-                    <span className="text-[11px] font-mono text-cyan-700 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded">
+                    <span className="text-xs font-mono text-cyan-700 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded">
                       {c.alias}
                     </span>
                   )}
@@ -224,7 +224,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 </p>
 
                 {c.specialty && (
-                  <div className="mt-3 pt-2.5 border-t border-border flex items-center gap-2 text-[11px] text-muted-foreground">
+                  <div className="mt-3 pt-2.5 border-t border-border flex items-center gap-2 text-xs text-muted-foreground">
                     <Shield className="w-3.5 h-3.5 text-pink-400 shrink-0" />
                     <span className="truncate">{c.specialty}</span>
                   </div>
@@ -274,13 +274,13 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                 
                 {/* Role badge tag */}
-                <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-mono font-black uppercase tracking-wider bg-black/70 border border-border text-white backdrop-blur-md">
+                <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-xs font-mono font-black uppercase tracking-wider bg-black/70 border border-border text-white backdrop-blur-md">
                   {c.role}
                 </span>
 
                 {/* Hover overlay indicator */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-[11px] font-bold text-white bg-pink-600 px-2.5 py-1 rounded-lg shadow-lg">
+                  <span className="text-xs font-bold text-white bg-pink-600 px-2.5 py-1 rounded-lg shadow-lg">
                     Dossier &rarr;
                   </span>
                 </div>
@@ -290,7 +290,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 <h3 className="truncate font-display text-[13px] font-bold text-foreground group-hover:text-pink-600 dark:group-hover:text-pink-300 transition-colors">
                   {c.name}
                 </h3>
-                <p className="mt-0.5 text-[11px] font-mono text-pink-400/90 truncate">
+                <p className="mt-0.5 text-xs font-mono text-pink-400/90 truncate">
                   {c.alias || c.role}
                 </p>
               </div>

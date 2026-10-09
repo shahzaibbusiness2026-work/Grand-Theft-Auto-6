@@ -179,7 +179,7 @@ export default function AdminSeoPage() {
                 onChange={(e) => handleUpdate({ titleTemplate: e.target.value })}
                 className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white font-mono focus:outline-none focus:border-[#6366F1]"
               />
-              <p className="text-[11px] text-[#64748B] mt-1.5">
+              <p className="text-xs text-[#64748B] mt-1.5">
                 Use <code>{"{{title}}"}</code> as dynamic placeholder for individual pages.
               </p>
             </div>
@@ -191,7 +191,7 @@ export default function AdminSeoPage() {
                 </label>
                 <span
                   className={cn(
-                    "text-[11px] font-mono",
+                    "text-xs font-mono",
                     descLength > 160 ? "text-rose-400 font-bold" : "text-[#64748B]"
                   )}
                 >
@@ -242,7 +242,7 @@ export default function AdminSeoPage() {
             </h3>
 
             <div className="p-4 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-1.5">
-              <p className="text-[11px] text-emerald-400 font-mono truncate">
+              <p className="text-xs text-emerald-400 font-mono truncate">
                 {seoConfig.canonicalBaseUrl} › articles
               </p>
               <p className="text-sm font-bold text-indigo-400 hover:underline cursor-pointer line-clamp-1">
@@ -253,7 +253,7 @@ export default function AdminSeoPage() {
               </p>
             </div>
 
-            <p className="text-[11px] text-[#64748B] leading-relaxed">
+            <p className="text-xs text-[#64748B] leading-relaxed">
               Real-time representation of how search engines like Google and Bing present Atlas pages in public search results.
             </p>
           </div>
@@ -281,7 +281,7 @@ export default function AdminSeoPage() {
           <div className="rounded-xl border border-[#1C2436] bg-[#111622] overflow-hidden">
             <table className="w-full text-left text-xs" aria-label="URL redirects table">
               <thead>
-                <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-[11px]">
+                <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-xs">
                   <th scope="col" className="p-3.5 font-medium">Source Path (From)</th>
                   <th scope="col" className="p-3.5 font-medium">Destination (To)</th>
                   <th scope="col" className="p-3.5 font-medium w-24 text-center">Type</th>
@@ -339,7 +339,7 @@ export default function AdminSeoPage() {
                           handleUpdate({ redirects: updated });
                         }}
                         className={cn(
-                          "px-2 py-0.5 rounded text-[11px] font-semibold border",
+                          "px-2 py-0.5 rounded text-xs font-semibold border",
                           red.enabled
                             ? "bg-[#064E3B]/40 text-[#34D399] border-[#065F46]"
                             : "bg-[#1E293B] text-[#64748B] border-[#334155]"
@@ -379,7 +379,7 @@ export default function AdminSeoPage() {
               Automated sitemaps notify Google and other search engines about published articles, vehicles, and weapons.
             </p>
 
-            <div className="space-y-2 p-3.5 rounded-xl bg-[#0E131D] border border-[#1C2436] font-mono text-[11px]">
+            <div className="space-y-2 p-3.5 rounded-xl bg-[#0E131D] border border-[#1C2436] font-mono text-xs">
               <div className="flex justify-between">
                 <span className="text-[#64748B] font-sans">Sitemap URL:</span>
                 <span className="text-white font-bold">{seoConfig.canonicalBaseUrl}/sitemap.xml</span>

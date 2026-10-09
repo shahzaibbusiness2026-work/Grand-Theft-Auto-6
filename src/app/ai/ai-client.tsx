@@ -199,7 +199,7 @@ export function AIClient() {
                           />
                         )}
                       </div>
-                      <span className="text-[11px] text-muted-foreground font-mono">{msg.timestamp}</span>
+                      <span className="text-xs text-muted-foreground font-mono">{msg.timestamp}</span>
                     </div>
                   )}
 
@@ -210,8 +210,8 @@ export function AIClient() {
 
                   {/* Sources Citation List */}
                   {!isUser && (msg.sources?.length || 0) > 0 && (
-                    <div className="pt-2 border-t border-border text-[11px] text-muted-foreground space-y-1 font-mono">
-                      <span className="font-bold text-muted-foreground uppercase tracking-wider text-[9px] block">
+                    <div className="pt-2 border-t border-border text-xs text-muted-foreground space-y-1 font-mono">
+                      <span className="font-bold text-muted-foreground uppercase tracking-wider text-xs block">
                         Verified Sources:
                       </span>
                       <ul className="list-disc list-inside space-y-0.5">
@@ -231,7 +231,7 @@ export function AIClient() {
                         <Link
                           key={idx}
                           href={tool.href}
-                          className="btn-secondary text-[11px] px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold text-accent hover:text-white"
+                          className="btn-secondary text-xs px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold text-accent hover:text-white"
                         >
                           {tool.label} <ArrowRight className="h-2.5 w-2.5" />
                         </Link>
@@ -248,10 +248,10 @@ export function AIClient() {
                           href={item.href}
                           className="p-2 rounded-lg bg-background border border-border hover:border-primary/40 transition-colors block text-left"
                         >
-                          <span className="text-[9px] uppercase font-bold text-muted-foreground block">
+                          <span className="text-xs uppercase font-bold text-muted-foreground block">
                             {item.type}
                           </span>
-                          <span className="text-[11px] font-bold text-white truncate block">
+                          <span className="text-xs font-bold text-white truncate block">
                             {item.title}
                           </span>
                         </Link>
@@ -290,7 +290,7 @@ export function AIClient() {
             <button
               key={prompt}
               onClick={() => handleSend(prompt)}
-              className="text-[11px] px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/50 text-muted-foreground hover:text-white whitespace-nowrap transition-all flex items-center gap-1.5"
+              className="text-xs px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/50 text-muted-foreground hover:text-white whitespace-nowrap transition-all flex items-center gap-1.5"
             >
               <Sparkles className="h-3 w-3 text-primary flex-shrink-0" />
               <span>{prompt}</span>

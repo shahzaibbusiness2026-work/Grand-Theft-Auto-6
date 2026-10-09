@@ -124,12 +124,12 @@ export default function AdminCollectiblesPage() {
       key: "district",
       header: "District",
       sortable: true,
-      render: (c) => <span className="text-[11px] text-[var(--admin-text-muted)]">{c.district || "—"}</span>,
+      render: (c) => <span className="text-xs text-[var(--admin-text-muted)]">{c.district || "—"}</span>,
     },
     {
       key: "reward",
       header: "Reward",
-      render: (c) => <span className="text-[11px] text-[var(--admin-text)]">{c.reward || "—"}</span>,
+      render: (c) => <span className="text-xs text-[var(--admin-text)]">{c.reward || "—"}</span>,
     },
     {
       key: "status",
@@ -176,7 +176,7 @@ export default function AdminCollectiblesPage() {
 
   const inputCls =
     "w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]";
-  const labelCls = "block text-[11px] font-medium text-[#94A3B8] mb-1";
+  const labelCls = "block text-xs font-medium text-[#94A3B8] mb-1";
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
@@ -221,7 +221,7 @@ export default function AdminCollectiblesPage() {
               {isLoading ? "Loading collectibles…" : "No collectibles found."}
             </p>
             {!isLoading && (
-              <p className="text-[11px] text-[var(--admin-text-muted)] mt-1">
+              <p className="text-xs text-[var(--admin-text-muted)] mt-1">
                 Add your first collectible to publish it on the public site.
               </p>
             )}

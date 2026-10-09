@@ -15,7 +15,7 @@ export function Logo({ className, href = "/" }: { className?: string; href?: str
       <span className="text-primary font-display text-[21px] font-black tracking-tight">
         GTA6
       </span>
-      <span className="mt-1 flex items-center gap-1 font-mono text-[11px] font-bold uppercase tracking-[0.38em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_6px_rgba(0,240,255,0.3)]">
+      <span className="mt-1 flex items-center gap-1 font-mono text-xs font-bold uppercase tracking-[0.38em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_6px_rgba(0,240,255,0.3)]">
         <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#00F0FF] shadow-[0_0_4px_#00F0FF]" aria-hidden="true" />
         ATLAS
       </span>

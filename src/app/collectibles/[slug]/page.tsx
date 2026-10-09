@@ -145,7 +145,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-4 rounded-xl bg-card border border-border space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                     Prerequisites
                   </span>
                   <p className="text-xs text-foreground font-mono">
@@ -153,7 +153,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                   </p>
                 </div>
                 <div className="p-4 rounded-xl bg-card border border-amber-500/20 space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1">
+                  <span className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1">
                     <Trophy className="h-3 w-3" /> Reward Upon Collection
                   </span>
                   <p className="text-xs text-amber-300 font-mono font-semibold">
@@ -223,13 +223,13 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                     href={`/collectibles/${item.slug}`}
                     className="block p-3 rounded-lg bg-card border border-border hover:border-primary/40 transition-colors group"
                   >
-                    <div className="text-[11px] uppercase font-bold text-muted-foreground mb-0.5">
+                    <div className="text-xs uppercase font-bold text-muted-foreground mb-0.5">
                       {item.category}
                     </div>
                     <div className="text-xs font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
                       {item.title}
                     </div>
-                    <div className="text-[11px] text-accent mt-1 flex items-center gap-1">
+                    <div className="text-xs text-accent mt-1 flex items-center gap-1">
                       <MapPin className="h-2.5 w-2.5" /> {item.district}
                     </div>
                   </Link>

@@ -265,7 +265,7 @@ export default function AdminComparisonsPage() {
                       </div>
                       <div>
                         <p className="text-xs font-semibold text-white">{v.name}</p>
-                        <p className="text-[11px] text-[#64748B]">{v.type}</p>
+                        <p className="text-xs text-[#64748B]">{v.type}</p>
                       </div>
                     </div>
                     <button
@@ -295,7 +295,7 @@ export default function AdminComparisonsPage() {
                       <Car className="w-4 h-4 text-[#94A3B8]" />
                       <div>
                         <p className="text-xs font-medium text-white">Vehicle V-001</p>
-                        <p className="text-[11px] text-[#64748B]">Vehicle</p>
+                        <p className="text-xs text-[#64748B]">Vehicle</p>
                       </div>
                     </div>
                     <Link
@@ -311,7 +311,7 @@ export default function AdminComparisonsPage() {
                       <Car className="w-4 h-4 text-[#94A3B8]" />
                       <div>
                         <p className="text-xs font-medium text-white">Vehicle V-002</p>
-                        <p className="text-[11px] text-[#64748B]">Vehicle</p>
+                        <p className="text-xs text-[#64748B]">Vehicle</p>
                       </div>
                     </div>
                     <Link
@@ -376,7 +376,7 @@ export default function AdminComparisonsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs" aria-label="Attributes configuration table">
                 <thead>
-                  <tr className="border-b border-[#1C2436] text-[#64748B] text-[11px]">
+                  <tr className="border-b border-[#1C2436] text-[#64748B] text-xs">
                     <th scope="col" className="w-8 pb-2.5"></th>
                     <th scope="col" className="w-8 pb-2.5"></th>
                     <th scope="col" className="pb-2.5 font-medium">Attribute label</th>
@@ -479,24 +479,24 @@ export default function AdminComparisonsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs" aria-label="Comparison preview matrix">
                 <thead>
-                  <tr className="border-b border-[#1C2436] text-[#64748B] text-[11px]">
+                  <tr className="border-b border-[#1C2436] text-[#64748B] text-xs">
                     <th scope="col" className="pb-3 font-medium">Attribute</th>
                     <th scope="col" className="pb-3 font-medium">
                       <div>
                         <p className="text-white font-semibold">Vehicle V-001</p>
-                        <p className="text-[11px] text-[#E5A83B]">Unverified</p>
+                        <p className="text-xs text-[#E5A83B]">Unverified</p>
                       </div>
                     </th>
                     <th scope="col" className="pb-3 font-medium">
                       <div>
                         <p className="text-white font-semibold">Vehicle V-002</p>
-                        <p className="text-[11px] text-[#E5A83B]">Unverified</p>
+                        <p className="text-xs text-[#E5A83B]">Unverified</p>
                       </div>
                     </th>
                     <th scope="col" className="pb-3 font-medium">
                       <div>
                         <p className="text-white font-semibold">Vehicle V-003</p>
-                        <p className="text-[11px] text-[#E5A83B]">Unverified</p>
+                        <p className="text-xs text-[#E5A83B]">Unverified</p>
                       </div>
                     </th>
                   </tr>
@@ -563,7 +563,7 @@ export default function AdminComparisonsPage() {
               </div>
               <div className="space-y-0.5">
                 <p className="text-xs font-bold text-white">Database linked</p>
-                <p className="text-[11px] text-[#64748B] leading-relaxed">
+                <p className="text-xs text-[#64748B] leading-relaxed">
                   Specifications update from source records. No duplicate entry required.
                 </p>
               </div>
@@ -575,7 +575,7 @@ export default function AdminComparisonsPage() {
               </div>
               <div className="space-y-0.5">
                 <p className="text-xs font-bold text-white">Side-by-side view</p>
-                <p className="text-[11px] text-[#64748B] leading-relaxed">
+                <p className="text-xs text-[#64748B] leading-relaxed">
                   Up to 3 records per comparison on desktop and mobile viewports.
                 </p>
               </div>
@@ -587,7 +587,7 @@ export default function AdminComparisonsPage() {
               </div>
               <div className="space-y-0.5">
                 <p className="text-xs font-bold text-white">Highlight rules</p>
-                <p className="text-[11px] text-[#64748B] leading-relaxed">
+                <p className="text-xs text-[#64748B] leading-relaxed">
                   Highlight the highest, lowest, or custom preferred value per attribute.
                 </p>
               </div>

@@ -83,7 +83,7 @@ export function CompanionProgressCard({
             <span className="font-display text-2xl sm:text-3xl font-black text-white drop-shadow-[0_0_12px_rgba(245,158,11,0.3)]">
               {overallPercent}%
             </span>
-            <span className="text-[9px] font-semibold text-slate-400 leading-tight">
+            <span className="text-xs font-semibold text-slate-400 leading-tight">
               Overall<br />Completion
             </span>
           </div>
@@ -94,7 +94,7 @@ export function CompanionProgressCard({
           {CATEGORIES.map((cat) => (
             <div
               key={cat.name}
-              className="flex items-center justify-between text-[11px] font-semibold min-w-0"
+              className="flex items-center justify-between text-xs font-semibold min-w-0"
             >
               <div className="flex items-center gap-1.5 min-w-0 truncate pr-1">
                 <span className={`h-2 w-2 shrink-0 rounded-full ${cat.color}`} />

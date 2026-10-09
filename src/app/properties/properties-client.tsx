@@ -94,7 +94,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
           <span className="font-display text-2xl sm:text-3xl font-black text-foreground">
             {properties.length}
           </span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mt-1">
             Confirmed Properties
           </span>
         </div>
@@ -102,7 +102,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
           <span className="font-display text-2xl sm:text-3xl font-black text-amber-400">
             $3.5M
           </span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400/80 block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-400/80 block mt-1">
             Top Luxury Price
           </span>
         </div>
@@ -110,7 +110,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
           <span className="font-display text-2xl sm:text-3xl font-black text-emerald-400">
             $18.5k/hr
           </span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
             Peak Passive Yield
           </span>
         </div>
@@ -118,7 +118,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
           <span className="font-display text-2xl sm:text-3xl font-black text-primary">
             10-Car
           </span>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-primary/80 block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-primary/80 block mt-1">
             Max Garage Storage
           </span>
         </div>
@@ -135,7 +135,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
               <span className="text-xs font-bold text-foreground uppercase tracking-wider block">
                 Side-by-Side Property Comparison ({compareIds.length} / 2 Selected)
               </span>
-              <span className="text-[11px] text-muted-foreground">
+              <span className="text-xs text-muted-foreground">
                 {compareIds.length === 1
                   ? "Select 1 more property from below to duel specs & ROI"
                   : "Both properties selected. Ready to compare!"}
@@ -209,7 +209,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
                 )}
               >
-                {type} <span className="opacity-60 text-[11px]">({count})</span>
+                {type} <span className="opacity-60 text-xs">({count})</span>
               </button>
             );
           })}
@@ -262,7 +262,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none" />
 
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                      <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-muted/80 text-primary border border-primary/30 backdrop-blur-md">
+                      <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-muted/80 text-primary border border-primary/30 backdrop-blur-md">
                         {item.type}
                       </span>
                       <FavoriteButton type="properties" id={item.id} />
@@ -296,7 +296,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                     {/* Stats Metrics Grid */}
                     <div className="grid grid-cols-2 gap-2 pt-1 font-mono text-xs">
                       <div className="p-2.5 rounded-lg bg-muted/50 border border-border">
-                        <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-0.5">
+                        <span className="text-xs uppercase font-bold text-muted-foreground block mb-0.5">
                           Garage Space
                         </span>
                         <span className="font-bold text-foreground flex items-center gap-1">
@@ -304,7 +304,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                         </span>
                       </div>
                       <div className="p-2.5 rounded-lg bg-muted/50 border border-border">
-                        <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-0.5">
+                        <span className="text-xs uppercase font-bold text-muted-foreground block mb-0.5">
                           Passive Yield
                         </span>
                         <span className="font-bold text-emerald-400 flex items-center gap-1">
@@ -380,7 +380,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute bottom-2 left-2 right-2">
-                      <span className="text-[11px] uppercase font-bold text-primary block">
+                      <span className="text-xs uppercase font-bold text-primary block">
                         {p.type}
                       </span>
                       <h4 className="font-display text-sm font-bold text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] truncate">
@@ -418,10 +418,10 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
 
                   {/* Upgrades */}
                   <div className="bg-muted/50 p-3 rounded-xl border border-border space-y-1.5">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block">
+                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block">
                       Available Upgrades:
                     </span>
-                    <ul className="text-[11px] text-muted-foreground space-y-1">
+                    <ul className="text-xs text-muted-foreground space-y-1">
                       {p.upgrades.map((u) => (
                         <li key={u} className="flex items-center gap-1.5">
                           <CheckCircle2 className="h-3 w-3 text-emerald-400 flex-shrink-0" />

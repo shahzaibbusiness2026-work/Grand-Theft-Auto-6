@@ -92,14 +92,14 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
               
               {/* Badges Overlay */}
               <div className="absolute top-4 left-4 flex flex-col gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-pink-500/40 bg-pink-950/60 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-pink-400 backdrop-blur-md shadow-lg">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-pink-500/40 bg-pink-950/60 px-3 py-1 text-xs font-black uppercase tracking-wider text-pink-400 backdrop-blur-md shadow-lg">
                   <Sparkles className="w-3 h-3" />
                   {character.role}
                 </span>
 
                 {character.status && (
                   <span className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider backdrop-blur-md shadow-sm",
+                    "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider backdrop-blur-md shadow-sm",
                     character.status === "Active" 
                       ? "border-emerald-500/40 bg-emerald-950/60 text-emerald-400"
                       : "border-amber-500/40 bg-amber-950/60 text-amber-400"
@@ -122,7 +122,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
               {/* Header Info */}
               <div>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] font-mono font-black uppercase tracking-[0.25em] text-pink-600 dark:text-pink-400">
+                  <span className="text-xs font-mono font-black uppercase tracking-[0.25em] text-pink-600 dark:text-pink-400">
                     OFFICIAL CHARACTER DOSSIER
                   </span>
                   {character.alias && (
@@ -169,7 +169,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[11px] font-mono uppercase text-muted-foreground block">Territory / Origin</span>
+                      <span className="text-xs font-mono uppercase text-muted-foreground block">Territory / Origin</span>
                       <strong className="text-xs font-semibold text-foreground">{character.origin}</strong>
                     </div>
                   </div>
@@ -179,7 +179,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <Car className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[11px] font-mono uppercase text-muted-foreground block">Signature Ride</span>
+                      <span className="text-xs font-mono uppercase text-muted-foreground block">Signature Ride</span>
                       <strong className="text-xs font-semibold text-foreground">{character.vehicle}</strong>
                     </div>
                   </div>
@@ -189,7 +189,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <Zap className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[11px] font-mono uppercase text-muted-foreground block">Special Perk / Ability</span>
+                      <span className="text-xs font-mono uppercase text-muted-foreground block">Special Perk / Ability</span>
                       <strong className="text-xs font-semibold text-foreground">{character.perk}</strong>
                     </div>
                   </div>
@@ -199,7 +199,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <Shield className="w-4 h-4 text-pink-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[11px] font-mono uppercase text-muted-foreground block">Specialty</span>
+                      <span className="text-xs font-mono uppercase text-muted-foreground block">Specialty</span>
                       <strong className="text-xs font-semibold text-foreground">{character.specialty}</strong>
                     </div>
                   </div>
@@ -209,7 +209,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5 sm:col-span-2">
                     <Radio className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[11px] font-mono uppercase text-muted-foreground block">Known Affiliation</span>
+                      <span className="text-xs font-mono uppercase text-muted-foreground block">Known Affiliation</span>
                       <strong className="text-xs font-semibold text-foreground">{character.affiliation}</strong>
                     </div>
                   </div>
@@ -219,11 +219,11 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 sm:col-span-2 space-y-1.5">
                     <div className="flex items-center gap-2">
                       <Crosshair className="w-4 h-4 text-rose-400 shrink-0" />
-                      <span className="text-[11px] font-mono uppercase text-muted-foreground">Weapon Loadout</span>
+                      <span className="text-xs font-mono uppercase text-muted-foreground">Weapon Loadout</span>
                     </div>
                     <div className="flex flex-wrap gap-1.5 pt-0.5">
                       {character.weapons.map((w) => (
-                        <span key={w} className="px-2 py-0.5 rounded-md bg-muted/70 border border-border text-[11px] font-mono text-foreground">
+                        <span key={w} className="px-2 py-0.5 rounded-md bg-muted/70 border border-border text-xs font-mono text-foreground">
                           {w}
                         </span>
                       ))}
@@ -236,7 +236,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
               {character.tags && character.tags.length > 0 && (
                 <div className="flex flex-wrap items-center gap-1.5 pt-1">
                   {character.tags.map((tag) => (
-                    <span key={tag} className="text-[11px] font-mono text-muted-foreground bg-muted/40 border border-border px-2.5 py-0.5 rounded-full">
+                    <span key={tag} className="text-xs font-mono text-muted-foreground bg-muted/40 border border-border px-2.5 py-0.5 rounded-full">
                       #{tag}
                     </span>
                   ))}
@@ -247,7 +247,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
 
             {/* Modal Footer */}
             <div className="mt-6 pt-4 border-t border-border flex flex-wrap items-center justify-between gap-3">
-              <span className="text-[11px] text-muted-foreground">
+              <span className="text-xs text-muted-foreground">
                 Voice Actor: <strong className="text-foreground">{character.voiceActor || "Rockstar Games Cast"}</strong>
               </span>
 

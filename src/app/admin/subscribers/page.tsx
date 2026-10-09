@@ -225,7 +225,7 @@ export default function AdminSubscribersPage() {
                 <span className="text-xs font-medium text-white truncate">
                   {s.email}
                 </span>
-                <span className="text-[11px] text-[#64748B] shrink-0">
+                <span className="text-xs text-[#64748B] shrink-0">
                   {new Date(s.subscribed_at).toLocaleString()}
                 </span>
               </li>

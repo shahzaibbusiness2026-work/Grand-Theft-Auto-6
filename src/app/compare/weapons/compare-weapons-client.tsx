@@ -277,7 +277,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
-            <span className="text-[10px] font-black uppercase tracking-widest text-accent">Ballistic Comparison Duel</span>
+            <span className="text-xs font-black uppercase tracking-widest text-accent">Ballistic Comparison Duel</span>
           </div>
           <h2 className="font-display text-xl sm:text-2xl font-black uppercase text-foreground tracking-wide">
             Comparing <span className="text-accent">{selectedWeapons.length}</span> Firearms
@@ -306,7 +306,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
         <div className="dark-panel relative overflow-hidden rounded-3xl border border-amber-500/30 bg-[#0a0f1d] bg-gradient-to-r from-amber-500/10 via-[#0e0717] to-[#040810] p-6 sm:p-8 shadow-2xl">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-xl">
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-amber-300">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-black uppercase tracking-wider text-amber-300">
                 <Trophy className="h-3.5 w-3.5 text-amber-400" /> Ballistic Recommendation & Highest Combat Rating
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white">
@@ -349,7 +349,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <button
                     onClick={() => setPickerSlotIndex(idx)}
-                    className="rounded-lg bg-muted/50 px-2 py-1 text-[11px] font-bold text-muted-foreground hover:bg-muted/60 transition-colors"
+                    className="rounded-lg bg-muted/50 px-2 py-1 text-xs font-bold text-muted-foreground hover:bg-muted/60 transition-colors"
                   >
                     Slot #{idx + 1}: Swap Weapon ▾
                   </button>
@@ -366,7 +366,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                 {/* Visual */}
                 <div className="relative h-40 rounded-2xl overflow-hidden border border-border bg-gradient-to-br from-card dark:from-[#0c0517] via-black/90 to-[#170a1f] p-4 flex items-center justify-center mb-4">
                   <img src={w.img} alt={w.name} className="max-h-28 w-full object-contain mix-blend-lighten brightness-125" />
-                  <span className="absolute bottom-2 left-2 rounded-lg bg-black/80 px-2 py-0.5 text-[11px] font-bold text-accent backdrop-blur">
+                  <span className="absolute bottom-2 left-2 rounded-lg bg-black/80 px-2 py-0.5 text-xs font-bold text-accent backdrop-blur">
                     {w.klass}
                   </span>
                 </div>
@@ -383,7 +383,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     {bestForTags[idx].map((t) => (
                       <span
                         key={t.label}
-                        className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-accent"
+                        className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-xs font-black uppercase tracking-wide text-accent"
                       >
                         {t.emoji} {t.label}
                       </span>
@@ -392,13 +392,13 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                 )}
                 {overallScores[idx] != null && (
                   <div className="mt-2 flex items-center justify-between rounded-xl border border-amber-500/30 bg-amber-400/10 px-2.5 py-1.5">
-                    <span className="text-[11px] font-black uppercase tracking-wider text-amber-700 dark:text-amber-300 flex items-center gap-1">
+                    <span className="text-xs font-black uppercase tracking-wider text-amber-700 dark:text-amber-300 flex items-center gap-1">
                       <Trophy className="h-3 w-3" /> Overall Score
                     </span>
                     <span className="font-mono font-black text-sm text-amber-400">
                       {overallScores[idx]}/100
                       {overallScoreLeader === idx && overallScores.length > 1 && (
-                        <span className="ml-1.5 text-[9px] font-black uppercase text-emerald-400">Lead</span>
+                        <span className="ml-1.5 text-xs font-black uppercase text-emerald-400">Lead</span>
                       )}
                     </span>
                   </div>
@@ -414,7 +414,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{w.damage}/100</span>
                       {w.damage === bestDamage && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -432,7 +432,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{dpsIndices[idx]}</span>
                       {dpsIndices[idx] === bestDps && selectedWeapons.length > 1 && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -448,7 +448,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{w.fireRate}/100</span>
                       {w.fireRate === bestFireRate && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -464,7 +464,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{w.accuracy}/100</span>
                       {w.accuracy === bestAccuracy && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -480,7 +480,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{w.range}/100</span>
                       {w.range === bestRange && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-[9px] font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -491,7 +491,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
               </div>
 
               {/* PROS & CONS */}
-              <div className="mt-4 pt-3 border-t border-border space-y-2 text-[11px]">
+              <div className="mt-4 pt-3 border-t border-border space-y-2 text-xs">
                 <div className="flex items-start gap-1.5 text-emerald-400">
                   <ThumbsUp className="h-3 w-3 shrink-0 mt-0.5" />
                   <span>
@@ -526,7 +526,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="card-surface rounded-3xl border border-border p-5">
             <h3 className="font-display text-sm font-black uppercase text-foreground mb-1">Ballistics Radar</h3>
-            <p className="text-[11px] text-muted-foreground mb-3">
+            <p className="text-xs text-muted-foreground mb-3">
               Damage • Fire Rate • Accuracy • Range • Reload • Magazine
             </p>
             <RadarChart axes={["Damage", "Fire Rate", "Accuracy", "Range", "Reload", "Mag"]} series={radarSeries} />
@@ -534,7 +534,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
 
           <div className="card-surface rounded-3xl border border-border p-5">
             <h3 className="font-display text-sm font-black uppercase text-foreground mb-1">Special Features</h3>
-            <p className="text-[11px] text-muted-foreground mb-3">Attachments, ammunition & special traits</p>
+            <p className="text-xs text-muted-foreground mb-3">Attachments, ammunition & special traits</p>
             {featureUnion.length === 0 ? (
               <p className="text-xs text-muted-foreground py-8 text-center">
                 None of the selected weapons have special features listed yet.
@@ -543,7 +543,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
               <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
                 {featureMatrix.map(({ feature, present }) => (
                   <div key={feature} className="grid gap-2 items-center" style={{ gridTemplateColumns: `1.4fr repeat(${selectedWeapons.length}, 1fr)` }}>
-                    <span className="text-[11px] font-bold text-muted-foreground">{feature}</span>
+                    <span className="text-xs font-bold text-muted-foreground">{feature}</span>
                     {present.map((has, i) => (
                       <span key={i} className="text-center text-sm" aria-label={has ? "Yes" : "No"}>
                         {has ? (
@@ -606,12 +606,12 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                       </div>
                       <div>
                         <h4 className="font-display text-sm font-bold text-foreground">{cand.name}</h4>
-                        <p className="text-[11px] text-muted-foreground">{cand.klass} &bull; Damage {cand.damage}</p>
+                        <p className="text-xs text-muted-foreground">{cand.klass} &bull; Damage {cand.damage}</p>
                       </div>
                     </div>
                     <div className="text-right">
                       <span className="font-mono text-xs font-bold text-cyan-600 dark:text-[#00F0FF]">{cand.priceDisplay}</span>
-                      <span className="block text-[11px] text-muted-foreground font-semibold">{cand.confidence}</span>
+                      <span className="block text-xs text-muted-foreground font-semibold">{cand.confidence}</span>
                     </div>
                   </button>
                 );

@@ -267,7 +267,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-border">
-                <span className="font-bold text-muted-foreground uppercase tracking-wider text-[11px]">Showroom Price</span>
+                <span className="font-bold text-muted-foreground uppercase tracking-wider text-xs">Showroom Price</span>
                 <span className="font-display font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{vehicle.priceDisplay}</span>
               </div>
             </div>
@@ -297,11 +297,11 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
 
             {/* Source transparency block */}
             <div className="mt-6 rounded-2xl border-border bg-muted/60 p-3.5 text-xs text-muted-foreground space-y-1">
-              <div className="flex items-center gap-2 text-[11px] font-bold uppercase text-muted-foreground">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
                 <span>Verified Data Grounding</span>
               </div>
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 <strong>Source:</strong> {vehicle.source}. Classified under <strong>{vehicle.confidence}</strong> standards.
               </p>
             </div>
@@ -332,15 +332,15 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             </h2>
             <div className="mt-4 space-y-3">
               <div className="rounded-xl border-border bg-muted/60 p-3 text-xs">
-                <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">Dealership / Web Source:</span>
+                <span className="text-xs uppercase font-bold text-muted-foreground block mb-1">Dealership / Web Source:</span>
                 <span className="text-foreground font-semibold">{vehicle.purchaseLocation}</span>
               </div>
 
-              <span className="text-[11px] uppercase font-bold text-muted-foreground block pt-2">Known Street Spawns:</span>
+              <span className="text-xs uppercase font-bold text-muted-foreground block pt-2">Known Street Spawns:</span>
               <ul className="space-y-2">
                 {vehicle.spawnLocations.map((loc, i) => (
                   <li key={loc} className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent font-bold text-[11px]">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent font-bold text-xs">
                       {i + 1}
                     </span>
                     <span>{loc}</span>
@@ -399,7 +399,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             {vehicle.features?.length ? (
               <div className="mt-4 flex flex-wrap gap-2">
                 {vehicle.features.map((f) => (
-                  <span key={f} className="rounded-full border border-accent/40 bg-accent/10 px-2.5 py-1 text-[11px] font-bold text-accent">
+                  <span key={f} className="rounded-full border border-accent/40 bg-accent/10 px-2.5 py-1 text-xs font-bold text-accent">
                     {f}
                   </span>
                 ))}

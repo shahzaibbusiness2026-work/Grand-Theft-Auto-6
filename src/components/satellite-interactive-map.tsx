@@ -791,12 +791,12 @@ export function SatelliteInteractiveMap({
               <span className="font-display text-sm font-black uppercase tracking-wider text-white">
                 LEONIDA SATELLITE ATLAS
               </span>
-              <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-black uppercase text-emerald-400">
+              <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-xs font-black uppercase text-emerald-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
                 LIVE GPS
               </span>
             </div>
-            <p className="text-[11px] text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               HD 4K Topographic Reconnaissance • {visiblePOIs.length} Active Targets Displayed
             </p>
           </div>
@@ -809,7 +809,7 @@ export function SatelliteInteractiveMap({
               key={d.id}
               onClick={() => jumpToDistrict(d.id)}
               className={cn(
-                "rounded-lg px-2.5 py-1 text-[11px] font-bold uppercase transition-all",
+                "rounded-lg px-2.5 py-1 text-xs font-bold uppercase transition-all",
                 activeDistrict === d.id
                   ? "bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 font-black shadow-xs"
                   : "text-muted-foreground hover:text-white hover:bg-muted/40"
@@ -878,12 +878,12 @@ export function SatelliteInteractiveMap({
                 <h3 className="font-display text-xs font-black uppercase tracking-wider text-white">
                   Map Categories
                 </h3>
-                <p className="text-[11px] text-muted-foreground">Toggle pins and POIs</p>
+                <p className="text-xs text-muted-foreground">Toggle pins and POIs</p>
               </div>
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => toggleFilter("all")}
-                  className="text-[11px] font-bold text-amber-400 hover:underline"
+                  className="text-xs font-bold text-amber-400 hover:underline"
                 >
                   {checkedFilters.all ? "Invert" : "Select All"}
                 </button>
@@ -937,7 +937,7 @@ export function SatelliteInteractiveMap({
                       <span className="truncate">{f.label}</span>
                     </span>
                     <span className="flex items-center gap-2">
-                      <span className="text-[11px] font-mono text-muted-foreground">{filterCounts[f.id] ?? 0}</span>
+                      <span className="text-xs font-mono text-muted-foreground">{filterCounts[f.id] ?? 0}</span>
                       <span
                         className={cn(
                           "flex h-4 w-4 items-center justify-center rounded transition-all",
@@ -956,7 +956,7 @@ export function SatelliteInteractiveMap({
 
             {/* Progress Strip */}
             <div className="mt-3 pt-3 border-t border-border">
-              <div className="flex items-center justify-between text-[11px] font-bold text-white">
+              <div className="flex items-center justify-between text-xs font-bold text-white">
                 <span className="flex items-center gap-1.5 text-muted-foreground">
                   <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Verified Visited
                 </span>
@@ -986,7 +986,7 @@ export function SatelliteInteractiveMap({
                   <h3 className="font-display text-sm font-black uppercase text-white truncate max-w-[180px]">
                     {selectedPOI.title}
                   </h3>
-                  <p className="text-[11px] text-muted-foreground font-semibold">{selectedPOI.district}</p>
+                  <p className="text-xs text-muted-foreground font-semibold">{selectedPOI.district}</p>
                 </div>
               </div>
               <button
@@ -1004,7 +1004,7 @@ export function SatelliteInteractiveMap({
                 alt={selectedPOI.title}
                 className="h-full w-full object-cover"
               />
-              <span className="absolute left-2 top-2 rounded bg-black/75 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-400 backdrop-blur border border-border">
+              <span className="absolute left-2 top-2 rounded bg-black/75 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-amber-400 backdrop-blur border border-border">
                 {selectedPOI.type}
               </span>
             </div>
@@ -1014,10 +1014,10 @@ export function SatelliteInteractiveMap({
             </p>
 
             <div className="mt-3 flex items-center justify-between rounded-xl border border-border bg-black/40 px-3 py-2 text-xs">
-              <span className="flex items-center gap-1.5 text-muted-foreground text-[11px]">
+              <span className="flex items-center gap-1.5 text-muted-foreground text-xs">
                 <Sun className="h-3.5 w-3.5 text-amber-400" /> Best Hours:
               </span>
-              <span className="font-bold text-white text-[11px] font-mono">
+              <span className="font-bold text-white text-xs font-mono">
                 {selectedPOI.hours}
               </span>
             </div>
@@ -1086,7 +1086,7 @@ export function SatelliteInteractiveMap({
 
             {/* Personal Notes Section */}
             <div className="mt-4 pt-3 border-t border-border">
-              <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
+              <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
                 <FileText className="h-3 w-3 text-cyan-600 dark:text-[#00F0FF]" />
                 <span>Personal Field Notes</span>
               </div>
@@ -1109,18 +1109,18 @@ export function SatelliteInteractiveMap({
         <div className="pointer-events-none absolute left-0 right-0 top-3 z-20 flex justify-center px-4">
           <div className="pointer-events-auto flex items-center gap-2 rounded-2xl border border-border bg-black/80 px-3.5 py-1.5 shadow-2xl backdrop-blur-md">
             <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-            <span className="text-[11px] font-mono text-muted-foreground font-bold">
+            <span className="text-xs font-mono text-muted-foreground font-bold">
               GPS: {mouseCoords.lat} {mouseCoords.lng}
             </span>
             <span className="h-3 w-px bg-muted/60" />
-            <span className="text-[11px] font-mono text-cyan-600 dark:text-[#00F0FF] font-bold">
+            <span className="text-xs font-mono text-cyan-600 dark:text-[#00F0FF] font-bold">
               ZOOM: {Math.round(zoom * 100)}%
             </span>
             <span className="h-3 w-px bg-muted/60" />
             <button
               onClick={() => setClusterMode((prev) => !prev)}
               className={cn(
-                "flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-colors",
+                "flex items-center gap-1 px-2 py-0.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors",
                 clusterMode ? "bg-accent text-accent-foreground" : "bg-muted/50 text-muted-foreground hover:text-foreground"
               )}
             >
@@ -1214,9 +1214,9 @@ export function SatelliteInteractiveMap({
                   </span>
 
                   {/* Tooltip on Hover */}
-                  <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-black/90 px-2.5 py-1 text-[11px] font-bold text-white opacity-0 shadow-2xl backdrop-blur-md border border-border group-hover:opacity-100 transition-opacity z-30">
+                  <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-black/90 px-2.5 py-1 text-xs font-bold text-white opacity-0 shadow-2xl backdrop-blur-md border border-border group-hover:opacity-100 transition-opacity z-30">
                     <span className="text-amber-400 block font-black">{m.title}</span>
-                    <span className="text-muted-foreground font-medium text-[9px]">{m.district}</span>
+                    <span className="text-muted-foreground font-medium text-xs">{m.district}</span>
                   </span>
                 </button>
               );
@@ -1275,10 +1275,10 @@ export function SatelliteInteractiveMap({
         {/* ==================== 6. BOTTOM LEFT COMPASS & HINT ==================== */}
         <div className="absolute left-4 bottom-4 z-20 flex items-center gap-2">
           <div className="flex items-center gap-2 rounded-xl border border-border bg-black/80 px-3 py-1.5 backdrop-blur-xl shadow-2xl">
-            <span className="font-display text-[11px] font-black text-amber-400 tracking-wider">
+            <span className="font-display text-xs font-black text-amber-400 tracking-wider">
               N ▲
             </span>
-            <span className="text-[11px] text-muted-foreground font-medium">
+            <span className="text-xs text-muted-foreground font-medium">
               Click & Drag to Pan • Scroll to Zoom
             </span>
           </div>
@@ -1326,7 +1326,7 @@ export function SatelliteInteractiveMap({
                     />
                     <span
                       className={cn(
-                        "absolute left-2 top-2 rounded px-1.5 py-0.5 text-[8px] font-black uppercase tracking-wider text-white shadow-sm",
+                        "absolute left-2 top-2 rounded px-1.5 py-0.5 text-xs font-black uppercase tracking-wider text-white shadow-sm",
                         r.badgeColor
                       )}
                     >
@@ -1337,9 +1337,9 @@ export function SatelliteInteractiveMap({
                     <p className="flex items-center gap-1.5 truncate text-xs font-bold text-white group-hover:text-amber-400 transition-colors">
                       <MapPin className={cn("h-3.5 w-3.5 shrink-0", r.color)} /> {r.title}
                     </p>
-                    <p className="mt-1 flex items-center justify-between text-[11px] text-muted-foreground">
+                    <p className="mt-1 flex items-center justify-between text-xs text-muted-foreground">
                       <span>{r.type}</span>
-                      <span className="font-mono text-[9px]">{r.when}</span>
+                      <span className="font-mono text-xs">{r.when}</span>
                     </p>
                   </div>
                 </div>

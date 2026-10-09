@@ -662,7 +662,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
             <Donut value={overallPercent} size={130} strokeWidth={12} color="var(--primary)" />
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
               <span className="font-display text-3xl font-black text-foreground">{overallPercent}%</span>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Total</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Total</span>
             </div>
           </div>
           <div className="flex-1 text-center sm:text-left">
@@ -690,7 +690,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
               <span className="text-xs font-bold uppercase tracking-widest text-primary flex items-center gap-2">
                 <SlidersHorizontal className="h-4 w-4" /> Data Sync & Backup
               </span>
-              <span className="text-[11px] font-mono text-muted-foreground">Local Auto-Save</span>
+              <span className="text-xs font-mono text-muted-foreground">Local Auto-Save</span>
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Your tracker is securely persisted in your browser. Export anytime to back up or transfer between devices.
@@ -722,7 +722,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
         {/* Interactive Map Link Box */}
         <div className="card-carbon p-6 flex flex-col justify-between bg-gradient-to-br from-card via-card to-primary/10 border-border">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-accent mb-2">
+            <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-accent mb-2">
               <MapPin className="h-3.5 w-3.5" /> Live Map Sync
             </div>
             <h3 className="font-display text-base font-black text-foreground mb-2">
@@ -762,12 +762,12 @@ export function TrackerClient({ config }: TrackerClientProps) {
                     : "border-border bg-card/60 hover:border-border hover:bg-muted/50 text-card-foreground"
                 )}
               >
-                <div className="flex items-center justify-between text-[11px] mb-1">
+                <div className="flex items-center justify-between text-xs mb-1">
                   <span className="font-semibold text-foreground truncate pr-1">{cat}</span>
                   <span className="font-mono font-black text-accent">{stat.percent}%</span>
                 </div>
                 <Progress value={stat.percent} className="h-1.5 bg-muted" />
-                <div className="flex justify-between items-center text-[11px] text-muted-foreground mt-1.5 font-mono">
+                <div className="flex justify-between items-center text-xs text-muted-foreground mt-1.5 font-mono">
                   <span>
                     {stat.completed} / {stat.total}
                     {categoryWeights[cat] != null && (
@@ -885,10 +885,10 @@ export function TrackerClient({ config }: TrackerClientProps) {
                   {/* Main Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                      <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border">
+                      <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border">
                         {item.category}
                       </span>
-                      <span className="text-[11px] font-medium text-muted-foreground flex items-center gap-1">
+                      <span className="text-xs font-medium text-muted-foreground flex items-center gap-1">
                         <MapPin className="h-3 w-3 text-accent" /> {item.district}
                       </span>
                       <ConfidenceBadge confidence={item.confidence} source={item.source} size="sm" />
@@ -908,7 +908,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                     </p>
 
                     <div className="mt-2.5 flex flex-wrap items-center gap-4 text-xs">
-                      <div className="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 font-mono text-[11px]">
+                      <div className="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 font-mono text-xs">
                         <Trophy className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400" />
                         <span>Reward: {item.reward}</span>
                       </div>
@@ -916,7 +916,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                       {item.mapPoiId && (
                         <Link
                           href={`/map?poi=${item.mapPoiId}`}
-                          className="text-[11px] font-medium text-accent hover:underline flex items-center gap-1"
+                          className="text-xs font-medium text-accent hover:underline flex items-center gap-1"
                         >
                           <MapPin className="h-3 w-3" /> View On Live Map
                         </Link>
@@ -928,7 +928,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                           setEditingNoteId(isEditing ? null : item.id);
                           setNoteText(userNote || "");
                         }}
-                        className="text-[11px] font-medium text-muted-foreground hover:text-foreground flex items-center gap-1"
+                        className="text-xs font-medium text-muted-foreground hover:text-foreground flex items-center gap-1"
                       >
                         <FileEdit className="h-3 w-3" />
                         {userNote ? "Edit Personal Note" : "+ Add Note"}
@@ -938,7 +938,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                     {/* Personal Note Box */}
                     {userNote && !isEditing && (
                       <div className="mt-2.5 p-2.5 rounded-lg bg-muted/50 border border-border text-xs text-foreground font-mono">
-                        <span className="text-primary font-bold uppercase tracking-wider text-[11px] block mb-1">
+                        <span className="text-primary font-bold uppercase tracking-wider text-xs block mb-1">
                           Personal Field Note:
                         </span>
                         {userNote}
@@ -948,7 +948,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                     {/* Note Editor Drawer */}
                     {isEditing && (
                       <div className="mt-3 p-3 rounded-lg bg-card border border-primary/40 shadow-lg space-y-2">
-                        <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block">
+                        <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground block">
                           Add Field Note for: {item.title}
                         </label>
                         <textarea

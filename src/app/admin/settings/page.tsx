@@ -286,7 +286,7 @@ export default function AdminSettingsPage() {
                 <Sparkles className="w-4 h-4 text-amber-400" />
                 Hero Section Headlines & Taglines
               </h2>
-              <p className="text-[11px] text-[#94A3B8] mt-0.5">
+              <p className="text-xs text-[#94A3B8] mt-0.5">
                 These texts appear prominently at the top of the homepage and in browser meta titles.
               </p>
             </div>
@@ -325,7 +325,7 @@ export default function AdminSettingsPage() {
                 <Globe className="w-4 h-4 text-sky-400" />
                 Release Countdown & Target Launch
               </h2>
-              <p className="text-[11px] text-[#94A3B8] mt-0.5">
+              <p className="text-xs text-[#94A3B8] mt-0.5">
                 Configure the live launch countdown timer, target date, and verification status.
               </p>
             </div>
@@ -342,7 +342,7 @@ export default function AdminSettingsPage() {
                   placeholder="2026-11-19T00:00:00Z"
                   className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs font-mono text-white focus:outline-none focus:border-[#6366F1]"
                 />
-                <p className="text-[11px] text-[#64748B] mt-1">
+                <p className="text-xs text-[#64748B] mt-1">
                   Example: 2026-11-19T00:00:00Z or 2026-09-17
                 </p>
               </div>
@@ -363,7 +363,7 @@ export default function AdminSettingsPage() {
             <div className="pt-2 flex items-center justify-between border-t border-[#1C2436]">
               <div>
                 <p className="font-semibold text-white text-xs">Official Date Confirmed by Rockstar</p>
-                <p className="text-[11px] text-[#64748B]">
+                <p className="text-xs text-[#64748B]">
                   Enable when Rockstar Games announces the official release date.
                 </p>
               </div>
@@ -383,7 +383,7 @@ export default function AdminSettingsPage() {
                 <Sparkles className="w-4 h-4 text-emerald-400" />
                 Sitewide Announcement Banner
               </h2>
-              <p className="text-[11px] text-[#94A3B8] mt-0.5">
+              <p className="text-xs text-[#94A3B8] mt-0.5">
                 Displays breaking news, trailer alerts, or major updates across all pages.
               </p>
             </div>
@@ -408,7 +408,7 @@ export default function AdminSettingsPage() {
                 <FileText className="w-4 h-4 text-purple-400" />
                 Footer Text & Copyright
               </h2>
-              <p className="text-[11px] text-[#94A3B8] mt-0.5">
+              <p className="text-xs text-[#94A3B8] mt-0.5">
                 Manage the footer description, copyright notice, and legal disclaimers.
               </p>
             </div>
@@ -463,7 +463,7 @@ export default function AdminSettingsPage() {
           <div className="rounded-xl border border-[#1C2436] bg-[#111622] overflow-hidden">
             <table className="w-full text-left text-xs" aria-label="Navigation menu items">
               <thead>
-                <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-[11px]">
+                <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-xs">
                   <th scope="col" className="p-3.5 w-12 text-center">Order</th>
                   <th scope="col" className="p-3.5 font-medium">Display Label</th>
                   <th scope="col" className="p-3.5 font-medium">Destination Path</th>
@@ -512,7 +512,7 @@ export default function AdminSettingsPage() {
                           handleUpdate({ navigationMenu: updated });
                         }}
                         className={cn(
-                          "px-2 py-0.5 rounded text-[11px] font-semibold border",
+                          "px-2 py-0.5 rounded text-xs font-semibold border",
                           item.visible
                             ? "bg-[#064E3B]/40 text-[#34D399] border-[#065F46]"
                             : "bg-[#1E293B] text-[#64748B] border-[#334155]"
@@ -569,12 +569,12 @@ export default function AdminSettingsPage() {
                   </span>
                   <div>
                     <p className="text-xs font-bold text-white">{sec.label}</p>
-                    <p className="text-[11px] text-[#64748B]">{sec.desc}</p>
+                    <p className="text-xs text-[#64748B]">{sec.desc}</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] text-emerald-400 font-semibold">Enabled</span>
+                  <span className="text-xs text-emerald-400 font-semibold">Enabled</span>
                   <input
                     type="checkbox"
                     defaultChecked
@@ -607,13 +607,13 @@ export default function AdminSettingsPage() {
               >
                 <div className="flex items-center justify-between">
                   <h3 className="text-xs font-bold text-white">{tool.name}</h3>
-                  <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span className="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                     Live
                   </span>
                 </div>
-                <p className="text-[11px] text-[#64748B] leading-relaxed">{tool.desc}</p>
+                <p className="text-xs text-[#64748B] leading-relaxed">{tool.desc}</p>
                 <div className="pt-1 flex items-center justify-between">
-                  <span className="text-[11px] text-[#94A3B8]">Public access</span>
+                  <span className="text-xs text-[#94A3B8]">Public access</span>
                   <input
                     type="checkbox"
                     defaultChecked
@@ -639,7 +639,7 @@ export default function AdminSettingsPage() {
               placeholder="GTA 6 Atlas"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
             />
-            <p className="text-[11px] text-[#64748B] mt-1">Used in the browser tab, metadata and sitemap.</p>
+            <p className="text-xs text-[#64748B] mt-1">Used in the browser tab, metadata and sitemap.</p>
           </div>
 
           <div>

@@ -92,7 +92,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
                 <div key={s.label} className="card-surface flex items-center gap-3 px-4 py-3">
                   <s.icon className={cn("h-5 w-5", s.color)} />
                   <div>
-                    <p className="text-[9px] uppercase tracking-wider text-muted-foreground">{s.label}</p>
+                    <p className="text-xs uppercase tracking-wider text-muted-foreground">{s.label}</p>
                     <p className="font-display text-lg font-extrabold">{s.value}</p>
                   </div>
                 </div>
@@ -128,7 +128,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
                 <span className="flex items-center gap-2.5">
                   <Crosshair className="h-3.5 w-3.5 text-accent" /> {label}
                 </span>
-                <span className="text-[11px]">{count}</span>
+                <span className="text-xs">{count}</span>
               </button>
             ))}
           </nav>
@@ -145,7 +145,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
 
           <h3 className="section-eyebrow mt-6 text-muted-foreground">Price Range</h3>
           <div className="mt-3 space-y-3">
-            <div className="flex justify-between text-[11px] text-muted-foreground">
+            <div className="flex justify-between text-xs text-muted-foreground">
               <span>${(price[0] / 1000).toFixed(0)}K</span>
               <span>${(price[1] / 1000).toFixed(0)}K+</span>
             </div>
@@ -211,8 +211,8 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
                   <div className="mt-3 grid grid-cols-4 gap-1 border-t border-border pt-3 text-center">
                     {w.stats.map((s, j) => (
                       <div key={j}>
-                        <p className="text-[11px] font-bold">{s}</p>
-                        <p className="text-[8px] uppercase tracking-wide text-muted-foreground">{statLabels[j]}</p>
+                        <p className="text-xs font-bold">{s}</p>
+                        <p className="text-xs uppercase tracking-wide text-muted-foreground">{statLabels[j]}</p>
                       </div>
                     ))}
                   </div>
@@ -245,7 +245,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
                     <img src="/img/rifle.svg" alt="" className="h-full w-full object-cover opacity-90" style={{ filter: `hue-rotate(${i * 40}deg) grayscale(0.15) brightness(1.2)` }} />
                   </div>
                   <span className="text-xs font-bold">{c.label}</span>
-                  <span className="text-[9px] text-muted-foreground">{c.count}</span>
+                  <span className="text-xs text-muted-foreground">{c.count}</span>
                 </a>
               ))}
             </div>
@@ -269,7 +269,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
                   </span>
                   <div className="flex-1">
                     <p className="text-[13px] font-bold">{w.name}</p>
-                    <p className="text-[11px] text-muted-foreground">{w.klass}</p>
+                    <p className="text-xs text-muted-foreground">{w.klass}</p>
                   </div>
                   <span className="font-display text-[13px] font-extrabold">{w.score}</span>
                 </li>
@@ -290,7 +290,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
                     <Badge variant={i < 3 ? "green" : "gray"}>{i < 3 ? "New" : i === 3 ? "1d ago" : "2d ago"}</Badge>
                     <div className="flex-1">
                       <p className="text-[13px] font-bold">{name}</p>
-                      <p className="text-[11px] text-muted-foreground">{klass}</p>
+                      <p className="text-xs text-muted-foreground">{klass}</p>
                     </div>
                   </li>
                 );

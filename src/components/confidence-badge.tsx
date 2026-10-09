@@ -71,7 +71,7 @@ export function ConfidenceBadge({
         config.border,
         config.bg,
         config.text,
-        size === "sm" ? "px-2.5 py-0.5 text-[9px]" : "px-3 py-1 text-[11px]",
+        size === "sm" ? "px-2.5 py-0.5 text-xs" : "px-3 py-1 text-xs",
         className
       )}
     >

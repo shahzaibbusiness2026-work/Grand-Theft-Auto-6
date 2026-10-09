@@ -235,7 +235,7 @@ export default function AdminUsersPage() {
           )}
         >
           <span>All users</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-mono bg-[#182030] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-xs font-mono bg-[#182030] text-[#94A3B8]">
             {users.length}
           </span>
         </button>
@@ -251,7 +251,7 @@ export default function AdminUsersPage() {
           )}
         >
           <span>Administrators</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-mono bg-[#182030] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-xs font-mono bg-[#182030] text-[#94A3B8]">
             {users.filter((u) => u.role === "Administrator").length}
           </span>
         </button>
@@ -267,7 +267,7 @@ export default function AdminUsersPage() {
           )}
         >
           <span>Editors</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-mono bg-[#182030] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-xs font-mono bg-[#182030] text-[#94A3B8]">
             {users.filter((u) => u.role === "Editor").length}
           </span>
         </button>
@@ -283,7 +283,7 @@ export default function AdminUsersPage() {
           )}
         >
           <span>Contributors</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-mono bg-[#182030] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-xs font-mono bg-[#182030] text-[#94A3B8]">
             {users.filter((u) => u.role === "Publisher").length}
           </span>
         </button>
@@ -299,7 +299,7 @@ export default function AdminUsersPage() {
           )}
         >
           <span>Pending invites</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[11px] font-mono bg-[#182030] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-xs font-mono bg-[#182030] text-[#94A3B8]">
             {users.filter((u) => u.status === "pending").length}
           </span>
         </button>
@@ -356,7 +356,7 @@ export default function AdminUsersPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs" aria-label="Team members">
             <thead>
-              <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-[11px]">
+              <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-xs">
                 <th scope="col" className="p-3.5 w-10">
                   <input
                     type="checkbox"
@@ -396,14 +396,14 @@ export default function AdminUsersPage() {
                         </div>
                         <div>
                           <p className="font-semibold text-white">{u.name}</p>
-                          <p className="text-[11px] text-[#64748B]">{u.email}</p>
+                          <p className="text-xs text-[#64748B]">{u.email}</p>
                         </div>
                       </div>
                     </td>
                     <td className="p-3.5">
                       <span
                         className={cn(
-                          "px-2 py-0.5 rounded text-[11px] font-semibold border",
+                          "px-2 py-0.5 rounded text-xs font-semibold border",
                           u.role === "Administrator"
                             ? "bg-[#312E81] text-[#A5B4FC] border-[#4338CA]"
                             : u.role === "Editor"
@@ -428,7 +428,7 @@ export default function AdminUsersPage() {
                         />
                         <span
                           className={cn(
-                            "text-[11px] font-medium capitalize",
+                            "text-xs font-medium capitalize",
                             u.status === "active"
                               ? "text-emerald-400"
                               : u.status === "pending"
@@ -441,11 +441,11 @@ export default function AdminUsersPage() {
                       </div>
                     </td>
                     <td className="p-3.5">
-                      <span className="text-[11px] font-mono text-[#94A3B8]">
+                      <span className="text-xs font-mono text-[#94A3B8]">
                         {u.role === "Administrator" ? "Enabled" : "Optional"}
                       </span>
                     </td>
-                    <td className="p-3.5 text-[#64748B] font-mono text-[11px]">
+                    <td className="p-3.5 text-[#64748B] font-mono text-xs">
                       {u.lastActivity}
                     </td>
                     <td className="p-3.5 text-right">
@@ -488,7 +488,7 @@ export default function AdminUsersPage() {
         <div className="rounded-xl border border-[#1C2436] overflow-hidden bg-[#0E131D]">
           <table className="w-full text-left text-xs" aria-label="Permissions matrix">
             <thead>
-              <tr className="border-b border-[#1C2436] bg-[#111622] text-[#64748B] text-[11px]">
+              <tr className="border-b border-[#1C2436] bg-[#111622] text-[#64748B] text-xs">
                 <th scope="col" className="p-3.5 font-medium">System Capability</th>
                 <th scope="col" className="p-3.5 font-medium text-center w-36">Administrator</th>
                 <th scope="col" className="p-3.5 font-medium text-center w-36">Editor</th>
@@ -593,7 +593,7 @@ export default function AdminUsersPage() {
               )}
             />
             {emailError && (
-              <p className="text-[11px] text-red-400 mt-1 font-medium">{emailError}</p>
+              <p className="text-xs text-red-400 mt-1 font-medium">{emailError}</p>
             )}
           </div>
 
@@ -636,7 +636,7 @@ export default function AdminUsersPage() {
                       <p className="font-semibold text-white">{r.title}</p>
                       {isSelected && <Check className="w-4 h-4 text-[#6366F1]" />}
                     </div>
-                    <p className="text-[11px] text-[#64748B] mt-1 leading-relaxed">{r.desc}</p>
+                    <p className="text-xs text-[#64748B] mt-1 leading-relaxed">{r.desc}</p>
                   </div>
                 );
               })}
@@ -646,7 +646,7 @@ export default function AdminUsersPage() {
           {/* Permissions Summary Notice Box */}
           <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] flex items-start gap-2.5 text-[#94A3B8]">
             <Info className="w-4 h-4 text-[#38BDF8] shrink-0 mt-0.5" />
-            <p className="text-[11px] leading-relaxed">
+            <p className="text-xs leading-relaxed">
               An invitation token with a 48-hour expiration will be sent via email. The recipient must verify their email and set up two-factor authentication.
             </p>
           </div>

@@ -161,7 +161,7 @@ export function RadioClient({ initialStations }: { initialStations?: RadioStatio
                   <p className="text-xs text-muted-foreground">{station.genre}</p>
                 </div>
 
-                <div className="pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-muted-foreground">
+                <div className="pt-3 border-t border-border/60 flex items-center justify-between text-xs text-muted-foreground">
                   <span>Host: <strong>{station.host}</strong></span>
                   <span className="text-primary font-semibold">{station.tracks.length} tracks</span>
                 </div>
@@ -202,7 +202,7 @@ export function RadioClient({ initialStations }: { initialStations?: RadioStatio
                   key={i}
                   className="p-3 rounded-xl bg-muted border border-border/50 flex items-center gap-3 text-xs"
                 >
-                  <span className="font-mono text-[11px] text-muted-foreground w-4">
+                  <span className="font-mono text-xs text-muted-foreground w-4">
                     0{i + 1}
                   </span>
                   <Music2 className="w-3.5 h-3.5 text-primary shrink-0" />

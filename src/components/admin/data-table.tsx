@@ -179,7 +179,7 @@ export function DataTable<T extends { id: string; name?: string; title?: string 
                       <div className="flex items-center gap-1.5">
                         <span>{col.header}</span>
                         {col.sortable && (
-                          <span className="text-[11px]" aria-hidden="true">
+                          <span className="text-xs" aria-hidden="true">
                             {isSorted ? (
                               sortConfig.direction === "asc" ? (
                                 <ChevronUp className="w-3.5 h-3.5 text-[var(--admin-primary)]" />

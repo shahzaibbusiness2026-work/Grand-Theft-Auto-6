@@ -94,7 +94,7 @@ export default async function MissionsPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-accent mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-accent mb-3">
               <Flag className="h-3 w-3" /> Campaign & Heists Archive
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
@@ -116,7 +116,7 @@ export default async function MissionsPage() {
           ].map(([v, l]) => (
             <div key={l} className="flex flex-col items-center gap-1 px-4 py-5 text-center">
               <span className="font-display text-xl sm:text-2xl font-black text-accent">{v}</span>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{l}</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{l}</span>
             </div>
           ))}
         </div>

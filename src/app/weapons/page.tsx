@@ -29,7 +29,7 @@ export default async function WeaponsPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-accent mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-accent mb-3">
               <Crosshair className="h-3 w-3" /> Ballistics & Hardware Catalog
             </div>
             <h1 className="font-display text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-foreground">

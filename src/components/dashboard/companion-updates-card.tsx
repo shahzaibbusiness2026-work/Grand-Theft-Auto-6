@@ -89,14 +89,14 @@ export function CompanionUpdatesCard({ articles }: CompanionUpdatesCardProps) {
                 <span className="block text-xs font-bold text-white truncate group-hover:text-cyan-600 dark:text-[#00F0FF] transition-colors">
                   {item.title}
                 </span>
-                <span className="block text-[11px] text-muted-foreground font-medium mt-0.5">
+                <span className="block text-xs text-muted-foreground font-medium mt-0.5">
                   {item.date}
                 </span>
               </div>
             </div>
 
             <span
-              className={`shrink-0 rounded-full px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider ${
+              className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-black uppercase tracking-wider ${
                 item.badge === "Official"
                   ? "bg-purple-500/20 text-purple-300 border border-purple-500/30"
                   : "bg-amber-500/20 text-amber-300 border border-amber-500/30"

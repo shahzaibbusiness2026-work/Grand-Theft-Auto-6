@@ -193,7 +193,7 @@ export function DashboardSidebar({
                   </span>
                   <span className="h-1.5 w-1.5 rounded-full bg-[#00F0FF] shadow-[0_0_6px_#00F0FF]" />
                 </div>
-                <p className="font-mono text-[11px] text-slate-400 tracking-wider">
+                <p className="font-mono text-xs text-slate-400 tracking-wider">
                   OS V1.04 // ONLINE
                 </p>
               </div>
@@ -240,7 +240,7 @@ export function DashboardSidebar({
         {/* Section 1: Dashboard Tracker Modules */}
         <div className="space-y-1">
           {!isCollapsed && (
-            <p className="px-2.5 pb-1 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-[#00F0FF]/80">
+            <p className="px-2.5 pb-1 font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#00F0FF]/80">
               {"// Tracker Modules"}
             </p>
           )}
@@ -316,7 +316,7 @@ export function DashboardSidebar({
                       </p>
                       <p
                         className={cn(
-                          "text-[11px] truncate transition-colors duration-200",
+                          "text-xs truncate transition-colors duration-200",
                           isActive ? "text-[#00F0FF]/70" : "text-slate-400 group-hover:text-slate-300"
                         )}
                       >
@@ -327,7 +327,7 @@ export function DashboardSidebar({
 
                   <span
                     className={cn(
-                      "ml-2 shrink-0 rounded-md px-1.5 py-0.5 font-mono text-[11px] font-bold border transition-all duration-200",
+                      "ml-2 shrink-0 rounded-md px-1.5 py-0.5 font-mono text-xs font-bold border transition-all duration-200",
                       isActive
                         ? "bg-[#00F0FF]/20 text-[#00F0FF] border-[#00F0FF]/40 shadow-[0_0_8px_rgba(0,240,255,0.15)]"
                         : "bg-white/[0.04] text-slate-300 border-white/10 group-hover:bg-amber-500/20 group-hover:text-amber-400 group-hover:border-amber-500/50 group-hover:shadow-[0_0_8px_rgba(245,158,11,0.25)]"
@@ -345,7 +345,7 @@ export function DashboardSidebar({
         {/* Section 2: Atlas Intelligence (All site features) */}
         <div className="space-y-1 pt-2 border-t border-white/10">
           {!isCollapsed && (
-            <p className="px-2.5 pb-1 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-amber-400/90">
+            <p className="px-2.5 pb-1 font-mono text-xs font-bold uppercase tracking-[0.25em] text-amber-400/90">
               {"// Atlas Intelligence"}
             </p>
           )}
@@ -399,14 +399,14 @@ export function DashboardSidebar({
                       <p className="font-display text-[13px] font-bold tracking-wide truncate text-slate-200 group-hover:text-white transition-colors duration-200">
                         {feat.label}
                       </p>
-                      <p className="text-[11px] text-slate-400 truncate group-hover:text-slate-300 transition-colors duration-200">
+                      <p className="text-xs text-slate-400 truncate group-hover:text-slate-300 transition-colors duration-200">
                         {feat.sublabel}
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-1.5 ml-2">
-                    <span className="shrink-0 rounded-md bg-white/[0.04] border border-white/10 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-slate-300 group-hover:bg-amber-500/20 group-hover:text-amber-400 group-hover:border-amber-500/50 group-hover:shadow-[0_0_8px_rgba(245,158,11,0.25)] transition-all duration-200">
+                    <span className="shrink-0 rounded-md bg-white/[0.04] border border-white/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-slate-300 group-hover:bg-amber-500/20 group-hover:text-amber-400 group-hover:border-amber-500/50 group-hover:shadow-[0_0_8px_rgba(245,158,11,0.25)] transition-all duration-200">
                       {feat.badge}
                     </span>
                     <ChevronRight className="h-3 w-3 text-slate-500 opacity-0 group-hover:opacity-100 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all duration-200" />
@@ -422,7 +422,7 @@ export function DashboardSidebar({
       <div className="pt-3 border-t border-white/10 space-y-2 mt-3">
         {!isCollapsed ? (
           <>
-            <div className="flex items-center justify-between px-2.5 py-1 text-[11px] font-mono text-slate-400">
+            <div className="flex items-center justify-between px-2.5 py-1 text-xs font-mono text-slate-400">
               <span className="flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-[#10b981] shadow-[0_0_8px_#10b981]" />
                 Browser Cache Sync

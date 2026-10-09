@@ -136,7 +136,7 @@ export default async function ArticleDetailPage({ params }: Props) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
-              <span className="inline-block rounded-full bg-primary/20 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary border border-primary/30">
+              <span className="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary border border-primary/30">
                 {article.category}
               </span>
               <h1 className="mt-3 max-w-3xl font-display text-3xl sm:text-4xl font-extrabold leading-tight">
@@ -176,7 +176,7 @@ export default async function ArticleDetailPage({ params }: Props) {
                   {article.tags.map((t) => (
                     <span
                       key={t}
-                      className="rounded-full bg-muted px-3 py-1 text-[11px] font-semibold text-muted-foreground"
+                      className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground"
                     >
                       #{t}
                     </span>

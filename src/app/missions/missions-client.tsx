@@ -108,7 +108,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-border">
           {/* Type */}
           <div>
-            <span className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Mission Type:</span>
+            <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Mission Type:</span>
             <div className="flex flex-wrap gap-1">
               {TYPES.map((t) => (
                 <button
@@ -129,7 +129,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
           {/* Character */}
           <div>
-            <span className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Operative:</span>
+            <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Operative:</span>
             <div className="flex flex-wrap gap-1">
               {CHARACTERS.map((c) => (
                 <button
@@ -150,7 +150,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
           {/* Difficulty */}
           <div>
-            <span className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Threat Level:</span>
+            <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Threat Level:</span>
             <div className="flex flex-wrap gap-1">
               {DIFFICULTIES.map((d) => (
                 <button
@@ -216,7 +216,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
                   {/* Badges */}
                   <div className="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
-                    <span className="rounded-full bg-black/75 px-2.5 py-0.5 text-[9px] font-black uppercase text-accent border border-accent/30 backdrop-blur">
+                    <span className="rounded-full bg-black/75 px-2.5 py-0.5 text-xs font-black uppercase text-accent border border-accent/30 backdrop-blur">
                       {m.type}
                     </span>
                     <ConfidenceBadge level={m.confidence} size="sm" />
@@ -226,7 +226,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                     <span className="font-mono text-xs font-bold text-amber-400 bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
                       {m.cashRewardDisplay}
                     </span>
-                    <span className="text-[11px] font-semibold text-muted-foreground bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
+                    <span className="text-xs font-semibold text-muted-foreground bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
                       ⏱ {m.duration}
                     </span>
                   </div>
@@ -235,7 +235,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                 {/* Content */}
                 <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-cyan-600 dark:text-[#00F0FF] uppercase mb-1">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-cyan-600 dark:text-[#00F0FF] uppercase mb-1">
                       <Users className="h-3 w-3" />
                       <span>{m.character} &bull; {m.district}</span>
                     </div>
@@ -249,14 +249,14 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
                   {/* Objectives summary */}
                   <div className="rounded-2xl border-border bg-muted/60 p-3 space-y-1 text-xs">
-                    <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">Key Objective:</span>
+                    <span className="text-xs uppercase font-bold text-muted-foreground block mb-1">Key Objective:</span>
                     <p className="text-xs text-foreground truncate">{m.objectives[0]}</p>
                   </div>
 
                   {/* Card Footer */}
                   <div className="pt-2 border-t border-border flex items-center justify-between">
                     <span className={cn(
-                      "text-[11px] font-black uppercase px-2 py-0.5 rounded border",
+                      "text-xs font-black uppercase px-2 py-0.5 rounded border",
                       m.difficulty === "Easy" && "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",
                       m.difficulty === "Medium" && "border-amber-500/40 text-amber-600 dark:text-amber-400 bg-amber-500/10",
                       (m.difficulty === "Hard" || m.difficulty === "Extreme") && "border-rose-500/40 text-rose-400 bg-rose-500/10"

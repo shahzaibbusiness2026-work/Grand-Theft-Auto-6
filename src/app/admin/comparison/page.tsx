@@ -35,7 +35,7 @@ const WEAPON_FIELDS: { key: keyof WeaponScoreWeights; label: string }[] = [
 
 const inputCls =
   "w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]";
-const labelCls = "block text-[11px] font-medium text-[#94A3B8] mb-1";
+const labelCls = "block text-xs font-medium text-[#94A3B8] mb-1";
 
 export default function AdminComparisonPage() {
   const { showToast } = useToast();
@@ -129,7 +129,7 @@ export default function AdminComparisonPage() {
               </h2>
               <span
                 className={
-                  "px-2 py-0.5 rounded text-[11px] font-bold " +
+                  "px-2 py-0.5 rounded text-xs font-bold " +
                   (Math.round(vehicleTotal) === 100
                     ? "bg-emerald-950/60 border border-emerald-500/40 text-emerald-400"
                     : "bg-amber-950/60 border border-amber-500/40 text-amber-400")
@@ -157,7 +157,7 @@ export default function AdminComparisonPage() {
                   onChange={(e) => setVehicle((w) => ({ ...w, [f.key]: Number(e.target.value) || 0 }))}
                   className={inputCls + " w-20 text-center"}
                 />
-                <span className="text-[11px] text-[#64748B] w-8 text-right">%</span>
+                <span className="text-xs text-[#64748B] w-8 text-right">%</span>
               </div>
             ))}
           </div>
@@ -170,7 +170,7 @@ export default function AdminComparisonPage() {
               </h2>
               <span
                 className={
-                  "px-2 py-0.5 rounded text-[11px] font-bold " +
+                  "px-2 py-0.5 rounded text-xs font-bold " +
                   (Math.round(weaponTotal) === 100
                     ? "bg-emerald-950/60 border border-emerald-500/40 text-emerald-400"
                     : "bg-amber-950/60 border border-amber-500/40 text-amber-400")
@@ -198,7 +198,7 @@ export default function AdminComparisonPage() {
                   onChange={(e) => setWeapon((w) => ({ ...w, [f.key]: Number(e.target.value) || 0 }))}
                   className={inputCls + " w-20 text-center"}
                 />
-                <span className="text-[11px] text-[#64748B] w-8 text-right">%</span>
+                <span className="text-xs text-[#64748B] w-8 text-right">%</span>
               </div>
             ))}
           </div>

@@ -184,7 +184,7 @@ export default function AdminWeaponsPage() {
       {/* Header */}
       <div className="space-y-3">
         <div className="flex items-center gap-2.5 text-xs text-[#94A3B8]">
-          <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
+          <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Connected to Supabase
           </span>
@@ -234,7 +234,7 @@ export default function AdminWeaponsPage() {
           )}
         >
           <span>All weapons</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-2 py-0.5 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.all}
           </span>
         </button>
@@ -252,7 +252,7 @@ export default function AdminWeaponsPage() {
           )}
         >
           <span>Needs verification</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-2 py-0.5 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.verification}
           </span>
         </button>
@@ -270,7 +270,7 @@ export default function AdminWeaponsPage() {
           )}
         >
           <span>Drafts</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-2 py-0.5 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.drafts}
           </span>
         </button>
@@ -288,7 +288,7 @@ export default function AdminWeaponsPage() {
           )}
         >
           <span>Archived</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-2 py-0.5 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.archived}
           </span>
         </button>
@@ -383,7 +383,7 @@ export default function AdminWeaponsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs" aria-label="Weapons data table">
                 <thead>
-                  <tr className="border-b border-[#1C2436] text-[#64748B] text-[11px]">
+                  <tr className="border-b border-[#1C2436] text-[#64748B] text-xs">
                     <th scope="col" className="p-3 w-10 text-center">
                       <input
                         type="checkbox"
@@ -466,7 +466,7 @@ export default function AdminWeaponsPage() {
                               <p className="font-bold text-white text-xs hover:text-[#818CF8] transition-colors">
                                 {w.name}
                               </p>
-                              <p className="text-[11px] text-[#64748B]">
+                              <p className="text-xs text-[#64748B]">
                                 Placeholder record
                               </p>
                             </div>
@@ -479,22 +479,22 @@ export default function AdminWeaponsPage() {
                           {w.ammunition}
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
-                          <span className="px-2.5 py-0.5 rounded text-[11px] font-semibold bg-[#3C2415] border border-[#5A361F] text-[#F97316]">
+                          <span className="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#3C2415] border border-[#5A361F] text-[#F97316]">
                             Unverified
                           </span>
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
                           {w.status === "review" ? (
-                            <span className="px-2.5 py-0.5 rounded text-[11px] font-medium bg-[#3D2D16] border border-[#594220] text-[#EAB308]">
+                            <span className="px-2.5 py-0.5 rounded text-xs font-medium bg-[#3D2D16] border border-[#594220] text-[#EAB308]">
                               Review
                             </span>
                           ) : (
-                            <span className="px-2.5 py-0.5 rounded text-[11px] font-medium bg-[#182030] border border-[#243048] text-[#94A3B8]">
+                            <span className="px-2.5 py-0.5 rounded text-xs font-medium bg-[#182030] border border-[#243048] text-[#94A3B8]">
                               Draft
                             </span>
                           )}
                         </td>
-                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-[11px]">
+                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-xs">
                           {w.updatedAt}
                         </td>
                         <td className="py-3 px-3 text-right" onClick={(e) => e.stopPropagation()}>
@@ -577,7 +577,7 @@ export default function AdminWeaponsPage() {
               <div>
                 <h2 className="text-sm font-bold text-white">Edit Weapon</h2>
                 <p className="text-xs text-[#94A3B8] mt-0.5">{drawerWeapon.name}</p>
-                <p className="text-[11px] text-[#64748B]">Placeholder record</p>
+                <p className="text-xs text-[#64748B]">Placeholder record</p>
               </div>
               <button
                 type="button"
@@ -596,7 +596,7 @@ export default function AdminWeaponsPage() {
               </div>
               <div className="min-w-0">
                 <p className="text-xs font-bold text-white truncate">{drawerWeapon.name}</p>
-                <p className="text-[11px] text-[#64748B]">Placeholder record</p>
+                <p className="text-xs text-[#64748B]">Placeholder record</p>
               </div>
             </div>
 
@@ -605,7 +605,7 @@ export default function AdminWeaponsPage() {
               <div>
                 <label
                   htmlFor="drawer-category"
-                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                  className="block text-xs font-medium text-[#94A3B8] mb-1.5"
                 >
                   Category
                 </label>
@@ -632,7 +632,7 @@ export default function AdminWeaponsPage() {
               <div>
                 <label
                   htmlFor="drawer-ammunition"
-                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                  className="block text-xs font-medium text-[#94A3B8] mb-1.5"
                 >
                   Ammunition
                 </label>
@@ -654,7 +654,7 @@ export default function AdminWeaponsPage() {
               <div>
                 <label
                   htmlFor="drawer-verification"
-                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                  className="block text-xs font-medium text-[#94A3B8] mb-1.5"
                 >
                   Verification status
                 </label>
@@ -678,7 +678,7 @@ export default function AdminWeaponsPage() {
               <div>
                 <label
                   htmlFor="drawer-publication"
-                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                  className="block text-xs font-medium text-[#94A3B8] mb-1.5"
                 >
                   Publication status
                 </label>
@@ -703,7 +703,7 @@ export default function AdminWeaponsPage() {
               <div>
                 <label
                   htmlFor="drawer-notes"
-                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                  className="block text-xs font-medium text-[#94A3B8] mb-1.5"
                 >
                   Notes
                 </label>
@@ -717,7 +717,7 @@ export default function AdminWeaponsPage() {
                 />
               </div>
 
-              <p className="text-[11px] text-[#64748B]">
+              <p className="text-xs text-[#64748B]">
                 This is a placeholder record. All information is unverified.
               </p>
 
@@ -762,7 +762,7 @@ export default function AdminWeaponsPage() {
           </div>
           <div>
             <p className="text-xs font-bold text-white">Archived record restored</p>
-            <p className="text-[11px] text-[#A7F3D0]">
+            <p className="text-xs text-[#A7F3D0]">
               Weapon W-008 has been restored from the archive.
             </p>
           </div>

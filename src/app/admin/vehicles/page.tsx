@@ -218,7 +218,7 @@ export default function AdminVehiclesPage() {
           )}
         >
           <span>All vehicles</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-2 py-0.5 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.all}
           </span>
         </button>
@@ -236,7 +236,7 @@ export default function AdminVehiclesPage() {
           )}
         >
           <span>Needs verification</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-2 py-0.5 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.verification}
           </span>
         </button>
@@ -254,7 +254,7 @@ export default function AdminVehiclesPage() {
           )}
         >
           <span>Drafts</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-2 py-0.5 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.drafts}
           </span>
         </button>
@@ -272,7 +272,7 @@ export default function AdminVehiclesPage() {
           )}
         >
           <span>Archived</span>
-          <span className="px-2 py-0.5 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-2 py-0.5 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.archived}
           </span>
         </button>
@@ -421,7 +421,7 @@ export default function AdminVehiclesPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs" aria-label="Vehicles data table">
               <thead>
-                <tr className="border-b border-[#1C2436] text-[#64748B] text-[11px]">
+                <tr className="border-b border-[#1C2436] text-[#64748B] text-xs">
                   <th scope="col" className="p-3 w-10 text-center">
                     <input
                       type="checkbox"
@@ -513,7 +513,7 @@ export default function AdminVehiclesPage() {
                               <p className="font-bold text-white text-xs hover:text-[#818CF8] transition-colors">
                                 {v.displayName}
                               </p>
-                              <p className="text-[11px] text-[#64748B] font-mono">
+                              <p className="text-xs text-[#64748B] font-mono">
                                 {v.code}
                               </p>
                             </div>
@@ -526,23 +526,23 @@ export default function AdminVehiclesPage() {
                           {v.manufacturer}
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
-                          <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#EAB308]">
+                          <div className="flex items-center gap-1.5 text-xs font-medium text-[#EAB308]">
                             <span className="w-2 h-2 rounded-full bg-[#EAB308]" />
                             <span>Pending source</span>
                           </div>
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
                           {v.status === "review" ? (
-                            <span className="px-2.5 py-1 rounded text-[11px] font-semibold bg-[#162744] border border-[#234375] text-[#38BDF8]">
+                            <span className="px-2.5 py-1 rounded text-xs font-semibold bg-[#162744] border border-[#234375] text-[#38BDF8]">
                               Review
                             </span>
                           ) : (
-                            <span className="px-2.5 py-1 rounded text-[11px] font-medium bg-[#182030] border border-[#243048] text-[#94A3B8]">
+                            <span className="px-2.5 py-1 rounded text-xs font-medium bg-[#182030] border border-[#243048] text-[#94A3B8]">
                               Draft
                             </span>
                           )}
                         </td>
-                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-[11px]">
+                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-xs">
                           {v.updatedAt}
                         </td>
                         <td className="py-3 px-3 text-right" onClick={(e) => e.stopPropagation()}>
@@ -573,19 +573,19 @@ export default function AdminVehiclesPage() {
                           <td colSpan={8} className="px-12 py-3.5 text-xs text-[#94A3B8]">
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-2">
                               <div>
-                                <span className="text-[#64748B] text-[11px] block">Manufacturer</span>
+                                <span className="text-[#64748B] text-xs block">Manufacturer</span>
                                 <span className="text-white font-medium">{v.manufacturer}</span>
                               </div>
                               <div>
-                                <span className="text-[#64748B] text-[11px] block">Sources</span>
+                                <span className="text-[#64748B] text-xs block">Sources</span>
                                 <span className="text-white font-medium">{v.sources.length}</span>
                               </div>
                               <div>
-                                <span className="text-[#64748B] text-[11px] block">Last editor</span>
+                                <span className="text-[#64748B] text-xs block">Last editor</span>
                                 <span className="text-white font-medium">{v.lastEditor}</span>
                               </div>
                             </div>
-                            <p className="text-[11px] text-[#64748B] italic">
+                            <p className="text-xs text-[#64748B] italic">
                               No additional information available.
                             </p>
                           </td>
@@ -602,7 +602,7 @@ export default function AdminVehiclesPage() {
           {selectedIds.length > 0 && (
             <div className="p-3 bg-[#0B0E14] border-t border-[#1C2436] flex items-center justify-between flex-wrap gap-3 text-xs">
               <div className="flex items-center gap-3">
-                <span className="px-2.5 py-1 rounded bg-[#6366F1] text-white font-bold text-[11px]">
+                <span className="px-2.5 py-1 rounded bg-[#6366F1] text-white font-bold text-xs">
                   {selectedIds.length} selected
                 </span>
                 <button

@@ -63,7 +63,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
           <span className="text-primary font-display text-[26px] font-black tracking-tight">
             GTA 6
           </span>
-          <span className="mt-0.5 font-mono text-[9px] font-black uppercase tracking-[0.45em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
+          <span className="mt-0.5 font-mono text-xs font-black uppercase tracking-[0.45em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
             COMPANION
           </span>
         </Link>
@@ -119,7 +119,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
             </span>
           </div>
 
-          <ul className="space-y-1.5 text-[11px] text-slate-300 mb-3">
+          <ul className="space-y-1.5 text-xs text-slate-300 mb-3">
             {[
               "Ad-free experience",
               "Advanced tools",

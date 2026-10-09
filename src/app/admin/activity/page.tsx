@@ -157,7 +157,7 @@ export default function AdminActivityPage() {
             size="sm"
             onClick={resetFilters}
             leftIcon={<RotateCcw className="w-3 h-3" />}
-            className="text-amber-300 hover:text-amber-200 hover:bg-amber-500/20 h-7 px-2 text-[11px]"
+            className="text-amber-300 hover:text-amber-200 hover:bg-amber-500/20 h-7 px-2 text-xs"
           >
             Reset Filters
           </Button>
@@ -171,7 +171,7 @@ export default function AdminActivityPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs" aria-label="Activity audit log">
               <thead>
-                <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-[11px]">
+                <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-xs">
                   <th scope="col" className="p-3.5 font-medium">Timestamp</th>
                   <th scope="col" className="p-3.5 font-medium">Actor</th>
                   <th scope="col" className="p-3.5 font-medium">Action</th>
@@ -200,12 +200,12 @@ export default function AdminActivityPage() {
                             : "hover:bg-[#141B2A]"
                         )}
                       >
-                        <td className="p-3.5 font-mono text-[11px] text-[#64748B] whitespace-nowrap">
+                        <td className="p-3.5 font-mono text-xs text-[#64748B] whitespace-nowrap">
                           {act.timestamp}
                         </td>
                         <td className="p-3.5 whitespace-nowrap">
                           <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-[9px]">
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-xs">
                               {act.actor.initials}
                             </div>
                             <span className="font-semibold text-white">
@@ -214,7 +214,7 @@ export default function AdminActivityPage() {
                           </div>
                         </td>
                         <td className="p-3.5 whitespace-nowrap">
-                          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
+                          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
                             {act.action}
                           </span>
                         </td>
@@ -244,13 +244,13 @@ export default function AdminActivityPage() {
                 <h3 className="font-bold uppercase tracking-wider text-white">
                   Activity Details
                 </h3>
-                <span className="font-mono text-[11px] text-[#64748B]">
+                <span className="font-mono text-xs text-[#64748B]">
                   #{selectedActivity.id.toUpperCase()}
                 </span>
               </div>
 
               {/* Event Metadata */}
-              <div className="space-y-2 p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] font-mono text-[11px]">
+              <div className="space-y-2 p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] font-mono text-xs">
                 <div className="flex justify-between">
                   <span className="text-[#64748B] font-sans">Actor:</span>
                   <span className="text-white font-bold">{selectedActivity.actor.name}</span>
@@ -273,8 +273,8 @@ export default function AdminActivityPage() {
               <div className="space-y-2">
                 <h4 className="font-semibold text-white">Modified Fields</h4>
                 <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-2">
-                  <p className="text-[11px] font-semibold text-[#94A3B8]">Field: Status</p>
-                  <div className="flex items-center gap-2 font-mono text-[11px]">
+                  <p className="text-xs font-semibold text-[#94A3B8]">Field: Status</p>
+                  <div className="flex items-center gap-2 font-mono text-xs">
                     <span className="px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 line-through">
                       Draft
                     </span>
@@ -286,8 +286,8 @@ export default function AdminActivityPage() {
                 </div>
 
                 <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-2">
-                  <p className="text-[11px] font-semibold text-[#94A3B8]">Field: Coordinates</p>
-                  <div className="flex items-center gap-2 font-mono text-[11px]">
+                  <p className="text-xs font-semibold text-[#94A3B8]">Field: Coordinates</p>
+                  <div className="flex items-center gap-2 font-mono text-xs">
                     <span className="px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 line-through">
                       (45.2, 58.1)
                     </span>

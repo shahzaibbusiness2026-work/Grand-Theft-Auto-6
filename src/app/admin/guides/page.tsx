@@ -117,7 +117,7 @@ export default function AdminGuidesPage() {
           <BookOpen className="w-4 h-4 text-indigo-400 shrink-0" />
           <div className="min-w-0">
             <span className="font-bold text-[var(--admin-text)] block truncate">{g.title}</span>
-            <span className="text-[11px] text-[var(--admin-text-muted)]">{g.read_time || "—"}</span>
+            <span className="text-xs text-[var(--admin-text-muted)]">{g.read_time || "—"}</span>
           </div>
         </div>
       ),
@@ -141,13 +141,13 @@ export default function AdminGuidesPage() {
       key: "views",
       header: "Views",
       sortable: true,
-      render: (g) => <span className="font-mono text-[11px] text-[var(--admin-text-muted)]">{(g.views ?? 0).toLocaleString()}</span>,
+      render: (g) => <span className="font-mono text-xs text-[var(--admin-text-muted)]">{(g.views ?? 0).toLocaleString()}</span>,
     },
     {
       key: "featured",
       header: "Flags",
       render: (g) => (
-        <div className="flex items-center gap-1.5 text-[11px]">
+        <div className="flex items-center gap-1.5 text-xs">
           {g.featured && (
             <span className="px-1.5 py-0.5 rounded bg-[#2A2015] text-[#E5A83B] border border-[#4A3818]">Featured</span>
           )}
@@ -196,7 +196,7 @@ export default function AdminGuidesPage() {
 
   const inputCls =
     "w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]";
-  const labelCls = "block text-[11px] font-medium text-[#94A3B8] mb-1";
+  const labelCls = "block text-xs font-medium text-[#94A3B8] mb-1";
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
@@ -241,7 +241,7 @@ export default function AdminGuidesPage() {
               {isLoading ? "Loading guides…" : "No guides found."}
             </p>
             {!isLoading && (
-              <p className="text-[11px] text-[var(--admin-text-muted)] mt-1">
+              <p className="text-xs text-[var(--admin-text-muted)] mt-1">
                 Add your first guide to publish it on the public site.
               </p>
             )}

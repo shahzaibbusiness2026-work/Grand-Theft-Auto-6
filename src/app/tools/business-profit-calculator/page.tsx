@@ -22,7 +22,7 @@ export default function BusinessProfitCalculatorPage() {
         </nav>
 
         <div className="mb-8 max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#00F0FF]/40 bg-[#00F0FF]/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-[#00F0FF] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#00F0FF]/40 bg-[#00F0FF]/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-[#00F0FF] mb-3">
             <Building2 className="h-3 w-3" /> Enterprise Cashflow Engine
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">

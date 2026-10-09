@@ -156,7 +156,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
           <p className="font-mono text-xs sm:text-sm font-black uppercase tracking-[0.25em] text-sky-600 dark:text-[#00F0FF] dark:drop-shadow-[0_0_12px_rgba(0,240,255,0.6)]">
             RELEASE TIMELINE
           </p>
-          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wider text-sky-700 dark:text-[#00F0FF] bg-sky-500/10 dark:bg-[#00F0FF]/10 border border-sky-500/30 dark:border-[#00F0FF]/50 rounded-full px-3 py-0.5 backdrop-blur-md shadow-sm dark:shadow-[0_0_12px_rgba(0,240,255,0.25)]">
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-sky-700 dark:text-[#00F0FF] bg-sky-500/10 dark:bg-[#00F0FF]/10 border border-sky-500/30 dark:border-[#00F0FF]/50 rounded-full px-3 py-0.5 backdrop-blur-md shadow-sm dark:shadow-[0_0_12px_rgba(0,240,255,0.25)]">
             <span className="w-2 h-2 rounded-full bg-sky-500 dark:bg-[#00F0FF] shadow-[0_0_8px_#0284c7] dark:shadow-[0_0_8px_#00F0FF]" />
             LIVE
           </span>
@@ -236,13 +236,13 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
               </span>
 
               {/* Subtext */}
-              <span className="mt-1.5 text-[11px] sm:text-xs text-slate-500 dark:text-white/80 font-mono font-medium">
+              <span className="mt-1.5 text-xs sm:text-xs text-slate-500 dark:text-white/80 font-mono font-medium">
                 {cell.subtext}
               </span>
 
               {/* Active Unit Badge */}
               {isSelected && (
-                <span className="absolute -top-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded bg-slate-900 dark:bg-black/95 border border-sky-500 dark:border-[#00F0FF] text-[11px] font-mono text-sky-400 dark:text-[#00F0FF] whitespace-nowrap shadow-xl z-20 backdrop-blur-md">
+                <span className="absolute -top-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded bg-slate-900 dark:bg-black/95 border border-sky-500 dark:border-[#00F0FF] text-xs font-mono text-sky-400 dark:text-[#00F0FF] whitespace-nowrap shadow-xl z-20 backdrop-blur-md">
                   {cell.tooltip}
                 </span>
               )}
@@ -288,7 +288,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
         </div>
 
         {/* Milestone Labels */}
-        <div className="flex items-center justify-between text-[11px] sm:text-xs font-medium text-slate-500 dark:text-slate-300">
+        <div className="flex items-center justify-between text-xs sm:text-xs font-medium text-slate-500 dark:text-slate-300">
           <span>Reveal Trailer (Dec 2023)</span>
           <span className="text-sky-600 dark:text-[#00F0FF] font-semibold dark:drop-shadow-[0_0_10px_rgba(0,240,255,0.8)]">Current Intel</span>
           <span>Target Launch (Nov 2026)</span>
@@ -297,7 +297,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
 
       {/* 4. Footer Note */}
       <div className="pt-3 text-center">
-        <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-300/80 font-medium">
+        <p className="text-xs sm:text-xs text-slate-500 dark:text-slate-300/80 font-medium">
           {caption || (isConfirmed ?? SITE_CONFIG.isReleaseDateConfirmed
             ? "Official Confirmed Launch Date"
             : "Anticipated window • Date to be confirmed by Rockstar Games")}

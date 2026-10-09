@@ -70,7 +70,7 @@ export function CompanionHero({
       <div className="relative z-10 flex flex-col justify-between p-6 sm:p-8 lg:p-10 min-h-[300px] lg:flex-row lg:items-center gap-6">
         {/* Left column: Welcome Greeting, progress text, and CTA */}
         <div className="max-w-xl space-y-3">
-          <span className="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">
+          <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-slate-400">
             GOOD TO SEE YOU AGAIN,
           </span>
 
@@ -110,7 +110,7 @@ export function CompanionHero({
                 <div className="font-display text-sm font-extrabold uppercase tracking-wider text-foreground">
                   ATLAS DATABASE
                 </div>
-                <div className="text-[11px] font-semibold text-muted-foreground">
+                <div className="text-xs font-semibold text-muted-foreground">
                   Live Leonida Intel
                 </div>
               </div>
@@ -127,10 +127,10 @@ export function CompanionHero({
                   >
                     <Icon className={`h-3.5 w-3.5 shrink-0 ${stat.color}`} />
                     <div className="min-w-0">
-                      <p className="text-[11px] font-black text-foreground leading-none">
+                      <p className="text-xs font-black text-foreground leading-none">
                         {stat.value}
                       </p>
-                      <p className="text-[9px] text-muted-foreground mt-0.5 truncate">
+                      <p className="text-xs text-muted-foreground mt-0.5 truncate">
                         {stat.label}
                       </p>
                     </div>
@@ -148,7 +148,7 @@ export function CompanionHero({
             >
               Bigger Brighter Wilder
             </span>
-            <span className="font-mono text-[9px] tracking-[0.35em] text-muted-foreground uppercase mt-1">
+            <span className="font-mono text-xs tracking-[0.35em] text-muted-foreground uppercase mt-1">
               VICE CITY AWAITS
             </span>
           </div>

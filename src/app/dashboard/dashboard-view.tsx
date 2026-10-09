@@ -133,7 +133,7 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
 
             {/* Bottom Footer Bar */}
             <div className="flex items-center justify-center pt-8 pb-4 text-center">
-              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.4em] text-slate-500">
+              <p className="font-mono text-xs font-bold uppercase tracking-[0.4em] text-slate-500">
                 VICE CITY <span className="text-amber-500 mx-2">/</span> A BIGGER TOMORROW
               </p>
             </div>

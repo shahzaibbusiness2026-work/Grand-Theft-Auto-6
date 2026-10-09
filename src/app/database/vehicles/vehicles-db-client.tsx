@@ -99,7 +99,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
                 <div key={s.label} className="card-surface flex flex-col items-center gap-1 px-3 py-3">
                   <s.icon className={cn("h-4 w-4", s.color)} />
                   <span className="font-display text-lg font-extrabold">{s.value}</span>
-                  <span className="text-[9px] uppercase tracking-wider text-muted-foreground">/ {s.value}</span>
+                  <span className="text-xs uppercase tracking-wider text-muted-foreground">/ {s.value}</span>
                 </div>
               ))}
             </div>
@@ -133,7 +133,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
                 <span className="flex items-center gap-2.5">
                   <t.icon className="h-3.5 w-3.5 text-accent" /> {t.label}
                 </span>
-                <span className="text-[11px]">{t.count}</span>
+                <span className="text-xs">{t.count}</span>
               </button>
             ))}
           </nav>
@@ -143,7 +143,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
 
           <h3 className="section-eyebrow mt-6 text-muted-foreground">Price Range</h3>
           <div className="mt-3 space-y-3">
-            <div className="flex justify-between text-[11px] text-muted-foreground">
+            <div className="flex justify-between text-xs text-muted-foreground">
               <span>${(price[0] / 1_000_000).toFixed(1)}M</span>
               <span>${(price[1] / 1_000_000).toFixed(1)}M+</span>
             </div>
@@ -227,8 +227,8 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
                           const S = statIcons[j].icon;
                           return <S className={cn("mx-auto h-3.5 w-3.5", s > 80 ? "text-neon-orange" : "text-muted-foreground")} />;
                         })()}
-                        <p className="mt-1 text-[11px] font-bold">{s}</p>
-                        <p className="text-[8px] uppercase tracking-wide text-muted-foreground">{statIcons[j].label}</p>
+                        <p className="mt-1 text-xs font-bold">{s}</p>
+                        <p className="text-xs uppercase tracking-wide text-muted-foreground">{statIcons[j].label}</p>
                       </div>
                     ))}
                   </div>
@@ -286,7 +286,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
                   </div>
                   <div className="p-3">
                     <h3 className="font-display text-[13px] font-bold">{v.name}</h3>
-                    <p className="text-[9px] uppercase tracking-wider text-muted-foreground">Top Speed</p>
+                    <p className="text-xs uppercase tracking-wider text-muted-foreground">Top Speed</p>
                     <p className="mt-0.5 font-display text-sm font-extrabold text-accent">{v.stat}</p>
                   </div>
                 </Link>

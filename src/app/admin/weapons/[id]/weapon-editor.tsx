@@ -112,7 +112,7 @@ export function WeaponEditor({
 
   const inputCls =
     "w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]";
-  const labelCls = "block text-[11px] font-medium text-[#94A3B8] mb-1";
+  const labelCls = "block text-xs font-medium text-[#94A3B8] mb-1";
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">

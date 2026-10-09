@@ -149,7 +149,7 @@ export default function AdminMessagesPage() {
           <div className="rounded-xl border border-[#1C2436] bg-[#111622] p-8 text-center">
             <Mail className="w-8 h-8 text-[#243048] mx-auto mb-3" />
             <p className="text-xs font-semibold text-white">No messages found.</p>
-            <p className="text-[11px] text-[#64748B] mt-1">
+            <p className="text-xs text-[#64748B] mt-1">
               Contact form submissions will appear here.
             </p>
           </div>
@@ -171,7 +171,7 @@ export default function AdminMessagesPage() {
                   </a>
                   <span
                     className={cn(
-                      "px-2 py-0.5 rounded text-[11px] font-semibold border capitalize",
+                      "px-2 py-0.5 rounded text-xs font-semibold border capitalize",
                       STATUS_STYLES[m.status]
                     )}
                   >
@@ -184,7 +184,7 @@ export default function AdminMessagesPage() {
                 <p className="text-xs text-[#94A3B8] mt-1 whitespace-pre-wrap break-words max-w-2xl">
                   {m.message}
                 </p>
-                <p className="text-[11px] text-[#64748B] mt-2 font-mono">
+                <p className="text-xs text-[#64748B] mt-2 font-mono">
                   {new Date(m.created_at).toLocaleString()}
                 </p>
               </div>

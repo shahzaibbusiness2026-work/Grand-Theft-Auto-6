@@ -225,7 +225,7 @@ export function LoadoutClient() {
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
             <Sparkles className="h-4 w-4 text-primary" /> Tactical Archetype Presets
           </span>
-          <span className="text-[11px] text-muted-foreground font-mono">1-Click Setup</span>
+          <span className="text-xs text-muted-foreground font-mono">1-Click Setup</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {PRESET_LOADOUTS.map((preset) => (
@@ -234,7 +234,7 @@ export function LoadoutClient() {
               onClick={() => applyPreset(preset)}
               className="text-left p-3 rounded-xl bg-card/90 border border-border hover:border-primary/50 transition-all group"
             >
-              <span className="text-[11px] font-bold uppercase tracking-wider text-accent block">
+              <span className="text-xs font-bold uppercase tracking-wider text-accent block">
                 {preset.role}
               </span>
               <span className="font-display text-xs font-bold text-foreground group-hover:text-primary transition-colors block mt-0.5">
@@ -253,7 +253,7 @@ export function LoadoutClient() {
           <div className="card-carbon p-6 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                   Loadout Designation
                 </label>
                 <input
@@ -265,7 +265,7 @@ export function LoadoutClient() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                   Tactical Role
                 </label>
                 <input
@@ -283,10 +283,10 @@ export function LoadoutClient() {
             {/* Slot 1: Primary */}
             <div className="card-carbon p-4 space-y-3 border-primary/20">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-primary">
+                <span className="text-xs font-bold uppercase tracking-wider text-primary">
                   Slot 1: Primary Weapon
                 </span>
-                <span className="text-[11px] font-mono text-muted-foreground">{primaryWeapon.klass}</span>
+                <span className="text-xs font-mono text-muted-foreground">{primaryWeapon.klass}</span>
               </div>
 
               <select
@@ -301,7 +301,7 @@ export function LoadoutClient() {
                 ))}
               </select>
 
-              <div className="p-3 rounded-lg bg-background/80 border border-border text-[11px] font-mono space-y-1">
+              <div className="p-3 rounded-lg bg-background/80 border border-border text-xs font-mono space-y-1">
                 <div className="flex justify-between text-muted-foreground">
                   <span>Damage:</span>
                   <span className="text-foreground font-bold">{primaryWeapon.damage} pts</span>
@@ -320,10 +320,10 @@ export function LoadoutClient() {
             {/* Slot 2: Secondary Sidearm */}
             <div className="card-carbon p-4 space-y-3 border-accent/20">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-accent">
+                <span className="text-xs font-bold uppercase tracking-wider text-accent">
                   Slot 2: Secondary Sidearm
                 </span>
-                <span className="text-[11px] font-mono text-muted-foreground">{secondaryWeapon.klass}</span>
+                <span className="text-xs font-mono text-muted-foreground">{secondaryWeapon.klass}</span>
               </div>
 
               <select
@@ -338,7 +338,7 @@ export function LoadoutClient() {
                 ))}
               </select>
 
-              <div className="p-3 rounded-lg bg-background/80 border border-border text-[11px] font-mono space-y-1">
+              <div className="p-3 rounded-lg bg-background/80 border border-border text-xs font-mono space-y-1">
                 <div className="flex justify-between text-muted-foreground">
                   <span>Damage:</span>
                   <span className="text-foreground font-bold">{secondaryWeapon.damage} pts</span>
@@ -357,10 +357,10 @@ export function LoadoutClient() {
             {/* Slot 3: Melee */}
             <div className="card-carbon p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                   Slot 3: Melee / Silent
                 </span>
-                <span className="text-[11px] font-mono text-muted-foreground">{meleeWeapon.klass}</span>
+                <span className="text-xs font-mono text-muted-foreground">{meleeWeapon.klass}</span>
               </div>
 
               <select
@@ -375,7 +375,7 @@ export function LoadoutClient() {
                 ))}
               </select>
 
-              <div className="p-3 rounded-lg bg-background/80 border border-border text-[11px] font-mono space-y-1">
+              <div className="p-3 rounded-lg bg-background/80 border border-border text-xs font-mono space-y-1">
                 <div className="flex justify-between text-muted-foreground">
                   <span>Impact:</span>
                   <span className="text-foreground font-bold">{meleeWeapon.damage} pts</span>
@@ -390,10 +390,10 @@ export function LoadoutClient() {
             {/* Slot 4: Heavy / Support */}
             <div className="card-carbon p-4 space-y-3 border-amber-500/20">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
                   Slot 4: Heavy / Tactical Support
                 </span>
-                <span className="text-[11px] font-mono text-muted-foreground">{heavyWeapon.klass}</span>
+                <span className="text-xs font-mono text-muted-foreground">{heavyWeapon.klass}</span>
               </div>
 
               <select
@@ -408,7 +408,7 @@ export function LoadoutClient() {
                 ))}
               </select>
 
-              <div className="p-3 rounded-lg bg-background/80 border border-border text-[11px] font-mono space-y-1">
+              <div className="p-3 rounded-lg bg-background/80 border border-border text-xs font-mono space-y-1">
                 <div className="flex justify-between text-muted-foreground">
                   <span>Stopping Power:</span>
                   <span className="text-amber-400 font-bold">{heavyWeapon.damage} pts</span>
@@ -427,7 +427,7 @@ export function LoadoutClient() {
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
                 <Shield className="h-4 w-4 text-emerald-400" /> Tactical Equipment ({selectedGear.length}/3 Slots)
               </span>
-              <span className="text-[11px] font-mono text-muted-foreground">Max 3 Items</span>
+              <span className="text-xs font-mono text-muted-foreground">Max 3 Items</span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
@@ -550,11 +550,11 @@ export function LoadoutClient() {
                     className="p-3 rounded-xl bg-background/80 border border-border flex items-center justify-between gap-3 group"
                   >
                     <div className="min-w-0 flex-1">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-primary block">
+                      <span className="text-xs font-bold uppercase tracking-wider text-primary block">
                         {saved.role}
                       </span>
                       <h5 className="text-xs font-bold text-foreground truncate">{saved.name}</h5>
-                      <span className="text-[11px] text-muted-foreground font-mono">
+                      <span className="text-xs text-muted-foreground font-mono">
                         {saved.equipment.length} items equipped
                       </span>
                     </div>

@@ -149,7 +149,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-center">
                   <div className="p-3 rounded-xl bg-muted/80 border border-border">
-                    <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">
+                    <span className="text-xs uppercase font-bold text-muted-foreground block mb-1">
                       Per Hour
                     </span>
                     <span className="text-base font-black text-emerald-400">
@@ -157,7 +157,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     </span>
                   </div>
                   <div className="p-3 rounded-xl bg-muted/80 border border-border">
-                    <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">
+                    <span className="text-xs uppercase font-bold text-muted-foreground block mb-1">
                       Daily (24h)
                     </span>
                     <span className="text-base font-black text-emerald-400">
@@ -165,7 +165,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     </span>
                   </div>
                   <div className="p-3 rounded-xl bg-muted/80 border border-border">
-                    <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">
+                    <span className="text-xs uppercase font-bold text-muted-foreground block mb-1">
                       Weekly (7d)
                     </span>
                     <span className="text-base font-black text-emerald-400">
@@ -173,7 +173,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     </span>
                   </div>
                   <div className="p-3 rounded-xl bg-muted/80 border border-border">
-                    <span className="text-[11px] uppercase font-bold text-muted-foreground block mb-1">
+                    <span className="text-xs uppercase font-bold text-muted-foreground block mb-1">
                       Break-Even
                     </span>
                     <span className="text-base font-black text-amber-400">
@@ -271,13 +271,13 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     href={`/properties/${item.slug}`}
                     className="block p-3 rounded-lg bg-card border border-border hover:border-primary/40 transition-colors group"
                   >
-                    <div className="text-[11px] uppercase font-bold text-primary mb-0.5">
+                    <div className="text-xs uppercase font-bold text-primary mb-0.5">
                       {item.type}
                     </div>
                     <div className="text-xs font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
                       {item.name}
                     </div>
-                    <div className="text-[11px] text-amber-400 font-mono mt-1">
+                    <div className="text-xs text-amber-400 font-mono mt-1">
                       {item.priceDisplay}
                     </div>
                   </Link>

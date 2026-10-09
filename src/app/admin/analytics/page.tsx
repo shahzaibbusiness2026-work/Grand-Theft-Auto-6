@@ -136,7 +136,7 @@ export default function AdminAnalyticsPage() {
             <Eye className="w-4 h-4 text-indigo-400" />
           </div>
           <p className="text-2xl font-bold text-white tracking-tight">248,300</p>
-          <p className="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
+          <p className="text-xs text-emerald-400 font-medium flex items-center gap-1">
             <TrendingUp className="w-3.5 h-3.5" />
             <span>+14.2% vs previous period</span>
           </p>
@@ -148,7 +148,7 @@ export default function AdminAnalyticsPage() {
             <Search className="w-4 h-4 text-[#38BDF8]" />
           </div>
           <p className="text-2xl font-bold text-white tracking-tight">42,150</p>
-          <p className="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
+          <p className="text-xs text-emerald-400 font-medium flex items-center gap-1">
             <TrendingUp className="w-3.5 h-3.5" />
             <span>+8.7% query volume</span>
           </p>
@@ -160,7 +160,7 @@ export default function AdminAnalyticsPage() {
             <Zap className="w-4 h-4 text-amber-400" />
           </div>
           <p className="text-2xl font-bold text-white tracking-tight">68,900</p>
-          <p className="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
+          <p className="text-xs text-emerald-400 font-medium flex items-center gap-1">
             <TrendingUp className="w-3.5 h-3.5" />
             <span>+22.4% interactive usage</span>
           </p>
@@ -183,7 +183,7 @@ export default function AdminAnalyticsPage() {
           <div className="p-3 rounded-lg bg-[#111622] border border-[#1C2436] flex items-center justify-between">
             <div>
               <p className="text-xs font-bold text-white">&quot;Lucia penitentiary uniform&quot;</p>
-              <p className="text-[11px] text-[#64748B]">1,450 searches • 0% CTR</p>
+              <p className="text-xs text-[#64748B]">1,450 searches • 0% CTR</p>
             </div>
             <Link
               href="/admin/articles/art-new"
@@ -196,7 +196,7 @@ export default function AdminAnalyticsPage() {
           <div className="p-3 rounded-lg bg-[#111622] border border-[#1C2436] flex items-center justify-between">
             <div>
               <p className="text-xs font-bold text-white">&quot;Vice City airport coordinates&quot;</p>
-              <p className="text-[11px] text-[#64748B]">2,890 searches • 74% CTR</p>
+              <p className="text-xs text-[#64748B]">2,890 searches • 74% CTR</p>
             </div>
             <Link
               href="/admin/map"
@@ -218,7 +218,7 @@ export default function AdminAnalyticsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs" aria-label="Top performing articles">
               <thead>
-                <tr className="border-b border-[#1C2436] text-[#64748B] bg-[#0E131D] text-[11px]">
+                <tr className="border-b border-[#1C2436] text-[#64748B] bg-[#0E131D] text-xs">
                   <th scope="col" className="p-3 font-medium">Article Title</th>
                   <th scope="col" className="p-3 font-medium">Category</th>
                   <th scope="col" className="p-3 font-medium text-right">Views</th>
@@ -232,7 +232,7 @@ export default function AdminAnalyticsPage() {
                       {art.title}
                     </td>
                     <td className="p-3">
-                      <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
+                      <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
                         {art.category}
                       </span>
                     </td>
@@ -257,7 +257,7 @@ export default function AdminAnalyticsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs" aria-label="Most viewed database pages">
               <thead>
-                <tr className="border-b border-[#1C2436] text-[#64748B] bg-[#0E131D] text-[11px]">
+                <tr className="border-b border-[#1C2436] text-[#64748B] bg-[#0E131D] text-xs">
                   <th scope="col" className="p-3 font-medium">Record</th>
                   <th scope="col" className="p-3 font-medium">Type</th>
                   <th scope="col" className="p-3 font-medium text-right">Views</th>
@@ -269,7 +269,7 @@ export default function AdminAnalyticsPage() {
                   <tr key={i} className="hover:bg-[#141B2A] transition-colors">
                     <td className="p-3 font-semibold text-white">{page.name}</td>
                     <td className="p-3">
-                      <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
+                      <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
                         {page.type}
                       </span>
                     </td>
@@ -294,7 +294,7 @@ export default function AdminAnalyticsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs" aria-label="Interactive tool usage statistics">
               <thead>
-                <tr className="border-b border-[#1C2436] text-[#64748B] bg-[#0E131D] text-[11px]">
+                <tr className="border-b border-[#1C2436] text-[#64748B] bg-[#0E131D] text-xs">
                   <th scope="col" className="p-3 font-medium">Tool Name</th>
                   <th scope="col" className="p-3 font-medium text-right">Sessions</th>
                   <th scope="col" className="p-3 font-medium text-right">Avg Duration</th>
@@ -312,7 +312,7 @@ export default function AdminAnalyticsPage() {
                       {tool.avgDuration}
                     </td>
                     <td className="p-3 text-right">
-                      <span className="text-[11px] font-mono font-bold text-emerald-400">
+                      <span className="text-xs font-mono font-bold text-emerald-400">
                         {tool.completion}
                       </span>
                     </td>
@@ -331,7 +331,7 @@ export default function AdminAnalyticsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs" aria-label="Search query performance">
               <thead>
-                <tr className="border-b border-[#1C2436] text-[#64748B] bg-[#0E131D] text-[11px]">
+                <tr className="border-b border-[#1C2436] text-[#64748B] bg-[#0E131D] text-xs">
                   <th scope="col" className="p-3 font-medium">Search Term</th>
                   <th scope="col" className="p-3 font-medium text-right">Volume</th>
                   <th scope="col" className="p-3 font-medium text-right">CTR</th>
@@ -346,11 +346,11 @@ export default function AdminAnalyticsPage() {
                     <td className="p-3 text-right font-mono text-[#64748B]">{q.ctr}</td>
                     <td className="p-3 text-right">
                       {q.hasNoResults ? (
-                        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-red-500/10 border border-red-500/20 text-red-400">
+                        <span className="px-2 py-0.5 rounded text-xs font-semibold bg-red-500/10 border border-red-500/20 text-red-400">
                           0 Results
                         </span>
                       ) : (
-                        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                        <span className="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
                           Active
                         </span>
                       )}

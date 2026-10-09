@@ -124,7 +124,7 @@ export default function AdminRadioPage() {
           />
           <div className="min-w-0">
             <span className="font-bold text-[var(--admin-text)] block truncate">{s.name}</span>
-            <span className="text-[11px] text-[var(--admin-text-muted)]">{s.frequency || "—"}</span>
+            <span className="text-xs text-[var(--admin-text-muted)]">{s.frequency || "—"}</span>
           </div>
         </div>
       ),
@@ -138,13 +138,13 @@ export default function AdminRadioPage() {
     {
       key: "host",
       header: "Host",
-      render: (s) => <span className="text-[11px] text-[var(--admin-text-muted)]">{s.host || "—"}</span>,
+      render: (s) => <span className="text-xs text-[var(--admin-text-muted)]">{s.host || "—"}</span>,
     },
     {
       key: "sort_order",
       header: "Order",
       sortable: true,
-      render: (s) => <span className="font-mono text-[11px] text-[var(--admin-text-muted)]">{s.sort_order ?? 0}</span>,
+      render: (s) => <span className="font-mono text-xs text-[var(--admin-text-muted)]">{s.sort_order ?? 0}</span>,
     },
     {
       key: "visible",
@@ -203,7 +203,7 @@ export default function AdminRadioPage() {
 
   const inputCls =
     "w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]";
-  const labelCls = "block text-[11px] font-medium text-[#94A3B8] mb-1";
+  const labelCls = "block text-xs font-medium text-[#94A3B8] mb-1";
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
@@ -248,7 +248,7 @@ export default function AdminRadioPage() {
               {isLoading ? "Loading stations…" : "No stations found."}
             </p>
             {!isLoading && (
-              <p className="text-[11px] text-[var(--admin-text-muted)] mt-1">
+              <p className="text-xs text-[var(--admin-text-muted)] mt-1">
                 Add your first radio station to publish it on the public site.
               </p>
             )}

@@ -42,7 +42,7 @@ export function EmptyState({
 
       {guidelines && guidelines.length > 0 && (
         <div className="mt-6 text-left w-full bg-[var(--admin-surface)] border border-[var(--admin-border)] rounded-xl p-4 space-y-2">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
+          <p className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
             Guidelines:
           </p>
           <ul className="text-xs text-[var(--admin-text-muted)] space-y-1.5 list-disc list-inside">

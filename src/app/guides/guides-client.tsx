@@ -125,7 +125,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                 )}
               >
                 {c.label}
-                <span className={cn("rounded-full px-2 py-0.5 text-[11px]", cat === c.label ? "bg-amber-500 text-slate-950 font-bold" : "bg-muted")}>
+                <span className={cn("rounded-full px-2 py-0.5 text-xs", cat === c.label ? "bg-amber-500 text-slate-950 font-bold" : "bg-muted")}>
                   {c.count}
                 </span>
               </button>
@@ -167,12 +167,12 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                   {g.featured && <Badge variant="solid" className="absolute left-2 top-2">Featured</Badge>}
                 </div>
                 <div className="p-3.5">
-                  <p className="flex items-center gap-1 text-[11px] text-muted-foreground">
+                  <p className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Clock className="h-3 w-3" /> {g.read}
                   </p>
                   <h3 className="mt-1.5 font-display text-sm font-bold leading-snug">{g.title}</h3>
                   <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{g.desc}</p>
-                  <div className="mt-2.5 flex items-center justify-between text-[11px] text-muted-foreground">
+                  <div className="mt-2.5 flex items-center justify-between text-xs text-muted-foreground">
                     <span className="flex items-center gap-1">
                       <Eye className="h-3 w-3" /> {g.views}
                     </span>
@@ -240,7 +240,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
             {quickLinks.map((q) => (
               <a key={q.label} href={q.href} className="card-surface flex flex-col items-center gap-2 px-2 py-4 text-center transition-colors hover:border-accent/60">
                 <q.icon className="h-4 w-4 text-accent" />
-                <span className="text-[9px] font-semibold leading-tight">{q.label}</span>
+                <span className="text-xs font-semibold leading-tight">{q.label}</span>
               </a>
             ))}
           </div>
@@ -272,7 +272,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                 <img src={w.img} alt="" className="h-9 w-12 rounded-md object-cover" />
                 <div className="flex-1">
                   <p className="line-clamp-2 text-xs font-bold leading-snug">{w.title}</p>
-                  <p className="text-[9px] text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     {w.read} • {w.views}
                   </p>
                 </div>

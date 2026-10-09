@@ -229,7 +229,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
 
                     {/* Class & Confidence Tags */}
                     <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between">
-                      <span className="inline-block rounded-full bg-black/70 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-accent backdrop-blur-sm border border-accent/30">
+                      <span className="inline-block rounded-full bg-black/70 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-accent backdrop-blur-sm border border-accent/30">
                         {v.klass}
                       </span>
                       <ConfidenceBadge level={v.confidence} size="sm" />
@@ -244,13 +244,13 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                           {v.name}
                         </h3>
                       </div>
-                      <p className="text-[11px] text-muted-foreground mt-0.5">{v.manufacturer} &bull; {v.drivetrain}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{v.manufacturer} &bull; {v.drivetrain}</p>
                     </div>
 
                     {/* Metric Bars */}
                     <div className="mt-3 space-y-2 border-t border-border/60 pt-3">
                       <div>
-                        <div className="flex justify-between text-[11px] font-semibold">
+                        <div className="flex justify-between text-xs font-semibold">
                           <span className="text-muted-foreground">Top Speed</span>
                           <span className="font-display font-bold text-foreground">{v.topSpeed} mph</span>
                         </div>
@@ -263,7 +263,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                       </div>
 
                       <div>
-                        <div className="flex justify-between text-[11px] font-semibold">
+                        <div className="flex justify-between text-xs font-semibold">
                           <span className="text-muted-foreground">Engine Power</span>
                           <span className="font-display font-bold text-foreground">{v.power} hp</span>
                         </div>

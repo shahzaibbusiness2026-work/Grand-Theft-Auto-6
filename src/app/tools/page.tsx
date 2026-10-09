@@ -207,7 +207,7 @@ export default function ToolsPage() {
         {/* Header Hero */}
         <div className="card-carbon p-8 md:p-12 mb-10 border-primary/30 relative overflow-hidden bg-gradient-to-br from-card via-card to-primary/10 dark:from-slate-900 dark:via-slate-950">
           <div className="relative z-10 max-w-2xl space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-primary">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-primary">
               <Sparkles className="h-3 w-3" /> Complete Utility Suite
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
@@ -249,7 +249,7 @@ export default function ToolsPage() {
                             <span className="p-2.5 rounded-xl bg-muted text-primary group-hover:bg-primary group-hover:text-foreground transition-colors">
                               <IconComponent className="h-5 w-5" />
                             </span>
-                            <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-background text-muted-foreground border border-border font-mono">
+                            <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-background text-muted-foreground border border-border font-mono">
                               {t.badge}
                             </span>
                           </div>

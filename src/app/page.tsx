@@ -139,7 +139,7 @@ export default async function HomePage() {
                   <h3 className="font-display text-sm font-bold uppercase tracking-wide text-white drop-shadow">
                     {c.name}
                   </h3>
-                  <p className={cn("text-[11px] font-bold drop-shadow", roleColor[c.role])}>
+                  <p className={cn("text-xs font-bold drop-shadow", roleColor[c.role])}>
                     {c.role}
                   </p>
                 </div>
@@ -177,7 +177,7 @@ export default async function HomePage() {
                   <div className="min-w-0">
                     <Badge variant="solid" className="mb-1.5">{a.tag}</Badge>
                     <h4 className="line-clamp-2 font-display text-sm font-bold leading-snug group-hover:text-accent">{a.title}</h4>
-                    <p className="mt-1 flex items-center gap-2 text-[11px] text-muted-foreground">
+                    <p className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
                       <time dateTime={toIsoDate(a.date)}>{a.date}</time>
                       <span className="text-border" aria-hidden="true">•</span>
                       <Clock className="h-3 w-3" aria-hidden="true" /> {a.read}
@@ -209,7 +209,7 @@ export default async function HomePage() {
                   <div className="min-w-0">
                     <Badge className="mb-1.5">{a.tag}</Badge>
                     <h4 className="line-clamp-2 font-display text-sm font-bold leading-snug group-hover:text-primary">{a.title}</h4>
-                    <p className="mt-1 flex items-center gap-2 text-[11px] text-muted-foreground">
+                    <p className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
                       <time dateTime={toIsoDate(a.date)}>{a.date}</time>
                       <span className="text-border" aria-hidden="true">•</span>
                       <Clock className="h-3 w-3" aria-hidden="true" /> {a.read}

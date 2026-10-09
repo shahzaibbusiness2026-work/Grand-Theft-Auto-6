@@ -61,7 +61,7 @@ export function HomeSatelliteMap() {
           <span className="font-display text-xs font-black uppercase tracking-[0.25em] text-white">
             LEONIDA SATELLITE RADAR
           </span>
-          <span className="hidden font-mono text-[11px] text-cyan-400/80 sm:inline-block">
+          <span className="hidden font-mono text-xs text-cyan-400/80 sm:inline-block">
             25°46&apos;31&quot;N 80°11&apos;32&quot;W // HD 4K
           </span>
         </div>
@@ -120,9 +120,9 @@ export function HomeSatelliteMap() {
                 </span>
 
                 {/* Pin Tooltip */}
-                <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-black/90 px-2.5 py-1 text-[11px] font-bold text-white shadow-xl backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-black/90 px-2.5 py-1 text-xs font-bold text-white shadow-xl backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity">
                   <span className="text-amber-400 font-black">{p.name}</span>
-                  <span className="text-slate-400 block text-[9px] font-medium">{p.district}</span>
+                  <span className="text-slate-400 block text-xs font-medium">{p.district}</span>
                 </span>
               </button>
             );

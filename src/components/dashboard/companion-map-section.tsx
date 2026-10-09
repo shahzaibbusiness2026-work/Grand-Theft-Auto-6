@@ -28,7 +28,7 @@ export function CompanionMapSection({
               <span className="font-display text-sm font-extrabold uppercase tracking-wider text-white dark:text-white text-slate-900">
                 LEONIDA TERRITORY MAP & SECTORS
               </span>
-              <span className="flex items-center gap-1 rounded-full bg-cyan-500/15 dark:bg-cyan-500/20 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-[#00F0FF] border border-cyan-500/30">
+              <span className="flex items-center gap-1 rounded-full bg-cyan-500/15 dark:bg-cyan-500/20 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-[#00F0FF] border border-cyan-500/30">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-500"></span>
@@ -36,7 +36,7 @@ export function CompanionMapSection({
                 LIVE RADAR
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 dark:text-slate-400 text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 mt-0.5">
               Live district telemetry, GPS waypoints, and verified points of interest
             </p>
           </div>
@@ -63,10 +63,10 @@ export function CompanionMapSection({
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="rounded-lg bg-cyan-500/10 px-2 py-0.5 font-mono text-[11px] font-bold text-cyan-400 dark:text-cyan-400 text-cyan-600 border border-cyan-500/20">
+                <span className="rounded-lg bg-cyan-500/10 px-2 py-0.5 font-mono text-xs font-bold text-cyan-400 dark:text-cyan-400 text-cyan-600 border border-cyan-500/20">
                   {loc.type || "Territory"}
                 </span>
-                <span className="flex items-center gap-1 text-[11px] font-semibold text-emerald-400 dark:text-emerald-400 text-emerald-600">
+                <span className="flex items-center gap-1 text-xs font-semibold text-emerald-400 dark:text-emerald-400 text-emerald-600">
                   <ShieldCheck className="h-3 w-3" />
                   {loc.verification === "verified" ? "Verified" : "Reported"}
                 </span>
@@ -75,12 +75,12 @@ export function CompanionMapSection({
               <h4 className="font-display text-sm font-bold text-white dark:text-white text-slate-900 group-hover:text-[#00F0FF] transition-colors truncate">
                 {loc.name}
               </h4>
-              <p className="text-[11px] text-slate-400 dark:text-slate-400 text-slate-500 mt-0.5 truncate">
+              <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 mt-0.5 truncate">
                 {loc.district}
               </p>
             </div>
 
-            <div className="mt-3 pt-2.5 border-t border-white/5 dark:border-white/5 border-slate-200/80 flex items-center justify-between text-[11px]">
+            <div className="mt-3 pt-2.5 border-t border-white/5 dark:border-white/5 border-slate-200/80 flex items-center justify-between text-xs">
               <span className="font-mono text-slate-400 dark:text-slate-400 text-slate-500 truncate max-w-[140px]">
                 {loc.coordinates || "Vice City GPS"}
               </span>
@@ -106,7 +106,7 @@ export function CompanionMapSection({
         </div>
         <Link
           href="/map"
-          className="shrink-0 text-[11px] font-bold uppercase tracking-wider text-cyan-400 dark:text-cyan-400 text-cyan-600 hover:underline"
+          className="shrink-0 text-xs font-bold uppercase tracking-wider text-cyan-400 dark:text-cyan-400 text-cyan-600 hover:underline"
         >
           Open Radar Grid &rarr;
         </Link>

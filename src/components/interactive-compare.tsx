@@ -118,7 +118,7 @@ export function InteractiveCompare({
                   </p>
                   <button
                     onClick={() => setSwappingSlot(swappingSlot === slotIdx ? null : slotIdx)}
-                    className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-bold text-muted-foreground hover:text-accent transition-colors"
+                    className="mt-1.5 inline-flex items-center gap-1 text-xs font-bold text-muted-foreground hover:text-accent transition-colors"
                   >
                     <RefreshCw className="h-3 w-3" /> Change
                   </button>
@@ -128,7 +128,7 @@ export function InteractiveCompare({
                 {swappingSlot === slotIdx && (
                   <div className="absolute top-full left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-xl border border-border bg-card/95 p-2 shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in-95 duration-150">
                     <div className="flex items-center justify-between border-b border-border/60 pb-1.5 px-2 mb-1">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Select Replacement</span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Select Replacement</span>
                       <button onClick={() => setSwappingSlot(null)} className="p-0.5 text-muted-foreground hover:text-foreground">
                         <X className="h-3.5 w-3.5" />
                       </button>
@@ -148,7 +148,7 @@ export function InteractiveCompare({
                           <img src={cand.img} alt="" style={cand.filter ? { filter: cand.filter } : undefined} className="h-8 w-10 rounded object-cover" />
                           <div className="min-w-0">
                             <p className="truncate font-semibold">{cand.name}</p>
-                            <p className="truncate text-[11px] text-muted-foreground">{cand.klass}</p>
+                            <p className="truncate text-xs text-muted-foreground">{cand.klass}</p>
                           </div>
                         </button>
                       ))}
@@ -231,9 +231,9 @@ export function InteractiveCompare({
         </span>
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-accent">VERIFIED BENCHMARK</span>
+            <span className="text-xs font-black uppercase tracking-widest text-accent">VERIFIED BENCHMARK</span>
             <span className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] font-bold text-muted-foreground">{type.toUpperCase()} DUEL</span>
+            <span className="text-xs font-bold text-muted-foreground">{type.toUpperCase()} DUEL</span>
           </div>
           <h3 className="mt-1 font-display text-base font-bold text-foreground">
             {recommendationTitle}
@@ -255,7 +255,7 @@ export function InteractiveCompare({
               Click any candidate below to instantly slot them into comparison.
             </p>
           </div>
-          <span className="text-[11px] font-bold text-accent">Tap to Swap</span>
+          <span className="text-xs font-bold text-accent">Tap to Swap</span>
         </div>
 
         <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
@@ -285,7 +285,7 @@ export function InteractiveCompare({
                     className="h-full w-full object-cover"
                   />
                   {isSelected && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-[11px] font-bold text-white gap-1">
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-xs font-bold text-white gap-1">
                       <Check className="h-3 w-3 text-neon-green" /> In Duel
                     </div>
                   )}
@@ -293,7 +293,7 @@ export function InteractiveCompare({
                 <h5 className="mt-2 font-display text-xs font-bold leading-tight truncate text-foreground">
                   {entity.name}
                 </h5>
-                <p className="mt-0.5 text-[11px] text-muted-foreground truncate">{entity.klass}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground truncate">{entity.klass}</p>
               </button>
             );
           })}

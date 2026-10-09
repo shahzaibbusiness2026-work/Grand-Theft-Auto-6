@@ -121,10 +121,10 @@ export default async function RankingDetailPage({
             </div>
           </div>
           <div className="mt-4 inline-flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1 text-[11px] font-semibold text-muted-foreground">
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-semibold text-muted-foreground">
               Ranked by <span className="font-black text-foreground">{match.def.metricLabel}</span>
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1 text-[11px] font-semibold text-muted-foreground">
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-semibold text-muted-foreground">
               Live database • {top.length} entries
             </span>
           </div>
@@ -159,7 +159,7 @@ export default async function RankingDetailPage({
                     <h2 className="font-display text-base font-black uppercase text-foreground truncate group-hover:text-accent">
                       {row.name}
                     </h2>
-                    <p className="text-[11px] text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       {row.klass}
                       {row.manufacturer ? ` • ${row.manufacturer}` : ""}
                       {row.priceDisplay ? ` • ${row.priceDisplay}` : ""}
@@ -169,7 +169,7 @@ export default async function RankingDetailPage({
                         {row.bestFor.slice(0, 2).map((t) => (
                           <span
                             key={t.label}
-                            className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-accent"
+                            className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-xs font-black uppercase tracking-wide text-accent"
                           >
                             {t.emoji} {t.label}
                           </span>
@@ -179,7 +179,7 @@ export default async function RankingDetailPage({
                   </div>
                   <div className="text-right shrink-0">
                     <span className="block font-mono font-black text-lg text-accent">{row.display}</span>
-                    <span className="flex items-center gap-1 justify-end text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                    <span className="flex items-center gap-1 justify-end text-xs font-bold uppercase tracking-wider text-muted-foreground">
                       <Trophy className="h-2.5 w-2.5" /> {row.score}/100
                     </span>
                   </div>

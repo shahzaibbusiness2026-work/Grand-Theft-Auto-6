@@ -287,7 +287,7 @@ export function ArticleEditor({
                 className="w-full pl-14 pr-4 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs font-mono text-white focus:outline-none focus:border-[#6366F1] transition-colors"
               />
             </div>
-            <p className="text-[11px] text-[#64748B]">
+            <p className="text-xs text-[#64748B]">
               This will be used in the article URL: /news/{slug || "your-slug"}
             </p>
           </div>
@@ -330,7 +330,7 @@ export function ArticleEditor({
                   <div className="w-10 h-10 rounded-xl bg-[#182030]/80 border border-[#243048] flex items-center justify-center text-white mb-2">
                     <ImageIcon className="w-5 h-5 text-[#818CF8]" />
                   </div>
-                  <p className="text-[11px] text-[#64748B]">
+                  <p className="text-xs text-[#64748B]">
                     Paste an image URL above, or upload one in the Media library.
                   </p>
                 </div>
@@ -350,7 +350,7 @@ export function ArticleEditor({
               placeholder="Write the article body. Blank lines start new paragraphs."
               className="w-full p-4 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1] resize-y font-mono leading-relaxed"
             />
-            <p className="text-[11px] text-[#64748B]">
+            <p className="text-xs text-[#64748B]">
               Plain text and paragraphs — rendered on the public article page.
             </p>
           </div>
@@ -363,7 +363,7 @@ export function ArticleEditor({
 
             <div className="space-y-3 text-xs">
               <div>
-                <label htmlFor="article-pub-status" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="article-pub-status" className="block text-xs font-medium text-[#94A3B8] mb-1">
                   Status
                 </label>
                 <select
@@ -381,7 +381,7 @@ export function ArticleEditor({
               </div>
 
               <div>
-                <label htmlFor="article-author-name" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="article-author-name" className="block text-xs font-medium text-[#94A3B8] mb-1">
                   Author name
                 </label>
                 <input
@@ -396,7 +396,7 @@ export function ArticleEditor({
               </div>
 
               <div>
-                <label htmlFor="article-author-role" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="article-author-role" className="block text-xs font-medium text-[#94A3B8] mb-1">
                   Author role
                 </label>
                 <input
@@ -411,7 +411,7 @@ export function ArticleEditor({
               </div>
 
               <div>
-                <label htmlFor="article-category-input" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="article-category-input" className="block text-xs font-medium text-[#94A3B8] mb-1">
                   Category <span className="text-red-400">*</span>
                 </label>
                 <input
@@ -432,12 +432,12 @@ export function ArticleEditor({
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-[#94A3B8] mb-1">Tags</label>
+                <label className="block text-xs font-medium text-[#94A3B8] mb-1">Tags</label>
                 <div className="flex flex-wrap gap-1.5 p-2 rounded-xl bg-[#0E131D] border border-[#1C2436] items-center">
                   {tags.map((t) => (
                     <span
                       key={t}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#182030] text-[#94A3B8] text-[11px]"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#182030] text-[#94A3B8] text-xs"
                     >
                       <span>{t}</span>
                       <button
@@ -461,13 +461,13 @@ export function ArticleEditor({
                       }
                     }}
                     placeholder="Add tag…"
-                    className="flex-1 min-w-[80px] bg-transparent text-[11px] text-white placeholder-[#64748B] focus:outline-none"
+                    className="flex-1 min-w-[80px] bg-transparent text-xs text-white placeholder-[#64748B] focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="article-publish-date" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="article-publish-date" className="block text-xs font-medium text-[#94A3B8] mb-1">
                   Schedule for (optional)
                 </label>
                 <div className="relative">
@@ -480,7 +480,7 @@ export function ArticleEditor({
                     className="w-full pl-8 pr-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
                   />
                 </div>
-                <p className="text-[11px] text-[#64748B] mt-1">
+                <p className="text-xs text-[#64748B] mt-1">
                   Set with status “Scheduled” to time a release.
                 </p>
               </div>
@@ -491,23 +491,23 @@ export function ArticleEditor({
             <h3 className="text-xs font-bold text-white uppercase tracking-wider">SEO</h3>
 
             <div className="space-y-1">
-              <p className="text-[11px] font-medium text-[#64748B]">Search result preview</p>
+              <p className="text-xs font-medium text-[#64748B]">Search result preview</p>
               <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-1">
-                <p className="text-[11px] text-[#94A3B8]">GTA 6 Atlas</p>
+                <p className="text-xs text-[#94A3B8]">GTA 6 Atlas</p>
                 <p className="text-xs font-semibold text-[#818CF8]">{metaTitle}</p>
-                <p className="text-[11px] text-emerald-400 font-mono truncate">
+                <p className="text-xs text-emerald-400 font-mono truncate">
                   gta6atlas.com/news/{slug || "your-slug"}
                 </p>
-                <p className="text-[11px] text-[#94A3B8] line-clamp-2 leading-tight">{metaDescription}</p>
+                <p className="text-xs text-[#94A3B8] line-clamp-2 leading-tight">{metaDescription}</p>
               </div>
             </div>
 
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="meta-title-input" className="block text-[11px] font-medium text-[#94A3B8]">
+                <label htmlFor="meta-title-input" className="block text-xs font-medium text-[#94A3B8]">
                   SEO title
                 </label>
-                <span className="text-[11px] font-mono text-[#64748B]">{metaTitle.length} / 60</span>
+                <span className="text-xs font-mono text-[#64748B]">{metaTitle.length} / 60</span>
               </div>
               <input
                 id="meta-title-input"
@@ -521,10 +521,10 @@ export function ArticleEditor({
 
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="meta-desc-input" className="block text-[11px] font-medium text-[#94A3B8]">
+                <label htmlFor="meta-desc-input" className="block text-xs font-medium text-[#94A3B8]">
                   Meta description
                 </label>
-                <span className="text-[11px] font-mono text-[#64748B]">
+                <span className="text-xs font-mono text-[#64748B]">
                   {(article.seoDescription || "").length} / 160
                 </span>
               </div>
@@ -539,7 +539,7 @@ export function ArticleEditor({
             </div>
 
             <div className="space-y-1">
-              <label htmlFor="canonical-url-input" className="block text-[11px] font-medium text-[#94A3B8]">
+              <label htmlFor="canonical-url-input" className="block text-xs font-medium text-[#94A3B8]">
                 Canonical URL (optional)
               </label>
               <input
@@ -553,7 +553,7 @@ export function ArticleEditor({
             </div>
 
             <div className="space-y-1">
-              <label htmlFor="og-image-input" className="block text-[11px] font-medium text-[#94A3B8]">
+              <label htmlFor="og-image-input" className="block text-xs font-medium text-[#94A3B8]">
                 Open Graph image (optional)
               </label>
               <input

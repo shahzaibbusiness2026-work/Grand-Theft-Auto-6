@@ -148,7 +148,7 @@ function AdminLoginForm() {
             </button>
           </form>
 
-          <p className="text-center text-[11px] text-[#374151] mt-6">
+          <p className="text-center text-xs text-[#374151] mt-6">
             Access restricted to authorized Atlas team members only.
           </p>
         </div>

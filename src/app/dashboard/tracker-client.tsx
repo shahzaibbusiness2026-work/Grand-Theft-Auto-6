@@ -137,7 +137,7 @@ export function TrackerClient() {
             </div>
 
             <div>
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-neon-green/30 bg-neon-green/10 px-2.5 py-0.5 text-[11px] font-bold text-neon-green">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-neon-green/30 bg-neon-green/10 px-2.5 py-0.5 text-xs font-bold text-neon-green">
                 <Sparkles className="h-3 w-3" /> Live LocalStorage Sync Active
               </div>
               <h2 className="mt-1 font-display text-xl font-extrabold uppercase tracking-wider text-foreground">
@@ -238,7 +238,7 @@ export function TrackerClient() {
                     >
                       {item.title}
                     </span>
-                    <span className="rounded bg-muted px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-muted-foreground">
+                    <span className="rounded bg-muted px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                       {item.category}
                     </span>
                   </div>

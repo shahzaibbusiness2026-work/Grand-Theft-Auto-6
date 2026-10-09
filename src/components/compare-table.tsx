@@ -38,7 +38,7 @@ export function CompareTable({ labels, columns, recommendation }: CompareTablePr
                   )}
                 </div>
                 <h3 className="mt-3 font-display text-sm font-bold leading-tight">{c.name}</h3>
-                <p className="mt-0.5 text-[11px] text-muted-foreground">{c.klass}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">{c.klass}</p>
               </div>
             ))}
           </div>

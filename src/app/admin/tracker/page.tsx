@@ -62,18 +62,18 @@ export default function AdminTrackerPage() {
       {/* Summary Row */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-4 shadow-sm">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)] mb-1">Active Categories</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)] mb-1">Active Categories</p>
           <p className="text-2xl font-black text-[var(--admin-text)]">{categories.filter((c) => c.active).length}<span className="text-sm font-medium text-[var(--admin-text-muted)]">/{categories.length}</span></p>
         </div>
         <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-4 shadow-sm">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)] mb-1">Total Weight</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)] mb-1">Total Weight</p>
           <p className={cn("text-2xl font-black", totalWeight === 100 ? "text-emerald-400" : "text-amber-400")}>{totalWeight}%</p>
           {totalWeight !== 100 && (
-            <p className="text-[11px] text-amber-400 font-medium mt-0.5">⚠ Weights should sum to 100%</p>
+            <p className="text-xs text-amber-400 font-medium mt-0.5">⚠ Weights should sum to 100%</p>
           )}
         </div>
         <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-4 shadow-sm">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)] mb-1">Tracked Items</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)] mb-1">Tracked Items</p>
           <p className="text-2xl font-black text-[var(--admin-text)]">{totalItems}</p>
         </div>
       </div>
@@ -115,7 +115,7 @@ export default function AdminTrackerPage() {
                 </button>
                 <div>
                   <p className="font-bold text-xs text-[var(--admin-text)]">{cat.name}</p>
-                  <p className="text-[11px] text-[var(--admin-text-muted)]">
+                  <p className="text-xs text-[var(--admin-text-muted)]">
                     {cat.totalItems} items tracked in database
                   </p>
                 </div>

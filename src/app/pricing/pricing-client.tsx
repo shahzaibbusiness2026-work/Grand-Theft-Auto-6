@@ -96,7 +96,7 @@ export function PricingClient() {
         </button>
         <span className={cn("text-xs font-semibold flex items-center gap-1.5", annualBilling ? "text-foreground" : "text-muted-foreground")}>
           Annual Billing
-          <span className="rounded-full bg-emerald-500/20 text-emerald-400 text-[11px] font-mono font-bold px-2 py-0.5 border border-emerald-500/30">
+          <span className="rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-mono font-bold px-2 py-0.5 border border-emerald-500/30">
             Save 33%
           </span>
         </span>
@@ -145,7 +145,7 @@ export function PricingClient() {
 
         {/* Tier 2: Vice City Pro */}
         <div className="dark-panel card-carbon p-8 flex flex-col justify-between border-primary/50 relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-primary/10 shadow-[0_0_30px_rgba(244,63,94,0.15)]">
-          <div className="absolute top-0 right-0 bg-gradient-to-l from-primary to-accent text-primary-foreground text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-bl-xl shadow-md">
+          <div className="absolute top-0 right-0 bg-gradient-to-l from-primary to-accent text-primary-foreground text-xs font-black uppercase tracking-widest px-4 py-1 rounded-bl-xl shadow-md">
             Launching Soon
           </div>
 

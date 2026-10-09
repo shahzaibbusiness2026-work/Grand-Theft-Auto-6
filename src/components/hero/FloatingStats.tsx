@@ -148,7 +148,7 @@ export function FloatingStats({ stats }: FloatingStatsProps) {
                   <span className="block font-display text-sm sm:text-base font-black text-foreground leading-none tracking-tight group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
                     {stat.metric}
                   </span>
-                  <span className="block text-[11px] font-semibold text-muted-foreground truncate mt-0.5">
+                  <span className="block text-xs font-semibold text-muted-foreground truncate mt-0.5">
                     {stat.label}
                   </span>
                 </div>
@@ -162,7 +162,7 @@ export function FloatingStats({ stats }: FloatingStatsProps) {
           <span className="font-serif italic text-xs font-bold tracking-wider text-foreground/90 uppercase">
             &ldquo;VICE CITY LIVES AGAIN.&rdquo;
           </span>
-          <span className="font-mono text-[9px] font-extrabold tracking-[0.25em] text-amber-500 dark:text-amber-400 uppercase mt-0.5">
+          <span className="font-mono text-xs font-extrabold tracking-[0.25em] text-amber-500 dark:text-amber-400 uppercase mt-0.5">
             — ROCKSTAR GAMES
           </span>
         </div>

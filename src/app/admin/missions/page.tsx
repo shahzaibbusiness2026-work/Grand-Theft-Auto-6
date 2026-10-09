@@ -199,7 +199,7 @@ export default function AdminMissionsPage() {
               {isLoading ? "Loading missions…" : "No missions found."}
             </p>
             {!isLoading && (
-              <p className="text-[11px] text-[var(--admin-text-muted)] mt-1">
+              <p className="text-xs text-[var(--admin-text-muted)] mt-1">
                 Add your first mission to start the story database.
               </p>
             )}
@@ -210,7 +210,7 @@ export default function AdminMissionsPage() {
       <Modal isOpen={editorOpen} onClose={() => setEditorOpen(false)} title={form.id ? "Edit mission" : "Add mission"}>
         <div className="space-y-3.5 text-xs">
           <div>
-            <label htmlFor="mis-name" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+            <label htmlFor="mis-name" className="block text-xs font-medium text-[#94A3B8] mb-1">
               Name <span className="text-red-400">*</span>
             </label>
             <input
@@ -223,7 +223,7 @@ export default function AdminMissionsPage() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor="mis-protagonist" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+              <label htmlFor="mis-protagonist" className="block text-xs font-medium text-[#94A3B8] mb-1">
                 Protagonist
               </label>
               <select
@@ -238,7 +238,7 @@ export default function AdminMissionsPage() {
               </select>
             </div>
             <div>
-              <label htmlFor="mis-status" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+              <label htmlFor="mis-status" className="block text-xs font-medium text-[#94A3B8] mb-1">
                 Status
               </label>
               <select
@@ -253,7 +253,7 @@ export default function AdminMissionsPage() {
             </div>
           </div>
           <div>
-            <label htmlFor="mis-act" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+            <label htmlFor="mis-act" className="block text-xs font-medium text-[#94A3B8] mb-1">
               Story Act
             </label>
             <input
@@ -265,7 +265,7 @@ export default function AdminMissionsPage() {
             />
           </div>
           <div>
-            <label htmlFor="mis-objectives" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+            <label htmlFor="mis-objectives" className="block text-xs font-medium text-[#94A3B8] mb-1">
               Objectives
             </label>
             <textarea

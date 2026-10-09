@@ -28,7 +28,7 @@ export default async function VehiclesPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-accent">
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent">
               <Sparkles className="h-3 w-3" /> Confirmed Roster
             </div>
             <h1 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-foreground">
@@ -50,7 +50,7 @@ export default async function VehiclesPage() {
           ].map(([v, l]) => (
             <div key={l} className="flex flex-col items-center gap-1 px-4 py-5 text-center">
               <span className="font-display text-2xl sm:text-3xl font-black text-accent">{v}</span>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{l}</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{l}</span>
             </div>
           ))}
         </div>
@@ -73,7 +73,7 @@ export default async function VehiclesPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-transparent" />
           <div className="relative flex flex-col gap-5 px-6 py-10 sm:px-10 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-widest text-primary">PLAYER GARAGE</span>
+              <span className="text-xs font-black uppercase tracking-widest text-primary">PLAYER GARAGE</span>
               <h3 className="mt-1 font-display text-2xl font-extrabold text-foreground">
                 Want to duel any two rides head-to-head?
               </h3>

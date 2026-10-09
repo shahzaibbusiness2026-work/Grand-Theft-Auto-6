@@ -70,7 +70,7 @@ export function CompanionAiCard() {
             key={chip}
             type="button"
             onClick={() => handleChipClick(chip)}
-            className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[11px] font-semibold text-slate-300 transition-all hover:border-[#00F0FF]/40 hover:bg-[#00F0FF]/10 hover:text-white active:scale-95"
+            className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-semibold text-slate-300 transition-all hover:border-[#00F0FF]/40 hover:bg-[#00F0FF]/10 hover:text-white active:scale-95"
           >
             {chip}
           </button>

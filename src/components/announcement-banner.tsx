@@ -20,7 +20,7 @@ export async function AnnouncementBanner() {
         <span className="truncate">{settings.announcementBanner}</span>
         <Link
           href="/news"
-          className="inline-flex items-center gap-0.5 text-[11px] underline font-extrabold hover:text-white transition-colors ml-1"
+          className="inline-flex items-center gap-0.5 text-xs underline font-extrabold hover:text-white transition-colors ml-1"
         >
           <span>Learn More</span>
           <ChevronRight className="h-3 w-3" />

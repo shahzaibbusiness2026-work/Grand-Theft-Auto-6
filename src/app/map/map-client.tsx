@@ -91,7 +91,7 @@ export function MapClient() {
           {/* Header Row */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-amber-500 dark:text-amber-400 mb-3">
+              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-amber-500 dark:text-amber-400 mb-3">
                 <Radio className="h-3 w-3 animate-pulse" /> Official Interactive Radar
               </div>
               <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
@@ -105,15 +105,15 @@ export function MapClient() {
             {/* Quick Stat Chips */}
             <div className="flex flex-wrap items-center gap-3">
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-400">Total POIs</span>
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Total POIs</span>
                 <span className="font-display text-lg font-black text-white">Verified</span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-400">Resolution</span>
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Resolution</span>
                 <span className="font-display text-lg font-black text-[#00F0FF]">Ultra-HD 4K</span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-400">Districts</span>
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Districts</span>
                 <span className="font-display text-lg font-black text-amber-400">6 Regions</span>
               </div>
             </div>
@@ -162,7 +162,7 @@ export function MapClient() {
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#070c18] via-transparent to-black/30" />
-                <span className="absolute top-3 right-3 rounded-full bg-black/80 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-emerald-400 border border-emerald-500/30 backdrop-blur">
+                <span className="absolute top-3 right-3 rounded-full bg-black/80 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-emerald-400 border border-emerald-500/30 backdrop-blur">
                   {d.threat}
                 </span>
                 <div className="absolute bottom-3 left-4 right-4">
@@ -180,15 +180,15 @@ export function MapClient() {
                 {/* Stat row */}
                 <div className="grid grid-cols-3 gap-2 rounded-2xl border border-white/10 bg-black/40 p-3 text-center">
                   <div>
-                    <span className="block text-[9px] uppercase font-bold text-slate-400">POIs</span>
+                    <span className="block text-xs uppercase font-bold text-slate-400">POIs</span>
                     <span className="font-mono text-sm font-black text-white">{d.pois}</span>
                   </div>
                   <div>
-                    <span className="block text-[9px] uppercase font-bold text-slate-400">Missions</span>
+                    <span className="block text-xs uppercase font-bold text-slate-400">Missions</span>
                     <span className="font-mono text-sm font-black text-amber-400">{d.missions}</span>
                   </div>
                   <div>
-                    <span className="block text-[9px] uppercase font-bold text-slate-400">Secrets</span>
+                    <span className="block text-xs uppercase font-bold text-slate-400">Secrets</span>
                     <span className="font-mono text-sm font-black text-[#00F0FF]">{d.collectibles}</span>
                   </div>
                 </div>
@@ -198,7 +198,7 @@ export function MapClient() {
                   {d.tags.map((t) => (
                     <span
                       key={t}
-                      className="rounded-lg bg-white/5 border border-white/10 px-2 py-0.5 text-[11px] font-semibold text-slate-400"
+                      className="rounded-lg bg-white/5 border border-white/10 px-2 py-0.5 text-xs font-semibold text-slate-400"
                     >
                       {t}
                     </span>

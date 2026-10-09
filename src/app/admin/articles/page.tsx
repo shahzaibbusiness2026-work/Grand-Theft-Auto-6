@@ -252,7 +252,7 @@ export default function AdminArticlesPage() {
           )}
         >
           <span>All</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[11px] bg-white/20">
+          <span className="px-1.5 py-0.2 rounded-full text-xs bg-white/20">
             {tabCounts.all}
           </span>
         </button>
@@ -270,7 +270,7 @@ export default function AdminArticlesPage() {
           )}
         >
           <span>Drafts</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.draft}
           </span>
         </button>
@@ -288,7 +288,7 @@ export default function AdminArticlesPage() {
           )}
         >
           <span>Review</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.review}
           </span>
         </button>
@@ -306,7 +306,7 @@ export default function AdminArticlesPage() {
           )}
         >
           <span>Scheduled</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.scheduled}
           </span>
         </button>
@@ -324,7 +324,7 @@ export default function AdminArticlesPage() {
           )}
         >
           <span>Published</span>
-          <span className="px-1.5 py-0.2 rounded-full text-[11px] bg-[#1C2436] text-[#94A3B8]">
+          <span className="px-1.5 py-0.2 rounded-full text-xs bg-[#1C2436] text-[#94A3B8]">
             {tabCounts.published}
           </span>
         </button>
@@ -343,7 +343,7 @@ export default function AdminArticlesPage() {
             placeholder="Search articles..."
             className="w-full pl-9 pr-12 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1] transition-colors"
           />
-          <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[11px] font-mono text-[#64748B] bg-[#182030] border border-[#243048] rounded">
+          <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-xs font-mono text-[#64748B] bg-[#182030] border border-[#243048] rounded">
             ⌘ K
           </kbd>
         </div>
@@ -428,7 +428,7 @@ export default function AdminArticlesPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs" aria-label="Articles table">
                 <thead>
-                  <tr className="border-b border-[#1C2436] text-[#64748B] text-[11px]">
+                  <tr className="border-b border-[#1C2436] text-[#64748B] text-xs">
                     <th scope="col" className="p-3 w-10 text-center">
                       <input
                         type="checkbox"
@@ -473,7 +473,7 @@ export default function AdminArticlesPage() {
                     <tr>
                       <td colSpan={8} className="p-8 text-center text-[#94A3B8]">
                         <p className="font-semibold text-white text-xs">No articles found.</p>
-                        <p className="text-[11px] text-[#64748B] mt-1">
+                        <p className="text-xs text-[#64748B] mt-1">
                           {articles.length === 0
                             ? "Create your first article to get started."
                             : "Try adjusting the filters or search."}
@@ -507,28 +507,28 @@ export default function AdminArticlesPage() {
                           <p className="font-bold text-white text-xs hover:text-[#818CF8] transition-colors line-clamp-1">
                             {art.title}
                           </p>
-                          <p className="text-[11px] text-[#64748B] line-clamp-1 mt-0.5">
+                          <p className="text-xs text-[#64748B] line-clamp-1 mt-0.5">
                             {art.subtitle || art.excerpt}
                           </p>
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
                           {art.status === "published" && (
-                            <span className="px-2.5 py-0.5 rounded text-[11px] font-semibold bg-[#0F2A1D] border border-[#1C5338] text-[#34D399]">
+                            <span className="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#0F2A1D] border border-[#1C5338] text-[#34D399]">
                               Published
                             </span>
                           )}
                           {art.status === "review" && (
-                            <span className="px-2.5 py-0.5 rounded text-[11px] font-semibold bg-[#3D2D16] border border-[#594220] text-[#EAB308]">
+                            <span className="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#3D2D16] border border-[#594220] text-[#EAB308]">
                               Review
                             </span>
                           )}
                           {art.status === "scheduled" && (
-                            <span className="px-2.5 py-0.5 rounded text-[11px] font-semibold bg-[#162744] border border-[#234375] text-[#38BDF8]">
+                            <span className="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#162744] border border-[#234375] text-[#38BDF8]">
                               Scheduled
                             </span>
                           )}
                           {art.status === "draft" && (
-                            <span className="px-2.5 py-0.5 rounded text-[11px] font-medium bg-[#182030] border border-[#243048] text-[#94A3B8]">
+                            <span className="px-2.5 py-0.5 rounded text-xs font-medium bg-[#182030] border border-[#243048] text-[#94A3B8]">
                               Draft
                             </span>
                           )}
@@ -538,16 +538,16 @@ export default function AdminArticlesPage() {
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
                           <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 rounded-full bg-[#182030] border border-[#243048] flex items-center justify-center text-[11px] font-bold text-[#94A3B8]">
+                            <div className="w-6 h-6 rounded-full bg-[#182030] border border-[#243048] flex items-center justify-center text-xs font-bold text-[#94A3B8]">
                               {art.author.avatar}
                             </div>
                             <span className="text-white text-xs">{art.author.name}</span>
                           </div>
                         </td>
-                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-[11px]">
+                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-xs">
                           {art.updatedAt}
                         </td>
-                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-[11px]">
+                        <td className="py-3 px-3 text-[#64748B] whitespace-nowrap font-mono text-xs">
                           {art.publishedAt || art.scheduledFor || "—"}
                         </td>
                         <td className="py-3 px-3 text-right" onClick={(e) => e.stopPropagation()}>
@@ -659,7 +659,7 @@ export default function AdminArticlesPage() {
               <div>
                 <label
                   htmlFor="quick-title"
-                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                  className="block text-xs font-medium text-[#94A3B8] mb-1.5"
                 >
                   Title
                 </label>
@@ -677,7 +677,7 @@ export default function AdminArticlesPage() {
               <div>
                 <label
                   htmlFor="quick-category"
-                  className="block text-[11px] font-medium text-[#94A3B8] mb-1.5"
+                  className="block text-xs font-medium text-[#94A3B8] mb-1.5"
                 >
                   Category
                 </label>
@@ -699,14 +699,14 @@ export default function AdminArticlesPage() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-[#94A3B8] mb-1.5">
+                <label className="block text-xs font-medium text-[#94A3B8] mb-1.5">
                   Tags
                 </label>
                 <div className="flex flex-wrap gap-1.5 p-2 rounded-xl bg-[#0E131D] border border-[#1C2436] min-h-[40px] items-center">
                   {quickTags.map((t) => (
                     <span
                       key={t}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#182030] text-[#94A3B8] text-[11px]"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#182030] text-[#94A3B8] text-xs"
                     >
                       <span>{t}</span>
                       <button
@@ -731,7 +731,7 @@ export default function AdminArticlesPage() {
                     }}
                     placeholder="Add tag…"
                     aria-label="Add tag"
-                    className="flex-1 min-w-[80px] bg-transparent text-[11px] text-white placeholder-[#64748B] focus:outline-none"
+                    className="flex-1 min-w-[80px] bg-transparent text-xs text-white placeholder-[#64748B] focus:outline-none"
                   />
                 </div>
               </div>
@@ -739,7 +739,7 @@ export default function AdminArticlesPage() {
               {/* Info Notice Box */}
               <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] flex items-start gap-2.5 text-xs text-[#94A3B8]">
                 <Info className="w-4 h-4 text-[#6366F1] shrink-0 mt-0.5" />
-                <p className="text-[11px] leading-relaxed">
+                <p className="text-xs leading-relaxed">
                   This is a quick edit. For full editing options including content, SEO and featured image, open the article in the editor.
                 </p>
               </div>

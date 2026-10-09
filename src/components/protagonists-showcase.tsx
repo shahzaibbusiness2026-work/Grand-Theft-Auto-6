@@ -58,7 +58,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-pink-400">
+          <div className="inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-pink-400">
             <Sparkles className="h-3 w-3" /> Modern Bonnie & Clyde
           </div>
           <h2
@@ -167,7 +167,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
 
                 {/* Bottom-Left Tagline */}
                 <div className="absolute bottom-5 left-5 z-10 pointer-events-none">
-                  <p className="font-mono text-[11px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                  <p className="font-mono text-xs sm:text-xs font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                     A BRIGHTER<br />TOMORROW<br />TOGETHER.
                   </p>
                   <div className="w-14 h-0.5 bg-pink-500 mt-1 shadow-[0_0_8px_#ec4899]" />
@@ -179,7 +179,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                 <div className="space-y-4">
                   {/* Top Dossier Header */}
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-[11px] font-black uppercase tracking-[0.25em] text-pink-600">
+                    <span className="font-mono text-xs font-black uppercase tracking-[0.25em] text-pink-600">
                       CONFIRMED DOSSIER
                     </span>
                     <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
@@ -255,7 +255,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   <div className="text-xs">
                     <span className="text-muted-foreground">Actor: </span>
                     <span className="font-bold text-slate-900">{actorName(lucia?.voiceActor, "Manni L. Perez")}</span>
-                    <p className="text-[11px] text-muted-foreground">(Confirmed / Casting)</p>
+                    <p className="text-xs text-muted-foreground">(Confirmed / Casting)</p>
                   </div>
                   <button
                     type="button"
@@ -323,7 +323,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
 
                 {/* Bottom-Left Tagline */}
                 <div className="absolute bottom-5 left-5 z-10 pointer-events-none">
-                  <p className="font-mono text-[11px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                  <p className="font-mono text-xs sm:text-xs font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                     SAME<br />STREETS<br />HIGHER<br />STAKES...
                   </p>
                   <div className="w-14 h-0.5 bg-cyan-400 mt-1 shadow-[0_0_8px_#22d3ee]" />
@@ -335,7 +335,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                 <div className="space-y-4">
                   {/* Top Dossier Header */}
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-[11px] font-black uppercase tracking-[0.25em] text-blue-600">
+                    <span className="font-mono text-xs font-black uppercase tracking-[0.25em] text-blue-600">
                       CONFIRMED DOSSIER
                     </span>
                     <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
@@ -411,7 +411,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   <div className="text-xs">
                     <span className="text-muted-foreground">Actor: </span>
                     <span className="font-bold text-slate-900">{actorName(jason?.voiceActor, "Gregory Connors")}</span>
-                    <p className="text-[11px] text-muted-foreground">(Confirmed / Speculated)</p>
+                    <p className="text-xs text-muted-foreground">(Confirmed / Speculated)</p>
                   </div>
                   <button
                     type="button"

@@ -225,7 +225,7 @@ export default function AdminMediaPage() {
       {/* Upload progress bar */}
       {isUploading && (
         <div className="rounded-xl border border-[#1C2436] bg-[#111622] p-3">
-          <div className="flex items-center justify-between text-[11px] text-[#94A3B8] mb-1.5">
+          <div className="flex items-center justify-between text-xs text-[#94A3B8] mb-1.5">
             <span>Uploading to Supabase Storage…</span>
             <span className="font-mono">{uploadProgress}%</span>
           </div>
@@ -372,7 +372,7 @@ export default function AdminMediaPage() {
                       <div className="w-full h-full bg-gradient-to-tr from-indigo-950/60 to-purple-900/40 flex items-center justify-center text-indigo-400">
                         <ImageIcon className="w-8 h-8 opacity-60 group-hover:scale-110 transition-transform" />
                       </div>
-                      <span className="absolute top-2 right-2 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase bg-black/70 backdrop-blur-sm text-white">
+                      <span className="absolute top-2 right-2 px-1.5 py-0.5 rounded text-xs font-bold uppercase bg-black/70 backdrop-blur-sm text-white">
                         {asset.type}
                       </span>
                     </div>
@@ -382,12 +382,12 @@ export default function AdminMediaPage() {
                       <p className="text-xs font-bold text-white truncate">
                         {asset.filename}
                       </p>
-                      <div className="flex items-center justify-between text-[11px] text-[#64748B] font-mono">
+                      <div className="flex items-center justify-between text-xs text-[#64748B] font-mono">
                         <span>{asset.dimensions}</span>
                         <span>{asset.fileSize}</span>
                       </div>
                       {asset.usedBy.length > 0 && (
-                        <span className="inline-block mt-1 text-[11px] font-semibold text-[#6366F1]">
+                        <span className="inline-block mt-1 text-xs font-semibold text-[#6366F1]">
                           Used in {asset.usedBy.length} article(s)
                         </span>
                       )}
@@ -401,7 +401,7 @@ export default function AdminMediaPage() {
             <div className="rounded-xl border border-[#1C2436] bg-[#111622] overflow-hidden">
               <table className="w-full text-left text-xs" aria-label="Media assets list">
                 <thead>
-                  <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-[11px]">
+                  <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-xs">
                     <th scope="col" className="p-3 w-12">Preview</th>
                     <th scope="col" className="p-3 font-medium">Filename</th>
                     <th scope="col" className="p-3 font-medium">Type</th>
@@ -436,7 +436,7 @@ export default function AdminMediaPage() {
                           {asset.filename}
                         </td>
                         <td className="p-3">
-                          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
+                          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#182030] text-[#94A3B8] border border-[#243048]">
                             {asset.type}
                           </span>
                         </td>
@@ -449,7 +449,7 @@ export default function AdminMediaPage() {
                         <td className="p-3 text-[#6366F1] font-medium">
                           {asset.usedBy.length} articles
                         </td>
-                        <td className="p-3 font-mono text-[#64748B] text-[11px]">
+                        <td className="p-3 font-mono text-[#64748B] text-xs">
                           {asset.uploadedAt}
                         </td>
                       </tr>
@@ -487,7 +487,7 @@ export default function AdminMediaPage() {
               </div>
 
               {/* Technical Details */}
-              <div className="space-y-2 p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] font-mono text-[11px]">
+              <div className="space-y-2 p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] font-mono text-xs">
                 <div className="flex justify-between">
                   <span className="text-[#64748B] font-sans">Filename:</span>
                   <span className="text-white font-bold truncate max-w-[180px]">
@@ -575,7 +575,7 @@ export default function AdminMediaPage() {
                   Used By ({selectedAsset.usedBy.length} items)
                 </span>
                 {selectedAsset.usedBy.length === 0 ? (
-                  <p className="text-[11px] text-[#64748B]">
+                  <p className="text-xs text-[#64748B]">
                     This asset is not currently embedded in any published content.
                   </p>
                 ) : (
@@ -591,7 +591,7 @@ export default function AdminMediaPage() {
                             {item.title}
                           </span>
                         </div>
-                        <span className="text-[11px] text-[#64748B] shrink-0 font-mono">
+                        <span className="text-xs text-[#64748B] shrink-0 font-mono">
                           {item.publishedDate}
                         </span>
                       </div>
@@ -638,7 +638,7 @@ export default function AdminMediaPage() {
 
             {/* Affected Content List (Image 10) */}
             <div className="space-y-2 p-3 rounded-xl bg-[#0E131D] border border-[#1C2436]">
-              <p className="text-[11px] font-semibold text-[#94A3B8]">Associated content:</p>
+              <p className="text-xs font-semibold text-[#94A3B8]">Associated content:</p>
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between p-2 rounded-lg bg-[#111622] border border-[#1C2436]">
                   <div className="flex items-center gap-2">

@@ -75,7 +75,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
           id={tooltipId}
           role="tooltip"
           className={cn(
-            "absolute z-50 px-2.5 py-1 text-[11px] font-medium text-[var(--admin-text)] bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-lg shadow-xl shadow-black/50 backdrop-blur-md pointer-events-none whitespace-nowrap transition-all duration-150 animate-in fade-in zoom-in-95",
+            "absolute z-50 px-2.5 py-1 text-xs font-medium text-[var(--admin-text)] bg-[var(--admin-card)] border border-[var(--admin-border)] rounded-lg shadow-xl shadow-black/50 backdrop-blur-md pointer-events-none whitespace-nowrap transition-all duration-150 animate-in fade-in zoom-in-95",
             positionStyles[position],
             className
           )}

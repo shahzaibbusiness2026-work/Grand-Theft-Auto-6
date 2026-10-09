@@ -79,7 +79,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                 <div className="min-w-0">
                   <p className="text-xs font-bold truncate">{t.title}</p>
                   {t.description && (
-                    <p className="text-[11px] text-[var(--admin-text-muted)] truncate">
+                    <p className="text-xs text-[var(--admin-text-muted)] truncate">
                       {t.description}
                     </p>
                   )}

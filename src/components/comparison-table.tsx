@@ -26,7 +26,7 @@ export function ComparisonTable({
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs" aria-label="Comparison stat table">
           <thead>
-            <tr className="border-b border-border text-[11px] text-muted-foreground">
+            <tr className="border-b border-border text-xs text-muted-foreground">
               <th scope="col" className="py-3 px-4 font-bold uppercase tracking-wider">
                 Statistic
               </th>
@@ -64,14 +64,14 @@ export function ComparisonTable({
                   {row.winnerIndex != null ? (
                     <span
                       className={cn(
-                        "inline-flex items-center gap-1 rounded bg-emerald-500/20 text-emerald-500 dark:text-emerald-400 border border-emerald-500/30 px-2 py-0.5 text-[11px] font-black uppercase"
+                        "inline-flex items-center gap-1 rounded bg-emerald-500/20 text-emerald-500 dark:text-emerald-400 border border-emerald-500/30 px-2 py-0.5 text-xs font-black uppercase"
                       )}
                     >
                       <Trophy className="h-2.5 w-2.5" />
                       {contenders[row.winnerIndex]?.name.slice(0, 18)}
                     </span>
                   ) : (
-                    <span className="text-[11px] font-bold uppercase text-muted-foreground">Tie</span>
+                    <span className="text-xs font-bold uppercase text-muted-foreground">Tie</span>
                   )}
                 </td>
               </tr>

@@ -115,7 +115,7 @@ export default function AdminLocationsPage() {
     {
       key: "coordinates",
       header: "Coordinates",
-      render: (l) => <span className="font-mono text-[11px] text-[var(--admin-text-muted)]">{l.coordinates}</span>,
+      render: (l) => <span className="font-mono text-xs text-[var(--admin-text-muted)]">{l.coordinates}</span>,
     },
     {
       key: "actions",
@@ -194,7 +194,7 @@ export default function AdminLocationsPage() {
               {isLoading ? "Loading locations…" : "No locations found."}
             </p>
             {!isLoading && (
-              <p className="text-[11px] text-[var(--admin-text-muted)] mt-1">
+              <p className="text-xs text-[var(--admin-text-muted)] mt-1">
                 Add your first location to start building the map database.
               </p>
             )}
@@ -205,7 +205,7 @@ export default function AdminLocationsPage() {
       <Modal isOpen={editorOpen} onClose={() => setEditorOpen(false)} title={form.id ? "Edit location" : "Add location"}>
         <div className="space-y-3.5 text-xs">
           <div>
-            <label htmlFor="loc-name" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+            <label htmlFor="loc-name" className="block text-xs font-medium text-[#94A3B8] mb-1">
               Name <span className="text-red-400">*</span>
             </label>
             <input
@@ -218,7 +218,7 @@ export default function AdminLocationsPage() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor="loc-district" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+              <label htmlFor="loc-district" className="block text-xs font-medium text-[#94A3B8] mb-1">
                 District
               </label>
               <input
@@ -230,7 +230,7 @@ export default function AdminLocationsPage() {
               />
             </div>
             <div>
-              <label htmlFor="loc-type" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+              <label htmlFor="loc-type" className="block text-xs font-medium text-[#94A3B8] mb-1">
                 Type
               </label>
               <select
@@ -248,7 +248,7 @@ export default function AdminLocationsPage() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor="loc-verification" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+              <label htmlFor="loc-verification" className="block text-xs font-medium text-[#94A3B8] mb-1">
                 Verification
               </label>
               <select
@@ -262,7 +262,7 @@ export default function AdminLocationsPage() {
               </select>
             </div>
             <div>
-              <label htmlFor="loc-coords" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+              <label htmlFor="loc-coords" className="block text-xs font-medium text-[#94A3B8] mb-1">
                 Coordinates
               </label>
               <input
@@ -276,7 +276,7 @@ export default function AdminLocationsPage() {
             </div>
           </div>
           <div>
-            <label htmlFor="loc-desc" className="block text-[11px] font-medium text-[#94A3B8] mb-1">
+            <label htmlFor="loc-desc" className="block text-xs font-medium text-[#94A3B8] mb-1">
               Description
             </label>
             <textarea

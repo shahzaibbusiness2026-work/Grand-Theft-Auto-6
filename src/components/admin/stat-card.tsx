@@ -58,7 +58,7 @@ export function StatCard({
       />
 
       <div className="flex items-center justify-between relative z-10">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
+        <span className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)]">
           {label}
         </span>
         <span className={cn("p-2.5 rounded-xl border shadow-sm transition-transform group-hover:scale-105", iconColorClasses[accentColor])}>

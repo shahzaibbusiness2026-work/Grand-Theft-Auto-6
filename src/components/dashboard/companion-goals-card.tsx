@@ -35,7 +35,7 @@ export function CompanionGoalsCard() {
           <Target className="h-4 w-4 text-amber-400" />
           <span>TODAY&apos;S GOALS</span>
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] font-semibold text-amber-400">
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-400">
           <Clock className="h-3 w-3" />
           <span>12h 34m left</span>
         </div>
@@ -71,7 +71,7 @@ export function CompanionGoalsCard() {
               </span>
             </div>
 
-            <span className="font-mono text-[11px] text-slate-400">
+            <span className="font-mono text-xs text-slate-400">
               {goal.progress}
             </span>
           </div>
@@ -85,7 +85,7 @@ export function CompanionGoalsCard() {
             <Star className="h-4 w-4 fill-current" />
           </div>
           <div className="leading-tight">
-            <span className="block text-[9px] font-bold uppercase tracking-wider text-amber-300">
+            <span className="block text-xs font-bold uppercase tracking-wider text-amber-300">
               REWARD
             </span>
             <span className="font-display text-xs font-extrabold text-white">

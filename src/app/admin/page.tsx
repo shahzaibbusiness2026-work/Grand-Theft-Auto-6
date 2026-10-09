@@ -259,7 +259,7 @@ export default function AdminOverviewPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs" aria-label="Items needing attention">
                 <thead>
-                  <tr className="border-b border-[#1C2436] text-[#64748B] text-[11px]">
+                  <tr className="border-b border-[#1C2436] text-[#64748B] text-xs">
                     <th scope="col" className="pb-2.5 font-medium">Task</th>
                     <th scope="col" className="pb-2.5 font-medium">Details</th>
                     <th scope="col" className="pb-2.5 font-medium text-right">Action</th>
@@ -272,7 +272,7 @@ export default function AdminOverviewPage() {
                         <FileText className="w-4 h-4 text-[#94A3B8] shrink-0" />
                         <div>
                           <p className="font-semibold text-white">Articles awaiting approval</p>
-                          <p className="text-[11px] text-[#64748B]">Review drafts from team members</p>
+                          <p className="text-xs text-[#64748B]">Review drafts from team members</p>
                         </div>
                       </div>
                     </td>
@@ -295,7 +295,7 @@ export default function AdminOverviewPage() {
                         <Car className="w-4 h-4 text-[#94A3B8] shrink-0" />
                         <div>
                           <p className="font-semibold text-white">Verify vehicle sources</p>
-                          <p className="text-[11px] text-[#64748B]">Check and confirm information sources</p>
+                          <p className="text-xs text-[#64748B]">Check and confirm information sources</p>
                         </div>
                       </div>
                     </td>
@@ -318,7 +318,7 @@ export default function AdminOverviewPage() {
                         <MapPin className="w-4 h-4 text-[#94A3B8] shrink-0" />
                         <div>
                           <p className="font-semibold text-white">Map markers to verify</p>
-                          <p className="text-[11px] text-[#64748B]">Confirm locations and correct metadata</p>
+                          <p className="text-xs text-[#64748B]">Confirm locations and correct metadata</p>
                         </div>
                       </div>
                     </td>
@@ -360,7 +360,7 @@ export default function AdminOverviewPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs" aria-label="Recent content edits">
                 <thead>
-                  <tr className="border-b border-[#1C2436] text-[#64748B] text-[11px]">
+                  <tr className="border-b border-[#1C2436] text-[#64748B] text-xs">
                     <th scope="col" className="pb-2.5 font-medium">Record</th>
                     <th scope="col" className="pb-2.5 font-medium">Type</th>
                     <th scope="col" className="pb-2.5 font-medium">Editor</th>
@@ -380,7 +380,7 @@ export default function AdminOverviewPage() {
                     <tr key={e.id} className="hover:bg-[#141B2A] transition-colors">
                       <td className="py-3 pr-4 font-semibold text-white">{e.title}</td>
                       <td className="py-3">
-                        <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-[#182030] text-[#94A3B8] border border-[#243048]">
+                        <span className="px-2 py-0.5 rounded text-xs font-medium bg-[#182030] text-[#94A3B8] border border-[#243048]">
                           {e.type}
                         </span>
                       </td>
@@ -421,7 +421,7 @@ export default function AdminOverviewPage() {
                 <FileText className="w-5 h-5 shrink-0 text-white" />
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-white">Add article</p>
-                  <p className="text-[11px] text-white/80 truncate">Write a new article</p>
+                  <p className="text-xs text-white/80 truncate">Write a new article</p>
                 </div>
               </Link>
 
@@ -433,7 +433,7 @@ export default function AdminOverviewPage() {
                 <Car className="w-5 h-5 shrink-0 text-[#94A3B8] group-hover:text-white transition-colors" />
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-white">Add vehicle</p>
-                  <p className="text-[11px] text-[#64748B] truncate">Create a vehicle record</p>
+                  <p className="text-xs text-[#64748B] truncate">Create a vehicle record</p>
                 </div>
               </Link>
 
@@ -445,7 +445,7 @@ export default function AdminOverviewPage() {
                 <Crosshair className="w-5 h-5 shrink-0 text-[#94A3B8] group-hover:text-white transition-colors" />
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-white">Add weapon</p>
-                  <p className="text-[11px] text-[#64748B] truncate">Create a weapon record</p>
+                  <p className="text-xs text-[#64748B] truncate">Create a weapon record</p>
                 </div>
               </Link>
 
@@ -457,7 +457,7 @@ export default function AdminOverviewPage() {
                 <MapPin className="w-5 h-5 shrink-0 text-[#94A3B8] group-hover:text-white transition-colors" />
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-white">Add map marker</p>
-                  <p className="text-[11px] text-[#64748B] truncate">Add a location to the map</p>
+                  <p className="text-xs text-[#64748B] truncate">Add a location to the map</p>
                 </div>
               </Link>
             </div>
@@ -487,7 +487,7 @@ export default function AdminOverviewPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs" aria-label="Scheduled articles">
                 <thead>
-                  <tr className="border-b border-[#1C2436] text-[#64748B] text-[11px]">
+                  <tr className="border-b border-[#1C2436] text-[#64748B] text-xs">
                     <th scope="col" className="pb-2.5 font-medium">Title</th>
                     <th scope="col" className="pb-2.5 font-medium whitespace-nowrap">Publish date</th>
                     <th scope="col" className="pb-2.5 font-medium text-right">Status</th>
@@ -508,7 +508,7 @@ export default function AdminOverviewPage() {
                       </td>
                       <td className="py-3 text-[#94A3B8] whitespace-nowrap">{a.date}</td>
                       <td className="py-3 text-right">
-                        <span className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#0F243A] text-[#38BDF8] border border-[#1B3E60]">
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#0F243A] text-[#38BDF8] border border-[#1B3E60]">
                           Scheduled
                         </span>
                       </td>
@@ -536,12 +536,12 @@ export default function AdminOverviewPage() {
                   <MapPin className="w-4 h-4 text-[#94A3B8]" />
                   <div>
                     <p className="font-semibold text-white">Interactive Map</p>
-                    <p className="text-[11px] text-[#64748B]">Map data and markers</p>
+                    <p className="text-xs text-[#64748B]">Map data and markers</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#10B981]" aria-hidden="true" />
-                  <span className="text-[11px] font-medium text-[#10B981]">Operational</span>
+                  <span className="text-xs font-medium text-[#10B981]">Operational</span>
                 </div>
               </div>
 
@@ -551,12 +551,12 @@ export default function AdminOverviewPage() {
                   <Scale className="w-4 h-4 text-[#94A3B8]" />
                   <div>
                     <p className="font-semibold text-white">Comparisons</p>
-                    <p className="text-[11px] text-[#64748B]">Feature comparisons</p>
+                    <p className="text-xs text-[#64748B]">Feature comparisons</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#10B981]" aria-hidden="true" />
-                  <span className="text-[11px] font-medium text-[#10B981]">Operational</span>
+                  <span className="text-xs font-medium text-[#10B981]">Operational</span>
                 </div>
               </div>
 
@@ -566,12 +566,12 @@ export default function AdminOverviewPage() {
                   <ListChecks className="w-4 h-4 text-[#94A3B8]" />
                   <div>
                     <p className="font-semibold text-white">Completion Tracker</p>
-                    <p className="text-[11px] text-[#64748B]">Progress tracking system</p>
+                    <p className="text-xs text-[#64748B]">Progress tracking system</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#10B981]" aria-hidden="true" />
-                  <span className="text-[11px] font-medium text-[#10B981]">Operational</span>
+                  <span className="text-xs font-medium text-[#10B981]">Operational</span>
                 </div>
               </div>
             </div>
