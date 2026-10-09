@@ -15,6 +15,18 @@ import {
   Sparkles,
   Crown,
   Bot,
+  MapPin,
+  Building2,
+  Users,
+  Newspaper,
+  BookOpen,
+  Wrench,
+  Calculator,
+  TrendingUp,
+  DollarSign,
+  Crosshair,
+  Mail,
+  type LucideIcon,
 } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
@@ -57,21 +69,42 @@ const LINKS: NavLink[] = [
   { href: "/map", label: "Map" },
 ];
 
-const MORE_LINKS = [
-  { href: "/locations", label: "Locations & POIs" },
-  { href: "/properties", label: "Properties & Real Estate" },
-  { href: "/tools", label: "All 15 Tools" },
-  { href: "/tools/money-calculator", label: "Money Calculator" },
-  { href: "/tools/business-profit-calculator", label: "Business Profit Calculator" },
-  { href: "/tools/money-maker", label: "Money-Making Method Finder" },
-  { href: "/tools/loadout-builder", label: "Tactical Loadout Builder" },
-  { href: "/ai", label: "Ask GTA 6 AI" },
-  { href: "/pricing", label: "Vice City Pro" },
-  { href: "/characters", label: "Characters" },
-  { href: "/news", label: "News" },
-  { href: "/guides", label: "Guides" },
-  { href: "/contact", label: "Contact" },
+type MoreLink = { href: string; label: string; icon: LucideIcon };
+type MoreSection = { title: string; links: MoreLink[] };
+
+const MORE_SECTIONS: MoreSection[] = [
+  {
+    title: "Discover",
+    links: [
+      { href: "/locations", label: "Locations & POIs", icon: MapPin },
+      { href: "/properties", label: "Properties & Real Estate", icon: Building2 },
+      { href: "/characters", label: "Characters", icon: Users },
+      { href: "/news", label: "News", icon: Newspaper },
+      { href: "/guides", label: "Guides", icon: BookOpen },
+    ],
+  },
+  {
+    title: "Tools",
+    links: [
+      { href: "/tools", label: "All 15 Tools", icon: Wrench },
+      { href: "/tools/money-calculator", label: "Money Calculator", icon: Calculator },
+      { href: "/tools/business-profit-calculator", label: "Business Profit Calculator", icon: TrendingUp },
+      { href: "/tools/money-maker", label: "Money-Making Method Finder", icon: DollarSign },
+      { href: "/tools/loadout-builder", label: "Tactical Loadout Builder", icon: Crosshair },
+    ],
+  },
+  {
+    title: "More",
+    links: [
+      { href: "/ai", label: "Ask GTA 6 AI", icon: Bot },
+      { href: "/pricing", label: "Vice City Pro", icon: Crown },
+      { href: "/contact", label: "Contact", icon: Mail },
+    ],
+  },
 ];
+
+/** Flat list of all More-menu hrefs, for active-state highlighting. */
+const MORE_HREFS = MORE_SECTIONS.flatMap((s) => s.links.map((l) => l.href));
 
 function useDropdown() {
   const [open, setOpen] = useState(false);
@@ -266,7 +299,7 @@ export function Navbar() {
               aria-expanded={more.open}
               className={cn(
                 "flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
-                MORE_LINKS.some((l) => isActive(l.href))
+                MORE_HREFS.some((href) => isActive(href))
                   ? "border border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
                   : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
               )}
@@ -282,23 +315,46 @@ export function Navbar() {
             {more.open && (
               <div
                 role="menu"
-                className="absolute right-0 top-full z-50 mt-2.5 w-56 rounded-xl border border-border bg-card/95 p-1.5 shadow-2xl backdrop-blur-2xl text-card-foreground animate-in fade-in zoom-in-95 duration-150 max-h-96 overflow-y-auto"
+                className="absolute right-0 top-full z-50 mt-2.5 w-72 rounded-2xl border border-border bg-card/95 p-2 shadow-2xl backdrop-blur-2xl text-card-foreground animate-in fade-in zoom-in-95 duration-150 max-h-[28rem] overflow-y-auto"
               >
-                {MORE_LINKS.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    role="menuitem"
-                    onClick={() => more.setOpen(false)}
-                    className={cn(
-                      "block rounded-lg px-3 py-2 text-xs font-medium tracking-wide transition-colors",
-                      isActive(l.href)
-                        ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 font-bold"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                    )}
-                  >
-                    {l.label}
-                  </Link>
+                {MORE_SECTIONS.map((section, si) => (
+                  <div key={section.title}>
+                    {si > 0 && <div className="mx-2 my-1.5 border-t border-border/60" role="separator" />}
+                    <p className="px-3 pb-1 pt-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground/70">
+                      {section.title}
+                    </p>
+                    {section.links.map((l) => {
+                      const Icon = l.icon;
+                      const active = isActive(l.href);
+                      return (
+                        <Link
+                          key={l.href}
+                          href={l.href}
+                          role="menuitem"
+                          onClick={() => more.setOpen(false)}
+                          className={cn(
+                            "flex items-center gap-2.5 rounded-xl px-3 py-2 text-[13px] font-medium tracking-wide transition-colors",
+                            active
+                              ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 font-bold"
+                              : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                          )}
+                        >
+                          <span
+                            className={cn(
+                              "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-colors",
+                              active
+                                ? "border-amber-500/40 bg-amber-500/15 text-amber-700 dark:text-amber-400"
+                                : "border-border/70 bg-muted/60 text-muted-foreground"
+                            )}
+                            aria-hidden="true"
+                          >
+                            <Icon className="h-3.5 w-3.5" />
+                          </span>
+                          {l.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
                 ))}
               </div>
             )}
@@ -382,7 +438,7 @@ export function Navbar() {
               <span>Search All 15 Tools, Rides, Guns...</span>
             </button>
             {LINKS.flatMap((l) => [{ href: l.href, label: l.label }, ...(l.menu || [])])
-              .concat(MORE_LINKS)
+              .concat(MORE_SECTIONS.flatMap((s) => s.links.map((l) => ({ href: l.href, label: l.label }))))
               .map((l) => {
               const active = isActive(l.href);
               return (
