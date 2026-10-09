@@ -109,7 +109,7 @@ export default function AdminCollectiblesPage() {
       sortable: true,
       render: (c) => (
         <div className="flex items-center gap-2.5 min-w-0">
-          <Package className="w-4 h-4 text-amber-400 shrink-0" />
+          <Package className="w-4 h-4 text-gold-light shrink-0" />
           <span className="font-bold text-[var(--admin-text)] truncate">{c.title}</span>
         </div>
       ),

@@ -422,7 +422,7 @@ export default function AdminUsersPage() {
                             u.status === "active"
                               ? "bg-emerald-400"
                               : u.status === "pending"
-                              ? "bg-amber-400"
+                              ? "bg-gold-light"
                               : "bg-gray-400"
                           )}
                         />
@@ -432,7 +432,7 @@ export default function AdminUsersPage() {
                             u.status === "active"
                               ? "text-emerald-400"
                               : u.status === "pending"
-                              ? "text-amber-400"
+                              ? "text-gold-light"
                               : "text-gray-400"
                           )}
                         >

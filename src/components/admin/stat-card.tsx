@@ -29,7 +29,7 @@ export function StatCard({
   const iconColorClasses = {
     primary: "text-indigo-400 bg-indigo-500/10 border-indigo-500/25",
     success: "text-emerald-400 bg-emerald-500/10 border-emerald-500/25",
-    warning: "text-amber-400 bg-amber-500/10 border-amber-500/25",
+    warning: "text-gold-light bg-gold/10 border-gold/25",
     danger: "text-rose-400 bg-rose-500/10 border-rose-500/25",
     info: "text-sky-400 bg-sky-500/10 border-sky-500/25",
   };
@@ -37,7 +37,7 @@ export function StatCard({
   const glowGradients = {
     primary: "from-indigo-500/5 to-transparent",
     success: "from-emerald-500/5 to-transparent",
-    warning: "from-amber-500/5 to-transparent",
+    warning: "from-gold/5 to-transparent",
     danger: "from-rose-500/5 to-transparent",
     info: "from-sky-500/5 to-transparent",
   };

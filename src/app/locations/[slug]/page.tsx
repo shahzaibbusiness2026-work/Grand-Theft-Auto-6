@@ -102,7 +102,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
       case "Low":
         return "text-emerald-400 bg-emerald-500/10 border-emerald-500/30";
       case "Medium":
-        return "text-amber-400 bg-amber-500/10 border-amber-500/30";
+        return "text-gold-light bg-gold/10 border-gold/30";
       case "High":
         return "text-orange-400 bg-orange-500/10 border-orange-500/30";
       case "Restricted Area":
@@ -237,13 +237,13 @@ export default async function LocationDetailPage({ params }: PageProps) {
 
                   {(loc.relatedWeapons?.length || 0) > 0 && (
                     <div className="p-4 rounded-xl bg-card border border-border space-y-2">
-                      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400">
+                      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold-light">
                         <Crosshair className="h-4 w-4" /> Available Armory
                       </div>
                       <ul className="text-xs text-foreground font-mono space-y-1">
                         {loc.relatedWeapons?.map((w) => (
                           <li key={w} className="flex items-center gap-1.5">
-                            <span className="h-1.5 w-1.5 rounded-full bg-amber-400" /> {w}
+                            <span className="h-1.5 w-1.5 rounded-full bg-gold-light" /> {w}
                           </li>
                         ))}
                       </ul>

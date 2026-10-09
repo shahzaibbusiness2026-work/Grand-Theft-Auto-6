@@ -4,7 +4,7 @@ export function CompanionQuoteCard() {
   return (
     <div className="relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-[#0a0f1d]/90 p-6 shadow-xl backdrop-blur-xl">
       {/* Background neon ambient blur */}
-      <div className="absolute -top-12 -right-12 h-36 w-36 rounded-full bg-amber-500/10 blur-[60px] pointer-events-none" />
+      <div className="absolute -top-12 -right-12 h-36 w-36 rounded-full bg-gold/10 blur-[60px] pointer-events-none" />
 
       {/* Quote text */}
       <div className="relative z-10 pt-2">
@@ -23,7 +23,7 @@ export function CompanionQuoteCard() {
           title="Rockstar Games"
         >
           <span className="font-mono font-black text-[13px] tracking-tighter">
-            R<span className="text-amber-400">★</span>
+            R<span className="text-gold-light">★</span>
           </span>
         </div>
       </div>

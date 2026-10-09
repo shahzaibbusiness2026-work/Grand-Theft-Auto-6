@@ -58,12 +58,12 @@ export function FavoriteButton({ type, id, className, showText = true }: Favorit
       className={cn(
         "inline-flex items-center justify-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-bold transition-all active:scale-95",
         favorited
-          ? "border-amber-500/50 bg-amber-500/20 text-amber-500 dark:text-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.25)]"
-          : "border-border bg-card/60 text-muted-foreground hover:border-amber-500/30 hover:bg-muted hover:text-foreground",
+          ? "border-gold/50 bg-gold/20 text-gold dark:text-gold-light shadow-[0_0_12px_rgba(201,168,106,0.25)]"
+          : "border-border bg-card/60 text-muted-foreground hover:border-gold/30 hover:bg-muted hover:text-foreground",
         className
       )}
     >
-      <Heart className={cn("h-4 w-4 transition-transform", favorited && "fill-amber-500 text-amber-500 dark:text-amber-400 scale-110")} />
+      <Heart className={cn("h-4 w-4 transition-transform", favorited && "fill-gold text-gold dark:text-gold-light scale-110")} />
       {showText && <span>{favorited ? "Saved in Garage" : "Add to Favorites"}</span>}
     </button>
   );

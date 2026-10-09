@@ -40,9 +40,9 @@ export function ConfidenceBadge({
     REPORTED: {
       label: "Reported Leak",
       icon: Eye,
-      border: "border-amber-500/40",
-      bg: "bg-amber-500/10",
-      text: "text-amber-600 dark:text-amber-400",
+      border: "border-gold/40",
+      bg: "bg-gold/10",
+      text: "text-gold-dark dark:text-gold-light",
     },
     RUMORED: {
       label: "Rumored",

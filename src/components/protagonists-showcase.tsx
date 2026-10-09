@@ -207,7 +207,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                     {/* Special Ability */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
                       <div className="flex items-center gap-2 text-muted-foreground font-semibold w-36 sm:w-40 shrink-0">
-                        <Zap className="w-4 h-4 text-amber-500 shrink-0" />
+                        <Zap className="w-4 h-4 text-gold shrink-0" />
                         <span>Special Ability:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">

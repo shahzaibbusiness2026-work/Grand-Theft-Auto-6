@@ -154,8 +154,8 @@ export default function AdminSettingsPage() {
                 Connected to Supabase
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 border border-amber-500/30 text-amber-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gold/10 border border-gold/30 text-gold-light">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-light" />
                 Offline (Local Cache)
               </span>
             )}
@@ -201,7 +201,7 @@ export default function AdminSettingsPage() {
               : "bg-[#111622] text-[#94A3B8] hover:text-white border border-[#1C2436]"
           )}
         >
-          <FileText className="w-4 h-4 text-amber-400" />
+          <FileText className="w-4 h-4 text-gold-light" />
           <span>Site Copy & Texts</span>
         </button>
 
@@ -283,7 +283,7 @@ export default function AdminSettingsPage() {
           <div className="p-5 rounded-xl border border-[#1C2436] bg-[#111622] space-y-4">
             <div className="border-b border-[#1C2436] pb-3">
               <h2 className="text-sm font-bold text-white flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-amber-400" />
+                <Sparkles className="w-4 h-4 text-gold-light" />
                 Hero Section Headlines & Taglines
               </h2>
               <p className="text-xs text-[#94A3B8] mt-0.5">

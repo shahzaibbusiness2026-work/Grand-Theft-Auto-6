@@ -132,7 +132,7 @@ export default function AdminComparisonPage() {
                   "px-2 py-0.5 rounded text-xs font-bold " +
                   (Math.round(vehicleTotal) === 100
                     ? "bg-emerald-950/60 border border-emerald-500/40 text-emerald-400"
-                    : "bg-amber-950/60 border border-amber-500/40 text-amber-400")
+                    : "bg-amber-950/60 border border-gold/40 text-gold-light")
                 }
               >
                 {vehicleTotal} total
@@ -173,7 +173,7 @@ export default function AdminComparisonPage() {
                   "px-2 py-0.5 rounded text-xs font-bold " +
                   (Math.round(weaponTotal) === 100
                     ? "bg-emerald-950/60 border border-emerald-500/40 text-emerald-400"
-                    : "bg-amber-950/60 border border-amber-500/40 text-amber-400")
+                    : "bg-amber-950/60 border border-gold/40 text-gold-light")
                 }
               >
                 {weaponTotal} total

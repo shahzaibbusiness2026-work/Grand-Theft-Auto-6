@@ -367,7 +367,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
 
           <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-              <Wallet className="h-4 w-4 text-amber-400" /> Weapon Economy
+              <Wallet className="h-4 w-4 text-gold-light" /> Weapon Economy
             </h2>
             <dl className="mt-4 divide-y divide-border">
               {[

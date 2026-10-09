@@ -215,7 +215,7 @@ export function AdminHeader({
             {mounted && resolvedTheme === "light" ? (
               <Moon className="w-4 h-4 text-indigo-600" />
             ) : (
-              <Sun className="w-4 h-4 text-amber-400 hover:text-amber-300" />
+              <Sun className="w-4 h-4 text-gold-light hover:text-amber-300" />
             )}
           </button>
 

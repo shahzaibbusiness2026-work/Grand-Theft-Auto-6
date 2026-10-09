@@ -66,7 +66,7 @@ export function CompanionWeaponsSection({
                   <span className="rounded-lg bg-rose-500/10 px-2 py-0.5 font-mono text-xs font-bold text-rose-400 dark:text-rose-400 text-rose-600 border border-rose-500/20">
                     {wep.category}
                   </span>
-                  <span className="font-mono text-xs font-black text-amber-400">
+                  <span className="font-mono text-xs font-black text-gold-light">
                     {wep.priceDisplay || "$10,000"}
                   </span>
                 </div>
@@ -87,7 +87,7 @@ export function CompanionWeaponsSection({
                   </div>
                   <div className="h-1.5 w-full rounded-full bg-white/10 dark:bg-white/10 bg-slate-200 overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-rose-500 to-amber-500 transition-all duration-500"
+                      className="h-full rounded-full bg-gradient-to-r from-rose-500 to-gold transition-all duration-500"
                       style={{ width: `${Math.min(100, Math.max(10, dmgNum))}%` }}
                     />
                   </div>

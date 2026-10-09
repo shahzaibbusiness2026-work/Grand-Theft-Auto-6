@@ -8,7 +8,7 @@ interface CompanionProgressCardProps {
 }
 
 const CATEGORIES = [
-  { name: "Missions", percent: 80, color: "bg-amber-500" },
+  { name: "Missions", percent: 80, color: "bg-gold" },
   { name: "Collectibles", percent: 65, color: "bg-purple-500" },
   { name: "Vehicles", percent: 40, color: "bg-[#00F0FF]" },
   { name: "Weapons", percent: 35, color: "bg-orange-500" },
@@ -29,7 +29,7 @@ export function CompanionProgressCard({
       {/* Card Header */}
       <div className="flex items-center justify-between pb-3 border-b border-white/5">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-200">
-          <BarChart3 className="h-4 w-4 text-amber-400" />
+          <BarChart3 className="h-4 w-4 text-gold-light" />
           <span>YOUR PROGRESS</span>
         </div>
         <Link
@@ -80,7 +80,7 @@ export function CompanionProgressCard({
 
           {/* Center Text */}
           <div className="absolute flex flex-col items-center justify-center text-center">
-            <span className="font-display text-2xl sm:text-3xl font-black text-white drop-shadow-[0_0_12px_rgba(245,158,11,0.3)]">
+            <span className="font-display text-2xl sm:text-3xl font-black text-white drop-shadow-[0_0_12px_rgba(201,168,106,0.3)]">
               {overallPercent}%
             </span>
             <span className="text-xs font-semibold text-slate-400 leading-tight">

@@ -57,12 +57,12 @@ export function CompanionUpdatesCard({ articles }: CompanionUpdatesCardProps) {
       {/* Header */}
       <div className="flex items-center justify-between pb-3 border-b border-border">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-foreground">
-          <Newspaper className="h-4 w-4 text-amber-400" />
+          <Newspaper className="h-4 w-4 text-gold-light" />
           <span>LATEST UPDATES</span>
         </div>
         <Link
           href="/news"
-          className="flex items-center gap-1 text-xs font-semibold text-amber-400 transition-colors hover:text-amber-300"
+          className="flex items-center gap-1 text-xs font-semibold text-gold-light transition-colors hover:text-amber-300"
         >
           <span>View All</span>
           <ArrowRight className="h-3.5 w-3.5" />
@@ -99,7 +99,7 @@ export function CompanionUpdatesCard({ articles }: CompanionUpdatesCardProps) {
               className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-black uppercase tracking-wider ${
                 item.badge === "Official"
                   ? "bg-purple-500/20 text-purple-300 border border-purple-500/30"
-                  : "bg-amber-500/20 text-amber-300 border border-amber-500/30"
+                  : "bg-gold/20 text-amber-300 border border-gold/30"
               }`}
             >
               {item.badge}

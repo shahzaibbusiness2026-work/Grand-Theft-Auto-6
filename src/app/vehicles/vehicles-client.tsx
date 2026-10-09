@@ -219,7 +219,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                       className={cn(
                         "absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full backdrop-blur-md transition-all",
                         isFav
-                          ? "bg-amber-500 text-slate-950 shadow-md"
+                          ? "bg-gold text-slate-950 shadow-md"
                           : "bg-black/50 text-white hover:bg-black/80"
                       )}
                       aria-label="Save to garage"

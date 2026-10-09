@@ -183,7 +183,7 @@ export function DashboardSidebar({
         <div className={cn("pb-3 border-b border-white/10", isCollapsed ? "flex flex-col items-center gap-2.5" : "flex items-center justify-between")}>
           {!isCollapsed ? (
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-1.5 shadow-[0_0_15px_rgba(245,158,11,0.4)]">
+              <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-gold-light to-gold-dark p-1.5 shadow-[0_0_15px_rgba(201,168,106,0.4)]">
                 <Layers className="h-4 w-4 text-slate-950 font-bold" />
               </div>
               <div className="min-w-0">
@@ -199,7 +199,7 @@ export function DashboardSidebar({
               </div>
             </div>
           ) : (
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 shadow-[0_0_12px_rgba(245,158,11,0.4)]">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-gold-light to-gold-dark shadow-[0_0_12px_rgba(201,168,106,0.4)]">
               <Layers className="h-4 w-4 text-slate-950 font-bold" />
             </div>
           )}
@@ -230,7 +230,7 @@ export function DashboardSidebar({
               type="button"
               onClick={onCloseMobile}
               aria-label="Close sidebar"
-              className="flex lg:hidden h-8 w-8 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 hover:text-amber-400 hover:border-amber-500/50 hover:bg-amber-500/15 transition-all focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="flex lg:hidden h-8 w-8 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 hover:text-gold-light hover:border-gold/50 hover:bg-gold/15 transition-all focus-visible:ring-2 focus-visible:ring-gold-light"
             >
               <X className="h-4 w-4" />
             </button>
@@ -264,7 +264,7 @@ export function DashboardSidebar({
                       "relative flex h-10 w-10 mx-auto items-center justify-center rounded-xl transition-all duration-200 outline-none",
                       isActive
                         ? "bg-[#00F0FF]/15 border border-[#00F0FF]/60 shadow-[0_0_15px_rgba(0,240,255,0.3)] text-[#00F0FF]"
-                        : "border border-transparent text-slate-400 hover:bg-gradient-to-br hover:from-amber-500/20 hover:to-orange-500/15 hover:border-amber-500/50 hover:text-white hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+                        : "border border-transparent text-slate-400 hover:bg-gradient-to-br hover:from-gold/20 hover:to-orange-500/15 hover:border-gold/50 hover:text-white hover:shadow-[0_0_15px_rgba(201,168,106,0.3)]"
                     )}
                   >
                     <Icon
@@ -291,17 +291,17 @@ export function DashboardSidebar({
                   }}
                   suppressHydrationWarning
                   className={cn(
-                    "group flex w-full items-center justify-between px-3 py-2.5 rounded-xl transition-all duration-200 outline-none text-left focus-visible:ring-2 focus-visible:ring-amber-500",
+                    "group flex w-full items-center justify-between px-3 py-2.5 rounded-xl transition-all duration-200 outline-none text-left focus-visible:ring-2 focus-visible:ring-gold",
                     isActive
                       ? "bg-[#00F0FF]/12 border-l-2 border-[#00F0FF] shadow-[inset_0_0_12px_rgba(0,240,255,0.12)] text-[#00F0FF]"
-                      : "border-l-2 border-transparent hover:bg-gradient-to-r hover:from-amber-500/15 hover:via-orange-500/[0.08] hover:to-transparent hover:border-l-2 hover:border-amber-500 hover:shadow-[inset_0_0_15px_rgba(245,158,11,0.08)]"
+                      : "border-l-2 border-transparent hover:bg-gradient-to-r hover:from-gold/15 hover:via-orange-500/[0.08] hover:to-transparent hover:border-l-2 hover:border-gold hover:shadow-[inset_0_0_15px_rgba(201,168,106,0.08)]"
                   )}
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <Icon
                       className={cn(
                         "h-4 w-4 shrink-0 transition-transform duration-200 group-hover:scale-110",
-                        isActive ? "scale-105" : "text-slate-400 group-hover:text-amber-400 group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]"
+                        isActive ? "scale-105" : "text-slate-400 group-hover:text-gold-light group-hover:drop-shadow-[0_0_8px_rgba(201,168,106,0.6)]"
                       )}
                       style={{ color: isActive ? item.color : undefined }}
                     />
@@ -330,7 +330,7 @@ export function DashboardSidebar({
                       "ml-2 shrink-0 rounded-md px-1.5 py-0.5 font-mono text-xs font-bold border transition-all duration-200",
                       isActive
                         ? "bg-[#00F0FF]/20 text-[#00F0FF] border-[#00F0FF]/40 shadow-[0_0_8px_rgba(0,240,255,0.15)]"
-                        : "bg-white/[0.04] text-slate-300 border-white/10 group-hover:bg-amber-500/20 group-hover:text-amber-400 group-hover:border-amber-500/50 group-hover:shadow-[0_0_8px_rgba(245,158,11,0.25)]"
+                        : "bg-white/[0.04] text-slate-300 border-white/10 group-hover:bg-gold/20 group-hover:text-gold-light group-hover:border-gold/50 group-hover:shadow-[0_0_8px_rgba(201,168,106,0.25)]"
                     )}
                     suppressHydrationWarning
                   >
@@ -345,7 +345,7 @@ export function DashboardSidebar({
         {/* Section 2: Atlas Intelligence (All site features) */}
         <div className="space-y-1 pt-2 border-t border-white/10">
           {!isCollapsed && (
-            <p className="px-2.5 pb-1 font-mono text-xs font-bold uppercase tracking-[0.25em] text-amber-400/90">
+            <p className="px-2.5 pb-1 font-mono text-xs font-bold uppercase tracking-[0.25em] text-gold-light/90">
               {"// Atlas Intelligence"}
             </p>
           )}
@@ -365,8 +365,8 @@ export function DashboardSidebar({
                     className={cn(
                       "flex h-10 w-10 mx-auto items-center justify-center rounded-xl transition-all duration-200",
                       isCurrent
-                        ? "bg-amber-500/20 border border-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.35)] text-white"
-                        : "border border-transparent text-slate-400 hover:bg-gradient-to-br hover:from-amber-500/20 hover:to-orange-500/15 hover:border-amber-500/50 hover:text-white hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+                        ? "bg-gold/20 border border-gold/60 shadow-[0_0_15px_rgba(201,168,106,0.35)] text-white"
+                        : "border border-transparent text-slate-400 hover:bg-gradient-to-br hover:from-gold/20 hover:to-orange-500/15 hover:border-gold/50 hover:text-white hover:shadow-[0_0_15px_rgba(201,168,106,0.3)]"
                     )}
                   >
                     <Icon
@@ -384,15 +384,15 @@ export function DashboardSidebar({
                   prefetch={true}
                   onClick={onCloseMobile}
                   className={cn(
-                    "group flex w-full items-center justify-between px-3 py-2.5 rounded-xl transition-all duration-200 text-left focus-visible:ring-2 focus-visible:ring-amber-500",
+                    "group flex w-full items-center justify-between px-3 py-2.5 rounded-xl transition-all duration-200 text-left focus-visible:ring-2 focus-visible:ring-gold",
                     isCurrent
-                      ? "bg-amber-500/15 border-l-2 border-amber-500 text-white shadow-[inset_0_0_12px_rgba(245,158,11,0.12)]"
-                      : "border-l-2 border-transparent hover:bg-gradient-to-r hover:from-amber-500/15 hover:via-orange-500/[0.08] hover:to-transparent hover:border-l-2 hover:border-amber-500 hover:shadow-[inset_0_0_15px_rgba(245,158,11,0.08)] text-slate-300 hover:text-white"
+                      ? "bg-gold/15 border-l-2 border-gold text-white shadow-[inset_0_0_12px_rgba(201,168,106,0.12)]"
+                      : "border-l-2 border-transparent hover:bg-gradient-to-r hover:from-gold/15 hover:via-orange-500/[0.08] hover:to-transparent hover:border-l-2 hover:border-gold hover:shadow-[inset_0_0_15px_rgba(201,168,106,0.08)] text-slate-300 hover:text-white"
                   )}
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <Icon
-                      className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]"
+                      className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(201,168,106,0.6)]"
                       style={{ color: feat.color }}
                     />
                     <div className="min-w-0">
@@ -406,10 +406,10 @@ export function DashboardSidebar({
                   </div>
 
                   <div className="flex items-center gap-1.5 ml-2">
-                    <span className="shrink-0 rounded-md bg-white/[0.04] border border-white/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-slate-300 group-hover:bg-amber-500/20 group-hover:text-amber-400 group-hover:border-amber-500/50 group-hover:shadow-[0_0_8px_rgba(245,158,11,0.25)] transition-all duration-200">
+                    <span className="shrink-0 rounded-md bg-white/[0.04] border border-white/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-slate-300 group-hover:bg-gold/20 group-hover:text-gold-light group-hover:border-gold/50 group-hover:shadow-[0_0_8px_rgba(201,168,106,0.25)] transition-all duration-200">
                       {feat.badge}
                     </span>
-                    <ChevronRight className="h-3 w-3 text-slate-500 opacity-0 group-hover:opacity-100 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all duration-200" />
+                    <ChevronRight className="h-3 w-3 text-slate-500 opacity-0 group-hover:opacity-100 group-hover:text-gold-light group-hover:translate-x-0.5 transition-all duration-200" />
                   </div>
                 </Link>
               );

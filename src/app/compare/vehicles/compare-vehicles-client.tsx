@@ -334,11 +334,11 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
       {/* OVERALL WINNER & RECOMMENDATION CARD */}
       {overallWinner && (
-        <div className="dark-panel relative overflow-hidden rounded-3xl border border-amber-500/30 bg-[#0a0f1d] bg-gradient-to-r from-amber-500/10 via-[#0a0f1d] to-[#12071a] p-6 sm:p-8 shadow-2xl">
+        <div className="dark-panel relative overflow-hidden rounded-3xl border border-gold/30 bg-[#0a0f1d] bg-gradient-to-r from-gold/10 via-[#0a0f1d] to-[#12071a] p-6 sm:p-8 shadow-2xl">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-xl">
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-black uppercase tracking-wider text-amber-300">
-                <Trophy className="h-3.5 w-3.5 text-amber-400" /> Official Recommendation & Overall Winner
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-gold-light/40 bg-gold-light/10 px-3 py-1 text-xs font-black uppercase tracking-wider text-amber-300">
+                <Trophy className="h-3.5 w-3.5 text-gold-light" /> Official Recommendation & Overall Winner
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white">
                 {overallWinner.vehicle.name} dominates with {overallWinner.total}/100 Performance Score
@@ -358,7 +358,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 />
               </div>
               <div>
-                <span className="block font-mono font-black text-2xl text-amber-400">{overallWinner.total} PTS</span>
+                <span className="block font-mono font-black text-2xl text-gold-light">{overallWinner.total} PTS</span>
                 <Link
                   href={`/vehicles/${overallWinner.vehicle.slug}`}
                   className="text-xs font-bold text-accent hover:underline flex items-center gap-1 mt-1"
@@ -380,7 +380,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
               key={v.id}
               className={cn(
                 "card-surface relative rounded-3xl border p-5 flex flex-col justify-between transition-all",
-                isWinner ? "border-amber-400/60 shadow-[0_0_24px_rgba(251,191,36,0.15)]" : "border-border"
+                isWinner ? "border-gold-light/60 shadow-[0_0_24px_rgba(251,191,36,0.15)]" : "border-border"
               )}
             >
               {/* Header with Slot Selector & Remove */}
@@ -394,7 +394,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                       Slot #{idx + 1}: Swap Vehicle ▾
                     </button>
                     {isWinner && (
-                      <span className="flex items-center gap-1 rounded-full bg-amber-400/20 text-amber-700 dark:text-amber-300 border border-amber-400/40 px-2 py-0.5 text-xs font-black uppercase">
+                      <span className="flex items-center gap-1 rounded-full bg-gold-light/20 text-gold-dark dark:text-amber-300 border border-gold-light/40 px-2 py-0.5 text-xs font-black uppercase">
                         <Trophy className="h-2.5 w-2.5" /> Best Choice
                       </span>
                     )}
@@ -444,11 +444,11 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   </div>
                 )}
                 {overallScores[idx] != null && (
-                  <div className="mt-2 flex items-center justify-between rounded-xl border border-amber-500/30 bg-amber-400/10 px-2.5 py-1.5">
-                    <span className="text-xs font-black uppercase tracking-wider text-amber-700 dark:text-amber-300 flex items-center gap-1">
+                  <div className="mt-2 flex items-center justify-between rounded-xl border border-gold/30 bg-gold-light/10 px-2.5 py-1.5">
+                    <span className="text-xs font-black uppercase tracking-wider text-gold-dark dark:text-amber-300 flex items-center gap-1">
                       <Trophy className="h-3 w-3" /> Overall Score
                     </span>
-                    <span className="font-mono font-black text-sm text-amber-400">
+                    <span className="font-mono font-black text-sm text-gold-light">
                       {overallScores[idx]}/100
                       {overallScoreLeader === idx && overallScores.length > 1 && (
                         <span className="ml-1.5 text-xs font-black uppercase text-emerald-400">Lead</span>
@@ -481,7 +481,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-muted-foreground flex items-center gap-1.5">
-                      <Timer className="h-3.5 w-3.5 text-amber-400" /> 0–60 Launch
+                      <Timer className="h-3.5 w-3.5 text-gold-light" /> 0–60 Launch
                     </span>
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{v.acceleration}s</span>

@@ -27,10 +27,10 @@ export default function CheatsPage() {
         </div>
 
         {/* Warning Notice */}
-        <div className="rounded-2xl border border-amber-500/40 dark:border-amber-800/40 bg-amber-500/10 dark:bg-amber-950/20 p-5 sm:p-6 flex items-start gap-4 text-amber-800 dark:text-amber-200">
-          <ShieldAlert className="w-6 h-6 shrink-0 text-amber-400 mt-0.5" />
+        <div className="rounded-2xl border border-gold/40 dark:border-amber-800/40 bg-gold/10 dark:bg-amber-950/20 p-5 sm:p-6 flex items-start gap-4 text-amber-800 dark:text-amber-200">
+          <ShieldAlert className="w-6 h-6 shrink-0 text-gold-light mt-0.5" />
           <div className="text-xs sm:text-sm leading-relaxed space-y-1">
-            <p className="font-bold text-amber-700 dark:text-amber-200 uppercase tracking-wider">
+            <p className="font-bold text-gold-dark dark:text-amber-200 uppercase tracking-wider">
               Warning: Trophies & Achievements Will Be Disabled
             </p>
             <p className="text-amber-800/80 dark:text-amber-200/80">

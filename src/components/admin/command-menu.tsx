@@ -263,7 +263,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                           "text-xs font-bold px-2 py-0.5 rounded-md uppercase border",
                           veh.verification === "verified"
                             ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                            : "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                            : "bg-gold/10 text-gold-light border-gold/30"
                         )}
                       >
                         {veh.verification}

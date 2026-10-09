@@ -145,7 +145,7 @@ export function Modal({
             )}
             {variant === "warning" && (
               <div
-                className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 shrink-0"
+                className="p-2 rounded-xl bg-gold/10 border border-gold/20 text-gold-light shrink-0"
                 aria-hidden="true"
               >
                 <AlertTriangle className="w-5 h-5" />

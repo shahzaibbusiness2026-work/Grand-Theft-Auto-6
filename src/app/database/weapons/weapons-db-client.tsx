@@ -84,10 +84,10 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {[
-                { label: "Total Weapons", value: "118", icon: Crosshair, color: "text-amber-500 dark:text-amber-400" },
+                { label: "Total Weapons", value: "118", icon: Crosshair, color: "text-gold dark:text-gold-light" },
                 { label: "Melee Weapons", value: "24", icon: Sword, color: "text-purple-400" },
                 { label: "Ranged Weapons", value: "94", icon: Target, color: "text-sky-400" },
-                { label: "Unlocked", value: "58 / 118", icon: Lock, color: "text-amber-500 dark:text-amber-400" },
+                { label: "Unlocked", value: "58 / 118", icon: Lock, color: "text-gold dark:text-gold-light" },
               ].map((s) => (
                 <div key={s.label} className="card-surface flex items-center gap-3 px-4 py-3">
                   <s.icon className={cn("h-5 w-5", s.color)} />

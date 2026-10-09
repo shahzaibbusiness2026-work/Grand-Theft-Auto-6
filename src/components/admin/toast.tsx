@@ -61,7 +61,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         {toasts.map((t) => {
           const typeIcons = {
             success: <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />,
-            warning: <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />,
+            warning: <AlertTriangle className="w-4 h-4 text-gold-light shrink-0" />,
             danger: <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />,
             info: <Info className="w-4 h-4 text-sky-400 shrink-0" />,
           };

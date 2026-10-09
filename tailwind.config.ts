@@ -51,6 +51,11 @@ const config: Config = {
           DEFAULT: "hsl(var(--coral))",
           accent: "#F3A398",
         },
+        gold: {
+          DEFAULT: "#C9A86A",
+          light: "#E3CFA3",
+          dark: "#A98850",
+        },
         neon: {
           cyan: "#00F0FF",
           cyber: "#00F0FF",
@@ -78,11 +83,11 @@ const config: Config = {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        "neon-magenta": "0 0 24px rgba(245, 158, 11, 0.35)",
+        "neon-magenta": "0 0 24px rgba(201, 168, 106, 0.35)",
         "neon-cyber": "0 0 20px rgba(0, 240, 255, 0.45)",
         "neon-cyan": "0 0 20px rgba(0, 240, 255, 0.4)",
-        "neon-amber": "0 0 20px rgba(245, 158, 11, 0.4)",
-        "neon-pink": "0 0 24px rgba(245, 158, 11, 0.35)",
+        "neon-amber": "0 0 20px rgba(201, 168, 106, 0.4)",
+        "neon-pink": "0 0 24px rgba(201, 168, 106, 0.35)",
         "neon-purple": "0 0 20px rgba(139, 92, 246, 0.35)",
         "card-dark": "0 8px 30px rgba(0, 0, 0, 0.45)",
         "card-light": "0 8px 30px rgba(15, 23, 42, 0.06)",

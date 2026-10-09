@@ -583,7 +583,7 @@ export default function AdminComparisonsPage() {
 
             <div className="p-4 rounded-xl bg-[#111622] border border-[#1C2436] flex items-start gap-3">
               <div className="w-9 h-9 rounded-lg bg-[#182030] border border-[#243048] flex items-center justify-center text-[#94A3B8] shrink-0">
-                <Sparkles className="w-4 h-4 text-amber-400" />
+                <Sparkles className="w-4 h-4 text-gold-light" />
               </div>
               <div className="space-y-0.5">
                 <p className="text-xs font-bold text-white">Highlight rules</p>

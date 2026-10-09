@@ -42,8 +42,8 @@ export const Badge: React.FC<BadgeProps> = ({
     },
     warning: {
       container:
-        "bg-amber-500/10 text-amber-400 border-amber-500/25",
-      dot: "bg-amber-400",
+        "bg-gold/10 text-gold-light border-gold/25",
+      dot: "bg-gold-light",
     },
     danger: {
       container:

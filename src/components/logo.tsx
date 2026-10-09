@@ -35,7 +35,7 @@ export function AppLogo({ className, href = "/dashboard" }: { className?: string
             stroke="currentColor"
             strokeWidth="1.4"
             strokeLinejoin="round"
-            className="text-amber-500 dark:text-amber-400"
+            className="text-gold dark:text-gold-light"
           />
         </svg>
       </span>
@@ -43,7 +43,7 @@ export function AppLogo({ className, href = "/dashboard" }: { className?: string
         <span className="block font-display text-lg font-black tracking-wide text-foreground">
           GTA 6
         </span>
-        <span className="block text-xs font-bold uppercase tracking-[0.4em] text-amber-500 dark:text-amber-400">
+        <span className="block text-xs font-bold uppercase tracking-[0.4em] text-gold dark:text-gold-light">
           Atlas
         </span>
       </span>

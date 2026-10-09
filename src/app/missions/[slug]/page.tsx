@@ -146,7 +146,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Cash Payout</span>
-                <span className="font-mono text-sm font-black text-amber-400">{mission.cashRewardDisplay}</span>
+                <span className="font-mono text-sm font-black text-gold-light">{mission.cashRewardDisplay}</span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Duration</span>
@@ -170,7 +170,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             <ul className="mt-4 space-y-3">
               {mission.objectives.map((obj, i) => (
                 <li key={obj} className="flex items-start gap-3 rounded-xl border border-border bg-muted/60 p-3 text-xs text-slate-700 dark:text-slate-200">
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/20 font-bold text-amber-400 text-xs">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold/20 font-bold text-gold-light text-xs">
                     {i + 1}
                   </span>
                   <span className="font-medium pt-0.5">{obj}</span>
@@ -198,12 +198,12 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             {/* Choices */}
             <div className="card-surface p-6 rounded-3xl border border-border">
               <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-                <Split className="h-4 w-4 text-amber-400" /> Approaches & Branching Choices
+                <Split className="h-4 w-4 text-gold-light" /> Approaches & Branching Choices
               </h2>
               <div className="mt-4 space-y-2.5">
                 {mission.choices.map((c, i) => (
                   <div key={c} className="rounded-xl border border-border bg-muted/60 p-3 text-xs text-muted-foreground">
-                    <span className="block text-xs uppercase font-bold text-amber-400 mb-1">
+                    <span className="block text-xs uppercase font-bold text-gold-light mb-1">
                       Approach #{i + 1}:
                     </span>
                     <span>{c}</span>

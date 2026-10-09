@@ -137,7 +137,7 @@ export default function AdminSubscribersPage() {
           className="w-full flex items-center justify-between px-5 py-4 text-left"
         >
           <span className="flex items-center gap-2.5">
-            <Megaphone className="w-4 h-4 text-amber-400" />
+            <Megaphone className="w-4 h-4 text-gold-light" />
             <span className="text-sm font-bold text-white">Send launch-day announcement</span>
           </span>
           <span className="text-xs text-[#64748B]">{showBroadcast ? "Hide" : "Compose"}</span>

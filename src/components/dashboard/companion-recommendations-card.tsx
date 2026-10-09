@@ -49,7 +49,7 @@ export function CompanionRecommendationsCard() {
       <div className="flex items-start justify-between pb-3 border-b border-white/5">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-200">
-            <Sparkles className="h-4 w-4 text-amber-400" />
+            <Sparkles className="h-4 w-4 text-gold-light" />
             <span>RECOMMENDED FOR YOU</span>
           </div>
           <p className="text-xs text-slate-400 mt-0.5">

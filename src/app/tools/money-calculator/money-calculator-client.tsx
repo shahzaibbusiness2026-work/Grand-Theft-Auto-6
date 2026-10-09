@@ -89,7 +89,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
       {/* Top Presets Bar */}
       <div className="card-surface p-4 rounded-2xl border border-border flex flex-wrap items-center gap-2">
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mr-2 flex items-center gap-1">
-          <Sparkles className="h-3.5 w-3.5 text-amber-400" /> Quick Goal Presets:
+          <Sparkles className="h-3.5 w-3.5 text-gold-light" /> Quick Goal Presets:
         </span>
         {PRESETS.map((p) => (
           <button
@@ -159,7 +159,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
           <div>
             <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
               <span>Average Income Per Mission / Heist Cut ($)</span>
-              <span className="font-mono text-amber-400 font-bold">${incomePerMission.toLocaleString()}</span>
+              <span className="font-mono text-gold-light font-bold">${incomePerMission.toLocaleString()}</span>
             </label>
             <input
               type="number"
@@ -191,7 +191,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
           <div>
             <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
               <span>Daily Playing Commitment (Hours/Day)</span>
-              <span className="font-mono text-amber-400 font-bold">{hoursPerDay} hrs/day</span>
+              <span className="font-mono text-gold-light font-bold">{hoursPerDay} hrs/day</span>
             </label>
             <input
               type="range"
@@ -200,7 +200,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               step={0.5}
               value={hoursPerDay}
               onChange={(e) => setHoursPerDay(Number(e.target.value))}
-              className="w-full accent-amber-500"
+              className="w-full accent-gold"
             />
             <div className="flex justify-between text-xs text-muted-foreground mt-1 font-mono">
               <span>30m Casual</span>
@@ -251,7 +251,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               </div>
 
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                <Calendar className="h-4 w-4 text-amber-400 mx-auto mb-1" />
+                <Calendar className="h-4 w-4 text-gold-light mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-foreground">{calculations.daysNeeded}</span>
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Playing Days</span>
               </div>
@@ -315,9 +315,9 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
             <Info className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> How the Formula Works
           </h3>
           <p className="text-xs leading-relaxed text-muted-foreground">
-            The remaining cash needed is calculated via <code className="bg-muted/80 px-1.5 py-0.5 rounded text-amber-400">Target - Current Cash</code>.
+            The remaining cash needed is calculated via <code className="bg-muted/80 px-1.5 py-0.5 rounded text-gold-light">Target - Current Cash</code>.
             Total grinding hours equal <code className="bg-muted/80 px-1.5 py-0.5 rounded text-cyan-600 dark:text-[#00F0FF]">Remaining / Hourly Earnings</code>.
-            Real-world days needed equal <code className="bg-muted/80 px-1.5 py-0.5 rounded text-amber-400">Hours Needed / Daily Playtime</code>.
+            Real-world days needed equal <code className="bg-muted/80 px-1.5 py-0.5 rounded text-gold-light">Hours Needed / Daily Playtime</code>.
           </p>
         </div>
 

@@ -26,16 +26,16 @@ const ACTIVITIES: ActivityItem[] = [
     title: "Found: Hidden Stash",
     time: "5 hours ago",
     icon: Package,
-    iconBg: "bg-amber-500/15 border-amber-500/30",
-    iconColor: "text-amber-400",
+    iconBg: "bg-gold/15 border-gold/30",
+    iconColor: "text-gold-light",
   },
   {
     id: "act-3",
     title: "Completed: The Maze (Side Mission)",
     time: "1 day ago",
     icon: Flag,
-    iconBg: "bg-amber-500/15 border-amber-500/30",
-    iconColor: "text-amber-400",
+    iconBg: "bg-gold/15 border-gold/30",
+    iconColor: "text-gold-light",
   },
   {
     id: "act-4",
@@ -66,7 +66,7 @@ export function CompanionActivityCard() {
         </div>
         <Link
           href="/tracker"
-          className="flex items-center gap-1 text-xs font-semibold text-amber-400 transition-colors hover:text-amber-300"
+          className="flex items-center gap-1 text-xs font-semibold text-gold-light transition-colors hover:text-amber-300"
         >
           <span>View All</span>
           <ArrowRight className="h-3.5 w-3.5" />

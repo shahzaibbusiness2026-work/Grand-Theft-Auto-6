@@ -228,7 +228,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
       case "Vehicle":
         return <Car className="h-4 w-4 text-accent" />;
       case "Weapon":
-        return <Crosshair className="h-4 w-4 text-amber-400" />;
+        return <Crosshair className="h-4 w-4 text-gold-light" />;
       case "Location":
         return <MapPin className="h-4 w-4 text-emerald-400" />;
       case "Property":

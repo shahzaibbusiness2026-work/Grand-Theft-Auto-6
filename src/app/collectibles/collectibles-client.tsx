@@ -114,9 +114,9 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
             Found / Collected
           </span>
         </div>
-        <div className="card-carbon p-4 text-center border-amber-500/20 bg-amber-950/10">
-          <span className="font-display text-2xl sm:text-3xl font-black text-amber-400">{totalCount - collectedCount}</span>
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-400/80 block mt-1">
+        <div className="card-carbon p-4 text-center border-gold/20 bg-amber-950/10">
+          <span className="font-display text-2xl sm:text-3xl font-black text-gold-light">{totalCount - collectedCount}</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-gold-light/80 block mt-1">
             Remaining To Find
           </span>
         </div>
@@ -178,7 +178,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 onClick={() => setFilterStatus("uncollected")}
                 className={cn(
                   "px-3 py-1 rounded-lg font-medium transition-colors",
-                  filterStatus === "uncollected" ? "bg-amber-500/20 text-amber-700 dark:text-amber-300" : "text-muted-foreground hover:text-foreground"
+                  filterStatus === "uncollected" ? "bg-gold/20 text-gold-dark dark:text-amber-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Pending
@@ -315,8 +315,8 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                     </p>
 
                     <div className="p-2.5 rounded-lg bg-muted/50 border border-border text-xs font-mono space-y-1">
-                      <div className="text-amber-400 flex items-center gap-1">
-                        <Trophy className="h-3 w-3 text-amber-400 flex-shrink-0" />
+                      <div className="text-gold-light flex items-center gap-1">
+                        <Trophy className="h-3 w-3 text-gold-light flex-shrink-0" />
                         <span className="truncate">Reward: {item.reward}</span>
                       </div>
                       <div className="text-muted-foreground truncate">

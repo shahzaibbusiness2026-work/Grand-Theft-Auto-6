@@ -38,7 +38,7 @@ export default function RankingsIndexPage() {
       <div className="container-site py-8">
         {/* HERO */}
         <div className="mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-gold-dark dark:text-gold-light mb-3">
             <Trophy className="h-3.5 w-3.5" aria-hidden="true" /> Auto-Generated Rankings
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">

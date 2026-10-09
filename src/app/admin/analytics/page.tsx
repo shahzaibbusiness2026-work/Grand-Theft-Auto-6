@@ -157,7 +157,7 @@ export default function AdminAnalyticsPage() {
         <div className="p-5 rounded-xl border border-[#1C2436] bg-[#111622] space-y-2">
           <div className="flex items-center justify-between text-[#94A3B8]">
             <span className="text-xs font-medium">Tool Sessions</span>
-            <Zap className="w-4 h-4 text-amber-400" />
+            <Zap className="w-4 h-4 text-gold-light" />
           </div>
           <p className="text-2xl font-bold text-white tracking-tight">68,900</p>
           <p className="text-xs text-emerald-400 font-medium flex items-center gap-1">
@@ -168,8 +168,8 @@ export default function AdminAnalyticsPage() {
       </div>
 
       {/* Search Queries Callout Card (Image 13) */}
-      <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5 space-y-3">
-        <div className="flex items-center gap-2 text-amber-400">
+      <div className="rounded-xl border border-gold/20 bg-gold/5 p-5 space-y-3">
+        <div className="flex items-center gap-2 text-gold-light">
           <AlertTriangle className="w-4 h-4" />
           <h2 className="text-xs font-bold uppercase tracking-wider">
             Search Trends & Content Gaps

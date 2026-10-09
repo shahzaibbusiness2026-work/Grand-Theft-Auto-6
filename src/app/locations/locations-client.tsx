@@ -78,7 +78,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
       case "Low":
         return "text-emerald-400 bg-emerald-500/10 border-emerald-500/30";
       case "Medium":
-        return "text-amber-400 bg-amber-500/10 border-amber-500/30";
+        return "text-gold-light bg-gold/10 border-gold/30";
       case "High":
         return "text-orange-400 bg-orange-500/10 border-orange-500/30";
       case "Restricted Area":
@@ -291,7 +291,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
 
                       {(item.relatedWeapons?.length || 0) > 0 && (
                         <div className="flex items-center gap-1.5 text-muted-foreground truncate">
-                          <Crosshair className="h-3 w-3 text-amber-400 flex-shrink-0" />
+                          <Crosshair className="h-3 w-3 text-gold-light flex-shrink-0" />
                           <span className="truncate">
                             Armory: {item.relatedWeapons?.join(", ")}
                           </span>

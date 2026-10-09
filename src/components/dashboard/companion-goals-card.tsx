@@ -32,10 +32,10 @@ export function CompanionGoalsCard() {
       {/* Header with timer badge */}
       <div className="flex items-center justify-between pb-3 border-b border-white/5">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-200">
-          <Target className="h-4 w-4 text-amber-400" />
+          <Target className="h-4 w-4 text-gold-light" />
           <span>TODAY&apos;S GOALS</span>
         </div>
-        <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-400">
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-gold-light">
           <Clock className="h-3 w-3" />
           <span>12h 34m left</span>
         </div>
@@ -79,9 +79,9 @@ export function CompanionGoalsCard() {
       </div>
 
       {/* Reward Section Banner */}
-      <div className="flex items-center justify-between rounded-2xl border border-amber-500/25 bg-amber-500/[0.08] p-3 shadow-inner">
+      <div className="flex items-center justify-between rounded-2xl border border-gold/25 bg-gold/[0.08] p-3 shadow-inner">
         <div className="flex items-center gap-2.5">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-500 text-slate-950 shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gold text-slate-950 shadow-[0_0_12px_rgba(201,168,106,0.5)]">
             <Star className="h-4 w-4 fill-current" />
           </div>
           <div className="leading-tight">

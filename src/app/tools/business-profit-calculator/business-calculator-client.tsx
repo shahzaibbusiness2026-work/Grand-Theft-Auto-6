@@ -124,7 +124,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
       <div className="card-surface p-4 rounded-2xl border border-border flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mr-2 flex items-center gap-1">
-            <Sparkles className="h-3.5 w-3.5 text-amber-400" /> Presets:
+            <Sparkles className="h-3.5 w-3.5 text-gold-light" /> Presets:
           </span>
           {BUSINESS_PRESETS.map((p) => (
             <button
@@ -187,7 +187,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
             <div>
               <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                 <span>Renovation & Security Upgrades ($)</span>
-                <span className="font-mono text-amber-400 font-bold">${bizA.upgradeCost.toLocaleString()}</span>
+                <span className="font-mono text-gold-light font-bold">${bizA.upgradeCost.toLocaleString()}</span>
               </label>
               <input
                 type="number"
@@ -240,7 +240,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 step={0.5}
                 value={bizA.hoursPerDay}
                 onChange={(e) => setBizA({ ...bizA, hoursPerDay: Number(e.target.value) })}
-                className="w-full accent-amber-500"
+                className="w-full accent-gold"
               />
             </div>
           </div>
@@ -270,8 +270,8 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
             </div>
 
             <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-center">
-                <Clock className="h-4 w-4 text-amber-400 mx-auto mb-1" />
+              <div className="rounded-2xl border border-gold/30 bg-gold/10 p-3.5 text-center">
+                <Clock className="h-4 w-4 text-gold-light mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-amber-300">{metricsA.breakEvenHours} hrs</span>
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Break-Even ({metricsA.breakEvenDays} days)</span>
               </div>
@@ -319,7 +319,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
               <div>
                 <label className="block text-xs font-bold text-muted-foreground mb-1 flex justify-between">
                   <span>Upgrades ($)</span>
-                  <span className="font-mono text-amber-400 font-bold">${bizB.upgradeCost.toLocaleString()}</span>
+                  <span className="font-mono text-gold-light font-bold">${bizB.upgradeCost.toLocaleString()}</span>
                 </label>
                 <input
                   type="number"
@@ -399,8 +399,8 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
               </div>
 
               <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-center">
-                  <Clock className="h-4 w-4 text-amber-400 mx-auto mb-1" />
+                <div className="rounded-2xl border border-gold/30 bg-gold/10 p-3.5 text-center">
+                  <Clock className="h-4 w-4 text-gold-light mx-auto mb-1" />
                   <span className="font-mono text-lg font-black text-amber-300">{metricsB.breakEvenHours} hrs</span>
                   <span className="block text-xs uppercase font-bold text-muted-foreground">Break-Even ({metricsB.breakEvenDays} days)</span>
                 </div>

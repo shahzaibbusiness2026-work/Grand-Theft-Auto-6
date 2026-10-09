@@ -98,11 +98,11 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
             Confirmed Properties
           </span>
         </div>
-        <div className="card-carbon p-4 text-center border-amber-500/20 bg-amber-950/10">
-          <span className="font-display text-2xl sm:text-3xl font-black text-amber-400">
+        <div className="card-carbon p-4 text-center border-gold/20 bg-amber-950/10">
+          <span className="font-display text-2xl sm:text-3xl font-black text-gold-light">
             $3.5M
           </span>
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-400/80 block mt-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-gold-light/80 block mt-1">
             Top Luxury Price
           </span>
         </div>
@@ -269,7 +269,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                     </div>
 
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                      <div className="text-lg font-display font-black text-amber-400 drop-shadow-md">
+                      <div className="text-lg font-display font-black text-gold-light drop-shadow-md">
                         {item.priceDisplay}
                       </div>
                       <ConfidenceBadge confidence={item.confidence} source={item.source} size="sm" />
@@ -392,7 +392,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                   <div className="space-y-2 bg-muted/50 p-3 rounded-xl border border-border">
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">Price:</span>
-                      <span className="text-amber-400 font-bold">{p.priceDisplay}</span>
+                      <span className="text-gold-light font-bold">{p.priceDisplay}</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">District:</span>

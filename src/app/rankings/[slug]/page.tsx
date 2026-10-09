@@ -144,7 +144,7 @@ export default async function RankingDetailPage({
                   <span
                     className={
                       "font-display text-xl font-black w-12 text-center shrink-0 " +
-                      (i < 3 ? "text-amber-500 dark:text-amber-400" : "text-muted-foreground")
+                      (i < 3 ? "text-gold dark:text-gold-light" : "text-muted-foreground")
                     }
                   >
                     {medal}

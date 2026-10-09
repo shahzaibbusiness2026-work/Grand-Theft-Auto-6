@@ -388,9 +388,9 @@ export function LoadoutClient() {
             </div>
 
             {/* Slot 4: Heavy / Support */}
-            <div className="card-carbon p-4 space-y-3 border-amber-500/20">
+            <div className="card-carbon p-4 space-y-3 border-gold/20">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-gold-light">
                   Slot 4: Heavy / Tactical Support
                 </span>
                 <span className="text-xs font-mono text-muted-foreground">{heavyWeapon.klass}</span>
@@ -411,7 +411,7 @@ export function LoadoutClient() {
               <div className="p-3 rounded-lg bg-background/80 border border-border text-xs font-mono space-y-1">
                 <div className="flex justify-between text-muted-foreground">
                   <span>Stopping Power:</span>
-                  <span className="text-amber-400 font-bold">{heavyWeapon.damage} pts</span>
+                  <span className="text-gold-light font-bold">{heavyWeapon.damage} pts</span>
                 </div>
                 <div className="flex justify-between text-muted-foreground">
                   <span>Range:</span>
@@ -479,12 +479,12 @@ export function LoadoutClient() {
               <div>
                 <div className="flex justify-between mb-1">
                   <span className="text-muted-foreground flex items-center gap-1">
-                    <Zap className="h-3.5 w-3.5 text-amber-400" /> Precision
+                    <Zap className="h-3.5 w-3.5 text-gold-light" /> Precision
                   </span>
-                  <span className="text-amber-400 font-bold">{ratings.precision} / 100</span>
+                  <span className="text-gold-light font-bold">{ratings.precision} / 100</span>
                 </div>
                 <div className="h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="h-full bg-amber-400 rounded-full transition-all" style={{ width: `${ratings.precision}%` }} />
+                  <div className="h-full bg-gold-light rounded-full transition-all" style={{ width: `${ratings.precision}%` }} />
                 </div>
               </div>
 

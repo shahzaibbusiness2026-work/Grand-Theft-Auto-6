@@ -33,7 +33,7 @@ export function CompanionHero({
       label: "Weapons",
       value: siteStats?.totalWeapons ?? "—",
       icon: Crosshair,
-      color: "text-amber-400",
+      color: "text-gold-light",
     },
     {
       label: "Articles",
@@ -62,7 +62,7 @@ export function CompanionHero({
         <div className="absolute inset-0 bg-gradient-to-r from-[#070b14] via-[#070b14]/85 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#070b14] via-transparent to-[#070b14]/40" />
         {/* Ambient neon flares */}
-        <div className="absolute -top-10 left-1/3 h-64 w-64 rounded-full bg-amber-500/15 blur-[120px]" />
+        <div className="absolute -top-10 left-1/3 h-64 w-64 rounded-full bg-gold/15 blur-[120px]" />
         <div className="absolute -bottom-10 right-1/4 h-64 w-64 rounded-full bg-[#00F0FF]/15 blur-[120px]" />
       </div>
 
@@ -89,7 +89,7 @@ export function CompanionHero({
           <div className="pt-2">
             <Link
               href="/missions"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 px-6 py-3 font-display text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_24px_rgba(245,158,11,0.35)] transition-all duration-300 hover:brightness-105 hover:shadow-[0_0_32px_rgba(245,158,11,0.55)] hover:scale-[1.02] active:scale-95"
+              className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 font-display text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_24px_rgba(201,168,106,0.35)] transition-all duration-300 hover:brightness-105 hover:shadow-[0_0_32px_rgba(201,168,106,0.55)] hover:scale-[1.02] active:scale-95"
             >
               <span>Continue Your Journey</span>
               <ArrowRight className="h-4 w-4 text-slate-950" />
@@ -143,7 +143,7 @@ export function CompanionHero({
           {/* Neon cursive script & watermark */}
           <div className="flex flex-col items-start lg:items-end select-none">
             <span
-              className="text-2xl sm:text-3xl font-serif italic text-amber-400 drop-shadow-[0_0_12px_rgba(245,158,11,0.7)]"
+              className="text-2xl sm:text-3xl font-serif italic text-gold-light drop-shadow-[0_0_12px_rgba(201,168,106,0.7)]"
               style={{ fontFamily: "'Brush Script MT', 'Pacifico', cursive, sans-serif" }}
             >
               Bigger Brighter Wilder

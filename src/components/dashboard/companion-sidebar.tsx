@@ -28,9 +28,9 @@ interface CompanionSidebarProps {
 }
 
 const NAV_ITEMS = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutGrid, color: "text-amber-400 group-hover:text-amber-300 light:text-amber-600 bg-amber-500/10 border-amber-500/25" },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutGrid, color: "text-gold-light group-hover:text-amber-300 light:text-gold-dark bg-gold/10 border-gold/25" },
   { href: "/map", label: "Interactive Map", icon: MapPin, color: "text-cyan-400 group-hover:text-cyan-300 light:text-cyan-600 bg-cyan-500/10 border-cyan-500/25" },
-  { href: "/vehicles", label: "Vehicles", icon: Car, color: "text-amber-400 group-hover:text-amber-300 light:text-amber-600 bg-amber-500/10 border-amber-500/25" },
+  { href: "/vehicles", label: "Vehicles", icon: Car, color: "text-gold-light group-hover:text-amber-300 light:text-gold-dark bg-gold/10 border-gold/25" },
   { href: "/weapons", label: "Weapons", icon: Crosshair, color: "text-rose-400 group-hover:text-rose-300 light:text-rose-600 bg-rose-500/10 border-rose-500/25" },
   { href: "/missions", label: "Missions", icon: Target, color: "text-emerald-400 group-hover:text-emerald-300 light:text-emerald-600 bg-emerald-500/10 border-emerald-500/25" },
   { href: "/properties", label: "Properties", icon: Building2, color: "text-purple-400 group-hover:text-purple-300 light:text-purple-600 bg-purple-500/10 border-purple-500/25" },
@@ -83,7 +83,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
               className={cn(
                 "group flex items-center gap-3 rounded-xl px-2.5 py-2 text-xs font-semibold tracking-wide transition-all duration-200",
                 isActive
-                  ? "bg-amber-500/20 text-white font-bold shadow-[0_0_16px_rgba(245,158,11,0.25)] border border-amber-500/40"
+                  ? "bg-gold/20 text-white font-bold shadow-[0_0_16px_rgba(201,168,106,0.25)] border border-gold/40"
                   : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-100"
               )}
             >
@@ -91,7 +91,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
                 className={cn(
                   "flex h-7 w-7 items-center justify-center rounded-lg border transition-all duration-200 shrink-0",
                   isActive
-                    ? "bg-amber-500/30 text-amber-400 border-amber-500/50 shadow-[0_0_10px_rgba(245,158,11,0.4)] scale-105"
+                    ? "bg-gold/30 text-gold-light border-gold/50 shadow-[0_0_10px_rgba(201,168,106,0.4)] scale-105"
                     : cn(
                         "group-hover:scale-110 group-hover:shadow-[0_0_8px_rgba(255,255,255,0.15)]",
                         item.color
@@ -109,9 +109,9 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
       {/* Bottom Section: GO PRO & Neon Art */}
       <div className="p-3.5 space-y-4">
         {/* GO PRO Card */}
-        <div className="dark-panel relative overflow-hidden rounded-2xl border border-amber-500/25 bg-gradient-to-b from-[#131c2e]/90 to-[#0c1220]/95 p-3.5 shadow-xl backdrop-blur-md">
+        <div className="dark-panel relative overflow-hidden rounded-2xl border border-gold/25 bg-gradient-to-b from-[#131c2e]/90 to-[#0c1220]/95 p-3.5 shadow-xl backdrop-blur-md">
           <div className="flex items-center gap-2 mb-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-500/20 text-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.3)]">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gold/20 text-gold-light shadow-[0_0_10px_rgba(201,168,106,0.3)]">
               <Crown className="h-4 w-4" />
             </div>
             <span className="font-display text-sm font-extrabold tracking-wider text-white">
@@ -136,7 +136,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
           <Link
             href="/pricing"
             onClick={onItemClick}
-            className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 py-2 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_4px_16px_rgba(245,158,11,0.35)] transition-all duration-200 hover:brightness-105 active:scale-95"
+            className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-gold py-2 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_4px_16px_rgba(201,168,106,0.35)] transition-all duration-200 hover:brightness-105 active:scale-95"
           >
             <span>Upgrade Now</span>
             <ArrowRight className="h-3.5 w-3.5 text-slate-950" />
@@ -146,20 +146,20 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
         {/* Neon script & palm decoration */}
         <div className="relative flex flex-col items-center justify-center py-2 select-none pointer-events-none opacity-90 overflow-hidden">
           <svg
-            className="absolute -bottom-4 right-1 h-20 w-20 text-amber-500/[0.08]"
+            className="absolute -bottom-4 right-1 h-20 w-20 text-gold/[0.08]"
             viewBox="0 0 24 24"
             fill="currentColor"
           >
             <path d="M12 2C12 2 10.5 5.5 8 8C5.5 10.5 2 12 2 12C2 12 5.5 13.5 8 16C10.5 18.5 12 22 12 22C12 22 13.5 18.5 16 16C18.5 13.5 22 12 22 12C22 12 18.5 10.5 16 8C13.5 5.5 12 2 12 2Z" />
           </svg>
           <span
-            className="font-serif italic text-base tracking-wide text-amber-400 drop-shadow-[0_0_10px_rgba(245,158,11,0.7)]"
+            className="font-serif italic text-base tracking-wide text-gold-light drop-shadow-[0_0_10px_rgba(201,168,106,0.7)]"
             style={{ fontFamily: "'Brush Script MT', 'Pacifico', cursive, sans-serif" }}
           >
             Vice City
           </span>
           <span
-            className="font-serif italic text-lg tracking-wider text-amber-400 -mt-1 drop-shadow-[0_0_12px_rgba(245,158,11,0.8)]"
+            className="font-serif italic text-lg tracking-wider text-gold-light -mt-1 drop-shadow-[0_0_12px_rgba(201,168,106,0.8)]"
             style={{ fontFamily: "'Brush Script MT', 'Pacifico', cursive, sans-serif" }}
           >
             Lives Again

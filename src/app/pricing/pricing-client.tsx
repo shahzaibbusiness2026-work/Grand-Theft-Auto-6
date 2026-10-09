@@ -152,7 +152,7 @@ export function PricingClient() {
           <div className="space-y-6">
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary mb-1">
-                <Crown className="h-4 w-4 text-amber-400" /> Premium VIP Membership
+                <Crown className="h-4 w-4 text-gold-light" /> Premium VIP Membership
               </div>
               <h3 className="font-display text-2xl font-black text-white">Vice City Pro</h3>
               <p className="text-xs text-muted-foreground mt-1">
@@ -211,7 +211,7 @@ export function PricingClient() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-muted/50 backdrop-blur-md">
           <div className="card-carbon p-8 max-w-md w-full border-primary/40 space-y-6 text-center animate-fade-in shadow-2xl">
             <div className="h-16 w-16 rounded-full bg-primary/20 text-primary flex items-center justify-center mx-auto shadow-lg shadow-primary/30">
-              <Crown className="h-8 w-8 text-amber-400" />
+              <Crown className="h-8 w-8 text-gold-light" />
             </div>
 
             <div className="space-y-2">

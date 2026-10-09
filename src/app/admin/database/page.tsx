@@ -233,7 +233,7 @@ export default function AdminDatabasePage() {
                     </span>
                   )}
                   {ast.status === "unconfirmed" && (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-950/60 border border-amber-800/40 text-amber-400">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-950/60 border border-amber-800/40 text-gold-light">
                       <HelpCircle className="w-3 h-3" /> Unconfirmed
                     </span>
                   )}

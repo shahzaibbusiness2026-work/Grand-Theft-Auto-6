@@ -303,11 +303,11 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
 
       {/* OVERALL WINNER CARD */}
       {overallWinner && (
-        <div className="dark-panel relative overflow-hidden rounded-3xl border border-amber-500/30 bg-[#0a0f1d] bg-gradient-to-r from-amber-500/10 via-[#0e0717] to-[#040810] p-6 sm:p-8 shadow-2xl">
+        <div className="dark-panel relative overflow-hidden rounded-3xl border border-gold/30 bg-[#0a0f1d] bg-gradient-to-r from-gold/10 via-[#0e0717] to-[#040810] p-6 sm:p-8 shadow-2xl">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-xl">
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-black uppercase tracking-wider text-amber-300">
-                <Trophy className="h-3.5 w-3.5 text-amber-400" /> Ballistic Recommendation & Highest Combat Rating
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-gold-light/40 bg-gold-light/10 px-3 py-1 text-xs font-black uppercase tracking-wider text-amber-300">
+                <Trophy className="h-3.5 w-3.5 text-gold-light" /> Ballistic Recommendation & Highest Combat Rating
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white">
                 {overallWinner.weapon.name} leads with {overallWinner.total}/100 Rating
@@ -323,7 +323,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                 <img src={overallWinner.weapon.img} alt={overallWinner.weapon.name} className="max-h-full max-w-full object-contain mix-blend-lighten" />
               </div>
               <div>
-                <span className="block font-mono font-black text-2xl text-amber-400">{overallWinner.total} PTS</span>
+                <span className="block font-mono font-black text-2xl text-gold-light">{overallWinner.total} PTS</span>
                 <Link href={`/weapons/${overallWinner.weapon.slug}`} className="text-xs font-bold text-accent hover:underline flex items-center gap-1 mt-1">
                   Full Specs <ChevronRight className="h-3 w-3" />
                 </Link>
@@ -342,7 +342,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
               key={w.id}
               className={cn(
                 "card-surface relative rounded-3xl border p-5 flex flex-col justify-between transition-all",
-                isWinner ? "border-amber-400/60 shadow-[0_0_24px_rgba(251,191,36,0.15)]" : "border-border"
+                isWinner ? "border-gold-light/60 shadow-[0_0_24px_rgba(251,191,36,0.15)]" : "border-border"
               )}
             >
               <div>
@@ -391,11 +391,11 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                   </div>
                 )}
                 {overallScores[idx] != null && (
-                  <div className="mt-2 flex items-center justify-between rounded-xl border border-amber-500/30 bg-amber-400/10 px-2.5 py-1.5">
-                    <span className="text-xs font-black uppercase tracking-wider text-amber-700 dark:text-amber-300 flex items-center gap-1">
+                  <div className="mt-2 flex items-center justify-between rounded-xl border border-gold/30 bg-gold-light/10 px-2.5 py-1.5">
+                    <span className="text-xs font-black uppercase tracking-wider text-gold-dark dark:text-amber-300 flex items-center gap-1">
                       <Trophy className="h-3 w-3" /> Overall Score
                     </span>
-                    <span className="font-mono font-black text-sm text-amber-400">
+                    <span className="font-mono font-black text-sm text-gold-light">
                       {overallScores[idx]}/100
                       {overallScoreLeader === idx && overallScores.length > 1 && (
                         <span className="ml-1.5 text-xs font-black uppercase text-emerald-400">Lead</span>

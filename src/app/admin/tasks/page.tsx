@@ -222,7 +222,7 @@ export default function AdminTasksPage() {
 
       {/* Active Filters Reset Bar */}
       {hasActiveFilters && (
-        <div className="flex items-center justify-between px-3.5 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-medium">
+        <div className="flex items-center justify-between px-3.5 py-2 rounded-xl bg-gold/10 border border-gold/20 text-amber-300 text-xs font-medium">
           <div className="flex items-center gap-2">
             <Filter className="w-3.5 h-3.5" />
             <span>
@@ -236,7 +236,7 @@ export default function AdminTasksPage() {
             size="sm"
             onClick={resetFilters}
             leftIcon={<RotateCcw className="w-3 h-3" />}
-            className="text-amber-300 hover:text-amber-200 hover:bg-amber-500/20 h-7 px-2 text-xs"
+            className="text-amber-300 hover:text-amber-200 hover:bg-gold/20 h-7 px-2 text-xs"
           >
             Reset Filters
           </Button>

@@ -152,8 +152,8 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                     {collectible.requirements}
                   </p>
                 </div>
-                <div className="p-4 rounded-xl bg-card border border-amber-500/20 space-y-1">
-                  <span className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1">
+                <div className="p-4 rounded-xl bg-card border border-gold/20 space-y-1">
+                  <span className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-1">
                     <Trophy className="h-3 w-3" /> Reward Upon Collection
                   </span>
                   <p className="text-xs text-amber-300 font-mono font-semibold">

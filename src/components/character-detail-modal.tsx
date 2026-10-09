@@ -102,11 +102,11 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                     "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider backdrop-blur-md shadow-sm",
                     character.status === "Active" 
                       ? "border-emerald-500/40 bg-emerald-950/60 text-emerald-400"
-                      : "border-amber-500/40 bg-amber-950/60 text-amber-400"
+                      : "border-gold/40 bg-amber-950/60 text-gold-light"
                   )}>
                     <span className={cn(
                       "w-1.5 h-1.5 rounded-full",
-                      character.status === "Active" ? "bg-emerald-400 animate-pulse" : "bg-amber-400"
+                      character.status === "Active" ? "bg-emerald-400 animate-pulse" : "bg-gold-light"
                     )} />
                     {character.status}
                   </span>
@@ -187,7 +187,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
 
                 {character.perk && (
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
-                    <Zap className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <Zap className="w-4 h-4 text-gold-light shrink-0 mt-0.5" />
                     <div>
                       <span className="text-xs font-mono uppercase text-muted-foreground block">Special Perk / Ability</span>
                       <strong className="text-xs font-semibold text-foreground">{character.perk}</strong>

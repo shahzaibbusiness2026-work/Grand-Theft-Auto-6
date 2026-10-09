@@ -27,10 +27,10 @@ export default function AboutPage() {
         </div>
 
         {/* Disclaimer Notice */}
-        <div className="rounded-2xl border border-amber-500/40 dark:border-amber-800/40 bg-amber-500/10 dark:bg-amber-950/20 p-5 sm:p-6 flex items-start gap-4 text-amber-800 dark:text-amber-200">
-          <AlertTriangle className="w-5 h-5 shrink-0 text-amber-500 dark:text-amber-400 mt-0.5" />
+        <div className="rounded-2xl border border-gold/40 dark:border-amber-800/40 bg-gold/10 dark:bg-amber-950/20 p-5 sm:p-6 flex items-start gap-4 text-amber-800 dark:text-amber-200">
+          <AlertTriangle className="w-5 h-5 shrink-0 text-gold dark:text-gold-light mt-0.5" />
           <div className="text-xs sm:text-sm leading-relaxed space-y-1">
-            <p className="font-bold text-amber-700 dark:text-amber-200">Notice of Non-Affiliation and Disclaimer</p>
+            <p className="font-bold text-gold-dark dark:text-amber-200">Notice of Non-Affiliation and Disclaimer</p>
             <p className="text-amber-800/80 dark:text-amber-200/80">
               GTA 6 Atlas is an independent, unofficial fan site and community encyclopedia. We are not affiliated, associated, authorized, endorsed by, or in any way officially connected with Rockstar Games, Take-Two Interactive Software, Inc., or any of their subsidiaries or affiliates. The official Rockstar Games website can be found at <a href="https://www.rockstargames.com" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-foreground">rockstargames.com</a>.
             </p>

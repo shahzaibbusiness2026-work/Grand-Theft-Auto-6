@@ -18,8 +18,8 @@ const STATS: StatItem[] = [
     label: "Characters",
     href: "/characters",
     icon: Users,
-    iconColor: "text-amber-500 dark:text-amber-400",
-    iconBg: "bg-amber-500/15 border-amber-500/30",
+    iconColor: "text-gold dark:text-gold-light",
+    iconBg: "bg-gold/15 border-gold/30",
   },
   {
     metric: "200+",
@@ -50,8 +50,8 @@ const STATS: StatItem[] = [
     label: "Locations",
     href: "/locations",
     icon: MapPin,
-    iconColor: "text-amber-500 dark:text-amber-400",
-    iconBg: "bg-amber-500/15 border-amber-500/30",
+    iconColor: "text-gold dark:text-gold-light",
+    iconBg: "bg-gold/15 border-gold/30",
   },
   {
     metric: "100%",
@@ -81,8 +81,8 @@ export function FloatingStats({ stats }: FloatingStatsProps) {
       label: "Characters",
       href: "/characters",
       icon: Users,
-      iconColor: "text-amber-500 dark:text-amber-400",
-      iconBg: "bg-amber-500/15 border-amber-500/30",
+      iconColor: "text-gold dark:text-gold-light",
+      iconBg: "bg-gold/15 border-gold/30",
     },
     {
       metric: stats?.totalVehicles !== undefined ? `${stats.totalVehicles}` : "200+",
@@ -113,8 +113,8 @@ export function FloatingStats({ stats }: FloatingStatsProps) {
       label: "Locations",
       href: "/locations",
       icon: MapPin,
-      iconColor: "text-amber-500 dark:text-amber-400",
-      iconBg: "bg-amber-500/15 border-amber-500/30",
+      iconColor: "text-gold dark:text-gold-light",
+      iconBg: "bg-gold/15 border-gold/30",
     },
     {
       metric: stats?.totalMapMarkers !== undefined ? `${stats.totalMapMarkers}` : "100%",
@@ -145,7 +145,7 @@ export function FloatingStats({ stats }: FloatingStatsProps) {
                   <Icon className={`h-4 w-4 ${stat.iconColor}`} />
                 </div>
                 <div className="min-w-0">
-                  <span className="block font-display text-sm sm:text-base font-black text-foreground leading-none tracking-tight group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
+                  <span className="block font-display text-sm sm:text-base font-black text-foreground leading-none tracking-tight group-hover:text-gold dark:group-hover:text-gold-light transition-colors">
                     {stat.metric}
                   </span>
                   <span className="block text-xs font-semibold text-muted-foreground truncate mt-0.5">
@@ -162,7 +162,7 @@ export function FloatingStats({ stats }: FloatingStatsProps) {
           <span className="font-serif italic text-xs font-bold tracking-wider text-foreground/90 uppercase">
             &ldquo;VICE CITY LIVES AGAIN.&rdquo;
           </span>
-          <span className="font-mono text-xs font-extrabold tracking-[0.25em] text-amber-500 dark:text-amber-400 uppercase mt-0.5">
+          <span className="font-mono text-xs font-extrabold tracking-[0.25em] text-gold dark:text-gold-light uppercase mt-0.5">
             — ROCKSTAR GAMES
           </span>
         </div>

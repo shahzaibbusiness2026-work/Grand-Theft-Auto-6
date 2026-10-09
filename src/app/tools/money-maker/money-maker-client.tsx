@@ -59,7 +59,7 @@ export function MoneyMakerClient() {
       case "Low":
         return "text-emerald-400 bg-emerald-500/10 border-emerald-500/30";
       case "Medium":
-        return "text-amber-400 bg-amber-500/10 border-amber-500/30";
+        return "text-gold-light bg-gold/10 border-gold/30";
       case "High":
         return "text-rose-400 bg-rose-500/10 border-rose-500/30";
       default:
@@ -121,7 +121,7 @@ export function MoneyMakerClient() {
           {/* Question 2: Starting Capital */}
           <div className="space-y-2">
             <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <DollarSign className="h-3.5 w-3.5 text-amber-400" /> Starting Bankroll
+              <DollarSign className="h-3.5 w-3.5 text-gold-light" /> Starting Bankroll
             </label>
             <div className="grid grid-cols-3 gap-1.5 bg-card p-1 rounded-xl border border-border text-xs">
               <button
@@ -182,7 +182,7 @@ export function MoneyMakerClient() {
                 onClick={() => setRisk("Medium")}
                 className={cn(
                   "py-1.5 rounded-lg font-semibold transition-all",
-                  risk === "Medium" ? "bg-amber-500/20 text-amber-300" : "text-muted-foreground hover:text-foreground"
+                  risk === "Medium" ? "bg-gold/20 text-amber-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Med
@@ -308,7 +308,7 @@ export function MoneyMakerClient() {
                 <span className="text-xs uppercase font-bold text-muted-foreground block mb-1">
                   Min Capital
                 </span>
-                <span className="text-xs font-bold text-amber-400 truncate block">
+                <span className="text-xs font-bold text-gold-light truncate block">
                   {activeMethod.minInvestmentDisplay}
                 </span>
               </div>

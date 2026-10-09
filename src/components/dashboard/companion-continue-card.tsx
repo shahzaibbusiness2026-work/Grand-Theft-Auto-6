@@ -54,7 +54,7 @@ export function CompanionContinueCard({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#070b14] via-transparent to-transparent" />
           <div className="absolute top-2 left-2.5 flex items-center gap-1.5">
-            <span className="rounded-full bg-amber-500 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-sm">
+            <span className="rounded-full bg-gold px-2 py-0.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-sm">
               {missionType}
             </span>
             <span className="rounded-full bg-cyan-400 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-sm">
@@ -108,7 +108,7 @@ export function CompanionContinueCard({
       {/* Continue Mission Button */}
       <Link
         href="/missions"
-        className="flex w-full items-center justify-center gap-1.5 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 py-2.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_16px_rgba(245,158,11,0.35)] transition-all hover:brightness-105 active:scale-95"
+        className="flex w-full items-center justify-center gap-1.5 rounded-2xl bg-gold py-2.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_16px_rgba(201,168,106,0.35)] transition-all hover:brightness-105 active:scale-95"
       >
         <span>Continue Mission</span>
         <ArrowRight className="h-3.5 w-3.5 text-slate-950" />

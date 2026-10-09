@@ -11,7 +11,7 @@ export async function AnnouncementBanner() {
   }
 
   return (
-    <div className="relative z-50 bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 text-slate-950 py-1.5 px-4 text-center text-xs font-bold shadow-md">
+    <div className="relative z-50 bg-gold-dark text-slate-950 py-1.5 px-4 text-center text-xs font-bold shadow-md">
       <div className="container-site flex items-center justify-center gap-2">
         <span className="flex h-2 w-2 relative">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-950 opacity-75" />

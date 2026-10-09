@@ -153,7 +153,7 @@ function SplitNavDropdown({
       className={cn(
         "relative flex items-center rounded-lg transition-all duration-200",
         active
-          ? "border border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+          ? "border border-gold/40 bg-gold/10 text-gold-dark dark:text-gold-light font-bold shadow-[0_0_12px_rgba(201,168,106,0.15)]"
           : "border border-transparent text-muted-foreground hover:bg-muted/80 hover:text-foreground"
       )}
     >
@@ -193,7 +193,7 @@ function SplitNavDropdown({
               className={cn(
                 "block rounded-lg px-3 py-2 text-xs font-medium tracking-wide transition-colors",
                 pathname === m.href
-                  ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 font-bold"
+                  ? "bg-gold/15 text-gold-dark dark:text-gold-light font-bold"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
             >
@@ -255,7 +255,7 @@ export function Navbar() {
           {isPro && (
             <Link
               href="/pricing"
-              className="hidden lg:inline-flex items-center gap-1 rounded-full border border-amber-500/40 bg-amber-500/15 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-amber-400"
+              className="hidden lg:inline-flex items-center gap-1 rounded-full border border-gold/40 bg-gold/15 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-gold-light"
               title="Vice City Pro Active"
             >
               <Crown className="h-3 w-3" /> PRO
@@ -281,7 +281,7 @@ export function Navbar() {
                 className={cn(
                   "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
                   isActive(l.href)
-                    ? "border border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+                    ? "border border-gold/40 bg-gold/10 text-gold-dark dark:text-gold-light font-bold shadow-[0_0_12px_rgba(201,168,106,0.15)]"
                     : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
@@ -300,7 +300,7 @@ export function Navbar() {
               className={cn(
                 "flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
                 MORE_HREFS.some((href) => isActive(href))
-                  ? "border border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+                  ? "border border-gold/40 bg-gold/10 text-gold-dark dark:text-gold-light font-bold shadow-[0_0_12px_rgba(201,168,106,0.15)]"
                   : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
               )}
             >
@@ -336,7 +336,7 @@ export function Navbar() {
                               className={cn(
                                 "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-medium tracking-wide transition-colors",
                                 active
-                                  ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 font-bold"
+                                  ? "bg-gold/15 text-gold-dark dark:text-gold-light font-bold"
                                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
                               )}
                             >
@@ -344,7 +344,7 @@ export function Navbar() {
                                 className={cn(
                                   "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-colors",
                                   active
-                                    ? "border-amber-500/40 bg-amber-500/15 text-amber-700 dark:text-amber-400"
+                                    ? "border-gold/40 bg-gold/15 text-gold-dark dark:text-gold-light"
                                     : "border-border/70 bg-muted/60 text-muted-foreground"
                                 )}
                                 aria-hidden="true"
@@ -369,7 +369,7 @@ export function Navbar() {
           {/* Ask AI Quick Button */}
           <Link
             href="/ai"
-            className="hidden sm:inline-flex items-center gap-1 rounded-lg border border-amber-500/40 bg-amber-500/10 px-2.5 py-1.5 text-xs font-bold text-amber-700 dark:text-amber-400 hover:bg-amber-500 hover:text-slate-950 transition-all shadow-sm"
+            className="hidden sm:inline-flex items-center gap-1 rounded-lg border border-gold/40 bg-gold/10 px-2.5 py-1.5 text-xs font-bold text-gold-dark dark:text-gold-light hover:bg-gold hover:text-slate-950 transition-all shadow-sm"
             title="Ask GTA 6 AI"
           >
             <Bot className="h-3.5 w-3.5" />
@@ -382,7 +382,7 @@ export function Navbar() {
             onClick={() => setPaletteOpen(true)}
             aria-label="Search the Atlas (⌘K)"
             title="Search the Atlas (⌘K)"
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-amber-500/50 hover:bg-amber-500/10 hover:text-amber-500 dark:hover:text-amber-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-gold/50 hover:bg-gold/10 hover:text-gold dark:hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95"
           >
             <Search className="h-4 w-4" />
           </button>
@@ -397,7 +397,7 @@ export function Navbar() {
             className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-border hover:bg-muted hover:text-foreground focus-visible:outline-none active:scale-95"
           >
             {mounted && resolvedTheme === "light" ? (
-              <Sun className="h-4 w-4 text-amber-500" />
+              <Sun className="h-4 w-4 text-gold" />
             ) : (
               <Moon className="h-4 w-4 text-cyan-400" />
             )}
@@ -407,7 +407,7 @@ export function Navbar() {
           <Link
             href="/dashboard"
             prefetch={true}
-            className="hidden h-9 items-center gap-1.5 rounded-lg bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(245,158,11,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
+            className="hidden h-9 items-center gap-1.5 rounded-lg bg-gold px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(201,168,106,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
           >
             <LayoutGrid className="h-3.5 w-3.5" />
             <span>Dashboard</span>
@@ -435,7 +435,7 @@ export function Navbar() {
                 setMobileOpen(false);
                 setPaletteOpen(true);
               }}
-              className="mb-2 flex w-full items-center gap-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-400 transition-colors"
+              className="mb-2 flex w-full items-center gap-2.5 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gold-dark dark:text-gold-light transition-colors"
             >
               <Search className="h-4 w-4" />
               <span>Search All 15 Tools, Rides, Guns...</span>
@@ -454,7 +454,7 @@ export function Navbar() {
                   className={cn(
                     "rounded-xl px-4 py-2.5 text-sm font-semibold tracking-wide transition-colors",
                     active
-                      ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 font-bold"
+                      ? "bg-gold/15 text-gold-dark dark:text-gold-light font-bold"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
                 >

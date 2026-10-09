@@ -121,11 +121,11 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                 onClick={() => setCat(c.label)}
                 className={cn(
                   "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-[13px] font-semibold text-muted-foreground transition-colors hover:text-foreground",
-                  cat === c.label && "border border-amber-500/50 bg-amber-500/10 text-amber-500 dark:text-amber-400 shadow-sm"
+                  cat === c.label && "border border-gold/50 bg-gold/10 text-gold dark:text-gold-light shadow-sm"
                 )}
               >
                 {c.label}
-                <span className={cn("rounded-full px-2 py-0.5 text-xs", cat === c.label ? "bg-amber-500 text-slate-950 font-bold" : "bg-muted")}>
+                <span className={cn("rounded-full px-2 py-0.5 text-xs", cat === c.label ? "bg-gold text-slate-950 font-bold" : "bg-muted")}>
                   {c.count}
                 </span>
               </button>
@@ -195,7 +195,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                   onClick={() => setTab(t)}
                   className={cn(
                     "rounded-full px-3 py-1 text-xs font-semibold transition-all",
-                    tab === t ? "bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-slate-950 font-bold shadow-sm" : "text-muted-foreground hover:text-foreground"
+                    tab === t ? "bg-gold text-slate-950 font-bold shadow-sm" : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {t}
@@ -282,7 +282,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
         </div>
 
         <div className="card-surface relative overflow-hidden border-accent/40 p-5">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-amber-500/10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-gold/10" />
           <Skull className="absolute -right-3 -top-3 h-24 w-24 text-accent/20" />
           <div className="relative">
             <h3 className="flex items-center gap-2 font-display text-sm font-extrabold uppercase tracking-wider">

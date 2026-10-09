@@ -255,8 +255,8 @@ export default function AdminMapPage() {
                 Connected to Supabase
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 border border-amber-500/30 text-amber-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gold/10 border border-gold/30 text-gold-light">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-light" />
                 Offline (Local Cache)
               </span>
             )}

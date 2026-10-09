@@ -79,11 +79,11 @@ export interface MapPOI {
 
 function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
   let iconComponent: any = MapPin;
-  let color = "bg-amber-500";
+  let color = "bg-gold";
   const catLower = (m.category || "").toLowerCase();
 
   if (m.icon === "car") { iconComponent = Car; color = "bg-cyan-500"; }
-  else if (m.icon === "star") { iconComponent = Star; color = "bg-amber-500"; }
+  else if (m.icon === "star") { iconComponent = Star; color = "bg-gold"; }
   else if (m.icon === "flag") { iconComponent = Flag; color = "bg-rose-500"; }
   else if (m.icon === "square") { iconComponent = Crosshair; color = "bg-orange-500"; }
   else if (m.icon === "dot") { iconComponent = Egg; color = "bg-emerald-500"; }
@@ -121,8 +121,8 @@ function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
 }
 
 const CATEGORY_FILTERS = [
-  { id: "all", label: "Show All", count: 312, icon: Star, color: "text-amber-400", all: true },
-  { id: "missions", label: "Missions & Heists", count: 48, icon: Target, color: "text-amber-400" },
+  { id: "all", label: "Show All", count: 312, icon: Star, color: "text-gold-light", all: true },
+  { id: "missions", label: "Missions & Heists", count: 48, icon: Target, color: "text-gold-light" },
   { id: "garages", label: "Garages & Safehouses", count: 26, icon: Warehouse, color: "text-cyan-400" },
   { id: "shops", label: "Ammu-Nation & Shops", count: 38, icon: ShoppingBag, color: "text-emerald-400" },
   { id: "vehicles", label: "Vehicles", count: 63, icon: Car, color: "text-cyan-400" },
@@ -131,7 +131,7 @@ const CATEGORY_FILTERS = [
   { id: "properties", label: "Real Estate", count: 30, icon: Building2, color: "text-indigo-400" },
   { id: "activities", label: "Stunts & Racing", count: 40, icon: Flame, color: "text-yellow-400" },
   { id: "easter-eggs", label: "Secrets & Lore", count: 21, icon: Egg, color: "text-teal-400" },
-  { id: "poi", label: "Points of Interest", count: 52, icon: MapPin, color: "text-amber-400" },
+  { id: "poi", label: "Points of Interest", count: 52, icon: MapPin, color: "text-gold-light" },
 ];
 
 const DISTRICTS = [
@@ -216,7 +216,7 @@ const POIS: MapPOI[] = [
     hours: "Anytime",
     top: "49%",
     left: "53%",
-    color: "bg-amber-500",
+    color: "bg-gold",
     icon: Star,
     verified: true,
   },
@@ -261,7 +261,7 @@ const POIS: MapPOI[] = [
     hours: "Unrestricted Pickup",
     top: "41%",
     left: "35%",
-    color: "bg-amber-500",
+    color: "bg-gold",
     icon: Crosshair,
     verified: true,
   },
@@ -276,7 +276,7 @@ const POIS: MapPOI[] = [
     hours: "Open 24/7",
     top: "22%",
     left: "34%",
-    color: "bg-amber-500",
+    color: "bg-gold",
     icon: MapPin,
     verified: true,
   },
@@ -321,7 +321,7 @@ const POIS: MapPOI[] = [
     hours: "10:00 – 20:00",
     top: "47%",
     left: "60%",
-    color: "bg-amber-500",
+    color: "bg-gold",
     icon: Car,
     verified: true,
   },
@@ -358,7 +358,7 @@ const POIS: MapPOI[] = [
 ];
 
 const FOUND_ON_MAP_RAIL = [
-  { title: "Hidden Cache #12", type: "Collectible", when: "2h ago", img: "/img/cache-chest.jpg", badge: "COLLECTIBLE", badgeColor: "bg-amber-600", icon: Gem, color: "text-amber-400" },
+  { title: "Hidden Cache #12", type: "Collectible", when: "2h ago", img: "/img/cache-chest.jpg", badge: "COLLECTIBLE", badgeColor: "bg-gold-dark", icon: Gem, color: "text-gold-light" },
   { title: "Stunt Jump #8", type: "Activity", when: "5h ago", img: "/img/stunt-bike.jpg", badge: "ACTIVITY", badgeColor: "bg-[#7E22CE]", icon: Star, color: "text-purple-400" },
   { title: "Garage – Ocean Drive", type: "Garage", when: "1d ago", img: "/img/garage.jpg", badge: "GARAGE", badgeColor: "bg-[#D97706]", icon: Warehouse, color: "text-cyan-400" },
   { title: "Tactical SMG Drop", type: "Weapon", when: "2d ago", img: "/img/smg-gun.jpg", badge: "WEAPON", badgeColor: "bg-[#7E22CE]", icon: Crosshair, color: "text-rose-400" },
@@ -783,7 +783,7 @@ export function SatelliteInteractiveMap({
       {/* ================================================================= */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-background dark:bg-[#070b14]/95 px-4 py-3 backdrop-blur-xl sm:px-6 rounded-t-3xl">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.4)]">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-gold to-yellow-400 text-slate-950 shadow-[0_0_15px_rgba(201,168,106,0.4)]">
             <Radio className="h-5 w-5 animate-pulse" />
           </div>
           <div>
@@ -811,7 +811,7 @@ export function SatelliteInteractiveMap({
               className={cn(
                 "rounded-lg px-2.5 py-1 text-xs font-bold uppercase transition-all",
                 activeDistrict === d.id
-                  ? "bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 font-black shadow-xs"
+                  ? "bg-gold text-slate-950 font-black shadow-xs"
                   : "text-muted-foreground hover:text-white hover:bg-muted/40"
               )}
             >
@@ -827,12 +827,12 @@ export function SatelliteInteractiveMap({
             className={cn(
               "flex h-9 items-center gap-1.5 rounded-xl border px-3 text-xs font-bold transition-all",
               leftSidebarOpen
-                ? "border-amber-500/50 bg-amber-500/15 text-white"
+                ? "border-gold/50 bg-gold/15 text-white"
                 : "border-border bg-muted/40 text-muted-foreground hover:text-white"
             )}
             title="Toggle Filter Sidebar"
           >
-            <Sliders className="h-3.5 w-3.5 text-amber-400" />
+            <Sliders className="h-3.5 w-3.5 text-gold-light" />
             <span className="hidden sm:inline">Filters</span>
           </button>
 
@@ -851,7 +851,7 @@ export function SatelliteInteractiveMap({
 
           <button
             onClick={toggleFullscreen}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-muted/40 text-muted-foreground hover:text-white hover:border-amber-500/50 transition-all shadow-sm"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-muted/40 text-muted-foreground hover:text-white hover:border-gold/50 transition-all shadow-sm"
             title={isFullscreen ? "Exit Fullscreen" : "Full Screen"}
           >
             {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
@@ -883,7 +883,7 @@ export function SatelliteInteractiveMap({
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => toggleFilter("all")}
-                  className="text-xs font-bold text-amber-400 hover:underline"
+                  className="text-xs font-bold text-gold-light hover:underline"
                 >
                   {checkedFilters.all ? "Invert" : "Select All"}
                 </button>
@@ -904,7 +904,7 @@ export function SatelliteInteractiveMap({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search weapons, stunts, banks..."
-                className="w-full rounded-xl border border-border bg-black/50 py-2 pl-9 pr-3 text-xs text-white placeholder:text-muted-foreground focus:border-amber-500 focus:outline-none"
+                className="w-full rounded-xl border border-border bg-black/50 py-2 pl-9 pr-3 text-xs text-white placeholder:text-muted-foreground focus:border-gold focus:outline-none"
               />
               {searchQuery && (
                 <button
@@ -928,7 +928,7 @@ export function SatelliteInteractiveMap({
                     className={cn(
                       "flex cursor-pointer select-none items-center justify-between rounded-xl px-2.5 py-1.5 text-xs font-semibold transition-colors",
                       f.all
-                        ? "border border-amber-500/30 bg-amber-500/10 text-white font-bold"
+                        ? "border border-gold/30 bg-gold/10 text-white font-bold"
                         : "text-muted-foreground hover:bg-muted/40 hover:text-white"
                     )}
                   >
@@ -942,7 +942,7 @@ export function SatelliteInteractiveMap({
                         className={cn(
                           "flex h-4 w-4 items-center justify-center rounded transition-all",
                           isChecked
-                            ? "bg-amber-500 text-slate-950 shadow-xs"
+                            ? "bg-gold text-slate-950 shadow-xs"
                             : "border border-border bg-black/40"
                         )}
                       >
@@ -960,13 +960,13 @@ export function SatelliteInteractiveMap({
                 <span className="flex items-center gap-1.5 text-muted-foreground">
                   <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Verified Visited
                 </span>
-                <span className="text-amber-400">
+                <span className="text-gold-light">
                   {verifiedTotal} / {allPOIs.length}
                 </span>
               </div>
               <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-amber-400 to-yellow-400 transition-all"
+                  className="h-full rounded-full bg-gradient-to-r from-gold-light to-yellow-400 transition-all"
                   style={{ width: `${(verifiedTotal / Math.max(1, allPOIs.length)) * 100}%` }}
                 />
               </div>
@@ -979,7 +979,7 @@ export function SatelliteInteractiveMap({
           <div className="absolute right-3 top-3 z-30 w-80 max-w-[calc(100vw-24px)] rounded-2xl border border-border bg-[#070c18]/95 p-5 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-right duration-200">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2.5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-xl border border-amber-500/40 bg-amber-500/15 text-amber-400">
+                <span className="flex h-8 w-8 items-center justify-center rounded-xl border border-gold/40 bg-gold/15 text-gold-light">
                   <selectedPOI.icon className="h-4 w-4" />
                 </span>
                 <div>
@@ -1004,7 +1004,7 @@ export function SatelliteInteractiveMap({
                 alt={selectedPOI.title}
                 className="h-full w-full object-cover"
               />
-              <span className="absolute left-2 top-2 rounded bg-black/75 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-amber-400 backdrop-blur border border-border">
+              <span className="absolute left-2 top-2 rounded bg-black/75 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-gold-light backdrop-blur border border-border">
                 {selectedPOI.type}
               </span>
             </div>
@@ -1015,7 +1015,7 @@ export function SatelliteInteractiveMap({
 
             <div className="mt-3 flex items-center justify-between rounded-xl border border-border bg-black/40 px-3 py-2 text-xs">
               <span className="flex items-center gap-1.5 text-muted-foreground text-xs">
-                <Sun className="h-3.5 w-3.5 text-amber-400" /> Best Hours:
+                <Sun className="h-3.5 w-3.5 text-gold-light" /> Best Hours:
               </span>
               <span className="font-bold text-white text-xs font-mono">
                 {selectedPOI.hours}
@@ -1042,7 +1042,7 @@ export function SatelliteInteractiveMap({
 
               <button
                 onClick={() => focusOnPOI(selectedPOI)}
-                className="flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 py-2 text-xs font-black text-slate-950 shadow-md hover:brightness-105 transition-all"
+                className="flex items-center justify-center gap-1.5 rounded-xl bg-gold py-2 text-xs font-black text-slate-950 shadow-md hover:brightness-105 transition-all"
               >
                 <Navigation className="h-3.5 w-3.5" />
                 <span>Center GPS</span>
@@ -1060,11 +1060,11 @@ export function SatelliteInteractiveMap({
                 className={cn(
                   "flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition-all border",
                   favoriteLocations.includes(selectedPOI.id)
-                    ? "border-amber-500/50 bg-amber-500/20 text-amber-300"
+                    ? "border-gold/50 bg-gold/20 text-amber-300"
                     : "border-border bg-muted/40 text-muted-foreground hover:bg-muted/50"
                 )}
               >
-                <Heart className={cn("h-3.5 w-3.5", favoriteLocations.includes(selectedPOI.id) && "fill-amber-400 text-amber-400")} />
+                <Heart className={cn("h-3.5 w-3.5", favoriteLocations.includes(selectedPOI.id) && "fill-gold-light text-gold-light")} />
                 <span>{favoriteLocations.includes(selectedPOI.id) ? "Saved" : "Favorite"}</span>
               </button>
 
@@ -1200,7 +1200,7 @@ export function SatelliteInteractiveMap({
                 >
                   {/* Selected Ping Ring */}
                   {isSelected && (
-                    <span className="absolute -inset-3 rounded-full border-2 border-amber-500 bg-amber-500/30 animate-ping" />
+                    <span className="absolute -inset-3 rounded-full border-2 border-gold bg-gold/30 animate-ping" />
                   )}
 
                   <span
@@ -1215,7 +1215,7 @@ export function SatelliteInteractiveMap({
 
                   {/* Tooltip on Hover */}
                   <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-black/90 px-2.5 py-1 text-xs font-bold text-white opacity-0 shadow-2xl backdrop-blur-md border border-border group-hover:opacity-100 transition-opacity z-30">
-                    <span className="text-amber-400 block font-black">{m.title}</span>
+                    <span className="text-gold-light block font-black">{m.title}</span>
                     <span className="text-muted-foreground font-medium text-xs">{m.district}</span>
                   </span>
                 </button>
@@ -1275,7 +1275,7 @@ export function SatelliteInteractiveMap({
         {/* ==================== 6. BOTTOM LEFT COMPASS & HINT ==================== */}
         <div className="absolute left-4 bottom-4 z-20 flex items-center gap-2">
           <div className="flex items-center gap-2 rounded-xl border border-border bg-black/80 px-3 py-1.5 backdrop-blur-xl shadow-2xl">
-            <span className="font-display text-xs font-black text-amber-400 tracking-wider">
+            <span className="font-display text-xs font-black text-gold-light tracking-wider">
               N ▲
             </span>
             <span className="text-xs text-muted-foreground font-medium">
@@ -1301,7 +1301,7 @@ export function SatelliteInteractiveMap({
             </div>
             <Link
               href="/collectibles"
-              className="text-xs font-bold text-amber-400 hover:underline"
+              className="text-xs font-bold text-gold-light hover:underline"
             >
               View Full 100% Checklist →
             </Link>
@@ -1316,7 +1316,7 @@ export function SatelliteInteractiveMap({
                   onClick={() => {
                     if (matchedPOI) focusOnPOI(matchedPOI);
                   }}
-                  className="group w-48 shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-border bg-[#070c18] transition-all hover:-translate-y-1 hover:border-amber-500/60 shadow-xl"
+                  className="group w-48 shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-border bg-[#070c18] transition-all hover:-translate-y-1 hover:border-gold/60 shadow-xl"
                 >
                   <div className="relative h-24 overflow-hidden bg-black/50">
                     <img
@@ -1334,7 +1334,7 @@ export function SatelliteInteractiveMap({
                     </span>
                   </div>
                   <div className="p-3">
-                    <p className="flex items-center gap-1.5 truncate text-xs font-bold text-white group-hover:text-amber-400 transition-colors">
+                    <p className="flex items-center gap-1.5 truncate text-xs font-bold text-white group-hover:text-gold-light transition-colors">
                       <MapPin className={cn("h-3.5 w-3.5 shrink-0", r.color)} /> {r.title}
                     </p>
                     <p className="mt-1 flex items-center justify-between text-xs text-muted-foreground">

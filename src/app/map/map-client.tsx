@@ -79,11 +79,11 @@ export function MapClient() {
         <div className="container-site">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-xs font-semibold text-muted-foreground mb-4">
-            <Link href="/" className="hover:text-amber-500 transition-colors">
+            <Link href="/" className="hover:text-gold transition-colors">
               Home
             </Link>
             <ChevronRight className="h-3 w-3 text-muted-foreground/60" />
-            <span className="text-amber-500 dark:text-amber-400 font-bold">Interactive Map</span>
+            <span className="text-gold dark:text-gold-light font-bold">Interactive Map</span>
             <ChevronRight className="h-3 w-3 text-muted-foreground/60" />
             <span className="text-foreground">Leonida Satellite Atlas</span>
           </nav>
@@ -91,7 +91,7 @@ export function MapClient() {
           {/* Header Row */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-amber-500 dark:text-amber-400 mb-3">
+              <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-gold dark:text-gold-light mb-3">
                 <Radio className="h-3 w-3 animate-pulse" /> Official Interactive Radar
               </div>
               <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
@@ -114,7 +114,7 @@ export function MapClient() {
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
                 <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Districts</span>
-                <span className="font-display text-lg font-black text-amber-400">6 Regions</span>
+                <span className="font-display text-lg font-black text-gold-light">6 Regions</span>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@ export function MapClient() {
       <div className="container-site pb-20 pt-8 border-t border-border">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-500 dark:text-amber-400 mb-1">
+            <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-gold dark:text-gold-light mb-1">
               <Compass className="h-3.5 w-3.5" /> Regional Intel
             </div>
             <h2 className="font-display text-2xl sm:text-3xl font-black uppercase text-foreground tracking-wide">
@@ -142,10 +142,10 @@ export function MapClient() {
           </div>
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-xs font-bold text-foreground hover:text-foreground hover:border-amber-500/50 transition-all"
+            className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-xs font-bold text-foreground hover:text-foreground hover:border-gold/50 transition-all"
           >
             <span>Open 100% Progress Tracker</span>
-            <ChevronRight className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400" />
+            <ChevronRight className="h-3.5 w-3.5 text-gold dark:text-gold-light" />
           </Link>
         </div>
 
@@ -153,7 +153,7 @@ export function MapClient() {
           {DISTRICT_GUIDES.map((d) => (
             <div
               key={d.name}
-              className="group rounded-3xl border border-white/10 bg-[#070c18] overflow-hidden transition-all hover:-translate-y-1 hover:border-amber-500/50 hover:shadow-2xl flex flex-col"
+              className="group rounded-3xl border border-white/10 bg-[#070c18] overflow-hidden transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-2xl flex flex-col"
             >
               <div className="relative h-44 overflow-hidden bg-black/60">
                 <img
@@ -185,7 +185,7 @@ export function MapClient() {
                   </div>
                   <div>
                     <span className="block text-xs uppercase font-bold text-slate-400">Missions</span>
-                    <span className="font-mono text-sm font-black text-amber-400">{d.missions}</span>
+                    <span className="font-mono text-sm font-black text-gold-light">{d.missions}</span>
                   </div>
                   <div>
                     <span className="block text-xs uppercase font-bold text-slate-400">Secrets</span>

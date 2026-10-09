@@ -159,7 +159,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   className={cn(
                     "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
                     selectedDiff === d
-                      ? "bg-amber-400 text-black font-bold shadow-sm"
+                      ? "bg-gold-light text-black font-bold shadow-sm"
                       : "bg-muted/40 text-muted-foreground hover:text-foreground"
                   )}
                 >
@@ -223,7 +223,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   </div>
 
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-amber-400 bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
+                    <span className="font-mono text-xs font-bold text-gold-light bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
                       {m.cashRewardDisplay}
                     </span>
                     <span className="text-xs font-semibold text-muted-foreground bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
@@ -258,7 +258,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                     <span className={cn(
                       "text-xs font-black uppercase px-2 py-0.5 rounded border",
                       m.difficulty === "Easy" && "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",
-                      m.difficulty === "Medium" && "border-amber-500/40 text-amber-600 dark:text-amber-400 bg-amber-500/10",
+                      m.difficulty === "Medium" && "border-gold/40 text-gold-dark dark:text-gold-light bg-gold/10",
                       (m.difficulty === "Hard" || m.difficulty === "Extreme") && "border-rose-500/40 text-rose-400 bg-rose-500/10"
                     )}>
                       {m.difficulty}

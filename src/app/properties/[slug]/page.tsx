@@ -113,7 +113,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 {prop.name}
               </h1>
 
-              <div className="font-display text-2xl sm:text-3xl font-black text-amber-400">
+              <div className="font-display text-2xl sm:text-3xl font-black text-gold-light">
                 {prop.priceDisplay}
               </div>
 
@@ -176,7 +176,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     <span className="text-xs uppercase font-bold text-muted-foreground block mb-1">
                       Break-Even
                     </span>
-                    <span className="text-base font-black text-amber-400">
+                    <span className="text-base font-black text-gold-light">
                       {breakEvenDays ? `${breakEvenDays} Days` : "N/A"}
                     </span>
                   </div>
@@ -235,7 +235,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               <div className="space-y-2.5 text-xs font-mono">
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">Price:</span>
-                  <span className="font-bold text-amber-400">{prop.priceDisplay}</span>
+                  <span className="font-bold text-gold-light">{prop.priceDisplay}</span>
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">Garage:</span>
@@ -277,7 +277,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     <div className="text-xs font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
                       {item.name}
                     </div>
-                    <div className="text-xs text-amber-400 font-mono mt-1">
+                    <div className="text-xs text-gold-light font-mono mt-1">
                       {item.priceDisplay}
                     </div>
                   </Link>

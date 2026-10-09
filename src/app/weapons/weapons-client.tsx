@@ -25,7 +25,7 @@ const CATEGORIES = [
 
 const rarityStyles: Record<string, string> = {
   Featured: "bg-accent/15 text-accent border-accent/40",
-  Legendary: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/40",
+  Legendary: "bg-gold/15 text-gold-dark dark:text-gold-light border-gold/40",
   Epic: "bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/40",
   Rare: "bg-cyan-500/15 dark:bg-[#00F0FF]/15 text-cyan-700 dark:text-[#00F0FF] border-cyan-500/40 dark:border-[#00F0FF]/40",
   Common: "bg-muted text-muted-foreground border-border",
@@ -201,7 +201,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       }}
                       className={cn(
                         "absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full backdrop-blur-md transition-all",
-                        isFav ? "bg-amber-500 text-slate-950 shadow-md" : "bg-black/50 text-white hover:bg-black/80"
+                        isFav ? "bg-gold text-slate-950 shadow-md" : "bg-black/50 text-white hover:bg-black/80"
                       )}
                       aria-label="Save weapon"
                     >
