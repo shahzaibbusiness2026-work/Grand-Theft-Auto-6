@@ -26,12 +26,14 @@ import {
   DollarSign,
   Crosshair,
   Mail,
+  LogIn,
+  LogOut,
   type LucideIcon,
 } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { CommandPalette } from "@/components/command-palette";
-import { getStoredUserState } from "@/lib/user-store";
+import { getStoredUserState, isLoggedIn, logoutUser } from "@/lib/user-store";
 import { cn } from "@/lib/utils";
 
 type NavLink = {
@@ -213,13 +215,18 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [isPro, setIsPro] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const more = useDropdown();
 
   useEffect(() => {
     setMounted(true);
     setIsPro(getStoredUserState().isPro);
+    setLoggedIn(isLoggedIn());
 
-    const handleSync = () => setIsPro(getStoredUserState().isPro);
+    const handleSync = () => {
+      setIsPro(getStoredUserState().isPro);
+      setLoggedIn(isLoggedIn());
+    };
     window.addEventListener("gta6_user_state_change", handleSync);
     return () => window.removeEventListener("gta6_user_state_change", handleSync);
   }, []);
@@ -403,15 +410,28 @@ export function Navbar() {
             )}
           </button>
 
-          {/* Dashboard Link */}
-          <Link
-            href="/dashboard"
-            prefetch={true}
-            className="hidden h-9 items-center gap-1.5 rounded-lg bg-gold px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(201,168,106,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
-          >
-            <LayoutGrid className="h-3.5 w-3.5" />
-            <span>Dashboard</span>
-          </Link>
+          {/* Auth: Login/Signup when logged out, Dashboard when logged in */}
+          {mounted && loggedIn ? (
+            <Link
+              href="/dashboard"
+              prefetch={true}
+              className="hidden h-9 items-center gap-1.5 rounded-lg bg-gold px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(201,168,106,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
+            >
+              <LayoutGrid className="h-3.5 w-3.5" />
+              <span>Dashboard</span>
+            </Link>
+          ) : (
+            mounted && (
+              <Link
+                href="/login"
+                prefetch={true}
+                className="hidden h-9 items-center gap-1.5 rounded-lg bg-gold px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(201,168,106,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
+              >
+                <LogIn className="h-3.5 w-3.5" />
+                <span>Login / Sign Up</span>
+              </Link>
+            )
+          )}
 
           {/* Mobile menu button */}
           <button
@@ -462,6 +482,40 @@ export function Navbar() {
                 </Link>
               );
             })}
+            {/* Mobile auth */}
+            <div className="mt-3 border-t border-border/60 pt-3">
+              {mounted && loggedIn ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gold px-4 py-3 text-sm font-black uppercase tracking-wider text-slate-950"
+                  >
+                    <LayoutGrid className="h-4 w-4" /> Dashboard
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      logoutUser();
+                      setMobileOpen(false);
+                    }}
+                    className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-muted-foreground"
+                  >
+                    <LogOut className="h-4 w-4" /> Logout
+                  </button>
+                </>
+              ) : (
+                mounted && (
+                  <Link
+                    href="/login"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gold px-4 py-3 text-sm font-black uppercase tracking-wider text-slate-950"
+                  >
+                    <LogIn className="h-4 w-4" /> Login / Sign Up
+                  </Link>
+                )
+              )}
+            </div>
           </nav>
         </div>
       )}

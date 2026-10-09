@@ -110,6 +110,21 @@ export function saveStoredUserState(state: UserState): void {
   }
 }
 
+/* Auth helpers: email-based login (local-first, no password) */
+export function setUserEmail(email: string): void {
+  const current = getStoredUserState();
+  saveStoredUserState({ ...current, userEmail: email.toLowerCase().trim() });
+}
+
+export function logoutUser(): void {
+  const current = getStoredUserState();
+  saveStoredUserState({ ...current, userEmail: null });
+}
+
+export function isLoggedIn(): boolean {
+  return !!getStoredUserState().userEmail;
+}
+
 /* Helper functions */
 export function toggleFavorite(
   type: "vehicles" | "weapons" | "locations" | "properties",
