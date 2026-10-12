@@ -136,12 +136,12 @@ const CATEGORY_FILTERS = [
 
 const DISTRICTS = [
   { id: "all", name: "Full Leonida State", top: 50, left: 50, zoom: 1.0 },
-  { id: "vice-downtown", name: "Vice City Downtown", top: 48, left: 58, zoom: 1.75 },
-  { id: "ocean-drive", name: "Ocean Drive Waterfront", top: 56, left: 63, zoom: 2.0 },
-  { id: "keys", name: "Leonida Keys", top: 72, left: 45, zoom: 1.65 },
-  { id: "swamps", name: "Grassrivers Marshlands", top: 35, left: 55, zoom: 1.6 },
-  { id: "port-gellhorn", name: "Port Gellhorn Docks", top: 42, left: 35, zoom: 1.75 },
-  { id: "north-wilds", name: "Northern Wilds", top: 22, left: 34, zoom: 1.65 },
+  { id: "vice-city", name: "Vice City", top: 52, left: 60, zoom: 1.75, desc: "Neon-soaked urban heart of Leonida — Ocean Beach Art Deco, Little Cuba" },
+  { id: "keys", name: "Leonida Keys", top: 72, left: 45, zoom: 1.65, desc: "Tropical archipelago — boats, bars, dangerous waters" },
+  { id: "grassrivers", name: "Grassrivers", top: 35, left: 55, zoom: 1.6, desc: "Everglades-inspired wetlands — gators, airboats, mangroves" },
+  { id: "port-gellhorn", name: "Port Gellhorn", top: 42, left: 35, zoom: 1.75, desc: "Faded coastal resort town — cheap motels, empty strip malls" },
+  { id: "ambrosia", name: "Ambrosia", top: 28, left: 48, zoom: 1.65, desc: "Rural industrial town — Allied Crystal sugar refinery, biker gangs" },
+  { id: "mount-kalaga", name: "Mount Kalaga National Park", top: 18, left: 40, zoom: 1.6, desc: "Northern wilderness — hunting, fishing, off-road trails" },
 ];
 
 const POIS: MapPOI[] = [
@@ -457,6 +457,26 @@ export function SatelliteInteractiveMap({
   }, [allPOIs]);
 
   const [zoom, setZoom] = useState<number>(1.0);
+
+  // Keyboard shortcuts for zoom (+/- keys)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only when map is in viewport and not typing in input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.key === '+' || e.key === '=') {
+        e.preventDefault();
+        setZoom((z) => Math.min(3.2, +(z + 0.25).toFixed(2)));
+      } else if (e.key === '-' || e.key === '_') {
+        e.preventDefault();
+        setZoom((z) => Math.max(0.65, +(z - 0.25).toFixed(2)));
+      } else if (e.key === '0') {
+        e.preventDefault();
+        setZoom(1.0);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
   const [pan, setPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [searchQuery, setSearchQuery] = useState("");
   const [mapMode, setMapMode] = useState<"satellite" | "tactical" | "radar">("satellite");
@@ -1060,11 +1080,11 @@ export function SatelliteInteractiveMap({
                 className={cn(
                   "flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition-all border",
                   favoriteLocations.includes(selectedPOI.id)
-                    ? "border-gold/50 bg-gold/20 text-amber-300"
-                    : "border-border bg-muted/40 text-muted-foreground hover:bg-muted/50"
+                    ? "border-[#C9A86A]/50 bg-[#C9A86A]/20 text-[#C9A86A]"
+                    : "border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200"
                 )}
               >
-                <Heart className={cn("h-3.5 w-3.5", favoriteLocations.includes(selectedPOI.id) && "fill-gold-light text-gold-light")} />
+                <Heart className={cn("h-3.5 w-3.5", favoriteLocations.includes(selectedPOI.id) && "fill-[#C9A86A] text-[#C9A86A]")} />
                 <span>{favoriteLocations.includes(selectedPOI.id) ? "Saved" : "Favorite"}</span>
               </button>
 
@@ -1077,7 +1097,7 @@ export function SatelliteInteractiveMap({
                     setTimeout(() => setCopiedShare(false), 2000);
                   }
                 }}
-                className="flex items-center justify-center gap-1.5 rounded-xl border border-border bg-muted/40 py-2 text-xs font-bold text-muted-foreground hover:bg-muted/50 transition-all"
+                className="flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-slate-100 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200 transition-all"
               >
                 {copiedShare ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
                 <span>{copiedShare ? "Copied!" : "Share Link"}</span>
@@ -1137,7 +1157,7 @@ export function SatelliteInteractiveMap({
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          onWheel={handleWheel}
+
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
