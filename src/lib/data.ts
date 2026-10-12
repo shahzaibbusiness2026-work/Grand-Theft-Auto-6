@@ -240,75 +240,9 @@ export const characters: Character[] = [
     ],
     tags: ["Socialite", "VIP Access", "Starfish Island", "Fashion"]
   },
-  {
-    id: "pamela",
-    name: "Pamela Scott",
-    role: "Civilian",
-    desc: "Legendary radio personality and voice of Wave 103, broadcasting synth-wave beats and satirical Leonida news.",
-    img: "/img/char-pamela.jpg",
-    featured: false,
-    alias: "Wave 103 Host",
-    voiceActor: "Rockstar Ensemble Cast",
-    origin: "Vice City Downtown Radio Tower",
-    specialty: "Radio Broadcasting & Media Commentary",
-    perk: "Public Broadcast Announcements",
-    vehicle: "Karin Dilettante Hybrid",
-    weapons: ["Studio Microphone"],
-    affiliation: "Wave 103 FM / Leonida Public Broadcasting",
-    status: "Civilian",
-    quote: "You're tuned to Wave 103. The sun is setting, the neon is buzzing, and someone just robbed a liquor store on 5th.",
-    bio: [
-      "Pamela Scott's smooth voice and biting commentary have soundtracked Vice City drives for years, chronicling everything from hurricane warnings to high-speed police chases.",
-      "Her broadcasts provide live atmospheric color commentary as players complete campaign milestones."
-    ],
-    tags: ["Radio Host", "Wave 103", "Downtown", "Media"]
-  },
-  {
-    id: "phil",
-    name: "Phil Cassidy",
-    role: "Supporting",
-    desc: "Eccentric munitions dealer, demolitions veteran, and fan-favorite legacy arms contractor operating in Leonida.",
-    img: "/img/char-phil.jpg",
-    featured: false,
-    alias: "The Demolitionist",
-    voiceActor: "Rockstar Ensemble Cast",
-    origin: "Leonida County Backwoods",
-    specialty: "Military Explosives & Heavy Ordnance",
-    perk: "Discounted High-Explosive Loadouts",
-    vehicle: "Vapid Sandking XL (Camo)",
-    weapons: ["RPG-7", "C4 Satchel Charges", "Combat LMG"],
-    affiliation: "Cassidy Munitions Supply",
-    status: "Active",
-    quote: "If you can't blow your way through the front door, you're not using enough boom, son!",
-    bio: [
-      "A storied veteran of past conflicts and arms trades, Phil Cassidy continues his tradition of supplying military-grade ordnance from heavily fortified rural compounds.",
-      "He provides custom breaching charges and anti-materiel weapons necessary for cracking armored bank transports."
-    ],
-    tags: ["Arms Dealer", "Explosives", "Legacy Character", "Heavy Weapons"]
-  },
-  {
-    id: "grace",
-    name: "Grace Anzora",
-    role: "Law Enforcement",
-    desc: "Lead Detective for the Leonida State Police Organized Crime Division, heading the task force hunting Lucia & Jason.",
-    img: "/img/char-grace.jpg",
-    featured: false,
-    alias: "Detective Anzora",
-    voiceActor: "Rockstar Ensemble Cast",
-    origin: "State Police Headquarters, Vice City",
-    specialty: "Forensic Investigation & Tactical Ambush Planning",
-    perk: "Heightened Police Response & Roadblock Deployment",
-    vehicle: "Vapid Stanier Unmarked Interceptor",
-    weapons: ["Glock 22 .40 S&W", "Tactical 12-Gauge Shotgun"],
-    affiliation: "Leonida State Police Organized Crime Task Force",
-    status: "Active",
-    quote: "They think they're Bonnie and Clyde. But in this state, the house always wins.",
-    bio: [
-      "Detective Grace Anzora is an incorruptible investigator with an obsessive determination to dismantle armed robbery rings operating along the I-97 transit corridor.",
-      "Leading an inter-agency task force, Anzora tracks Lucia and Jason's escalating heists, analyzing surveillance footage to predict their next high-stakes target."
-    ],
-    tags: ["Detective", "Law Enforcement", "State Police", "Antagonist Force"]
-  },
+  
+  
+  
 ];
 
 /* ------------------------------------------------------------------ */

@@ -60,14 +60,24 @@ const DISTRICT_GUIDES = [
     tags: ["Cargo Depots", "Weapons", "Escape Routes"],
   },
   {
-    name: "Northern Wilds",
-    desc: "Mountain ridge lookouts, off-road logging trails, winding switchback highways, and extreme high-altitude stunt jump ramps.",
+    name: "Mount Kalaga National Park",
+    desc: "Forested mountain wilderness, ranger stations, off-road trails, and panoramic lookouts. Confirmed as GTA 6's northern wilderness region.",
     pois: 32,
     missions: 11,
     collectibles: 19,
-    threat: "Remote / Low",
+    threat: "Remote / Wildlife",
     img: "/img/hero-dark.jpg",
-    tags: ["Stunt Jumps", "Fire Lookouts", "Off-Road"],
+    tags: ["Stunt Jumps", "Lookouts", "Off-Road"],
+  },
+  {
+    name: "Ambrosia",
+    desc: "Rural inland heartland with farmland, small towns, and backroad Americana. A quieter corner of Leonida with hidden secrets.",
+    pois: 28,
+    missions: 9,
+    collectibles: 22,
+    threat: "Low Patrols",
+    img: "/img/garage.jpg",
+    tags: ["Farms", "Small Towns", "Backroads"],
   },
 ];
 

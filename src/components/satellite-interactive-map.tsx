@@ -1157,8 +1157,8 @@ export function SatelliteInteractiveMap({
           >
             {/* The Real Satellite Map Image */}
             <img
-              src="/img/satellite-map-hd.jpg"
-              alt="Leonida High Definition Satellite Map"
+              src="/img/leonida-map-v2.jpg"
+              alt="Leonida Trailer-Accurate Satellite Map - Vice City, Leonida Keys, Grassrivers, Port Gellhorn"
               draggable={false}
               className={cn(
                 "h-full w-full object-cover select-none pointer-events-none transition-all duration-300",
