@@ -2890,7 +2890,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
   {
     id: "m4-carbine",
     slug: "m4-carbine",
-    name: "M4 Carbine / Service Rifle",
+    name: "Duke Arms Carbine",
     klass: "Assault Rifle",
     damage: 68,
     fireRate: 82,
@@ -2913,7 +2913,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
   {
     id: "glock-21",
     slug: "glock-21",
-    name: "Combat Pistol (Glock 21)",
+    name: "Capo Pistol",
     klass: "Pistol",
     damage: 34,
     fireRate: 62,
@@ -3028,7 +3028,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
   {
     id: "rpg-7",
     slug: "rpg-7-launcher",
-    name: "RPG-7 Rocket Launcher",
+    name: "Grenade Launcher",
     klass: "Heavy",
     damage: 100,
     fireRate: 10,
