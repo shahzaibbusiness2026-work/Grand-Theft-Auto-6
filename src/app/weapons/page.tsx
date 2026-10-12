@@ -17,8 +17,30 @@ export default async function WeaponsPage() {
   // Live Supabase data first (admin edits win); canonical static entries fill the rest.
   const weapons = await getMergedWeapons();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "GTA 6 Weapons Database",
+    description: "Complete database of weapons confirmed for GTA 6",
+    numberOfItems: weapons.length,
+    itemListElement: weapons.slice(0, 20).map((w, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Product",
+        name: w.name,
+        category: w.klass,
+        image: w.img,
+      },
+    })),
+  };
+
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* HERO */}
       <section className="container-site pt-6">
         <div className="card-surface relative overflow-hidden rounded-3xl border border-border shadow-sm">

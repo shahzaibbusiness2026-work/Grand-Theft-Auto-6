@@ -16,8 +16,31 @@ export default async function VehiclesPage() {
   // Live Supabase data first (admin edits win); canonical static entries fill the rest.
   const vehicles = await getMergedVehicles();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "GTA 6 Vehicles Database",
+    description: "Complete database of vehicles confirmed for GTA 6",
+    numberOfItems: vehicles.length,
+    itemListElement: vehicles.slice(0, 20).map((v, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Car",
+        name: v.name,
+        brand: v.manufacturer,
+        vehicleConfiguration: v.klass,
+        image: v.img,
+      },
+    })),
+  };
+
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* HERO */}
       <section className="container-site pt-8 sm:pt-10">
         <div className="card-surface relative overflow-hidden rounded-3xl border border-border/80 shadow-sm">
