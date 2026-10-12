@@ -8,6 +8,7 @@ import { SiteShell } from "@/components/shells";
 import { ArticleCard } from "@/components/article-card";
 import { NewsletterBar } from "@/components/newsletter-bar";
 import { getPublicArticleBySlug, getPublicArticles } from "@/lib/services/articles";
+import { articles as fallbackArticles } from "@/lib/data";
 import { getSeoSettings } from "@/lib/services/seo";
 import { serializeJsonLd } from "@/lib/utils";
 
@@ -17,7 +18,17 @@ type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = await getPublicArticleBySlug(slug);
+  let article: any = await getPublicArticleBySlug(slug);
+  if (!article) {
+    const fb = fallbackArticles.find((a) => a.slug === slug);
+    if (fb) {
+      article = {
+        slug: fb.slug, title: fb.title, excerpt: fb.excerpt,
+        cover_image: fb.img, seo_title: null, seo_description: null,
+        canonical_url: null, og_image: null, published_at: null,
+      };
+    }
+  }
   if (!article) {
     notFound();
   }
@@ -63,7 +74,29 @@ function formatDate(value?: string | null): string {
 
 export default async function ArticleDetailPage({ params }: Props) {
   const { slug } = await params;
-  const article = await getPublicArticleBySlug(slug);
+  let article = await getPublicArticleBySlug(slug);
+  // Fall back to bundled articles when DB is unreachable or slug is static
+  if (!article) {
+    const fb = fallbackArticles.find((a) => a.slug === slug);
+    if (fb) {
+      article = {
+        slug: fb.slug,
+        title: fb.title,
+        excerpt: fb.excerpt,
+        content: fb.excerpt,
+        cover_image: fb.img,
+        category: fb.category || fb.tag,
+        tag: fb.tag,
+        published_at: null,
+        read_time: fb.read,
+        seo_title: null,
+        seo_description: null,
+        canonical_url: null,
+        og_image: null,
+        status: "published",
+      } as any;
+    }
+  }
   if (!article) notFound();
 
   const all = await getPublicArticles();

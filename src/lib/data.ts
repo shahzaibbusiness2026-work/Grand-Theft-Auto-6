@@ -425,13 +425,13 @@ export const featuredArticle: Article = {
 };
 
 export const articles: Article[] = [
-  { title: "New Gameplay Features Confirmed in GTA 6", excerpt: "Rockstar reveals exciting new mechanics, realistic police AI, and more.", date: "May 5, 2025", read: "4 min read", img: "/img/heli.jpg", tag: "News" },
-  { title: "Exploring the Massive Leonida Map", excerpt: "A closer look at the biggest GTA map ever created.", date: "May 5, 2025", read: "5 min read", img: "/img/boat.jpg", tag: "Map" },
-  { title: "Who is Lucia? New Character Deep Dive", excerpt: "Everything we know about Lucia Caminos.", date: "May 7, 2025", read: "5 min read", img: "/img/char-lucia.jpg", tag: "Characters" },
-  { title: "Nightlife & Activities in Vice City", excerpt: "From clubs to street races, experience the vibrant nightlife.", date: "May 5, 2025", read: "4 min read", img: "/img/hero-dark.jpg", tag: "Gameplay" },
-  { title: "Off-Road Adventures & New Terrain", excerpt: "Mountains, swamps, and rural areas explored.", date: "May 8, 2025", read: "4 min read", img: "/img/car-pickup.jpg", tag: "News" },
-  { title: "GTA 6 Release Date & Pre-Order Info", excerpt: "Latest updates on the official release window and pre-orders.", date: "May 1, 2025", read: "4 min read", img: "/img/vice-sunset.svg", tag: "Updates" },
-  { title: "Vehicles of GTA 6: Full Breakdown", excerpt: "All confirmed vehicles, categories and new additions in GTA 6.", date: "May 8, 2025", read: "6 min read", img: "/img/car-orange.jpg", tag: "Vehicles" },
+  { title: "New Gameplay Features Confirmed in GTA 6", excerpt: "Rockstar reveals exciting new mechanics, realistic police AI, and more.", date: "May 5, 2025", read: "4 min read", img: "/img/heli.jpg", tag: "News", slug: "new-gameplay-features-confirmed-in-gta-6" },
+  { title: "Exploring the Massive Leonida Map", excerpt: "A closer look at the biggest GTA map ever created.", date: "May 5, 2025", read: "5 min read", img: "/img/boat.jpg", tag: "Map", slug: "exploring-the-massive-leonida-map" },
+  { title: "Who is Lucia? New Character Deep Dive", excerpt: "Everything we know about Lucia Caminos.", date: "May 7, 2025", read: "5 min read", img: "/img/char-lucia.jpg", tag: "Characters", slug: "who-is-lucia-new-character-deep-dive" },
+  { title: "Nightlife & Activities in Vice City", excerpt: "From clubs to street races, experience the vibrant nightlife.", date: "May 5, 2025", read: "4 min read", img: "/img/hero-dark.jpg", tag: "Gameplay", slug: "nightlife-activities-in-vice-city" },
+  { title: "Off-Road Adventures & New Terrain", excerpt: "Mountains, swamps, and rural areas explored.", date: "May 8, 2025", read: "4 min read", img: "/img/car-pickup.jpg", tag: "News", slug: "off-road-adventures-new-terrain" },
+  { title: "GTA 6 Release Date & Pre-Order Info", excerpt: "Latest updates on the official release window and pre-orders.", date: "May 1, 2025", read: "4 min read", img: "/img/vice-sunset.svg", tag: "Updates", slug: "gta-6-release-date-pre-order-info" },
+  { title: "Vehicles of GTA 6: Full Breakdown", excerpt: "All confirmed vehicles, categories and new additions in GTA 6.", date: "May 8, 2025", read: "6 min read", img: "/img/car-orange.jpg", tag: "Vehicles", slug: "vehicles-of-gta-6-full-breakdown" },
   { title: "How to Prepare for GTA 6: Pre-Order Guide", excerpt: "Everything you need before the gates of Leonida open.", date: "May 3, 2025", read: "4 min read", img: "/img/boat.jpg", filter: "hue-rotate(20deg)", tag: "Guides" },
 ];
 
