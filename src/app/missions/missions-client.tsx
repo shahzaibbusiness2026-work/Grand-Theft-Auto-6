@@ -226,7 +226,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                     <span className="font-mono text-xs font-bold text-gold-light bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
                       {m.cashRewardDisplay}
                     </span>
-                    <span className="text-xs font-semibold text-muted-foreground bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
+                    <span className="text-xs font-semibold text-white/80 bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
                       ⏱ {m.duration}
                     </span>
                   </div>
@@ -257,9 +257,9 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   <div className="pt-2 border-t border-border flex items-center justify-between">
                     <span className={cn(
                       "text-xs font-black uppercase px-2 py-0.5 rounded border",
-                      m.difficulty === "Easy" && "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",
+                      m.difficulty === "Easy" && "border-emerald-500/40 text-emerald-600 dark:text-emerald-400 bg-emerald-500/10",
                       m.difficulty === "Medium" && "border-gold/40 text-gold-dark dark:text-gold-light bg-gold/10",
-                      (m.difficulty === "Hard" || m.difficulty === "Extreme") && "border-rose-500/40 text-rose-400 bg-rose-500/10"
+                      (m.difficulty === "Hard" || m.difficulty === "Extreme") && "border-rose-500/40 text-rose-600 dark:text-rose-400 bg-rose-500/10"
                     )}>
                       {m.difficulty}
                     </span>

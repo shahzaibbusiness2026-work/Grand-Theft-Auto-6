@@ -56,7 +56,7 @@ export default function NotFound() {
             </Button>
           </form>
 
-          <h2 className="mt-14 font-display text-lg font-bold">Helpful Links</h2>
+          <h2 className="mt-14 font-display text-lg font-bold text-white">Helpful Links</h2>
           <div className="mt-6 grid w-full grid-cols-1 gap-4 pb-4 sm:grid-cols-2 lg:grid-cols-4">
             {links.map((l) => (
               <Link

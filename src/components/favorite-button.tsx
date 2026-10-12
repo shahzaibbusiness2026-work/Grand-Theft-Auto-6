@@ -40,7 +40,7 @@ export function FavoriteButton({ type, id, className, showText = true }: Favorit
         type="button"
         disabled
         className={cn(
-          "inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold text-slate-400 opacity-70",
+          "inline-flex items-center justify-center gap-1.5 rounded-xl border border-border bg-muted/40 px-3 py-2 text-xs font-bold text-muted-foreground opacity-70",
           className
         )}
       >

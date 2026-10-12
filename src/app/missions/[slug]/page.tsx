@@ -146,7 +146,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Cash Payout</span>
-                <span className="font-mono text-sm font-black text-gold-light">{mission.cashRewardDisplay}</span>
+                <span className="font-mono text-sm font-black text-gold-dark dark:text-gold-light">{mission.cashRewardDisplay}</span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Duration</span>
@@ -154,7 +154,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Difficulty</span>
-                <span className="font-display text-sm font-black text-[#00F0FF]">{mission.difficulty}</span>
+                <span className="font-display text-sm font-black text-cyan-700 dark:text-[#00F0FF]">{mission.difficulty}</span>
               </div>
             </div>
           </div>
@@ -169,8 +169,8 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             </h2>
             <ul className="mt-4 space-y-3">
               {mission.objectives.map((obj, i) => (
-                <li key={obj} className="flex items-start gap-3 rounded-xl border border-border bg-muted/60 p-3 text-xs text-slate-700 dark:text-slate-200">
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold/20 font-bold text-gold-light text-xs">
+                <li key={obj} className="flex items-start gap-3 rounded-xl border border-border bg-muted/60 p-3 text-xs text-foreground">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold/20 font-bold text-gold-dark dark:text-gold-light text-xs">
                     {i + 1}
                   </span>
                   <span className="font-medium pt-0.5">{obj}</span>
@@ -185,7 +185,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
                   <Lightbulb className="h-4 w-4" /> Tactical Pro-Tip
                 </div>
                 {mission.guideTips.map((tip, idx) => (
-                  <p key={idx} className="text-xs text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
+                  <p key={idx} className="text-xs text-foreground leading-relaxed font-medium">
                     {tip}
                   </p>
                 ))}
@@ -198,12 +198,12 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             {/* Choices */}
             <div className="card-surface p-6 rounded-3xl border border-border">
               <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-                <Split className="h-4 w-4 text-gold-light" /> Approaches & Branching Choices
+                <Split className="h-4 w-4 text-gold-dark dark:text-gold-light" /> Approaches & Branching Choices
               </h2>
               <div className="mt-4 space-y-2.5">
                 {mission.choices.map((c, i) => (
                   <div key={c} className="rounded-xl border border-border bg-muted/60 p-3 text-xs text-muted-foreground">
-                    <span className="block text-xs uppercase font-bold text-gold-light mb-1">
+                    <span className="block text-xs uppercase font-bold text-gold-dark dark:text-gold-light mb-1">
                       Approach #{i + 1}:
                     </span>
                     <span>{c}</span>
@@ -215,11 +215,11 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             {/* Rewards & Unlocks */}
             <div className="card-surface p-6 rounded-3xl border border-border">
               <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-                <Unlock className="h-4 w-4 text-emerald-400" /> Rewards & Permanent Unlocks
+                <Unlock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" /> Rewards & Permanent Unlocks
               </h2>
               <div className="mt-4 flex flex-wrap gap-2">
                 {mission.otherRewards.map((r) => (
-                  <span key={r} className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-400">
+                  <span key={r} className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
                     <CheckCircle2 className="h-3.5 w-3.5" />
                     <span>{r}</span>
                   </span>

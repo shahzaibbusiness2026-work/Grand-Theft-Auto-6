@@ -863,7 +863,7 @@ export function SatelliteInteractiveMap({
       {/* ================================================================= */}
       {/* TOP COMMAND HEADER (GTA HUD BAR)                                  */}
       {/* ================================================================= */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-background dark:bg-[#070b14]/95 px-4 py-3 backdrop-blur-xl sm:px-6 rounded-t-3xl">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-[#070b14]/95 px-4 py-3 backdrop-blur-xl sm:px-6 rounded-t-3xl">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-gold to-yellow-400 text-slate-950 shadow-[0_0_15px_rgba(201,168,106,0.4)]">
             <Radio className="h-5 w-5 animate-pulse" />
@@ -1065,7 +1065,7 @@ export function SatelliteInteractiveMap({
                             : "border border-border bg-black/40"
                         )}
                       >
-                        {isChecked && <Check className="h-3 w-3 text-white" strokeWidth={3.5} />}
+                        {isChecked && <Check className="h-3 w-3 text-slate-950" strokeWidth={3.5} />}
                       </span>
                     </span>
                   </div>
@@ -1146,7 +1146,7 @@ export function SatelliteInteractiveMap({
               <button
                 onClick={() => {
                   const nextState = toggleMapCompleted(selectedPOI.id);
-                  setCollectedPOIs((prev) => ({ ...prev, [selectedPOI.id]: !nextState }));
+                  setCollectedPOIs((prev) => ({ ...prev, [selectedPOI.id]: nextState }));
                 }}
                 className={cn(
                   "flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition-all border",
@@ -1206,7 +1206,7 @@ export function SatelliteInteractiveMap({
             {/* Personal Notes Section */}
             <div className="mt-4 pt-3 border-t border-border">
               <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
-                <FileText className="h-3 w-3 text-cyan-600 dark:text-[#00F0FF]" />
+                <FileText className="h-3 w-3 text-[#00F0FF]" />
                 <span>Personal Field Notes</span>
               </div>
               <textarea
@@ -1218,7 +1218,7 @@ export function SatelliteInteractiveMap({
                 }}
                 placeholder="Add tactical notes, stash codes, enemy routes..."
                 rows={2}
-                className="w-full rounded-xl border border-border bg-black/50 p-2 text-xs text-foreground placeholder:text-muted-foreground focus:border-cyan-500 dark:border-[#00F0FF]/50 focus:outline-none focus:ring-1 focus:ring-cyan-500 dark:ring-[#00F0FF]/30 resize-none font-sans"
+                className="w-full rounded-xl border border-border bg-black/50 p-2 text-xs text-white placeholder:text-muted-foreground focus:border-[#00F0FF]/50 focus:outline-none focus:ring-1 focus:ring-[#00F0FF]/30 resize-none font-sans"
               />
             </div>
           </div>
@@ -1351,7 +1351,7 @@ export function SatelliteInteractiveMap({
             className={cn(
               "flex h-9 w-9 items-center justify-center rounded-xl border backdrop-blur-xl shadow-2xl transition-all",
               showGrid
-                ? "border-cyan-500 dark:border-[#00F0FF] bg-cyan-500 dark:bg-[#00F0FF]/20 text-cyan-600 dark:text-[#00F0FF]"
+                ? "border-[#00F0FF] bg-[#00F0FF]/20 text-[#00F0FF]"
                 : "border-border bg-black/80 text-white hover:bg-muted/60"
             )}
             title="Toggle Tactical Grid"
@@ -1398,7 +1398,7 @@ export function SatelliteInteractiveMap({
               N ▲
             </span>
             <span className="text-xs text-muted-foreground font-medium">
-              Click & Drag to Pan • Scroll to Zoom
+              Click & Drag to Pan • +/- to Zoom
             </span>
           </div>
         </div>
@@ -1411,7 +1411,7 @@ export function SatelliteInteractiveMap({
         <div className="mt-8 space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="font-display text-sm font-black uppercase tracking-wider text-white">
+              <h3 className="font-display text-sm font-black uppercase tracking-wider text-foreground">
                 Featured Intel & Key Locations
               </h3>
               <p className="text-xs text-muted-foreground">

@@ -225,7 +225,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
 
                 {c.specialty && (
                   <div className="mt-3 pt-2.5 border-t border-border flex items-center gap-2 text-xs text-muted-foreground">
-                    <Shield className="w-3.5 h-3.5 text-pink-400 shrink-0" />
+                    <Shield className="w-3.5 h-3.5 text-pink-600 dark:text-pink-400 shrink-0" />
                     <span className="truncate">{c.specialty}</span>
                   </div>
                 )}
@@ -242,7 +242,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
             <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">
               All Characters
             </h2>
-            <p className="mt-1 text-xs font-mono text-pink-400">
+            <p className="mt-1 text-xs font-mono text-pink-600 dark:text-pink-400">
               {filtered.length}{" "}Characters Found • Click any card for full dossier
             </p>
           </div>
@@ -290,7 +290,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 <h3 className="truncate font-display text-[13px] font-bold text-foreground group-hover:text-pink-600 dark:group-hover:text-pink-300 transition-colors">
                   {c.name}
                 </h3>
-                <p className="mt-0.5 text-xs font-mono text-pink-400/90 truncate">
+                <p className="mt-0.5 text-xs font-mono text-pink-600/90 dark:text-pink-400/90 truncate">
                   {c.alias || c.role}
                 </p>
               </div>
@@ -316,7 +316,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
             </span>
           </div>
           <div>
-            <p className="section-eyebrow text-pink-400">Character Stories</p>
+            <p className="section-eyebrow text-pink-600 dark:text-pink-400">Character Stories</p>
             <h2 className="mt-3 font-display text-2xl font-extrabold uppercase tracking-wider leading-snug text-foreground">
               Every Character Has <br /> A Story
             </h2>

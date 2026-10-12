@@ -109,14 +109,14 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-emerald-500/20 bg-emerald-950/10">
-          <span className="font-display text-2xl sm:text-3xl font-black text-emerald-400">{collectedCount}</span>
-          <span className="text-xs font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
+          <span className="font-display text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400">{collectedCount}</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-emerald-600/80 dark:text-emerald-400/80 block mt-1">
             Found / Collected
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-gold/20 bg-amber-950/10">
-          <span className="font-display text-2xl sm:text-3xl font-black text-gold-light">{totalCount - collectedCount}</span>
-          <span className="text-xs font-bold uppercase tracking-wider text-gold-light/80 block mt-1">
+          <span className="font-display text-2xl sm:text-3xl font-black text-gold-dark dark:text-gold-light">{totalCount - collectedCount}</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-gold-dark/80 dark:text-gold-light/80 block mt-1">
             Remaining To Find
           </span>
         </div>
@@ -315,8 +315,8 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                     </p>
 
                     <div className="p-2.5 rounded-lg bg-muted/50 border border-border text-xs font-mono space-y-1">
-                      <div className="text-gold-light flex items-center gap-1">
-                        <Trophy className="h-3 w-3 text-gold-light flex-shrink-0" />
+                      <div className="text-gold-dark dark:text-gold-light flex items-center gap-1">
+                        <Trophy className="h-3 w-3 text-gold-dark dark:text-gold-light flex-shrink-0" />
                         <span className="truncate">Reward: {item.reward}</span>
                       </div>
                       <div className="text-muted-foreground truncate">

@@ -367,6 +367,13 @@
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
+/* Character cards sit on a dark gradient overlay in BOTH themes — pin the
+   theme-aware accent role text (e.g. "Protagonist") to its dark-theme color
+   so it stays legible in light mode. */
+.light .dark-overlay-text .text-accent {
+  color: #F3A398 !important;
+}
+
 .light select option {
   background-color: #ffffff !important;
   color: #0f172a !important;
@@ -806,6 +813,35 @@
 .light .dark-panel.bg-\[\#0a0f1d\] {
   background-color: #0a0f1d !important;
 }
+
+/* --------------------------------------------------------------------
+   Champagne-gold text legibility in bright mode.
+   Bare `text-gold` (#C9A86A) and `text-gold-light` (#E3CFA3) are legible
+   only on dark surfaces; on light surfaces they drop to ~1.2-2.4:1
+   contrast (warning icons, threat badges, stat cards, price text,
+   eyebrow labels). Flip them to the deep bronze-gold (#A98850, the
+   light theme's --primary) everywhere except permanent dark surfaces:
+   .dark-panel cards and from-slate-950 image scrims keep the light gold.
+   -------------------------------------------------------------------- */
+.light .text-gold,
+.light .text-gold-light {
+  color: #A98850 !important;
+}
+.light .text-gold-light\/80 {
+  color: rgba(169, 136, 80, 0.8) !important;
+}
+.light .text-gold-light\/90 {
+  color: rgba(169, 136, 80, 0.9) !important;
+}
+/* Permanent dark surfaces keep the light champagne gold */
+.light .dark-panel .text-gold,
+.light .dark-panel .text-gold-light {
+  color: #E3CFA3 !important;
+}
+.light [class*="from-slate-950"] .text-gold-light {
+  color: #E3CFA3 !important;
+}
+
 
 
 

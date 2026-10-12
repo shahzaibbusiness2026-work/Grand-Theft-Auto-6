@@ -179,7 +179,7 @@ export function ContactClient() {
                 required
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="mt-4 min-h-[140px] w-full rounded-lg border border-input bg-card px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="min-h-[140px] w-full rounded-lg border border-input bg-card px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
             <Button type="submit" className="mt-5 w-full" disabled={loading}>

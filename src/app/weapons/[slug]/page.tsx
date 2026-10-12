@@ -246,7 +246,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 className="max-h-52 w-full object-contain mix-blend-lighten brightness-125 transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-border">
-                <span className="font-bold text-muted-foreground uppercase tracking-wider text-xs">Purchase Price</span>
+                <span className="font-bold text-white/70 uppercase tracking-wider text-xs">Purchase Price</span>
                 <span className="font-mono font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{weapon.priceDisplay}</span>
               </div>
             </div>
@@ -274,7 +274,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
 
             <div className="mt-6 rounded-2xl border-border bg-muted/60 p-3.5 text-xs text-muted-foreground">
               <div className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground mb-1">
-                <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
+                <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>Verified Source Citation</span>
               </div>
               <p className="text-xs text-muted-foreground">
@@ -320,7 +320,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
           {/* Where to find */}
           <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-              <MapPin className="h-4 w-4 text-emerald-400" /> Acquisition & Drop Locations
+              <MapPin className="h-4 w-4 text-emerald-600 dark:text-emerald-400" /> Acquisition & Drop Locations
             </h2>
             <ul className="mt-4 space-y-2.5">
               {weapon.locations.map((loc, i) => (
@@ -339,7 +339,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-              <Layers className="h-4 w-4 text-rose-400" /> Special Traits
+              <Layers className="h-4 w-4 text-rose-600 dark:text-rose-400" /> Special Traits
             </h2>
             {weapon.features?.length ? (
               <div className="mt-4 flex flex-wrap gap-2">
@@ -367,7 +367,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
 
           <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-              <Wallet className="h-4 w-4 text-gold-light" /> Weapon Economy
+              <Wallet className="h-4 w-4 text-gold-dark dark:text-gold-light" /> Weapon Economy
             </h2>
             <dl className="mt-4 divide-y divide-border">
               {[

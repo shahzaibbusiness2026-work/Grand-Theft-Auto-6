@@ -448,10 +448,10 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     <span className="text-xs font-black uppercase tracking-wider text-gold-dark dark:text-amber-300 flex items-center gap-1">
                       <Trophy className="h-3 w-3" /> Overall Score
                     </span>
-                    <span className="font-mono font-black text-sm text-gold-light">
+                    <span className="font-mono font-black text-sm text-gold-dark dark:text-gold-light">
                       {overallScores[idx]}/100
                       {overallScoreLeader === idx && overallScores.length > 1 && (
-                        <span className="ml-1.5 text-xs font-black uppercase text-emerald-400">Lead</span>
+                        <span className="ml-1.5 text-xs font-black uppercase text-emerald-600 dark:text-emerald-400">Lead</span>
                       )}
                     </span>
                   </div>
@@ -469,7 +469,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{v.topSpeed} mph</span>
                       {v.topSpeed === bestSpeed && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -481,12 +481,12 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-muted-foreground flex items-center gap-1.5">
-                      <Timer className="h-3.5 w-3.5 text-gold-light" /> 0–60 Launch
+                      <Timer className="h-3.5 w-3.5 text-gold-dark dark:text-gold-light" /> 0–60 Launch
                     </span>
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{v.acceleration}s</span>
                       {v.acceleration === bestAccel && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -503,7 +503,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{v.handling}/100</span>
                       {v.handling === bestHandling && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -515,12 +515,12 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-muted-foreground flex items-center gap-1.5">
-                      <Disc3 className="h-3.5 w-3.5 text-rose-400" /> Braking Power
+                      <Disc3 className="h-3.5 w-3.5 text-rose-600 dark:text-rose-400" /> Braking Power
                     </span>
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{v.braking}/100</span>
                       {v.braking === bestBraking && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -532,12 +532,12 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-muted-foreground flex items-center gap-1.5">
-                      <Car className="h-3.5 w-3.5 text-emerald-400" /> Traction
+                      <Car className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" /> Traction
                     </span>
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{v.traction ?? 70}/100</span>
                       {(v.traction ?? 70) === bestTraction && selectedVehicles.length > 1 && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -555,7 +555,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{v.power} HP</span>
                       {v.power === bestPower && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -566,13 +566,13 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
               {/* PROS & CONS */}
               <div className="mt-4 pt-3 border-t border-border space-y-2 text-xs">
-                <div className="flex items-start gap-1.5 text-emerald-400">
+                <div className="flex items-start gap-1.5 text-emerald-600 dark:text-emerald-400">
                   <ThumbsUp className="h-3 w-3 shrink-0 mt-0.5" />
                   <span>
                     {v.topSpeed >= 200 ? "Blistering top end speed on open expressways" : "Highly responsive throttle curve for street getaways"}
                   </span>
                 </div>
-                <div className="flex items-start gap-1.5 text-rose-400">
+                <div className="flex items-start gap-1.5 text-rose-600 dark:text-rose-400">
                   <ThumbsDown className="h-3 w-3 shrink-0 mt-0.5" />
                   <span>
                     {(v.price || 0) > 1500000 ? "High acquisition cost and expensive insurance replacement" : "Lower top speed ceiling against hypercars"}
@@ -624,9 +624,9 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     {present.map((has, i) => (
                       <span key={i} className="text-center text-sm" aria-label={has ? "Yes" : "No"}>
                         {has ? (
-                          <span className="text-emerald-400 font-black">✓</span>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-black">✓</span>
                         ) : (
-                          <span className="text-rose-400/70">✗</span>
+                          <span className="text-rose-600 dark:text-rose-400/70">✗</span>
                         )}
                       </span>
                     ))}

@@ -69,7 +69,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 border border-border text-muted-foreground hover:text-white hover:bg-muted/50 hover:border-pink-500/50 transition-all backdrop-blur-md"
+          className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 border border-border text-muted-foreground hover:text-foreground hover:bg-muted/50 hover:border-pink-500/50 transition-all backdrop-blur-md"
           aria-label="Close modal"
         >
           <X className="h-5 w-5" />
@@ -254,7 +254,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleShare}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-muted/40 hover:bg-muted/50 border border-border text-foreground hover:text-white transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-muted/40 hover:bg-muted/50 border border-border text-foreground transition-all"
                 >
                   {copied ? (
                     <>

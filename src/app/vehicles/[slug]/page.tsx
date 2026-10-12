@@ -251,7 +251,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                 <Button
                   href="/map"
                   variant="outline"
-                  className="text-xs font-semibold"
+                  className="text-xs font-semibold text-white border-white/25 hover:bg-white/10 hover:text-white"
                 >
                   <MapPin className="h-3.5 w-3.5 mr-1 text-cyan-600 dark:text-[#00F0FF]" /> Find on Satellite Map
                 </Button>
@@ -267,7 +267,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-border">
-                <span className="font-bold text-muted-foreground uppercase tracking-wider text-xs">Showroom Price</span>
+                <span className="font-bold text-white/70 uppercase tracking-wider text-xs">Showroom Price</span>
                 <span className="font-display font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{vehicle.priceDisplay}</span>
               </div>
             </div>
@@ -298,7 +298,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             {/* Source transparency block */}
             <div className="mt-6 rounded-2xl border-border bg-muted/60 p-3.5 text-xs text-muted-foreground space-y-1">
               <div className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground">
-                <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
+                <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>Verified Data Grounding</span>
               </div>
               <p className="text-xs text-muted-foreground">
@@ -328,7 +328,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
           {/* Where to find */}
           <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-              <MapPin className="h-4 w-4 text-emerald-400" /> Spawn & Purchase Locations
+              <MapPin className="h-4 w-4 text-emerald-600 dark:text-emerald-400" /> Spawn & Purchase Locations
             </h2>
             <div className="mt-4 space-y-3">
               <div className="rounded-xl border-border bg-muted/60 p-3 text-xs">
@@ -372,7 +372,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
           {/* Economy */}
           <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-              <Wallet className="h-4 w-4 text-gold-light" /> Ownership Economy
+              <Wallet className="h-4 w-4 text-gold-dark dark:text-gold-light" /> Ownership Economy
             </h2>
             <dl className="mt-4 divide-y divide-border">
               {[
@@ -394,7 +394,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
           {/* Special features & durability */}
           <div className="card-surface p-6 rounded-3xl border border-border">
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-              <Layers className="h-4 w-4 text-rose-400" /> Special Features & Durability
+              <Layers className="h-4 w-4 text-rose-600 dark:text-rose-400" /> Special Features & Durability
             </h2>
             {vehicle.features?.length ? (
               <div className="mt-4 flex flex-wrap gap-2">

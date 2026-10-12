@@ -135,7 +135,7 @@ export default async function HomePage() {
                   className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-                <div className="absolute bottom-2.5 left-3 right-3">
+                <div className="absolute bottom-2.5 left-3 right-3 dark-overlay-text">
                   <h3 className="font-display text-sm font-bold uppercase tracking-wide text-white drop-shadow">
                     {c.name}
                   </h3>
@@ -234,9 +234,9 @@ export default async function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent pointer-events-none" />
           <div className="relative px-6 py-9 sm:px-10">
-            <p className="section-eyebrow text-accent">Newsletter</p>
+            <p className="section-eyebrow text-[#F3A398]">Newsletter</p>
             <h2 id="newsletter-heading" className="mt-3 max-w-md font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl text-white">
-              Never Miss <br /> an <span className="text-accent text-glow-amber">Update</span>
+              Never Miss <br /> an <span className="text-[#F3A398] text-glow-amber">Update</span>
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/80">
               Subscribe to our newsletter and get the latest GTA 6 news, articles, trailers and exclusive updates straight to your inbox.

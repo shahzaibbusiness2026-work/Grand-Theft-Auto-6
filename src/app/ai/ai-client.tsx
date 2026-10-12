@@ -149,15 +149,15 @@ export function AIClient() {
       {/* Disclaimer Banner */}
       <div className="card-carbon p-4 border-primary/30 bg-primary/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div className="flex items-center gap-2.5 text-xs text-muted-foreground">
-          <ShieldCheck className="h-5 w-5 text-emerald-400 flex-shrink-0" />
+          <ShieldCheck className="h-5 w-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
           <span>
-            <span className="mr-1.5 inline-block rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gold align-middle">Beta</span>
+            <span className="mr-1.5 inline-block rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gold-dark dark:text-gold-light align-middle">Beta</span>
             Strict Confidence Grounding: <strong>Zero hallucinated release dates or fake features.</strong> Every claim cites official materials or verified in-engine archives. This is a knowledge-base assistant — answers are matched from our verified GTA 6 database, not a live language model.
           </span>
         </div>
         <button
           onClick={handleClearHistory}
-          className="btn-ghost text-xs px-3 py-1.5 text-muted-foreground hover:text-white flex items-center gap-1 self-end sm:self-auto"
+          className="btn-ghost text-xs px-3 py-1.5 text-muted-foreground flex items-center gap-1 self-end sm:self-auto"
         >
           <RotateCcw className="h-3.5 w-3.5" /> Clear Chat
         </button>
@@ -184,7 +184,7 @@ export function AIClient() {
                   className={cn(
                     "max-w-2xl rounded-2xl p-4 sm:p-5 space-y-3",
                     isUser
-                      ? "bg-primary text-white ml-12 rounded-tr-none shadow-lg shadow-primary/20"
+                      ? "bg-primary text-primary-foreground ml-12 rounded-tr-none shadow-lg shadow-primary/20"
                       : "bg-card border border-border text-foreground mr-12 rounded-tl-none"
                   )}
                 >
@@ -232,7 +232,7 @@ export function AIClient() {
                         <Link
                           key={idx}
                           href={tool.href}
-                          className="btn-secondary text-xs px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold text-accent hover:text-white"
+                          className="btn-secondary text-xs px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold text-accent hover:text-foreground"
                         >
                           {tool.label} <ArrowRight className="h-2.5 w-2.5" />
                         </Link>
@@ -252,7 +252,7 @@ export function AIClient() {
                           <span className="text-xs uppercase font-bold text-muted-foreground block">
                             {item.type}
                           </span>
-                          <span className="text-xs font-bold text-white truncate block">
+                          <span className="text-xs font-bold text-foreground truncate block">
                             {item.title}
                           </span>
                         </Link>
@@ -291,7 +291,7 @@ export function AIClient() {
             <button
               key={prompt}
               onClick={() => handleSend(prompt)}
-              className="text-xs px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/50 text-muted-foreground hover:text-white whitespace-nowrap transition-all flex items-center gap-1.5"
+              className="text-xs px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/50 text-muted-foreground hover:text-foreground whitespace-nowrap transition-all flex items-center gap-1.5"
             >
               <Sparkles className="h-3 w-3 text-primary flex-shrink-0" />
               <span>{prompt}</span>

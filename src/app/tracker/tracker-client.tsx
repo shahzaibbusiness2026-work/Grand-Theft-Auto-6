@@ -667,7 +667,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
           </div>
           <div className="flex-1 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-              <Trophy className="h-5 w-5 text-gold dark:text-gold-light" />
+              <Trophy className="h-5 w-5 text-gold-dark dark:text-gold-light" />
               <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">
                 100% Leonida Completion
               </h2>
@@ -909,7 +909,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
 
                     <div className="mt-2.5 flex flex-wrap items-center gap-4 text-xs">
                       <div className="flex items-center gap-1.5 text-gold-dark dark:text-gold-light font-mono text-xs">
-                        <Trophy className="h-3.5 w-3.5 text-gold dark:text-gold-light" />
+                        <Trophy className="h-3.5 w-3.5 text-gold-dark dark:text-gold-light" />
                         <span>Reward: {item.reward}</span>
                       </div>
 

@@ -228,21 +228,21 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
       case "Vehicle":
         return <Car className="h-4 w-4 text-accent" />;
       case "Weapon":
-        return <Crosshair className="h-4 w-4 text-gold-light" />;
+        return <Crosshair className="h-4 w-4 text-gold-dark dark:text-gold-light" />;
       case "Location":
-        return <MapPin className="h-4 w-4 text-emerald-400" />;
+        return <MapPin className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />;
       case "Property":
-        return <Building2 className="h-4 w-4 text-sky-400" />;
+        return <Building2 className="h-4 w-4 text-sky-600 dark:text-sky-400" />;
       case "Collectible":
-        return <Compass className="h-4 w-4 text-cyan-400" />;
+        return <Compass className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />;
       case "Mission":
-        return <Flag className="h-4 w-4 text-orange-400" />;
+        return <Flag className="h-4 w-4 text-orange-600 dark:text-orange-400" />;
       case "Character":
-        return <User className="h-4 w-4 text-purple-400" />;
+        return <User className="h-4 w-4 text-purple-600 dark:text-purple-400" />;
       case "News":
-        return <Newspaper className="h-4 w-4 text-rose-400" />;
+        return <Newspaper className="h-4 w-4 text-rose-600 dark:text-rose-400" />;
       case "Guide":
-        return <BookOpen className="h-4 w-4 text-lime-400" />;
+        return <BookOpen className="h-4 w-4 text-lime-600 dark:text-lime-400" />;
     }
   };
 

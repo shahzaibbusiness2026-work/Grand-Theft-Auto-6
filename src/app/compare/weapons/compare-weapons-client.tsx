@@ -395,10 +395,10 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <span className="text-xs font-black uppercase tracking-wider text-gold-dark dark:text-amber-300 flex items-center gap-1">
                       <Trophy className="h-3 w-3" /> Overall Score
                     </span>
-                    <span className="font-mono font-black text-sm text-gold-light">
+                    <span className="font-mono font-black text-sm text-gold-dark dark:text-gold-light">
                       {overallScores[idx]}/100
                       {overallScoreLeader === idx && overallScores.length > 1 && (
-                        <span className="ml-1.5 text-xs font-black uppercase text-emerald-400">Lead</span>
+                        <span className="ml-1.5 text-xs font-black uppercase text-emerald-600 dark:text-emerald-400">Lead</span>
                       )}
                     </span>
                   </div>
@@ -414,7 +414,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{w.damage}/100</span>
                       {w.damage === bestDamage && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -432,7 +432,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{dpsIndices[idx]}</span>
                       {dpsIndices[idx] === bestDps && selectedWeapons.length > 1 && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -448,7 +448,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{w.fireRate}/100</span>
                       {w.fireRate === bestFireRate && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -464,7 +464,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{w.accuracy}/100</span>
                       {w.accuracy === bestAccuracy && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -480,7 +480,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono font-bold text-foreground">{w.range}/100</span>
                       {w.range === bestRange && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
                           Winner
                         </span>
                       )}
@@ -492,13 +492,13 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
 
               {/* PROS & CONS */}
               <div className="mt-4 pt-3 border-t border-border space-y-2 text-xs">
-                <div className="flex items-start gap-1.5 text-emerald-400">
+                <div className="flex items-start gap-1.5 text-emerald-600 dark:text-emerald-400">
                   <ThumbsUp className="h-3 w-3 shrink-0 mt-0.5" />
                   <span>
                     {w.damage >= 70 ? "Devastating per-round ballistic trauma" : "Rapid cycle rate for intense close-quarter skirmishes"}
                   </span>
                 </div>
-                <div className="flex items-start gap-1.5 text-rose-400">
+                <div className="flex items-start gap-1.5 text-rose-600 dark:text-rose-400">
                   <ThumbsDown className="h-3 w-3 shrink-0 mt-0.5" />
                   <span>
                     {w.range < 50 ? "Significant damage falloff at long distances" : "Heavier recoil climb during sustained full-auto spray"}
@@ -547,9 +547,9 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     {present.map((has, i) => (
                       <span key={i} className="text-center text-sm" aria-label={has ? "Yes" : "No"}>
                         {has ? (
-                          <span className="text-emerald-400 font-black">✓</span>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-black">✓</span>
                         ) : (
-                          <span className="text-rose-400/70">✗</span>
+                          <span className="text-rose-600 dark:text-rose-400/70">✗</span>
                         )}
                       </span>
                     ))}

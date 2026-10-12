@@ -18,7 +18,7 @@ export default function AIPage() {
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-primary mb-3">
             <Bot className="h-3 w-3" /> Grounded Intelligence Assistant
-            <span className="rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-bold text-gold">Beta</span>
+            <span className="rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-bold text-gold-dark dark:text-gold-light">Beta</span>
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             ASK <span className="text-primary">GTA 6 AI</span>

@@ -262,7 +262,7 @@ export function Navbar() {
           {isPro && (
             <Link
               href="/pricing"
-              className="hidden lg:inline-flex items-center gap-1 rounded-full border border-gold/40 bg-gold/15 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-gold-light"
+              className="hidden lg:inline-flex items-center gap-1 rounded-full border border-gold/40 bg-gold/15 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-gold-dark dark:text-gold-light"
               title="Vice City Pro Active"
             >
               <Crown className="h-3 w-3" /> PRO
@@ -389,7 +389,7 @@ export function Navbar() {
             onClick={() => setPaletteOpen(true)}
             aria-label="Search the Atlas (⌘K)"
             title="Search the Atlas (⌘K)"
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-gold/50 hover:bg-gold/10 hover:text-gold dark:hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-gold/50 hover:bg-gold/10 hover:text-gold-dark dark:hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95"
           >
             <Search className="h-4 w-4" />
           </button>

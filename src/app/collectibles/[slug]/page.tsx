@@ -153,10 +153,10 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                   </p>
                 </div>
                 <div className="p-4 rounded-xl bg-card border border-gold/20 space-y-1">
-                  <span className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-1">
+                  <span className="text-xs font-bold uppercase tracking-wider text-gold-dark dark:text-gold-light flex items-center gap-1">
                     <Trophy className="h-3 w-3" /> Reward Upon Collection
                   </span>
-                  <p className="text-xs text-amber-300 font-mono font-semibold">
+                  <p className="text-xs text-amber-600 dark:text-amber-300 font-mono font-semibold">
                     {collectible.reward}
                   </p>
                 </div>
@@ -191,7 +191,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
             {/* Data Source Audit */}
             <div className="card-carbon p-6 space-y-3">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                <ShieldCheck className="h-4 w-4 text-emerald-400" /> Data Confidence Audit
+                <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" /> Data Confidence Audit
               </div>
               <div className="text-xs space-y-2">
                 <div className="flex justify-between py-1 border-b border-border">

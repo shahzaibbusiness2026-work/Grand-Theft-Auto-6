@@ -52,8 +52,8 @@ export function NewsletterBar({
         </div>
         {status === "success" ? (
           <div className="flex items-center gap-2 rounded-xl border border-neon-green/40 bg-neon-green/10 px-4 py-3">
-            <CheckCircle className="h-4 w-4 text-neon-green" aria-hidden="true" />
-            <p className="text-sm font-semibold text-neon-green">{successMessage}</p>
+            <CheckCircle className="h-4 w-4 shrink-0 text-emerald-700 dark:text-emerald-400" aria-hidden="true" />
+            <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">{successMessage}</p>
           </div>
         ) : (
           <form className="w-full max-w-md" onSubmit={handleSubmit} aria-label="Newsletter sign-up">
