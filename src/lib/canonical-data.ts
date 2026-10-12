@@ -3139,7 +3139,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 2 (~1:51); official Rockstar promotional material",
     description:
       "Jason's signature handgun with personalized engraved detailing, seen firing from the passenger window of a Bravado Gauntlet Hellfire in Trailer 2. Officially named by Rockstar; damage, capacity and upgrade path are unpublished.",
-    img: "",
+    img: "/img/gta6/combat-pistol.jpg",
     manufacturer: "Girardi",
   },
   {
@@ -3164,7 +3164,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar screenshot and promotional material",
     description:
       "Promoted as Lucia's preferred handgun. The personalized promotional version uses rose and signature decoration. No verified combat values have been published.",
-    img: "",
+    img: "/img/gta6/combat-pistol.jpg",
     manufacturer: "Klose",
   },
   {
@@ -3189,7 +3189,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar screenshot (desk still)",
     description:
       "A modern polymer-frame sidearm with gold and custom decorative treatment, shown on a desk in an official Rockstar screenshot. Exact in-game manufacturer and model name are unknown; player usability is unconfirmed.",
-    img: "",
+    img: "/img/gta6/combat-pistol.jpg",
   },
   {
     id: "hawk-little-morgan-revolvers",
@@ -3213,7 +3213,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official GTA 6 Ultimate Edition promotional material",
     description:
       "His-and-hers personalized large-frame magnum revolvers associated with Jason and Lucia. Promotional art shows engraved Vice City styling, palm-tree grip decoration, character initials and a mounted optic. Tied to the Ultimate Edition; base-game availability is unconfirmed.",
-    img: "",
+    img: "/img/gta6/combat-pistol.jpg",
     manufacturer: "Hawk & Little",
   },
   {
@@ -3238,7 +3238,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Ambrosia-region screenshot",
     description:
       "A revolver with visible Mustang .357 and Duke Arms Company markings, held by a biker in an official Ambrosia-region screenshot. Whether the player can equip this exact version is unconfirmed.",
-    img: "",
+    img: "/img/gta6/combat-pistol.jpg",
     manufacturer: "Duke Arms Company",
   },
   {
@@ -3263,7 +3263,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 2 (~1:15), bank-robbery sequence",
     description:
       "Compact shoulder-fired submachine gun carried by both Jason and Lucia in the Trailer 2 bank-robbery sequence. Jason's weapon has a clearly visible red-dot optic. Magazine size, fire rate and attachment system are unannounced.",
-    img: "",
+    img: "/img/gta6/tactical-smg.webp",
   },
   {
     id: "micro-smg",
@@ -3287,7 +3287,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Vintage Vice City Pack promotional image",
     description:
       "Compact automatic weapon shown with a tropical palm-pattern finish in the Vintage Vice City Pack promotional image. The finish is promotional; exact base model details and standard-edition access are unconfirmed.",
-    img: "",
+    img: "/img/gta6/tactical-smg.webp",
   },
   {
     id: "tropical-finish-smg",
@@ -3311,7 +3311,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Vintage Vice City Pack promotional image",
     description:
       "A second compact SMG with a palm-pattern tropical finish shown in promotional material. The in-game model name is not readable or officially listed. Player availability, magazine capacity and upgrade compatibility are unknown.",
-    img: "",
+    img: "/img/gta6/tactical-smg.webp",
   },
   {
     id: "eris-branded-smg",
@@ -3335,7 +3335,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Ultimate Edition promotional image (illegal-goods-store raid)",
     description:
       "Brightly colored customized SMG with ERIS in-universe branding, held by a PTT Youngin$ gang member in Ultimate Edition promotional material. Shown as contraband; player ownership and stats are unconfirmed.",
-    img: "",
+    img: "/img/gta6/tactical-smg.webp",
     manufacturer: "ERIS",
   },
   {
@@ -3360,7 +3360,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official GTA 6 media (Raul Bautista street standoff)",
     description:
       "Tactical carbine configuration seen with Raul Bautista in a street standoff across official media. Analysts note different official views may show two related carbine designs rather than one identical model. Player availability and attachment slots are unpublished.",
-    img: "",
+    img: "/img/gta6/m4-carbine.webp",
     manufacturer: "Duke Arms Company",
   },
   {
@@ -3385,7 +3385,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Grassrivers hunter/poacher screenshot",
     description:
       "Full-length rifle with traditional stock profile shown beside a mud-covered hunter in Grassrivers. The still confirms the model exists, not that it is player-equippable.",
-    img: "",
+    img: "/img/gta6/m4-carbine.webp",
   },
   {
     id: "duke-arms-assault-sniper",
@@ -3409,7 +3409,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Grassrivers poacher screenshot",
     description:
       "Long rifle with optic and Duke Arms Company identification, rested against a seated poacher's leg in Grassrivers. No official damage, range, zoom or ammo values are available.",
-    img: "",
+    img: "/img/rifle.svg",
     manufacturer: "Duke Arms Company",
   },
   {
@@ -3434,7 +3434,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Mount Kalaga hunter screenshot",
     description:
       "Bolt-action hunting rifle fitted with a large telescopic sight, held by a hunter in wooded Mount Kalaga terrain. Supports a scoped hunting-rifle class; player use and statistics are unknown.",
-    img: "",
+    img: "/img/rifle.svg",
   },
   {
     id: "scoped-hunting-rifles",
@@ -3458,7 +3458,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar woodland screenshot (two hunters)",
     description:
       "Multiple long guns with scopes visible with two hunters walking through the woods. The view is insufficient to prove every rifle is the same model; kept as a generic bolt-action hunting-rifle classification.",
-    img: "",
+    img: "/img/rifle.svg",
   },
   {
     id: "long-barrel-double-shotgun",
@@ -3482,7 +3482,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Grassrivers hunting/poacher imagery",
     description:
       "Traditional side-by-side or double-barrel long-gun profile seen with an NPC hunter/poacher in Grassrivers, also described in an alligator-hunting context. No confirmed reload, spread, damage or player-availability details.",
-    img: "",
+    img: "/img/gunstore.svg",
   },
   {
     id: "combat-mg-lmg",
@@ -3506,7 +3506,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 2 (~2:11), Phil's Ammu-Nation commercial",
     description:
       "Large automatic weapon lifted by the shopkeeper during Phil's Ammu-Nation commercial in Trailer 2, shown in front of a gun wall. The Ammu-Nation presentation strongly suggests an obtainable weapon class, but stats and purchase conditions are unannounced.",
-    img: "",
+    img: "/img/gta6/grenade-launcher.webp",
   },
   {
     id: "claw-hammers",
@@ -3530,7 +3530,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 1 (~0:58), Hamlet social-media clip",
     description:
       "Two ordinary claw hammers raised by an older woman in a Trailer 1 social-media clip. The scene confirms the objects exist, not a player melee loadout — treat as a possible melee prop until playable use is demonstrated.",
-    img: "",
+    img: "/img/gunstore.svg",
   },
   {
     id: "pool-cue",
@@ -3554,7 +3554,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar bar/pool screenshot",
     description:
       "Ordinary pool cue seen with Jason and Cal Hampton during a game of pool. Present as sports equipment with no attack animation shown — list as a possible melee item, not a confirmed weapon.",
-    img: "",
+    img: "/img/gunstore.svg",
   },
   {
     id: "minigolf-club",
@@ -3578,7 +3578,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar minigolf screenshot",
     description:
       "Short golf club brandished by Cal Hampton during a round of minigolf in an official screenshot. Its presence does not confirm that Jason or Lucia can equip it as a weapon.",
-    img: "",
+    img: "/img/gunstore.svg",
   },
   {
     id: "baseball-bat",
@@ -3602,7 +3602,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Port Gellhorn character screenshot",
     description:
       "Conventional wooden or dark-finished bat carried by an NPC in Port Gellhorn. A recurring GTA melee class, but GTA 6 mechanics and player usability remain unconfirmed.",
-    img: "",
+    img: "/img/gunstore.svg",
   },
   {
     id: "switchblade-knife",
@@ -3626,7 +3626,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Ultimate Edition weapon promotional image",
     description:
       "Compact folding knife with switchblade form shown alongside promoted weapon items in Ultimate Edition art. Visible in official art, but active player use and statistics are unconfirmed.",
-    img: "",
+    img: "/img/gunstore.svg",
   },
   {
     id: "unarmed-combat",
@@ -3650,7 +3650,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 1 (motel fight) and Trailer 2 (cargo-plane fight)",
     description:
       "Hand-to-hand combat shown across both trailers — punches and physical fighting without a held weapon. Unarmed fighting is visually established; the control system, damage model and moves are unpublished.",
-    img: "",
+    img: "/img/gunstore.svg",
   }
 ];
 
