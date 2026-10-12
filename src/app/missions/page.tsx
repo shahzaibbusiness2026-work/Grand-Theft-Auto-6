@@ -60,7 +60,9 @@ export default async function MissionsPage() {
   // Live Supabase data first; canonical static entries fill anything not yet in the DB.
   let missions: CanonicalMission[] = canonicalMissions;
   try {
-    const dbMissions = (await getMissions()) as DbMission[];
+    // Timeout after 5s - don't let Supabase hang the page
+    const timeout = new Promise<null>((_, reject) => setTimeout(() => reject(new Error("timeout")), 5000));
+    const dbMissions = (await Promise.race([getMissions(), timeout])) as DbMission[] | null;
     if (dbMissions && dbMissions.length > 0) {
       const dbIds = new Set(dbMissions.map((m) => m.id.toLowerCase()));
       const dbNames = new Set(dbMissions.map((m) => m.name.toLowerCase()));

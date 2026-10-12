@@ -1,27 +1,17 @@
 import type { Metadata } from "next";
-import { Poppins, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getSeoSettings } from "@/lib/services/seo";
 import { getSiteSettings } from "@/lib/services/settings";
 import { serializeJsonLd } from "@/lib/utils";
 import "./globals.css";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  // Only load weights actually used by the design system
-  weight: ["700", "800", "900"],
+// Generic system font stacks - clean, familiar, non-robotic
+const fontDisplay = {
   variable: "--font-display",
-  display: "swap",
-  preload: true,
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+};
+const fontSans = {
   variable: "--font-sans",
-  display: "swap",
-  preload: true,
-});
+};
 
 const FALLBACK_SITE_URL = "https://gta6atlas.com";
 
@@ -143,7 +133,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body
         suppressHydrationWarning
-        className={`${poppins.variable} ${inter.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
+        className={`${fontDisplay.variable} ${fontSans.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
       >
         <ThemeProvider>{children}</ThemeProvider>
       </body>
