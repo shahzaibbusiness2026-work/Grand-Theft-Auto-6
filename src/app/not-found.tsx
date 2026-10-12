@@ -18,10 +18,10 @@ export default function NotFound() {
       <section className="relative overflow-hidden" aria-labelledby="not-found-title">
         <ThemeImage
           dark="/img/hero-dark.jpg"
-          light="/img/hero-dark.jpg"
+          light="/img/hero-light.jpg"
           alt=""
           role="presentation"
-          className="absolute inset-0 h-full w-full object-cover opacity-80 dark:opacity-60 brightness-110"
+          className="absolute inset-0 h-full w-full object-cover opacity-80 dark:opacity-60 dark:brightness-110"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/50 dark:from-background/55 dark:via-background/70 to-background" />
         <div className="container-site relative flex flex-col items-center pt-16 text-center">

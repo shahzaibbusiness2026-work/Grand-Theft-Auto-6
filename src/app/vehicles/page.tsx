@@ -51,7 +51,7 @@ export default async function VehiclesPage() {
             alt="Super car"
             className="absolute right-0 top-0 h-full w-full object-cover object-[70%_60%] lg:w-2/3 opacity-80"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-background/35 dark:from-background/95 dark:via-background/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-background/20 dark:from-background/95 dark:via-background/60 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent">
               <Sparkles className="h-3 w-3" /> Confirmed Roster
@@ -97,7 +97,7 @@ export default async function VehiclesPage() {
             alt="Dream ride"
             className="absolute inset-0 h-full w-full object-cover opacity-60 dark:opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/50 dark:from-background/95 dark:via-background/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-background/25 dark:from-background/95 dark:via-background/80 to-transparent" />
           <div className="relative flex flex-col gap-5 px-6 py-10 sm:px-10 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <span className="text-xs font-black uppercase tracking-widest text-primary">PLAYER GARAGE</span>
