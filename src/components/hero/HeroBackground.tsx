@@ -29,8 +29,8 @@ export function HeroBackground() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 transition-all duration-300" />
 
       {/* 5. Edge vignettes */}
-      <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-background to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/60 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent" />
     </div>
   );
 }
