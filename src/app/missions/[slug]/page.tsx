@@ -117,9 +117,9 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
 
         {/* HERO BANNER */}
         <div className="card-surface relative overflow-hidden rounded-3xl border border-border shadow-2xl p-6 sm:p-10">
-          <div className="absolute right-0 top-0 h-full w-full lg:w-2/3 opacity-40">
+          <div className="absolute right-0 top-0 h-full w-full lg:w-2/3 opacity-70 dark:opacity-40">
             <img loading="lazy" src={mission.img} alt={mission.title} className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-background/40 dark:from-background dark:via-background/80 to-transparent" />
           </div>
 
           <div className="relative max-w-xl space-y-4">

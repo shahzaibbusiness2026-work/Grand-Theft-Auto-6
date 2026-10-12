@@ -14,16 +14,25 @@ interface ThemeImageProps {
 
 /** Renders consistent cinematic artwork across both dark and bright themes with Next.js image optimization. */
 export function ThemeImage({ dark, light, className, alt = "GTA 6 Atlas Artwork", priority = false }: ThemeImageProps) {
-  const src = dark || light;
-
+  const base = "object-cover transition-opacity duration-300 pointer-events-none";
   return (
-    <Image
-      src={src}
-      alt={alt}
-      fill
-      priority={priority}
-      sizes="100vw"
-      className={cn("object-cover transition-opacity duration-300 pointer-events-none", className)}
-    />
+    <>
+      <Image
+        src={light}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes="100vw"
+        className={cn(base, className, "dark:hidden")}
+      />
+      <Image
+        src={dark}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes="100vw"
+        className={cn(base, className, "hidden dark:block")}
+      />
+    </>
   );
 }

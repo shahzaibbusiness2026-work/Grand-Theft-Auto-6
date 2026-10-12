@@ -92,15 +92,15 @@ export default async function MissionsPage() {
             alt="Leonida Missions"
             className="absolute right-0 top-0 h-full w-full object-cover lg:w-2/3 opacity-70"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/50 dark:from-black/85 dark:via-black/60 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-accent mb-3">
               <Flag className="h-3 w-3" /> Campaign & Heists Archive
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
+            <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground dark:text-white">
               LEONIDA <span className="text-primary">MISSIONS & HEISTS</span>
             </h1>
-            <p className="mt-4 text-sm leading-relaxed text-slate-300">
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground dark:text-slate-300">
               Browse confirmed story chapters, multi-approach bank heists, cartel side contracts, and dynamic stranger encounters across Vice City and beyond.
             </p>
           </div>
