@@ -135,6 +135,20 @@ export function RadioClient({ initialStations }: { initialStations?: RadioStatio
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Station Selection Cards */}
         <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {filteredStations.length === 0 && (
+            <div className="col-span-full flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-muted/20 px-6 py-16 text-center">
+              <p className="text-base font-bold text-foreground">No stations found</p>
+              <p className="mt-1.5 text-sm text-muted-foreground">
+                Nothing matches &quot;{searchQuery}&quot;. Try a different station, genre, or host.
+              </p>
+              <button
+                onClick={() => setSearchQuery("")}
+                className="mt-4 rounded-xl bg-[#C9A86A] px-5 py-2 text-sm font-bold text-[#0a0f1e] hover:bg-[#d4b578] transition-colors"
+              >
+                Clear Search
+              </button>
+            </div>
+          )}
           {filteredStations.map((station) => {
             const isSelected = activeStation.id === station.id;
             return (

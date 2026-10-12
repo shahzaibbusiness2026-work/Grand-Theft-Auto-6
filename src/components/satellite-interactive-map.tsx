@@ -505,7 +505,6 @@ export function SatelliteInteractiveMap({
   const [userNotes, setUserNotes] = useState<Record<string, string>>({});
   const [favoriteLocations, setFavoriteLocations] = useState<string[]>([]);
   const [copiedShare, setCopiedShare] = useState(false);
-  const [clusterMode, setClusterMode] = useState(false);
 
   // Live category counts derived from the actual marker set (bundled + CMS).
   const filterCounts = useMemo(() => {
@@ -544,7 +543,9 @@ export function SatelliteInteractiveMap({
   const [showGrid, setShowGrid] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(initialFullscreen);
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
-  const [rightDrawerOpen, setRightDrawerOpen] = useState(true);
+  const [rightDrawerOpen, setRightDrawerOpen] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth >= 640 : true
+  );
   const [activeDistrict, setActiveDistrict] = useState("all");
   const [mouseCoords, setMouseCoords] = useState<{ lat: string; lng: string }>({
     lat: "25°46'31\"N",
@@ -1235,17 +1236,7 @@ export function SatelliteInteractiveMap({
             <span className="text-xs font-mono text-cyan-600 dark:text-[#00F0FF] font-bold">
               ZOOM: {Math.round(zoom * 100)}%
             </span>
-            <span className="h-3 w-px bg-muted/60" />
-            <button
-              onClick={() => setClusterMode((prev) => !prev)}
-              className={cn(
-                "flex items-center gap-1 px-2 py-0.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors",
-                clusterMode ? "bg-accent text-accent-foreground" : "bg-muted/50 text-muted-foreground hover:text-foreground"
-              )}
-            >
-              <Layers2 className="h-3 w-3" />
-              <span>{clusterMode ? "Clusters ON" : "Pins"}</span>
-            </button>
+
           </div>
         </div>
 
