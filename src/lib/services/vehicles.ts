@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { clearVehiclesCache } from "./catalog-cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
@@ -379,6 +380,7 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
     revalidatePath("/compare/vehicles");
     revalidatePath("/vehicles/compare");
     revalidatePath("/rankings");
+    clearVehiclesCache();
 
     return { success: true, id };
   } catch (err) {
@@ -402,6 +404,7 @@ export async function deleteVehicle(id: string) {
     revalidatePath("/vehicles");
     revalidatePath("/");
     revalidatePath("/admin/vehicles");
+    clearVehiclesCache();
 
     return { success: true };
   } catch (err) {

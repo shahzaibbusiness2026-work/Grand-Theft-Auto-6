@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { clearWeaponsCache } from "./catalog-cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
@@ -288,6 +289,7 @@ export async function saveWeapon(weapon: Partial<AdminWeapon> & { name: string; 
     revalidatePath("/compare/weapons");
     revalidatePath("/weapons/compare");
     revalidatePath("/rankings");
+    clearWeaponsCache();
 
     return { success: true, id };
   } catch (err) {
@@ -310,6 +312,7 @@ export async function deleteWeapon(id: string) {
 
     revalidatePath("/weapons");
     revalidatePath("/admin/weapons");
+    clearWeaponsCache();
 
     return { success: true };
   } catch (err) {

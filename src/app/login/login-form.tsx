@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Mail, ArrowRight, Loader2 } from "lucide-react";
+import { Mail, ArrowRight, Loader2, HardDrive } from "lucide-react";
 import { setUserEmail } from "@/lib/user-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -72,6 +72,11 @@ export function LoginForm() {
           </>
         )}
       </Button>
+
+      <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+        <HardDrive className="h-3.5 w-3.5" aria-hidden="true" />
+        Local profile — saved on this device only. Nothing is uploaded.
+      </p>
     </form>
   );
 }

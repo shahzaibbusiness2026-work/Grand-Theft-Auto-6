@@ -7,7 +7,10 @@ import { getNewsletterSubscribers } from "@/lib/services/newsletter";
  * POST /api/admin/broadcast
  * Sends a launch announcement to all newsletter subscribers via Resend.
  *
- * Body: { subject: string, message: string }
+ * Body: { subject: string, message: string, dryRun?: boolean, confirm?: boolean }
+ *
+ * Safety: requires dryRun first (returns preview), then confirm: true to actually send.
+ * This prevents accidental mass sends.
  *
  * Requires:
  * - Admin session (assertAdmin)
@@ -32,7 +35,7 @@ export async function POST(req: Request) {
     );
   }
 
-  let body: { subject?: string; message?: string };
+  let body: { subject?: string; message?: string; dryRun?: boolean; confirm?: boolean };
   try {
     body = await req.json();
   } catch {
@@ -58,6 +61,25 @@ export async function POST(req: Request) {
   if (!subscribers || subscribers.length === 0) {
     return NextResponse.json(
       { error: "No subscribers to send to" },
+      { status: 400 }
+    );
+  }
+
+  // Dry-run mode: return preview without sending
+  if (body.dryRun) {
+    return NextResponse.json({
+      dryRun: true,
+      subscriberCount: subscribers.length,
+      subject,
+      messagePreview: message.slice(0, 500) + (message.length > 500 ? "..." : ""),
+      from: process.env.BROADCAST_FROM_EMAIL || "GTA 6 Atlas <onboarding@resend.dev>",
+    });
+  }
+
+  // Require explicit confirmation to prevent accidental sends
+  if (!body.confirm) {
+    return NextResponse.json(
+      { error: "Confirmation required. Send dryRun: true first to preview, then confirm: true to send." },
       { status: 400 }
     );
   }

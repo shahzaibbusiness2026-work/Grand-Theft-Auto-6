@@ -4,7 +4,7 @@ import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = {
   title: "Login | GTA 6 Atlas",
-  description: "Log in to GTA 6 Atlas to sync your dashboard, favorites, and tracker progress.",
+  description: "Create a free local profile on GTA 6 Atlas — your dashboard, favorites, and tracker progress are saved on this device only.",
   alternates: { canonical: "/login" },
 };
 
@@ -19,12 +19,12 @@ export default function LoginPage() {
                 Welcome Back
               </h1>
               <p className="mt-2 text-sm text-muted-foreground">
-                Enter your email to access your dashboard, favorites, and tracker.
+                Enter your email to set up your local profile for the dashboard, favorites, and tracker.
               </p>
             </div>
             <LoginForm />
             <p className="mt-6 text-center text-xs text-muted-foreground">
-              New here? Just enter your email — an account is created automatically.
+              New here? Just enter your email — a local profile is created on this device automatically.
             </p>
           </div>
         </div>

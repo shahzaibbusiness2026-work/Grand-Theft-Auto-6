@@ -24,6 +24,40 @@ import {
   VEHICLE_CLASS_DEFAULTS,
   WEAPON_CATEGORY_DEFAULTS,
 } from "@/lib/scoring";
+import {
+  getCachedVehicles,
+  setCachedVehicles,
+  getCachedWeapons,
+  setCachedWeapons,
+  clearCatalogCache,
+} from "./catalog-cache";
+
+// Re-exported for admin save/delete actions and API routes.
+export { clearCatalogCache };
+
+/* Precomputed canonical lookups — O(1) instead of array .find() per DB row. */
+const canonicalVehicleById = new Map<string, CanonicalVehicle>();
+const canonicalVehicleByName = new Map<string, CanonicalVehicle>();
+for (const cv of canonicalVehicles) {
+  canonicalVehicleById.set(cv.id.toLowerCase(), cv);
+  const nameKey = cv.name.toLowerCase();
+  if (!canonicalVehicleByName.has(nameKey)) canonicalVehicleByName.set(nameKey, cv);
+}
+const canonicalWeaponById = new Map<string, CanonicalWeapon>();
+const canonicalWeaponByName = new Map<string, CanonicalWeapon>();
+for (const cw of canonicalWeapons) {
+  canonicalWeaponById.set(cw.id.toLowerCase(), cw);
+  const nameKey = cw.name.toLowerCase();
+  if (!canonicalWeaponByName.has(nameKey)) canonicalWeaponByName.set(nameKey, cw);
+}
+
+function findCanonicalVehicle(id: string, name: string): CanonicalVehicle | undefined {
+  return canonicalVehicleById.get(id.toLowerCase()) ?? canonicalVehicleByName.get(name.toLowerCase());
+}
+
+function findCanonicalWeapon(id: string, name: string): CanonicalWeapon | undefined {
+  return canonicalWeaponById.get(id.toLowerCase()) ?? canonicalWeaponByName.get(name.toLowerCase());
+}
 
 const num = (s?: string | null): number | null => {
   const n = parseFloat((s || "").replace(/,/g, ""));
@@ -170,17 +204,18 @@ function dbWeaponToDisplay(w: WeaponCatalogRow, c?: CanonicalWeapon): CanonicalW
  * unreachable or empty.
  */
 export async function getMergedVehicles(): Promise<CanonicalVehicle[]> {
+  const cached = getCachedVehicles<CanonicalVehicle>();
+  if (cached) return cached;
+  const merged = await buildMergedVehicles();
+  setCachedVehicles(merged);
+  return merged;
+}
+
+async function buildMergedVehicles(): Promise<CanonicalVehicle[]> {
   try {
     const dbVehicles = await getPublicVehicleCatalog();
     if (dbVehicles && dbVehicles.length > 0) {
-      const dbMapped = dbVehicles.map((v) =>
-        dbVehicleToDisplay(
-          v,
-          canonicalVehicles.find(
-            (cv) => cv.id.toLowerCase() === v.id.toLowerCase() || cv.name.toLowerCase() === v.name.toLowerCase()
-          )
-        )
-      );
+      const dbMapped = dbVehicles.map((v) => dbVehicleToDisplay(v, findCanonicalVehicle(v.id, v.name)));
       const dbIds = new Set(dbVehicles.map((v) => v.id.toLowerCase()));
       const dbNames = new Set(dbVehicles.map((v) => v.name.toLowerCase()));
       const remainingCanonical = canonicalVehicles.filter(
@@ -198,17 +233,18 @@ export async function getMergedVehicles(): Promise<CanonicalVehicle[]> {
  * Published weapons for display: same merge rules as getMergedVehicles.
  */
 export async function getMergedWeapons(): Promise<CanonicalWeapon[]> {
+  const cached = getCachedWeapons<CanonicalWeapon>();
+  if (cached) return cached;
+  const merged = await buildMergedWeapons();
+  setCachedWeapons(merged);
+  return merged;
+}
+
+async function buildMergedWeapons(): Promise<CanonicalWeapon[]> {
   try {
     const dbWeapons = await getPublicWeaponCatalog();
     if (dbWeapons && dbWeapons.length > 0) {
-      const dbMapped = dbWeapons.map((w) =>
-        dbWeaponToDisplay(
-          w,
-          canonicalWeapons.find(
-            (cw) => cw.id.toLowerCase() === w.id.toLowerCase() || cw.name.toLowerCase() === w.name.toLowerCase()
-          )
-        )
-      );
+      const dbMapped = dbWeapons.map((w) => dbWeaponToDisplay(w, findCanonicalWeapon(w.id, w.name)));
       const dbIds = new Set(dbWeapons.map((w) => w.id.toLowerCase()));
       const dbNames = new Set(dbWeapons.map((w) => w.name.toLowerCase()));
       const remainingCanonical = canonicalWeapons.filter(

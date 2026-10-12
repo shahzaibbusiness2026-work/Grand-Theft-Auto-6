@@ -63,16 +63,41 @@ export default function AdminSubscribersPage() {
     });
   };
 
-  const handleBroadcast = async () => {
+  const [previewData, setPreviewData] = useState<{subscriberCount: number; subject: string; messagePreview: string} | null>(null);
+
+  const handlePreview = async () => {
     if (!broadcastSubject.trim() || !broadcastMessage.trim() || sending) return;
-    if (!confirm(`Send this email to ${subscribers.length} subscriber(s)?`)) return;
     setSending(true);
     setSendResult(null);
+    setPreviewData(null);
     try {
       const res = await fetch("/api/admin/broadcast", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subject: broadcastSubject.trim(), message: broadcastMessage.trim() }),
+        body: JSON.stringify({ subject: broadcastSubject.trim(), message: broadcastMessage.trim(), dryRun: true }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        showToast({ title: "Preview failed", description: data.error || "Unknown error", type: "danger" });
+      } else {
+        setPreviewData(data);
+      }
+    } catch {
+      showToast({ title: "Preview failed", description: "Network error", type: "danger" });
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const handleBroadcast = async () => {
+    if (!previewData) return;
+    if (!confirm(`Send this email to ${previewData.subscriberCount} subscriber(s)? This cannot be undone.`)) return;
+    setSending(true);
+    try {
+      const res = await fetch("/api/admin/broadcast", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subject: broadcastSubject.trim(), message: broadcastMessage.trim(), confirm: true }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -82,6 +107,7 @@ export default function AdminSubscribersPage() {
         showToast({ title: "Broadcast sent", description: `${data.sent} sent, ${data.failed} failed.`, type: "success" });
         setBroadcastSubject("");
         setBroadcastMessage("");
+        setPreviewData(null);
       }
     } catch {
       showToast({ title: "Broadcast failed", description: "Network error", type: "danger" });
@@ -167,12 +193,12 @@ export default function AdminSubscribersPage() {
             <div className="flex items-center gap-3">
               <button
                 type="button"
-                onClick={handleBroadcast}
+                onClick={handlePreview}
                 disabled={sending || !broadcastSubject.trim() || !broadcastMessage.trim()}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#6366F1] hover:bg-[#5457E5] text-white text-sm font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-4 h-4" />
-                {sending ? "Sending…" : `Send to ${subscribers.length} subscriber(s)`}
+                {sending ? "Loading…" : "Preview broadcast"}
               </button>
               {sendResult && (
                 <span className="text-xs text-emerald-400 font-semibold">
@@ -180,6 +206,30 @@ export default function AdminSubscribersPage() {
                 </span>
               )}
             </div>
+            {previewData && (
+              <div className="mt-4 p-4 rounded-xl bg-[#0B0F1A] border border-amber-500/30">
+                <div className="text-sm font-bold text-amber-400 mb-2">Preview — {previewData.subscriberCount} recipients</div>
+                <div className="text-sm font-semibold text-white mb-1">{previewData.subject}</div>
+                <div className="text-xs text-[#94A3B8] whitespace-pre-wrap mb-4">{previewData.messagePreview}</div>
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={handleBroadcast}
+                    disabled={sending}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold transition-colors disabled:opacity-50"
+                  >
+                    {sending ? "Sending…" : `Confirm & send to ${previewData.subscriberCount}`}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPreviewData(null)}
+                    className="px-4 py-2.5 rounded-xl text-sm text-[#94A3B8] hover:text-white transition-colors"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
