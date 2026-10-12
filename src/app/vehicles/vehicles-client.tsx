@@ -104,7 +104,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
               <button
                 onClick={() => setSortBy("speed")}
                 className={cn(
-                  "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
+                  "rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
                   sortBy === "speed" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -113,7 +113,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
               <button
                 onClick={() => setSortBy("power")}
                 className={cn(
-                  "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
+                  "rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
                   sortBy === "power" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -122,7 +122,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
               <button
                 onClick={() => setSortBy("price")}
                 className={cn(
-                  "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
+                  "rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
                   sortBy === "price" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -131,7 +131,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
               <button
                 onClick={() => setSortBy("name")}
                 className={cn(
-                  "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
+                  "rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
                   sortBy === "name" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -156,7 +156,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
             <button
               onClick={() => setConfidenceFilter("all")}
               className={cn(
-                "rounded-lg px-3 py-1.5 text-xs font-semibold transition-all",
+                "rounded-lg px-4 py-2.5 text-sm font-semibold transition-all",
                 confidenceFilter === "all" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -165,7 +165,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
             <button
               onClick={() => setConfidenceFilter("official")}
               className={cn(
-                "rounded-lg px-3 py-1.5 text-xs font-semibold transition-all",
+                "rounded-lg px-4 py-2.5 text-sm font-semibold transition-all",
                 confidenceFilter === "official" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -174,7 +174,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
             <button
               onClick={() => setConfidenceFilter("rumored")}
               className={cn(
-                "rounded-lg px-3 py-1.5 text-xs font-semibold transition-all",
+                "rounded-lg px-4 py-2.5 text-sm font-semibold transition-all",
                 confidenceFilter === "rumored" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -190,7 +190,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
               key={cat}
               onClick={() => setSelectedCat(cat)}
               className={cn(
-                "rounded-lg px-3 py-1.5 text-xs font-semibold transition-all",
+                "rounded-lg px-4 py-2.5 text-sm font-semibold transition-all",
                 selectedCat === cat
                   ? "bg-primary text-primary-foreground shadow-sm font-bold"
                   : "bg-muted/40 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
@@ -258,7 +258,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                         handleToggleFav(v.id);
                       }}
                       className={cn(
-                        "absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full backdrop-blur-md transition-all",
+                        "absolute right-2.5 top-2.5 flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md transition-all",
                         isFav
                           ? "bg-gold text-slate-950 shadow-md"
                           : "bg-black/50 text-white hover:bg-black/80"

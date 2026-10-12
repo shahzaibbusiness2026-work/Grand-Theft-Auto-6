@@ -979,7 +979,7 @@ export function SatelliteInteractiveMap({
           <div className="absolute right-3 top-3 z-30 w-80 max-w-[calc(100vw-24px)] rounded-2xl border border-border bg-[#070c18]/95 p-5 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-right duration-200">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2.5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-xl border border-gold/40 bg-gold/15 text-gold-light">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/40 bg-gold/15 text-gold-light">
                   <selectedPOI.icon className="h-4 w-4" />
                 </span>
                 <div>
@@ -1205,7 +1205,7 @@ export function SatelliteInteractiveMap({
 
                   <span
                     className={cn(
-                      "flex h-7 w-7 items-center justify-center rounded-full border-2 border-white text-white shadow-[0_0_15px_rgba(0,0,0,0.9)] transition-all",
+                      "flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-white shadow-[0_0_15px_rgba(0,0,0,0.9)] transition-all",
                       isCollected ? "bg-emerald-500" : m.color,
                       isSelected && "ring-4 ring-white scale-125 shadow-[0_0_20px_#f59e0b]"
                     )}
@@ -1247,7 +1247,7 @@ export function SatelliteInteractiveMap({
                 const nextZoom = Math.min(3.2, +(zoom + 0.3).toFixed(2));
                 setZoom(nextZoom);
               }}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-white hover:bg-muted/60 transition-colors"
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-white hover:bg-muted/60 transition-colors"
               title="Zoom In"
             >
               <Plus className="h-4 w-4" />
@@ -1257,14 +1257,14 @@ export function SatelliteInteractiveMap({
                 const nextZoom = Math.max(0.65, +(zoom - 0.3).toFixed(2));
                 setZoom(nextZoom);
               }}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-white hover:bg-muted/60 transition-colors"
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-white hover:bg-muted/60 transition-colors"
               title="Zoom Out"
             >
               <Minus className="h-4 w-4" />
             </button>
             <button
               onClick={centerMap}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-white hover:bg-muted/60 transition-colors"
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-white hover:bg-muted/60 transition-colors"
               title="Reset Center"
             >
               <LocateFixed className="h-4 w-4" />
