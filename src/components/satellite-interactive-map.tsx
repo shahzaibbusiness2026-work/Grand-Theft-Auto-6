@@ -355,6 +355,66 @@ const POIS: MapPOI[] = [
     icon: Car,
     verified: true,
   },
+  {
+    id: "poi-ambrosia-refinery",
+    title: "Allied Crystal Sugar Refinery",
+    category: "locations",
+    type: "Industrial Landmark",
+    district: "Ambrosia",
+    desc: "Massive sugar refinery dominating Ambrosia — company town centerpiece, biker gang territory.",
+    img: "/img/hero-dark.jpg",
+    hours: "Restricted Area",
+    top: "28%",
+    left: "48%",
+    color: "bg-orange-600",
+    icon: Building2,
+    verified: true,
+  },
+  {
+    id: "poi-ambrosia-garage",
+    title: "Biker Garage & Chop Shop",
+    category: "garages",
+    type: "Garage & Mod Shop",
+    district: "Ambrosia",
+    desc: "Biker gang-run chop shop — custom choppers, off-road mods, no questions asked.",
+    img: "/img/garage.jpg",
+    hours: "Open 24/7",
+    top: "30%",
+    left: "52%",
+    color: "bg-cyan-500 dark:bg-[#00F0FF]",
+    icon: Warehouse,
+    verified: true,
+  },
+  {
+    id: "poi-kalaga-trails",
+    title: "Mount Kalaga Trailhead",
+    category: "collectibles",
+    type: "Wilderness Area",
+    district: "Mount Kalaga National Park",
+    desc: "Trailhead for hunting, fishing, and off-road adventures in the northern wilderness.",
+    img: "/img/cache-chest.jpg",
+    hours: "Dawn to Dusk",
+    top: "18%",
+    left: "40%",
+    color: "bg-purple-500",
+    icon: Gem,
+    verified: true,
+  },
+  {
+    id: "poi-kalaga-lookout",
+    title: "Kalaga Summit Lookout",
+    category: "locations",
+    type: "Scenic Viewpoint",
+    district: "Mount Kalaga National Park",
+    desc: "Highest point in Leonida — panoramic views, hidden collectible caches nearby.",
+    img: "/img/hero-dark.jpg",
+    hours: "Open 24/7",
+    top: "15%",
+    left: "38%",
+    color: "bg-emerald-600",
+    icon: MapPin,
+    verified: true,
+  },
 ];
 
 const FOUND_ON_MAP_RAIL = [
@@ -394,6 +454,7 @@ export function SatelliteInteractiveMap({
     easter_eggs: true,
   });
 
+  const [hideCollected, setHideCollected] = useState(false);
   const [allPOIs, setAllPOIs] = useState<MapPOI[]>(POIS);
   const [selectedPOI, setSelectedPOI] = useState<MapPOI | null>(POIS[0]);
   const [collectedPOIs, setCollectedPOIs] = useState<Record<string, boolean>>({
@@ -775,6 +836,7 @@ export function SatelliteInteractiveMap({
   // Filtered POIs
   const visiblePOIs = useMemo(() => {
     return allPOIs.filter((p) => {
+      if (hideCollected && collectedPOIs[p.id]) return false;
       const isCategoryChecked = checkedFilters.all || checkedFilters[p.category];
       const matchesSearch =
         searchQuery.trim() === "" ||
@@ -784,7 +846,7 @@ export function SatelliteInteractiveMap({
         p.type.toLowerCase().includes(searchQuery.toLowerCase());
       return isCategoryChecked && matchesSearch;
     });
-  }, [allPOIs, checkedFilters, searchQuery]);
+  }, [allPOIs, checkedFilters, searchQuery, hideCollected, collectedPOIs]);
 
   const verifiedTotal = Object.values(collectedPOIs).filter(Boolean).length;
 
@@ -936,6 +998,43 @@ export function SatelliteInteractiveMap({
               )}
             </div>
 
+            {/* Collectible Tracker */}
+            {(() => {
+              const collectiblePOIs = allPOIs.filter((p) => p.category === "collectibles");
+              const collectedCount = collectiblePOIs.filter((p) => collectedPOIs[p.id]).length;
+              const totalCount = collectiblePOIs.length;
+              const pct = totalCount > 0 ? Math.round((collectedCount / totalCount) * 100) : 0;
+              return (
+                <div className="mt-3 rounded-xl border border-purple-500/30 bg-purple-500/10 p-3">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-bold text-purple-300 flex items-center gap-1.5">
+                      <Gem className="h-3.5 w-3.5" />
+                      Collectibles
+                    </span>
+                    <span className="text-xs font-mono text-purple-300">{collectedCount}/{totalCount} ({pct}%)</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-black/40 overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-400 transition-all duration-500"
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                  <button
+                    onClick={() => setHideCollected(!hideCollected)}
+                    className={cn(
+                      "mt-2 flex w-full items-center justify-center gap-1.5 rounded-lg py-1.5 text-xs font-bold transition-all border",
+                      hideCollected
+                        ? "border-purple-500/50 bg-purple-500/20 text-purple-200"
+                        : "border-slate-600 bg-slate-800/50 text-slate-300 hover:bg-slate-700/50"
+                    )}
+                  >
+                    <EyeOff className="h-3 w-3" />
+                    {hideCollected ? "Showing All" : "Hide Collected"}
+                  </button>
+                </div>
+              );
+            })()}
+
             {/* Checklist items */}
             <div className="mt-3 flex-1 space-y-0.5 overflow-y-auto pr-1 no-scrollbar">
               {CATEGORY_FILTERS.map((f) => {
@@ -1053,7 +1152,7 @@ export function SatelliteInteractiveMap({
                   "flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition-all border",
                   collectedPOIs[selectedPOI.id]
                     ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-300"
-                    : "border-border bg-muted/40 text-muted-foreground hover:bg-muted/50"
+                    : "border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200"
                 )}
               >
                 <Check className="h-3.5 w-3.5" />
@@ -1062,7 +1161,7 @@ export function SatelliteInteractiveMap({
 
               <button
                 onClick={() => focusOnPOI(selectedPOI)}
-                className="flex items-center justify-center gap-1.5 rounded-xl bg-gold py-2 text-xs font-black text-slate-950 shadow-md hover:brightness-105 transition-all"
+                className="flex items-center justify-center gap-1.5 rounded-xl bg-[#C9A86A] py-2 text-xs font-black text-slate-950 shadow-md hover:brightness-105 transition-all"
               >
                 <Navigation className="h-3.5 w-3.5" />
                 <span>Center GPS</span>
