@@ -12,7 +12,6 @@
  */
 
 import { createPublicClient } from "@/lib/supabase/public";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { articles as fallbackArticles, Article, Character, Vehicle } from "@/lib/data";
 import { AdminWeapon } from "@/lib/admin-store";
 import { getPublicArticles as _getPublicArticles } from "./articles";

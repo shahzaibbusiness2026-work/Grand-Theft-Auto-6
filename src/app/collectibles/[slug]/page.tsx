@@ -6,7 +6,6 @@ import {
   ArrowLeft,
   CheckCircle2,
   Compass,
-  AlertTriangle,
   Lightbulb,
   ExternalLink,
   ChevronRight,

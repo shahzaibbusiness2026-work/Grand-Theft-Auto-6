@@ -8,26 +8,21 @@ import {
   X,
   Share2,
   Check,
-  Sparkles,
   Gauge,
   Timer,
   Disc3,
   Car,
   Zap,
-  ArrowRight,
   ThumbsUp,
   ThumbsDown,
-  Award,
   ChevronRight,
 } from "lucide-react";
 import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
 import type { VehicleScoreWeights } from "@/lib/scoring";
-import { computeVehicleScore, getVehicleBestFor, normalizeWeights } from "@/lib/scoring";
+import { computeVehicleScore, getVehicleBestFor } from "@/lib/scoring";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
 import { RadarChart, RADAR_COLORS } from "@/components/radar-chart";
 import { ComparisonTable, type ComparisonRowDef } from "@/components/comparison-table";

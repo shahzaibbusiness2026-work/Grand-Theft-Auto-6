@@ -2,18 +2,10 @@
 import { notFound } from "next/navigation";
 import {
   ChevronRight,
-  Flag,
   Target,
-  Clock,
-  Coins,
-  ShieldCheck,
-  Users,
   CheckCircle2,
   Sparkles,
   MapPin,
-  Car,
-  Crosshair,
-  ArrowRight,
   Lightbulb,
   Split,
   Unlock,
@@ -21,8 +13,7 @@ import {
 import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ThemeImage } from "@/components/theme-image";
-import { canonicalMissions, canonicalLocations, canonicalVehicles, canonicalWeapons, type CanonicalMission } from "@/lib/canonical-data";
+import { canonicalMissions, canonicalLocations, type CanonicalMission } from "@/lib/canonical-data";
 import { getMissions } from "@/lib/services/missions";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 

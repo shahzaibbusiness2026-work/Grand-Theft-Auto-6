@@ -8,19 +8,14 @@ import {
   Circle,
   Search,
   MapPin,
-  Sparkles,
   ExternalLink,
   HelpCircle,
   Trophy,
-  Filter,
-  Eye,
-  SlidersHorizontal,
 } from "lucide-react";
 import { canonicalCollectibles as collectiblesFallback, type CanonicalCollectible } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import {
   getStoredUserState,
-  saveStoredUserState,
   toggleTrackerItem,
   type UserState,
 } from "@/lib/user-store";

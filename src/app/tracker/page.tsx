@@ -1,7 +1,7 @@
 import { SiteShell } from "@/components/shells";
 import { TrackerClient } from "./tracker-client";
 import { getTrackerCategories } from "@/lib/services/tracker";
-import { Trophy, CheckCircle2, ShieldCheck } from "lucide-react";
+import { Trophy } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

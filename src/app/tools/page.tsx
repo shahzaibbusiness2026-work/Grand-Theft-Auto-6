@@ -12,14 +12,11 @@ import {
   Bot,
   Sliders,
   ArrowRight,
-  ShieldCheck,
   Wrench,
   Sparkles,
-  Search,
   Flag,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
-import { SectionHeader } from "@/components/section-header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

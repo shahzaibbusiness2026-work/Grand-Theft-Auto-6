@@ -15,7 +15,7 @@ import {
   Check, 
   Share2 
 } from "lucide-react";
-import { Character, roleColor } from "@/lib/data";
+import { Character } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 

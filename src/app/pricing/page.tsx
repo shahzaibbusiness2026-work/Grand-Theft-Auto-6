@@ -1,6 +1,6 @@
 import { SiteShell } from "@/components/shells";
 import { PricingClient } from "./pricing-client";
-import { Crown, Sparkles } from "lucide-react";
+import { Crown } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

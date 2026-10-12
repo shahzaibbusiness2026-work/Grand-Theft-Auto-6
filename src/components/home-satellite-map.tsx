@@ -11,7 +11,6 @@ import {
   ArrowRight,
   Layers,
   Sparkles,
-  MapPin,
   Crosshair,
   Warehouse,
   Home,
@@ -19,7 +18,6 @@ import {
   Star,
   Egg,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const PREVIEW_PINS = [

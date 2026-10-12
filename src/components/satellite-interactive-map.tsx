@@ -12,49 +12,35 @@ import {
   Sun,
   EyeOff,
   Flag,
-  RotateCcw,
   Star,
-  CircleDot,
   Gem,
   Car,
   Crosshair,
   Warehouse,
   Home,
-  ShoppingCart,
   PersonStanding,
   MapPin,
   Egg,
-  Crown,
   Building2,
-  SlidersHorizontal,
-  List,
   Check,
-  ChevronLeft,
-  ChevronRight,
   Maximize2,
   Minimize2,
   Compass,
   Radio,
   Navigation,
-  Sparkles,
-  Share2,
   ShieldCheck,
   Sliders,
   Heart,
   FileText,
   Copy,
-  Layers2,
   Target,
   ShoppingBag,
   Flame,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { canonicalLocations } from "@/lib/canonical-data";
 import {
   getStoredUserState,
   toggleFavorite,
-  isFavorite,
   toggleMapCompleted,
   setMapNote,
 } from "@/lib/user-store";
@@ -437,7 +423,6 @@ export function SatelliteInteractiveMap({
   initialFullscreen?: boolean;
   standaloneMode?: boolean;
 }) {
-  const [activeTab, setActiveTab] = useState<"filters" | "legend">("filters");
   const [checkedFilters, setCheckedFilters] = useState<Record<string, boolean>>({
     all: true,
     story: true,
@@ -746,26 +731,6 @@ export function SatelliteInteractiveMap({
     setIsDragging(false);
   };
 
-  // Wheel zoom handler
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const delta = e.deltaY < 0 ? 0.15 : -0.15;
-    const newZoom = Math.min(3.2, Math.max(0.65, +(zoom + delta).toFixed(2)));
-
-    if (!viewportRef.current) return;
-    const rect = viewportRef.current.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    // Zoom towards cursor
-    const scaleFactor = newZoom / zoom;
-    const newPanX = mouseX - (mouseX - pan.x) * scaleFactor;
-    const newPanY = mouseY - (mouseY - pan.y) * scaleFactor;
-
-    setZoom(newZoom);
-    setPan({ x: newPanX, y: newPanY });
-  };
-
   // Touch handlers for mobile
   const touchStartRef = useRef<{ x: number; y: number; dist: number }>({ x: 0, y: 0, dist: 0 });
 
@@ -825,13 +790,6 @@ export function SatelliteInteractiveMap({
         all: false,
       }));
     }
-  };
-
-  const toggleCollected = (poiId: string) => {
-    setCollectedPOIs((prev) => ({
-      ...prev,
-      [poiId]: !prev[poiId],
-    }));
   };
 
   // Filtered POIs

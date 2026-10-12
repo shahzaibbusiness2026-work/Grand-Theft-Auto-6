@@ -105,10 +105,6 @@ export default async function ArticleDetailPage({ params }: Props) {
     .concat(all.filter((a) => a.slug !== article.slug && a.category !== article.category))
     .slice(0, 3);
 
-  const paragraphs = (article.content || article.excerpt || "")
-    .split(/\n\s*\n/)
-    .map((p) => p.trim())
-    .filter(Boolean);
 
   const seo = await getSeoSettings();
   const base = seo.canonicalBaseUrl?.startsWith("http")

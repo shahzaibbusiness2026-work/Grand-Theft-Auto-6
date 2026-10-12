@@ -1,6 +1,6 @@
 ﻿import { SiteShell } from "@/components/shells";
 import { LoadoutClient } from "./loadout-client";
-import { Crosshair, Shield } from "lucide-react";
+import { Crosshair } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

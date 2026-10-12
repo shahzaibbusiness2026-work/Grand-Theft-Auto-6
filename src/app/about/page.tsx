@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import { Metadata } from "next";
-import { ShieldCheck, Compass, Users, Sparkles, AlertTriangle } from "lucide-react";
+import { ShieldCheck, Compass, Users, AlertTriangle } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {

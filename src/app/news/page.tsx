@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { SectionHeader } from "@/components/section-header";
 import { NewsletterBar } from "@/components/newsletter-bar";
 import { ArticleCard, PopularRow, CategoryList } from "@/components/article-card";
-import { popularPosts, newsCategories, featuredArticle } from "@/lib/data";
+import { popularPosts, featuredArticle } from "@/lib/data";
 import { getPublicArticles } from "@/lib/services/queries";
 import { getCategories } from "@/lib/services/categories";
 

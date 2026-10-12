@@ -3,13 +3,11 @@
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { SafeImage } from "@/components/safe-image";
-import { Search, Heart, ArrowUpDown, SlidersHorizontal, Trophy, Car, ArrowRight, ShieldCheck } from "lucide-react";
+import { Search, Heart, Trophy, ArrowRight } from "lucide-react";
 import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ConfidenceBadge } from "@/components/confidence-badge";
-import { getStoredUserState, toggleFavorite, isFavorite } from "@/lib/user-store";
+import { getStoredUserState, toggleFavorite } from "@/lib/user-store";
 
 const CATEGORIES = [
   "All Types",

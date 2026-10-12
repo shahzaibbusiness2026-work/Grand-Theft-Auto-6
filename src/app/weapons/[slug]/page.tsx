@@ -5,10 +5,6 @@ import {
   Crosshair,
   ShieldCheck,
   ArrowRight,
-  Zap,
-  Flame,
-  Target,
-  Clock,
   Layers,
   Sparkles,
   MapPin,
@@ -189,8 +185,6 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
     ["Rarity Tier", weapon.rarity],
     ["Confidence Rating", weapon.confidence],
   ];
-
-  const similar = canonicalWeapons.filter((w) => w.id !== weapon.id && w.klass === weapon.klass).slice(0, 3);
 
   return (
     <SiteShell>

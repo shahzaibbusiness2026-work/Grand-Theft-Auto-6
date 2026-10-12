@@ -5,21 +5,14 @@ import Link from "next/link";
 import {
   DollarSign,
   TrendingUp,
-  Clock,
   ShieldAlert,
-  Users,
   User,
   Sparkles,
-  Award,
-  ChevronRight,
   Calculator,
   CheckCircle2,
-  SlidersHorizontal,
-  Flame,
   HelpCircle,
-  Share2,
 } from "lucide-react";
-import { canonicalMoneyMethods, type CanonicalMoneyMethod } from "@/lib/canonical-data";
+import { canonicalMoneyMethods } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { cn } from "@/lib/utils";
 

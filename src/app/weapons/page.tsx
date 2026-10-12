@@ -5,7 +5,7 @@ export { metadata } from './metadata';
 // (15s+ waits on every visit).
 export const revalidate = 3600;
 
-import { Crosshair, ArrowRight, Trophy, Flame } from "lucide-react";
+import { Crosshair, ArrowRight } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";

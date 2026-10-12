@@ -12,7 +12,6 @@ import {
   Sun,
   Moon,
   Bell,
-  ChevronRight,
   ShieldCheck,
   CheckCircle2,
   ExternalLink,

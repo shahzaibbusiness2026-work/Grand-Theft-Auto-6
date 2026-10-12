@@ -8,7 +8,6 @@ export const revalidate = 3600;
 import Link from "next/link";
 import { SafeImage } from "@/components/safe-image";
 import {
-  ArrowRight,
   Clock,
   Mail,
 } from "lucide-react";

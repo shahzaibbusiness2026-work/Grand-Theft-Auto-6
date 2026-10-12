@@ -9,20 +9,9 @@ import {
   User,
   ShieldCheck,
   RotateCcw,
-  ExternalLink,
-  HelpCircle,
-  Clock,
   ArrowRight,
-  Flame,
-  CheckCircle2,
 } from "lucide-react";
 import { ConfidenceBadge } from "@/components/confidence-badge";
-import {
-  getStoredUserState,
-  saveStoredUserState,
-  type ChatMessage,
-  type UserState,
-} from "@/lib/user-store";
 import { cn } from "@/lib/utils";
 
 const STARTER_PROMPTS = [

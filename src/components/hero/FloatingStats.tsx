@@ -12,57 +12,6 @@ interface StatItem {
   iconBg: string;
 }
 
-const STATS: StatItem[] = [
-  {
-    metric: "500+",
-    label: "Characters",
-    href: "/characters",
-    icon: Users,
-    iconColor: "text-gold dark:text-gold-light",
-    iconBg: "bg-gold/15 border-gold/30",
-  },
-  {
-    metric: "200+",
-    label: "Vehicles",
-    href: "/vehicles",
-    icon: Car,
-    iconColor: "text-sky-500 dark:text-cyan-400",
-    iconBg: "bg-sky-500/15 border-sky-500/30",
-  },
-  {
-    metric: "300+",
-    label: "Weapons",
-    href: "/weapons",
-    icon: Crosshair,
-    iconColor: "text-orange-500 dark:text-orange-400",
-    iconBg: "bg-orange-500/15 border-orange-500/30",
-  },
-  {
-    metric: "400+",
-    label: "Missions",
-    href: "/missions",
-    icon: Target,
-    iconColor: "text-emerald-500 dark:text-emerald-400",
-    iconBg: "bg-emerald-500/15 border-emerald-500/30",
-  },
-  {
-    metric: "800+",
-    label: "Locations",
-    href: "/locations",
-    icon: MapPin,
-    iconColor: "text-gold dark:text-gold-light",
-    iconBg: "bg-gold/15 border-gold/30",
-  },
-  {
-    metric: "100%",
-    label: "Completion",
-    href: "/tracker",
-    icon: Trophy,
-    iconColor: "text-yellow-500 dark:text-yellow-400",
-    iconBg: "bg-yellow-500/15 border-yellow-500/30",
-  },
-];
-
 export interface FloatingStatsProps {
   stats?: {
     totalCharacters?: number;

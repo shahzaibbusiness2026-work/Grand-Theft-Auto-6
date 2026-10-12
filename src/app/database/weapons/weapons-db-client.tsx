@@ -64,7 +64,6 @@ const statLabels = ["Damage", "Fire Rate", "Accuracy", "Range"];
 export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; top?: DbTopWeapon[] }) {
   const cards = weapons && weapons.length > 0 ? weapons : dbWeapons;
   const topList = top && top.length > 0 ? top : topWeapons;
-  const total = cards.length;
   const [type, setType] = useState<string>("All Weapons");
   const [price, setPrice] = useState<number[]>([0, 2000000]);
 

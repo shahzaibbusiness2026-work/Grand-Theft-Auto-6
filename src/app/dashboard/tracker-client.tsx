@@ -3,17 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import {
   CheckCircle2,
-  Circle,
-  Trophy,
   Sparkles,
-  RotateCcw,
-  Star,
-  Flag,
-  Gem,
-  Car,
-  Crosshair,
-  Shield,
-  Layers,
 } from "lucide-react";
 import { Donut } from "@/components/ui/donut";
 import { Progress } from "@/components/ui/progress";

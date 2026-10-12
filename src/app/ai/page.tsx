@@ -1,6 +1,6 @@
 import { SiteShell } from "@/components/shells";
 import { AIClient } from "./ai-client";
-import { Bot, Sparkles } from "lucide-react";
+import { Bot } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

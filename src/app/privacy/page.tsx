@@ -1,6 +1,5 @@
 ﻿import React from "react";
 import { Metadata } from "next";
-import { ShieldCheck, Lock, Eye, FileText } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {

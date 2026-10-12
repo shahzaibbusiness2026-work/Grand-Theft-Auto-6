@@ -10,8 +10,6 @@ import {
   computeWeaponScore,
   getVehicleBestFor,
   type BestForTag,
-  type VehicleScoreWeights,
-  type WeaponScoreWeights,
 } from "@/lib/scoring";
 import type { Metadata } from "next";
 

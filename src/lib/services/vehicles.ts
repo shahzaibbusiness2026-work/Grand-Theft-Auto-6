@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { clearVehiclesCache } from "./catalog-cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
 import { vehicles as fallbackVehicles, Vehicle } from "@/lib/data";

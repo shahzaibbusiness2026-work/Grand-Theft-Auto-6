@@ -3,9 +3,8 @@
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { SafeImage } from "@/components/safe-image";
-import { Search, Crosshair, ArrowRight, Trophy, Heart } from "lucide-react";
+import { Search, ArrowRight, Trophy, Heart } from "lucide-react";
 import { canonicalWeapons, CanonicalWeapon } from "@/lib/canonical-data";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { ConfidenceBadge } from "@/components/confidence-badge";
@@ -38,10 +37,8 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
   const [selectedCat, setSelectedCat] = useState("All Categories");
   const [sortBy, setSortBy] = useState<"damage" | "fireRate" | "range" | "price">("damage");
   const [favorites, setFavorites] = useState<string[]>([]);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const state = getStoredUserState();
     if (state.favorites?.weapons) {
       setFavorites(state.favorites.weapons);

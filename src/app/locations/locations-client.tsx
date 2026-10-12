@@ -6,15 +6,11 @@ import Image from "next/image";
 import {
   MapPin,
   Search,
-  SlidersHorizontal,
   ExternalLink,
-  ShieldAlert,
   Clock,
   Car,
   Crosshair,
-  Flag,
   HelpCircle,
-  Building,
   Navigation,
 } from "lucide-react";
 import { type CanonicalLocation } from "@/lib/canonical-data";

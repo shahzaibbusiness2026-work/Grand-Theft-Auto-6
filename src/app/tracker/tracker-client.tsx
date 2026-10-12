@@ -1,29 +1,21 @@
 "use client";
 
-import { useState, useEffect, useMemo, useTransition } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import {
   CheckCircle2,
   Circle,
   Trophy,
-  Sparkles,
   RotateCcw,
   Search,
   Download,
   Upload,
   BookOpen,
   MapPin,
-  Car,
-  Crosshair,
-  Building2,
   HelpCircle,
   FileEdit,
   ChevronRight,
-  Eye,
   SlidersHorizontal,
-  Flame,
-  Radio,
-  Compass,
 } from "lucide-react";
 import { Donut } from "@/components/ui/donut";
 import { Progress } from "@/components/ui/progress";
@@ -475,7 +467,6 @@ export function TrackerClient({ config }: TrackerClientProps) {
   const [filterStatus, setFilterStatus] = useState<"all" | "completed" | "pending">("all");
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
   const [noteText, setNoteText] = useState<string>("");
-  const [isPending, startTransition] = useTransition();
 
   // Load and sync user state
   useEffect(() => {

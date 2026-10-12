@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import { Gamepad2, AlertTriangle, ShieldAlert, Sparkles, Smartphone, Terminal } from "lucide-react";
+import { Gamepad2, ShieldAlert, Sparkles, Smartphone, Terminal } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {

@@ -2,7 +2,7 @@
 import { CompareWeaponsClient } from "./compare-weapons-client";
 import { getMergedWeapons } from "@/lib/services/catalog";
 import { getComparisonWeights } from "@/lib/services/comparison";
-import { Crosshair, ShieldAlert } from "lucide-react";
+import { Crosshair } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

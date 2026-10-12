@@ -5,7 +5,7 @@ export const revalidate = 3600;
 
 import { ThemeImage } from "@/components/theme-image";
 import { MissionsClient } from "./missions-client";
-import { Sparkles, Flag, Target, Trophy } from "lucide-react";
+import {  Flag } from "lucide-react";
 import type { Metadata } from "next";
 import { canonicalMissions, type CanonicalMission } from "@/lib/canonical-data";
 import { getMissions, type MissionRecord } from "@/lib/services/missions";

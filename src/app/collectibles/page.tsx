@@ -1,6 +1,6 @@
 import { SiteShell } from "@/components/shells";
 import { CollectiblesClient } from "./collectibles-client";
-import { Sparkles, Compass } from "lucide-react";
+import {  Compass } from "lucide-react";
 import type { Metadata } from "next";
 import { canonicalCollectibles, type CanonicalCollectible } from "@/lib/canonical-data";
 import { getPublicCollectibles, type CollectibleRecord } from "@/lib/services/collectibles";

@@ -2,14 +2,12 @@
 
 import { useState } from "react";
 import { SafeImage } from "@/components/safe-image";
-import { ChevronLeft, ChevronRight, Play, Star, ArrowRight, Sparkles, User, Shield, Zap, Car } from "lucide-react";
+import {  Play, Star, ArrowRight, Sparkles, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-import { Badge } from "@/components/ui/badge";
-import { Select } from "@/components/ui/select";
 import { SectionHeader } from "@/components/section-header";
 import { FilterBar } from "@/components/filter-bar";
-import { characters, roleColor, Character } from "@/lib/data";
+import { characters, Character } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { CharacterDetailModal } from "@/components/character-detail-modal";
 

@@ -5,13 +5,10 @@ import {
   Clock,
   ShieldAlert,
   ArrowLeft,
-  ExternalLink,
   ChevronRight,
   Car,
   Crosshair,
-  Flag,
   Navigation,
-  Sparkles,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { canonicalLocations, type CanonicalLocation } from "@/lib/canonical-data";

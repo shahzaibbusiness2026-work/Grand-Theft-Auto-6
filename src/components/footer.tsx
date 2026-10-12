@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { Instagram, Twitter, Youtube, Gamepad2, Mail, ArrowRight, Sparkles } from "lucide-react";
+import { Instagram, Twitter, Youtube, Gamepad2 } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { Button } from "@/components/ui/button";
 import { getSiteSettings } from "@/lib/services/queries";
 
 

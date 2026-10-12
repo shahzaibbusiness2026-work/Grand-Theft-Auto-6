@@ -1,6 +1,6 @@
 ﻿import { SiteShell } from "@/components/shells";
 import { MoneyMakerClient } from "./money-maker-client";
-import { DollarSign, TrendingUp } from "lucide-react";
+import { DollarSign } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

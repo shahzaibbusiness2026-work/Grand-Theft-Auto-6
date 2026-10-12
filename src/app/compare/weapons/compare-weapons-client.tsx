@@ -8,16 +8,10 @@ import {
   X,
   Share2,
   Check,
-  Sparkles,
-  Crosshair,
   Zap,
-  Disc3,
-  Clock,
-  ArrowRight,
   ThumbsUp,
   ThumbsDown,
   ChevronRight,
-  ShieldAlert,
 } from "lucide-react";
 import { canonicalWeapons, CanonicalWeapon } from "@/lib/canonical-data";
 import type { WeaponScoreWeights } from "@/lib/scoring";
@@ -25,7 +19,6 @@ import { computeWeaponScore, getWeaponBestFor, computeDpsIndex } from "@/lib/sco
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
 import { RadarChart, RADAR_COLORS } from "@/components/radar-chart";
 import { ComparisonTable, type ComparisonRowDef } from "@/components/comparison-table";

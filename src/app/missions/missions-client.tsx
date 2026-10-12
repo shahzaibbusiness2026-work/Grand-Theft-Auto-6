@@ -5,19 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Search,
-  Flag,
-  Target,
-  Clock,
-  Coins,
-  ChevronRight,
-  ShieldAlert,
   Users,
-  CheckCircle2,
-  Sparkles,
   ArrowRight,
 } from "lucide-react";
 import { canonicalMissions as missionsFallback, CanonicalMission } from "@/lib/canonical-data";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 

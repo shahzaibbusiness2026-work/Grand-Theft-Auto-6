@@ -9,8 +9,6 @@ import {
   Car,
   Map,
   Settings,
-  Shield,
-  Layers
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AdminSidebar } from "./admin-sidebar";

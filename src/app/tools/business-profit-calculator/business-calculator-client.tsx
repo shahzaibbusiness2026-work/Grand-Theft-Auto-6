@@ -1,27 +1,18 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Link from "next/link";
 import {
   Building2,
   TrendingUp,
-  Calculator,
-  RotateCcw,
-  Share2,
   Copy,
   Check,
   Sparkles,
-  HelpCircle,
   Clock,
-  Calendar,
   Layers,
-  ArrowRight,
   Info,
-  DollarSign,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { canonicalProperties } from "@/lib/canonical-data";
 
 interface BusinessConfig {
   name: string;
@@ -101,9 +92,6 @@ export function BusinessCalculatorClient() {
     setBizA({ ...p });
   };
 
-  const handleApplyPresetB = (p: BusinessConfig) => {
-    setBizB({ ...p });
-  };
 
   const handleCopy = () => {
     const text = `GTA 6 Business Financial Breakdown: ${bizA.name}

@@ -80,7 +80,7 @@ export async function inviteAdminUser(data: { name: string; email: string; role:
       userId = user.user.id;
     } else if (inviteErr) {
       // If SMTP is not configured, provision user directly with confirmed status
-      const { data: created, error: createErr } = await supabase.auth.admin.createUser({
+      const { data: created } = await supabase.auth.admin.createUser({
         email: data.email,
         email_confirm: true,
         user_metadata: { name: data.name, role: data.role },

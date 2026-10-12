@@ -4,9 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Building2,
   Car,
-  DollarSign,
   TrendingUp,
   Search,
   ExternalLink,
@@ -14,11 +12,7 @@ import {
   CheckCircle2,
   ArrowRightLeft,
   X,
-  Sparkles,
-  ShieldCheck,
   HelpCircle,
-  Clock,
-  Layers,
 } from "lucide-react";
 import { canonicalProperties as propertiesFallback, type CanonicalProperty } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";

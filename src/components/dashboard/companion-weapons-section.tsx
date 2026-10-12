@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Crosshair, ShieldAlert, Sparkles, ArrowUpRight, Wrench } from "lucide-react";
+import { Crosshair, ShieldAlert, ArrowUpRight, Wrench } from "lucide-react";
 import type { DashboardWeaponItem } from "@/lib/services/queries";
 
 interface CompanionWeaponsSectionProps {

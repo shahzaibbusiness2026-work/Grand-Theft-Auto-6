@@ -3,8 +3,7 @@ export { metadata } from './metadata';
 // Cache the rendered catalog for 1 hour (see weapons/page.tsx).
 export const revalidate = 3600;
 
-import Link from "next/link";
-import { ArrowRight, Sparkles, Trophy } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";

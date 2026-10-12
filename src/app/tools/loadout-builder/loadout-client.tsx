@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import Link from "next/link";
 import {
   Crosshair,
   Shield,
@@ -9,18 +8,12 @@ import {
   Weight,
   Sparkles,
   Save,
-  Share2,
   Trash2,
-  Plus,
   CheckCircle2,
   Copy,
-  Layers,
-  ArrowRightLeft,
-  Flame,
   Gauge,
-  Sliders,
 } from "lucide-react";
-import { canonicalWeapons, type CanonicalWeapon } from "@/lib/canonical-data";
+import { canonicalWeapons } from "@/lib/canonical-data";
 import {
   getStoredUserState,
   saveStoredUserState,

@@ -6,10 +6,7 @@ import {
   Clock, 
   Copy, 
   Check, 
-  Globe2,
-  Share2,
   Plane,
-  ChevronRight
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants";

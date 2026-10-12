@@ -1,18 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import {
   Check,
-  Zap,
   Crown,
-  Sparkles,
   ShieldCheck,
-  RotateCcw,
-  ArrowRight,
-  Bot,
-  Trophy,
-  HelpCircle,
 } from "lucide-react";
 import {
   getStoredUserState,

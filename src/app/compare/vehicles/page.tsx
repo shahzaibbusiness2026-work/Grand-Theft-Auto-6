@@ -2,8 +2,7 @@
 import { CompareVehiclesClient } from "./compare-vehicles-client";
 import { getMergedVehicles } from "@/lib/services/catalog";
 import { getComparisonWeights } from "@/lib/services/comparison";
-import { Trophy, Sparkles } from "lucide-react";
-import Link from "next/link";
+import { Trophy } from "lucide-react";
 
 export const metadata = {
   title: "Vehicle Comparison Duel (2–4 Rides) — GTA 6 Atlas",

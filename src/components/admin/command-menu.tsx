@@ -8,12 +8,7 @@ import {
   Car,
   Crosshair,
   MapPin,
-  Clock,
-  ArrowRight,
   X,
-  Layers,
-  Sparkles,
-  Command
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {

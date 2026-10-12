@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import { Metadata } from "next";
-import { Cookie, CheckCircle2, Shield } from "lucide-react";
+import {  CheckCircle2, Shield } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {

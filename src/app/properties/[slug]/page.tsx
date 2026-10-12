@@ -1,19 +1,13 @@
 ﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
-  Building2,
-  Car,
-  DollarSign,
   TrendingUp,
   MapPin,
   CheckCircle2,
   ArrowLeft,
-  ExternalLink,
   ChevronRight,
-  ShieldCheck,
   Sparkles,
   Navigation,
-  Clock,
   Layers,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";

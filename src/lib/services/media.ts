@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 
 import { INITIAL_ADMIN_MEDIA, AdminMediaAsset } from "@/lib/admin-store";
