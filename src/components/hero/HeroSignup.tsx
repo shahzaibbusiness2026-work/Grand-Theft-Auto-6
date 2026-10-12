@@ -67,7 +67,7 @@ export function HeroSignup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email address"
-          className="h-10 min-w-0 flex-1 bg-transparent text-sm text-white placeholder:text-white/50 focus:outline-none disabled:opacity-60"
+          className="hero-dark-input h-10 min-w-0 flex-1 bg-transparent text-sm text-white placeholder:text-white/50 focus:outline-none disabled:opacity-60"
         />
         <button
           type="submit"
