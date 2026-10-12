@@ -293,7 +293,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                       <div>
                         <div className="flex items-baseline justify-between">
                           <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Top Speed</span>
-                          <span className="font-display text-lg font-black tabular-nums text-foreground">{v.topSpeed}<span className="ml-0.5 text-[11px] font-semibold text-muted-foreground">mph</span></span>
+                          <span className="font-display text-lg font-black tabular-nums text-foreground">{v.topSpeed}<span className="ml-0.5 text-[11px] font-semibold text-muted-foreground">mph</span>{(v.confidence === "RUMORED" || v.confidence === "REPORTED") && <span className="ml-1 text-[10px] font-medium text-amber-600 dark:text-amber-400" title="Estimated stats">est.</span>}</span>
                         </div>
                         <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-muted">
                           <div
@@ -306,7 +306,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                       <div>
                         <div className="flex items-baseline justify-between">
                           <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Engine Power</span>
-                          <span className="font-display text-lg font-black tabular-nums text-foreground">{v.power}<span className="ml-0.5 text-[11px] font-semibold text-muted-foreground">hp</span></span>
+                          <span className="font-display text-lg font-black tabular-nums text-foreground">{v.power}<span className="ml-0.5 text-[11px] font-semibold text-muted-foreground">hp</span>{(v.confidence === "RUMORED" || v.confidence === "REPORTED") && <span className="ml-1 text-[10px] font-medium text-amber-600 dark:text-amber-400" title="Estimated stats">est.</span>}</span>
                         </div>
                         <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-muted">
                           <div

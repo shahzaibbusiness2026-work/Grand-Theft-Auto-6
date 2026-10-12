@@ -24,6 +24,13 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Cache static images for 1 year
+        source: "/img/(.*)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
         source: "/(.*)",
         headers: [
           { key: "X-Frame-Options", value: "DENY" },
