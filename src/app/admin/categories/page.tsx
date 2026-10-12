@@ -7,6 +7,7 @@ import { Button } from "@/components/admin/ui/button";
 import { Badge } from "@/components/admin/ui/badge";
 import { Tooltip } from "@/components/admin/ui/tooltip";
 import { getCategories, saveCategory, deleteCategory, AdminCategory } from "@/lib/services/categories";
+import { Modal } from "@/components/admin/modal";
 
 export default function AdminCategoriesPage() {
   const { showToast } = useToast();
@@ -42,6 +43,8 @@ export default function AdminCategoriesPage() {
       type: "success",
     });
   };
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
   const handleDeleteCategory = async (id: string) => {
     const cat = categories.find((c) => c.id === id);
@@ -100,7 +103,7 @@ export default function AdminCategoriesPage() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => handleDeleteCategory(c.id)}
+                        onClick={() => setDeleteTarget({ id: c.id, name: c.name })}
                         className="text-[var(--admin-text-muted)] hover:text-rose-400 hover:bg-rose-500/10 h-7 w-7"
                         aria-label={`Delete category: ${c.name}`}
                       >
@@ -158,6 +161,30 @@ export default function AdminCategoriesPage() {
           </form>
         </div>
       </div>
+      {/* Delete confirmation */}
+      <Modal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete permanently?"
+        description={`This will permanently delete "${deleteTarget?.name}". This action cannot be undone.`}
+        variant="danger"
+        footer={<>
+          <button
+            type="button"
+            onClick={() => setDeleteTarget(null)}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={() => { if (deleteTarget) { handleDeleteCategory(deleteTarget.id); setDeleteTarget(null); } }}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+          >
+            Delete
+          </button>
+        </>}
+      />
     </div>
   );
 }

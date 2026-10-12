@@ -36,6 +36,7 @@ import {
   deleteMapMarker,
 } from "@/lib/services/map";
 import { cn } from "@/lib/utils";
+import { Modal } from "@/components/admin/modal";
 
 export default function AdminMapPage() {
   const { showToast } = useToast();
@@ -201,6 +202,8 @@ export default function AdminMapPage() {
       type: "success",
     });
   };
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
   const handleDeleteMarker = async () => {
     if (!selectedMarker) return;
@@ -569,7 +572,7 @@ export default function AdminMapPage() {
             {selectedMarker && (
               <button
                 type="button"
-                onClick={handleDeleteMarker}
+                onClick={() => selectedMarker && setDeleteTarget({ id: selectedMarker.id, name: selectedMarker.name })}
                 aria-label={`Delete ${selectedMarker.name}`}
                 className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 p-1 rounded transition-colors"
               >
@@ -824,6 +827,30 @@ export default function AdminMapPage() {
           )}
         </div>
       </div>
+      {/* Delete confirmation */}
+      <Modal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete permanently?"
+        description={`This will permanently delete "${deleteTarget?.name}". This action cannot be undone.`}
+        variant="danger"
+        footer={<>
+          <button
+                      type="button"
+                      onClick={() => setDeleteTarget(null)}
+                      className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+                    >
+                      Cancel
+                    </button>
+          <button
+            type="button"
+            onClick={() => { if (deleteTarget) { handleDeleteMarker(); setDeleteTarget(null); } }}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+          >
+            Delete
+          </button>
+        </>}
+      />
     </div>
   );
 }

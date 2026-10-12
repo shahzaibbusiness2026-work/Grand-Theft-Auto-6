@@ -94,6 +94,8 @@ export default function AdminPropertiesPage() {
     }
   };
 
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
+
   const handleDelete = async (id: string) => {
     setProperties((prev) => prev.filter((p) => p.id !== id));
     const res = await deleteProperty(id);
@@ -167,7 +169,7 @@ export default function AdminPropertiesPage() {
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              handleDelete(p.id);
+              setDeleteTarget({ id: p.id, name: p.name });
             }}
             className="p-1.5 rounded-lg text-[var(--admin-text-muted)] hover:text-[#F87171] hover:bg-[#1C2436] transition-colors"
             title="Delete"
@@ -361,6 +363,30 @@ export default function AdminPropertiesPage() {
           </div>
         </div>
       </Modal>
+      {/* Delete confirmation */}
+      <Modal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete permanently?"
+        description={`This will permanently delete "${deleteTarget?.name}". This action cannot be undone.`}
+        variant="danger"
+        footer={<>
+          <button
+            type="button"
+            onClick={() => setDeleteTarget(null)}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={() => { if (deleteTarget) { handleDelete(deleteTarget.id); setDeleteTarget(null); } }}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+          >
+            Delete
+          </button>
+        </>}
+      />
     </div>
   );
 }

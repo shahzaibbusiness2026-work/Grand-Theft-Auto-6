@@ -10,6 +10,7 @@ import {
   ContactMessage,
 } from "@/lib/services/contact";
 import { cn } from "@/lib/utils";
+import { Modal } from "@/components/admin/modal";
 
 const STATUS_STYLES: Record<ContactMessage["status"], string> = {
   new: "bg-[#12291B] border-[#1F4D2E] text-[#4ADE80]",
@@ -66,6 +67,8 @@ export default function AdminMessagesPage() {
       loadMessages();
     }
   };
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
   const handleDelete = async (id: string) => {
     setMessages((prev) => prev.filter((m) => m.id !== id));
@@ -213,7 +216,7 @@ export default function AdminMessagesPage() {
                 )}
                 <button
                   type="button"
-                  onClick={() => handleDelete(m.id)}
+                  onClick={() => setDeleteTarget({ id: m.id, name: m.subject || m.name || "message" })}
                   className="p-2 rounded-lg text-[#64748B] hover:text-[#F87171] hover:bg-[#1C2436] transition-colors"
                   title="Delete message"
                   aria-label="Delete message"
@@ -225,6 +228,30 @@ export default function AdminMessagesPage() {
           </article>
         ))}
       </div>
+      {/* Delete confirmation */}
+      <Modal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete permanently?"
+        description={`This will permanently delete "${deleteTarget?.name}". This action cannot be undone.`}
+        variant="danger"
+        footer={<>
+          <button
+            type="button"
+            onClick={() => setDeleteTarget(null)}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={() => { if (deleteTarget) { handleDelete(deleteTarget.id); setDeleteTarget(null); } }}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+          >
+            Delete
+          </button>
+        </>}
+      />
     </div>
   );
 }

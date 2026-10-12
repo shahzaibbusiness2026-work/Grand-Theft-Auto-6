@@ -6,6 +6,7 @@ import { DataTable, Column } from "@/components/admin/data-table";
 import { Badge } from "@/components/admin/ui/badge";
 import { getAdminCharacters, deleteCharacter, saveCharacter } from "@/lib/services/characters";
 import { useToast } from "@/components/admin/toast";
+import { Modal } from "@/components/admin/modal";
 
 interface CharacterRecord {
   id: string;
@@ -52,6 +53,8 @@ export default function AdminCharactersPage() {
   useEffect(() => {
     loadCharacters();
   }, []);
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
   const handleDelete = async (id: string) => {
     setCharacters((prev) => prev.filter((c) => c.id !== id));
@@ -144,7 +147,7 @@ export default function AdminCharactersPage() {
       header: "Actions",
       render: (c) => (
         <button
-          onClick={() => handleDelete(c.id)}
+          onClick={() => setDeleteTarget({ id: c.id, name: c.name })}
           className="p-1.5 rounded-lg text-red-400 hover:text-red-300 hover:bg-red-950/40 transition-colors"
           title="Delete character"
         >
@@ -266,6 +269,30 @@ export default function AdminCharactersPage() {
           </div>
         </div>
       )}
+      {/* Delete confirmation */}
+      <Modal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete permanently?"
+        description={`This will permanently delete "${deleteTarget?.name}". This action cannot be undone.`}
+        variant="danger"
+        footer={<>
+          <button
+            type="button"
+            onClick={() => setDeleteTarget(null)}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={() => { if (deleteTarget) { handleDelete(deleteTarget.id); setDeleteTarget(null); } }}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+          >
+            Delete
+          </button>
+        </>}
+      />
     </div>
   );
 }

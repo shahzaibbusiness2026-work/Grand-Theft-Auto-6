@@ -20,6 +20,7 @@ import { Badge } from "@/components/admin/ui/badge";
 import { Tooltip } from "@/components/admin/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { getTasks, saveTask, deleteTask, AdminTask } from "@/lib/services/tasks";
+import { Modal } from "@/components/admin/modal";
 
 export default function AdminTasksPage() {
   const { showToast } = useToast();
@@ -63,8 +64,10 @@ export default function AdminTasksPage() {
     });
   };
 
-  const handleDeleteTask = async (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
+
+  const handleDeleteTask = async (id: string, e?: React.MouseEvent) => {
+    e?.stopPropagation();
     const taskToDelete = tasks.find((t) => t.id === id);
     setTasks((prev) => prev.filter((t) => t.id !== id));
     await deleteTask(id);
@@ -321,7 +324,7 @@ export default function AdminTasksPage() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={(e) => handleDeleteTask(task.id, e)}
+                    onClick={() => setDeleteTarget({ id: task.id, name: task.title })}
                     className="text-[var(--admin-text-muted)] hover:text-rose-400 hover:bg-rose-500/10 h-7 w-7"
                     aria-label={`Delete task: ${task.title}`}
                   >
@@ -333,6 +336,30 @@ export default function AdminTasksPage() {
           ))
         )}
       </div>
+      {/* Delete confirmation */}
+      <Modal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete permanently?"
+        description={`This will permanently delete "${deleteTarget?.name}". This action cannot be undone.`}
+        variant="danger"
+        footer={<>
+          <button
+                      type="button"
+                      onClick={() => setDeleteTarget(null)}
+                      className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+                    >
+                      Cancel
+                    </button>
+          <button
+            type="button"
+            onClick={() => { if (deleteTarget) { handleDeleteTask(deleteTarget.id); setDeleteTarget(null); } }}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+          >
+            Delete
+          </button>
+        </>}
+      />
     </div>
   );
 }

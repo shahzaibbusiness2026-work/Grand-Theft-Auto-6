@@ -31,6 +31,7 @@ import {
   updateAdminUserRole,
 } from "@/lib/services/users";
 import { cn } from "@/lib/utils";
+import { Modal } from "@/components/admin/modal";
 
 export default function AdminUsersPage() {
   const { showToast } = useToast();
@@ -159,6 +160,8 @@ export default function AdminUsersPage() {
       });
     }
   };
+
+    const [deleteUserTarget, setDeleteUserTarget] = useState<AdminUser | null>(null);
 
   const handleDeleteUser = async (user: AdminUser) => {
     setUsers((prev) => prev.filter((u) => u.id !== user.id));
@@ -459,7 +462,7 @@ export default function AdminUsersPage() {
                         </button>
                         <button
                           type="button"
-                          onClick={() => handleDeleteUser(u)}
+                          onClick={() => setDeleteUserTarget(u)}
                           className="text-xs text-[#64748B] hover:text-[#F87171] font-semibold"
                         >
                           Remove
@@ -701,6 +704,30 @@ export default function AdminUsersPage() {
           </div>
         </div>
       )}
+      {/* Delete confirmation */}
+      <Modal
+        isOpen={!!deleteUserTarget}
+        onClose={() => setDeleteUserTarget(null)}
+        title="Delete permanently?"
+        description={`This will permanently delete user "${deleteUserTarget?.name || deleteUserTarget?.email}". This action cannot be undone.`}
+        variant="danger"
+        footer={<>
+          <button
+            type="button"
+            onClick={() => setDeleteUserTarget(null)}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={() => { if (deleteUserTarget) { handleDeleteUser(deleteUserTarget); setDeleteUserTarget(null); } }}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+          >
+            Delete
+          </button>
+        </>}
+      />
     </div>
   );
 }

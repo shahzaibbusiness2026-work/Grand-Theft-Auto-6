@@ -20,6 +20,7 @@ import {
 } from "@/lib/admin-store";
 import { getAdminArticles, saveArticle, deleteArticle } from "@/lib/services/articles";
 import { cn } from "@/lib/utils";
+import { Modal } from "@/components/admin/modal";
 
 export default function AdminArticlesPage() {
   const router = useRouter();
@@ -162,6 +163,8 @@ export default function AdminArticlesPage() {
       });
     }
   };
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
   const handleDeleteArticle = async (id: string) => {
     const target = articles.find((a) => a.id === id);
@@ -570,7 +573,7 @@ export default function AdminArticlesPage() {
                             </button>
                             <button
                               type="button"
-                              onClick={() => handleDeleteArticle(art.id)}
+                              onClick={() => setDeleteTarget({ id: art.id, name: art.title })}
                               className="p-1.5 rounded-lg text-[#64748B] hover:text-[#F87171] hover:bg-[#1C2436] transition-colors"
                               aria-label="Delete article"
                               title="Delete"
@@ -774,6 +777,30 @@ export default function AdminArticlesPage() {
           </div>
         )}
       </div>
+      {/* Delete confirmation */}
+      <Modal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete permanently?"
+        description={`This will permanently delete "${deleteTarget?.name}". This action cannot be undone.`}
+        variant="danger"
+        footer={<>
+          <button
+            type="button"
+            onClick={() => setDeleteTarget(null)}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={() => { if (deleteTarget) { handleDeleteArticle(deleteTarget.id); setDeleteTarget(null); } }}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+          >
+            Delete
+          </button>
+        </>}
+      />
     </div>
   );
 }

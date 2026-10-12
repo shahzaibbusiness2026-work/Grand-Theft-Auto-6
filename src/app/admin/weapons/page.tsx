@@ -24,6 +24,7 @@ import {
 } from "@/lib/admin-store";
 import { getAdminWeapons, saveWeapon, deleteWeapon } from "@/lib/services/weapons";
 import { cn } from "@/lib/utils";
+import { Modal } from "@/components/admin/modal";
 
 // Weapon Silhouette SVG matching Image 5
 function WeaponSilhouette({ category }: { category: string }) {
@@ -165,6 +166,8 @@ export default function AdminWeaponsPage() {
       showToast({ title: "Save failed", description: res.error || "Could not save the weapon.", type: "danger" });
     }
   };
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
   const handleDeleteWeapon = async (id: string) => {
     const target = weapons.find((w) => w.id === id);
@@ -508,7 +511,7 @@ export default function AdminWeaponsPage() {
                             </Link>
                             <button
                               type="button"
-                              onClick={() => handleDeleteWeapon(w.id)}
+                              onClick={() => setDeleteTarget({ id: w.id, name: w.name })}
                               className="p-1.5 rounded-lg text-[#64748B] hover:text-[#F87171] hover:bg-[#1C2436] transition-colors"
                               aria-label="Delete weapon"
                               title="Delete"
@@ -776,6 +779,30 @@ export default function AdminWeaponsPage() {
           </button>
         </div>
       )}
+      {/* Delete confirmation */}
+      <Modal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete permanently?"
+        description={`This will permanently delete "${deleteTarget?.name}". This action cannot be undone.`}
+        variant="danger"
+        footer={<>
+          <button
+            type="button"
+            onClick={() => setDeleteTarget(null)}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={() => { if (deleteTarget) { handleDeleteWeapon(deleteTarget.id); setDeleteTarget(null); } }}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+          >
+            Delete
+          </button>
+        </>}
+      />
     </div>
   );
 }
