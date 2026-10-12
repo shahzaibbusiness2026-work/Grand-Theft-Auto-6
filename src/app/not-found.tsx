@@ -23,7 +23,7 @@ export default function NotFound() {
           role="presentation"
           className="absolute inset-0 h-full w-full object-cover opacity-80 dark:opacity-60 dark:brightness-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/30 dark:from-background/55 dark:via-background/70 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         <div className="container-site relative flex flex-col items-center pt-16 text-center">
           <p
             className="font-display text-[110px] font-extrabold leading-none tracking-widest text-transparent sm:text-[160px]"
@@ -32,10 +32,10 @@ export default function NotFound() {
           >
             404
           </p>
-          <h1 id="not-found-title" className="mt-2 font-display text-3xl font-extrabold">
+          <h1 id="not-found-title" className="mt-2 font-display text-3xl font-extrabold text-white">
             Page Not Found
           </h1>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
             Looks like you&apos;ve taken a wrong turn in Vice City.
             <br />
             The page you&apos;re looking for doesn&apos;t exist or has been moved.
