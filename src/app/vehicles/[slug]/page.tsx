@@ -220,7 +220,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             alt="Leonida backdrop"
             className="absolute inset-0 h-full w-full object-cover opacity-70 dark:opacity-40 brightness-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/25 via-background/10 dark:from-background dark:via-background/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
           <div className="relative grid gap-8 p-6 sm:p-10 lg:grid-cols-2 lg:items-center">
             <div>
@@ -231,11 +231,11 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                 <ConfidenceBadge level={vehicle.confidence} source={vehicle.source} />
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
+              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight">
                 {vehicle.name}
               </h1>
 
-              <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground font-medium">
+              <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/80 font-medium">
                 {vehicle.description}
               </p>
 

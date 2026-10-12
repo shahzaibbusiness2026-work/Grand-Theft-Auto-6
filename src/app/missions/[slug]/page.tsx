@@ -119,7 +119,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
         <div className="card-surface relative overflow-hidden rounded-3xl border border-border shadow-2xl p-6 sm:p-10">
           <div className="absolute right-0 top-0 h-full w-full lg:w-2/3 opacity-70 dark:opacity-40">
             <img loading="lazy" src={mission.img} alt={mission.title} className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/25 via-background/10 dark:from-background dark:via-background/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           </div>
 
           <div className="relative max-w-xl space-y-4">
@@ -130,11 +130,11 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               <ConfidenceBadge level={mission.confidence} source={mission.source} />
             </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase text-foreground leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white leading-tight">
               {mission.title}
             </h1>
 
-            <p className="text-sm leading-relaxed text-muted-foreground">
+            <p className="text-sm leading-relaxed text-white/80">
               {mission.description}
             </p>
 

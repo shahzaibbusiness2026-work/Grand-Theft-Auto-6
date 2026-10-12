@@ -51,15 +51,15 @@ export default async function WeaponsPage() {
             alt="Vice City Arsenal"
             className="absolute inset-0 h-full w-full object-cover opacity-80 dark:opacity-60 brightness-[1.15]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/25 via-background/10 dark:from-background dark:via-background/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-accent mb-3">
               <Crosshair className="h-3 w-3" /> Ballistics & Hardware Catalog
             </div>
-            <h1 className="font-display text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-foreground">
+            <h1 className="font-display text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-white">
               Leonida Armory
             </h1>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
+            <p className="mt-4 text-sm leading-relaxed text-white/80 sm:text-[15px]">
               Verified damage ratings, cycle rates, recoil patterns, attachments, and street drop locations for the entire GTA 6 weapon roster.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">

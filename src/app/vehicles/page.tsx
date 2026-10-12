@@ -51,15 +51,15 @@ export default async function VehiclesPage() {
             alt="Super car"
             className="absolute right-0 top-0 h-full w-full object-cover object-[70%_60%] lg:w-2/3 opacity-80"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/25 via-background/10 dark:from-background/95 dark:via-background/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent">
               <Sparkles className="h-3 w-3" /> Confirmed Roster
             </div>
-            <h1 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-foreground">
+            <h1 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-white">
               Vehicle Showcase
             </h1>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-4 text-sm leading-relaxed text-white/80">
               Browse cars, bikes, boats, planes, and helicopters confirmed for the state of Leonida. Filter by class, compare top speeds, or save favorites to your garage.
             </p>
           </div>
@@ -97,14 +97,14 @@ export default async function VehiclesPage() {
             alt="Dream ride"
             className="absolute inset-0 h-full w-full object-cover opacity-60 dark:opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-background/25 dark:from-background/95 dark:via-background/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           <div className="relative flex flex-col gap-5 px-6 py-10 sm:px-10 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <span className="text-xs font-black uppercase tracking-widest text-primary">PLAYER GARAGE</span>
-              <h3 className="mt-1 font-display text-2xl font-extrabold text-foreground">
+              <h3 className="mt-1 font-display text-2xl font-extrabold text-white">
                 Want to duel any two rides head-to-head?
               </h3>
-              <p className="mt-1.5 max-w-md text-sm text-muted-foreground">
+              <p className="mt-1.5 max-w-md text-sm text-white/80">
                 Open our Interactive Vehicle Comparison Duel to inspect horsepower curves, braking deltas, and 0-60 launch times.
               </p>
             </div>
