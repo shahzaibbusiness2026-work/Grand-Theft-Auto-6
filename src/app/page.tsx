@@ -230,9 +230,9 @@ export default async function HomePage() {
             alt="GTA 6 Vice City Skyline"
             fill
             sizes="100vw"
-            className="object-cover object-right opacity-75 dark:brightness-110 pointer-events-none"
+            className="object-cover object-right opacity-90 dark:opacity-75 dark:brightness-110 pointer-events-none"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/75 via-background/35 dark:from-background/95 dark:via-background/60 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-background/20 dark:from-background/95 dark:via-background/60 to-transparent pointer-events-none" />
           <div className="relative px-6 py-9 sm:px-10">
             <p className="section-eyebrow text-accent">Newsletter</p>
             <h2 id="newsletter-heading" className="mt-3 max-w-md font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">

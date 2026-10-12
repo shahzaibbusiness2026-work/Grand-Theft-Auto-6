@@ -23,7 +23,7 @@ export default function NotFound() {
           role="presentation"
           className="absolute inset-0 h-full w-full object-cover opacity-80 dark:opacity-60 dark:brightness-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/50 dark:from-background/55 dark:via-background/70 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/30 dark:from-background/55 dark:via-background/70 to-background" />
         <div className="container-site relative flex flex-col items-center pt-16 text-center">
           <p
             className="font-display text-[110px] font-extrabold leading-none tracking-widest text-transparent sm:text-[160px]"

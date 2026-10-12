@@ -51,7 +51,7 @@ export default async function WeaponsPage() {
             alt="Vice City Arsenal"
             className="absolute inset-0 h-full w-full object-cover opacity-80 dark:opacity-60 brightness-[1.15]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-background/20 dark:from-background dark:via-background/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/25 via-background/10 dark:from-background dark:via-background/80 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-accent mb-3">
               <Crosshair className="h-3 w-3" /> Ballistics & Hardware Catalog
