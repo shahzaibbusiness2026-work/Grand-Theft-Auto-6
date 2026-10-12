@@ -10,7 +10,7 @@ export function HeroBackground() {
       <div className="absolute inset-0 bg-slate-100 dark:bg-[#090d16] transition-colors duration-300" />
 
       {/* 2. Ultra-HD 4K Vice City Panoramic Artwork */}
-      <div className="absolute inset-0 w-full h-full opacity-90 dark:opacity-100 transition-opacity duration-300">
+      <div className="absolute inset-0 w-full h-full opacity-100 transition-opacity duration-300">
         <Image
           src="/img/hero-vice-skyline-hd.jpg"
           alt="GTA VI Vice City Skyline and Muscle Car"
@@ -23,10 +23,10 @@ export function HeroBackground() {
       </div>
 
       {/* 3. Atmospheric overlay preserving readability */}
-      <div className="absolute inset-0 bg-white/15 dark:bg-[#090d16]/25 transition-colors duration-300" />
+      <div className="absolute inset-0 bg-black/35 transition-colors duration-300" />
 
       {/* 4. Subtle center vignette for contrast behind centered countdown */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/30 dark:from-[#090d16]/40 dark:via-transparent dark:to-[#090d16]/70 transition-all duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 transition-all duration-300" />
 
       {/* 5. Edge vignettes */}
       <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-background to-transparent" />

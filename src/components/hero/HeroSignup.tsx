@@ -39,8 +39,8 @@ export function HeroSignup() {
         className="mx-auto mt-6 flex w-full max-w-md items-center justify-center gap-2.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4"
         role="status"
       >
-        <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
-        <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+        <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-400" aria-hidden="true" />
+        <p className="text-sm font-semibold text-emerald-300">
           {successMessage}
         </p>
       </div>
@@ -52,9 +52,9 @@ export function HeroSignup() {
       <form
         onSubmit={handleSubmit}
         aria-label="Get notified when GTA 6 tools go live"
-        className="flex items-center gap-2 rounded-2xl border border-border bg-card p-2 pl-4 shadow-sm transition-shadow focus-within:shadow-md focus-within:border-primary/50"
+        className="flex items-center gap-2 rounded-2xl border border-white/20 bg-black/60 p-2 pl-4 shadow-sm backdrop-blur-xl transition-shadow focus-within:shadow-md focus-within:border-primary/50"
       >
-        <Mail className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+        <Mail className="h-4 w-4 shrink-0 text-white/50" aria-hidden="true" />
         <label htmlFor="hero-signup-email" className="sr-only">
           Email address
         </label>
@@ -67,7 +67,7 @@ export function HeroSignup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email address"
-          className="h-10 min-w-0 flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none disabled:opacity-60"
+          className="h-10 min-w-0 flex-1 bg-transparent text-sm text-white placeholder:text-white/50 focus:outline-none disabled:opacity-60"
         />
         <button
           type="submit"
@@ -78,12 +78,12 @@ export function HeroSignup() {
           {loading ? "Joining…" : "Notify me"}
         </button>
       </form>
-      <p className="mt-2.5 text-center text-xs leading-relaxed text-muted-foreground">
+      <p className="mt-2.5 text-center text-xs leading-relaxed text-white/70">
         Be first to know when the weapons database, interactive map and money
         calculator go live. No spam, unsubscribe anytime.
       </p>
       {status === "error" && (
-        <p role="alert" className="mt-1.5 text-center text-xs font-semibold text-red-600 dark:text-red-400">
+        <p role="alert" className="mt-1.5 text-center text-xs font-semibold text-red-400">
           Something went wrong — please try again.
         </p>
       )}
