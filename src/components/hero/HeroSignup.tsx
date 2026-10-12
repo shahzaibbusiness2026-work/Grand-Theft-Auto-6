@@ -52,7 +52,7 @@ export function HeroSignup() {
       <form
         onSubmit={handleSubmit}
         aria-label="Get notified when GTA 6 tools go live"
-        className="flex items-center gap-2 rounded-2xl border border-white/20 bg-[#0a0f1e]/90 p-2 pl-4 shadow-lg backdrop-blur-xl transition-shadow focus-within:shadow-md focus-within:border-primary/50"
+        className="flex items-center gap-2 rounded-2xl border border-white/20 bg-[#0a0f1e]/90 p-2 pl-4 shadow-lg backdrop-blur-xl transition-shadow focus-within:shadow-md focus-within:border-[#C9A86A]/50"
       >
         <Mail className="h-4 w-4 shrink-0 text-white/50" aria-hidden="true" />
         <label htmlFor="hero-signup-email" className="sr-only">
@@ -72,7 +72,7 @@ export function HeroSignup() {
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-primary px-5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-hover active:scale-95 disabled:opacity-60"
+          className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-[#C9A86A] px-5 text-sm font-bold text-[#0a0f1e] transition-colors hover:bg-[#d4b578] active:scale-95 disabled:opacity-60"
         >
           <BellRing className="h-4 w-4" aria-hidden="true" />
           {loading ? "Joining…" : "Notify me"}
