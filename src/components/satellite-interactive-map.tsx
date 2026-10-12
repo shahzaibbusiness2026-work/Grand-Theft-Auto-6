@@ -1152,7 +1152,7 @@ export function SatelliteInteractiveMap({
                   "flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition-all border",
                   collectedPOIs[selectedPOI.id]
                     ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-300"
-                    : "border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    : "border-slate-700 bg-slate-800 text-white hover:bg-slate-700"
                 )}
               >
                 <Check className="h-3.5 w-3.5" />
