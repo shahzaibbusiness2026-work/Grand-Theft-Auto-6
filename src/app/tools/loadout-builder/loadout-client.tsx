@@ -47,27 +47,27 @@ const PRESET_LOADOUTS = [
     role: "Heist Specialist",
     primary: "m4-carbine",
     secondary: "glock-21",
-    melee: "hunting-combat-knife",
-    heavy: "tactical-smg-vom-feuer",
+    melee: "combat-knife",
+    heavy: "tactical-smg",
     equipment: ["Rebreather Scuba Apparatus", "Thermite Breach Gel", "EMP Frequency Scrambler"],
     notes: "Quiet waterborne insertion with maximum concealment and electronic bypass.",
   },
   {
     name: "South Beach Street Warfare",
     role: "Enforcer / Assault",
-    primary: "ak-74-kalashnikov",
+    primary: "ak-74",
     secondary: "glock-21",
-    melee: "hunting-combat-knife",
-    heavy: "remington-pump-shotgun",
+    melee: "combat-knife",
+    heavy: "pump-shotgun",
     equipment: ["Heavy Ceramic Body Armor", "High-Explosive C4 Satchel", "Tactical First Aid Trauma Kit"],
     notes: "Heavy kinetic stopping power and maximum survivability during 5-star police response.",
   },
   {
     name: "Everglades Swampland Hunter",
     role: "Recon Marksman",
-    primary: "remington-pump-shotgun",
+    primary: "pump-shotgun",
     secondary: "glock-21",
-    melee: "hunting-combat-knife",
+    melee: "combat-knife",
     heavy: "m4-carbine",
     equipment: ["Thermal / NVG Optics", "Tactical First Aid Trauma Kit", "Lockpick & Biometric Bypass Kit"],
     notes: "Engineered for long-range target acquisition across murky wetlands and night ops.",
@@ -82,8 +82,8 @@ export function LoadoutClient() {
   const [role, setRole] = useState<string>("Tactical Operative");
   const [primaryId, setPrimaryId] = useState<string>("m4-carbine");
   const [secondaryId, setSecondaryId] = useState<string>("glock-21");
-  const [meleeId, setMeleeId] = useState<string>("hunting-combat-knife");
-  const [heavyId, setHeavyId] = useState<string>("remington-pump-shotgun");
+  const [meleeId, setMeleeId] = useState<string>("combat-knife");
+  const [heavyId, setHeavyId] = useState<string>("pump-shotgun");
   const [selectedGear, setSelectedGear] = useState<string[]>([
     "Heavy Ceramic Body Armor",
     "Thermite Breach Gel",
@@ -304,7 +304,7 @@ export function LoadoutClient() {
               <div className="p-3 rounded-lg bg-background/80 border border-border text-xs font-mono space-y-1">
                 <div className="flex justify-between text-muted-foreground">
                   <span>Damage:</span>
-                  <span className="text-foreground font-bold">{primaryWeapon.damage} pts</span>
+                  <span className="font-display font-black tabular-nums text-foreground">{primaryWeapon.damage}<span className="text-[10px] font-semibold text-muted-foreground ml-0.5">pts</span></span>
                 </div>
                 <div className="flex justify-between text-muted-foreground">
                   <span>Fire Rate:</span>
@@ -341,7 +341,7 @@ export function LoadoutClient() {
               <div className="p-3 rounded-lg bg-background/80 border border-border text-xs font-mono space-y-1">
                 <div className="flex justify-between text-muted-foreground">
                   <span>Damage:</span>
-                  <span className="text-foreground font-bold">{secondaryWeapon.damage} pts</span>
+                  <span className="font-display font-black tabular-nums text-foreground">{secondaryWeapon.damage}<span className="text-[10px] font-semibold text-muted-foreground ml-0.5">pts</span></span>
                 </div>
                 <div className="flex justify-between text-muted-foreground">
                   <span>Handling:</span>
@@ -457,7 +457,7 @@ export function LoadoutClient() {
         <div className="space-y-6">
           {/* Performance Radar Card */}
           <div className="card-carbon p-6 space-y-5 border-primary/30">
-            <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
+            <h3 className="font-display text-lg font-black text-foreground uppercase tracking-wide flex items-center gap-2">
               <Gauge className="h-4 w-4 text-primary" /> Loadout Combat Metrics
             </h3>
 
@@ -468,7 +468,7 @@ export function LoadoutClient() {
                   <span className="text-muted-foreground flex items-center gap-1">
                     <Crosshair className="h-3.5 w-3.5 text-rose-400" /> Firepower
                   </span>
-                  <span className="text-rose-400 font-bold">{ratings.firepower} / 100</span>
+                  <span className="font-display text-base font-black tabular-nums text-rose-400">{ratings.firepower}<span className="text-xs font-semibold text-muted-foreground">/100</span></span>
                 </div>
                 <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div className="h-full bg-rose-500 rounded-full transition-all" style={{ width: `${ratings.firepower}%` }} />
@@ -481,7 +481,7 @@ export function LoadoutClient() {
                   <span className="text-muted-foreground flex items-center gap-1">
                     <Zap className="h-3.5 w-3.5 text-gold-light" /> Precision
                   </span>
-                  <span className="text-gold-light font-bold">{ratings.precision} / 100</span>
+                  <span className="font-display text-base font-black tabular-nums text-gold-light">{ratings.precision}<span className="text-xs font-semibold text-muted-foreground">/100</span></span>
                 </div>
                 <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div className="h-full bg-gold-light rounded-full transition-all" style={{ width: `${ratings.precision}%` }} />
@@ -494,7 +494,7 @@ export function LoadoutClient() {
                   <span className="text-muted-foreground flex items-center gap-1">
                     <Weight className="h-3.5 w-3.5 text-accent" /> Mobility & Sprint
                   </span>
-                  <span className="text-accent font-bold">{ratings.mobility}%</span>
+                  <span className="font-display text-base font-black tabular-nums text-accent">{ratings.mobility}<span className="text-xs font-semibold text-muted-foreground">%</span></span>
                 </div>
                 <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div className="h-full bg-accent rounded-full transition-all" style={{ width: `${ratings.mobility}%` }} />
@@ -507,7 +507,7 @@ export function LoadoutClient() {
                   <span className="text-muted-foreground flex items-center gap-1">
                     <Shield className="h-3.5 w-3.5 text-emerald-400" /> Concealment / Stealth
                   </span>
-                  <span className="text-emerald-400 font-bold">{ratings.stealth} / 100</span>
+                  <span className="font-display text-base font-black tabular-nums text-emerald-400">{ratings.stealth}<span className="text-xs font-semibold text-muted-foreground">/100</span></span>
                 </div>
                 <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div className="h-full bg-emerald-400 rounded-full transition-all" style={{ width: `${ratings.stealth}%` }} />
@@ -519,14 +519,14 @@ export function LoadoutClient() {
             <div className="pt-2 space-y-2">
               <button
                 onClick={handleSave}
-                className="btn-primary w-full py-2.5 text-xs flex items-center justify-center gap-2 font-bold uppercase tracking-wider"
+                className="w-full py-3 text-sm flex items-center justify-center gap-2 font-black uppercase tracking-wider rounded-xl bg-gold text-slate-950 hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_2px_12px_rgba(201,168,106,0.3)]"
               >
                 <Save className="h-4 w-4" /> Save Build To Armory
               </button>
 
               <button
                 onClick={handleCopyShare}
-                className="btn-secondary w-full py-2.5 text-xs flex items-center justify-center gap-2 font-bold uppercase tracking-wider"
+                className="w-full py-3 text-sm flex items-center justify-center gap-2 font-bold uppercase tracking-wider rounded-xl border border-gold/40 text-gold-dark dark:text-gold-light hover:bg-gold/10 active:scale-[0.98] transition-all"
               >
                 {copiedLink ? <CheckCircle2 className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
                 {copiedLink ? "Loadout Copied!" : "Share / Copy Loadout"}
@@ -571,14 +571,14 @@ export function LoadoutClient() {
                           setSelectedGear(saved.equipment);
                           if (saved.notes) setNotes(saved.notes);
                         }}
-                        className="btn-ghost text-xs p-1.5 text-accent hover:text-foreground"
+                        className="text-xs font-bold px-3 py-1.5 rounded-lg border border-border text-foreground hover:border-gold/50 hover:text-gold-dark dark:hover:text-gold-light transition-colors"
                         title="Load this build into builder"
                       >
                         Load
                       </button>
                       <button
                         onClick={() => handleDeleteSaved(saved.id)}
-                        className="btn-ghost text-xs p-1.5 text-rose-400 hover:text-rose-300"
+                        className="p-1.5 rounded-lg text-muted-foreground hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
                         title="Delete saved build"
                       >
                         <Trash2 className="h-3.5 w-3.5" />

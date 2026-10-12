@@ -250,9 +250,9 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                     {/* Metric Bars */}
                     <div className="mt-3 space-y-2 border-t border-border/60 pt-3">
                       <div>
-                        <div className="flex justify-between text-xs font-semibold">
-                          <span className="text-muted-foreground">Top Speed</span>
-                          <span className="font-display font-bold text-foreground">{v.topSpeed} mph</span>
+                        <div className="flex items-baseline justify-between">
+                          <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Top Speed</span>
+                          <span className="font-display text-lg font-black tabular-nums text-foreground">{v.topSpeed}<span className="ml-0.5 text-[11px] font-semibold text-muted-foreground">mph</span></span>
                         </div>
                         <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-muted">
                           <div
@@ -263,9 +263,9 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                       </div>
 
                       <div>
-                        <div className="flex justify-between text-xs font-semibold">
-                          <span className="text-muted-foreground">Engine Power</span>
-                          <span className="font-display font-bold text-foreground">{v.power} hp</span>
+                        <div className="flex items-baseline justify-between">
+                          <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Engine Power</span>
+                          <span className="font-display text-lg font-black tabular-nums text-foreground">{v.power}<span className="ml-0.5 text-[11px] font-semibold text-muted-foreground">hp</span></span>
                         </div>
                         <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-muted">
                           <div
