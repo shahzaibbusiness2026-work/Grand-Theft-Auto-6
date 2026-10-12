@@ -29,6 +29,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
 
   const [search, setSearch] = useState("");
   const [selectedCat, setSelectedCat] = useState("All Types");
+  const [confidenceFilter, setConfidenceFilter] = useState<"all" | "official" | "rumored">("all");
   const [sortBy, setSortBy] = useState<"speed" | "power" | "price" | "name">("speed");
   const [favorites, setFavorites] = useState<string[]>([]);
   const [mounted, setMounted] = useState(false);
@@ -63,7 +64,13 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
           v.name.toLowerCase().includes(search.toLowerCase()) ||
           v.manufacturer.toLowerCase().includes(search.toLowerCase()) ||
           v.klass.toLowerCase().includes(search.toLowerCase());
-        return matchesCat && matchesSearch;
+        const matchesConfidence =
+          confidenceFilter === "all" ||
+          (confidenceFilter === "official" &&
+            (v.confidence === "OFFICIAL" || v.confidence === "CONFIRMED")) ||
+          (confidenceFilter === "rumored" &&
+            (v.confidence === "RUMORED" || v.confidence === "REPORTED"));
+        return matchesCat && matchesSearch && matchesConfidence;
       })
       .sort((a, b) => {
         if (sortBy === "speed") return b.topSpeed - a.topSpeed;
@@ -139,6 +146,40 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
               <Trophy className="h-3.5 w-3.5" />
               <span>Compare (2-4)</span>
             </Link>
+          </div>
+        </div>
+
+        {/* Confidence Filter */}
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className="text-xs font-medium text-muted-foreground">Show:</span>
+          <div className="flex items-center gap-1 rounded-xl border border-border/80 bg-muted/30 p-1">
+            <button
+              onClick={() => setConfidenceFilter("all")}
+              className={cn(
+                "rounded-lg px-3 py-1.5 text-xs font-semibold transition-all",
+                confidenceFilter === "all" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              All (106)
+            </button>
+            <button
+              onClick={() => setConfidenceFilter("official")}
+              className={cn(
+                "rounded-lg px-3 py-1.5 text-xs font-semibold transition-all",
+                confidenceFilter === "official" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              Official Only
+            </button>
+            <button
+              onClick={() => setConfidenceFilter("rumored")}
+              className={cn(
+                "rounded-lg px-3 py-1.5 text-xs font-semibold transition-all",
+                confidenceFilter === "rumored" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              Rumored
+            </button>
           </div>
         </div>
 
