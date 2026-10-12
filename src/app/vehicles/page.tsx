@@ -11,6 +11,7 @@ import { ThemeImage } from "@/components/theme-image";
 import { VehiclesClient } from "./vehicles-client";
 import { SectionErrorBoundary } from "@/components/section-error-boundary";
 import { getMergedVehicles } from "@/lib/services/catalog";
+import { serializeJsonLd } from "@/lib/utils";
 
 export default async function VehiclesPage() {
   // Live Supabase data first (admin edits win); canonical static entries fill the rest.
@@ -39,7 +40,7 @@ export default async function VehiclesPage() {
     <SiteShell>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       {/* HERO */}
       <section className="container-site pt-8 sm:pt-10">
