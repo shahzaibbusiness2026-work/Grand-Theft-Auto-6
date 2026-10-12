@@ -151,7 +151,8 @@ export function AIClient() {
         <div className="flex items-center gap-2.5 text-xs text-muted-foreground">
           <ShieldCheck className="h-5 w-5 text-emerald-400 flex-shrink-0" />
           <span>
-            Strict Confidence Grounding: <strong>Zero hallucinated release dates or fake features.</strong> Every claim cites official materials or verified in-engine archives.
+            <span className="mr-1.5 inline-block rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gold align-middle">Beta</span>
+            Strict Confidence Grounding: <strong>Zero hallucinated release dates or fake features.</strong> Every claim cites official materials or verified in-engine archives. This is a knowledge-base assistant — answers are matched from our verified GTA 6 database, not a live language model.
           </span>
         </div>
         <button

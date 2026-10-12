@@ -8,6 +8,7 @@ import {
   Sliders,
   Share2,
   Key,
+  ShieldAlert,
   Plus,
   Trash2,
   Eye,
@@ -24,6 +25,7 @@ import {
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
 import { Badge } from "@/components/admin/ui/badge";
+import { Modal } from "@/components/admin/modal";
 import {
   INITIAL_ADMIN_SETTINGS,
   AdminSiteSettings,
@@ -57,8 +59,10 @@ export default function AdminSettingsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
+  const [showRevokeModal, setShowRevokeModal] = useState(false);
+  const [isRevoking, setIsRevoking] = useState(false);
   const [activeTab, setActiveTab] = useState<
-    "content" | "navigation" | "sections" | "tools" | "branding" | "integrations"
+    "content" | "navigation" | "sections" | "tools" | "branding" | "integrations" | "security"
   >("content");
 
   // Load live settings from Supabase on mount
@@ -126,6 +130,34 @@ export default function AdminSettingsPage() {
       description: "Restored previous site configuration from Supabase.",
       type: "info",
     });
+  };
+
+  const handleRevokeSessions = async () => {
+    setIsRevoking(true);
+    try {
+      const res = await fetch("/api/admin/revoke-sessions", { method: "POST" });
+      const data = (await res.json()) as { success: boolean; error?: string };
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Revocation failed.");
+      }
+      setShowRevokeModal(false);
+      showToast({
+        title: "All sessions revoked",
+        description: "Every admin session has been invalidated. You are being signed out.",
+        type: "success",
+      });
+      setTimeout(() => {
+        window.location.href = "/admin/login";
+      }, 1500);
+    } catch (err) {
+      showToast({
+        title: "Revocation failed",
+        description: err instanceof Error ? err.message : "Unknown error.",
+        type: "danger",
+      });
+    } finally {
+      setIsRevoking(false);
+    }
   };
 
   const handleAddNav = () => {
@@ -273,6 +305,20 @@ export default function AdminSettingsPage() {
         >
           <Key className="w-4 h-4" />
           <span>API integrations</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("security")}
+          className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap",
+            activeTab === "security"
+              ? "bg-[#3730A3]/50 text-white border border-[#4F46E5]/40 shadow-sm"
+              : "bg-[#111622] text-[#94A3B8] hover:text-white border border-[#1C2436]"
+          )}
+        >
+          <ShieldAlert className="w-4 h-4" />
+          <span>Security</span>
         </button>
       </div>
 
@@ -706,6 +752,65 @@ export default function AdminSettingsPage() {
           </div>
         </div>
       )}
+
+      {/* Tab 6: Security */}
+      {activeTab === "security" && (
+        <div className="p-6 rounded-xl border border-[#1C2436] bg-[#111622] space-y-5 text-xs">
+          <div>
+            <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+              <ShieldAlert className="w-4 h-4 text-gold-light" />
+              Session security
+            </h3>
+            <p className="text-[#94A3B8] mt-2 leading-relaxed">
+              Admin sessions expire automatically 24 hours after login. If a session
+              token may have been exposed, revoke all sessions below — every admin
+              (including you) is signed out immediately and must log in again.
+            </p>
+          </div>
+          <div className="rounded-xl border border-red-500/30 bg-red-500/5 p-4">
+            <p className="font-semibold text-red-300 mb-1">Danger zone</p>
+            <p className="text-[#94A3B8] mb-4 leading-relaxed">
+              Revoking invalidates every active admin session at once. Use this if
+              you suspect a session cookie has leaked or an unauthorized device has
+              access. You will be signed out too.
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowRevokeModal(true)}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition-colors"
+            >
+              <ShieldAlert className="w-4 h-4" />
+              Revoke all sessions
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Revoke-sessions confirmation modal */}
+      <Modal
+        isOpen={showRevokeModal}
+        onClose={() => setShowRevokeModal(false)}
+        title="Revoke all admin sessions?"
+        description="This immediately signs out every admin, including you. All session tokens become invalid and everyone must log in again."
+        variant="danger"
+        footer={<>
+          <button
+            type="button"
+            onClick={() => setShowRevokeModal(false)}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            disabled={isRevoking}
+            onClick={handleRevokeSessions}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors disabled:opacity-60"
+          >
+            {isRevoking ? "Revoking…" : "Revoke now"}
+          </button>
+        </>}
+      />
     </div>
   );
 }

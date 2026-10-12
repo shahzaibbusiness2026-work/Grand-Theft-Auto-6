@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifyAdminSessionToken } from "@/lib/auth/session";
+import { verifyAdminSessionToken, getCurrentSessionVersion } from "@/lib/auth/session";
 import { getMasterAdminEmails } from "@/lib/auth/assert-admin";
 
 /** Cached CMS-managed 301/302 redirects (seo_settings.redirects). */
@@ -66,7 +66,14 @@ export async function middleware(request: NextRequest) {
   // can create a Supabase account, which would be privilege escalation.
   // ------------------------------------------------------------------
   const adminCookieValue = request.cookies.get("gta6_admin_session")?.value;
-  const sessionCheck = await verifyAdminSessionToken(adminCookieValue);
+  // Enforce session revocation here too (same fail-open policy as
+  // assertAdmin): without this, a revoked cookie could still pass the
+  // middleware gate on admin page loads.
+  const { version: sessionVersion, confirmed } = await getCurrentSessionVersion();
+  const sessionCheck = await verifyAdminSessionToken(
+    adminCookieValue,
+    confirmed ? sessionVersion : undefined
+  );
 
   let isMasterSupabaseAdmin = false;
   if (!sessionCheck.valid) {

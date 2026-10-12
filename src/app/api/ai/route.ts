@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isRateLimited } from "@/lib/rate-limit";
 import {
   canonicalVehicles,
   canonicalWeapons,
@@ -18,27 +19,15 @@ export interface AIResponsePayload {
   relatedItems?: { title: string; type: string; href: string }[];
 }
 
-// Simple in-memory rate limiter: 30 requests per minute per IP.
-// Note: resets on server restart; for production use Redis/Upstash.
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+// 30 requests per minute per IP (Redis-backed when Upstash env vars are set,
+// per-instance in-memory fallback otherwise).
 const RATE_LIMIT = 30;
 const RATE_WINDOW_MS = 60_000;
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
-    return false;
-  }
-  entry.count += 1;
-  return entry.count > RATE_LIMIT;
-}
 
 export async function POST(req: Request) {
   try {
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-    if (isRateLimited(ip)) {
+    if (await isRateLimited("ai", ip, RATE_LIMIT, RATE_WINDOW_MS)) {
       return NextResponse.json(
         { error: "Too many requests. Please try again in a minute." },
         { status: 429 }

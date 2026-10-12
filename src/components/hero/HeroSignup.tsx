@@ -15,6 +15,7 @@ import { subscribeNewsletter } from "@/lib/services/newsletter";
 export function HeroSignup() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -24,6 +25,7 @@ export function HeroSignup() {
     const res = await subscribeNewsletter(email);
     setLoading(false);
     if (res.success) {
+      setSuccessMessage(res.message || "Check your email to confirm your subscription.");
       setStatus("success");
       setEmail("");
     } else {
@@ -39,7 +41,7 @@ export function HeroSignup() {
       >
         <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
         <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
-          You&apos;re on the list — we&apos;ll notify you at launch.
+          {successMessage}
         </p>
       </div>
     );

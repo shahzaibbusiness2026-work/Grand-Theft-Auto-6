@@ -35,10 +35,11 @@ export function CompanionAiCard() {
         </div>
         <div>
           <h3 className="font-display text-sm font-extrabold uppercase tracking-wider text-white">
-            ASK GTA 6 AI
+            ASK GTA 6 AI{" "}
+            <span className="ml-1 inline-block rounded-full bg-gold/20 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-gold align-middle">Beta</span>
           </h3>
           <p className="text-xs text-slate-400">
-            Get quick answers, tips, and personalized recommendations.
+            Knowledge-base assistant — quick answers from our verified GTA 6 database.
           </p>
         </div>
       </div>

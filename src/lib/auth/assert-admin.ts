@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
-import { verifyAdminSessionToken } from "@/lib/auth/session";
+import { verifyAdminSessionToken, getCurrentSessionVersion } from "@/lib/auth/session";
 
 /**
  * Emails allowed to administer the site (ADMIN_MASTER_EMAILS, comma-separated).
@@ -31,7 +31,13 @@ export async function assertAdmin(): Promise<{ authorized: true; userId?: string
   try {
     const cookieStore = await cookies();
     const adminCookieValue = cookieStore.get("gta6_admin_session")?.value;
-    const sessionCheck = await verifyAdminSessionToken(adminCookieValue);
+    // Enforce session revocation: skip the version check only when the
+    // current version could not be confirmed (DB unreachable, no cache).
+    const { version: sessionVersion, confirmed } = await getCurrentSessionVersion();
+    const sessionCheck = await verifyAdminSessionToken(
+      adminCookieValue,
+      confirmed ? sessionVersion : undefined
+    );
 
     if (sessionCheck.valid) {
       return { authorized: true, userId: sessionCheck.email };

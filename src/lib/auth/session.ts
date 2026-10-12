@@ -2,6 +2,12 @@
  * session.ts — Edge-compatible HMAC session token management.
  * Signs and verifies admin session cookies cryptographically.
  * Works seamlessly in Next.js Middleware (Edge runtime), Route Handlers, and Server Actions.
+ *
+ * Revocation: every token embeds a `sessionVersion`. The current version is
+ * stored in Supabase `site_settings` (key: "admin_session_version") and read
+ * with a short in-memory cache. Bumping the version invalidates every
+ * previously issued token within the cache TTL (see
+ * /api/admin/revoke-sessions).
  */
 
 /**
@@ -20,7 +26,11 @@ function getSessionSecret(): string {
   return secret;
 }
 
-const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+/** Admin sessions expire 24 hours after login. */
+const TWENTY_FOUR_HOURS_MS = 24 * 60 * 60 * 1000;
+
+/** site_settings key holding the current admin session version. */
+export const ADMIN_SESSION_VERSION_KEY = "admin_session_version";
 
 async function getCryptoKey(secret: string): Promise<CryptoKey> {
   const enc = new TextEncoder();
@@ -42,21 +52,31 @@ function bufferToHex(buffer: ArrayBuffer): string {
   return hex;
 }
 
-/**
- * Creates a cryptographically signed HMAC-SHA256 session token.
- */
-export async function createAdminSessionToken(email: string): Promise<string> {
-  const expiresAt = Date.now() + SEVEN_DAYS_MS;
-  const payload = `${email}:${expiresAt}`;
+async function signPayload(payload: string): Promise<string> {
   const key = await getCryptoKey(getSessionSecret());
   const signatureBuffer = await crypto.subtle.sign(
     "HMAC",
     key,
     new TextEncoder().encode(payload)
   );
-  const signature = bufferToHex(signatureBuffer);
+  return bufferToHex(signatureBuffer);
+}
 
-  const tokenData = JSON.stringify({ email, expiresAt, signature });
+/**
+ * Creates a cryptographically signed HMAC-SHA256 session token.
+ * The current session version is embedded so tokens can be revoked by
+ * bumping the version (see /api/admin/revoke-sessions).
+ */
+export async function createAdminSessionToken(
+  email: string,
+  sessionVersion = 0
+): Promise<string> {
+  const expiresAt = Date.now() + TWENTY_FOUR_HOURS_MS;
+  const version = Number.isFinite(sessionVersion) ? Math.floor(sessionVersion) : 0;
+  const payload = `${email}:${expiresAt}:${version}`;
+  const signature = await signPayload(payload);
+
+  const tokenData = JSON.stringify({ email, expiresAt, version, signature });
   // Buffer or btoa depending on environment
   if (typeof Buffer !== "undefined") {
     return Buffer.from(tokenData).toString("base64");
@@ -65,10 +85,18 @@ export async function createAdminSessionToken(email: string): Promise<string> {
 }
 
 /**
- * Verifies the authenticity, signature, and expiration of the session token.
+ * Verifies the authenticity, signature, expiration, and session version of
+ * the token.
+ *
+ * Pass `expectedVersion` (from getCurrentSessionVersion()) to enforce
+ * revocation: tokens issued before the version was bumped are rejected.
+ * Omit it only when the version could not be confirmed (e.g. the database
+ * is unreachable) — in that case HMAC signature and expiry are still
+ * enforced.
  */
 export async function verifyAdminSessionToken(
-  tokenString: string | undefined | null
+  tokenString: string | undefined | null,
+  expectedVersion?: number
 ): Promise<{ valid: boolean; email?: string }> {
   if (!tokenString) return { valid: false };
 
@@ -77,19 +105,23 @@ export async function verifyAdminSessionToken(
       ? Buffer.from(tokenString, "base64").toString("utf-8")
       : atob(tokenString);
 
-    const { email, expiresAt, signature } = JSON.parse(raw);
+    const { email, expiresAt, version, signature } = JSON.parse(raw);
 
     if (!email || !expiresAt || !signature) return { valid: false };
     if (Date.now() > Number(expiresAt)) return { valid: false };
 
-    const payload = `${email}:${expiresAt}`;
-    const key = await getCryptoKey(getSessionSecret());
-    const expectedSigBuffer = await crypto.subtle.sign(
-      "HMAC",
-      key,
-      new TextEncoder().encode(payload)
-    );
-    const expectedSignature = bufferToHex(expectedSigBuffer);
+    // Tokens issued before versions existed carry no version field.
+    const tokenVersion = typeof version === "number" ? version : -1;
+    if (expectedVersion !== undefined && tokenVersion < expectedVersion) {
+      return { valid: false };
+    }
+
+    // Reconstruct the payload exactly as it was signed at issue time.
+    const payload =
+      version === undefined
+        ? `${email}:${expiresAt}`
+        : `${email}:${expiresAt}:${tokenVersion}`;
+    const expectedSignature = await signPayload(payload);
 
     if (signature.length !== expectedSignature.length) return { valid: false };
 
@@ -107,4 +139,55 @@ export async function verifyAdminSessionToken(
   }
 
   return { valid: false };
+}
+
+/**
+ * Reads the current admin session version from Supabase with a short
+ * in-memory cache (Edge-compatible: plain REST fetch).
+ *
+ * `confirmed` is false only when the database could not be reached AND no
+ * cached value exists yet — callers then skip the version check (fail open
+ * for availability) while HMAC and expiry are still enforced. Once a value
+ * has been fetched successfully it keeps being enforced even through later
+ * outages.
+ */
+const SESSION_VERSION_CACHE_TTL_MS = 15_000;
+let sessionVersionCache: { version: number; fetchedAt: number } | null = null;
+
+export function clearSessionVersionCache(): void {
+  sessionVersionCache = null;
+}
+
+export async function getCurrentSessionVersion(): Promise<{
+  version: number;
+  confirmed: boolean;
+}> {
+  if (
+    sessionVersionCache &&
+    Date.now() - sessionVersionCache.fetchedAt < SESSION_VERSION_CACHE_TTL_MS
+  ) {
+    return { version: sessionVersionCache.version, confirmed: true };
+  }
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/site_settings?select=value&key=eq.${ADMIN_SESSION_VERSION_KEY}`,
+      {
+        headers: { apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "" },
+        // Never let a slow CMS outage hang admin auth; fail fast.
+        signal: AbortSignal.timeout(2000),
+      }
+    );
+    if (!res.ok) throw new Error(`site_settings fetch failed: ${res.status}`);
+    const rows = (await res.json()) as { value: string }[];
+    const parsed = parseInt(rows[0]?.value ?? "0", 10);
+    const version = Number.isFinite(parsed) ? parsed : 0;
+    sessionVersionCache = { version, fetchedAt: Date.now() };
+    return { version, confirmed: true };
+  } catch {
+    return {
+      version: sessionVersionCache?.version ?? 0,
+      confirmed: sessionVersionCache !== null,
+    };
+  }
 }

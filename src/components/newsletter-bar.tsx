@@ -21,6 +21,7 @@ export function NewsletterBar({
 }: NewsletterBarProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -30,6 +31,7 @@ export function NewsletterBar({
     const res = await subscribeNewsletter(email);
     setLoading(false);
     if (res.success) {
+      setSuccessMessage(res.message || "Check your email to confirm your subscription.");
       setStatus("success");
       setEmail("");
     } else {
@@ -51,7 +53,7 @@ export function NewsletterBar({
         {status === "success" ? (
           <div className="flex items-center gap-2 rounded-xl border border-neon-green/40 bg-neon-green/10 px-4 py-3">
             <CheckCircle className="h-4 w-4 text-neon-green" aria-hidden="true" />
-            <p className="text-sm font-semibold text-neon-green">Subscribed!</p>
+            <p className="text-sm font-semibold text-neon-green">{successMessage}</p>
           </div>
         ) : (
           <form className="w-full max-w-md" onSubmit={handleSubmit} aria-label="Newsletter sign-up">

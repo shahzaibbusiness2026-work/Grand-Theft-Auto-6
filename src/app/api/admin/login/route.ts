@@ -3,7 +3,8 @@ import { cookies } from "next/headers";
 import { createHash } from "crypto";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createAdminSessionToken } from "@/lib/auth/session";
+import { createAdminSessionToken, getCurrentSessionVersion } from "@/lib/auth/session";
+import { peekRateLimit, recordRateLimitHit } from "@/lib/rate-limit";
 
 /**
  * Admin login endpoint.
@@ -32,30 +33,18 @@ const MASTER_EMAILS = (process.env.ADMIN_MASTER_EMAILS || "")
 const MASTER_PASSWORD = process.env.ADMIN_MASTER_PASSWORD;
 
 /* ------------------------------------------------------------------ */
-/* Simple in-memory rate limiting: 5 failed attempts / 10 min / IP     */
-/* (per server instance; sufficient to slow credential stuffing)       */
+/* Rate limiting: 5 failed attempts / 10 min / IP (Redis-backed when    */
+/* Upstash env vars are set, per-instance in-memory fallback otherwise) */
 /* ------------------------------------------------------------------ */
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-const failedAttempts = new Map<string, { count: number; resetAt: number }>();
 
-function isRateLimited(ip: string): boolean {
-  const entry = failedAttempts.get(ip);
-  if (!entry) return false;
-  if (Date.now() > entry.resetAt) {
-    failedAttempts.delete(ip);
-    return false;
-  }
-  return entry.count >= RATE_LIMIT_MAX;
+async function isLoginRateLimited(ip: string): Promise<boolean> {
+  return peekRateLimit("admin-login", ip, RATE_LIMIT_MAX);
 }
 
-function recordFailure(ip: string) {
-  const entry = failedAttempts.get(ip);
-  if (!entry || Date.now() > entry.resetAt) {
-    failedAttempts.set(ip, { count: 1, resetAt: Date.now() + RATE_LIMIT_WINDOW_MS });
-  } else {
-    entry.count += 1;
-  }
+async function recordLoginFailure(ip: string) {
+  await recordRateLimitHit("admin-login", ip, RATE_LIMIT_WINDOW_MS);
 }
 
 function timingSafeEqualStr(a: string, b: string): boolean {
@@ -65,13 +54,17 @@ function timingSafeEqualStr(a: string, b: string): boolean {
 }
 
 async function setAdminCookie(cookieStore: Awaited<ReturnType<typeof cookies>>, email: string) {
-  const token = await createAdminSessionToken(email);
+  // Embed the current session version so the token dies on the next
+  // "revoke all sessions". Login still works if the version store is
+  // unreachable — the check resumes once Supabase is back.
+  const { version } = await getCurrentSessionVersion();
+  const token = await createAdminSessionToken(email, version);
   cookieStore.set("gta6_admin_session", token, {
     path: "/",
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: 60 * 60 * 24, // 24 hours
   });
 }
 
@@ -84,7 +77,7 @@ export async function POST(request: Request) {
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       "unknown";
 
-    if (isRateLimited(ip)) {
+    if (await isLoginRateLimited(ip)) {
       return NextResponse.json(
         { success: false, error: "Too many failed attempts. Try again in 10 minutes." },
         { status: 429 }
@@ -131,7 +124,7 @@ export async function POST(request: Request) {
             user: { email: userEmail, role: "admin" },
           });
         }
-        recordFailure(ip);
+        await recordLoginFailure(ip);
         // Identical generic message as invalid credentials: do not reveal
         // whether the email has an account (prevents user enumeration).
         return NextResponse.json(
@@ -178,7 +171,7 @@ export async function POST(request: Request) {
       });
     }
 
-    recordFailure(ip);
+    await recordLoginFailure(ip);
 
     return NextResponse.json(
       { success: false, error: "Invalid email or password." },
