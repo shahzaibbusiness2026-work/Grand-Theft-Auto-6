@@ -897,7 +897,7 @@ export const INITIAL_ADMIN_ACTIVITIES: AdminActivity[] = [
 export const INITIAL_SEO_SETTINGS: AdminSeoSettings = {
   titleTemplate: "{title} | GTA 6 Atlas",
   metaDescription: "Your independent guide to GTA 6. News, articles, locations, vehicles, weapons and more — all in one place.",
-  canonicalBaseUrl: "https://gta6atlas.com",
+  canonicalBaseUrl: "",
   socialPreviewImage: "/img/hero-dark.jpg",
   excludeDraftsAndArchived: true,
   redirects: [

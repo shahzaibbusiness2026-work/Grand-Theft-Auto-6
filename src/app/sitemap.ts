@@ -21,9 +21,14 @@ export const dynamic = "force-dynamic";
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const seo = await getSeoSettings();
-  const baseUrl = seo.canonicalBaseUrl?.startsWith("http")
+  // Prefer admin-set URL, but ignore the stale gta6atlas.com default (parked domain)
+  const adminUrl = seo.canonicalBaseUrl?.startsWith("http") && !seo.canonicalBaseUrl.includes("gta6atlas.com")
     ? seo.canonicalBaseUrl
-    : process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://gta6atlas.com");
+    : null;
+  const baseUrl = adminUrl
+    || process.env.NEXT_PUBLIC_SITE_URL
+    || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null)
+    || "https://grand-theft-auto-6-5ap5.vercel.app";
 
   // Core Static Routes
   const staticRoutes = [
