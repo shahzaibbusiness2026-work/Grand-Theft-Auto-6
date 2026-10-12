@@ -218,7 +218,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             dark="/img/hero-dark.jpg"
             light="/img/hero-light.jpg"
             alt="Leonida backdrop"
-            className="absolute inset-0 h-full w-full object-cover opacity-70 dark:opacity-40 brightness-110"
+            className="absolute inset-0 h-full w-full object-cover opacity-70 dark:opacity-40 dark:brightness-110"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
