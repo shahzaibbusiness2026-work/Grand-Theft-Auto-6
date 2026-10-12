@@ -166,11 +166,11 @@ export function VehicleEditor({
             <button
               type="button"
               disabled={saving}
-              onClick={() => handleSave("draft")}
+              onClick={() => handleSave(vehicle.status || "draft")}
               className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#111622] hover:bg-[#161F30] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs font-semibold transition-colors disabled:opacity-60"
             >
               <Save className="w-3.5 h-3.5" />
-              <span>{saving ? "Saving…" : "Save draft"}</span>
+              <span>{saving ? "Saving…" : "Save"}</span>
             </button>
             <button
               type="button"
