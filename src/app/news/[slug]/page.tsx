@@ -83,7 +83,7 @@ export default async function ArticleDetailPage({ params }: Props) {
         slug: fb.slug,
         title: fb.title,
         excerpt: fb.excerpt,
-        content: fb.excerpt,
+        content: fb.content || fb.excerpt,
         cover_image: fb.img,
         category: fb.category || fb.tag,
         tag: fb.tag,
