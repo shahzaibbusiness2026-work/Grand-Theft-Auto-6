@@ -240,11 +240,11 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                   <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex items-start justify-between gap-2">
-                        <h3 className="font-display text-base font-black text-foreground group-hover:text-accent transition-colors truncate">
+                        <h3 className="font-display text-lg font-bold text-foreground group-hover:text-accent transition-colors leading-tight">
                           {v.name}
                         </h3>
                       </div>
-                      <p className="text-xs text-muted-foreground mt-0.5">{v.manufacturer} &bull; {v.drivetrain}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{v.manufacturer} &bull; {v.drivetrain}</p>
                     </div>
 
                     {/* Metric Bars */}
@@ -278,10 +278,10 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
 
                     {/* Card Footer */}
                     <div className="mt-4 flex items-center justify-between border-t border-border/40 pt-3 text-xs">
-                      <span className="font-mono font-bold text-cyan-600 dark:text-[#00F0FF]">{v.priceDisplay}</span>
+                      <span className="font-display text-base font-black tabular-nums text-cyan-700 dark:text-[#00F0FF]">{v.priceDisplay}</span>
                       <Link
                         href={`/vehicles/${v.slug}`}
-                        className="inline-flex items-center gap-1 font-bold text-accent transition-colors hover:text-foreground"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-foreground"
                       >
                         <span>View Specs</span>
                         <ArrowRight className="h-3.5 w-3.5" />

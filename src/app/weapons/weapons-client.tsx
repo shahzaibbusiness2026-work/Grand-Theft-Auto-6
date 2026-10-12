@@ -229,17 +229,17 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                     {/* Stats */}
                     <div className="space-y-2 border-t border-border pt-3 text-xs">
                       <div>
-                        <div className="flex justify-between text-xs font-semibold text-muted-foreground">
-                          <span>Damage</span>
-                          <span className="font-mono text-foreground font-bold">{w.damage}/100</span>
+                        <div className="flex items-baseline justify-between">
+                          <span className="text-sm font-medium text-muted-foreground">Damage</span>
+                          <span className="font-display text-xl font-black tabular-nums text-foreground">{w.damage}<span className="text-xs font-semibold text-muted-foreground">/100</span></span>
                         </div>
                         <Progress value={w.damage} className="h-1.5 mt-1" />
                       </div>
 
                       <div>
-                        <div className="flex justify-between text-xs font-semibold text-muted-foreground">
-                          <span>Fire Rate</span>
-                          <span className="font-mono text-foreground font-bold">{w.fireRate}/100</span>
+                        <div className="flex items-baseline justify-between">
+                          <span className="text-sm font-medium text-muted-foreground">Fire Rate</span>
+                          <span className="font-display text-xl font-black tabular-nums text-foreground">{w.fireRate}<span className="text-xs font-semibold text-muted-foreground">/100</span></span>
                         </div>
                         <Progress value={w.fireRate} className="h-1.5 mt-1" />
                       </div>
@@ -247,10 +247,10 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
 
                     {/* Footer */}
                     <div className="pt-3 border-t border-border flex items-center justify-between">
-                      <span className="font-mono text-xs font-black text-cyan-600 dark:text-[#00F0FF]">{w.priceDisplay}</span>
+                      <span className="font-display text-base font-black tabular-nums text-cyan-700 dark:text-[#00F0FF]">{w.priceDisplay}</span>
                       <Link
                         href={`/weapons/${w.slug}`}
-                        className="inline-flex items-center gap-1 text-xs font-bold text-accent hover:text-foreground transition-colors"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:text-foreground transition-colors"
                       >
                         <span>View Specs</span>
                         <ArrowRight className="h-3 w-3" />
