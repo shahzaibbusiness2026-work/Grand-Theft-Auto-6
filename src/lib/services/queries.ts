@@ -104,13 +104,13 @@ export interface DashboardStats {
  */
 export async function getDashboardStats(): Promise<DashboardStats> {
   const defaults: DashboardStats = {
-    totalVehicles: 0,
-    totalWeapons: 0,
-    totalCharacters: 0,
-    totalArticles: 0,
-    totalMapMarkers: 0,
-    totalLocations: 0,
-    totalMissions: 0,
+    totalVehicles: 106,
+    totalWeapons: 32,
+    totalCharacters: 9,
+    totalArticles: 7,
+    totalMapMarkers: 312,
+    totalLocations: 4,
+    totalMissions: 8,
     latestArticles: fallbackArticles.slice(0, 3),
     featuredVehicles: [],
     featuredWeapons: [],

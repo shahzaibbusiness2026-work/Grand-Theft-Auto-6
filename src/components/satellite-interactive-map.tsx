@@ -797,7 +797,7 @@ export function SatelliteInteractiveMap({
               </span>
             </div>
             <p className="text-xs text-muted-foreground">
-              HD 4K Topographic Reconnaissance • {visiblePOIs.length} Active Targets Displayed
+              HD 4K Topographic Reconnaissance • {visiblePOIs.length}{" "}Active Targets Displayed
             </p>
           </div>
         </div>

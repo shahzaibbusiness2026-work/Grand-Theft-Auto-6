@@ -243,7 +243,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               All Characters
             </h2>
             <p className="mt-1 text-xs font-mono text-pink-400">
-              {filtered.length} Characters Found • Click any card for full dossier
+              {filtered.length}{" "}Characters Found • Click any card for full dossier
             </p>
           </div>
           <div className="flex items-center gap-3">
