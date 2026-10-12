@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
-import { OnboardingModal } from "@/components/onboarding/onboarding-modal";
 import { getSeoSettings } from "@/lib/services/seo";
 import { getSiteSettings } from "@/lib/services/settings";
 import { serializeJsonLd } from "@/lib/utils";
@@ -145,7 +144,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <ThemeProvider>
           {children}
-          <OnboardingModal />
         </ThemeProvider>
       </body>
     </html>
