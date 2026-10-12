@@ -8,6 +8,7 @@ import {
 import { Donut } from "@/components/ui/donut";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+import { toggleTrackerItem, getStoredUserState } from "@/lib/user-store";
 
 interface TrackerItem {
   id: string;
@@ -49,50 +50,62 @@ export function TrackerClient() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [mounted, setMounted] = useState(false);
 
-  // Load from LocalStorage
+  // Load from user store (single source of truth)
   useEffect(() => {
     setMounted(true);
     try {
-      const saved = localStorage.getItem("gta6_atlas_tracker_completed");
-      if (saved) {
-        setCompletedIds(JSON.parse(saved));
+      const state = getStoredUserState();
+      const ids = state.tracker?.completedIds || [];
+      if (ids.length > 0) {
+        setCompletedIds(ids);
       } else {
-        // Default some items as completed for initial feel
-        setCompletedIds(["m-1", "m-2", "c-1", "a-1"]);
+        // Migrate legacy key if present
+        const legacy = localStorage.getItem("gta6_atlas_tracker_completed");
+        if (legacy) {
+          const legacyIds = JSON.parse(legacy);
+          setCompletedIds(legacyIds);
+          // Migrate to user store
+          legacyIds.forEach((id: string) => {
+            const s = getStoredUserState();
+            if (!(s.tracker.completedIds || []).includes(id)) {
+              toggleTrackerItem(id);
+            }
+          });
+          localStorage.removeItem("gta6_atlas_tracker_completed");
+        } else {
+          // Default some items as completed for initial feel
+          setCompletedIds(["m-1", "m-2", "c-1", "a-1"]);
+        }
       }
     } catch {
       // ignore
     }
   }, []);
 
-  // Save to LocalStorage
+  // Toggle via user store (single source of truth)
   const toggleItem = (id: string) => {
-    setCompletedIds((prev) => {
-      const next = prev.includes(id)
-        ? prev.filter((item) => item !== id)
-        : [...prev, id];
-      try {
-        localStorage.setItem("gta6_atlas_tracker_completed", JSON.stringify(next));
-      } catch {
-        // ignore
-      }
-      return next;
-    });
+    const nowCompleted = toggleTrackerItem(id);
+    setCompletedIds((prev) =>
+      nowCompleted ? [...prev, id] : prev.filter((item) => item !== id)
+    );
   };
 
   const resetAll = () => {
+    // Clear all via user store
+    const state = getStoredUserState();
+    const ids = [...(state.tracker?.completedIds || [])];
+    ids.forEach((id) => toggleTrackerItem(id));
     setCompletedIds([]);
-    try {
-      localStorage.removeItem("gta6_atlas_tracker_completed");
-    } catch {}
   };
 
   const completeAll = () => {
     const all = TRACKER_ITEMS.map((i) => i.id);
+    const state = getStoredUserState();
+    const current = state.tracker?.completedIds || [];
+    all.forEach((id) => {
+      if (!current.includes(id)) toggleTrackerItem(id);
+    });
     setCompletedIds(all);
-    try {
-      localStorage.setItem("gta6_atlas_tracker_completed", JSON.stringify(all));
-    } catch {}
   };
 
   const stats = useMemo(() => {
