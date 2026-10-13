@@ -31,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ? seo.canonicalBaseUrl
     : null;
   // Priority: admin-set canonical → NEXT_PUBLIC_SITE_URL → stable Vercel
-  // alias. The deployment-specific VERCEL_URL is only a last resort because
+  // alias. The deployment-specific VERCEL_URL is deliberately NOT used —
   // it changes on every redeploy and would make sitemap URLs drift.
   const baseUrl = adminUrl
     || process.env.NEXT_PUBLIC_SITE_URL
