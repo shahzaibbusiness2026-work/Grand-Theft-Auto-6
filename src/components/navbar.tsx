@@ -309,7 +309,7 @@ export function Navbar() {
                   : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
               )}
             >
-              <span>More</span>
+              <span>Tools</span>
               <ChevronDown
                 className={cn(
                   "h-3.5 w-3.5 transition-transform duration-200 opacity-70",
