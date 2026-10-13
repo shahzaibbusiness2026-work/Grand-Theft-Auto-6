@@ -11,7 +11,12 @@ import { getSeoSettings } from "@/lib/services/seo";
 import { getPublicArticles } from "@/lib/services/articles";
 import { ALL_RANKING_SLUGS } from "@/lib/rankings";
 
-export const dynamic = "force-dynamic";
+/**
+ * Revalidate at most once per hour: this keeps the sitemap fresh (new
+ * articles published directly to Supabase by the daily cron show up
+ * automatically) without re-rendering on every single request.
+ */
+export const revalidate = 3600;
 
 /**
  * DB/CMS-driven sitemap:
@@ -25,9 +30,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const adminUrl = seo.canonicalBaseUrl?.startsWith("http") && !seo.canonicalBaseUrl.includes("gta6atlas.com")
     ? seo.canonicalBaseUrl
     : null;
+  // Priority: admin-set canonical → NEXT_PUBLIC_SITE_URL → stable Vercel
+  // alias. The deployment-specific VERCEL_URL is only a last resort because
+  // it changes on every redeploy and would make sitemap URLs drift.
   const baseUrl = adminUrl
     || process.env.NEXT_PUBLIC_SITE_URL
-    || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null)
     || "https://grand-theft-auto-6-5ap5.vercel.app";
 
   // Core Static Routes
@@ -49,6 +56,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/tools/business-profit-calculator",
     "/tools/money-maker",
     "/tools/loadout-builder",
+    "/tools/vehicle-upgrade-calculator",
+    "/tools/wanted-level-guide",
+    "/tools/map-distance-calculator",
+    "/tools/day-night-converter",
+    "/tools/business-income-calculator",
     "/ai",
     "/pricing",
     "/characters",
