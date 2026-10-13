@@ -366,6 +366,20 @@ export function Navbar() {
               </div>
             )}
           </div>
+
+          {/* News link after Tools dropdown */}
+          <Link
+            href="/news"
+            aria-current={isActive("/news") ? "page" : undefined}
+            className={cn(
+              "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
+              isActive("/news")
+                ? "border border-gold/40 bg-gold/10 text-gold-dark dark:text-gold-light font-bold shadow-[0_0_12px_rgba(201,168,106,0.15)]"
+                : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+            )}
+          >
+            News
+          </Link>
         </nav>
 
         {/* Right side controls */}
