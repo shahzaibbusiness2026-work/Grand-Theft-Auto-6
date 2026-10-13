@@ -15,14 +15,18 @@ import {
   Wrench,
   Sparkles,
   Flag,
+  Siren,
+  Route,
+  SunMoon,
+  Briefcase,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "All 15 Interactive Tools & Calculators — GTA 6 Atlas",
+  title: "All 20 Interactive Tools & Calculators — GTA 6 Atlas",
   description:
-    "Complete suite of 15 production-ready interactive tools for Grand Theft Auto VI: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, and AI assistant.",
+    "Complete suite of 20 production-ready interactive tools for Grand Theft Auto VI: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, and AI assistant.",
 };
 
 interface ToolItem {
@@ -75,6 +79,26 @@ const ALL_TOOLS: ToolItem[] = [
     href: "/locations",
     badge: "Tool 11",
     icon: MapPin,
+  },
+  {
+    id: "tool-map-distance",
+    name: "Map Distance Calculator",
+    category: "Maps & Exploration",
+    desc: "Estimate travel distance, drive time, and boat time between any two Leonida locations with fastest-vehicle recommendations.",
+    href: "/tools/map-distance-calculator",
+    badge: "Tool 19",
+    icon: Route,
+    highlight: true,
+  },
+  {
+    id: "tool-day-night",
+    name: "Day/Night Time Converter",
+    category: "Maps & Exploration",
+    desc: "Convert real-world time to GTA 6 in-game time and back, with sun position indicator and next sunrise/sunset presets.",
+    href: "/tools/day-night-converter",
+    badge: "Tool 20",
+    icon: SunMoon,
+    highlight: true,
   },
 
   // Databases & Compare
@@ -133,6 +157,16 @@ const ALL_TOOLS: ToolItem[] = [
     badge: "Tool 12",
     icon: Building2,
   },
+  {
+    id: "tool-vehicle-upgrade",
+    name: "Vehicle Upgrade Calculator",
+    category: "Databases & Compare",
+    desc: "Plan tuning builds across 10 vehicles: mod costs, estimated performance gains, and cost-per-performance-point breakdowns.",
+    href: "/tools/vehicle-upgrade-calculator",
+    badge: "Tool 16",
+    icon: Wrench,
+    highlight: true,
+  },
 
   // Financial & Business
   {
@@ -162,6 +196,16 @@ const ALL_TOOLS: ToolItem[] = [
     badge: "Tool 13",
     icon: DollarSign,
   },
+  {
+    id: "tool-business-income",
+    name: "Business Income Calculator",
+    category: "Financial & Business",
+    desc: "Model daily and weekly income, break-even days, and 30-day ROI across 6 Leonida businesses with upgrade tiers.",
+    href: "/tools/business-income-calculator",
+    badge: "Tool 17",
+    icon: Briefcase,
+    highlight: true,
+  },
 
   // Combat & Loadouts
   {
@@ -172,6 +216,16 @@ const ALL_TOOLS: ToolItem[] = [
     href: "/tools/loadout-builder",
     badge: "Tool 14",
     icon: Sliders,
+    highlight: true,
+  },
+  {
+    id: "tool-wanted-guide",
+    name: "Wanted Level Guide",
+    category: "Combat & Loadouts",
+    desc: "Interactive 1–5 star police response breakdown: units deployed, helicopter spawns, roadblocks, and escape tips per level.",
+    href: "/tools/wanted-level-guide",
+    badge: "Tool 18",
+    icon: Siren,
     highlight: true,
   },
 
