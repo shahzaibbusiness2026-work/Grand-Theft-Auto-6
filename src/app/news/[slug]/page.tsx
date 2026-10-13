@@ -36,9 +36,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const seo = await getSeoSettings();
   const base = seo.canonicalBaseUrl?.startsWith("http")
     ? seo.canonicalBaseUrl
-    : "https://gta6atlas.com";
+    : "https://grand-theft-auto-6-5ap5.vercel.app";
   const canonical = article.canonical_url || `${base}/news/${article.slug}`;
-  const ogImage = article.og_image || article.cover_image || seo.socialPreviewImage;
+  const rawOgImage = article.og_image || article.cover_image || seo.socialPreviewImage;
+  // Social platforms require absolute image URLs
+  const ogImage = rawOgImage?.startsWith("/") ? `${base}${rawOgImage}` : rawOgImage;
   const title = article.seo_title || article.title;
   const description = article.seo_description || article.excerpt;
 
@@ -52,6 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       type: "article",
       publishedTime: article.published_at || undefined,
+      authors: [article.author_name || "Atlas Editorial"],
       images: [{ url: ogImage }],
     },
     twitter: {
@@ -109,7 +112,7 @@ export default async function ArticleDetailPage({ params }: Props) {
   const seo = await getSeoSettings();
   const base = seo.canonicalBaseUrl?.startsWith("http")
     ? seo.canonicalBaseUrl
-    : "https://gta6atlas.com";
+    : "https://grand-theft-auto-6-5ap5.vercel.app";
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -129,7 +132,11 @@ export default async function ArticleDetailPage({ params }: Props) {
         datePublished: article.published_at || undefined,
         dateModified: article.updated_at || article.published_at || undefined,
         author: { "@type": "Person", name: article.author_name || "Atlas Editorial" },
-        publisher: { "@type": "Organization", name: "GTA 6 Atlas" },
+        publisher: {
+          "@type": "Organization",
+          name: "GTA 6 Atlas",
+          logo: { "@type": "ImageObject", url: `${base}/img/hero-dark.jpg` },
+        },
         mainEntityOfPage: `${base}/news/${article.slug}`,
         articleSection: article.category,
         keywords: Array.isArray(article.tags) ? article.tags.join(", ") : undefined,
