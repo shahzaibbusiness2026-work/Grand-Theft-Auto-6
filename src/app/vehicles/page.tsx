@@ -107,7 +107,7 @@ export default async function VehiclesPage() {
                 Open our Interactive Vehicle Comparison Duel to inspect horsepower curves, braking deltas, and 0-60 launch times.
               </p>
             </div>
-            <Button href="/vehicles/compare" className="shrink-0 font-bold bg-primary">
+            <Button href="/vehicles/compare" className="shrink-0 font-bold bg-primary min-h-[44px]">
               Open Comparison Duel <ArrowRight className="h-4 w-4 ml-1" />
             </Button>
           </div>

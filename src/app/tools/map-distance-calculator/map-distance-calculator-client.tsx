@@ -171,7 +171,7 @@ export function MapDistanceCalculatorClient() {
             <button
               onClick={handleSwap}
               aria-label="Swap origin and destination"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-muted/60 px-3 py-1.5 text-xs font-bold text-foreground hover:border-primary hover:text-primary transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-muted/60 px-4 min-h-[44px] text-xs font-bold text-foreground hover:border-primary hover:text-primary transition-colors"
             >
               <ArrowLeftRight className="h-3.5 w-3.5" /> Swap
             </button>

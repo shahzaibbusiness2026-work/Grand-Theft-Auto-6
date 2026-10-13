@@ -122,12 +122,12 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 <img loading="lazy" src={prop.img} alt={prop.name} className="h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
-                  <span className="font-mono text-muted-foreground">
+                  <span className="font-mono text-muted-foreground min-w-0 truncate">
                     Map Location: Top {prop.mapCoords.top} / Left {prop.mapCoords.left}
                   </span>
                   <Link
                     href={`/map?poi=${prop.id}&top=${prop.mapCoords.top}&left=${prop.mapCoords.left}`}
-                    className="btn-primary text-xs px-3 py-1.5 font-bold flex items-center gap-1.5"
+                    className="btn-primary text-xs px-3 py-1.5 min-h-[44px] font-bold flex items-center gap-1.5"
                   >
                     <Navigation className="h-3.5 w-3.5" /> View Satellite Map
                   </Link>

@@ -116,7 +116,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
             </h2>
             <button
               onClick={handleReset}
-              className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
+              className="min-h-[44px] inline-flex items-center px-3 text-xs text-muted-foreground hover:text-foreground gap-1 transition-colors"
             >
               <RotateCcw className="h-3 w-3" /> Reset
             </button>
@@ -187,7 +187,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
               step={0.5}
               value={hoursPerDay}
               onChange={(e) => setHoursPerDay(Number(e.target.value))}
-              className="w-full accent-[#C9A86A]"
+              className="w-full accent-[#C9A86A] py-3"
             />
             <div className="flex justify-between text-xs text-muted-foreground mt-1 font-mono">
               <span>0.5h</span>
@@ -298,7 +298,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
               </Button>
               <button
                 onClick={handleReset}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex min-h-[44px] items-center gap-1.5 px-3 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors"
               >
                 <RotateCcw className="h-3.5 w-3.5" /> Reset Inputs
               </button>

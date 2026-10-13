@@ -384,7 +384,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => setPickerSlotIndex(idx)}
-                      className="rounded-lg bg-muted/50 px-2 py-1 text-xs font-bold text-muted-foreground hover:bg-muted/60 transition-colors"
+                      className="rounded-lg bg-muted/50 px-2 py-3 min-h-[44px] text-xs font-bold text-muted-foreground hover:bg-muted/60 transition-colors"
                     >
                       Slot #{idx + 1}: Swap Vehicle ▾
                     </button>
@@ -397,7 +397,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   {selectedVehicles.length > 2 && (
                     <button
                       onClick={() => handleRemoveVehicle(idx)}
-                      className="rounded-lg p-1 text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      className="rounded-lg p-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/50"
                       aria-label="Remove vehicle"
                     >
                       <X className="h-4 w-4" />
@@ -580,7 +580,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 <FavoriteButton type="vehicles" id={v.id} showText={false} />
                 <Link
                   href={`/vehicles/${v.slug}`}
-                  className="flex-1 text-center rounded-xl bg-muted/40 hover:bg-muted/50 py-2 text-xs font-bold text-foreground hover:text-foreground transition-colors border border-border"
+                  className="flex-1 text-center rounded-xl bg-muted/40 hover:bg-muted/50 min-h-[44px] flex items-center justify-center py-2 text-xs font-bold text-foreground hover:text-foreground transition-colors border border-border"
                 >
                   View Details
                 </Link>
@@ -652,7 +652,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
               </h3>
                 <button
                   onClick={() => setPickerSlotIndex(null)}
-                  className="rounded-lg p-1 text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  className="rounded-lg p-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 >
                   <X className="h-5 w-5" />
                 </button>

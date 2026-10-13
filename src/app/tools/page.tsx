@@ -344,7 +344,7 @@ export default function ToolsPage() {
           </div>
           <Link
             href="/contact"
-            className="btn-secondary text-xs px-5 py-2.5 font-bold uppercase tracking-wider whitespace-nowrap"
+            className="btn-secondary text-xs px-5 py-2.5 min-h-[44px] font-bold uppercase tracking-wider whitespace-nowrap"
           >
             Submit Feedback
           </Link>

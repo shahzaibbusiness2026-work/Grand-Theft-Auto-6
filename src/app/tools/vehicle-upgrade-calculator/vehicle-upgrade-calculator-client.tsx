@@ -150,7 +150,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
               key={p.label}
               onClick={() => setSelectedUpgrades([...p.upgrades])}
               className={cn(
-                "rounded-xl px-3 py-1.5 text-xs font-semibold transition-all border",
+                "rounded-xl px-3 py-1.5 min-h-[44px] text-xs font-semibold transition-all border",
                 active
                   ? "border-accent bg-accent/20 text-foreground font-bold shadow-sm"
                   : "border-border bg-muted/60 text-muted-foreground hover:border-border hover:text-foreground"
@@ -172,7 +172,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
             </h2>
             <button
               onClick={handleReset}
-              className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
+              className="min-h-[44px] inline-flex items-center px-3 text-xs text-muted-foreground hover:text-foreground gap-1 transition-colors"
             >
               <RotateCcw className="h-3 w-3" /> Reset
             </button>

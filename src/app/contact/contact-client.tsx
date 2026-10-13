@@ -105,7 +105,7 @@ export function ContactClient() {
                   { Icon: Youtube, label: "GTA 6 Atlas on YouTube", href: "https://youtube.com/@GTA6Atlas" },
                   { Icon: Gamepad2, label: "GTA 6 Atlas Discord community", href: "https://discord.gg/gta6atlas" },
                 ].map(({ Icon, label, href }) => (
-                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center">
                     <Icon className="h-4 w-4" />
                   </a>
                 ))}

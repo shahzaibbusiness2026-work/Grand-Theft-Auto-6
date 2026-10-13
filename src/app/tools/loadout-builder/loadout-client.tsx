@@ -285,7 +285,7 @@ export function LoadoutClient() {
               <select
                 value={primaryId}
                 onChange={(e) => setPrimaryId(e.target.value)}
-                className="w-full bg-card border border-border rounded-xl px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-gold/60 focus:ring-2 focus:ring-gold/20 font-medium transition-all cursor-pointer"
+                className="w-full bg-card border border-border rounded-xl px-3 py-3 text-sm text-foreground focus:outline-none focus:border-gold/60 focus:ring-2 focus:ring-gold/20 font-medium transition-all cursor-pointer"
               >
                 {primaryPool.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -322,7 +322,7 @@ export function LoadoutClient() {
               <select
                 value={secondaryId}
                 onChange={(e) => setSecondaryId(e.target.value)}
-                className="w-full bg-card border border-border rounded-xl px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-gold/60 focus:ring-2 focus:ring-gold/20 font-medium transition-all cursor-pointer"
+                className="w-full bg-card border border-border rounded-xl px-3 py-3 text-sm text-foreground focus:outline-none focus:border-gold/60 focus:ring-2 focus:ring-gold/20 font-medium transition-all cursor-pointer"
               >
                 {secondaryPool.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -359,7 +359,7 @@ export function LoadoutClient() {
               <select
                 value={meleeId}
                 onChange={(e) => setMeleeId(e.target.value)}
-                className="w-full bg-card border border-border rounded-xl px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-gold/60 focus:ring-2 focus:ring-gold/20 font-medium transition-all cursor-pointer"
+                className="w-full bg-card border border-border rounded-xl px-3 py-3 text-sm text-foreground focus:outline-none focus:border-gold/60 focus:ring-2 focus:ring-gold/20 font-medium transition-all cursor-pointer"
               >
                 {meleePool.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -392,7 +392,7 @@ export function LoadoutClient() {
               <select
                 value={heavyId}
                 onChange={(e) => setHeavyId(e.target.value)}
-                className="w-full bg-card border border-border rounded-xl px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-gold/60 focus:ring-2 focus:ring-gold/20 font-medium transition-all cursor-pointer"
+                className="w-full bg-card border border-border rounded-xl px-3 py-3 text-sm text-foreground focus:outline-none focus:border-gold/60 focus:ring-2 focus:ring-gold/20 font-medium transition-all cursor-pointer"
               >
                 {heavyPool.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -565,14 +565,14 @@ export function LoadoutClient() {
                           setSelectedGear(saved.equipment);
                           if (saved.notes) setNotes(saved.notes);
                         }}
-                        className="text-xs font-bold px-3 py-1.5 rounded-lg border border-border text-foreground hover:border-gold/50 hover:text-gold-dark dark:hover:text-gold-light transition-colors"
+                        className="text-xs font-bold px-3 py-1.5 min-h-[44px] rounded-lg border border-border text-foreground hover:border-gold/50 hover:text-gold-dark dark:hover:text-gold-light transition-colors"
                         title="Load this build into builder"
                       >
                         Load
                       </button>
                       <button
                         onClick={() => handleDeleteSaved(saved.id)}
-                        className="p-1.5 rounded-lg text-muted-foreground hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+                        className="min-h-[44px] min-w-[44px] p-3 rounded-lg text-muted-foreground hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
                         title="Delete saved build"
                       >
                         <Trash2 className="h-3.5 w-3.5" />

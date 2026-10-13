@@ -63,10 +63,10 @@ export default async function WeaponsPage() {
               Verified damage ratings, cycle rates, recoil patterns, attachments, and street drop locations for the entire GTA 6 weapon roster.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Button href="/compare/weapons" className="bg-primary font-bold text-xs text-primary-foreground hover:bg-primary-hover">
+              <Button href="/compare/weapons" className="bg-primary font-bold text-xs text-primary-foreground hover:bg-primary-hover min-h-[44px]">
                 Compare Weapons (2-4) <ArrowRight className="h-4 w-4 ml-1" />
               </Button>
-              <Button href="/tools/loadout-builder" variant="outline" className="text-xs font-semibold">
+              <Button href="/tools/loadout-builder" variant="outline" className="text-xs font-semibold min-h-[44px]">
                 Open Loadout Builder
               </Button>
             </div>

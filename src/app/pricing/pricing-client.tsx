@@ -77,7 +77,7 @@ export function PricingClient() {
         </span>
         <button
           onClick={() => setAnnualBilling(!annualBilling)}
-          className="relative h-7 w-14 rounded-full bg-muted p-1 border border-border transition-colors focus:outline-none"
+          className="relative h-7 w-14 rounded-full bg-muted border border-border transition-colors focus:outline-none p-2 -m-2"
         >
           <div
             className={cn(

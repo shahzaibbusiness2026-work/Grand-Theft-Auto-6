@@ -68,7 +68,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
             <button
               onClick={() => setSortBy("default")}
               className={cn(
-                "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
+                "rounded-lg px-2.5 py-2.5 text-xs font-semibold transition-all",
                 sortBy === "default" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -77,7 +77,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
             <button
               onClick={() => setSortBy("reward")}
               className={cn(
-                "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
+                "rounded-lg px-2.5 py-2.5 text-xs font-semibold transition-all",
                 sortBy === "reward" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -86,7 +86,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
             <button
               onClick={() => setSortBy("title")}
               className={cn(
-                "rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all",
+                "rounded-lg px-2.5 py-2.5 text-xs font-semibold transition-all",
                 sortBy === "title" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -106,7 +106,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   key={t}
                   onClick={() => setSelectedType(t)}
                   className={cn(
-                    "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
+                    "rounded-lg px-2.5 py-2.5 text-xs font-semibold transition-all",
                     selectedType === t
                       ? "bg-cyan-500 dark:bg-[#00F0FF] text-black font-bold shadow-sm"
                       : "bg-muted/40 text-muted-foreground hover:text-foreground"
@@ -127,7 +127,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   key={c}
                   onClick={() => setSelectedChar(c)}
                   className={cn(
-                    "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
+                    "rounded-lg px-2.5 py-2.5 text-xs font-semibold transition-all",
                     selectedChar === c
                       ? "bg-accent text-accent-foreground font-bold shadow-sm"
                       : "bg-muted/40 text-muted-foreground hover:text-foreground"
@@ -148,7 +148,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   key={d}
                   onClick={() => setSelectedDiff(d)}
                   className={cn(
-                    "rounded-lg px-2.5 py-1 text-xs font-semibold transition-all",
+                    "rounded-lg px-2.5 py-2.5 text-xs font-semibold transition-all",
                     selectedDiff === d
                       ? "bg-gold-light text-black font-bold shadow-sm"
                       : "bg-muted/40 text-muted-foreground hover:text-foreground"
@@ -181,7 +181,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                 setSelectedChar("All Characters");
                 setSelectedDiff("All Difficulties");
               }}
-              className="mt-4 rounded-xl bg-accent px-4 py-2 text-xs font-bold text-white shadow-md"
+              className="mt-4 rounded-xl bg-accent px-4 py-3 text-xs font-bold text-white shadow-md"
             >
               Reset Filters
             </button>
@@ -257,7 +257,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
                     <Link
                       href={`/missions/${m.slug}`}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-accent hover:text-foreground transition-colors"
+                      className="inline-flex items-center gap-1 py-2 text-xs font-bold text-accent hover:text-foreground transition-colors"
                     >
                       <span>Full Walkthrough</span>
                       <ArrowRight className="h-3.5 w-3.5" />

@@ -691,18 +691,18 @@ export function TrackerClient({ config }: TrackerClientProps) {
           <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border">
             <button
               onClick={handleExportJSON}
-              className="btn-secondary text-xs px-3 py-2 flex items-center gap-1.5 flex-1 justify-center"
+              className="btn-secondary text-xs px-3 py-3 flex items-center gap-1.5 flex-1 justify-center"
               title="Export completion progress as JSON"
             >
               <Download className="h-3.5 w-3.5 text-accent" /> Export JSON
             </button>
-            <label className="btn-secondary text-xs px-3 py-2 flex items-center gap-1.5 flex-1 justify-center cursor-pointer">
+            <label className="btn-secondary text-xs px-3 py-3 flex items-center gap-1.5 flex-1 justify-center cursor-pointer">
               <Upload className="h-3.5 w-3.5 text-primary" /> Import
               <input type="file" accept=".json" onChange={handleImportJSON} className="hidden" />
             </label>
             <button
               onClick={handleResetAll}
-              className="btn-ghost text-xs px-3 py-2 text-rose-500 dark:text-rose-400 hover:text-rose-600 hover:bg-rose-500/10 flex items-center gap-1"
+              className="btn-ghost text-xs px-3 py-3 text-rose-500 dark:text-rose-400 hover:text-rose-600 hover:bg-rose-500/10 flex items-center gap-1"
               title="Reset all checkboxes"
             >
               <RotateCcw className="h-3.5 w-3.5" /> Reset
@@ -725,7 +725,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
           </div>
           <Link
             href="/map"
-            className="btn-primary text-xs px-4 py-2.5 mt-4 flex items-center justify-center gap-2 font-bold tracking-wide"
+            className="btn-primary text-xs px-4 py-3 mt-4 flex items-center justify-center gap-2 font-bold tracking-wide"
           >
             Launch Interactive Map <ChevronRight className="h-4 w-4" />
           </Link>
@@ -795,7 +795,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
             <button
               onClick={() => setFilterStatus("all")}
               className={cn(
-                "px-3 py-1.5 rounded-lg font-medium transition-colors",
+                "px-3 py-2.5 rounded-lg font-medium transition-colors",
                 filterStatus === "all" ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -804,7 +804,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
             <button
               onClick={() => setFilterStatus("pending")}
               className={cn(
-                "px-3 py-1.5 rounded-lg font-medium transition-colors",
+                "px-3 py-2.5 rounded-lg font-medium transition-colors",
                 filterStatus === "pending" ? "bg-gold/20 text-gold-dark dark:text-gold-light font-semibold" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -813,7 +813,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
             <button
               onClick={() => setFilterStatus("completed")}
               className={cn(
-                "px-3 py-1.5 rounded-lg font-medium transition-colors",
+                "px-3 py-2.5 rounded-lg font-medium transition-colors",
                 filterStatus === "completed" ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-semibold" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -838,7 +838,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                 setSelectedCategory("All");
                 setFilterStatus("all");
               }}
-              className="btn-secondary text-xs px-4 py-2 mt-4 inline-flex items-center gap-2"
+              className="btn-secondary text-xs px-4 py-3 mt-4 inline-flex items-center gap-2"
             >
               Reset Filters
             </button>
@@ -863,7 +863,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                   {/* Toggle Checkbox Button */}
                   <button
                     onClick={() => handleToggle(item.id)}
-                    className="mt-0.5 flex-shrink-0 text-muted-foreground hover:text-primary transition-colors focus:outline-none"
+                    className="mt-0.5 flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted-foreground hover:text-primary transition-colors focus:outline-none"
                     aria-label={`Mark ${item.title} as ${isDone ? "incomplete" : "complete"}`}
                   >
                     {isDone ? (
@@ -907,7 +907,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                       {item.mapPoiId && (
                         <Link
                           href={`/map?poi=${item.mapPoiId}`}
-                          className="text-xs font-medium text-accent hover:underline flex items-center gap-1"
+                          className="text-xs font-medium text-accent hover:underline flex items-center gap-1 py-2"
                         >
                           <MapPin className="h-3 w-3" /> View On Live Map
                         </Link>
@@ -919,7 +919,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
                           setEditingNoteId(isEditing ? null : item.id);
                           setNoteText(userNote || "");
                         }}
-                        className="text-xs font-medium text-muted-foreground hover:text-foreground flex items-center gap-1"
+                        className="text-xs font-medium text-muted-foreground hover:text-foreground flex items-center gap-1 py-2"
                       >
                         <FileEdit className="h-3 w-3" />
                         {userNote ? "Edit Personal Note" : "+ Add Note"}
@@ -952,13 +952,13 @@ export function TrackerClient({ config }: TrackerClientProps) {
                         <div className="flex justify-end gap-2">
                           <button
                             onClick={() => setEditingNoteId(null)}
-                            className="btn-ghost text-xs px-3 py-1 text-muted-foreground hover:text-foreground"
+                            className="btn-ghost text-xs px-4 py-2.5 text-muted-foreground hover:text-foreground"
                           >
                             Cancel
                           </button>
                           <button
                             onClick={() => handleSaveNote(item.id)}
-                            className="btn-primary text-xs px-3 py-1 font-bold"
+                            className="btn-primary text-xs px-4 py-2.5 font-bold"
                           >
                             Save Note
                           </button>

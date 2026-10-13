@@ -140,7 +140,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
             <select
               value={selectedDistrict}
               onChange={(e) => setSelectedDistrict(e.target.value)}
-              className="bg-card border border-border rounded-xl px-3 py-2 text-xs text-foreground focus:outline-none focus:border-primary"
+              className="bg-card border border-border rounded-xl px-3 py-3 text-xs text-foreground focus:outline-none focus:border-primary"
             >
               {districts.map((d) => (
                 <option key={d} value={d}>
@@ -152,7 +152,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
             <select
               value={selectedThreat}
               onChange={(e) => setSelectedThreat(e.target.value)}
-              className="bg-card border border-border rounded-xl px-3 py-2 text-xs text-foreground focus:outline-none focus:border-primary"
+              className="bg-card border border-border rounded-xl px-3 py-3 text-xs text-foreground focus:outline-none focus:border-primary"
             >
               <option value="All">All Danger Levels</option>
               <option value="Low">Low Threat</option>
@@ -175,7 +175,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={cn(
-                  "text-xs px-3 py-1.5 rounded-full font-semibold transition-all border",
+                  "text-xs px-3 py-3 rounded-full font-semibold transition-all border",
                   isSelected
                     ? "border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(244,63,94,0.4)]"
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
@@ -204,7 +204,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                 setSelectedThreat("All");
                 setSearchQuery("");
               }}
-              className="btn-secondary text-xs px-4 py-2 mt-4 inline-flex items-center gap-2"
+              className="btn-secondary text-xs px-4 py-3 mt-4 inline-flex items-center gap-2"
             >
               Reset Filters
             </button>
@@ -301,14 +301,14 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                 <div className="p-4 pt-0 flex items-center justify-between gap-2 border-t border-border/60 mt-3">
                   <Link
                     href={`/map?poi=${item.id}&top=${item.top}&left=${item.left}`}
-                    className="text-xs font-semibold text-accent hover:underline flex items-center gap-1 py-1"
+                    className="text-xs font-semibold text-accent hover:underline flex items-center gap-1 py-2"
                   >
                     <Navigation className="h-3.5 w-3.5" /> Locate On Map
                   </Link>
 
                   <Link
                     href={`/locations/${item.slug}`}
-                    className="btn-secondary text-xs px-3 py-1.5 inline-flex items-center gap-1 font-semibold"
+                    className="btn-secondary text-xs px-3 py-2.5 inline-flex items-center gap-1 font-semibold"
                   >
                     View Dossier <ExternalLink className="h-3 w-3" />
                   </Link>

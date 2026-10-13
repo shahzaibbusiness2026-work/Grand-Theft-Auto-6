@@ -342,14 +342,14 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <button
                     onClick={() => setPickerSlotIndex(idx)}
-                    className="rounded-lg bg-muted/50 px-2 py-1 text-xs font-bold text-muted-foreground hover:bg-muted/60 transition-colors"
+                    className="rounded-lg bg-muted/50 px-2 py-3 min-h-[44px] text-xs font-bold text-muted-foreground hover:bg-muted/60 transition-colors"
                   >
                     Slot #{idx + 1}: Swap Weapon ▾
                   </button>
                   {selectedWeapons.length > 2 && (
                     <button
                       onClick={() => handleRemove(idx)}
-                      className="rounded-lg p-1 text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      className="rounded-lg p-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -504,7 +504,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                 <FavoriteButton type="weapons" id={w.id} showText={false} />
                 <Link
                   href={`/weapons/${w.slug}`}
-                  className="flex-1 text-center rounded-xl bg-muted/40 hover:bg-muted/50 py-2 text-xs font-bold text-foreground transition-colors border border-border"
+                  className="flex-1 text-center rounded-xl bg-muted/40 hover:bg-muted/50 min-h-[44px] flex items-center justify-center py-2 text-xs font-bold text-foreground transition-colors border border-border"
                 >
                   Full Ballistics
                 </Link>
@@ -573,7 +573,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
               </h3>
               <button
                 onClick={() => setPickerSlotIndex(null)}
-                className="rounded-lg p-1 text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                className="rounded-lg p-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/50"
               >
                 <X className="h-5 w-5" />
               </button>

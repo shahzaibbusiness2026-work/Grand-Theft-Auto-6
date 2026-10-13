@@ -114,7 +114,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-3 py-2 rounded-lg border border-border">
-                  <span className="flex items-center gap-1.5 font-mono">
+                  <span className="flex min-w-0 items-center gap-1.5 font-mono truncate">
                     <Compass className="h-4 w-4 text-accent" /> Relative Map Coordinates: Top {collectible.coordinates.top} / Left {collectible.coordinates.left}
                   </span>
                   <Link

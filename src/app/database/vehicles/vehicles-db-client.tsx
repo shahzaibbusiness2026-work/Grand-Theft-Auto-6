@@ -126,7 +126,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
                 key={t.label}
                 onClick={() => setType(t.label)}
                 className={cn(
-                  "flex w-full items-center justify-between rounded-lg px-3 py-2 text-[13px] font-semibold text-muted-foreground hover:text-foreground",
+                  "flex w-full items-center justify-between rounded-lg px-3 py-3 text-[13px] font-semibold text-muted-foreground hover:text-foreground",
                   type === t.label && "border border-accent/50 bg-accent/10 text-foreground"
                 )}
               >
@@ -184,16 +184,16 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
         {/* MAIN */}
         <div className="space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex gap-4 text-[13px] font-semibold">
+            <div className="flex flex-wrap gap-4 text-[13px] font-semibold">
               <button className="border-b-2 border-accent pb-2 text-foreground">All Vehicles <span className="text-muted-foreground">312</span></button>
               <button className="pb-2 text-muted-foreground">Owned / Saved <span>0</span></button>
               <button className="pb-2 text-muted-foreground">Recently Viewed <span>6</span></button>
             </div>
             <div className="flex items-center gap-2">
-              <Button size="sm" className="h-8">
+              <Button size="sm" className="h-8 min-h-[44px]">
                 <LayoutGrid className="h-3.5 w-3.5" /> Grid View
               </Button>
-              <Button variant="secondary" size="sm" className="h-8">
+              <Button variant="secondary" size="sm" className="h-8 min-h-[44px]">
                 <List className="h-3.5 w-3.5" /> List View
               </Button>
             </div>
@@ -238,17 +238,17 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
           </div>
 
           {/* Pagination */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex gap-1.5">
-              <Button variant="secondary" size="icon" className="h-8 w-8">
+              <Button variant="secondary" size="icon" className="h-11 w-11">
                 <ChevronLeft className="h-4 w-4" />
               </Button>
               {["1", "2", "3", "…", "13"].map((p) => (
-                <button key={p} className={cn("h-8 w-8 rounded-lg text-[13px] font-bold", p === "1" ? "bg-primary text-foreground" : "bg-card text-muted-foreground hover:text-foreground")}>
+                <button key={p} className={cn("h-11 w-11 rounded-lg text-[13px] font-bold", p === "1" ? "bg-primary text-foreground" : "bg-card text-muted-foreground hover:text-foreground")}>
                   {p}
                 </button>
               ))}
-              <Button variant="secondary" size="icon" className="h-8 w-8">
+              <Button variant="secondary" size="icon" className="h-11 w-11">
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
@@ -261,7 +261,7 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
               <h2 className="flex items-center gap-2 font-display text-sm font-extrabold uppercase tracking-wider">
                 <Trophy className="h-4 w-4 text-accent" /> Top Vehicles
               </h2>
-              <div className="flex gap-3 text-xs font-semibold text-muted-foreground">
+              <div className="flex flex-wrap gap-3 text-xs font-semibold text-muted-foreground">
                 {["Top Speed", "Best Handling", "Most Expensive", "Most Popular"].map((t, i) => (
                   <button key={t} className={cn(i === 0 && "text-foreground")}>
                     {t}

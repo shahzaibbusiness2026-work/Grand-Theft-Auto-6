@@ -18,7 +18,7 @@ export function PremiumCard() {
       </p>
       <Link
         href="/pricing"
-        className="btn-primary mt-4 inline-flex w-full items-center justify-center gap-1.5 py-2 text-xs font-bold uppercase tracking-wider"
+        className="btn-primary mt-4 inline-flex w-full items-center justify-center gap-1.5 py-3 text-xs font-bold uppercase tracking-wider"
       >
         <span>Explore Pro Access</span>
         <ArrowRight className="h-3.5 w-3.5" />

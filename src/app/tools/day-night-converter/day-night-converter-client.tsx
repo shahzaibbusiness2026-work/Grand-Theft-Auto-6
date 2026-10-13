@@ -135,7 +135,7 @@ export function DayNightConverterClient() {
             key={m.id}
             onClick={() => setMode(m.id)}
             className={cn(
-              "rounded-xl px-4 py-2 text-xs font-semibold transition-all border",
+              "rounded-xl px-4 py-2 min-h-[44px] text-xs font-semibold transition-all border",
               mode === m.id
                 ? "border-accent bg-accent/20 text-foreground font-bold shadow-sm"
                 : "border-border bg-muted/60 text-muted-foreground hover:border-border hover:text-foreground"
@@ -192,7 +192,7 @@ export function DayNightConverterClient() {
                     key={d}
                     onClick={() => setRealMinutes(d)}
                     className={cn(
-                      "rounded-xl px-3 py-1.5 text-xs font-semibold transition-all border",
+                      "rounded-xl px-3 py-1.5 min-h-[44px] text-xs font-semibold transition-all border",
                       realMinutes === d
                         ? "border-accent bg-accent/20 text-foreground font-bold"
                         : "border-border bg-muted/60 text-muted-foreground hover:text-foreground"
@@ -304,7 +304,7 @@ export function DayNightConverterClient() {
                   key={p.label}
                   onClick={() => handlePreset(p.time)}
                   className={cn(
-                    "rounded-xl px-4 py-2 text-xs font-semibold transition-all border flex items-center gap-1.5",
+                    "rounded-xl px-4 py-2 min-h-[44px] text-xs font-semibold transition-all border flex items-center gap-1.5",
                     mode === "game-to-real" && targetGameTime === p.time
                       ? "border-accent bg-accent/20 text-foreground font-bold"
                       : "border-border bg-muted/60 text-muted-foreground hover:text-foreground"

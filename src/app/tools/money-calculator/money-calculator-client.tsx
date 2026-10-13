@@ -115,7 +115,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
             </h2>
             <button
               onClick={handleReset}
-              className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
+              className="min-h-[44px] inline-flex items-center px-3 text-xs text-muted-foreground hover:text-foreground gap-1 transition-colors"
             >
               <RotateCcw className="h-3 w-3" /> Reset
             </button>
@@ -198,7 +198,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               step={0.5}
               value={hoursPerDay}
               onChange={(e) => setHoursPerDay(Number(e.target.value))}
-              className="w-full accent-gold"
+              className="w-full accent-gold py-3"
             />
             <div className="flex justify-between text-xs text-muted-foreground mt-1 font-mono">
               <span>30m Casual</span>

@@ -40,7 +40,7 @@ export function FavoriteButton({ type, id, className, showText = true }: Favorit
         type="button"
         disabled
         className={cn(
-          "inline-flex items-center justify-center gap-1.5 rounded-xl border border-border bg-muted/40 px-3 py-2 text-xs font-bold text-muted-foreground opacity-70",
+          "inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border border-border bg-muted/40 px-3 py-2 text-xs font-bold text-muted-foreground opacity-70",
           className
         )}
       >
@@ -56,7 +56,7 @@ export function FavoriteButton({ type, id, className, showText = true }: Favorit
       onClick={handleToggle}
       aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
       className={cn(
-        "inline-flex items-center justify-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-bold transition-all active:scale-95",
+        "inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-bold transition-all active:scale-95",
         favorited
           ? "border-gold/50 bg-gold/20 text-gold dark:text-gold-light shadow-[0_0_12px_rgba(201,168,106,0.25)]"
           : "border-border bg-card/60 text-muted-foreground hover:border-gold/30 hover:bg-muted hover:text-foreground",

@@ -84,7 +84,7 @@ export function MoneyMakerClient() {
               <button
                 onClick={() => setPlaystyle("any")}
                 className={cn(
-                  "py-1.5 rounded-lg font-semibold transition-all",
+                  "py-3 rounded-lg font-semibold transition-all",
                   playstyle === "any" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -93,7 +93,7 @@ export function MoneyMakerClient() {
               <button
                 onClick={() => setPlaystyle("solo")}
                 className={cn(
-                  "py-1.5 rounded-lg font-semibold transition-all",
+                  "py-3 rounded-lg font-semibold transition-all",
                   playstyle === "solo" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -102,7 +102,7 @@ export function MoneyMakerClient() {
               <button
                 onClick={() => setPlaystyle("coop")}
                 className={cn(
-                  "py-1.5 rounded-lg font-semibold transition-all",
+                  "py-3 rounded-lg font-semibold transition-all",
                   playstyle === "coop" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -120,7 +120,7 @@ export function MoneyMakerClient() {
               <button
                 onClick={() => setCapital("any")}
                 className={cn(
-                  "py-1.5 rounded-lg font-semibold transition-all",
+                  "py-3 rounded-lg font-semibold transition-all",
                   capital === "any" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -129,7 +129,7 @@ export function MoneyMakerClient() {
               <button
                 onClick={() => setCapital("broke")}
                 className={cn(
-                  "py-1.5 rounded-lg font-semibold transition-all",
+                  "py-3 rounded-lg font-semibold transition-all",
                   capital === "broke" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -138,7 +138,7 @@ export function MoneyMakerClient() {
               <button
                 onClick={() => setCapital("mid")}
                 className={cn(
-                  "py-1.5 rounded-lg font-semibold transition-all",
+                  "py-3 rounded-lg font-semibold transition-all",
                   capital === "mid" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -156,7 +156,7 @@ export function MoneyMakerClient() {
               <button
                 onClick={() => setRisk("any")}
                 className={cn(
-                  "py-1.5 rounded-lg font-semibold transition-all",
+                  "py-3 rounded-lg font-semibold transition-all",
                   risk === "any" ? "bg-primary text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -165,7 +165,7 @@ export function MoneyMakerClient() {
               <button
                 onClick={() => setRisk("Low")}
                 className={cn(
-                  "py-1.5 rounded-lg font-semibold transition-all",
+                  "py-3 rounded-lg font-semibold transition-all",
                   risk === "Low" ? "bg-emerald-500/20 text-emerald-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -174,7 +174,7 @@ export function MoneyMakerClient() {
               <button
                 onClick={() => setRisk("Medium")}
                 className={cn(
-                  "py-1.5 rounded-lg font-semibold transition-all",
+                  "py-3 rounded-lg font-semibold transition-all",
                   risk === "Medium" ? "bg-gold/20 text-amber-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -183,7 +183,7 @@ export function MoneyMakerClient() {
               <button
                 onClick={() => setRisk("High")}
                 className={cn(
-                  "py-1.5 rounded-lg font-semibold transition-all",
+                  "py-3 rounded-lg font-semibold transition-all",
                   risk === "High" ? "bg-rose-500/20 text-rose-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >

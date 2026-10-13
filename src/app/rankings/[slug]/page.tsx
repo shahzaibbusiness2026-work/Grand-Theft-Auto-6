@@ -191,13 +191,13 @@ export default async function RankingDetailPage({
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href={match.type === "vehicle" ? "/compare/vehicles" : "/compare/weapons"}
-            className="inline-flex items-center gap-2 rounded-xl border border-border bg-muted/40 px-4 py-2 text-xs font-bold text-foreground hover:text-accent transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl border border-border bg-muted/40 px-4 py-3 text-xs font-bold text-foreground hover:text-accent transition-colors"
           >
             ⚔️ Duel these in the Comparison Tool
           </Link>
           <Link
             href="/rankings"
-            className="inline-flex items-center gap-2 rounded-xl border border-border bg-muted/40 px-4 py-2 text-xs font-bold text-foreground hover:text-accent transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl border border-border bg-muted/40 px-4 py-3 text-xs font-bold text-foreground hover:text-accent transition-colors"
           >
             <Trophy className="h-4 w-4" aria-hidden="true" /> All {typeLabel} Rankings
           </Link>

@@ -141,14 +141,14 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
             {compareIds.length === 2 && (
               <button
                 onClick={() => setShowCompareModal(true)}
-                className="btn-primary text-xs px-4 py-2 font-bold flex items-center gap-1.5 shadow-lg shadow-primary/30"
+                className="btn-primary text-xs px-4 py-3 font-bold flex items-center gap-1.5 shadow-lg shadow-primary/30"
               >
                 Launch Duel <ArrowRightLeft className="h-3.5 w-3.5" />
               </button>
             )}
             <button
               onClick={() => setCompareIds([])}
-              className="btn-ghost text-xs px-3 py-2 text-muted-foreground hover:text-foreground"
+              className="btn-ghost text-xs px-3 py-3 text-muted-foreground hover:text-foreground"
             >
               Clear
             </button>
@@ -174,7 +174,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
             <select
               value={selectedDistrict}
               onChange={(e) => setSelectedDistrict(e.target.value)}
-              className="bg-card border border-border rounded-xl px-3 py-2 text-xs text-foreground focus:outline-none focus:border-primary"
+              className="bg-card border border-border rounded-xl px-3 py-3 text-xs text-foreground focus:outline-none focus:border-primary"
             >
               {districts.map((d) => (
                 <option key={d} value={d}>
@@ -197,7 +197,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                 key={type}
                 onClick={() => setSelectedType(type)}
                 className={cn(
-                  "text-xs px-3 py-1.5 rounded-full font-semibold transition-all border",
+                  "text-xs px-3 py-2.5 rounded-full font-semibold transition-all border",
                   isSelected
                     ? "border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(244,63,94,0.4)]"
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
@@ -225,7 +225,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                 setSelectedDistrict("All");
                 setSearchQuery("");
               }}
-              className="btn-secondary text-xs px-4 py-2 mt-4 inline-flex items-center gap-2"
+              className="btn-secondary text-xs px-4 py-3 mt-4 inline-flex items-center gap-2"
             >
               Reset Filters
             </button>
@@ -316,7 +316,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                     <button
                       onClick={() => toggleCompare(item.id)}
                       className={cn(
-                        "text-xs px-3 py-1.5 rounded-lg font-semibold border transition-colors flex items-center gap-1.5",
+                        "text-xs px-3 py-2.5 rounded-lg font-semibold border transition-colors flex items-center gap-1.5",
                         isCompared
                           ? "bg-primary text-primary-foreground border-primary"
                           : "border-border bg-muted/80 text-muted-foreground hover:text-foreground hover:border-slate-600"
@@ -328,7 +328,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
 
                     <Link
                       href={`/properties/${item.slug}`}
-                      className="btn-secondary text-xs px-3 py-1.5 inline-flex items-center gap-1 font-semibold"
+                      className="btn-secondary text-xs px-3 py-2.5 inline-flex items-center gap-1 font-semibold"
                     >
                       Dossier <ExternalLink className="h-3 w-3" />
                     </Link>
@@ -353,14 +353,14 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
               </div>
               <button
                 onClick={() => setShowCompareModal(false)}
-                className="p-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"
+                className="p-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             {/* Duel Grid */}
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 font-mono text-xs">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 font-mono text-xs">
               {comparedProps.map((p, idx) => (
                 <div key={p.id} className="space-y-4">
                   <div className="h-36 rounded-xl overflow-hidden relative bg-background">

@@ -119,7 +119,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
               key={p.name}
               onClick={() => handleApplyPresetA(p)}
               className={cn(
-                "rounded-xl px-3 py-1.5 text-xs font-semibold transition-all border",
+                "rounded-xl px-3 py-1.5 min-h-[44px] text-xs font-semibold transition-all border",
                 bizA.name === p.name
                   ? "border-accent bg-accent/20 text-foreground font-bold shadow-sm"
                   : "border-border bg-muted/60 text-muted-foreground hover:border-border hover:text-foreground"
@@ -133,7 +133,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
         <button
           onClick={() => setCompareMode((prev) => !prev)}
           className={cn(
-            "rounded-xl px-3.5 py-1.5 text-xs font-bold transition-all border",
+            "rounded-xl px-3.5 py-1.5 min-h-[44px] text-xs font-bold transition-all border",
             compareMode
               ? "border-cyan-500 dark:border-[#00F0FF] bg-cyan-500 dark:bg-[#00F0FF]/20 text-cyan-600 dark:text-[#00F0FF]"
               : "border-border bg-muted/40 text-muted-foreground hover:text-foreground"
@@ -228,7 +228,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                 step={0.5}
                 value={bizA.hoursPerDay}
                 onChange={(e) => setBizA({ ...bizA, hoursPerDay: Number(e.target.value) })}
-                className="w-full accent-gold"
+                className="w-full accent-gold py-3"
               />
             </div>
           </div>
@@ -357,7 +357,7 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct}%`;
                   step={0.5}
                   value={bizB.hoursPerDay}
                   onChange={(e) => setBizB({ ...bizB, hoursPerDay: Number(e.target.value) })}
-                  className="w-full accent-[#00F0FF]"
+                  className="w-full accent-[#00F0FF] py-3"
                 />
               </div>
             </div>

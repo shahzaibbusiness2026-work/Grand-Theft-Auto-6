@@ -96,7 +96,7 @@ export function CompanionGoalsCard() {
 
         <button
           type="button"
-          className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-400 hover:text-white transition-colors"
+          className="flex h-11 w-11 items-center justify-center rounded-lg text-slate-400 hover:text-white transition-colors"
           aria-label="View rewards"
         >
           <ArrowRight className="h-4 w-4" />

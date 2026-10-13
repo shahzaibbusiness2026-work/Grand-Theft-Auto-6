@@ -27,7 +27,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
             <button
               type="button"
               onClick={onMenuToggle}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-slate-300 hover:text-white md:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-slate-300 hover:text-white md:hidden"
               aria-label="Open navigation menu"
             >
               <Menu className="h-5 w-5" />
@@ -57,7 +57,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
             type="button"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
             className={cn(
-              "flex h-9 px-2.5 items-center gap-1.5 rounded-xl border transition-all active:scale-95 shadow-sm",
+              "flex h-11 px-2.5 items-center gap-1.5 rounded-xl border transition-all active:scale-95 shadow-sm",
               resolvedTheme === "light"
                 ? "border-gold-light/60 bg-amber-50 text-gold-dark shadow-[0_0_12px_rgba(201,168,106,0.35)] ring-1 ring-gold-light/40"
                 : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-[#00F0FF]/40 hover:bg-white/[0.08] hover:text-[#00F0FF]"
@@ -86,7 +86,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
             <button
               type="button"
               onClick={() => setNotificationOpen((prev) => !prev)}
-              className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-slate-300 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+              className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-slate-300 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
               title="Notifications"
             >
               <Bell className="h-4 w-4" />

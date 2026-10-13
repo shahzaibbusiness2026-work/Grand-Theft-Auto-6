@@ -56,7 +56,7 @@ export function CompanionAiCard() {
           />
           <button
             type="submit"
-            className="absolute right-2 flex h-8 w-8 items-center justify-center rounded-xl bg-gold text-slate-950 shadow-[0_0_12px_rgba(201,168,106,0.35)] transition-all hover:brightness-105 active:scale-95"
+            className="absolute right-2 flex h-11 w-11 items-center justify-center rounded-xl bg-gold text-slate-950 shadow-[0_0_12px_rgba(201,168,106,0.35)] transition-all hover:brightness-105 active:scale-95"
             aria-label="Submit query"
           >
             <Send className="h-3.5 w-3.5" />

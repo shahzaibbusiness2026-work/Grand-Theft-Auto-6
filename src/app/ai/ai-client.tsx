@@ -146,7 +146,7 @@ export function AIClient() {
         </div>
         <button
           onClick={handleClearHistory}
-          className="btn-ghost text-xs px-3 py-1.5 text-muted-foreground flex items-center gap-1 self-end sm:self-auto"
+          className="btn-ghost text-xs px-3 py-1.5 min-h-[44px] text-muted-foreground flex items-center gap-1 self-end sm:self-auto"
         >
           <RotateCcw className="h-3.5 w-3.5" /> Clear Chat
         </button>
@@ -221,7 +221,7 @@ export function AIClient() {
                         <Link
                           key={idx}
                           href={tool.href}
-                          className="btn-secondary text-xs px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold text-accent hover:text-foreground"
+                          className="btn-secondary text-xs px-2.5 py-2 min-h-[44px] rounded-lg flex items-center gap-1 font-semibold text-accent hover:text-foreground"
                         >
                           {tool.label} <ArrowRight className="h-2.5 w-2.5" />
                         </Link>
@@ -280,7 +280,7 @@ export function AIClient() {
             <button
               key={prompt}
               onClick={() => handleSend(prompt)}
-              className="text-xs px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/50 text-muted-foreground hover:text-foreground whitespace-nowrap transition-all flex items-center gap-1.5"
+              className="text-xs px-3 py-2.5 min-h-[44px] rounded-full bg-card border border-border hover:border-primary/50 text-muted-foreground hover:text-foreground whitespace-nowrap transition-all flex items-center gap-1.5"
             >
               <Sparkles className="h-3 w-3 text-primary flex-shrink-0" />
               <span>{prompt}</span>

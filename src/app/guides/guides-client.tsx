@@ -120,7 +120,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                 key={c.label}
                 onClick={() => setCat(c.label)}
                 className={cn(
-                  "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-[13px] font-semibold text-muted-foreground transition-colors hover:text-foreground",
+                  "flex w-full items-center justify-between rounded-lg px-3 py-3 text-[13px] font-semibold text-muted-foreground transition-colors hover:text-foreground",
                   cat === c.label && "border border-gold/50 bg-gold/10 text-gold dark:text-gold-light shadow-sm"
                 )}
               >
@@ -155,7 +155,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
         <div className="card-surface p-6">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">Featured Guides</h2>
-            <a href="/guides" className="flex items-center gap-1 text-xs font-semibold text-accent">
+            <a href="/guides" className="flex items-center gap-1 text-xs font-semibold text-accent px-2 py-2">
               View All <ChevronRight className="h-3 w-3" />
             </a>
           </div>
@@ -194,7 +194,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                   key={t}
                   onClick={() => setTab(t)}
                   className={cn(
-                    "rounded-full px-3 py-1 text-xs font-semibold transition-all",
+                    "rounded-full px-3 py-2 min-h-[44px] text-xs font-semibold transition-all",
                     tab === t ? "bg-gold text-slate-950 font-bold shadow-sm" : "text-muted-foreground hover:text-foreground"
                   )}
                 >
@@ -225,7 +225,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
             ))}
           </ul>
           <div className="mt-6 flex justify-center">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="default" className="min-h-[44px]">
               View More Guides <ChevronDown className="h-4 w-4" />
             </Button>
           </div>
@@ -253,7 +253,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
             <div>
               <p className="text-[13px] font-bold">60 / 142 Guides Read</p>
               <p className="mt-1 text-xs text-muted-foreground">Keep going, you&apos;re doing great!</p>
-              <Button variant="outline" size="sm" className="mt-3 h-8">
+              <Button variant="outline" size="sm" className="mt-3 min-h-[44px]">
                 View My Progress
               </Button>
             </div>
@@ -263,7 +263,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
         <div className="card-surface p-5">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-sm font-extrabold uppercase tracking-wider">Popular This Week</h2>
-            <Link href="/guides" className="text-xs font-semibold text-accent">View All</Link>
+            <Link href="/guides" className="text-xs font-semibold text-accent px-2 py-2">View All</Link>
           </div>
           <ul className="mt-4 space-y-3">
             {weekTop.map((w, i) => (

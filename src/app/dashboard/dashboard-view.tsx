@@ -45,7 +45,7 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:text-white"
+              className="absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:text-white"
               aria-label="Close sidebar"
             >
               <X className="h-4 w-4" />

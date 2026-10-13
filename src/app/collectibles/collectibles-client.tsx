@@ -150,7 +150,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
             <select
               value={selectedDistrict}
               onChange={(e) => setSelectedDistrict(e.target.value)}
-              className="bg-card border border-border rounded-xl px-3 py-2 text-xs text-foreground focus:outline-none focus:border-primary"
+              className="bg-card border border-border rounded-xl px-3 py-3 text-xs text-foreground focus:outline-none focus:border-primary"
             >
               {districts.map((d) => (
                 <option key={d} value={d}>
@@ -163,7 +163,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
               <button
                 onClick={() => setFilterStatus("all")}
                 className={cn(
-                  "px-3 py-1 rounded-lg font-medium transition-colors",
+                  "px-3 py-2.5 rounded-lg font-medium transition-colors",
                   filterStatus === "all" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -172,7 +172,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
               <button
                 onClick={() => setFilterStatus("uncollected")}
                 className={cn(
-                  "px-3 py-1 rounded-lg font-medium transition-colors",
+                  "px-3 py-2.5 rounded-lg font-medium transition-colors",
                   filterStatus === "uncollected" ? "bg-gold/20 text-gold-dark dark:text-amber-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -181,7 +181,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
               <button
                 onClick={() => setFilterStatus("collected")}
                 className={cn(
-                  "px-3 py-1 rounded-lg font-medium transition-colors",
+                  "px-3 py-2.5 rounded-lg font-medium transition-colors",
                   filterStatus === "collected" ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -203,7 +203,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={cn(
-                  "text-xs px-3 py-1.5 rounded-full font-semibold transition-all border",
+                  "text-xs px-3 py-3 rounded-full font-semibold transition-all border",
                   isSelected
                     ? "border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(244,63,94,0.4)]"
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
@@ -232,7 +232,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 setFilterStatus("all");
                 setSearchQuery("");
               }}
-              className="btn-secondary text-xs px-4 py-2 mt-4 inline-flex items-center gap-2"
+              className="btn-secondary text-xs px-4 py-3 mt-4 inline-flex items-center gap-2"
             >
               Reset Filters
             </button>
@@ -268,7 +268,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                     <button
                       onClick={() => handleToggle(item.id)}
                       className={cn(
-                        "absolute top-3 right-3 p-1.5 rounded-full backdrop-blur-md border transition-all",
+                        "absolute top-3 right-3 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full backdrop-blur-md border transition-all",
                         isDone
                           ? "bg-emerald-500 text-white border-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.5)]"
                           : "bg-muted/50 text-muted-foreground border-border hover:text-foreground hover:border-slate-500"
@@ -325,14 +325,14 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 <div className="p-4 pt-0 flex items-center justify-between gap-2 border-t border-border/60 mt-2">
                   <Link
                     href={`/map?poi=${item.id}&top=${item.coordinates.top}&left=${item.coordinates.left}`}
-                    className="text-xs font-medium text-accent hover:underline flex items-center gap-1 py-1"
+                    className="text-xs font-medium text-accent hover:underline flex items-center gap-1 py-2"
                   >
                     <MapPin className="h-3 w-3" /> Map View
                   </Link>
 
                   <Link
                     href={`/collectibles/${item.slug}`}
-                    className="btn-secondary text-xs px-3 py-1.5 inline-flex items-center gap-1 font-semibold"
+                    className="btn-secondary text-xs px-3 py-2.5 inline-flex items-center gap-1 font-semibold"
                   >
                     Walkthrough <ExternalLink className="h-3 w-3" />
                   </Link>

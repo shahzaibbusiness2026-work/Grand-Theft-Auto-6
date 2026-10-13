@@ -178,12 +178,12 @@ export default async function LocationDetailPage({ params }: PageProps) {
                 <img loading="lazy" src={loc.img} alt={loc.name} className="h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
-                  <span className="font-mono text-muted-foreground">
+                  <span className="font-mono text-muted-foreground min-w-0 truncate">
                     Map Grid: Top {loc.top} / Left {loc.left}
                   </span>
                   <Link
                     href={`/map?poi=${loc.id}&top=${loc.top}&left=${loc.left}`}
-                    className="btn-primary text-xs px-3 py-1.5 font-bold flex items-center gap-1.5"
+                    className="btn-primary text-xs px-3 py-2.5 min-h-[44px] font-bold flex items-center gap-1.5"
                   >
                     <Navigation className="h-3.5 w-3.5" /> Fly to Live Pin
                   </Link>
