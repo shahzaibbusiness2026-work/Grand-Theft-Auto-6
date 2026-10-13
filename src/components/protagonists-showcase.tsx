@@ -77,7 +77,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
           <button
             onClick={() => setActiveTab("both")}
             className={cn(
-              "rounded-lg px-3 py-1.5 text-xs font-bold transition-all",
+              "min-h-[44px] rounded-lg px-4 py-2.5 text-xs font-bold transition-all",
               activeTab === "both"
                 ? "bg-foreground text-background shadow-sm"
                 : "text-muted-foreground hover:text-foreground"
@@ -88,7 +88,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
           <button
             onClick={() => setActiveTab("lucia")}
             className={cn(
-              "rounded-lg px-3 py-1.5 text-xs font-bold transition-all",
+              "min-h-[44px] rounded-lg px-4 py-2.5 text-xs font-bold transition-all",
               activeTab === "lucia"
                 ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-sm"
                 : "text-muted-foreground hover:text-foreground"
@@ -99,7 +99,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
           <button
             onClick={() => setActiveTab("jason")}
             className={cn(
-              "rounded-lg px-3 py-1.5 text-xs font-bold transition-all",
+              "min-h-[44px] rounded-lg px-4 py-2.5 text-xs font-bold transition-all",
               activeTab === "jason"
                 ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-sm"
                 : "text-muted-foreground hover:text-foreground"
@@ -260,7 +260,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   <button
                     type="button"
                     onClick={() => openDossier(lucia)}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 shadow-md shadow-pink-500/30 transition-all hover:scale-105 active:scale-95"
+                    className="inline-flex min-h-[44px] items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 shadow-md shadow-pink-500/30 transition-all hover:scale-105 active:scale-95"
                   >
                     <span>View Dossier</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -416,7 +416,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   <button
                     type="button"
                     onClick={() => openDossier(jason)}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 shadow-md shadow-blue-500/30 transition-all hover:scale-105 active:scale-95"
+                    className="inline-flex min-h-[44px] items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 shadow-md shadow-blue-500/30 transition-all hover:scale-105 active:scale-95"
                   >
                     <span>View Dossier</span>
                     <ArrowRight className="w-3.5 h-3.5" />

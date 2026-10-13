@@ -84,7 +84,7 @@ const MORE_SECTIONS: MoreSection[] = [
   {
     title: "Tools",
     links: [
-      { href: "/tools", label: "All 15 Tools", icon: Wrench },
+      { href: "/tools", label: "All 20 Tools", icon: Wrench },
       { href: "/tools/money-calculator", label: "Money Calculator", icon: Calculator },
       { href: "/tools/business-profit-calculator", label: "Business Profit Calculator", icon: TrendingUp },
       { href: "/tools/money-maker", label: "Money-Making Method Finder", icon: DollarSign },
@@ -209,6 +209,10 @@ export function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  /** Which mobile accordion section is expanded ("tools" or a LINKS href). */
+  const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
+  const toggleMobileSection = (id: string) =>
+    setOpenMobileSection((cur) => (cur === id ? null : id));
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [isPro, setIsPro] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -228,6 +232,11 @@ export function Navbar() {
   }, []);
 
   useEffect(() => setMobileOpen(false), [pathname]);
+
+  /* Collapse any open accordion section whenever the drawer closes. */
+  useEffect(() => {
+    if (!mobileOpen) setOpenMobileSection(null);
+  }, [mobileOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -445,43 +454,187 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer — accordion: parent buttons only, tap chevron to expand */}
       {mobileOpen && (
         <div className="border-t border-border bg-card/98 backdrop-blur-2xl text-card-foreground md:hidden">
-          <nav aria-label="Mobile navigation" className="mx-auto flex w-full max-w-[1240px] flex-col gap-1.5 px-6 py-5 max-h-[75vh] overflow-y-auto">
+          <nav
+            aria-label="Mobile navigation"
+            className="mx-auto flex w-full max-w-[1240px] flex-col gap-1 px-6 py-5 max-h-[75vh] overflow-y-auto"
+          >
             <button
               type="button"
               onClick={() => {
                 setMobileOpen(false);
                 setPaletteOpen(true);
               }}
-              className="mb-2 flex w-full items-center gap-2.5 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gold-dark dark:text-gold-light transition-colors"
+              className="mb-3 flex min-h-[48px] w-full items-center gap-2.5 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gold-dark dark:text-gold-light transition-colors"
             >
-              <Search className="h-4 w-4" />
-              <span>Search All 15 Tools, Rides, Guns...</span>
+              <Search className="h-4 w-4 shrink-0" />
+              <span>Search All 20 Tools, Rides, Guns...</span>
             </button>
-            {LINKS.flatMap((l) => [{ href: l.href, label: l.label }, ...(l.menu || [])])
-              .concat(MORE_SECTIONS.flatMap((s) => s.links.map((l) => ({ href: l.href, label: l.label }))))
-              .map((l) => {
-              const active = isActive(l.href);
+
+            {/* LINKS parents: Home, Vehicles, Weapons, Missions, Map */}
+            {LINKS.map((l) => {
+              const parentActive =
+                isActive(l.href) || (l.menu?.some((m) => pathname === m.href) ?? false);
+              if (!l.menu) {
+                return (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    prefetch={true}
+                    onClick={() => setMobileOpen(false)}
+                    aria-current={parentActive ? "page" : undefined}
+                    className={cn(
+                      "flex min-h-[48px] w-full items-center rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
+                      parentActive
+                        ? "bg-gold/15 text-gold-dark dark:text-gold-light font-bold"
+                        : "text-foreground/90 hover:bg-muted"
+                    )}
+                  >
+                    {l.label}
+                  </Link>
+                );
+              }
+              const expanded = openMobileSection === l.href;
               return (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  prefetch={true}
-                  onClick={() => setMobileOpen(false)}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "rounded-xl px-4 py-2.5 text-sm font-semibold tracking-wide transition-colors",
-                    active
-                      ? "bg-gold/15 text-gold-dark dark:text-gold-light font-bold"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                <div key={l.href} className="flex flex-col">
+                  <div
+                    className={cn(
+                      "flex w-full items-center rounded-xl transition-colors",
+                      parentActive
+                        ? "bg-gold/10 text-gold-dark dark:text-gold-light"
+                        : "hover:bg-muted"
+                    )}
+                  >
+                    <Link
+                      href={l.href}
+                      prefetch={true}
+                      onClick={() => setMobileOpen(false)}
+                      aria-current={isActive(l.href) ? "page" : undefined}
+                      className={cn(
+                        "flex min-h-[48px] flex-1 items-center px-4 text-[15px] font-semibold tracking-wide",
+                        parentActive ? "font-bold" : "text-foreground/90"
+                      )}
+                    >
+                      {l.label}
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => toggleMobileSection(l.href)}
+                      aria-expanded={expanded}
+                      aria-label={`${expanded ? "Collapse" : "Expand"} ${l.label} submenu`}
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      <ChevronDown
+                        className={cn(
+                          "h-5 w-5 transition-transform duration-200",
+                          expanded && "rotate-180"
+                        )}
+                      />
+                    </button>
+                  </div>
+                  {expanded && (
+                    <div className="flex flex-col gap-0.5 pb-1 pl-3">
+                      {l.menu.map((m) => {
+                        const subActive = pathname === m.href;
+                        return (
+                          <Link
+                            key={m.href}
+                            href={m.href}
+                            prefetch={true}
+                            onClick={() => setMobileOpen(false)}
+                            aria-current={subActive ? "page" : undefined}
+                            className={cn(
+                              "flex min-h-[44px] items-center rounded-lg px-4 text-sm font-medium tracking-wide transition-colors",
+                              subActive
+                                ? "bg-gold/15 text-gold-dark dark:text-gold-light font-bold"
+                                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                            )}
+                          >
+                            {m.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
                   )}
-                >
-                  {l.label}
-                </Link>
+                </div>
               );
             })}
+
+            {/* Tools accordion: expands the MORE_SECTIONS groups */}
+            <div className="flex flex-col">
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("tools")}
+                aria-expanded={openMobileSection === "tools"}
+                aria-label={`${openMobileSection === "tools" ? "Collapse" : "Expand"} Tools menu`}
+                className={cn(
+                  "flex min-h-[48px] w-full items-center justify-between rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
+                  MORE_HREFS.some((href) => isActive(href))
+                    ? "bg-gold/10 text-gold-dark dark:text-gold-light font-bold"
+                    : "text-foreground/90 hover:bg-muted"
+                )}
+              >
+                <span>Tools</span>
+                <ChevronDown
+                  className={cn(
+                    "h-5 w-5 text-muted-foreground transition-transform duration-200",
+                    openMobileSection === "tools" && "rotate-180"
+                  )}
+                />
+              </button>
+              {openMobileSection === "tools" && (
+                <div className="flex flex-col gap-0.5 pb-1">
+                  {MORE_SECTIONS.map((section) => (
+                    <div key={section.title} className="pl-3">
+                      <p className="px-4 pb-1 pt-2 text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground/70">
+                        {section.title}
+                      </p>
+                      {section.links.map((l) => {
+                        const Icon = l.icon;
+                        const subActive = isActive(l.href);
+                        return (
+                          <Link
+                            key={l.href}
+                            href={l.href}
+                            prefetch={true}
+                            onClick={() => setMobileOpen(false)}
+                            aria-current={subActive ? "page" : undefined}
+                            className={cn(
+                              "flex min-h-[44px] items-center gap-3 rounded-lg px-4 text-sm font-medium tracking-wide transition-colors",
+                              subActive
+                                ? "bg-gold/15 text-gold-dark dark:text-gold-light font-bold"
+                                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                            )}
+                          >
+                            <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                            {l.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* News */}
+            <Link
+              href="/news"
+              prefetch={true}
+              onClick={() => setMobileOpen(false)}
+              aria-current={isActive("/news") ? "page" : undefined}
+              className={cn(
+                "flex min-h-[48px] w-full items-center rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
+                isActive("/news")
+                  ? "bg-gold/15 text-gold-dark dark:text-gold-light font-bold"
+                  : "text-foreground/90 hover:bg-muted"
+              )}
+            >
+              News
+            </Link>
+
             {/* Mobile auth */}
             <div className="mt-3 border-t border-border/60 pt-3">
               {mounted && loggedIn ? (

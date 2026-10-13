@@ -162,7 +162,7 @@ export default async function ArticleDetailPage({ params }: Props) {
 
         {/* Hero */}
         <header className="card-surface mt-4 overflow-hidden bg-gradient-to-br from-card via-card/85 to-primary/5">
-          <div className="relative h-56 sm:h-72">
+          <div className="relative min-h-56 sm:min-h-72">
             <SafeImage
               src={article.cover_image || "/img/hero-dark.jpg"}
               alt={article.seo_title || article.title}
@@ -203,7 +203,7 @@ export default async function ArticleDetailPage({ params }: Props) {
               <p className="border-l-2 border-primary/60 pl-4 text-base leading-relaxed text-foreground/90">
                 {article.excerpt}
               </p>
-              <div className="mt-6 space-y-5 text-base leading-[1.75] text-foreground/90 prose-headings:font-bold prose-headings:text-foreground prose-h2:text-2xl prose-h2:mt-8 prose-h3:text-xl prose-h3:mt-6 prose-p:my-4 prose-strong:text-foreground prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6 prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6 prose-li:my-1 prose-a:text-accent prose-a:underline hover:prose-a:text-foreground prose-blockquote:border-l-4 prose-blockquote:border-accent/40 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground">
+              <div className="mt-6 space-y-5 overflow-x-auto break-words text-base leading-[1.75] text-foreground/90 prose-headings:font-bold prose-headings:text-foreground prose-h2:text-2xl prose-h2:mt-8 prose-h3:text-xl prose-h3:mt-6 prose-p:my-4 prose-strong:text-foreground prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6 prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6 prose-li:my-1 prose-a:text-accent prose-a:underline hover:prose-a:text-foreground prose-blockquote:border-l-4 prose-blockquote:border-accent/40 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground">
                 <ReactMarkdown>{article.content || article.excerpt || ""}</ReactMarkdown>
               </div>
               {article.tags && article.tags.length > 0 && (

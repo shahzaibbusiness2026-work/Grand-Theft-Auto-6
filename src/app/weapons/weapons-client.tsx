@@ -92,7 +92,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
               <button
                 onClick={() => setSortBy("damage")}
                 className={cn(
-                  "rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
+                  "min-h-[44px] rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
                   sortBy === "damage" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -101,7 +101,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
               <button
                 onClick={() => setSortBy("fireRate")}
                 className={cn(
-                  "rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
+                  "min-h-[44px] rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
                   sortBy === "fireRate" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -110,7 +110,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
               <button
                 onClick={() => setSortBy("range")}
                 className={cn(
-                  "rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
+                  "min-h-[44px] rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
                   sortBy === "range" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -119,7 +119,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
               <button
                 onClick={() => setSortBy("price")}
                 className={cn(
-                  "rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
+                  "min-h-[44px] rounded-lg px-3 py-2.5 text-sm font-semibold transition-all",
                   sortBy === "price" ? "bg-accent text-accent-foreground font-bold" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -129,7 +129,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
 
             <Link
               href="/compare/weapons"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-bold text-accent transition-colors hover:bg-accent/20"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-bold text-accent transition-colors hover:bg-accent/20"
             >
               <Trophy className="h-3.5 w-3.5" />
               <span>Duel (2-4)</span>
@@ -144,7 +144,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
               key={cat}
               onClick={() => setSelectedCat(cat)}
               className={cn(
-                "rounded-lg px-4 py-2.5 text-sm font-semibold transition-all",
+                "min-h-[44px] rounded-lg px-4 py-2.5 text-sm font-semibold transition-all",
                 selectedCat === cat
                   ? "bg-primary text-primary-foreground font-bold shadow-sm"
                   : "bg-muted/40 text-muted-foreground hover:text-foreground"
@@ -197,7 +197,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                         handleToggleFav(w.id);
                       }}
                       className={cn(
-                        "absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md transition-all",
+                        "absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full backdrop-blur-md transition-all",
                         isFav ? "bg-gold text-slate-950 shadow-md" : "bg-black/50 text-white hover:bg-black/80"
                       )}
                       aria-label="Save weapon"

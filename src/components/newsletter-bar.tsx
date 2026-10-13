@@ -71,7 +71,7 @@ export function NewsletterBar({
                   disabled={loading}
                 />
               </div>
-              <Button type="submit" className="shrink-0" disabled={loading}>
+              <Button type="submit" className="shrink-0 min-h-[44px]" disabled={loading}>
                 {loading ? "..." : "Subscribe"} <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Button>
             </div>

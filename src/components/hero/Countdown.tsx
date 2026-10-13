@@ -164,7 +164,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
           {/* Timezone Switcher */}
           <button
             onClick={() => setTimezoneMode(prev => prev === "local" ? "vice" : "local")}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-black/60 hover:bg-black/80 border border-white/20 hover:border-[#00F0FF]/60 text-white transition-all backdrop-blur-md shadow-sm"
+            className="inline-flex min-h-[44px] items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-black/60 hover:bg-black/80 border border-white/20 hover:border-[#00F0FF]/60 text-white transition-all backdrop-blur-md shadow-sm"
             title="Switch timezone view"
           >
             <Clock className="w-3.5 h-3.5 text-[#00F0FF]" />
@@ -174,7 +174,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
           {/* Copy Countdown */}
           <button
             onClick={handleCopy}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-black/60 hover:bg-black/80 border border-white/20 hover:border-[#00F0FF]/60 text-white transition-all backdrop-blur-md shadow-sm"
+            className="inline-flex min-h-[44px] items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-black/60 hover:bg-black/80 border border-white/20 hover:border-[#00F0FF]/60 text-white transition-all backdrop-blur-md shadow-sm"
             title="Copy countdown to clipboard"
           >
             {copied ? (
@@ -195,7 +195,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
             href={googleCalendarUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#00D2FF] to-[#0066FF] hover:from-[#38BDF8] hover:to-[#0055EE] text-white transition-all shadow-[0_0_20px_rgba(0,210,255,0.45)] hover:shadow-[0_0_25px_rgba(0,210,255,0.65)] active:scale-95"
+            className="inline-flex min-h-[44px] items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#00D2FF] to-[#0066FF] hover:from-[#38BDF8] hover:to-[#0055EE] text-white transition-all shadow-[0_0_20px_rgba(0,210,255,0.45)] hover:shadow-[0_0_25px_rgba(0,210,255,0.65)] active:scale-95"
             title="Add release window to Google Calendar"
           >
             <Calendar className="w-3.5 h-3.5 text-white" />
@@ -286,9 +286,9 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
 
         {/* Milestone Labels */}
         <div className="flex items-center justify-between text-xs sm:text-xs font-medium text-white/70">
-          <span>Reveal Trailer (Dec 2023)</span>
+          <span className="hidden sm:inline">Reveal Trailer (Dec 2023)</span>
           <span className="text-[#00F0FF] font-semibold drop-shadow-[0_0_10px_rgba(0,240,255,0.8)]">Current Intel</span>
-          <span>Target Launch (Nov 2026)</span>
+          <span className="hidden sm:inline">Target Launch (Nov 2026)</span>
         </div>
       </div>
 

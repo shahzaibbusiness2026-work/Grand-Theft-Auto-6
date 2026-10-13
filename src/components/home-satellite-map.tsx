@@ -131,21 +131,21 @@ export function HomeSatelliteMap() {
         <div className="absolute right-5 bottom-6 z-20 flex flex-col gap-1.5 rounded-2xl border border-white/15 bg-black/80 p-1.5 backdrop-blur-xl shadow-2xl">
           <button
             onClick={() => handleZoom(0.25)}
-            className="flex h-9 w-9 items-center justify-center rounded-xl text-white hover:bg-white/20 transition-colors"
+            className="flex h-11 w-11 items-center justify-center rounded-xl text-white hover:bg-white/20 transition-colors"
             aria-label="Zoom In"
           >
             <Plus className="h-4 w-4" />
           </button>
           <button
             onClick={() => handleZoom(-0.25)}
-            className="flex h-9 w-9 items-center justify-center rounded-xl text-white hover:bg-white/20 transition-colors"
+            className="flex h-11 w-11 items-center justify-center rounded-xl text-white hover:bg-white/20 transition-colors"
             aria-label="Zoom Out"
           >
             <Minus className="h-4 w-4" />
           </button>
           <button
             onClick={() => setZoom(1)}
-            className="flex h-9 w-9 items-center justify-center rounded-xl text-white hover:bg-white/20 transition-colors"
+            className="flex h-11 w-11 items-center justify-center rounded-xl text-white hover:bg-white/20 transition-colors"
             aria-label="Reset Zoom"
           >
             <LocateFixed className="h-4 w-4" />
