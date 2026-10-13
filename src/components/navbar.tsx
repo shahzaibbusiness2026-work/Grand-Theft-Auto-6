@@ -65,7 +65,6 @@ const LINKS: NavLink[] = [
     ],
   },
   { href: "/missions", label: "Missions", menu: [{ href: "/tracker", label: "100% Tracker" }] },
-  { href: "/rankings", label: "Rankings" },
   { href: "/map", label: "Map" },
 ];
 
