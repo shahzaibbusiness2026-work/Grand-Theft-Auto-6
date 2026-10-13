@@ -266,7 +266,7 @@ export function Navbar() {
           )}
         </div>
 
-        <nav aria-label="Main navigation" className="hidden items-center gap-2 lg:gap-3 md:flex">
+        <nav aria-label="Main navigation" className="hidden items-center gap-3 lg:gap-5 md:flex">
           {LINKS.map((l) =>
             l.menu ? (
               <SplitNavDropdown
