@@ -78,7 +78,6 @@ const MORE_SECTIONS: MoreSection[] = [
       { href: "/locations", label: "Locations & POIs", icon: MapPin },
       { href: "/properties", label: "Properties & Real Estate", icon: Building2 },
       { href: "/characters", label: "Characters", icon: Users },
-      { href: "/news", label: "News", icon: Newspaper },
       { href: "/guides", label: "Guides", icon: BookOpen },
     ],
   },
@@ -384,16 +383,6 @@ export function Navbar() {
 
         {/* Right side controls */}
         <div className="flex items-center gap-2">
-          {/* Ask AI Quick Button */}
-          <Link
-            href="/ai"
-            className="hidden sm:inline-flex items-center gap-1 rounded-lg border border-gold/40 bg-gold/10 px-2.5 py-1.5 text-xs font-bold text-gold-dark dark:text-gold-light hover:bg-gold hover:text-slate-950 transition-all shadow-sm"
-            title="Ask GTA 6 AI"
-          >
-            <Bot className="h-3.5 w-3.5" />
-            <span>AI</span>
-          </Link>
-
           {/* Search Button */}
           <button
             type="button"
