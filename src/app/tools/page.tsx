@@ -19,14 +19,20 @@ import {
   Route,
   SunMoon,
   Briefcase,
+  Split,
+  HelpCircle,
+  Timer,
+  Camera,
+  Zap,
+  Warehouse,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "All 20 Interactive Tools & Calculators — GTA 6 Atlas",
+  title: "All 26 Interactive Tools & Calculators — GTA 6 Atlas",
   description:
-    "Complete suite of 20 production-ready interactive tools for Grand Theft Auto VI: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, and AI assistant.",
+    "Complete suite of 26 production-ready interactive tools for Grand Theft Auto VI: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, and AI assistant.",
 };
 
 interface ToolItem {
@@ -100,6 +106,16 @@ const ALL_TOOLS: ToolItem[] = [
     icon: SunMoon,
     highlight: true,
   },
+  {
+    id: "tool-photo-spots",
+    name: "Photo Spot Finder",
+    category: "Maps & Exploration",
+    desc: "The most cinematic screenshot locations in Leonida: best time of day, region, and pro tips for every shot.",
+    href: "/tools/photo-spot-finder",
+    badge: "Tool 24",
+    icon: Camera,
+    highlight: true,
+  },
 
   // Databases & Compare
   {
@@ -167,6 +183,16 @@ const ALL_TOOLS: ToolItem[] = [
     icon: Wrench,
     highlight: true,
   },
+  {
+    id: "tool-garage-planner",
+    name: "Garage Planner",
+    category: "Databases & Compare",
+    desc: "Organize your vehicle collection across garages: slot tracking, over-capacity warnings, and total collection value.",
+    href: "/tools/garage-planner",
+    badge: "Tool 26",
+    icon: Warehouse,
+    highlight: true,
+  },
 
   // Financial & Business
   {
@@ -206,6 +232,16 @@ const ALL_TOOLS: ToolItem[] = [
     icon: Briefcase,
     highlight: true,
   },
+  {
+    id: "tool-heist-splitter",
+    name: "Heist Payout Splitter",
+    category: "Financial & Business",
+    desc: "Split any heist take among your crew. Set each member's cut percentage and see everyone's payout instantly.",
+    href: "/tools/heist-payout-splitter",
+    badge: "Tool 21",
+    icon: Split,
+    highlight: true,
+  },
 
   // Combat & Loadouts
   {
@@ -228,6 +264,16 @@ const ALL_TOOLS: ToolItem[] = [
     icon: Siren,
     highlight: true,
   },
+  {
+    id: "tool-weapon-dps",
+    name: "Weapon DPS Calculator",
+    category: "Combat & Loadouts",
+    desc: "Compare weapons by live DPS with attachments: damage-per-magazine, time-to-empty, and a DPS bar chart.",
+    href: "/tools/weapon-dps-calculator",
+    badge: "Tool 25",
+    icon: Zap,
+    highlight: true,
+  },
 
   // AI & Assistance
   {
@@ -238,6 +284,26 @@ const ALL_TOOLS: ToolItem[] = [
     href: "/ai",
     badge: "Tool 15",
     icon: Bot,
+    highlight: true,
+  },
+  {
+    id: "tool-character-quiz",
+    name: "Which GTA 6 Character Are You?",
+    category: "AI & Assistance",
+    desc: "Take the 8-question personality quiz and find out which GTA 6 character matches you, with a shareable result card.",
+    href: "/tools/character-quiz",
+    badge: "Tool 22",
+    icon: HelpCircle,
+    highlight: true,
+  },
+  {
+    id: "tool-countdown-widget",
+    name: "Countdown Embed Widget",
+    category: "AI & Assistance",
+    desc: "Free embeddable GTA 6 launch countdown for your site or stream. Copy-paste ready iframe snippet.",
+    href: "/tools/countdown-widget",
+    badge: "Tool 23",
+    icon: Timer,
     highlight: true,
   },
 ];
