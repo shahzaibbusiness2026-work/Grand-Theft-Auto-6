@@ -26,7 +26,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
       </h1>
 
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
-      <div className="relative z-10 mx-auto w-full max-w-5xl flex flex-col items-center justify-center flex-1 py-8 sm:py-14 text-center">
+      <div className="relative z-10 mx-auto w-full max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl flex flex-col items-center justify-center flex-1 py-8 sm:py-14 text-center">
         {/* Countdown in Center */}
         <Countdown
           className="w-full max-w-xl sm:max-w-3xl mx-auto"
