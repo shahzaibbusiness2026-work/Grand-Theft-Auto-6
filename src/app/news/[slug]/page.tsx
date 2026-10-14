@@ -3,7 +3,8 @@ import { SafeImage } from "@/components/safe-image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
-import { Clock, ArrowLeft } from "lucide-react";
+import { Clock, ArrowLeft, ListOrdered } from "lucide-react";
+import { extractHeadings, createHeadingIdAllocator } from "@/lib/toc";
 import { SiteShell } from "@/components/shells";
 import { ArticleCard } from "@/components/article-card";
 import { NewsletterBar } from "@/components/newsletter-bar";
@@ -102,6 +103,31 @@ export default async function ArticleDetailPage({ params }: Props) {
   }
   if (!article) notFound();
 
+  const bodyMarkdown = article.content || article.excerpt || "";
+  const toc = extractHeadings(bodyMarkdown);
+  // Shared per-render allocator so rendered heading ids match the TOC exactly
+  const allocateHeadingId = createHeadingIdAllocator();
+  const markdownComponents = {
+    h2: ({ node, children, ...props }: any) => (
+      <h2
+        {...props}
+        id={allocateHeadingId(children)}
+        className="scroll-mt-24 text-2xl font-bold mt-8 text-foreground"
+      >
+        {children}
+      </h2>
+    ),
+    h3: ({ node, children, ...props }: any) => (
+      <h3
+        {...props}
+        id={allocateHeadingId(children)}
+        className="scroll-mt-24 text-xl font-bold mt-6 text-foreground"
+      >
+        {children}
+      </h3>
+    ),
+  };
+
   const all = await getPublicArticles();
   const related = all
     .filter((a) => a.slug !== article.slug && a.category === article.category)
@@ -199,12 +225,44 @@ export default async function ArticleDetailPage({ params }: Props) {
         {/* Body */}
         <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_300px]">
           <div className="min-w-0">
+            {toc.length >= 2 && (
+              <nav
+                aria-label="Table of contents"
+                className="card-surface mb-6 p-5 sm:p-6"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
+                    <ListOrdered className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-foreground">
+                    Table of Contents
+                  </h2>
+                </div>
+                <ol className="mt-4 divide-y divide-border/60">
+                  {toc.map((item, i) => (
+                    <li key={item.id} className={item.level === 3 ? "pl-5" : ""}>
+                      <a
+                        href={`#${item.id}`}
+                        className="group flex items-baseline gap-2.5 py-2.5 text-sm text-muted-foreground transition-colors hover:text-primary"
+                      >
+                        <span className="shrink-0 font-bold tabular-nums text-foreground/60 group-hover:text-primary">
+                          {i + 1}.
+                        </span>
+                        <span className="leading-snug group-hover:underline group-hover:underline-offset-4">
+                          {item.text}
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            )}
             <div className="card-surface p-6 sm:p-10">
               <p className="border-l-2 border-primary/60 pl-4 text-base leading-relaxed text-foreground/90">
                 {article.excerpt}
               </p>
               <div className="mt-6 space-y-5 overflow-x-auto break-words text-base leading-[1.75] text-foreground/90 prose-headings:font-bold prose-headings:text-foreground prose-h2:text-2xl prose-h2:mt-8 prose-h3:text-xl prose-h3:mt-6 prose-p:my-4 prose-strong:text-foreground prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6 prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6 prose-li:my-1 prose-a:text-accent prose-a:underline hover:prose-a:text-foreground prose-blockquote:border-l-4 prose-blockquote:border-accent/40 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground">
-                <ReactMarkdown>{article.content || article.excerpt || ""}</ReactMarkdown>
+                <ReactMarkdown components={markdownComponents}>{bodyMarkdown}</ReactMarkdown>
               </div>
               {article.tags && article.tags.length > 0 && (
                 <div className="mt-8 flex flex-wrap gap-2 border-t border-border pt-6">
