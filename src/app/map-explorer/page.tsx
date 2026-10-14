@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function MapExplorerPage() {
   return (
     <AppShell>
-      <div className="w-full px-4 py-6 sm:px-6 md:px-8 lg:px-10">
+      <div className="w-full px-4 py-6 sm:px-6 md:px-8 lg:px-10 overflow-x-clip">
         <SatelliteInteractiveMap />
       </div>
     </AppShell>

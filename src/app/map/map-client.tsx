@@ -83,7 +83,7 @@ const DISTRICT_GUIDES = [
 
 export function MapClient() {
   return (
-    <>
+    <div className="overflow-x-clip">
       {/* Top Breadcrumb & Page Banner */}
       <div className="border-b border-white/10 bg-gradient-to-b from-[#0e0717] via-[#070b14] to-[#04070f] pt-8 pb-8">
         <div className="container-site">
@@ -219,6 +219,6 @@ export function MapClient() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
