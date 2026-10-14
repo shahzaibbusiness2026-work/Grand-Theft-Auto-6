@@ -73,7 +73,7 @@ export default function AdminVehiclesPage() {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const [itemsPerPage, setItemsPerPage] = useState(8);
 
   // Filtered vehicles
   const filteredVehicles = useMemo(() => {
@@ -637,13 +637,30 @@ export default function AdminVehiclesPage() {
           )}
 
 
-          {/* Table Footer & Pagination matching Image 2 */}
+          {/* Table Footer & Pagination */}
+          {(() => {
+            const totalPages = Math.max(1, Math.ceil(filteredVehicles.length / itemsPerPage));
+            const safePage = Math.min(currentPage, totalPages);
+            const startItem = filteredVehicles.length === 0 ? 0 : (safePage - 1) * itemsPerPage + 1;
+            const endItem = Math.min(safePage * itemsPerPage, filteredVehicles.length);
+            const pageNums: (number | "…")[] = [];
+            if (totalPages <= 7) {
+              for (let i = 1; i <= totalPages; i++) pageNums.push(i);
+            } else {
+              pageNums.push(1);
+              if (safePage > 3) pageNums.push("…");
+              for (let i = Math.max(2, safePage - 1); i <= Math.min(totalPages - 1, safePage + 1); i++) pageNums.push(i);
+              if (safePage < totalPages - 2) pageNums.push("…");
+              pageNums.push(totalPages);
+            }
+            return (
           <div className="p-4 border-t border-[#1C2436] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-[#94A3B8]">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5">
                 <span>Rows per page</span>
                 <select
-                  defaultValue="8"
+                  value={itemsPerPage}
+                  onChange={(e) => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}
                   aria-label="Rows per page"
                   className="px-2 py-1 rounded-lg bg-[#0E131D] border border-[#1C2436] text-white focus:outline-none focus:border-[#6366F1]"
                 >
@@ -652,13 +669,13 @@ export default function AdminVehiclesPage() {
                   <option value="24">24</option>
                 </select>
               </div>
-              <span className="text-[#64748B]">1–8 of 84</span>
+              <span className="text-[#64748B]">{startItem}–{endItem} of {filteredVehicles.length}</span>
             </div>
 
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
-                disabled={currentPage === 1}
+                disabled={safePage === 1}
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white disabled:opacity-40 transition-colors"
                 aria-label="Previous page"
@@ -666,53 +683,38 @@ export default function AdminVehiclesPage() {
                 <ChevronLeft className="w-4 h-4" />
               </button>
 
-              <button
-                type="button"
-                className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#6366F1] text-white"
-              >
-                1
-              </button>
-              <button
-                type="button"
-                className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-              >
-                2
-              </button>
-              <button
-                type="button"
-                className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-              >
-                3
-              </button>
-              <button
-                type="button"
-                className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-              >
-                4
-              </button>
-              <button
-                type="button"
-                className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-              >
-                5
-              </button>
-              <span className="px-1 text-[#64748B]">...</span>
-              <button
-                type="button"
-                className="w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-              >
-                11
-              </button>
+              {pageNums.map((pn, idx) =>
+                pn === "…" ? (
+                  <span key={`e${idx}`} className="px-1 text-[#64748B]">…</span>
+                ) : (
+                  <button
+                    key={pn}
+                    type="button"
+                    onClick={() => setCurrentPage(pn)}
+                    className={`w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center transition-colors ${
+                      safePage === pn
+                        ? "bg-[#6366F1] text-white"
+                        : "bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
+                    }`}
+                  >
+                    {pn}
+                  </button>
+                )
+              )}
 
               <button
                 type="button"
-                className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white transition-colors"
+                disabled={safePage === totalPages}
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white disabled:opacity-40 transition-colors"
                 aria-label="Next page"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
+            );
+          })()}
         </div>
       )}
 

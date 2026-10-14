@@ -527,16 +527,32 @@ export default function AdminWeaponsPage() {
               </table>
             </div>
 
-            {/* Table Footer & Pagination matching Image 5 */}
+            {/* Table Footer & Pagination */}
+            {(() => {
+              const totalPages = Math.max(1, Math.ceil(filteredWeapons.length / itemsPerPage));
+              const safePage = Math.min(currentPage, totalPages);
+              const startItem = filteredWeapons.length === 0 ? 0 : (safePage - 1) * itemsPerPage + 1;
+              const endItem = Math.min(safePage * itemsPerPage, filteredWeapons.length);
+              const pageNums: (number | "…")[] = [];
+              if (totalPages <= 7) {
+                for (let i = 1; i <= totalPages; i++) pageNums.push(i);
+              } else {
+                pageNums.push(1);
+                if (safePage > 3) pageNums.push("…");
+                for (let i = Math.max(2, safePage - 1); i <= Math.min(totalPages - 1, safePage + 1); i++) pageNums.push(i);
+                if (safePage < totalPages - 2) pageNums.push("…");
+                pageNums.push(totalPages);
+              }
+              return (
             <div className="p-4 border-t border-[#1C2436] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-[#94A3B8]">
               <p>
-                Showing {weapons.length} records from Supabase (drafts and published)
+                Showing {startItem}–{endItem} of {filteredWeapons.length} records from Supabase (drafts and published)
               </p>
 
               <div className="flex items-center gap-1.5">
                 <button
                   type="button"
-                  disabled={currentPage === 1}
+                  disabled={safePage === 1}
                   onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                   className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white disabled:opacity-40 transition-colors"
                   aria-label="Previous page"
@@ -544,32 +560,39 @@ export default function AdminWeaponsPage() {
                   <ChevronLeft className="w-4 h-4" />
                 </button>
 
-                {[1, 2, 3, 4, 5].map((pageNum) => (
-                  <button
-                    key={pageNum}
-                    type="button"
-                    onClick={() => setCurrentPage(pageNum)}
-                    className={cn(
-                      "w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center transition-colors",
-                      currentPage === pageNum
-                        ? "bg-[#6366F1] text-white"
-                        : "bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-                    )}
-                  >
-                    {pageNum}
-                  </button>
-                ))}
+                {pageNums.map((pn, idx) =>
+                  pn === "…" ? (
+                    <span key={`e${idx}`} className="px-1 text-[#64748B]">…</span>
+                  ) : (
+                    <button
+                      key={pn}
+                      type="button"
+                      onClick={() => setCurrentPage(pn)}
+                      className={cn(
+                        "w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center transition-colors",
+                        safePage === pn
+                          ? "bg-[#6366F1] text-white"
+                          : "bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
+                      )}
+                    >
+                      {pn}
+                    </button>
+                  )
+                )}
 
                 <button
                   type="button"
-                  onClick={() => setCurrentPage((p) => p + 1)}
-                  className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white transition-colors"
+                  disabled={safePage === totalPages}
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  className="p-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-[#64748B] hover:text-white disabled:opacity-40 transition-colors"
                   aria-label="Next page"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
+              );
+            })()}
           </div>
         </div>
 
