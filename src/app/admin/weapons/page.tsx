@@ -438,7 +438,7 @@ export default function AdminWeaponsPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#182030]">
-                  {filteredWeapons.slice(0, itemsPerPage).map((w) => {
+                  {filteredWeapons.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((w) => {
                     const isSelected = selectedIds.includes(w.id);
                     return (
                       <tr

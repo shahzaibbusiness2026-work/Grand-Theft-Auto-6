@@ -464,7 +464,7 @@ export default function AdminVehiclesPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#182030]">
-                {filteredVehicles.slice(0, itemsPerPage).map((v) => {
+                {filteredVehicles.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((v) => {
                   const isSelected = selectedIds.includes(v.id);
                   const isExpanded = expandedId === v.id;
 
