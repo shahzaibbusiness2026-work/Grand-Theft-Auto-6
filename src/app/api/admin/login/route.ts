@@ -25,12 +25,8 @@ import { peekRateLimit, recordRateLimitHit } from "@/lib/rate-limit";
 /* Fail closed: no hardcoded fallback emails. If ADMIN_MASTER_EMAILS is unset,
  * the master-email path is disabled entirely (same philosophy as the password).
  * Set ADMIN_MASTER_EMAILS="you@yourdomain.com" in production env. */
-const MASTER_EMAILS = (process.env.ADMIN_MASTER_EMAILS || "")
-  .split(",")
-  .map((e) => e.trim().toLowerCase())
-  .filter(Boolean);
-
-const MASTER_PASSWORD = process.env.ADMIN_MASTER_PASSWORD;
+/* NOTE: env vars are read inside the POST handler (not at module level)
+ * because Next.js inlines process.env at build time for module-scope code. */
 
 /* ------------------------------------------------------------------ */
 /* Rate limiting: 5 failed attempts / 10 min / IP (Redis-backed when    */
@@ -70,6 +66,14 @@ async function setAdminCookie(cookieStore: Awaited<ReturnType<typeof cookies>>, 
 
 export async function POST(request: Request) {
   try {
+    // Read env vars at request time — Next.js inlines process.env at build
+    // time for module-scope constants, so they must be read here.
+    const MASTER_EMAILS = (process.env.ADMIN_MASTER_EMAILS || "")
+      .split(",")
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean);
+    const MASTER_PASSWORD = (process.env.ADMIN_MASTER_PASSWORD || "").trim();
+
     // x-real-ip is set by the edge platform and cannot be spoofed by the
     // client; x-forwarded-for is only a fallback (first hop may vary).
     const ip =
