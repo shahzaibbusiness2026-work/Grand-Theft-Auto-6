@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import {
   Map,
   MapPin,
@@ -76,6 +76,99 @@ export default function AdminMapPage() {
     loadMarkers();
   }, []);
 
+  // Import / Export / Preview handlers
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleExportMarkers = () => {
+    const payload = {
+      exportedAt: new Date().toISOString(),
+      count: markers.length,
+      markers,
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `gta6-atlas-markers-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast({
+      title: "Markers exported",
+      description: `${markers.length} markers downloaded as JSON.`,
+      type: "success",
+    });
+  };
+
+  const handleImportFile = async (file: File) => {
+    try {
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+      const raw: unknown[] = Array.isArray(parsed) ? parsed : parsed.markers;
+      if (!Array.isArray(raw) || raw.length === 0) {
+        showToast({ title: "Import failed", description: "No markers found in this file.", type: "danger" });
+        return;
+      }
+      const validCategories = ["Location", "Collectibles", "Activities"];
+      const validLayers = ["Research", "Official", "Community"];
+      const validIcons = ["pin", "flag", "square", "star", "car", "dot"];
+      const validVerifications = ["unverified", "verified", "pending"];
+      const imported: AdminMapMarker[] = [];
+      const existingIds = new Set(markers.map((m) => m.id));
+      for (const r of raw) {
+        const rec = r as Record<string, unknown>;
+        if (!rec || typeof rec.name !== "string" || !rec.name.trim()) continue;
+        const coords = rec.coordinates as { x?: unknown; y?: unknown } | undefined;
+        const idBase = typeof rec.id === "string" && rec.id ? rec.id : `mark-${Date.now()}-${imported.length}`;
+        const id = existingIds.has(idBase) ? `${idBase}-imported` : idBase;
+        existingIds.add(id);
+        imported.push({
+          id,
+          name: rec.name.trim(),
+          category: validCategories.includes(rec.category as string) ? (rec.category as AdminMapMarker["category"]) : "Location",
+          layer: validLayers.includes(rec.layer as string) ? (rec.layer as AdminMapMarker["layer"]) : "Research",
+          visible: typeof rec.visible === "boolean" ? rec.visible : true,
+          icon: validIcons.includes(rec.icon as string) ? (rec.icon as AdminMapMarker["icon"]) : "pin",
+          coordinates: {
+            x: typeof coords?.x === "number" ? Math.max(0, Math.min(100, coords.x)) : 50,
+            y: typeof coords?.y === "number" ? Math.max(0, Math.min(100, coords.y)) : 50,
+          },
+          description: typeof rec.description === "string" ? rec.description : "",
+          verification: validVerifications.includes(rec.verification as string)
+            ? (rec.verification as AdminMapMarker["verification"])
+            : "unverified",
+          source: typeof rec.source === "string" ? rec.source : undefined,
+          linkedRecord: typeof rec.linkedRecord === "string" ? rec.linkedRecord : undefined,
+        });
+      }
+      if (imported.length === 0) {
+        showToast({ title: "Import failed", description: "No valid markers found in this file.", type: "danger" });
+        return;
+      }
+      setMarkers((prev) => [...imported, ...prev]);
+      setSelectedMarkerId(imported[0].id);
+      let failed = 0;
+      for (const m of imported) {
+        const res = await saveMapMarker(m);
+        if (!res.success) failed++;
+      }
+      showToast({
+        title: failed === 0 ? "Markers imported" : "Import partially failed",
+        description: failed === 0
+          ? `${imported.length} markers imported and saved.`
+          : `${imported.length - failed} of ${imported.length} saved; ${failed} failed to persist.`,
+        type: failed === 0 ? "success" : "danger",
+      });
+    } catch {
+      showToast({ title: "Import failed", description: "Could not read this file as marker JSON.", type: "danger" });
+    }
+  };
+
+  const handlePreviewMap = () => {
+    window.open("/map", "_blank", "noopener,noreferrer");
+  };
+
   // Selected Marker
   const selectedMarker = useMemo(() => {
     return markers.find((m) => m.id === selectedMarkerId) || markers[0];
@@ -148,15 +241,32 @@ export default function AdminMapPage() {
       prev.map((m) => (m.id === selectedMarker.id ? updatedMarker : m))
     );
 
-    // Save coordinates to Supabase
-    saveMapMarker(updatedMarker);
+    // Save coordinates to Supabase — await so failures surface instead of
+    // being silently swallowed while the toast claims success.
+    const saveResult = await saveMapMarker(updatedMarker);
+    if (!saveResult.success) {
+      // Revert the optimistic move so UI matches the database.
+      setMarkers((prev) =>
+        prev.map((m) =>
+          m.id === selectedMarker.id
+            ? { ...m, coordinates: { ...selectedMarker.coordinates } }
+            : m
+        )
+      );
+      showToast({
+        title: "Sync failed",
+        description: `Could not save new coordinates for ${selectedMarker.name}. ${saveResult.error || "Please try again."}`,
+        type: "danger",
+      });
+      return;
+    }
 
     showToast({
       title: "Marker Moved & Synced",
       description: `${selectedMarker.name} coordinates updated to (${clampedX}, ${clampedY}).`,
       action: {
         label: "Undo",
-        onClick: () => {
+        onClick: async () => {
           if (previousCoordinates) {
             setMarkers((prev) =>
               prev.map((m) =>
@@ -165,10 +275,17 @@ export default function AdminMapPage() {
                   : m
               )
             );
-            saveMapMarker({
+            const undoResult = await saveMapMarker({
               ...selectedMarker,
               coordinates: previousCoordinates.coords,
             });
+            if (!undoResult.success) {
+              showToast({
+                title: "Undo failed to sync",
+                description: "Coordinates were reverted locally but could not be saved.",
+                type: "danger",
+              });
+            }
           }
         },
       },
@@ -280,9 +397,22 @@ export default function AdminMapPage() {
             {isSaving ? "Saving..." : "Save changes"}
           </Button>
 
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json,application/json"
+            className="hidden"
+            aria-label="Import markers JSON"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) handleImportFile(file);
+              e.target.value = "";
+            }}
+          />
           <Button
             variant="secondary"
             size="sm"
+            onClick={() => fileInputRef.current?.click()}
             className="bg-[#111622] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs px-3 py-2 rounded-lg"
           >
             Import
@@ -291,6 +421,7 @@ export default function AdminMapPage() {
           <Button
             variant="secondary"
             size="sm"
+            onClick={handleExportMarkers}
             className="bg-[#111622] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs px-3 py-2 rounded-lg"
           >
             Export
@@ -299,6 +430,7 @@ export default function AdminMapPage() {
           <Button
             variant="secondary"
             size="sm"
+            onClick={handlePreviewMap}
             className="bg-[#111622] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs px-3 py-2 rounded-lg"
           >
             Preview

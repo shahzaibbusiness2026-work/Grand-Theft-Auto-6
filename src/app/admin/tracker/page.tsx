@@ -35,14 +35,25 @@ export default function AdminTrackerPage() {
 
   const toggleCategory = async (id: string) => {
     const updated = categories.map((c) => (c.id === id ? { ...c, active: !c.active } : c));
+    const previous = categories;
     setCategories(updated);
     const cat = categories.find((c) => c.id === id);
-    showToast({
-      title: `Category ${cat?.active ? "Disabled" : "Enabled"}`,
-      description: `"${cat?.name}" ${cat?.active ? "excluded from" : "included in"} completion formula.`,
-      type: "info",
-    });
-    await saveTrackerCategories(updated);
+    const res = await saveTrackerCategories(updated);
+    if (res.success) {
+      showToast({
+        title: `Category ${cat?.active ? "Disabled" : "Enabled"}`,
+        description: `"${cat?.name}" ${cat?.active ? "excluded from" : "included in"} completion formula.`,
+        type: "info",
+      });
+    } else {
+      // Revert the optimistic toggle so the UI matches the database.
+      setCategories(previous);
+      showToast({
+        title: "Could not save change",
+        description: res.error || `Failed to update "${cat?.name}". Please try again.`,
+        type: "danger",
+      });
+    }
   };
 
   return (

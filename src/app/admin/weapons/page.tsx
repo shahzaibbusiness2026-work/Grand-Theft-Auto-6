@@ -77,8 +77,8 @@ export default function AdminWeaponsPage() {
   const [drawerWeapon, setDrawerWeapon] = useState<AdminWeapon | null>(null);
   const [drawerNotes, setDrawerNotes] = useState("");
 
-  // Toast visible by default matching Image 5
-  const [showRestoredToast, setShowRestoredToast] = useState(true);
+  // Toast state for "Archived record restored" — shown only after a real restore
+  const [showRestoredToast, setShowRestoredToast] = useState(false);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -171,14 +171,18 @@ export default function AdminWeaponsPage() {
 
   const handleDeleteWeapon = async (id: string) => {
     const target = weapons.find((w) => w.id === id);
+    if (!target) return;
+    // Snapshot for rollback
+    const previous = weapons;
     setWeapons((prev) => prev.filter((w) => w.id !== id));
+    setSelectedIds((prev) => prev.filter((sid) => sid !== id));
     const res = await deleteWeapon(id);
     if (res.success) {
-      showToast({ title: "Weapon Deleted", description: `${target?.name || "Weapon"} removed from Supabase.`, type: "success" });
+      showToast({ title: "Weapon Deleted", description: `${target.name} removed from Supabase.`, type: "success" });
     } else {
-      showToast({ title: "Delete failed", description: res.error || "Could not delete the weapon.", type: "danger" });
-      const data = await getAdminWeapons();
-      setWeapons(data || []);
+      // Roll back the optimistic removal so the row reappears immediately
+      setWeapons(previous);
+      showToast({ title: "Delete failed", description: res.error || "Could not delete the weapon. The row was restored.", type: "danger" });
     }
   };
 
@@ -378,6 +382,20 @@ export default function AdminWeaponsPage() {
         </div>
       </div>
 
+      {/* Clear filters — visible only when any filter is active */}
+      {(searchQuery || selectedCategory !== "all" || selectedAmmunition !== "all" || selectedVerification !== "all" || selectedPublication !== "all") && (
+        <div className="flex justify-end -mt-2">
+          <button
+            type="button"
+            onClick={() => { resetFilters(); setCurrentPage(1); }}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] border border-[#243048] text-xs font-semibold text-[#94A3B8] hover:text-white transition-colors"
+          >
+            <RotateCcw className="w-3 h-3" />
+            <span>Clear filters</span>
+          </button>
+        </div>
+      )}
+
       {/* Main Grid: Data Table (Left) + Slide-over Drawer (Right) matching Image 5 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Table Container (matches Image 5 width) */}
@@ -482,14 +500,32 @@ export default function AdminWeaponsPage() {
                           {w.ammunition}
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
-                          <span className="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#3C2415] border border-[#5A361F] text-[#F97316]">
-                            Unverified
-                          </span>
+                          {w.verification === "verified" ? (
+                            <span className="px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400">
+                              Verified
+                            </span>
+                          ) : w.verification === "pending_source" ? (
+                            <span className="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#3D2D16] border border-[#594220] text-[#EAB308]">
+                              Pending source
+                            </span>
+                          ) : (
+                            <span className="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#3C2415] border border-[#5A361F] text-[#F97316]">
+                              Unverified
+                            </span>
+                          )}
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
-                          {w.status === "review" ? (
+                          {w.status === "published" ? (
+                            <span className="px-2.5 py-0.5 rounded text-xs font-medium bg-emerald-950/60 border border-emerald-500/40 text-emerald-400">
+                              Published
+                            </span>
+                          ) : w.status === "review" ? (
                             <span className="px-2.5 py-0.5 rounded text-xs font-medium bg-[#3D2D16] border border-[#594220] text-[#EAB308]">
                               Review
+                            </span>
+                          ) : w.status === "archived" ? (
+                            <span className="px-2.5 py-0.5 rounded text-xs font-medium bg-[#0E131D] border border-[#2A344A] text-[#64748B]">
+                              Archived
                             </span>
                           ) : (
                             <span className="px-2.5 py-0.5 rounded text-xs font-medium bg-[#182030] border border-[#243048] text-[#94A3B8]">

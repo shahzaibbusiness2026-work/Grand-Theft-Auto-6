@@ -16,22 +16,27 @@ import {
   X
 } from "lucide-react";
 import { INITIAL_DATABASE_ASSETS, DatabaseAsset } from "@/lib/admin-data";
-import { getAdminVehicles } from "@/lib/services/vehicles";
-import { getAdminWeapons } from "@/lib/services/weapons";
-import { getLocations } from "@/lib/services/locations";
+import { getAdminVehicles, saveVehicle } from "@/lib/services/vehicles";
+import { getAdminWeapons, saveWeapon } from "@/lib/services/weapons";
+import { getLocations, saveLocation } from "@/lib/services/locations";
+import { useToast } from "@/components/admin/toast";
 import { cn } from "@/lib/utils";
 
 export default function AdminDatabasePage() {
+  const { showToast } = useToast();
   const [assets, setAssets] = useState<DatabaseAsset[]>(INITIAL_DATABASE_ASSETS);
   const [selectedCategory, setSelectedCategory] = useState<"all" | "vehicle" | "weapon" | "location">("all");
   const [selectedStatus, setSelectedStatus] = useState<"all" | "verified" | "unconfirmed" | "deprecated">("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
 
   useEffect(() => {
     Promise.all([
-      getAdminVehicles().catch(() => []),
-      getAdminWeapons().catch(() => []),
-      getLocations().catch(() => []),
+      getAdminVehicles(),
+      getAdminWeapons(),
+      getLocations(),
     ]).then(([vehicles, weapons, locations]) => {
       const vAssets: DatabaseAsset[] = vehicles.map(v => ({
         id: v.id,
@@ -64,8 +69,19 @@ export default function AdminDatabasePage() {
         details: l.description || `${l.name} (${l.type})`
       }));
       const combined = [...vAssets, ...wAssets, ...lAssets];
-      if (combined.length > 0) setAssets(combined);
-    });
+      if (combined.length > 0) {
+        setAssets(combined);
+        setLoadError(null);
+      } else {
+        // No live data and no fallback — surface it instead of silently showing stale mocks
+        setLoadError("No assets returned from the database. Check your Supabase connection.");
+      }
+    })
+    .catch((err) => {
+      console.error("Database portal load failed:", err);
+      setLoadError("Could not load assets from Supabase. Showing cached seed data — changes will not persist until the connection is restored.");
+    })
+    .finally(() => setIsLoading(false));
   }, []);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -86,31 +102,118 @@ export default function AdminDatabasePage() {
     return matchesCat && matchesStatus && matchesSearch;
   });
 
-  const handleUpdateStatus = (id: string, nextStatus: "verified" | "unconfirmed" | "deprecated") => {
-    setAssets(prev => prev.map(a => {
-      if (a.id !== id) return a;
-      return {
-        ...a,
-        status: nextStatus,
-        lastVerified: new Date().toISOString().substring(0, 10),
-        verifier: "Current Editor"
-      };
-    }));
+  const persistVerification = async (
+    asset: DatabaseAsset,
+    nextStatus: "verified" | "unconfirmed" | "deprecated"
+  ): Promise<{ success: boolean; error?: string }> => {
+    // Map portal status -> service verification value
+    const verification = nextStatus === "verified" ? "verified" : "unverified";
+    try {
+      if (asset.category === "vehicle") {
+        return await saveVehicle({ id: asset.id, name: asset.name, verification });
+      }
+      if (asset.category === "weapon") {
+        return await saveWeapon({ id: asset.id, name: asset.name, verification });
+      }
+      return await saveLocation({ id: asset.id, name: asset.name, verification } as Parameters<typeof saveLocation>[0]);
+    } catch (err) {
+      return { success: false, error: String(err) };
+    }
   };
 
-  const handleAddAsset = (e: React.FormEvent) => {
+  const handleUpdateStatus = async (id: string, nextStatus: "verified" | "unconfirmed" | "deprecated") => {
+    const asset = assets.find((a) => a.id === id);
+    if (!asset) return;
+    const prev = assets;
+    // Optimistic update
+    setAssets((prevAssets) =>
+      prevAssets.map((a) =>
+        a.id !== id
+          ? a
+          : {
+              ...a,
+              status: nextStatus,
+              lastVerified: new Date().toISOString().substring(0, 10),
+              verifier: "Current Editor",
+            }
+      )
+    );
+    setUpdatingId(id);
+    const result = await persistVerification(asset, nextStatus);
+    setUpdatingId(null);
+    if (result.success) {
+      showToast({
+        title: "Status updated",
+        description: `"${asset.name}" is now ${nextStatus}.`,
+        type: "success",
+      });
+    } else {
+      // Roll back on failure
+      setAssets(prev);
+      showToast({
+        title: "Update failed",
+        description: result.error || "Could not save the verification status.",
+        type: "danger",
+      });
+    }
+  };
+
+  const handleAddAsset = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newName.trim()) return;
 
+    const verification = newStatus === "verified" ? "verified" : "unverified";
+    const id = `ast-${Date.now()}`;
+
+    let result: { success: boolean; error?: string; id?: string };
+    try {
+      if (newCat === "vehicle") {
+        result = await saveVehicle({
+          id,
+          name: newName.trim(),
+          verification,
+          summary: newDetails || undefined,
+          manufacturer: newSource || undefined,
+        });
+      } else if (newCat === "weapon") {
+        result = await saveWeapon({
+          id,
+          name: newName.trim(),
+          verification,
+          notes: newDetails || undefined,
+          acquisitionMethod: newSource || undefined,
+        });
+      } else {
+        result = await saveLocation({
+          id,
+          name: newName.trim(),
+          verification,
+          description: newDetails || undefined,
+          district: newSource || undefined,
+        } as Parameters<typeof saveLocation>[0]);
+      }
+    } catch (err) {
+      result = { success: false, error: String(err) };
+    }
+
+    if (!result.success) {
+      showToast({
+        title: "Save failed",
+        description: result.error || "Could not save the asset to the database.",
+        type: "danger",
+      });
+      return;
+    }
+
     const created: DatabaseAsset = {
-      id: `ast-${Date.now()}`,
-      name: newName,
+      id: result.id || id,
+      name: newName.trim(),
       category: newCat,
       status: newStatus,
       source: newSource || "Awaiting source citation",
       lastVerified: new Date().toISOString().substring(0, 10),
       verifier: "Current Editor",
-      details: newDetails || "No detailed notes provided."
+      details: newDetails || "No detailed notes provided.",
     };
 
     setAssets([created, ...assets]);
@@ -118,6 +221,11 @@ export default function AdminDatabasePage() {
     setNewName("");
     setNewSource("");
     setNewDetails("");
+    showToast({
+      title: "Asset saved",
+      description: `"${created.name}" saved to the database.`,
+      type: "success",
+    });
   };
 
   return (
@@ -141,6 +249,17 @@ export default function AdminDatabasePage() {
           <span>Add Asset</span>
         </button>
       </div>
+
+      {/* Load error banner */}
+      {loadError && (
+        <div role="alert" className="rounded-2xl border border-red-800/50 bg-red-950/40 p-4 flex items-start gap-3">
+          <AlertOctagon className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-bold text-red-300">Database connection issue</p>
+            <p className="text-xs text-red-200/80 mt-0.5">{loadError}</p>
+          </div>
+        </div>
+      )}
 
       {/* Filters & Search */}
       <div className="rounded-2xl border border-[#33415C] bg-[#141C2E] p-4 flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
@@ -196,7 +315,12 @@ export default function AdminDatabasePage() {
 
       {/* Asset Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filteredAssets.length === 0 ? (
+        {isLoading ? (
+          <div className="col-span-full rounded-2xl border border-[#33415C] bg-[#141C2E] p-12 text-center">
+            <div className="w-8 h-8 border-2 border-[#B8AAFF]/30 border-t-[#B8AAFF] rounded-full animate-spin mx-auto mb-3" />
+            <p className="text-xs text-[#94A3BD]">Loading assets from Supabase…</p>
+          </div>
+        ) : filteredAssets.length === 0 ? (
           <div className="col-span-full rounded-2xl border border-[#33415C] bg-[#141C2E] p-12 text-center">
             <HelpCircle className="w-10 h-10 text-[#94A3BD] mx-auto mb-3" />
             <h3 className="font-sans text-base font-bold text-white">No assets found</h3>
@@ -263,15 +387,17 @@ export default function AdminDatabasePage() {
                   {ast.status !== "verified" && (
                     <button
                       onClick={() => handleUpdateStatus(ast.id, "verified")}
-                      className="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-800/50 hover:bg-emerald-900/60 text-emerald-300 font-bold text-xs transition-colors"
+                      disabled={updatingId === ast.id}
+                      className="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-800/50 hover:bg-emerald-900/60 text-emerald-300 font-bold text-xs transition-colors disabled:opacity-50"
                     >
-                      Confirm
+                      {updatingId === ast.id ? "Saving…" : "Confirm"}
                     </button>
                   )}
                   {ast.status !== "unconfirmed" && (
                     <button
                       onClick={() => handleUpdateStatus(ast.id, "unconfirmed")}
-                      className="px-2.5 py-1 rounded-lg bg-amber-950/60 border border-amber-800/50 hover:bg-amber-900/60 text-amber-300 font-bold text-xs transition-colors"
+                      disabled={updatingId === ast.id}
+                      className="px-2.5 py-1 rounded-lg bg-amber-950/60 border border-amber-800/50 hover:bg-amber-900/60 text-amber-300 font-bold text-xs transition-colors disabled:opacity-50"
                     >
                       Flag Unconfirmed
                     </button>
@@ -279,7 +405,8 @@ export default function AdminDatabasePage() {
                   {ast.status !== "deprecated" && (
                     <button
                       onClick={() => handleUpdateStatus(ast.id, "deprecated")}
-                      className="px-2.5 py-1 rounded-lg bg-[#1C2740] border border-[#33415C] hover:bg-red-950/40 hover:border-red-800/40 text-[#94A3BD] hover:text-red-300 font-bold text-xs transition-colors"
+                      disabled={updatingId === ast.id}
+                      className="px-2.5 py-1 rounded-lg bg-[#1C2740] border border-[#33415C] hover:bg-red-950/40 hover:border-red-800/40 text-[#94A3BD] hover:text-red-300 font-bold text-xs transition-colors disabled:opacity-50"
                     >
                       Deprecate
                     </button>

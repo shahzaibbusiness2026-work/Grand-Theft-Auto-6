@@ -33,28 +33,90 @@ export default function AdminCategoriesPage() {
       count: 0,
       description: newCatDesc.trim() || "No description provided.",
     };
-    setCategories((prev) => [...prev, created]);
+    const prev = categories;
+    setCategories((p) => [...p, created]);
     setNewCatName("");
     setNewCatDesc("");
-    await saveCategory(created);
-    showToast({
-      title: "Category Created",
-      description: `"${created.name}" saved to Supabase taxonomy.`,
-      type: "success",
-    });
+    const result = await saveCategory(created);
+    if (result.success) {
+      showToast({
+        title: "Category Created",
+        description: `"${created.name}" saved to Supabase taxonomy.`,
+        type: "success",
+      });
+    } else {
+      // Roll back the optimistic add
+      setCategories(prev);
+      showToast({
+        title: "Save failed",
+        description: result.error || "Could not save the category.",
+        type: "danger",
+      });
+    }
   };
 
   const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
   const handleDeleteCategory = async (id: string) => {
     const cat = categories.find((c) => c.id === id);
-    setCategories((prev) => prev.filter((c) => c.id !== id));
-    await deleteCategory(id);
-    showToast({
-      title: "Category Deleted",
-      description: `"${cat?.name || "Category"}" removed from Supabase taxonomy.`,
-      type: "success",
-    });
+    const prev = categories;
+    setCategories((p) => p.filter((c) => c.id !== id));
+    const result = await deleteCategory(id);
+    if (result.success) {
+      showToast({
+        title: "Category Deleted",
+        description: `"${cat?.name || "Category"}" removed from Supabase taxonomy.`,
+        type: "success",
+      });
+    } else {
+      // Roll back the optimistic delete
+      setCategories(prev);
+      showToast({
+        title: "Delete failed",
+        description: result.error || "Could not delete the category.",
+        type: "danger",
+      });
+    }
+  };
+
+  // --- Edit category ---
+  const [editTarget, setEditTarget] = useState<AdminCategory | null>(null);
+  const [editName, setEditName] = useState("");
+  const [editDesc, setEditDesc] = useState("");
+
+  const openEdit = (c: AdminCategory) => {
+    setEditTarget(c);
+    setEditName(c.name);
+    setEditDesc(c.description || "");
+  };
+
+  const handleEditCategory = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editTarget || !editName.trim()) return;
+    const prev = categories;
+    const updated: AdminCategory = {
+      ...editTarget,
+      name: editName.trim(),
+      slug: editName.trim().toLowerCase().replace(/\s+/g, "-"),
+      description: editDesc.trim() || "No description provided.",
+    };
+    setCategories((p) => p.map((c) => (c.id === updated.id ? updated : c)));
+    setEditTarget(null);
+    const result = await saveCategory(updated);
+    if (result.success) {
+      showToast({
+        title: "Category Updated",
+        description: `"${updated.name}" saved to Supabase taxonomy.`,
+        type: "success",
+      });
+    } else {
+      setCategories(prev);
+      showToast({
+        title: "Update failed",
+        description: result.error || "Could not update the category.",
+        type: "danger",
+      });
+    }
   };
 
   return (
@@ -85,7 +147,25 @@ export default function AdminCategoriesPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-[var(--admin-border-subtle)]">
-              {categories.map((c) => (
+              {isLoading ? (
+                <tr>
+                  <td colSpan={5} className="p-12 text-center">
+                    <div className="w-8 h-8 border-2 border-[var(--admin-primary)]/30 border-t-[var(--admin-primary)] rounded-full animate-spin mx-auto mb-3" />
+                    <p className="text-xs text-[var(--admin-text-muted)]">Loading categories…</p>
+                  </td>
+                </tr>
+              ) : categories.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="p-12 text-center">
+                    <Tag className="w-8 h-8 text-[var(--admin-text-muted)] mx-auto mb-2" />
+                    <p className="text-sm font-bold text-[var(--admin-text)]">No categories yet</p>
+                    <p className="text-xs text-[var(--admin-text-muted)] mt-1">
+                      Create your first category using the form on the right.
+                    </p>
+                  </td>
+                </tr>
+              ) : (
+                categories.map((c) => (
                 <tr key={c.id} className="hover:bg-[var(--admin-elevated)]/40 transition-colors">
                   <td className="p-3.5 font-bold text-[var(--admin-text)]">
                     <div className="flex items-center gap-2">
@@ -99,20 +179,34 @@ export default function AdminCategoriesPage() {
                   </td>
                   <td className="p-3.5 text-[var(--admin-text-muted)] max-w-[240px] truncate">{c.description}</td>
                   <td className="p-3.5 text-right">
-                    <Tooltip content="Delete category">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setDeleteTarget({ id: c.id, name: c.name })}
-                        className="text-[var(--admin-text-muted)] hover:text-rose-400 hover:bg-rose-500/10 h-7 w-7"
-                        aria-label={`Delete category: ${c.name}`}
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </Button>
-                    </Tooltip>
+                    <div className="flex items-center justify-end gap-1">
+                      <Tooltip content="Edit category">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => openEdit(c)}
+                          className="text-[var(--admin-text-muted)] hover:text-[var(--admin-primary)] hover:bg-[var(--admin-primary)]/10 h-7 w-7"
+                          aria-label={`Edit category: ${c.name}`}
+                        >
+                          <Edit className="w-3.5 h-3.5" />
+                        </Button>
+                      </Tooltip>
+                      <Tooltip content="Delete category">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => setDeleteTarget({ id: c.id, name: c.name })}
+                          className="text-[var(--admin-text-muted)] hover:text-rose-400 hover:bg-rose-500/10 h-7 w-7"
+                          aria-label={`Delete category: ${c.name}`}
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </Button>
+                      </Tooltip>
+                    </div>
                   </td>
                 </tr>
-              ))}
+                ))
+              )}
             </tbody>
           </table>
         </div>
@@ -161,6 +255,57 @@ export default function AdminCategoriesPage() {
           </form>
         </div>
       </div>
+      {/* Edit category modal */}
+      <Modal
+        isOpen={!!editTarget}
+        onClose={() => setEditTarget(null)}
+        title="Edit category"
+        description={`Rename or update the description for "${editTarget?.name}".`}
+        footer={<>
+          <button
+            type="button"
+            onClick={() => setEditTarget(null)}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={handleEditCategory}
+            disabled={!editName.trim()}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[var(--admin-primary)] hover:opacity-90 text-white transition-colors disabled:opacity-50"
+          >
+            Save changes
+          </button>
+        </>}
+      >
+        <div className="space-y-3 text-xs">
+          <div>
+            <label htmlFor="edit-cat-name" className="block font-bold text-[var(--admin-text)] mb-1">
+              Category Name
+            </label>
+            <input
+              id="edit-cat-name"
+              type="text"
+              value={editName}
+              onChange={(e) => setEditName(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-all"
+            />
+          </div>
+          <div>
+            <label htmlFor="edit-cat-desc" className="block font-bold text-[var(--admin-text)] mb-1">
+              Description
+            </label>
+            <textarea
+              id="edit-cat-desc"
+              rows={3}
+              value={editDesc}
+              onChange={(e) => setEditDesc(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl bg-[var(--admin-card)] border border-[var(--admin-border)] text-xs text-[var(--admin-text)] focus:outline-none focus:border-[var(--admin-primary)] transition-all resize-none"
+            />
+          </div>
+        </div>
+      </Modal>
       {/* Delete confirmation */}
       <Modal
         isOpen={!!deleteTarget}

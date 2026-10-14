@@ -202,7 +202,16 @@ export function ArticleEditor({
             <button
               type="button"
               disabled={saving}
-              onClick={() => handleSave(article.status === "published" ? "published" : "draft")}
+              onClick={() => {
+                // Preserve the current status — never silently demote a
+                // scheduled/review article to draft. The dedicated Publish
+                // button handles promotion; this one just saves in place.
+                const target = article.status === "scheduled" ? "draft" : article.status;
+                if (article.status === "scheduled") {
+                  if (!window.confirm("This article is scheduled for release. Saving now will unschedule it and move it to draft. Continue?")) return;
+                }
+                handleSave(target);
+              }}
               className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#111622] hover:bg-[#161F30] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs font-semibold transition-colors disabled:opacity-60"
             >
               <Save className="w-3.5 h-3.5" />

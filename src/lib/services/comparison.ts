@@ -101,3 +101,70 @@ export async function saveComparisonWeights(
     return { success: false, error: String(err) };
   }
 }
+
+export interface SavedComparison {
+  id: string;
+  name: string;
+  type: "vehicle" | "weapon";
+  itemIds: string[];
+  itemCount: number;
+  attributes: { label: string; unit: string; rule: "higher" | "lower" | "none" }[];
+  missingValueDisplay: string;
+  hideEmptyAttributes: boolean;
+  updatedAt: string;
+}
+
+/**
+ * Load saved comparison drafts from site_settings (JSON array).
+ */
+export async function getSavedComparisons(): Promise<
+  { id: string; name: string; type: string; itemCount: number; updatedAt: string }[]
+> {
+  try {
+    const supabase = await createServerSupabase();
+    const { data } = await supabase
+      .from("site_settings")
+      .select("value")
+      .eq("key", "admin_saved_comparisons")
+      .maybeSingle();
+    if (data?.value && Array.isArray(data.value)) {
+      return data.value as { id: string; name: string; type: string; itemCount: number; updatedAt: string }[];
+    }
+    return [];
+  } catch (err) {
+    console.error("Failed to load saved comparisons:", err);
+    return [];
+  }
+}
+
+/**
+ * Save a comparison draft to site_settings. Returns success flag.
+ */
+export async function saveComparisonDraft(
+  draft: Omit<SavedComparison, "id" | "updatedAt"> & { id?: string }
+): Promise<{ success: boolean; id?: string; error?: string }> {
+  try {
+    await assertAdmin();
+    const supabase = createAdminClient();
+    const { data: existing } = await supabase
+      .from("site_settings")
+      .select("value")
+      .eq("key", "admin_saved_comparisons")
+      .maybeSingle();
+    const list: SavedComparison[] = Array.isArray(existing?.value) ? existing.value : [];
+    const id = draft.id || `cmp-${Date.now()}`;
+    const updatedAt = new Date().toISOString();
+    const record: SavedComparison = { ...draft, id, updatedAt };
+    const idx = list.findIndex((c) => c.id === id);
+    const next = idx >= 0 ? list.map((c, i) => (i === idx ? record : c)) : [record, ...list];
+    const { error } = await supabase
+      .from("site_settings")
+      .upsert({ key: "admin_saved_comparisons", value: next, updated_at: updatedAt }, { onConflict: "key" });
+    if (error) throw error;
+    revalidatePath("/admin/comparisons");
+    return { success: true, id };
+  } catch (err) {
+    console.error("Failed to save comparison:", err);
+    return { success: false, error: String(err) };
+  }
+}

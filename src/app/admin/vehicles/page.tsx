@@ -17,6 +17,7 @@ import {
   Edit,
   SlidersHorizontal,
   Trash2,
+  Archive,
   RotateCcw,
   Filter,
   Bookmark,
@@ -58,6 +59,71 @@ export default function AdminVehiclesPage() {
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
+  // Collapsible filter panel (wired to the "Filters" button)
+  const [showFilters, setShowFilters] = useState(true);
+  const activeFilterCount =
+    (searchQuery ? 1 : 0) +
+    (selectedClass !== "all" ? 1 : 0) +
+    (selectedManufacturer !== "all" ? 1 : 0) +
+    (selectedVerification !== "all" ? 1 : 0) +
+    (selectedStatus !== "all" ? 1 : 0);
+  const resetVehicleFilters = () => {
+    setSearchQuery("");
+    setSelectedClass("all");
+    setSelectedManufacturer("all");
+    setSelectedVerification("all");
+    setSelectedStatus("all");
+    setCurrentPage(1);
+  };
+
+  // Saved filter views (persisted to localStorage)
+  interface SavedView {
+    name: string;
+    searchQuery: string;
+    selectedClass: string;
+    selectedManufacturer: string;
+    selectedVerification: string;
+    selectedStatus: string;
+  }
+  const [showSavedViews, setShowSavedViews] = useState(false);
+  const [newViewName, setNewViewName] = useState("");
+  const [savedViews, setSavedViews] = useState<SavedView[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      return JSON.parse(localStorage.getItem("gta6-admin-vehicle-views") || "[]");
+    } catch {
+      return [];
+    }
+  });
+  const persistViews = (views: SavedView[]) => {
+    setSavedViews(views);
+    try {
+      localStorage.setItem("gta6-admin-vehicle-views", JSON.stringify(views));
+    } catch { /* storage unavailable — views just won't persist */ }
+  };
+  const handleSaveView = () => {
+    const name = newViewName.trim();
+    if (!name) return;
+    persistViews([
+      ...savedViews.filter((v) => v.name !== name),
+      { name, searchQuery, selectedClass, selectedManufacturer, selectedVerification, selectedStatus },
+    ]);
+    setNewViewName("");
+    showToast({ title: "View saved", description: `"${name}" saved to this browser.`, type: "success" });
+  };
+  const applySavedView = (view: SavedView) => {
+    setSearchQuery(view.searchQuery);
+    setSelectedClass(view.selectedClass);
+    setSelectedManufacturer(view.selectedManufacturer);
+    setSelectedVerification(view.selectedVerification);
+    setSelectedStatus(view.selectedStatus);
+    setCurrentPage(1);
+    setShowSavedViews(false);
+  };
+  const handleDeleteView = (name: string) => {
+    persistViews(savedViews.filter((v) => v.name !== name));
+  };
+
   useEffect(() => {
     setIsLoading(true);
     getAdminVehicles()
@@ -68,8 +134,8 @@ export default function AdminVehiclesPage() {
   // Expandable row state (matching Image 18)
   const [expandedId, setExpandedId] = useState<string | null>("veh-003");
 
-  // Toast state matching Image 2
-  const [showSavedToast, setShowSavedToast] = useState(true);
+  // Toast state — shown only after a real save action
+  const [showSavedToast, setShowSavedToast] = useState(false);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -128,7 +194,43 @@ export default function AdminVehiclesPage() {
     }
   };
 
+  // Bulk edit publication status for selected vehicles
+  const [showBulkStatus, setShowBulkStatus] = useState(false);
+  const [bulkStatusSaving, setBulkStatusSaving] = useState(false);
+  const handleBulkStatusChange = async (status: AdminVehicle["status"]) => {
+    setBulkStatusSaving(true);
+    const ids = [...selectedIds];
+    const failures: string[] = [];
+    for (const id of ids) {
+      const vehicle = vehicles.find((v) => v.id === id);
+      if (!vehicle) continue;
+      const res = await saveVehicle({ ...vehicle, status });
+      if (!res.success) failures.push(vehicle.displayName || vehicle.name);
+    }
+    if (failures.length === 0) {
+      setVehicles((prev) =>
+        prev.map((v) => (ids.includes(v.id) ? { ...v, status } : v))
+      );
+      setSelectedIds([]);
+      setShowBulkStatus(false);
+      showToast({ title: "Status updated", description: `${ids.length} vehicle(s) set to ${status}.`, type: "success" });
+    } else {
+      // Refresh from Supabase so the UI matches what actually persisted
+      const data = await getAdminVehicles();
+      setVehicles(data || []);
+      setSelectedIds([]);
+      setShowBulkStatus(false);
+      showToast({
+        title: "Partial update",
+        description: `${failures.length} of ${ids.length} failed: ${failures.slice(0, 3).join(", ")}${failures.length > 3 ? "…" : ""}`,
+        type: "danger",
+      });
+    }
+    setBulkStatusSaving(false);
+  };
+
   const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
+
 
   const handleDeleteVehicle = async (id: string) => {
     const target = vehicles.find((v) => v.id === id);
@@ -145,15 +247,27 @@ export default function AdminVehiclesPage() {
   };
 
   const handleArchiveSelected = async () => {
-    for (const id of selectedIds) {
+    const ids = [...selectedIds];
+    const failures: string[] = [];
+    for (const id of ids) {
       const vehicle = vehicles.find((v) => v.id === id);
-      if (vehicle) await saveVehicle({ ...vehicle, status: "archived" });
+      if (!vehicle) continue;
+      const res = await saveVehicle({ ...vehicle, status: "archived" });
+      if (!res.success) failures.push(vehicle.displayName || vehicle.name);
     }
-    setVehicles((prev) =>
-      prev.map((v) => (selectedIds.includes(v.id) ? { ...v, status: "archived" as const } : v))
-    );
+    // Sync UI with what actually persisted
+    const data = await getAdminVehicles();
+    setVehicles(data || []);
     setSelectedIds([]);
-    showToast({ title: "Archived", description: `${selectedIds.length} vehicle(s) archived.`, type: "success" });
+    if (failures.length === 0) {
+      showToast({ title: "Archived", description: `${ids.length} vehicle(s) archived.`, type: "success" });
+    } else {
+      showToast({
+        title: "Partial archive",
+        description: `${failures.length} of ${ids.length} failed: ${failures.slice(0, 3).join(", ")}${failures.length > 3 ? "…" : ""}`,
+        type: "danger",
+      });
+    }
   };
 
   const toggleExpand = (id: string) => {
@@ -281,7 +395,8 @@ export default function AdminVehiclesPage() {
         </button>
       </div>
 
-      {/* Filter Row matching Image 2 & Image 18 */}
+      {/* Filter Row — collapsible via the Filters button */}
+      {showFilters && (
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 flex-1">
           <div className="relative md:col-span-1">
@@ -364,25 +479,79 @@ export default function AdminVehiclesPage() {
           </div>
         </div>
 
-        {/* Filters (3) & Saved views buttons (Image 18) */}
+        {/* Filters toggle & Saved views buttons */}
         <div className="flex items-center gap-2 shrink-0">
           <button
             type="button"
+            onClick={() => setShowFilters((v) => !v)}
+            aria-expanded={showFilters}
             className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs font-semibold text-[#94A3B8] hover:text-white transition-colors"
           >
             <Filter className="w-3.5 h-3.5 text-[#6366F1]" />
-            <span>Filters (3)</span>
+            <span>Filters{activeFilterCount > 0 ? ` (${activeFilterCount})` : ""}</span>
           </button>
-          <button
-            type="button"
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs font-semibold text-[#94A3B8] hover:text-white transition-colors"
-          >
-            <Bookmark className="w-3.5 h-3.5 text-[#64748B]" />
-            <span>Saved views</span>
-            <ChevronDown className="w-3 h-3 text-[#64748B]" />
-          </button>
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setShowSavedViews((v) => !v)}
+              aria-expanded={showSavedViews}
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs font-semibold text-[#94A3B8] hover:text-white transition-colors"
+            >
+              <Bookmark className="w-3.5 h-3.5 text-[#64748B]" />
+              <span>Saved views</span>
+              <ChevronDown className={cn("w-3 h-3 text-[#64748B] transition-transform", showSavedViews && "rotate-180")} />
+            </button>
+            {showSavedViews && (
+              <div className="absolute right-0 top-full mt-2 w-64 rounded-xl border border-[#1C2436] bg-[#111622] shadow-2xl z-30 p-3 space-y-2">
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={newViewName}
+                    onChange={(e) => setNewViewName(e.target.value)}
+                    placeholder="Name this view..."
+                    className="flex-1 min-w-0 px-2.5 py-1.5 rounded-lg bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleSaveView}
+                    disabled={!newViewName.trim()}
+                    className="px-2.5 py-1.5 rounded-lg bg-[#6366F1] hover:bg-[#5254D8] disabled:opacity-40 text-white text-xs font-semibold transition-colors"
+                  >
+                    Save
+                  </button>
+                </div>
+                {savedViews.length === 0 ? (
+                  <p className="text-xs text-[#64748B] px-1 py-1">No saved views yet. Set filters above, name the view, and save it.</p>
+                ) : (
+                  <ul className="space-y-1 max-h-48 overflow-y-auto">
+                    {savedViews.map((view) => (
+                      <li key={view.name} className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg hover:bg-[#182030] group">
+                        <button
+                          type="button"
+                          onClick={() => applySavedView(view)}
+                          className="flex-1 min-w-0 text-left text-xs text-white truncate"
+                          title={`Apply "${view.name}"`}
+                        >
+                          {view.name}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteView(view.name)}
+                          className="p-1 rounded text-[#64748B] hover:text-[#F87171] opacity-0 group-hover:opacity-100 transition-opacity"
+                          aria-label={`Delete view ${view.name}`}
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
+      )}
 
       {/* Main Table / Skeleton Loader matching Image 2, 18, 20 */}
       {isLoading ? (
@@ -464,7 +633,30 @@ export default function AdminVehiclesPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#182030]">
-                {filteredVehicles.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((v) => {
+                {filteredVehicles.length === 0 ? (
+                  <tr>
+                    <td colSpan={8} className="px-6 py-14 text-center">
+                      <div className="flex flex-col items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-[#0E131D] border border-[#1C2436] flex items-center justify-center">
+                          <Search className="w-5 h-5 text-[#64748B]" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-white">No vehicles match your filters</p>
+                          <p className="text-xs text-[#64748B] mt-1">Try adjusting your search or clearing the filters.</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={resetVehicleFilters}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#182030] hover:bg-[#202B40] border border-[#243048] text-xs font-semibold text-[#94A3B8] hover:text-white transition-colors"
+                        >
+                          <RotateCcw className="w-3 h-3" />
+                          <span>Clear all filters</span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ) : (
+                filteredVehicles.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((v) => {
                   const isSelected = selectedIds.includes(v.id);
                   const isExpanded = expandedId === v.id;
 
@@ -529,15 +721,35 @@ export default function AdminVehiclesPage() {
                           {v.manufacturer}
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
-                          <div className="flex items-center gap-1.5 text-xs font-medium text-[#EAB308]">
-                            <span className="w-2 h-2 rounded-full bg-[#EAB308]" />
-                            <span>Pending source</span>
-                          </div>
+                          {v.verification === "verified" ? (
+                            <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
+                              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                              <span>Verified</span>
+                            </div>
+                          ) : v.verification === "pending_source" ? (
+                            <div className="flex items-center gap-1.5 text-xs font-medium text-[#EAB308]">
+                              <span className="w-2 h-2 rounded-full bg-[#EAB308]" />
+                              <span>Pending source</span>
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-1.5 text-xs font-medium text-[#F97316]">
+                              <span className="w-2 h-2 rounded-full bg-[#F97316]" />
+                              <span>Unverified</span>
+                            </div>
+                          )}
                         </td>
                         <td className="py-3 px-3 whitespace-nowrap">
-                          {v.status === "review" ? (
+                          {v.status === "published" ? (
+                            <span className="px-2.5 py-1 rounded text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400">
+                              Published
+                            </span>
+                          ) : v.status === "review" ? (
                             <span className="px-2.5 py-1 rounded text-xs font-semibold bg-[#162744] border border-[#234375] text-[#38BDF8]">
                               Review
+                            </span>
+                          ) : v.status === "archived" ? (
+                            <span className="px-2.5 py-1 rounded text-xs font-medium bg-[#0E131D] border border-[#2A344A] text-[#64748B]">
+                              Archived
                             </span>
                           ) : (
                             <span className="px-2.5 py-1 rounded text-xs font-medium bg-[#182030] border border-[#243048] text-[#94A3B8]">
@@ -596,7 +808,7 @@ export default function AdminVehiclesPage() {
                       )}
                     </React.Fragment>
                   );
-                })}
+                }))}
               </tbody>
             </table>
           </div>
@@ -608,20 +820,40 @@ export default function AdminVehiclesPage() {
                 <span className="px-2.5 py-1 rounded bg-[#6366F1] text-white font-bold text-xs">
                   {selectedIds.length} selected
                 </span>
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] text-white border border-[#243048] font-semibold transition-colors"
-                >
-                  <Edit className="w-3 h-3 text-[#818CF8]" />
-                  <span>Edit status</span>
-                  <ChevronDown className="w-3 h-3 text-[#64748B]" />
-                </button>
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setShowBulkStatus((v) => !v)}
+                    aria-expanded={showBulkStatus}
+                    disabled={bulkStatusSaving}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] text-white border border-[#243048] font-semibold transition-colors disabled:opacity-50"
+                  >
+                    <Edit className="w-3 h-3 text-[#818CF8]" />
+                    <span>{bulkStatusSaving ? "Saving…" : "Edit status"}</span>
+                    <ChevronDown className={cn("w-3 h-3 text-[#64748B] transition-transform", showBulkStatus && "rotate-180")} />
+                  </button>
+                  {showBulkStatus && (
+                    <div className="absolute left-0 bottom-full mb-2 w-44 rounded-xl border border-[#1C2436] bg-[#111622] shadow-2xl z-30 p-1.5">
+                      {(["draft", "review", "published", "archived"] as const).map((s) => (
+                        <button
+                          key={s}
+                          type="button"
+                          onClick={() => handleBulkStatusChange(s)}
+                          disabled={bulkStatusSaving}
+                          className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-white hover:bg-[#1C2436] transition-colors capitalize disabled:opacity-50"
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <button
                   type="button"
                   onClick={handleArchiveSelected}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182030] hover:bg-[#202B40] text-white border border-[#243048] font-semibold transition-colors"
                 >
-                  <Trash2 className="w-3 h-3 text-[#EF4444]" />
+                  <Archive className="w-3 h-3 text-[#EAB308]" />
                   <span>Archive</span>
                 </button>
                 <button

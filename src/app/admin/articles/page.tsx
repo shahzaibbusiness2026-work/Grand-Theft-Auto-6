@@ -74,6 +74,17 @@ export default function AdminArticlesPage() {
       if (selectedAuthor !== "all" && a.author.name.toLowerCase() !== selectedAuthor.toLowerCase()) return false;
       if (selectedCategory !== "all" && a.category !== selectedCategory) return false;
 
+      if (selectedDate !== "all") {
+        const ref = a.updatedAt || a.publishedAt;
+        if (!ref) return false;
+        const ageMs = Date.now() - new Date(ref).getTime();
+        if (Number.isNaN(ageMs) || ageMs < 0) return false;
+        const dayMs = 24 * 60 * 60 * 1000;
+        if (selectedDate === "today" && ageMs > dayMs) return false;
+        if (selectedDate === "week" && ageMs > 7 * dayMs) return false;
+        if (selectedDate === "month" && ageMs > 30 * dayMs) return false;
+      }
+
       if (
         searchQuery &&
         !a.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
@@ -83,7 +94,7 @@ export default function AdminArticlesPage() {
       }
       return true;
     });
-  }, [articles, activeTab, selectedAuthor, selectedCategory, searchQuery]);
+  }, [articles, activeTab, selectedAuthor, selectedCategory, selectedDate, searchQuery]);
 
   const totalPages = Math.max(1, Math.ceil(filteredArticles.length / itemsPerPage));
   const pageArticles = filteredArticles.slice(

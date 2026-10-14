@@ -54,6 +54,11 @@ export default function AdminSettingsPage() {
     twitterHandle: "@GTA6Atlas",
     discordUrl: "https://discord.gg/gta6atlas",
     redditUrl: "https://reddit.com/r/GTA6Atlas",
+    homepageSectionToggles: ["hero", "map", "news", "vehicles", "weapons", "community"],
+    publicToolToggles: ["map_tool", "comp_tool", "track_tool", "sub_tool"],
+    ga4MeasurementId: "",
+    cloudflareToken: "",
+    discordWebhookUrl: "",
   });
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -103,12 +108,13 @@ export default function AdminSettingsPage() {
         throw new Error(res.error);
       }
     } catch (err) {
+      // Never mask a failure as a save: keep the unsaved flag so the user
+      // knows their changes did not reach Supabase.
       showToast({
-        title: "Saved Locally",
-        description: "Updated in local state. Ensure Supabase credentials are valid.",
-        type: "info",
+        title: "Save failed",
+        description: err instanceof Error ? err.message : "Could not save settings to Supabase. Your changes are still pending.",
+        type: "danger",
       });
-      setHasUnsavedChanges(false);
     } finally {
       setIsSaving(false);
     }
@@ -170,6 +176,15 @@ export default function AdminSettingsPage() {
     };
     handleUpdate({ navigationMenu: [...settings.navigationMenu, newItem] });
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 gap-4" role="status" aria-label="Loading settings">
+        <Loader2 className="w-8 h-8 text-[#6366F1] animate-spin" />
+        <p className="text-sm text-[#94A3B8]">Loading site settings from Supabase…</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200 pb-16">
@@ -571,6 +586,7 @@ export default function AdminSettingsPage() {
                       <button
                         type="button"
                         onClick={() => {
+                          if (!window.confirm(`Delete navigation item "${item.label}"? This cannot be undone.`)) return;
                           const updated = settings.navigationMenu.filter((m) => m.id !== item.id);
                           handleUpdate({ navigationMenu: updated });
                         }}
@@ -620,10 +636,20 @@ export default function AdminSettingsPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-emerald-400 font-semibold">Enabled</span>
+                  <span className={`text-xs font-semibold ${(settings.homepageSectionToggles ?? []).includes(sec.id) ? "text-emerald-400" : "text-[#64748B]"}`}>
+                    {(settings.homepageSectionToggles ?? []).includes(sec.id) ? "Enabled" : "Disabled"}
+                  </span>
                   <input
                     type="checkbox"
-                    defaultChecked
+                    checked={(settings.homepageSectionToggles ?? []).includes(sec.id)}
+                    onChange={(e) => {
+                      const current = settings.homepageSectionToggles ?? [];
+                      const updated = e.target.checked
+                        ? [...current, sec.id]
+                        : current.filter((s) => s !== sec.id);
+                      handleUpdate({ homepageSectionToggles: updated });
+                    }}
+                    aria-label={`Toggle ${sec.label}`}
                     className="rounded border-[#1C2436] text-[#6366F1] focus:ring-0 bg-[#0E131D]"
                   />
                 </div>
@@ -662,7 +688,15 @@ export default function AdminSettingsPage() {
                   <span className="text-xs text-[#94A3B8]">Public access</span>
                   <input
                     type="checkbox"
-                    defaultChecked
+                    checked={(settings.publicToolToggles ?? []).includes(tool.id)}
+                    onChange={(e) => {
+                      const current = settings.publicToolToggles ?? [];
+                      const updated = e.target.checked
+                        ? [...current, tool.id]
+                        : current.filter((t) => t !== tool.id);
+                      handleUpdate({ publicToolToggles: updated });
+                    }}
+                    aria-label={`Toggle public access for ${tool.name}`}
                     className="rounded border-[#1C2436] text-[#6366F1] focus:ring-0 bg-[#0E131D]"
                   />
                 </div>
@@ -725,7 +759,8 @@ export default function AdminSettingsPage() {
             <label className="block font-medium text-[#94A3B8] mb-1">Google Analytics 4 Measurement ID</label>
             <input
               type="text"
-              defaultValue=""
+              value={settings.ga4MeasurementId ?? ""}
+              onChange={(e) => handleUpdate({ ga4MeasurementId: e.target.value })}
               placeholder="G-XXXXXXXXXX"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] font-mono focus:outline-none focus:border-[#6366F1]"
             />
@@ -735,7 +770,8 @@ export default function AdminSettingsPage() {
             <label className="block font-medium text-[#94A3B8] mb-1">Cloudflare Web Analytics Token</label>
             <input
               type="text"
-              defaultValue=""
+              value={settings.cloudflareToken ?? ""}
+              onChange={(e) => handleUpdate({ cloudflareToken: e.target.value })}
               placeholder="cf_token_…"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] font-mono focus:outline-none focus:border-[#6366F1]"
             />
@@ -745,7 +781,8 @@ export default function AdminSettingsPage() {
             <label className="block font-medium text-[#94A3B8] mb-1">Discord Webhook for Editorial Alerts</label>
             <input
               type="text"
-              defaultValue=""
+              value={settings.discordWebhookUrl ?? ""}
+              onChange={(e) => handleUpdate({ discordWebhookUrl: e.target.value })}
               placeholder="https://discord.com/api/webhooks/…"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] font-mono focus:outline-none focus:border-[#6366F1]"
             />
