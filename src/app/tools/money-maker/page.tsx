@@ -1,6 +1,7 @@
 ﻿import { SiteShell } from "@/components/shells";
 import { MoneyMakerClient } from "./money-maker-client";
-import { DollarSign } from "lucide-react";
+import { DollarSign, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,6 +14,15 @@ export default function MoneyMakerPage() {
   return (
     <SiteShell>
       <div className="container-site py-8">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
+          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+          <ChevronRight className="h-3 w-3" />
+          <Link href="/tools" className="hover:text-primary transition-colors">Tools</Link>
+          <ChevronRight className="h-3 w-3" />
+          <span className="text-foreground font-bold">Money-Making Method Finder</span>
+        </nav>
+
         {/* Header Hero */}
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-emerald-400 mb-3">

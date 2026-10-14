@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";
 import { VehiclesClient } from "./vehicles-client";
 import { SectionErrorBoundary } from "@/components/section-error-boundary";
+import { RelatedArticles } from "@/components/related-articles";
 import { getMergedVehicles } from "@/lib/services/catalog";
 import { serializeJsonLd } from "@/lib/utils";
 
@@ -88,8 +89,7 @@ export default async function VehiclesPage() {
       </section>
 
       {/* CTA BANNER */}
-      <section className="container-site pb-10">
-        <div className="card-surface relative overflow-hidden rounded-3xl border-border/80">
+      <section className="container-site pb-10">        <div className="card-surface relative overflow-hidden rounded-3xl border-border/80">
           <ThemeImage
             dark="/img/car-purple.jpg"
             light="/img/car-pink.jpg"
@@ -113,6 +113,9 @@ export default async function VehiclesPage() {
           </div>
         </div>
       </section>
+
+      {/* RELATED ARTICLES — internal linking for SEO/discovery */}
+      <RelatedArticles category="Vehicles" title="Vehicle Guides & News" />
     </SiteShell>
   );
 }

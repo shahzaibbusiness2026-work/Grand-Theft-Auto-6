@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeImage } from "@/components/theme-image";
 import { WeaponsClient } from "./weapons-client";
 import { SectionErrorBoundary } from "@/components/section-error-boundary";
+import { RelatedArticles } from "@/components/related-articles";
 import { getMergedWeapons } from "@/lib/services/catalog";
 import { serializeJsonLd } from "@/lib/utils";
 
@@ -80,6 +81,9 @@ export default async function WeaponsPage() {
           <WeaponsClient initialWeapons={weapons} />
         </SectionErrorBoundary>
       </section>
+
+      {/* RELATED ARTICLES — internal linking for SEO/discovery */}
+      <RelatedArticles category="Weapons" title="Weapon Guides & News" />
     </SiteShell>
   );
 }
