@@ -116,9 +116,9 @@ export function Modal({
       aria-labelledby={titleId}
       aria-describedby={description ? descId : undefined}
     >
-      {/* Backdrop */}
+      {/* Backdrop - click does NOT close (prevents accidental data loss in forms).
+          Use the X button or Escape key to close. */}
       <div
-        onClick={onClose}
         className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity animate-in fade-in duration-200"
         aria-hidden="true"
       />
