@@ -631,30 +631,28 @@ export default function AdminMediaPage() {
               <div className="space-y-1">
                 <h2 className="text-lg font-bold text-white">Delete used asset?</h2>
                 <p className="text-xs text-[#94A3B8] leading-relaxed">
-                  This asset is currently used in {selectedAsset?.usedBy.length || 2} articles. Deleting it may result in broken images or missing content.
+                  This asset is currently used in {selectedAsset?.usedBy.length ?? 0} article(s). Deleting it may result in broken images or missing content.
                 </p>
               </div>
             </div>
 
-            {/* Affected Content List (Image 10) */}
+            {/* Affected Content List — real usedBy data */}
             <div className="space-y-2 p-3 rounded-xl bg-[#0E131D] border border-[#1C2436]">
               <p className="text-xs font-semibold text-[#94A3B8]">Associated content:</p>
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between p-2 rounded-lg bg-[#111622] border border-[#1C2436]">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-3.5 h-3.5 text-indigo-400" />
-                    <span className="text-xs font-semibold text-white">Vice City Map Reveal Analysis</span>
-                  </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#64748B]" />
+              {(selectedAsset?.usedBy?.length ?? 0) === 0 ? (
+                <p className="text-xs text-[#64748B]">Not used in any articles.</p>
+              ) : (
+                <div className="space-y-1.5">
+                  {selectedAsset!.usedBy.map((item) => (
+                    <div key={item.id} className="flex items-center justify-between p-2 rounded-lg bg-[#111622] border border-[#1C2436]">
+                      <div className="flex items-center gap-2">
+                        <FileText className="w-3.5 h-3.5 text-indigo-400" />
+                        <span className="text-xs font-semibold text-white">{item.title}</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center justify-between p-2 rounded-lg bg-[#111622] border border-[#1C2436]">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-3.5 h-3.5 text-indigo-400" />
-                    <span className="text-xs font-semibold text-white">Weapon Customization Guide</span>
-                  </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#64748B]" />
-                </div>
-              </div>
+              )}
             </div>
 
             {/* Confirmation Checkbox */}

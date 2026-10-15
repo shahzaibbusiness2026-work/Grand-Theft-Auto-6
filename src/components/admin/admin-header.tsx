@@ -35,29 +35,9 @@ interface NotificationItem {
   read: boolean;
 }
 
-const INITIAL_NOTIFICATIONS: NotificationItem[] = [
-  {
-    id: "1",
-    title: "Source Verified",
-    desc: "Morgan Kim verified source for Bravado Banshee GTS.",
-    time: "12m ago",
-    read: false,
-  },
-  {
-    id: "2",
-    title: "Marker Displaced",
-    desc: "Vice City Metro map marker coordinates require recalibration.",
-    time: "1h ago",
-    read: false,
-  },
-  {
-    id: "3",
-    title: "Article Scheduled",
-    desc: '"Comparing database records" scheduled for Sep 24, 2026.',
-    time: "3h ago",
-    read: false,
-  },
-];
+// No fabricated notifications. Start empty — real activity-based
+// notifications can be wired here once a notification feed exists.
+const INITIAL_NOTIFICATIONS: NotificationItem[] = [];
 
 export function AdminHeader({
   onOpenMobileMenu,

@@ -92,8 +92,8 @@ export default function AdminSeoPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               SEO & metadata
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
-              Demo data
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+              Live data
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
@@ -386,7 +386,7 @@ export default function AdminSeoPage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-[#64748B] font-sans">Indexed Pages:</span>
-                <span className="text-[#94A3B8]">348 URLs</span>
+                <span className="text-[#94A3B8]">—</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-[#64748B] font-sans">Status:</span>

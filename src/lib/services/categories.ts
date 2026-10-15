@@ -14,13 +14,7 @@ export interface AdminCategory {
   description: string;
 }
 
-const DEFAULT_CATEGORIES: AdminCategory[] = [
-  { id: "cat-1", name: "News", slug: "news", count: 18, description: "Official press releases, release date updates, and studio announcements." },
-  { id: "cat-2", name: "Analysis", slug: "analysis", count: 42, description: "In-depth research, leaked trailer breakdowns, and lore analysis." },
-  { id: "cat-3", name: "Vehicles", slug: "vehicles", count: 32, description: "Vehicle breakdowns, manufacturer specs, and performance comparisons." },
-  { id: "cat-4", name: "Gameplay", slug: "gameplay", count: 24, description: "Dual-protagonist mechanics, weapon handling, and combat guides." },
-  { id: "cat-5", name: "Map", slug: "map", count: 15, description: "Leonida geography, Vice City districts, and coordinate mapping." },
-];
+const DEFAULT_CATEGORIES: AdminCategory[] = [];
 
 /**
  * Fetch all categories from Supabase with live article counts
@@ -36,7 +30,7 @@ export async function getCategories(): Promise<AdminCategory[]> {
       .eq("key", "admin_categories")
       .maybeSingle();
 
-    let categories: AdminCategory[] = DEFAULT_CATEGORIES;
+    let categories: AdminCategory[] = [];
     if (settingData && settingData.value && Array.isArray(settingData.value) && settingData.value.length > 0) {
       categories = settingData.value as AdminCategory[];
     }
@@ -66,7 +60,7 @@ export async function getCategories(): Promise<AdminCategory[]> {
     return categories;
   } catch (err) {
     console.error("Error fetching categories:", err);
-    return DEFAULT_CATEGORIES;
+    return [];
   }
 }
 

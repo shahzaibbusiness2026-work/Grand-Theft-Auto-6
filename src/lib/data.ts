@@ -269,71 +269,50 @@ export const vehicles: Vehicle[] = [
   { id: "vortex", name: "Speeder Vortex", klass: "Speed Boat", img: "/img/boat.jpg", topSpeed: 120, power: 800 },
 ];
 
+// Vehicle category labels. Counts are intentionally omitted — GTA 6 is not
+// released and any per-category totals would be invented. Live counts come
+// from the database (106 vehicles total as of last seed).
 export const vehicleCategories = [
-  { label: "Cars", count: "120+ Vehicles", icon: "car" },
-  { label: "Motorcycles", count: "80+ Vehicles", icon: "bike" },
-  { label: "Boats", count: "40+ Vehicles", icon: "boat" },
-  { label: "Helicopters", count: "30+ Vehicles", icon: "heli" },
-  { label: "Planes", count: "20+ Vehicles", icon: "plane" },
-  { label: "Bicycles", count: "10+ Vehicles", icon: "bicycle" },
+  { label: "Cars", icon: "car" },
+  { label: "Motorcycles", icon: "bike" },
+  { label: "Boats", icon: "boat" },
+  { label: "Helicopters", icon: "heli" },
+  { label: "Planes", icon: "plane" },
+  { label: "Bicycles", icon: "bicycle" },
 ] as const;
 
-export const topVehicles = [
-  { rank: 1, name: "Grotti Cheetah", stat: "231.50 mph", img: "/img/car-orange.jpg" },
-  { rank: 2, name: "Progen Emerus", stat: "225.10 mph", img: "/img/car-pink.jpg" },
-  { rank: 3, name: "Pegassi Tempesta", stat: "219.75 mph", img: "/img/car-orange.jpg", filter: "hue-rotate(40deg)" },
-  { rank: 4, name: "Ocelot Pariah", stat: "217.80 mph", img: "/img/car-purple.jpg" },
-  { rank: 5, name: "Pfister 811", stat: "214.30 mph", img: "/img/car-pink.jpg", filter: "grayscale(0.6)" },
-];
+// Previously listed fabricated precise top speeds (e.g. "231.50 mph").
+// GTA 6 is unreleased; no such measurements exist. Empty — live data only.
+export const topVehicles: { rank: number; name: string; stat: string; img: string; filter?: string }[] = [];
 
-export const dbVehicles = [
-  { name: "Grotti Cheetah", klass: "Super • Sports Classics", price: "$2,850,000", img: "/img/car-orange.jpg", stats: [82, 87, 83, 78] },
-  { name: "Declasse Vigero ZX", klass: "Muscle • Sports Classics", price: "$1,295,000", img: "/img/car-pink.jpg", filter: "hue-rotate(160deg)", stats: [88, 82, 75, 70] },
-  { name: "Western Nightblade", klass: "Motorcycle • Street", price: "$48,500", img: "/img/moto-red.jpg", filter: "hue-rotate(60deg)", stats: [78, 85, 92, 60] },
-  { name: "Shitzu Jetmax", klass: "Boat • Powerboats", price: "$320,000", img: "/img/boat.jpg", stats: [70, 70, 65, 80] },
-  { name: "Buckingham Maverick", klass: "Helicopter", price: "$1,550,000", img: "/img/heli.jpg", stats: [85, 75, 70, 90] },
-  { name: "Dodo Seaplane", klass: "Plane • Planes", price: "$500,000", img: "/img/heli.jpg", filter: "hue-rotate(140deg)", stats: [72, 68, 60, 75] },
-  { name: "Canis Terminus", klass: "SUV • Off-Road", price: "$610,000", img: "/img/car-pickup.jpg", stats: [65, 60, 55, 90] },
-  { name: "Bravado Rumpo", klass: "Van • Vans", price: "$32,000", img: "/img/car-pickup.jpg", filter: "grayscale(0.8)", stats: [55, 50, 45, 70] },
-];
+// Previously contained invented prices and performance stats. Removed —
+// vehicle data comes from the live database only.
+export const dbVehicles: { name: string; klass: string; price: string; img: string; filter?: string; stats: number[] }[] = [];
 
-export const vehicleComparison = [
-  { name: "Grotti Turismo Omaggio", klass: "Super Car", img: "/img/car-purple.jpg", best: true, rows: ["220 mph", "2.8s", "78%", "91%", "7-Speed", "RWD", "2", "1,380 kg", "$2,750,000", "The Contract DLC"] },
-  { name: "Pfister Comet S2", klass: "Sports Car", img: "/img/car-pink.jpg", rows: ["193 mph", "3.6s", "72%", "83%", "6-Speed", "RWD", "2", "1,450 kg", "$1,495,000", "Base Game"] },
-  { name: "Bravado Gauntlet Hellfire", klass: "Muscle Car", img: "/img/car-orange.jpg", filter: "hue-rotate(190deg)", rows: ["168 mph", "4.8s", "65%", "70%", "6-Speed", "RWD", "4", "1,800 kg", "$745,000", "After Hours DLC"] },
-];
+// Previously contained invented vehicle specs. Removed — comparisons use live data.
+export const vehicleComparison: { name: string; klass: string; img: string; best?: boolean; filter?: string; rows: string[] }[] = [];
 export const vehicleComparisonLabels = ["Top Speed", "Acceleration", "Braking", "Handling", "Transmission", "Drive Type", "Seating", "Weight", "Price", "Featured In"];
 
-export const moreCompareVehicles = [
-  { name: "Pegassi Ignus", klass: "Super Car", img: "/img/car-orange.jpg", filter: "hue-rotate(-30deg) saturate(1.4)" },
-  { name: "Ocelot Pariah", klass: "Sports Car", img: "/img/car-pink.jpg", filter: "grayscale(0.7)" },
-  { name: "Benefactor Krieger", klass: "Super Car", img: "/img/car-purple.jpg", filter: "grayscale(0.5)" },
-  { name: "Karin Previon", klass: "Sports Car", img: "/img/car-orange.jpg", filter: "hue-rotate(190deg)" },
-  { name: "Vapid Blade", klass: "Muscle Car", img: "/img/car-orange.jpg", filter: "hue-rotate(60deg)" },
-];
+// Removed — comparison candidates come from live data.
+export const moreCompareVehicles: { name: string; klass: string; img: string; filter?: string }[] = [];
 
 /* ------------------------------------------------------------------ */
 
-export const mainMissions = [
-  { num: "01", title: "Welcome to Leonida", desc: "Your journey begins in the sunny state of Leonida.", status: "Completed" },
-  { num: "02", title: "Back in Vice", desc: "Reuniting with old friends brings new opportunities.", status: "In Progress" },
-  { num: "03", title: "The Score", desc: "Big risks, bigger rewards. It's time to make a move.", status: "Not Started" },
-  { num: "04", title: "The Exchange", desc: "A deal is on the table. Trust no one.", status: "Not Started" },
-] as const;
+// Rockstar has not revealed GTA 6 mission titles. Previously listed titles
+// ("Welcome to Leonida", "Back in Vice", "The Score", "The Exchange") were
+// invented. Missions will be added here only when officially confirmed.
+export const mainMissions: { num: string; title: string; desc: string; status: string }[] = [];
 
-export const sideMissions = [
-  { num: "01", title: "Lost Deliveries", desc: "Help a local business recover lost shipments.", reward: "$5,000", status: "Completed" },
-  { num: "02", title: "Private Property", desc: "Deal with trespassers in a sensitive area.", reward: "$3,200", status: "In Progress" },
-  { num: "03", title: "Beach Patrol", desc: "Keep the beaches of Vice City safe.", reward: "$4,500", status: "Not Started" },
-  { num: "04", title: "Night Shift", desc: "Discreet security work for extra cash.", reward: "$6,000", status: "Not Started" },
-] as const;
+// Previously listed invented side missions. Removed — same policy as mainMissions.
+export const sideMissions: { num: string; title: string; desc: string; reward: string; status: string }[] = [];
 
+// Activity labels only — availability counts were invented. GTA 6 is unreleased.
 export const activities = [
-  { label: "Street Races", count: "12 Available", icon: "car", color: "text-neon-cyan" },
-  { label: "Shooting Range", count: "8 Available", icon: "target", color: "text-neon-amber" },
-  { label: "Stunt Jumps", count: "10 Available", icon: "ramp", color: "text-neon-purple" },
-  { label: "Boat Races", count: "10 Available", icon: "boat", color: "text-neon-blue" },
-  { label: "Darts", count: "6 Available", icon: "darts", color: "text-neon-orange" },
+  { label: "Street Races", icon: "car", color: "text-neon-cyan" },
+  { label: "Shooting Range", icon: "target", color: "text-neon-amber" },
+  { label: "Stunt Jumps", icon: "ramp", color: "text-neon-purple" },
+  { label: "Boat Races", icon: "boat", color: "text-neon-blue" },
+  { label: "Darts", icon: "darts", color: "text-neon-orange" },
 ] as const;
 
 export const statusVariant: Record<string, "green" | "orange" | "gray"> = {
@@ -344,16 +323,17 @@ export const statusVariant: Record<string, "green" | "orange" | "gray"> = {
 
 /* ------------------------------------------------------------------ */
 
+// Map filter labels only — counts were invented. Live marker counts come from the database.
 export const mapFilters = [
-  { label: "All", count: 312 },
-  { label: "Missions", count: 21 },
-  { label: "Safe Houses", count: 10 },
-  { label: "Garages", count: 18 },
-  { label: "Ammu-Nation", count: 45 },
-  { label: "Points of Interest", count: 52 },
-  { label: "Businesses", count: 34 },
-  { label: "Races", count: 22 },
-  { label: "Collectibles", count: 87 },
+  { label: "All" },
+  { label: "Missions" },
+  { label: "Safe Houses" },
+  { label: "Garages" },
+  { label: "Ammu-Nation" },
+  { label: "Points of Interest" },
+  { label: "Businesses" },
+  { label: "Races" },
+  { label: "Collectibles" },
 ] as const;
 
 export const pois = [
@@ -364,23 +344,25 @@ export const pois = [
   { name: "Port Gellhorn Docks", type: "Industrial Area", img: "/img/boat.jpg", filter: "saturate(0.6) brightness(0.8)" },
 ];
 
+// Leonida regions. Blaine County REMOVED — it is from GTA V (San Andreas), not GTA 6.
+// Mission/POI counts were invented; removed. Live counts come from the database.
 export const regions = [
-  { name: "Vice City", desc: "The heart of Leonida. A vibrant city full of life, crime and opportunity.", missions: 45, poi: 28, img: "/img/vice-sunset.svg", accent: "border-primary" },
-  { name: "Blaine County", desc: "Rural landscapes, small towns and dangerous backroads.", missions: 32, poi: 18, img: "/img/vice-sunset.svg", filter: "hue-rotate(60deg) saturate(0.7)", accent: "border-neon-green" },
-  { name: "Grassrivers", desc: "Swamps, wilderness and hidden secrets.", missions: 28, poi: 16, img: "/img/vice-sunset.svg", filter: "hue-rotate(90deg) saturate(0.6)", accent: "border-neon-orange" },
-  { name: "Leonida Keys", desc: "Beautiful islands and coastal escapes.", missions: 15, poi: 10, img: "/img/boat.jpg", accent: "border-neon-blue" },
-  { name: "Port Gellhorn", desc: "Industrial hub and gateway to the ocean.", missions: 22, poi: 14, img: "/img/vice-sunset.svg", filter: "hue-rotate(-40deg)", accent: "border-neon-purple" },
+  { name: "Vice City", desc: "The heart of Leonida. A vibrant city full of life, crime and opportunity.", img: "/img/vice-sunset.svg", accent: "border-primary" },
+  { name: "Grassrivers", desc: "Swamps, wilderness and hidden secrets.", img: "/img/vice-sunset.svg", filter: "hue-rotate(90deg) saturate(0.6)", accent: "border-neon-orange" },
+  { name: "Leonida Keys", desc: "Beautiful islands and coastal escapes.", img: "/img/boat.jpg", accent: "border-neon-blue" },
+  { name: "Port Gellhorn", desc: "Industrial hub and gateway to the ocean.", img: "/img/vice-sunset.svg", filter: "hue-rotate(-40deg)", accent: "border-neon-purple" },
 ];
 
 /* ------------------------------------------------------------------ */
 
+// Collectible category labels only — progress numbers were invented.
 export const collectibleCategories = [
-  { label: "Hidden Packages", progress: "201 / 305", icon: "package", color: "text-neon-purple" },
-  { label: "Stunt Jumps", progress: "50 / 70", icon: "ramp", color: "text-neon-blue" },
-  { label: "Rebel Radio", progress: "14 / 30", icon: "radio", color: "text-neon-cyan" },
-  { label: "Wildlife Photos", progress: "80 / 140", icon: "camera", color: "text-neon-green" },
-  { label: "Weapon Parts", progress: "30 / 50", icon: "wrench", color: "text-neon-orange" },
-  { label: "Easter Eggs", progress: "12 / 24", icon: "egg", color: "text-neon-yellow" },
+  { label: "Hidden Packages", icon: "package", color: "text-neon-purple" },
+  { label: "Stunt Jumps", icon: "ramp", color: "text-neon-blue" },
+  { label: "Rebel Radio", icon: "radio", color: "text-neon-cyan" },
+  { label: "Wildlife Photos", icon: "camera", color: "text-neon-green" },
+  { label: "Weapon Parts", icon: "wrench", color: "text-neon-orange" },
+  { label: "Easter Eggs", icon: "egg", color: "text-neon-yellow" },
 ] as const;
 
 export const discovered = [
@@ -392,12 +374,12 @@ export const discovered = [
   { name: "Easter Egg", place: "UFO Graffiti", img: "/img/hero-dark.jpg", filter: "hue-rotate(90deg)" },
 ];
 
+// Blaine County removed (GTA V, not GTA 6). Progress numbers were invented; removed.
 export const collectibleRegions = [
-  { name: "Vice City", done: 187, total: 280, pct: 67, img: "/img/vice-sunset.svg" },
-  { name: "Blaine County", done: 142, total: 210, pct: 68, img: "/img/vice-sunset.svg", filter: "hue-rotate(60deg) saturate(0.7)" },
-  { name: "Grassrivers", done: 98, total: 150, pct: 65, img: "/img/vice-sunset.svg", filter: "hue-rotate(90deg) saturate(0.6)" },
-  { name: "Leonida Keys", done: 76, total: 110, pct: 69, img: "/img/boat.jpg" },
-  { name: "Port Gellhorn", done: 67, total: 100, pct: 67, img: "/img/vice-sunset.svg", filter: "hue-rotate(-40deg)" },
+  { name: "Vice City", img: "/img/vice-sunset.svg" },
+  { name: "Grassrivers", img: "/img/vice-sunset.svg", filter: "hue-rotate(90deg) saturate(0.6)" },
+  { name: "Leonida Keys", img: "/img/boat.jpg" },
+  { name: "Port Gellhorn", img: "/img/vice-sunset.svg", filter: "hue-rotate(-40deg)" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -456,51 +438,31 @@ export const newsCategories = [
 
 /* ------------------------------------------------------------------ */
 
-export const weaponStats = [
-  { label: "Damage", value: 68 },
-  { label: "Fire Rate", value: 82 },
-  { label: "Accuracy", value: 75 },
-  { label: "Range", value: 70 },
-  { label: "Handling", value: 65 },
-];
+// Removed invented weapon stat values — live weapon data comes from the database.
+export const weaponStats: { label: string; value: number }[] = [];
 
-export const weaponComparison = [
-  { name: "M4 Carbine", klass: "Assault Rifle", img: "/img/gunstore.svg", filter: "brightness(0.7)", rows: [68, 82, 75, 70, 65, 66, "2.40 sec", 30, "$15,500"] },
-  { name: "AK-74", klass: "Assault Rifle", rows: [72, 61, 58, 65, 55, 62, "2.80 sec", 30, "$12,000"] },
-  { name: "Advanced Rifle", klass: "Assault Rifle", rows: [82, 75, 80, 85, 70, 76, "2.20 sec", 40, "$20,600"] },
-];
+// Removed invented weapon comparison specs — comparisons use live data.
+export const weaponComparison: { name: string; klass: string; img?: string; filter?: string; rows: (number | string)[] }[] = [];
 export const weaponComparisonLabels = ["Damage", "Fire Rate", "Accuracy", "Range", "Handling", "Mobility", "Reload Time", "Magazine Size", "Price"];
 
 export const similarWeapons = ["M4 Carbine", "AK-74", "Carbine Rifle", "Bullpup Rifle", "Advanced Rifle"];
 
-export const dbWeapons = [
-  { name: "Pistol Mk II", klass: "Pistol", price: "$24,500", rarity: "Featured", stats: [32, 60, 78, 45] },
-  { name: "Glock 21", klass: "Pistol", price: "$8,500", rarity: "Common", stats: [28, 55, 72, 40] },
-  { name: "VOM Feuer MP9", klass: "SMG", price: "$18,750", rarity: "Rare", stats: [26, 85, 60, 35] },
-  { name: "Carbine Rifle Mk II", klass: "Assault Rifle", price: "$65,000", rarity: "Legendary", stats: [52, 66, 82, 65] },
-  { name: "Remington 870", klass: "Shotgun", price: "$6,000", rarity: "Common", stats: [82, 40, 20, 15] },
-  { name: "Heavy Sniper", klass: "Sniper Rifle", price: "$47,500", rarity: "Rare", stats: [98, 10, 95, 90] },
-  { name: "RPG-7", klass: "Launcher", price: "$80,000", rarity: "Epic", stats: [100, 7, 30, 80] },
-  { name: "Baseball Bat", klass: "Melee", price: "$300", rarity: "Common", stats: [60, 80, 80, 15] },
-];
+// Removed invented weapon prices/stats — live data comes from the database only.
+export const dbWeapons: { name: string; klass: string; price: string; rarity: string; stats: number[] }[] = [];
 
-export const topWeapons = [
-  { rank: 1, name: "Carbine Rifle Mk II", klass: "Assault Rifle", score: "92.4" },
-  { rank: 2, name: "Heavy Sniper", klass: "Sniper Rifle", score: "91.1" },
-  { rank: 3, name: "RPG-7", klass: "Launcher", score: "89.5" },
-  { rank: 4, name: "Pistol Mk II", klass: "Pistol", score: "88.1" },
-  { rank: 5, name: "Combat Shotgun", klass: "Shotgun", score: "86.7" },
-];
+// Removed invented weapon scores — live data only.
+export const topWeapons: { rank: number; name: string; klass: string; score: string }[] = [];
 
+// Weapon category labels only — counts were invented. Live counts from database.
 export const weaponCategories = [
-  { label: "Pistols", count: "18 Weapons" },
-  { label: "SMGs", count: "16 Weapons" },
-  { label: "Shotguns", count: "12 Weapons" },
-  { label: "Assault Rifles", count: "21 Weapons" },
-  { label: "Sniper Rifles", count: "9 Weapons" },
-  { label: "LMGs", count: "7 Weapons" },
-  { label: "Launchers", count: "6 Weapons" },
-  { label: "Melee", count: "17 Weapons" },
+  { label: "Pistols" },
+  { label: "SMGs" },
+  { label: "Shotguns" },
+  { label: "Assault Rifles" },
+  { label: "Sniper Rifles" },
+  { label: "LMGs" },
+  { label: "Launchers" },
+  { label: "Melee" },
 ];
 
 /* ------------------------------------------------------------------ */

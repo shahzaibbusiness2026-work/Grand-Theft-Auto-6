@@ -11,13 +11,10 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import {
-  INITIAL_ADMIN_ARTICLES,
-  INITIAL_ADMIN_VEHICLES,
-  INITIAL_ADMIN_WEAPONS,
-  INITIAL_ADMIN_MAP_MARKERS,
-  AdminMapMarker,
-} from "@/lib/admin-store";
+import { getAdminArticles } from "@/lib/services/articles";
+import { getAdminVehicles } from "@/lib/services/vehicles";
+import { getAdminWeapons } from "@/lib/services/weapons";
+import { getMapMarkers } from "@/lib/services/map";
 
 interface CommandMenuProps {
   isOpen: boolean;
@@ -29,6 +26,28 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<"all" | "articles" | "vehicles" | "weapons" | "locations">("all");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [articles, setArticles] = useState<{ id: string; title: string; category: string; updatedAt: string; status: string }[]>([]);
+  const [vehicles, setVehicles] = useState<{ id: string; name: string; displayName: string; manufacturer: string; class: string; verification: string }[]>([]);
+  const [weapons, setWeapons] = useState<{ id: string; name: string; category: string; ammunition: string; verification: string }[]>([]);
+  const [markers, setMarkers] = useState<{ id: string; name: string; category: string; layer: string; coordinates: { x: number; y: number } }[]>([]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    let cancelled = false;
+    Promise.all([
+      getAdminArticles().catch(() => []),
+      getAdminVehicles().catch(() => []),
+      getAdminWeapons().catch(() => []),
+      getMapMarkers().catch(() => []),
+    ]).then(([arts, vehs, weaps, marks]) => {
+      if (cancelled) return;
+      setArticles((arts || []).map((a: any) => ({ id: a.id, title: a.title, category: a.category || "News", updatedAt: a.updatedAt || "", status: a.status || "draft" })));
+      setVehicles((vehs || []).map((v: any) => ({ id: v.id, name: v.name, displayName: v.display_name || v.name, manufacturer: v.manufacturer || "", class: v.class || "", verification: v.verification || "unverified" })));
+      setWeapons((weaps || []).map((w: any) => ({ id: w.id, name: w.name, category: w.category || "", ammunition: w.ammunition || "", verification: w.verification || "unverified" })));
+      setMarkers((marks || []).map((m: any) => ({ id: m.id, name: m.name || m.title || "", category: m.category || "", layer: m.layer || "", coordinates: { x: m.x ?? m.coordinates?.x ?? 0, y: m.y ?? m.coordinates?.y ?? 0 } })));
+    });
+    return () => { cancelled = true; };
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -58,14 +77,14 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
   if (!isOpen) return null;
 
   // Filter items
-  const filteredArticles = INITIAL_ADMIN_ARTICLES.filter(
+  const filteredArticles = articles.filter(
     (a) =>
       (activeFilter === "all" || activeFilter === "articles") &&
       (a.title.toLowerCase().includes(query.toLowerCase()) ||
         a.category.toLowerCase().includes(query.toLowerCase()))
   );
 
-  const filteredVehicles = INITIAL_ADMIN_VEHICLES.filter(
+  const filteredVehicles = vehicles.filter(
     (v) =>
       (activeFilter === "all" || activeFilter === "vehicles") &&
       (v.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -73,15 +92,15 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
         v.class.toLowerCase().includes(query.toLowerCase()))
   );
 
-  const filteredWeapons = INITIAL_ADMIN_WEAPONS.filter(
+  const filteredWeapons = weapons.filter(
     (w) =>
       (activeFilter === "all" || activeFilter === "weapons") &&
       (w.name.toLowerCase().includes(query.toLowerCase()) ||
         w.category.toLowerCase().includes(query.toLowerCase()))
   );
 
-  const filteredMarkers = INITIAL_ADMIN_MAP_MARKERS.filter(
-    (m: AdminMapMarker) =>
+  const filteredMarkers = markers.filter(
+    (m: { id: string; name: string; category: string; layer: string; coordinates: { x: number; y: number } }) =>
       (activeFilter === "all" || activeFilter === "locations") &&
       (m.name.toLowerCase().includes(query.toLowerCase()) ||
         m.category.toLowerCase().includes(query.toLowerCase()))
@@ -154,7 +173,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                 : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
             )}
           >
-            Articles ({INITIAL_ADMIN_ARTICLES.length})
+            Articles ({articles.length})
           </button>
           <button
             onClick={() => setActiveFilter("vehicles")}
@@ -165,7 +184,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                 : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
             )}
           >
-            Vehicles ({INITIAL_ADMIN_VEHICLES.length})
+            Vehicles ({vehicles.length})
           </button>
           <button
             onClick={() => setActiveFilter("weapons")}
@@ -176,7 +195,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                 : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
             )}
           >
-            Weapons ({INITIAL_ADMIN_WEAPONS.length})
+            Weapons ({weapons.length})
           </button>
           <button
             onClick={() => setActiveFilter("locations")}
@@ -187,7 +206,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                 : "text-[var(--admin-text-muted)] hover:bg-[var(--admin-elevated)]"
             )}
           >
-            Map Markers ({INITIAL_ADMIN_MAP_MARKERS.length})
+            Map Markers ({markers.length})
           </button>
         </div>
 
@@ -304,7 +323,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                     <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Map Markers ({filteredMarkers.length})</span>
                   </div>
-                  {filteredMarkers.slice(0, 4).map((mark: AdminMapMarker) => (
+                  {filteredMarkers.slice(0, 4).map((mark: { id: string; name: string; category: string; layer: string; coordinates: { x: number; y: number } }) => (
                     <button
                       key={mark.id}
                       onClick={() => handleSelect(`/admin/map?marker=${mark.id}`)}

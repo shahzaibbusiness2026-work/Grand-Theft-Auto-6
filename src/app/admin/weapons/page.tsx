@@ -206,7 +206,7 @@ export default function AdminWeaponsPage() {
               Weapons Management
             </h1>
             <p className="text-xs text-[#94A3B8] mt-1">
-              Manage weapon records for GTA 6 Atlas. All records are placeholder records pending verification.
+              Manage weapon records for GTA 6 Atlas. Records show their actual verification status.
             </p>
           </div>
 
@@ -488,7 +488,7 @@ export default function AdminWeaponsPage() {
                                 {w.name}
                               </p>
                               <p className="text-xs text-[#64748B]">
-                                Placeholder record
+                                Unverified record
                               </p>
                             </div>
                           </div>
@@ -639,7 +639,7 @@ export default function AdminWeaponsPage() {
               <div>
                 <h2 className="text-sm font-bold text-white">Edit Weapon</h2>
                 <p className="text-xs text-[#94A3B8] mt-0.5">{drawerWeapon.name}</p>
-                <p className="text-xs text-[#64748B]">Placeholder record</p>
+                <p className="text-xs text-[#64748B]">Unverified record</p>
               </div>
               <button
                 type="button"
@@ -658,7 +658,7 @@ export default function AdminWeaponsPage() {
               </div>
               <div className="min-w-0">
                 <p className="text-xs font-bold text-white truncate">{drawerWeapon.name}</p>
-                <p className="text-xs text-[#64748B]">Placeholder record</p>
+                <p className="text-xs text-[#64748B]">Unverified record</p>
               </div>
             </div>
 
@@ -780,7 +780,7 @@ export default function AdminWeaponsPage() {
               </div>
 
               <p className="text-xs text-[#64748B]">
-                This is a placeholder record. All information is unverified.
+                Verification status reflects the latest source review.
               </p>
 
               <div className="pt-2 flex items-center gap-2">

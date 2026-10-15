@@ -25,19 +25,9 @@ import { getAdminWeapons } from "@/lib/services/weapons";
 
 export default function AdminAnalyticsPage() {
   const [timeRange, setTimeRange] = useState("7d");
-  const [topArticles, setTopArticles] = useState([
-    { title: "How to use the Atlas map", category: "Guides", views: "48,200", avgTime: "4m 12s", bounce: "32%" },
-    { title: "Trailer details to verify", category: "General", views: "34,800", avgTime: "5m 45s", bounce: "28%" },
-    { title: "Vehicle database research notes", category: "Vehicles", views: "29,400", avgTime: "3m 50s", bounce: "35%" },
-    { title: "Comparing database records", category: "Analysis", views: "18,900", avgTime: "6m 10s", bounce: "24%" },
-  ]);
+  const [topArticles, setTopArticles] = useState<{ title: string; category: string; views: string; avgTime: string; bounce: string }[]>([]);
 
-  const [popularDatabasePages, setPopularDatabasePages] = useState([
-    { name: "Bravado Banshee GTS", type: "Vehicle", views: "42,100", unique: "31,200" },
-    { name: "Combat Pistol (9mm)", type: "Weapon", views: "28,400", unique: "21,800" },
-    { name: "Vice City Metro Station", type: "Location", views: "22,900", unique: "17,400" },
-    { name: "Pegassi Zorrusso", type: "Vehicle", views: "19,800", unique: "14,600" },
-  ]);
+  const [popularDatabasePages, setPopularDatabasePages] = useState<{ name: string; type: string; views: string; unique: string }[]>([]);
 
   useEffect(() => {
     async function loadData() {
@@ -52,9 +42,9 @@ export default function AdminAnalyticsPage() {
             arts.slice(0, 5).map((a) => ({
               title: a.title,
               category: a.category || "News",
-              views: a.views ? a.views.toLocaleString() : "24,500",
-              avgTime: "4m 18s",
-              bounce: "29%",
+              views: a.views ? a.views.toLocaleString() : "—",
+              avgTime: "—",
+              bounce: "—",
             }))
           );
         }
@@ -63,14 +53,14 @@ export default function AdminAnalyticsPage() {
             ...vehs.slice(0, 2).map((v) => ({
               name: v.name,
               type: "Vehicle",
-              views: "42,100",
-              unique: "31,200",
+              views: "—",
+              unique: "—",
             })),
             ...(weaps || []).slice(0, 2).map((w) => ({
               name: w.name,
               type: "Weapon",
-              views: "28,400",
-              unique: "21,800",
+              views: "—",
+              unique: "—",
             })),
           ]);
         }
@@ -81,18 +71,9 @@ export default function AdminAnalyticsPage() {
     loadData();
   }, []);
 
-  const toolUsage = [
-    { name: "Interactive Map", sessions: "45,200", avgDuration: "8m 24s", completion: "94%" },
-    { name: "Vehicle & Weapon Comparisons", sessions: "16,400", avgDuration: "3m 42s", completion: "88%" },
-    { name: "100% Completion Tracker", sessions: "7,300", avgDuration: "12m 10s", completion: "76%" },
-  ];
+  const toolUsage: { name: string; sessions: string; avgDuration: string; completion: string }[] = []; // Requires real analytics integration — no fabricated data.
 
-  const searchQueries = [
-    { term: "Banshee top speed", count: "3,420", ctr: "68%", hasNoResults: false },
-    { term: "Vice City airport coordinates", count: "2,890", ctr: "74%", hasNoResults: false },
-    { term: "Lucia penitentiary uniform", count: "1,450", ctr: "0%", hasNoResults: true },
-    { term: "Service Carbine location", count: "1,220", ctr: "81%", hasNoResults: false },
-  ];
+  const searchQueries: { term: string; count: string; ctr: string; hasNoResults: boolean }[] = []; // Requires real analytics integration.
 
   return (
     <div className="space-y-8 animate-in fade-in duration-200 pb-16">
@@ -103,8 +84,8 @@ export default function AdminAnalyticsPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Analytics
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2A2015] border border-[#4A3818] text-[#E5A83B]">
-              Demo data
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+              Live data
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
@@ -132,37 +113,37 @@ export default function AdminAnalyticsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="p-5 rounded-xl border border-[#1C2436] bg-[#111622] space-y-2">
           <div className="flex items-center justify-between text-[#94A3B8]">
-            <span className="text-xs font-medium">Total Page Views</span>
+            <span className="text-xs font-medium">Published Articles</span>
             <Eye className="w-4 h-4 text-indigo-400" />
           </div>
-          <p className="text-2xl font-bold text-white tracking-tight">248,300</p>
+          <p className="text-2xl font-bold text-white tracking-tight">{topArticles.length > 0 ? topArticles.length : "—"}</p>
           <p className="text-xs text-emerald-400 font-medium flex items-center gap-1">
             <TrendingUp className="w-3.5 h-3.5" />
-            <span>+14.2% vs previous period</span>
+            <span>Live from Supabase</span>
           </p>
         </div>
 
         <div className="p-5 rounded-xl border border-[#1C2436] bg-[#111622] space-y-2">
           <div className="flex items-center justify-between text-[#94A3B8]">
-            <span className="text-xs font-medium">Search Sessions</span>
+            <span className="text-xs font-medium">Database Records</span>
             <Search className="w-4 h-4 text-[#38BDF8]" />
           </div>
-          <p className="text-2xl font-bold text-white tracking-tight">42,150</p>
+          <p className="text-2xl font-bold text-white tracking-tight">{popularDatabasePages.length > 0 ? popularDatabasePages.length : "—"}</p>
           <p className="text-xs text-emerald-400 font-medium flex items-center gap-1">
             <TrendingUp className="w-3.5 h-3.5" />
-            <span>+8.7% query volume</span>
+            <span>Vehicles + weapons loaded</span>
           </p>
         </div>
 
         <div className="p-5 rounded-xl border border-[#1C2436] bg-[#111622] space-y-2">
           <div className="flex items-center justify-between text-[#94A3B8]">
-            <span className="text-xs font-medium">Tool Sessions</span>
+            <span className="text-xs font-medium">Traffic Analytics</span>
             <Zap className="w-4 h-4 text-gold-light" />
           </div>
-          <p className="text-2xl font-bold text-white tracking-tight">68,900</p>
+          <p className="text-2xl font-bold text-white tracking-tight">—</p>
           <p className="text-xs text-emerald-400 font-medium flex items-center gap-1">
             <TrendingUp className="w-3.5 h-3.5" />
-            <span>+22.4% interactive usage</span>
+            <span>Connect Plausible/GA4 to enable</span>
           </p>
         </div>
       </div>
@@ -179,32 +160,8 @@ export default function AdminAnalyticsPage() {
           High volume queries with zero matching results indicate immediate content creation opportunities.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-          <div className="p-3 rounded-lg bg-[#111622] border border-[#1C2436] flex items-center justify-between">
-            <div>
-              <p className="text-xs font-bold text-white">&quot;Lucia penitentiary uniform&quot;</p>
-              <p className="text-xs text-[#64748B]">1,450 searches • 0% CTR</p>
-            </div>
-            <Link
-              href="/admin/articles/art-new"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-[#6366F1] hover:underline"
-            >
-              + Create draft <ArrowUpRight className="w-3 h-3" />
-            </Link>
-          </div>
-
-          <div className="p-3 rounded-lg bg-[#111622] border border-[#1C2436] flex items-center justify-between">
-            <div>
-              <p className="text-xs font-bold text-white">&quot;Vice City airport coordinates&quot;</p>
-              <p className="text-xs text-[#64748B]">2,890 searches • 74% CTR</p>
-            </div>
-            <Link
-              href="/admin/map"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-[#6366F1] hover:underline"
-            >
-              + Add map marker <ArrowUpRight className="w-3 h-3" />
-            </Link>
-          </div>
+        <div className="p-3 rounded-lg bg-[#111622] border border-[#1C2436] text-xs text-[#64748B]">
+          Search analytics require a connected analytics provider. No search data available yet.
         </div>
       </div>
 
@@ -226,7 +183,7 @@ export default function AdminAnalyticsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#182030]">
-                {topArticles.map((art, i) => (
+                {topArticles.length === 0 ? (<tr><td colSpan={4} className="p-4 text-center text-[#64748B]">No article data yet.</td></tr>) : topArticles.map((art, i) => (
                   <tr key={i} className="hover:bg-[#141B2A] transition-colors">
                     <td className="p-3 font-semibold text-white truncate max-w-[200px]">
                       {art.title}
@@ -265,7 +222,7 @@ export default function AdminAnalyticsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#182030]">
-                {popularDatabasePages.map((page, i) => (
+                {popularDatabasePages.length === 0 ? (<tr><td colSpan={4} className="p-4 text-center text-[#64748B]">No database data yet.</td></tr>) : popularDatabasePages.map((page, i) => (
                   <tr key={i} className="hover:bg-[#141B2A] transition-colors">
                     <td className="p-3 font-semibold text-white">{page.name}</td>
                     <td className="p-3">
@@ -302,7 +259,7 @@ export default function AdminAnalyticsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#182030]">
-                {toolUsage.map((tool, i) => (
+                {toolUsage.length === 0 ? (<tr><td colSpan={4} className="p-4 text-center text-[#64748B]">No tool usage data — connect an analytics provider.</td></tr>) : toolUsage.map((tool, i) => (
                   <tr key={i} className="hover:bg-[#141B2A] transition-colors">
                     <td className="p-3 font-semibold text-white">{tool.name}</td>
                     <td className="p-3 text-right font-mono font-bold text-white">
@@ -339,7 +296,7 @@ export default function AdminAnalyticsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#182030]">
-                {searchQueries.map((q, i) => (
+                {searchQueries.length === 0 ? (<tr><td colSpan={4} className="p-4 text-center text-[#64748B]">No search data — connect an analytics provider.</td></tr>) : searchQueries.map((q, i) => (
                   <tr key={i} className="hover:bg-[#141B2A] transition-colors">
                     <td className="p-3 font-semibold text-white">{q.term}</td>
                     <td className="p-3 text-right font-mono text-white">{q.count}</td>

@@ -21,7 +21,6 @@ import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
 import { Badge } from "@/components/admin/ui/badge";
 import {
-  INITIAL_ADMIN_USERS,
   AdminUser,
 } from "@/lib/admin-store";
 import {
@@ -35,7 +34,7 @@ import { Modal } from "@/components/admin/modal";
 
 export default function AdminUsersPage() {
   const { showToast } = useToast();
-  const [users, setUsers] = useState<AdminUser[]>(INITIAL_ADMIN_USERS);
+  const [users, setUsers] = useState<AdminUser[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRoleFilter, setSelectedRoleFilter] = useState("all");
@@ -376,7 +375,13 @@ export default function AdminUsersPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-[#182030]">
-              {filteredUsers.length === 0 ? (
+              {isLoading ? (
+                <tr>
+                  <td colSpan={7} className="p-8 text-center text-[#64748B]">
+                    Loading team members...
+                  </td>
+                </tr>
+              ) : filteredUsers.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="p-8 text-center text-[#64748B]">
                     No team members found matching your search.

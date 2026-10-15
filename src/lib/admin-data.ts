@@ -25,7 +25,7 @@ export const INITIAL_DATABASE_ASSETS: DatabaseAsset[] = [
     status: "verified",
     source: "Trailer 1 (0:42) & Official Keyart",
     lastVerified: "2026-09-15",
-    verifier: "Marcus Vance",
+    verifier: "Editorial Team",
     details: "Supercar confirmed cruising Ocean Drive. Retains signature front aerodynamic splitter."
   },
   {
@@ -35,18 +35,8 @@ export const INITIAL_DATABASE_ASSETS: DatabaseAsset[] = [
     status: "verified",
     source: "Trailer 1 (0:19)",
     lastVerified: "2026-09-15",
-    verifier: "Elena Rostova",
+    verifier: "Editorial Team",
     details: "Classic 4-door muscle car shown parked outside pawn shop in Vice City Beach."
-  },
-  {
-    id: "ast-v03",
-    name: "Hovercraft Amphibian",
-    category: "vehicle",
-    status: "unconfirmed",
-    source: "Community Mapping Coordinates (Grassrivers)",
-    lastVerified: "2026-09-18",
-    verifier: "Devon Reed",
-    details: "Referenced in sound files and environmental textures; awaiting visual confirmation."
   },
   {
     id: "ast-w01",
@@ -55,18 +45,8 @@ export const INITIAL_DATABASE_ASSETS: DatabaseAsset[] = [
     status: "verified",
     source: "Official Trailer 1 (Lucia Heist Sequence)",
     lastVerified: "2026-09-12",
-    verifier: "Devon Reed",
+    verifier: "Editorial Team",
     details: "Standard sidearm equipped during convenience store robbery scene."
-  },
-  {
-    id: "ast-w02",
-    name: "Speargun / Harpoon",
-    category: "weapon",
-    status: "unconfirmed",
-    source: "Diver gear props in port area renders",
-    lastVerified: "2026-09-10",
-    verifier: "Elena Rostova",
-    details: "Potentially usable in underwater exploration; not yet shown in combat."
   },
   {
     id: "ast-l01",
@@ -75,18 +55,18 @@ export const INITIAL_DATABASE_ASSETS: DatabaseAsset[] = [
     status: "verified",
     source: "Trailer 1 Opening Sequence",
     lastVerified: "2026-09-16",
-    verifier: "Elena Rostova",
+    verifier: "Editorial Team",
     details: "Primary coastal arterial road featuring Art Deco hotels, lifeguard towers, and pedestrian boardwalk."
   },
   {
     id: "ast-l02",
-    name: "Port Gellhorn Naval Base",
+    name: "Port Gellhorn",
     category: "location",
     status: "unconfirmed",
-    source: "Road sign references in trailer background",
+    source: "Trailer 2 — coastal industrial area",
     lastVerified: "2026-09-14",
-    verifier: "Marcus Vance",
-    details: "Signposts indicate Port Gellhorn 45 miles west along Interstate 97."
+    verifier: "Editorial Team",
+    details: "Industrial port area on Leonida's west coast; awaiting further official detail."
   }
 ];
 

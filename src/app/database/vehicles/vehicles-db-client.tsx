@@ -46,26 +46,30 @@ export interface DbTopVehicle {
   filter?: string;
 }
 
-const types = [
-  { label: "All Vehicles", count: 312, icon: Car },
-  { label: "Cars", count: 178, icon: Car },
-  { label: "Motorcycles", count: 43, icon: Bike },
-  { label: "Boats", count: 28, icon: Ship },
-  { label: "Planes", count: 22, icon: Plane },
-  { label: "Helicopters", count: 14, icon: Wind },
-  { label: "Trucks", count: 18, icon: Car },
-  { label: "SUVs", count: 34, icon: Car },
-  { label: "Vans", count: 15, icon: Car },
-  { label: "Other", count: 41, icon: Boxes },
+// Type filter labels — counts are computed from live data inside the component,
+// not hardcoded. Previous values (312, 178, 43, ...) were invented.
+const typeDefs = [
+  { label: "All Vehicles", icon: Car },
+  { label: "Cars", icon: Car },
+  { label: "Motorcycles", icon: Bike },
+  { label: "Boats", icon: Ship },
+  { label: "Planes", icon: Plane },
+  { label: "Helicopters", icon: Wind },
+  { label: "Trucks", icon: Car },
+  { label: "SUVs", icon: Car },
+  { label: "Vans", icon: Car },
+  { label: "Other", icon: Boxes },
 ];
 
-const heroStats = [
-  { label: "Total Vehicles", value: "312", icon: Car, color: "text-neon-purple" },
-  { label: "Cars", value: "178", icon: Car, color: "text-neon-orange" },
-  { label: "Bikes", value: "43", icon: Bike, color: "text-neon-green" },
-  { label: "Boats", value: "28", icon: Ship, color: "text-neon-blue" },
-  { label: "Planes", value: "22", icon: Plane, color: "text-sky-400" },
-  { label: "Other", value: "41", icon: Boxes, color: "text-neon-yellow" },
+// Hero stat defs — values computed from live data inside the component.
+// Previous values (312, 178, 43, ...) were invented.
+const heroStatDefs = [
+  { label: "Total Vehicles", icon: Car, color: "text-neon-purple" },
+  { label: "Cars", icon: Car, color: "text-neon-orange" },
+  { label: "Bikes", icon: Bike, color: "text-neon-green" },
+  { label: "Boats", icon: Ship, color: "text-neon-blue" },
+  { label: "Planes", icon: Plane, color: "text-sky-400" },
+  { label: "Other", icon: Boxes, color: "text-neon-yellow" },
 ];
 
 const statIcons = [
@@ -79,6 +83,23 @@ export function VehiclesDbClient({ vehicles, top }: { vehicles?: DbVehicleCard[]
   const cards = vehicles && vehicles.length > 0 ? vehicles : dbVehicles;
   const topList = top && top.length > 0 ? top : topVehicles;
   const total = cards.length;
+  // Live counts computed from actual data — never hardcoded.
+  const countByType = (label: string): number => {
+    if (label === "All Vehicles") return total;
+    const needle = label.toLowerCase().replace(/s$/, "");
+    return cards.filter((v) => v.klass.toLowerCase().includes(needle)).length;
+  };
+  const types = typeDefs.map((t) => ({ ...t, count: countByType(t.label) }));
+  const heroStats = heroStatDefs.map((s) => {
+    const val =
+      s.label === "Total Vehicles" ? total
+      : s.label === "Cars" ? countByType("Cars")
+      : s.label === "Bikes" ? countByType("Motorcycles")
+      : s.label === "Boats" ? countByType("Boats")
+      : s.label === "Planes" ? countByType("Planes")
+      : total - countByType("Cars") - countByType("Motorcycles") - countByType("Boats") - countByType("Planes") - countByType("Helicopters");
+    return { ...s, value: String(val) };
+  });
   const [type, setType] = useState("All Vehicles");
   const [price, setPrice] = useState<number[]>([0, 4000000]);
 

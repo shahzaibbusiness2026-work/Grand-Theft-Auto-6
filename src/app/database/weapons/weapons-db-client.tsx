@@ -38,17 +38,19 @@ export interface DbTopWeapon {
   score: string;
 }
 
-const types = [
-  ["All Weapons", 118],
-  ["Pistols", 18],
-  ["SMGs", 16],
-  ["Shotguns", 12],
-  ["Assault Rifles", 21],
-  ["Sniper Rifles", 9],
-  ["LMGs", 7],
-  ["Launchers", 6],
-  ["Melee", 17],
-  ["Special", 12],
+// Type labels only — counts computed from live data inside the component.
+// Previous values (118, 18, 16, ...) were invented. DB has 32 weapons.
+const typeLabels = [
+  "All Weapons",
+  "Pistols",
+  "SMGs",
+  "Shotguns",
+  "Assault Rifles",
+  "Sniper Rifles",
+  "LMGs",
+  "Launchers",
+  "Melee",
+  "Special",
 ] as const;
 
 const rarityVariant: Record<string, "pink" | "green" | "blue" | "yellow" | "default"> = {
@@ -64,6 +66,12 @@ const statLabels = ["Damage", "Fire Rate", "Accuracy", "Range"];
 export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; top?: DbTopWeapon[] }) {
   const cards = weapons && weapons.length > 0 ? weapons : dbWeapons;
   const topList = top && top.length > 0 ? top : topWeapons;
+  // Live counts computed from actual data — never hardcoded.
+  const countByType = (label: string): number => {
+    if (label === "All Weapons") return cards.length;
+    return cards.filter((w) => w.klass.toLowerCase().includes(label.toLowerCase().replace(/s$/, ""))).length;
+  };
+  const types: readonly (readonly [string, number])[] = typeLabels.map((l) => [l, countByType(l)] as const);
   const [type, setType] = useState<string>("All Weapons");
   const [price, setPrice] = useState<number[]>([0, 2000000]);
 
@@ -83,10 +91,9 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {[
-                { label: "Total Weapons", value: "118", icon: Crosshair, color: "text-gold dark:text-gold-light" },
-                { label: "Melee Weapons", value: "24", icon: Sword, color: "text-purple-400" },
-                { label: "Ranged Weapons", value: "94", icon: Target, color: "text-sky-400" },
-                { label: "Unlocked", value: "58 / 118", icon: Lock, color: "text-gold dark:text-gold-light" },
+                { label: "Total Weapons", value: String(cards.length), icon: Crosshair, color: "text-gold dark:text-gold-light" },
+                { label: "Melee Weapons", value: String(countByType("Melee")), icon: Sword, color: "text-purple-400" },
+                { label: "Ranged Weapons", value: String(cards.length - countByType("Melee")), icon: Target, color: "text-sky-400" },
               ].map((s) => (
                 <div key={s.label} className="card-surface flex items-center gap-3 px-4 py-3">
                   <s.icon className={cn("h-5 w-5", s.color)} />
@@ -244,7 +251,6 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
                     <img loading="lazy" src="/img/rifle.svg" alt="" className="h-full w-full object-cover opacity-90" style={{ filter: `hue-rotate(${i * 40}deg) grayscale(0.15) brightness(1.2)` }} />
                   </div>
                   <span className="text-xs font-bold">{c.label}</span>
-                  <span className="text-xs text-muted-foreground">{c.count}</span>
                 </a>
               ))}
             </div>
