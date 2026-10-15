@@ -15,7 +15,7 @@ import {
   ShieldCheck,
   X
 } from "lucide-react";
-import { INITIAL_DATABASE_ASSETS, DatabaseAsset } from "@/lib/admin-data";
+import { DatabaseAsset } from "@/lib/admin-data";
 import { getAdminVehicles, saveVehicle } from "@/lib/services/vehicles";
 import { getAdminWeapons, saveWeapon } from "@/lib/services/weapons";
 import { getLocations, saveLocation } from "@/lib/services/locations";
@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 
 export default function AdminDatabasePage() {
   const { showToast } = useToast();
-  const [assets, setAssets] = useState<DatabaseAsset[]>(INITIAL_DATABASE_ASSETS);
+  const [assets, setAssets] = useState<DatabaseAsset[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<"all" | "vehicle" | "weapon" | "location">("all");
   const [selectedStatus, setSelectedStatus] = useState<"all" | "verified" | "unconfirmed" | "deprecated">("all");
   const [searchQuery, setSearchQuery] = useState("");

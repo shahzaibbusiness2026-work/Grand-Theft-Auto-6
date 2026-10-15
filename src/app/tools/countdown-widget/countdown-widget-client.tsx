@@ -194,7 +194,7 @@ export function CountdownWidgetClient() {
           </Button>
           <p className="text-xs text-muted-foreground flex items-center gap-1.5">
             <Info className="h-3.5 w-3.5 text-gold-light" />
-            Embed route coming soon — reserve your spot
+            Copy the code above and paste it into your website to show the live countdown.
           </p>
         </div>
       </div>

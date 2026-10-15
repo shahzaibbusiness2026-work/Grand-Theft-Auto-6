@@ -11,20 +11,33 @@ interface GoalItem {
   completed: boolean;
 }
 
-const INITIAL_GOALS: GoalItem[] = [
-  { id: "g-1", label: "Find 3 collectibles", progress: "3/3", completed: true },
-  { id: "g-2", label: "Complete 1 side mission", progress: "1/1", completed: true },
+const STORAGE_KEY = "gta6-user-goals";
+
+const DEFAULT_GOALS: GoalItem[] = [
+  { id: "g-1", label: "Find 3 collectibles", progress: "0/3", completed: false },
+  { id: "g-2", label: "Complete 1 side mission", progress: "0/1", completed: false },
   { id: "g-3", label: "Visit 2 new locations", progress: "0/2", completed: false },
   { id: "g-4", label: "Earn $100,000", progress: "$0 / $100K", completed: false },
 ];
 
+function loadGoals(): GoalItem[] {
+  if (typeof window === "undefined") return DEFAULT_GOALS;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return JSON.parse(stored) as GoalItem[];
+  } catch {}
+  return DEFAULT_GOALS;
+}
+
 export function CompanionGoalsCard() {
-  const [goals, setGoals] = useState<GoalItem[]>(INITIAL_GOALS);
+  const [goals, setGoals] = useState<GoalItem[]>(loadGoals);
 
   const toggleGoal = (id: string) => {
-    setGoals((prev) =>
-      prev.map((g) => (g.id === id ? { ...g, completed: !g.completed } : g))
-    );
+    setGoals((prev) => {
+      const next = prev.map((g) => (g.id === id ? { ...g, completed: !g.completed } : g));
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); } catch {}
+      return next;
+    });
   };
 
   return (
