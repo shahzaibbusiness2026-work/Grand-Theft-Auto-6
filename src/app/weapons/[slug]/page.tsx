@@ -18,6 +18,7 @@ import { Progress } from "@/components/ui/progress";
 import { canonicalWeapons, CanonicalWeapon } from "@/lib/canonical-data";
 import { FavoriteButton } from "@/components/favorite-button";
 import { ConfidenceBadge } from "@/components/confidence-badge";
+import { serializeJsonLd } from "@/lib/utils";
 
 import { getPublicWeapons } from "@/lib/services/queries";
 
@@ -188,6 +189,33 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
 
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Weapons", item: "https://grand-theft-auto-6-5ap5.vercel.app/weapons" },
+                  { "@type": "ListItem", position: 3, name: weapon.name, item: `https://grand-theft-auto-6-5ap5.vercel.app/weapons/${weapon.slug}` },
+                ],
+              },
+              {
+                "@type": "Product",
+                name: weapon.name,
+                description: weapon.description,
+                image: weapon.img,
+                category: weapon.klass,
+                brand: { "@type": "Brand", name: "GTA 6 Atlas" },
+                url: `https://grand-theft-auto-6-5ap5.vercel.app/weapons/${weapon.slug}`,
+              },
+            ],
+          }),
+        }}
+      />
       <section className="container-site pt-6 pb-10">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap mb-4">

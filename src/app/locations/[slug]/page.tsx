@@ -11,6 +11,7 @@ import {
   Navigation,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { canonicalLocations, type CanonicalLocation } from "@/lib/canonical-data";
 import { getLocations } from "@/lib/services/locations";
 import { ConfidenceBadge } from "@/components/confidence-badge";
@@ -111,6 +112,30 @@ export default async function LocationDetailPage({ params }: PageProps) {
 
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Locations", item: "https://grand-theft-auto-6-5ap5.vercel.app/locations" },
+                  { "@type": "ListItem", position: 3, name: loc.name, item: `https://grand-theft-auto-6-5ap5.vercel.app/locations/${loc.slug}` },
+                ],
+              },
+              {
+                "@type": "Place",
+                name: loc.name,
+                description: `Point of interest in ${loc.district}, State of Leonida.`,
+                url: `https://grand-theft-auto-6-5ap5.vercel.app/locations/${loc.slug}`,
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb Navigation */}
         <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6 font-mono">

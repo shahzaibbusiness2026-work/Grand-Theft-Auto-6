@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { VehicleUpgradeCalculatorClient } from "./vehicle-upgrade-calculator-client";
 import { Wrench, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -8,11 +9,40 @@ export const metadata: Metadata = {
   title: "GTA 6 Vehicle Upgrade Calculator — Tuning Costs & Performance Gains",
   description:
     "Calculate total tuning costs and estimated performance gains for your GTA 6 ride — engine, turbo, armor, brakes and cosmetic mods priced out before you visit Los Santos Customs.",
+
+  alternates: { canonical: "/tools/vehicle-upgrade-calculator" },
 };
 
 export default function VehicleUpgradeCalculatorPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Vehicle Upgrade Calculator \u2014 Tuning Costs & Performance Gains", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/vehicle-upgrade-calculator" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Vehicle Upgrade Calculator \u2014 Tuning Costs & Performance Gains",
+                description: "Calculate total tuning costs and estimated performance gains for your GTA 6 ride \u2014 engine, turbo, armor, brakes and cosmetic mods priced out before you visit Los Santos Customs.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/vehicle-upgrade-calculator",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

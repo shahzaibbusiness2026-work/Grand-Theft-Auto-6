@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, Wrench } from "lucide-react";
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "All 26 Interactive Tools & Calculators — GTA 6 Atlas",
   description:
     "Complete suite of 26 production-ready interactive tools for Grand Theft Auto VI: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, and AI assistant.",
+  alternates: { canonical: "/tools" },
 };
 
 import { ALL_TOOLS } from "@/lib/tools-data";
@@ -23,6 +25,24 @@ const CATEGORIES = [
 export default function ToolsPage() {
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "GTA 6 Atlas Tools",
+            description: "Interactive tools and calculators for Grand Theft Auto VI.",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "GTA 6 Money Calculator", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-calculator" },
+              { "@type": "ListItem", position: 2, name: "GTA 6 Business Profit Calculator", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/business-profit-calculator" },
+              { "@type": "ListItem", position: 3, name: "GTA 6 Money-Making Method Finder", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-maker" },
+              { "@type": "ListItem", position: 4, name: "GTA 6 Loadout Builder", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/loadout-builder" },
+              { "@type": "ListItem", position: 5, name: "GTA 6 Vehicle Upgrade Calculator", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/vehicle-upgrade-calculator" },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Header Hero */}
         <div className="card-carbon p-8 md:p-12 mb-10 border-primary/30 relative overflow-hidden bg-gradient-to-br from-card via-card to-primary/10 dark:from-slate-900 dark:via-slate-950">

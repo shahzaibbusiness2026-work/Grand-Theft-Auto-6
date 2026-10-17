@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { WeaponDpsCalculatorClient } from "./weapon-dps-calculator-client";
 import { Crosshair, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -7,11 +8,40 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Weapon DPS Calculator — Damage, Fire Rate & Attachments",
   description: "Compare GTA 6 weapons by DPS. Add attachments and see live damage-per-second, damage-per-magazine, and time-to-empty.",
+
+  alternates: { canonical: "/tools/weapon-dps-calculator" },
 };
 
 export default function WeaponDpsCalculatorPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Weapon DPS Calculator \u2014 Damage, Fire Rate & Attachments", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/weapon-dps-calculator" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Weapon DPS Calculator \u2014 Damage, Fire Rate & Attachments",
+                description: "Compare GTA 6 weapons by DPS. Add attachments and see live damage-per-second, damage-per-magazine, and time-to-empty.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/weapon-dps-calculator",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

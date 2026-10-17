@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { canonicalMissions, canonicalLocations, type CanonicalMission } from "@/lib/canonical-data";
 import { getMissions } from "@/lib/services/missions";
 import { ConfidenceBadge } from "@/components/confidence-badge";
+import { serializeJsonLd } from "@/lib/utils";
 
 /** Resolve a mission from live Supabase data, mapped to the canonical shape. */
 async function resolveMission(slug: string): Promise<CanonicalMission | undefined> {
@@ -94,6 +95,36 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
 
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Missions", item: "https://grand-theft-auto-6-5ap5.vercel.app/missions" },
+                  { "@type": "ListItem", position: 3, name: mission.title, item: `https://grand-theft-auto-6-5ap5.vercel.app/missions/${mission.slug}` },
+                ],
+              },
+              {
+                "@type": "HowTo",
+                name: `${mission.title} — GTA 6 Mission Guide`,
+                description: mission.description,
+                image: mission.img,
+                step: (mission.objectives?.length ? mission.objectives : [mission.description]).map((obj, i) => ({
+                  "@type": "HowToStep",
+                  position: i + 1,
+                  name: `Step ${i + 1}`,
+                  text: obj,
+                })),
+              },
+            ],
+          }),
+        }}
+      />
       <section className="container-site pt-6 pb-10">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap mb-4">

@@ -1,4 +1,5 @@
 ﻿import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { MoneyMakerClient } from "./money-maker-client";
 import { DollarSign, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -8,11 +9,40 @@ export const metadata: Metadata = {
   title: "Money-Making Method Finder & Grinding Strategies — GTA 6 Atlas",
   description:
     "Intelligent GTA 6 money-making route recommender. Discover the highest-paying heists, passive nightclub operations, and vehicle salvage strategies ranked by cash per hour.",
+
+  alternates: { canonical: "/tools/money-maker" },
 };
 
 export default function MoneyMakerPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "Money-Making Method Finder & Grinding Strategies \u2014 GTA 6 Atlas", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-maker" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "Money-Making Method Finder & Grinding Strategies \u2014 GTA 6 Atlas",
+                description: "Intelligent GTA 6 money-making route recommender. Discover the highest-paying heists, passive nightclub operations, and vehicle salvage strategies ranked by cash per hour.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-maker",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

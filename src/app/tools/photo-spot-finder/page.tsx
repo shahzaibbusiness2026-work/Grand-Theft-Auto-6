@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { PhotoSpotFinderClient } from "./photo-spot-finder-client";
 import { Camera, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -7,11 +8,40 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Photo Spot Finder — Best Screenshot Locations",
   description: "The most cinematic photo spots in Leonida. Best time of day, region, and pro tips for every shot.",
+
+  alternates: { canonical: "/tools/photo-spot-finder" },
 };
 
 export default function PhotoSpotFinderPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Photo Spot Finder \u2014 Best Screenshot Locations", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/photo-spot-finder" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Photo Spot Finder \u2014 Best Screenshot Locations",
+                description: "The most cinematic photo spots in Leonida. Best time of day, region, and pro tips for every shot.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/photo-spot-finder",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

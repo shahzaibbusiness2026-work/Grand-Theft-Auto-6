@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { GaragePlannerClient } from "./garage-planner-client";
 import { Warehouse, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -7,11 +8,40 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Garage Planner — Organize Your Vehicle Collection",
   description: "Plan your GTA 6 garage space. Assign vehicles to properties, track slots used, and see your collection's total value.",
+
+  alternates: { canonical: "/tools/garage-planner" },
 };
 
 export default function GaragePlannerPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Garage Planner \u2014 Organize Your Vehicle Collection", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/garage-planner" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Garage Planner \u2014 Organize Your Vehicle Collection",
+                description: "Plan your GTA 6 garage space. Assign vehicles to properties, track slots used, and see your collection's total value.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/garage-planner",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

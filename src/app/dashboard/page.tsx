@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: "100% Player Completion Tracker | GTA 6 Atlas",
   description:
     "Track your story missions, side jobs, collectibles, activities and Leonida completion progress with local sync.",
+  // Personal progress tool, not indexable content.
+  robots: { index: false, follow: false },
 };
 
 // Revalidate every 60 seconds so dashboard data stays fresh without full SSR cost

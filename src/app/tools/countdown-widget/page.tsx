@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { CountdownWidgetClient } from "./countdown-widget-client";
 import { Code2, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -7,11 +8,40 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Countdown Widget — Embed on Your Site",
   description: "Get a free embeddable GTA 6 launch countdown widget for your website or stream overlay. Copy-paste ready.",
+
+  alternates: { canonical: "/tools/countdown-widget" },
 };
 
 export default function CountdownWidgetPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Countdown Widget \u2014 Embed on Your Site", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/countdown-widget" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Countdown Widget \u2014 Embed on Your Site",
+                description: "Get a free embeddable GTA 6 launch countdown widget for your website or stream overlay. Copy-paste ready.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/countdown-widget",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

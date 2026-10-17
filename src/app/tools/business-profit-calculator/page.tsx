@@ -1,4 +1,5 @@
 ﻿import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { BusinessCalculatorClient } from "./business-calculator-client";
 import { Building2, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -7,11 +8,40 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Business Profit & ROI Calculator — Nightclub, Chop Shop & Warehouse",
   description: "Calculate break-even hours, passive daily income, and annual return on investment (ROI) across GTA 6 commercial businesses and properties.",
+
+  alternates: { canonical: "/tools/business-profit-calculator" },
 };
 
 export default function BusinessProfitCalculatorPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Business Profit & ROI Calculator \u2014 Nightclub, Chop Shop & Warehouse", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/business-profit-calculator" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Business Profit & ROI Calculator \u2014 Nightclub, Chop Shop & Warehouse",
+                description: "Calculate break-even hours, passive daily income, and annual return on investment (ROI) across GTA 6 commercial businesses and properties.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/business-profit-calculator",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>

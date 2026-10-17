@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { WantedLevelGuideClient } from "./wanted-level-guide-client";
 import { Siren, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -7,11 +8,40 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Wanted Level Guide — Police Response & Escape Tips",
   description: "Interactive guide to GTA 6's 1-5 star wanted levels: police units, helicopters, roadblocks, spike strips, estimated evade times, and escape tips for every level.",
+
+  alternates: { canonical: "/tools/wanted-level-guide" },
 };
 
 export default function WantedLevelGuidePage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Wanted Level Guide \u2014 Police Response & Escape Tips", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/wanted-level-guide" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Wanted Level Guide \u2014 Police Response & Escape Tips",
+                description: "Interactive guide to GTA 6's 1-5 star wanted levels: police units, helicopters, roadblocks, spike strips, estimated evade times, and escape tips for every level.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/wanted-level-guide",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

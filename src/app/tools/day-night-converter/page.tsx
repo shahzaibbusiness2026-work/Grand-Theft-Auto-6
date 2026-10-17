@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { DayNightConverterClient } from "./day-night-converter-client";
 import { SunMoon, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -8,11 +9,40 @@ export const metadata: Metadata = {
   title: "GTA 6 Day/Night Time Converter — Real Time to Game Time",
   description:
     "Convert between real-world minutes and GTA 6 in-game hours. See exactly what time it will be in Leonida after your session, when the next sunrise or sunset hits, and track the sun with a live day/night indicator.",
+
+  alternates: { canonical: "/tools/day-night-converter" },
 };
 
 export default function DayNightConverterPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Day/Night Time Converter \u2014 Real Time to Game Time", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/day-night-converter" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Day/Night Time Converter \u2014 Real Time to Game Time",
+                description: "Convert between real-world minutes and GTA 6 in-game hours. See exactly what time it will be in Leonida after your session, when the next sunrise or sunset hits, and track the sun with a live day/night indicator.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/day-night-converter",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { HeistPayoutSplitterClient } from "./heist-payout-splitter-client";
 import { Users, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -7,11 +8,40 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Heist Payout Splitter — Divide Crew Cuts Fairly",
   description: "Split any GTA 6 heist take among your crew. Set each member's cut percentage and see everyone's payout instantly.",
+
+  alternates: { canonical: "/tools/heist-payout-splitter" },
 };
 
 export default function HeistPayoutSplitterPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Heist Payout Splitter \u2014 Divide Crew Cuts Fairly", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/heist-payout-splitter" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Heist Payout Splitter \u2014 Divide Crew Cuts Fairly",
+                description: "Split any GTA 6 heist take among your crew. Set each member's cut percentage and see everyone's payout instantly.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/heist-payout-splitter",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

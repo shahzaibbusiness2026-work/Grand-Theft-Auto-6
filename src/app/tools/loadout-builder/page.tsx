@@ -1,4 +1,5 @@
 ﻿import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { LoadoutClient } from "./loadout-client";
 import { Crosshair, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -8,11 +9,40 @@ export const metadata: Metadata = {
   title: "GTA 6 Tactical Loadout Builder & Armory Scoring — GTA 6 Atlas",
   description:
     "Assemble and simulate custom GTA 6 weapon loadouts for heists, street wars, and recon operations. Real-time firepower, mobility, and stealth ratings with offline saving.",
+
+  alternates: { canonical: "/tools/loadout-builder" },
 };
 
 export default function LoadoutBuilderPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Tactical Loadout Builder & Armory Scoring \u2014 GTA 6 Atlas", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/loadout-builder" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Tactical Loadout Builder & Armory Scoring \u2014 GTA 6 Atlas",
+                description: "Assemble and simulate custom GTA 6 weapon loadouts for heists, street wars, and recon operations. Real-time firepower, mobility, and stealth ratings with offline saving.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/loadout-builder",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

@@ -1,4 +1,5 @@
 ﻿import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { MoneyCalculatorClient } from "./money-calculator-client";
 import { DollarSign, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -7,11 +8,40 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Money Calculator — Hours, Missions & Estimated Goal Date",
   description: "Calculate how many missions, hours, and playing days you need to afford any supercar, luxury penthouse, or business in GTA 6.",
+
+  alternates: { canonical: "/tools/money-calculator" },
 };
 
 export default function MoneyCalculatorPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Money Calculator \u2014 Hours, Missions & Estimated Goal Date", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-calculator" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Money Calculator \u2014 Hours, Missions & Estimated Goal Date",
+                description: "Calculate how many missions, hours, and playing days you need to afford any supercar, luxury penthouse, or business in GTA 6.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-calculator",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

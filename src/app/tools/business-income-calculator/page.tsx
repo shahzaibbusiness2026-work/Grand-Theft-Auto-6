@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/shells";
+import { serializeJsonLd } from "@/lib/utils";
 import { BusinessIncomeCalculatorClient } from "./business-income-calculator-client";
 import { Briefcase, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -7,11 +8,40 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Business Income Calculator — ROI & Break-Even Planner",
   description: "Calculate daily and weekly business income, total investment, break-even days, and 30-day ROI for GTA 6 businesses — nightclub, chop shop, warehouse, and more.",
+
+  alternates: { canonical: "/tools/business-income-calculator" },
 };
 
 export default function BusinessIncomeCalculatorPage() {
   return (
-    <SiteShell>
+        <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Business Income Calculator \u2014 ROI & Break-Even Planner", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/business-income-calculator" },
+                ],
+              },
+              {
+                "@type": "WebApplication",
+                name: "GTA 6 Business Income Calculator \u2014 ROI & Break-Even Planner",
+                description: "Calculate daily and weekly business income, total investment, break-even days, and 30-day ROI for GTA 6 businesses \u2014 nightclub, chop shop, warehouse, and more.",
+                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/business-income-calculator",
+                applicationCategory: "UtilitiesApplication",
+                operatingSystem: "Web",
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">

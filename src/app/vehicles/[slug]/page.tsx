@@ -22,6 +22,7 @@ import { ThemeImage } from "@/components/theme-image";
 import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
 import { FavoriteButton } from "@/components/favorite-button";
 import { ConfidenceBadge } from "@/components/confidence-badge";
+import { serializeJsonLd } from "@/lib/utils";
 
 import { getPublicVehicleCatalog, type VehicleCatalogRow } from "@/lib/services/vehicles";
 
@@ -198,6 +199,33 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
 
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
+                  { "@type": "ListItem", position: 2, name: "Vehicles", item: "https://grand-theft-auto-6-5ap5.vercel.app/vehicles" },
+                  { "@type": "ListItem", position: 3, name: vehicle.name, item: `https://grand-theft-auto-6-5ap5.vercel.app/vehicles/${vehicle.slug}` },
+                ],
+              },
+              {
+                "@type": "Vehicle",
+                name: vehicle.name,
+                manufacturer: vehicle.manufacturer,
+                vehicleConfiguration: vehicle.klass,
+                description: vehicle.description,
+                image: vehicle.img,
+                url: `https://grand-theft-auto-6-5ap5.vercel.app/vehicles/${vehicle.slug}`,
+              },
+            ],
+          }),
+        }}
+      />
       <section className="container-site pt-6">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap">

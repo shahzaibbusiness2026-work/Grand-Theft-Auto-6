@@ -27,6 +27,8 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
 
   return (
     <div data-flip-text className="flex h-screen w-full overflow-hidden bg-[#070b14] dark:bg-[#070b14] text-slate-100 dark:text-slate-100 antialiased select-none transition-colors">
+      {/* SEO: single H1 for the page, visually hidden (dashboard is a tool UI). */}
+      <h1 className="sr-only">GTA 6 100% Player Completion Tracker</h1>
       {/* 1. Desktop Fixed Sidebar */}
       <div className="hidden md:flex shrink-0">
         <CompanionSidebar />
