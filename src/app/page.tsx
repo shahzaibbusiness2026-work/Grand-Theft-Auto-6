@@ -53,6 +53,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const TRAILERS = [
   { id: "QdBZY2fkU-0", title: "Official Trailer 1", caption: "Watch the official reveal trailer" },
   { id: "FKUW7_I4QwA", title: "Official Trailer 2", caption: "More gameplay, more Leonida" },
+  { id: "rz1B4B2yBZY", title: "Launch Trailer", caption: "Jason's Army past, Lucia's prison call" },
 ];
 
 export default async function HomePage() {
@@ -79,7 +80,7 @@ export default async function HomePage() {
       {/* 2 — LATEST TRAILERS */}
       <section aria-labelledby="trailers-heading" className="container-site pt-6 sm:pt-8">
         <SectionHeader id="trailers-heading" title="Latest Trailers" subtitle="Watch the official reveals" viewAllHref="/news" viewAllLabel="View All Trailers" />
-        <div className="grid gap-5 lg:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {TRAILERS.map((t) => (
             <figure key={t.id} className="card-surface group overflow-hidden">
               <YouTubeLite videoId={t.id} title={`GTA 6 ${t.title}`} />
