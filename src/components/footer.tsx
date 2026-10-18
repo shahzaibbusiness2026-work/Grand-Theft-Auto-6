@@ -41,6 +41,7 @@ const COLS = [
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Service", href: "/terms" },
       { label: "Cookie Policy", href: "/cookies" },
+      { label: "DMCA", href: "/dmca" },
     ],
   },
 ];
@@ -113,6 +114,8 @@ export async function Footer() {
             <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
             <span className="text-border" aria-hidden="true">|</span>
             <Link href="/cookies" className="hover:text-primary transition-colors">Cookie Policy</Link>
+            <span className="text-border" aria-hidden="true">|</span>
+            <Link href="/dmca" className="hover:text-primary transition-colors">DMCA</Link>
             <span className="text-border" aria-hidden="true">|</span>
             <Link href="/site-map" className="hover:text-primary transition-colors">Sitemap</Link>
           </div>
