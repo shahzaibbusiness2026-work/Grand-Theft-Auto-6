@@ -55,7 +55,7 @@ export function CountdownWidgetClient() {
 
   const embedCode = useMemo(() => {
     const s = SIZES[size];
-    return `<iframe src="${EMBED_BASE_URL}?size=${size}" width="${s.width}" height="${s.height}" frameborder="0" title="GTA 6 Countdown"></iframe>`;
+    return `<iframe src="${EMBED_BASE_URL}?size=${size}" width="${s.width}" height="${s.height}" frameborder="0" title="GTA 6 Countdown" loading="lazy"></iframe>`;
   }, [size]);
 
   const handleCopy = () => {

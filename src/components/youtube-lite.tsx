@@ -23,6 +23,7 @@ export function YouTubeLite({ videoId, title }: YouTubeLiteProps) {
       <div className="relative aspect-video w-full bg-black">
         <iframe
           className="absolute inset-0 h-full w-full"
+          loading="lazy"
           src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`}
           title={title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
