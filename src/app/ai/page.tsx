@@ -1,5 +1,6 @@
 import { SiteShell } from "@/components/shells";
 import { AIClient } from "./ai-client";
+import { ToolGate } from "@/components/auth/tool-gate";
 import { Bot } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -32,7 +33,9 @@ export default function AIPage() {
           </p>
         </div>
 
-        <AIClient />
+        <ToolGate feature="The AI assistant">
+          <AIClient />
+        </ToolGate>
       </div>
     </SiteShell>
   );
