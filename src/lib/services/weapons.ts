@@ -210,22 +210,51 @@ export async function saveWeapon(weapon: Partial<AdminWeapon> & { name: string; 
     const supabase = createAdminClient();
     const id = weapon.id || `wep-${Date.now()}`;
 
+    // Partial updates must never wipe untouched columns: check whether the
+    // row already exists, then write only the fields the caller provided.
+    let existing: { id: string } | null = null;
+    if (weapon.id) {
+      const { data } = await supabase.from("weapons").select("id").eq("id", id).maybeSingle();
+      existing = data;
+    }
+
     const payload: Record<string, unknown> = {
       id,
-      code: weapon.code || `W-${id.toUpperCase()}`,
-      name: weapon.name,
-      category: weapon.category || "Pistol",
-      ammunition: weapon.ammunition || "Unknown",
-      damage: weapon.damage || "Unknown",
-      range: weapon.range || "Unknown",
-      rate_of_fire: weapon.rateOfFire || "Unknown",
-      magazine_size: weapon.magazineSize || "Unknown",
-      acquisition_method: weapon.acquisitionMethod || "Ammu-Nation",
-      notes: weapon.notes || "",
-      status: weapon.status || "draft",
-      verification: weapon.verification || "unverified",
       updated_at: new Date().toISOString(),
     };
+
+    const provided: Record<string, unknown> = {
+      code: weapon.code,
+      name: weapon.name,
+      category: weapon.category,
+      ammunition: weapon.ammunition,
+      damage: weapon.damage,
+      range: weapon.range,
+      rate_of_fire: weapon.rateOfFire,
+      magazine_size: weapon.magazineSize,
+      acquisition_method: weapon.acquisitionMethod,
+      notes: weapon.notes,
+      status: weapon.status,
+      verification: weapon.verification,
+    };
+    for (const [k, val] of Object.entries(provided)) {
+      if (val !== undefined) payload[k] = val;
+    }
+
+    if (!existing) {
+      // New record — fill required columns with safe defaults.
+      payload.code ??= `W-${id.toUpperCase()}`;
+      payload.category ??= "Pistol";
+      payload.ammunition ??= "Unknown";
+      payload.damage ??= "Unknown";
+      payload.range ??= "Unknown";
+      payload.rate_of_fire ??= "Unknown";
+      payload.magazine_size ??= "Unknown";
+      payload.acquisition_method ??= "Ammu-Nation";
+      payload.notes ??= "";
+      payload.status ??= "draft";
+      payload.verification ??= "unverified";
+    }
 
     // Deep-dive fields — only written when provided so partial saves don't clear data.
     const optional: Record<string, unknown> = {

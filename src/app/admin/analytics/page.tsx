@@ -84,8 +84,8 @@ export default function AdminAnalyticsPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Analytics
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-              Live data
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-sky-500/10 border border-sky-500/20 text-sky-400">
+              Site content data
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">

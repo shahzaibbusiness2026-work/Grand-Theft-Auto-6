@@ -39,7 +39,7 @@ export interface AdminVehicle {
   displayName: string;
   class: "Sports" | "SUV" | "Sedan" | "Motorcycle" | "Truck" | "Off-Road" | "Boat" | "Unknown";
   manufacturer: string;
-  verification: "unverified" | "pending_source" | "verified";
+  verification: "unverified" | "pending_source" | "verified" | "deprecated";
   status: "draft" | "review" | "published" | "archived";
   summary: string;
   topSpeed?: string;
@@ -115,7 +115,7 @@ export interface AdminWeapon {
   name: string;
   category: "Pistol" | "Rifle" | "SMG" | "Shotgun" | "Heavy" | "Melee" | "Unknown";
   ammunition: string;
-  verification: "unverified" | "pending_source" | "verified";
+  verification: "unverified" | "pending_source" | "verified" | "deprecated";
   status: "draft" | "review" | "published" | "archived";
   damage?: string;
   range?: string;
@@ -163,7 +163,7 @@ export interface AdminMapMarker {
   icon: "pin" | "flag" | "square" | "star" | "car" | "dot";
   coordinates: { x: number; y: number };
   description: string;
-  verification: "unverified" | "verified" | "pending";
+  verification: "unverified" | "verified" | "pending" | "deprecated";
   source?: string;
   linkedRecord?: string;
 }

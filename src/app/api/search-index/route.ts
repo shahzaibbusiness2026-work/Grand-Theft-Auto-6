@@ -8,7 +8,7 @@ import {
   canonicalProperties,
   canonicalCollectibles,
 } from "@/lib/canonical-data";
-import { characters } from "@/lib/data";
+import { getPublicCharacters } from "@/lib/services/characters";
 import { TOOL_SEARCH_ITEMS, type SearchItem } from "@/lib/search-types";
 
 /**
@@ -123,8 +123,9 @@ export async function GET() {
       });
     });
 
-    // Characters
-    characters.forEach((c) => {
+    // Characters (from the CMS characters table)
+    const dbCharacters = await getPublicCharacters();
+    dbCharacters.forEach((c) => {
       items.push({
         id: `char-${c.id}`,
         title: c.name,

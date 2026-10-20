@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
 
-import { characters as fallbackCharacters, Character } from "@/lib/data";
+import type { Character } from "@/lib/data";
 import { logActivity } from "./activity";
 
 export interface AdminCharacter {
@@ -21,19 +21,6 @@ export interface AdminCharacter {
   updatedAt: string;
 }
 
-const FALLBACK_ADMIN_CHARACTERS: AdminCharacter[] = fallbackCharacters.map((c) => ({
-  id: c.id,
-  name: c.name,
-  role: c.role,
-  status: c.status || "Active",
-  affiliation: c.affiliation || "Independent",
-  actor: c.voiceActor || "Unconfirmed",
-  location: c.origin || "Vice City",
-  importance: c.featured ? "High" : "Medium",
-  verified: true,
-  lastEditor: "Atlas Staff",
-  updatedAt: new Date().toISOString(),
-}));
 
 export interface DatabaseCharacterRow {
   id: string;
@@ -119,10 +106,10 @@ export async function getPublicCharacters(): Promise<Character[]> {
     }
     console.error("getPublicCharacters: database error", error?.message);
   } catch {
-    // Graceful fallback only on connection failure
+    // No bundled fallback — never serve invented character data.
   }
 
-  return fallbackCharacters;
+  return [];
 }
 
 /**
@@ -147,7 +134,7 @@ export async function getAdminCharacters(): Promise<AdminCharacter[]> {
     // Graceful fallback
   }
 
-  return FALLBACK_ADMIN_CHARACTERS;
+  return [];
 }
 
 import { assertAdmin } from "@/lib/auth/assert-admin";
@@ -161,27 +148,49 @@ export async function saveCharacter(char: Partial<Character> & { name: string; i
     const supabase = createAdminClient();
     const id = char.id || char.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
+    // Partial updates must never wipe untouched columns: build the payload
+    // from only the fields the caller actually provided.
+    let existing: { id: string } | null = null;
+    if (char.id) {
+      const { data } = await supabase.from("characters").select("id").eq("id", id).maybeSingle();
+      existing = data;
+    }
+
     const payload: Partial<DatabaseCharacterRow> = {
       id,
-      name: char.name,
-      role: char.role || "Supporting",
-      description: char.desc || "Character in Grand Theft Auto VI",
-      img: char.img || "/img/char-lucia.jpg",
-      featured: char.featured ?? false,
-      alias: char.alias || null,
-      voice_actor: char.voiceActor || null,
-      origin: char.origin || null,
-      specialty: char.specialty || null,
-      perk: char.perk || null,
-      vehicle: char.vehicle || null,
-      weapons: char.weapons || [],
-      affiliation: char.affiliation || null,
-      status: char.status || "Active",
-      quote: char.quote || null,
-      bio: char.bio || [],
-      tags: char.tags || [],
       updated_at: new Date().toISOString(),
     };
+
+    if (char.name !== undefined) payload.name = char.name;
+    if (char.role !== undefined) payload.role = char.role;
+    if (char.desc !== undefined) payload.description = char.desc;
+    if (char.img !== undefined) payload.img = char.img;
+    if (char.featured !== undefined) payload.featured = char.featured;
+    if (char.alias !== undefined) payload.alias = char.alias;
+    if (char.voiceActor !== undefined) payload.voice_actor = char.voiceActor;
+    if (char.origin !== undefined) payload.origin = char.origin;
+    if (char.specialty !== undefined) payload.specialty = char.specialty;
+    if (char.perk !== undefined) payload.perk = char.perk;
+    if (char.vehicle !== undefined) payload.vehicle = char.vehicle;
+    if (char.weapons !== undefined) payload.weapons = char.weapons;
+    if (char.affiliation !== undefined) payload.affiliation = char.affiliation;
+    if (char.status !== undefined) payload.status = char.status;
+    if (char.quote !== undefined) payload.quote = char.quote;
+    if (char.bio !== undefined) payload.bio = char.bio;
+    if (char.tags !== undefined) payload.tags = char.tags;
+
+    if (!existing) {
+      // New character — fill required columns with safe defaults.
+      payload.name = payload.name || char.name;
+      payload.role = payload.role || "Supporting";
+      payload.description = payload.description || "Character in Grand Theft Auto VI";
+      payload.img = payload.img || "/img/char-lucia.jpg";
+      payload.featured = payload.featured ?? false;
+      payload.status = payload.status || "Active";
+      payload.weapons = payload.weapons || [];
+      payload.bio = payload.bio || [];
+      payload.tags = payload.tags || [];
+    }
 
     const { error } = await supabase.from("characters").upsert(payload, { onConflict: "id" });
     if (error) throw error;

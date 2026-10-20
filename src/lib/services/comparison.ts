@@ -168,3 +168,37 @@ export async function saveComparisonDraft(
     return { success: false, error: String(err) };
   }
 }
+
+/**
+ * Delete a saved comparison draft from site_settings.
+ */
+export async function deleteComparisonDraft(
+  id: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    await assertAdmin();
+    const supabase = createAdminClient();
+    const { data: existing } = await supabase
+      .from("site_settings")
+      .select("value")
+      .eq("key", "admin_saved_comparisons")
+      .maybeSingle();
+    const list: SavedComparison[] = Array.isArray(existing?.value) ? existing.value : [];
+    const next = list.filter((c) => c.id !== id);
+    if (next.length === list.length) {
+      return { success: false, error: "Saved comparison not found" };
+    }
+    const { error } = await supabase
+      .from("site_settings")
+      .upsert(
+        { key: "admin_saved_comparisons", value: next, updated_at: new Date().toISOString() },
+        { onConflict: "key" }
+      );
+    if (error) throw error;
+    revalidatePath("/admin/comparisons");
+    return { success: true };
+  } catch (err) {
+    console.error("Failed to delete comparison:", err);
+    return { success: false, error: String(err) };
+  }
+}

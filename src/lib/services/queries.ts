@@ -12,7 +12,7 @@
  */
 
 import { createPublicClient } from "@/lib/supabase/public";
-import { articles as fallbackArticles, Article, Character, Vehicle } from "@/lib/data";
+import type { Article, Character, Vehicle } from "@/lib/data";
 import { AdminWeapon } from "@/lib/admin-store";
 import { getPublicArticles as _getPublicArticles } from "./articles";
 import { getPublicCharacters as _getPublicCharacters } from "./characters";
@@ -103,14 +103,14 @@ export interface DashboardStats {
  */
 export async function getDashboardStats(): Promise<DashboardStats> {
   const defaults: DashboardStats = {
-    totalVehicles: 106,
-    totalWeapons: 32,
-    totalCharacters: 9,
-    totalArticles: 7,
-    totalMapMarkers: 312,
-    totalLocations: 4,
-    totalMissions: 8,
-    latestArticles: fallbackArticles.slice(0, 3),
+    totalVehicles: 0,
+    totalWeapons: 0,
+    totalCharacters: 0,
+    totalArticles: 0,
+    totalMapMarkers: 0,
+    totalLocations: 0,
+    totalMissions: 0,
+    latestArticles: [],
     featuredVehicles: [],
     featuredWeapons: [],
     featuredLocations: [],

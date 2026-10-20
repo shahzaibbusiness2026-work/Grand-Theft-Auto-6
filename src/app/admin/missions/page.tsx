@@ -278,6 +278,44 @@ export default function AdminMissionsPage() {
               className="w-full p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] text-white resize-none focus:outline-none focus:border-[#6366F1]"
             />
           </div>
+          <div>
+            <label htmlFor="mis-description" className="block text-xs font-medium text-[#94A3B8] mb-1">
+              Description
+            </label>
+            <textarea
+              id="mis-description"
+              rows={3}
+              value={form.description || ""}
+              onChange={(e) => setForm({ ...form, description: e.target.value })}
+              className="w-full p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] text-white resize-none focus:outline-none focus:border-[#6366F1]"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label htmlFor="mis-district" className="block text-xs font-medium text-[#94A3B8] mb-1">
+                District
+              </label>
+              <input
+                id="mis-district"
+                type="text"
+                value={form.district || ""}
+                onChange={(e) => setForm({ ...form, district: e.target.value })}
+                className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-white focus:outline-none focus:border-[#6366F1]"
+              />
+            </div>
+            <div>
+              <label htmlFor="mis-location" className="block text-xs font-medium text-[#94A3B8] mb-1">
+                Location
+              </label>
+              <input
+                id="mis-location"
+                type="text"
+                value={form.location || ""}
+                onChange={(e) => setForm({ ...form, location: e.target.value })}
+                className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-white focus:outline-none focus:border-[#6366F1]"
+              />
+            </div>
+          </div>
           <div className="flex items-center justify-end gap-2 pt-2">
             <button
               type="button"

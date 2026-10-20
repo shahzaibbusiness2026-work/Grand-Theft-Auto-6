@@ -7,7 +7,7 @@ import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
-import { articles as fallbackArticles, Article } from "@/lib/data";
+import type { Article } from "@/lib/data";
 import { INITIAL_ADMIN_ARTICLES, AdminArticle } from "@/lib/admin-store";
 import { logActivity } from "./activity";
 
@@ -122,7 +122,7 @@ export const getPublicArticles = cache(async (): Promise<Article[]> => {
     // Connection failure — fall back to bundled content
   }
 
-  return fallbackArticles;
+  return [];
 });
 
 /**

@@ -11,17 +11,10 @@ export interface LocationRecord {
   name: string;
   district: string;
   type: "City District" | "Island / Keys" | "Government Facility" | "Landmark";
-  verification: "verified" | "pending";
+  verification: "verified" | "pending" | "deprecated";
   coordinates: string;
   description?: string;
 }
-
-const FALLBACK_LOCATIONS: LocationRecord[] = [
-  { id: "loc-1", name: "Vice City Beach", district: "Vice City Metro", type: "City District", verification: "verified", coordinates: "25.7617, -80.1918" },
-  { id: "loc-2", name: "Leonida Penitentiary", district: "Leonard County", type: "Government Facility", verification: "verified", coordinates: "25.9011, -80.3542" },
-  { id: "loc-3", name: "Grassrivers Wetlands", district: "Everglades Equivalent", type: "Landmark", verification: "pending", coordinates: "25.6120, -80.6010" },
-  { id: "loc-4", name: "Kelly County Archipelago", district: "The Keys", type: "Island / Keys", verification: "verified", coordinates: "24.5551, -81.7800" },
-];
 
 export async function getLocations(): Promise<LocationRecord[]> {
   try {
@@ -35,8 +28,8 @@ export async function getLocations(): Promise<LocationRecord[]> {
       const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
       if (Array.isArray(parsed) && parsed.length > 0) return parsed as LocationRecord[];
     }
-  } catch { /* fallback */ }
-  return FALLBACK_LOCATIONS;
+  } catch { /* no fallback — never invent locations */ }
+  return [];
 }
 
 /**

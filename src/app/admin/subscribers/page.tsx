@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BellRing, Search, RefreshCw, Download, Send, Megaphone } from "lucide-react";
+import { BellRing, Search, RefreshCw, Download, Send, Megaphone, Plus, X } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
 import {
   getNewsletterSubscribers,
+  adminAddSubscriber,
+  adminRemoveSubscriber,
   NewsletterSubscriber,
 } from "@/lib/services/newsletter";
+import { Modal } from "@/components/admin/modal";
 import { cn } from "@/lib/utils";
 
 export default function AdminSubscribersPage() {
@@ -19,6 +22,9 @@ export default function AdminSubscribersPage() {
   const [broadcastMessage, setBroadcastMessage] = useState("");
   const [sending, setSending] = useState(false);
   const [sendResult, setSendResult] = useState<{ sent: number; failed: number; total: number } | null>(null);
+  const [newEmail, setNewEmail] = useState("");
+  const [addBusy, setAddBusy] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState<NewsletterSubscriber | null>(null);
 
   const loadSubscribers = () => {
     setIsLoading(true);
@@ -34,6 +40,33 @@ export default function AdminSubscribersPage() {
     loadSubscribers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleAdd = async () => {
+    const email = newEmail.trim();
+    if (!email) return;
+    setAddBusy(true);
+    const res = await adminAddSubscriber(email);
+    setAddBusy(false);
+    if (res.success) {
+      setNewEmail("");
+      showToast({ title: `Subscribed ${email}`, type: "success" });
+      loadSubscribers();
+    } else {
+      showToast({ title: res.error || "Failed to add subscriber", type: "danger" });
+    }
+  };
+
+  const handleRemove = async () => {
+    if (!deleteTarget) return;
+    const res = await adminRemoveSubscriber(deleteTarget.email);
+    setDeleteTarget(null);
+    if (res.success) {
+      showToast({ title: `Removed ${deleteTarget.email}`, type: "success" });
+      loadSubscribers();
+    } else {
+      showToast({ title: res.error || "Failed to remove subscriber", type: "danger" });
+    }
+  };
 
   const filtered = useMemo(() => {
     if (!searchQuery) return subscribers;
@@ -234,6 +267,33 @@ export default function AdminSubscribersPage() {
         )}
       </div>
 
+      {/* Add subscriber */}
+      <div className="rounded-xl border border-[#1C2436] bg-[#111622] p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+        <div className="text-sm text-[#94A3B8]">
+          <span className="font-bold text-white">Add subscriber</span>
+          <span className="block text-xs">Imports, corrections, offline signups.</span>
+        </div>
+        <div className="flex gap-2 sm:ml-auto w-full sm:w-auto">
+          <input
+            type="email"
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") handleAdd(); }}
+            placeholder="subscriber@example.com"
+            className="flex-1 sm:w-64 rounded-xl bg-[#0B0F1A] border border-[#1C2436] px-3.5 py-2 text-sm text-white placeholder:text-[#475569] focus:outline-none focus:border-[#38BDF8]"
+          />
+          <button
+            type="button"
+            onClick={handleAdd}
+            disabled={addBusy || !newEmail.trim()}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#38BDF8] text-[#0B0F1A] text-sm font-bold hover:bg-[#7DD3FC] transition-colors disabled:opacity-50"
+          >
+            <Plus className="w-4 h-4" />
+            {addBusy ? "Adding…" : "Add"}
+          </button>
+        </div>
+      </div>
+
       {/* Search */}
       <div className="relative">
         <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
@@ -275,14 +335,56 @@ export default function AdminSubscribersPage() {
                 <span className="text-xs font-medium text-white truncate">
                   {s.email}
                 </span>
-                <span className="text-xs text-[#64748B] shrink-0">
-                  {new Date(s.subscribed_at).toLocaleString()}
-                </span>
+                <div className="flex items-center gap-3 shrink-0">
+                  <span className="text-xs text-[#64748B]">
+                    {new Date(s.subscribed_at).toLocaleString()}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setDeleteTarget(s)}
+                    title={`Remove ${s.email}`}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                    Remove
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
         )}
       </div>
+
+      <Modal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Remove subscriber?"
+        variant="danger"
+        size="sm"
+        footer={
+          <>
+            <button
+              type="button"
+              onClick={() => setDeleteTarget(null)}
+              className="px-4 py-2 rounded-xl text-sm text-[#94A3B8] hover:text-white transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleRemove}
+              className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold transition-colors"
+            >
+              Remove
+            </button>
+          </>
+        }
+      >
+        <p className="text-sm text-[#94A3B8]">
+          Remove <span className="font-bold text-white">{deleteTarget?.email}</span> from the
+          subscriber list? They will no longer receive broadcasts.
+        </p>
+      </Modal>
     </div>
   );
 }

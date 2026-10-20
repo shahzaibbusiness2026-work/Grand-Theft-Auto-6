@@ -6,7 +6,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
-import { vehicles as fallbackVehicles, Vehicle } from "@/lib/data";
+import type { Vehicle } from "@/lib/data";
 import { INITIAL_ADMIN_VEHICLES, AdminVehicle } from "@/lib/admin-store";
 import { logActivity } from "./activity";
 
@@ -214,7 +214,7 @@ export async function getPublicVehicles(): Promise<Vehicle[]> {
     // Connection failure — fall back to bundled content
   }
 
-  return fallbackVehicles;
+  return [];
 }
 
 /**
@@ -274,24 +274,55 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
     const supabase = createAdminClient();
     const id = v.id || v.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
+    // Partial updates must never wipe untouched columns: check whether the
+    // row already exists, then write only the fields the caller provided.
+    let existing: { id: string } | null = null;
+    if (v.id) {
+      const { data } = await supabase.from("vehicles").select("id").eq("id", id).maybeSingle();
+      existing = data;
+    }
+
     const payload: Record<string, unknown> = {
       id,
-      code: v.code || `VEH-${id.toUpperCase()}`,
-      name: v.name,
-      display_name: v.displayName || v.name,
-      class: v.class || "Sports",
-      manufacturer: v.manufacturer || "Unknown",
-      top_speed: v.topSpeed || "180 mph",
-      acceleration: v.acceleration || "3.5s",
-      handling: v.handling || "8.0/10",
-      weight: v.weight || "3,200 lbs",
-      summary: v.summary || "Cataloged vehicle in the State of Leonida",
-      images: v.images || ["/img/car-orange.jpg"],
-      status: v.status || "published",
-      verification: v.verification || "verified",
-      last_editor: v.lastEditor || "Atlas Staff",
       updated_at: new Date().toISOString(),
     };
+
+    const provided: Record<string, unknown> = {
+      code: v.code,
+      name: v.name,
+      display_name: v.displayName ?? v.name,
+      class: v.class,
+      manufacturer: v.manufacturer,
+      top_speed: v.topSpeed,
+      acceleration: v.acceleration,
+      handling: v.handling,
+      weight: v.weight,
+      summary: v.summary,
+      images: v.images,
+      status: v.status,
+      verification: v.verification,
+      last_editor: v.lastEditor,
+    };
+    for (const [k, val] of Object.entries(provided)) {
+      if (val !== undefined) payload[k] = val;
+    }
+
+    if (!existing) {
+      // New record — fill required columns with safe defaults.
+      payload.code ??= `VEH-${id.toUpperCase()}`;
+      payload.display_name ??= v.name;
+      payload.class ??= "Sports";
+      payload.manufacturer ??= "Unknown";
+      payload.top_speed ??= "180 mph";
+      payload.acceleration ??= "3.5s";
+      payload.handling ??= "8.0/10";
+      payload.weight ??= "3,200 lbs";
+      payload.summary ??= "Cataloged vehicle in the State of Leonida";
+      payload.images ??= ["/img/car-orange.jpg"];
+      payload.status ??= "published";
+      payload.verification ??= "verified";
+      payload.last_editor ??= "TZG Staff";
+    }
 
     // Deep-dive fields — only written when provided so partial saves don't clear data.
     const optional: Record<string, unknown> = {

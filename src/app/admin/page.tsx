@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { ALL_TOOLS } from "@/lib/tools-data";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -224,7 +225,7 @@ export default function AdminOverviewPage() {
             <p className="text-2xl font-bold text-white tracking-tight mt-0.5">
               {isLoading ? "…" : stats.totalRecords}
             </p>
-            <p className="text-xs text-[#64748B] mt-0.5 truncate">Across all 8 tables</p>
+            <p className="text-xs text-[#64748B] mt-0.5 truncate">Across the core content tables</p>
           </div>
         </div>
 
@@ -234,9 +235,9 @@ export default function AdminOverviewPage() {
             <CheckSquare className="w-5 h-5" />
           </div>
           <div className="min-w-0">
-            <p className="text-xs text-[#94A3B8] font-medium">Tools online</p>
-            <p className="text-2xl font-bold text-white tracking-tight mt-0.5">3/3</p>
-            <p className="text-xs text-[#64748B] mt-0.5 truncate">All systems operational</p>
+            <p className="text-xs text-[#94A3B8] font-medium">Tools live</p>
+            <p className="text-2xl font-bold text-white tracking-tight mt-0.5">{ALL_TOOLS.length}</p>
+            <p className="text-xs text-[#64748B] mt-0.5 truncate">Public tools on the site</p>
           </div>
         </div>
       </div>
@@ -524,8 +525,8 @@ export default function AdminOverviewPage() {
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
               <div>
-                <h2 className="text-sm font-bold text-white">Tool health</h2>
-                <p className="text-xs text-[#64748B]">Status of internal tools</p>
+                <h2 className="text-sm font-bold text-white">Quick manage</h2>
+                <p className="text-xs text-[#64748B]">Jump to a module</p>
               </div>
             </div>
 
@@ -539,10 +540,7 @@ export default function AdminOverviewPage() {
                     <p className="text-xs text-[#64748B]">Map data and markers</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#10B981]" aria-hidden="true" />
-                  <span className="text-xs font-medium text-[#10B981]">Operational</span>
-                </div>
+                <span className="text-xs font-medium text-[#38BDF8]">Manage →</span>
               </div>
 
               {/* Comparisons */}
@@ -554,10 +552,7 @@ export default function AdminOverviewPage() {
                     <p className="text-xs text-[#64748B]">Feature comparisons</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#10B981]" aria-hidden="true" />
-                  <span className="text-xs font-medium text-[#10B981]">Operational</span>
-                </div>
+                <span className="text-xs font-medium text-[#38BDF8]">Manage →</span>
               </div>
 
               {/* Completion Tracker */}
@@ -569,10 +564,7 @@ export default function AdminOverviewPage() {
                     <p className="text-xs text-[#64748B]">Progress tracking system</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#10B981]" aria-hidden="true" />
-                  <span className="text-xs font-medium text-[#10B981]">Operational</span>
-                </div>
+                <span className="text-xs font-medium text-[#38BDF8]">Manage →</span>
               </div>
             </div>
           </div>

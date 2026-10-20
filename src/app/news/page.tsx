@@ -12,7 +12,6 @@ import { Badge } from "@/components/ui/badge";
 import { SectionHeader } from "@/components/section-header";
 import { NewsletterBar } from "@/components/newsletter-bar";
 import { ArticleCard, PopularRow, CategoryList } from "@/components/article-card";
-import { popularPosts, featuredArticle } from "@/lib/data";
 import { getPublicArticles } from "@/lib/services/queries";
 import { getCategories } from "@/lib/services/categories";
 
@@ -22,11 +21,11 @@ export default async function NewsPage() {
     getPublicArticles(),
     getCategories(),
   ]);
-  const heroArticle = liveArticles[0] || featuredArticle;
+  const heroArticle = liveArticles[0];
   const listArticles = liveArticles.slice(1);
   const categories = categoriesData.map((c) => ({ label: c.name, count: c.count }));
-  // Popular sidebar reflects live content; static list only when DB is empty.
-  const popular = liveArticles.length > 0 ? liveArticles.slice(0, 5) : popularPosts;
+  // Popular sidebar reflects live content only — no static filler.
+  const popular = liveArticles.slice(0, 5);
 
   return (
     <SiteShell>
@@ -48,6 +47,7 @@ export default async function NewsPage() {
       </section>
 
       {/* FEATURED + CATEGORIES */}
+      {heroArticle && (
       <section className="container-site grid gap-6 py-7 lg:grid-cols-[1fr_300px]">
         <article className="card-surface grid overflow-hidden md:grid-cols-2">
           <div className="relative h-56 md:h-full min-h-[220px]">
@@ -84,6 +84,7 @@ export default async function NewsPage() {
         </article>
         <CategoryList categories={categories} />
       </section>
+      )}
 
       {/* LATEST + POPULAR */}
       <section className="container-site grid gap-6 pb-8 lg:grid-cols-[1fr_300px]">

@@ -24,7 +24,7 @@ import { Button } from "@/components/admin/ui/button";
 import { cn } from "@/lib/utils";
 import { getAdminVehicles } from "@/lib/services/vehicles";
 import { getAdminWeapons } from "@/lib/services/weapons";
-import { getSavedComparisons, saveComparisonDraft } from "@/lib/services/comparison";
+import { getSavedComparisons, saveComparisonDraft, deleteComparisonDraft } from "@/lib/services/comparison";
 
 interface AttributeConfig {
   id: string;
@@ -614,17 +614,35 @@ export default function AdminComparisonsPage() {
                         {c.itemCount} item{c.itemCount === 1 ? "" : "s"} · updated{" "}
                         {new Date(c.updatedAt).toLocaleDateString()}
                       </p>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setComparisonName(c.name);
-                          setActiveTab(c.type as "vehicle" | "weapon");
-                          setViewMode("editor");
-                        }}
-                        className="text-xs font-semibold text-[#6366F1] hover:underline"
-                      >
-                        Open in editor →
-                      </button>
+                      <div className="flex items-center justify-between">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setComparisonName(c.name);
+                            setActiveTab(c.type as "vehicle" | "weapon");
+                            setViewMode("editor");
+                          }}
+                          className="text-xs font-semibold text-[#6366F1] hover:underline"
+                        >
+                          Open in editor →
+                        </button>
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            if (!window.confirm(`Delete saved comparison "${c.name}"?`)) return;
+                            const res = await deleteComparisonDraft(c.id);
+                            if (res.success) {
+                              setSavedComparisons((prev) => prev.filter((x) => x.id !== c.id));
+                              showToast({ title: "Saved comparison deleted", type: "success" });
+                            } else {
+                              showToast({ title: res.error || "Delete failed", type: "danger" });
+                            }
+                          }}
+                          className="text-xs font-semibold text-red-400 hover:text-red-300 hover:underline"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>

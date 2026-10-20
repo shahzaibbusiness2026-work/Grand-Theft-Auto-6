@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { articles as fallbackArticles } from "@/lib/data";
 import type { DatabaseArticleRow } from "@/lib/services/articles";
 
 // Revalidate cache every 60 seconds for near-real-time data
@@ -57,7 +56,7 @@ export async function GET() {
       markersRes.status === "fulfilled" ? (markersRes.value.count ?? 0) : 0;
 
     // Map DB rows to Article shape
-    let latestArticles = fallbackArticles.slice(0, 3);
+    let latestArticles: any[] = [];
     if (
       latestRes.status === "fulfilled" &&
       !latestRes.value.error &&
@@ -96,7 +95,7 @@ export async function GET() {
       totalCharacters: 0,
       totalArticles: 0,
       totalMapMarkers: 0,
-      latestArticles: fallbackArticles.slice(0, 3),
+      latestArticles: [],
     });
   }
 }

@@ -25,7 +25,6 @@ import {
   canonicalProperties,
   canonicalCollectibles,
 } from "@/lib/canonical-data";
-import { characters } from "@/lib/data";
 import { TOOL_SEARCH_ITEMS, type SearchItem } from "@/lib/search-types";
 import { cn } from "@/lib/utils";
 
@@ -110,17 +109,7 @@ function buildStaticIndex(): SearchItem[] {
     });
   });
 
-  // Characters
-  characters.forEach((c) => {
-    items.push({
-      id: `char-${c.id}`,
-      title: c.name,
-      subtitle: `${c.role} • ${c.desc.slice(0, 50)}...`,
-      category: "Character",
-      href: "/characters",
-      img: c.img,
-    });
-  });
+  // Characters come from the live API index (CMS characters table).
 
   return items;
 }

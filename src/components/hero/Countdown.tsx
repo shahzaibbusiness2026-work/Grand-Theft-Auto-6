@@ -112,7 +112,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
     { 
       label: "DAYS", 
       value: mounted ? formatNoLeadingZero(t.days) : "--", 
-      subtext: "3.4M Watching",
+      subtext: "To Nov 19, 2026",
       tooltip: `${t.days} Days Total`
     },
     { 

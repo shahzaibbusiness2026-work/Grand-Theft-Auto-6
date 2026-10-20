@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 import { SectionHeader } from "@/components/section-header";
 import { FilterBar } from "@/components/filter-bar";
-import { characters, Character } from "@/lib/data";
+import type { Character } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { CharacterDetailModal } from "@/components/character-detail-modal";
 
@@ -22,7 +22,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
-  const characterList = initialCharacters && initialCharacters.length > 0 ? initialCharacters : characters;
+  const characterList = initialCharacters ?? [];
 
   const luciaChar = characterList.find((c) => c.id === 'lucia');
   const jasonChar = characterList.find((c) => c.id === 'jason');

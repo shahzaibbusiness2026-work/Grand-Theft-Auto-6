@@ -148,6 +148,47 @@ export async function getNewsletterSubscribers(): Promise<NewsletterSubscriber[]
   return [];
 }
 
+/** Admin: manually add a subscriber (imports, corrections, offline signups). */
+export async function adminAddSubscriber(
+  email: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    await assertAdmin();
+    const clean = (email || "").trim().toLowerCase();
+    if (!EMAIL_RE.test(clean)) return { success: false, error: "Invalid email address" };
+    const list =
+      (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || [];
+    if (list.some((s) => s.email === clean)) {
+      return { success: false, error: "That email is already subscribed" };
+    }
+    list.push({ email: clean, subscribed_at: new Date().toISOString() });
+    await setPrivateSetting(SUBSCRIBERS_KEY, list);
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
+/** Admin: remove a subscriber (honors unsubscribe requests immediately). */
+export async function adminRemoveSubscriber(
+  email: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    await assertAdmin();
+    const clean = (email || "").trim().toLowerCase();
+    const list =
+      (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || [];
+    const next = list.filter((s) => s.email !== clean);
+    if (next.length === list.length) {
+      return { success: false, error: "Subscriber not found" };
+    }
+    await setPrivateSetting(SUBSCRIBERS_KEY, next);
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
 /** Pending (unconfirmed) subscriptions, for admin visibility. */
 export async function getPendingSubscribers(): Promise<
   { email: string; created_at: string; expires_at: string }[]

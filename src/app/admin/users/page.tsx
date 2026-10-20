@@ -369,7 +369,6 @@ export default function AdminUsersPage() {
                 <th scope="col" className="p-3.5 font-medium">User</th>
                 <th scope="col" className="p-3.5 font-medium">Role</th>
                 <th scope="col" className="p-3.5 font-medium">Status</th>
-                <th scope="col" className="p-3.5 font-medium">2FA</th>
                 <th scope="col" className="p-3.5 font-medium">Last active</th>
                 <th scope="col" className="p-3.5 font-medium text-right">Actions</th>
               </tr>
@@ -447,11 +446,6 @@ export default function AdminUsersPage() {
                           {u.status}
                         </span>
                       </div>
-                    </td>
-                    <td className="p-3.5">
-                      <span className="text-xs font-mono text-[#94A3B8]">
-                        {u.role === "Administrator" ? "Enabled" : "Optional"}
-                      </span>
                     </td>
                     <td className="p-3.5 text-[#64748B] font-mono text-xs">
                       {u.lastActivity}

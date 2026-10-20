@@ -13,13 +13,15 @@ import {
   Crosshair, 
   MapPin, 
   ShieldCheck,
+  Trash2,
   X
 } from "lucide-react";
 import { DatabaseAsset } from "@/lib/admin-data";
-import { getAdminVehicles, saveVehicle } from "@/lib/services/vehicles";
-import { getAdminWeapons, saveWeapon } from "@/lib/services/weapons";
-import { getLocations, saveLocation } from "@/lib/services/locations";
+import { getAdminVehicles, saveVehicle, deleteVehicle } from "@/lib/services/vehicles";
+import { getAdminWeapons, saveWeapon, deleteWeapon } from "@/lib/services/weapons";
+import { getLocations, saveLocation, deleteLocation } from "@/lib/services/locations";
 import { useToast } from "@/components/admin/toast";
+import { Modal } from "@/components/admin/modal";
 import { cn } from "@/lib/utils";
 
 export default function AdminDatabasePage() {
@@ -31,6 +33,29 @@ export default function AdminDatabasePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<DatabaseAsset | null>(null);
+
+  const handleDeleteAsset = async () => {
+    if (!deleteTarget) return;
+    const target = deleteTarget;
+    setDeleteTarget(null);
+    try {
+      const result =
+        target.category === "vehicle"
+          ? await deleteVehicle(target.id)
+          : target.category === "weapon"
+            ? await deleteWeapon(target.id)
+            : await deleteLocation(target.id);
+      if (result.success) {
+        setAssets((prev) => prev.filter((a) => a.id !== target.id));
+        showToast({ title: "Record deleted", description: `"${target.name}" was permanently removed.`, type: "success" });
+      } else {
+        showToast({ title: "Delete failed", description: result.error || "Could not delete the record.", type: "danger" });
+      }
+    } catch (err) {
+      showToast({ title: "Delete failed", description: String(err), type: "danger" });
+    }
+  };
 
   useEffect(() => {
     Promise.all([
@@ -42,9 +67,9 @@ export default function AdminDatabasePage() {
         id: v.id,
         name: v.name,
         category: "vehicle",
-        status: v.verification === "verified" ? "verified" : "unconfirmed",
+        status: v.verification === "verified" ? "verified" : v.verification === "deprecated" ? "deprecated" : "unconfirmed",
         source: v.manufacturer ? `Manufacturer: ${v.manufacturer}` : "Trailer 1 Footages",
-        lastVerified: new Date().toISOString().substring(0, 10),
+        lastVerified: v.updatedAt ? v.updatedAt.substring(0, 10) : "—",
         verifier: v.lastEditor || "TZG Editor",
         details: v.summary || `${v.name} (${v.class})`
       }));
@@ -52,20 +77,20 @@ export default function AdminDatabasePage() {
         id: w.id,
         name: w.name,
         category: "weapon",
-        status: w.verification === "verified" ? "verified" : "unconfirmed",
+        status: w.verification === "verified" ? "verified" : w.verification === "deprecated" ? "deprecated" : "unconfirmed",
         source: w.acquisitionMethod || "Ammu-Nation",
-        lastVerified: new Date().toISOString().substring(0, 10),
-        verifier: "Atlas Weaponry",
+        lastVerified: w.updatedAt ? w.updatedAt.substring(0, 10) : "—",
+        verifier: "TZG Staff",
         details: w.notes || `${w.name} (${w.category})`
       }));
       const lAssets: DatabaseAsset[] = locations.map(l => ({
         id: l.id,
         name: l.name,
         category: "location",
-        status: l.verification === "verified" ? "verified" : "unconfirmed",
+        status: l.verification === "verified" ? "verified" : l.verification === "deprecated" ? "deprecated" : "unconfirmed",
         source: l.district || "State of Leonida",
-        lastVerified: new Date().toISOString().substring(0, 10),
-        verifier: "Atlas Cartography",
+        lastVerified: "—",
+        verifier: "TZG Staff",
         details: l.description || `${l.name} (${l.type})`
       }));
       const combined = [...vAssets, ...wAssets, ...lAssets];
@@ -106,14 +131,24 @@ export default function AdminDatabasePage() {
     asset: DatabaseAsset,
     nextStatus: "verified" | "unconfirmed" | "deprecated"
   ): Promise<{ success: boolean; error?: string }> => {
-    // Map portal status -> service verification value
-    const verification = nextStatus === "verified" ? "verified" : "unverified";
+    // Deprecate is a real persisted state; vehicles/weapons are also
+    // unpublished so deprecated items leave the public catalog (and are
+    // republished when un-deprecated). Partial saves merge server-side,
+    // so no other field of the record is touched.
+    const verification =
+      nextStatus === "verified" ? "verified" : nextStatus === "deprecated" ? "deprecated" : "unverified";
+    const publishStatus =
+      nextStatus === "deprecated"
+        ? "draft"
+        : asset.status === "deprecated"
+          ? "published"
+          : undefined;
     try {
       if (asset.category === "vehicle") {
-        return await saveVehicle({ id: asset.id, name: asset.name, verification });
+        return await saveVehicle({ id: asset.id, name: asset.name, verification, status: publishStatus });
       }
       if (asset.category === "weapon") {
-        return await saveWeapon({ id: asset.id, name: asset.name, verification });
+        return await saveWeapon({ id: asset.id, name: asset.name, verification, status: publishStatus });
       }
       return await saveLocation({ id: asset.id, name: asset.name, verification } as Parameters<typeof saveLocation>[0]);
     } catch (err) {
@@ -402,6 +437,14 @@ export default function AdminDatabasePage() {
                       Flag Unconfirmed
                     </button>
                   )}
+                  <button
+                    onClick={() => setDeleteTarget(ast)}
+                    disabled={updatingId === ast.id}
+                    title={`Delete ${ast.name} permanently`}
+                    className="px-2.5 py-1 rounded-lg bg-red-950/50 border border-red-800/50 hover:bg-red-900/60 text-red-300 font-bold text-xs transition-colors disabled:opacity-50 inline-flex items-center gap-1"
+                  >
+                    <Trash2 className="w-3 h-3" /> Delete
+                  </button>
                   {ast.status !== "deprecated" && (
                     <button
                       onClick={() => handleUpdateStatus(ast.id, "deprecated")}
@@ -417,6 +460,37 @@ export default function AdminDatabasePage() {
           ))
         )}
       </div>
+
+      <Modal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete this record?"
+        variant="danger"
+        size="sm"
+        footer={
+          <>
+            <button
+              type="button"
+              onClick={() => setDeleteTarget(null)}
+              className="px-4 py-2 rounded-xl text-sm text-[#94A3B8] hover:text-white transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleDeleteAsset}
+              className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold transition-colors"
+            >
+              Delete permanently
+            </button>
+          </>
+        }
+      >
+        <p className="text-sm text-[#94A3B8]">
+          Permanently delete <span className="font-bold text-white">{deleteTarget?.name}</span> (
+          {deleteTarget?.category}) from the database? This cannot be undone.
+        </p>
+      </Modal>
 
       {/* Add Asset Modal */}
       {isAddModalOpen && (

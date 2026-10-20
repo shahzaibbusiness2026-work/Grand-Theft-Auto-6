@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge";
 import { SectionHeader } from "@/components/section-header";
 import { NewsletterBar } from "@/components/newsletter-bar";
 import { ArticleCard, PopularRow, CategoryList } from "@/components/article-card";
-import { popularPosts } from "@/lib/data";
 import { getPublicArticles } from "@/lib/services/queries";
 import { getCategories } from "@/lib/services/categories";
 
@@ -31,7 +30,7 @@ export default async function BlogPage() {
   const listArticles = liveArticles.slice(1);
   const blogCategories = categoriesData.map((c) => ({ label: c.name, count: c.count }));
   // Popular sidebar reflects live content; static list only when DB is empty.
-  const popular = liveArticles.length > 0 ? liveArticles.slice(0, 5) : popularPosts;
+  const popular = liveArticles.slice(0, 5);
 
   return (
     <SiteShell>

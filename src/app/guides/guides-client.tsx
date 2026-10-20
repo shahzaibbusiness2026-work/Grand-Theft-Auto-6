@@ -23,7 +23,6 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Donut } from "@/components/ui/donut";
-import { guideCategories, featuredGuides, popularGuides } from "@/lib/data";
 import type { GuideRecord } from "@/lib/services/guides";
 import { cn } from "@/lib/utils";
 
@@ -72,7 +71,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
   const hasLive = !!(guides && guides.length > 0);
 
   const liveCategories = (() => {
-    if (!hasLive) return guideCategories;
+    if (!hasLive) return [];
     const counts = new Map<string, number>();
     for (const g of guides!) {
       counts.set(g.category, (counts.get(g.category) || 0) + 1);
@@ -85,7 +84,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
   })();
 
   const liveFeatured = hasLive ? guides!.filter((g) => g.featured).map(toCard) : [];
-  const featuredCards = liveFeatured.length > 0 ? liveFeatured : featuredGuides;
+  const featuredCards = liveFeatured;
 
   const livePopular = hasLive
     ? guides!
@@ -93,20 +92,14 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
         .sort((a, b) => (b.views || 0) - (a.views || 0))
         .map(toCard)
     : [];
-  const popularCards = livePopular.length > 0 ? livePopular : popularGuides;
+  const popularCards = livePopular;
 
   const weekTop = hasLive
     ? [...guides!]
         .sort((a, b) => (b.views || 0) - (a.views || 0))
         .slice(0, 5)
         .map((g) => ({ title: g.title, read: g.read_time || "10 min read", views: formatViews(g.views), img: g.image || "/img/hero-dark.jpg" }))
-    : [
-        { title: "How to Get the Best Early Weapons", read: "9 min read", views: "14.2K", img: "/img/rifle.svg" },
-        { title: "Hidden Packages Locations", read: "11 min read", views: "12.6K", img: "/img/treasure.svg" },
-        { title: "Best Properties to Buy", read: "10 min read", views: "10.9K", img: "/img/hero-dark.jpg" },
-        { title: "All Secret Vehicles & How to Unlock", read: "17 min read", views: "9.2K", img: "/img/car-purple.jpg" },
-        { title: "Skill Progression Guide", read: "6 min read", views: "8.1K", img: "/img/char-jason.jpg" },
-      ];
+    : [];
 
   return (
     <div className="grid w-full gap-6 px-4 py-8 sm:px-6 md:px-8 lg:px-10 lg:grid-cols-[240px_1fr_290px]">

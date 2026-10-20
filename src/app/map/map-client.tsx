@@ -12,9 +12,6 @@ const DISTRICT_GUIDES = [
   {
     name: "Vice City Downtown",
     desc: "The glittering neon metropolis of Leonida. High-rise penthouses, corporate headquarters, luxury dealerships, and intense underground syndicates.",
-    pois: 58,
-    missions: 24,
-    collectibles: 32,
     threat: "High Police Activity",
     img: "/img/apartment.jpg",
     tags: ["Safehouses", "Luxury Showrooms", "Ammu-Nation"],
@@ -22,9 +19,6 @@ const DISTRICT_GUIDES = [
   {
     name: "Ocean Drive & South Beach",
     desc: "Sun-soaked beachfront strips, art-deco hotels, waterfront mod garages, and iconic late-night clubs like The Malibú.",
-    pois: 46,
-    missions: 18,
-    collectibles: 28,
     threat: "Medium Patrols",
     img: "/img/garage.jpg",
     tags: ["Mod Shops", "Nightclubs", "Waterfront"],
@@ -32,9 +26,6 @@ const DISTRICT_GUIDES = [
   {
     name: "Leonida Keys",
     desc: "Vast archipelago of tropical islands, shallow coral reefs, smuggler marinas, hidden sunken caches, and coastal bank branches.",
-    pois: 38,
-    missions: 14,
-    collectibles: 35,
     threat: "Coastguard Patrols",
     img: "/img/boat.jpg",
     tags: ["Speedboats", "Submerged Loot", "Heists"],
@@ -42,9 +33,6 @@ const DISTRICT_GUIDES = [
   {
     name: "Grassrivers Marshlands",
     desc: "Expansive untamed swamplands, wildlife sanctuaries, abandoned military silos, and mysterious extraterrestrial graffiti murals.",
-    pois: 42,
-    missions: 16,
-    collectibles: 41,
     threat: "Wildlife & Smugglers",
     img: "/img/ufo-mural.jpg",
     tags: ["Easter Eggs", "Airboats", "Wild Fauna"],
@@ -52,9 +40,6 @@ const DISTRICT_GUIDES = [
   {
     name: "Port Gellhorn & Industrial",
     desc: "Heavy shipping cargo docks, industrial railyards, underground safehouses, container yards, and high-caliber weapon caches.",
-    pois: 36,
-    missions: 12,
-    collectibles: 24,
     threat: "Private Security",
     img: "/img/smg-gun.jpg",
     tags: ["Cargo Depots", "Weapons", "Escape Routes"],
@@ -62,9 +47,6 @@ const DISTRICT_GUIDES = [
   {
     name: "Mount Kalaga National Park",
     desc: "Forested mountain wilderness, ranger stations, off-road trails, and panoramic lookouts. Confirmed as GTA 6's northern wilderness region.",
-    pois: 32,
-    missions: 11,
-    collectibles: 19,
     threat: "Remote / Wildlife",
     img: "/img/hero-dark.jpg",
     tags: ["Stunt Jumps", "Lookouts", "Off-Road"],
@@ -72,9 +54,6 @@ const DISTRICT_GUIDES = [
   {
     name: "Ambrosia",
     desc: "Rural inland heartland with farmland, small towns, and backroad Americana. A quieter corner of Leonida with hidden secrets.",
-    pois: 28,
-    missions: 9,
-    collectibles: 22,
     threat: "Low Patrols",
     img: "/img/garage.jpg",
     tags: ["Farms", "Small Towns", "Backroads"],
@@ -186,22 +165,6 @@ export function MapClient() {
                 <p className="text-xs leading-relaxed text-slate-300 font-medium">
                   {d.desc}
                 </p>
-
-                {/* Stat row */}
-                <div className="grid grid-cols-3 gap-2 rounded-2xl border border-white/10 bg-black/40 p-3 text-center">
-                  <div>
-                    <span className="block text-xs uppercase font-bold text-slate-400">POIs</span>
-                    <span className="font-mono text-sm font-black text-white">{d.pois}</span>
-                  </div>
-                  <div>
-                    <span className="block text-xs uppercase font-bold text-slate-400">Missions</span>
-                    <span className="font-mono text-sm font-black text-gold-light">{d.missions}</span>
-                  </div>
-                  <div>
-                    <span className="block text-xs uppercase font-bold text-slate-400">Secrets</span>
-                    <span className="font-mono text-sm font-black text-[#00F0FF]">{d.collectibles}</span>
-                  </div>
-                </div>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-1.5 pt-1">

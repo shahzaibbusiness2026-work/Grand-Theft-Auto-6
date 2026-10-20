@@ -18,12 +18,6 @@ export interface MissionRecord {
   location?: string;
 }
 
-const FALLBACK_MISSIONS: MissionRecord[] = [
-  { id: "mis-1", name: "Leonida Corrections Breakout", protagonist: "Lucia", act: "Prologue / Act 1", status: "Confirmed", objectives: "Escape penitentiary grounds with contact assistance." },
-  { id: "mis-2", name: "Convenience Store Robbery", protagonist: "Both", act: "Act 1", status: "Confirmed", objectives: "Armed robbery of Vice City convenience store." },
-  { id: "mis-3", name: "Port Gellhorn Airfield Infiltration", protagonist: "Jason", act: "Act 2", status: "Rumoured", objectives: "Secure contraband flight plan from hangar." },
-];
-
 export async function getMissions(): Promise<MissionRecord[]> {
   try {
     const supabase = await createServerSupabase();
@@ -36,8 +30,8 @@ export async function getMissions(): Promise<MissionRecord[]> {
       const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
       if (Array.isArray(parsed) && parsed.length > 0) return parsed as MissionRecord[];
     }
-  } catch { /* fallback */ }
-  return FALLBACK_MISSIONS;
+  } catch { /* no fallback — never invent missions */ }
+  return [];
 }
 
 /**
