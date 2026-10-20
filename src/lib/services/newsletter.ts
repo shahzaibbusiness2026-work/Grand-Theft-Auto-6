@@ -1,7 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
-import { randomBytes, createHash } from "crypto";
+import { createHash } from "crypto";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { getPrivateSetting, setPrivateSetting } from "./private-settings";
 import { peekRateLimit, recordRateLimitHit } from "@/lib/rate-limit";
@@ -23,17 +23,9 @@ const PENDING_KEY = "newsletter_pending";
 
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-const CONFIRM_TOKEN_TTL_MS = 24 * 60 * 60 * 1000; // 24h
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-function getSiteBaseUrl(): string {
-  const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  if (envUrl && envUrl.startsWith("http")) return envUrl.replace(/\/$/, "");
-  const vercelUrl = process.env.VERCEL_URL;
-  if (vercelUrl) return `https://${vercelUrl}`;
-  return "http://localhost:3000";
-}
 
 function hashToken(token: string): string {
   return createHash("sha256").update(token).digest("hex");
@@ -52,62 +44,12 @@ async function purgeExpiredPending(list: PendingSubscription[]): Promise<Pending
   return fresh;
 }
 
-async function sendConfirmationEmail(email: string, token: string): Promise<boolean> {
-  const apiKey = process.env.RESEND_API_KEY;
-  const confirmUrl = `${getSiteBaseUrl()}/newsletter/confirm?token=${encodeURIComponent(token)}`;
-
-  if (!apiKey) {
-    // Email service not configured: still store the pending subscription and
-    // surface the link in server logs so it can be confirmed during dev.
-    // In production, set RESEND_API_KEY so users actually receive this.
-    console.warn(
-      `[newsletter] RESEND_API_KEY not set — confirmation email for ${email} NOT sent. ` +
-        `Confirmation link: ${confirmUrl}`
-    );
-    return false;
-  }
-
-  try {
-    const { Resend } = await import("resend");
-    const resend = new Resend(apiKey);
-    const from =
-      process.env.NEWSLETTER_FROM_EMAIL ||
-      process.env.BROADCAST_FROM_EMAIL ||
-      "Tahzaib Gaming <onboarding@resend.dev>";
-
-    const { error } = await resend.emails.send({
-      from,
-      to: email,
-      subject: "Confirm your Tahzaib Gaming newsletter subscription",
-      text:
-        `Thanks for signing up for Tahzaib Gaming updates!\n\n` +
-        `Please confirm your subscription by clicking this link (valid for 24 hours):\n${confirmUrl}\n\n` +
-        `If you didn't request this, you can safely ignore this email.`,
-      html:
-        `<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">` +
-        `<h2>Confirm your subscription</h2>` +
-        `<p>Thanks for signing up for Tahzaib Gaming updates! Click the button below to confirm your email address (link valid for 24 hours).</p>` +
-        `<p><a href="${confirmUrl}" style="display: inline-block; background: #C9A86A; color: #000; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">Confirm subscription</a></p>` +
-        `<p style="font-size: 12px; color: #888;">If you didn't request this, you can safely ignore this email.</p>` +
-        `</div>`,
-    });
-    if (error) {
-      console.error("[newsletter] Resend error:", error.message);
-      return false;
-    }
-    return true;
-  } catch (err) {
-    console.error("[newsletter] Failed to send confirmation email:", err);
-    return false;
-  }
-}
 
 /**
- * Double opt-in newsletter signup:
+ * Single opt-in newsletter signup:
  *  1. Validates + rate-limits the request.
- *  2. Stores a pending subscription with a 24h-expiring confirmation token.
- *  3. Sends a confirmation email — the address is ONLY added to the live
- *     subscriber list after the token link is clicked.
+ *  2. Adds the address directly to the live subscriber list — no
+ *     confirmation email or link click required.
  */
 export async function subscribeNewsletter(
   email: string
@@ -135,39 +77,12 @@ export async function subscribeNewsletter(
       return { success: true, message: "You're already subscribed." };
     }
 
-    let pending = await purgeExpiredPending(await getPending());
-    const existing = pending.find((p) => p.email === cleanEmail);
-    if (existing) {
-      // Re-send the confirmation email rather than creating a duplicate.
-      const token = randomBytes(32).toString("hex");
-      const tokenHash = hashToken(token);
-      pending = pending.map((p) =>
-        p.email === cleanEmail
-          ? {
-              ...p,
-              token_hash: tokenHash,
-              created_at: new Date().toISOString(),
-              expires_at: new Date(Date.now() + CONFIRM_TOKEN_TTL_MS).toISOString(),
-            }
-          : p
-      );
-      await setPrivateSetting(PENDING_KEY, pending);
-      await sendConfirmationEmail(cleanEmail, token);
-      return { success: true, message: "Check your email to confirm your subscription." };
-    }
+    await setPrivateSetting(SUBSCRIBERS_KEY, [
+      ...subscribers,
+      { email: cleanEmail, subscribed_at: new Date().toISOString() },
+    ]);
 
-    const token = randomBytes(32).toString("hex");
-    const now = new Date();
-    pending.push({
-      email: cleanEmail,
-      token_hash: hashToken(token),
-      created_at: now.toISOString(),
-      expires_at: new Date(now.getTime() + CONFIRM_TOKEN_TTL_MS).toISOString(),
-    });
-    await setPrivateSetting(PENDING_KEY, pending);
-    await sendConfirmationEmail(cleanEmail, token);
-
-    return { success: true, message: "Check your email to confirm your subscription." };
+    return { success: true, message: "You're subscribed — see you at launch!" };
   } catch (err) {
     console.error("Newsletter subscription error:", err);
     return { success: false, message: "Failed to subscribe. Please try again." };
