@@ -878,15 +878,6 @@
   animation: heroRiseIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes digitTick {
-  0% { opacity: 0; transform: translateY(10px) scale(0.96); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-.countdown-digit {
-  display: inline-block;
-  animation: digitTick 0.45s ease-out both;
-}
-
 @keyframes neonDriftA {
   0% { transform: translate3d(-6%, -4%, 0) scale(1); }
   50% { transform: translate3d(5%, 3%, 0) scale(1.15); }
@@ -923,6 +914,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hero-enter { opacity: 1; animation: none; }
-  .countdown-digit, .hero-neon-a, .hero-neon-b { animation: none; }
+  .hero-neon-a, .hero-neon-b { animation: none; }
   .progress-shimmer::after { animation: none; display: none; }
 }

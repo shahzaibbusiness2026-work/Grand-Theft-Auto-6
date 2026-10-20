@@ -92,11 +92,15 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
       return;
     }
     let raf = 0;
+    let frame = 0;
     const start = performance.now();
     const DUR = 2600;
     const step = (now: number) => {
       const p = Math.min(1, (now - start) / DUR);
-      setIntroP(p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+      frame += 1;
+      if (frame % 2 === 0 || p >= 1) {
+        setIntroP(p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+      }
       if (p < 1) raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
@@ -133,25 +137,25 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
   const cells = useMemo(() => [
     { 
       label: "DAYS", 
-      value: mounted ? formatNoLeadingZero(roll(t.days)) : "--", 
+      value: mounted ? formatNoLeadingZero(t.days) : "--", 
       subtext: "To Nov 19, 2026",
       tooltip: `${t.days} Days Total`
     },
     { 
       label: "HOURS", 
-      value: mounted ? formatNoLeadingZero(roll(t.hours)) : "--", 
+      value: mounted ? formatNoLeadingZero(t.hours) : "--", 
       subtext: `${t.totalHours.toLocaleString()} Total`,
       tooltip: `${t.totalHours.toLocaleString()} Hours Total`
     },
     { 
       label: "MINUTES", 
-      value: mounted ? formatNoLeadingZero(roll(t.minutes)) : "--", 
+      value: mounted ? formatNoLeadingZero(t.minutes) : "--", 
       subtext: `${t.totalMinutes.toLocaleString()} Total`,
       tooltip: `${t.totalMinutes.toLocaleString()} Minutes Total`
     },
     { 
       label: "SECONDS", 
-      value: mounted ? formatNoLeadingZero(roll(t.seconds)) : "--", 
+      value: mounted ? formatNoLeadingZero(t.seconds) : "--", 
       subtext: `${t.totalSeconds.toLocaleString()} Total`,
       tooltip: `${t.totalSeconds.toLocaleString()} Seconds Total`
     },
@@ -258,7 +262,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
             >
               {/* Digit display without leading zeros */}
               <span className="font-display tabular-nums text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
-                <span key={cell.value} className="countdown-digit">{cell.value}</span>
+                {cell.value}
               </span>
 
               {/* Unit Label */}
