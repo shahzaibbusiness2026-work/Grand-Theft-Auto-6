@@ -49,7 +49,7 @@ export default function DMCAPage() {
               <li>A statement that the information in the notice is accurate, and under penalty of perjury, that you are authorized to act on behalf of the copyright owner.</li>
             </ul>
             <p>
-              Send takedown notices to our designated copyright agent via the <a href="/contact" className="underline font-semibold hover:text-foreground">contact page</a> with the subject line "DMCA Takedown Request".
+              Send takedown notices to our designated copyright agent via the <a href="/contact" className="underline font-semibold hover:text-foreground">contact page</a> with the subject line &quot;DMCA Takedown Request&quot;.
             </p>
           </section>
 
@@ -79,14 +79,14 @@ export default function DMCAPage() {
               Content on GTA 6 Atlas — including game references, database entries, commentary, and analysis — is published for informational, educational, and commentary purposes. All original commentary, database curation, software code, and UI design are the property of GTA 6 Atlas.
             </p>
             <p>
-              Trailer videos embedded on this site are hosted by YouTube and streamed from Rockstar Games' official channel. We do not host or redistribute copyrighted video files.
+              Trailer videos embedded on this site are hosted by YouTube and streamed from Rockstar Games&apos; official channel. We do not host or redistribute copyrighted video files.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">6. Contact</h2>
             <p>
-              For all copyright-related inquiries, please use our <a href="/contact" className="underline font-semibold hover:text-foreground">contact page</a> with the subject line "DMCA" or "Copyright". We aim to respond to valid notices within 48 hours.
+              For all copyright-related inquiries, please use our <a href="/contact" className="underline font-semibold hover:text-foreground">contact page</a> with the subject line &quot;DMCA&quot; or &quot;Copyright&quot;. We aim to respond to valid notices within 48 hours.
             </p>
           </section>
         </div>

@@ -845,3 +845,22 @@
 
 
 
+
+/* Daily hero background: fade in on scene change + slow cinematic zoom
+   (video-like motion with zero extra weight). */
+@keyframes heroBgFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes heroBgKenBurns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.hero-bg-img {
+  animation: heroBgFadeIn 1.2s ease both, heroBgKenBurns 24s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-img {
+    animation: heroBgFadeIn 0.3s ease both;
+  }
+}
