@@ -83,6 +83,28 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
   const [copied, setCopied] = useState(false);
   const [selectedUnit, setSelectedUnit] = useState<string | null>(null);
 
+  // Intro count-up: on load, every number rolls 0 -> real value over 2.6s
+  // (easeOutExpo) in sync with the completion bar, then live ticking takes over.
+  const [introP, setIntroP] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      setIntroP(1);
+      return;
+    }
+    let raf = 0;
+    const start = performance.now();
+    const DUR = 2600;
+    const step = (now: number) => {
+      const p = Math.min(1, (now - start) / DUR);
+      setIntroP(p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+      if (p < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+  const introDone = introP >= 1;
+  const roll = (n: number) => Math.round(n * introP);
+
   useEffect(() => {
     setT(getRemainingTime(launchDate));
     setStats(getCompletionStats());
@@ -111,29 +133,29 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
   const cells = useMemo(() => [
     { 
       label: "DAYS", 
-      value: mounted ? formatNoLeadingZero(t.days) : "--", 
+      value: mounted ? formatNoLeadingZero(roll(t.days)) : "--", 
       subtext: "To Nov 19, 2026",
       tooltip: `${t.days} Days Total`
     },
     { 
       label: "HOURS", 
-      value: mounted ? formatNoLeadingZero(t.hours) : "--", 
+      value: mounted ? formatNoLeadingZero(roll(t.hours)) : "--", 
       subtext: `${t.totalHours.toLocaleString()} Total`,
       tooltip: `${t.totalHours.toLocaleString()} Hours Total`
     },
     { 
       label: "MINUTES", 
-      value: mounted ? formatNoLeadingZero(t.minutes) : "--", 
+      value: mounted ? formatNoLeadingZero(roll(t.minutes)) : "--", 
       subtext: `${t.totalMinutes.toLocaleString()} Total`,
       tooltip: `${t.totalMinutes.toLocaleString()} Minutes Total`
     },
     { 
       label: "SECONDS", 
-      value: mounted ? formatNoLeadingZero(t.seconds) : "--", 
+      value: mounted ? formatNoLeadingZero(roll(t.seconds)) : "--", 
       subtext: `${t.totalSeconds.toLocaleString()} Total`,
       tooltip: `${t.totalSeconds.toLocaleString()} Seconds Total`
     },
-  ], [mounted, t]);
+  ], [mounted, t, introP]);
 
   const accessibleSummary = mounted
     ? `${t.days} days, ${t.hours} hours, ${t.minutes} minutes, and ${t.seconds} seconds remaining until launch. Journey is ${stats.percentage}% complete.`
@@ -271,10 +293,10 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
           </div>
           <div className="flex items-center gap-2 sm:gap-3 font-mono text-xs sm:text-sm">
             <span className="text-white/70 font-medium hidden sm:inline">
-              {stats.elapsedDays.toLocaleString()} elapsed / {stats.remainingDays}d to go
+              {roll(stats.elapsedDays).toLocaleString()} elapsed / {stats.remainingDays}d to go
             </span>
             <span className="font-bold text-sm sm:text-base text-[#00F0FF] tabular-nums drop-shadow-[0_0_10px_rgba(0,240,255,0.7)]">
-              {mounted ? `${stats.percentage}%` : "--%"}
+              {mounted ? `${(stats.percentage * introP).toFixed(1)}%` : "--%"}
             </span>
             <span className="text-white font-medium text-xs sm:text-sm">
               Complete
@@ -289,7 +311,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
         >
           <div
             className="h-full rounded-full bg-gradient-to-r from-[#00D2FF] to-[#38BDF8] shadow-[0_0_15px_#00F0FF] transition-all duration-1000 ease-out relative flex items-center justify-end"
-            style={{ width: `${mounted ? stats.percentage : 0}%` }}
+            style={{ width: `${mounted ? stats.percentage * introP : 0}%`, transition: introDone ? undefined : "none" }}
           >
             <span className="progress-shimmer" aria-hidden="true" />
             {/* Glowing White Thumb Knob at the tip */}
@@ -312,7 +334,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
           <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-white">
             {mounted
               ? preloadDays > 0
-                ? <>Pre-load in <span className="text-[#FF2E9A]">{preloadDays} day{preloadDays !== 1 ? "s" : ""}</span> — Nov 12</>
+                ? <>Pre-load in <span className="text-[#FF2E9A]">{roll(preloadDays)} day{preloadDays !== 1 ? "s" : ""}</span> — Nov 12</>
                 : "Pre-load is live now"
               : "Pre-load — Nov 12"}
           </span>
