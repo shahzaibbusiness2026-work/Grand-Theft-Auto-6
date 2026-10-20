@@ -53,7 +53,6 @@ export function HomeSatelliteMap() {
       <div className="relative z-20 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-black/75 px-5 py-3.5 backdrop-blur-xl">
         <div className="flex items-center gap-3">
           <span className="relative flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#00F0FF]" />
           </span>
           <span className="font-display text-xs font-black uppercase tracking-[0.25em] text-white">
@@ -105,7 +104,7 @@ export function HomeSatelliteMap() {
                 aria-label={p.name}
               >
                 {isSelected && (
-                  <span className="absolute -inset-2.5 rounded-full border-2 border-white bg-gold/40 animate-ping" />
+                  <span className="absolute -inset-2.5 rounded-full border-2 border-white bg-gold/40" />
                 )}
                 <span
                   className={cn(

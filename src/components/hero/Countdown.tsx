@@ -196,7 +196,6 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
           </p>
           <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#00F0FF] bg-[#00F0FF]/10 border border-[#00F0FF]/50 rounded-full px-3 py-0.5 backdrop-blur-md shadow-[0_0_12px_rgba(0,240,255,0.25)]">
             <span className="relative flex w-2 h-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F0FF] opacity-60" />
               <span className="relative inline-flex w-2 h-2 rounded-full bg-[#00F0FF] shadow-[0_0_8px_#00F0FF]" />
             </span>
             LIVE
@@ -260,10 +259,10 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
               aria-label={`${cell.value} ${cell.label}${isSelected ? " (selected)" : ""}`}
               aria-pressed={isSelected}
               className={cn(
-                "group relative flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-all border backdrop-blur-xl",
+                "group relative flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors border",
                 isSelected
                   ? "bg-black/50 border-[#00F0FF] shadow-[0_0_35px_rgba(0,240,255,0.4)] scale-[1.03]"
-                  : "bg-black/35 border-white/20 hover:border-[#00F0FF]/60 hover:bg-black/45 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]"
+                  : "bg-black/55 border-white/20 hover:border-[#00F0FF]/60 hover:bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]"
               )}
             >
               {/* Digit display without leading zeros */}
@@ -316,11 +315,11 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
 
         {/* The Animated Progress Track with Glowing Thumb Knob */}
         <div 
-          className="relative w-full h-2.5 sm:h-3 rounded-full bg-black/60 border border-white/20 backdrop-blur-md p-0 shadow-inner flex items-center"
+          className="relative w-full h-2.5 sm:h-3 rounded-full bg-black/60 border border-white/20 p-0 shadow-inner flex items-center"
           title={`Reveal to Launch Window: ${stats.percentage}% elapsed`}
         >
           <div
-            className="h-full rounded-full bg-gradient-to-r from-[#00D2FF] to-[#38BDF8] shadow-[0_0_15px_#00F0FF] transition-all duration-1000 ease-out relative flex items-center justify-end"
+            className="h-full rounded-full bg-gradient-to-r from-[#00D2FF] to-[#38BDF8] shadow-[0_0_15px_#00F0FF] relative flex items-center justify-end"
             style={{ width: `${stats.percentage * (mounted ? introP : 1)}%`, transition: mounted && !introDone ? "none" : undefined }}
           >
             <span className="progress-shimmer" aria-hidden="true" />
@@ -340,7 +339,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
       {/* 4. Pre-load countdown */}
       <div className="pt-4 flex justify-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-[#FF2E9A]/60 bg-[#FF2E9A]/10 px-4 py-1.5 backdrop-blur-md shadow-[0_0_16px_rgba(255,46,154,0.25)]">
-          <span className="w-2 h-2 rounded-full bg-[#FF2E9A] shadow-[0_0_8px_#FF2E9A] animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-[#FF2E9A] shadow-[0_0_8px_#FF2E9A]" />
           <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-white">
             {mounted
               ? preloadDays > 0
