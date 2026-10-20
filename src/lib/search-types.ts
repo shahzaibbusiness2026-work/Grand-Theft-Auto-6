@@ -82,13 +82,6 @@ export const TOOL_SEARCH_ITEMS: SearchItem[] = [
     href: "/tools/loadout-builder",
   },
   {
-    id: "tool-ai",
-    title: "Ask GTA 6 AI Assistant",
-    subtitle: "Grounded intelligence companion with confidence citations",
-    category: "Tool",
-    href: "/ai",
-  },
-  {
     id: "tool-collectibles",
     title: "Collectibles Finder",
     subtitle: "Hidden packages, stunt ramps, radio masts & wildlife photos",

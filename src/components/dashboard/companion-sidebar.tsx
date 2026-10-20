@@ -14,7 +14,6 @@ import {
   Sparkles,
   BookOpen,
   Newspaper,
-  Bot,
   Users,
   Crown,
   Check,
@@ -39,7 +38,6 @@ const NAV_ITEMS = [
   { href: "/collectibles", label: "Collectibles", icon: Sparkles, color: "text-fuchsia-400 group-hover:text-fuchsia-300 light:text-fuchsia-600 bg-fuchsia-500/10 border-fuchsia-500/25" },
   { href: "/guides", label: "Guides", icon: BookOpen, color: "text-orange-400 group-hover:text-orange-300 light:text-orange-600 bg-orange-500/10 border-orange-500/25" },
   { href: "/news", label: "News", icon: Newspaper, color: "text-indigo-400 group-hover:text-indigo-300 light:text-indigo-600 bg-indigo-500/10 border-indigo-500/25" },
-  { href: "/ai", label: "Ask GTA 6 AI", icon: Bot, color: "text-[#00F0FF] group-hover:text-cyan-200 light:text-cyan-600 bg-cyan-400/10 border-cyan-400/25" },
   { href: "/blog", label: "Community", icon: Users, color: "text-pink-400 group-hover:text-pink-300 light:text-pink-600 bg-pink-500/10 border-pink-500/25" },
 ];
 

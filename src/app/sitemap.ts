@@ -68,7 +68,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/tools/weapon-dps-calculator",
     "/tools/garage-planner",
     "/site-map",
-    "/ai",
     "/pricing",
     "/characters",
     "/radio",

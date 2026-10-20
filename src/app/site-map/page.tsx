@@ -57,7 +57,6 @@ export default function SiteMapPage() {
         { label: "Guides", href: "/guides", desc: "How-tos & walkthroughs" },
         { label: "Radio Stations", href: "/radio", desc: "Leonida airwaves" },
         { label: "Cheats & Codes", href: "/cheats", desc: "Codes & secrets" },
-        { label: "Ask GTA 6 AI", href: "/ai", desc: "AI companion" },
       ],
     },
     {

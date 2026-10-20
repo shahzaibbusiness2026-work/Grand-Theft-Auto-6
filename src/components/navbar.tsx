@@ -13,7 +13,6 @@ import {
   X,
   LayoutGrid,
   Crown,
-  Bot,
   MapPin,
   Building2,
   Users,
@@ -94,7 +93,6 @@ const MORE_SECTIONS: MoreSection[] = [
   {
     title: "More",
     links: [
-      { href: "/ai", label: "Ask GTA 6 AI", icon: Bot },
       { href: "/pricing", label: "Vice City Pro", icon: Crown },
       { href: "/contact", label: "Contact", icon: Mail },
     ],

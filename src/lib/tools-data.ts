@@ -8,7 +8,6 @@ import {
   Building2,
   Compass,
   MapPin,
-  Bot,
   Sliders,
   ArrowRight,
   Wrench,
@@ -267,16 +266,6 @@ export const ALL_TOOLS: ToolItem[] = [
   },
 
   // AI & Assistance
-  {
-    id: "tool-ai",
-    name: "Ask GTA 6 AI Companion",
-    category: "AI & Assistance",
-    desc: "Ask any question regarding GTA 6 lore, vehicles, weapons, or heists. Grounded strictly in official disclosures with verifiable citations.",
-    href: "/ai",
-    badge: "Tool 15",
-    icon: Bot,
-    highlight: true,
-  },
   {
     id: "tool-character-quiz",
     name: "Which GTA 6 Character Are You?",
