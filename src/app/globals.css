@@ -846,8 +846,10 @@
 
 
 
-/* Daily hero background: fade in on scene change + slow cinematic zoom
-   (video-like motion with zero extra weight). */
+/* Daily hero background: one-time fade-in when the scene changes.
+   No infinite animations anywhere in the hero — continuously animating
+   full-screen images and large blurred glows cause visible jitter on
+   weaker devices, so all ambient motion here is static. */
 @keyframes heroBgFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -857,10 +859,10 @@
   to { transform: scale(1.08); }
 }
 .hero-bg-img {
-  animation: heroBgFadeIn 1.2s ease both, heroBgKenBurns 24s ease-in-out infinite alternate;
+  animation: heroBgFadeIn 1.2s ease both;
 }
 .hero-bg-kenburns {
-  animation: heroBgKenBurns 24s ease-in-out infinite alternate;
+  animation: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-bg-img {
@@ -894,8 +896,8 @@
   50% { transform: translate3d(-5%, -3%, 0) scale(0.95); }
   100% { transform: translate3d(6%, 5%, 0) scale(1.1); }
 }
-.hero-neon-a { animation: neonDriftA 26s ease-in-out infinite; }
-.hero-neon-b { animation: neonDriftB 32s ease-in-out infinite; }
+.hero-neon-a { animation: none; }
+.hero-neon-b { animation: none; }
 
 @keyframes progressShimmer {
   from { transform: translateX(-110%); }
@@ -915,7 +917,7 @@
   bottom: 0;
   width: 45%;
   background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
-  animation: progressShimmer 2.8s ease-in-out infinite;
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
