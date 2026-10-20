@@ -14,6 +14,12 @@ import { SITE_CONFIG } from "@/lib/constants";
 // Timeline boundaries: Reveal Trailer (Dec 5, 2023) -> Target Launch (Nov 19, 2026)
 const REVEAL_DATE = new Date("2023-12-05T00:00:00Z");
 const LAUNCH_DATE = new Date(SITE_CONFIG.targetReleaseDate);
+const PRELOAD_DATE = new Date("2026-11-12T00:00:00Z");
+
+function getPreloadDaysLeft() {
+  const ms = PRELOAD_DATE.getTime() - Date.now();
+  return Math.max(0, Math.ceil(ms / 86_400_000));
+}
 
 function getRemainingTime(target: Date) {
   const now = Date.now();
@@ -71,6 +77,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
 
   const [t, setT] = useState(() => getRemainingTime(launchDate));
   const [stats, setStats] = useState(() => getCompletionStats());
+  const [preloadDays, setPreloadDays] = useState(() => getPreloadDaysLeft());
   const [mounted, setMounted] = useState(false);
   const [timezoneMode, setTimezoneMode] = useState<"local" | "vice">("local");
   const [copied, setCopied] = useState(false);
@@ -79,11 +86,13 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
   useEffect(() => {
     setT(getRemainingTime(launchDate));
     setStats(getCompletionStats());
+    setPreloadDays(getPreloadDaysLeft());
     setMounted(true);
 
     const interval = setInterval(() => {
       setT(getRemainingTime(launchDate));
       setStats(getCompletionStats());
+      setPreloadDays(getPreloadDaysLeft());
     }, 1000);
 
     return () => clearInterval(interval);
@@ -292,7 +301,21 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
         </div>
       </div>
 
-      {/* 4. Footer Note */}
+      {/* 4. Pre-load countdown */}
+      <div className="pt-4 flex justify-center">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[#FF2E9A]/60 bg-[#FF2E9A]/10 px-4 py-1.5 backdrop-blur-md shadow-[0_0_16px_rgba(255,46,154,0.25)]">
+          <span className="w-2 h-2 rounded-full bg-[#FF2E9A] shadow-[0_0_8px_#FF2E9A] animate-pulse" />
+          <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-white">
+            {mounted
+              ? preloadDays > 0
+                ? <>Pre-load in <span className="text-[#FF2E9A]">{preloadDays} day{preloadDays !== 1 ? "s" : ""}</span> — Nov 12</>
+                : "Pre-load is live now"
+              : "Pre-load — Nov 12"}
+          </span>
+        </span>
+      </div>
+
+      {/* 5. Footer Note */}
       <div className="pt-3 text-center">
         <p className="text-xs sm:text-xs text-white/70 font-medium">
           {caption || (isConfirmed ?? SITE_CONFIG.isReleaseDateConfirmed
