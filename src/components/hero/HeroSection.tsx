@@ -28,6 +28,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
       <div className="relative z-10 mx-auto w-full max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl flex flex-col items-center justify-center flex-1 py-8 sm:py-14 text-center">
         {/* Countdown in Center */}
+        <div className="hero-enter w-full" style={{ animationDelay: "0.05s" }}>
         <Countdown
           className="w-full max-w-xl sm:max-w-3xl mx-auto"
           targetDate={settings?.targetReleaseDate}
@@ -35,11 +36,15 @@ export function HeroSection({ settings }: HeroSectionProps) {
           isConfirmed={settings?.isReleaseDateConfirmed}
         />
 
+        </div>
+
         {/* Email capture directly below the countdown */}
-        <HeroSignup />
+        <div className="hero-enter w-full flex justify-center" style={{ animationDelay: "0.3s" }}>
+          <HeroSignup />
+        </div>
 
         {/* Action Buttons Centered Below Countdown */}
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
+        <div className="hero-enter flex flex-wrap items-center justify-center gap-4 pt-6" style={{ animationDelay: "0.45s" }}>
           <Link
             href="/map"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 dark:from-[#00D2FF] dark:via-[#00A3FF] dark:to-[#0066FF] hover:from-sky-400 hover:to-indigo-500 dark:hover:from-[#38BDF8] dark:hover:to-[#0055EE] px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all shadow-[0_4px_20px_rgba(14,165,233,0.35)] dark:shadow-[0_0_30px_rgba(0,210,255,0.45)] hover:shadow-[0_6px_25px_rgba(14,165,233,0.5)] dark:hover:shadow-[0_0_40px_rgba(0,210,255,0.7)] active:scale-95"
@@ -60,7 +65,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
       </div>
 
       {/* 3. BOTTOM QUICK-ACCESS FEATURE BAR */}
-      <div className="relative z-10 w-full border-t border-white/10 pt-5 mt-6 max-w-7xl mx-auto transition-colors">
+      <div className="hero-enter relative z-10 w-full border-t border-white/10 pt-5 mt-6 max-w-7xl mx-auto" style={{ animationDelay: "0.65s" }}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {/* Feature 1: Latest stories */}
           <Link href="/news" className="group flex items-center gap-4 transition-colors">

@@ -163,7 +163,10 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
             RELEASE TIMELINE
           </p>
           <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#00F0FF] bg-[#00F0FF]/10 border border-[#00F0FF]/50 rounded-full px-3 py-0.5 backdrop-blur-md shadow-[0_0_12px_rgba(0,240,255,0.25)]">
-            <span className="w-2 h-2 rounded-full bg-[#00F0FF] shadow-[0_0_8px_#00F0FF]" />
+            <span className="relative flex w-2 h-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F0FF] opacity-60" />
+              <span className="relative inline-flex w-2 h-2 rounded-full bg-[#00F0FF] shadow-[0_0_8px_#00F0FF]" />
+            </span>
             LIVE
           </span>
         </div>
@@ -233,7 +236,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
             >
               {/* Digit display without leading zeros */}
               <span className="font-display tabular-nums text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
-                {cell.value}
+                <span key={cell.value} className="countdown-digit">{cell.value}</span>
               </span>
 
               {/* Unit Label */}
@@ -288,6 +291,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
             className="h-full rounded-full bg-gradient-to-r from-[#00D2FF] to-[#38BDF8] shadow-[0_0_15px_#00F0FF] transition-all duration-1000 ease-out relative flex items-center justify-end"
             style={{ width: `${mounted ? stats.percentage : 0}%` }}
           >
+            <span className="progress-shimmer" aria-hidden="true" />
             {/* Glowing White Thumb Knob at the tip */}
             <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-white border-2 border-[#00D2FF] shadow-[0_0_12px_#00F0FF] z-10" />
           </div>
