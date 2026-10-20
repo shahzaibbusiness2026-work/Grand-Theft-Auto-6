@@ -859,9 +859,15 @@
 .hero-bg-img {
   animation: heroBgFadeIn 1.2s ease both, heroBgKenBurns 24s ease-in-out infinite alternate;
 }
+.hero-bg-kenburns {
+  animation: heroBgKenBurns 24s ease-in-out infinite alternate;
+}
 @media (prefers-reduced-motion: reduce) {
   .hero-bg-img {
     animation: heroBgFadeIn 0.3s ease both;
+  }
+  .hero-bg-kenburns {
+    animation: none;
   }
 }
 

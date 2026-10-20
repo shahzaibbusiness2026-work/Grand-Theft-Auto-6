@@ -93,7 +93,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
     }
     let raf = 0;
     let frame = 0;
-    const start = performance.now();
+    let start = performance.now();
     const DUR = 2600;
     const step = (now: number) => {
       const p = Math.min(1, (now - start) / DUR);
@@ -103,8 +103,14 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
       }
       if (p < 1) raf = requestAnimationFrame(step);
     };
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
+    const kick = setTimeout(() => {
+      start = performance.now();
+      raf = requestAnimationFrame(step);
+    }, 150);
+    return () => {
+      clearTimeout(kick);
+      cancelAnimationFrame(raf);
+    };
   }, []);
   const introDone = introP >= 1;
   const roll = (n: number) => Math.round(n * introP);
@@ -297,10 +303,10 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
           </div>
           <div className="flex items-center gap-2 sm:gap-3 font-mono text-xs sm:text-sm">
             <span className="text-white/70 font-medium hidden sm:inline">
-              {roll(stats.elapsedDays).toLocaleString()} elapsed / {stats.remainingDays}d to go
+              {(mounted ? roll(stats.elapsedDays) : stats.elapsedDays).toLocaleString()} elapsed / {stats.remainingDays}d to go
             </span>
             <span className="font-bold text-sm sm:text-base text-[#00F0FF] tabular-nums drop-shadow-[0_0_10px_rgba(0,240,255,0.7)]">
-              {mounted ? `${(stats.percentage * introP).toFixed(1)}%` : "--%"}
+              {`${(mounted ? stats.percentage * introP : stats.percentage).toFixed(1)}%`}
             </span>
             <span className="text-white font-medium text-xs sm:text-sm">
               Complete
@@ -315,7 +321,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
         >
           <div
             className="h-full rounded-full bg-gradient-to-r from-[#00D2FF] to-[#38BDF8] shadow-[0_0_15px_#00F0FF] transition-all duration-1000 ease-out relative flex items-center justify-end"
-            style={{ width: `${mounted ? stats.percentage * introP : 0}%`, transition: introDone ? undefined : "none" }}
+            style={{ width: `${stats.percentage * (mounted ? introP : 1)}%`, transition: mounted && !introDone ? "none" : undefined }}
           >
             <span className="progress-shimmer" aria-hidden="true" />
             {/* Glowing White Thumb Knob at the tip */}

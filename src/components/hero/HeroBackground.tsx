@@ -10,9 +10,9 @@ import { useEffect, useState } from "react";
  * deterministically from the calendar date, so the background changes at
  * local midnight with no cron job, no API call, and no cache busting.
  *
- * The server renders scene[0] (matches the pre-mount HTML, no hydration
- * mismatch); after mount the client swaps to today's scene with a fade.
- * An open tab also re-checks at the next local midnight.
+ * Server and client both initialise to today's scene (same UTC-day
+ * formula), so the first paint is already correct — no post-load swap.
+ * An open tab crossfades to the next scene at rotation time.
  */
 const SCENES = [
   {
@@ -59,14 +59,25 @@ function todaysIndex(): number {
 }
 
 export function HeroBackground() {
-  const [idx, setIdx] = useState(0);
-  const scene = SCENES[idx];
+  // Initialise with TODAY's scene on both server and client, so the first
+  // paint is already correct — no post-load swap that reads as a refresh.
+  const [baseIdx, setBaseIdx] = useState<number>(() => todaysIndex());
+  const [incomingIdx, setIncomingIdx] = useState<number | null>(null);
+  const [incomingReady, setIncomingReady] = useState(false);
+  const scene = SCENES[baseIdx];
+  const incoming = incomingIdx !== null ? SCENES[incomingIdx] : null;
 
   useEffect(() => {
-    const update = () => setIdx(todaysIndex());
+    const update = () => {
+      const t = todaysIndex();
+      if (t !== baseIdx && t !== incomingIdx) {
+        setIncomingReady(false);
+        setIncomingIdx(t);
+      }
+    };
     update();
 
-    // Rotate an already-open page at the next local midnight.
+    // Rotate an already-open page: check at the next local midnight, then hourly.
     const now = new Date();
     const nextMidnight = new Date(
       now.getFullYear(),
@@ -77,8 +88,23 @@ export function HeroBackground() {
       2,
     );
     const timer = setTimeout(update, nextMidnight.getTime() - now.getTime());
-    return () => clearTimeout(timer);
-  }, []);
+    const hourly = setInterval(update, 3_600_000);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(hourly);
+    };
+  }, [baseIdx, incomingIdx]);
+
+  // Once the incoming scene has fully faded in, promote it to the base layer.
+  useEffect(() => {
+    if (incomingIdx === null || !incomingReady) return;
+    const t = setTimeout(() => {
+      setBaseIdx(incomingIdx);
+      setIncomingIdx(null);
+      setIncomingReady(false);
+    }, 1100);
+    return () => clearTimeout(t);
+  }, [incomingIdx, incomingReady]);
 
   return (
     <div
@@ -88,10 +114,9 @@ export function HeroBackground() {
       {/* 1. Base background: adapts to light/dark */}
       <div className="absolute inset-0 bg-slate-100 dark:bg-[#090d16] transition-colors duration-300" />
 
-      {/* 2. Daily-rotating scene (key forces a fade on change) */}
+      {/* 2. Today's scene (base layer — correct from first paint) */}
       <div className="absolute inset-0 w-full h-full">
         <Image
-          key={scene.src}
           src={scene.src}
           alt={scene.alt}
           fill
@@ -101,6 +126,26 @@ export function HeroBackground() {
           className="object-cover object-center hero-bg-img"
         />
       </div>
+
+      {/* 2b. Incoming scene (midnight rotation only): crossfades OVER the base
+          once fully loaded, so the background never pops or vanishes. */}
+      {incoming && (
+        <div className="absolute inset-0 w-full h-full">
+          <Image
+            src={incoming.src}
+            alt={incoming.alt}
+            fill
+            quality={80}
+            sizes="100vw"
+            onLoad={() => setIncomingReady(true)}
+            style={{
+              opacity: incomingReady ? 1 : 0,
+              transition: "opacity 1000ms ease",
+            }}
+            className="object-cover object-center hero-bg-kenburns"
+          />
+        </div>
+      )}
 
       {/* 3. Atmospheric overlay preserving readability */}
       <div className="absolute inset-0 bg-black/35 transition-colors duration-300" />
