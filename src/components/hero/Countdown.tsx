@@ -75,45 +75,18 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
     return LAUNCH_DATE;
   }, [targetDate]);
 
-  const [t, setT] = useState(() => getRemainingTime(launchDate));
-  const [stats, setStats] = useState(() => getCompletionStats());
-  const [preloadDays, setPreloadDays] = useState(() => getPreloadDaysLeft());
+  // Constant first render, identical on server and client; the mount effect
+  // below sets the real values once. Wall-clock initialisers made server and
+  // client HTML differ on every load, so React discarded and rebuilt the
+  // whole countdown — a visible flicker on every refresh.
+  const [t, setT] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, totalDays: 0, totalHours: 0, totalMinutes: 0, totalSeconds: 0 });
+  const [stats, setStats] = useState({ percentage: 0, elapsedDays: 0, totalDays: 0, remainingDays: 0 });
+  const [preloadDays, setPreloadDays] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [timezoneMode, setTimezoneMode] = useState<"local" | "vice">("local");
   const [copied, setCopied] = useState(false);
   const [selectedUnit, setSelectedUnit] = useState<string | null>(null);
 
-  // Intro count-up: on load, every number rolls 0 -> real value over 2.6s
-  // (easeOutExpo) in sync with the completion bar, then live ticking takes over.
-  const [introP, setIntroP] = useState(0);
-  useEffect(() => {
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-      setIntroP(1);
-      return;
-    }
-    let raf = 0;
-    let frame = 0;
-    let start = performance.now();
-    const DUR = 2600;
-    const step = (now: number) => {
-      const p = Math.min(1, (now - start) / DUR);
-      frame += 1;
-      if (frame % 2 === 0 || p >= 1) {
-        setIntroP(p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
-      }
-      if (p < 1) raf = requestAnimationFrame(step);
-    };
-    const kick = setTimeout(() => {
-      start = performance.now();
-      raf = requestAnimationFrame(step);
-    }, 150);
-    return () => {
-      clearTimeout(kick);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-  const introDone = introP >= 1;
-  const roll = (n: number) => Math.round(n * introP);
 
   useEffect(() => {
     setT(getRemainingTime(launchDate));
@@ -165,7 +138,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
       subtext: `${t.totalSeconds.toLocaleString()} Total`,
       tooltip: `${t.totalSeconds.toLocaleString()} Seconds Total`
     },
-  ], [mounted, t, introP]);
+  ], [mounted, t]);
 
   const accessibleSummary = mounted
     ? `${t.days} days, ${t.hours} hours, ${t.minutes} minutes, and ${t.seconds} seconds remaining until launch. Journey is ${stats.percentage}% complete.`
@@ -302,10 +275,10 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
           </div>
           <div className="flex items-center gap-2 sm:gap-3 font-mono text-xs sm:text-sm">
             <span className="text-white/70 font-medium hidden sm:inline">
-              {(mounted ? roll(stats.elapsedDays) : stats.elapsedDays).toLocaleString()} elapsed / {stats.remainingDays}d to go
+              {stats.elapsedDays.toLocaleString()} elapsed / {stats.remainingDays}d to go
             </span>
             <span className="font-bold text-sm sm:text-base text-[#00F0FF] tabular-nums drop-shadow-[0_0_10px_rgba(0,240,255,0.7)]">
-              {`${(mounted ? stats.percentage * introP : stats.percentage).toFixed(1)}%`}
+              {`${stats.percentage.toFixed(1)}%`}
             </span>
             <span className="text-white font-medium text-xs sm:text-sm">
               Complete
@@ -320,7 +293,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
         >
           <div
             className="h-full rounded-full bg-gradient-to-r from-[#00D2FF] to-[#38BDF8] shadow-[0_0_15px_#00F0FF] relative flex items-center justify-end"
-            style={{ width: `${stats.percentage * (mounted ? introP : 1)}%`, transition: mounted && !introDone ? "none" : undefined }}
+            style={{ width: `${stats.percentage}%` }}
           >
             <span className="progress-shimmer" aria-hidden="true" />
             {/* Glowing White Thumb Knob at the tip */}
@@ -343,7 +316,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
           <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-white">
             {mounted
               ? preloadDays > 0
-                ? <>Pre-load in <span className="text-[#FF2E9A]">{roll(preloadDays)} day{preloadDays !== 1 ? "s" : ""}</span> — Nov 12</>
+                ? <>Pre-load in <span className="text-[#FF2E9A]">{preloadDays} day{preloadDays !== 1 ? "s" : ""}</span> — Nov 12</>
                 : "Pre-load is live now"
               : "Pre-load — Nov 12"}
           </span>
