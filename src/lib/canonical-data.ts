@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------ */
-/* GTA 6 Atlas — Canonical Verified Database                          */
+/* Tahzaib Gaming — Canonical Verified Database                          */
 /* Strict adherence to information confidence levels:                */
 /* OFFICIAL | CONFIRMED | REPORTED | RUMORED | SPECULATION            */
 /* ------------------------------------------------------------------ */

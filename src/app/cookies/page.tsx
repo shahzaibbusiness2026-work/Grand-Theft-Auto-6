@@ -4,8 +4,8 @@ import {  CheckCircle2, Shield } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | GTA 6 Atlas",
-  description: "Learn how GTA 6 Atlas uses cookies and client storage to remember your preferences and interactive map layers.",
+  title: "Cookie Policy | Tahzaib Gaming",
+  description: "Learn how Tahzaib Gaming uses cookies and client storage to remember your preferences and interactive map layers.",
   alternates: { canonical: "/cookies" },
   };
 

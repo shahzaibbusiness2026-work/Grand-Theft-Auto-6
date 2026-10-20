@@ -234,7 +234,7 @@ export default function AdminArticlesPage() {
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
-            Manage, edit and publish content for GTA 6 Atlas. All information is unverified and subject to change.
+            Manage, edit and publish content for Tahzaib Gaming. All information is unverified and subject to change.
           </p>
         </div>
 

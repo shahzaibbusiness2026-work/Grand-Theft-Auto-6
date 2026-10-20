@@ -206,7 +206,7 @@ export default function AdminWeaponsPage() {
               Weapons Management
             </h1>
             <p className="text-xs text-[#94A3B8] mt-1">
-              Manage weapon records for GTA 6 Atlas. Records show their actual verification status.
+              Manage weapon records for Tahzaib Gaming. Records show their actual verification status.
             </p>
           </div>
 

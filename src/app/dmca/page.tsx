@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-  title: "DMCA & Copyright Policy | GTA 6 Atlas",
-  description: "DMCA takedown and copyright infringement policy for GTA 6 Atlas. How to submit a copyright complaint or counter-notice.",
+  title: "DMCA & Copyright Policy | Tahzaib Gaming",
+  description: "DMCA takedown and copyright infringement policy for Tahzaib Gaming. How to submit a copyright complaint or counter-notice.",
   alternates: { canonical: "/dmca" },
 };
 
@@ -28,17 +28,17 @@ export default function DMCAPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">1. Our Commitment</h2>
             <p>
-              GTA 6 Atlas respects the intellectual property rights of others and complies with the Digital Millennium Copyright Act (DMCA) and applicable international copyright laws. We respond promptly to valid takedown notices and take repeat infringement seriously.
+              Tahzaib Gaming respects the intellectual property rights of others and complies with the Digital Millennium Copyright Act (DMCA) and applicable international copyright laws. We respond promptly to valid takedown notices and take repeat infringement seriously.
             </p>
             <p>
-              GTA 6 Atlas is an unofficial fan site. We do not claim ownership of Grand Theft Auto, GTA, Rockstar Games, Take-Two Interactive, or any associated trademarks, characters, artwork, or titles — these belong to their respective owners.
+              Tahzaib Gaming is an unofficial fan site. We do not claim ownership of Grand Theft Auto, GTA, Rockstar Games, Take-Two Interactive, or any associated trademarks, characters, artwork, or titles — these belong to their respective owners.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">2. Filing a Takedown Notice</h2>
             <p>
-              If you believe that content on GTA 6 Atlas infringes your copyright, you may submit a takedown notice. Under the DMCA, your notice must include:
+              If you believe that content on Tahzaib Gaming infringes your copyright, you may submit a takedown notice. Under the DMCA, your notice must include:
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>A physical or electronic signature of the copyright owner or authorized agent.</li>
@@ -76,7 +76,7 @@ export default function DMCAPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">5. Fair Use</h2>
             <p>
-              Content on GTA 6 Atlas — including game references, database entries, commentary, and analysis — is published for informational, educational, and commentary purposes. All original commentary, database curation, software code, and UI design are the property of GTA 6 Atlas.
+              Content on Tahzaib Gaming — including game references, database entries, commentary, and analysis — is published for informational, educational, and commentary purposes. All original commentary, database curation, software code, and UI design are the property of Tahzaib Gaming.
             </p>
             <p>
               Trailer videos embedded on this site are hosted by YouTube and streamed from Rockstar Games&apos; official channel. We do not host or redistribute copyrighted video files.

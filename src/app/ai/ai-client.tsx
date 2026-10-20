@@ -42,7 +42,7 @@ export function AIClient() {
       content:
         "Welcome to **Ask GTA 6 AI**. I am your grounded intelligence companion for the State of Leonida. Every response is verified against canonical trailers, official Rockstar announcements, and validated leak archives — strictly tagged with confidence ratings and verifiable citations.",
       confidence: "OFFICIAL",
-      sources: ["Rockstar Games Official Disclosures", "GTA 6 Atlas Database"],
+      sources: ["Rockstar Games Official Disclosures", "Tahzaib Gaming Database"],
       suggestedTools: [
         { label: "100% Completion Tracker", href: "/tracker" },
         { label: "Interactive Satellite Map", href: "/map" },
@@ -127,7 +127,7 @@ export function AIClient() {
         content:
           "Intelligence conversation reset. Ask any question regarding GTA 6 vehicles, firearms, safehouses, or story missions.",
         confidence: "OFFICIAL",
-        sources: ["GTA 6 Atlas Database"],
+        sources: ["Tahzaib Gaming Database"],
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       },
     ]);

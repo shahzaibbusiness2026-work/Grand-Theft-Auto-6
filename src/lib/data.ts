@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------ */
-/* GTA 6 Atlas — central mock database                                 */
+/* Tahzaib Gaming — central mock database                                 */
 /* ------------------------------------------------------------------ */
 
 export interface Character {
@@ -535,9 +535,9 @@ export const trackerCategories = [
 
 export const faqs = [
   { q: "How can I report a bug or issue?", a: "Use the contact form above or email support@gta6atlas.com. Our team typically responds within 24 hours." },
-  { q: "Can I suggest new features for GTA 6 Atlas?", a: "Absolutely! We love community ideas. Send us your suggestion and we might build it for the next release." },
-  { q: "Is GTA 6 Atlas affiliated with Rockstar Games?", a: "No. GTA 6 Atlas is an unofficial fan-made companion and is not affiliated with Rockstar Games or Take-Two Interactive." },
+  { q: "Can I suggest new features for Tahzaib Gaming?", a: "Absolutely! We love community ideas. Send us your suggestion and we might build it for the next release." },
+  { q: "Is Tahzaib Gaming affiliated with Rockstar Games?", a: "No. Tahzaib Gaming is an unofficial fan-made companion and is not affiliated with Rockstar Games or Take-Two Interactive." },
   { q: "How long does it take to get a response?", a: "We reply within 24 hours on business days. Live chat is available 9:00 AM – 9:00 PM EST, Monday to Sunday." },
-  { q: "Where can I follow GTA 6 Atlas for updates?", a: "Follow us on Instagram, Twitter, YouTube and Discord for the latest news and announcements." },
+  { q: "Where can I follow Tahzaib Gaming for updates?", a: "Follow us on Instagram, Twitter, YouTube and Discord for the latest news and announcements." },
 ];
 

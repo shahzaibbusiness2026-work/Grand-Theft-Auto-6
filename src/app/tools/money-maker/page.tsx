@@ -6,7 +6,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Money-Making Method Finder & Grinding Strategies — GTA 6 Atlas",
+  title: "Money-Making Method Finder & Grinding Strategies — Tahzaib Gaming",
   description:
     "Intelligent GTA 6 money-making route recommender. Discover the highest-paying heists, passive nightclub operations, and vehicle salvage strategies ranked by cash per hour.",
 
@@ -27,12 +27,12 @@ export default function MoneyMakerPage() {
                 itemListElement: [
                   { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "Money-Making Method Finder & Grinding Strategies \u2014 GTA 6 Atlas", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-maker" },
+                  { "@type": "ListItem", position: 3, name: "Money-Making Method Finder & Grinding Strategies \u2014 Tahzaib Gaming", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-maker" },
                 ],
               },
               {
                 "@type": "WebApplication",
-                name: "Money-Making Method Finder & Grinding Strategies \u2014 GTA 6 Atlas",
+                name: "Money-Making Method Finder & Grinding Strategies \u2014 Tahzaib Gaming",
                 description: "Intelligent GTA 6 money-making route recommender. Discover the highest-paying heists, passive nightclub operations, and vehicle salvage strategies ranked by cash per hour.",
                 url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-maker",
                 applicationCategory: "UtilitiesApplication",

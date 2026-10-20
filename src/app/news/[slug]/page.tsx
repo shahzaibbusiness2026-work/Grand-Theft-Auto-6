@@ -160,7 +160,7 @@ export default async function ArticleDetailPage({ params }: Props) {
         author: { "@type": "Person", name: article.author_name || "Atlas Editorial" },
         publisher: {
           "@type": "Organization",
-          name: "GTA 6 Atlas",
+          name: "Tahzaib Gaming",
           logo: { "@type": "ImageObject", url: `${base}/img/hero-dark.jpg` },
         },
         mainEntityOfPage: `${base}/news/${article.slug}`,
@@ -309,7 +309,7 @@ export default async function ArticleDetailPage({ params }: Props) {
 
         {related.length > 0 && (
           <section className="mt-8 pb-4">
-            <h2 className="font-display text-xl font-extrabold">More from GTA 6 Atlas</h2>
+            <h2 className="font-display text-xl font-extrabold">More from Tahzaib Gaming</h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {related.map((a) => (
                 <ArticleCard key={`grid-${a.slug || a.title}`} article={a} />

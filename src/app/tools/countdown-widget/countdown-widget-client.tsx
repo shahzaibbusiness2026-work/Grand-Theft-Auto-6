@@ -159,7 +159,7 @@ export function CountdownWidgetClient() {
               href="/"
               className="text-[10px] font-semibold text-neutral-500 hover:text-gold-light transition-colors inline-flex items-center gap-1"
             >
-              Powered by GTA 6 Atlas <ExternalLink className="h-2.5 w-2.5" />
+              Powered by Tahzaib Gaming <ExternalLink className="h-2.5 w-2.5" />
             </Link>
             {!parts.live && (
               <span className="text-xs font-bold text-emerald-400">GTA 6 is out now — see you in Leonida!</span>

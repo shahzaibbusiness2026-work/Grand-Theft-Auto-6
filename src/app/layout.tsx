@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = seo.canonicalBaseUrl?.startsWith("http")
     ? seo.canonicalBaseUrl
     : FALLBACK_SITE_URL;
-  const siteTitle = settings.siteTitle || "GTA 6 Atlas";
+  const siteTitle = settings.siteTitle || "Tahzaib Gaming";
   const description = seo.metaDescription || settings.siteDescription;
   const ogImage = seo.socialPreviewImage || "/img/hero-dark.jpg";
   // Title template from the CMS; fall back to the classic "%s | Site" form.
@@ -91,11 +91,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         "@type": "WebSite",
         "@id": `${siteUrl}/#website`,
         "url": siteUrl,
-        "name": "GTA 6 Atlas",
+        "name": "Tahzaib Gaming",
         "description": "The Ultimate GTA 6 Companion Platform & Database",
         "publisher": {
           "@type": "Organization",
-          "name": "GTA 6 Atlas",
+          "name": "Tahzaib Gaming",
         },
       },
       {

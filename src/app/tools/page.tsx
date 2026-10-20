@@ -5,7 +5,7 @@ import { serializeJsonLd } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "All 26 Interactive Tools & Calculators — GTA 6 Atlas",
+  title: "All 26 Interactive Tools & Calculators — Tahzaib Gaming",
   description:
     "Complete suite of 26 production-ready interactive tools for Grand Theft Auto VI: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, and AI assistant.",
   alternates: { canonical: "/tools" },
@@ -31,7 +31,7 @@ export default function ToolsPage() {
           __html: serializeJsonLd({
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "GTA 6 Atlas Tools",
+            name: "Tahzaib Gaming Tools",
             description: "Interactive tools and calculators for Grand Theft Auto VI.",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "GTA 6 Money Calculator", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-calculator" },
@@ -51,7 +51,7 @@ export default function ToolsPage() {
               <Sparkles className="h-3 w-3" /> Complete Utility Suite
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
-              GTA 6 ATLAS <span className="text-primary">TOOLBOX</span>
+              TAHZAIB GAMING <span className="text-primary">TOOLBOX</span>
             </h1>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Explore all 15 fully interactive utilities engineered for Grand Theft Auto VI.

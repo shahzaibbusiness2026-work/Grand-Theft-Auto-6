@@ -41,7 +41,7 @@ export default function AdminSettingsPage() {
   const { showToast } = useToast();
   const [settings, setSettings] = useState<ComprehensiveSiteSettings>({
     ...INITIAL_ADMIN_SETTINGS,
-    siteTitle: "GTA 6 Atlas",
+    siteTitle: "Tahzaib Gaming",
     siteTagline: "The Ultimate GTA 6 Companion Platform & Database",
     siteDescription: "Your independent, high-performance tactical intelligence guide and reconnaissance map for Grand Theft Auto VI.",
     targetReleaseDate: "2026-11-19T00:00:00Z",
@@ -49,7 +49,7 @@ export default function AdminSettingsPage() {
     countdownCaption: "Target countdown • Official date to be confirmed by Rockstar Games",
     heroHeading: "Grand Theft Auto VI — Official Database & Interactive Atlas",
     heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
-    announcementBanner: "GTA 6 Atlas — The Ultimate Interactive Companion for Grand Theft Auto VI",
+    announcementBanner: "Tahzaib Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
     contactEmail: "contact@gta6atlas.com",
     twitterHandle: "@GTA6Atlas",
     discordUrl: "https://discord.gg/gta6atlas",
@@ -716,7 +716,7 @@ export default function AdminSettingsPage() {
               type="text"
               value={settings.siteTitle || ""}
               onChange={(e) => handleUpdate({ siteTitle: e.target.value })}
-              placeholder="GTA 6 Atlas"
+              placeholder="Tahzaib Gaming"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
             />
             <p className="text-xs text-[#64748B] mt-1">Used in the browser tab, metadata and sitemap.</p>

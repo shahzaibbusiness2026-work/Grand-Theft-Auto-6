@@ -209,7 +209,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 description: weapon.description,
                 image: weapon.img,
                 category: weapon.klass,
-                brand: { "@type": "Brand", name: "GTA 6 Atlas" },
+                brand: { "@type": "Brand", name: "Tahzaib Gaming" },
                 url: `https://grand-theft-auto-6-5ap5.vercel.app/weapons/${weapon.slug}`,
               },
             ],

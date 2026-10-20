@@ -189,7 +189,7 @@ export async function POST(req: Request) {
     return NextResponse.json<AIResponsePayload>({
       answer: `According to verified Rockstar Games disclosures, Grand Theft Auto VI is set across the fictional State of Leonida featuring protagonists Lucia and Jason. While speculation surrounds unannounced mechanics, our atlas strictly catalogues confirmed vehicles, firearms, mission objectives, and properties with verifiable citations. For unannounced specifics (such as release day launch times or unconfirmed character cameos), details remain unverified by Rockstar.`,
       confidence: "CONFIRMED",
-      sources: ["Rockstar Games Official Press Releases", "GTA 6 Atlas Canonical Database"],
+      sources: ["Rockstar Games Official Press Releases", "Tahzaib Gaming Canonical Database"],
       suggestedTools: [
         { label: "100% Completion Tracker", href: "/tracker" },
         { label: "Interactive Satellite Map", href: "/map" },

@@ -72,7 +72,7 @@ export async function POST(req: Request) {
       subscriberCount: subscribers.length,
       subject,
       messagePreview: message.slice(0, 500) + (message.length > 500 ? "..." : ""),
-      from: process.env.BROADCAST_FROM_EMAIL || "GTA 6 Atlas <onboarding@resend.dev>",
+      from: process.env.BROADCAST_FROM_EMAIL || "Tahzaib Gaming <onboarding@resend.dev>",
     });
   }
 
@@ -97,14 +97,14 @@ export async function POST(req: Request) {
 
   const resend = new Resend(apiKey);
   const from =
-    process.env.BROADCAST_FROM_EMAIL || "GTA 6 Atlas <onboarding@resend.dev>";
+    process.env.BROADCAST_FROM_EMAIL || "Tahzaib Gaming <onboarding@resend.dev>";
 
   // Plain-text + simple HTML version of the message
   const htmlMessage = message
     .split("\n")
     .map((line) => line.trim() === "" ? "<br>" : `<p>${escapeHtml(line)}</p>`)
     .join("");
-  const htmlBody = `<!DOCTYPE html><html><body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">${htmlMessage}<hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;"><p style="font-size: 12px; color: #888;">You received this because you signed up for GTA 6 Atlas launch alerts.</p></body></html>`;
+  const htmlBody = `<!DOCTYPE html><html><body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">${htmlMessage}<hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;"><p style="font-size: 12px; color: #888;">You received this because you signed up for Tahzaib Gaming launch alerts.</p></body></html>`;
 
   // Use Resend's batch API (up to 100 per call) instead of sequential
   // sends: avoids Vercel function timeouts on large lists and prevents

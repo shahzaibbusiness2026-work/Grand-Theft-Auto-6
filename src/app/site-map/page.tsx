@@ -5,9 +5,9 @@ import { ALL_TOOLS } from "@/lib/tools-data";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sitemap — Every Page on GTA 6 Atlas",
+  title: "Sitemap — Every Page on Tahzaib Gaming",
   description:
-    "Complete sitemap of GTA 6 Atlas: all 26 interactive tools, vehicle and weapon databases, character guides, the Leonida map, news, and guides.",
+    "Complete sitemap of Tahzaib Gaming: all 26 interactive tools, vehicle and weapon databases, character guides, the Leonida map, news, and guides.",
   alternates: { canonical: "/site-map" },
 };
 
@@ -98,7 +98,7 @@ export default function SiteMapPage() {
             Site<span className="text-primary">map</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Every page on GTA 6 Atlas, organized by section. Looking for the machine-readable
+            Every page on Tahzaib Gaming, organized by section. Looking for the machine-readable
             version? See our <Link href="/sitemap.xml" className="font-semibold text-primary hover:underline">XML sitemap</Link>.
           </p>
         </div>

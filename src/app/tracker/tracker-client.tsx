@@ -597,7 +597,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
     if (!userState) return;
     const payload = {
       version: "1.0",
-      app: "GTA 6 Atlas 100% Completion Tracker",
+      app: "Tahzaib Gaming 100% Completion Tracker",
       exportedAt: new Date().toISOString(),
       stats: {
         total: totalMilestones,
@@ -633,7 +633,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
           saveStoredUserState(current);
           alert(`Success! Restored ${parsed.completedIds.length} completed checklist items.`);
         } else {
-          alert("Invalid backup file format. Expected a valid GTA 6 Atlas JSON export.");
+          alert("Invalid backup file format. Expected a valid Tahzaib Gaming JSON export.");
         }
       } catch (err) {
         alert("Failed to parse the backup JSON file.");

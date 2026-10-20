@@ -51,7 +51,7 @@ export async function Footer() {
 
   const socials = [
     { icon: Instagram, label: "Rockstar Games Instagram", href: "https://www.instagram.com/rockstargames" },
-    { icon: Twitter, label: "GTA 6 Atlas X / Twitter", href: settings.twitterHandle ? `https://twitter.com/${settings.twitterHandle.replace('@', '')}` : "https://twitter.com/rockstargames" },
+    { icon: Twitter, label: "Tahzaib Gaming X / Twitter", href: settings.twitterHandle ? `https://twitter.com/${settings.twitterHandle.replace('@', '')}` : "https://twitter.com/rockstargames" },
     { icon: Youtube, label: "Rockstar Games YouTube", href: "https://www.youtube.com/@RockstarGames" },
     { icon: Gamepad2, label: "GTA Community Discord", href: settings.discordUrl || "https://discord.gg/gta" },
   ];
@@ -66,7 +66,7 @@ export async function Footer() {
               "Your ultimate guide to Grand Theft Auto 6. Explore every location, character, vehicle, mission and secret across Leonida."}
           </p>
           <p className="mt-2 max-w-xs text-xs text-muted-foreground/70">
-            GTA 6 Atlas is an unofficial fan site and is not affiliated with
+            Tahzaib Gaming is an unofficial fan site and is not affiliated with
             Rockstar Games or Take-Two Interactive.
           </p>
           <div className="mt-5 flex items-center gap-3">
@@ -106,7 +106,7 @@ export async function Footer() {
         <div className="container-site flex flex-col items-center justify-between gap-4 py-6 text-[13px] text-muted-foreground sm:flex-row">
           <p>
             {settings.copyrightText ||
-              "© 2026 GTA 6 Atlas. Unofficial fan site — not affiliated with Rockstar Games or Take-Two Interactive."}
+              "© 2026 Tahzaib Gaming. Unofficial fan site — not affiliated with Rockstar Games or Take-Two Interactive."}
           </p>
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>

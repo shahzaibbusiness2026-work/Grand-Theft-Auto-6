@@ -100,10 +100,10 @@ export function ContactClient() {
               <h3 className="font-display text-sm font-bold">Follow Us</h3>
               <div className="mt-2 flex gap-3 text-accent">
                 {[
-                  { Icon: Twitter, label: "GTA 6 Atlas on X (Twitter)", href: "https://x.com/GTA6Atlas" },
-                  { Icon: Instagram, label: "GTA 6 Atlas on Instagram", href: "https://instagram.com/gta6atlas" },
-                  { Icon: Youtube, label: "GTA 6 Atlas on YouTube", href: "https://youtube.com/@GTA6Atlas" },
-                  { Icon: Gamepad2, label: "GTA 6 Atlas Discord community", href: "https://discord.gg/gta6atlas" },
+                  { Icon: Twitter, label: "Tahzaib Gaming on X (Twitter)", href: "https://x.com/GTA6Atlas" },
+                  { Icon: Instagram, label: "Tahzaib Gaming on Instagram", href: "https://instagram.com/gta6atlas" },
+                  { Icon: Youtube, label: "Tahzaib Gaming on YouTube", href: "https://youtube.com/@GTA6Atlas" },
+                  { Icon: Gamepad2, label: "Tahzaib Gaming Discord community", href: "https://discord.gg/gta6atlas" },
                 ].map(({ Icon, label, href }) => (
                   <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center">
                     <Icon className="h-4 w-4" />
@@ -119,7 +119,7 @@ export function ContactClient() {
             <CheckCircle className="w-12 h-12 text-emerald-500 animate-bounce" />
             <h2 className="font-display text-xl font-bold">Message Transmitted!</h2>
             <p className="text-sm text-muted-foreground max-w-sm">
-              Thank you for contacting the GTA 6 Atlas team. Our dispatch team will review your inquiry shortly.
+              Thank you for contacting the Tahzaib Gaming team. Our dispatch team will review your inquiry shortly.
             </p>
             <Button onClick={() => setSubmitted(false)} variant="outline" className="mt-4">
               Send Another Inquiry

@@ -45,7 +45,7 @@ export default function AdminDatabasePage() {
         status: v.verification === "verified" ? "verified" : "unconfirmed",
         source: v.manufacturer ? `Manufacturer: ${v.manufacturer}` : "Trailer 1 Footages",
         lastVerified: new Date().toISOString().substring(0, 10),
-        verifier: v.lastEditor || "Atlas Editor",
+        verifier: v.lastEditor || "TZG Editor",
         details: v.summary || `${v.name} (${v.class})`
       }));
       const wAssets: DatabaseAsset[] = weapons.map(w => ({

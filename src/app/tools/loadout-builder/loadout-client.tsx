@@ -204,7 +204,7 @@ export function LoadoutClient() {
   };
 
   const handleCopyShare = () => {
-    const shareText = `GTA 6 Atlas Loadout: ${loadoutName} [${role}]\n• Primary: ${primaryWeapon.name}\n• Sidearm: ${secondaryWeapon.name}\n• Melee: ${meleeWeapon.name}\n• Heavy: ${heavyWeapon.name}\n• Gear: ${selectedGear.join(", ")}\nFirepower: ${ratings.firepower}/100 | Mobility: ${ratings.mobility}%`;
+    const shareText = `Tahzaib Gaming Loadout: ${loadoutName} [${role}]\n• Primary: ${primaryWeapon.name}\n• Sidearm: ${secondaryWeapon.name}\n• Melee: ${meleeWeapon.name}\n• Heavy: ${heavyWeapon.name}\n• Gear: ${selectedGear.join(", ")}\nFirepower: ${ratings.firepower}/100 | Mobility: ${ratings.mobility}%`;
     navigator.clipboard.writeText(shareText);
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 2500);

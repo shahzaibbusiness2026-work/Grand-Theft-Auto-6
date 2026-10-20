@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | GTA 6 Atlas",
-  description: "Learn how GTA 6 Atlas collects, uses, and protects your information when using our interactive map and database tools.",
+  title: "Privacy Policy | Tahzaib Gaming",
+  description: "Learn how Tahzaib Gaming collects, uses, and protects your information when using our interactive map and database tools.",
   alternates: { canonical: "/privacy" },
   };
 
@@ -28,7 +28,7 @@ export default function PrivacyPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">1. Overview</h2>
             <p>
-              GTA 6 Atlas (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy outlines the types of information we may collect from you or that you may provide when you visit our website, and our practices for collecting, using, maintaining, and disclosing that information.
+              Tahzaib Gaming (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy outlines the types of information we may collect from you or that you may provide when you visit our website, and our practices for collecting, using, maintaining, and disclosing that information.
             </p>
           </section>
 

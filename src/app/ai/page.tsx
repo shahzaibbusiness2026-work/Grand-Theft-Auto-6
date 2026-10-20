@@ -4,7 +4,7 @@ import { Bot } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Ask GTA 6 AI — Grounded Intelligence Companion | GTA 6 Atlas",
+  title: "Ask GTA 6 AI — Grounded Intelligence Companion | Tahzaib Gaming",
   description:
     "Ask any question about Grand Theft Auto VI with our beta knowledge-base assistant. Grounded in verified Rockstar trailers, leaks, and disclosures with strict confidence ratings and zero hallucinated facts.",
   alternates: { canonical: "/ai" },

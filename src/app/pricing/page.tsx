@@ -4,7 +4,7 @@ import { Crown } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vice City Pro Membership — Plans & Pricing | GTA 6 Atlas",
+  title: "Vice City Pro Membership — Plans & Pricing | Tahzaib Gaming",
   description:
     "Upgrade to Vice City Pro for unlimited grounded Ask GTA 6 AI queries, 4-way comparison duels, cloud completion backups, and ad-free access.",
   alternates: { canonical: "/pricing" },

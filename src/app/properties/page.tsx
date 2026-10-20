@@ -8,7 +8,7 @@ import { getPublicProperties, type PropertyRecord } from "@/lib/services/propert
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Real Estate & Property Database — GTA 6 Atlas",
+  title: "GTA 6 Real Estate & Property Database — Tahzaib Gaming",
   description:
     "Explore, compare, and calculate returns on all confirmed safehouses, nightclubs, luxury penthouses, chop shops, and marinos in Grand Theft Auto VI.",
 };

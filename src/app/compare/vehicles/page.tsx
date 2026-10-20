@@ -5,7 +5,7 @@ import { getComparisonWeights } from "@/lib/services/comparison";
 import { Trophy } from "lucide-react";
 
 export const metadata = {
-  title: "Vehicle Comparison Duel (2–4 Rides) — GTA 6 Atlas",
+  title: "Vehicle Comparison Duel (2–4 Rides) — Tahzaib Gaming",
   description: "Interactive head-to-head GTA 6 vehicle comparison tool. Duel 2 to 4 rides across top speed, acceleration, handling, braking, and showroom price.",
   alternates: { canonical: "/compare/vehicles" },
 };

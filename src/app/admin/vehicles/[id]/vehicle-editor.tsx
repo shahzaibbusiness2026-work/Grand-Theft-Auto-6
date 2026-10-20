@@ -44,7 +44,7 @@ const EMPTY_DRAFT: AdminVehicle = {
   weight: "",
   sources: [],
   images: [],
-  lastEditor: "Atlas Staff",
+  lastEditor: "TZG Staff",
   updatedAt: new Date().toISOString(),
 };
 

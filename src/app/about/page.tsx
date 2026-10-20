@@ -4,8 +4,8 @@ import { ShieldCheck, Compass, Users, AlertTriangle } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-  title: "About GTA 6 Atlas | The Authoritative Leonida Intelligence Network",
-  description: "Learn about the mission, editorial standards, and team behind the GTA 6 Atlas comprehensive database and mapping tool.",
+  title: "About Tahzaib Gaming | The Authoritative Leonida Intelligence Network",
+  description: "Learn about the mission, editorial standards, and team behind the Tahzaib Gaming comprehensive database and mapping tool.",
   alternates: { canonical: "/about" },
   };
 
@@ -16,13 +16,13 @@ export default function AboutPage() {
         {/* Hero */}
         <div className="max-w-3xl space-y-4">
           <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-primary">
-            About GTA 6 Atlas
+            About Tahzaib Gaming
           </p>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
             The Authoritative Leonida Intelligence Hub
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Built by passionate analysts and open-world enthusiasts, GTA 6 Atlas is dedicated to cataloging every vehicle, weapon, district, mission, and easter egg in Grand Theft Auto VI.
+            Built by passionate analysts and open-world enthusiasts, Tahzaib Gaming is dedicated to cataloging every vehicle, weapon, district, mission, and easter egg in Grand Theft Auto VI.
           </p>
         </div>
 
@@ -32,7 +32,7 @@ export default function AboutPage() {
           <div className="text-xs sm:text-sm leading-relaxed space-y-1">
             <p className="font-bold text-gold-dark dark:text-amber-200">Notice of Non-Affiliation and Disclaimer</p>
             <p className="text-amber-800/80 dark:text-amber-200/80">
-              GTA 6 Atlas is an independent, unofficial fan site and community encyclopedia. We are not affiliated, associated, authorized, endorsed by, or in any way officially connected with Rockstar Games, Take-Two Interactive Software, Inc., or any of their subsidiaries or affiliates. The official Rockstar Games website can be found at <a href="https://www.rockstargames.com" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-foreground">rockstargames.com</a>.
+              Tahzaib Gaming is an independent, unofficial fan site and community encyclopedia. We are not affiliated, associated, authorized, endorsed by, or in any way officially connected with Rockstar Games, Take-Two Interactive Software, Inc., or any of their subsidiaries or affiliates. The official Rockstar Games website can be found at <a href="https://www.rockstargames.com" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-foreground">rockstargames.com</a>.
             </p>
           </div>
         </div>

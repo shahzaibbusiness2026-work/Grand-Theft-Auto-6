@@ -1,7 +1,7 @@
 "use client";
 
 /* ------------------------------------------------------------------ */
-/* GTA 6 Atlas — Global User Persistence & State Store                */
+/* Tahzaib Gaming — Global User Persistence & State Store                */
 /* Manages Favorites, Tracker Progress, Notes, Loadouts, Pro Status   */
 /* ------------------------------------------------------------------ */
 

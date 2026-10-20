@@ -3,8 +3,8 @@ import { CheckCircle2, AlertTriangle, MailWarning } from "lucide-react";
 import { confirmNewsletterSubscription } from "@/lib/services/newsletter";
 
 export const metadata = {
-  title: "Confirm subscription | GTA 6 Atlas",
-  description: "Confirm your GTA 6 Atlas newsletter subscription.",
+  title: "Confirm subscription | Tahzaib Gaming",
+  description: "Confirm your Tahzaib Gaming newsletter subscription.",
   robots: { index: false, follow: false },
 };
 
@@ -22,7 +22,7 @@ export default async function NewsletterConfirmPage({
     confirmed: {
       icon: <CheckCircle2 className="h-12 w-12 text-emerald-500" aria-hidden="true" />,
       title: "You're subscribed!",
-      body: "Your email is confirmed. You'll get GTA 6 Atlas launch alerts and updates.",
+      body: "Your email is confirmed. You'll get Tahzaib Gaming launch alerts and updates.",
     },
     already: {
       icon: <CheckCircle2 className="h-12 w-12 text-emerald-500" aria-hidden="true" />,

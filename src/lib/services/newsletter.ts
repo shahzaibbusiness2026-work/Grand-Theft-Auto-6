@@ -73,20 +73,20 @@ async function sendConfirmationEmail(email: string, token: string): Promise<bool
     const from =
       process.env.NEWSLETTER_FROM_EMAIL ||
       process.env.BROADCAST_FROM_EMAIL ||
-      "GTA 6 Atlas <onboarding@resend.dev>";
+      "Tahzaib Gaming <onboarding@resend.dev>";
 
     const { error } = await resend.emails.send({
       from,
       to: email,
-      subject: "Confirm your GTA 6 Atlas newsletter subscription",
+      subject: "Confirm your Tahzaib Gaming newsletter subscription",
       text:
-        `Thanks for signing up for GTA 6 Atlas updates!\n\n` +
+        `Thanks for signing up for Tahzaib Gaming updates!\n\n` +
         `Please confirm your subscription by clicking this link (valid for 24 hours):\n${confirmUrl}\n\n` +
         `If you didn't request this, you can safely ignore this email.`,
       html:
         `<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">` +
         `<h2>Confirm your subscription</h2>` +
-        `<p>Thanks for signing up for GTA 6 Atlas updates! Click the button below to confirm your email address (link valid for 24 hours).</p>` +
+        `<p>Thanks for signing up for Tahzaib Gaming updates! Click the button below to confirm your email address (link valid for 24 hours).</p>` +
         `<p><a href="${confirmUrl}" style="display: inline-block; background: #C9A86A; color: #000; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">Confirm subscription</a></p>` +
         `<p style="font-size: 12px; color: #888;">If you didn't request this, you can safely ignore this email.</p>` +
         `</div>`,
