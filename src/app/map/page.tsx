@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 import { RelatedArticles } from "@/components/related-articles";
 import { MapClient } from "./map-client";
+import { getSiteSettings } from "@/lib/services/settings";
+import { FeatureDisabled } from "@/components/feature-disabled";
 
 export const metadata: Metadata = {
   title: "GTA 6 Interactive Map | Full Leonida & Vice City Satellite Atlas",
@@ -11,6 +13,14 @@ export const metadata: Metadata = {
 };
 
 export default async function MapPage() {
+  const settings = await getSiteSettings();
+    if (!(settings.publicToolToggles ?? []).includes("map_tool")) {
+      return (
+        <SiteShell>
+          <FeatureDisabled title="Interactive Map" />
+        </SiteShell>
+      );
+    }
   return (
     <SiteShell>
       <MapClient />

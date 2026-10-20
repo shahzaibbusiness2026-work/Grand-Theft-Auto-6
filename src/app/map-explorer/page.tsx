@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { AppShell } from "@/components/app-shell";
 import { SatelliteInteractiveMap } from "@/components/satellite-interactive-map";
+import { getSiteSettings } from "@/lib/services/settings";
+import { FeatureDisabled } from "@/components/feature-disabled";
 
 export const metadata: Metadata = {
   title: "Interactive Map Explorer",
@@ -9,7 +11,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/map-explorer" },
 };
 
-export default function MapExplorerPage() {
+export default async function MapExplorerPage() {
+  const settings = await getSiteSettings();
+  if (!(settings.publicToolToggles ?? []).includes("map_tool")) {
+    return (
+      <AppShell>
+        <FeatureDisabled title="Map Explorer" />
+      </AppShell>
+    );
+  }
   return (
     <AppShell>
       {/* SEO: single H1 for the page, visually hidden (map UI fills the viewport). */}

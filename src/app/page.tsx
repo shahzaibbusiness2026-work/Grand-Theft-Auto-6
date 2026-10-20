@@ -67,17 +67,24 @@ export default async function HomePage() {
   const newsPosts = allArticles.slice(0, 3);
   const blogPosts = allArticles.slice(3, 6);
 
+  // Admin → Settings → Homepage Sections controls which blocks render.
+  const sectionToggles = settings.homepageSectionToggles ?? [];
+  const showSection = (id: string) => sectionToggles.includes(id);
+
   return (
     <SiteShell>
-      {/* 1 — CINEMATIC AAA HERO SECTION */}
+      {showSection("hero") && (<>
+{/* 1 — CINEMATIC AAA HERO SECTION */}
       <HeroSection settings={settings} />
+</>)}
 
-      {/* QUICK STATS ATLAS STRIP */}
+{/* QUICK STATS ATLAS STRIP */}
       <section className="container-site pt-1 sm:pt-2">
         <FloatingStats stats={stats} />
       </section>
 
-      {/* 2 — LATEST TRAILERS */}
+      {showSection("trailers") && (<>
+{/* 2 — LATEST TRAILERS */}
       <section aria-labelledby="trailers-heading" className="container-site pt-6 sm:pt-8">
         <SectionHeader id="trailers-heading" title="Latest Trailers" subtitle="Watch the official reveals" viewAllHref="/news" viewAllLabel="View All Trailers" />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -97,8 +104,10 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+</>)}
 
-      {/* 3 — INTERACTIVE MAP */}
+{showSection("map") && (<>
+{/* 3 — INTERACTIVE MAP */}
       <section aria-labelledby="map-heading" className="container-site pt-6">
         <SectionHeader
           id="map-heading"
@@ -109,8 +118,10 @@ export default async function HomePage() {
         />
         <HomeSatelliteMap />
       </section>
+</>)}
 
-      {/* 4 — CHARACTERS */}
+{showSection("characters") && (<>
+{/* 4 — CHARACTERS */}
       <section aria-labelledby="characters-heading" className="container-site pt-6">
         <SectionHeader
           id="characters-heading"
@@ -151,8 +162,10 @@ export default async function HomePage() {
 
       {/* 5 — PROTAGONIST SHOWCASE (LUCIA & JASON, CMS-DRIVEN) */}
       <ProtagonistsShowcase characters={allCharacters} />
+</>)}
 
-      {/* 6 — NEWS & BLOG */}
+{showSection("news") && (<>
+{/* 6 — NEWS & BLOG */}
       <section aria-labelledby="news-heading" className="container-site pt-6">
         <SectionHeader id="news-heading" title="News & Articles" subtitle="Stay updated with the latest" viewAllHref="/news" viewAllLabel="View All News" />
         <div className="grid gap-6 lg:grid-cols-2">
@@ -221,8 +234,10 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+</>)}
 
-      {/* 7 — NEWSLETTER */}
+{showSection("community") && (<>
+{/* 7 — NEWSLETTER */}
       <section aria-labelledby="newsletter-heading" className="container-site py-6">
         <div className="card-surface relative overflow-hidden min-h-[340px]">
           <SafeImage
@@ -262,6 +277,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+</>)}
+
     </SiteShell>
   );
 }

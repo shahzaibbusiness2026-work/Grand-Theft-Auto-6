@@ -54,8 +54,8 @@ export default function AdminSettingsPage() {
     twitterHandle: "@GTA6Atlas",
     discordUrl: "https://discord.gg/gta6atlas",
     redditUrl: "https://reddit.com/r/GTA6Atlas",
-    homepageSectionToggles: ["hero", "map", "news", "vehicles", "weapons", "community"],
-    publicToolToggles: ["map_tool", "comp_tool", "track_tool", "sub_tool"],
+    homepageSectionToggles: ["hero", "trailers", "map", "characters", "news", "community"],
+    publicToolToggles: ["map_tool", "comp_tool", "track_tool"],
     ga4MeasurementId: "",
     cloudflareToken: "",
     discordWebhookUrl: "",
@@ -508,7 +508,7 @@ export default function AdminSettingsPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-xs text-[#94A3B8]">
-              Configure items displayed in the public header navigation bar.
+              Configure the extra links shown in the public footer (Explore column). Add, edit, hide or delete — changes go live on the site.
             </p>
             <Button
               variant="primary"
@@ -613,12 +613,12 @@ export default function AdminSettingsPage() {
 
           <div className="space-y-2">
             {[
-              { id: "hero", label: "Hero Banner & Countdown", desc: "Main GTA 6 promotional banner, release date countdown, and trailer player." },
+              { id: "hero", label: "Hero Banner & Countdown", desc: "Main GTA 6 promotional banner and release date countdown." },
+              { id: "trailers", label: "Latest Trailers", desc: "Official trailer video cards on the homepage." },
               { id: "map", label: "Interactive Map Preview", desc: "Teaser component showcasing Leonida map landmarks and coordinate filters." },
-              { id: "news", label: "Latest News & Guides", desc: "Curated article feed showing breaking news and analysis." },
-              { id: "vehicles", label: "Trending Vehicles Carousel", desc: "Database showcase highlighting popular cars, bikes, boats, and aircraft." },
-              { id: "weapons", label: "Weapons Arsenal Teaser", desc: "Quick-access grid of handguns, rifles, shotguns, and heavy weapons." },
-              { id: "community", label: "Community Submissions", desc: "Submissions feed for fan theories and unverified coordinate tips." },
+              { id: "characters", label: "Characters & Protagonists", desc: "Character roster highlights and the Lucia & Jason showcase." },
+              { id: "news", label: "Latest News & Blog", desc: "Curated article feed showing breaking news and analysis." },
+              { id: "community", label: "Newsletter Signup", desc: "The homepage newsletter block where visitors subscribe for launch updates." },
             ].map((sec, idx) => (
               <div
                 key={sec.id}
@@ -671,7 +671,6 @@ export default function AdminSettingsPage() {
               { id: "map_tool", name: "Interactive Map", desc: "Interactive Leonida canvas with POI markers, search, and coordinates." },
               { id: "comp_tool", name: "Comparison Engine", desc: "Side-by-side vehicle and weapon comparison matrix." },
               { id: "track_tool", name: "100% Completion Tracker", desc: "Mission, collectible, and stunt jump checklist for players." },
-              { id: "sub_tool", name: "User Tip Submissions", desc: "Allow public users to submit potential map coordinates and trailer finds." },
             ].map((tool) => (
               <div
                 key={tool.id}

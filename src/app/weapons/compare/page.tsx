@@ -2,6 +2,8 @@
 import { CompareWeaponsClient } from "@/app/compare/weapons/compare-weapons-client";
 import { getMergedWeapons } from "@/lib/services/catalog";
 import { getComparisonWeights } from "@/lib/services/comparison";
+import { getSiteSettings } from "@/lib/services/settings";
+import { FeatureDisabled } from "@/components/feature-disabled";
 import { Crosshair } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -12,6 +14,14 @@ export const metadata: Metadata = {
 };
 
 export default async function WeaponsComparePage() {
+  const settings = await getSiteSettings();
+  if (!(settings.publicToolToggles ?? []).includes("comp_tool")) {
+    return (
+      <SiteShell>
+        <FeatureDisabled title="Weapon Comparison" />
+      </SiteShell>
+    );
+  }
   // Live Supabase catalog (admin edits win) + CMS-configured score weights.
   const [weapons, weights] = await Promise.all([getMergedWeapons(), getComparisonWeights()]);
 

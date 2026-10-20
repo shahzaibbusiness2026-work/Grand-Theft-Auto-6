@@ -23,9 +23,9 @@ export interface ComprehensiveSiteSettings extends AdminSiteSettings {
   twitterHandle: string;
   discordUrl: string;
   redditUrl: string;
-  /** Homepage section ids (hero, map, news, vehicles, weapons, community) with public visibility enabled. */
+  /** Homepage section ids (hero, trailers, map, characters, news, community) with public visibility enabled. Read by the homepage. */
   homepageSectionToggles: string[];
-  /** Tool ids with public access enabled (map_tool, comp_tool, track_tool, sub_tool). */
+  /** Tool ids with public access enabled (map_tool, comp_tool, track_tool). Read by the /map, compare and /tracker pages. */
   publicToolToggles: string[];
   /** Analytics / webhook integrations (empty = not configured). */
   ga4MeasurementId: string;
@@ -48,8 +48,8 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   twitterHandle: "@GTA6Atlas",
   discordUrl: "https://discord.gg/gta6atlas",
   redditUrl: "https://reddit.com/r/GTA6Atlas",
-  homepageSectionToggles: ["hero", "map", "news", "vehicles", "weapons", "community"],
-  publicToolToggles: ["map_tool", "comp_tool", "track_tool", "sub_tool"],
+  homepageSectionToggles: ["hero", "trailers", "map", "characters", "news", "community"],
+  publicToolToggles: ["map_tool", "comp_tool", "track_tool"],
   ga4MeasurementId: "",
   cloudflareToken: "",
   discordWebhookUrl: "",

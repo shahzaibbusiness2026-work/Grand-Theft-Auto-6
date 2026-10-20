@@ -29,7 +29,7 @@ const COLS = [
   {
     title: "Support",
     links: [
-      { label: "About Atlas", href: "/about" },
+      { label: "About Us", href: "/about" },
       { label: "Contact Us", href: "/contact" },
       { label: "Report Bug", href: "/contact" },
       { label: "Editorial Admin", href: "/admin" },
@@ -48,6 +48,18 @@ const COLS = [
 
 export async function Footer() {
   const settings = await getSiteSettings();
+
+  // Admin → Settings → Navigation manages the extra links in the Explore
+  // column (visible items, in the owner's chosen order, de-duplicated).
+  const adminNav = [...((settings as any).navigationMenu ?? [])]
+    .filter((i: any) => i && i.visible !== false && i.label && i.url)
+    .sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0))
+    .map((i: any) => ({ label: i.label as string, href: i.url as string }));
+  const cols = COLS.map((col, idx) => {
+    if (idx !== 0 || adminNav.length === 0) return col;
+    const seen = new Set(col.links.map((l) => l.href));
+    return { ...col, links: [...col.links, ...adminNav.filter((l) => !seen.has(l.href))] };
+  });
 
   const socials = [
     { icon: Instagram, label: "Rockstar Games Instagram", href: "https://www.instagram.com/rockstargames" },
@@ -85,7 +97,7 @@ export async function Footer() {
           </div>
         </div>
 
-        {COLS.map((col) => (
+        {cols.map((col) => (
           <div key={col.title}>
             <h2 className="section-eyebrow text-foreground">{col.title}</h2>
             <ul className="mt-4 space-y-2.5">

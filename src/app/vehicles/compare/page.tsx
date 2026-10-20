@@ -2,6 +2,8 @@
 import { CompareVehiclesClient } from "@/app/compare/vehicles/compare-vehicles-client";
 import { getMergedVehicles } from "@/lib/services/catalog";
 import { getComparisonWeights } from "@/lib/services/comparison";
+import { getSiteSettings } from "@/lib/services/settings";
+import { FeatureDisabled } from "@/components/feature-disabled";
 import { Trophy } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -12,6 +14,14 @@ export const metadata: Metadata = {
 };
 
 export default async function VehiclesComparePage() {
+  const settings = await getSiteSettings();
+  if (!(settings.publicToolToggles ?? []).includes("comp_tool")) {
+    return (
+      <SiteShell>
+        <FeatureDisabled title="Vehicle Comparison" />
+      </SiteShell>
+    );
+  }
   // Live Supabase catalog (admin edits win) + CMS-configured score weights.
   const [vehicles, weights] = await Promise.all([getMergedVehicles(), getComparisonWeights()]);
 

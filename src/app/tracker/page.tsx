@@ -1,5 +1,7 @@
 import { SiteShell } from "@/components/shells";
 import { TrackerClient } from "./tracker-client";
+import { getSiteSettings } from "@/lib/services/settings";
+import { FeatureDisabled } from "@/components/feature-disabled";
 import { getTrackerCategories } from "@/lib/services/tracker";
 import { Trophy } from "lucide-react";
 import type { Metadata } from "next";
@@ -12,6 +14,14 @@ export const metadata: Metadata = {
   };
 
 export default async function TrackerPage() {
+  const settings = await getSiteSettings();
+  if (!(settings.publicToolToggles ?? []).includes("track_tool")) {
+    return (
+      <SiteShell>
+        <FeatureDisabled title="Completion Tracker" />
+      </SiteShell>
+    );
+  }
   // Admin-configured categories (site_settings.completion_tracker_config)
   // drive which checklist categories the public tracker shows.
   const trackerConfig = await getTrackerCategories();
