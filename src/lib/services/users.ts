@@ -131,6 +131,16 @@ export async function inviteAdminUser(data: { name: string; email: string; role:
 export async function updateAdminUserRole(id: string, role: AdminUser["role"]) {
   try {
     await assertAdmin();
+    // Fallback-only users (usr-* ids) have no Supabase Auth record —
+    // persist their role in the private team-member list instead.
+    if (id.startsWith("usr-")) {
+      const current = (await getPrivateSetting<AdminUser[]>("admin_team_members")) || [];
+      const updated = current.map((u) => (u.id === id ? { ...u, role } : u));
+      await setPrivateSetting("admin_team_members", updated);
+      await logActivity({ action: "update", targetType: "user", targetId: id, detail: { role } });
+      revalidatePath("/admin/users");
+      return { success: true };
+    }
     const supabase = createAdminClient();
     const { error } = await supabase.auth.admin.updateUserById(id, {
       user_metadata: { role },

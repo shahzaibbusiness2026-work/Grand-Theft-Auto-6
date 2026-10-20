@@ -352,6 +352,7 @@ export default function AdminSeoPage() {
                       <button
                         type="button"
                         onClick={() => {
+                          if (!window.confirm(`Delete redirect ${red.fromUrl} → ${red.toUrl}?`)) return;
                           const updated = seoConfig.redirects.filter((r) => r.id !== red.id);
                           handleUpdate({ redirects: updated });
                         }}

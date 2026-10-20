@@ -148,6 +148,8 @@ export default function AdminArticlesPage() {
       ...quickEditArticle,
       tags: quickTags,
     };
+    // Snapshot for rollback if the save fails
+    const previous = articles;
     setArticles((prev) =>
       prev.map((a) => (a.id === updated.id ? updated : a))
     );
@@ -167,8 +169,10 @@ export default function AdminArticlesPage() {
       setQuickEditArticle(null);
       loadArticles();
     } else {
+      // Roll back the optimistic edit so the list matches the database
+      setArticles(previous);
       showToast({
-        title: "Save failed",
+        title: "Save failed — changes reverted",
         description: res.error || "Could not save the article.",
         type: "danger",
       });

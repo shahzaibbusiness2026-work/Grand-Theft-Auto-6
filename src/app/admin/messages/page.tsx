@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Mail, Trash2, CheckCheck, Search, RefreshCw } from "lucide-react";
+import { Mail, Trash2, CheckCheck, Search, RefreshCw, Reply } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
 import {
   getContactMessages,
@@ -69,6 +69,40 @@ export default function AdminMessagesPage() {
   };
 
   const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
+  const [replyTarget, setReplyTarget] = useState<ContactMessage | null>(null);
+  const [replySubject, setReplySubject] = useState("");
+  const [replyBody, setReplyBody] = useState("");
+  const [replySending, setReplySending] = useState(false);
+
+  const openReply = (m: ContactMessage) => {
+    setReplyTarget(m);
+    setReplySubject(m.subject ? `Re: ${m.subject}` : "Re: Your message to Tahzaib Gaming");
+    setReplyBody("");
+  };
+
+  const handleSendReply = async () => {
+    if (!replyTarget || !replySubject.trim() || !replyBody.trim()) return;
+    setReplySending(true);
+    try {
+      const res = await fetch("/api/admin/messages/reply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messageId: replyTarget.id, subject: replySubject, message: replyBody }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        showToast({ title: "Reply sent", description: `Email delivered to ${replyTarget.email}. Message marked handled.`, type: "success" });
+        setMessages((prev) => prev.map((x) => (x.id === replyTarget.id ? { ...x, status: "handled" as ContactMessage["status"] } : x)));
+        setReplyTarget(null);
+      } else {
+        showToast({ title: "Reply failed", description: data.error || "Could not send the reply.", type: "danger" });
+      }
+    } catch {
+      showToast({ title: "Reply failed", description: "Network error while sending the reply.", type: "danger" });
+    } finally {
+      setReplySending(false);
+    }
+  };
 
   const handleDelete = async (id: string) => {
     setMessages((prev) => prev.filter((m) => m.id !== id));
@@ -216,6 +250,15 @@ export default function AdminMessagesPage() {
                 )}
                 <button
                   type="button"
+                  onClick={() => openReply(m)}
+                  className="p-2 rounded-lg text-[#64748B] hover:text-[#818CF8] hover:bg-[#1C2436] transition-colors"
+                  title={`Reply to ${m.email}`}
+                  aria-label={`Reply to ${m.email}`}
+                >
+                  <Reply className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
                   onClick={() => setDeleteTarget({ id: m.id, name: m.subject || m.name || "message" })}
                   className="p-2 rounded-lg text-[#64748B] hover:text-[#F87171] hover:bg-[#1C2436] transition-colors"
                   title="Delete message"
@@ -228,6 +271,64 @@ export default function AdminMessagesPage() {
           </article>
         ))}
       </div>
+      {/* Reply composer */}
+      <Modal
+        isOpen={!!replyTarget}
+        onClose={() => setReplyTarget(null)}
+        title={replyTarget ? `Reply to ${replyTarget.name}` : "Reply"}
+        description={replyTarget ? `Email to ${replyTarget.email} — sent via Resend. Replying marks the message handled.` : undefined}
+        size="lg"
+        footer={
+          <>
+            <button
+              type="button"
+              onClick={() => setReplyTarget(null)}
+              className="px-4 py-2 rounded-xl text-sm text-[#94A3B8] hover:text-white transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleSendReply}
+              disabled={replySending || !replySubject.trim() || !replyBody.trim()}
+              className="px-4 py-2 rounded-xl bg-[#6366F1] hover:bg-[#5254D8] text-white text-sm font-bold transition-colors disabled:opacity-50"
+            >
+              {replySending ? "Sending…" : "Send reply"}
+            </button>
+          </>
+        }
+      >
+        <div className="space-y-4">
+          {replyTarget && (
+            <blockquote className="rounded-xl border border-[#1C2436] bg-[#0B0F1A] p-3 text-xs text-[#94A3B8] whitespace-pre-wrap break-words max-h-32 overflow-y-auto">
+              {replyTarget.message}
+            </blockquote>
+          )}
+          <div>
+            <label htmlFor="reply-subject" className="block text-xs font-medium text-[#94A3B8] mb-1">Subject</label>
+            <input
+              id="reply-subject"
+              type="text"
+              value={replySubject}
+              onChange={(e) => setReplySubject(e.target.value)}
+              placeholder="Re: …"
+              className="w-full rounded-xl bg-[#0B0F1A] border border-[#1C2436] px-3.5 py-2 text-sm text-white placeholder:text-[#475569] focus:outline-none focus:border-[#6366F1]"
+            />
+          </div>
+          <div>
+            <label htmlFor="reply-body" className="block text-xs font-medium text-[#94A3B8] mb-1">Your reply</label>
+            <textarea
+              id="reply-body"
+              rows={7}
+              value={replyBody}
+              onChange={(e) => setReplyBody(e.target.value)}
+              placeholder="Write a helpful, friendly reply — plain text, formatted into an email automatically."
+              className="w-full rounded-xl bg-[#0B0F1A] border border-[#1C2436] px-3.5 py-2 text-sm text-white placeholder:text-[#475569] focus:outline-none focus:border-[#6366F1] resize-y"
+            />
+          </div>
+        </div>
+      </Modal>
+
       {/* Delete confirmation */}
       <Modal
         isOpen={!!deleteTarget}

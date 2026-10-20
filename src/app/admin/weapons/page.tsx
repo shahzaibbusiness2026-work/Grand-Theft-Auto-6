@@ -153,6 +153,8 @@ export default function AdminWeaponsPage() {
   const handleSaveDrawer = async () => {
     if (!drawerWeapon) return;
     const updated = { ...drawerWeapon, notes: drawerNotes };
+    // Snapshot for rollback if the save fails
+    const previous = weapons;
     setWeapons((prev) => prev.map((w) => (w.id === updated.id ? updated : w)));
 
     showToast({ title: "Saving to Supabase…", description: `Saving ${updated.name}…`, type: "info" });
@@ -163,7 +165,9 @@ export default function AdminWeaponsPage() {
       showToast({ title: "Weapon Saved", description: `${updated.name} persisted to Supabase.`, type: "success" });
       setDrawerWeapon(null);
     } else {
-      showToast({ title: "Save failed", description: res.error || "Could not save the weapon.", type: "danger" });
+      // Roll back the optimistic edit so the list matches the database
+      setWeapons(previous);
+      showToast({ title: "Save failed — changes reverted", description: res.error || "Could not save the weapon.", type: "danger" });
     }
   };
 

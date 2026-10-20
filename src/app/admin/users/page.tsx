@@ -135,6 +135,8 @@ export default function AdminUsersPage() {
   const handleSaveRole = async () => {
     if (!editingUser) return;
     const target = editingUser;
+    // Snapshot for rollback if the save fails
+    const previous = users;
     setUsers((prev) =>
       prev.map((u) => (u.id === target.id ? target : u))
     );
@@ -152,8 +154,10 @@ export default function AdminUsersPage() {
         type: "success",
       });
     } else {
+      // Roll back the optimistic edit so the list matches the server
+      setUsers(previous);
       showToast({
-        title: "Role update failed",
+        title: "Role update failed — change reverted",
         description: res.error || "Could not persist the role change.",
         type: "danger",
       });
@@ -163,6 +167,8 @@ export default function AdminUsersPage() {
     const [deleteUserTarget, setDeleteUserTarget] = useState<AdminUser | null>(null);
 
   const handleDeleteUser = async (user: AdminUser) => {
+    // Snapshot for rollback if the delete fails
+    const previous = users;
     setUsers((prev) => prev.filter((u) => u.id !== user.id));
     const res = await deleteAdminUser(user.id);
     if (res.success) {
@@ -172,8 +178,10 @@ export default function AdminUsersPage() {
         type: "success",
       });
     } else {
+      // Roll back the optimistic removal so the row reappears immediately
+      setUsers(previous);
       showToast({
-        title: "Delete failed",
+        title: "Delete failed — user restored",
         description: res.error || "Could not delete the user.",
         type: "danger",
       });
