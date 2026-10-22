@@ -50,7 +50,7 @@ export async function GET(request: Request) {
     }
 
     const resend = new Resend(apiKey);
-    const from = process.env.BROADCAST_FROM_EMAIL || "Tahzaib Gaming <onboarding@resend.dev>";
+    const from = process.env.BROADCAST_FROM_EMAIL || "PixelSpot Gaming <onboarding@resend.dev>";
     
     let sent = 0;
     let failed = 0;
@@ -66,7 +66,7 @@ export async function GET(request: Request) {
               <h1 style="color: #C9A86A; text-align: center;">GTA 6 IS HERE!</h1>
               <p>Hey there,</p>
               <p>The wait is over! <strong>Grand Theft Auto VI</strong> has officially launched today, November 19, 2026.</p>
-              <p>Your Tahzaib Gaming is ready with:</p>
+              <p>Your PixelSpot Gaming is ready with:</p>
               <ul>
                 <li>🗺️ Interactive Leonida map with all locations</li>
                 <li>🚗 106 vehicles database</li>
@@ -78,7 +78,7 @@ export async function GET(request: Request) {
                 <a href="https://grand-theft-auto-6-5ap5.vercel.app" style="background: #C9A86A; color: #000; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;">Explore the Atlas →</a>
               </p>
               <p>Welcome to Leonida!</p>
-              <p style="color: #888; font-size: 12px;">You're receiving this because you signed up for Tahzaib Gaming updates. <a href="https://grand-theft-auto-6-5ap5.vercel.app/unsubscribe?email=${encodeURIComponent(sub.email)}">Unsubscribe</a></p>
+              <p style="color: #888; font-size: 12px;">You're receiving this because you signed up for PixelSpot Gaming updates. <a href="https://grand-theft-auto-6-5ap5.vercel.app/unsubscribe?email=${encodeURIComponent(sub.email)}">Unsubscribe</a></p>
             </div>
           `,
         });

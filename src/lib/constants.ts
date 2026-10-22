@@ -1,18 +1,18 @@
 /**
- * Tahzaib Gaming — Central Configuration & Verified Constants
+ * PixelSpot Gaming — Central Configuration & Verified Constants
  * Single source of truth for release dates, site identity, and external references.
  */
 
 export const SITE_CONFIG = {
-  name: "Tahzaib Gaming",
-  shortName: "TZG",
+  name: "PixelSpot Gaming",
+  shortName: "PSG",
   tagline: "Your Guide to Vice City — A new city. Every detail.",
   description:
     "The definitive independent companion, database, and interactive satellite atlas for Grand Theft Auto VI in the State of Leonida.",
   url: "https://gta6atlas.com",
   ogImage: "https://gta6atlas.com/img/hero-vice-skyline-hd.jpg",
   disclaimer:
-    "Tahzaib Gaming is an independent fan platform and is not affiliated with, sponsored by, or endorsed by Rockstar Games or Take-Two Interactive.",
+    "PixelSpot Gaming is an independent fan platform and is not affiliated with, sponsored by, or endorsed by Rockstar Games or Take-Two Interactive.",
   
   // Release Date Configuration:
   // Rockstar has announced "Fall 2026". The specific calendar date remains unconfirmed.

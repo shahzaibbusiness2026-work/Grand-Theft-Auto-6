@@ -3,7 +3,7 @@ import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Controls — PS5 & Xbox Button Layout — Tahzaib Gaming",
+  title: "GTA 6 Controls — PS5 & Xbox Button Layout — PixelSpot Gaming",
   description: "Full GTA 6 controls reference for PlayStation 5 and Xbox Series X|S: on foot, driving, flying, swimming and combat. Based on GTA 5's layout, confirmed at launch.",
   alternates: { canonical: "/controls" },
 };

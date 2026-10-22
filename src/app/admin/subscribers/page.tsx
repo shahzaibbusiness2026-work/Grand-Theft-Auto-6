@@ -211,14 +211,14 @@ export default function AdminSubscribersPage() {
               type="text"
               value={broadcastSubject}
               onChange={(e) => setBroadcastSubject(e.target.value)}
-              placeholder="Subject — e.g. Tahzaib Gaming is LIVE!"
+              placeholder="Subject — e.g. PixelSpot Gaming is LIVE!"
               aria-label="Email subject"
               className="w-full px-4 py-2.5 rounded-xl bg-[#0B0F1A] border border-[#1C2436] text-sm text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
             />
             <textarea
               value={broadcastMessage}
               onChange={(e) => setBroadcastMessage(e.target.value)}
-              placeholder={"Message — e.g.\n\nThe wait is over! Tahzaib Gaming tools are now live:\n\nhttps://your-site.com\n\n— Team TZG"}
+              placeholder={"Message — e.g.\n\nThe wait is over! PixelSpot Gaming tools are now live:\n\nhttps://your-site.com\n\n— Team PSG"}
               aria-label="Email message"
               rows={6}
               className="w-full px-4 py-2.5 rounded-xl bg-[#0B0F1A] border border-[#1C2436] text-sm text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1] resize-y"

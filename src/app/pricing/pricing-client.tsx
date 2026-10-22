@@ -12,7 +12,7 @@ const FREE_FEATURES = [
 
 /**
  * Honest membership page: there are no paid plans. Everything on
- * Tahzaib Gaming is free. This page exists so the "Membership" links
+ * PixelSpot Gaming is free. This page exists so the "Membership" links
  * across the site land on a truthful statement instead of a fake
  * paywall for features that do not exist.
  */
@@ -27,7 +27,7 @@ export function PricingClient() {
           No Paid Plans. Everything Is Free.
         </h2>
         <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl mx-auto">
-          Tahzaib Gaming has no subscriptions, no premium tier and nothing for
+          PixelSpot Gaming has no subscriptions, no premium tier and nothing for
           sale. Every map, database, comparison, tracker and tool on this site
           is free to use. If a paid membership is ever introduced after the
           game launches, it will be announced here first — nothing is charged

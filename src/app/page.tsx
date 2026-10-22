@@ -33,7 +33,7 @@ import { getSiteSettings } from "@/lib/services/settings";
  */
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
-  const title = settings.siteTitle || "Tahzaib Gaming — Your Ultimate GTA 6 Companion";
+  const title = settings.siteTitle || "PixelSpot Gaming — Your Ultimate GTA 6 Companion";
   const description =
     settings.siteDescription ||
     "Explore the world of GTA 6 with the most complete fan database. Interactive maps, missions, vehicles, characters, weapons and more for Grand Theft Auto 6.";

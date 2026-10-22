@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "GTA 6 News, Trailers & Updates | Tahzaib Gaming",
+  title: "GTA 6 News, Trailers & Updates | PixelSpot Gaming",
   description: "Stay updated with the latest GTA 6 news, trailers, gameplay reveals, character updates and community articles.",
   openGraph: {
     title: "GTA 6 News & Articles",

@@ -107,7 +107,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
   const formatNoLeadingZero = (num: number) => String(num);
 
   const handleCopy = () => {
-    const text = `${t.days} days, ${t.hours} hours, ${t.minutes} minutes until Grand Theft Auto VI! (Tracked on Tahzaib Gaming)`;
+    const text = `${t.days} days, ${t.hours} hours, ${t.minutes} minutes until Grand Theft Auto VI! (Tracked on PixelSpot Gaming)`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);

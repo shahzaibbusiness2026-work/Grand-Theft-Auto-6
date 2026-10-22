@@ -3,8 +3,8 @@ import { SiteShell } from "@/components/shells";
 import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = {
-  title: "Login | Tahzaib Gaming",
-  description: "Create a free local profile on Tahzaib Gaming — your dashboard, favorites, and tracker progress are saved on this device only.",
+  title: "Login | PixelSpot Gaming",
+  description: "Create a free local profile on PixelSpot Gaming — your dashboard, favorites, and tracker progress are saved on this device only.",
   alternates: { canonical: "/login" },
 };
 

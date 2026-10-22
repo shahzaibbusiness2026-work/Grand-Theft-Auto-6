@@ -3,7 +3,7 @@ import { AchievementsClient } from "./achievements-client";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Achievements & Trophies Tracker — Tahzaib Gaming",
+  title: "GTA 6 Achievements & Trophies Tracker — PixelSpot Gaming",
   description: "Expected GTA 6 trophy and achievement list with an interactive tracker. Story, exploration, combat, collectible and hidden trophies — progress saves on your device.",
   alternates: { canonical: "/achievements" },
 };

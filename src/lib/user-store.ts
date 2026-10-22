@@ -1,7 +1,7 @@
 "use client";
 
 /* ------------------------------------------------------------------ */
-/* Tahzaib Gaming — Global User Persistence & State Store                */
+/* PixelSpot Gaming — Global User Persistence & State Store                */
 /* Manages Favorites, Tracker Progress, Notes, Loadouts, Pro Status   */
 /* ------------------------------------------------------------------ */
 

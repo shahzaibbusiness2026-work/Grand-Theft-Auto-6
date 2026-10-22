@@ -3,7 +3,7 @@ import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Money Guide — How to Make Money Fast — Tahzaib Gaming",
+  title: "GTA 6 Money Guide — How to Make Money Fast — PixelSpot Gaming",
   description: "Every way to make money in GTA 6: story heists, businesses, side jobs, collectibles and caches — ranked by effort and payout, with calculators to plan each route.",
   alternates: { canonical: "/money-guide" },
 };

@@ -321,7 +321,7 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
       payload.images ??= ["/img/car-orange.jpg"];
       payload.status ??= "published";
       payload.verification ??= "verified";
-      payload.last_editor ??= "TZG Staff";
+      payload.last_editor ??= "PSG Staff";
     }
 
     // Deep-dive fields — only written when provided so partial saves don't clear data.

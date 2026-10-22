@@ -8,7 +8,7 @@ import { getPublicCollectibles, type CollectibleRecord } from "@/lib/services/co
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Collectibles Finder & Checklist — Tahzaib Gaming",
+  title: "Collectibles Finder & Checklist — PixelSpot Gaming",
   description:
     "Interactive GTA 6 Collectibles Finder across Leonida. Track Hidden Packages, Stunt Jumps, Rebel Radio Transmitters, Wildlife Photos, and Easter Eggs with coordinate guides.",
 };

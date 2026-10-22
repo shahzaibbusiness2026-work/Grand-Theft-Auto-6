@@ -3,7 +3,7 @@ import { ShieldAlert, Smartphone, Gamepad2, Terminal, Clock } from "lucide-react
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Cheats — What We Know Before Launch | Tahzaib Gaming",
+  title: "GTA 6 Cheats — What We Know Before Launch | PixelSpot Gaming",
   description:
     "No official GTA 6 cheat codes have been announced yet. How cheats worked in GTA 5, what to expect in GTA 6, and what this page will list at launch.",
   alternates: { canonical: "/cheats" },

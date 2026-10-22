@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------ */
-/* Tahzaib Gaming — shared types & label lists only.                   */
+/* PixelSpot Gaming — shared types & label lists only.                   */
 /* All content (articles, characters, vehicles, weapons, guides…)      */
 /* lives in Supabase and is managed from the admin dashboard.          */
 /* Nothing content-shaped is hardcoded here — no dummy data, ever.     */
@@ -179,8 +179,8 @@ export const weaponCategories = [
 
 export const faqs = [
   { q: "How can I report a bug or issue?", a: "Use the contact form above or email support@gta6atlas.com. Our team typically responds within 24 hours." },
-  { q: "Can I suggest new features for Tahzaib Gaming?", a: "Absolutely! We love community ideas. Send us your suggestion and we might build it for the next release." },
-  { q: "Is Tahzaib Gaming affiliated with Rockstar Games?", a: "No. Tahzaib Gaming is an unofficial fan-made companion and is not affiliated with Rockstar Games or Take-Two Interactive." },
+  { q: "Can I suggest new features for PixelSpot Gaming?", a: "Absolutely! We love community ideas. Send us your suggestion and we might build it for the next release." },
+  { q: "Is PixelSpot Gaming affiliated with Rockstar Games?", a: "No. PixelSpot Gaming is an unofficial fan-made companion and is not affiliated with Rockstar Games or Take-Two Interactive." },
   { q: "How long does it take to get a response?", a: "We reply within 24 hours on business days. Live chat is available 9:00 AM – 9:00 PM EST, Monday to Sunday." },
-  { q: "Where can I follow Tahzaib Gaming for updates?", a: "Follow us on Instagram, Twitter, YouTube and Discord for the latest news and announcements." },
+  { q: "Where can I follow PixelSpot Gaming for updates?", a: "Follow us on Instagram, Twitter, YouTube and Discord for the latest news and announcements." },
 ];
