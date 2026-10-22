@@ -5,9 +5,9 @@ import { serializeJsonLd } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "All 26 Interactive Tools & Calculators — Tahzaib Gaming",
+  title: "All 32 Interactive Tools & Calculators — Tahzaib Gaming",
   description:
-    "Complete suite of 26 production-ready interactive tools for Grand Theft Auto VI: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, and AI assistant.",
+    "Complete suite of 32 production-ready interactive tools for Grand Theft Auto VI: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, achievements, activities, Easter eggs, businesses, money guides and more.",
   alternates: { canonical: "/tools" },
 };
 
@@ -20,6 +20,7 @@ const CATEGORIES = [
   "Financial & Business",
   "Combat & Loadouts",
   "AI & Assistance",
+  "Guides & Reference",
 ] as const;
 
 export default function ToolsPage() {

@@ -23,12 +23,14 @@ import {
   Camera,
   Zap,
   Warehouse,
+  Egg,
+  Gamepad2,
 } from "lucide-react";
 
 export interface ToolItem {
   id: string;
   name: string;
-  category: "Maps & Exploration" | "Databases & Compare" | "Financial & Business" | "Combat & Loadouts" | "AI & Assistance";
+  category: "Maps & Exploration" | "Databases & Compare" | "Financial & Business" | "Combat & Loadouts" | "AI & Assistance" | "Guides & Reference";
   desc: string;
   href: string;
   badge: string;
@@ -285,5 +287,70 @@ export const ALL_TOOLS: ToolItem[] = [
     badge: "Tool 23",
     icon: Timer,
     highlight: true,
+  },
+  // New: the user's requested hub pages
+  {
+    id: "tool-achievements",
+    name: "Achievements & Trophies Tracker",
+    category: "Maps & Exploration",
+    desc: "Expected GTA 6 trophy list with an interactive checklist. Story, exploration, combat, collectible and hidden trophies — progress saves on your device.",
+    href: "/achievements",
+    badge: "Tool 27",
+    icon: Trophy,
+    highlight: true,
+  },
+  {
+    id: "tool-activities",
+    name: "Activities & Hobbies",
+    category: "Maps & Exploration",
+    desc: "Everything to do between missions: hunting, fishing, mini-golf, diving, racing and more across Leonida, with an interactive checklist.",
+    href: "/activities",
+    badge: "Tool 28",
+    icon: Compass,
+  },
+  {
+    id: "tool-easter-eggs",
+    name: "Easter Eggs & Hidden Details",
+    category: "Databases & Compare",
+    desc: "Every confirmed GTA 6 Easter egg: the Tommy Vercetti lizard, the Ocean View Hotel, Red Dead presidents on the cash — each labelled confirmed, community find or speculation.",
+    href: "/easter-eggs",
+    badge: "Tool 29",
+    icon: Egg,
+  },
+  {
+    id: "tool-businesses",
+    name: "Businesses Database",
+    category: "Financial & Business",
+    desc: "Six ways to own Leonida: bait & tackle, chop shop, luxury dealership, nightclub, smuggler warehouse and taxi depot — with income calculators.",
+    href: "/businesses",
+    badge: "Tool 30",
+    icon: Building2,
+  },
+  {
+    id: "tool-money-guide",
+    name: "Money Guide",
+    category: "Guides & Reference",
+    desc: "Every way to make money in GTA 6 ranked by payout and effort: story heists, businesses, side jobs, collectibles and caches.",
+    href: "/money-guide",
+    badge: "Tool 31",
+    icon: DollarSign,
+  },
+  {
+    id: "tool-settings-guide",
+    name: "Settings Guide",
+    category: "Guides & Reference",
+    desc: "Best GTA 6 settings for PS5 and Xbox Series X|S: performance vs fidelity, HDR, camera, audio and accessibility explained before launch.",
+    href: "/settings-guide",
+    badge: "Tool 32",
+    icon: Sliders,
+  },
+  {
+    id: "tool-controls",
+    name: "Controls Reference",
+    category: "Guides & Reference",
+    desc: "Full PS5 and Xbox button layout for GTA 6: on foot, driving, flying, swimming and combat.",
+    href: "/controls",
+    badge: "Tool 33",
+    icon: Gamepad2,
   },
 ];
