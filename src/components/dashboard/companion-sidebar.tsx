@@ -132,11 +132,11 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
           </ul>
 
           <Link
-            href="/pricing"
+            href="/tools"
             onClick={onItemClick}
             className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-gold py-2 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_4px_16px_rgba(201,168,106,0.35)] transition-all duration-200 hover:brightness-105 active:scale-95"
           >
-            <span>Upgrade Now</span>
+            <span>Explore Tools</span>
             <ArrowRight className="h-3.5 w-3.5 text-slate-950" />
           </Link>
         </div>

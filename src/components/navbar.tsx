@@ -93,7 +93,7 @@ const MORE_SECTIONS: MoreSection[] = [
   {
     title: "More",
     links: [
-      { href: "/pricing", label: "Vice City Pro", icon: Crown },
+      { href: "/pricing", label: "Membership", icon: Crown },
       { href: "/contact", label: "Contact", icon: Mail },
     ],
   },
@@ -212,17 +212,14 @@ export function Navbar() {
   const toggleMobileSection = (id: string) =>
     setOpenMobileSection((cur) => (cur === id ? null : id));
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [isPro, setIsPro] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const more = useDropdown();
 
   useEffect(() => {
     setMounted(true);
-    setIsPro(getStoredUserState().isPro);
     setLoggedIn(isLoggedIn());
 
     const handleSync = () => {
-      setIsPro(getStoredUserState().isPro);
       setLoggedIn(isLoggedIn());
     };
     window.addEventListener("gta6_user_state_change", handleSync);
@@ -262,15 +259,6 @@ export function Navbar() {
       <div className="mx-auto flex h-16 w-full max-w-[1240px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="mr-3 lg:mr-6 flex items-center gap-2">
           <Logo />
-          {isPro && (
-            <Link
-              href="/pricing"
-              className="hidden lg:inline-flex items-center gap-1 rounded-full border border-gold/40 bg-gold/15 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-gold-dark dark:text-gold-light"
-              title="Vice City Pro Active"
-            >
-              <Crown className="h-3 w-3" /> PRO
-            </Link>
-          )}
         </div>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-3 lg:gap-5 md:flex">

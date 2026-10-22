@@ -41,7 +41,7 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   targetReleaseDate: SITE_CONFIG.targetReleaseDate,
   isReleaseDateConfirmed: SITE_CONFIG.isReleaseDateConfirmed,
   countdownCaption: "Target countdown • Official date to be confirmed by Rockstar Games",
-  heroHeading: "Grand Theft Auto VI — Official Database & Interactive Atlas",
+  heroHeading: "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas",
   heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
   announcementBanner: "Tahzaib Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
   contactEmail: "contact@gta6atlas.com",

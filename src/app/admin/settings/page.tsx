@@ -47,7 +47,7 @@ export default function AdminSettingsPage() {
     targetReleaseDate: "2026-11-19T00:00:00Z",
     isReleaseDateConfirmed: false,
     countdownCaption: "Target countdown • Official date to be confirmed by Rockstar Games",
-    heroHeading: "Grand Theft Auto VI — Official Database & Interactive Atlas",
+    heroHeading: "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas",
     heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
     announcementBanner: "Tahzaib Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
     contactEmail: "contact@gta6atlas.com",

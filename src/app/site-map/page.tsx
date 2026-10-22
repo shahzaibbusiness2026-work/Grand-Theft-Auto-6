@@ -63,7 +63,7 @@ export default function SiteMapPage() {
       title: "Account & More",
       links: [
         { label: "Dashboard", href: "/dashboard", desc: "Your Atlas HQ" },
-        { label: "Vice City Pro", href: "/pricing", desc: "Membership plans" },
+        { label: "Membership", href: "/pricing", desc: "Membership — everything on this site is free" },
         { label: "About Atlas", href: "/about", desc: "Who we are" },
         { label: "Contact Us", href: "/contact", desc: "Get in touch" },
       ],

@@ -22,7 +22,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
       {/* Accessible heading for SEO */}
       <h1 id="hero-heading" className="sr-only">
-        {settings?.heroHeading || "Grand Theft Auto VI — Official Database & Interactive Atlas"}
+        {settings?.heroHeading || "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas"}
       </h1>
 
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}

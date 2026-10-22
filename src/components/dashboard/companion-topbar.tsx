@@ -149,7 +149,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
                     href="/pricing"
                     className="block rounded-lg px-3 py-1.5 text-xs text-gold-light hover:bg-gold/10"
                   >
-                    Vice City Pro
+                    Membership
                   </a>
                 </div>
               </div>
