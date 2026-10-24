@@ -159,8 +159,8 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
       {/* Grid of Weapons */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Showing <span className="text-foreground font-mono">{filteredWeapons.length}</span> Verified Weapons
+          <p className="text-xs font-bold text-muted-foreground">
+            Showing <span className="text-foreground tabular-nums">{filteredWeapons.length}</span> Verified Weapons
           </p>
         </div>
 
@@ -207,7 +207,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
 
                     {/* Rarity & Confidence */}
                     <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between">
-                      <span className={cn("rounded-full border px-2 py-0.5 text-xs font-black uppercase tracking-wider", rarityStyles[w.rarity])}>
+                      <span className={cn("rounded-full border px-2 py-0.5 text-xs font-black", rarityStyles[w.rarity])}>
                         {w.rarity}
                       </span>
                       <ConfidenceBadge level={w.confidence} size="sm" />

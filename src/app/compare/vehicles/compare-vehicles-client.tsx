@@ -297,12 +297,12 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
-            <span className="text-xs font-black uppercase tracking-widest text-accent">Head-to-Head Duel Mode</span>
+            <span className="text-sm font-black text-accent">Head-to-Head Duel Mode</span>
           </div>
-          <h2 className="font-display text-xl sm:text-2xl font-black uppercase text-foreground tracking-wide">
+          <h2 className="font-display text-xl sm:text-2xl font-black text-foreground">
             Comparing <span className="text-cyan-600 dark:text-[#00F0FF]">{selectedVehicles.length}</span> Contenders
           </h2>
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="text-sm text-muted-foreground mt-1">
             Compare 2 to 4 rides across top speed, acceleration curve, handling physics, and value.
           </p>
         </div>
@@ -311,7 +311,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
           {selectedSlugs.length < 4 && (
             <Button
               onClick={handleAddSlot}
-              className="bg-muted/50 hover:bg-muted/60 text-foreground font-bold text-xs"
+              className="bg-muted/50 hover:bg-muted/60 text-foreground font-bold text-sm"
             >
               <Plus className="h-3.5 w-3.5 mr-1" /> Add 3rd/4th Car
             </Button>
@@ -319,7 +319,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
           <Button
             onClick={handleShare}
-            className="bg-primary text-primary-foreground font-bold text-xs shadow-md"
+            className="bg-primary text-primary-foreground font-bold text-sm shadow-md"
           >
             {copied ? <Check className="h-3.5 w-3.5 mr-1 text-emerald-300" /> : <Share2 className="h-3.5 w-3.5 mr-1" />}
             <span>{copied ? "Link Copied!" : "Share Comparison URL"}</span>
@@ -332,13 +332,13 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
         <div className="dark-panel relative overflow-hidden rounded-3xl border border-gold/30 bg-[#0a0f1d] bg-gradient-to-r from-gold/10 via-[#0a0f1d] to-[#12071a] p-6 sm:p-8 shadow-2xl">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-xl">
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-gold-light/40 bg-gold-light/10 px-3 py-1 text-xs font-black uppercase tracking-wider text-amber-300">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-gold-light/40 bg-gold-light/10 px-3 py-1 text-sm font-black text-amber-300">
                 <Trophy className="h-3.5 w-3.5 text-gold-light" /> Official Recommendation & Overall Winner
               </div>
-              <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white">
+              <h3 className="font-display text-2xl sm:text-3xl font-black text-white">
                 {overallWinner.vehicle.name} dominates with {overallWinner.total}/100 Performance Score
               </h3>
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-sm text-muted-foreground leading-relaxed">
                 Based on combined power output, zero-to-sixty acceleration rate, and cornering grip, the{" "}
                 <strong>{overallWinner.vehicle.name}</strong> provides superior track dominance and getaway viability in Leonida.
               </p>
@@ -353,10 +353,10 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 />
               </div>
               <div>
-                <span className="block font-mono font-black text-2xl text-gold-light">{overallWinner.total} PTS</span>
+                <span className="block tabular-nums font-black text-2xl text-gold-light">{overallWinner.total} points</span>
                 <Link
                   href={`/vehicles/${overallWinner.vehicle.slug}`}
-                  className="text-xs font-bold text-accent hover:underline flex items-center gap-1 mt-1"
+                  className="text-sm font-bold text-accent hover:underline flex items-center gap-1 mt-1"
                 >
                   Full Specs <ChevronRight className="h-3 w-3" />
                 </Link>
@@ -384,12 +384,12 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => setPickerSlotIndex(idx)}
-                      className="rounded-lg bg-muted/50 px-2 py-3 min-h-[44px] text-xs font-bold text-muted-foreground hover:bg-muted/60 transition-colors"
+                      className="rounded-lg bg-muted/50 px-2 py-3 min-h-[44px] text-sm font-bold text-muted-foreground hover:bg-muted/60 transition-colors"
                     >
                       Slot #{idx + 1}: Swap Vehicle ▾
                     </button>
                     {isWinner && (
-                      <span className="flex items-center gap-1 rounded-full bg-gold-light/20 text-gold-dark dark:text-amber-300 border border-gold-light/40 px-2 py-0.5 text-xs font-black uppercase">
+                      <span className="flex items-center gap-1 rounded-full bg-gold-light/20 text-gold-dark dark:text-amber-300 border border-gold-light/40 px-2 py-0.5 text-sm font-black">
                         <Trophy className="h-2.5 w-2.5" /> Best Choice
                       </span>
                     )}
@@ -413,25 +413,25 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     style={v.filter ? { filter: v.filter } : undefined}
                     className="h-full w-full object-cover"
                   />
-                  <span className="absolute bottom-2 left-2 rounded-lg bg-black/80 px-2 py-0.5 text-xs font-bold text-accent backdrop-blur">
+                  <span className="absolute bottom-2 left-2 rounded-lg bg-black/80 px-2 py-0.5 text-sm font-bold text-accent backdrop-blur">
                     {v.klass}
                   </span>
                 </div>
 
                 {/* Title and Pricing */}
-                <h3 className="font-display text-lg font-black uppercase text-foreground truncate">
+                <h3 className="font-display text-lg font-black text-foreground truncate">
                   {v.name}
                 </h3>
-                <div className="flex items-center justify-between text-xs mt-1">
+                <div className="flex items-center justify-between text-sm mt-1">
                   <span className="text-muted-foreground">{v.manufacturer}</span>
-                  <span className="font-mono font-bold text-cyan-600 dark:text-[#00F0FF]">{v.priceDisplay}</span>
+                  <span className="tabular-nums font-bold text-cyan-600 dark:text-[#00F0FF]">{v.priceDisplay}</span>
                 </div>
                 {bestForTags[idx]?.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {bestForTags[idx].map((t) => (
                       <span
                         key={t.label}
-                        className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-xs font-black uppercase tracking-wide text-accent"
+                        className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-sm font-black text-accent"
                       >
                         {t.emoji} {t.label}
                       </span>
@@ -440,13 +440,13 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 )}
                 {overallScores[idx] != null && (
                   <div className="mt-2 flex items-center justify-between rounded-xl border border-gold/30 bg-gold-light/10 px-2.5 py-1.5">
-                    <span className="text-xs font-black uppercase tracking-wider text-gold-dark dark:text-amber-300 flex items-center gap-1">
+                    <span className="text-sm font-black text-gold-dark dark:text-amber-300 flex items-center gap-1">
                       <Trophy className="h-3 w-3" /> Overall Score
                     </span>
-                    <span className="font-mono font-black text-sm text-gold-dark dark:text-gold-light">
+                    <span className="tabular-nums font-black text-sm text-gold-dark dark:text-gold-light">
                       {overallScores[idx]}/100
                       {overallScoreLeader === idx && overallScores.length > 1 && (
-                        <span className="ml-1.5 text-xs font-black uppercase text-emerald-600 dark:text-emerald-400">Lead</span>
+                        <span className="ml-1.5 text-sm font-black text-emerald-600 dark:text-emerald-400">Lead</span>
                       )}
                     </span>
                   </div>
@@ -457,14 +457,14 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
               <div className="mt-5 space-y-3 pt-4 border-t border-border">
                 {/* Top Speed */}
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground flex items-center gap-1.5">
                       <Gauge className="h-3.5 w-3.5 text-accent" /> Top Speed
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-foreground">{v.topSpeed} mph</span>
+                      <span className="tabular-nums font-bold text-foreground">{v.topSpeed} mph</span>
                       {v.topSpeed === bestSpeed && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
                           Winner
                         </span>
                       )}
@@ -474,14 +474,14 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
                 {/* 0-60 Launch */}
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground flex items-center gap-1.5">
                       <Timer className="h-3.5 w-3.5 text-gold-dark dark:text-gold-light" /> 0–60 Launch
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-foreground">{v.acceleration}s</span>
+                      <span className="tabular-nums font-bold text-foreground">{v.acceleration}s</span>
                       {v.acceleration === bestAccel && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
                           Winner
                         </span>
                       )}
@@ -491,14 +491,14 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
                 {/* Handling */}
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground flex items-center gap-1.5">
                       <Car className="h-3.5 w-3.5 text-cyan-600 dark:text-[#00F0FF]" /> Handling Grip
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-foreground">{v.handling}/100</span>
+                      <span className="tabular-nums font-bold text-foreground">{v.handling}/100</span>
                       {v.handling === bestHandling && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
                           Winner
                         </span>
                       )}
@@ -508,14 +508,14 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
                 {/* Braking */}
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground flex items-center gap-1.5">
                       <Disc3 className="h-3.5 w-3.5 text-rose-600 dark:text-rose-400" /> Braking Power
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-foreground">{v.braking}/100</span>
+                      <span className="tabular-nums font-bold text-foreground">{v.braking}/100</span>
                       {v.braking === bestBraking && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
                           Winner
                         </span>
                       )}
@@ -525,14 +525,14 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
                 {/* Traction */}
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground flex items-center gap-1.5">
                       <Car className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" /> Traction
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-foreground">{v.traction ?? 70}/100</span>
+                      <span className="tabular-nums font-bold text-foreground">{v.traction ?? 70}/100</span>
                       {(v.traction ?? 70) === bestTraction && selectedVehicles.length > 1 && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
                           Winner
                         </span>
                       )}
@@ -543,14 +543,14 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
                 {/* Power */}
                 <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground flex items-center gap-1.5">
                       <Zap className="h-3.5 w-3.5 text-purple-400" /> Horsepower
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-foreground">{v.power} HP</span>
+                      <span className="tabular-nums font-bold text-foreground">{v.power} HP</span>
                       {v.power === bestPower && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-xs font-black uppercase">
+                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
                           Winner
                         </span>
                       )}
@@ -560,7 +560,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
               </div>
 
               {/* PROS & CONS */}
-              <div className="mt-4 pt-3 border-t border-border space-y-2 text-xs">
+              <div className="mt-4 pt-3 border-t border-border space-y-2 text-sm">
                 <div className="flex items-start gap-1.5 text-emerald-600 dark:text-emerald-400">
                   <ThumbsUp className="h-3 w-3 shrink-0 mt-0.5" />
                   <span>
@@ -580,7 +580,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 <FavoriteButton type="vehicles" id={v.id} showText={false} />
                 <Link
                   href={`/vehicles/${v.slug}`}
-                  className="flex-1 text-center rounded-xl bg-muted/40 hover:bg-muted/50 min-h-[44px] flex items-center justify-center py-2 text-xs font-bold text-foreground hover:text-foreground transition-colors border border-border"
+                  className="flex-1 text-center rounded-xl bg-muted/40 hover:bg-muted/50 min-h-[44px] flex items-center justify-center py-2 text-sm font-bold text-foreground hover:text-foreground transition-colors border border-border"
                 >
                   View Details
                 </Link>
@@ -594,8 +594,8 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
       {selectedVehicles.length >= 2 && (
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="card-surface rounded-3xl border border-border p-5">
-            <h3 className="font-display text-sm font-black uppercase text-foreground mb-1">Performance Radar</h3>
-            <p className="text-xs text-muted-foreground mb-3">
+            <h3 className="font-display text-sm font-black text-foreground mb-1">Performance Radar</h3>
+            <p className="text-sm text-muted-foreground mb-3">
               Speed • Acceleration • Braking • Handling • Traction • Value
             </p>
             <RadarChart
@@ -605,17 +605,17 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
           </div>
 
           <div className="card-surface rounded-3xl border border-border p-5">
-            <h3 className="font-display text-sm font-black uppercase text-foreground mb-1">Special Features</h3>
-            <p className="text-xs text-muted-foreground mb-3">Weaponization, armor & ability showdown</p>
+            <h3 className="font-display text-sm font-black text-foreground mb-1">Special Features</h3>
+            <p className="text-sm text-muted-foreground mb-3">Weaponization, armor & ability showdown</p>
             {featureUnion.length === 0 ? (
-              <p className="text-xs text-muted-foreground py-8 text-center">
+              <p className="text-sm text-muted-foreground py-8 text-center">
                 None of the selected vehicles have special features listed yet.
               </p>
             ) : (
               <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
                 {featureMatrix.map(({ feature, present }) => (
                   <div key={feature} className="grid gap-2 items-center" style={{ gridTemplateColumns: `1.4fr repeat(${selectedVehicles.length}, 1fr)` }}>
-                    <span className="text-xs font-bold text-muted-foreground">{feature}</span>
+                    <span className="text-sm font-bold text-muted-foreground">{feature}</span>
                     {present.map((has, i) => (
                       <span key={i} className="text-center text-sm" aria-label={has ? "Yes" : "No"}>
                         {has ? (
@@ -647,7 +647,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in">
           <div className="card-surface max-w-2xl w-full max-h-[80vh] overflow-hidden rounded-3xl border border-border p-6 flex flex-col">
             <div className="flex items-center justify-between pb-4 border-b border-border">
-              <h3 className="font-display text-lg font-black uppercase text-foreground">
+              <h3 className="font-display text-lg font-black text-foreground">
                 Choose Contender for Slot #{pickerSlotIndex + 1}
               </h3>
                 <button
@@ -676,12 +676,12 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                       <img loading="lazy" src={cand.img} alt={cand.name} className="h-12 w-16 rounded-xl object-cover" />
                       <div>
                         <h4 className="font-display text-sm font-bold text-foreground">{cand.name}</h4>
-                        <p className="text-xs text-muted-foreground">{cand.klass} &bull; {cand.topSpeed} mph</p>
+                        <p className="text-sm text-muted-foreground">{cand.klass} &bull; {cand.topSpeed} mph</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="font-mono text-xs font-bold text-cyan-600 dark:text-[#00F0FF]">{cand.priceDisplay}</span>
-                      <span className="block text-xs text-muted-foreground font-semibold">{cand.confidence}</span>
+                      <span className="tabular-nums text-sm font-bold text-cyan-600 dark:text-[#00F0FF]">{cand.priceDisplay}</span>
+                      <span className="block text-sm text-muted-foreground font-semibold">{cand.confidence}</span>
                     </div>
                   </button>
                 );

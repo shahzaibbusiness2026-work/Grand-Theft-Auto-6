@@ -241,7 +241,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 <ConfidenceBadge level={weapon.confidence} source={weapon.source} />
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
+              <h1 className="font-display text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-tight">
                 {weapon.name}
               </h1>
 
@@ -268,8 +268,8 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 className="max-h-52 w-full object-contain mix-blend-lighten brightness-125 transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-border">
-                <span className="font-bold text-white/70 uppercase tracking-wider text-xs">Purchase Price</span>
-                <span className="font-mono font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{weapon.priceDisplay}</span>
+                <span className="font-bold text-white/70 text-xs">Purchase Price</span>
+                <span className="tabular-nums font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{weapon.priceDisplay}</span>
               </div>
             </div>
           </div>
@@ -279,7 +279,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Stat Bars */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
+            <h2 className="font-display text-base font-bold flex items-center gap-2 text-foreground">
               <Crosshair className="h-4 w-4 text-accent" /> Ballistic Combat Ratings
             </h2>
             <div className="mt-6 space-y-4">
@@ -287,7 +287,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 <div key={s.label} className="space-y-1.5">
                   <div className="flex justify-between text-xs font-semibold">
                     <span className="text-muted-foreground">{s.label}</span>
-                    <span className="font-mono font-bold text-foreground">{s.value}</span>
+                    <span className="tabular-nums font-bold text-foreground">{s.value}</span>
                   </div>
                   <Progress value={s.pct} className="h-2" />
                 </div>
@@ -295,19 +295,19 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
             </div>
 
             <div className="mt-6 rounded-2xl border-border bg-muted/60 p-3.5 text-xs text-muted-foreground">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground mb-1">
+              <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground mb-1">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>Verified Source Citation</span>
               </div>
               <p className="text-xs text-muted-foreground">
-                <strong>Source:</strong> {weapon.source}. Confidence level: <strong>{weapon.confidence}</strong>.
+                <strong>Source:</strong> {weapon.source}. Confidence level: <strong>{weapon.confidence === "CONFIRMED" ? "Confirmed" : "Speculation"}</strong>.
               </p>
             </div>
           </div>
 
           {/* Quick Specifications */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
+            <h2 className="font-display text-base font-bold flex items-center gap-2 text-foreground">
               <Wrench className="h-4 w-4 text-primary" /> Caliber & Mechanics Specs
             </h2>
             <dl className="mt-4 divide-y divide-border">
@@ -325,7 +325,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Attachments */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
+            <h2 className="font-display text-base font-bold flex items-center gap-2 text-foreground">
               <Sparkles className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> Supported Attachments & Upgrades
             </h2>
             <p className="text-xs text-muted-foreground mt-1">Modular upgrades compatible with this firearm:</p>
@@ -341,7 +341,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
 
           {/* Where to find */}
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
+            <h2 className="font-display text-base font-bold flex items-center gap-2 text-foreground">
               <MapPin className="h-4 w-4 text-emerald-600 dark:text-emerald-400" /> Acquisition & Drop Locations
             </h2>
             <ul className="mt-4 space-y-2.5">
@@ -360,7 +360,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
         {/* DEEP-DIVE: FEATURES, ECONOMY & CUSTOMIZATION */}
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
+            <h2 className="font-display text-base font-bold flex items-center gap-2 text-foreground">
               <Layers className="h-4 w-4 text-rose-600 dark:text-rose-400" /> Special Traits
             </h2>
             {weapon.features?.length ? (
@@ -388,7 +388,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
           </div>
 
           <div className="card-surface p-6 rounded-3xl border border-border">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
+            <h2 className="font-display text-base font-bold flex items-center gap-2 text-foreground">
               <Wallet className="h-4 w-4 text-gold-dark dark:text-gold-light" /> Weapon Economy
             </h2>
             <dl className="mt-4 divide-y divide-border">
@@ -405,7 +405,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
             </dl>
             {weapon.customization?.length ? (
               <>
-                <p className="mt-4 text-xs uppercase font-bold text-muted-foreground">Supported Modifications</p>
+                <p className="mt-4 text-xs font-bold text-muted-foreground">Supported Modifications</p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {weapon.customization.map((c) => (
                     <span key={c} className="rounded-full border border-primary/40 bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
