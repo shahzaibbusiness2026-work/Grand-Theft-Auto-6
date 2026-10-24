@@ -66,7 +66,7 @@ export function LoginForm() {
     lastName: string
   ) {
     setLoading(true);
-    setDbError(null);
+    setDbError("");
     const saved = await saveAccountToDatabase(email, firstName, lastName);
     if (saved.ok) {
       router.push("/dashboard");
