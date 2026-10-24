@@ -9,7 +9,6 @@ import {
   UserPlus,
   ArrowRight,
   Loader2,
-  ShieldCheck,
   Eye,
   EyeOff,
   Copy,
@@ -768,14 +767,6 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
               </button>
             </div>
 
-            <div className="mt-6 flex items-start justify-center gap-2 border-t border-white/15 pt-5 text-center">
-              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
-              <p className="text-xs leading-relaxed text-slate-400">
-                Your account is saved in the database.
-                <br />
-                Favorites and tracker stay on this device.
-              </p>
-            </div>
           </>
         )}
       </div>
