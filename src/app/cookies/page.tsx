@@ -4,8 +4,8 @@ import {  CheckCircle2, Shield } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | PixelSpot Gaming",
-  description: "Learn how PixelSpot Gaming uses cookies and client storage to remember your preferences and interactive map layers.",
+  title: "Cookie Policy | Taish Gaming",
+  description: "Learn how Taish Gaming uses cookies and client storage to remember your preferences and interactive map layers.",
   alternates: { canonical: "/cookies" },
   };
 

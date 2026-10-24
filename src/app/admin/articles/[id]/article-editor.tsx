@@ -24,7 +24,7 @@ const EMPTY_DRAFT: AdminArticle = {
   content: "",
   status: "draft",
   category: "News",
-  author: { name: "PSG Editorial", avatar: "/img/avatar-admin.svg", role: "Staff Writer" },
+  author: { name: "TG Editorial", avatar: "/img/avatar-admin.svg", role: "Staff Writer" },
   updatedAt: new Date().toISOString(),
   views: 0,
   readTime: "5 min",
@@ -89,7 +89,7 @@ export function ArticleEditor({
       readTime: article.readTime || "5 min",
       author: {
         ...article.author,
-        name: article.author?.name || "PSG Editorial",
+        name: article.author?.name || "TG Editorial",
         avatar: article.author?.avatar || "/img/avatar-admin.svg",
         role: article.author?.role || "Staff Writer",
       },
@@ -502,7 +502,7 @@ export function ArticleEditor({
             <div className="space-y-1">
               <p className="text-xs font-medium text-[#64748B]">Search result preview</p>
               <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-1">
-                <p className="text-xs text-[#94A3B8]">PixelSpot Gaming</p>
+                <p className="text-xs text-[#94A3B8]">Taish Gaming</p>
                 <p className="text-xs font-semibold text-[#818CF8]">{metaTitle}</p>
                 <p className="text-xs text-emerald-400 font-mono truncate">
                   gta6atlas.com/news/{slug || "your-slug"}

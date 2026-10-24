@@ -70,7 +70,7 @@ export default function AdminDatabasePage() {
         status: v.verification === "verified" ? "verified" : v.verification === "deprecated" ? "deprecated" : "unconfirmed",
         source: v.manufacturer ? `Manufacturer: ${v.manufacturer}` : "Trailer 1 Footages",
         lastVerified: v.updatedAt ? v.updatedAt.substring(0, 10) : "—",
-        verifier: v.lastEditor || "PSG Editor",
+        verifier: v.lastEditor || "TG Editor",
         details: v.summary || `${v.name} (${v.class})`
       }));
       const wAssets: DatabaseAsset[] = weapons.map(w => ({
@@ -80,7 +80,7 @@ export default function AdminDatabasePage() {
         status: w.verification === "verified" ? "verified" : w.verification === "deprecated" ? "deprecated" : "unconfirmed",
         source: w.acquisitionMethod || "Ammu-Nation",
         lastVerified: w.updatedAt ? w.updatedAt.substring(0, 10) : "—",
-        verifier: "PSG Staff",
+        verifier: "TG Staff",
         details: w.notes || `${w.name} (${w.category})`
       }));
       const lAssets: DatabaseAsset[] = locations.map(l => ({
@@ -90,7 +90,7 @@ export default function AdminDatabasePage() {
         status: l.verification === "verified" ? "verified" : l.verification === "deprecated" ? "deprecated" : "unconfirmed",
         source: l.district || "State of Leonida",
         lastVerified: "—",
-        verifier: "PSG Staff",
+        verifier: "TG Staff",
         details: l.description || `${l.name} (${l.type})`
       }));
       const combined = [...vAssets, ...wAssets, ...lAssets];

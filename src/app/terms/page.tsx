@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | PixelSpot Gaming",
-  description: "Terms of service and acceptable use policy for PixelSpot Gaming encyclopedia and mapping platform.",
+  title: "Terms of Service | Taish Gaming",
+  description: "Terms of service and acceptable use policy for Taish Gaming encyclopedia and mapping platform.",
   alternates: { canonical: "/terms" },
   };
 
@@ -28,7 +28,7 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">1. Acceptance of Terms</h2>
             <p>
-              By accessing or using the PixelSpot Gaming website, tools, interactive maps, or APIs, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+              By accessing or using the Taish Gaming website, tools, interactive maps, or APIs, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
             </p>
           </section>
 
@@ -38,7 +38,7 @@ export default function TermsPage() {
               Grand Theft Auto, GTA, Rockstar Games, Take-Two Interactive, and their associated logos, characters, artwork, and titles are trademarks and/or registered trademarks of Take-Two Interactive Software, Inc. and Rockstar Games.
             </p>
             <p>
-              All game content, screenshots, and references displayed on this site are utilized strictly for informational, educational, and commentary purposes under fair use doctrine. Original commentary, database curation, software code, and UI design are the property of PixelSpot Gaming.
+              All game content, screenshots, and references displayed on this site are utilized strictly for informational, educational, and commentary purposes under fair use doctrine. Original commentary, database curation, software code, and UI design are the property of Taish Gaming.
             </p>
           </section>
 
@@ -55,7 +55,7 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">4. Disclaimer of Warranties</h2>
             <p>
-              PixelSpot Gaming is provided on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind, either express or implied. Information regarding unreleased gameplay mechanics or release windows is subject to change at any time by Rockstar Games.
+              Taish Gaming is provided on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind, either express or implied. Information regarding unreleased gameplay mechanics or release windows is subject to change at any time by Rockstar Games.
             </p>
           </section>
         </div>

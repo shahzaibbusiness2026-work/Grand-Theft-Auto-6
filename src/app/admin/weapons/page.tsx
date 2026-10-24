@@ -210,7 +210,7 @@ export default function AdminWeaponsPage() {
               Weapons Management
             </h1>
             <p className="text-xs text-[#94A3B8] mt-1">
-              Manage weapon records for PixelSpot Gaming. Records show their actual verification status.
+              Manage weapon records for Taish Gaming. Records show their actual verification status.
             </p>
           </div>
 

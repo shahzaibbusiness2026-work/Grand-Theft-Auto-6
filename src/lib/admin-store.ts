@@ -282,7 +282,7 @@ export const INITIAL_ADMIN_USERS: AdminUser[] = [];
 export const INITIAL_ADMIN_ACTIVITIES: AdminActivity[] = [];
 
 export const INITIAL_SEO_SETTINGS: AdminSeoSettings = {
-  titleTemplate: "{title} | PixelSpot Gaming",
+  titleTemplate: "{title} | Taish Gaming",
   metaDescription: "Your independent guide to GTA 6. News, articles, locations, vehicles, weapons and more — all in one place.",
   canonicalBaseUrl: "",
   socialPreviewImage: "/img/hero-dark.jpg",
@@ -295,8 +295,8 @@ export const INITIAL_SEO_SETTINGS: AdminSeoSettings = {
 };
 
 export const INITIAL_SITE_SETTINGS: AdminSiteSettings = {
-  platformName: "PixelSpot Gaming",
-  copyrightText: "© 2026 PixelSpot Gaming. All rights reserved.",
+  platformName: "Taish Gaming",
+  copyrightText: "© 2026 Taish Gaming. All rights reserved.",
   logoUrl: "/img/gta6-official-logo.png",
   navigationMenu: [
     { id: "nav-1", order: 1, label: "Articles", url: "/articles", visible: true },

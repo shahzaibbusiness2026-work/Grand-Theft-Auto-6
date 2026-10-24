@@ -6,7 +6,7 @@ import { canonicalLocations, type CanonicalLocation } from "@/lib/canonical-data
 import { getLocations, type LocationRecord } from "@/lib/services/locations";
 
 export const metadata: Metadata = {
-  title: "Leonida Locations & Points of Interest — PixelSpot Gaming",
+  title: "Leonida Locations & Points of Interest — Taish Gaming",
   description:
     "Explore every confirmed location, landmark, gun shop, safehouse, and secret outpost across Vice City and the State of Leonida. Verified coordinates and satellite map sync.",
 };

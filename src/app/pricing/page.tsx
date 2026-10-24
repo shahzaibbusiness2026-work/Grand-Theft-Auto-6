@@ -4,9 +4,9 @@ import { Crown } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Membership — Everything Is Free | PixelSpot Gaming",
+  title: "Membership — Everything Is Free | Taish Gaming",
   description:
-    "PixelSpot Gaming has no paid plans. Every map, database, comparison, tracker and tool on the site is free to use.",
+    "Taish Gaming has no paid plans. Every map, database, comparison, tracker and tool on the site is free to use.",
   alternates: { canonical: "/pricing" },
   };
 
@@ -23,7 +23,7 @@ export default function PricingPage() {
             MEMBERSHIP
           </h1>
           <p className="text-sm text-muted-foreground">
-            There are no paid plans on PixelSpot Gaming. Everything here is free.
+            There are no paid plans on Taish Gaming. Everything here is free.
           </p>
         </div>
 

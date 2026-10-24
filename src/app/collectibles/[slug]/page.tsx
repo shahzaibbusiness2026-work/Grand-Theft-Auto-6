@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${collectible.title} — Location & Guide | PixelSpot Gaming`,
+    title: `${collectible.title} — Location & Guide | Taish Gaming`,
     description: `Complete guide and coordinate location for ${collectible.title} in ${collectible.district}. Requirements: ${collectible.requirements}.`,
     alternates: { canonical: `/collectibles/${collectible.slug}` },
   };

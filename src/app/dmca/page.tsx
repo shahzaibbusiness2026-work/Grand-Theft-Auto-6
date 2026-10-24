@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-  title: "DMCA & Copyright Policy | PixelSpot Gaming",
-  description: "DMCA takedown and copyright infringement policy for PixelSpot Gaming. How to submit a copyright complaint or counter-notice.",
+  title: "DMCA & Copyright Policy | Taish Gaming",
+  description: "DMCA takedown and copyright infringement policy for Taish Gaming. How to submit a copyright complaint or counter-notice.",
   alternates: { canonical: "/dmca" },
 };
 
@@ -28,17 +28,17 @@ export default function DMCAPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">1. Our Commitment</h2>
             <p>
-              PixelSpot Gaming respects the intellectual property rights of others and complies with the Digital Millennium Copyright Act (DMCA) and applicable international copyright laws. We respond promptly to valid takedown notices and take repeat infringement seriously.
+              Taish Gaming respects the intellectual property rights of others and complies with the Digital Millennium Copyright Act (DMCA) and applicable international copyright laws. We respond promptly to valid takedown notices and take repeat infringement seriously.
             </p>
             <p>
-              PixelSpot Gaming is an unofficial fan site. We do not claim ownership of Grand Theft Auto, GTA, Rockstar Games, Take-Two Interactive, or any associated trademarks, characters, artwork, or titles — these belong to their respective owners.
+              Taish Gaming is an unofficial fan site. We do not claim ownership of Grand Theft Auto, GTA, Rockstar Games, Take-Two Interactive, or any associated trademarks, characters, artwork, or titles — these belong to their respective owners.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">2. Filing a Takedown Notice</h2>
             <p>
-              If you believe that content on PixelSpot Gaming infringes your copyright, you may submit a takedown notice. Under the DMCA, your notice must include:
+              If you believe that content on Taish Gaming infringes your copyright, you may submit a takedown notice. Under the DMCA, your notice must include:
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>A physical or electronic signature of the copyright owner or authorized agent.</li>
@@ -76,7 +76,7 @@ export default function DMCAPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">5. Fair Use</h2>
             <p>
-              Content on PixelSpot Gaming — including game references, database entries, commentary, and analysis — is published for informational, educational, and commentary purposes. All original commentary, database curation, software code, and UI design are the property of PixelSpot Gaming.
+              Content on Taish Gaming — including game references, database entries, commentary, and analysis — is published for informational, educational, and commentary purposes. All original commentary, database curation, software code, and UI design are the property of Taish Gaming.
             </p>
             <p>
               Trailer videos embedded on this site are hosted by YouTube and streamed from Rockstar Games&apos; official channel. We do not host or redistribute copyrighted video files.

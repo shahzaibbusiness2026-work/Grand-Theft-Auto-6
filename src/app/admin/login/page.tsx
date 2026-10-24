@@ -85,7 +85,7 @@ function AdminLoginForm() {
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#1C2436] border border-[#6366F1]/40 mb-4">
             <Lock className="w-7 h-7 text-[#6366F1]" />
           </div>
-          <h1 className="font-sans text-3xl font-black uppercase tracking-tight text-white">PixelSpot Gaming</h1>
+          <h1 className="font-sans text-3xl font-black uppercase tracking-tight text-white">Taish Gaming</h1>
           <p className="text-sm text-[#64748B] mt-1">Admin Dashboard — Authorized Access Only</p>
         </div>
 
@@ -160,11 +160,11 @@ function AdminLoginForm() {
           </form>
 
           <p className="text-center text-xs text-[#374151] mt-6">
-            Access restricted to authorized PixelSpot Gaming team members only.
+            Access restricted to authorized Taish Gaming team members only.
           </p>
         </div>
 
-        <p className="text-center text-xs text-[#1E293B] mt-4">PixelSpot Gaming CMS • Secured by Supabase Auth</p>
+        <p className="text-center text-xs text-[#1E293B] mt-4">Taish Gaming CMS • Secured by Supabase Auth</p>
       </div>
     </div>
   );

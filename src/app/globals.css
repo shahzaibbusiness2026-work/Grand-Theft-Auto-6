@@ -36,7 +36,7 @@
     --color-neon-magenta: 250 100% 83%;
     --color-neon-cyan: 7 81% 77%;
 
-    /* PixelSpot Gaming Admin Design System Tokens (Dark Mode Default) */
+    /* Taish Gaming Admin Design System Tokens (Dark Mode Default) */
     --admin-bg: #090d16;
     --admin-surface: #0f1524;
     --admin-card: #131b2e;
@@ -80,7 +80,7 @@
     --input: 219 14% 55%; /* #7B879C */
     --ring: 38 38% 48%; /* #A98850 */
 
-    /* PixelSpot Gaming Admin Design System Tokens (Light Mode) */
+    /* Taish Gaming Admin Design System Tokens (Light Mode) */
     --admin-bg: #f8fafc;
     --admin-surface: #ffffff;
     --admin-card: #ffffff;
@@ -230,7 +230,7 @@
 }
 
 /* ==========================================================================
-   PIXELSPOT GAMING ADMIN DASHBOARD — BRIGHT (LIGHT) THEME RULES
+   TAISH GAMING ADMIN DASHBOARD — BRIGHT (LIGHT) THEME RULES
    Ensures all cards, text, inputs, dropdowns, tables, and borders align with
    the bright theme when active.
    ========================================================================== */

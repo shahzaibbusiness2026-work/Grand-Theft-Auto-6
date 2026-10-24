@@ -196,7 +196,7 @@ export function AdminSidebar({
             {!isCollapsed && (
               <div className="flex items-center gap-2 min-w-0">
                 <span className="font-bold text-sm tracking-tight text-white truncate">
-                  PixelSpot Gaming
+                  Taish Gaming
                 </span>
                 <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#1C2336] text-[#818CF8] border border-[#2B3652] shrink-0">
                   Admin

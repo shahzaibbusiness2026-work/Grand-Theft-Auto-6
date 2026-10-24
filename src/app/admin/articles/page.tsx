@@ -238,7 +238,7 @@ export default function AdminArticlesPage() {
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
-            Manage, edit and publish content for PixelSpot Gaming. All information is unverified and subject to change.
+            Manage, edit and publish content for Taish Gaming. All information is unverified and subject to change.
           </p>
         </div>
 

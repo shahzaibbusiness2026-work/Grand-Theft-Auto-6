@@ -43,7 +43,7 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   countdownCaption: "Target countdown • Official date to be confirmed by Rockstar Games",
   heroHeading: "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas",
   heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
-  announcementBanner: "PixelSpot Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
+  announcementBanner: "Taish Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
   contactEmail: "contact@gta6atlas.com",
   twitterHandle: "@GTA6Atlas",
   discordUrl: "https://discord.gg/gta6atlas",

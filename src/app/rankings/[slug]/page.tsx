@@ -22,9 +22,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const match = getRankingDef(slug);
-  if (!match) return { title: "Ranking not found — PixelSpot Gaming" };
+  if (!match) return { title: "Ranking not found — Taish Gaming" };
   return {
-    title: `${match.def.title} — PixelSpot Gaming`,
+    title: `${match.def.title} — Taish Gaming`,
     description: match.def.description,
     alternates: { canonical: `/rankings/${match.def.slug}` },
     openGraph: { title: match.def.title, description: match.def.description },

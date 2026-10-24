@@ -79,10 +79,10 @@ export async function POST(req: Request) {
     .split("\n")
     .map((line) => (line.trim() === "" ? "<br>" : `<p>${escapeHtml(line)}</p>`))
     .join("");
-  const html = `<!DOCTYPE html><html><body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">${htmlBody}<hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;"><p style="font-size: 12px; color: #888;">Re: your message to PixelSpot Gaming. This is a reply to your contact-form enquiry.</p></body></html>`;
+  const html = `<!DOCTYPE html><html><body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">${htmlBody}<hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;"><p style="font-size: 12px; color: #888;">Re: your message to Taish Gaming. This is a reply to your contact-form enquiry.</p></body></html>`;
 
   const resend = new Resend(apiKey);
-  const from = process.env.BROADCAST_FROM_EMAIL || "PixelSpot Gaming <onboarding@resend.dev>";
+  const from = process.env.BROADCAST_FROM_EMAIL || "Taish Gaming <onboarding@resend.dev>";
   const { error: sendError } = await resend.emails.send({
     from,
     to: [contact.email],

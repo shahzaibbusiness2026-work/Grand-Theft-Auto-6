@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "GTA 6 Vehicles Database — Stats, Prices & Comparisons | PixelSpot Gaming",
+  title: "GTA 6 Vehicles Database — Stats, Prices & Comparisons | Taish Gaming",
   description: "Browse the confirmed GTA 6 vehicle roster — cars, motorcycles, boats, helicopters and more across Leonida.",
   openGraph: {
     title: "GTA 6 Vehicles — Complete Database",

@@ -1,7 +1,7 @@
 "use client";
 
 /* ------------------------------------------------------------------ */
-/* PixelSpot Gaming — Global User Persistence & State Store                */
+/* Taish Gaming — Global User Persistence & State Store                */
 /* Manages Favorites, Tracker Progress, Notes, Loadouts, Pro Status   */
 /* ------------------------------------------------------------------ */
 

@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------ */
-/* PixelSpot Gaming — Canonical Verified Database                          */
+/* Taish Gaming — Canonical Verified Database                          */
 /* Strict adherence to information confidence levels:                */
 /* OFFICIAL | CONFIRMED | REPORTED | RUMORED | SPECULATION            */
 /* ------------------------------------------------------------------ */

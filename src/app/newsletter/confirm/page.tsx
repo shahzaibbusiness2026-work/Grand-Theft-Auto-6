@@ -3,8 +3,8 @@ import { CheckCircle2, AlertTriangle, MailWarning } from "lucide-react";
 import { confirmNewsletterSubscription } from "@/lib/services/newsletter";
 
 export const metadata = {
-  title: "Confirm subscription | PixelSpot Gaming",
-  description: "Confirm your PixelSpot Gaming newsletter subscription.",
+  title: "Confirm subscription | Taish Gaming",
+  description: "Confirm your Taish Gaming newsletter subscription.",
   robots: { index: false, follow: false },
 };
 
@@ -22,7 +22,7 @@ export default async function NewsletterConfirmPage({
     confirmed: {
       icon: <CheckCircle2 className="h-12 w-12 text-emerald-500" aria-hidden="true" />,
       title: "You're subscribed!",
-      body: "Your email is confirmed. You'll get PixelSpot Gaming launch alerts and updates.",
+      body: "Your email is confirmed. You'll get Taish Gaming launch alerts and updates.",
     },
     already: {
       icon: <CheckCircle2 className="h-12 w-12 text-emerald-500" aria-hidden="true" />,

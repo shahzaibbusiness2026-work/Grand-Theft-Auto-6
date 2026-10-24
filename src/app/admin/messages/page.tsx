@@ -76,7 +76,7 @@ export default function AdminMessagesPage() {
 
   const openReply = (m: ContactMessage) => {
     setReplyTarget(m);
-    setReplySubject(m.subject ? `Re: ${m.subject}` : "Re: Your message to PixelSpot Gaming");
+    setReplySubject(m.subject ? `Re: ${m.subject}` : "Re: Your message to Taish Gaming");
     setReplyBody("");
   };
 

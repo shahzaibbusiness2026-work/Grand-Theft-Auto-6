@@ -16,7 +16,7 @@ export function FeatureDisabled({ title }: { title: string }) {
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           The site owner has switched this section off in the admin dashboard for now.
-          Everything else on PixelSpot Gaming is still open — check back soon.
+          Everything else on Taish Gaming is still open — check back soon.
         </p>
         <Link
           href="/"

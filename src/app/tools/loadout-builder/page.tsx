@@ -6,7 +6,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Tactical Loadout Builder & Armory Scoring — PixelSpot Gaming",
+  title: "GTA 6 Tactical Loadout Builder & Armory Scoring — Taish Gaming",
   description:
     "Assemble and simulate custom GTA 6 weapon loadouts for heists, street wars, and recon operations. Real-time firepower, mobility, and stealth ratings with offline saving.",
 
@@ -27,12 +27,12 @@ export default function LoadoutBuilderPage() {
                 itemListElement: [
                   { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Tactical Loadout Builder & Armory Scoring \u2014 PixelSpot Gaming", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/loadout-builder" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Tactical Loadout Builder & Armory Scoring \u2014 Taish Gaming", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/loadout-builder" },
                 ],
               },
               {
                 "@type": "WebApplication",
-                name: "GTA 6 Tactical Loadout Builder & Armory Scoring \u2014 PixelSpot Gaming",
+                name: "GTA 6 Tactical Loadout Builder & Armory Scoring \u2014 Taish Gaming",
                 description: "Assemble and simulate custom GTA 6 weapon loadouts for heists, street wars, and recon operations. Real-time firepower, mobility, and stealth ratings with offline saving.",
                 url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/loadout-builder",
                 applicationCategory: "UtilitiesApplication",
