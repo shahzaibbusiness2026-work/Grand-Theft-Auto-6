@@ -24,7 +24,7 @@ export default function LoginPage() {
             </div>
             <LoginForm />
             <p className="mt-6 text-center text-xs text-muted-foreground">
-              First time here? After your email, you will enter your first and last name and your account is created — saved on this device only.
+              First time here? After your email, you will enter your first and last name and your account is created and saved in the database.
             </p>
           </div>
         </div>

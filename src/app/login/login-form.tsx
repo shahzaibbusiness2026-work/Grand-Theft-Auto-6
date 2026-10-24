@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Mail, User, ArrowRight, ArrowLeft, Loader2, HardDrive } from "lucide-react";
+import { Mail, User, ArrowRight, ArrowLeft, Loader2, ShieldCheck } from "lucide-react";
 import {
   setUserEmail,
   setUserName,
@@ -23,8 +23,63 @@ export function LoginForm() {
   const [isNewEmail, setIsNewEmail] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  // Database-save failure state: the local login already succeeded, so the
+  // user can retry the save or continue on this device only — never stuck.
+  const [dbError, setDbError] = useState("");
+  const [pendingLogin, setPendingLogin] = useState<{
+    email: string;
+    firstName: string;
+    lastName: string;
+  } | null>(null);
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  async function saveAccountToDatabase(
+    email: string,
+    firstName: string,
+    lastName: string
+  ): Promise<{ ok: boolean; error?: string }> {
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 10000);
+      const res = await fetch("/api/account/profile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, firstName, lastName }),
+        signal: ctrl.signal,
+      });
+      clearTimeout(timer);
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        return { ok: false, error: data?.error || "Could not save your account." };
+      }
+      return { ok: true };
+    } catch {
+      return {
+        ok: false,
+        error: "Could not reach the server. Check your connection and try again.",
+      };
+    }
+  }
+
+  async function proceedToDashboard(
+    email: string,
+    firstName: string,
+    lastName: string
+  ) {
+    setLoading(true);
+    setDbError(null);
+    const saved = await saveAccountToDatabase(email, firstName, lastName);
+    if (saved.ok) {
+      router.push("/dashboard");
+      return;
+    }
+    // Local login stands; only the database save failed. Offer a retry and
+    // an explicit device-only escape — never a dead end.
+    setDbError(saved.error || "Could not save your account.");
+    setPendingLogin({ email, firstName, lastName });
+    setLoading(false);
+  }
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -35,16 +90,21 @@ export function LoginForm() {
     }
 
     const stored = getStoredUserState();
-    // Returning user with a finished account: log straight in.
+    // Returning user with a finished account: save locally, then save the
+    // sign-in to the database before entering the dashboard.
     if (stored.userEmail === trimmed && stored.displayName) {
-      setLoading(true);
       try {
         setUserEmail(trimmed);
-        router.push("/dashboard");
       } catch {
         setError("Something went wrong. Please try again.");
-        setLoading(false);
+        return;
       }
+      const [first, ...rest] = (stored.displayName || "").split(" ");
+      await proceedToDashboard(
+        trimmed,
+        stored.firstName || first || "",
+        stored.lastName || rest.join(" ")
+      );
       return;
     }
 
@@ -62,7 +122,7 @@ export function LoginForm() {
     setStep("create");
   };
 
-  const handleCreateSubmit = (e: React.FormEvent) => {
+  const handleCreateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -71,15 +131,14 @@ export function LoginForm() {
       return;
     }
 
-    setLoading(true);
     try {
       setUserEmail(email.trim().toLowerCase());
       setUserName(firstName, lastName);
-      router.push("/dashboard");
     } catch {
       setError("Something went wrong. Please try again.");
-      setLoading(false);
+      return;
     }
+    await proceedToDashboard(email.trim().toLowerCase(), firstName, lastName);
   };
 
   if (step === "create") {
@@ -146,6 +205,38 @@ export function LoginForm() {
           </p>
         )}
 
+        {dbError && pendingLogin && (
+          <div role="alert" className="rounded-xl border border-amber-500/40 bg-amber-500/10 p-3 text-xs text-amber-700 dark:text-amber-300">
+            <p className="font-semibold">
+              Signed in on this device, but the database save failed: {dbError}
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  proceedToDashboard(
+                    pendingLogin.email,
+                    pendingLogin.firstName,
+                    pendingLogin.lastName
+                  )
+                }
+                disabled={loading}
+                className="rounded-lg bg-gold px-3 py-1.5 font-bold text-slate-950 hover:brightness-105"
+              >
+                Retry save
+              </button>
+              <button
+                type="button"
+                onClick={() => router.push("/dashboard")}
+                disabled={loading}
+                className="rounded-lg border border-border px-3 py-1.5 font-semibold text-muted-foreground hover:text-foreground"
+              >
+                Continue on this device only
+              </button>
+            </div>
+          </div>
+        )}
+
         <Button type="submit" disabled={loading} className="w-full bg-gold font-bold text-slate-950 hover:brightness-105">
           {loading ? (
             <>
@@ -168,8 +259,8 @@ export function LoginForm() {
         </button>
 
         <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
-          <HardDrive className="h-3.5 w-3.5" aria-hidden="true" />
-          Local profile — saved on this device only. Nothing is uploaded.
+          <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+          Your account is saved in the database. Favorites and tracker stay on this device.
         </p>
       </form>
     );
@@ -203,6 +294,38 @@ export function LoginForm() {
         </p>
       )}
 
+      {dbError && pendingLogin && (
+        <div role="alert" className="rounded-xl border border-amber-500/40 bg-amber-500/10 p-3 text-xs text-amber-700 dark:text-amber-300">
+          <p className="font-semibold">
+            Signed in on this device, but the database save failed: {dbError}
+          </p>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() =>
+                proceedToDashboard(
+                  pendingLogin.email,
+                  pendingLogin.firstName,
+                  pendingLogin.lastName
+                )
+              }
+              disabled={loading}
+              className="rounded-lg bg-gold px-3 py-1.5 font-bold text-slate-950 hover:brightness-105"
+            >
+              Retry save
+            </button>
+            <button
+              type="button"
+              onClick={() => router.push("/dashboard")}
+              disabled={loading}
+              className="rounded-lg border border-border px-3 py-1.5 font-semibold text-muted-foreground hover:text-foreground"
+            >
+              Continue on this device only
+            </button>
+          </div>
+        </div>
+      )}
+
       <Button type="submit" disabled={loading} className="w-full bg-gold font-bold text-slate-950 hover:brightness-105">
         {loading ? (
           <>
@@ -221,8 +344,8 @@ export function LoginForm() {
       </p>
 
       <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
-        <HardDrive className="h-3.5 w-3.5" aria-hidden="true" />
-        Local profile — saved on this device only. Nothing is uploaded.
+        <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+        Your account is saved in the database. Favorites and tracker stay on this device.
       </p>
     </form>
   );
