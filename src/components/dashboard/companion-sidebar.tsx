@@ -15,9 +15,6 @@ import {
   BookOpen,
   Newspaper,
   Users,
-  Crown,
-  Check,
-  ArrowRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -104,43 +101,8 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
         })}
       </nav>
 
-      {/* Bottom Section: GO PRO & Neon Art */}
+      {/* Bottom Section: Neon Art (the GO PRO upsell card was removed — everything on the site is free) */}
       <div className="p-3.5 space-y-4">
-        {/* GO PRO Card */}
-        <div className="dark-panel relative overflow-hidden rounded-2xl border border-gold/25 bg-gradient-to-b from-[#131c2e]/90 to-[#0c1220]/95 p-3.5 shadow-xl backdrop-blur-md">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gold/20 text-gold-light shadow-[0_0_10px_rgba(201,168,106,0.3)]">
-              <Crown className="h-4 w-4" />
-            </div>
-            <span className="font-display text-sm font-extrabold tracking-wider text-white">
-              GO PRO
-            </span>
-          </div>
-
-          <ul className="space-y-1.5 text-xs text-slate-300 mb-3">
-            {[
-              "Ad-free experience",
-              "Advanced tools",
-              "Save your progress",
-              "Exclusive content",
-            ].map((feature) => (
-              <li key={feature} className="flex items-center gap-2">
-                <Check className="h-3 w-3 text-cyan-400 shrink-0" />
-                <span className="truncate">{feature}</span>
-              </li>
-            ))}
-          </ul>
-
-          <Link
-            href="/tools"
-            onClick={onItemClick}
-            className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-gold py-2 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_4px_16px_rgba(201,168,106,0.35)] transition-all duration-200 hover:brightness-105 active:scale-95"
-          >
-            <span>Explore Tools</span>
-            <ArrowRight className="h-3.5 w-3.5 text-slate-950" />
-          </Link>
-        </div>
-
         {/* Neon script & palm decoration */}
         <div className="relative flex flex-col items-center justify-center py-2 select-none pointer-events-none opacity-90 overflow-hidden">
           <svg

@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       type: "article",
       publishedTime: article.published_at || undefined,
-      authors: [article.author_name || "Atlas Editorial"],
+      authors: [article.author_name || "Taish Team"],
       images: [{ url: ogImage }],
     },
     twitter: {
@@ -124,7 +124,7 @@ export default async function ArticleDetailPage({ params }: Props) {
         image: [article.og_image || article.cover_image || `${base}/img/hero-dark.jpg`],
         datePublished: article.published_at || undefined,
         dateModified: article.updated_at || article.published_at || undefined,
-        author: { "@type": "Person", name: article.author_name || "Atlas Editorial" },
+        author: { "@type": "Person", name: article.author_name || "Taish Team" },
         publisher: {
           "@type": "Organization",
           name: "Taish Gaming",

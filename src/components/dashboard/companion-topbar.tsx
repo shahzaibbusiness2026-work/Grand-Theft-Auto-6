@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Moon, Sun, Bell, ChevronDown, Menu } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Search, Moon, Sun, Bell, ChevronDown, Menu, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { CommandPalette } from "@/components/command-palette";
+import { logoutUser } from "@/lib/user-store";
 
 import { cn } from "@/lib/utils";
 
@@ -13,10 +15,17 @@ interface CompanionTopBarProps {
 }
 
 export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: CompanionTopBarProps) {
+  const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
+
+  function handleSignOut() {
+    logoutUser();
+    setProfileOpen(false);
+    router.push("/login");
+  }
 
   return (
     <>
@@ -151,6 +160,15 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
                   >
                     Membership
                   </a>
+                </div>
+                <div className="border-t border-white/10 pt-1">
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    className="flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-semibold text-rose-300 hover:bg-rose-500/10 hover:text-rose-200"
+                  >
+                    <LogOut className="h-3.5 w-3.5" /> Sign out
+                  </button>
                 </div>
               </div>
             )}

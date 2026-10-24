@@ -222,7 +222,7 @@ export async function saveArticle(article: Partial<AdminArticle> & { title: stri
       category: article.category || "News",
       tag: article.tags?.[0] || "Official",
       status: article.status || "published",
-      author_name: article.author?.name || "Atlas Editorial",
+      author_name: article.author?.name || "Taish Team",
       author_avatar: article.author?.avatar || "/img/avatar-admin.svg",
       author_role: article.author?.role || "Staff Writer",
       cover_image: article.coverImage || "/img/hero-dark.jpg",
