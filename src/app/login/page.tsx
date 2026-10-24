@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { SiteShell } from "@/components/shells";
+import Image from "next/image";
+import Link from "next/link";
 import { LoginCards } from "./login-form";
 
 export const metadata: Metadata = {
@@ -8,22 +9,40 @@ export const metadata: Metadata = {
   alternates: { canonical: "/login" },
 };
 
-export default function LoginPage() {
+/**
+ * Standalone auth page (no navbar/footer) so the Vice City background
+ * image fills the viewport behind the card, like the reference design.
+ * The ?oauth= flag comes from /auth/callback when a social sign-in is
+ * cancelled or fails, so the card can say so instead of failing silently.
+ */
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ oauth?: string }>;
+}) {
+  const params = await searchParams;
+  const oauthStatus =
+    params.oauth === "cancelled" || params.oauth === "error" ? params.oauth : undefined;
+
   return (
-    <SiteShell>
-      <div className="container-site flex min-h-[60vh] items-center justify-center py-12">
-        <div className="w-full max-w-4xl">
-          <div className="mb-8 text-center">
-            <h1 className="font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
-              Welcome
-            </h1>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Log in to your dashboard, or create your account — it takes a few seconds.
-            </p>
-          </div>
-          <LoginCards />
-        </div>
+    <div className="relative min-h-screen">
+      <Image
+        src="/img/hero-vice-skyline-hd.jpg"
+        alt=""
+        fill
+        priority
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-black/65" />
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-10">
+        <LoginCards oauthStatus={oauthStatus} />
+        <Link
+          href="/"
+          className="mt-6 text-xs font-semibold text-slate-300 hover:text-white"
+        >
+          ← Back to home
+        </Link>
       </div>
-    </SiteShell>
+    </div>
   );
 }
