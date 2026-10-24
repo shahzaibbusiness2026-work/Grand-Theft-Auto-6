@@ -291,3 +291,24 @@ export const ALL_RANKING_SLUGS: string[] = [
   ...VEHICLE_RANKINGS.map((r) => r.slug),
   ...WEAPON_RANKINGS.map((r) => r.slug),
 ];
+
+/**
+ * Rankings that actually have entries. A ranking whose metric is null for
+ * every item renders as a 404 (see rankings/[slug]), so only live rankings
+ * may be linked from the index page or listed in the sitemap — otherwise
+ * visitors and Google hit dead ends (e.g. best-weaponized while no
+ * weaponized vehicle is confirmed yet).
+ */
+export function getLiveRankingSlugs(
+  vehicles: CanonicalVehicle[],
+  weapons: CanonicalWeapon[],
+): string[] {
+  const live: string[] = [];
+  for (const def of VEHICLE_RANKINGS) {
+    if (vehicles.some((v) => def.value(v) != null)) live.push(def.slug);
+  }
+  for (const def of WEAPON_RANKINGS) {
+    if (weapons.some((w) => def.value(w) != null)) live.push(def.slug);
+  }
+  return live;
+}

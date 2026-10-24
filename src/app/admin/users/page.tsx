@@ -589,7 +589,7 @@ export default function AdminUsersPage() {
             <input
               id="invite-email"
               type="email"
-              placeholder="name@gta6atlas.com"
+              placeholder="name@example.com"
               value={newUser.email}
               onChange={(e) => {
                 setNewUser({ ...newUser, email: e.target.value });

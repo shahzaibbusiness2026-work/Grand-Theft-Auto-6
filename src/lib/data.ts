@@ -178,7 +178,7 @@ export const weaponCategories = [
 /* ------------------------------------------------------------------ */
 
 export const faqs = [
-  { q: "How can I report a bug or issue?", a: "Use the contact form above or email support@gta6atlas.com. Our team typically responds within 24 hours." },
+  { q: "How can I report a bug or issue?", a: "Use the contact form on this page — every message lands in the admin inbox." },
   { q: "Can I suggest new features for Taish Gaming?", a: "Absolutely! We love community ideas. Send us your suggestion and we might build it for the next release." },
   { q: "Is Taish Gaming affiliated with Rockstar Games?", a: "No. Taish Gaming is an unofficial fan-made companion and is not affiliated with Rockstar Games or Take-Two Interactive." },
   { q: "How long does it take to get a response?", a: "We reply within 24 hours on business days. Live chat is available 9:00 AM – 9:00 PM EST, Monday to Sunday." },

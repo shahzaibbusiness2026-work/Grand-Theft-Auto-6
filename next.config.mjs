@@ -24,6 +24,14 @@ const nextConfig = {
         : []),
     ],
   },
+  async redirects() {
+    return [
+      // Retired URLs from the admin SEO redirect defaults — real routes,
+      // not just rows in a settings table.
+      { source: "/old-map", destination: "/map", permanent: true },
+      { source: "/vehicle-list", destination: "/vehicles", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
@@ -34,14 +42,14 @@ const nextConfig = {
         ],
       },
       {
+        // Frame headers intentionally live in middleware.ts, which exempts
+        // /embed/* so the public countdown iframe is not blocked.
         source: "/(.*)",
         headers: [
-          { key: "X-Frame-Options", value: "DENY" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-          { key: "Content-Security-Policy", value: "frame-ancestors 'none';" },
         ],
       },
     ];

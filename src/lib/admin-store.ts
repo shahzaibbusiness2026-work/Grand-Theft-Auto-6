@@ -289,8 +289,7 @@ export const INITIAL_SEO_SETTINGS: AdminSeoSettings = {
   excludeDraftsAndArchived: true,
   redirects: [
     { id: "red-1", fromUrl: "/old-map", toUrl: "/map", type: "301", enabled: true },
-    { id: "red-2", fromUrl: "/vehicle-list", toUrl: "/vehicles", type: "301", enabled: true },
-    { id: "red-3", fromUrl: "/guides", toUrl: "/guides", type: "301", enabled: true }
+    { id: "red-2", fromUrl: "/vehicle-list", toUrl: "/vehicles", type: "301", enabled: true }
   ]
 };
 

@@ -9,7 +9,8 @@ import {
 } from "@/lib/canonical-data";
 import { getSeoSettings } from "@/lib/services/seo";
 import { getPublicArticles } from "@/lib/services/articles";
-import { ALL_RANKING_SLUGS } from "@/lib/rankings";
+import { getLiveRankingSlugs } from "@/lib/rankings";
+import { getMergedVehicles, getMergedWeapons } from "@/lib/services/catalog";
 
 /**
  * Revalidate at most once per hour: this keeps the sitemap fresh (new
@@ -169,8 +170,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  // Auto-generated ranking pages
-  const rankingRoutes = ALL_RANKING_SLUGS.map((slug) => ({
+  // Auto-generated ranking pages — only rankings with entries, so the
+  // sitemap never points at a page that 404s (e.g. best-weaponized today).
+  const [liveVehicles, liveWeapons] = await Promise.all([getMergedVehicles(), getMergedWeapons()]);
+  const rankingRoutes = getLiveRankingSlugs(liveVehicles, liveWeapons).map((slug) => ({
     url: `${baseUrl}/rankings/${slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,

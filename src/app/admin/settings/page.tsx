@@ -50,7 +50,7 @@ export default function AdminSettingsPage() {
     heroHeading: "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas",
     heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
     announcementBanner: "Taish Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
-    contactEmail: "contact@gta6atlas.com",
+    contactEmail: "",
     twitterHandle: "@GTA6Atlas",
     discordUrl: "https://discord.gg/gta6atlas",
     redditUrl: "https://reddit.com/r/GTA6Atlas",

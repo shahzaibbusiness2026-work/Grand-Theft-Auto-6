@@ -3,9 +3,7 @@
 import { useState } from "react";
 import {
   Mail,
-  MessageSquare,
   MapPin,
-  Share2,
   Send,
   ChevronDown,
   Bug,
@@ -13,10 +11,6 @@ import {
   ShieldCheck,
   Clock,
   Megaphone,
-  Instagram,
-  Twitter,
-  Youtube,
-  Gamepad2,
   CheckCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,9 +21,10 @@ import { submitContactMessage } from "@/lib/services/contact";
 import { cn } from "@/lib/utils";
 
 const contactCards = [
-  { icon: Mail, title: "Email Us", lines: ["support@gta6atlas.com", "We reply within 24 hours"] },
-  { icon: MessageSquare, title: "Community Chat", lines: ["Discord & Forum Support", "Active Daily"] },
-  { icon: MapPin, title: "Community Hub", lines: ["Leonida & Vice City Fans", "Global Online Community"] },
+  // No public mailbox or Discord/forum exists yet, so the cards point at
+  // the working form below instead of addresses that would bounce.
+  { icon: Mail, title: "Message Us", lines: ["Use the form below", "Every message lands in the admin inbox"] },
+  { icon: MapPin, title: "Community Hub", lines: ["Leonida & Vice City Fans", "Guides, tools and news in one place"] },
 ];
 
 const faqIcons = [Bug, Star, ShieldCheck, Clock, Megaphone];
@@ -92,26 +87,6 @@ export function ContactClient() {
               </div>
             </div>
           ))}
-          <div className="card-surface flex items-start gap-4 p-4">
-            <span className="icon-tile border border-accent/40 bg-accent/10 text-accent">
-              <Share2 className="h-4 w-4" />
-            </span>
-            <div>
-              <h3 className="font-display text-sm font-bold">Follow Us</h3>
-              <div className="mt-2 flex gap-3 text-accent">
-                {[
-                  { Icon: Twitter, label: "Taish Gaming on X (Twitter)", href: "https://x.com/GTA6Atlas" },
-                  { Icon: Instagram, label: "Taish Gaming on Instagram", href: "https://instagram.com/gta6atlas" },
-                  { Icon: Youtube, label: "Taish Gaming on YouTube", href: "https://youtube.com/@GTA6Atlas" },
-                  { Icon: Gamepad2, label: "Taish Gaming Discord community", href: "https://discord.gg/gta6atlas" },
-                ].map(({ Icon, label, href }) => (
-                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center">
-                    <Icon className="h-4 w-4" />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
 
         {submitted ? (

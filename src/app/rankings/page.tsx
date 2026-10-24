@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
-import { VEHICLE_RANKINGS, WEAPON_RANKINGS } from "@/lib/rankings";
+import { VEHICLE_RANKINGS, WEAPON_RANKINGS, getLiveRankingSlugs } from "@/lib/rankings";
+import { getMergedVehicles, getMergedWeapons } from "@/lib/services/catalog";
 import { Trophy, Car, Crosshair } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Metadata } from "next";
@@ -8,7 +9,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Rankings — Best Vehicles & Weapons, Auto-Updated",
   description:
-    "Auto-generated GTA 6 rankings: fastest cars, best handling, best off-road, best weaponized vehicles, highest DPS weapons, best pistols, SMGs, assault rifles and snipers — always computed from our live database.",
+    "Auto-generated GTA 6 rankings: fastest cars, best handling, best off-road, highest DPS weapons, best pistols, SMGs, assault rifles and snipers — always computed from our live database.",
   alternates: { canonical: "/rankings" },
 };
 
@@ -32,7 +33,16 @@ function RankingCard({ href, icon: Icon, title, description, badge }: { href: st
   );
 }
 
-export default function RankingsIndexPage() {
+export default async function RankingsIndexPage() {
+  // Only rankings with entries are linked: an empty ranking is a 404 page,
+  // so listing it would send visitors into a dead end.
+  const [vehicles, weapons] = await Promise.all([getMergedVehicles(), getMergedWeapons()]);
+  const liveSlugs = new Set(getLiveRankingSlugs(vehicles, weapons));
+  const liveVehicleRankings = VEHICLE_RANKINGS.filter((r) => liveSlugs.has(r.slug));
+  const liveWeaponRankings = WEAPON_RANKINGS.filter((r) => liveSlugs.has(r.slug));
+  const hiddenCount =
+    VEHICLE_RANKINGS.length + WEAPON_RANKINGS.length - liveVehicleRankings.length - liveWeaponRankings.length;
+
   return (
     <SiteShell>
       <div className="container-site py-8">
@@ -47,6 +57,14 @@ export default function RankingsIndexPage() {
           <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
             Every ranking below is computed automatically from our vehicle and weapon database — the same CMS data
             that powers the comparison duels. When new GTA 6 content is added, these rankings update themselves.
+            {hiddenCount > 0 && (
+              <>
+                {" "}
+                {hiddenCount} ranking{hiddenCount > 1 ? "s are" : " is"} hidden for now because no confirmed
+                entry exists yet — {hiddenCount > 1 ? "they" : "it"} will appear automatically once the database
+                has one.
+              </>
+            )}
           </p>
         </div>
 
@@ -61,7 +79,7 @@ export default function RankingsIndexPage() {
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {VEHICLE_RANKINGS.map((r) => (
+            {liveVehicleRankings.map((r) => (
               <RankingCard
                 key={r.slug}
                 href={`/rankings/${r.slug}`}
@@ -85,7 +103,7 @@ export default function RankingsIndexPage() {
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {WEAPON_RANKINGS.map((r) => (
+            {liveWeaponRankings.map((r) => (
               <RankingCard
                 key={r.slug}
                 href={`/rankings/${r.slug}`}

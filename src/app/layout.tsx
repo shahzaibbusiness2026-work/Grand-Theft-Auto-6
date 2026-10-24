@@ -13,7 +13,7 @@ const fontSans = {
   variable: "--font-sans",
 };
 
-const FALLBACK_SITE_URL = "https://gta6atlas.com";
+const FALLBACK_SITE_URL = "https://grand-theft-auto-6-5ap5.vercel.app";
 
 /**
  * Site-wide metadata is CMS-driven (admin → SEO settings / site settings),
@@ -77,7 +77,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: siteTitle,
       description,
       images: [ogImage],
-      creator: settings.twitterHandle || "@gta6atlas",
+      ...(settings.twitterHandle ? { creator: settings.twitterHandle } : {}),
     },
   };
 }

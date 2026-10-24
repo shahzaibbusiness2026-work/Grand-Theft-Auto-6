@@ -44,10 +44,12 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   heroHeading: "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas",
   heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
   announcementBanner: "Taish Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
-  contactEmail: "contact@gta6atlas.com",
-  twitterHandle: "@GTA6Atlas",
-  discordUrl: "https://discord.gg/gta6atlas",
-  redditUrl: "https://reddit.com/r/GTA6Atlas",
+  // Social/contact placeholders are intentionally empty: no mailbox or
+  // handle exists for the brand yet, and the UI must not link to lookalikes.
+  contactEmail: "",
+  twitterHandle: "",
+  discordUrl: "",
+  redditUrl: "",
   homepageSectionToggles: ["hero", "trailers", "map", "characters", "news", "community"],
   publicToolToggles: ["map_tool", "comp_tool", "track_tool"],
   ga4MeasurementId: "",

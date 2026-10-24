@@ -61,11 +61,18 @@ export async function Footer() {
     return { ...col, links: [...col.links, ...adminNav.filter((l) => !seen.has(l.href))] };
   });
 
+  // Taish's own X/Discord links render ONLY when a real handle is configured.
+  // Until then the footer shows Rockstar's official accounts, honestly labeled,
+  // instead of pointing visitors at placeholder handles that are not ours.
   const socials = [
     { icon: Instagram, label: "Rockstar Games Instagram", href: "https://www.instagram.com/rockstargames" },
-    { icon: Twitter, label: "Taish Gaming X / Twitter", href: settings.twitterHandle ? `https://twitter.com/${settings.twitterHandle.replace('@', '')}` : "https://twitter.com/rockstargames" },
+    ...(settings.twitterHandle
+      ? [{ icon: Twitter, label: "Taish Gaming X / Twitter", href: `https://twitter.com/${settings.twitterHandle.replace("@", "")}` }]
+      : []),
     { icon: Youtube, label: "Rockstar Games YouTube", href: "https://www.youtube.com/@RockstarGames" },
-    { icon: Gamepad2, label: "GTA Community Discord", href: settings.discordUrl || "https://discord.gg/gta" },
+    ...(settings.discordUrl
+      ? [{ icon: Gamepad2, label: "Taish Gaming Discord", href: settings.discordUrl }]
+      : []),
   ];
 
   return (
