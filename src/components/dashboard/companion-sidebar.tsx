@@ -76,7 +76,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
               href={item.href}
               onClick={onItemClick}
               className={cn(
-                "group flex items-center gap-3 rounded-xl px-2.5 py-2 text-xs font-semibold tracking-wide transition-all duration-200",
+                "group flex items-center gap-3 rounded-xl px-2.5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-200",
                 isActive
                   ? "bg-gold/20 text-white font-bold shadow-[0_0_16px_rgba(201,168,106,0.25)] border border-gold/40"
                   : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-100"

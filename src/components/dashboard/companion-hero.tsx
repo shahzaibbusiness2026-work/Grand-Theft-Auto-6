@@ -18,7 +18,7 @@ interface CompanionHeroProps {
 }
 
 export function CompanionHero({
-  userName = "ZUHAIB",
+  userName = "Player",
   completionRate = 72,
   siteStats,
 }: CompanionHeroProps) {

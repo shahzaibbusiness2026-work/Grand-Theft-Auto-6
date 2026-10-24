@@ -925,3 +925,17 @@
   .hero-neon-a, .hero-neon-b { animation: none; }
   .progress-shimmer::after { animation: none; display: none; }
 }
+
+/* Dashboard premium typography (dashboard only, via .dashboard-type on the
+   dashboard root). Same generic system stack as the rest of the site — no
+   custom webfont — but body text steps up from 12px to a readable 14px with
+   relaxed leading, so cards and navigation stop feeling cramped. Uppercase
+   eyebrow labels keep their small size. */
+.dashboard-type .text-xs {
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+.dashboard-type .text-xs.uppercase {
+  font-size: 0.75rem;
+  line-height: 1.4;
+}

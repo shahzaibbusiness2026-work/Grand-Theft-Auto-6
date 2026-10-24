@@ -24,7 +24,7 @@ export default function LoginPage() {
             </div>
             <LoginForm />
             <p className="mt-6 text-center text-xs text-muted-foreground">
-              New here? Just enter your email — a local profile is created on this device automatically.
+              First time here? After your email, you will pick a display name and your account is created — saved on this device only.
             </p>
           </div>
         </div>

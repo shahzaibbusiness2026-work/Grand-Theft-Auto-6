@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getDisplayName } from "@/lib/user-store";
 import { CompanionSidebar } from "@/components/dashboard/companion-sidebar";
 import { CompanionTopBar } from "@/components/dashboard/companion-topbar";
 import { CompanionHero } from "@/components/dashboard/companion-hero";
@@ -24,9 +25,15 @@ interface DashboardViewProps {
 
 export function DashboardView({ liveStats }: DashboardViewProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // The account's own name — read from the local login on mount (never a
+  // hardcoded person). "Player" is the neutral fallback before login.
+  const [displayName, setDisplayName] = useState("Player");
+  useEffect(() => {
+    setDisplayName(getDisplayName());
+  }, []);
 
   return (
-    <div data-flip-text className="flex h-screen w-full overflow-hidden bg-[#070b14] dark:bg-[#070b14] text-slate-100 dark:text-slate-100 antialiased select-none transition-colors">
+    <div data-flip-text className="dashboard-type flex h-screen w-full overflow-hidden bg-[#070b14] dark:bg-[#070b14] text-slate-100 dark:text-slate-100 antialiased select-none transition-colors">
       {/* SEO: single H1 for the page, visually hidden (dashboard is a tool UI). */}
       <h1 className="sr-only">GTA 6 100% Player Completion Tracker</h1>
       {/* 1. Desktop Fixed Sidebar */}
@@ -62,7 +69,7 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
         {/* Top Header Bar */}
         <CompanionTopBar
           onMenuToggle={() => setMobileMenuOpen(true)}
-          userName="Zuhaib"
+          userName={displayName}
         />
 
         {/* Scrollable Dashboard Body */}
@@ -70,7 +77,7 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
           <div className="mx-auto max-w-[1540px] space-y-6 pb-12">
             {/* Hero Welcome Card — shows live DB counts as site stats */}
             <CompanionHero
-              userName="ZUHAIB"
+              userName={displayName}
               completionRate={72}
               siteStats={{
                 totalVehicles: liveStats.totalVehicles,

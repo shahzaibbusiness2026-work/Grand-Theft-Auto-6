@@ -30,6 +30,7 @@ export interface ChatMessage {
 export interface UserState {
   isPro: boolean;
   userEmail: string | null;
+  displayName: string | null;
   favorites: {
     vehicles: string[];
     weapons: string[];
@@ -52,6 +53,7 @@ const STORAGE_KEY = "gta6_atlas_user_store_v1";
 const DEFAULT_STATE: UserState = {
   isPro: false,
   userEmail: null,
+  displayName: null,
   favorites: {
     vehicles: [],
     weapons: [],
@@ -101,6 +103,27 @@ export function saveStoredUserState(state: UserState): void {
 export function setUserEmail(email: string): void {
   const current = getStoredUserState();
   saveStoredUserState({ ...current, userEmail: email.toLowerCase().trim() });
+}
+
+export function setUserDisplayName(name: string): void {
+  const current = getStoredUserState();
+  saveStoredUserState({ ...current, displayName: name.trim() || null });
+}
+
+/* Best-effort display name from an email address ("shahzaib.khan@" -> "Shahzaib Khan"). */
+export function deriveDisplayName(email: string): string {
+  const local = email.split("@")[0] || "";
+  const words = local.split(/[._-]+/).filter(Boolean);
+  if (!words.length) return "Player";
+  return words.map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+}
+
+/* The name the dashboard should show: the account's display name, else the
+   email-derived name, else a neutral fallback. Never a hardcoded person. */
+export function getDisplayName(state: UserState = getStoredUserState()): string {
+  if (state.displayName) return state.displayName;
+  if (state.userEmail) return deriveDisplayName(state.userEmail);
+  return "Player";
 }
 
 export function logoutUser(): void {

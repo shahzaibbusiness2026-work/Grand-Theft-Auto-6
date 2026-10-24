@@ -14,7 +14,16 @@ interface CompanionTopBarProps {
   userName?: string;
 }
 
-export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: CompanionTopBarProps) {
+function initialsFor(name: string): string {
+  const words = name.split(/\s+/).filter(Boolean);
+  if (!words.length) return "P";
+  return words
+    .slice(0, 2)
+    .map((w) => w.charAt(0).toUpperCase())
+    .join("");
+}
+
+export function CompanionTopBar({ onMenuToggle, userName = "Player" }: CompanionTopBarProps) {
   const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
   const [paletteOpen, setPaletteOpen] = useState(false);
@@ -126,9 +135,9 @@ export function CompanionTopBar({ onMenuToggle, userName = "Zuhaib" }: Companion
               onClick={() => setProfileOpen((prev) => !prev)}
               className="flex items-center gap-2.5 rounded-xl border border-transparent p-1 sm:px-2 sm:py-1 transition-all hover:border-white/10 hover:bg-white/[0.04]"
             >
-              {/* Avatar circle */}
+              {/* Avatar circle — initials of the account's own name */}
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-yellow-400 text-xs font-black text-slate-950 shadow-[0_0_12px_rgba(201,168,106,0.4)]">
-                ZB
+                {initialsFor(userName)}
               </div>
 
               {/* Text info */}
