@@ -31,6 +31,8 @@ export interface UserState {
   isPro: boolean;
   userEmail: string | null;
   displayName: string | null;
+  firstName: string | null;
+  lastName: string | null;
   favorites: {
     vehicles: string[];
     weapons: string[];
@@ -54,6 +56,8 @@ const DEFAULT_STATE: UserState = {
   isPro: false,
   userEmail: null,
   displayName: null,
+  firstName: null,
+  lastName: null,
   favorites: {
     vehicles: [],
     weapons: [],
@@ -110,6 +114,16 @@ export function setUserDisplayName(name: string): void {
   saveStoredUserState({ ...current, displayName: name.trim() || null });
 }
 
+/* First + last name as collected at account creation. The dashboard name is
+   exactly "First Last" (or just First when no last name was given). */
+export function setUserName(first: string, last: string): void {
+  const current = getStoredUserState();
+  const firstName = first.trim() || null;
+  const lastName = last.trim() || null;
+  const displayName = [firstName, lastName].filter(Boolean).join(" ") || null;
+  saveStoredUserState({ ...current, firstName, lastName, displayName });
+}
+
 /* Best-effort display name from an email address ("shahzaib.khan@" -> "Shahzaib Khan"). */
 export function deriveDisplayName(email: string): string {
   const local = email.split("@")[0] || "";
@@ -118,10 +132,12 @@ export function deriveDisplayName(email: string): string {
   return words.map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 }
 
-/* The name the dashboard should show: the account's display name, else the
-   email-derived name, else a neutral fallback. Never a hardcoded person. */
+/* The name the dashboard should show: the account's first + last name, else
+   the email-derived name, else a neutral fallback. Never a hardcoded person. */
 export function getDisplayName(state: UserState = getStoredUserState()): string {
   if (state.displayName) return state.displayName;
+  const full = [state.firstName, state.lastName].filter(Boolean).join(" ");
+  if (full) return full;
   if (state.userEmail) return deriveDisplayName(state.userEmail);
   return "Player";
 }

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Mail, User, ArrowRight, ArrowLeft, Loader2, HardDrive } from "lucide-react";
 import {
   setUserEmail,
-  setUserDisplayName,
+  setUserName,
   deriveDisplayName,
   getStoredUserState,
 } from "@/lib/user-store";
@@ -18,7 +18,8 @@ export function LoginForm() {
   const router = useRouter();
   const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [isNewEmail, setIsNewEmail] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -48,13 +49,16 @@ export function LoginForm() {
     }
 
     // First time with this email (or an unfinished legacy account): show the
-    // explicit Create account step so the dashboard can show their own name.
+    // explicit Create account step so the dashboard can show their first +
+    // last name. Prefill from the email-derived name when there is one.
     setIsNewEmail(stored.userEmail !== trimmed);
-    setDisplayName(
+    const prefill =
       stored.userEmail === trimmed && stored.displayName
         ? stored.displayName
-        : deriveDisplayName(trimmed)
-    );
+        : deriveDisplayName(trimmed);
+    const [first, ...rest] = prefill.split(" ");
+    setFirstName(first || "");
+    setLastName(rest.join(" "));
     setStep("create");
   };
 
@@ -62,16 +66,15 @@ export function LoginForm() {
     e.preventDefault();
     setError("");
 
-    const name = displayName.trim();
-    if (!name) {
-      setError("Please enter a display name.");
+    if (!firstName.trim()) {
+      setError("Please enter your first name.");
       return;
     }
 
     setLoading(true);
     try {
       setUserEmail(email.trim().toLowerCase());
-      setUserDisplayName(name);
+      setUserName(firstName, lastName);
       router.push("/dashboard");
     } catch {
       setError("Something went wrong. Please try again.");
@@ -84,35 +87,56 @@ export function LoginForm() {
       <form onSubmit={handleCreateSubmit} className="space-y-4">
         <div className="text-center">
           <h2 className="font-display text-lg font-black uppercase tracking-tight text-foreground">
-            {isNewEmail ? "Create your account" : "Choose your display name"}
+            {isNewEmail ? "Create your account" : "Enter your name"}
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
             {isNewEmail
-              ? "First time here — pick the name your dashboard will show."
-              : "Your account exists but has no display name yet — pick one now."}
+              ? "First time here — enter your first and last name. That is the name your dashboard will show."
+              : "Your account exists but has no name yet — enter it now."}
           </p>
           <p className="mt-2 text-xs font-medium text-muted-foreground">
             {email.trim().toLowerCase()}
           </p>
         </div>
 
-        <div>
-          <label htmlFor="create-name" className="mb-1.5 block text-xs font-semibold text-foreground">
-            Display name
-          </label>
-          <div className="relative">
-            <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-            <Input
-              id="create-name"
-              type="text"
-              placeholder="Your name"
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-              required
-              autoComplete="nickname"
-              disabled={loading}
-              className="pl-10"
-            />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label htmlFor="create-first-name" className="mb-1.5 block text-xs font-semibold text-foreground">
+              First name
+            </label>
+            <div className="relative">
+              <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+              <Input
+                id="create-first-name"
+                type="text"
+                placeholder="First name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+                autoComplete="given-name"
+                disabled={loading}
+                className="pl-10"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="create-last-name" className="mb-1.5 block text-xs font-semibold text-foreground">
+              Last name
+            </label>
+            <div className="relative">
+              <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+              <Input
+                id="create-last-name"
+                type="text"
+                placeholder="Last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                autoComplete="family-name"
+                disabled={loading}
+                className="pl-10"
+              />
+            </div>
           </div>
         </div>
 
