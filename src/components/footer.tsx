@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { Instagram, Twitter, Youtube, Gamepad2 } from "lucide-react";
+import {
+  FaInstagram,
+  FaTiktok,
+  FaFacebook,
+  FaYoutube,
+  FaDiscord,
+  FaXTwitter,
+  FaReddit,
+} from "react-icons/fa6";
 import { Logo } from "@/components/logo";
 import { getSiteSettings } from "@/lib/services/queries";
 
@@ -61,18 +69,26 @@ export async function Footer() {
     return { ...col, links: [...col.links, ...adminNav.filter((l) => !seen.has(l.href))] };
   });
 
-  // Taish's own X/Discord links render ONLY when a real handle is configured.
-  // Until then the footer shows Rockstar's official accounts, honestly labeled,
-  // instead of pointing visitors at placeholder handles that are not ours.
+  // Taish Gaming's own social row. X/Discord honor a configured setting when
+  // one exists; the rest point at the intended Taish handles. NOTE: an
+  // intended handle is not a claimed account — until each handle is claimed
+  // on its platform, its icon links to a "not found" page. Claim order:
+  // YouTube + TikTok (verified free), then Instagram/Facebook (in-app check),
+  // then X, Reddit, Discord.
   const socials = [
-    { icon: Instagram, label: "Rockstar Games Instagram", href: "https://www.instagram.com/rockstargames" },
-    ...(settings.twitterHandle
-      ? [{ icon: Twitter, label: "Taish Gaming X / Twitter", href: `https://twitter.com/${settings.twitterHandle.replace("@", "")}` }]
-      : []),
-    { icon: Youtube, label: "Rockstar Games YouTube", href: "https://www.youtube.com/@RockstarGames" },
-    ...(settings.discordUrl
-      ? [{ icon: Gamepad2, label: "Taish Gaming Discord", href: settings.discordUrl }]
-      : []),
+    { icon: FaInstagram, label: "Taish Gaming on Instagram", href: "https://instagram.com/taishgaming" },
+    { icon: FaTiktok, label: "Taish Gaming on TikTok", href: "https://tiktok.com/@taishgaming" },
+    { icon: FaFacebook, label: "Taish Gaming on Facebook", href: "https://facebook.com/taishgaming" },
+    { icon: FaYoutube, label: "Taish Gaming on YouTube", href: "https://youtube.com/@TaishGaming" },
+    { icon: FaDiscord, label: "Taish Gaming Discord", href: settings.discordUrl || "https://discord.gg/taishgaming" },
+    {
+      icon: FaXTwitter,
+      label: "Taish Gaming on X",
+      href: settings.twitterHandle
+        ? `https://x.com/${settings.twitterHandle.replace("@", "")}`
+        : "https://x.com/TaishGaming",
+    },
+    { icon: FaReddit, label: "Taish Gaming on Reddit", href: "https://reddit.com/r/TaishGaming" },
   ];
 
   return (
@@ -88,7 +104,10 @@ export async function Footer() {
             Taish Gaming is an unofficial fan site and is not affiliated with
             Rockstar Games or Take-Two Interactive.
           </p>
-          <div className="mt-5 flex items-center gap-3">
+          <p className="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            Follow Taish Gaming
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
             {socials.map(({ icon: Icon, label, href }) => (
               <a
                 key={label}
