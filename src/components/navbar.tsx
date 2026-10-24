@@ -256,7 +256,10 @@ export function Navbar() {
         aria-hidden="true"
       />
 
-      <div className="mx-auto flex h-16 w-full max-w-[1240px] items-center justify-between px-4 sm:px-6 lg:px-8">
+      {/* Same container as the rest of the site (container-site scales to
+          1680/1920/2240px on large displays); the old fixed 1240px cap left
+          the navbar floating in a narrow column on wide screens. */}
+      <div className="container-site flex h-16 items-center justify-between">
         <div className="mr-3 lg:mr-6 flex items-center gap-2">
           <Logo />
         </div>

@@ -14,7 +14,6 @@ import { CompanionUpdatesCard } from "@/components/dashboard/companion-updates-c
 import { CompanionMapSection } from "@/components/dashboard/companion-map-section";
 import { CompanionVehiclesSection } from "@/components/dashboard/companion-vehicles-section";
 import { CompanionWeaponsSection } from "@/components/dashboard/companion-weapons-section";
-import { CompanionAiCard } from "@/components/dashboard/companion-ai-card";
 import { CompanionQuoteCard } from "@/components/dashboard/companion-quote-card";
 import { X } from "lucide-react";
 import type { DashboardStats } from "@/lib/services/queries";
@@ -130,14 +129,9 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
               <CompanionUpdatesCard articles={liveStats.latestArticles} />
             </div>
 
-            {/* Row 6: Ask GTA 6 AI, Atmospheric Quote */}
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-              <div className="lg:col-span-8">
-                <CompanionAiCard />
-              </div>
-              <div className="lg:col-span-4">
-                <CompanionQuoteCard />
-              </div>
+            {/* Bottom row: Atmospheric Quote, full width (Ask GTA 6 AI removed) */}
+            <div className="grid grid-cols-1 gap-6">
+              <CompanionQuoteCard />
             </div>
 
             {/* Bottom Footer Bar */}

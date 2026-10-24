@@ -41,10 +41,13 @@ export function CompanionProgressCard({
         </Link>
       </div>
 
-      {/* Main Body: Donut on left, categories list on right */}
-      <div className="flex items-center justify-between gap-3 sm:gap-4 py-3 sm:py-4 min-w-0">
+      {/* Main Body: donut centered on top, categories in two columns below.
+          The old side-by-side layout squeezed the donut and truncated
+          category names ("Collecti…", "Achieve…") and let the center label
+          overflow the ring — nothing fits side-by-side in a 3-column card. */}
+      <div className="flex flex-col items-center gap-4 py-4 min-w-0">
         {/* Donut Chart */}
-        <div className="relative flex h-28 w-28 sm:h-32 sm:w-32 shrink-0 items-center justify-center">
+        <div className="relative flex h-32 w-32 shrink-0 items-center justify-center">
           <svg className="h-full w-full -rotate-90 transform" viewBox="0 0 128 128">
             {/* Background Track */}
             <circle
@@ -78,27 +81,30 @@ export function CompanionProgressCard({
             />
           </svg>
 
-          {/* Center Text */}
-          <div className="absolute flex flex-col items-center justify-center text-center">
-            <span className="font-display text-2xl sm:text-3xl font-black text-white drop-shadow-[0_0_12px_rgba(201,168,106,0.3)]">
+          {/* Center Text — width capped to the donut's inner circle so the
+              label can never spill past the ring again. */}
+          <div className="absolute flex max-w-[88px] flex-col items-center justify-center text-center">
+            <span className="font-display text-3xl font-black text-white drop-shadow-[0_0_12px_rgba(201,168,106,0.3)]">
               {overallPercent}%
             </span>
-            <span className="text-xs font-semibold text-slate-400 leading-tight">
-              Overall<br />Completion
+            <span className="text-[11px] font-semibold text-slate-400 leading-tight">
+              Overall Completion
             </span>
           </div>
         </div>
 
-        {/* Categories Breakdown */}
-        <div className="min-w-0 flex-1 space-y-1.5">
+        {/* Categories Breakdown — one full-width row per category, so every
+            name shows in full at any card width (two columns still squeezed
+            "Collectibles" and "Achievements" into ellipses). */}
+        <div className="w-full space-y-1.5">
           {CATEGORIES.map((cat) => (
             <div
               key={cat.name}
               className="flex items-center justify-between text-xs font-semibold min-w-0"
             >
-              <div className="flex items-center gap-1.5 min-w-0 truncate pr-1">
+              <div className="flex items-center gap-1.5 min-w-0 pr-1">
                 <span className={`h-2 w-2 shrink-0 rounded-full ${cat.color}`} />
-                <span className="text-slate-300 truncate">{cat.name}</span>
+                <span className="text-slate-300">{cat.name}</span>
               </div>
               <span className="font-mono text-slate-400 shrink-0">{cat.percent}%</span>
             </div>
