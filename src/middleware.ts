@@ -34,11 +34,19 @@ async function getCmsRedirects(): Promise<RedirectRule[]> {
 }
 
 export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
   const response = NextResponse.next({
     request: { headers: request.headers },
   });
 
-  const { pathname } = request.nextUrl;
+  // Frame protection for every page EXCEPT the public /embed/* routes: the
+  // countdown widget hands out iframe code for /embed/countdown, and a DENY
+  // would render it blank everywhere it is embedded.
+  if (!pathname.startsWith("/embed/")) {
+    response.headers.set("X-Frame-Options", "DENY");
+    response.headers.set("Content-Security-Policy", "frame-ancestors 'none';");
+  }
 
   // CMS-managed redirects (admin SEO page). Skipped for admin/API paths.
   if (!pathname.startsWith("/admin") && !pathname.startsWith("/api")) {

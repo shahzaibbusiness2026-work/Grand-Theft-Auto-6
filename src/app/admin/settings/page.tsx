@@ -51,9 +51,9 @@ export default function AdminSettingsPage() {
     heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
     announcementBanner: "Taish Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
     contactEmail: "",
-    twitterHandle: "@GTA6Atlas",
-    discordUrl: "https://discord.gg/gta6atlas",
-    redditUrl: "https://reddit.com/r/GTA6Atlas",
+    twitterHandle: "",
+    discordUrl: "",
+    redditUrl: "",
     homepageSectionToggles: ["hero", "trailers", "map", "characters", "news", "community"],
     publicToolToggles: ["map_tool", "comp_tool", "track_tool"],
     ga4MeasurementId: "",
@@ -728,7 +728,7 @@ export default function AdminSettingsPage() {
               type="text"
               value={settings.twitterHandle || ""}
               onChange={(e) => handleUpdate({ twitterHandle: e.target.value })}
-              placeholder="@GTA6Atlas"
+              placeholder="@TaishGaming"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
             />
           </div>

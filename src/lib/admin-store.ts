@@ -314,8 +314,8 @@ export const INITIAL_SITE_SETTINGS: AdminSiteSettings = {
     completionTracker: true
   },
   socialLinks: [
-    { id: "soc-1", platform: "X (Twitter)", url: "https://x.com/gta6atlas" },
-    { id: "soc-2", platform: "YouTube", url: "https://youtube.com/@gta6atlas" }
+    { id: "soc-1", platform: "X (Twitter)", url: "" },
+    { id: "soc-2", platform: "YouTube", url: "" }
   ],
   mapsApiKey: "••••••••••••••••••••••••"
 };
