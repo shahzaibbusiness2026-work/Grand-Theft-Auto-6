@@ -34,6 +34,7 @@ const nextConfig = {
       { source: "/weapon", destination: "/weapons", permanent: true },
       { source: "/vehicle", destination: "/vehicles", permanent: true },
       { source: "/maps", destination: "/map", permanent: true },
+      { source: "/cheats", destination: "/guides", permanent: true },
     ];
   },
   async headers() {

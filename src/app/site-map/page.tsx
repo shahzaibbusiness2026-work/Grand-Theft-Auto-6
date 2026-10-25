@@ -56,7 +56,6 @@ export default function SiteMapPage() {
         { label: "Blog", href: "/blog", desc: "Features & opinion" },
         { label: "Guides", href: "/guides", desc: "How-tos & walkthroughs" },
         { label: "Radio Stations", href: "/radio", desc: "Leonida airwaves" },
-        { label: "Cheats & Codes", href: "/cheats", desc: "Codes & secrets" },
       ],
     },
     {

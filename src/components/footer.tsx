@@ -29,7 +29,6 @@ const COLS = [
     links: [
       { label: "Blog", href: "/blog" },
       { label: "Guides", href: "/guides" },
-      { label: "Cheats & Codes", href: "/cheats" },
       { label: "Tools", href: "/tools" },
       { label: "Dashboard", href: "/dashboard" },
     ],
