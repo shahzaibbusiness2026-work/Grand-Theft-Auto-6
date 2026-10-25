@@ -13,7 +13,7 @@ const fontSans = {
   variable: "--font-sans",
 };
 
-const FALLBACK_SITE_URL = "https://grand-theft-auto-6-5ap5.vercel.app";
+const FALLBACK_SITE_URL = "https://www.taishgaming.com";
 
 /**
  * Site-wide metadata is CMS-driven (admin → SEO settings / site settings),

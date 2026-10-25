@@ -198,9 +198,9 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Weapons", item: "https://grand-theft-auto-6-5ap5.vercel.app/weapons" },
-                  { "@type": "ListItem", position: 3, name: weapon.name, item: `https://grand-theft-auto-6-5ap5.vercel.app/weapons/${weapon.slug}` },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Weapons", item: "https://www.taishgaming.com/weapons" },
+                  { "@type": "ListItem", position: 3, name: weapon.name, item: `https://www.taishgaming.com/weapons/${weapon.slug}` },
                 ],
               },
               {
@@ -210,7 +210,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 image: weapon.img,
                 category: weapon.klass,
                 brand: { "@type": "Brand", name: "Taish Gaming" },
-                url: `https://grand-theft-auto-6-5ap5.vercel.app/weapons/${weapon.slug}`,
+                url: `https://www.taishgaming.com/weapons/${weapon.slug}`,
               },
             ],
           }),

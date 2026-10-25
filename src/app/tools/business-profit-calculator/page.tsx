@@ -24,16 +24,16 @@ export default function BusinessProfitCalculatorPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Business Profit & ROI Calculator \u2014 Nightclub, Chop Shop & Warehouse", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/business-profit-calculator" },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Business Profit & ROI Calculator \u2014 Nightclub, Chop Shop & Warehouse", item: "https://www.taishgaming.com/tools/business-profit-calculator" },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Business Profit & ROI Calculator \u2014 Nightclub, Chop Shop & Warehouse",
                 description: "Calculate break-even hours, passive daily income, and annual return on investment (ROI) across GTA 6 commercial businesses and properties.",
-                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/business-profit-calculator",
+                url: "https://www.taishgaming.com/tools/business-profit-calculator",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

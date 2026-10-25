@@ -24,16 +24,16 @@ export default function GaragePlannerPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Garage Planner \u2014 Organize Your Vehicle Collection", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/garage-planner" },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Garage Planner \u2014 Organize Your Vehicle Collection", item: "https://www.taishgaming.com/tools/garage-planner" },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Garage Planner \u2014 Organize Your Vehicle Collection",
                 description: "Plan your GTA 6 garage space. Assign vehicles to properties, track slots used, and see your collection's total value.",
-                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/garage-planner",
+                url: "https://www.taishgaming.com/tools/garage-planner",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

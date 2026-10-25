@@ -24,16 +24,16 @@ export default function CountdownWidgetPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Countdown Widget \u2014 Embed on Your Site", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/countdown-widget" },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Countdown Widget \u2014 Embed on Your Site", item: "https://www.taishgaming.com/tools/countdown-widget" },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Countdown Widget \u2014 Embed on Your Site",
                 description: "Get a free embeddable GTA 6 launch countdown widget for your website or stream overlay. Copy-paste ready.",
-                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/countdown-widget",
+                url: "https://www.taishgaming.com/tools/countdown-widget",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

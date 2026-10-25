@@ -75,10 +75,10 @@ export async function GET(request: Request) {
                 <li>🎯 100% completion tracker</li>
               </ul>
               <p style="text-align: center; margin: 30px 0;">
-                <a href="https://grand-theft-auto-6-5ap5.vercel.app" style="background: #C9A86A; color: #000; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;">Explore the Atlas →</a>
+                <a href="https://www.taishgaming.com" style="background: #C9A86A; color: #000; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;">Explore the Atlas →</a>
               </p>
               <p>Welcome to Leonida!</p>
-              <p style="color: #888; font-size: 12px;">You're receiving this because you signed up for Taish Gaming updates. <a href="https://grand-theft-auto-6-5ap5.vercel.app/unsubscribe?email=${encodeURIComponent(sub.email)}">Unsubscribe</a></p>
+              <p style="color: #888; font-size: 12px;">You're receiving this because you signed up for Taish Gaming updates. <a href="https://www.taishgaming.com/unsubscribe?email=${encodeURIComponent(sub.email)}">Unsubscribe</a></p>
             </div>
           `,
         });

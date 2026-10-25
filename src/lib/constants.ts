@@ -9,8 +9,8 @@ export const SITE_CONFIG = {
   tagline: "Your Guide to Vice City — A new city. Every detail.",
   description:
     "The definitive independent companion, database, and interactive satellite atlas for Grand Theft Auto VI in the State of Leonida.",
-  url: "https://grand-theft-auto-6-5ap5.vercel.app",
-  ogImage: "https://grand-theft-auto-6-5ap5.vercel.app/img/hero-vice-skyline-hd.jpg",
+  url: "https://www.taishgaming.com",
+  ogImage: "https://www.taishgaming.com/img/hero-vice-skyline-hd.jpg",
   disclaimer:
     "Taish Gaming is an independent fan platform and is not affiliated with, sponsored by, or endorsed by Rockstar Games or Take-Two Interactive.",
   

@@ -25,16 +25,16 @@ export default function DayNightConverterPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Day/Night Time Converter \u2014 Real Time to Game Time", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/day-night-converter" },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Day/Night Time Converter \u2014 Real Time to Game Time", item: "https://www.taishgaming.com/tools/day-night-converter" },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Day/Night Time Converter \u2014 Real Time to Game Time",
                 description: "Convert between real-world minutes and GTA 6 in-game hours. See exactly what time it will be in Leonida after your session, when the next sunrise or sunset hits, and track the sun with a live day/night indicator.",
-                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/day-night-converter",
+                url: "https://www.taishgaming.com/tools/day-night-converter",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

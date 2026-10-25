@@ -25,16 +25,16 @@ export default function MoneyMakerPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "Money-Making Method Finder & Grinding Strategies \u2014 Taish Gaming", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-maker" },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
+                  { "@type": "ListItem", position: 3, name: "Money-Making Method Finder & Grinding Strategies \u2014 Taish Gaming", item: "https://www.taishgaming.com/tools/money-maker" },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "Money-Making Method Finder & Grinding Strategies \u2014 Taish Gaming",
                 description: "Intelligent GTA 6 money-making route recommender. Discover the highest-paying heists, passive nightclub operations, and vehicle salvage strategies ranked by cash per hour.",
-                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-maker",
+                url: "https://www.taishgaming.com/tools/money-maker",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

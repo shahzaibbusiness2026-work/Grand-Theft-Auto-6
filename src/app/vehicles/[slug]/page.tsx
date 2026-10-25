@@ -208,9 +208,9 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Vehicles", item: "https://grand-theft-auto-6-5ap5.vercel.app/vehicles" },
-                  { "@type": "ListItem", position: 3, name: vehicle.name, item: `https://grand-theft-auto-6-5ap5.vercel.app/vehicles/${vehicle.slug}` },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Vehicles", item: "https://www.taishgaming.com/vehicles" },
+                  { "@type": "ListItem", position: 3, name: vehicle.name, item: `https://www.taishgaming.com/vehicles/${vehicle.slug}` },
                 ],
               },
               {
@@ -220,7 +220,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                 vehicleConfiguration: vehicle.klass,
                 description: vehicle.description,
                 image: vehicle.img,
-                url: `https://grand-theft-auto-6-5ap5.vercel.app/vehicles/${vehicle.slug}`,
+                url: `https://www.taishgaming.com/vehicles/${vehicle.slug}`,
               },
             ],
           }),

@@ -70,16 +70,16 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Properties", item: "https://grand-theft-auto-6-5ap5.vercel.app/properties" },
-                  { "@type": "ListItem", position: 3, name: prop.name, item: `https://grand-theft-auto-6-5ap5.vercel.app/properties/${prop.slug}` },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Properties", item: "https://www.taishgaming.com/properties" },
+                  { "@type": "ListItem", position: 3, name: prop.name, item: `https://www.taishgaming.com/properties/${prop.slug}` },
                 ],
               },
               {
                 "@type": "RealEstateListing",
                 name: prop.name,
                 description: `Property in ${prop.district}, State of Leonida.`,
-                url: `https://grand-theft-auto-6-5ap5.vercel.app/properties/${prop.slug}`,
+                url: `https://www.taishgaming.com/properties/${prop.slug}`,
               },
             ],
           }),

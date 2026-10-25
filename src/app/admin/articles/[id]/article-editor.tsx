@@ -505,7 +505,7 @@ export function ArticleEditor({
                 <p className="text-xs text-[#94A3B8]">Taish Gaming</p>
                 <p className="text-xs font-semibold text-[#818CF8]">{metaTitle}</p>
                 <p className="text-xs text-emerald-400 font-mono truncate">
-                  grand-theft-auto-6-5ap5.vercel.app/news/{slug || "your-slug"}
+                  www.taishgaming.com/news/{slug || "your-slug"}
                 </p>
                 <p className="text-xs text-[#94A3B8] line-clamp-2 leading-tight">{metaDescription}</p>
               </div>
@@ -556,7 +556,7 @@ export function ArticleEditor({
                 type="text"
                 value={article.canonicalUrl || ""}
                 onChange={(e) => setField("canonicalUrl", e.target.value)}
-                placeholder="https://grand-theft-auto-6-5ap5.vercel.app/news/…"
+                placeholder="https://www.taishgaming.com/news/…"
                 className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs font-mono text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
               />
             </div>

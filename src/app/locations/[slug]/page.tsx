@@ -121,16 +121,16 @@ export default async function LocationDetailPage({ params }: PageProps) {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Locations", item: "https://grand-theft-auto-6-5ap5.vercel.app/locations" },
-                  { "@type": "ListItem", position: 3, name: loc.name, item: `https://grand-theft-auto-6-5ap5.vercel.app/locations/${loc.slug}` },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Locations", item: "https://www.taishgaming.com/locations" },
+                  { "@type": "ListItem", position: 3, name: loc.name, item: `https://www.taishgaming.com/locations/${loc.slug}` },
                 ],
               },
               {
                 "@type": "Place",
                 name: loc.name,
                 description: `Point of interest in ${loc.district}, State of Leonida.`,
-                url: `https://grand-theft-auto-6-5ap5.vercel.app/locations/${loc.slug}`,
+                url: `https://www.taishgaming.com/locations/${loc.slug}`,
               },
             ],
           }),

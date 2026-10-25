@@ -24,16 +24,16 @@ export default function WeaponDpsCalculatorPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Weapon DPS Calculator \u2014 Damage, Fire Rate & Attachments", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/weapon-dps-calculator" },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Weapon DPS Calculator \u2014 Damage, Fire Rate & Attachments", item: "https://www.taishgaming.com/tools/weapon-dps-calculator" },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Weapon DPS Calculator \u2014 Damage, Fire Rate & Attachments",
                 description: "Compare GTA 6 weapons by DPS. Add attachments and see live damage-per-second, damage-per-magazine, and time-to-empty.",
-                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/weapon-dps-calculator",
+                url: "https://www.taishgaming.com/tools/weapon-dps-calculator",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

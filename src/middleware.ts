@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifyAdminSessionToken, getCurrentSessionVersion } from "@/lib/auth/session";
+import { verifyAdminSessionToken, getCurrentSessionVersion, verifyUserSessionToken, USER_SESSION_COOKIE } from "@/lib/auth/session";
 import { getMasterAdminEmails } from "@/lib/auth/assert-admin";
 
 /** Cached CMS-managed 301/302 redirects (seo_settings.redirects). */
@@ -35,6 +35,30 @@ async function getCmsRedirects(): Promise<RedirectRule[]> {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // ------------------------------------------------------------------
+  // Dashboard lock: /dashboard is members-only. The ONLY credential is
+  // a signed user session cookie issued by login, signup, password
+  // reset, or the OAuth callback. Local device state is never trusted
+  // here — anyone can write localStorage, so it cannot open the gate.
+  // Logged-out visitors go to /login; after login the cookie exists
+  // and the gate passes.
+  // ------------------------------------------------------------------
+  if (pathname === "/dashboard" || pathname.startsWith("/dashboard/")) {
+    let allowed = false;
+    try {
+      const check = await verifyUserSessionToken(
+        request.cookies.get(USER_SESSION_COOKIE)?.value
+      );
+      allowed = check.valid;
+    } catch {
+      // Missing session secret or broken token: fail closed.
+      allowed = false;
+    }
+    if (!allowed) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
 
   const response = NextResponse.next({
     request: { headers: request.headers },

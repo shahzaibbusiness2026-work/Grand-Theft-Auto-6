@@ -424,7 +424,7 @@ export default function AdminSeoPage() {
               rows={6}
               value={seoConfig.robotsTxt || ""}
               onChange={(e) => handleUpdate({ robotsTxt: e.target.value })}
-              placeholder={`User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://grand-theft-auto-6-5ap5.vercel.app/sitemap.xml`}
+              placeholder={`User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://www.taishgaming.com/sitemap.xml`}
               className="w-full p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] font-mono text-xs text-white leading-relaxed focus:outline-none focus:border-[#6366F1]"
             />
 

@@ -2,6 +2,11 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getAccount, saveAccount } from "@/lib/auth/accounts";
+import {
+  USER_SESSION_COOKIE,
+  createUserSessionToken,
+  userSessionCookieOptions,
+} from "@/lib/auth/session";
 
 /**
  * GET /auth/callback
@@ -88,5 +93,20 @@ export async function GET(req: Request) {
     // save only means the dashboard falls back to "Player" for this visit.
   }
 
-  return NextResponse.redirect(new URL("/auth/welcome", req.url));
+  // OAuth users need the same signed cookie as email users, or the
+  // dashboard gate would bounce them straight back to /login.
+  const res = NextResponse.redirect(new URL("/auth/welcome", req.url));
+  try {
+    res.cookies.set(
+      USER_SESSION_COOKIE,
+      await createUserSessionToken(email),
+      userSessionCookieOptions()
+    );
+  } catch (err) {
+    // A missing session secret must not turn a good OAuth login into a
+    // 500 — the welcome bridge still signs the user in locally, and the
+    // dashboard gate will send them to email login if no cookie exists.
+    console.error("Could not issue user session cookie after OAuth:", err);
+  }
+  return res;
 }

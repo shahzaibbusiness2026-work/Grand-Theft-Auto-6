@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const seo = await getSeoSettings();
   const base = seo.canonicalBaseUrl?.startsWith("http")
     ? seo.canonicalBaseUrl
-    : "https://grand-theft-auto-6-5ap5.vercel.app";
+    : "https://www.taishgaming.com";
   const canonical = article.canonical_url || `${base}/news/${article.slug}`;
   const rawOgImage = article.og_image || article.cover_image || seo.socialPreviewImage;
   // Social platforms require absolute image URLs
@@ -105,7 +105,7 @@ export default async function ArticleDetailPage({ params }: Props) {
   const seo = await getSeoSettings();
   const base = seo.canonicalBaseUrl?.startsWith("http")
     ? seo.canonicalBaseUrl
-    : "https://grand-theft-auto-6-5ap5.vercel.app";
+    : "https://www.taishgaming.com";
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [

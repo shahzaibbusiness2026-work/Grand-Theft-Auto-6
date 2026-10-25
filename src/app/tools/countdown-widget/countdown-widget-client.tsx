@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 
 // Expected launch window (estimate) — Nov 19, 2026 00:00:00 UTC
 const TARGET_DATE = new Date("2026-11-19T00:00:00Z");
-const EMBED_BASE_URL = "https://grand-theft-auto-6-5ap5.vercel.app/embed/countdown";
+const EMBED_BASE_URL = "https://www.taishgaming.com/embed/countdown";
 
 type SizeId = "small" | "medium" | "large";
 

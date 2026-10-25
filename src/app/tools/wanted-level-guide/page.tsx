@@ -24,16 +24,16 @@ export default function WantedLevelGuidePage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Wanted Level Guide \u2014 Police Response & Escape Tips", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/wanted-level-guide" },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Wanted Level Guide \u2014 Police Response & Escape Tips", item: "https://www.taishgaming.com/tools/wanted-level-guide" },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Wanted Level Guide \u2014 Police Response & Escape Tips",
                 description: "Interactive guide to GTA 6's 1-5 star wanted levels: police units, helicopters, roadblocks, spike strips, estimated evade times, and escape tips for every level.",
-                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/wanted-level-guide",
+                url: "https://www.taishgaming.com/tools/wanted-level-guide",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

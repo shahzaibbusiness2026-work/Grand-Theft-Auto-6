@@ -52,14 +52,114 @@ function bufferToHex(buffer: ArrayBuffer): string {
   return hex;
 }
 
-async function signPayload(payload: string): Promise<string> {
-  const key = await getCryptoKey(getSessionSecret());
+async function signPayloadWith(secret: string, payload: string): Promise<string> {
+  const key = await getCryptoKey(secret);
   const signatureBuffer = await crypto.subtle.sign(
     "HMAC",
     key,
     new TextEncoder().encode(payload)
   );
   return bufferToHex(signatureBuffer);
+}
+
+async function signPayload(payload: string): Promise<string> {
+  return signPayloadWith(getSessionSecret(), payload);
+}
+
+/* ------------------------------------------------------------------ */
+/* User sessions (dashboard lock).                                     */
+/*                                                                     */
+/* Same Edge-compatible HMAC scheme as admin sessions, but a separate  */
+/* purpose prefix ("tg-user:") and a separate cookie, so a user token  */
+/* can never validate as an admin token or vice versa.                 */
+/*                                                                     */
+/* Secret: USER_SESSION_SECRET is preferred. Until it is added to the  */
+/* environment, ADMIN_SESSION_SECRET is reused — it is already a      */
+/* strong server-only secret, and the purpose prefix keeps the two    */
+/* token kinds cryptographically separated. Adding the dedicated     */
+/* secret later is a hardening step, not a breakage fix.               */
+/*                                                                     */
+/* User sessions live 7 days. There is no server-side revocation list: */
+/* a password reset does not instantly kill an already-issued cookie  */
+/* (it expires within 7 days at most). The dashboard holds no         */
+/* server-side private data — favorites/tracker are device-local — so  */
+/* this window is accepted.                                           */
+/* ------------------------------------------------------------------ */
+
+/** Cookie carrying the signed user session. */
+export const USER_SESSION_COOKIE = "tg_user_session";
+
+/** User sessions expire 7 days after issue. */
+const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+export const USER_SESSION_MAX_AGE_SECONDS = 7 * 24 * 60 * 60;
+
+export function userSessionCookieOptions() {
+  return {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax" as const,
+    path: "/",
+    maxAge: USER_SESSION_MAX_AGE_SECONDS,
+  };
+}
+
+function getUserSessionSecret(): string {
+  const secret = process.env.USER_SESSION_SECRET || process.env.ADMIN_SESSION_SECRET;
+  if (!secret) {
+    throw new Error(
+      "USER_SESSION_SECRET (or ADMIN_SESSION_SECRET) is not set. Add it to your environment before using user sessions."
+    );
+  }
+  return secret;
+}
+
+/** Creates a signed user session token for the dashboard gate. */
+export async function createUserSessionToken(email: string): Promise<string> {
+  const expiresAt = Date.now() + SEVEN_DAYS_MS;
+  const payload = `tg-user:${email}:${expiresAt}`;
+  const signature = await signPayloadWith(getUserSessionSecret(), payload);
+
+  const tokenData = JSON.stringify({ email, expiresAt, signature });
+  if (typeof Buffer !== "undefined") {
+    return Buffer.from(tokenData).toString("base64");
+  }
+  return btoa(tokenData);
+}
+
+/** Verifies a user session token's signature and expiry. */
+export async function verifyUserSessionToken(
+  tokenString: string | undefined | null
+): Promise<{ valid: boolean; email?: string }> {
+  if (!tokenString) return { valid: false };
+
+  try {
+    const raw = typeof Buffer !== "undefined"
+      ? Buffer.from(tokenString, "base64").toString("utf-8")
+      : atob(tokenString);
+
+    const { email, expiresAt, signature } = JSON.parse(raw);
+
+    if (!email || !expiresAt || !signature) return { valid: false };
+    if (Date.now() > Number(expiresAt)) return { valid: false };
+
+    const payload = `tg-user:${email}:${expiresAt}`;
+    const expectedSignature = await signPayloadWith(getUserSessionSecret(), payload);
+
+    if (signature.length !== expectedSignature.length) return { valid: false };
+
+    let mismatch = 0;
+    for (let i = 0; i < signature.length; i++) {
+      mismatch |= signature.charCodeAt(i) ^ expectedSignature.charCodeAt(i);
+    }
+
+    if (mismatch === 0) {
+      return { valid: true, email };
+    }
+  } catch {
+    // Malformed token, invalid JSON, or invalid Base64
+  }
+
+  return { valid: false };
 }
 
 /**

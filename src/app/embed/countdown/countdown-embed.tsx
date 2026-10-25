@@ -55,7 +55,7 @@ export function CountdownEmbed({ size }: { size: "small" | "medium" | "large" })
         </div>
       )}
       <a
-        href="https://grand-theft-auto-6-5ap5.vercel.app/"
+        href="https://www.taishgaming.com/"
         target="_blank"
         rel="noopener noreferrer"
         className={`${compact ? "mt-1 text-[9px]" : "mt-2 text-[10px]"} font-semibold uppercase tracking-[0.2em] text-[#00F0FF] hover:underline`}

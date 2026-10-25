@@ -24,16 +24,16 @@ export default function HeistPayoutSplitterPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Heist Payout Splitter \u2014 Divide Crew Cuts Fairly", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/heist-payout-splitter" },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Heist Payout Splitter \u2014 Divide Crew Cuts Fairly", item: "https://www.taishgaming.com/tools/heist-payout-splitter" },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Heist Payout Splitter \u2014 Divide Crew Cuts Fairly",
                 description: "Split any GTA 6 heist take among your crew. Set each member's cut percentage and see everyone's payout instantly.",
-                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/heist-payout-splitter",
+                url: "https://www.taishgaming.com/tools/heist-payout-splitter",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

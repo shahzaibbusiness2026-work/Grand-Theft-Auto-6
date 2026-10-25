@@ -15,7 +15,7 @@ export async function GET() {
   const adminUrl = seo.canonicalBaseUrl?.startsWith("http") && !seo.canonicalBaseUrl.includes("gta6atlas.com")
     ? seo.canonicalBaseUrl
     : null;
-  const baseUrl = adminUrl || process.env.NEXT_PUBLIC_SITE_URL || "https://grand-theft-auto-6-5ap5.vercel.app";
+  const baseUrl = adminUrl || process.env.NEXT_PUBLIC_SITE_URL || "https://www.taishgaming.com";
 
   const body =
     seo.robotsTxt && seo.robotsTxt.trim().length > 0

@@ -65,16 +65,16 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Collectibles", item: "https://grand-theft-auto-6-5ap5.vercel.app/collectibles" },
-                  { "@type": "ListItem", position: 3, name: collectible.title, item: `https://grand-theft-auto-6-5ap5.vercel.app/collectibles/${collectible.slug}` },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Collectibles", item: "https://www.taishgaming.com/collectibles" },
+                  { "@type": "ListItem", position: 3, name: collectible.title, item: `https://www.taishgaming.com/collectibles/${collectible.slug}` },
                 ],
               },
               {
                 "@type": "CreativeWork",
                 name: collectible.title,
                 description: `Collectible guide for ${collectible.title} in ${collectible.district}.`,
-                url: `https://grand-theft-auto-6-5ap5.vercel.app/collectibles/${collectible.slug}`,
+                url: `https://www.taishgaming.com/collectibles/${collectible.slug}`,
               },
             ],
           }),

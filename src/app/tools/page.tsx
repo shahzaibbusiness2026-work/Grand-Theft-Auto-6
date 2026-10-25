@@ -35,11 +35,11 @@ export default function ToolsPage() {
             name: "Taish Gaming Tools",
             description: "Interactive tools and calculators for Grand Theft Auto VI.",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "GTA 6 Money Calculator", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-calculator" },
-              { "@type": "ListItem", position: 2, name: "GTA 6 Business Profit Calculator", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/business-profit-calculator" },
-              { "@type": "ListItem", position: 3, name: "GTA 6 Money-Making Method Finder", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/money-maker" },
-              { "@type": "ListItem", position: 4, name: "GTA 6 Loadout Builder", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/loadout-builder" },
-              { "@type": "ListItem", position: 5, name: "GTA 6 Vehicle Upgrade Calculator", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/vehicle-upgrade-calculator" },
+              { "@type": "ListItem", position: 1, name: "GTA 6 Money Calculator", item: "https://www.taishgaming.com/tools/money-calculator" },
+              { "@type": "ListItem", position: 2, name: "GTA 6 Business Profit Calculator", item: "https://www.taishgaming.com/tools/business-profit-calculator" },
+              { "@type": "ListItem", position: 3, name: "GTA 6 Money-Making Method Finder", item: "https://www.taishgaming.com/tools/money-maker" },
+              { "@type": "ListItem", position: 4, name: "GTA 6 Loadout Builder", item: "https://www.taishgaming.com/tools/loadout-builder" },
+              { "@type": "ListItem", position: 5, name: "GTA 6 Vehicle Upgrade Calculator", item: "https://www.taishgaming.com/tools/vehicle-upgrade-calculator" },
             ],
           }),
         }}

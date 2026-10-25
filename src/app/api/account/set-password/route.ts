@@ -10,6 +10,11 @@ import {
   getAccount,
   saveAccount,
 } from "@/lib/auth/accounts";
+import {
+  USER_SESSION_COOKIE,
+  createUserSessionToken,
+  userSessionCookieOptions,
+} from "@/lib/auth/session";
 
 /**
  * POST /api/account/set-password
@@ -118,13 +123,21 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json({
+    // A successful reset proves ownership — issue a fresh session cookie
+    // so the reset user can reach the dashboard without logging in again.
+    const res = NextResponse.json({
       ok: true,
       recoveryCode: freshCode,
       firstName: account.first_name || "",
       lastName: account.last_name || "",
       displayName: account.display_name || "",
     });
+    res.cookies.set(
+      USER_SESSION_COOKIE,
+      await createUserSessionToken(email),
+      userSessionCookieOptions()
+    );
+    return res;
   } catch {
     return NextResponse.json(
       { ok: false, error: "Could not reset the password. Please try again." },

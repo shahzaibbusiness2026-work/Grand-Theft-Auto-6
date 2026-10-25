@@ -24,16 +24,16 @@ export default function BusinessIncomeCalculatorPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Business Income Calculator \u2014 ROI & Break-Even Planner", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/business-income-calculator" },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Business Income Calculator \u2014 ROI & Break-Even Planner", item: "https://www.taishgaming.com/tools/business-income-calculator" },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Business Income Calculator \u2014 ROI & Break-Even Planner",
                 description: "Calculate daily and weekly business income, total investment, break-even days, and 30-day ROI for GTA 6 businesses \u2014 nightclub, chop shop, warehouse, and more.",
-                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/business-income-calculator",
+                url: "https://www.taishgaming.com/tools/business-income-calculator",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

@@ -145,6 +145,16 @@ export function getDisplayName(state: UserState = getStoredUserState()): string 
 export function logoutUser(): void {
   const current = getStoredUserState();
   saveStoredUserState({ ...current, userEmail: null });
+  // Clear the server session cookie too, or the dashboard gate would
+  // still let this browser in. Fire-and-forget: local sign-out must never
+  // hang on a network failure.
+  try {
+    fetch("/api/account/logout", { method: "POST", keepalive: true }).catch(
+      () => {}
+    );
+  } catch {
+    // Offline or unsupported — the cookie simply expires on its own.
+  }
 }
 
 export function isLoggedIn(): boolean {

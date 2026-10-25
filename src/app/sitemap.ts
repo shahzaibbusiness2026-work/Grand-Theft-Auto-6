@@ -36,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // it changes on every redeploy and would make sitemap URLs drift.
   const baseUrl = adminUrl
     || process.env.NEXT_PUBLIC_SITE_URL
-    || "https://grand-theft-auto-6-5ap5.vercel.app";
+    || "https://www.taishgaming.com";
 
   // Core Static Routes
   const staticRoutes = [

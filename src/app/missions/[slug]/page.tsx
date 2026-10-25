@@ -104,9 +104,9 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Missions", item: "https://grand-theft-auto-6-5ap5.vercel.app/missions" },
-                  { "@type": "ListItem", position: 3, name: mission.title, item: `https://grand-theft-auto-6-5ap5.vercel.app/missions/${mission.slug}` },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Missions", item: "https://www.taishgaming.com/missions" },
+                  { "@type": "ListItem", position: 3, name: mission.title, item: `https://www.taishgaming.com/missions/${mission.slug}` },
                 ],
               },
               {

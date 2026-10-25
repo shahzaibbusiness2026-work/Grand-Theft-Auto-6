@@ -24,16 +24,16 @@ export default function PhotoSpotFinderPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://grand-theft-auto-6-5ap5.vercel.app/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Photo Spot Finder \u2014 Best Screenshot Locations", item: "https://grand-theft-auto-6-5ap5.vercel.app/tools/photo-spot-finder" },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Photo Spot Finder \u2014 Best Screenshot Locations", item: "https://www.taishgaming.com/tools/photo-spot-finder" },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Photo Spot Finder \u2014 Best Screenshot Locations",
                 description: "The most cinematic photo spots in Leonida. Best time of day, region, and pro tips for every shot.",
-                url: "https://grand-theft-auto-6-5ap5.vercel.app/tools/photo-spot-finder",
+                url: "https://www.taishgaming.com/tools/photo-spot-finder",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

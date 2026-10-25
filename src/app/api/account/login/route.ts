@@ -2,6 +2,11 @@ import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { peekRateLimit, recordRateLimitHit } from "@/lib/rate-limit";
 import { validEmail, verifyPassword, getAccount, saveAccount } from "@/lib/auth/accounts";
+import {
+  USER_SESSION_COOKIE,
+  createUserSessionToken,
+  userSessionCookieOptions,
+} from "@/lib/auth/session";
 
 /**
  * POST /api/account/login
@@ -99,12 +104,21 @@ export async function POST(req: Request) {
       sign_in_count: account.sign_in_count + 1,
     });
 
-    return NextResponse.json({
+    // Issue the signed session cookie the dashboard gate checks. A login
+    // that cannot sign a session is a server misconfiguration — fail
+    // closed instead of returning a "success" the dashboard would reject.
+    const res = NextResponse.json({
       ok: true,
       firstName: account.first_name || "",
       lastName: account.last_name || "",
       displayName: account.display_name || "",
     });
+    res.cookies.set(
+      USER_SESSION_COOKIE,
+      await createUserSessionToken(email),
+      userSessionCookieOptions()
+    );
+    return res;
   } catch {
     return NextResponse.json(
       { ok: false, error: "Could not log you in. Please try again." },

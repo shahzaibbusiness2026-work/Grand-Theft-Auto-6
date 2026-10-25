@@ -9,6 +9,11 @@ import {
   getAccount,
   saveAccount,
 } from "@/lib/auth/accounts";
+import {
+  USER_SESSION_COOKIE,
+  createUserSessionToken,
+  userSessionCookieOptions,
+} from "@/lib/auth/session";
 
 /**
  * POST /api/account/signup
@@ -134,13 +139,22 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json({
+    // Issue the signed session cookie so the new account can reach the
+    // dashboard after saving the recovery code. Fails closed on a server
+    // misconfiguration, like login.
+    const res = NextResponse.json({
       ok: true,
       firstName,
       lastName,
       displayName,
       recoveryCode,
     });
+    res.cookies.set(
+      USER_SESSION_COOKIE,
+      await createUserSessionToken(email),
+      userSessionCookieOptions()
+    );
+    return res;
   } catch {
     return NextResponse.json(
       { ok: false, error: "Could not create your account. Please try again." },
