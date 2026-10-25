@@ -30,6 +30,10 @@ const nextConfig = {
       // not just rows in a settings table.
       { source: "/old-map", destination: "/map", permanent: true },
       { source: "/vehicle-list", destination: "/vehicles", permanent: true },
+      { source: "/home", destination: "/", permanent: true },
+      { source: "/weapon", destination: "/weapons", permanent: true },
+      { source: "/vehicle", destination: "/vehicles", permanent: true },
+      { source: "/maps", destination: "/map", permanent: true },
     ];
   },
   async headers() {
