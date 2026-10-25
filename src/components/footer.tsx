@@ -50,6 +50,7 @@ const COLS = [
       { label: "Terms of Service", href: "/terms" },
       { label: "Cookie Policy", href: "/cookies" },
       { label: "DMCA", href: "/dmca" },
+      { label: "Disclaimer", href: "/disclaimer" },
     ],
   },
 ];
