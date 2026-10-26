@@ -93,7 +93,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
             {locations.length}
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mt-1">
-            Confirmed POIs
+            Points of Interest
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-accent/20 bg-accent/10">

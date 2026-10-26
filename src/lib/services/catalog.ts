@@ -96,7 +96,7 @@ function dbVehicleToDisplay(v: VehicleCatalogRow, c?: CanonicalVehicle): Canonic
     purchaseLocation: c?.purchaseLocation || "Southern San Andreas Super Autos",
     spawnLocations: c?.spawnLocations ?? ["Vice City Downtown", "Ocean Drive"],
     customizationOptions: v.customization?.length ? v.customization : c?.customizationOptions ?? ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
-    confidence: (v.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "CONFIRMED",
+    confidence: (v.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "SPECULATION",
     source: v.source || c?.source || "In-game Footage",
     description: v.summary || c?.description || `${v.name} in Grand Theft Auto VI.`,
     featured: v.featured ?? c?.featured ?? true,

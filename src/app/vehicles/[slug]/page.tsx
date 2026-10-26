@@ -65,7 +65,7 @@ async function resolveVehicle(slug: string): Promise<CanonicalVehicle | undefine
         purchaseLocation: c?.purchaseLocation || "Southern San Andreas Super Autos",
         spawnLocations: c?.spawnLocations ?? ["Vice City Downtown", "Ocean Drive"],
         customizationOptions: c?.customizationOptions ?? ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
-        confidence: (row.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "CONFIRMED",
+        confidence: (row.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "SPECULATION",
         source: row.source || c?.source || "In-game Footage",
         description: row.summary || c?.description || `${row.name} in Grand Theft Auto VI.`,
         featured: row.featured ?? c?.featured ?? true,

@@ -17,7 +17,9 @@ export function ConfidenceBadge({
   className,
   size = "sm",
 }: ConfidenceBadgeProps) {
-  const activeLevel = level || confidence || "CONFIRMED";
+  // Fail closed: an item with no confidence rating must never display as
+  // "Confirmed". Unknown or missing means Speculation until rated.
+  const activeLevel = level || confidence || "SPECULATION";
 
   const configs: Record<
     ConfidenceLevel,
@@ -60,7 +62,7 @@ export function ConfidenceBadge({
     },
   };
 
-  const config = configs[activeLevel] || configs.CONFIRMED;
+  const config = configs[activeLevel] || configs.SPECULATION;
   const Icon = config.icon;
 
   return (
