@@ -16,6 +16,12 @@ import {
   TrendingUp,
   Zap,
   Ruler,
+  Car,
+  Bike,
+  Ship,
+  Plane,
+  Truck,
+  LayoutGrid,
 } from "lucide-react";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
@@ -159,6 +165,14 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
   // Some DB rows use plural klass spellings ("Boats", "Motorcycles"); normalize them
   // so they merge with the canonical singular classes instead of doubling up.
   const normKlass = (k: string) => (k === "Boats" ? "Boat" : k === "Motorcycles" ? "Motorcycle" : k);
+  const klassIcon = (k: string) => {
+    const n = normKlass(k);
+    if (n === "Motorcycle" || n === "Dirt Bike") return Bike;
+    if (n === "Boat") return Ship;
+    if (n === "Helicopter" || n === "Plane") return Plane;
+    if (n === "Van" || n === "Commercial") return Truck;
+    return Car;
+  };
   const klassCounts = useMemo(() => {
     const map = new Map<string, number>();
     vehicleList.forEach((v) => map.set(normKlass(v.klass), (map.get(v.klass) ?? 0) + 1));
@@ -522,22 +536,25 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 klassFilter === "" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
               )}
             >
-              <span>All Vehicles</span>
+              <span className="flex items-center gap-2"><LayoutGrid className="h-4 w-4" />All Vehicles</span>
               <span className="tabular-nums text-xs opacity-80">{vehicleList.length}</span>
             </button>
-            {klassCounts.map(([klass, count]) => (
-              <button
-                key={klass}
-                onClick={() => setKlassFilter(klass)}
-                className={cn(
-                  "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-bold transition",
-                  klassFilter === klass ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
-                )}
-              >
-                <span>{klass}s</span>
-                <span className="tabular-nums text-xs opacity-80">{count}</span>
-              </button>
-            ))}
+            {klassCounts.map(([klass, count]) => {
+              const Icon = klassIcon(klass);
+              return (
+                <button
+                  key={klass}
+                  onClick={() => setKlassFilter(klass)}
+                  className={cn(
+                    "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-bold transition",
+                    klassFilter === klass ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+                  )}
+                >
+                  <span className="flex items-center gap-2"><Icon className="h-4 w-4" />{klass}s</span>
+                  <span className="tabular-nums text-xs opacity-80">{count}</span>
+                </button>
+              );
+            })}
           </div>
 
           <div className="mt-6 space-y-4 border-t border-border pt-5">

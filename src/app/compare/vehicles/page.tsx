@@ -27,6 +27,7 @@ export default async function CompareVehiclesPage() {
 
   return (
     <SiteShell>
+      <div className="dark bg-[#070b14]">
       <div className="container-site py-8">
         {/* Header Hero */}
         <div className="relative mb-8 overflow-hidden rounded-3xl border border-border">
@@ -45,8 +46,8 @@ export default async function CompareVehiclesPage() {
               <span aria-hidden="true">›</span>
               <span className="text-white">Compare</span>
             </nav>
-            <h1 className="font-display text-4xl sm:text-5xl font-black leading-tight tracking-tight text-white">
-              GTA 6 Vehicle <span className="text-primary">Comparison</span>
+            <h1 className="font-display text-5xl sm:text-6xl font-black leading-none tracking-tight text-white">
+              GTA <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">6</span> Vehicle <span className="text-primary">Comparison</span>
             </h1>
             <p className="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-white/80">
               Compare GTA 6 vehicle entries with known details, clearly labelled pre-release estimates, charts
@@ -56,6 +57,7 @@ export default async function CompareVehiclesPage() {
         </div>
 
         <CompareVehiclesClient vehicles={vehicles} weights={weights.vehicle} />
+      </div>
       </div>
     </SiteShell>
   );
