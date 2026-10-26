@@ -16,7 +16,7 @@ export function Logo({ className, href = "/" }: { className?: string; href?: str
     >
       <Gamepad2 className="h-7 w-7 text-[#FF2E9A]" aria-hidden="true" />
       <span className="font-display text-[21px] font-black tracking-tight">
-        <span className="text-white">TAISH</span>
+        <span className="text-foreground">TAISH</span>
         {" "}
         <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">
           GAMING
