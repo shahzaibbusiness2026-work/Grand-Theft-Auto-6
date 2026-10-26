@@ -1,23 +1,25 @@
 import Link from "next/link";
+import { Gamepad2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-/** Marketing logo — stacked amber/gold "TAISH" + technical cyan "GAMING" identifier. */
+/** Marketing logo — one-line "TAISHGAMING" lockup from the reference design:
+ * gamepad mark, TAISH in foreground, GAMING in the pink-to-violet gradient. */
 export function Logo({ className, href = "/" }: { className?: string; href?: string }) {
   return (
     <Link
       href={href}
       className={cn(
-        "group inline-flex shrink-0 flex-col leading-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00F0FF]/60 rounded-md transition-opacity hover:opacity-95",
+        "group inline-flex shrink-0 items-center gap-2 leading-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2E9A]/60 rounded-md transition-opacity hover:opacity-95",
         className
       )}
       aria-label="Taish Gaming Home"
     >
-      <span className="text-primary font-display text-[21px] font-black tracking-tight">
-        TAISH
-      </span>
-      <span className="mt-1 flex items-center gap-1 font-mono text-xs font-bold uppercase tracking-[0.38em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_6px_rgba(0,240,255,0.3)]">
-        <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#00F0FF] shadow-[0_0_4px_#00F0FF]" aria-hidden="true" />
-        GAMING
+      <Gamepad2 className="h-7 w-7 text-[#FF2E9A]" aria-hidden="true" />
+      <span className="font-display text-[21px] font-black tracking-tight">
+        <span className="text-foreground">TAISH</span>
+        <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">
+          GAMING
+        </span>
       </span>
     </Link>
   );

@@ -47,7 +47,7 @@ export default async function CompareVehiclesPage() {
               <span className="text-white">Compare</span>
             </nav>
             <h1 className="font-display text-5xl sm:text-6xl font-black leading-none tracking-tight text-white">
-              GTA <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">6</span> Vehicle <span className="text-primary">Comparison</span>
+              GTA <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">6</span> Vehicle <span className="text-[#FF2E9A]">Comparison</span>
             </h1>
             <p className="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-white/80">
               Compare GTA 6 vehicle entries with known details, clearly labelled pre-release estimates, charts

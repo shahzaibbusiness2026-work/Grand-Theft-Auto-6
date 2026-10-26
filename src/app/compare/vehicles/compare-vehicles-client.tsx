@@ -106,6 +106,24 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // The reference layout is designed dark. next-themes stores the theme on
+  // <html> (:root carries the dark palette, .light overrides it), so a nested
+  // .dark wrapper cannot flip it — force the document theme while mounted
+  // and restore the visitor's theme on unmount.
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const root = document.documentElement;
+    const hadLight = root.classList.contains("light");
+    const hadDark = root.classList.contains("dark");
+    root.classList.remove("light");
+    root.classList.add("dark");
+    return () => {
+      root.classList.remove("dark");
+      if (hadLight) root.classList.add("light");
+      else if (hadDark) root.classList.add("dark");
+    };
+  }, []);
+
   // Sync selected to URL
   const syncToUrl = (slugs: string[]) => {
     if (typeof window !== "undefined") {
@@ -175,7 +193,10 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
   };
   const klassCounts = useMemo(() => {
     const map = new Map<string, number>();
-    vehicleList.forEach((v) => map.set(normKlass(v.klass), (map.get(v.klass) ?? 0) + 1));
+    vehicleList.forEach((v) => {
+      const nk = normKlass(v.klass);
+      map.set(nk, (map.get(nk) ?? 0) + 1);
+    });
     return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
   }, [vehicleList]);
 
@@ -454,7 +475,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   onClick={handleSwapFirstTwo}
                   title="Swap the first two vehicles"
                   aria-label="Swap the first two vehicles"
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 transition hover:scale-105"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-white shadow-lg shadow-[#FF2E9A]/30 transition hover:scale-105"
                 >
                   <ArrowLeftRight className="h-5 w-5" />
                 </button>
@@ -499,7 +520,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
           )}
           <Button
             onClick={handleShare}
-            className="bg-primary text-primary-foreground font-bold text-sm shadow-md min-h-[44px]"
+            className="bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-white font-bold text-sm shadow-md min-h-[44px]"
           >
             {copied ? <Check className="h-3.5 w-3.5 mr-1 text-emerald-300" /> : <Share2 className="h-3.5 w-3.5 mr-1" />}
             <span>{copied ? "Link Copied!" : "Share Comparison URL"}</span>
@@ -533,7 +554,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
               onClick={() => setKlassFilter("")}
               className={cn(
                 "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-bold transition",
-                klassFilter === "" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+                klassFilter === "" ? "bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-white" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
               )}
             >
               <span className="flex items-center gap-2"><LayoutGrid className="h-4 w-4" />All Vehicles</span>
@@ -547,7 +568,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   onClick={() => setKlassFilter(klass)}
                   className={cn(
                     "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-bold transition",
-                    klassFilter === klass ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+                    klassFilter === klass ? "bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-white" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
                   )}
                 >
                   <span className="flex items-center gap-2"><Icon className="h-4 w-4" />{klass}s</span>
@@ -631,7 +652,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     className={cn(
                       "flex-1 rounded-lg py-2 text-sm font-black transition",
                       seatsFilter === opt.value
-                        ? "bg-primary text-primary-foreground"
+                        ? "bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-white"
                         : "bg-muted/50 text-muted-foreground hover:bg-muted/70 hover:text-foreground"
                     )}
                   >
@@ -711,7 +732,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 <Fragment key={v.id}>
                   {selectedVehicles.length === 2 && idx === 1 && (
                     <div className="hidden items-center justify-center md:flex" aria-hidden="true">
-                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-lg font-black text-primary-foreground shadow-lg shadow-primary/40">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-lg font-black text-white shadow-lg shadow-[#FF2E9A]/40">
                         VS
                       </span>
                     </div>
@@ -747,7 +768,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="font-display truncate text-lg font-black text-foreground">{v.name}</h3>
                       </div>
-                      <span className="tabular-nums mt-0.5 text-base font-black text-primary">
+                      <span className="tabular-nums mt-0.5 text-base font-black text-[#FF2E9A]">
                         {v.priceDisplay ?? "Price not listed"}
                       </span>
                       <span className="text-sm text-muted-foreground">{v.manufacturer}</span>
