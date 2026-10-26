@@ -122,8 +122,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
+  // Dynamic entity routes — index-ready gate: Rumored and Speculation
+  // pages stay crawlable through the hubs but are kept out of the sitemap,
+  // so search engines prioritize the better-evidenced pages.
   // Dynamic Vehicle Routes
-  const vehicleRoutes = canonicalVehicles.map((v) => ({
+  const vehicleRoutes = canonicalVehicles
+    .filter((v) => v.confidence !== "RUMORED" && v.confidence !== "SPECULATION")
+    .map((v) => ({
     url: `${baseUrl}/vehicles/${v.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
@@ -131,7 +136,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Dynamic Weapon Routes
-  const weaponRoutes = canonicalWeapons.map((w) => ({
+  const weaponRoutes = canonicalWeapons
+    .filter((w) => w.confidence !== "RUMORED" && w.confidence !== "SPECULATION")
+    .map((w) => ({
     url: `${baseUrl}/weapons/${w.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
@@ -139,7 +146,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Dynamic Mission Routes
-  const missionRoutes = canonicalMissions.map((m) => ({
+  const missionRoutes = canonicalMissions
+    .filter((m) => m.confidence !== "RUMORED" && m.confidence !== "SPECULATION")
+    .map((m) => ({
     url: `${baseUrl}/missions/${m.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
@@ -147,7 +156,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Dynamic Location Routes
-  const locationRoutes = canonicalLocations.map((l) => ({
+  const locationRoutes = canonicalLocations
+    .filter((l) => l.confidence !== "RUMORED" && l.confidence !== "SPECULATION")
+    .map((l) => ({
     url: `${baseUrl}/locations/${l.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
@@ -155,7 +166,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Dynamic Property Routes
-  const propertyRoutes = canonicalProperties.map((p) => ({
+  const propertyRoutes = canonicalProperties
+    .filter((p) => p.confidence !== "RUMORED" && p.confidence !== "SPECULATION")
+    .map((p) => ({
     url: `${baseUrl}/properties/${p.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
@@ -163,7 +176,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Dynamic Collectible Routes
-  const collectibleRoutes = canonicalCollectibles.map((c) => ({
+  const collectibleRoutes = canonicalCollectibles
+    .filter((c) => c.confidence !== "RUMORED" && c.confidence !== "SPECULATION")
+    .map((c) => ({
     url: `${baseUrl}/collectibles/${c.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,

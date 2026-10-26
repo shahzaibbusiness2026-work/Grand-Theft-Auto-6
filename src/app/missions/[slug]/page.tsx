@@ -45,7 +45,7 @@ async function resolveMission(slug: string): Promise<CanonicalMission | undefine
         otherRewards: row.other_rewards || canonical?.otherRewards || [],
         requirements: row.requirements || canonical?.requirements || [],
         objectives: objectives.length > 0 ? objectives : canonical?.objectives || [],
-        confidence: (row.confidence as CanonicalMission["confidence"]) || canonical?.confidence || "REPORTED",
+        confidence: (row.confidence as CanonicalMission["confidence"]) || canonical?.confidence || "SPECULATION",
         description: row.description || canonical?.description || "",
         source: canonical?.source || "Atlas Admin",
         img: canonical?.img || "/img/hero-dark.jpg",

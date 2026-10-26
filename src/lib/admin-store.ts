@@ -166,6 +166,7 @@ export interface AdminMapMarker {
   verification: "unverified" | "verified" | "pending" | "deprecated";
   source?: string;
   linkedRecord?: string;
+  createdAt?: string;
 }
 
 export interface AdminMediaAsset {

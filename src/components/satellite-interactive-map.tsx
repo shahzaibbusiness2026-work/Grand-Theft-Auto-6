@@ -61,6 +61,8 @@ export interface MapPOI {
   color: string;
   icon: any;
   verified?: boolean;
+  source?: string;
+  addedOn?: string;
 }
 
 function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
@@ -103,6 +105,8 @@ function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
     color,
     icon: iconComponent,
     verified: m.verification === "verified",
+    source: m.source || undefined,
+    addedOn: m.createdAt ? m.createdAt.slice(0, 10) : undefined,
   };
 }
 
@@ -138,6 +142,7 @@ const POIS: MapPOI[] = [
     type: "Weapon Shop",
     district: "Downtown Vice City",
     desc: "Buy military weapons, heavy body armor, ammo and specialized weapon attachments.",
+    source: "Trailer 1 Ammu-Nation Exterior Banner",
     img: "/img/ammu-nation.jpg",
     hours: "09:00 – 22:00",
     top: "46%",
@@ -153,13 +158,14 @@ const POIS: MapPOI[] = [
     type: "Garage & Mod Shop",
     district: "Ocean Drive Waterfront",
     desc: "Vehicle storage, custom widebody kits, performance turbo tuning, and instant respray.",
+    source: "Community research",
     img: "/img/garage.jpg",
     hours: "Open 24/7",
     top: "56%",
     left: "64%",
     color: "bg-cyan-500 dark:bg-[#00F0FF]",
     icon: Warehouse,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-suite",
@@ -168,13 +174,14 @@ const POIS: MapPOI[] = [
     type: "Safehouse / Property",
     district: "Vice City Downtown",
     desc: "Luxury penthouse with 10-car garage, private helipad, and panoramic Biscayne bay view.",
+    source: "Downtown Luxury Real Estate Leaks",
     img: "/img/apartment.jpg",
     hours: "Private Residence",
     top: "51%",
     left: "61%",
     color: "bg-indigo-500",
     icon: Building2,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-cache",
@@ -183,6 +190,7 @@ const POIS: MapPOI[] = [
     type: "Submerged Collectible",
     district: "Biscayne Bay Reef",
     desc: "Smuggler's waterproof cargo chest submerged beneath coastal coral reef.",
+    source: "Community research",
     img: "/img/cache-chest.jpg",
     hours: "Requires Scuba Gear",
     top: "62%",
@@ -198,13 +206,14 @@ const POIS: MapPOI[] = [
     type: "Unique Stunt Jump",
     district: "Escobar Causeway Ramp",
     desc: "Highway bridge ramp launch over dual express lanes with cinematic slow-mo camera.",
+    source: "Community research",
     img: "/img/stunt-bike.jpg",
     hours: "Anytime",
     top: "49%",
     left: "53%",
     color: "bg-gold",
     icon: Star,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-heist",
@@ -213,6 +222,7 @@ const POIS: MapPOI[] = [
     type: "Main Story Heist",
     district: "Leonida Keys",
     desc: "Main story bank heist target with Lucia and Jason targeting regional depository vault.",
+    source: "Community research",
     img: "/img/boat.jpg",
     hours: "Chapter 3 Mission",
     top: "73%",
@@ -228,13 +238,14 @@ const POIS: MapPOI[] = [
     type: "Mystery / Easter Egg",
     district: "Grassrivers Marshlands",
     desc: "Cryptic extraterrestrial artwork painted across abandoned cold-war military radar dome.",
+    source: "In-Game Leak Mystery Documentation",
     img: "/img/ufo-mural.jpg",
     hours: "00:00 – 04:00 (Rain Only)",
     top: "32%",
     left: "54%",
     color: "bg-emerald-500",
     icon: Egg,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-weapon-smg",
@@ -243,13 +254,14 @@ const POIS: MapPOI[] = [
     type: "Rare Weapon Pickup",
     district: "Port Gellhorn Docks",
     desc: "Military suppressed submachine gun hidden inside high-security shipping depot container.",
+    source: "Community research",
     img: "/img/smg-gun.jpg",
     hours: "Unrestricted Pickup",
     top: "41%",
     left: "35%",
     color: "bg-gold",
     icon: Crosshair,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-north-wilds",
@@ -258,13 +270,14 @@ const POIS: MapPOI[] = [
     type: "Scenic Vantage Point",
     district: "Northern Wilds",
     desc: "Mountain ridge fire lookout tower with 360-degree panorama spanning Leonida wilderness.",
+    source: "Wilderness Leaks & Map Topography",
     img: "/img/hero-dark.jpg",
     hours: "Open 24/7",
     top: "22%",
     left: "34%",
     color: "bg-gold",
     icon: MapPin,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-port-gellhorn",
@@ -273,13 +286,14 @@ const POIS: MapPOI[] = [
     type: "Safehouse",
     district: "Port Gellhorn",
     desc: "Low-profile industrial safehouse with escape tunnel to docks, armory, and vehicle stash.",
+    source: "Story Mission Leak Documents",
     img: "/img/garage.jpg",
     hours: "Story Unlocked",
     top: "44%",
     left: "33%",
     color: "bg-emerald-500",
     icon: Home,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-club",
@@ -288,13 +302,14 @@ const POIS: MapPOI[] = [
     type: "Nightlife & Syndicate",
     district: "Ocean Drive Waterfront",
     desc: "Legendary 80s-inspired oceanfront nightclub. Hotspot for Vice City underground contacts.",
+    source: "Trailer 1 Club Interior Shots",
     img: "/img/vice-sunset.svg",
     hours: "22:00 – 06:00",
     top: "58%",
     left: "62%",
     color: "bg-fuchsia-500",
     icon: PersonStanding,
-    verified: false,
+    verified: true,
   },
   {
     id: "poi-supercar",
@@ -303,13 +318,14 @@ const POIS: MapPOI[] = [
     type: "Luxury Showroom",
     district: "Downtown Vice City",
     desc: "Exclusive showroom housing the fastest exotic hypercars and customized test vehicles.",
+    source: "Community research",
     img: "/img/car-purple.jpg",
     hours: "10:00 – 20:00",
     top: "47%",
     left: "60%",
     color: "bg-gold",
     icon: Car,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-heli",
@@ -318,6 +334,7 @@ const POIS: MapPOI[] = [
     type: "Aviation Hub",
     district: "Escobar International",
     desc: "Charter flight landing pad with available police and civilian transport helicopters.",
+    source: "Community research",
     img: "/img/heli.jpg",
     hours: "Open 24/7",
     top: "54%",
@@ -333,6 +350,7 @@ const POIS: MapPOI[] = [
     type: "Marina",
     district: "Leonida Keys",
     desc: "Deep-sea marina docked with high-speed offshore powerboats and jet-skis.",
+    source: "Trailer 1 Keys Bridge & Waterways",
     img: "/img/boat.jpg",
     hours: "Open 24/7",
     top: "76%",
@@ -348,13 +366,14 @@ const POIS: MapPOI[] = [
     type: "Industrial Landmark",
     district: "Ambrosia",
     desc: "Massive sugar refinery dominating Ambrosia — company town centerpiece, biker gang territory.",
+    source: "Community research",
     img: "/img/hero-dark.jpg",
     hours: "Restricted Area",
     top: "28%",
     left: "48%",
     color: "bg-orange-600",
     icon: Building2,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-ambrosia-garage",
@@ -363,13 +382,14 @@ const POIS: MapPOI[] = [
     type: "Garage & Mod Shop",
     district: "Ambrosia",
     desc: "Biker gang-run chop shop — custom choppers, off-road mods, no questions asked.",
+    source: "Community research",
     img: "/img/garage.jpg",
     hours: "Open 24/7",
     top: "30%",
     left: "52%",
     color: "bg-cyan-500 dark:bg-[#00F0FF]",
     icon: Warehouse,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-kalaga-trails",
@@ -378,13 +398,14 @@ const POIS: MapPOI[] = [
     type: "Wilderness Area",
     district: "Mount Kalaga National Park",
     desc: "Trailhead for hunting, fishing, and off-road adventures in the northern wilderness.",
+    source: "Community research",
     img: "/img/cache-chest.jpg",
     hours: "Dawn to Dusk",
     top: "18%",
     left: "40%",
     color: "bg-purple-500",
     icon: Gem,
-    verified: true,
+    verified: false,
   },
   {
     id: "poi-kalaga-lookout",
@@ -393,13 +414,14 @@ const POIS: MapPOI[] = [
     type: "Scenic Viewpoint",
     district: "Mount Kalaga National Park",
     desc: "Highest point in Leonida — panoramic views, hidden collectible caches nearby.",
+    source: "Community research",
     img: "/img/hero-dark.jpg",
     hours: "Open 24/7",
     top: "15%",
     left: "38%",
     color: "bg-emerald-600",
     icon: MapPin,
-    verified: true,
+    verified: false,
   },
 ];
 
@@ -460,7 +482,7 @@ export function SatelliteInteractiveMap({
       try {
         const markers = await getMapMarkers();
         if (markers && markers.length > 0) {
-          const livePois = markers.map(adminMarkerToPoi);
+          const livePois = markers.filter((m) => m.visible !== false).map(adminMarkerToPoi);
           // Merge: keep bundled POIs, overlay live/CMS markers (live wins on id conflicts)
           const liveIds = new Set(livePois.map((m) => m.id));
           const mergedPois = [...POIS.filter((poi) => !liveIds.has(poi.id)), ...livePois];
@@ -793,9 +815,12 @@ export function SatelliteInteractiveMap({
   };
 
   // Filtered POIs
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
+
   const visiblePOIs = useMemo(() => {
     return allPOIs.filter((p) => {
       if (hideCollected && collectedPOIs[p.id]) return false;
+      if (verifiedOnly && !p.verified) return false;
       const isCategoryChecked = checkedFilters.all || checkedFilters[p.category];
       const matchesSearch =
         searchQuery.trim() === "" ||
@@ -805,7 +830,7 @@ export function SatelliteInteractiveMap({
         p.type.toLowerCase().includes(searchQuery.toLowerCase());
       return isCategoryChecked && matchesSearch;
     });
-  }, [allPOIs, checkedFilters, searchQuery, hideCollected, collectedPOIs]);
+  }, [allPOIs, checkedFilters, searchQuery, hideCollected, collectedPOIs, verifiedOnly]);
 
   const verifiedTotal = Object.values(collectedPOIs).filter(Boolean).length;
 
@@ -838,7 +863,7 @@ export function SatelliteInteractiveMap({
               </span>
             </div>
             <p className="text-xs text-muted-foreground">
-              HD 4K Topographic Reconnaissance • {visiblePOIs.length}{" "}Active Targets Displayed
+              Fan-made Leonida Atlas • {visiblePOIs.length}{" "}Active Targets Displayed
             </p>
           </div>
         </div>
@@ -1032,6 +1057,32 @@ export function SatelliteInteractiveMap({
               })}
             </div>
 
+            {/* Evidence filter: only pins with a verified source */}
+            <div className="mt-3 pt-3 border-t border-border">
+              <div
+                onClick={() => setVerifiedOnly((v) => !v)}
+                className="flex min-h-[44px] cursor-pointer select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-xs font-semibold text-muted-foreground hover:bg-muted/40 hover:text-white transition-colors"
+              >
+                <span className="flex items-center gap-2 truncate">
+                  <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                  <span className="truncate">Verified pins only</span>
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-muted-foreground">{allPOIs.filter((p) => p.verified).length}</span>
+                  <span
+                    className={cn(
+                      "flex h-4 w-4 items-center justify-center rounded transition-all",
+                      verifiedOnly
+                        ? "bg-gold text-slate-950 shadow-xs"
+                        : "border border-border bg-black/40"
+                    )}
+                  >
+                    {verifiedOnly && <Check className="h-3 w-3 text-slate-950" strokeWidth={3.5} />}
+                  </span>
+                </span>
+              </div>
+            </div>
+
             {/* Progress Strip */}
             <div className="mt-3 pt-3 border-t border-border">
               <div className="flex items-center justify-between text-xs font-bold text-white">
@@ -1098,6 +1149,28 @@ export function SatelliteInteractiveMap({
               <span className="font-bold text-white text-xs font-mono">
                 {selectedPOI.hours}
               </span>
+            </div>
+
+            {/* Evidence: source, verification, added date */}
+            <div className="mt-3 space-y-1.5 rounded-xl border border-border bg-black/40 px-3 py-2.5 text-xs">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-muted-foreground font-semibold">Evidence</span>
+                <span className={cn("font-bold", selectedPOI.verified ? "text-emerald-400" : "text-amber-400")}>
+                  {selectedPOI.verified ? "Verified pin" : "Unverified pin"}
+                </span>
+              </div>
+              {selectedPOI.source && (
+                <div className="flex items-start justify-between gap-2">
+                  <span className="text-muted-foreground font-semibold shrink-0">Source</span>
+                  <span className="text-right font-medium text-white/90">{selectedPOI.source}</span>
+                </div>
+              )}
+              {selectedPOI.addedOn && (
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-muted-foreground font-semibold">Added</span>
+                  <span className="font-mono text-white/90">{selectedPOI.addedOn}</span>
+                </div>
+              )}
             </div>
 
             {/* Action buttons: Visited, Center, Favorite, Share */}

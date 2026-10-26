@@ -26,28 +26,28 @@ export function ConfidenceBadge({
     { label: string; icon: any; border: string; bg: string; text: string }
   > = {
     OFFICIAL: {
-      label: "Official Rockstar",
+      label: "Officially Confirmed",
       icon: ShieldCheck,
       border: "border-emerald-500/40",
       bg: "bg-emerald-500/10",
       text: "text-emerald-600 dark:text-emerald-400",
     },
     CONFIRMED: {
-      label: "Confirmed Asset",
+      label: "Observed in Official Media",
       icon: CheckCircle,
       border: "border-cyan-500/40",
       bg: "bg-cyan-500/10",
       text: "text-cyan-700 dark:text-[#00F0FF]",
     },
     REPORTED: {
-      label: "Reported Leak",
+      label: "Credible Report",
       icon: Eye,
       border: "border-gold/40",
       bg: "bg-gold/10",
       text: "text-gold-dark dark:text-gold-light",
     },
     RUMORED: {
-      label: "Rumored",
+      label: "Community Identified",
       icon: AlertTriangle,
       border: "border-purple-500/40",
       bg: "bg-purple-500/10",

@@ -41,6 +41,7 @@ function rowToMarker(row: DatabaseMapMarkerRow): AdminMapMarker {
     verification: (row.verification as AdminMapMarker["verification"]) || "verified",
     source: row.source || undefined,
     linkedRecord: row.linked_record || undefined,
+    createdAt: row.created_at || undefined,
   };
 }
 

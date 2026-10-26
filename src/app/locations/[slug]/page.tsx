@@ -50,7 +50,7 @@ async function resolveLocation(slug: string): Promise<CanonicalLocation | undefi
         relatedVehicles: canonical?.relatedVehicles,
         relatedWeapons: canonical?.relatedWeapons,
         relatedMissions: canonical?.relatedMissions,
-        confidence: (row.confidence as CanonicalLocation["confidence"]) || canonical?.confidence || "REPORTED",
+        confidence: (row.confidence as CanonicalLocation["confidence"]) || canonical?.confidence || "SPECULATION",
         source: row.source || canonical?.source || "Atlas Admin",
         img: row.img || canonical?.img || "/img/map-dark.svg",
         verified: row.verification === "verified",

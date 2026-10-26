@@ -86,10 +86,10 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
       if (v.confidence) counts[v.confidence] = (counts[v.confidence] || 0) + 1;
     });
     const order: Array<[string, string]> = [
-      ["OFFICIAL", "Official"],
-      ["CONFIRMED", "Confirmed"],
-      ["REPORTED", "Reported"],
-      ["RUMORED", "Rumored"],
+      ["OFFICIAL", "Officially Confirmed"],
+      ["CONFIRMED", "Observed in Official Media"],
+      ["REPORTED", "Credible Reports"],
+      ["RUMORED", "Community Identified"],
       ["SPECULATION", "Speculation"],
     ];
     return order
@@ -187,7 +187,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                 confidenceFilter === "official" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
-              Official Only
+              Officially Confirmed
             </button>
             <button
               onClick={() => setConfidenceFilter("rumored")}
@@ -196,7 +196,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                 confidenceFilter === "rumored" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
-              Rumored
+              Community Identified
             </button>
           </div>
         </div>

@@ -78,10 +78,10 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
       if (w.confidence) counts[w.confidence] = (counts[w.confidence] || 0) + 1;
     });
     const order: Array<[string, string]> = [
-      ["OFFICIAL", "Official"],
-      ["CONFIRMED", "Confirmed"],
-      ["REPORTED", "Reported"],
-      ["RUMORED", "Rumored"],
+      ["OFFICIAL", "Officially Confirmed"],
+      ["CONFIRMED", "Observed in Official Media"],
+      ["REPORTED", "Credible Reports"],
+      ["RUMORED", "Community Identified"],
       ["SPECULATION", "Speculation"],
     ];
     return order

@@ -81,25 +81,25 @@ export function MapClient() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-gold dark:text-gold-light mb-3">
-                <Radio className="h-3 w-3 animate-pulse" /> Official Interactive Radar
+                <Radio className="h-3 w-3 animate-pulse" /> Fan-made Interactive Atlas
               </div>
               <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
                 LEONIDA STATE <span className="text-primary">SATELLITE ATLAS</span>
               </h1>
               <p className="mt-3 text-sm leading-relaxed text-slate-300 font-medium">
-                Explore every street, island, mission, weapon cache, mod garage, and hidden easter egg across the entire state of Leonida in Ultra-HD 4K reconnaissance.
+                Explore the fan-made Leonida atlas: districts, mission areas, weapon caches, and hidden spots identified from official footage, with evidence labels on every pin.
               </p>
             </div>
 
             {/* Quick Stat Chips */}
             <div className="flex flex-wrap items-center gap-3">
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Total POIs</span>
-                <span className="font-display text-lg font-black text-white">Verified</span>
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Coverage</span>
+                <span className="font-display text-lg font-black text-white">Statewide</span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Resolution</span>
-                <span className="font-display text-lg font-black text-[#00F0FF]">Ultra-HD 4K</span>
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Evidence</span>
+                <span className="font-display text-lg font-black text-[#00F0FF]">Labelled per pin</span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
                 <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Districts</span>
@@ -126,7 +126,7 @@ export function MapClient() {
               Districts of Leonida
             </h2>
             <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-              Detailed breakdown of verified mission targets, collectibles, and points of interest by region
+              Detailed breakdown of mission areas, collectibles, and points of interest by region
             </p>
           </div>
           <Link
