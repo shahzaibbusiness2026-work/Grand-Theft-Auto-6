@@ -108,16 +108,25 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
   // The reference layout is designed dark. next-themes stores the theme on
   // <html> (:root carries the dark palette, .light overrides it), so a nested
-  // .dark wrapper cannot flip it — force the document theme while mounted
-  // and restore the visitor's theme on unmount.
+  // .dark wrapper cannot flip it — and a global stylesheet rule forces
+  // bg-[#070b14] surfaces back to white under .light. Force the document
+  // theme while mounted and restore the visitor's theme on unmount. The
+  // timeout re-application matters: the theme provider's own mount effect
+  // runs after this one (parents run last) and would otherwise re-assert
+  // the stored light theme over it.
   useEffect(() => {
     if (typeof document === "undefined") return;
     const root = document.documentElement;
     const hadLight = root.classList.contains("light");
     const hadDark = root.classList.contains("dark");
-    root.classList.remove("light");
-    root.classList.add("dark");
+    const forceDark = () => {
+      root.classList.remove("light");
+      root.classList.add("dark");
+    };
+    forceDark();
+    const timer = setTimeout(forceDark, 50);
     return () => {
+      clearTimeout(timer);
       root.classList.remove("dark");
       if (hadLight) root.classList.add("light");
       else if (hadDark) root.classList.add("dark");
