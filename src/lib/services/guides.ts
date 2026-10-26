@@ -36,6 +36,22 @@ export async function getPublicGuides(): Promise<GuideRecord[]> {
   return [];
 }
 
+export async function getPublicGuideBySlug(slug: string): Promise<GuideRecord | null> {
+  try {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from("guides")
+      .select("*")
+      .eq("slug", slug)
+      .eq("status", "published")
+      .maybeSingle();
+    if (!error && data) return data as GuideRecord;
+  } catch {
+    // Guide detail falls back to a 404 below
+  }
+  return null;
+}
+
 export async function getAdminGuides(): Promise<GuideRecord[]> {
   try {
     await assertAdmin();

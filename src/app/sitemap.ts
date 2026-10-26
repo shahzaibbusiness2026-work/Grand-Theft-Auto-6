@@ -6,6 +6,7 @@ import {
 } from "@/lib/canonical-data";
 import { getSeoSettings } from "@/lib/services/seo";
 import { getPublicArticles } from "@/lib/services/articles";
+import { getPublicGuides } from "@/lib/services/guides";
 
 /**
  * Revalidate at most once per hour: this keeps the sitemap fresh (new
@@ -146,9 +147,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // Published guide detail pages (each guide record carries its own slug).
+  let guideRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const guides = await getPublicGuides();
+    guideRoutes = guides
+      .filter((g) => g.slug)
+      .map((g) => ({
+        url: `${baseUrl}/guides/${g.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+      }));
+  } catch {
+    // Sitemap still ships without guides if the DB is unreachable
+  }
+
   return [
     ...staticRoutes,
     ...articleRoutes,
+    ...guideRoutes,
     ...vehicleRoutes,
     ...weaponRoutes,
     ...locationRoutes,

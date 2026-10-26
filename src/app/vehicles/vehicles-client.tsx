@@ -178,7 +178,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
                 confidenceFilter === "all" ? "bg-accent text-accent-foreground shadow-xs font-bold" : "text-muted-foreground hover:text-foreground"
               )}
             >
-              All (106)
+              All ({vehicles.length})
             </button>
             <button
               onClick={() => setConfidenceFilter("official")}

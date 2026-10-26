@@ -63,7 +63,7 @@ const LINKS: NavLink[] = [
       { href: "/rankings", label: "All Weapon Rankings" },
     ],
   },
-  { href: "/missions", label: "Missions", menu: [{ href: "/tracker", label: "100% Tracker" }] },
+  { href: "/missions", label: "Missions", menu: [{ href: "/missions", label: "All Missions" }, { href: "/tracker", label: "100% Tracker" }] },
   { href: "/map", label: "Map" },
 ];
 
@@ -368,19 +368,13 @@ export function Navbar() {
             )}
           </div>
 
-          {/* News link after Tools dropdown */}
-          <Link
+          {/* News dropdown after Tools dropdown: label goes to /news, chevron reveals Blog */}
+          <SplitNavDropdown
             href="/news"
-            aria-current={isActive("/news") ? "page" : undefined}
-            className={cn(
-              "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
-              isActive("/news")
-                ? "bg-[#FF2E9A] text-white font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
-                : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-            )}
-          >
-            News
-          </Link>
+            label="News"
+            menu={[{ href: "/blog", label: "Blog" }]}
+            pathname={pathname}
+          />
         </nav>
 
         {/* Right side controls */}
@@ -616,21 +610,64 @@ export function Navbar() {
               )}
             </div>
 
-            {/* News */}
-            <Link
-              href="/news"
-              prefetch={true}
-              onClick={() => setMobileOpen(false)}
-              aria-current={isActive("/news") ? "page" : undefined}
-              className={cn(
-                "flex min-h-[48px] w-full items-center rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
-                isActive("/news")
-                  ? "bg-[#FF2E9A] text-white font-bold"
-                  : "text-foreground/90 hover:bg-muted hover:text-[#FF2E9A]"
+            {/* News accordion: label goes to /news, chevron reveals Blog */}
+            <div className="flex flex-col">
+              <div
+                className={cn(
+                  "flex w-full items-center rounded-xl transition-colors",
+                  isActive("/news") || pathname === "/blog"
+                    ? "bg-[#FF2E9A] text-white"
+                    : openMobileSection === "news"
+                      ? "bg-[#FF2E9A] text-white"
+                      : "hover:bg-muted"
+                )}
+              >
+                <Link
+                  href="/news"
+                  prefetch={true}
+                  onClick={() => setMobileOpen(false)}
+                  aria-current={isActive("/news") ? "page" : undefined}
+                  className={cn(
+                    "flex min-h-[48px] flex-1 items-center px-4 text-[15px] font-semibold tracking-wide",
+                    isActive("/news") ? "font-bold" : "text-foreground/90"
+                  )}
+                >
+                  News
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("news")}
+                  aria-expanded={openMobileSection === "news"}
+                  aria-label={`${openMobileSection === "news" ? "Collapse" : "Expand"} News submenu`}
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <ChevronDown
+                    className={cn(
+                      "h-5 w-5 transition-transform duration-200",
+                      openMobileSection === "news" && "rotate-180"
+                    )}
+                  />
+                </button>
+              </div>
+              {openMobileSection === "news" && (
+                <div className="flex flex-col gap-0.5 pb-1 pl-3">
+                  <Link
+                    href="/blog"
+                    prefetch={true}
+                    onClick={() => setMobileOpen(false)}
+                    aria-current={pathname === "/blog" ? "page" : undefined}
+                    className={cn(
+                      "flex min-h-[44px] items-center rounded-lg px-4 text-sm font-medium tracking-wide transition-colors",
+                      pathname === "/blog"
+                        ? "bg-[#FF2E9A] text-white font-bold"
+                        : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
+                    )}
+                  >
+                    Blog
+                  </Link>
+                </div>
               )}
-            >
-              News
-            </Link>
+            </div>
 
             {/* Mobile auth */}
             <div className="mt-3 border-t border-border/60 pt-3">

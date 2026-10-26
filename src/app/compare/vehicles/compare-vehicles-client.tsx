@@ -399,13 +399,17 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
     if (selectedVehicles.length < 2) return [];
     const winnerMax = (vals: number[]) => {
       const valid = vals.filter((v) => v != null) as number[];
-      if (valid.length === 0 || new Set(valid).size === 1) return null;
-      return vals.indexOf(Math.max(...valid));
+      if (valid.length === 0) return null;
+      const top = Math.max(...valid);
+      if (valid.filter((v) => v === top).length > 1) return null;
+      return vals.indexOf(top);
     };
     const winnerMin = (vals: (number | null)[]) => {
       const valid = vals.filter((v): v is number => v != null);
-      if (valid.length === 0 || new Set(valid).size === 1) return null;
-      return vals.indexOf(Math.min(...(valid as number[])));
+      if (valid.length === 0) return null;
+      const low = Math.min(...(valid as number[]));
+      if (valid.filter((v) => v === low).length > 1) return null;
+      return vals.indexOf(low);
     };
     const kmhVals = selectedVehicles.map((v) => toKmh(v.topSpeed));
     const accelVals = selectedVehicles.map((v) => v.acceleration);
@@ -421,7 +425,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
         label: "Overall Score",
         values: overallScores.map((s) => `${s}/100 est.`),
         bars: overallScores,
-        winnerIndex: new Set(overallScores).size === 1 ? null : overallScores.indexOf(Math.max(...overallScores)),
+        winnerIndex: winnerMax(overallScores),
       },
       {
         label: "Top Speed",

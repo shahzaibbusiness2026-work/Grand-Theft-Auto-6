@@ -57,7 +57,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
             href="/map-explorer"
             className="inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 bg-black/60 hover:bg-black/80 px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all backdrop-blur-xl hover:border-[#00F0FF]/60 active:scale-95 shadow-lg"
           >
-            <span>Open Interactive Map</span>
+            <span>Open Map Explorer</span>
             <Map className="h-4 w-4 text-[#00F0FF]" />
           </Link>
         </div>

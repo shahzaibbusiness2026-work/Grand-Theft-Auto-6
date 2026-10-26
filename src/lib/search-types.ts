@@ -28,7 +28,7 @@ export const TOOL_SEARCH_ITEMS: SearchItem[] = [
   {
     id: "tool-map",
     title: "Interactive Satellite Map",
-    subtitle: "24 POIs, satellite topography, personal field notes & filters",
+    subtitle: "18 POIs, satellite topography, personal field notes & filters",
     category: "Tool",
     href: "/map",
   },
@@ -91,7 +91,7 @@ export const TOOL_SEARCH_ITEMS: SearchItem[] = [
   {
     id: "tool-locations",
     title: "Locations & POI Directory",
-    subtitle: "Directory of confirmed landmarks, gun shops & estates",
+    subtitle: "Directory of landmarks, gun shops & estates",
     category: "Tool",
     href: "/locations",
   },

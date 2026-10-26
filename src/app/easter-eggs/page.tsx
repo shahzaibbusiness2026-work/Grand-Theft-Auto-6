@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "GTA 6 Easter Eggs & Hidden Details",
-  description: "Every confirmed GTA 6 Easter egg: the Tommy Vercetti lizard, the Ocean View Hotel, Red Dead presidents on the cash, and the details fans are still hunting.",
+  description: "Every GTA 6 Easter egg spotted so far: the Tommy Vercetti lizard, the Ocean View Hotel, Red Dead presidents on the cash, and the details fans are still hunting.",
   alternates: { canonical: "/easter-eggs" },
 };
 

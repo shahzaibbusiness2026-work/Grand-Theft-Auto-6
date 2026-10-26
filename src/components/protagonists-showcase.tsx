@@ -264,7 +264,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   <div className="text-xs">
                     <span className="text-muted-foreground">Actor: </span>
                     <span className="font-bold text-slate-900">{actorName(lucia?.voiceActor, "Manni L. Perez")}</span>
-                    <p className="text-xs text-muted-foreground">(Confirmed / Casting)</p>
+                    <p className="text-xs text-muted-foreground">(Community Identified)</p>
                   </div>
                   <button
                     type="button"
@@ -429,7 +429,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   <div className="text-xs">
                     <span className="text-muted-foreground">Actor: </span>
                     <span className="font-bold text-slate-900">{actorName(jason?.voiceActor, "Gregory Connors")}</span>
-                    <p className="text-xs text-muted-foreground">(Confirmed / Speculated)</p>
+                    <p className="text-xs text-muted-foreground">(Community Identified)</p>
                   </div>
                   <button
                     type="button"

@@ -31,6 +31,16 @@ type DbMission = MissionRecord & {
 /** Map a DB mission row onto the CanonicalMission shape the client renders. */
 function dbToCanonical(m: DbMission, match?: CanonicalMission): CanonicalMission {
   const objectives = (m.objectives || "").split("\n").map((s) => s.trim()).filter(Boolean);
+  // A community-researched source can never support an "Observed in Official
+  // Media" or "Credible Report" badge: force the honest "Community Identified"
+  // tier (RUMORED) whenever the resolved source is community research.
+  const resolvedConfidence = (m.confidence as CanonicalMission["confidence"]) || match?.confidence || "REPORTED";
+  const resolvedSource = match?.source || "Atlas Admin";
+  const confidence =
+    resolvedSource === "Community research" &&
+    (resolvedConfidence === "CONFIRMED" || resolvedConfidence === "REPORTED")
+      ? "RUMORED"
+      : resolvedConfidence;
   return {
     id: m.id,
     slug: m.slug || match?.slug || m.id,
@@ -49,8 +59,8 @@ function dbToCanonical(m: DbMission, match?: CanonicalMission): CanonicalMission
     outcomes: match?.outcomes || [],
     unlocks: match?.unlocks || [],
     relatedMissions: match?.relatedMissions || [],
-    confidence: (m.confidence as CanonicalMission["confidence"]) || match?.confidence || "REPORTED",
-    source: match?.source || "Atlas Admin",
+    confidence,
+    source: resolvedSource,
     description: m.description || match?.description || "",
     guideTips: match?.guideTips || [],
     img: match?.img || "/img/hero-dark.jpg",
@@ -104,7 +114,7 @@ export default async function MissionsPage() {
               LEONIDA <span className="text-primary">MISSIONS & HEISTS</span>
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-white/80">
-              Browse confirmed story chapters, multi-approach bank heists, cartel side contracts, and dynamic stranger encounters across Vice City and beyond.
+              Browse story chapters, multi-approach bank heists, cartel side contracts, and dynamic stranger encounters across Vice City and beyond.
             </p>
           </div>
         </div>

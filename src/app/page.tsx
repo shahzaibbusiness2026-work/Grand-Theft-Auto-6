@@ -118,7 +118,7 @@ export default async function HomePage() {
         <SectionHeader
           id="map-heading"
           title="Interactive World Map"
-          subtitle="Explore confirmed points of interest across Vice City and Leonida"
+          subtitle="Explore points of interest across Vice City and Leonida"
           viewAllHref="/map"
           viewAllLabel="Open Fullscreen Map"
         />

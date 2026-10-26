@@ -170,7 +170,7 @@ export function HomeSatelliteMap() {
               <Sparkles className="h-3.5 w-3.5" />
             </span>
             <span>
-              Click to view all <strong>312 POIs</strong>, missions, weapons & progress on the full map
+              Click to explore the full map — locations, missions, weapons & progress
             </span>
             <ArrowRight className="h-4 w-4 text-gold dark:text-gold-light" />
           </Link>

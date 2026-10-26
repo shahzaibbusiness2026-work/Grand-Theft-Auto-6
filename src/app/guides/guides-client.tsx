@@ -27,6 +27,8 @@ interface GuideCard {
   desc: string;
   read: string;
   img: string;
+  slug?: string;
+  category?: string;
   featured?: boolean;
   tag?: string;
   filter?: string;
@@ -38,6 +40,8 @@ function toCard(g: GuideRecord): GuideCard {
     desc: g.description || "",
     read: g.read_time || "10 min read",
     img: g.image || "/img/hero-dark.jpg",
+    slug: g.slug,
+    category: g.category,
     featured: g.featured,
     tag: g.tag || g.category,
   };
@@ -54,6 +58,8 @@ const quickLinks = [
 
 export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
   const [cat, setCat] = useState("All Guides");
+  const [search, setSearch] = useState("");
+  const [expanded, setExpanded] = useState(false);
 
   const hasLive = !!(guides && guides.length > 0);
 
@@ -70,20 +76,27 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
     ];
   })();
 
+  const matchesFilter = (g: GuideCard) =>
+    (cat === "All Guides" || g.category === cat) &&
+    (search.trim() === "" ||
+      `${g.title} ${g.desc}`.toLowerCase().includes(search.trim().toLowerCase()));
+
   const liveFeatured = hasLive ? guides!.filter((g) => g.featured).map(toCard) : [];
-  const featuredCards = liveFeatured;
+  const featuredCards = liveFeatured.filter(matchesFilter);
 
   // Popular = guides explicitly flagged popular. View counts were seeded
   // numbers, not real analytics, so nothing here is ranked by views anymore.
   const livePopular = hasLive ? guides!.filter((g) => g.popular).map(toCard) : [];
-  const popularCards = livePopular;
+  const popularCards = livePopular.filter(matchesFilter);
+  const allFiltered = hasLive ? guides!.map(toCard).filter(matchesFilter) : [];
 
   // Editor's picks = featured guides, in catalogue order.
   const weekTop = hasLive
     ? guides!
         .filter((g) => g.featured)
+        .map((g) => ({ title: g.title, read: g.read_time || "10 min read", img: g.image || "/img/hero-dark.jpg", slug: g.slug, category: g.category, desc: g.description || "" }))
+        .filter(matchesFilter)
         .slice(0, 5)
-        .map((g) => ({ title: g.title, read: g.read_time || "10 min read", img: g.image || "/img/hero-dark.jpg" }))
     : [];
 
   return (
@@ -124,7 +137,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
             <p className="mt-1 text-sm text-muted-foreground">Pre-release guides and analysis for Vice City and beyond.</p>
             <div className="relative mt-5 max-w-md">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input placeholder="Search guides..." className="pl-9" />
+              <Input placeholder="Search guides..." className="pl-9" value={search} onChange={(e) => setSearch(e.target.value)} />
             </div>
           </div>
         </div>
@@ -133,13 +146,13 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
         <div className="card-surface p-6">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">Featured Guides</h2>
-            <a href="/guides" className="flex items-center gap-1 text-xs font-semibold text-accent px-2 py-2">
+            <Link href="/guides" className="flex items-center gap-1 text-xs font-semibold text-accent px-2 py-2">
               View All <ChevronRight className="h-3 w-3" />
-            </a>
+            </Link>
           </div>
           <div className="no-scrollbar mt-5 flex gap-4 overflow-x-auto pb-1">
             {featuredCards.map((g) => (
-              <article key={g.title} className="group card-surface w-56 shrink-0 overflow-hidden">
+              <Link key={g.title} href={g.slug ? `/guides/${g.slug}` : "/guides"} className="group card-surface w-56 shrink-0 overflow-hidden">
                 <div className="relative h-28 overflow-hidden">
                   <img loading="lazy" src={g.img} alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   {g.featured && <Badge variant="solid" className="absolute left-2 top-2">Featured</Badge>}
@@ -154,7 +167,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                     <Bookmark className="h-3.5 w-3.5" />
                   </div>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
@@ -165,8 +178,9 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
             <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">Popular Guides</h2>
           </div>
           <ul className="mt-5 space-y-3">
-            {popularCards.map((g) => (
+            {(expanded ? allFiltered : popularCards).map((g) => (
               <li key={g.title} className="flex items-center gap-4 rounded-lg border border-border/60 p-3">
+                <Link href={g.slug ? `/guides/${g.slug}` : "/guides"} className="flex flex-1 items-center gap-4">
                 <img loading="lazy" src={g.img} alt="" style={g.filter ? { filter: g.filter } : undefined} className="h-14 w-20 rounded-md object-cover" />
                 <div className="flex-1">
                   <h3 className="text-sm font-bold">{g.title}</h3>
@@ -175,6 +189,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                     <span>{g.desc}</span>
                   </div>
                 </div>
+                </Link>
                 <span className="hidden items-center gap-1 text-xs text-muted-foreground sm:flex">
                   <Clock className="h-3 w-3" /> {g.read}
                 </span>
@@ -182,11 +197,13 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex justify-center">
-            <Button variant="ghost" size="default" className="min-h-[44px]">
-              View More Guides <ChevronDown className="h-4 w-4" />
-            </Button>
-          </div>
+          {allFiltered.length > popularCards.length && (
+            <div className="mt-6 flex justify-center">
+              <Button variant="ghost" size="default" className="min-h-[44px]" onClick={() => setExpanded((v) => !v)}>
+                {expanded ? "Show Fewer Guides" : "View More Guides"} <ChevronDown className={cn("h-4 w-4 transition-transform", expanded && "rotate-180")} />
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -215,7 +232,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                 <span className="w-4 text-center font-display text-[13px] font-extrabold text-accent">{i + 1}</span>
                 <img loading="lazy" src={w.img} alt="" className="h-9 w-12 rounded-md object-cover" />
                 <div className="flex-1">
-                  <p className="line-clamp-2 text-xs font-bold leading-snug">{w.title}</p>
+                  <Link href={w.slug ? `/guides/${w.slug}` : "/guides"} className="line-clamp-2 text-xs font-bold leading-snug hover:text-accent">{w.title}</Link>
                   <p className="text-xs text-muted-foreground">
                     {w.read}
                   </p>

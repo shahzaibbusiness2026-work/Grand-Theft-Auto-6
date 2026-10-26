@@ -389,7 +389,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
               <Sparkles className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> Available Mod Parts
             </h2>
-            <p className="text-xs text-muted-foreground mt-1">Confirmed workshop upgrade modules supported on this chassis:</p>
+            <p className="text-xs text-muted-foreground mt-1">Workshop upgrade modules supported on this chassis:</p>
             <div className="mt-4 grid grid-cols-2 gap-2.5">
               {vehicle.customizationOptions.map((mod) => (
                 <div key={mod} className="rounded-xl border-border bg-muted/60 p-3 text-xs text-foreground font-medium flex items-center gap-2">

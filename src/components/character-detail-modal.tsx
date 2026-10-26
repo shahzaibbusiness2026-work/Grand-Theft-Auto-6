@@ -248,7 +248,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
             {/* Modal Footer */}
             <div className="mt-6 pt-4 border-t border-border flex flex-wrap items-center justify-between gap-3">
               <span className="text-xs text-muted-foreground">
-                Voice Actor: <strong className="text-foreground">{character.voiceActor || "Rockstar Games Cast"}</strong>
+                Voice Actor: <strong className="text-foreground">{character.voiceActor || "Not announced"}</strong>
               </span>
 
               <div className="flex items-center gap-2">

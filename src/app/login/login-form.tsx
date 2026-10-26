@@ -237,7 +237,7 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
     setOauthNotice("");
     if (oauthEnabled?.[provider] !== true) {
       setOauthNotice(
-        `${OAUTH_LABEL[provider]} sign-in is not connected yet. To turn it on: Supabase Dashboard → Authentication → Sign-in providers → enable ${OAUTH_LABEL[provider]}. Once enabled, this button works instantly — no code change needed.`
+        `${OAUTH_LABEL[provider]} sign-in isn't available yet. It will appear here automatically once it's enabled.`
       );
       return;
     }

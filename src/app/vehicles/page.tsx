@@ -54,13 +54,13 @@ export default async function VehiclesPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent">
-              <Sparkles className="h-3 w-3" /> Confirmed Roster
+              <Sparkles className="h-3 w-3" /> Full Roster
             </div>
             <h1 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-white">
               Vehicle Showcase
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-white/80">
-              Browse cars, bikes, boats, planes, and helicopters confirmed for the state of Leonida. Filter by class, compare top speeds, or save favorites to your garage.
+              Browse cars, bikes, boats, planes, and helicopters spotted across the state of Leonida. Filter by class, compare top speeds, or save favorites to your garage.
             </p>
           </div>
         </div>
@@ -68,10 +68,10 @@ export default async function VehiclesPage() {
         {/* Global Live Stats Counter */}
         <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-2 divide-border/80 sm:grid-cols-4 sm:divide-x rounded-2xl border border-border shadow-sm">
           {[
-            [`${vehicles.length}+`, "Total Confirmed"],
-            ["120+", "Sports & Supercars"],
-            ["80+", "Motorcycles & Dirt"],
-            ["50+", "Boats, Jets & Heli"],
+            [`${vehicles.length}+`, "Total Vehicles"],
+            [`${vehicles.filter((v) => v.klass === "Super Car" || v.klass === "Sports Car").length}+`, "Sports & Supercars"],
+            [`${vehicles.filter((v) => v.klass === "Motorcycle" || v.klass === "Dirt Bike").length}+`, "Motorcycles & Dirt"],
+            [`${vehicles.filter((v) => v.klass === "Boat" || v.klass === "Helicopter" || v.klass === "Plane").length}+`, "Boats, Jets & Heli"],
           ].map(([v, l]) => (
             <div key={l} className="flex flex-col items-center gap-1 px-4 py-5 text-center">
               <span className="font-display text-2xl sm:text-3xl font-black text-accent">{v}</span>

@@ -79,7 +79,7 @@ export default async function LocationsPage() {
             LEONIDA <span className="text-primary">LOCATIONS & POIS</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            Directory of confirmed landmarks, nightlife venues, gun shops, luxury estates, and underground facilities across Vice City, Port Gellhorn, and the Keys.
+            Directory of landmarks, nightlife venues, gun shops, luxury estates, and underground facilities across Vice City, Port Gellhorn, and the Keys.
           </p>
         </div>
 

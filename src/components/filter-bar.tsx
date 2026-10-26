@@ -36,10 +36,10 @@ export function FilterBar({ placeholder, selects = [], className, onSearch, onSe
         />
       ))}
       <div className="flex items-center gap-1 rounded-lg border border-input p-1">
-        <Button variant="solid" size="icon" className="h-7 w-7 rounded-md">
+        <Button variant="solid" size="icon" aria-label="Grid view" title="Grid view" className="h-7 w-7 rounded-md">
           <LayoutGrid className="h-3.5 w-3.5" />
         </Button>
-        <Button variant="ghost" size="icon" className="h-7 w-7 rounded-md">
+        <Button variant="ghost" size="icon" aria-label="List view" title="List view" className="h-7 w-7 rounded-md">
           <List className="h-3.5 w-3.5" />
         </Button>
       </div>
