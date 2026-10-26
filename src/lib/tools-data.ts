@@ -34,14 +34,38 @@ export interface ToolItem {
   desc: string;
   href: string;
   badge: string;
+  status: "verified" | "simulator" | "postlaunch";
   icon: any;
   highlight?: boolean;
 }
+
+
+export const TOOL_STATUS_META: Record<
+  ToolItem["status"],
+  { label: string; note: string; badgeClass: string }
+> = {
+  verified: {
+    label: "Verified · Safe pre-launch",
+    note: "Works fully with official or trailer-observed information.",
+    badgeClass: "border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+  },
+  simulator: {
+    label: "Pre-release simulator",
+    note: "Uses estimated and example values until verified after launch.",
+    badgeClass: "border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400",
+  },
+  postlaunch: {
+    label: "Post-launch data",
+    note: "Exact in-game data for this tool is not verified yet and will be added after launch.",
+    badgeClass: "border-slate-500/40 bg-slate-500/10 text-slate-600 dark:text-slate-400",
+  },
+};
 
 export const ALL_TOOLS: ToolItem[] = [
   // Maps & Exploration
   {
     id: "tool-map",
+    status: "verified",
     name: "Interactive Satellite Map",
     category: "Maps & Exploration",
     desc: "Explore full Leonida satellite topography with 24 POIs, live filter markers, custom field notes, and completed location checkboxes.",
@@ -52,6 +76,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-tracker",
+    status: "postlaunch",
     name: "100% Completion Tracker",
     category: "Maps & Exploration",
     desc: "Offline-first 11-category completion checklist. Track story milestones, underwater caches, stunt jumps, and export JSON backups.",
@@ -62,6 +87,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-collectibles",
+    status: "postlaunch",
     name: "Collectibles Finder",
     category: "Maps & Exploration",
     desc: "Pinpoint hidden packages, stunt ramps, rebel radio towers, and wildlife photo locations with coordinate step-by-step guides.",
@@ -71,6 +97,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-locations",
+    status: "postlaunch",
     name: "Location Finder & POIs",
     category: "Maps & Exploration",
     desc: "Directory of confirmed landmarks, gun shops, luxury estates, and underground facilities across Vice City, Port Gellhorn, and Keys.",
@@ -80,6 +107,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-map-distance",
+    status: "simulator",
     name: "Map Distance Calculator",
     category: "Maps & Exploration",
     desc: "Estimate travel distance, drive time, and boat time between any two Leonida locations with fastest-vehicle recommendations.",
@@ -90,6 +118,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-day-night",
+    status: "simulator",
     name: "Day/Night Time Converter",
     category: "Maps & Exploration",
     desc: "Convert real-world time to GTA 6 in-game time and back, with sun position indicator and next sunrise/sunset presets.",
@@ -100,6 +129,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-photo-spots",
+    status: "simulator",
     name: "Photo Spot Finder",
     category: "Maps & Exploration",
     desc: "The most cinematic screenshot locations in Leonida: best time of day, region, and pro tips for every shot.",
@@ -112,6 +142,7 @@ export const ALL_TOOLS: ToolItem[] = [
   // Databases & Compare
   {
     id: "tool-vehicles",
+    status: "simulator",
     name: "Vehicle Database",
     category: "Databases & Compare",
     desc: "Browse 12 verified rides with acceleration dyno bars, top speed records, horsepower ratings, prices, and garage favorites.",
@@ -121,6 +152,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-compare-vehicles",
+    status: "simulator",
     name: "Vehicle Comparison Duel",
     category: "Databases & Compare",
     desc: "Head-to-head comparison tool for 2 to 4 rides across top speed, 0–60 acceleration, handling, braking, and purchase value.",
@@ -131,6 +163,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-missions",
+    status: "postlaunch",
     name: "Mission Database & Finder",
     category: "Databases & Compare",
     desc: "Walkthroughs, objectives, branch choices, cash rewards, and unlock trees for confirmed Lucia & Jason story and heist contracts.",
@@ -140,15 +173,17 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-weapons",
+    status: "simulator",
     name: "Weapon Database & Armory",
     category: "Databases & Compare",
-    desc: "Tactical catalog of confirmed firearms with DPS, recoil, range, attachment customization options, and Ammu-Nation pricing.",
+    desc: "Tactical catalog of GTA 6 weapons with DPS, recoil, range, attachment customization options, and Ammu-Nation pricing.",
     href: "/weapons",
     badge: "Tool 07",
     icon: Crosshair,
   },
   {
     id: "tool-compare-weapons",
+    status: "simulator",
     name: "Weapon Comparison Duel",
     category: "Databases & Compare",
     desc: "Side-by-side firearm comparison for 2 to 4 weapons. Compare damage drop-off, bullet velocity, recoil patterns, and magazine sizes.",
@@ -158,6 +193,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-properties",
+    status: "postlaunch",
     name: "Properties & Real Estate",
     category: "Databases & Compare",
     desc: "Directory of safehouses, luxury penthouses, chop shops, and nightclubs with garage storage sizes, passive earnings, and side-by-side duels.",
@@ -167,6 +203,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-vehicle-upgrade",
+    status: "simulator",
     name: "Vehicle Upgrade Calculator",
     category: "Databases & Compare",
     desc: "Plan tuning builds across 10 vehicles: mod costs, estimated performance gains, and cost-per-performance-point breakdowns.",
@@ -177,6 +214,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-garage-planner",
+    status: "simulator",
     name: "Garage Planner",
     category: "Databases & Compare",
     desc: "Organize your vehicle collection across garages: slot tracking, over-capacity warnings, and total collection value.",
@@ -189,6 +227,7 @@ export const ALL_TOOLS: ToolItem[] = [
   // Financial & Business
   {
     id: "tool-money-calc",
+    status: "simulator",
     name: "Money & Goal Calculator",
     category: "Financial & Business",
     desc: "Calculate exactly how many heist runs or play hours are required to afford luxury supercars, penthouses, and nightclub upgrades.",
@@ -198,6 +237,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-business-profit",
+    status: "simulator",
     name: "Business Profit Calculator",
     category: "Financial & Business",
     desc: "Model passive revenue, upgrade multipliers, operating costs, and break-even payback days for Leonida commercial empires.",
@@ -207,6 +247,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-money-maker",
+    status: "simulator",
     name: "Money-Making Method Finder",
     category: "Financial & Business",
     desc: "Interactive strategy recommender. Find the highest-yield solo and squad cash methods filtered by bankroll and risk tolerance.",
@@ -216,6 +257,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-business-income",
+    status: "simulator",
     name: "Business Income Calculator",
     category: "Financial & Business",
     desc: "Model daily and weekly income, break-even days, and 30-day ROI across 6 Leonida businesses with upgrade tiers.",
@@ -226,6 +268,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-heist-splitter",
+    status: "simulator",
     name: "Heist Payout Splitter",
     category: "Financial & Business",
     desc: "Split any heist take among your crew. Set each member's cut percentage and see everyone's payout instantly.",
@@ -238,6 +281,7 @@ export const ALL_TOOLS: ToolItem[] = [
   // Combat & Loadouts
   {
     id: "tool-loadout",
+    status: "simulator",
     name: "Tactical Loadout Builder",
     category: "Combat & Loadouts",
     desc: "Configure 5-slot weapon loadouts with tactical gear. Real-time firepower, accuracy, mobility, and stealth ratings with local save.",
@@ -248,6 +292,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-wanted-guide",
+    status: "postlaunch",
     name: "Wanted Level Guide",
     category: "Combat & Loadouts",
     desc: "Interactive 1–5 star police response breakdown: units deployed, helicopter spawns, roadblocks, and escape tips per level.",
@@ -258,6 +303,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-weapon-dps",
+    status: "simulator",
     name: "Weapon DPS Calculator",
     category: "Combat & Loadouts",
     desc: "Compare weapons by live DPS with attachments: damage-per-magazine, time-to-empty, and a DPS bar chart.",
@@ -270,6 +316,7 @@ export const ALL_TOOLS: ToolItem[] = [
   // AI & Assistance
   {
     id: "tool-character-quiz",
+    status: "verified",
     name: "Which GTA 6 Character Are You?",
     category: "AI & Assistance",
     desc: "Take the 8-question personality quiz and find out which GTA 6 character matches you, with a shareable result card.",
@@ -280,6 +327,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-countdown-widget",
+    status: "verified",
     name: "Countdown Embed Widget",
     category: "AI & Assistance",
     desc: "Free embeddable GTA 6 launch countdown for your site or stream. Copy-paste ready iframe snippet.",
@@ -291,6 +339,7 @@ export const ALL_TOOLS: ToolItem[] = [
   // New: the user's requested hub pages
   {
     id: "tool-achievements",
+    status: "postlaunch",
     name: "Achievements & Trophies Tracker",
     category: "Maps & Exploration",
     desc: "Expected GTA 6 trophy list with an interactive checklist. Story, exploration, combat, collectible and hidden trophies — progress saves on your device.",
@@ -301,6 +350,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-activities",
+    status: "postlaunch",
     name: "Activities & Hobbies",
     category: "Maps & Exploration",
     desc: "Everything to do between missions: hunting, fishing, mini-golf, diving, racing and more across Leonida, with an interactive checklist.",
@@ -310,6 +360,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-easter-eggs",
+    status: "verified",
     name: "Easter Eggs & Hidden Details",
     category: "Databases & Compare",
     desc: "Every confirmed GTA 6 Easter egg: the Tommy Vercetti lizard, the Ocean View Hotel, Red Dead presidents on the cash — each labelled confirmed, community find or speculation.",
@@ -319,6 +370,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-businesses",
+    status: "postlaunch",
     name: "Businesses Database",
     category: "Financial & Business",
     desc: "Six ways to own Leonida: bait & tackle, chop shop, luxury dealership, nightclub, smuggler warehouse and taxi depot — with income calculators.",
@@ -328,6 +380,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-money-guide",
+    status: "postlaunch",
     name: "Money Guide",
     category: "Guides & Reference",
     desc: "Every way to make money in GTA 6 ranked by payout and effort: story heists, businesses, side jobs, collectibles and caches.",
@@ -337,6 +390,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-settings-guide",
+    status: "postlaunch",
     name: "Settings Guide",
     category: "Guides & Reference",
     desc: "Best GTA 6 settings for PS5 and Xbox Series X|S: performance vs fidelity, HDR, camera, audio and accessibility explained before launch.",
@@ -346,6 +400,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: "tool-controls",
+    status: "postlaunch",
     name: "Controls Reference",
     category: "Guides & Reference",
     desc: "Full PS5 and Xbox button layout for GTA 6: on foot, driving, flying, swimming and combat.",

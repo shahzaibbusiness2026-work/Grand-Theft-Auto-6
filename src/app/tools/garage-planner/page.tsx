@@ -5,6 +5,7 @@ import { Warehouse, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   title: "GTA 6 Garage Planner — Organize Your Vehicle Collection",
   description: "Plan your GTA 6 garage space. Assign vehicles to properties, track slots used, and see your collection's total value.",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function GaragePlannerPage() {
   return (
         <SiteShell>
+          <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

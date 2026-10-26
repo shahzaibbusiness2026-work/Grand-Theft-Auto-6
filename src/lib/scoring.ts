@@ -120,7 +120,7 @@ export function computeVehicleScore(
       tractionScore * w.traction +
       featuresScore * w.features) /
     100;
-  return Math.round(total * 10) / 10;
+  return Math.round(total);
 }
 
 export function computeWeaponScore(
@@ -147,7 +147,7 @@ export function computeWeaponScore(
       magazineScore * wt.magazine +
       clamp(w.handling) * wt.handling) /
     100;
-  return Math.round(total * 10) / 10;
+  return Math.round(total);
 }
 
 /** DPS index — Damage × effective shots-per-second (rating-based). */

@@ -17,6 +17,7 @@ import {
   ThumbsDown,
   ChevronRight,
 } from "lucide-react";
+import { ConfidenceBadge } from "@/components/confidence-badge";
 import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
 import type { VehicleScoreWeights } from "@/lib/scoring";
 import { computeVehicleScore, getVehicleBestFor } from "@/lib/scoring";
@@ -137,7 +138,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
       const accelScore = Math.max(0, (5.5 - v.acceleration) / 3.5) * 25;
       const handlingScore = (v.handling / 100) * 25;
       const brakingScore = (v.braking / 100) * 15;
-      const total = +(speedScore + accelScore + handlingScore + brakingScore).toFixed(1);
+      const total = Math.round(speedScore + accelScore + handlingScore + brakingScore);
       return { vehicle: v, total };
     });
   }, [selectedVehicles]);
@@ -335,14 +336,14 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-xl">
               <div className="inline-flex items-center gap-1.5 rounded-full border border-gold-light/40 bg-gold-light/10 px-3 py-1 text-sm font-black text-amber-300">
-                <Trophy className="h-3.5 w-3.5 text-gold-light" /> Official Recommendation & Overall Winner
+                <Trophy className="h-3.5 w-3.5 text-gold-light" /> Pre-Release Estimated Winner
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-black text-white">
-                {overallWinner.vehicle.name} dominates with {overallWinner.total}/100 Performance Score
+                {overallWinner.vehicle.name} leads with {overallWinner.total}/100 estimated Performance Score
               </h3>
               <p className="text-sm sm:text-sm text-muted-foreground leading-relaxed">
                 Based on combined power output, zero-to-sixty acceleration rate, and cornering grip, the{" "}
-                <strong>{overallWinner.vehicle.name}</strong> provides superior track dominance and getaway viability in Leonida.
+                <strong>{overallWinner.vehicle.name}</strong> provides superior track dominance and getaway viability in Leonida. Scores are pre-release estimates computed from estimated stats (Overall Score = Speed 35%, Acceleration 25%, Handling 25%, Braking 15%), not measured in-game performance.
               </p>
             </div>
 
@@ -428,6 +429,9 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   <span className="text-muted-foreground">{v.manufacturer}</span>
                   <span className="tabular-nums font-bold text-cyan-600 dark:text-[#00F0FF]">{v.priceDisplay}</span>
                 </div>
+                <div className="mt-2">
+                  <ConfidenceBadge level={v.confidence} size="sm" />
+                </div>
                 {bestForTags[idx]?.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {bestForTags[idx].map((t) => (
@@ -446,7 +450,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                       <Trophy className="h-3 w-3" /> Overall Score
                     </span>
                     <span className="tabular-nums font-black text-sm text-gold-dark dark:text-gold-light">
-                      {overallScores[idx]}/100
+                      {overallScores[idx]}/100 est.
                       {overallScoreLeader === idx && overallScores.length > 1 && (
                         <span className="ml-1.5 text-sm font-black text-emerald-600 dark:text-emerald-400">Lead</span>
                       )}
@@ -683,7 +687,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     </div>
                     <div className="text-right">
                       <span className="tabular-nums text-sm font-bold text-cyan-600 dark:text-[#00F0FF]">{cand.priceDisplay}</span>
-                      <span className="block text-sm text-muted-foreground font-semibold">{cand.confidence}</span>
+                      <ConfidenceBadge level={cand.confidence} size="sm" />
                     </div>
                   </button>
                 );

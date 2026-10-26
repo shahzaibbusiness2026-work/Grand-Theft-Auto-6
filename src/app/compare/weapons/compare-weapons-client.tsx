@@ -13,6 +13,7 @@ import {
   ThumbsDown,
   ChevronRight,
 } from "lucide-react";
+import { ConfidenceBadge } from "@/components/confidence-badge";
 import { canonicalWeapons, CanonicalWeapon } from "@/lib/canonical-data";
 import type { WeaponScoreWeights } from "@/lib/scoring";
 import { computeWeaponScore, getWeaponBestFor, computeDpsIndex } from "@/lib/scoring";
@@ -123,7 +124,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
   // Overall Score (Damage 40%, FireRate 30%, Accuracy 20%, Range 10%)
   const scores = useMemo(() => {
     return selectedWeapons.map((w) => {
-      const total = +(w.damage * 0.4 + w.fireRate * 0.3 + w.accuracy * 0.2 + w.range * 0.1).toFixed(1);
+      const total = Math.round(w.damage * 0.4 + w.fireRate * 0.3 + w.accuracy * 0.2 + w.range * 0.1);
       return { weapon: w, total };
     });
   }, [selectedWeapons]);
@@ -302,14 +303,14 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-xl">
               <div className="inline-flex items-center gap-1.5 rounded-full border border-gold-light/40 bg-gold-light/10 px-3 py-1 text-sm font-black text-amber-300">
-                <Trophy className="h-3.5 w-3.5 text-gold-light" /> Ballistic Recommendation & Highest Combat Rating
+                <Trophy className="h-3.5 w-3.5 text-gold-light" /> Pre-Release Estimated Winner
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-black text-white">
-                {overallWinner.weapon.name} leads with {overallWinner.total}/100 Rating
+                {overallWinner.weapon.name} leads with {overallWinner.total}/100 estimated Rating
               </h3>
               <p className="text-sm sm:text-sm text-muted-foreground leading-relaxed">
                 Featuring the optimal blend of stopping power and high cycle fire rate, the{" "}
-                <strong>{overallWinner.weapon.name}</strong> delivers superior time-to-kill (TTK) across both indoor room-clearing and open street firefights.
+                <strong>{overallWinner.weapon.name}</strong> delivers superior time-to-kill (TTK) across both indoor room-clearing and open street firefights. Scores are pre-release estimates computed from estimated stats (Overall Score = Damage 40%, Fire Rate 30%, Accuracy 20%, Range 10%), not measured in-game performance.
               </p>
             </div>
 
@@ -373,6 +374,9 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                   <span className="text-muted-foreground">{w.ammoType}</span>
                   <span className="tabular-nums font-bold text-cyan-600 dark:text-[#00F0FF]">{w.priceDisplay}</span>
                 </div>
+                <div className="mt-2">
+                  <ConfidenceBadge level={w.confidence} size="sm" />
+                </div>
                 {bestForTags[idx]?.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {bestForTags[idx].map((t) => (
@@ -391,7 +395,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                       <Trophy className="h-3 w-3" /> Overall Score
                     </span>
                     <span className="tabular-nums font-black text-sm text-gold-dark dark:text-gold-light">
-                      {overallScores[idx]}/100
+                      {overallScores[idx]}/100 est.
                       {overallScoreLeader === idx && overallScores.length > 1 && (
                         <span className="ml-1.5 text-sm font-black text-emerald-600 dark:text-emerald-400">Lead</span>
                       )}
@@ -606,7 +610,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
                     </div>
                     <div className="text-right">
                       <span className="tabular-nums text-sm font-bold text-cyan-600 dark:text-[#00F0FF]">{cand.priceDisplay}</span>
-                      <span className="block text-sm text-muted-foreground font-semibold">{cand.confidence}</span>
+                      <ConfidenceBadge level={cand.confidence} size="sm" />
                     </div>
                   </button>
                 );

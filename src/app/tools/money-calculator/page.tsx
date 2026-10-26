@@ -5,6 +5,7 @@ import { DollarSign, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   title: "GTA 6 Money Calculator — Hours, Missions & Estimated Goal Date",
   description: "Calculate how many missions, hours, and playing days you need to afford any supercar, luxury penthouse, or business in GTA 6.",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function MoneyCalculatorPage() {
   return (
         <SiteShell>
+          <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

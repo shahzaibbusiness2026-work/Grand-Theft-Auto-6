@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ForgotForm } from "./forgot-form";
 
 export const metadata: Metadata = {
-  title: "Forgot password | Taish Gaming",
+  title: "Forgot password",
   description: "Reset your Taish Gaming account password with your recovery code.",
   alternates: { canonical: "/forgot-password" },
 };

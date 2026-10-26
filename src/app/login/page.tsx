@@ -4,7 +4,7 @@ import Link from "next/link";
 import { LoginCards } from "./login-form";
 
 export const metadata: Metadata = {
-  title: "Login | Taish Gaming",
+  title: "Login",
   description: "Log in to your Taish Gaming dashboard or create a free account — your dashboard, favorites, and tracker progress are saved for you.",
   alternates: { canonical: "/login" },
 };

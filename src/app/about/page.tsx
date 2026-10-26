@@ -4,10 +4,21 @@ import { ShieldCheck, Compass, Users, AlertTriangle } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-  title: "About Taish Gaming | Independent GTA 6 Database",
-  description: "Learn about the mission, editorial standards, and team behind the independent GTA 6 database and mapping tool from Taish Gaming.",
+  title: { absolute: "About Taish Gaming | Independent GTA 6 Database" },
+  description: "Learn how Taish Gaming researches GTA 6 information, labels official evidence, community findings and speculation, and maintains its independent fan-made database.",
   alternates: { canonical: "/about" },
-  };
+  openGraph: {
+    title: "About Taish Gaming | Independent GTA 6 Database",
+    description: "Learn how Taish Gaming researches GTA 6 information, labels official evidence, community findings and speculation, and maintains its independent fan-made database.",
+    images: ["/img/hero-dark.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Taish Gaming | Independent GTA 6 Database",
+    description: "Learn how Taish Gaming researches GTA 6 information, labels official evidence, community findings and speculation, and maintains its independent fan-made database.",
+    images: ["/img/hero-dark.jpg"],
+  },
+};
 
 export default function AboutPage() {
   return (

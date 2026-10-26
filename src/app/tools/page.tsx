@@ -5,13 +5,26 @@ import { serializeJsonLd } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Tools, Calculators & Interactive Trackers",
+  title: { absolute: "GTA 6 Tools, Trackers & Calculators | Taish Gaming" },
   description:
-    "GTA 6 tools, calculators and trackers: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, achievements, activities, Easter eggs, businesses, money guides and more.",
+    "Explore Taish Gaming's GTA 6 interactive tools, including the Leonida map, vehicle and weapon comparisons, completion tracker, calculators and planners.",
   alternates: { canonical: "/tools" },
+  openGraph: {
+    title: "GTA 6 Tools, Trackers & Calculators | Taish Gaming",
+    description:
+      "Explore Taish Gaming's GTA 6 interactive tools, including the Leonida map, vehicle and weapon comparisons, completion tracker, calculators and planners.",
+    images: ["/img/hero-dark.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GTA 6 Tools, Trackers & Calculators | Taish Gaming",
+    description:
+      "Explore Taish Gaming's GTA 6 interactive tools, including the Leonida map, vehicle and weapon comparisons, completion tracker, calculators and planners.",
+    images: ["/img/hero-dark.jpg"],
+  },
 };
 
-import { ALL_TOOLS } from "@/lib/tools-data";
+import { ALL_TOOLS, TOOL_STATUS_META } from "@/lib/tools-data";
 
 const CATEGORIES = [
   "All Tools",
@@ -90,8 +103,13 @@ export default function ToolsPage() {
                             <span className="p-2.5 rounded-xl bg-muted text-primary group-hover:bg-primary group-hover:text-foreground transition-colors">
                               <IconComponent className="h-5 w-5" />
                             </span>
-                            <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-background text-muted-foreground border border-border font-mono">
-                              {t.badge}
+                            <span className="flex items-center gap-1.5">
+                              <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-background text-muted-foreground border border-border font-mono">
+                                {t.badge}
+                              </span>
+                              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${TOOL_STATUS_META[t.status].badgeClass}`}>
+                                {TOOL_STATUS_META[t.status].label}
+                              </span>
                             </span>
                           </div>
 

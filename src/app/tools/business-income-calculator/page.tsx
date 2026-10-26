@@ -5,6 +5,7 @@ import { Briefcase, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   title: "GTA 6 Business Income Calculator — ROI & Break-Even Planner",
   description: "Calculate daily and weekly business income, total investment, break-even days, and 30-day ROI for GTA 6 businesses — nightclub, chop shop, warehouse, and more.",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function BusinessIncomeCalculatorPage() {
   return (
         <SiteShell>
+          <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Auto-generated GTA 6 rankings: fastest cars, best handling, best off-road, highest DPS weapons, best pistols, SMGs, assault rifles and snipers — always computed from our live database.",
   alternates: { canonical: "/rankings" },
+  robots: { index: false, follow: true },
 };
 
 function RankingCard({ href, icon: Icon, title, description, badge }: { href: string; icon: LucideIcon; title: string; description: string; badge: string }) {

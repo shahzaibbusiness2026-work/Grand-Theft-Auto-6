@@ -5,6 +5,7 @@ import { Crosshair, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   title: "GTA 6 Weapon DPS Calculator — Damage, Fire Rate & Attachments",
   description: "Compare GTA 6 weapons by DPS. Add attachments and see live damage-per-second, damage-per-magazine, and time-to-empty.",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function WeaponDpsCalculatorPage() {
   return (
         <SiteShell>
+          <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

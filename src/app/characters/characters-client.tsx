@@ -65,7 +65,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
             <div className="lg:col-span-7 space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-950/40 px-3.5 py-1 text-xs font-black uppercase tracking-wider text-pink-400 backdrop-blur-md">
                 <Sparkles className="w-3.5 h-3.5" />
-                CONFIRMED ROSTER & LORE
+                KNOWN GTA 6 CHARACTERS
               </div>
 
               <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
@@ -76,7 +76,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               </h1>
 
               <p className="max-w-xl text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Explore verified intelligence dossiers, voice casting, criminal records, and syndicate affiliations across Vice City and the State of Leonida.
+                Profiles based on Rockstar&apos;s official character information, trailers and clearly labelled analysis.
               </p>
 
               <div className="pt-2 max-w-lg">
@@ -211,11 +211,16 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                     {c.name}
                   </h3>
                   {c.alias && (
-                    <span
-                      title="Editorial nickname, not an official Rockstar alias"
-                      className="text-xs font-mono text-cyan-700 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded"
-                    >
-                      &ldquo;{c.alias}&rdquo;
+                    <span className="flex items-center gap-1.5">
+                      <span
+                        title="Editorial nickname, not an official Rockstar alias"
+                        className="text-xs font-mono text-cyan-700 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded"
+                      >
+                        &ldquo;{c.alias}&rdquo;
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground border border-border rounded-full px-1.5 py-0.5">
+                        Editorial label
+                      </span>
                     </span>
                   )}
                 </div>

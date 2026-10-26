@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-  title: "Disclaimer | Taish Gaming",
+  title: "Disclaimer",
   description:
     "Read the Taish Gaming disclaimer: an unofficial fan site not affiliated with Rockstar Games or Take-Two Interactive, with pre-launch information clearly marked.",
   alternates: { canonical: "/disclaimer" },

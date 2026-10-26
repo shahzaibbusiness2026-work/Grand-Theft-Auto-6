@@ -5,8 +5,9 @@ import { DollarSign, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
-  title: "Money-Making Method Finder & Grinding Strategies — Taish Gaming",
+  title: "Money-Making Method Finder & Grinding Strategies",
   description:
     "Intelligent GTA 6 money-making route recommender. Discover the highest-paying heists, passive nightclub operations, and vehicle salvage strategies ranked by cash per hour.",
 
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 export default function MoneyMakerPage() {
   return (
         <SiteShell>
+          <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

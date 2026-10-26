@@ -6,9 +6,20 @@ import { Crosshair } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Weapon Comparison Duel (2–4 Firearms) — Taish Gaming",
-  description: "Interactive head-to-head GTA 6 firearm comparison tool. Duel 2 to 4 weapons across DPS, bullet velocity, recoil, effective range, and magazine capacity.",
+  title: { absolute: "GTA 6 Weapon Comparison Tool | Compare Weapons & Stats" },
+  description: "Compare GTA 6 weapon entries side by side with evidence labels and clearly marked pre-release estimates for damage, fire rate, range and handling.",
   alternates: { canonical: "/compare/weapons" },
+  openGraph: {
+    title: "GTA 6 Weapon Comparison Tool | Compare Weapons & Stats",
+    description: "Compare GTA 6 weapon entries side by side with evidence labels and clearly marked pre-release estimates for damage, fire rate, range and handling.",
+    images: ["/img/hero-dark.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GTA 6 Weapon Comparison Tool | Compare Weapons & Stats",
+    description: "Compare GTA 6 weapon entries side by side with evidence labels and clearly marked pre-release estimates for damage, fire rate, range and handling.",
+    images: ["/img/hero-dark.jpg"],
+  },
 };
 
 export default async function CompareWeaponsPage() {
@@ -27,7 +38,7 @@ export default async function CompareWeaponsPage() {
             COMPARE <span className="text-primary">GTA 6 WEAPONS</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            Select 2 to 4 confirmed firearms to compare side-by-side DPS, recoil patterns, reload timings, ammo capacities, and tactical verdicts.
+            Select 2 to 4 GTA 6 weapon entries to compare clearly labelled pre-release estimates and known characteristics.
           </p>
         </div>
 

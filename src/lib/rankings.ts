@@ -66,7 +66,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
     title: "Quickest 0–60 Acceleration",
     icon: Rocket,
     description:
-      "GTA 6 vehicles ranked by 0–60 launch. Which confirmed rides in Grand Theft Auto VI hit the mark fastest, from hypercars to superbikes.",
+      "GTA 6 vehicles ranked by 0–60 launch. Which GTA 6 vehicles hit the mark fastest, from hypercars to superbikes.",
     metricLabel: "0–60 Time",
     value: (v) => v.acceleration,
     format: (v) => `${v.acceleration}s`,

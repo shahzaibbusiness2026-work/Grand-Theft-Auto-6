@@ -7,7 +7,7 @@ import { Trophy } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "100% Completion Tracker & Checklist — Taish Gaming",
+  title: "100% Completion Tracker & Checklist",
   description:
     "Interactive 100% completion checklist for Grand Theft Auto VI (Leonida). Track story missions, submerged caches, stranger encounters, hobbies, and achievements with local auto-save.",
   alternates: { canonical: "/tracker" },

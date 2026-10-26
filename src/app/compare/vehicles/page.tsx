@@ -5,9 +5,20 @@ import { getComparisonWeights } from "@/lib/services/comparison";
 import { Trophy } from "lucide-react";
 
 export const metadata = {
-  title: "Vehicle Comparison Duel (2–4 Rides) — Taish Gaming",
-  description: "Interactive head-to-head GTA 6 vehicle comparison tool. Duel 2 to 4 rides across top speed, acceleration, handling, braking, and showroom price.",
+  title: { absolute: "GTA 6 Vehicle Comparison Tool | Compare Cars & Stats" },
+  description: "Compare GTA 6 vehicle entries side by side, including known details and clearly labelled pre-release estimates for speed, handling, acceleration and value.",
   alternates: { canonical: "/compare/vehicles" },
+  openGraph: {
+    title: "GTA 6 Vehicle Comparison Tool | Compare Cars & Stats",
+    description: "Compare GTA 6 vehicle entries side by side, including known details and clearly labelled pre-release estimates for speed, handling, acceleration and value.",
+    images: ["/img/hero-dark.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GTA 6 Vehicle Comparison Tool | Compare Cars & Stats",
+    description: "Compare GTA 6 vehicle entries side by side, including known details and clearly labelled pre-release estimates for speed, handling, acceleration and value.",
+    images: ["/img/hero-dark.jpg"],
+  },
 };
 
 export default async function CompareVehiclesPage() {
@@ -26,7 +37,7 @@ export default async function CompareVehiclesPage() {
             COMPARE <span className="text-primary">GTA 6 VEHICLES</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            Select any 2, 3, or 4 confirmed rides to compare side-by-side performance dyno metrics, braking deltas, horsepower, and value recommendations.
+            Select 2 to 4 GTA 6 vehicle entries to compare known details and clearly labelled pre-release estimates.
           </p>
         </div>
 

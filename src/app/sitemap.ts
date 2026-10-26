@@ -2,15 +2,10 @@ import { MetadataRoute } from "next";
 import {
   canonicalVehicles,
   canonicalWeapons,
-  canonicalMissions,
   canonicalLocations,
-  canonicalProperties,
-  canonicalCollectibles,
 } from "@/lib/canonical-data";
 import { getSeoSettings } from "@/lib/services/seo";
 import { getPublicArticles } from "@/lib/services/articles";
-import { getLiveRankingSlugs } from "@/lib/rankings";
-import { getMergedVehicles, getMergedWeapons } from "@/lib/services/catalog";
 
 /**
  * Revalidate at most once per hour: this keeps the sitemap fresh (new
@@ -45,13 +40,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/map-explorer",
     "/vehicles",
     "/compare/vehicles",
-    "/missions",
     "/weapons",
     "/compare/weapons",
     "/tracker",
-    "/collectibles",
     "/locations",
-    "/properties",
     "/tools",
     "/tools/money-calculator",
     "/tools/business-profit-calculator",
@@ -77,7 +69,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/blog",
     "/database/vehicles",
     "/database/weapons",
-    "/rankings",
     "/achievements",
     "/activities",
     "/easter-eggs",
@@ -145,16 +136,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  // Dynamic Mission Routes
-  const missionRoutes = canonicalMissions
-    .filter((m) => m.confidence !== "RUMORED" && m.confidence !== "SPECULATION")
-    .map((m) => ({
-    url: `${baseUrl}/missions/${m.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
-
   // Dynamic Location Routes
   const locationRoutes = canonicalLocations
     .filter((l) => l.confidence !== "RUMORED" && l.confidence !== "SPECULATION")
@@ -165,45 +146,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  // Dynamic Property Routes
-  const propertyRoutes = canonicalProperties
-    .filter((p) => p.confidence !== "RUMORED" && p.confidence !== "SPECULATION")
-    .map((p) => ({
-    url: `${baseUrl}/properties/${p.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
-
-  // Dynamic Collectible Routes
-  const collectibleRoutes = canonicalCollectibles
-    .filter((c) => c.confidence !== "RUMORED" && c.confidence !== "SPECULATION")
-    .map((c) => ({
-    url: `${baseUrl}/collectibles/${c.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
-
-  // Auto-generated ranking pages — only rankings with entries, so the
-  // sitemap never points at a page that 404s (e.g. best-weaponized today).
-  const [liveVehicles, liveWeapons] = await Promise.all([getMergedVehicles(), getMergedWeapons()]);
-  const rankingRoutes = getLiveRankingSlugs(liveVehicles, liveWeapons).map((slug) => ({
-    url: `${baseUrl}/rankings/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
-
   return [
     ...staticRoutes,
     ...articleRoutes,
     ...vehicleRoutes,
     ...weaponRoutes,
-    ...missionRoutes,
     ...locationRoutes,
-    ...propertyRoutes,
-    ...collectibleRoutes,
-    ...rankingRoutes,
   ];
 }

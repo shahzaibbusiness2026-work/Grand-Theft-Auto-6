@@ -40,7 +40,7 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   siteDescription: SITE_CONFIG.description,
   targetReleaseDate: SITE_CONFIG.targetReleaseDate,
   isReleaseDateConfirmed: SITE_CONFIG.isReleaseDateConfirmed,
-  countdownCaption: "Target countdown • Official date to be confirmed by Rockstar Games",
+  countdownCaption: "GTA VI releases November 19, 2026 · Pre-load begins November 12, 2026",
   heroHeading: "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas",
   heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
   announcementBanner: "Taish Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",

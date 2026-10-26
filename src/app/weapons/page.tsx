@@ -57,7 +57,7 @@ export default async function WeaponsPage() {
               Leonida Armory
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-white/80 sm:text-[15px]">
-              Verified damage ratings, cycle rates, recoil patterns, attachments, and street drop locations for the entire GTA 6 weapon roster.
+              Explore weapons observed in official GTA 6 material, credible reports and clearly labelled community analysis. Pre-release performance values are estimates and will be replaced with measured in-game data after launch.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Button href="/compare/weapons" className="bg-primary font-bold text-xs text-primary-foreground hover:bg-primary-hover min-h-[44px]">

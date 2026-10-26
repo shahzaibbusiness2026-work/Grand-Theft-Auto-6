@@ -5,6 +5,7 @@ import { SunMoon, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   title: "GTA 6 Day/Night Time Converter — Real Time to Game Time",
   description:
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 export default function DayNightConverterPage() {
   return (
         <SiteShell>
+          <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

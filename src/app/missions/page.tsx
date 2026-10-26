@@ -12,7 +12,8 @@ import { getMissions, type MissionRecord } from "@/lib/services/missions";
 
 export const metadata: Metadata = {
   title: "GTA 6 Missions & Contracts Database — Story, Heists & Walkthroughs",
-  description: "Comprehensive verified database of GTA 6 story missions, contracts, and heists. Filter by operative (Lucia, Jason), rewards, difficulty, and chapter.",
+  description: "Comprehensive database of GTA 6 story missions, contracts, and heists. Filter by operative (Lucia, Jason), rewards, difficulty, and chapter.",
+  robots: { index: false, follow: true },
 };
 
 type DbMission = MissionRecord & {

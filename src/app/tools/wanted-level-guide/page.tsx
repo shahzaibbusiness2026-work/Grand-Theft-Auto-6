@@ -5,6 +5,7 @@ import { Siren, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   title: "GTA 6 Wanted Level Guide — Police Response & Escape Tips",
   description: "Interactive guide to GTA 6's 1-5 star wanted levels: police units, helicopters, roadblocks, spike strips, estimated evade times, and escape tips for every level.",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function WantedLevelGuidePage() {
   return (
         <SiteShell>
+          <ToolStatusBanner status="postlaunch" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -305,7 +305,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
         <div className="flex items-center justify-between text-xs sm:text-xs font-medium text-white/70">
           <span className="hidden sm:inline">Reveal Trailer (Dec 2023)</span>
           <span className="text-[#00F0FF] font-semibold drop-shadow-[0_0_10px_rgba(0,240,255,0.8)]">Current Intel</span>
-          <span className="hidden sm:inline">Target Launch (Nov 2026)</span>
+          <span className="hidden sm:inline">Official Launch · Nov 19, 2026</span>
         </div>
       </div>
 
@@ -328,7 +328,7 @@ export function Countdown({ className, targetDate, caption, isConfirmed }: Count
         <p className="text-xs sm:text-xs text-white/70 font-medium">
           {caption || (isConfirmed ?? SITE_CONFIG.isReleaseDateConfirmed
             ? "Official Confirmed Launch Date"
-            : "Anticipated window • Date to be confirmed by Rockstar Games")}
+            : "GTA VI releases November 19, 2026 · Pre-load begins November 12, 2026")}
         </p>
       </div>
     </div>

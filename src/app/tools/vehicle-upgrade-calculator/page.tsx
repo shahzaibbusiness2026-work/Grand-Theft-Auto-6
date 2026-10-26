@@ -5,6 +5,7 @@ import { Wrench, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   title: "GTA 6 Vehicle Upgrade Calculator — Tuning Costs & Performance Gains",
   description:
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 export default function VehicleUpgradeCalculatorPage() {
   return (
         <SiteShell>
+          <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

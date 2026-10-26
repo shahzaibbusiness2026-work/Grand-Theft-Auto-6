@@ -5,6 +5,7 @@ import { Camera, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   title: "GTA 6 Photo Spot Finder — Best Screenshot Locations",
   description: "The most cinematic photo spots in Leonida. Best time of day, region, and pro tips for every shot.",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function PhotoSpotFinderPage() {
   return (
         <SiteShell>
+          <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

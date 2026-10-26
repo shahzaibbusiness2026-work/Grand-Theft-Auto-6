@@ -8,9 +8,10 @@ import { getPublicProperties, type PropertyRecord } from "@/lib/services/propert
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Real Estate & Property Database — Taish Gaming",
+  title: "GTA 6 Real Estate & Property Database",
   description:
-    "Explore, compare, and calculate returns on all confirmed safehouses, nightclubs, luxury penthouses, chop shops, and marinos in Grand Theft Auto VI.",
+    "Explore, compare, and calculate returns on all safehouses, nightclubs, luxury penthouses, chop shops, and marinos in Grand Theft Auto VI.",
+  robots: { index: false, follow: true },
 };
 
 /** Map a DB property row onto the CanonicalProperty shape the client renders. */

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "GTA 6 Weapons Database — Stats, Prices & Comparisons | Taish Gaming",
-  description: "Explore the full GTA 6 arsenal — stats, prices, damage ratings and locations for every weapon in Leonida.",
+  title: "GTA 6 Weapons Database — Stats, Prices & Comparisons",
+  description: "Explore GTA 6 weapons observed in official material, credible reports and community analysis. Pre-release performance values are estimates.",
   openGraph: {
     title: "GTA 6 Weapons — Full Arsenal Database",
     description: "Stats, prices, and comparisons for every weapon in GTA 6.",

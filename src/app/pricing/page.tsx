@@ -4,7 +4,7 @@ import { Crown } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Membership — Everything Is Free | Taish Gaming",
+  title: "Membership — Everything Is Free",
   description:
     "Taish Gaming has no paid plans. Every map, database, comparison, tracker and tool on the site is free to use.",
   alternates: { canonical: "/pricing" },

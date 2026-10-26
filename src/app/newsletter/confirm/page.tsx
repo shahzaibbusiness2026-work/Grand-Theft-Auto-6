@@ -3,7 +3,7 @@ import { CheckCircle2, AlertTriangle, MailWarning } from "lucide-react";
 import { confirmNewsletterSubscription } from "@/lib/services/newsletter";
 
 export const metadata = {
-  title: "Confirm subscription | Taish Gaming",
+  title: "Confirm subscription",
   description: "Confirm your Taish Gaming newsletter subscription.",
   robots: { index: false, follow: false },
 };

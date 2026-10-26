@@ -180,10 +180,15 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   {/* Top Dossier Header */}
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-xs font-black uppercase tracking-[0.25em] text-pink-600">
-                      CONFIRMED DOSSIER
+                      CHARACTER PROFILE
                     </span>
-                    <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
-                      {lucia?.alias || "The Mastermind"}
+                    <span className="flex items-center gap-1.5">
+                      <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
+                        {lucia?.alias || "The Mastermind"}
+                      </span>
+                      <span title="Editorial nickname, not an official Rockstar alias" className="text-[10px] font-bold uppercase tracking-wider text-slate-500 border border-slate-300 rounded-full px-2 py-0.5">
+                        Editorial label
+                      </span>
                     </span>
                   </div>
 
@@ -195,6 +200,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   </div>
 
                   {/* Quote Box */}
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">From official trailers</p>
                   <div className="rounded-2xl bg-pink-50/70 border border-pink-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
                     <Quote className="w-5 h-5 text-pink-500 shrink-0 mt-0.5 rotate-180" />
                     <p className="text-xs sm:text-[13px] italic font-medium text-pink-700 leading-relaxed">
@@ -203,6 +209,9 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   </div>
 
                   {/* Specs List: Vertical 4-Row Key-Value Stack */}
+                  <p className="pt-1 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
+                    Unconfirmed / Speculative — possible abilities, specialty, signature vehicle and territory (editorial analysis, not Rockstar-confirmed)
+                  </p>
                   <div className="space-y-3 pt-1">
                     {/* Special Ability */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">
@@ -336,10 +345,15 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   {/* Top Dossier Header */}
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-xs font-black uppercase tracking-[0.25em] text-blue-600">
-                      CONFIRMED DOSSIER
+                      CHARACTER PROFILE
                     </span>
-                    <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
-                      {jason?.alias || "The Enforcer"}
+                    <span className="flex items-center gap-1.5">
+                      <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
+                        {jason?.alias || "The Enforcer"}
+                      </span>
+                      <span title="Editorial nickname, not an official Rockstar alias" className="text-[10px] font-bold uppercase tracking-wider text-slate-500 border border-slate-300 rounded-full px-2 py-0.5">
+                        Editorial label
+                      </span>
                     </span>
                   </div>
 
@@ -351,6 +365,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   </div>
 
                   {/* Quote Box */}
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">From official trailers</p>
                   <div className="rounded-2xl bg-sky-50/70 border border-sky-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
                     <Quote className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 rotate-180" />
                     <p className="text-xs sm:text-[13px] italic font-medium text-sky-800 leading-relaxed">
@@ -359,6 +374,9 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   </div>
 
                   {/* Specs List: Vertical 4-Row Key-Value Stack */}
+                  <p className="pt-1 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
+                    Unconfirmed / Speculative — possible abilities, specialty, signature vehicle and territory (editorial analysis, not Rockstar-confirmed)
+                  </p>
                   <div className="space-y-3 pt-1">
                     {/* Special Ability */}
                     <div className="flex items-start sm:items-center gap-2 text-xs sm:text-[13px]">

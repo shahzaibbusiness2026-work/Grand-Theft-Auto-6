@@ -8,9 +8,10 @@ import { getPublicCollectibles, type CollectibleRecord } from "@/lib/services/co
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Collectibles Finder & Checklist — Taish Gaming",
+  title: "Collectibles Finder & Checklist",
   description:
     "Interactive GTA 6 Collectibles Finder across Leonida. Track Hidden Packages, Stunt Jumps, Rebel Radio Transmitters, Wildlife Photos, and Easter Eggs with coordinate guides.",
+  robots: { index: false, follow: true },
 };
 
 /** Map a DB collectible row onto the CanonicalCollectible shape the client renders. */

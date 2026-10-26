@@ -22,11 +22,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const match = getRankingDef(slug);
-  if (!match) return { title: "Ranking not found — Taish Gaming" };
+  if (!match) return { title: "Ranking not found", robots: { index: false, follow: true } };
   return {
-    title: `${match.def.title} — Taish Gaming`,
+    title: `${match.def.title}`,
     description: match.def.description,
     alternates: { canonical: `/rankings/${match.def.slug}` },
+    robots: { index: false, follow: true },
     openGraph: { title: match.def.title, description: match.def.description },
     twitter: {
       card: "summary_large_image",

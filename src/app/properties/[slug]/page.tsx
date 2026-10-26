@@ -37,9 +37,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${prop.name} (${prop.type}) — Property Dossier | Taish Gaming`,
+    title: `${prop.name} (${prop.type}) — Property Dossier`,
     description: `Fan-made real estate breakdown for ${prop.name} in ${prop.district}. Estimated price: ${prop.priceDisplay}, Garage: ${prop.garageCapacity} vehicles, Estimated passive income: ${prop.passiveIncomeDisplay}.`,
     alternates: { canonical: `/properties/${prop.slug}` },
+    robots: { index: false, follow: true },
   };
 }
 

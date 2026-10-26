@@ -7,7 +7,7 @@ import { CountdownEmbed } from "./countdown-embed";
  * Deliberately bare: no site shell, noindex so embeds never pollute search.
  */
 export const metadata: Metadata = {
-  title: "GTA 6 Countdown — Taish Gaming",
+  title: "GTA 6 Countdown",
   robots: { index: false, follow: false },
 };
 
