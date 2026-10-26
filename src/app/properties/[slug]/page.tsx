@@ -15,6 +15,7 @@ import { serializeJsonLd } from "@/lib/utils";
 import { canonicalProperties } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
+import { EstimatedDataNote } from "@/components/estimated-data-note";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${prop.name} (${prop.type}) — Property Dossier | Taish Gaming`,
-    description: `Official real estate breakdown for ${prop.name} in ${prop.district}. Price: ${prop.priceDisplay}, Garage: ${prop.garageCapacity} vehicles, Passive Income: ${prop.passiveIncomeDisplay}.`,
+    description: `Fan-made real estate breakdown for ${prop.name} in ${prop.district}. Estimated price: ${prop.priceDisplay}, Garage: ${prop.garageCapacity} vehicles, Estimated passive income: ${prop.passiveIncomeDisplay}.`,
     alternates: { canonical: `/properties/${prop.slug}` },
   };
 }
@@ -133,7 +134,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               </h1>
 
               <div className="font-display text-2xl sm:text-3xl font-black text-gold-light">
-                {prop.priceDisplay}
+                {prop.priceDisplay} <span className="text-sm font-bold text-amber-500" title="Pre-release estimate">est.</span>
               </div>
 
               <p className="text-sm text-muted-foreground leading-relaxed pt-1">
@@ -163,8 +164,9 @@ export default async function PropertyDetailPage({ params }: PageProps) {
             {/* Financial ROI Calculator Box */}
             {hourly > 0 ? (
               <div className="card-carbon p-6 space-y-4 border-emerald-500/30 bg-emerald-950/10">
+                <EstimatedDataNote />
                 <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm uppercase tracking-wider">
-                  <TrendingUp className="h-4 w-4" /> Passive Revenue & ROI Breakdown
+                  <TrendingUp className="h-4 w-4" /> Passive Revenue & ROI Breakdown (Estimated)
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-center">
                   <div className="p-3 rounded-xl bg-muted/80 border border-border">
@@ -254,7 +256,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               <div className="space-y-2.5 text-xs font-mono">
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">Price:</span>
-                  <span className="font-bold text-gold-light">{prop.priceDisplay}</span>
+                  <span className="font-bold text-gold-light">{prop.priceDisplay} <span className="text-[10px] text-amber-500" title="Pre-release estimate">est.</span></span>
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">Garage:</span>
@@ -297,7 +299,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                       {item.name}
                     </div>
                     <div className="text-xs text-gold-light font-mono mt-1">
-                      {item.priceDisplay}
+                      {item.priceDisplay} <span className="text-[10px] text-amber-500" title="Pre-release estimate">est.</span>
                     </div>
                   </Link>
                 ))}

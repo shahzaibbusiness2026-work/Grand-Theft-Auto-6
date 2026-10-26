@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: `${mission.title} — GTA 6 Mission Guide & Walkthrough`,
-    description: `Full mission guide for '${mission.title}' in GTA 6: Objectives, choices & outcomes, rewards (${mission.cashRewardDisplay}), character requirements, and strategic tips.`,
+    description: `Full mission guide for '${mission.title}' in GTA 6: Objectives, choices & outcomes, estimated rewards (${mission.cashRewardDisplay}), character requirements, and strategic tips.`,
     alternates: { canonical: `/missions/${mission.slug}` },
     openGraph: {
       title: `${mission.title} — GTA 6 Mission Guide`,
@@ -174,7 +174,7 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Cash Payout</span>
-                <span className="font-mono text-sm font-black text-gold-dark dark:text-gold-light">{mission.cashRewardDisplay}</span>
+                <span className="font-mono text-sm font-black text-gold-dark dark:text-gold-light">{mission.cashRewardDisplay === "TBD" ? "TBD" : `${mission.cashRewardDisplay} (est.)`}</span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Duration</span>

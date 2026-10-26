@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils";
 import { FavoriteButton } from "@/components/favorite-button";
 import { RadarChart, RADAR_COLORS } from "@/components/radar-chart";
 import { ComparisonTable, type ComparisonRowDef } from "@/components/comparison-table";
+import { EstimatedDataNote } from "@/components/estimated-data-note";
 
 interface CompareVehiclesClientProps {
   initialSlugs?: string[];
@@ -205,65 +206,65 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
     const rows: ComparisonRowDef[] = [
       {
         label: "Overall Score",
-        values: overallScores.map((s) => `${s}/100`),
+        values: overallScores.map((s) => `${s}/100 est.`),
         bars: overallScores,
         winnerIndex: new Set(overallScores).size === 1 ? null : overallScores.indexOf(Math.max(...overallScores)),
       },
       {
         label: "Top Speed",
-        values: selectedVehicles.map((v) => `${v.topSpeed} mph`),
+        values: selectedVehicles.map((v) => `${v.topSpeed} mph est.`),
         bars: selectedVehicles.map((v) => ((v.topSpeed - 80) / 150) * 100),
         winnerIndex: winnerMax(selectedVehicles.map((v) => v.topSpeed)),
       },
       {
         label: "0–60 Launch",
-        values: selectedVehicles.map((v) => `${v.acceleration}s`),
+        values: selectedVehicles.map((v) => `${v.acceleration}s est.`),
         bars: selectedVehicles.map((v) => ((6.5 - v.acceleration) / 5) * 100),
         winnerIndex: winnerMin(selectedVehicles.map((v) => v.acceleration)),
       },
       {
         label: "Handling",
-        values: selectedVehicles.map((v) => `${v.handling}/100`),
+        values: selectedVehicles.map((v) => `${v.handling}/100 est.`),
         bars: selectedVehicles.map((v) => v.handling),
         winnerIndex: winnerMax(selectedVehicles.map((v) => v.handling)),
       },
       {
         label: "Braking",
-        values: selectedVehicles.map((v) => `${v.braking}/100`),
+        values: selectedVehicles.map((v) => `${v.braking}/100 est.`),
         bars: selectedVehicles.map((v) => v.braking),
         winnerIndex: winnerMax(selectedVehicles.map((v) => v.braking)),
       },
       {
         label: "Traction",
-        values: tractionVals.map((t) => `${t}/100`),
+        values: tractionVals.map((t) => `${t}/100 est.`),
         bars: tractionVals,
         winnerIndex: winnerMax(tractionVals),
       },
       {
         label: "Cornering",
-        values: corneringVals.map((t) => `${t}/100`),
+        values: corneringVals.map((t) => `${t}/100 est.`),
         bars: corneringVals,
         winnerIndex: winnerMax(corneringVals),
       },
       {
         label: "Launch / Takeoff",
-        values: launchVals.map((t) => `${t}/100`),
+        values: launchVals.map((t) => `${t}/100 est.`),
         bars: launchVals,
         winnerIndex: winnerMax(launchVals),
       },
       {
         label: "Horsepower",
-        values: selectedVehicles.map((v) => `${v.power} HP`),
+        values: selectedVehicles.map((v) => `${v.power} HP est.`),
         winnerIndex: winnerMax(selectedVehicles.map((v) => v.power)),
       },
       {
         label: "Price",
-        values: selectedVehicles.map((v) => v.priceDisplay),
+        values: selectedVehicles.map((v) => `${v.priceDisplay} est.`),
         winnerIndex: winnerMin(priceVals),
       },
       {
         label: "Weight",
-        values: selectedVehicles.map((v) => v.weight),
+        values: selectedVehicles.map((v) => `${v.weight} est.`),
         winnerIndex: winnerMin(weightVals),
       },
       {
@@ -292,6 +293,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
   return (
     <div className="space-y-8">
+      <EstimatedDataNote />
       {/* Top Controls Header */}
       <div className="card-surface p-5 rounded-3xl border border-border shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -462,7 +464,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                       <Gauge className="h-3.5 w-3.5 text-accent" /> Top Speed
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="tabular-nums font-bold text-foreground">{v.topSpeed} mph</span>
+                      <span className="tabular-nums font-bold text-foreground">{v.topSpeed} mph est.</span>
                       {v.topSpeed === bestSpeed && (
                         <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
                           Winner

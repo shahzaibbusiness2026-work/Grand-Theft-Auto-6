@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { FavoriteButton } from "@/components/favorite-button";
 import { RadarChart, RADAR_COLORS } from "@/components/radar-chart";
 import { ComparisonTable, type ComparisonRowDef } from "@/components/comparison-table";
+import { EstimatedDataNote } from "@/components/estimated-data-note";
 
 interface CompareWeaponsClientProps {
   initialSlugs?: string[];
@@ -182,66 +183,66 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
     const rows: ComparisonRowDef[] = [
       {
         label: "Overall Score",
-        values: overallScores.map((s) => `${s}/100`),
+        values: overallScores.map((s) => `${s}/100 est.`),
         bars: overallScores,
         winnerIndex: new Set(overallScores).size === 1 ? null : overallScores.indexOf(Math.max(...overallScores)),
       },
       {
         label: "DPS Index",
-        values: dpsIndices.map((d) => String(d)),
+        values: dpsIndices.map((d) => `${d} est.`),
         bars: dpsIndices,
         winnerIndex: new Set(dpsIndices).size === 1 ? null : dpsIndices.indexOf(bestDps),
       },
       {
         label: "Damage",
-        values: selectedWeapons.map((w) => `${w.damage}/100`),
+        values: selectedWeapons.map((w) => `${w.damage}/100 est.`),
         bars: selectedWeapons.map((w) => w.damage),
         winnerIndex: winnerMax(selectedWeapons.map((w) => w.damage)),
       },
       {
         label: "Fire Rate",
-        values: selectedWeapons.map((w) => `${w.fireRate}/100`),
+        values: selectedWeapons.map((w) => `${w.fireRate}/100 est.`),
         bars: selectedWeapons.map((w) => w.fireRate),
         winnerIndex: winnerMax(selectedWeapons.map((w) => w.fireRate)),
       },
       {
         label: "Accuracy",
-        values: selectedWeapons.map((w) => `${w.accuracy}/100`),
+        values: selectedWeapons.map((w) => `${w.accuracy}/100 est.`),
         bars: selectedWeapons.map((w) => w.accuracy),
         winnerIndex: winnerMax(selectedWeapons.map((w) => w.accuracy)),
       },
       {
         label: "Effective Range",
-        values: selectedWeapons.map((w) => `${w.range}/100`),
+        values: selectedWeapons.map((w) => `${w.range}/100 est.`),
         bars: selectedWeapons.map((w) => w.range),
         winnerIndex: winnerMax(selectedWeapons.map((w) => w.range)),
       },
       {
         label: "Reload Speed",
-        values: reloadVals.map((v) => `${v}/100`),
+        values: reloadVals.map((v) => `${v}/100 est.`),
         bars: reloadVals,
         winnerIndex: winnerMax(reloadVals),
       },
       {
         label: "Magazine",
-        values: magVals.map((m) => `${m} rnd`),
+        values: magVals.map((m) => `${m} rnd est.`),
         winnerIndex: winnerMax(magVals),
       },
       {
         label: "Recoil Control",
-        values: recoilVals.map((v) => `${v}/100`),
+        values: recoilVals.map((v) => `${v}/100 est.`),
         bars: recoilVals,
         winnerIndex: winnerMax(recoilVals),
       },
       {
         label: "Mobility",
-        values: selectedWeapons.map((w) => `${w.mobility ?? 70}/100`),
+        values: selectedWeapons.map((w) => `${w.mobility ?? 70}/100 est.`),
         bars: selectedWeapons.map((w) => w.mobility ?? 70),
         winnerIndex: winnerMax(selectedWeapons.map((w) => w.mobility ?? 70)),
       },
       {
         label: "Price",
-        values: selectedWeapons.map((w) => w.priceDisplay),
+        values: selectedWeapons.map((w) => `${w.priceDisplay} est.`),
         winnerIndex: winnerMin(priceVals),
       },
     ];
@@ -265,6 +266,7 @@ export function CompareWeaponsClient({ initialSlugs, weapons, weights }: Compare
 
   return (
     <div className="space-y-8">
+      <EstimatedDataNote />
       {/* Top Controls Header */}
       <div className="card-surface p-5 rounded-3xl border border-border shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>

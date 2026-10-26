@@ -104,7 +104,7 @@ export default async function VehiclesPage() {
                 Want to duel any two rides head-to-head?
               </h3>
               <p className="mt-1.5 max-w-md text-sm text-white/80">
-                Open our Interactive Vehicle Comparison Duel to inspect horsepower curves, braking deltas, and 0-60 launch times.
+                Open our Interactive Vehicle Comparison Duel to inspect estimated horsepower, braking, and 0-60 figures.
               </p>
             </div>
             <Button href="/compare/vehicles" className="shrink-0 font-bold bg-primary min-h-[44px]">

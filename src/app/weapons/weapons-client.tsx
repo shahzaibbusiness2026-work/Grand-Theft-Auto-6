@@ -248,7 +248,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       <div>
                         <div className="flex items-baseline justify-between">
                           <span className="text-sm font-medium text-muted-foreground">Damage</span>
-                          <span className="font-display text-xl font-black tabular-nums text-foreground">{w.damage}<span className="text-xs font-semibold text-muted-foreground">/100</span>{(w.confidence === "REPORTED" || w.confidence === "RUMORED") && <span className="ml-1 text-[10px] font-medium text-amber-600 dark:text-amber-400" title="Estimated stats - not officially confirmed">est.</span>}</span>
+                          <span className="font-display text-xl font-black tabular-nums text-foreground">{w.damage}<span className="text-xs font-semibold text-muted-foreground">/100</span><span className="ml-1 text-[10px] font-medium text-amber-600 dark:text-amber-400" title="Pre-release estimate">est.</span></span>
                         </div>
                         <Progress value={w.damage} className="h-1.5 mt-1" />
                       </div>
@@ -256,7 +256,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       <div>
                         <div className="flex items-baseline justify-between">
                           <span className="text-sm font-medium text-muted-foreground">Fire Rate</span>
-                          <span className="font-display text-xl font-black tabular-nums text-foreground">{w.fireRate}<span className="text-xs font-semibold text-muted-foreground">/100</span>{(w.confidence === "REPORTED" || w.confidence === "RUMORED") && <span className="ml-1 text-[10px] font-medium text-amber-600 dark:text-amber-400" title="Estimated stats - not officially confirmed">est.</span>}</span>
+                          <span className="font-display text-xl font-black tabular-nums text-foreground">{w.fireRate}<span className="text-xs font-semibold text-muted-foreground">/100</span><span className="ml-1 text-[10px] font-medium text-amber-600 dark:text-amber-400" title="Pre-release estimate">est.</span></span>
                         </div>
                         <Progress value={w.fireRate} className="h-1.5 mt-1" />
                       </div>

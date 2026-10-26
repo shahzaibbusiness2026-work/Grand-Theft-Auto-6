@@ -22,6 +22,7 @@ import { ThemeImage } from "@/components/theme-image";
 import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
 import { FavoriteButton } from "@/components/favorite-button";
 import { ConfidenceBadge } from "@/components/confidence-badge";
+import { EstimatedDataNote } from "@/components/estimated-data-note";
 import { serializeJsonLd } from "@/lib/utils";
 
 import { getPublicVehicleCatalog, type VehicleCatalogRow } from "@/lib/services/vehicles";
@@ -187,10 +188,10 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
   const quickSpecs = [
     ["Class", vehicle.klass],
     ["Manufacturer", vehicle.manufacturer],
-    ["Horsepower", `${vehicle.power} HP`],
-    ...(vehicle.torque != null ? [["Torque", `${vehicle.torque} lb-ft`]] : []),
+    ["Horsepower", `${vehicle.power} HP (est.)`],
+    ...(vehicle.torque != null ? [["Torque", `${vehicle.torque} lb-ft (est.)`]] : []),
     ["Drivetrain", vehicle.drivetrain],
-    ["Weight", vehicle.weight],
+    ["Weight", `${vehicle.weight} (est.)`],
     ["Seating", `${vehicle.seating} Passengers`],
     ...(vehicle.doors != null ? [["Doors", String(vehicle.doors)]] : []),
     ...(vehicle.transmission ? [["Transmission", vehicle.transmission]] : []),
@@ -300,13 +301,14 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
               />
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-border">
                 <span className="font-bold text-white/70 uppercase tracking-wider text-xs">Showroom Price</span>
-                <span className="font-display font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{vehicle.priceDisplay}</span>
+                <span className="font-display font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{vehicle.priceDisplay} <span className="ml-1 text-[10px] font-bold text-amber-500" title="Pre-release estimate">est.</span></span>
               </div>
             </div>
           </div>
         </div>
 
         {/* PERFORMANCE STATS & SPECIFICATIONS */}
+        <EstimatedDataNote className="mt-6" />
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Performance Bars */}
           <div className="card-surface p-6 rounded-3xl border border-border">
@@ -320,7 +322,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                     <span className="flex items-center gap-1.5 text-muted-foreground">
                       <s.icon className="h-3.5 w-3.5 text-accent" /> {s.label}
                     </span>
-                    <span className="font-mono font-bold text-foreground">{s.value}</span>
+                    <span className="font-mono font-bold text-foreground">{s.value} <span className="ml-1 text-[10px] font-medium text-amber-600 dark:text-amber-400" title="Pre-release estimate">est.</span></span>
                   </div>
                   <Progress value={s.pct} className="h-2" />
                 </div>
@@ -331,7 +333,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             <div className="mt-6 rounded-2xl border-border bg-muted/60 p-3.5 text-xs text-muted-foreground space-y-1">
               <div className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
-                <span>Verified Data Grounding</span>
+                <span>Source &amp; Evidence</span>
               </div>
               <p className="text-xs text-muted-foreground">
                 <strong>Source:</strong> {vehicle.source}. Classified under <strong>{vehicle.confidence}</strong> standards.
@@ -408,7 +410,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             </h2>
             <dl className="mt-4 divide-y divide-border">
               {[
-                ["Showroom price", vehicle.priceDisplay],
+                ["Showroom price", `${vehicle.priceDisplay} (est.)`],
                 ...(vehicle.resalePrice != null ? [["Resale value", `$${vehicle.resalePrice.toLocaleString()}`]] : []),
                 ...(vehicle.insuranceCost != null ? [["Insurance", `$${vehicle.insuranceCost.toLocaleString()}`]] : []),
                 ...(vehicle.upgradeCost != null ? [["Full upgrades", `$${vehicle.upgradeCost.toLocaleString()}`]] : []),

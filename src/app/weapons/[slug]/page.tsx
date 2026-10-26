@@ -18,6 +18,7 @@ import { Progress } from "@/components/ui/progress";
 import { canonicalWeapons, CanonicalWeapon } from "@/lib/canonical-data";
 import { FavoriteButton } from "@/components/favorite-button";
 import { ConfidenceBadge } from "@/components/confidence-badge";
+import { EstimatedDataNote } from "@/components/estimated-data-note";
 import { serializeJsonLd } from "@/lib/utils";
 
 import { getPublicWeapons } from "@/lib/services/queries";
@@ -55,7 +56,9 @@ function dbWeaponToCanonical(dbMatch: NonNullable<Awaited<ReturnType<typeof getP
     rarity: (rarityMatch?.[1] as CanonicalWeapon["rarity"]) || "Common",
     locations: [dbMatch.acquisitionMethod || "Ammu-Nation"],
     attachments: dbMatch.attachments || [],
-    confidence: dbMatch.verification === "verified" ? "CONFIRMED" : "SPECULATION",
+    confidence:
+      ((dbMatch as { confidence?: string }).confidence as CanonicalWeapon["confidence"]) ||
+      (dbMatch.verification === "verified" ? "CONFIRMED" : "SPECULATION"),
     source: dbMatch.notes || "In-game Database",
     description: dbMatch.notes || `${dbMatch.name} in Grand Theft Auto VI.`,
     img: dbMatch.image || "/img/hero-dark.jpg",
@@ -183,12 +186,12 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
     ...(weapon.manufacturer ? [["Manufacturer", weapon.manufacturer]] : []),
     ...(weapon.fireMode ? [["Fire Mode", weapon.fireMode]] : []),
     ["Caliber / Ammo", weapon.ammoType],
-    ["Standard Magazine", `${weapon.magazineSize} Rounds`],
-    ...(weapon.ammoCapacity != null ? [["Reserve Ammo", `${weapon.ammoCapacity} Rounds`]] : []),
-    ["Tactical Reload", weapon.reloadTime],
+    ["Standard Magazine", `${weapon.magazineSize} Rounds (est.)`],
+    ...(weapon.ammoCapacity != null ? [["Reserve Ammo", `${weapon.ammoCapacity} Rounds (est.)`]] : []),
+    ["Tactical Reload", `${weapon.reloadTime} (est.)`],
     ...(weapon.headshotMultiplier != null ? [["Headshot Multiplier", `Ã—${weapon.headshotMultiplier}`]] : []),
     ...(weapon.availability ? [["Availability", weapon.availability]] : []),
-    ["Retail Ammu-Nation Price", weapon.priceDisplay],
+    ["Retail Ammu-Nation Price", `${weapon.priceDisplay} (est.)`],
     ["Rarity Tier", weapon.rarity],
     ["Confidence Rating", weapon.confidence],
   ];
@@ -275,13 +278,14 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
               />
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-black/80 px-4 py-2 text-xs backdrop-blur border border-border">
                 <span className="font-bold text-white/70 text-xs">Purchase Price</span>
-                <span className="tabular-nums font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{weapon.priceDisplay}</span>
+                <span className="tabular-nums font-black text-cyan-600 dark:text-[#00F0FF] text-sm">{weapon.priceDisplay} <span className="ml-1 text-[10px] font-bold text-amber-500" title="Pre-release estimate">est.</span></span>
               </div>
             </div>
           </div>
         </div>
 
         {/* BALLISTIC STATS & SPECS */}
+        <EstimatedDataNote className="mt-6" />
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Stat Bars */}
           <div className="card-surface p-6 rounded-3xl border border-border">
@@ -293,7 +297,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 <div key={s.label} className="space-y-1.5">
                   <div className="flex justify-between text-xs font-semibold">
                     <span className="text-muted-foreground">{s.label}</span>
-                    <span className="tabular-nums font-bold text-foreground">{s.value}</span>
+                    <span className="tabular-nums font-bold text-foreground">{s.value} <span className="ml-1 text-[10px] font-medium text-amber-600 dark:text-amber-400" title="Pre-release estimate">est.</span></span>
                   </div>
                   <Progress value={s.pct} className="h-2" />
                 </div>
@@ -303,7 +307,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
             <div className="mt-6 rounded-2xl border-border bg-muted/60 p-3.5 text-xs text-muted-foreground">
               <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground mb-1">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
-                <span>Verified Source Citation</span>
+                <span>Source Citation</span>
               </div>
               <p className="text-xs text-muted-foreground">
                 <strong>Source:</strong> {weapon.source}. Confidence level: <strong>{weapon.confidence === "CONFIRMED" ? "Confirmed" : "Speculation"}</strong>.
@@ -399,7 +403,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
             </h2>
             <dl className="mt-4 divide-y divide-border">
               {[
-                ["Purchase price", weapon.priceDisplay],
+                ["Purchase price", `${weapon.priceDisplay} (est.)`],
                 ...(weapon.ammoCost != null ? [["Ammunition cost", `$${weapon.ammoCost.toLocaleString()}`]] : []),
                 ...(weapon.upgradeCost != null ? [["Full upgrades", `$${weapon.upgradeCost.toLocaleString()}`]] : []),
               ].map(([k, v]) => (
