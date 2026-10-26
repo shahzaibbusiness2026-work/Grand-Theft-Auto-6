@@ -23,17 +23,13 @@ export default async function WeaponsPage() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "GTA 6 Weapons Database",
-    description: "Complete database of weapons confirmed for GTA 6",
+    description: "Database of weapons in GTA 6",
     numberOfItems: weapons.length,
-    itemListElement: weapons.slice(0, 20).map((w, i) => ({
+    itemListElement: weapons.map((w, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      item: {
-        "@type": "Product",
-        name: w.name,
-        category: w.klass,
-        image: w.img,
-      },
+      name: w.name,
+      url: `https://www.taishgaming.com/weapons/${w.slug}`,
     })),
   };
 

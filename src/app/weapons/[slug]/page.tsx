@@ -212,15 +212,6 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                   { "@type": "ListItem", position: 3, name: weapon.name, item: `https://www.taishgaming.com/weapons/${weapon.slug}` },
                 ],
               },
-              {
-                "@type": "Product",
-                name: weapon.name,
-                description: weapon.description,
-                image: weapon.img,
-                category: weapon.klass,
-                brand: { "@type": "Brand", name: "Taish Gaming" },
-                url: `https://www.taishgaming.com/weapons/${weapon.slug}`,
-              },
             ],
           }),
         }}
