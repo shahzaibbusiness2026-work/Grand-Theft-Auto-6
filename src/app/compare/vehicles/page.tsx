@@ -37,7 +37,7 @@ export default async function CompareVehiclesPage() {
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/20" />
-          <div className="container-site relative px-6 pb-16 pt-6 sm:pb-20 sm:pt-8 lg:pb-24 lg:pt-10">
+          <div className="container-site relative px-6 py-16 sm:py-20 lg:py-24">
             <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm font-bold text-white/70">
               <Link href="/" className="hover:text-white">Home</Link>
               <span aria-hidden="true">›</span>
@@ -45,7 +45,6 @@ export default async function CompareVehiclesPage() {
               <span aria-hidden="true">›</span>
               <span className="text-white">Compare</span>
             </nav>
-            <p className="mb-3 text-sm font-black uppercase tracking-[0.25em] text-[#FF2E9A]">Today in Leonida</p>
             <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tight text-white">
               GTA <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">6</span> Vehicle <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">Comparison</span>
             </h1>

@@ -15,7 +15,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative w-full overflow-hidden bg-background pt-8 pb-6 sm:pt-10 sm:pb-7 lg:pt-12 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-[600px] lg:min-h-[640px] flex flex-col justify-between transition-colors duration-300"
+      className="relative w-full overflow-hidden bg-background pt-2 pb-6 sm:pt-2 sm:pb-7 lg:pt-2 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-[600px] lg:min-h-[640px] flex flex-col justify-between transition-colors duration-300"
     >
       {/* 1. CINEMATIC BACKGROUND CANVAS */}
       <HeroBackground />
@@ -26,7 +26,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
       </h1>
 
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
-      <div className="relative z-10 mx-auto w-full max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl flex flex-col items-center justify-center flex-1 py-8 sm:py-14 text-center">
+      <div className="relative z-10 mx-auto w-full max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl flex flex-col items-center justify-center flex-1 pb-8 sm:pb-14 text-center">
         {/* Countdown in Center */}
         <div className="hero-enter w-full" style={{ animationDelay: "0.05s" }}>
         <Countdown

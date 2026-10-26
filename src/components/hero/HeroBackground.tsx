@@ -161,13 +161,6 @@ export function HeroBackground() {
       <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/60 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent" />
 
-      {/* 6. Today's scene caption — hidden on small screens */}
-      <div className="absolute right-4 top-4 hidden sm:flex items-center gap-2 rounded-full border border-white/15 bg-black/45 px-3.5 py-1.5 backdrop-blur-md">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#00F0FF] shadow-[0_0_8px_#00F0FF]" />
-        <span className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/75">
-          Today in Leonida — {scene.label}
-        </span>
-      </div>
     </div>
   );
 }
