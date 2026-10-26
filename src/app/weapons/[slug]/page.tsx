@@ -310,7 +310,7 @@ export default async function WeaponDetailPage({ params }: { params: Promise<{ s
                 <span>Source Citation</span>
               </div>
               <p className="text-xs text-muted-foreground">
-                <strong>Source:</strong> {weapon.source}. Confidence level: <strong>{weapon.confidence === "CONFIRMED" ? "Confirmed" : "Speculation"}</strong>.
+                <strong>Source:</strong> {weapon.source}. Confidence level: <strong>{weapon.confidence.charAt(0) + weapon.confidence.slice(1).toLowerCase()}</strong>.
               </p>
             </div>
           </div>
