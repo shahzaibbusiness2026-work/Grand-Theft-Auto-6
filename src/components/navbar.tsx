@@ -149,9 +149,9 @@ function SplitNavDropdown({
       className={cn(
         "relative flex items-center rounded-lg transition-all duration-200",
         active
-          ? "border border-[#FF2E9A]/40 bg-[#FF2E9A]/10 text-[#FF2E9A] font-bold shadow-[0_0_12px_rgba(255,46,154,0.15)]"
+          ? "bg-[#FF2E9A] text-white font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
           : open
-            ? "border border-transparent text-[#FF2E9A]"
+            ? "bg-[#FF2E9A] text-white"
             : "border border-transparent text-muted-foreground hover:bg-muted/80 hover:text-[#FF2E9A]"
       )}
     >
@@ -191,7 +191,7 @@ function SplitNavDropdown({
               className={cn(
                 "block rounded-lg px-3 py-2 text-xs font-medium tracking-wide transition-colors",
                 pathname === m.href
-                  ? "bg-[#FF2E9A]/15 text-[#FF2E9A] font-bold"
+                  ? "bg-[#FF2E9A] text-white font-bold"
                   : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
               )}
             >
@@ -284,7 +284,7 @@ export function Navbar() {
                 className={cn(
                   "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
                   isActive(l.href)
-                    ? "border border-[#FF2E9A]/40 bg-[#FF2E9A]/10 text-[#FF2E9A] font-bold shadow-[0_0_12px_rgba(255,46,154,0.15)]"
+                    ? "bg-[#FF2E9A] text-white font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
                     : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
@@ -303,9 +303,9 @@ export function Navbar() {
               className={cn(
                 "flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
                 MORE_HREFS.some((href) => isActive(href))
-                  ? "border border-[#FF2E9A]/40 bg-[#FF2E9A]/10 text-[#FF2E9A] font-bold shadow-[0_0_12px_rgba(255,46,154,0.15)]"
+                  ? "bg-[#FF2E9A] text-white font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
                   : more.open
-                    ? "text-[#FF2E9A]"
+                    ? "bg-[#FF2E9A] text-white"
                     : "text-muted-foreground hover:bg-muted/80 hover:text-[#FF2E9A]"
               )}
             >
@@ -341,7 +341,7 @@ export function Navbar() {
                               className={cn(
                                 "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-medium tracking-wide transition-colors",
                                 active
-                                  ? "bg-[#FF2E9A]/15 text-[#FF2E9A] font-bold"
+                                  ? "bg-[#FF2E9A] text-white font-bold"
                                   : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
                               )}
                             >
@@ -349,7 +349,7 @@ export function Navbar() {
                                 className={cn(
                                   "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-colors",
                                   active
-                                    ? "border-[#FF2E9A]/40 bg-[#FF2E9A]/15 text-[#FF2E9A]"
+                                    ? "border-[#FF2E9A]/40 bg-[#FF2E9A] text-white"
                                     : "border-border/70 bg-muted/60 text-muted-foreground"
                                 )}
                                 aria-hidden="true"
@@ -375,7 +375,7 @@ export function Navbar() {
             className={cn(
               "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
               isActive("/news")
-                ? "border border-[#FF2E9A]/40 bg-[#FF2E9A]/10 text-[#FF2E9A] font-bold shadow-[0_0_12px_rgba(255,46,154,0.15)]"
+                ? "bg-[#FF2E9A] text-white font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
                 : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
             )}
           >
@@ -481,7 +481,7 @@ export function Navbar() {
                     className={cn(
                       "flex min-h-[48px] w-full items-center rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
                       parentActive
-                        ? "bg-[#FF2E9A]/15 text-[#FF2E9A] font-bold"
+                        ? "bg-[#FF2E9A] text-white font-bold"
                         : "text-foreground/90 hover:bg-muted hover:text-[#FF2E9A]"
                     )}
                   >
@@ -496,9 +496,9 @@ export function Navbar() {
                     className={cn(
                       "flex w-full items-center rounded-xl transition-colors",
                       parentActive
-                        ? "bg-[#FF2E9A]/10 text-[#FF2E9A]"
+                        ? "bg-[#FF2E9A] text-white"
                         : expanded
-                          ? "text-[#FF2E9A]"
+                          ? "bg-[#FF2E9A] text-white"
                           : "hover:bg-muted"
                     )}
                   >
@@ -543,7 +543,7 @@ export function Navbar() {
                             className={cn(
                               "flex min-h-[44px] items-center rounded-lg px-4 text-sm font-medium tracking-wide transition-colors",
                               subActive
-                                ? "bg-[#FF2E9A]/15 text-[#FF2E9A] font-bold"
+                                ? "bg-[#FF2E9A] text-white font-bold"
                                 : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
                             )}
                           >
@@ -567,9 +567,9 @@ export function Navbar() {
                 className={cn(
                   "flex min-h-[48px] w-full items-center justify-between rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
                   MORE_HREFS.some((href) => isActive(href))
-                    ? "bg-[#FF2E9A]/10 text-[#FF2E9A] font-bold"
+                    ? "bg-[#FF2E9A] text-white font-bold"
                     : openMobileSection === "tools"
-                      ? "text-[#FF2E9A]"
+                      ? "bg-[#FF2E9A] text-white"
                       : "text-foreground/90 hover:bg-muted hover:text-[#FF2E9A]"
                 )}
               >
@@ -601,7 +601,7 @@ export function Navbar() {
                             className={cn(
                               "flex min-h-[44px] items-center gap-3 rounded-lg px-4 text-sm font-medium tracking-wide transition-colors",
                               subActive
-                                ? "bg-[#FF2E9A]/15 text-[#FF2E9A] font-bold"
+                                ? "bg-[#FF2E9A] text-white font-bold"
                                 : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
                             )}
                           >
@@ -625,7 +625,7 @@ export function Navbar() {
               className={cn(
                 "flex min-h-[48px] w-full items-center rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
                 isActive("/news")
-                  ? "bg-[#FF2E9A]/15 text-[#FF2E9A] font-bold"
+                  ? "bg-[#FF2E9A] text-white font-bold"
                   : "text-foreground/90 hover:bg-muted hover:text-[#FF2E9A]"
               )}
             >
