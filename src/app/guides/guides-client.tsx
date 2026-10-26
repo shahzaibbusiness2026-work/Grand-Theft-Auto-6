@@ -99,7 +99,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                 onClick={() => setCat(c.label)}
                 className={cn(
                   "flex w-full items-center justify-between rounded-lg px-3 py-3 text-[13px] font-semibold text-muted-foreground transition-colors hover:text-foreground",
-                  cat === c.label && "border border-gold/50 bg-gold/10 text-gold dark:text-gold-light shadow-sm"
+                  cat === c.label && "border border-[#FF2E9A]/50 bg-[#FF2E9A]/10 text-[#FF2E9A] shadow-sm"
                 )}
               >
                 {c.label}

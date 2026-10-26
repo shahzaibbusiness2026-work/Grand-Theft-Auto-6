@@ -218,7 +218,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
                       }}
                       className={cn(
                         "absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full backdrop-blur-md transition-all",
-                        isFav ? "bg-gold text-slate-950 shadow-md" : "bg-black/50 text-white hover:bg-black/80"
+                        isFav ? "bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white shadow-md" : "bg-black/50 text-white hover:bg-black/80"
                       )}
                       aria-label="Save weapon"
                     >

@@ -162,7 +162,7 @@ function RecoveryCodePanel({
         will need it to reset it — we cannot email you a reset link yet.
         Store it somewhere safe, like your password manager.
       </p>
-      <Button onClick={onContinue} className="w-full bg-gold font-bold text-slate-950 hover:brightness-105">
+      <Button onClick={onContinue} className="w-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 font-bold text-white hover:brightness-110">
         I have saved my code — continue to dashboard <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </Button>
     </div>
@@ -419,7 +419,7 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
             onClick={() => setTab("signin")}
             className={`flex-1 rounded-full py-2.5 text-sm font-bold transition-all ${
               isSignin
-                ? "bg-gold text-slate-950 shadow"
+                ? "bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white shadow"
                 : "text-slate-300 hover:text-white"
             }`}
           >
@@ -432,7 +432,7 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
             onClick={() => setTab("signup")}
             className={`flex-1 rounded-full py-2.5 text-sm font-bold transition-all ${
               !isSignin
-                ? "bg-gold text-slate-950 shadow"
+                ? "bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white shadow"
                 : "text-slate-300 hover:text-white"
             }`}
           >
@@ -513,7 +513,7 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
                   {loginError}
                 </p>
               )}
-              <Button type="submit" disabled={loginLoading} className="w-full bg-gold font-bold text-slate-950 hover:brightness-105">
+              <Button type="submit" disabled={loginLoading} className="w-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 font-bold text-white hover:brightness-110">
                 {loginLoading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Saving…
@@ -571,7 +571,7 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
                 </p>
               )}
 
-              <Button type="submit" disabled={loginLoading} className="w-full bg-gold font-bold text-slate-950 hover:brightness-105">
+              <Button type="submit" disabled={loginLoading} className="w-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 font-bold text-white hover:brightness-110">
                 {loginLoading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Signing in…
@@ -701,7 +701,7 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
               </p>
             )}
 
-            <Button type="submit" disabled={signupLoading} className="w-full bg-gold font-bold text-slate-950 hover:brightness-105">
+            <Button type="submit" disabled={signupLoading} className="w-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 font-bold text-white hover:brightness-110">
               {signupLoading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Creating account…

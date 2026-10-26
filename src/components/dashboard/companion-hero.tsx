@@ -89,7 +89,7 @@ export function CompanionHero({
           <div className="pt-2">
             <Link
               href="/missions"
-              className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 font-display text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_24px_rgba(201,168,106,0.35)] transition-all duration-300 hover:brightness-105 hover:shadow-[0_0_32px_rgba(201,168,106,0.55)] hover:scale-[1.02] active:scale-95"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-6 py-3 font-display text-xs font-black uppercase tracking-wider text-white shadow-[0_0_24px_rgba(255,46,154,0.35)] transition-all duration-300 hover:brightness-105 hover:shadow-[0_0_32px_rgba(255,46,154,0.55)] hover:scale-[1.02] active:scale-95"
             >
               <span>Continue Your Journey</span>
               <ArrowRight className="h-4 w-4 text-slate-950" />

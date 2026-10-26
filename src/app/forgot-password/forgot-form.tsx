@@ -167,7 +167,7 @@ export function ForgotForm() {
         </div>
         <a
           href="/login"
-          className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-gold py-2.5 text-sm font-bold text-slate-950 hover:brightness-105"
+          className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#FF2E9A] to-violet-500 py-2.5 text-sm font-bold text-white hover:brightness-110"
         >
           Back to login <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </a>
@@ -242,7 +242,7 @@ export function ForgotForm() {
         </p>
       )}
 
-      <Button type="submit" disabled={loading} className="w-full bg-gold font-bold text-slate-950 hover:brightness-105">
+      <Button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 font-bold text-white hover:brightness-110">
         {loading ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Resetting…

@@ -484,7 +484,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   onClick={handleSwapFirstTwo}
                   title="Swap the first two vehicles"
                   aria-label="Swap the first two vehicles"
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-white shadow-lg shadow-[#FF2E9A]/30 transition hover:scale-105"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white shadow-lg shadow-[#FF2E9A]/30 transition hover:scale-105"
                 >
                   <ArrowLeftRight className="h-5 w-5" />
                 </button>
@@ -529,7 +529,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
           )}
           <Button
             onClick={handleShare}
-            className="bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-white font-bold text-sm shadow-md min-h-[44px]"
+            className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white font-bold text-sm shadow-md min-h-[44px]"
           >
             {copied ? <Check className="h-3.5 w-3.5 mr-1 text-emerald-300" /> : <Share2 className="h-3.5 w-3.5 mr-1" />}
             <span>{copied ? "Link Copied!" : "Share Comparison URL"}</span>
@@ -563,7 +563,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
               onClick={() => setKlassFilter("")}
               className={cn(
                 "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-bold transition",
-                klassFilter === "" ? "bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-white" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+                klassFilter === "" ? "bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
               )}
             >
               <span className="flex items-center gap-2"><LayoutGrid className="h-4 w-4" />All Vehicles</span>
@@ -577,7 +577,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   onClick={() => setKlassFilter(klass)}
                   className={cn(
                     "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-bold transition",
-                    klassFilter === klass ? "bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-white" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+                    klassFilter === klass ? "bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
                   )}
                 >
                   <span className="flex items-center gap-2"><Icon className="h-4 w-4" />{klass}s</span>
@@ -661,7 +661,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     className={cn(
                       "flex-1 rounded-lg py-2 text-sm font-black transition",
                       seatsFilter === opt.value
-                        ? "bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-white"
+                        ? "bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white"
                         : "bg-muted/50 text-muted-foreground hover:bg-muted/70 hover:text-foreground"
                     )}
                   >
@@ -741,7 +741,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 <Fragment key={v.id}>
                   {selectedVehicles.length === 2 && idx === 1 && (
                     <div className="hidden items-center justify-center md:flex" aria-hidden="true">
-                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-[#FF2E9A] to-[#00B4FF] text-lg font-black text-white shadow-lg shadow-[#FF2E9A]/40">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-lg font-black text-white shadow-lg shadow-[#FF2E9A]/40">
                         VS
                       </span>
                     </div>

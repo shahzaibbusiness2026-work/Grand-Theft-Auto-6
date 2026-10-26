@@ -150,7 +150,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                   className={cn(
                     "rounded-lg px-2.5 py-2.5 text-xs font-semibold transition-all",
                     selectedDiff === d
-                      ? "bg-gold-light text-black font-bold shadow-sm"
+                      ? "bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white font-bold shadow-sm"
                       : "bg-muted/40 text-muted-foreground hover:text-foreground"
                   )}
                 >

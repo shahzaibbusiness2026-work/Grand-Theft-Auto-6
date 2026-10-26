@@ -513,7 +513,7 @@ export function LoadoutClient() {
             <div className="pt-2 space-y-2">
               <button
                 onClick={handleSave}
-                className="w-full py-3 text-sm flex items-center justify-center gap-2 font-bold rounded-xl bg-gold text-slate-950 hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_2px_12px_rgba(201,168,106,0.3)]"
+                className="w-full py-3 text-sm flex items-center justify-center gap-2 font-bold rounded-xl bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_2px_12px_rgba(255,46,154,0.3)]"
               >
                 <Save className="h-4 w-4" /> Save to Armory
               </button>

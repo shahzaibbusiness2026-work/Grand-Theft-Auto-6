@@ -108,7 +108,7 @@ export function CompanionContinueCard({
       {/* Continue Mission Button */}
       <Link
         href="/missions"
-        className="flex w-full items-center justify-center gap-1.5 rounded-2xl bg-gold py-2.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_16px_rgba(201,168,106,0.35)] transition-all hover:brightness-105 active:scale-95"
+        className="flex w-full items-center justify-center gap-1.5 rounded-2xl bg-gradient-to-r from-[#FF2E9A] to-violet-500 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-[0_0_16px_rgba(255,46,154,0.35)] transition-all hover:brightness-105 active:scale-95"
       >
         <span>Continue Mission</span>
         <ArrowRight className="h-3.5 w-3.5 text-slate-950" />
