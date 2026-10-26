@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Fragment } from "react";
 import Link from "next/link";
 import {
   Trophy,
@@ -8,21 +8,20 @@ import {
   X,
   Share2,
   Check,
-  Gauge,
-  Timer,
-  Disc3,
-  Car,
-  Zap,
-  ThumbsUp,
-  ThumbsDown,
+  ArrowLeftRight,
+  Search,
+  RotateCcw,
   ChevronRight,
+  Lightbulb,
+  TrendingUp,
+  Zap,
+  Ruler,
 } from "lucide-react";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { canonicalVehicles, CanonicalVehicle } from "@/lib/canonical-data";
 import type { VehicleScoreWeights } from "@/lib/scoring";
-import { computeVehicleScore, getVehicleBestFor } from "@/lib/scoring";
+import { computeVehicleScore, getVehicleBestFor, DEFAULT_VEHICLE_WEIGHTS } from "@/lib/scoring";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { FavoriteButton } from "@/components/favorite-button";
 import { RadarChart, RADAR_COLORS } from "@/components/radar-chart";
@@ -37,6 +36,10 @@ interface CompareVehiclesClientProps {
   weights?: VehicleScoreWeights;
 }
 
+/** Stored top speeds are mph; the redesign displays km/h like the reference layout. */
+const toKmh = (mph: number) => Math.round(mph * 1.60934);
+const fmtPrice = (n: number) => `$${n.toLocaleString()}`;
+
 export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: CompareVehiclesClientProps) {
   const vehicleList = vehicles && vehicles.length > 0 ? vehicles : canonicalVehicles;
 
@@ -47,6 +50,40 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
 
   const [copied, setCopied] = useState(false);
   const [pickerSlotIndex, setPickerSlotIndex] = useState<number | null>(null);
+
+  // Finder filters (left sidebar). These filter the picker candidates.
+  const [search, setSearch] = useState("");
+  const [klassFilter, setKlassFilter] = useState("");
+  const [speedMin, setSpeedMin] = useState(0);
+  const [speedMax, setSpeedMax] = useState(400);
+  const [priceMin, setPriceMin] = useState(0);
+  const [priceMax, setPriceMax] = useState(5000000);
+  const [seatsFilter, setSeatsFilter] = useState(0); // 0 = Any, 1, 2, 4 = 4+
+  const [manufacturerFilter, setManufacturerFilter] = useState("");
+  const [driveFilter, setDriveFilter] = useState("");
+
+  const filtersActive =
+    search !== "" ||
+    klassFilter !== "" ||
+    speedMin > 0 ||
+    speedMax < 400 ||
+    priceMin > 0 ||
+    priceMax < 5000000 ||
+    seatsFilter !== 0 ||
+    manufacturerFilter !== "" ||
+    driveFilter !== "";
+
+  const resetFilters = () => {
+    setSearch("");
+    setKlassFilter("");
+    setSpeedMin(0);
+    setSpeedMax(400);
+    setPriceMin(0);
+    setPriceMax(5000000);
+    setSeatsFilter(0);
+    setManufacturerFilter("");
+    setDriveFilter("");
+  };
 
   // Read URL params on mount
   useEffect(() => {
@@ -101,14 +138,12 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
     setPickerSlotIndex(null);
   };
 
-  const handleAddSlot = () => {
-    if (selectedSlugs.length >= 4) return;
-    const unselected = vehicleList.find((v) => !selectedSlugs.includes(v.slug));
-    if (unselected) {
-      const next = [...selectedSlugs, unselected.slug];
-      setSelectedSlugs(next);
-      syncToUrl(next);
-    }
+  const handleSwapFirstTwo = () => {
+    if (selectedSlugs.length < 2) return;
+    const next = [...selectedSlugs];
+    [next[0], next[1]] = [next[1], next[0]];
+    setSelectedSlugs(next);
+    syncToUrl(next);
   };
 
   const handleShare = () => {
@@ -120,33 +155,43 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
     }
   };
 
-  // Calculate Winners
-  const bestSpeed = useMemo(() => Math.max(...selectedVehicles.map((v) => v.topSpeed)), [selectedVehicles]);
-  const bestAccel = useMemo(() => Math.min(...selectedVehicles.map((v) => v.acceleration)), [selectedVehicles]);
-  const bestBraking = useMemo(() => Math.max(...selectedVehicles.map((v) => v.braking)), [selectedVehicles]);
-  const bestHandling = useMemo(() => Math.max(...selectedVehicles.map((v) => v.handling)), [selectedVehicles]);
-  const bestPower = useMemo(() => Math.max(...selectedVehicles.map((v) => v.power)), [selectedVehicles]);
-  const bestTraction = useMemo(
-    () => Math.max(...selectedVehicles.map((v) => v.traction ?? 70)),
-    [selectedVehicles]
+  // Finder data: real counts / options computed from the catalog, never hardcoded.
+  const klassCounts = useMemo(() => {
+    const map = new Map<string, number>();
+    vehicleList.forEach((v) => map.set(v.klass, (map.get(v.klass) ?? 0) + 1));
+    return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
+  }, [vehicleList]);
+
+  const manufacturers = useMemo(
+    () => Array.from(new Set(vehicleList.map((v) => v.manufacturer).filter(Boolean))).sort(),
+    [vehicleList]
   );
 
-  // Overall Score Calculation (Speed 35%, Accel 25%, Handling 25%, Braking 15%)
-  const scores = useMemo(() => {
-    return selectedVehicles.map((v) => {
-      const speedScore = (v.topSpeed / 240) * 35;
-      const accelScore = Math.max(0, (5.5 - v.acceleration) / 3.5) * 25;
-      const handlingScore = (v.handling / 100) * 25;
-      const brakingScore = (v.braking / 100) * 15;
-      const total = Math.round(speedScore + accelScore + handlingScore + brakingScore);
-      return { vehicle: v, total };
-    });
-  }, [selectedVehicles]);
+  const drivetrains = useMemo(
+    () =>
+      Array.from(
+        new Set(vehicleList.map((v) => (v as { drivetrain?: string }).drivetrain).filter(Boolean) as string[])
+      ).sort(),
+    [vehicleList]
+  );
 
-  const overallWinner = useMemo(() => {
-    if (scores.length === 0) return null;
-    return [...scores].sort((a, b) => b.total - a.total)[0];
-  }, [scores]);
+  const filteredCandidates = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return vehicleList.filter((v) => {
+      if (q !== "" && !`${v.name} ${v.manufacturer}`.toLowerCase().includes(q)) return false;
+      if (klassFilter !== "" && v.klass !== klassFilter) return false;
+      const kmh = toKmh(v.topSpeed);
+      if (kmh < speedMin || kmh > speedMax) return false;
+      const price = v.price ?? 0;
+      if (price < priceMin || price > priceMax) return false;
+      if (seatsFilter === 1 && v.seating !== 1) return false;
+      if (seatsFilter === 2 && v.seating !== 2) return false;
+      if (seatsFilter === 4 && (v.seating ?? 0) < 4) return false;
+      if (manufacturerFilter !== "" && v.manufacturer !== manufacturerFilter) return false;
+      if (driveFilter !== "" && (v as { drivetrain?: string }).drivetrain !== driveFilter) return false;
+      return true;
+    });
+  }, [vehicleList, search, klassFilter, speedMin, speedMax, priceMin, priceMax, seatsFilter, manufacturerFilter, driveFilter]);
 
   // CMS-weighted Overall Scores + Best-For tags
   const overallScores = useMemo(
@@ -161,6 +206,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
     () => selectedVehicles.map((v) => getVehicleBestFor(v)),
     [selectedVehicles]
   );
+  const effectiveWeights = weights ?? DEFAULT_VEHICLE_WEIGHTS;
 
   // Radar chart data (acceleration inverted so higher = better on the chart)
   const radarSeries = useMemo(
@@ -185,6 +231,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
     return Number.isFinite(n) ? n : null;
   };
 
+  // Screenshot-style stat table: Stat | cars (value + bar) | Winner.
   const tableRows: ComparisonRowDef[] = useMemo(() => {
     if (selectedVehicles.length < 2) return [];
     const winnerMax = (vals: number[]) => {
@@ -197,14 +244,16 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
       if (valid.length === 0 || new Set(valid).size === 1) return null;
       return vals.indexOf(Math.min(...(valid as number[])));
     };
-    const tractionVals = selectedVehicles.map((v) => v.traction ?? 70);
-    const corneringVals = selectedVehicles.map((v) => v.cornering ?? 70);
-    const launchVals = selectedVehicles.map((v) => v.launch ?? 70);
-    const priceVals = selectedVehicles.map((v) => v.price ?? null);
+    const kmhVals = selectedVehicles.map((v) => toKmh(v.topSpeed));
+    const accelVals = selectedVehicles.map((v) => v.acceleration);
+    const handlingVals = selectedVehicles.map((v) => v.handling);
+    const brakingVals = selectedVehicles.map((v) => v.braking);
+    const powerVals = selectedVehicles.map((v) => v.power);
     const weightVals = selectedVehicles.map((v) => parseWeightNum(v.weight || ""));
+    const priceVals = selectedVehicles.map((v) => v.price ?? null);
     const seatVals = selectedVehicles.map((v) => v.seating ?? 0);
 
-    const rows: ComparisonRowDef[] = [
+    return [
       {
         label: "Overall Score",
         values: overallScores.map((s) => `${s}/100 est.`),
@@ -213,59 +262,37 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
       },
       {
         label: "Top Speed",
-        values: selectedVehicles.map((v) => `${v.topSpeed} mph est.`),
-        bars: selectedVehicles.map((v) => ((v.topSpeed - 80) / 150) * 100),
-        winnerIndex: winnerMax(selectedVehicles.map((v) => v.topSpeed)),
+        values: kmhVals.map((k) => `${k} km/h est.`),
+        bars: kmhVals.map((k) => (k / 400) * 100),
+        winnerIndex: winnerMax(kmhVals),
       },
       {
-        label: "0–60 Launch",
-        values: selectedVehicles.map((v) => `${v.acceleration}s est.`),
-        bars: selectedVehicles.map((v) => ((6.5 - v.acceleration) / 5) * 100),
-        winnerIndex: winnerMin(selectedVehicles.map((v) => v.acceleration)),
+        label: "Acceleration (0–60)",
+        values: accelVals.map((a) => `${a}s est.`),
+        bars: accelVals.map((a) => ((6.5 - a) / 5) * 100),
+        winnerIndex: winnerMin(accelVals),
       },
       {
         label: "Handling",
-        values: selectedVehicles.map((v) => `${v.handling}/100 est.`),
-        bars: selectedVehicles.map((v) => v.handling),
-        winnerIndex: winnerMax(selectedVehicles.map((v) => v.handling)),
+        values: handlingVals.map((h) => `${h}/100 est.`),
+        bars: handlingVals,
+        winnerIndex: winnerMax(handlingVals),
       },
       {
         label: "Braking",
-        values: selectedVehicles.map((v) => `${v.braking}/100 est.`),
-        bars: selectedVehicles.map((v) => v.braking),
-        winnerIndex: winnerMax(selectedVehicles.map((v) => v.braking)),
-      },
-      {
-        label: "Traction",
-        values: tractionVals.map((t) => `${t}/100 est.`),
-        bars: tractionVals,
-        winnerIndex: winnerMax(tractionVals),
-      },
-      {
-        label: "Cornering",
-        values: corneringVals.map((t) => `${t}/100 est.`),
-        bars: corneringVals,
-        winnerIndex: winnerMax(corneringVals),
-      },
-      {
-        label: "Launch / Takeoff",
-        values: launchVals.map((t) => `${t}/100 est.`),
-        bars: launchVals,
-        winnerIndex: winnerMax(launchVals),
+        values: brakingVals.map((b) => `${b}/100 est.`),
+        bars: brakingVals,
+        winnerIndex: winnerMax(brakingVals),
       },
       {
         label: "Horsepower",
-        values: selectedVehicles.map((v) => `${v.power} HP est.`),
-        winnerIndex: winnerMax(selectedVehicles.map((v) => v.power)),
-      },
-      {
-        label: "Price",
-        values: selectedVehicles.map((v) => `${v.priceDisplay} est.`),
-        winnerIndex: winnerMin(priceVals),
+        values: powerVals.map((p) => `${p} HP est.`),
+        bars: powerVals.map((p) => Math.min(100, p / 10)),
+        winnerIndex: winnerMax(powerVals),
       },
       {
         label: "Weight",
-        values: selectedVehicles.map((v) => `${v.weight} est.`),
+        values: selectedVehicles.map((v) => (v.weight ? `${v.weight} est.` : "Not confirmed")),
         winnerIndex: winnerMin(weightVals),
       },
       {
@@ -273,9 +300,98 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
         values: seatVals.map((s) => String(s)),
         winnerIndex: winnerMax(seatVals),
       },
+      {
+        label: "Price",
+        values: selectedVehicles.map((v) => (v.priceDisplay ? `${v.priceDisplay} est.` : "Not confirmed")),
+        winnerIndex: winnerMin(priceVals),
+      },
     ];
-    return rows;
   }, [selectedVehicles, overallScores]);
+
+  // Key takeaways: computed from the real numbers, leader-based so they work for 2–4 cars.
+  const takeaways = useMemo(() => {
+    if (selectedVehicles.length < 2) return [];
+    const lines: string[] = [];
+    const lead = (
+      vals: number[],
+      better: "max" | "min",
+      text: (w: CanonicalVehicle, diff: number | null) => string
+    ) => {
+      const sorted = [...vals].sort((a, b) => (better === "max" ? b - a : a - b));
+      if (sorted[0] === sorted[1]) return; // tied at the top
+      const wi = vals.indexOf(sorted[0]);
+      const diff = selectedVehicles.length === 2 ? Math.abs(sorted[0] - sorted[1]) : null;
+      lines.push(text(selectedVehicles[wi], diff));
+    };
+    lead(
+      selectedVehicles.map((v) => toKmh(v.topSpeed)),
+      "max",
+      (w, diff) =>
+        diff != null
+          ? `${w.name} is ${diff} km/h faster at top speed`
+          : `${w.name} has the highest top speed (${toKmh(w.topSpeed)} km/h est.)`
+    );
+    lead(
+      selectedVehicles.map((v) => v.acceleration),
+      "min",
+      (w) => `${w.name} launches quickest (0–60 in ${w.acceleration}s est.)`
+    );
+    lead(
+      selectedVehicles.map((v) => v.handling),
+      "max",
+      (w) => `${w.name} handles corners most smoothly`
+    );
+    lead(
+      selectedVehicles.map((v) => v.braking),
+      "max",
+      (w) => `${w.name} brakes hardest`
+    );
+    lead(
+      selectedVehicles.map((v) => v.power),
+      "max",
+      (w) => `${w.name} brings the most horsepower (${w.power} HP est.)`
+    );
+    const weightVals = selectedVehicles.map((v) => parseWeightNum(v.weight || ""));
+    if (weightVals.every((w) => w != null)) {
+      lead(weightVals as number[], "min", (w) => `${w.name} is the lightest of the group`);
+    }
+    const priceVals = selectedVehicles.map((v) => v.price ?? null);
+    if (priceVals.every((p) => p != null)) {
+      lead(priceVals as number[], "min", (w) => `${w.name} offers the best value at ${w.priceDisplay}`);
+    }
+    const seatVals = selectedVehicles.map((v) => v.seating ?? 0);
+    if (new Set(seatVals).size === 1) {
+      lines.push(`All selected vehicles seat ${seatVals[0]}`);
+    } else {
+      lead(seatVals, "max", (w) => `${w.name} seats the most (${w.seating})`);
+    }
+    return lines.slice(0, 8);
+  }, [selectedVehicles]);
+
+  // Speed & acceleration chart: illustrative curves drawn from the two known numbers
+  // per car (0–60 time and top speed). Never measured telemetry.
+  const speedChart = useMemo(() => {
+    const W = 640;
+    const H = 300;
+    const padL = 44;
+    const padR = 12;
+    const padT = 12;
+    const padB = 28;
+    const x = (t: number) => padL + (t / 20) * (W - padL - padR);
+    const y = (s: number) => padT + (1 - s / 400) * (H - padT - padB);
+    const series = selectedVehicles.map((v, i) => {
+      const topKmh = toKmh(v.topSpeed);
+      const accel = v.acceleration;
+      const k = topKmh > 100 ? -Math.log(1 - 97 / topKmh) / Math.max(accel, 0.5) : 2 / Math.max(accel, 0.5);
+      const pts: string[] = [];
+      for (let t = 0; t <= 20; t += 0.5) {
+        pts.push(`${x(t).toFixed(1)},${y(topKmh * (1 - Math.exp(-k * t))).toFixed(1)}`);
+      }
+      const marker = topKmh > 100 ? { mx: x(accel), my: y(97), label: `0–60: ${accel}s` } : null;
+      return { name: v.name, color: RADAR_COLORS[i % RADAR_COLORS.length], points: pts.join(" "), marker };
+    });
+    return { W, H, x, y, series };
+  }, [selectedVehicles]);
 
   // Special features (✓ / ✗) across all selected vehicles
   const featureUnion = useMemo(() => {
@@ -292,342 +408,633 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
     [featureUnion, selectedVehicles]
   );
 
+  const winnerVehicle = overallScoreLeader != null ? selectedVehicles[overallScoreLeader] : null;
+  const winnerScore = overallScoreLeader != null ? overallScores[overallScoreLeader] : null;
+  const powerLeader =
+    selectedVehicles.length > 1 && new Set(selectedVehicles.map((v) => v.power)).size > 1
+      ? selectedVehicles.indexOf(selectedVehicles.reduce((a, b) => (b.power > a.power ? b : a)))
+      : null;
+  const weightNums = selectedVehicles.map((v) => parseWeightNum(v.weight || ""));
+  const lightestIdx =
+    selectedVehicles.length > 1 &&
+    weightNums.every((w) => w != null) &&
+    new Set(weightNums).size > 1
+      ? weightNums.indexOf(Math.min(...(weightNums as number[])))
+      : null;
+
   return (
     <div className="space-y-8">
       <EstimatedDataNote />
-      {/* Top Controls Header */}
-      <div className="card-surface p-5 rounded-3xl border border-border shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
-            <span className="text-sm font-black text-accent">Head-to-Head Duel Mode</span>
-          </div>
-          <h2 className="font-display text-xl sm:text-2xl font-black text-foreground">
-            Comparing <span className="text-cyan-600 dark:text-[#00F0FF]">{selectedVehicles.length}</span> Contenders
-          </h2>
-          <p className="text-sm text-muted-foreground mt-1">
-            Compare 2 to 4 rides across top speed, acceleration curve, handling physics, and value.
-          </p>
-        </div>
 
-        <div className="flex flex-wrap items-center gap-2.5">
+      {/* Selected slots + swap + add + share */}
+      <div className="card-surface rounded-3xl border border-border p-5">
+        <div className="flex flex-wrap items-center gap-3">
+          {selectedVehicles.map((v, idx) => (
+            <Fragment key={v.id}>
+              {idx === 1 && (
+                <button
+                  onClick={handleSwapFirstTwo}
+                  title="Swap the first two vehicles"
+                  aria-label="Swap the first two vehicles"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 transition hover:scale-105"
+                >
+                  <ArrowLeftRight className="h-5 w-5" />
+                </button>
+              )}
+              <div className="flex items-center gap-3 rounded-2xl border border-border bg-muted/50 py-2 pl-2 pr-2.5">
+                <button
+                  onClick={() => setPickerSlotIndex(idx)}
+                  className="flex items-center gap-3 text-left"
+                  title="Change this vehicle"
+                >
+                  <img
+                    loading="lazy"
+                    src={v.img}
+                    alt={v.name}
+                    style={v.filter ? { filter: v.filter } : undefined}
+                    className="h-11 w-16 rounded-xl object-cover"
+                  />
+                  <span>
+                    <span className="block text-sm font-black text-foreground">{v.name}</span>
+                    <span className="block text-xs font-bold text-muted-foreground">{v.klass}</span>
+                  </span>
+                </button>
+                {selectedVehicles.length > 2 && (
+                  <button
+                    onClick={() => handleRemoveVehicle(idx)}
+                    aria-label={`Remove ${v.name}`}
+                    className="rounded-lg p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+            </Fragment>
+          ))}
           {selectedSlugs.length < 4 && (
             <Button
-              onClick={handleAddSlot}
-              className="bg-muted/50 hover:bg-muted/60 text-foreground font-bold text-sm"
+              onClick={() => setPickerSlotIndex(selectedSlugs.length)}
+              className="bg-muted/50 hover:bg-muted/60 text-foreground font-bold text-sm min-h-[44px]"
             >
-              <Plus className="h-3.5 w-3.5 mr-1" /> Add 3rd/4th Car
+              <Plus className="h-4 w-4 mr-1" /> Add Vehicle
             </Button>
           )}
-
           <Button
             onClick={handleShare}
-            className="bg-primary text-primary-foreground font-bold text-sm shadow-md"
+            className="bg-primary text-primary-foreground font-bold text-sm shadow-md min-h-[44px]"
           >
             {copied ? <Check className="h-3.5 w-3.5 mr-1 text-emerald-300" /> : <Share2 className="h-3.5 w-3.5 mr-1" />}
             <span>{copied ? "Link Copied!" : "Share Comparison URL"}</span>
           </Button>
         </div>
+        <p className="mt-3 text-xs text-muted-foreground">
+          Comparing {selectedVehicles.length} of up to 4 vehicles. Tap a vehicle above to swap it, use the
+          ⇄ button to swap the first two, or narrow the picker with the finder on the left.
+        </p>
       </div>
 
-      {/* OVERALL WINNER & RECOMMENDATION CARD */}
-      {overallWinner && (
-        <div className="dark-panel relative overflow-hidden rounded-3xl border border-gold/30 bg-[#0a0f1d] bg-gradient-to-r from-gold/10 via-[#0a0f1d] to-[#12071a] p-6 sm:p-8 shadow-2xl">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-xl">
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-gold-light/40 bg-gold-light/10 px-3 py-1 text-sm font-black text-amber-300">
-                <Trophy className="h-3.5 w-3.5 text-gold-light" /> Pre-Release Estimated Winner
-              </div>
-              <h3 className="font-display text-2xl sm:text-3xl font-black text-white">
-                {overallWinner.vehicle.name} leads with {overallWinner.total}/100 estimated Performance Score
-              </h3>
-              <p className="text-sm sm:text-sm text-muted-foreground leading-relaxed">
-                Based on combined power output, zero-to-sixty acceleration rate, and cornering grip, the{" "}
-                <strong>{overallWinner.vehicle.name}</strong> provides superior track dominance and getaway viability in Leonida. Scores are pre-release estimates computed from estimated stats (Overall Score = Speed 35%, Acceleration 25%, Handling 25%, Braking 15%), not measured in-game performance.
-              </p>
-            </div>
+      <div className="grid items-start gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+        {/* Finder sidebar */}
+        <aside className="card-surface rounded-3xl border border-border p-5 lg:sticky lg:top-24">
+          <h2 className="font-display text-base font-black text-foreground">Find &amp; Compare Vehicles</h2>
 
-            <div className="flex items-center gap-4 shrink-0">
-              <div className="h-20 w-32 rounded-xl overflow-hidden border border-border bg-black/40">
-                <img loading="lazy"
-                  src={overallWinner.vehicle.img}
-                  alt={overallWinner.vehicle.name}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div>
-                <span className="block tabular-nums font-black text-2xl text-gold-light">{overallWinner.total} points</span>
-                <Link
-                  href={`/vehicles/${overallWinner.vehicle.slug}`}
-                  className="text-sm font-bold text-accent hover:underline flex items-center gap-1 mt-1"
-                >
-                  Full Specs <ChevronRight className="h-3 w-3" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* MAIN SIDE-BY-SIDE CARDS GRID */}
-      <div className={cn("grid gap-4", selectedVehicles.length === 2 ? "grid-cols-1 md:grid-cols-2" : selectedVehicles.length === 3 ? "grid-cols-1 md:grid-cols-3" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4")}>
-        {selectedVehicles.map((v, idx) => {
-          const isWinner = overallWinner?.vehicle.slug === v.slug;
-          return (
-            <div
-              key={v.id}
-              className={cn(
-                "card-surface relative rounded-3xl border p-5 flex flex-col justify-between transition-all",
-                isWinner ? "border-gold-light/60 shadow-[0_0_24px_rgba(251,191,36,0.15)]" : "border-border"
-              )}
-            >
-              {/* Header with Slot Selector & Remove */}
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={() => setPickerSlotIndex(idx)}
-                      className="rounded-lg bg-muted/50 px-2 py-3 min-h-[44px] text-sm font-bold text-muted-foreground hover:bg-muted/60 transition-colors"
-                    >
-                      Slot #{idx + 1}: Swap Vehicle ▾
-                    </button>
-                    {isWinner && (
-                      <span className="flex items-center gap-1 rounded-full bg-gold-light/20 text-gold-dark dark:text-amber-300 border border-gold-light/40 px-2 py-0.5 text-sm font-black">
-                        <Trophy className="h-2.5 w-2.5" /> Best Choice
-                      </span>
-                    )}
-                  </div>
-                  {selectedVehicles.length > 2 && (
-                    <button
-                      onClick={() => handleRemoveVehicle(idx)}
-                      className="rounded-lg p-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                      aria-label="Remove vehicle"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  )}
-                </div>
-
-                {/* Vehicle Image */}
-                <div className="relative h-44 rounded-2xl overflow-hidden border border-border bg-black/60 shadow-inner mb-4">
-                  <img loading="lazy"
-                    src={v.img}
-                    alt={v.name}
-                    style={v.filter ? { filter: v.filter } : undefined}
-                    className="h-full w-full object-cover"
-                  />
-                  <span className="absolute bottom-2 left-2 rounded-lg bg-black/80 px-2 py-0.5 text-sm font-bold text-accent backdrop-blur">
-                    {v.klass}
-                  </span>
-                </div>
-
-                {/* Title and Pricing */}
-                <h3 className="font-display text-lg font-black text-foreground truncate">
-                  {v.name}
-                </h3>
-                <div className="flex items-center justify-between text-sm mt-1">
-                  <span className="text-muted-foreground">{v.manufacturer}</span>
-                  <span className="tabular-nums font-bold text-cyan-600 dark:text-[#00F0FF]">{v.priceDisplay}</span>
-                </div>
-                <div className="mt-2">
-                  <ConfidenceBadge level={v.confidence} size="sm" />
-                </div>
-                {bestForTags[idx]?.length > 0 && (
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {bestForTags[idx].map((t) => (
-                      <span
-                        key={t.label}
-                        className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-sm font-black text-accent"
-                      >
-                        {t.emoji} {t.label}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                {overallScores[idx] != null && (
-                  <div className="mt-2 flex items-center justify-between rounded-xl border border-gold/30 bg-gold-light/10 px-2.5 py-1.5">
-                    <span className="text-sm font-black text-gold-dark dark:text-amber-300 flex items-center gap-1">
-                      <Trophy className="h-3 w-3" /> Overall Score
-                    </span>
-                    <span className="tabular-nums font-black text-sm text-gold-dark dark:text-gold-light">
-                      {overallScores[idx]}/100 est.
-                      {overallScoreLeader === idx && overallScores.length > 1 && (
-                        <span className="ml-1.5 text-sm font-black text-emerald-600 dark:text-emerald-400">Lead</span>
-                      )}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* STAT ROWS */}
-              <div className="mt-5 space-y-3 pt-4 border-t border-border">
-                {/* Top Speed */}
-                <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground flex items-center gap-1.5">
-                      <Gauge className="h-3.5 w-3.5 text-accent" /> Top Speed
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="tabular-nums font-bold text-foreground">{v.topSpeed} mph est.</span>
-                      {v.topSpeed === bestSpeed && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
-                          Winner
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* 0-60 Launch */}
-                <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground flex items-center gap-1.5">
-                      <Timer className="h-3.5 w-3.5 text-gold-dark dark:text-gold-light" /> 0–60 Launch
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="tabular-nums font-bold text-foreground">{v.acceleration}s</span>
-                      {v.acceleration === bestAccel && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
-                          Winner
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Handling */}
-                <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground flex items-center gap-1.5">
-                      <Car className="h-3.5 w-3.5 text-cyan-600 dark:text-[#00F0FF]" /> Handling Grip
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="tabular-nums font-bold text-foreground">{v.handling}/100</span>
-                      {v.handling === bestHandling && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
-                          Winner
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Braking */}
-                <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground flex items-center gap-1.5">
-                      <Disc3 className="h-3.5 w-3.5 text-rose-600 dark:text-rose-400" /> Braking Power
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="tabular-nums font-bold text-foreground">{v.braking}/100</span>
-                      {v.braking === bestBraking && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
-                          Winner
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Traction */}
-                <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground flex items-center gap-1.5">
-                      <Car className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" /> Traction
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="tabular-nums font-bold text-foreground">{v.traction ?? 70}/100</span>
-                      {(v.traction ?? 70) === bestTraction && selectedVehicles.length > 1 && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
-                          Winner
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <Progress value={v.traction ?? 70} className="h-1.5 mt-1.5" />
-                </div>
-
-                {/* Power */}
-                <div className="rounded-xl border-border bg-muted/60 p-2.5">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground flex items-center gap-1.5">
-                      <Zap className="h-3.5 w-3.5 text-purple-400" /> Horsepower
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="tabular-nums font-bold text-foreground">{v.power} HP</span>
-                      {v.power === bestPower && (
-                        <span className="rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1 text-sm font-black">
-                          Winner
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* PROS & CONS */}
-              <div className="mt-4 pt-3 border-t border-border space-y-2 text-sm">
-                <div className="flex items-start gap-1.5 text-emerald-600 dark:text-emerald-400">
-                  <ThumbsUp className="h-3 w-3 shrink-0 mt-0.5" />
-                  <span>
-                    {v.topSpeed >= 200 ? "Blistering top end speed on open expressways" : "Highly responsive throttle curve for street getaways"}
-                  </span>
-                </div>
-                <div className="flex items-start gap-1.5 text-rose-600 dark:text-rose-400">
-                  <ThumbsDown className="h-3 w-3 shrink-0 mt-0.5" />
-                  <span>
-                    {(v.price || 0) > 1500000 ? "High acquisition cost and expensive insurance replacement" : "Lower top speed ceiling against hypercars"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Footer Actions */}
-              <div className="mt-5 pt-3 border-t border-border flex items-center justify-between gap-2">
-                <FavoriteButton type="vehicles" id={v.id} showText={false} />
-                <Link
-                  href={`/vehicles/${v.slug}`}
-                  className="flex-1 text-center rounded-xl bg-muted/40 hover:bg-muted/50 min-h-[44px] flex items-center justify-center py-2 text-sm font-bold text-foreground hover:text-foreground transition-colors border border-border"
-                >
-                  View Details
-                </Link>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* RADAR + FEATURE COMPARISON */}
-      {selectedVehicles.length >= 2 && (
-        <div className="grid gap-4 lg:grid-cols-2">
-          <div className="card-surface rounded-3xl border border-border p-5">
-            <h3 className="font-display text-sm font-black text-foreground mb-1">Performance Radar</h3>
-            <p className="text-sm text-muted-foreground mb-3">
-              Speed • Acceleration • Braking • Handling • Traction • Value
-            </p>
-            <RadarChart
-              axes={["Speed", "Accel", "Braking", "Handling", "Traction", "Value"]}
-              series={radarSeries}
+          <div className="relative mt-4">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <input
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search vehicles..."
+              aria-label="Search vehicles"
+              className="w-full rounded-xl border border-border bg-muted/50 py-2.5 pl-9 pr-3 text-sm font-bold text-foreground placeholder:font-normal placeholder:text-muted-foreground focus:border-primary focus:outline-none"
             />
           </div>
 
+          <div className="mt-5 space-y-1">
+            <button
+              onClick={() => setKlassFilter("")}
+              className={cn(
+                "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-bold transition",
+                klassFilter === "" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+              )}
+            >
+              <span>All Vehicles</span>
+              <span className="tabular-nums text-xs opacity-80">{vehicleList.length}</span>
+            </button>
+            {klassCounts.map(([klass, count]) => (
+              <button
+                key={klass}
+                onClick={() => setKlassFilter(klass)}
+                className={cn(
+                  "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-bold transition",
+                  klassFilter === klass ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+                )}
+              >
+                <span>{klass}s</span>
+                <span className="tabular-nums text-xs opacity-80">{count}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-6 space-y-4 border-t border-border pt-5">
+            <div>
+              <div className="flex items-center justify-between text-sm font-bold text-foreground">
+                <span>Top Speed (km/h)</span>
+                <span className="tabular-nums text-xs text-muted-foreground">
+                  {speedMin} – {speedMax}
+                </span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={400}
+                step={5}
+                value={speedMin}
+                onChange={(e) => setSpeedMin(Math.min(Number(e.target.value), speedMax))}
+                aria-label="Minimum top speed in km/h"
+                className="mt-2 w-full accent-pink-500"
+              />
+              <input
+                type="range"
+                min={0}
+                max={400}
+                step={5}
+                value={speedMax}
+                onChange={(e) => setSpeedMax(Math.max(Number(e.target.value), speedMin))}
+                aria-label="Maximum top speed in km/h"
+                className="w-full accent-pink-500"
+              />
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between text-sm font-bold text-foreground">
+                <span>Price Range</span>
+                <span className="tabular-nums text-xs text-muted-foreground">
+                  {fmtPrice(priceMin)} – {fmtPrice(priceMax)}
+                </span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={5000000}
+                step={50000}
+                value={priceMin}
+                onChange={(e) => setPriceMin(Math.min(Number(e.target.value), priceMax))}
+                aria-label="Minimum price"
+                className="mt-2 w-full accent-pink-500"
+              />
+              <input
+                type="range"
+                min={0}
+                max={5000000}
+                step={50000}
+                value={priceMax}
+                onChange={(e) => setPriceMax(Math.max(Number(e.target.value), priceMin))}
+                aria-label="Maximum price"
+                className="w-full accent-pink-500"
+              />
+            </div>
+
+            <div>
+              <span className="text-sm font-bold text-foreground">Seats</span>
+              <div className="mt-2 flex gap-1.5">
+                {[
+                  { value: 0, label: "Any" },
+                  { value: 1, label: "1" },
+                  { value: 2, label: "2" },
+                  { value: 4, label: "4+" },
+                ].map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setSeatsFilter(opt.value)}
+                    className={cn(
+                      "flex-1 rounded-lg py-2 text-sm font-black transition",
+                      seatsFilter === opt.value
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted/50 text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                    )}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="drive-filter" className="text-sm font-bold text-foreground">
+                Drive Type
+              </label>
+              <select
+                id="drive-filter"
+                value={driveFilter}
+                onChange={(e) => setDriveFilter(e.target.value)}
+                className="mt-2 w-full rounded-xl border border-border bg-muted/50 px-3 py-2.5 text-sm font-bold text-foreground focus:border-primary focus:outline-none"
+              >
+                <option value="">All Types</option>
+                {drivetrains.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="manufacturer-filter" className="text-sm font-bold text-foreground">
+                Manufacturer
+              </label>
+              <select
+                id="manufacturer-filter"
+                value={manufacturerFilter}
+                onChange={(e) => setManufacturerFilter(e.target.value)}
+                className="mt-2 w-full rounded-xl border border-border bg-muted/50 px-3 py-2.5 text-sm font-bold text-foreground focus:border-primary focus:outline-none"
+              >
+                <option value="">All Manufacturers</option>
+                {manufacturers.map((m) => (
+                  <option key={m} value={m}>
+                    {m}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button
+              onClick={resetFilters}
+              className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-border bg-muted/40 py-2.5 text-sm font-bold text-foreground transition hover:bg-muted/60"
+            >
+              <RotateCcw className="h-3.5 w-3.5" /> Reset Filters
+            </button>
+            <p className="text-center text-xs text-muted-foreground">
+              {filteredCandidates.length} of {vehicleList.length} vehicles match the finder
+              {filtersActive ? " — the picker shows only matches" : ""}
+            </p>
+          </div>
+        </aside>
+
+        {/* Main column */}
+        <div className="min-w-0 space-y-6">
+          {/* Vehicle cards */}
+          <div
+            className={cn(
+              "grid gap-4",
+              selectedVehicles.length === 2
+                ? "grid-cols-1 md:grid-cols-[1fr_auto_1fr]"
+                : selectedVehicles.length === 3
+                  ? "grid-cols-1 md:grid-cols-3"
+                  : "grid-cols-1 sm:grid-cols-2 xl:grid-cols-4"
+            )}
+          >
+            {selectedVehicles.map((v, idx) => {
+              const isWinner = overallScoreLeader === idx;
+              return (
+                <Fragment key={v.id}>
+                  {selectedVehicles.length === 2 && idx === 1 && (
+                    <div className="hidden items-center justify-center md:flex" aria-hidden="true">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-lg font-black text-primary-foreground shadow-lg shadow-primary/40">
+                        VS
+                      </span>
+                    </div>
+                  )}
+                  <div
+                    className={cn(
+                      "card-surface relative flex flex-col rounded-3xl border p-4 transition-all",
+                      isWinner ? "border-gold-light/60 shadow-[0_0_24px_rgba(251,191,36,0.15)]" : "border-border"
+                    )}
+                  >
+                    <div className="relative h-48 overflow-hidden rounded-2xl border border-border bg-black/60">
+                      <img
+                        loading="lazy"
+                        src={v.img}
+                        alt={v.name}
+                        style={v.filter ? { filter: v.filter } : undefined}
+                        className="h-full w-full object-cover"
+                      />
+                      <span className="absolute bottom-2 left-2 rounded-lg bg-black/80 px-2 py-0.5 text-sm font-bold text-accent backdrop-blur">
+                        {v.klass}
+                      </span>
+                      <span className="absolute right-2 top-2">
+                        <FavoriteButton type="vehicles" id={v.id} showText={false} />
+                      </span>
+                      {isWinner && (
+                        <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-gold-light/90 px-2 py-0.5 text-xs font-black text-black">
+                          <Trophy className="h-3 w-3" /> Best Choice
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex flex-1 flex-col pt-4">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-display truncate text-lg font-black text-foreground">{v.name}</h3>
+                      </div>
+                      <span className="tabular-nums mt-0.5 text-base font-black text-primary">
+                        {v.priceDisplay ?? "Price not listed"}
+                      </span>
+                      <span className="text-sm text-muted-foreground">{v.manufacturer}</span>
+                      <div className="mt-2">
+                        <ConfidenceBadge level={v.confidence} size="sm" />
+                      </div>
+                      {bestForTags[idx]?.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-1">
+                          {bestForTags[idx].map((t) => (
+                            <span
+                              key={t.label}
+                              className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-xs font-black text-accent"
+                            >
+                              {t.emoji} {t.label}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      {overallScores[idx] != null && (
+                        <div className="mt-2 flex items-center justify-between rounded-xl border border-gold/30 bg-gold-light/10 px-2.5 py-1.5">
+                          <span className="flex items-center gap-1 text-sm font-black text-gold-dark dark:text-amber-300">
+                            <Trophy className="h-3 w-3" /> Overall Score
+                          </span>
+                          <span className="tabular-nums text-sm font-black text-gold-dark dark:text-gold-light">
+                            {overallScores[idx]}/100 est.
+                            {isWinner && overallScores.length > 1 && (
+                              <span className="ml-1.5 text-sm font-black text-emerald-600 dark:text-emerald-400">Lead</span>
+                            )}
+                          </span>
+                        </div>
+                      )}
+                      <div className="mt-4 flex items-center justify-between gap-2 border-t border-border pt-4">
+                        <Link
+                          href={`/vehicles/${v.slug}`}
+                          className="flex flex-1 items-center justify-center gap-1 rounded-xl border border-border bg-muted/40 py-2.5 text-sm font-bold text-foreground transition hover:bg-muted/60"
+                        >
+                          View Details <ChevronRight className="h-3.5 w-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </Fragment>
+              );
+            })}
+          </div>
+
+          {/* Quick Verdict */}
+          {winnerVehicle && winnerScore != null && (
+            <div className="dark-panel relative overflow-hidden rounded-3xl border border-gold/30 bg-[#0a0f1d] p-6 shadow-2xl">
+              <div className="flex items-center gap-2">
+                <Trophy className="h-5 w-5 text-gold-light" />
+                <h3 className="font-display text-lg font-black text-white">Quick Verdict</h3>
+              </div>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                {selectedVehicles.map((v, i) => (
+                  <div key={v.id}>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="font-black text-white">{v.name}</span>
+                      <span className="tabular-nums font-black text-white">{overallScores[i]}/100 est.</span>
+                    </div>
+                    <div className="mt-1.5 h-2.5 overflow-hidden rounded-full bg-white/10">
+                      <div
+                        className="h-full rounded-full"
+                        style={{ width: `${Math.min(100, Math.max(0, overallScores[i]))}%`, backgroundColor: RADAR_COLORS[i % RADAR_COLORS.length] }}
+                      />
+                    </div>
+                    {bestForTags[i]?.length > 0 && (
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {bestForTags[i].map((t) => (
+                          <span key={t.label} className="rounded-md bg-white/10 px-2 py-0.5 text-xs font-bold text-white/80">
+                            {t.label}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 rounded-2xl border border-gold-light/40 bg-gold-light/10 p-4">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-gold-light/40 bg-gold-light/10 px-3 py-1 text-xs font-black text-amber-300">
+                  <Trophy className="h-3.5 w-3.5 text-gold-light" /> Pre-Release Estimated Winner
+                </span>
+                <p className="mt-2 text-sm leading-relaxed text-white/85">
+                  <strong className="text-white">Winner for Most Players: {winnerVehicle.name}.</strong> Based on
+                  combined top speed, acceleration, handling, braking, traction and features, it leads the field
+                  with {winnerScore}/100 estimated points.
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-white/60">
+                  Scores are pre-release estimates computed from estimated stats (Overall Score = Top Speed{" "}
+                  {effectiveWeights.topSpeed}%, Acceleration {effectiveWeights.acceleration}%, Handling{" "}
+                  {effectiveWeights.handling}%, Braking {effectiveWeights.braking}%, Traction {effectiveWeights.traction}%,
+                  Features {effectiveWeights.features}%), not measured in-game performance.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Overall Stats Comparison */}
+          {tableRows.length > 0 && (
+            <div>
+              <h3 className="font-display mb-3 flex items-center gap-2 text-lg font-black text-foreground">
+                Overall Stats Comparison
+              </h3>
+              <ComparisonTable
+                contenders={selectedVehicles.map((v, i) => ({ name: v.name, color: RADAR_COLORS[i % RADAR_COLORS.length] }))}
+                rows={tableRows}
+              />
+              <p className="mt-2 text-xs text-muted-foreground">
+                Top speeds are converted from the stored mph values to km/h. All figures are pre-release estimates.
+              </p>
+            </div>
+          )}
+
+          {/* Radar + Key Takeaways */}
+          {selectedVehicles.length >= 2 && (
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="card-surface rounded-3xl border border-border p-5">
+                <h3 className="font-display mb-1 text-lg font-black text-foreground">Performance Radar Chart</h3>
+                <p className="mb-3 text-sm text-muted-foreground">
+                  Speed • Acceleration • Braking • Handling • Traction • Value
+                </p>
+                <RadarChart
+                  axes={["Speed", "Accel", "Braking", "Handling", "Traction", "Value"]}
+                  series={radarSeries}
+                />
+              </div>
+
+              <div className="card-surface rounded-3xl border border-border p-5">
+                <h3 className="font-display mb-3 flex items-center gap-2 text-lg font-black text-foreground">
+                  <Lightbulb className="h-5 w-5 text-gold-light" /> Key Takeaways
+                </h3>
+                {takeaways.length === 0 ? (
+                  <p className="py-8 text-center text-sm text-muted-foreground">
+                    The selected vehicles are tied across every headline stat.
+                  </p>
+                ) : (
+                  <ul className="space-y-3">
+                    {takeaways.map((line) => (
+                      <li key={line} className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground">
+                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                          <Check className="h-3 w-3" />
+                        </span>
+                        {line}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Speed chart + Engine + Dimensions */}
+          <div className="grid gap-6 xl:grid-cols-3">
+            <div className="card-surface rounded-3xl border border-border p-5">
+              <h3 className="font-display mb-1 flex items-center gap-2 text-base font-black text-foreground">
+                <TrendingUp className="h-5 w-5 text-accent" /> Speed &amp; Acceleration
+              </h3>
+              <p className="mb-3 text-xs text-muted-foreground">Speed (km/h) over time (seconds)</p>
+              <svg
+                viewBox={`0 0 ${speedChart.W} ${speedChart.H}`}
+                role="img"
+                aria-label="Illustrative speed over time chart"
+                className="w-full"
+              >
+                {[100, 200, 300, 400].map((s) => (
+                  <g key={s}>
+                    <line x1={44} x2={628} y1={speedChart.y(s)} y2={speedChart.y(s)} stroke="currentColor" className="text-border" strokeWidth={0.6} />
+                    <text x={38} y={speedChart.y(s)} textAnchor="end" dominantBaseline="middle" fontSize={10} className="fill-current text-muted-foreground">
+                      {s}
+                    </text>
+                  </g>
+                ))}
+                {[0, 5, 10, 15, 20].map((t) => (
+                  <text key={t} x={speedChart.x(t)} y={speedChart.H - 8} textAnchor="middle" fontSize={10} className="fill-current text-muted-foreground">
+                    {t}s
+                  </text>
+                ))}
+                {speedChart.series.map((s) => (
+                  <g key={s.name}>
+                    <polyline points={s.points} fill="none" stroke={s.color} strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
+                    {s.marker && (
+                      <g>
+                        <circle cx={s.marker.mx} cy={s.marker.my} r={4.5} fill={s.color} stroke="white" strokeWidth={1.5} />
+                        <text x={s.marker.mx + 8} y={s.marker.my - 8} fontSize={11} fontWeight={700} fill={s.color}>
+                          {s.marker.label}
+                        </text>
+                      </g>
+                    )}
+                  </g>
+                ))}
+              </svg>
+              <div className="mt-2 flex flex-wrap gap-3">
+                {speedChart.series.map((s) => (
+                  <span key={s.name} className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
+                    <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: s.color }} />
+                    {s.name}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                Illustrative curves drawn from each car&apos;s 0–60 time and top speed — not measured telemetry.
+              </p>
+            </div>
+
+            <div className="card-surface rounded-3xl border border-border p-5">
+              <h3 className="font-display mb-3 flex items-center gap-2 text-base font-black text-foreground">
+                <Zap className="h-5 w-5 text-accent" /> Engine &amp; Power
+              </h3>
+              <dl className="divide-y divide-border text-sm">
+                {[
+                  { label: "Engine Type", value: "Not confirmed", crown: null },
+                  {
+                    label: "Horsepower",
+                    value: `${selectedVehicles.map((v) => `${v.name}: ${v.power} HP est.`).join(" · ")}`,
+                    crown: powerLeader,
+                  },
+                  { label: "Torque", value: "Not confirmed", crown: null },
+                  {
+                    label: "Drivetrain",
+                    value: selectedVehicles
+                      .map((v) => `${v.name}: ${(v as { drivetrain?: string }).drivetrain ?? "Not confirmed"}`)
+                      .join(" · "),
+                  },
+                  { label: "Transmission", value: "Not confirmed", crown: null },
+                  { label: "Fuel Type", value: "Not confirmed", crown: null },
+                  { label: "Fuel Capacity", value: "Not confirmed", crown: null },
+                  { label: "Est. Range", value: "Not confirmed", crown: null },
+                ].map((row) => (
+                  <div key={row.label} className="flex items-center justify-between gap-3 py-2">
+                    <dt className="font-bold text-muted-foreground">{row.label}</dt>
+                    <dd className="text-right font-bold text-foreground">
+                      {row.value}
+                      {row.crown != null && row.crown !== undefined && (
+                        <span className="ml-1.5 inline-flex items-center gap-0.5 text-xs font-black text-gold-dark dark:text-amber-300">
+                          <Trophy className="h-3 w-3" />
+                          {selectedVehicles[row.crown as number]?.name}
+                        </span>
+                      )}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                Engine details beyond horsepower and drivetrain are not confirmed yet — they arrive with launch data.
+              </p>
+            </div>
+
+            <div className="card-surface rounded-3xl border border-border p-5">
+              <h3 className="font-display mb-3 flex items-center gap-2 text-base font-black text-foreground">
+                <Ruler className="h-5 w-5 text-accent" /> Dimensions &amp; Weight
+              </h3>
+              <dl className="divide-y divide-border text-sm">
+                {[
+                  {
+                    label: "Weight",
+                    value: selectedVehicles.map((v) => `${v.name}: ${v.weight ? `${v.weight} est.` : "Not confirmed"}`).join(" · "),
+                    crown: lightestIdx,
+                    crownNote: "lightest",
+                  },
+                  { label: "Length", value: "Not confirmed", crown: null },
+                  { label: "Width", value: "Not confirmed", crown: null },
+                  { label: "Height", value: "Not confirmed", crown: null },
+                  { label: "Wheelbase", value: "Not confirmed", crown: null },
+                  { label: "Ground Clearance", value: "Not confirmed", crown: null },
+                ].map((row) => (
+                  <div key={row.label} className="flex items-center justify-between gap-3 py-2">
+                    <dt className="font-bold text-muted-foreground">{row.label}</dt>
+                    <dd className="text-right font-bold text-foreground">
+                      {row.value}
+                      {row.crown != null && row.crown !== undefined && (
+                        <span className="ml-1.5 inline-flex items-center gap-0.5 text-xs font-black text-emerald-600 dark:text-emerald-400">
+                          <Trophy className="h-3 w-3" />
+                          {selectedVehicles[row.crown as number]?.name} ({(row as { crownNote?: string }).crownNote})
+                        </span>
+                      )}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                Dimensions are not confirmed yet — only weight is currently listed for these vehicles.
+              </p>
+            </div>
+          </div>
+
+          {/* Special Features */}
           <div className="card-surface rounded-3xl border border-border p-5">
-            <h3 className="font-display text-sm font-black text-foreground mb-1">Special Features</h3>
-            <p className="text-sm text-muted-foreground mb-3">Weaponization, armor & ability showdown</p>
+            <h3 className="font-display mb-1 text-lg font-black text-foreground">Special Features</h3>
+            <p className="mb-3 text-sm text-muted-foreground">Weaponization, armor &amp; ability showdown</p>
             {featureUnion.length === 0 ? (
-              <p className="text-sm text-muted-foreground py-8 text-center">
+              <p className="py-8 text-center text-sm text-muted-foreground">
                 None of the selected vehicles have special features listed yet.
               </p>
             ) : (
-              <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+              <div className="max-h-72 space-y-2 overflow-y-auto pr-1">
                 {featureMatrix.map(({ feature, present }) => (
-                  <div key={feature} className="grid gap-2 items-center" style={{ gridTemplateColumns: `1.4fr repeat(${selectedVehicles.length}, 1fr)` }}>
+                  <div
+                    key={feature}
+                    className="grid items-center gap-2"
+                    style={{ gridTemplateColumns: `1.4fr repeat(${selectedVehicles.length}, 1fr)` }}
+                  >
                     <span className="text-sm font-bold text-muted-foreground">{feature}</span>
                     {present.map((has, i) => (
                       <span key={i} className="text-center text-sm" aria-label={has ? "Yes" : "No"}>
                         {has ? (
-                          <span className="text-emerald-600 dark:text-emerald-400 font-black">✓</span>
+                          <span className="font-black text-emerald-600 dark:text-emerald-400">✓</span>
                         ) : (
-                          <span className="text-rose-600 dark:text-rose-400/70">✗</span>
+                          <span className="text-rose-600/70 dark:text-rose-400/70">✗</span>
                         )}
                       </span>
                     ))}
@@ -635,44 +1042,52 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                 ))}
               </div>
             )}
-            {featureUnion.length === 0 && <div />}
           </div>
         </div>
-      )}
+      </div>
 
-      {/* FULL STAT TABLE WITH WINNERS */}
-      {tableRows.length > 0 && (
-        <ComparisonTable
-          contenders={selectedVehicles.map((v, i) => ({ name: v.name, color: RADAR_COLORS[i % RADAR_COLORS.length] }))}
-          rows={tableRows}
-        />
-      )}
-
-      {/* VEHICLE PICKER MODAL */}
+      {/* VEHICLE PICKER MODAL (filtered by the finder sidebar) */}
       {pickerSlotIndex !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in">
-          <div className="card-surface max-w-2xl w-full max-h-[80vh] overflow-hidden rounded-3xl border border-border p-6 flex flex-col">
-            <div className="flex items-center justify-between pb-4 border-b border-border">
-              <h3 className="font-display text-lg font-black text-foreground">
-                Choose Contender for Slot #{pickerSlotIndex + 1}
-              </h3>
-                <button
-                  onClick={() => setPickerSlotIndex(null)}
-                  className="rounded-lg p-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                >
-                  <X className="h-5 w-5" />
-                </button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md animate-in fade-in">
+          <div className="card-surface flex max-h-[80vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl border border-border p-6">
+            <div className="flex items-center justify-between border-b border-border pb-4">
+              <div>
+                <h3 className="font-display text-lg font-black text-foreground">
+                  Choose Contender for Slot #{pickerSlotIndex + 1}
+                </h3>
+                <p className="text-xs text-muted-foreground">
+                  {filteredCandidates.length} match the finder
+                  {filtersActive ? " — clear the finder filters to see every vehicle" : ""}
+                </p>
+              </div>
+              <button
+                onClick={() => setPickerSlotIndex(null)}
+                className="rounded-lg p-2.5 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+              >
+                <X className="h-5 w-5" />
+              </button>
             </div>
 
-            <div className="overflow-y-auto mt-4 space-y-2 pr-1">
-              {vehicleList.map((cand) => {
+            <div className="mt-4 space-y-2 overflow-y-auto pr-1">
+              {filteredCandidates.length === 0 && (
+                <div className="py-8 text-center">
+                  <p className="text-sm text-muted-foreground">No vehicles match the current finder filters.</p>
+                  <button
+                    onClick={resetFilters}
+                    className="mt-3 inline-flex items-center gap-1.5 rounded-xl border border-border bg-muted/40 px-4 py-2 text-sm font-bold text-foreground hover:bg-muted/60"
+                  >
+                    <RotateCcw className="h-3.5 w-3.5" /> Reset Filters
+                  </button>
+                </div>
+              )}
+              {filteredCandidates.map((cand) => {
                 const isCurrent = selectedSlugs.includes(cand.slug);
                 return (
                   <button
                     key={cand.id}
                     onClick={() => handleSelectVehicleForSlot(cand.slug)}
                     className={cn(
-                      "w-full text-left rounded-2xl border p-3 flex items-center justify-between gap-3 transition-all",
+                      "flex w-full items-center justify-between gap-3 rounded-2xl border p-3 text-left transition-all",
                       isCurrent
                         ? "border-accent bg-accent/10 opacity-60"
                         : "border-border bg-muted/60 hover:border-primary/40 hover:bg-muted/40"
@@ -682,11 +1097,15 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                       <img loading="lazy" src={cand.img} alt={cand.name} className="h-12 w-16 rounded-xl object-cover" />
                       <div>
                         <h4 className="font-display text-sm font-bold text-foreground">{cand.name}</h4>
-                        <p className="text-sm text-muted-foreground">{cand.klass} &bull; {cand.topSpeed} mph</p>
+                        <p className="text-sm text-muted-foreground">
+                          {cand.klass} &bull; {toKmh(cand.topSpeed)} km/h
+                        </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="tabular-nums text-sm font-bold text-cyan-600 dark:text-[#00F0FF]">{cand.priceDisplay}</span>
+                      <span className="tabular-nums block text-sm font-bold text-cyan-600 dark:text-[#00F0FF]">
+                        {cand.priceDisplay}
+                      </span>
                       <ConfidenceBadge level={cand.confidence} size="sm" />
                     </div>
                   </button>

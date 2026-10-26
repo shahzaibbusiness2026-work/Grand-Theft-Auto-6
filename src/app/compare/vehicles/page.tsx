@@ -2,7 +2,6 @@
 import { CompareVehiclesClient } from "./compare-vehicles-client";
 import { getMergedVehicles } from "@/lib/services/catalog";
 import { getComparisonWeights } from "@/lib/services/comparison";
-import { Trophy } from "lucide-react";
 
 export const metadata = {
   title: { absolute: "GTA 6 Vehicle Comparison Tool | Compare Cars & Stats" },
@@ -29,16 +28,30 @@ export default async function CompareVehiclesPage() {
     <SiteShell>
       <div className="container-site py-8">
         {/* Header Hero */}
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-accent mb-3">
-            <Trophy className="h-3 w-3" /> Vehicle Comparison Duel
+        <div className="relative mb-8 overflow-hidden rounded-3xl border border-border">
+          <img
+            src="/img/hero-dark.jpg"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/20" />
+          <div className="relative px-6 py-10 sm:px-10 sm:py-14">
+            <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm font-bold text-white/70">
+              <a href="/" className="hover:text-white">Home</a>
+              <span aria-hidden="true">›</span>
+              <a href="/vehicles" className="hover:text-white">Vehicles</a>
+              <span aria-hidden="true">›</span>
+              <span className="text-white">Compare</span>
+            </nav>
+            <h1 className="font-display text-4xl sm:text-5xl font-black leading-tight tracking-tight text-white">
+              GTA 6 Vehicle <span className="text-primary">Comparison</span>
+            </h1>
+            <p className="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-white/80">
+              Compare GTA 6 vehicle entries with known details, clearly labelled pre-release estimates, charts
+              and analysis to find the right ride for your Leonida journey.
+            </p>
           </div>
-          <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
-            COMPARE <span className="text-primary">GTA 6 VEHICLES</span>
-          </h1>
-          <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            Select 2 to 4 GTA 6 vehicle entries to compare known details and clearly labelled pre-release estimates.
-          </p>
         </div>
 
         <CompareVehiclesClient vehicles={vehicles} weights={weights.vehicle} />
