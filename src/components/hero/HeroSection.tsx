@@ -15,7 +15,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative w-full overflow-hidden bg-background pt-2 pb-6 sm:pt-2 sm:pb-7 lg:pt-2 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-[600px] lg:min-h-[640px] flex flex-col justify-between transition-colors duration-300"
+      className="relative w-full overflow-hidden bg-background pt-6 pb-6 sm:pt-6 sm:pb-7 lg:pt-6 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-[600px] lg:min-h-[640px] flex flex-col justify-between transition-colors duration-300"
     >
       {/* 1. CINEMATIC BACKGROUND CANVAS */}
       <HeroBackground />
