@@ -28,17 +28,16 @@ export default async function CompareVehiclesPage() {
   return (
     <SiteShell>
       <div className="dark bg-[#070b14]">
-      <div className="container-site py-8">
-        {/* Header Hero */}
-        <div className="relative mb-8 overflow-hidden rounded-3xl border border-border">
+      {/* Full-bleed hero, like the reference: edge-to-edge banner, huge title */}
+      <section className="relative w-full overflow-hidden">
           <img
-            src="/img/hero-dark.jpg"
+            src="/img/hero-vice-skyline-hd.jpg"
             alt=""
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/20" />
-          <div className="relative px-6 py-10 sm:px-10 sm:py-14">
+          <div className="container-site relative px-6 py-16 sm:py-20 lg:py-24">
             <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm font-bold text-white/70">
               <Link href="/" className="hover:text-white">Home</Link>
               <span aria-hidden="true">›</span>
@@ -46,16 +45,16 @@ export default async function CompareVehiclesPage() {
               <span aria-hidden="true">›</span>
               <span className="text-white">Compare</span>
             </nav>
-            <h1 className="font-display text-5xl sm:text-6xl font-black leading-none tracking-tight text-white">
-              GTA <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">6</span> Vehicle <span className="text-[#FF2E9A]">Comparison</span>
+            <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tight text-white">
+              GTA <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">6</span> Vehicle <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">Comparison</span>
             </h1>
-            <p className="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-white/80">
+            <p className="mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-white/80">
               Compare GTA 6 vehicle entries with known details, clearly labelled pre-release estimates, charts
               and analysis to find the right ride for your Leonida journey.
             </p>
           </div>
-        </div>
-
+      </section>
+      <div className="container-site py-8">
         <CompareVehiclesClient vehicles={vehicles} weights={weights.vehicle} />
       </div>
       </div>

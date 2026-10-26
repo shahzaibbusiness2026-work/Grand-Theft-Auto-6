@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, Fragment } from "react";
+import { useState, useEffect, useMemo, Fragment, useRef } from "react";
 import Link from "next/link";
 import {
   Trophy,
@@ -45,6 +45,122 @@ interface CompareVehiclesClientProps {
 /** Stored top speeds are mph; the redesign displays km/h like the reference layout. */
 const toKmh = (mph: number) => Math.round(mph * 1.60934);
 const fmtPrice = (n: number) => `$${n.toLocaleString()}`;
+
+
+/** Dual-handle range slider, styled like the reference: one track with the
+ * selected range filled in the pink-to-violet gradient and white thumbs
+ * with a pink ring. Dragging moves the nearest thumb; arrow keys nudge the
+ * focused thumb. Values are clamped so the low thumb never passes high. */
+function DualRangeSlider({
+  min,
+  max,
+  step,
+  lo,
+  hi,
+  onLo,
+  onHi,
+  labelLo,
+  labelHi,
+}: {
+  min: number;
+  max: number;
+  step: number;
+  lo: number;
+  hi: number;
+  onLo: (v: number) => void;
+  onHi: (v: number) => void;
+  labelLo: string;
+  labelHi: string;
+}) {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const dragRef = useRef<"lo" | "hi" | null>(null);
+  const pct = (v: number) => ((v - min) / (max - min)) * 100;
+  const valueFromClientX = (clientX: number) => {
+    const rect = trackRef.current?.getBoundingClientRect();
+    if (!rect || rect.width === 0) return null;
+    const raw = min + ((clientX - rect.left) / rect.width) * (max - min);
+    return Math.round(raw / step) * step;
+  };
+  const handlePointer = (clientX: number) => {
+    const v = valueFromClientX(clientX);
+    if (v === null) return;
+    const thumb = dragRef.current ?? (Math.abs(v - lo) <= Math.abs(v - hi) ? "lo" : "hi");
+    dragRef.current = thumb;
+    if (thumb === "lo") onLo(Math.min(Math.max(v, min), hi));
+    else onHi(Math.max(Math.min(v, max), lo));
+  };
+  const endDrag = () => {
+    dragRef.current = null;
+  };
+  const thumbs = [
+    {
+      key: "lo" as const,
+      value: lo,
+      label: labelLo,
+      nudge: (d: number) => onLo(Math.min(Math.max(lo + d, min), hi)),
+    },
+    {
+      key: "hi" as const,
+      value: hi,
+      label: labelHi,
+      nudge: (d: number) => onHi(Math.max(Math.min(hi + d, max), lo)),
+    },
+  ];
+  return (
+    <div
+      ref={trackRef}
+      className="relative mt-3 h-6 touch-none select-none"
+      onPointerDown={(e) => {
+        (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+        handlePointer(e.clientX);
+      }}
+      onPointerMove={(e) => {
+        if (dragRef.current) handlePointer(e.clientX);
+      }}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+    >
+      <div className="absolute left-0 right-0 top-1/2 h-2 -translate-y-1/2 rounded-full bg-white/15" />
+      <div
+        className="absolute top-1/2 h-2 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500"
+        style={{ left: `${pct(lo)}%`, width: `${pct(hi) - pct(lo)}%` }}
+      />
+      {thumbs.map((t) => (
+        <button
+          key={t.key}
+          type="button"
+          role="slider"
+          aria-label={t.label}
+          aria-valuemin={min}
+          aria-valuemax={max}
+          aria-valuenow={t.value}
+          className="absolute top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#FF2E9A] bg-white shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF2E9A]/60"
+          style={{ left: `${pct(t.value)}%` }}
+          onPointerDown={(e) => {
+            e.stopPropagation();
+            dragRef.current = t.key;
+            (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+          }}
+          onPointerMove={(e) => {
+            if (dragRef.current === t.key) handlePointer(e.clientX);
+          }}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+              e.preventDefault();
+              t.nudge(-step);
+            }
+            if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+              e.preventDefault();
+              t.nudge(step);
+            }
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: CompareVehiclesClientProps) {
   const vehicleList = vehicles && vehicles.length > 0 ? vehicles : canonicalVehicles;
@@ -595,25 +711,16 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   {speedMin} – {speedMax}
                 </span>
               </div>
-              <input
-                type="range"
+              <DualRangeSlider
                 min={0}
                 max={400}
                 step={5}
-                value={speedMin}
-                onChange={(e) => setSpeedMin(Math.min(Number(e.target.value), speedMax))}
-                aria-label="Minimum top speed in km/h"
-                className="mt-2 w-full accent-pink-500"
-              />
-              <input
-                type="range"
-                min={0}
-                max={400}
-                step={5}
-                value={speedMax}
-                onChange={(e) => setSpeedMax(Math.max(Number(e.target.value), speedMin))}
-                aria-label="Maximum top speed in km/h"
-                className="w-full accent-pink-500"
+                lo={speedMin}
+                hi={speedMax}
+                onLo={setSpeedMin}
+                onHi={setSpeedMax}
+                labelLo="Minimum top speed in km/h"
+                labelHi="Maximum top speed in km/h"
               />
             </div>
 
@@ -624,25 +731,16 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                   {fmtPrice(priceMin)} – {fmtPrice(priceMax)}
                 </span>
               </div>
-              <input
-                type="range"
+              <DualRangeSlider
                 min={0}
                 max={5000000}
                 step={50000}
-                value={priceMin}
-                onChange={(e) => setPriceMin(Math.min(Number(e.target.value), priceMax))}
-                aria-label="Minimum price"
-                className="mt-2 w-full accent-pink-500"
-              />
-              <input
-                type="range"
-                min={0}
-                max={5000000}
-                step={50000}
-                value={priceMax}
-                onChange={(e) => setPriceMax(Math.max(Number(e.target.value), priceMin))}
-                aria-label="Maximum price"
-                className="w-full accent-pink-500"
+                lo={priceMin}
+                hi={priceMax}
+                onLo={setPriceMin}
+                onHi={setPriceMax}
+                labelLo="Minimum price"
+                labelHi="Maximum price"
               />
             </div>
 
