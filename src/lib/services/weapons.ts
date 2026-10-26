@@ -315,7 +315,6 @@ export async function saveWeapon(weapon: Partial<AdminWeapon> & { name: string; 
     revalidatePath("/weapons");
     revalidatePath("/admin/weapons");
     revalidatePath("/compare/weapons");
-    revalidatePath("/weapons/compare");
     revalidatePath("/rankings");
     clearWeaponsCache();
 

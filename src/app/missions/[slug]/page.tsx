@@ -72,7 +72,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: `Full mission guide for '${mission.title}' in GTA 6: Objectives, choices & outcomes, rewards (${mission.cashRewardDisplay}), character requirements, and strategic tips.`,
     alternates: { canonical: `/missions/${mission.slug}` },
     openGraph: {
-      title: `${mission.title} — Walkthrough & Rewards`,
+      title: `${mission.title} — GTA 6 Mission Guide`,
+      description: mission.description,
+      images: [mission.img],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${mission.title} — GTA 6 Mission Guide`,
       description: mission.description,
       images: [mission.img],
     },

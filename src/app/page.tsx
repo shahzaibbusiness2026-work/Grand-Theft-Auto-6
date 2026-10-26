@@ -47,6 +47,12 @@ export async function generateMetadata(): Promise<Metadata> {
       url: "/",
       images: [{ url: "/img/hero-dark.jpg", width: 1200, height: 630, alt: title }],
     },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/img/hero-dark.jpg"],
+    },
   };
 }
 

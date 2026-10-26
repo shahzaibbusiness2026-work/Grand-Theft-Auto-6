@@ -211,8 +211,11 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                     {c.name}
                   </h3>
                   {c.alias && (
-                    <span className="text-xs font-mono text-cyan-700 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded">
-                      {c.alias}
+                    <span
+                      title="Editorial nickname, not an official Rockstar alias"
+                      className="text-xs font-mono text-cyan-700 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded"
+                    >
+                      &ldquo;{c.alias}&rdquo;
                     </span>
                   )}
                 </div>
@@ -289,7 +292,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                   {c.name}
                 </h3>
                 <p className="mt-0.5 text-xs font-mono text-pink-600/90 dark:text-pink-400/90 truncate">
-                  {c.alias || c.role}
+                  {c.role}
                 </p>
               </div>
             </article>

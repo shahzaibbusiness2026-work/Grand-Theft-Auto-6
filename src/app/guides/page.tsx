@@ -6,10 +6,21 @@ import { getPublicGuides } from "@/lib/services/guides";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Guides",
+  title: "GTA 6 Guides | Pre-Release Gameplay, Missions & Systems",
   description:
-    "GTA 6 guides — beginner tips, money-making methods, maps, weapons, characters and 100% completion strategies for Vice City and Leonida.",
+    "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",
   alternates: { canonical: "/guides" },
+  openGraph: {
+    title: "GTA 6 Guides | Pre-Release Gameplay, Missions & Systems",
+    description:
+      "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GTA 6 Guides | Pre-Release Gameplay, Missions & Systems",
+    description:
+      "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",
+  },
 };
 
 export default async function GuidesPage() {

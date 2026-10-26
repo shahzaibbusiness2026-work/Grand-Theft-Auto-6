@@ -78,6 +78,26 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
       });
   }, [vehicles, search, selectedCat, sortBy]);
 
+  // Honest evidence breakdown of the vehicles currently shown — never
+  // describe the whole set as "verified" when evidence levels are mixed.
+  const evidenceBreakdown = useMemo(() => {
+    const counts: Record<string, number> = {};
+    filteredVehicles.forEach((v) => {
+      if (v.confidence) counts[v.confidence] = (counts[v.confidence] || 0) + 1;
+    });
+    const order: Array<[string, string]> = [
+      ["OFFICIAL", "Official"],
+      ["CONFIRMED", "Confirmed"],
+      ["REPORTED", "Reported"],
+      ["RUMORED", "Rumored"],
+      ["SPECULATION", "Speculation"],
+    ];
+    return order
+      .filter(([level]) => counts[level] > 0)
+      .map(([level, label]) => `${counts[level]} ${label}`)
+      .join(" · ");
+  }, [filteredVehicles]);
+
 
   return (
     <div className="space-y-8">
@@ -204,7 +224,7 @@ export function VehiclesClient({ initialVehicles }: { initialVehicles?: Canonica
       <div>
         <div className="flex items-center justify-between mb-4">
           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Showing <span className="text-foreground">{filteredVehicles.length}</span> Verified Vehicles
+            Showing <span className="text-foreground">{filteredVehicles.length}</span> vehicles{evidenceBreakdown ? ` · ${evidenceBreakdown}` : ""}
           </p>
           {mounted && favorites.length > 0 && (
             <span className="text-xs text-accent font-semibold flex items-center gap-1">

@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Search,
   Clock,
-  Eye,
   Bookmark,
   ChevronRight,
   MapPin,
@@ -14,15 +13,12 @@ import {
   Car,
   Crosshair,
   DollarSign,
-  Skull,
-  Crown,
   ChevronDown,
 } from "lucide-react";
 import { PremiumCard } from "@/components/app-shell";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Donut } from "@/components/ui/donut";
 import type { GuideRecord } from "@/lib/services/guides";
 import { cn } from "@/lib/utils";
 
@@ -30,17 +26,10 @@ interface GuideCard {
   title: string;
   desc: string;
   read: string;
-  views: string;
   img: string;
   featured?: boolean;
   tag?: string;
   filter?: string;
-}
-
-function formatViews(n?: number): string {
-  if (!n && n !== 0) return "—";
-  if (n >= 1000) return `${(n / 1000).toFixed(1)}K`;
-  return String(n);
 }
 
 function toCard(g: GuideRecord): GuideCard {
@@ -48,7 +37,6 @@ function toCard(g: GuideRecord): GuideCard {
     title: g.title,
     desc: g.description || "",
     read: g.read_time || "10 min read",
-    views: formatViews(g.views),
     img: g.image || "/img/hero-dark.jpg",
     featured: g.featured,
     tag: g.tag || g.category,
@@ -60,12 +48,11 @@ const quickLinks = [
   { label: "Mission List", icon: List, href: "/missions" },
   { label: "Collectible Tracker", icon: Package, href: "/collectibles" },
   { label: "Vehicle Database", icon: Car, href: "/database/vehicles" },
-  { label: "Weapon Compare", icon: Crosshair, href: "/weapons/compare" },
+  { label: "Weapon Compare", icon: Crosshair, href: "/compare/weapons" },
   { label: "Money Calculator", icon: DollarSign, href: "/tools/money-calculator" },
 ];
 
 export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
-  const [tab, setTab] = useState("Trending");
   const [cat, setCat] = useState("All Guides");
 
   const hasLive = !!(guides && guides.length > 0);
@@ -86,19 +73,17 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
   const liveFeatured = hasLive ? guides!.filter((g) => g.featured).map(toCard) : [];
   const featuredCards = liveFeatured;
 
-  const livePopular = hasLive
-    ? guides!
-        .filter((g) => g.popular || (g.views || 0) >= 15000)
-        .sort((a, b) => (b.views || 0) - (a.views || 0))
-        .map(toCard)
-    : [];
+  // Popular = guides explicitly flagged popular. View counts were seeded
+  // numbers, not real analytics, so nothing here is ranked by views anymore.
+  const livePopular = hasLive ? guides!.filter((g) => g.popular).map(toCard) : [];
   const popularCards = livePopular;
 
+  // Editor's picks = featured guides, in catalogue order.
   const weekTop = hasLive
-    ? [...guides!]
-        .sort((a, b) => (b.views || 0) - (a.views || 0))
+    ? guides!
+        .filter((g) => g.featured)
         .slice(0, 5)
-        .map((g) => ({ title: g.title, read: g.read_time || "10 min read", views: formatViews(g.views), img: g.image || "/img/hero-dark.jpg" }))
+        .map((g) => ({ title: g.title, read: g.read_time || "10 min read", img: g.image || "/img/hero-dark.jpg" }))
     : [];
 
   return (
@@ -136,7 +121,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
           <div className="pointer-events-none absolute left-1/3 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
           <div className="relative p-6">
             <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">Guides Hub</h1>
-            <p className="mt-1 text-sm text-muted-foreground">Your ultimate library for mastering Vice City and beyond.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Pre-release guides and analysis for Vice City and beyond.</p>
             <div className="relative mt-5 max-w-md">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input placeholder="Search guides..." className="pl-9" />
@@ -165,10 +150,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                   </p>
                   <h3 className="mt-1.5 font-display text-sm font-bold leading-snug">{g.title}</h3>
                   <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{g.desc}</p>
-                  <div className="mt-2.5 flex items-center justify-between text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Eye className="h-3 w-3" /> {g.views}
-                    </span>
+                  <div className="mt-2.5 flex justify-end text-xs text-muted-foreground">
                     <Bookmark className="h-3.5 w-3.5" />
                   </div>
                 </div>
@@ -181,20 +163,6 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
         <div className="card-surface p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="font-display text-xl font-extrabold uppercase tracking-wider text-foreground">Popular Guides</h2>
-            <div className="flex gap-2">
-              {["Trending", "Most Viewed", "Recently Added"].map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setTab(t)}
-                  className={cn(
-                    "rounded-full px-3 py-2 min-h-[44px] text-xs font-semibold transition-all",
-                    tab === t ? "bg-gold text-slate-950 font-bold shadow-sm" : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
           </div>
           <ul className="mt-5 space-y-3">
             {popularCards.map((g) => (
@@ -209,9 +177,6 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                 </div>
                 <span className="hidden items-center gap-1 text-xs text-muted-foreground sm:flex">
                   <Clock className="h-3 w-3" /> {g.read}
-                </span>
-                <span className="hidden items-center gap-1 text-xs text-muted-foreground md:flex">
-                  <Eye className="h-3 w-3" /> {g.views}
                 </span>
                 <Bookmark className="h-4 w-4 text-accent" />
               </li>
@@ -240,22 +205,8 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
         </div>
 
         <div className="card-surface p-5">
-          <h2 className="font-display text-sm font-extrabold uppercase tracking-wider">Guide Progress</h2>
-          <div className="mt-4 flex items-center gap-5">
-            <Donut value={42} size={92} label="42%" />
-            <div>
-              <p className="text-[13px] font-bold">60 / 142 Guides Read</p>
-              <p className="mt-1 text-xs text-muted-foreground">Keep going, you&apos;re doing great!</p>
-              <Button variant="outline" size="sm" className="mt-3 min-h-[44px]">
-                View My Progress
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div className="card-surface p-5">
           <div className="flex items-center justify-between">
-            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider">Popular This Week</h2>
+            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider">Editor&apos;s Picks</h2>
             <Link href="/guides" className="text-xs font-semibold text-accent px-2 py-2">View All</Link>
           </div>
           <ul className="mt-4 space-y-3">
@@ -266,7 +217,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                 <div className="flex-1">
                   <p className="line-clamp-2 text-xs font-bold leading-snug">{w.title}</p>
                   <p className="text-xs text-muted-foreground">
-                    {w.read} • {w.views}
+                    {w.read}
                   </p>
                 </div>
               </li>
@@ -274,21 +225,6 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
           </ul>
         </div>
 
-        <div className="card-surface relative overflow-hidden border-accent/40 p-5">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-gold/10" />
-          <Skull className="absolute -right-3 -top-3 h-24 w-24 text-accent/20" />
-          <div className="relative">
-            <h3 className="flex items-center gap-2 font-display text-sm font-extrabold uppercase tracking-wider">
-              <Crown className="h-4 w-4 text-accent" /> Exclusive Premium Guides
-            </h3>
-            <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
-              Access in-depth walkthroughs, secret locations, and pro tips.
-            </p>
-            <Button variant="solid" size="sm" className="mt-4 w-full">
-              See Premium Guides
-            </Button>
-          </div>
-        </div>
       </aside>
     </div>
   );

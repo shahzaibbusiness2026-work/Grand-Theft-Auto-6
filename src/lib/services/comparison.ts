@@ -92,8 +92,6 @@ export async function saveComparisonWeights(
     revalidatePath("/admin/comparison");
     revalidatePath("/compare/vehicles");
     revalidatePath("/compare/weapons");
-    revalidatePath("/vehicles/compare");
-    revalidatePath("/weapons/compare");
     revalidatePath("/rankings");
     return { success: true };
   } catch (err) {

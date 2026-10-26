@@ -70,6 +70,26 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
       });
   }, [weapons, search, selectedCat, sortBy]);
 
+  // Honest evidence breakdown of the weapons currently shown — never
+  // describe the whole set as "verified" when evidence levels are mixed.
+  const evidenceBreakdown = useMemo(() => {
+    const counts: Record<string, number> = {};
+    filteredWeapons.forEach((w) => {
+      if (w.confidence) counts[w.confidence] = (counts[w.confidence] || 0) + 1;
+    });
+    const order: Array<[string, string]> = [
+      ["OFFICIAL", "Official"],
+      ["CONFIRMED", "Confirmed"],
+      ["REPORTED", "Reported"],
+      ["RUMORED", "Rumored"],
+      ["SPECULATION", "Speculation"],
+    ];
+    return order
+      .filter(([level]) => counts[level] > 0)
+      .map(([level, label]) => `${counts[level]} ${label}`)
+      .join(" · ");
+  }, [filteredWeapons]);
+
 
   return (
     <div className="space-y-8">
@@ -160,7 +180,7 @@ export function WeaponsClient({ initialWeapons }: { initialWeapons?: CanonicalWe
       <div>
         <div className="flex items-center justify-between mb-4">
           <p className="text-xs font-bold text-muted-foreground">
-            Showing <span className="text-foreground tabular-nums">{filteredWeapons.length}</span> Verified Weapons
+            Showing <span className="text-foreground tabular-nums">{filteredWeapons.length}</span> weapons{evidenceBreakdown ? ` · ${evidenceBreakdown}` : ""}
           </p>
         </div>
 

@@ -137,10 +137,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!vehicle) notFound();
 
   return {
-    title: `${vehicle.name} (${vehicle.klass}) — GTA 6 Stats, Speed & Location`,
-    description: `Full verified breakdown of the ${vehicle.name} in GTA 6: Top speed ${vehicle.topSpeed} mph, ${vehicle.acceleration}s 0-60, ${vehicle.priceDisplay} price, customization, and spawn locations.`,
+    title: `${vehicle.name} (${vehicle.klass}) — GTA 6 Vehicle Guide`,
+    description: `What we know about the ${vehicle.name} in GTA 6: trailer sightings, class, identification details, and related vehicles.`,
     alternates: { canonical: `/vehicles/${vehicle.slug}` },
     openGraph: {
+      title: `${vehicle.name} — GTA 6 Vehicle Guide`,
+      description: vehicle.description,
+      images: [vehicle.img],
+    },
+    twitter: {
+      card: "summary_large_image",
       title: `${vehicle.name} — GTA 6 Vehicle Guide`,
       description: vehicle.description,
       images: [vehicle.img],

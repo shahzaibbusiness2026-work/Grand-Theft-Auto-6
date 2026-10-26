@@ -39,7 +39,6 @@ const COLS = [
       { label: "About Us", href: "/about" },
       { label: "Contact Us", href: "/contact" },
       { label: "Report Bug", href: "/contact" },
-      { label: "Editorial Admin", href: "/admin" },
     ],
   },
   {

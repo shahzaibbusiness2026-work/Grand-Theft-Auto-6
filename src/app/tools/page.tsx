@@ -5,9 +5,9 @@ import { serializeJsonLd } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "All 32 Interactive Tools & Calculators — Taish Gaming",
+  title: "GTA 6 Tools, Calculators & Interactive Trackers",
   description:
-    "Complete suite of 32 production-ready interactive tools for Grand Theft Auto VI: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, achievements, activities, Easter eggs, businesses, money guides and more.",
+    "GTA 6 tools, calculators and trackers: interactive maps, comparison duels, profit calculators, loadout builders, 100% tracker, achievements, activities, Easter eggs, businesses, money guides and more.",
   alternates: { canonical: "/tools" },
 };
 
@@ -55,8 +55,8 @@ export default function ToolsPage() {
               TAISH GAMING <span className="text-primary">TOOLBOX</span>
             </h1>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Explore all 15 fully interactive utilities engineered for Grand Theft Auto VI.
-              From satellite map navigation and comparison duels to financial simulators, loadout builders, and grounded AI.
+              Explore all {ALL_TOOLS.length} tools, calculators and trackers for Grand Theft Auto VI,
+              from satellite map navigation and comparison duels to financial simulators and loadout builders.
             </p>
           </div>
         </div>

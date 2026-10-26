@@ -123,10 +123,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!weapon) notFound();
 
   return {
-    title: `${weapon.name} (${weapon.klass}) — GTA 6 Stats, Attachments & Locations`,
-    description: `Complete verified breakdown of the ${weapon.name} in GTA 6: Damage ${weapon.damage}, Fire rate ${weapon.fireRate}, Accuracy ${weapon.accuracy}, Price ${weapon.priceDisplay}, attachments, and drop locations.`,
+    title: `${weapon.name} (${weapon.klass}) — GTA 6 Weapon Guide`,
+    description: `What we know about the ${weapon.name} in GTA 6: trailer sightings, class, identification details, and related weapons.`,
     alternates: { canonical: `/weapons/${weapon.slug}` },
     openGraph: {
+      title: `${weapon.name} — GTA 6 Weapon Guide`,
+      description: weapon.description,
+      images: [weapon.img],
+    },
+    twitter: {
+      card: "summary_large_image",
       title: `${weapon.name} — GTA 6 Weapon Guide`,
       description: weapon.description,
       images: [weapon.img],

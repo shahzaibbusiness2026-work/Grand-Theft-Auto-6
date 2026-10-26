@@ -408,7 +408,6 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
     revalidatePath("/");
     revalidatePath("/admin/vehicles");
     revalidatePath("/compare/vehicles");
-    revalidatePath("/vehicles/compare");
     revalidatePath("/rankings");
     clearVehiclesCache();
 

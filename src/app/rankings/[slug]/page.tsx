@@ -28,6 +28,11 @@ export async function generateMetadata({
     description: match.def.description,
     alternates: { canonical: `/rankings/${match.def.slug}` },
     openGraph: { title: match.def.title, description: match.def.description },
+    twitter: {
+      card: "summary_large_image",
+      title: match.def.title,
+      description: match.def.description,
+    },
   };
 }
 

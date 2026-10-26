@@ -8,8 +8,19 @@ import { FeatureDisabled } from "@/components/feature-disabled";
 export const metadata: Metadata = {
   title: "GTA 6 Interactive Map | Full Leonida & Vice City Satellite Atlas",
   description:
-    "Explore the entire 4K satellite map of Leonida and Vice City. Verified points of interest, hidden caches, stunt jumps, weapon drops, garages, and safehouses.",
+    "Explore the fan-made Leonida and Vice City map: points of interest spotted in official footage, with evidence labels showing what is confirmed and what is still uncertain.",
   alternates: { canonical: "/map" },
+  openGraph: {
+    title: "GTA 6 Interactive Map | Full Leonida & Vice City Satellite Atlas",
+    description:
+      "Explore the fan-made Leonida and Vice City map: points of interest spotted in official footage, with evidence labels showing what is confirmed and what is still uncertain.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GTA 6 Interactive Map | Full Leonida & Vice City Satellite Atlas",
+    description:
+      "Explore the fan-made Leonida and Vice City map: points of interest spotted in official footage, with evidence labels showing what is confirmed and what is still uncertain.",
+  },
 };
 
 export default async function MapPage() {

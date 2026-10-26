@@ -4,8 +4,8 @@ import { ShieldCheck, Compass, Users, AlertTriangle } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-  title: "About Taish Gaming | The Authoritative Leonida Intelligence Network",
-  description: "Learn about the mission, editorial standards, and team behind the Taish Gaming comprehensive database and mapping tool.",
+  title: "About Taish Gaming | Independent GTA 6 Database",
+  description: "Learn about the mission, editorial standards, and team behind the independent GTA 6 database and mapping tool from Taish Gaming.",
   alternates: { canonical: "/about" },
   };
 
@@ -19,10 +19,10 @@ export default function AboutPage() {
             About Taish Gaming
           </p>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
-            The Authoritative Leonida Intelligence Hub
+            Independent GTA 6 Database
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Built by passionate analysts and open-world enthusiasts, Taish Gaming is dedicated to cataloging every vehicle, weapon, district, mission, and easter egg in Grand Theft Auto VI.
+            Built by passionate analysts and open-world enthusiasts, Taish Gaming is dedicated to cataloging the vehicles, weapons, districts, missions, and easter eggs spotted so far in Grand Theft Auto VI.
           </p>
         </div>
 
@@ -45,7 +45,7 @@ export default function AboutPage() {
             </div>
             <h2 className="font-display text-lg font-bold text-foreground">Rigorous Fact-Checking</h2>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Every coordinate, vehicle model, and gameplay feature is corroborated against official trailers, press releases, and patent filings to eliminate ungrounded speculation.
+              Taish Gaming separates official Rockstar information from trailer observations, community identifications, credible reporting and speculation. Every database item displays its evidence level so readers can see what is confirmed and what is still uncertain.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export default function AboutPage() {
             </div>
             <h2 className="font-display text-lg font-bold text-foreground">Interactive Spatial Tools</h2>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Our 4K high-definition satellite mapping engine allows explorers to inspect street grids, elevation contours, and collectibles with centimeter accuracy.
+              Our satellite-style map lets explorers browse Leonida regions, districts and points of interest spotted in official footage, each labelled with its evidence level.
             </p>
           </div>
 
