@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: guide.title,
       description: guide.description || undefined,
+      url: `/guides/${guide.slug}`,
       images: guide.image ? [guide.image] : undefined,
     },
     twitter: {

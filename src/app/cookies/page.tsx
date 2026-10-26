@@ -4,6 +4,7 @@ import {  CheckCircle2, Shield } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/cookies" },
   title: "Cookie Policy",
   description: "Learn how Taish Gaming uses cookies and client storage to remember your preferences and interactive map layers.",
   alternates: { canonical: "/cookies" },

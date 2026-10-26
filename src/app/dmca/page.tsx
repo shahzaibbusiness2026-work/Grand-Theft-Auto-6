@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/dmca" },
   title: "DMCA & Copyright Policy",
   description: "DMCA takedown and copyright infringement policy for Taish Gaming. How to submit a copyright complaint or counter-notice.",
   alternates: { canonical: "/dmca" },

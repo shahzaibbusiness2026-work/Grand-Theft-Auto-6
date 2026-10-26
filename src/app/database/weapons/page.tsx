@@ -7,6 +7,7 @@ import { canonicalWeapons } from "@/lib/canonical-data";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/database/weapons" },
   title: "Weapon Database",
   description:
     "Browse every confirmed GTA 6 weapon with live stats — damage, fire rate, range and handling, updated from the Atlas CMS.",

@@ -3,6 +3,7 @@ import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/settings-guide" },
   title: "GTA 6 Settings Guide — Best Display, Audio & Accessibility Settings",
   description: "The best GTA 6 settings for PS5 and Xbox Series X|S: performance vs fidelity modes, HDR, camera, audio and accessibility options explained before launch.",
   alternates: { canonical: "/settings-guide" },

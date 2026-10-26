@@ -8,6 +8,8 @@ import { getPublicProperties, type PropertyRecord } from "@/lib/services/propert
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+    alternates: { canonical: "/properties" },
+    openGraph: { url: "/properties" },
   title: "GTA 6 Real Estate & Property Database",
   description:
     "Explore, compare, and calculate returns on all safehouses, nightclubs, luxury penthouses, chop shops, and marinos in Grand Theft Auto VI.",

@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/terms" },
   title: "Terms of Service",
   description: "Terms of service and acceptable use policy for Taish Gaming encyclopedia and mapping platform.",
   alternates: { canonical: "/terms" },

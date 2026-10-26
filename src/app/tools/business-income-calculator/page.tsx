@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/business-income-calculator" },
   title: "GTA 6 Business Income Calculator — ROI & Break-Even Planner",
   description: "Calculate daily and weekly business income, total investment, break-even days, and 30-day ROI for GTA 6 businesses — nightclub, chop shop, warehouse, and more.",
 

@@ -6,6 +6,7 @@ import { getPublicRadioStations, type RadioStationRecord } from "@/lib/services/
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/radio" },
   title: "GTA 6 Radio Stations & Soundtrack | Wave 103, Flash FM & More",
   description:
     "Browse the verified and rumored radio stations in Grand Theft Auto VI: Wave 103, Flash FM, Fever 105, V-Rock, and Radio Espantoso.",

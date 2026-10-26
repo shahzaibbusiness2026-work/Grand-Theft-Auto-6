@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/vehicle-upgrade-calculator" },
   title: "GTA 6 Vehicle Upgrade Calculator — Tuning Costs & Performance Gains",
   description:
     "Calculate total tuning costs and estimated performance gains for your GTA 6 ride — engine, turbo, armor, brakes and cosmetic mods priced out before you visit Los Santos Customs.",

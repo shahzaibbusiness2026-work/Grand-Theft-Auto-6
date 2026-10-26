@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/map-distance-calculator" },
   title: "GTA 6 Map Distance Calculator — Travel Times Between Locations",
   description: "Estimate distances and travel times between GTA 6 map locations. Compare drive, boat, and off-road routes across Leonida and get the fastest vehicle recommendation.",
 

@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/day-night-converter" },
   title: "GTA 6 Day/Night Time Converter — Real Time to Game Time",
   description:
     "Convert between real-world minutes and GTA 6 in-game hours. See exactly what time it will be in Leonida after your session, when the next sunrise or sunset hits, and track the sun with a live day/night indicator.",

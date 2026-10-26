@@ -39,6 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${collectible.title} — Location & Guide`,
     description: `Complete guide and coordinate location for ${collectible.title} in ${collectible.district}. Requirements: ${collectible.requirements}.`,
     alternates: { canonical: `/collectibles/${collectible.slug}` },
+    openGraph: { url: `/collectibles/${collectible.slug}` },
     robots: { index: false, follow: true },
   };
 }

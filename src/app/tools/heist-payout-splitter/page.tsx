@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/heist-payout-splitter" },
   title: "GTA 6 Heist Payout Splitter — Divide Crew Cuts Fairly",
   description: "Split any GTA 6 heist take among your crew. Set each member's cut percentage and see everyone's payout instantly.",
 

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: { absolute: "About Taish Gaming | Independent GTA 6 Database" },
   description: "Learn how Taish Gaming researches GTA 6 information, labels official evidence, community findings and speculation, and maintains its independent fan-made database.",
   alternates: { canonical: "/about" },
-  openGraph: {
+  openGraph: { url: "/about",
     title: "About Taish Gaming | Independent GTA 6 Database",
     description: "Learn how Taish Gaming researches GTA 6 information, labels official evidence, community findings and speculation, and maintains its independent fan-made database.",
     images: ["/img/hero-dark.jpg"],

@@ -3,6 +3,7 @@ import { ActivitiesClient } from "./activities-client";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/activities" },
   title: "GTA 6 Activities & Hobbies",
   description: "Every activity in GTA 6: hunting, fishing, mini-golf, diving, racing and more across Leonida. Confirmed and expected activities with an interactive checklist.",
   alternates: { canonical: "/activities" },

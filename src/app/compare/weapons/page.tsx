@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: { absolute: "GTA 6 Weapon Comparison Tool | Compare Weapons & Stats" },
   description: "Compare GTA 6 weapon entries side by side with evidence labels and clearly marked pre-release estimates for damage, fire rate, range and handling.",
   alternates: { canonical: "/compare/weapons" },
-  openGraph: {
+  openGraph: { url: "/compare/weapons",
     title: "GTA 6 Weapon Comparison Tool | Compare Weapons & Stats",
     description: "Compare GTA 6 weapon entries side by side with evidence labels and clearly marked pre-release estimates for damage, fire rate, range and handling.",
     images: ["/img/hero-dark.jpg"],

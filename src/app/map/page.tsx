@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Explore the fan-made Leonida and Vice City map: points of interest spotted in official footage, with evidence labels showing what is confirmed and what is still uncertain.",
   alternates: { canonical: "/map" },
-  openGraph: {
+  openGraph: { url: "/map",
     title: "GTA 6 Interactive Map | Full Leonida & Vice City Satellite Atlas",
     description:
       "Explore the fan-made Leonida and Vice City map: points of interest spotted in official footage, with evidence labels showing what is confirmed and what is still uncertain.",

@@ -80,6 +80,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${loc.name} (${loc.district}) — Point of Interest Dossier`,
     description: `Official intel briefing and satellite map coordinates for ${loc.name} in ${loc.district}, State of Leonida. Threat level: ${loc.threatLevel}.`,
     alternates: { canonical: `/locations/${loc.slug}` },
+    openGraph: { url: `/locations/${loc.slug}` },
   };
 }
 

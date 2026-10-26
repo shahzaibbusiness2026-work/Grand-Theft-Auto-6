@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Characters — Lucia, Jason & Full Cast",
   description: "Meet all confirmed and rumored characters in GTA 6 — protagonists, antagonists, law enforcement and civilians of Leonida.",
-  openGraph: {
+  openGraph: { url: "/characters",
     title: "GTA 6 Characters — Meet the People of Leonida",
     description: "Explore detailed profiles of all characters in GTA 6.",
     images: [{ url: "/img/char-lucia.jpg", width: 1200, height: 630, alt: "Lucia Caminos" }],

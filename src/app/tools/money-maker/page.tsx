@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/money-maker" },
   title: "Money-Making Method Finder & Grinding Strategies",
   description:
     "Intelligent GTA 6 money-making route recommender. Discover the highest-paying heists, passive nightclub operations, and vehicle salvage strategies ranked by cash per hour.",

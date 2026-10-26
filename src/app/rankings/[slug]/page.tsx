@@ -28,7 +28,7 @@ export async function generateMetadata({
     description: match.def.description,
     alternates: { canonical: `/rankings/${match.def.slug}` },
     robots: { index: false, follow: true },
-    openGraph: { title: match.def.title, description: match.def.description },
+    openGraph: { title: match.def.title, description: match.def.description, url: `/rankings/${match.def.slug}` },
     twitter: {
       card: "summary_large_image",
       title: match.def.title,

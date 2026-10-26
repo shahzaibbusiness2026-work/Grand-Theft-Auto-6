@@ -3,9 +3,12 @@ import Image from "next/image";
 import { ForgotForm } from "./forgot-form";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/forgot-password" },
   title: "Forgot password",
   description: "Reset your Taish Gaming account password with your recovery code.",
   alternates: { canonical: "/forgot-password" },
+  // Auth pages are utility routes, not search landing pages.
+  robots: { index: false, follow: true },
 };
 
 /**

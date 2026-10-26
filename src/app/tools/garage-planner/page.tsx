@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/garage-planner" },
   title: "GTA 6 Garage Planner — Organize Your Vehicle Collection",
   description: "Plan your GTA 6 garage space. Assign vehicles to properties, track slots used, and see your collection's total value.",
 

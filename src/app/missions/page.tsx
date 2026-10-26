@@ -11,6 +11,8 @@ import { canonicalMissions, type CanonicalMission } from "@/lib/canonical-data";
 import { getMissions, type MissionRecord } from "@/lib/services/missions";
 
 export const metadata: Metadata = {
+    alternates: { canonical: "/missions" },
+    openGraph: { url: "/missions" },
   title: "GTA 6 Missions & Contracts Database — Story, Heists & Walkthroughs",
   description: "Comprehensive database of GTA 6 story missions, contracts, and heists. Filter by operative (Lucia, Jason), rewards, difficulty, and chapter.",
   robots: { index: false, follow: true },

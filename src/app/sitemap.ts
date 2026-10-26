@@ -67,7 +67,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/radio",
     "/guides",
     "/news",
-    "/blog",
+    // /blog removed: it 301-redirects to /news (editorial consolidation).
     "/database/vehicles",
     "/database/weapons",
     "/achievements",

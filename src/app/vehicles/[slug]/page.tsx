@@ -144,6 +144,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${vehicle.name} — GTA 6 Vehicle Guide`,
       description: vehicle.description,
+      url: `/vehicles/${vehicle.slug}`,
       images: [vehicle.img],
     },
     twitter: {

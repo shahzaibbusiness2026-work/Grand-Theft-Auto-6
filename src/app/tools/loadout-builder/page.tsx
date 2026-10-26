@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/loadout-builder" },
   title: "GTA 6 Tactical Loadout Builder & Armory Scoring",
   description:
     "Assemble and simulate custom GTA 6 weapon loadouts for heists, street wars, and recon operations. Real-time firepower, mobility, and stealth ratings with offline saving.",

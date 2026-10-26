@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Explore Taish Gaming's GTA 6 interactive tools, including the Leonida map, vehicle and weapon comparisons, completion tracker, calculators and planners.",
   alternates: { canonical: "/tools" },
-  openGraph: {
+  openGraph: { url: "/tools",
     title: "GTA 6 Tools, Trackers & Calculators | Taish Gaming",
     description:
       "Explore Taish Gaming's GTA 6 interactive tools, including the Leonida map, vehicle and weapon comparisons, completion tracker, calculators and planners.",

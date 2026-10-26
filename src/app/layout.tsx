@@ -45,13 +45,14 @@ export async function generateMetadata(): Promise<Metadata> {
     authors: [{ name: siteTitle }],
     creator: siteTitle,
     robots: { index: true, follow: true },
+    // NOTE: no openGraph.url/title/description here — those are per-page.
+    // A layout-level og:url leaked the homepage URL onto every child page
+    // that did not set its own. Each page now sets openGraph.url equal to
+    // its canonical; title/description fall back to the page's own values.
     openGraph: {
       type: "website",
       locale: "en_US",
-      url: baseUrl,
       siteName: siteTitle,
-      title: siteTitle,
-      description,
       images: [
         {
           url: ogImage,
@@ -63,8 +64,6 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: siteTitle,
-      description,
       images: [ogImage],
       ...(settings.twitterHandle ? { creator: settings.twitterHandle } : {}),
     },

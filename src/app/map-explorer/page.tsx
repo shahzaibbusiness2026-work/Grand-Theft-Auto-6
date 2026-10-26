@@ -5,6 +5,7 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/map-explorer" },
   title: "Interactive Map Explorer",
   description:
     "Explore the full interactive GTA 6 map of Vice City and Leonida — markers, collectibles, activities and verified locations.",

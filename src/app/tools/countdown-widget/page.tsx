@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/countdown-widget" },
   title: "GTA 6 Countdown Widget — Embed on Your Site",
   description: "Get a free embeddable GTA 6 launch countdown widget for your website or stream overlay. Copy-paste ready.",
 

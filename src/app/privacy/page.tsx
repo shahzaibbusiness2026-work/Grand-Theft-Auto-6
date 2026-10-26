@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/privacy" },
   title: "Privacy Policy",
   description: "Learn how Taish Gaming collects, uses, and protects your information when using our interactive map and database tools.",
   alternates: { canonical: "/privacy" },

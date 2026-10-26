@@ -8,7 +8,7 @@ export const metadata = {
   title: { absolute: "GTA 6 Vehicle Comparison Tool | Compare Cars & Stats" },
   description: "Compare GTA 6 vehicle entries side by side, including known details and clearly labelled pre-release estimates for speed, handling, acceleration and value.",
   alternates: { canonical: "/compare/vehicles" },
-  openGraph: {
+  openGraph: { url: "/compare/vehicles",
     title: "GTA 6 Vehicle Comparison Tool | Compare Cars & Stats",
     description: "Compare GTA 6 vehicle entries side by side, including known details and clearly labelled pre-release estimates for speed, handling, acceleration and value.",
     images: ["/img/hero-dark.jpg"],

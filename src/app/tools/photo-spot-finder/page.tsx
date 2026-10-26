@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/photo-spot-finder" },
   title: "GTA 6 Photo Spot Finder — Best Screenshot Locations",
   description: "The most cinematic photo spots in Leonida. Best time of day, region, and pro tips for every shot.",
 

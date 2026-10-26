@@ -36,6 +36,9 @@ const nextConfig = {
       { source: "/maps", destination: "/map", permanent: true },
       { source: "/cheats", destination: "/guides", permanent: true },
       { source: "/articles", destination: "/news", permanent: true },
+      // Editorial consolidation (P0 SEO fix): /blog duplicates the /news
+      // hub around the same articles. /news is canonical; /blog 301s to it.
+      { source: "/blog", destination: "/news", permanent: true },
       { source: "/countdown", destination: "/", permanent: true },
       // Duplicate compare routes: the /compare/* versions are canonical.
       { source: "/weapons/compare", destination: "/compare/weapons", permanent: true },

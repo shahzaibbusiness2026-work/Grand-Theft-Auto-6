@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
+    openGraph: { url: "/tools/money-calculator" },
   title: "GTA 6 Money Calculator — Hours, Missions & Estimated Goal Date",
   description: "Calculate how many missions, hours, and playing days you need to afford any supercar, luxury penthouse, or business in GTA 6.",
 

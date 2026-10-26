@@ -4,9 +4,12 @@ import Link from "next/link";
 import { LoginCards } from "./login-form";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/login" },
   title: "Login",
   description: "Log in to your Taish Gaming dashboard or create a free account — your dashboard, favorites, and tracker progress are saved for you.",
   alternates: { canonical: "/login" },
+  // Auth pages are utility routes, not search landing pages.
+  robots: { index: false, follow: true },
 };
 
 /**

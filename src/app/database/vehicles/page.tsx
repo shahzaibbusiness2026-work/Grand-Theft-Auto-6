@@ -7,6 +7,7 @@ import { canonicalVehicles } from "@/lib/canonical-data";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/database/vehicles" },
   title: "Vehicle Database",
   description:
     "Browse every confirmed GTA 6 vehicle with live stats — top speed, acceleration, handling and braking, updated from the Atlas CMS.",

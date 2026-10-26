@@ -3,6 +3,7 @@ import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/easter-eggs" },
   title: "GTA 6 Easter Eggs & Hidden Details",
   description: "Every GTA 6 Easter egg spotted so far: the Tommy Vercetti lizard, the Ocean View Hotel, Red Dead presidents on the cash, and the details fans are still hunting.",
   alternates: { canonical: "/easter-eggs" },

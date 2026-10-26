@@ -5,6 +5,7 @@ import { ALL_TOOLS } from "@/lib/tools-data";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/site-map" },
   title: "Sitemap — Every Page on Taish Gaming",
   description:
     "Complete sitemap of Taish Gaming: all 26 interactive tools, vehicle and weapon databases, character guides, the Leonida map, news, and guides.",

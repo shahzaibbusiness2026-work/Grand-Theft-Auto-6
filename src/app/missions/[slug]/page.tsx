@@ -77,6 +77,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${mission.title} — GTA 6 Mission Guide`,
       description: mission.description,
+      url: `/missions/${mission.slug}`,
       images: [mission.img],
     },
     twitter: {

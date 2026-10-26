@@ -3,6 +3,7 @@ import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/businesses" },
   title: "GTA 6 Businesses — Buy, Run & Profit",
   description: "Every GTA 6 business type: bait & tackle, chop shop, luxury dealership, nightclub, smuggler warehouse and taxi depot — with income calculators to plan your empire.",
   alternates: { canonical: "/businesses" },

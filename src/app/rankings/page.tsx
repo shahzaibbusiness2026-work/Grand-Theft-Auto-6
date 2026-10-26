@@ -7,6 +7,7 @@ import type { LucideIcon } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+    openGraph: { url: "/rankings" },
   title: "GTA 6 Rankings — Best Vehicles & Weapons, Auto-Updated",
   description:
     "Auto-generated GTA 6 rankings: fastest cars, best handling, best off-road, highest DPS weapons, best pistols, SMGs, assault rifles and snipers — always computed from our live database.",
