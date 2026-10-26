@@ -1,4 +1,5 @@
-﻿import { SiteShell } from "@/components/shells";
+﻿import Link from "next/link";
+import { SiteShell } from "@/components/shells";
 import { CompareVehiclesClient } from "./compare-vehicles-client";
 import { getMergedVehicles } from "@/lib/services/catalog";
 import { getComparisonWeights } from "@/lib/services/comparison";
@@ -38,9 +39,9 @@ export default async function CompareVehiclesPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/20" />
           <div className="relative px-6 py-10 sm:px-10 sm:py-14">
             <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm font-bold text-white/70">
-              <a href="/" className="hover:text-white">Home</a>
+              <Link href="/" className="hover:text-white">Home</Link>
               <span aria-hidden="true">›</span>
-              <a href="/vehicles" className="hover:text-white">Vehicles</a>
+              <Link href="/vehicles" className="hover:text-white">Vehicles</Link>
               <span aria-hidden="true">›</span>
               <span className="text-white">Compare</span>
             </nav>

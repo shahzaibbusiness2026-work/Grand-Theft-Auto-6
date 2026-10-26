@@ -156,9 +156,12 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
   };
 
   // Finder data: real counts / options computed from the catalog, never hardcoded.
+  // Some DB rows use plural klass spellings ("Boats", "Motorcycles"); normalize them
+  // so they merge with the canonical singular classes instead of doubling up.
+  const normKlass = (k: string) => (k === "Boats" ? "Boat" : k === "Motorcycles" ? "Motorcycle" : k);
   const klassCounts = useMemo(() => {
     const map = new Map<string, number>();
-    vehicleList.forEach((v) => map.set(v.klass, (map.get(v.klass) ?? 0) + 1));
+    vehicleList.forEach((v) => map.set(normKlass(v.klass), (map.get(v.klass) ?? 0) + 1));
     return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
   }, [vehicleList]);
 
@@ -179,7 +182,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
     const q = search.trim().toLowerCase();
     return vehicleList.filter((v) => {
       if (q !== "" && !`${v.name} ${v.manufacturer}`.toLowerCase().includes(q)) return false;
-      if (klassFilter !== "" && v.klass !== klassFilter) return false;
+      if (klassFilter !== "" && normKlass(v.klass) !== klassFilter) return false;
       const kmh = toKmh(v.topSpeed);
       if (kmh < speedMin || kmh > speedMax) return false;
       const price = v.price ?? 0;
@@ -387,7 +390,8 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
       for (let t = 0; t <= 20; t += 0.5) {
         pts.push(`${x(t).toFixed(1)},${y(topKmh * (1 - Math.exp(-k * t))).toFixed(1)}`);
       }
-      const marker = topKmh > 100 ? { mx: x(accel), my: y(97), label: `0–60: ${accel}s` } : null;
+      const marker =
+        topKmh > 100 ? { mx: x(accel), my: y(97), dy: i % 2 === 0 ? -8 : 18, label: `0–60: ${accel}s` } : null;
       return { name: v.name, color: RADAR_COLORS[i % RADAR_COLORS.length], points: pts.join(" "), marker };
     });
     return { W, H, x, y, series };
@@ -910,7 +914,7 @@ export function CompareVehiclesClient({ initialSlugs, vehicles, weights }: Compa
                     {s.marker && (
                       <g>
                         <circle cx={s.marker.mx} cy={s.marker.my} r={4.5} fill={s.color} stroke="white" strokeWidth={1.5} />
-                        <text x={s.marker.mx + 8} y={s.marker.my - 8} fontSize={11} fontWeight={700} fill={s.color}>
+                        <text x={s.marker.mx + 8} y={s.marker.my + s.marker.dy} fontSize={12} fontWeight={700} fill={s.color}>
                           {s.marker.label}
                         </text>
                       </g>
