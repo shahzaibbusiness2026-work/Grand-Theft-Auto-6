@@ -35,6 +35,7 @@ const nextConfig = {
       { source: "/vehicle", destination: "/vehicles", permanent: true },
       { source: "/maps", destination: "/map", permanent: true },
       { source: "/cheats", destination: "/guides", permanent: true },
+      { source: "/articles", destination: "/news", permanent: true },
       // Duplicate compare routes: the /compare/* versions are canonical.
       { source: "/weapons/compare", destination: "/compare/weapons", permanent: true },
       { source: "/vehicles/compare", destination: "/compare/vehicles", permanent: true },

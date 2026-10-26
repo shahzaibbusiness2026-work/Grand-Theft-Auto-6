@@ -299,7 +299,7 @@ export const INITIAL_SITE_SETTINGS: AdminSiteSettings = {
   copyrightText: "© 2026 Taish Gaming. All rights reserved.",
   logoUrl: "/img/gta6-official-logo.png",
   navigationMenu: [
-    { id: "nav-1", order: 1, label: "Articles", url: "/articles", visible: true },
+    { id: "nav-1", order: 1, label: "Articles", url: "/news", visible: true },
     { id: "nav-2", order: 2, label: "Vehicles", url: "/vehicles", visible: true },
     { id: "nav-3", order: 3, label: "Weapons", url: "/weapons", visible: true },
     { id: "nav-4", order: 4, label: "Map", url: "/map", visible: true }
