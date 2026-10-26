@@ -50,6 +50,8 @@ async function resolveMission(slug: string): Promise<CanonicalMission | undefine
         source: canonical?.source || "Atlas Admin",
         img: canonical?.img || "/img/hero-dark.jpg",
         guideTips: canonical?.guideTips || [],
+        choices: (canonical as any)?.choices || [],
+        unlocks: (canonical as any)?.unlocks || [],
       };
     }
   } catch {
