@@ -5,27 +5,43 @@ import { Badge } from "@/components/ui/badge";
 import type { Article } from "@/lib/data";
 import { cn, toIsoDate } from "@/lib/utils";
 
-export function ArticleCard({ article, className }: { article: Article; className?: string }) {
+export function ArticleCard({
+  article,
+  className,
+}: {
+  article: Article;
+  className?: string;
+}) {
   const href = article.slug ? `/news/${article.slug}` : "/news";
   return (
-    <Link href={href} className={cn("group card-surface block overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-sm", className)}>
+    <Link
+      href={href}
+      className={cn(
+        "group card-surface block overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-sm",
+        className,
+      )}
+    >
       <div className="relative h-40 overflow-hidden">
         <SafeImage
           src={article.img}
-          alt={`${article.title} - GTA 6 Article`}
+          alt=""
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
         {article.tag && (
-          <Badge variant="solid" className="absolute left-2 top-2 z-10">{article.tag}</Badge>
+          <Badge variant="solid" className="absolute left-2 top-2 z-10">
+            {article.tag}
+          </Badge>
         )}
       </div>
       <div className="p-4">
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <time dateTime={toIsoDate(article.date)}>{article.date}</time>
-          <span className="text-border" aria-hidden="true">•</span>
+          <span className="text-border" aria-hidden="true">
+            •
+          </span>
           <span className="flex items-center gap-1">
             <Clock className="h-3 w-3" aria-hidden="true" /> {article.read}
           </span>
@@ -47,13 +63,13 @@ export function ArticleCard({ article, className }: { article: Article; classNam
 export function PopularRow({ article }: { article: Article }) {
   return (
     <Link
-      href={article.slug ? `/news/${article.slug}` : "/blog"}
+      href={article.slug ? `/news/${article.slug}` : "/news"}
       className="flex items-center gap-3 py-2.5 hover:text-accent transition-colors"
     >
       <div className="relative h-11 w-14 shrink-0 overflow-hidden rounded-md">
         <SafeImage
           src={article.img}
-          alt={article.title}
+          alt=""
           fill
           sizes="56px"
           className="object-cover"
@@ -61,8 +77,13 @@ export function PopularRow({ article }: { article: Article }) {
         />
       </div>
       <div>
-        <p className="line-clamp-2 text-[13px] font-semibold leading-snug">{article.title}</p>
-        <time className="mt-0.5 block text-xs text-muted-foreground" dateTime={toIsoDate(article.date)}>
+        <p className="line-clamp-2 text-[13px] font-semibold leading-snug">
+          {article.title}
+        </p>
+        <time
+          className="mt-0.5 block text-xs text-muted-foreground"
+          dateTime={toIsoDate(article.date)}
+        >
           {article.date}
         </time>
       </div>
@@ -70,7 +91,11 @@ export function PopularRow({ article }: { article: Article }) {
   );
 }
 
-export function CategoryList({ categories }: { categories: { label: string; count: number }[] }) {
+export function CategoryList({
+  categories,
+}: {
+  categories: { label: string; count: number }[];
+}) {
   return (
     <div className="card-surface p-4">
       <h3 className="section-eyebrow mb-3">Categories</h3>
@@ -81,14 +106,19 @@ export function CategoryList({ categories }: { categories: { label: string; coun
               href="/news"
               className={cn(
                 "flex items-center justify-between rounded-md px-2.5 py-2 text-[13px] transition-colors hover:bg-muted",
-                i === 0 ? "text-accent" : "text-muted-foreground"
+                i === 0 ? "text-accent" : "text-muted-foreground",
               )}
             >
               <span className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+                <span
+                  className="h-1.5 w-1.5 rounded-full bg-accent"
+                  aria-hidden="true"
+                />
                 {c.label}
               </span>
-              <span className="text-xs" aria-label={`${c.count} articles`}>{c.count}</span>
+              <span className="text-xs" aria-label={`${c.count} articles`}>
+                {c.count}
+              </span>
             </Link>
           </li>
         ))}

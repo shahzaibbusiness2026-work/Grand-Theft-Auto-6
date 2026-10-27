@@ -1,17 +1,18 @@
 "use client";
+import Link from "next/link";
 
 import { useState } from "react";
 import Image from "next/image";
-import { 
-  Shield, 
-  Zap, 
-  Car, 
-  MapPin, 
-  Sparkles, 
-  ArrowRight, 
+import {
+  Shield,
+  Zap,
+  Car,
+  MapPin,
+  Sparkles,
+  ArrowRight,
   Crown,
   Handshake,
-  Quote
+  Quote,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Character } from "@/lib/data";
@@ -22,9 +23,15 @@ interface ProtagonistsShowcaseProps {
   characters?: Character[];
 }
 
-export function ProtagonistsShowcase({ characters: liveCharacters }: ProtagonistsShowcaseProps) {
-  const [activeTab, setActiveTab] = useState<"both" | "lucia" | "jason">("both");
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+export function ProtagonistsShowcase({
+  characters: liveCharacters,
+}: ProtagonistsShowcaseProps) {
+  const [activeTab, setActiveTab] = useState<"both" | "lucia" | "jason">(
+    "both",
+  );
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+    null,
+  );
 
   const lucia = liveCharacters?.find((c) => c.id === "lucia");
   const jason = liveCharacters?.find((c) => c.id === "jason");
@@ -42,9 +49,13 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
     if (character) setSelectedCharacter(character);
   };
 
-  const coloredName = (name: string | undefined, fallback: [string, string]) => {
+  const coloredName = (
+    name: string | undefined,
+    fallback: [string, string],
+  ) => {
     const parts = (name || `${fallback[0]} ${fallback[1]}`).trim().split(/\s+/);
-    if (parts.length < 2) return { first: parts[0] || fallback[0], rest: fallback[1] };
+    if (parts.length < 2)
+      return { first: parts[0] || fallback[0], rest: fallback[1] };
     return { first: parts[0], rest: parts.slice(1).join(" ") };
   };
   const actorName = (voiceActor: string | undefined, fallback: string) =>
@@ -54,7 +65,10 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
   const jasonName = coloredName(jason?.name, ["JASON", "DUVAL"]);
 
   return (
-    <section aria-labelledby="protagonists-heading" className="container-site pt-6">
+    <section
+      aria-labelledby="protagonists-heading"
+      className="container-site pt-6"
+    >
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
@@ -68,7 +82,8 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
             Meet the <span className="text-primary">Protagonists</span>
           </h2>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-            Two criminals bound by fate, trust, and ambition in the unforgiving underworld of Leonida.
+            Two criminals bound by fate, trust, and ambition in the unforgiving
+            underworld of Leonida.
           </p>
         </div>
 
@@ -80,7 +95,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
               "min-h-[44px] rounded-lg px-4 py-2.5 text-xs font-bold transition-all",
               activeTab === "both"
                 ? "bg-foreground text-background shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             Dual View
@@ -91,7 +106,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
               "min-h-[44px] rounded-lg px-4 py-2.5 text-xs font-bold transition-all",
               activeTab === "lucia"
                 ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             Lucia
@@ -102,7 +117,7 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
               "min-h-[44px] rounded-lg px-4 py-2.5 text-xs font-bold transition-all",
               activeTab === "jason"
                 ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             Jason
@@ -117,17 +132,19 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
           <div
             className={cn(
               "group relative overflow-hidden rounded-[28px] sm:rounded-[32px] bg-white border-2 border-pink-400/80 shadow-[0_0_35px_rgba(244,114,182,0.45),0_15px_35px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1",
-              activeTab === "lucia" && "lg:col-span-2 max-w-4xl mx-auto w-full"
+              activeTab === "lucia" && "lg:col-span-2 max-w-4xl mx-auto w-full",
             )}
           >
-            <div className={cn("flex flex-col h-full", !stacked && "lg:flex-row")}>
+            <div
+              className={cn("flex flex-col h-full", !stacked && "lg:flex-row")}
+            >
               {/* Left Column: Lucia Portrait & Artwork Overlays */}
               <div
                 className={cn(
                   "relative w-full overflow-hidden bg-slate-900 shrink-0 select-none",
                   stacked
                     ? "aspect-[4/3] sm:aspect-[16/10]"
-                    : "min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] lg:w-[45%]"
+                    : "min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] lg:w-[45%]",
                 )}
               >
                 <Image
@@ -168,7 +185,11 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                 {/* Bottom-Left Tagline */}
                 <div className="absolute bottom-5 left-5 z-10 pointer-events-none">
                   <p className="font-mono text-xs sm:text-xs font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                    A BRIGHTER<br />TOMORROW<br />TOGETHER.
+                    A BRIGHTER
+                    <br />
+                    TOMORROW
+                    <br />
+                    TOGETHER.
                   </p>
                   <div className="w-14 h-0.5 bg-pink-500 mt-1 shadow-[0_0_8px_#ec4899]" />
                 </div>
@@ -186,7 +207,10 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                       <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
                         {lucia?.alias || "The Mastermind"}
                       </span>
-                      <span title="Editorial nickname, not an official Rockstar alias" className="text-[10px] font-bold uppercase tracking-wider text-slate-500 border border-slate-300 rounded-full px-2 py-0.5">
+                      <span
+                        title="Editorial nickname, not an official Rockstar alias"
+                        className="text-[10px] font-bold uppercase tracking-wider text-slate-500 border border-slate-300 rounded-full px-2 py-0.5"
+                      >
                         Editorial label
                       </span>
                     </span>
@@ -195,22 +219,30 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   {/* Character Name */}
                   <div>
                     <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 leading-none">
-                      <span className="text-pink-600">{luciaName.first}</span> {luciaName.rest}
+                      <span className="text-pink-600">{luciaName.first}</span>{" "}
+                      {luciaName.rest}
                     </h3>
                   </div>
 
                   {/* Quote Box */}
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">From official trailers</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    From official trailers
+                  </p>
                   <div className="rounded-2xl bg-pink-50/70 border border-pink-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
                     <Quote className="w-5 h-5 text-pink-500 shrink-0 mt-0.5 rotate-180" />
                     <p className="text-xs sm:text-[13px] italic font-medium text-pink-700 leading-relaxed">
-                      &ldquo;{lucia?.quote || "The only way we're gonna get through this is by sticking together, being a team."}&rdquo;
+                      &ldquo;
+                      {lucia?.quote ||
+                        "The only way we're gonna get through this is by sticking together, being a team."}
+                      &rdquo;
                     </p>
                   </div>
 
                   {/* Specs List: Vertical 4-Row Key-Value Stack */}
                   <p className="pt-1 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
-                    Unconfirmed / Speculative — possible abilities, specialty, signature vehicle and territory (editorial analysis, not Rockstar-confirmed)
+                    Unconfirmed / Speculative — possible abilities, specialty,
+                    signature vehicle and territory (editorial analysis, not
+                    Rockstar-confirmed)
                   </p>
                   <div className="space-y-3 pt-1">
                     {/* Special Ability */}
@@ -220,7 +252,8 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                         <span>Special Ability:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        {lucia?.perk || "Tactical Reflexes (Bullet Time) & Lockpicking"}
+                        {lucia?.perk ||
+                          "Tactical Reflexes (Bullet Time) & Lockpicking"}
                       </span>
                     </div>
 
@@ -231,7 +264,8 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                         <span>Specialty:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        {lucia?.specialty || "High-stakes Armed Robberies & Infiltration"}
+                        {lucia?.specialty ||
+                          "High-stakes Armed Robberies & Infiltration"}
                       </span>
                     </div>
 
@@ -253,7 +287,8 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                         <span>Territory:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        {lucia?.origin || "Vice City Metro / Leonida Penitentiary"}
+                        {lucia?.origin ||
+                          "Vice City Metro / Leonida Penitentiary"}
                       </span>
                     </div>
                   </div>
@@ -263,17 +298,20 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                 <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
                   <div className="text-xs">
                     <span className="text-muted-foreground">Actor: </span>
-                    <span className="font-bold text-slate-900">{actorName(lucia?.voiceActor, "Manni L. Perez")}</span>
-                    <p className="text-xs text-muted-foreground">(Community Identified)</p>
+                    <span className="font-bold text-slate-900">
+                      {actorName(lucia?.voiceActor, "Manni L. Perez")}
+                    </span>
+                    <p className="text-xs text-muted-foreground">
+                      (Community Identified)
+                    </p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => openDossier(lucia)}
+                  <Link
+                    href="/characters/lucia"
                     className="inline-flex min-h-[44px] items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 shadow-md shadow-pink-500/30 transition-all hover:scale-105 active:scale-95"
                   >
                     <span>View Dossier</span>
                     <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -285,17 +323,19 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
           <div
             className={cn(
               "group relative overflow-hidden rounded-[28px] sm:rounded-[32px] bg-white border-2 border-cyan-400/80 shadow-[0_0_35px_rgba(56,189,248,0.45),0_15px_35px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1",
-              activeTab === "jason" && "lg:col-span-2 max-w-4xl mx-auto w-full"
+              activeTab === "jason" && "lg:col-span-2 max-w-4xl mx-auto w-full",
             )}
           >
-            <div className={cn("flex flex-col h-full", !stacked && "lg:flex-row")}>
+            <div
+              className={cn("flex flex-col h-full", !stacked && "lg:flex-row")}
+            >
               {/* Left Column: Jason Portrait & Artwork Overlays */}
               <div
                 className={cn(
                   "relative w-full overflow-hidden bg-slate-900 shrink-0 select-none",
                   stacked
                     ? "aspect-[4/3] sm:aspect-[16/10]"
-                    : "min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] lg:w-[45%]"
+                    : "min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] lg:w-[45%]",
                 )}
               >
                 <Image
@@ -333,7 +373,13 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                 {/* Bottom-Left Tagline */}
                 <div className="absolute bottom-5 left-5 z-10 pointer-events-none">
                   <p className="font-mono text-xs sm:text-xs font-black uppercase tracking-[0.25em] text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                    SAME<br />STREETS<br />HIGHER<br />STAKES...
+                    SAME
+                    <br />
+                    STREETS
+                    <br />
+                    HIGHER
+                    <br />
+                    STAKES...
                   </p>
                   <div className="w-14 h-0.5 bg-cyan-400 mt-1 shadow-[0_0_8px_#22d3ee]" />
                 </div>
@@ -351,7 +397,10 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                       <span className="rounded-full bg-[#334155] text-white text-xs font-semibold px-3.5 py-1 shadow-sm">
                         {jason?.alias || "The Enforcer"}
                       </span>
-                      <span title="Editorial nickname, not an official Rockstar alias" className="text-[10px] font-bold uppercase tracking-wider text-slate-500 border border-slate-300 rounded-full px-2 py-0.5">
+                      <span
+                        title="Editorial nickname, not an official Rockstar alias"
+                        className="text-[10px] font-bold uppercase tracking-wider text-slate-500 border border-slate-300 rounded-full px-2 py-0.5"
+                      >
                         Editorial label
                       </span>
                     </span>
@@ -360,22 +409,30 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                   {/* Character Name */}
                   <div>
                     <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 leading-none">
-                      <span className="text-blue-600">{jasonName.first}</span> {jasonName.rest}
+                      <span className="text-blue-600">{jasonName.first}</span>{" "}
+                      {jasonName.rest}
                     </h3>
                   </div>
 
                   {/* Quote Box */}
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">From official trailers</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    From official trailers
+                  </p>
                   <div className="rounded-2xl bg-sky-50/70 border border-sky-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
                     <Quote className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 rotate-180" />
                     <p className="text-xs sm:text-[13px] italic font-medium text-sky-800 leading-relaxed">
-                      &ldquo;{jason?.quote || "Trust. That's what it comes down to. You and me against the whole damn state."}&rdquo;
+                      &ldquo;
+                      {jason?.quote ||
+                        "Trust. That's what it comes down to. You and me against the whole damn state."}
+                      &rdquo;
                     </p>
                   </div>
 
                   {/* Specs List: Vertical 4-Row Key-Value Stack */}
                   <p className="pt-1 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
-                    Unconfirmed / Speculative — possible abilities, specialty, signature vehicle and territory (editorial analysis, not Rockstar-confirmed)
+                    Unconfirmed / Speculative — possible abilities, specialty,
+                    signature vehicle and territory (editorial analysis, not
+                    Rockstar-confirmed)
                   </p>
                   <div className="space-y-3 pt-1">
                     {/* Special Ability */}
@@ -385,7 +442,8 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                         <span>Special Ability:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        {jason?.perk || "Smuggler Eagle Eye (POI & Cache Detection)"}
+                        {jason?.perk ||
+                          "Smuggler Eagle Eye (POI & Cache Detection)"}
                       </span>
                     </div>
 
@@ -396,7 +454,8 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                         <span>Specialty:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        {jason?.specialty || "Off-Road Getaway & Heavy Weapons Logistics"}
+                        {jason?.specialty ||
+                          "Off-Road Getaway & Heavy Weapons Logistics"}
                       </span>
                     </div>
 
@@ -418,7 +477,8 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                         <span>Territory:</span>
                       </div>
                       <span className="font-bold text-slate-900 leading-snug">
-                        {jason?.origin || "Port Gellhorn & Keys Smuggling Routes"}
+                        {jason?.origin ||
+                          "Port Gellhorn & Keys Smuggling Routes"}
                       </span>
                     </div>
                   </div>
@@ -428,17 +488,20 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
                 <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
                   <div className="text-xs">
                     <span className="text-muted-foreground">Actor: </span>
-                    <span className="font-bold text-slate-900">{actorName(jason?.voiceActor, "Gregory Connors")}</span>
-                    <p className="text-xs text-muted-foreground">(Community Identified)</p>
+                    <span className="font-bold text-slate-900">
+                      {actorName(jason?.voiceActor, "Gregory Connors")}
+                    </span>
+                    <p className="text-xs text-muted-foreground">
+                      (Community Identified)
+                    </p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => openDossier(jason)}
+                  <Link
+                    href="/characters/jason"
                     className="inline-flex min-h-[44px] items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 shadow-md shadow-blue-500/30 transition-all hover:scale-105 active:scale-95"
                   >
                     <span>View Dossier</span>
                     <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -447,9 +510,9 @@ export function ProtagonistsShowcase({ characters: liveCharacters }: Protagonist
       </div>
 
       {/* Character Profile Detail Modal */}
-      <CharacterDetailModal 
-        character={selectedCharacter} 
-        onClose={() => setSelectedCharacter(null)} 
+      <CharacterDetailModal
+        character={selectedCharacter}
+        onClose={() => setSelectedCharacter(null)}
       />
     </section>
   );

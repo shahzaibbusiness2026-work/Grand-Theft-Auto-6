@@ -28,7 +28,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const prop = canonicalProperties.find((p) => p.slug === slug);
 
@@ -60,7 +62,8 @@ export default async function PropertyDetailPage({ params }: PageProps) {
   const hourly = prop.passiveIncomePerHour || 0;
   const dailyIncome = hourly * 24;
   const weeklyIncome = dailyIncome * 7;
-  const breakEvenDays = prop.price && hourly > 0 ? Math.ceil(prop.price / dailyIncome) : null;
+  const breakEvenDays =
+    prop.price && hourly > 0 ? Math.ceil(prop.price / dailyIncome) : null;
 
   return (
     <SiteShell>
@@ -73,15 +76,31 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
-                  { "@type": "ListItem", position: 2, name: "Properties", item: "https://www.taishgaming.com/properties" },
-                  { "@type": "ListItem", position: 3, name: prop.name, item: `https://www.taishgaming.com/properties/${prop.slug}` },
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://www.taishgaming.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Properties",
+                    item: "https://www.taishgaming.com/properties",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: prop.name,
+                    item: `https://www.taishgaming.com/properties/${prop.slug}`,
+                  },
                 ],
               },
               {
-                "@type": "RealEstateListing",
+                "@type": "WebPage",
                 name: prop.name,
-                description: `Property in ${prop.district}, State of Leonida.`,
+                description:
+                  "Fictional GTA VI property concept; availability and pricing unverified.",
                 url: `https://www.taishgaming.com/properties/${prop.slug}`,
               },
             ],
@@ -95,7 +114,10 @@ export default async function PropertyDetailPage({ params }: PageProps) {
             Home
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <Link href="/properties" className="hover:text-primary transition-colors">
+          <Link
+            href="/properties"
+            className="hover:text-primary transition-colors"
+          >
             Properties
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
@@ -124,9 +146,13 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     {prop.type}
                   </span>
                   <span className="text-xs text-muted-foreground flex items-center gap-1 font-medium">
-                    <MapPin className="h-3.5 w-3.5 text-accent" /> {prop.district}
+                    <MapPin className="h-3.5 w-3.5 text-accent" />{" "}
+                    {prop.district}
                   </span>
-                  <ConfidenceBadge confidence={prop.confidence} source={prop.source} />
+                  <ConfidenceBadge
+                    confidence={prop.confidence}
+                    source={prop.source}
+                  />
                 </div>
                 <FavoriteButton type="properties" id={prop.id} />
               </div>
@@ -136,7 +162,13 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               </h1>
 
               <div className="font-display text-2xl sm:text-3xl font-black text-gold-light">
-                {prop.priceDisplay} <span className="text-sm font-bold text-amber-500" title="Pre-release estimate">est.</span>
+                {prop.priceDisplay}{" "}
+                <span
+                  className="text-sm font-bold text-amber-500"
+                  title="Pre-release estimate"
+                >
+                  est.
+                </span>
               </div>
 
               <p className="text-sm text-muted-foreground leading-relaxed pt-1">
@@ -147,11 +179,17 @@ export default async function PropertyDetailPage({ params }: PageProps) {
             {/* Photo / Visual */}
             <div className="card-carbon overflow-hidden">
               <div className="relative h-72 sm:h-96 w-full bg-background">
-                <img loading="lazy" src={prop.img} alt={prop.name} className="h-full w-full object-cover" />
+                <img
+                  loading="lazy"
+                  src={prop.img}
+                  alt={prop.name}
+                  className="h-full w-full object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
                   <span className="font-mono text-muted-foreground min-w-0 truncate">
-                    Map Location: Top {prop.mapCoords.top} / Left {prop.mapCoords.left}
+                    Map Location: Top {prop.mapCoords.top} / Left{" "}
+                    {prop.mapCoords.left}
                   </span>
                   <Link
                     href={`/map?poi=${prop.id}&top=${prop.mapCoords.top}&left=${prop.mapCoords.left}`}
@@ -168,7 +206,8 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               <div className="card-carbon p-6 space-y-4 border-emerald-500/30 bg-emerald-950/10">
                 <EstimatedDataNote />
                 <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm uppercase tracking-wider">
-                  <TrendingUp className="h-4 w-4" /> Passive Revenue & ROI Breakdown (Estimated)
+                  <TrendingUp className="h-4 w-4" /> Passive Revenue & ROI
+                  Breakdown (Estimated)
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-center">
                   <div className="p-3 rounded-xl bg-muted/80 border border-border">
@@ -211,7 +250,9 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                   Residential / Private Safehouse
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  This property is an exclusive private residence or story safehouse with zero operational overhead and maximum vehicle staging security.
+                  This property is an exclusive private residence or story
+                  safehouse with zero operational overhead and maximum vehicle
+                  staging security.
                 </p>
               </div>
             )}
@@ -234,7 +275,8 @@ export default async function PropertyDetailPage({ params }: PageProps) {
 
               <div className="card-carbon p-6 space-y-3">
                 <h3 className="font-display text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-accent" /> Available Upgrades
+                  <Sparkles className="h-4 w-4 text-accent" /> Available
+                  Upgrades
                 </h3>
                 <ul className="space-y-2 text-xs text-muted-foreground">
                   {prop.upgrades.map((u) => (
@@ -258,19 +300,33 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               <div className="space-y-2.5 text-xs font-mono">
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">Price:</span>
-                  <span className="font-bold text-gold-light">{prop.priceDisplay} <span className="text-[10px] text-amber-500" title="Pre-release estimate">est.</span></span>
+                  <span className="font-bold text-gold-light">
+                    {prop.priceDisplay}{" "}
+                    <span
+                      className="text-[10px] text-amber-500"
+                      title="Pre-release estimate"
+                    >
+                      est.
+                    </span>
+                  </span>
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">Garage:</span>
-                  <span className="font-bold text-foreground">{prop.garageCapacity} Vehicles</span>
+                  <span className="font-bold text-foreground">
+                    {prop.garageCapacity} Vehicles
+                  </span>
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">District:</span>
-                  <span className="text-accent font-semibold">{prop.district}</span>
+                  <span className="text-accent font-semibold">
+                    {prop.district}
+                  </span>
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-border">
                   <span className="text-muted-foreground">Classification:</span>
-                  <span className="text-foreground font-semibold">{prop.confidence}</span>
+                  <span className="text-foreground font-semibold">
+                    {prop.confidence}
+                  </span>
                 </div>
               </div>
 
@@ -301,7 +357,13 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                       {item.name}
                     </div>
                     <div className="text-xs text-gold-light font-mono mt-1">
-                      {item.priceDisplay} <span className="text-[10px] text-amber-500" title="Pre-release estimate">est.</span>
+                      {item.priceDisplay}{" "}
+                      <span
+                        className="text-[10px] text-amber-500"
+                        title="Pre-release estimate"
+                      >
+                        est.
+                      </span>
                     </div>
                   </Link>
                 ))}

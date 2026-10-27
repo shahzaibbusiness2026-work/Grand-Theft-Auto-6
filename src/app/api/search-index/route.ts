@@ -29,7 +29,7 @@ export async function GET() {
       items.push({
         id: `veh-${v.id}`,
         title: v.name,
-        subtitle: `${v.klass} • ${v.topSpeed} mph • ${v.priceDisplay}`,
+        subtitle: `${v.klass} • Identification awaiting review`,
         category: "Vehicle",
         href: `/vehicles/${v.slug}`,
         img: v.img,
@@ -42,7 +42,7 @@ export async function GET() {
       items.push({
         id: `wep-${w.id}`,
         title: w.name,
-        subtitle: `${w.klass} • ${w.damage} Dmg • ${w.priceDisplay}`,
+        subtitle: `${w.klass} • Identification awaiting review`,
         category: "Weapon",
         href: `/weapons/${w.slug}`,
         img: w.img,
@@ -70,7 +70,7 @@ export async function GET() {
         title: g.title,
         subtitle: `${g.category}${g.read_time ? " • " + g.read_time : ""}`,
         category: "Guide",
-        href: "/guides",
+        href: g.slug ? `/guides/${g.slug}` : "/guides",
         img: g.image,
       });
     });
@@ -80,7 +80,7 @@ export async function GET() {
       items.push({
         id: `mis-${m.id}`,
         title: m.title,
-        subtitle: `${m.type} • ${m.character} • ${m.cashRewardDisplay}`,
+        subtitle: "Speculative mission concept",
         category: "Mission",
         href: `/missions/${m.slug}`,
         img: m.img,
@@ -104,7 +104,7 @@ export async function GET() {
       items.push({
         id: `prop-${p.id}`,
         title: p.name,
-        subtitle: `${p.type} in ${p.district} • ${p.priceDisplay}`,
+        subtitle: "Unverified property concept",
         category: "Property",
         href: `/properties/${p.slug}`,
         img: p.img,
@@ -131,7 +131,7 @@ export async function GET() {
         title: c.name,
         subtitle: `${c.role} • ${c.desc.slice(0, 50)}...`,
         category: "Character",
-        href: "/characters",
+        href: `/characters/${c.id}`,
         img: c.img,
       });
     });
@@ -139,12 +139,12 @@ export async function GET() {
     // On any failure return at least the static tool entries
     return NextResponse.json(
       { items: TOOL_SEARCH_ITEMS },
-      { headers: { "Cache-Control": "no-store" } }
+      { headers: { "Cache-Control": "no-store" } },
     );
   }
 
   return NextResponse.json(
     { items },
-    { headers: { "Cache-Control": "no-store" } }
+    { headers: { "Cache-Control": "no-store" } },
   );
 }

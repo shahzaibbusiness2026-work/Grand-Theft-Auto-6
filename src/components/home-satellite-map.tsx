@@ -21,13 +21,69 @@ import {
 import { cn } from "@/lib/utils";
 
 const PREVIEW_PINS = [
-  { id: "p-ammu", name: "Ammu-Nation", district: "Downtown Vice", top: "44%", left: "48%", color: "bg-gold", icon: Crosshair },
-  { id: "p-garage", name: "Ocean Drive Garage", district: "Ocean Beach", top: "56%", left: "63%", color: "bg-cyan-500", icon: Warehouse },
-  { id: "p-suite", name: "Ocean View Suite", district: "Vice City", top: "66%", left: "55%", color: "bg-sky-500", icon: Home },
-  { id: "p-cache", name: "Hidden Cache #12", district: "Biscayne Reef", top: "72%", left: "50%", color: "bg-purple-500", icon: Gem },
-  { id: "p-stunt", name: "Stunt Jump #8", district: "Causeway", top: "52%", left: "39%", color: "bg-gold", icon: Star },
-  { id: "p-ufo", name: "UFO Mural", district: "Grassrivers", top: "29%", left: "66%", color: "bg-emerald-500", icon: Egg },
-  { id: "p-heist", name: "Keys Bank Heist", district: "Leonida Keys", top: "68%", left: "41%", color: "bg-orange-500", icon: Star },
+  {
+    id: "p-ammu",
+    name: "Ammu-Nation",
+    district: "Downtown Vice",
+    top: "44%",
+    left: "48%",
+    color: "bg-gold",
+    icon: Crosshair,
+  },
+  {
+    id: "p-garage",
+    name: "Ocean Drive Garage",
+    district: "Ocean Beach",
+    top: "56%",
+    left: "63%",
+    color: "bg-cyan-500",
+    icon: Warehouse,
+  },
+  {
+    id: "p-suite",
+    name: "Ocean View Suite",
+    district: "Vice City",
+    top: "66%",
+    left: "55%",
+    color: "bg-sky-500",
+    icon: Home,
+  },
+  {
+    id: "p-cache",
+    name: "Hidden Cache #12",
+    district: "Biscayne Reef",
+    top: "72%",
+    left: "50%",
+    color: "bg-purple-500",
+    icon: Gem,
+  },
+  {
+    id: "p-stunt",
+    name: "Stunt Jump #8",
+    district: "Causeway",
+    top: "52%",
+    left: "39%",
+    color: "bg-gold",
+    icon: Star,
+  },
+  {
+    id: "p-ufo",
+    name: "UFO Mural",
+    district: "Grassrivers",
+    top: "29%",
+    left: "66%",
+    color: "bg-emerald-500",
+    icon: Egg,
+  },
+  {
+    id: "p-heist",
+    name: "Keys Bank Heist",
+    district: "Leonida Keys",
+    top: "68%",
+    left: "41%",
+    color: "bg-orange-500",
+    icon: Star,
+  },
 ];
 
 /**
@@ -66,7 +122,7 @@ export function HomeSatelliteMap() {
         {/* View Full Map Action Button */}
         <Link
           href="/map"
-          className="group inline-flex items-center gap-2 rounded-xl bg-gold px-4 py-2 font-display text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_20px_rgba(201,168,106,0.35)] transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(201,168,106,0.55)]"
+          className="group inline-flex min-h-11 items-center gap-2 rounded-xl bg-gold px-4 py-2 font-display text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_0_20px_rgba(201,168,106,0.35)] transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(201,168,106,0.55)]"
         >
           <span>Open Fullscreen Map</span>
           <Maximize2 className="h-3.5 w-3.5 transition-transform group-hover:scale-110" />
@@ -87,7 +143,8 @@ export function HomeSatelliteMap() {
             sizes="100vw"
             className={cn(
               "object-cover select-none pointer-events-none transition-all duration-300",
-              !satelliteMode && "invert hue-rotate-180 brightness-90 saturate-150"
+              !satelliteMode &&
+                "invert hue-rotate-180 brightness-90 saturate-150",
             )}
           />
 
@@ -99,7 +156,7 @@ export function HomeSatelliteMap() {
               <button
                 key={p.id}
                 onClick={() => setActivePin(p.id)}
-                className="absolute z-10 -translate-x-1/2 -translate-y-1/2 group focus:outline-none transition-transform hover:scale-125"
+                className="absolute z-10 -translate-x-1/2 -translate-y-1/2 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 transition-transform hover:scale-125"
                 style={{ top: p.top, left: p.left }}
                 aria-label={p.name}
               >
@@ -108,9 +165,10 @@ export function HomeSatelliteMap() {
                 )}
                 <span
                   className={cn(
-                    "flex h-7 w-7 items-center justify-center rounded-full border-2 border-white text-white shadow-[0_0_14px_rgba(0,0,0,0.9)] transition-all",
+                    "flex h-11 w-11 items-center justify-center rounded-full border-2 border-white text-white shadow-[0_0_14px_rgba(0,0,0,0.9)] transition-all",
                     p.color,
-                    isSelected && "ring-4 ring-white scale-125 shadow-[0_0_20px_#f59e0b]"
+                    isSelected &&
+                      "ring-4 ring-white scale-125 shadow-[0_0_20px_#f59e0b]",
                   )}
                 >
                   <Icon className="h-3.5 w-3.5" />
@@ -119,7 +177,9 @@ export function HomeSatelliteMap() {
                 {/* Pin Tooltip */}
                 <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-black/90 px-2.5 py-1 text-xs font-bold text-white shadow-xl backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity">
                   <span className="text-gold-light font-black">{p.name}</span>
-                  <span className="text-slate-400 block text-xs font-medium">{p.district}</span>
+                  <span className="text-slate-400 block text-xs font-medium">
+                    {p.district}
+                  </span>
                 </span>
               </button>
             );
@@ -157,24 +217,10 @@ export function HomeSatelliteMap() {
           className="absolute bottom-6 left-5 z-20 flex items-center gap-2.5 rounded-2xl border border-white/15 bg-black/80 px-4 py-2.5 text-xs font-bold text-white backdrop-blur-xl shadow-2xl hover:bg-white/20 transition-colors"
         >
           <Layers className="h-4 w-4 text-gold-light" />
-          <span>{satelliteMode ? "Switch to Tactical" : "Switch to Satellite"}</span>
+          <span>
+            {satelliteMode ? "Switch to Tactical" : "Switch to Satellite"}
+          </span>
         </button>
-
-        {/* Floating Callout Bottom Banner */}
-        <div className="absolute inset-x-5 bottom-20 sm:bottom-6 sm:left-1/2 sm:-translate-x-1/2 sm:w-auto z-20 pointer-events-none">
-          <Link
-            href="/map"
-            className="pointer-events-auto inline-flex items-center gap-3 rounded-2xl border border-border bg-card/90 px-5 py-3 text-xs font-semibold text-foreground shadow-2xl backdrop-blur-2xl transition-all hover:border-gold/60 hover:scale-105"
-          >
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gold/20 text-gold dark:text-gold-light">
-              <Sparkles className="h-3.5 w-3.5" />
-            </span>
-            <span>
-              Click to explore the full map — locations, missions, weapons & progress
-            </span>
-            <ArrowRight className="h-4 w-4 text-gold dark:text-gold-light" />
-          </Link>
-        </div>
       </div>
     </div>
   );

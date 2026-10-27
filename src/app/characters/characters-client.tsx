@@ -1,17 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { SafeImage } from "@/components/safe-image";
-import {  Play, Star, ArrowRight, Sparkles, Shield } from "lucide-react";
+import { Play, Star, ArrowRight, Sparkles, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { SectionHeader } from "@/components/section-header";
 import { FilterBar } from "@/components/filter-bar";
 import type { Character } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import { CharacterDetailModal } from "@/components/character-detail-modal";
 
-const PILLS = ["All Characters", "Main Characters", "Supporting", "Antagonists", "Law Enforcement", "Civilians"];
+const PILLS = [
+  "All Characters",
+  "Main Characters",
+  "Supporting",
+  "Antagonists",
+  "Law Enforcement",
+  "Civilians",
+];
 
 interface CharactersClientProps {
   initialCharacters?: Character[];
@@ -20,19 +27,19 @@ interface CharactersClientProps {
 export function CharactersClient({ initialCharacters }: CharactersClientProps) {
   const [pill, setPill] = useState("All Characters");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
   const characterList = initialCharacters ?? [];
 
-  const luciaChar = characterList.find((c) => c.id === 'lucia');
-  const jasonChar = characterList.find((c) => c.id === 'jason');
+  const luciaChar = characterList.find((c) => c.id === "lucia");
+  const jasonChar = characterList.find((c) => c.id === "jason");
 
   const filtered = characterList.filter((c) => {
     // Role filter
     let roleMatch = true;
     if (pill === "Main Characters") roleMatch = c.role === "Protagonist";
     else if (pill === "Antagonists") roleMatch = c.role === "Antagonist";
-    else if (pill === "Law Enforcement") roleMatch = c.role === "Law Enforcement";
+    else if (pill === "Law Enforcement")
+      roleMatch = c.role === "Law Enforcement";
     else if (pill === "Civilians") roleMatch = c.role === "Civilian";
     else if (pill === "Supporting") roleMatch = c.role === "Supporting";
 
@@ -40,7 +47,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
     let searchMatch = true;
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      searchMatch = 
+      searchMatch =
         c.name.toLowerCase().includes(q) ||
         (c.alias && c.alias.toLowerCase().includes(q)) ||
         c.desc.toLowerCase().includes(q) ||
@@ -69,21 +76,31 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               </div>
 
               <h1 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-                Meet the People of{" "}
-                <span className="text-primary">
-                  Leonida
-                </span>
+                Meet the People of <span className="text-primary">Leonida</span>
               </h1>
 
               <p className="max-w-xl text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Profiles based on Rockstar&apos;s official character information, trailers and clearly labelled analysis.
+                Profiles based on Rockstar&apos;s official character
+                information, trailers and clearly labelled analysis.
               </p>
 
               <div className="pt-2 max-w-lg">
                 <FilterBar
                   placeholder="Search characters, aliases, or roles..."
                   onSearch={setSearchQuery}
-                  selects={[{ label: "Role", options: ["All Roles", "Protagonist", "Antagonist", "Supporting", "Law Enforcement", "Civilian"] }]}
+                  selects={[
+                    {
+                      label: "Role",
+                      options: [
+                        "All Roles",
+                        "Protagonist",
+                        "Antagonist",
+                        "Supporting",
+                        "Law Enforcement",
+                        "Civilian",
+                      ],
+                    },
+                  ]}
                 />
               </div>
             </div>
@@ -91,9 +108,8 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
             {/* Right Content: Dual Protagonist Spotlight Frame (Lucia & Jason in Natural 3:4 Aspect Ratio) */}
             <div className="lg:col-span-5 flex items-center justify-center lg:justify-end gap-3 sm:gap-4">
               {/* Lucia Spotlight */}
-              <button
-                type="button"
-                onClick={() => setSelectedCharacter(luciaChar || null)}
+              <Link
+                href="/characters/lucia"
                 className="group relative w-36 sm:w-44 aspect-[3/4] rounded-2xl overflow-hidden border border-pink-500/40 bg-black/60 shadow-xl hover:shadow-[0_0_25px_rgba(236,72,153,0.35)] transition-all hover:scale-105 text-left"
                 title="View Lucia Caminos Profile"
               >
@@ -107,15 +123,18 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 inset-x-2 text-center">
-                  <span className="text-xs font-mono font-black uppercase tracking-wider text-pink-400 block">Lead Protagonist</span>
-                  <strong className="text-xs sm:text-sm font-black text-white block truncate drop-shadow">{luciaChar?.name || "Lucia Caminos"}</strong>
+                  <span className="text-xs font-mono font-black uppercase tracking-wider text-pink-400 block">
+                    Lead Protagonist
+                  </span>
+                  <strong className="text-xs sm:text-sm font-black text-white block truncate drop-shadow">
+                    {luciaChar?.name || "Lucia Caminos"}
+                  </strong>
                 </div>
-              </button>
+              </Link>
 
               {/* Jason Spotlight */}
-              <button
-                type="button"
-                onClick={() => setSelectedCharacter(jasonChar || null)}
+              <Link
+                href="/characters/jason"
                 className="group relative w-36 sm:w-44 aspect-[3/4] rounded-2xl overflow-hidden border border-cyan-500/40 bg-black/60 shadow-xl hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] transition-all hover:scale-105 text-left"
                 title="View Jason Duval Profile"
               >
@@ -129,10 +148,14 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 inset-x-2 text-center">
-                  <span className="text-xs font-mono font-black uppercase tracking-wider text-cyan-400 block">Co-Protagonist</span>
-                  <strong className="text-xs sm:text-sm font-black text-white block truncate drop-shadow">{jasonChar?.name || "Jason Duval"}</strong>
+                  <span className="text-xs font-mono font-black uppercase tracking-wider text-cyan-400 block">
+                    Co-Protagonist
+                  </span>
+                  <strong className="text-xs sm:text-sm font-black text-white block truncate drop-shadow">
+                    {jasonChar?.name || "Jason Duval"}
+                  </strong>
                 </div>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -147,7 +170,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                 "shrink-0 rounded-full border px-4 py-1.5 text-[13px] font-semibold transition-all",
                 pill === p
                   ? "border-transparent bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold shadow-md shadow-pink-500/25"
-                  : "border-border bg-card text-muted-foreground hover:text-foreground hover:border-border"
+                  : "border-border bg-card text-muted-foreground hover:text-foreground hover:border-border",
               )}
             >
               {p}
@@ -158,86 +181,88 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
 
       {/* 2. FEATURED CHARACTERS — Perfectly Proportioned 3:4 Portrait Cards with Interactive Click */}
       <section className="container-site py-8">
-        <SectionHeader 
-          title="Featured Characters" 
-          viewAllHref="#all-characters" 
-          viewAllLabel="View All Characters" 
+        <SectionHeader
+          title="Featured Characters"
+          viewAllHref="#all-characters"
+          viewAllLabel="View All Characters"
         />
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {characterList.filter((c) => c.featured).map((c, i) => (
-            <article 
-              key={c.id} 
-              onClick={() => setSelectedCharacter(c)}
-              className={cn(
-                "group relative card-surface overflow-hidden rounded-2xl border border-border hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_0_30px_rgba(236,72,153,0.2)] cursor-pointer",
-                i === 0 && "border-pink-500/60"
-              )}
-            >
-              {/* Perfectly Proportioned 3:4 Aspect Ratio Image Box */}
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/40">
-                <SafeImage
-                  src={c.img}
-                  alt={`${c.name} - GTA 6 Character (${c.role})`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1020] via-transparent to-transparent pointer-events-none" />
-                
-                {/* Top Badge */}
-                <div className="absolute left-3 top-3 flex items-center gap-1.5">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pink-500 text-foreground shadow-md shadow-pink-500/40">
-                    <Star className="h-3 w-3 fill-current" />
-                  </span>
-                  <span className="px-2 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-black/70 border border-border text-white backdrop-blur-md">
-                    {c.role}
-                  </span>
-                </div>
+          {characterList
+            .filter((c) => c.featured)
+            .map((c, i) => (
+              <Link
+                key={c.id}
+                href={"/characters/" + c.id}
+                className={cn(
+                  "group relative card-surface overflow-hidden rounded-2xl border border-border hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_0_30px_rgba(236,72,153,0.2)] cursor-pointer",
+                  i === 0 && "border-pink-500/60",
+                )}
+              >
+                {/* Perfectly Proportioned 3:4 Aspect Ratio Image Box */}
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/40">
+                  <SafeImage
+                    src={c.img}
+                    alt={`${c.name} - GTA 6 Character (${c.role})`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1020] via-transparent to-transparent pointer-events-none" />
 
-                {/* Hover CTA prompt */}
-                <div className="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="inline-flex items-center justify-center w-full gap-1.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-pink-500/30">
-                    <span>View Dossier</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-              </div>
-
-              {/* Card Meta Content */}
-              <div className="p-4 bg-card/95">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-display text-base font-bold text-foreground group-hover:text-pink-600 dark:group-hover:text-pink-300 transition-colors">
-                    {c.name}
-                  </h3>
-                  {c.alias && (
-                    <span className="flex items-center gap-1.5">
-                      <span
-                        title="Editorial nickname, not an official Rockstar alias"
-                        className="text-xs font-mono text-cyan-700 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded"
-                      >
-                        &ldquo;{c.alias}&rdquo;
-                      </span>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground border border-border rounded-full px-1.5 py-0.5">
-                        Editorial label
-                      </span>
+                  {/* Top Badge */}
+                  <div className="absolute left-3 top-3 flex items-center gap-1.5">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pink-500 text-foreground shadow-md shadow-pink-500/40">
+                      <Star className="h-3 w-3 fill-current" />
                     </span>
+                    <span className="px-2 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-black/70 border border-border text-white backdrop-blur-md">
+                      {c.role}
+                    </span>
+                  </div>
+
+                  {/* Hover CTA prompt */}
+                  <div className="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="inline-flex items-center justify-center w-full gap-1.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-pink-500/30">
+                      <span>View Dossier</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
+                </div>
+
+                {/* Card Meta Content */}
+                <div className="p-4 bg-card/95">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-display text-base font-bold text-foreground group-hover:text-pink-600 dark:group-hover:text-pink-300 transition-colors">
+                      {c.name}
+                    </h3>
+                    {c.alias && (
+                      <span className="flex items-center gap-1.5">
+                        <span
+                          title="Editorial nickname, not an official Rockstar alias"
+                          className="text-xs font-mono text-cyan-700 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded"
+                        >
+                          &ldquo;{c.alias}&rdquo;
+                        </span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground border border-border rounded-full px-1.5 py-0.5">
+                          Editorial label
+                        </span>
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">
+                    {c.desc}
+                  </p>
+
+                  {c.specialty && (
+                    <div className="mt-3 pt-2.5 border-t border-border flex items-center gap-2 text-xs text-muted-foreground">
+                      <Shield className="w-3.5 h-3.5 text-pink-600 dark:text-pink-400 shrink-0" />
+                      <span className="truncate">{c.specialty}</span>
+                    </div>
                   )}
                 </div>
-
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">
-                  {c.desc}
-                </p>
-
-                {c.specialty && (
-                  <div className="mt-3 pt-2.5 border-t border-border flex items-center gap-2 text-xs text-muted-foreground">
-                    <Shield className="w-3.5 h-3.5 text-pink-600 dark:text-pink-400 shrink-0" />
-                    <span className="truncate">{c.specialty}</span>
-                  </div>
-                )}
-              </div>
-            </article>
-          ))}
+              </Link>
+            ))}
         </div>
       </section>
 
@@ -249,7 +274,8 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               All Characters
             </h2>
             <p className="mt-1 text-xs font-mono text-pink-600 dark:text-pink-400">
-              {filtered.length}{" "}Characters Found • Click any card for full dossier
+              {filtered.length} Characters Found • Click any card for full
+              dossier
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -262,9 +288,9 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {filtered.map((c) => (
-            <article 
-              key={c.id} 
-              onClick={() => setSelectedCharacter(c)}
+            <Link
+              key={c.id}
+              href={"/characters/" + c.id}
               className="group card-surface overflow-hidden rounded-xl border border-border hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer shadow-md hover:shadow-[0_0_20px_rgba(236,72,153,0.2)]"
             >
               {/* Natural 3:4 Aspect Ratio Image */}
@@ -278,7 +304,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                
+
                 {/* Role badge tag */}
                 <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-xs font-mono font-black uppercase tracking-wider bg-black/70 border border-border text-white backdrop-blur-md">
                   {c.role}
@@ -300,7 +326,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                   {c.role}
                 </p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
@@ -322,14 +348,20 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
             </span>
           </div>
           <div>
-            <p className="section-eyebrow text-pink-600 dark:text-pink-400">Character Stories</p>
+            <p className="section-eyebrow text-pink-600 dark:text-pink-400">
+              Character Stories
+            </p>
             <h2 className="mt-3 font-display text-2xl font-extrabold uppercase tracking-wider leading-snug text-foreground">
               Every Character Has <br /> A Story
             </h2>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-              Dive deeper into their background, relationships, and impact on the criminal underworld of GTA 6.
+              Dive deeper into their background, relationships, and impact on
+              the criminal underworld of GTA 6.
             </p>
-            <Button href="/blog" className="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold">
+            <Button
+              href="/blog"
+              className="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold"
+            >
               Explore Character Stories <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
@@ -337,12 +369,6 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
       </section>
 
       {/* 5. Interactive Character Profile Detail Modal */}
-      <CharacterDetailModal
-        character={selectedCharacter}
-        onClose={() => setSelectedCharacter(null)}
-      />
     </>
   );
 }
-
-

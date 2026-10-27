@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
 export interface TrackerCategory {
@@ -19,17 +19,83 @@ export interface TrackerCategory {
  * onto the real checklist. Weights sum to 100.
  */
 const DEFAULT_TRACKER_CATEGORIES: TrackerCategory[] = [
-  { id: "trk-1", name: "Story Missions", weight: 40, totalItems: 5, active: true },
-  { id: "trk-2", name: "Strangers & Freaks", weight: 8, totalItems: 3, active: true },
-  { id: "trk-3", name: "Collectibles", weight: 15, totalItems: 4, active: true },
-  { id: "trk-4", name: "Hobbies & Pastimes", weight: 7, totalItems: 4, active: true },
-  { id: "trk-5", name: "Random Events", weight: 5, totalItems: 3, active: true },
-  { id: "trk-6", name: "Miscellaneous", weight: 5, totalItems: 3, active: true },
-  { id: "trk-7", name: "Properties & Businesses", weight: 5, totalItems: 3, active: true },
-  { id: "trk-8", name: "Weapon Masteries", weight: 5, totalItems: 3, active: true },
-  { id: "trk-9", name: "Vehicle Collections", weight: 4, totalItems: 2, active: true },
-  { id: "trk-10", name: "Map Exploration", weight: 4, totalItems: 2, active: true },
-  { id: "trk-11", name: "Trophies & Achievements", weight: 2, totalItems: 3, active: true },
+  {
+    id: "trk-1",
+    name: "Story Missions",
+    weight: 40,
+    totalItems: 5,
+    active: true,
+  },
+  {
+    id: "trk-2",
+    name: "Strangers & Freaks",
+    weight: 8,
+    totalItems: 3,
+    active: true,
+  },
+  {
+    id: "trk-3",
+    name: "Collectibles",
+    weight: 15,
+    totalItems: 4,
+    active: true,
+  },
+  {
+    id: "trk-4",
+    name: "Hobbies & Pastimes",
+    weight: 7,
+    totalItems: 4,
+    active: true,
+  },
+  {
+    id: "trk-5",
+    name: "Random Events",
+    weight: 5,
+    totalItems: 3,
+    active: true,
+  },
+  {
+    id: "trk-6",
+    name: "Miscellaneous",
+    weight: 5,
+    totalItems: 3,
+    active: true,
+  },
+  {
+    id: "trk-7",
+    name: "Properties & Businesses",
+    weight: 5,
+    totalItems: 3,
+    active: true,
+  },
+  {
+    id: "trk-8",
+    name: "Weapon Masteries",
+    weight: 5,
+    totalItems: 3,
+    active: true,
+  },
+  {
+    id: "trk-9",
+    name: "Vehicle Collections",
+    weight: 4,
+    totalItems: 2,
+    active: true,
+  },
+  {
+    id: "trk-10",
+    name: "Map Exploration",
+    weight: 4,
+    totalItems: 2,
+    active: true,
+  },
+  {
+    id: "trk-11",
+    name: "Trophies & Achievements",
+    weight: 2,
+    totalItems: 3,
+    active: true,
+  },
 ];
 
 /**
@@ -37,7 +103,7 @@ const DEFAULT_TRACKER_CATEGORIES: TrackerCategory[] = [
  */
 export async function getTrackerCategories(): Promise<TrackerCategory[]> {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data: setting } = await supabase
       .from("site_settings")
       .select("value")
@@ -45,7 +111,10 @@ export async function getTrackerCategories(): Promise<TrackerCategory[]> {
       .maybeSingle();
 
     if (setting?.value) {
-      const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
+      const parsed =
+        typeof setting.value === "string"
+          ? JSON.parse(setting.value)
+          : setting.value;
       if (Array.isArray(parsed) && parsed.length > 0) return parsed;
     }
   } catch (err) {
@@ -57,7 +126,9 @@ export async function getTrackerCategories(): Promise<TrackerCategory[]> {
 /**
  * Save tracker categories configuration to Supabase site_settings
  */
-export async function saveTrackerCategories(categories: TrackerCategory[]): Promise<{ success: boolean; error?: string }> {
+export async function saveTrackerCategories(
+  categories: TrackerCategory[],
+): Promise<{ success: boolean; error?: string }> {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
@@ -67,7 +138,7 @@ export async function saveTrackerCategories(categories: TrackerCategory[]): Prom
         value: JSON.stringify(categories),
         updated_at: new Date().toISOString(),
       },
-      { onConflict: "key" }
+      { onConflict: "key" },
     );
     if (error) throw error;
 

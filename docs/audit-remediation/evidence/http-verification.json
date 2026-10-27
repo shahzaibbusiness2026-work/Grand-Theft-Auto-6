@@ -1,0 +1,135 @@
+{
+  "base": "http://127.0.0.1:3001",
+  "checkedAt": "2026-10-27T14:36:03.831Z",
+  "passed": 24,
+  "total": 24,
+  "checks": [
+    {
+      "name": "real 404 /news/gta-6-easter-eggs-hidden-trailer-details",
+      "pass": true,
+      "status": 404
+    },
+    {
+      "name": "real 404 /news/audit-missing-article-2026",
+      "pass": true,
+      "status": 404
+    },
+    {
+      "name": "real 404 /vehicles/audit-missing-vehicle-2026",
+      "pass": true,
+      "status": 404
+    },
+    {
+      "name": "real 404 /weapons/audit-missing-weapon-2026",
+      "pass": true,
+      "status": 404
+    },
+    {
+      "name": "permanent redirect /database/vehicles",
+      "pass": true,
+      "status": 308,
+      "location": "/vehicles"
+    },
+    {
+      "name": "permanent redirect /database/weapons",
+      "pass": true,
+      "status": 308,
+      "location": "/weapons"
+    },
+    {
+      "name": "permanent redirect /blog",
+      "pass": true,
+      "status": 308,
+      "location": "/news"
+    },
+    {
+      "name": "unwritten guide excluded from indexing",
+      "pass": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "name": "sitemap canonical quality gate",
+      "pass": true,
+      "urls": 53
+    },
+    {
+      "name": "favicon delivered",
+      "pass": true,
+      "status": 200
+    },
+    {
+      "name": "public destination /team",
+      "pass": true,
+      "status": 200
+    },
+    {
+      "name": "public destination /editorial-policy",
+      "pass": true,
+      "status": 200
+    },
+    {
+      "name": "public destination /corrections",
+      "pass": true,
+      "status": 200
+    },
+    {
+      "name": "public destination /characters/jason",
+      "pass": true,
+      "status": 200
+    },
+    {
+      "name": "public destination /radio",
+      "pass": true,
+      "status": 200
+    },
+    {
+      "name": "public destination /unsubscribe",
+      "pass": true,
+      "status": 200
+    },
+    {
+      "name": "radio has sourced current lineup",
+      "pass": true,
+      "stations": 6
+    },
+    {
+      "name": "article cache and trailer heading",
+      "pass": true,
+      "cache": "s-maxage=300, stale-while-revalidate=31535700",
+      "cookies": false
+    },
+    {
+      "name": "Port Gellhorn hero and social card agree",
+      "pass": true,
+      "image": "https://www.taishgaming.com/img/port-gellhorn-official.jpg",
+      "width": 3840,
+      "height": 2160
+    },
+    {
+      "name": "catalog detail unverified and noindex",
+      "pass": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "name": "search index withholds unsupported catalog statistics",
+      "pass": true,
+      "entries": 144
+    },
+    {
+      "name": "security headers staged without breaking embed",
+      "pass": true,
+      "reportOnly": true,
+      "embedAllowed": true
+    },
+    {
+      "name": "CSP reports accepted without body reflection",
+      "pass": true,
+      "status": 204
+    },
+    {
+      "name": "optional third-party services absent by default",
+      "pass": true,
+      "default": "off"
+    }
+  ]
+}

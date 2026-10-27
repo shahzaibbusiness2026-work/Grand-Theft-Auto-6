@@ -26,7 +26,6 @@ const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-
 function hashToken(token: string): string {
   return createHash("sha256").update(token).digest("hex");
 }
@@ -35,7 +34,9 @@ async function getPending(): Promise<PendingSubscription[]> {
   return (await getPrivateSetting<PendingSubscription[]>(PENDING_KEY)) || [];
 }
 
-async function purgeExpiredPending(list: PendingSubscription[]): Promise<PendingSubscription[]> {
+async function purgeExpiredPending(
+  list: PendingSubscription[],
+): Promise<PendingSubscription[]> {
   const now = new Date().toISOString();
   const fresh = list.filter((p) => p.expires_at > now);
   if (fresh.length !== list.length) {
@@ -44,7 +45,6 @@ async function purgeExpiredPending(list: PendingSubscription[]): Promise<Pending
   return fresh;
 }
 
-
 /**
  * Single opt-in newsletter signup:
  *  1. Validates + rate-limits the request.
@@ -52,7 +52,7 @@ async function purgeExpiredPending(list: PendingSubscription[]): Promise<Pending
  *     confirmation email or link click required.
  */
 export async function subscribeNewsletter(
-  email: string
+  email: string,
 ): Promise<{ success: boolean; message?: string }> {
   try {
     const hdrs = await headers();
@@ -62,13 +62,19 @@ export async function subscribeNewsletter(
       "unknown";
 
     if (await peekRateLimit("newsletter-signup", ip, RATE_LIMIT_MAX)) {
-      return { success: false, message: "Too many attempts. Please try again later." };
+      return {
+        success: false,
+        message: "Too many attempts. Please try again later.",
+      };
     }
     await recordRateLimitHit("newsletter-signup", ip, RATE_LIMIT_WINDOW_MS);
 
     const cleanEmail = (email || "").trim().toLowerCase();
     if (!cleanEmail || cleanEmail.length > 254 || !EMAIL_RE.test(cleanEmail)) {
-      return { success: false, message: "Please provide a valid email address." };
+      return {
+        success: false,
+        message: "Please provide a valid email address.",
+      };
     }
 
     const subscribers =
@@ -77,15 +83,23 @@ export async function subscribeNewsletter(
       return { success: true, message: "You're already subscribed." };
     }
 
-    await setPrivateSetting(SUBSCRIBERS_KEY, [
+    const stored = await setPrivateSetting(SUBSCRIBERS_KEY, [
       ...subscribers,
       { email: cleanEmail, subscribed_at: new Date().toISOString() },
     ]);
+    if (!stored)
+      return {
+        success: false,
+        message: "Subscription storage is unavailable. Please try again later.",
+      };
 
     return { success: true, message: "You're subscribed — see you at launch!" };
   } catch (err) {
     console.error("Newsletter subscription error:", err);
-    return { success: false, message: "Failed to subscribe. Please try again." };
+    return {
+      success: false,
+      message: "Failed to subscribe. Please try again.",
+    };
   }
 }
 
@@ -96,7 +110,7 @@ export type ConfirmResult = "confirmed" | "already" | "expired" | "invalid";
  * Tokens are single-use and expire after 24 hours.
  */
 export async function confirmNewsletterSubscription(
-  token: string
+  token: string,
 ): Promise<{ result: ConfirmResult; email?: string }> {
   try {
     const clean = (token || "").trim();
@@ -109,7 +123,7 @@ export async function confirmNewsletterSubscription(
     if (entry.expires_at <= new Date().toISOString()) {
       await setPrivateSetting(
         PENDING_KEY,
-        pending.filter((p) => p.token_hash !== entry.token_hash)
+        pending.filter((p) => p.token_hash !== entry.token_hash),
       );
       return { result: "expired" };
     }
@@ -117,7 +131,7 @@ export async function confirmNewsletterSubscription(
     // Remove the pending entry (single-use) and add to subscribers.
     await setPrivateSetting(
       PENDING_KEY,
-      pending.filter((p) => p.token_hash !== entry.token_hash)
+      pending.filter((p) => p.token_hash !== entry.token_hash),
     );
     const subscribers =
       (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || [];
@@ -138,10 +152,14 @@ export async function confirmNewsletterSubscription(
 /**
  * Fetch subscribers for admin view
  */
-export async function getNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
+export async function getNewsletterSubscribers(): Promise<
+  NewsletterSubscriber[]
+> {
   try {
     await assertAdmin();
-    return (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || [];
+    return (
+      (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || []
+    );
   } catch (err) {
     console.error("Failed to get newsletter subscribers:", err);
   }
@@ -150,12 +168,13 @@ export async function getNewsletterSubscribers(): Promise<NewsletterSubscriber[]
 
 /** Admin: manually add a subscriber (imports, corrections, offline signups). */
 export async function adminAddSubscriber(
-  email: string
+  email: string,
 ): Promise<{ success: boolean; error?: string }> {
   try {
     await assertAdmin();
     const clean = (email || "").trim().toLowerCase();
-    if (!EMAIL_RE.test(clean)) return { success: false, error: "Invalid email address" };
+    if (!EMAIL_RE.test(clean))
+      return { success: false, error: "Invalid email address" };
     const list =
       (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || [];
     if (list.some((s) => s.email === clean)) {
@@ -171,7 +190,7 @@ export async function adminAddSubscriber(
 
 /** Admin: remove a subscriber (honors unsubscribe requests immediately). */
 export async function adminRemoveSubscriber(
-  email: string
+  email: string,
 ): Promise<{ success: boolean; error?: string }> {
   try {
     await assertAdmin();

@@ -5,7 +5,10 @@ const nextConfig = {
   poweredByHeader: false,
   devIndicators: false,
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? { exclude: ["error", "warn"] }
+        : false,
   },
   experimental: {
     optimizePackageImports: ["lucide-react"],
@@ -15,12 +18,22 @@ const nextConfig = {
     minimumCacheTTL: 3600,
     remotePatterns: [
       { protocol: "https", hostname: "i.ytimg.com" },
+      {
+        protocol: "https",
+        hostname: "www.rockstargames.com",
+        pathname: "/VI/_next/static/media/**",
+      },
       // CMS media uploads live in the project's Storage bucket; allow the
       // optimizer to serve them. Any OTHER external host is intentionally
       // not whitelisted — src/components/safe-image.tsx falls back to a
       // plain <img> for those so an arbitrary CMS URL can't crash a page.
       ...(process.env.NEXT_PUBLIC_SUPABASE_URL
-        ? [{ protocol: "https", hostname: new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname }]
+        ? [
+            {
+              protocol: "https",
+              hostname: new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname,
+            },
+          ]
         : []),
     ],
   },
@@ -41,8 +54,16 @@ const nextConfig = {
       { source: "/blog", destination: "/news", permanent: true },
       { source: "/countdown", destination: "/", permanent: true },
       // Duplicate compare routes: the /compare/* versions are canonical.
-      { source: "/weapons/compare", destination: "/compare/weapons", permanent: true },
-      { source: "/vehicles/compare", destination: "/compare/vehicles", permanent: true },
+      {
+        source: "/weapons/compare",
+        destination: "/compare/weapons",
+        permanent: true,
+      },
+      {
+        source: "/vehicles/compare",
+        destination: "/compare/vehicles",
+        permanent: true,
+      },
     ];
   },
   async headers() {
@@ -51,7 +72,10 @@ const nextConfig = {
         // Cache static images for 1 year
         source: "/img/(.*)",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
         ],
       },
       {
@@ -61,8 +85,14 @@ const nextConfig = {
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
-          { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
         ],
       },
     ];

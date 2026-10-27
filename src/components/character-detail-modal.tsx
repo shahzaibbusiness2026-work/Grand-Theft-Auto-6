@@ -2,18 +2,18 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import { 
-  X, 
-  Shield, 
-  Zap, 
-  Car, 
-  Crosshair, 
-  MapPin, 
-  Radio, 
-  Sparkles, 
-  Quote, 
-  Check, 
-  Share2 
+import {
+  X,
+  Shield,
+  Zap,
+  Car,
+  Crosshair,
+  MapPin,
+  Radio,
+  Sparkles,
+  Quote,
+  Check,
+  Share2,
 } from "lucide-react";
 import { Character } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -24,7 +24,10 @@ interface CharacterDetailModalProps {
   onClose: () => void;
 }
 
-export function CharacterDetailModal({ character, onClose }: CharacterDetailModalProps) {
+export function CharacterDetailModal({
+  character,
+  onClose,
+}: CharacterDetailModalProps) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -45,21 +48,23 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
 
   const handleShare = () => {
     if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
+      navigator.clipboard.writeText(
+        window.location.origin + "/characters/" + character.id,
+      );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
   };
 
   return (
-    <div 
+    <div
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-character-name"
     >
-      <div 
+      <div
         className="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-border bg-card text-card-foreground shadow-[0_25px_70px_rgba(0,0,0,0.45)] my-auto"
         onClick={(e) => e.stopPropagation()}
       >
@@ -89,7 +94,7 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
               />
               {/* Subtle Atmospheric Gradient Overlay (dark vignette in light theme, panel blend in dark) */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-black/40 pointer-events-none dark:bg-gradient-to-t dark:from-card dark:via-transparent dark:to-transparent dark:md:bg-gradient-to-r dark:md:from-transparent dark:md:to-card/90" />
-              
+
               {/* Badges Overlay */}
               <div className="absolute top-4 left-4 flex flex-col gap-2">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-pink-500/40 bg-pink-950/60 px-3 py-1 text-xs font-black uppercase tracking-wider text-pink-400 backdrop-blur-md shadow-lg">
@@ -98,16 +103,22 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                 </span>
 
                 {character.status && (
-                  <span className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider backdrop-blur-md shadow-sm",
-                    character.status === "Active" 
-                      ? "border-emerald-500/40 bg-emerald-950/60 text-emerald-400"
-                      : "border-gold/40 bg-amber-950/60 text-gold-light"
-                  )}>
-                    <span className={cn(
-                      "w-1.5 h-1.5 rounded-full",
-                      character.status === "Active" ? "bg-emerald-400 animate-pulse" : "bg-gold-light"
-                    )} />
+                  <span
+                    className={cn(
+                      "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider backdrop-blur-md shadow-sm",
+                      character.status === "Active"
+                        ? "border-emerald-500/40 bg-emerald-950/60 text-emerald-400"
+                        : "border-gold/40 bg-amber-950/60 text-gold-light",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "w-1.5 h-1.5 rounded-full",
+                        character.status === "Active"
+                          ? "bg-emerald-400 animate-pulse"
+                          : "bg-gold-light",
+                      )}
+                    />
                     {character.status}
                   </span>
                 )}
@@ -118,7 +129,6 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
           {/* Right Column: Full Profile Dossier */}
           <div className="p-6 sm:p-8 md:col-span-7 flex flex-col justify-between max-h-[85vh] overflow-y-auto">
             <div className="space-y-5">
-              
               {/* Header Info */}
               <div>
                 <div className="flex items-center justify-between gap-2">
@@ -132,7 +142,10 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   )}
                 </div>
 
-                <h2 id="modal-character-name" className="mt-1 font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-foreground">
+                <h2
+                  id="modal-character-name"
+                  className="mt-1 font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-foreground"
+                >
                   {character.name}
                 </h2>
 
@@ -156,7 +169,10 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                     Background & Narrative Role
                   </h3>
                   {character.bio.map((paragraph, idx) => (
-                    <p key={idx} className="text-xs sm:text-[13px] text-muted-foreground leading-relaxed">
+                    <p
+                      key={idx}
+                      className="text-xs sm:text-[13px] text-muted-foreground leading-relaxed"
+                    >
                       {paragraph}
                     </p>
                   ))}
@@ -169,8 +185,12 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-xs font-mono uppercase text-muted-foreground block">Territory / Origin</span>
-                      <strong className="text-xs font-semibold text-foreground">{character.origin}</strong>
+                      <span className="text-xs font-mono uppercase text-muted-foreground block">
+                        Territory / Origin
+                      </span>
+                      <strong className="text-xs font-semibold text-foreground">
+                        {character.origin}
+                      </strong>
                     </div>
                   </div>
                 )}
@@ -179,8 +199,12 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <Car className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-xs font-mono uppercase text-muted-foreground block">Signature Ride</span>
-                      <strong className="text-xs font-semibold text-foreground">{character.vehicle}</strong>
+                      <span className="text-xs font-mono uppercase text-muted-foreground block">
+                        Signature Ride
+                      </span>
+                      <strong className="text-xs font-semibold text-foreground">
+                        {character.vehicle}
+                      </strong>
                     </div>
                   </div>
                 )}
@@ -189,8 +213,12 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <Zap className="w-4 h-4 text-gold-light shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-xs font-mono uppercase text-muted-foreground block">Special Perk / Ability</span>
-                      <strong className="text-xs font-semibold text-foreground">{character.perk}</strong>
+                      <span className="text-xs font-mono uppercase text-muted-foreground block">
+                        Special Perk / Ability
+                      </span>
+                      <strong className="text-xs font-semibold text-foreground">
+                        {character.perk}
+                      </strong>
                     </div>
                   </div>
                 )}
@@ -199,8 +227,12 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5">
                     <Shield className="w-4 h-4 text-pink-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-xs font-mono uppercase text-muted-foreground block">Specialty</span>
-                      <strong className="text-xs font-semibold text-foreground">{character.specialty}</strong>
+                      <span className="text-xs font-mono uppercase text-muted-foreground block">
+                        Specialty
+                      </span>
+                      <strong className="text-xs font-semibold text-foreground">
+                        {character.specialty}
+                      </strong>
                     </div>
                   </div>
                 )}
@@ -209,8 +241,12 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 flex items-start gap-2.5 sm:col-span-2">
                     <Radio className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-xs font-mono uppercase text-muted-foreground block">Known Affiliation</span>
-                      <strong className="text-xs font-semibold text-foreground">{character.affiliation}</strong>
+                      <span className="text-xs font-mono uppercase text-muted-foreground block">
+                        Known Affiliation
+                      </span>
+                      <strong className="text-xs font-semibold text-foreground">
+                        {character.affiliation}
+                      </strong>
                     </div>
                   </div>
                 )}
@@ -219,11 +255,16 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                   <div className="rounded-xl border border-border bg-muted/40 p-3 sm:col-span-2 space-y-1.5">
                     <div className="flex items-center gap-2">
                       <Crosshair className="w-4 h-4 text-rose-400 shrink-0" />
-                      <span className="text-xs font-mono uppercase text-muted-foreground">Weapon Loadout</span>
+                      <span className="text-xs font-mono uppercase text-muted-foreground">
+                        Weapon Loadout
+                      </span>
                     </div>
                     <div className="flex flex-wrap gap-1.5 pt-0.5">
                       {character.weapons.map((w) => (
-                        <span key={w} className="px-2 py-0.5 rounded-md bg-muted/70 border border-border text-xs font-mono text-foreground">
+                        <span
+                          key={w}
+                          className="px-2 py-0.5 rounded-md bg-muted/70 border border-border text-xs font-mono text-foreground"
+                        >
                           {w}
                         </span>
                       ))}
@@ -236,19 +277,24 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
               {character.tags && character.tags.length > 0 && (
                 <div className="flex flex-wrap items-center gap-1.5 pt-1">
                   {character.tags.map((tag) => (
-                    <span key={tag} className="text-xs font-mono text-muted-foreground bg-muted/40 border border-border px-2.5 py-0.5 rounded-full">
+                    <span
+                      key={tag}
+                      className="text-xs font-mono text-muted-foreground bg-muted/40 border border-border px-2.5 py-0.5 rounded-full"
+                    >
                       #{tag}
                     </span>
                   ))}
                 </div>
               )}
-
             </div>
 
             {/* Modal Footer */}
             <div className="mt-6 pt-4 border-t border-border flex flex-wrap items-center justify-between gap-3">
               <span className="text-xs text-muted-foreground">
-                Voice Actor: <strong className="text-foreground">{character.voiceActor || "Not announced"}</strong>
+                Voice Actor:{" "}
+                <strong className="text-foreground">
+                  {character.voiceActor || "Not announced"}
+                </strong>
               </span>
 
               <div className="flex items-center gap-2">
@@ -277,7 +323,6 @@ export function CharacterDetailModal({ character, onClose }: CharacterDetailModa
                 </button>
               </div>
             </div>
-
           </div>
         </div>
       </div>

@@ -18,11 +18,11 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { canonicalMoneyMethods } from "@/lib/canonical-data";
+import { savingsScenario } from "@/lib/calculators";
 
 export function MoneyCalculatorClient() {
   const [currentMoney, setCurrentMoney] = useState<number>(50000);
-  const [targetMoney, setTargetMoney] = useState<number>(2850000); // e.g. Grotti Visione price
+  const [targetMoney, setTargetMoney] = useState<number>(2850000); // illustrative goal, not a GTA VI price
   const [incomePerMission, setIncomePerMission] = useState<number>(35000);
   const [incomePerHour, setIncomePerHour] = useState<number>(120000);
   const [hoursPerDay, setHoursPerDay] = useState<number>(2.5);
@@ -30,36 +30,25 @@ export function MoneyCalculatorClient() {
 
   // Target presets
   const PRESETS = [
-    { label: "Bravado Banshee ($1.25M)", target: 1250000 },
-    { label: "Grotti Visione ($2.85M)", target: 2850000 },
-    { label: "Biscayne Sky Penthouse ($3.5M)", target: 3500000 },
-    { label: "The Malibú Nightclub ($2.2M)", target: 2200000 },
-    { label: "Starter Weapons & Tuning ($150K)", target: 150000 },
+    { label: "Example goal ($1.25M)", target: 1250000 },
+    { label: "Example goal ($2.85M)", target: 2850000 },
+    { label: "Example goal ($3.5M)", target: 3500000 },
+    { label: "Example goal ($2.2M)", target: 2200000 },
+    { label: "Example goal ($150K)", target: 150000 },
   ];
 
   // Mathematical Calculations
-  const calculations = useMemo(() => {
-    const remaining = Math.max(0, targetMoney - currentMoney);
-    const missionsNeeded = incomePerMission > 0 ? Math.ceil(remaining / incomePerMission) : 0;
-    const hoursNeeded = incomePerHour > 0 ? +(remaining / incomePerHour).toFixed(1) : 0;
-    const daysNeeded = hoursPerDay > 0 && hoursNeeded > 0 ? +(hoursNeeded / hoursPerDay).toFixed(1) : 0;
-
-    const completionDate = new Date();
-    completionDate.setDate(completionDate.getDate() + Math.ceil(daysNeeded));
-
-    return {
-      remaining,
-      missionsNeeded,
-      hoursNeeded,
-      daysNeeded,
-      completionDateStr: completionDate.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      }),
-      progressPct: Math.min(100, Math.round((currentMoney / Math.max(1, targetMoney)) * 100)),
-    };
-  }, [currentMoney, targetMoney, incomePerMission, incomePerHour, hoursPerDay]);
+  const calculations = useMemo(
+    () =>
+      savingsScenario(
+        currentMoney,
+        targetMoney,
+        incomePerMission,
+        incomePerHour,
+        hoursPerDay,
+      ),
+    [currentMoney, targetMoney, incomePerMission, incomePerHour, hoursPerDay],
+  );
 
   const handleReset = () => {
     setCurrentMoney(0);
@@ -70,14 +59,15 @@ export function MoneyCalculatorClient() {
   };
 
   const handleCopySummary = () => {
-    const summary = `GTA 6 Money Target: $${targetMoney.toLocaleString()}
+    const summary = `Illustrative savings scenario (not verified GTA VI economy data).
+Goal: $${targetMoney.toLocaleString()}
 Current Cash: $${currentMoney.toLocaleString()}
 Gap Remaining: $${calculations.remaining.toLocaleString()} (${calculations.progressPct}% achieved)
 Missions Required: ~${calculations.missionsNeeded}
-Hours Required: ~${calculations.hoursNeeded}h
+Hours Required: ~${typeof calculations.hoursNeeded === "number" ? calculations.hoursNeeded + "h" : calculations.hoursNeeded}
 Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/day)`;
 
-    navigator.clipboard.writeText(summary);
+    navigator.clipboard.writeText(summary).catch(() => setCopied(false));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -87,7 +77,8 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
       {/* Top Presets Bar */}
       <div className="card-surface p-4 rounded-2xl border border-border flex flex-wrap items-center gap-2">
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mr-2 flex items-center gap-1">
-          <Sparkles className="h-3.5 w-3.5 text-gold-light" /> Quick Goal Presets:
+          <Sparkles className="h-3.5 w-3.5 text-amber-800 dark:text-gold-light" />{" "}
+          Quick Goal Presets:
         </span>
         {PRESETS.map((p) => (
           <button
@@ -97,7 +88,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               "rounded-xl px-3 py-1.5 text-xs font-semibold transition-all border",
               targetMoney === p.target
                 ? "border-accent bg-accent/20 text-foreground font-bold shadow-sm"
-                : "border-border bg-muted/60 text-muted-foreground hover:border-border hover:text-foreground"
+                : "border-border bg-muted/60 text-muted-foreground hover:border-border hover:text-foreground",
             )}
           >
             {p.label}
@@ -111,7 +102,8 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
         <div className="lg:col-span-5 card-surface p-6 rounded-3xl border border-border shadow-xl space-y-5">
           <div className="flex items-center justify-between pb-3 border-b border-border">
             <h2 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2">
-              <Calculator className="h-4 w-4 text-accent" /> Financial Parameters
+              <Calculator className="h-4 w-4 text-accent" /> Financial
+              Parameters
             </h2>
             <button
               onClick={handleReset}
@@ -123,77 +115,115 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
 
           {/* Current Money */}
           <div>
-            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
+            <label
+              htmlFor="savings-input-1"
+              className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between"
+            >
               <span>Current Bankroll / Cash ($)</span>
-              <span className="font-mono text-emerald-400 font-bold">${currentMoney.toLocaleString()}</span>
+              <span className="font-mono text-emerald-700 dark:text-emerald-400 font-bold">
+                ${currentMoney.toLocaleString()}
+              </span>
             </label>
             <input
+              id="savings-input-1"
               type="number"
               min={0}
               step={5000}
               value={currentMoney}
-              onChange={(e) => setCurrentMoney(Math.max(0, Number(e.target.value)))}
+              onChange={(e) =>
+                setCurrentMoney(Math.max(0, Number(e.target.value)))
+              }
               className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
           {/* Target Money */}
           <div>
-            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
+            <label
+              htmlFor="savings-input-2"
+              className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between"
+            >
               <span>Target Asset Goal ($)</span>
-              <span className="font-mono text-cyan-600 dark:text-[#00F0FF] font-bold">${targetMoney.toLocaleString()}</span>
+              <span className="font-mono text-cyan-700 dark:text-[#00F0FF] font-bold">
+                ${targetMoney.toLocaleString()}
+              </span>
             </label>
             <input
+              id="savings-input-2"
               type="number"
-              min={1000}
+              min={0}
               step={10000}
               value={targetMoney}
-              onChange={(e) => setTargetMoney(Math.max(1, Number(e.target.value)))}
+              onChange={(e) =>
+                setTargetMoney(Math.max(0, Number(e.target.value)))
+              }
               className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
           {/* Income Per Mission */}
           <div>
-            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
+            <label
+              htmlFor="savings-input-3"
+              className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between"
+            >
               <span>Average Income Per Mission / Heist Cut ($)</span>
-              <span className="font-mono text-gold-light font-bold">${incomePerMission.toLocaleString()}</span>
+              <span className="font-mono text-amber-800 dark:text-gold-light font-bold">
+                ${incomePerMission.toLocaleString()}
+              </span>
             </label>
             <input
+              id="savings-input-3"
               type="number"
-              min={1000}
+              min={0}
               step={5000}
               value={incomePerMission}
-              onChange={(e) => setIncomePerMission(Math.max(1, Number(e.target.value)))}
+              onChange={(e) =>
+                setIncomePerMission(Math.max(0, Number(e.target.value)))
+              }
               className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
           {/* Income Per Hour */}
           <div>
-            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
+            <label
+              htmlFor="savings-input-4"
+              className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between"
+            >
               <span>Estimated Hourly Grind Rate ($/hr)</span>
-              <span className="font-mono text-purple-400 font-bold">${incomePerHour.toLocaleString()} / hr</span>
+              <span className="font-mono text-purple-700 dark:text-purple-400 font-bold">
+                ${incomePerHour.toLocaleString()} / hr
+              </span>
             </label>
             <input
+              id="savings-input-4"
               type="number"
-              min={1000}
+              min={0}
               step={10000}
               value={incomePerHour}
-              onChange={(e) => setIncomePerHour(Math.max(1, Number(e.target.value)))}
+              onChange={(e) =>
+                setIncomePerHour(Math.max(0, Number(e.target.value)))
+              }
               className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
           </div>
 
           {/* Hours per day */}
           <div>
-            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
+            <label
+              htmlFor="savings-input-5"
+              className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between"
+            >
               <span>Daily Playing Commitment (Hours/Day)</span>
-              <span className="font-mono text-gold-light font-bold">{hoursPerDay} hrs/day</span>
+              <span className="font-mono text-amber-800 dark:text-gold-light font-bold">
+                {hoursPerDay} hrs/day
+              </span>
             </label>
             <input
+              id="savings-input-5"
               type="range"
-              min={0.5}
+              min={0}
               max={12}
               step={0.5}
               value={hoursPerDay}
@@ -201,7 +231,7 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               className="w-full accent-gold py-3"
             />
             <div className="flex justify-between text-xs text-muted-foreground mt-1 font-mono">
-              <span>30m Casual</span>
+              <span>0h Paused</span>
               <span>2.5h Regular</span>
               <span>6h Dedicated</span>
               <span>12h Hardcore</span>
@@ -215,14 +245,20 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
           <div className="card-surface p-6 rounded-3xl border border-border shadow-2xl bg-gradient-to-br from-card via-card to-primary/5 dark:from-[#0e0717] dark:via-[#070b15] dark:to-[#040810]">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <span className="text-xs uppercase font-bold text-muted-foreground">Total Money Remaining</span>
+                <span className="text-xs uppercase font-bold text-muted-foreground">
+                  Total Money Remaining
+                </span>
                 <div className="font-display text-3xl sm:text-4xl font-black text-foreground mt-0.5">
                   ${calculations.remaining.toLocaleString()}
                 </div>
               </div>
               <div className="text-right">
-                <span className="font-mono text-2xl font-black text-cyan-600 dark:text-[#00F0FF]">{calculations.progressPct}%</span>
-                <span className="block text-xs uppercase font-bold text-muted-foreground">Achieved</span>
+                <span className="font-mono text-2xl font-black text-cyan-700 dark:text-[#00F0FF]">
+                  {calculations.progressPct}%
+                </span>
+                <span className="block text-xs uppercase font-bold text-muted-foreground">
+                  Achieved
+                </span>
               </div>
             </div>
 
@@ -238,28 +274,44 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <Briefcase className="h-4 w-4 text-accent mx-auto mb-1" />
-                <span className="font-mono text-lg font-black text-foreground">{calculations.missionsNeeded}</span>
-                <span className="block text-xs uppercase font-bold text-muted-foreground">Missions Needed</span>
+                <span className="font-mono text-lg font-black text-foreground">
+                  {calculations.missionsNeeded}
+                </span>
+                <span className="block text-xs uppercase font-bold text-muted-foreground">
+                  Missions Needed
+                </span>
               </div>
 
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                <Clock className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF] mx-auto mb-1" />
-                <span className="font-mono text-lg font-black text-foreground">{calculations.hoursNeeded}h</span>
-                <span className="block text-xs uppercase font-bold text-muted-foreground">Hours Needed</span>
+                <Clock className="h-4 w-4 text-cyan-700 dark:text-[#00F0FF] mx-auto mb-1" />
+                <span className="font-mono text-lg font-black text-foreground">
+                  {typeof calculations.hoursNeeded === "number"
+                    ? calculations.hoursNeeded + "h"
+                    : calculations.hoursNeeded}
+                </span>
+                <span className="block text-xs uppercase font-bold text-muted-foreground">
+                  Hours Needed
+                </span>
               </div>
 
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                <Calendar className="h-4 w-4 text-gold-light mx-auto mb-1" />
-                <span className="font-mono text-lg font-black text-foreground">{calculations.daysNeeded}</span>
-                <span className="block text-xs uppercase font-bold text-muted-foreground">Playing Days</span>
+                <Calendar className="h-4 w-4 text-amber-800 dark:text-gold-light mx-auto mb-1" />
+                <span className="font-mono text-lg font-black text-foreground">
+                  {calculations.daysNeeded}
+                </span>
+                <span className="block text-xs uppercase font-bold text-muted-foreground">
+                  Playing Days
+                </span>
               </div>
 
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                <TrendingUp className="h-4 w-4 text-emerald-400 mx-auto mb-1" />
+                <TrendingUp className="h-4 w-4 text-emerald-700 dark:text-emerald-400 mx-auto mb-1" />
                 <span className="font-mono text-xs font-black text-emerald-300 block truncate">
                   {calculations.completionDateStr}
                 </span>
-                <span className="block text-xs uppercase font-bold text-muted-foreground">Target Date</span>
+                <span className="block text-xs uppercase font-bold text-muted-foreground">
+                  Target Date
+                </span>
               </div>
             </div>
 
@@ -269,8 +321,14 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
                 onClick={handleCopySummary}
                 className="bg-muted/50 hover:bg-muted/60 text-foreground text-xs font-bold"
               >
-                {copied ? <Check className="h-3.5 w-3.5 mr-1 text-emerald-400" /> : <Copy className="h-3.5 w-3.5 mr-1" />}
-                <span>{copied ? "Calculations Copied!" : "Copy Result Summary"}</span>
+                {copied ? (
+                  <Check className="h-3.5 w-3.5 mr-1 text-emerald-700 dark:text-emerald-400" />
+                ) : (
+                  <Copy className="h-3.5 w-3.5 mr-1" />
+                )}
+                <span>
+                  {copied ? "Calculations Copied!" : "Copy Result Summary"}
+                </span>
               </Button>
 
               <Link
@@ -282,27 +340,6 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
               </Link>
             </div>
           </div>
-
-          {/* RECOMMENDED METHODS FOR THIS GAP */}
-          <div className="card-surface p-6 rounded-3xl border border-border">
-            <h3 className="font-display text-base font-bold uppercase tracking-wider text-foreground mb-3 flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-emerald-400" /> Recommended Grind Paths
-            </h3>
-            <div className="space-y-2.5">
-              {canonicalMoneyMethods.slice(0, 3).map((m) => (
-                <div key={m.id} className="rounded-2xl border border-border bg-muted/60 p-3.5 flex items-center justify-between gap-3">
-                  <div>
-                    <h4 className="font-display text-sm font-bold text-foreground">{m.title}</h4>
-                    <p className="text-xs text-muted-foreground">{m.timeToPayout} &bull; Difficulty: {m.difficulty}</p>
-                  </div>
-                  <div className="text-right">
-                    <span className="font-mono font-bold text-emerald-400 text-xs">{m.moneyPerHourDisplay}</span>
-                    <span className="block text-xs uppercase font-black text-muted-foreground">{m.confidence}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -310,12 +347,23 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
       <div className="grid gap-6 md:grid-cols-2 pt-6 border-t border-border">
         <div className="card-surface p-6 rounded-3xl border border-border space-y-3">
           <h3 className="font-display text-base font-bold text-foreground flex items-center gap-2">
-            <Info className="h-4 w-4 text-cyan-600 dark:text-[#00F0FF]" /> How the Formula Works
+            <Info className="h-4 w-4 text-cyan-700 dark:text-[#00F0FF]" /> How
+            the Formula Works
           </h3>
           <p className="text-xs leading-relaxed text-muted-foreground">
-            The remaining cash needed is calculated via <code className="bg-muted/80 px-1.5 py-0.5 rounded text-gold-light">Target - Current Cash</code>.
-            Total grinding hours equal <code className="bg-muted/80 px-1.5 py-0.5 rounded text-cyan-600 dark:text-[#00F0FF]">Remaining / Hourly Earnings</code>.
-            Real-world days needed equal <code className="bg-muted/80 px-1.5 py-0.5 rounded text-gold-light">Hours Needed / Daily Playtime</code>.
+            The remaining cash needed is calculated via{" "}
+            <code className="bg-muted/80 px-1.5 py-0.5 rounded text-amber-800 dark:text-gold-light">
+              Target - Current Cash
+            </code>
+            . Total grinding hours equal{" "}
+            <code className="bg-muted/80 px-1.5 py-0.5 rounded text-cyan-700 dark:text-[#00F0FF]">
+              Remaining / Hourly Earnings
+            </code>
+            . Real-world days needed equal{" "}
+            <code className="bg-muted/80 px-1.5 py-0.5 rounded text-amber-800 dark:text-gold-light">
+              Hours Needed / Daily Playtime
+            </code>
+            .
           </p>
         </div>
 
@@ -324,7 +372,10 @@ Estimated Goal Date: ${calculations.completionDateStr} (playing ${hoursPerDay}h/
             <HelpCircle className="h-4 w-4 text-accent" /> Money Calculator FAQ
           </h3>
           <p className="text-xs leading-relaxed text-muted-foreground">
-            <strong>Are these payout values guaranteed?</strong> All payout figures are grounded in verified leak metadata and Rockstar gameplay trailers. Real release game economy may receive day-one balancing passes.
+            <strong>Are these payout values guaranteed?</strong> No. Every
+            preset is an illustrative savings target. Income, prices and playing
+            time are your assumptions, not verified GTA VI payouts or purchase
+            prices. A zero earning rate cannot reach a higher goal.
           </p>
         </div>
       </div>

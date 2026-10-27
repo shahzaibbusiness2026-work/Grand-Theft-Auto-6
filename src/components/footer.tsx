@@ -11,7 +11,6 @@ import {
 import { Logo } from "@/components/logo";
 import { getSiteSettings } from "@/lib/services/queries";
 
-
 const COLS = [
   {
     title: "Explore",
@@ -27,7 +26,7 @@ const COLS = [
   {
     title: "Community & Intel",
     links: [
-      { label: "Blog", href: "/blog" },
+      { label: "Articles", href: "/news" },
       { label: "Guides", href: "/guides" },
       { label: "Tools", href: "/tools" },
       { label: "Dashboard", href: "/dashboard" },
@@ -37,6 +36,9 @@ const COLS = [
     title: "Support",
     links: [
       { label: "About Us", href: "/about" },
+      { label: "Editorial Team", href: "/team" },
+      { label: "Editorial Policy", href: "/editorial-policy" },
+      { label: "Corrections", href: "/corrections" },
       { label: "Contact Us", href: "/contact" },
       { label: "Report Bug", href: "/contact" },
     ],
@@ -65,7 +67,10 @@ export async function Footer() {
   const cols = COLS.map((col, idx) => {
     if (idx !== 0 || adminNav.length === 0) return col;
     const seen = new Set(col.links.map((l) => l.href));
-    return { ...col, links: [...col.links, ...adminNav.filter((l) => !seen.has(l.href))] };
+    return {
+      ...col,
+      links: [...col.links, ...adminNav.filter((l) => !seen.has(l.href))],
+    };
   });
 
   // Taish Gaming's own social row. X/Discord honor a configured setting when
@@ -75,11 +80,31 @@ export async function Footer() {
   // YouTube + TikTok (verified free), then Instagram/Facebook (in-app check),
   // then X, Reddit, Discord.
   const socials = [
-    { icon: FaInstagram, label: "Taish Gaming on Instagram", href: "https://instagram.com/taishgaming" },
-    { icon: FaTiktok, label: "Taish Gaming on TikTok", href: "https://tiktok.com/@taishgaming" },
-    { icon: FaFacebook, label: "Taish Gaming on Facebook", href: "https://facebook.com/taishgaming" },
-    { icon: FaYoutube, label: "Taish Gaming on YouTube", href: "https://youtube.com/@TaishGaming" },
-    { icon: FaDiscord, label: "Taish Gaming Discord", href: settings.discordUrl || "https://discord.gg/taishgaming" },
+    {
+      icon: FaInstagram,
+      label: "Taish Gaming on Instagram",
+      href: "https://instagram.com/taishgaming",
+    },
+    {
+      icon: FaTiktok,
+      label: "Taish Gaming on TikTok",
+      href: "https://tiktok.com/@taishgaming",
+    },
+    {
+      icon: FaFacebook,
+      label: "Taish Gaming on Facebook",
+      href: "https://facebook.com/taishgaming",
+    },
+    {
+      icon: FaYoutube,
+      label: "Taish Gaming on YouTube",
+      href: "https://youtube.com/@TaishGaming",
+    },
+    {
+      icon: FaDiscord,
+      label: "Taish Gaming Discord",
+      href: settings.discordUrl || "https://discord.gg/taishgaming",
+    },
     {
       icon: FaXTwitter,
       label: "Taish Gaming on X",
@@ -87,7 +112,11 @@ export async function Footer() {
         ? `https://x.com/${settings.twitterHandle.replace("@", "")}`
         : "https://x.com/TaishGaming",
     },
-    { icon: FaReddit, label: "Taish Gaming on Reddit", href: "https://reddit.com/r/TaishGaming" },
+    {
+      icon: FaReddit,
+      label: "Taish Gaming on Reddit",
+      href: "https://reddit.com/r/TaishGaming",
+    },
   ];
 
   return (
@@ -99,7 +128,7 @@ export async function Footer() {
             {settings.siteDescription ||
               "Your ultimate guide to Grand Theft Auto 6. Explore every location, character, vehicle, mission and secret across Leonida."}
           </p>
-          <p className="mt-2 max-w-xs text-xs text-muted-foreground/70">
+          <p className="mt-2 max-w-xs text-xs text-muted-foreground">
             Taish Gaming is an unofficial fan site and is not affiliated with
             Rockstar Games or Take-Two Interactive.
           </p>
@@ -128,7 +157,10 @@ export async function Footer() {
             <ul className="mt-4 space-y-2.5">
               {col.links.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="text-sm text-muted-foreground transition-colors hover:text-primary">
+                  <Link
+                    href={l.href}
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -146,15 +178,45 @@ export async function Footer() {
               "© 2026 Taish Gaming. Unofficial fan site — not affiliated with Rockstar Games or Take-Two Interactive."}
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-            <span className="text-border" aria-hidden="true">|</span>
-            <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
-            <span className="text-border" aria-hidden="true">|</span>
-            <Link href="/cookies" className="hover:text-primary transition-colors">Cookie Policy</Link>
-            <span className="text-border" aria-hidden="true">|</span>
-            <Link href="/dmca" className="hover:text-primary transition-colors">DMCA</Link>
-            <span className="text-border" aria-hidden="true">|</span>
-            <Link href="/site-map" className="hover:text-primary transition-colors">Sitemap</Link>
+            <Link
+              href="/privacy"
+              className="hover:text-primary transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <span className="text-border" aria-hidden="true">
+              |
+            </span>
+            <Link
+              href="/terms"
+              className="hover:text-primary transition-colors"
+            >
+              Terms of Service
+            </Link>
+            <span className="text-border" aria-hidden="true">
+              |
+            </span>
+            <Link
+              href="/cookies"
+              className="hover:text-primary transition-colors"
+            >
+              Cookie Policy
+            </Link>
+            <span className="text-border" aria-hidden="true">
+              |
+            </span>
+            <Link href="/dmca" className="hover:text-primary transition-colors">
+              DMCA
+            </Link>
+            <span className="text-border" aria-hidden="true">
+              |
+            </span>
+            <Link
+              href="/site-map"
+              className="hover:text-primary transition-colors"
+            >
+              Sitemap
+            </Link>
           </div>
         </div>
       </div>

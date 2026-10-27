@@ -17,7 +17,22 @@ export function createPublicClient() {
   if (publicClient) return publicClient;
   publicClient = createSupabaseClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      },
+      global: {
+        fetch: (url, init) =>
+          fetch(url, {
+            ...init,
+            signal: init?.signal || AbortSignal.timeout(6000),
+          }),
+      },
+    },
   );
   return publicClient;
 }

@@ -1,0 +1,276 @@
+{
+  "asOf": "2026-10-27",
+  "timezone": "Asia/Karachi",
+  "site": "https://www.taishgaming.com",
+  "branch": "codex/audit-remediation",
+  "productionBaseline": "d06588ddf51b0458c5c3cc6eea9261bd1e0b4e8a",
+  "releaseState": "Validated source branch prepared for GitHub review; production code deployment is separate.",
+  "designScope": "No approved mockup redesign applied. Existing desktop catalog headers and navbar are retained; mobile clutter and comparison usability adjusted.",
+  "liveDataChanges": [
+    "Corrected launch-trailer Markdown heading",
+    "Replaced and credited Port Gellhorn article imagery",
+    "Corrected map-size comparison article body and metadata",
+    "Corrected Leonida map guide body and metadata",
+    "Pinned public.set_updated_at() search_path to pg_catalog"
+  ],
+  "checks": {
+    "unitTests": 16,
+    "httpChecks": 24,
+    "npmVulnerabilities": 0,
+    "productionBuild": "passed, final mobile/source-gating build"
+  },
+  "findings": [
+    {
+      "id": "F01",
+      "status": "READY",
+      "implementation": "Withdrew all 35 unsupported tracker milestones and rewards; retained local progress and export.",
+      "validation": "Tracker has a transparent empty state and no claimed completion percentage.",
+      "remaining": "Verified game requirements still need source review before being added."
+    },
+    {
+      "id": "F02",
+      "status": "READY",
+      "implementation": "Excluded all ten bodyless guides from public listings and sitemap; noindex on incomplete detail pages; added body editing and publish validation.",
+      "validation": "HTTP check confirms incomplete guide status; reading-time and publication-gate regressions pass.",
+      "remaining": "The ten guides remain unpublished-quality placeholders until real reviewed bodies are written."
+    },
+    {
+      "id": "F03",
+      "status": "READY",
+      "implementation": "Added field-specific evidence registry; withheld unsupported numeric catalog values, rankings and loadout scores; comparisons retain unknowns.",
+      "validation": "Evidence tests, search-index HTTP checks and public detail noindex checks pass.",
+      "remaining": "No model-wide confidence badge can establish statistics. A reviewer must populate field sources."
+    },
+    {
+      "id": "F04",
+      "status": "READY",
+      "implementation": "Replaced named economy presets with editable examples; fixed zero income, zero time, losses, break-even and undefined ROI.",
+      "validation": "Finance edge cases pass unit tests; browser confirms zero-income Not reachable output.",
+      "remaining": "Outputs remain illustrative assumptions rather than GTA VI economy facts."
+    },
+    {
+      "id": "F05",
+      "status": "READY",
+      "implementation": "Replaced legacy radio data with the six stations shown in the current Rockstar preview and linked the source.",
+      "validation": "HTTP check confirms six sourced station names and the official music link.",
+      "remaining": "A station preview does not establish a complete final soundtrack or frequencies."
+    },
+    {
+      "id": "F06",
+      "status": "READY",
+      "implementation": "Corrected the stored launch-trailer heading; added render repair, matching TOC IDs and publication checks for unclosed heading links.",
+      "validation": "CMS correction read back; Markdown and TOC tests pass.",
+      "remaining": "Stored correction is live data; the new publication guard still needs the code release."
+    },
+    {
+      "id": "F07",
+      "status": "PARTIAL",
+      "implementation": "Replaced the 140x76 apartment thumbnail with credited official Port Gellhorn 01 imagery, 3840x2160; local optimized copy and consistent social card.",
+      "validation": "Image inspected visually; HTTP checks confirm shared OG/Twitter asset and true dimensions.",
+      "remaining": "Operator must confirm image-use rights. Attribution does not itself establish permission."
+    },
+    {
+      "id": "F08",
+      "status": "PARTIAL",
+      "implementation": "Added team, editorial-policy and corrections pages; identified Taish Gaming as based in Pakistan using the owner's statement.",
+      "validation": "Profile and policy routes pass HTTP checks; no invented biographies or credentials.",
+      "remaining": "Individual author biographies, postal contact details and any legal entity identity have not been supplied."
+    },
+    {
+      "id": "F09",
+      "status": "READY",
+      "implementation": "Upgraded Next.js to 15.5.28 and compatible patched Supabase, image and CSS dependencies; retained supported framework major.",
+      "validation": "Final npm audit reports zero vulnerabilities across production and development dependencies; release build passes.",
+      "remaining": "Production runtime changes only after deployment. Rotate any token exposed in chat."
+    },
+    {
+      "id": "F10",
+      "status": "VERIFIED",
+      "implementation": "Confirmed production repository and deployed d06588dd baseline; isolated work in codex/audit-remediation.",
+      "validation": "Latest readable GitHub deployments and main still match the baseline; original working copy preserved.",
+      "remaining": "Never reset the original checkout, which contained pre-existing user modifications."
+    },
+    {
+      "id": "F11",
+      "status": "READY",
+      "implementation": "Retained desktop catalog headers; consolidated useful search, category, saved/history and comparison features before legacy route redirects.",
+      "validation": "HTTP checks confirm permanent redirects; mobile interaction checks cover core catalog actions.",
+      "remaining": "New cosmetic redesign is held. Unknown-data charts are withheld for editorial integrity."
+    },
+    {
+      "id": "F12",
+      "status": "READY",
+      "implementation": "Sitemap now uses published article dates, qualified guides, reviewed catalog entries and durable profiles; no synthetic daily lastmod.",
+      "validation": "HTTP quality gate checks canonical routes, duplicates and excluded incomplete/app URLs.",
+      "remaining": "Catalog details enter the sitemap only when appearance evidence is reviewed."
+    },
+    {
+      "id": "F13",
+      "status": "READY",
+      "implementation": "Canonical weapon hub remains linked; duplicate database route redirects; bodyless best-weapons guide is excluded rather than promoted.",
+      "validation": "Footer/hub anchors and sitemap exclusion reviewed.",
+      "remaining": "Do not add links solely to rescue an empty guide."
+    },
+    {
+      "id": "F14",
+      "status": "READY",
+      "implementation": "Removed the stale Easter-eggs article link and streaming loading boundaries that hid not-found responses.",
+      "validation": "Four genuine missing news/catalog paths return HTTP 404 with noindex.",
+      "remaining": "A transient article backend failure throws an error rather than pretending the URL is gone."
+    },
+    {
+      "id": "F15",
+      "status": "READY",
+      "implementation": "Made public reads cookie-free and deduplicated; enabled runtime ISR for article slugs with explicit invalidation; optimized the priority image.",
+      "validation": "Production-mode HTTP check confirms public caching without Set-Cookie or private/no-store.",
+      "remaining": "Field Core Web Vitals still require real production traffic after rollout."
+    },
+    {
+      "id": "F16",
+      "status": "READY",
+      "implementation": "Removed the bundled canonical catalog from global-search fallback; deferred map and dossier code until near the viewport.",
+      "validation": "Release build reports cached homepage and separated dynamic islands; lab evidence retained.",
+      "remaining": "Local build sizes are not a claim of improved production rankings or field performance."
+    },
+    {
+      "id": "F17",
+      "status": "PARTIAL",
+      "implementation": "Darkened muted and small-label colors and corrected calculator contrast; preserved navbar source per owner's instruction.",
+      "validation": "Sample mobile light/dark audits retained; active desktop navigation must be reported separately.",
+      "remaining": "The original active-navigation color is deliberately unchanged. This finding is not fully closed."
+    },
+    {
+      "id": "F18",
+      "status": "READY",
+      "implementation": "Bound visible labels to all five savings controls and ten business controls; slider exposes its visible name.",
+      "validation": "Browser accessibility snapshot names the controls; focused calculator checks pass.",
+      "remaining": "Further accessibility coverage should continue on other legacy tools."
+    },
+    {
+      "id": "F19",
+      "status": "READY",
+      "implementation": "Removed the CTA from the map pin layer; enlarged pins and map controls; deferred below-fold map loading.",
+      "validation": "Map geometry and mobile target sizes inspected; no CTA banner remains over pins.",
+      "remaining": "Fan-map coordinates do not become verified game locations by this UI fix."
+    },
+    {
+      "id": "F20",
+      "status": "READY",
+      "implementation": "Changed countdown cells to readable text rather than misleading interactive controls; removed per-second announcements and unsupported preload/timezone claims.",
+      "validation": "Mobile snapshot and accessibility checks cover labels and stable region name.",
+      "remaining": "Timer targets the release calendar date at 00:00 UTC, not a verified regional unlock."
+    },
+    {
+      "id": "F21",
+      "status": "READY",
+      "implementation": "Added durable server-rendered profiles for all eight known character entries and ordinary links from character cards and home dossiers.",
+      "validation": "Jason route and profile discovery checked; official background summaries cite Rockstar.",
+      "remaining": "Profiles intentionally avoid unsupported actor, ability or mission-reward claims."
+    },
+    {
+      "id": "F22",
+      "status": "READY",
+      "implementation": "Separated publication brand from SEO titles; used team Organization identity and an actual Taish Gaming logo asset.",
+      "validation": "Article HTTP check confirms publisher logo; global author metadata reviewed.",
+      "remaining": "A shared team byline is not a verified individual person's biography."
+    },
+    {
+      "id": "F23",
+      "status": "READY",
+      "implementation": "Removed HowTo and RealEstateListing types from speculative mission/property pages; retained cautious editorial WebPage descriptions.",
+      "validation": "Source review and successful build confirm schema replacement.",
+      "remaining": "Speculative pages remain excluded from indexing; no actual real-estate offer is asserted."
+    },
+    {
+      "id": "F24",
+      "status": "READY",
+      "implementation": "Aligned hub and priority-article OG/Twitter images; removed invented dimensions and declared true priority-image dimensions.",
+      "validation": "Priority article social-image consistency passes HTTP checks.",
+      "remaining": "Legacy assets require a broader rights and provenance inventory."
+    },
+    {
+      "id": "F25",
+      "status": "READY",
+      "implementation": "Added max-image-preview:large for public editorial pages while retaining noindex on incomplete/private content.",
+      "validation": "Article robots output and incomplete-guide noindex pass HTTP checks.",
+      "remaining": "Large-preview permission does not guarantee Discover inclusion."
+    },
+    {
+      "id": "F26",
+      "status": "STAGED",
+      "implementation": "Added a resource CSP in Report-Only mode, bounded privacy-sanitized reports and preserved embedding for public widgets.",
+      "validation": "Header, report endpoint and embedding HTTP checks pass.",
+      "remaining": "Script policy still permits inline scripts. Collect production reports, implement hashes/nonces as compatible, then enforce tested directives."
+    },
+    {
+      "id": "F27",
+      "status": "PARTIAL",
+      "implementation": "Updated actual data-flow/privacy wording; removed public fallback for private storage; added signed unsubscribe confirmation and opt-in controls for optional services.",
+      "validation": "Private-failure and token-tamper tests pass; no public private-key copies found; no test email sent.",
+      "remaining": "Owner must confirm retention, postal details, processing terms and jurisdiction-specific consent requirements. Real mail/account operations were not tested with live personal data."
+    },
+    {
+      "id": "F28",
+      "status": "READY",
+      "implementation": "Rewrote update signup copy, corrected calendar branding and placed product links before the optional signup.",
+      "validation": "Homepage mobile visual check and source order reviewed.",
+      "remaining": "No claim that already available tools are waiting to launch remains in the hero signup."
+    },
+    {
+      "id": "F29",
+      "status": "READY",
+      "implementation": "Derived counts from the current catalog, normalized plural category aliases, implemented actual local history and pagination.",
+      "validation": "Catalog records/category counts and user-state behavior checked; no fabricated 312 total or history count.",
+      "remaining": "Saved/history counts are per browser and are not cloud analytics."
+    },
+    {
+      "id": "F30",
+      "status": "READY",
+      "implementation": "Used the correct production-aligned branch; all new unknown/numeric states are explicit.",
+      "validation": "TypeScript and production build pass; original stale-checkout errors were not treated as live failures.",
+      "remaining": "The original modified checkout was left intact."
+    },
+    {
+      "id": "F31",
+      "status": "READY",
+      "implementation": "Backed up and corrected both map articles' body, excerpt and search descriptions together; withdrew unsupported developer ratios.",
+      "validation": "Four article changes saved transactionally and read back; related cards consume updated excerpts.",
+      "remaining": "Future quantitative claims require a traceable current primary source."
+    },
+    {
+      "id": "F32",
+      "status": "READY",
+      "implementation": "Added actual favicon ICO and Taish Gaming publisher PNG.",
+      "validation": "HTTP check confirms favicon 200 with image MIME type.",
+      "remaining": "Additional app icon sizes may be added when a PWA is implemented."
+    },
+    {
+      "id": "F33",
+      "status": "NEEDS ACCESS",
+      "implementation": "Added opt-in, route-sanitized Web Vitals reporting hooks and documented the measurement boundary.",
+      "validation": "Local events and default-disabled optional-service delivery reviewed; no invented traffic baseline.",
+      "remaining": "Owner access to GSC, GA4/Plausible, Bing, CDN/server logs and production field data is still required."
+    },
+    {
+      "id": "F34",
+      "status": "READY",
+      "implementation": "Placed the article answer/excerpt ahead of navigation and made the TOC an accessible closed disclosure.",
+      "validation": "Article HTTP and mobile checks confirm details markup and direct access to the answer.",
+      "remaining": "Article-specific fact checking remains an editorial responsibility."
+    }
+  ],
+  "ownerActions": [
+    "Confirm retention periods, postal/contact details and any legal entity name.",
+    "Confirm rights for the official promotional screenshot and other artwork.",
+    "Review CSP reports and plan compatible hash/nonce enforcement.",
+    "Enable Supabase leaked-password protection where supported; site custom accounts use their own scrypt implementation.",
+    "Provide private search/analytics/log access for F33.",
+    "Revoke the GitHub access token that was pasted into chat; normal GitHub sign-in is now configured."
+  ],
+  "notes": [
+    "No production emails were sent during this work.",
+    "No private-table RLS policies were opened.",
+    "The source original checkout and its pre-existing edits were not reset.",
+    "The proposed four-screen redesign remains preview-only."
+  ]
+}

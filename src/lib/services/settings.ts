@@ -8,7 +8,6 @@ import { assertAdmin } from "@/lib/auth/assert-admin";
 import { SITE_CONFIG } from "@/lib/constants";
 import { INITIAL_ADMIN_SETTINGS, AdminSiteSettings } from "@/lib/admin-store";
 
-
 export interface ComprehensiveSiteSettings extends AdminSiteSettings {
   siteTitle: string;
   siteTagline: string;
@@ -40,17 +39,27 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   siteDescription: SITE_CONFIG.description,
   targetReleaseDate: SITE_CONFIG.targetReleaseDate,
   isReleaseDateConfirmed: SITE_CONFIG.isReleaseDateConfirmed,
-  countdownCaption: "GTA VI releases November 19, 2026 · Pre-load begins November 12, 2026",
+  countdownCaption:
+    "GTA VI scheduled for November 19, 2026 · Regional unlock and preload times unconfirmed",
   heroHeading: "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas",
-  heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
-  announcementBanner: "Taish Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
+  heroSubtitle:
+    "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
+  announcementBanner:
+    "Taish Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
   // Social/contact placeholders are intentionally empty: no mailbox or
   // handle exists for the brand yet, and the UI must not link to lookalikes.
   contactEmail: "",
   twitterHandle: "",
   discordUrl: "",
   redditUrl: "",
-  homepageSectionToggles: ["hero", "trailers", "map", "characters", "news", "community"],
+  homepageSectionToggles: [
+    "hero",
+    "trailers",
+    "map",
+    "characters",
+    "news",
+    "community",
+  ],
   publicToolToggles: ["map_tool", "comp_tool", "track_tool"],
   ga4MeasurementId: "",
   cloudflareToken: "",
@@ -61,28 +70,33 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
  * Fetch all site text & settings from Supabase (with fallback).
  * cache() dedupes repeat calls within one request (layout + page + footer).
  */
-export const getSiteSettings = cache(async (): Promise<ComprehensiveSiteSettings> => {
-  try {
-    const supabase = createPublicClient();
-    const { data, error } = await supabase.from("site_settings").select("*");
+export const getSiteSettings = cache(
+  async (): Promise<ComprehensiveSiteSettings> => {
+    try {
+      const supabase = createPublicClient();
+      const { data, error } = await supabase.from("site_settings").select("*");
 
-    if (!error && data && data.length > 0) {
-      const settingsMap = data.reduce((acc: Record<string, any>, row: any) => {
-        acc[row.key] = row.value;
-        return acc;
-      }, {} as Record<string, any>);
+      if (!error && data && data.length > 0) {
+        const settingsMap = data.reduce(
+          (acc: Record<string, any>, row: any) => {
+            acc[row.key] = row.value;
+            return acc;
+          },
+          {} as Record<string, any>,
+        );
 
-      return {
-        ...DEFAULT_SETTINGS,
-        ...settingsMap,
-      };
+        return {
+          ...DEFAULT_SETTINGS,
+          ...settingsMap,
+        };
+      }
+    } catch {
+      // Graceful fallback
     }
-  } catch {
-    // Graceful fallback
-  }
 
-  return DEFAULT_SETTINGS;
-});
+    return DEFAULT_SETTINGS;
+  },
+);
 
 /**
  * Keys owned by specific services (or stored privately elsewhere). A settings
@@ -106,13 +120,17 @@ const MAX_SETTING_VALUE_CHARS = 100_000;
 /**
  * Save entire site settings or specific keys in Supabase
  */
-export async function saveSiteSettings(settings: Partial<ComprehensiveSiteSettings>) {
+export async function saveSiteSettings(
+  settings: Partial<ComprehensiveSiteSettings>,
+) {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
 
     const entries = Object.entries(settings);
-    const reserved = entries.filter(([key]) => RESERVED_SETTING_KEYS.has(key)).map(([key]) => key);
+    const reserved = entries
+      .filter(([key]) => RESERVED_SETTING_KEYS.has(key))
+      .map(([key]) => key);
     if (reserved.length > 0) {
       return {
         success: false as const,
@@ -121,7 +139,10 @@ export async function saveSiteSettings(settings: Partial<ComprehensiveSiteSettin
     }
     for (const [, value] of entries) {
       if (JSON.stringify(value ?? "")?.length > MAX_SETTING_VALUE_CHARS) {
-        return { success: false as const, error: "One of the values is too large to save." };
+        return {
+          success: false as const,
+          error: "One of the values is too large to save.",
+        };
       }
     }
 
@@ -132,8 +153,8 @@ export async function saveSiteSettings(settings: Partial<ComprehensiveSiteSettin
           value,
           updated_at: new Date().toISOString(),
         },
-        { onConflict: "key" }
-      )
+        { onConflict: "key" },
+      ),
     );
 
     await Promise.all(upsertPromises);

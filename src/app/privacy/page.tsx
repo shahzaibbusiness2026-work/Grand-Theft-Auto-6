@@ -1,76 +1,102 @@
-﻿import React from "react";
-import { Metadata } from "next";
+import { PrivacyControls } from "@/components/optional-integrations";
+import Link from "next/link";
 import { SiteShell } from "@/components/shells";
-
-export const metadata: Metadata = {
-    openGraph: { url: "/privacy" },
+export const metadata = {
   title: "Privacy Policy",
-  description: "Learn how Taish Gaming collects, uses, and protects your information when using our interactive map and database tools.",
+  description:
+    "What Taish Gaming stores when you browse, subscribe, contact us or create an account.",
   alternates: { canonical: "/privacy" },
-  };
-
-export default function PrivacyPage() {
+  openGraph: { url: "/privacy" },
+};
+export default function Page() {
   return (
     <SiteShell>
-      <div className="container-site py-12 sm:py-16 max-w-4xl space-y-10">
-        <div className="space-y-3">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-primary">
-            Legal & Compliance
-          </p>
-          <h1 className="font-display text-3xl sm:text-5xl font-black text-foreground tracking-tight">
-            Privacy Policy
-          </h1>
-          <p className="text-xs text-muted-foreground">
-            Last Updated: September 20, 2026
-          </p>
-        </div>
-
-        <div className="space-y-8 text-sm text-muted-foreground leading-relaxed">
-          <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-foreground">1. Overview</h2>
-            <p>
-              Taish Gaming (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy outlines the types of information we may collect from you or that you may provide when you visit our website, and our practices for collecting, using, maintaining, and disclosing that information.
-            </p>
-          </section>
-
-          <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-foreground">2. Information We Collect</h2>
-            <p>We collect minimal information necessary to deliver and enhance our web applications:</p>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>
-                <strong className="text-foreground">Local Storage Data:</strong> Your interactive checklist progress, saved vehicles/weapons in comparison tools, and custom map marker filters are saved locally on your browser using localStorage. This data never leaves your device unless you explicitly export it.
-              </li>
-              <li>
-                <strong className="text-foreground">Technical Usage Data:</strong> Standard server logs including IP address, browser type, referring URLs, and timestamps to diagnose infrastructure health and prevent malicious abuse.
-              </li>
-              <li>
-                <strong className="text-foreground">User Inquiries:</strong> When you voluntarily submit a message via our Contact form, we collect your provided name and email address solely to respond to your inquiry.
-              </li>
-            </ul>
-          </section>
-
-          <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-foreground">3. Third-Party Services & Cookies</h2>
-            <p>
-              We do not sell, rent, or monetize your personal information to third parties. We may utilize privacy-respecting analytics services to understand general traffic metrics and optimize page loading performance across global regions.
-            </p>
-          </section>
-
-          <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-foreground">4. Data Security</h2>
-            <p>
-              We implement industry-standard encryption protocols (HTTPS / TLS 1.3), Content Security Policies, and strict HTTP headers to ensure your browsing session remains safe from interception.
-            </p>
-          </section>
-
-          <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-foreground">5. Contact Us</h2>
-            <p>
-              If you have any questions or concerns regarding this Privacy Policy, please reach out through our <a href="/contact" className="text-primary underline font-semibold">Contact Page</a>.
-            </p>
-          </section>
-        </div>
-      </div>
+      <article className="container-site max-w-3xl py-12 space-y-6 leading-relaxed">
+        <h1 className="font-display text-4xl font-bold">Privacy Policy</h1>
+        <p className="text-sm text-muted-foreground">
+          Updated October 27, 2026
+        </p>
+        <p>
+          The operator is Taish Gaming, based in Pakistan. Taish Gaming is an
+          independent fan website. This page describes the features implemented
+          on the site. For privacy questions, deletion requests or to identify
+          the operator responsible for a request, use our{" "}
+          <Link href="/contact" className="underline">
+            contact form
+          </Link>
+          . A postal contact address has not been provided for publication.
+        </p>
+        <h2 className="text-2xl font-bold">Browser storage</h2>
+        <p>
+          The site uses browser storage for theme preferences, favorites,
+          tracker progress, notes, loadouts and recently viewed entries. This
+          local data can remain until you clear it in your browser. Signing in
+          does not by itself provide a verified cross-device backup of these
+          records. Clearing browser storage can remove local progress.
+        </p>
+        <h2 className="text-2xl font-bold">Accounts and security</h2>
+        <p>
+          Account creation sends your email address, supplied profile names and
+          authentication information to the server. Site accounts store password
+          hashes, recovery-code hashes, provider associations and sign-in
+          metadata; plaintext passwords and recovery codes are not stored as
+          account records. Account and admin sessions use cookies. Supabase
+          supports database storage and authentication integrations. Optional
+          sign-in providers process information under their own policies.
+        </p>
+        <h2 className="text-2xl font-bold">Newsletter and contact forms</h2>
+        <p>
+          Newsletter signup stores your email address and subscription date on
+          the server. The current form adds your address directly; it does not
+          require an email confirmation. Email delivery uses Resend when
+          configured. Contact submissions send the fields you provide, including
+          your message and contact details, to the server for review and
+          replies. New newsletter emails include signed unsubscribe links with a
+          confirmation page. Use the contact form for older unsubscribe links or
+          to request deletion of account or contact records. We may need to
+          verify control of an account before acting.
+        </p>
+        <h2 className="text-2xl font-bold">Technical data and third parties</h2>
+        <p>
+          Hosting and security systems may process network addresses, request
+          paths, browser information and timestamps for delivery, diagnostics
+          and abuse prevention. Rate limiting processes request identifiers.
+          YouTube videos load third-party content when you activate a video.
+          Links to external sites are governed by their policies.
+        </p>
+        <p>
+          Plausible analytics and Google AdSense are optional integrations
+          enabled by site configuration. They load on public pages only after
+          you allow optional services in this browser. When allowed, requests
+          are sent to those providers; advertising can use cookies or similar
+          technologies. We have not verified the production consent
+          configuration, provider retention periods or all regional settings. Do
+          not interpret this page as a guarantee that every deployment is
+          cookie-free.
+        </p>
+        <PrivacyControls />
+        <h2 className="text-2xl font-bold">Retention and your choices</h2>
+        <p>
+          There is currently no verified automatic retention schedule for
+          server-held accounts, subscriptions or contact messages. Records can
+          remain until the operator removes them. You can clear local browser
+          data, sign out to end the current session, avoid optional video
+          playback and submit an access or deletion request through the contact
+          form. This page does not promise a response deadline that the operator
+          has not confirmed.
+        </p>
+        <h2 className="text-2xl font-bold">Security and policy changes</h2>
+        <p>
+          We use HTTPS and access controls, but no service can guarantee
+          complete security. Material changes to this description should be
+          dated here. The operator still needs to confirm postal contact
+          details, retention periods, relevant processing terms and regional
+          consent requirements.
+        </p>
+        <Link className="block underline" href="/cookies">
+          Cookie and storage information
+        </Link>
+      </article>
     </SiteShell>
   );
 }
