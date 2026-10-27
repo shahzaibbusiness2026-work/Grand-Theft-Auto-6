@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { logActivity } from "./activity";
 
@@ -18,17 +18,30 @@ export interface LocationRecord {
 
 export async function getLocations(): Promise<LocationRecord[]> {
   try {
-    const supabase = await createServerSupabase();
-    const { data, error } = await supabase.from("locations").select("*").order("created_at", { ascending: true });
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from("locations")
+      .select("*")
+      .order("created_at", { ascending: true });
     if (!error && data && data.length > 0) return data as LocationRecord[];
 
     // Fallback to site_settings persistence
-    const { data: setting } = await supabase.from("site_settings").select("value").eq("key", "locations_data").single();
+    const { data: setting } = await supabase
+      .from("site_settings")
+      .select("value")
+      .eq("key", "locations_data")
+      .single();
     if (setting?.value) {
-      const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed as LocationRecord[];
+      const parsed =
+        typeof setting.value === "string"
+          ? JSON.parse(setting.value)
+          : setting.value;
+      if (Array.isArray(parsed) && parsed.length > 0)
+        return parsed as LocationRecord[];
     }
-  } catch { /* no fallback — never invent locations */ }
+  } catch {
+    /* no fallback — never invent locations */
+  }
   return [];
 }
 
@@ -38,7 +51,9 @@ export async function getLocations(): Promise<LocationRecord[]> {
  * (validation, connectivity, constraint) must surface instead of silently
  * rewriting the fallback blob.
  */
-function isMissingTableError(err: { code?: string; message?: string } | null): boolean {
+function isMissingTableError(
+  err: { code?: string; message?: string } | null,
+): boolean {
   if (!err) return false;
   return (
     err.code === "42P01" ||
@@ -47,14 +62,22 @@ function isMissingTableError(err: { code?: string; message?: string } | null): b
   );
 }
 
-export async function saveLocation(location: Partial<LocationRecord> & { name: string }) {
+export async function saveLocation(
+  location: Partial<LocationRecord> & { name: string },
+) {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
     const id = location.id || `loc-${Date.now()}`;
-    const itemToSave = { ...location, id, updated_at: new Date().toISOString() };
+    const itemToSave = {
+      ...location,
+      id,
+      updated_at: new Date().toISOString(),
+    };
 
-    const { error } = await supabase.from("locations").upsert(itemToSave, { onConflict: "id" });
+    const { error } = await supabase
+      .from("locations")
+      .upsert(itemToSave, { onConflict: "id" });
     if (error && !isMissingTableError(error)) {
       return { success: false, error: error.message };
     }
@@ -62,13 +85,20 @@ export async function saveLocation(location: Partial<LocationRecord> & { name: s
       // Table doesn't exist, persist in site_settings
       const current = await getLocations();
       const idx = current.findIndex((l) => l.id === id);
-      const updated = idx >= 0
-        ? current.map((l, i) => (i === idx ? { ...l, ...location, id } : l))
-        : [...current, itemToSave as LocationRecord];
-      await supabase.from("site_settings").upsert(
-        { key: "locations_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
-        { onConflict: "key" }
-      );
+      const updated =
+        idx >= 0
+          ? current.map((l, i) => (i === idx ? { ...l, ...location, id } : l))
+          : [...current, itemToSave as LocationRecord];
+      await supabase
+        .from("site_settings")
+        .upsert(
+          {
+            key: "locations_data",
+            value: JSON.stringify(updated),
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: "key" },
+        );
     }
 
     await logActivity({
@@ -99,13 +129,23 @@ export async function deleteLocation(id: string) {
       // Table doesn't exist, update in site_settings
       const current = await getLocations();
       const updated = current.filter((l) => l.id !== id);
-      await supabase.from("site_settings").upsert(
-        { key: "locations_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
-        { onConflict: "key" }
-      );
+      await supabase
+        .from("site_settings")
+        .upsert(
+          {
+            key: "locations_data",
+            value: JSON.stringify(updated),
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: "key" },
+        );
     }
 
-    await logActivity({ action: "delete", targetType: "location", targetId: id });
+    await logActivity({
+      action: "delete",
+      targetType: "location",
+      targetId: id,
+    });
 
     revalidatePath("/admin/locations");
     revalidatePath("/locations");
@@ -115,4 +155,3 @@ export async function deleteLocation(id: string) {
     return { success: false, error: String(err) };
   }
 }
-

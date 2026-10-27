@@ -7,17 +7,18 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
-    openGraph: { url: "/tools/business-profit-calculator" },
-  title: "GTA 6 Business Profit & ROI Calculator — Nightclub, Chop Shop & Warehouse",
-  description: "Calculate break-even hours, passive daily income, and annual return on investment (ROI) across GTA 6 commercial businesses and properties.",
+  openGraph: { url: "/tools/business-profit-calculator" },
+  title: "Business Profit & ROI Scenario Calculator",
+  description:
+    "Model net profit, losses and break-even time with editable assumptions. Example values are not verified GTA VI business data.",
 
   alternates: { canonical: "/tools/business-profit-calculator" },
 };
 
 export default function BusinessProfitCalculatorPage() {
   return (
-        <SiteShell>
-          <ToolStatusBanner status="simulator" />
+    <SiteShell>
+      <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -27,15 +28,31 @@ export default function BusinessProfitCalculatorPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Business Profit & ROI Calculator \u2014 Nightclub, Chop Shop & Warehouse", item: "https://www.taishgaming.com/tools/business-profit-calculator" },
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://www.taishgaming.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Tools",
+                    item: "https://www.taishgaming.com/tools",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "Business Profit & ROI Scenario Calculator",
+                    item: "https://www.taishgaming.com/tools/business-profit-calculator",
+                  },
                 ],
               },
               {
                 "@type": "WebApplication",
-                name: "GTA 6 Business Profit & ROI Calculator \u2014 Nightclub, Chop Shop & Warehouse",
-                description: "Calculate break-even hours, passive daily income, and annual return on investment (ROI) across GTA 6 commercial businesses and properties.",
+                name: "Business Profit & ROI Scenario Calculator",
+                description:
+                  "Model net profit, losses and break-even time with editable assumptions. Example values are not verified GTA VI business data.",
                 url: "https://www.taishgaming.com/tools/business-profit-calculator",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -47,11 +64,17 @@ export default function BusinessProfitCalculatorPage() {
       />
       <div className="container-site py-8">
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+          <Link href="/" className="hover:text-primary transition-colors">
+            Home
+          </Link>
           <ChevronRight className="h-3 w-3" />
-          <Link href="/tools" className="hover:text-primary transition-colors">Tools</Link>
+          <Link href="/tools" className="hover:text-primary transition-colors">
+            Tools
+          </Link>
           <ChevronRight className="h-3 w-3" />
-          <span className="text-foreground font-bold">Business Profit Calculator</span>
+          <span className="text-foreground font-bold">
+            Business Profit Calculator
+          </span>
         </nav>
 
         <div className="mb-8 max-w-2xl">
@@ -59,10 +82,13 @@ export default function BusinessProfitCalculatorPage() {
             <Building2 className="h-3 w-3" /> Enterprise Cashflow Engine
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-            BUSINESS PROFIT & <span className="text-primary">ROI CALCULATOR</span>
+            BUSINESS PROFIT &{" "}
+            <span className="text-primary">ROI CALCULATOR</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Model passive hourly income, operating overhead, and capital recovery timelines. Compare any two Vice City commercial acquisitions side-by-side.
+            Model income, operating costs, losses and capital recovery using
+            your own assumptions. These examples are not verified GTA VI
+            businesses.
           </p>
         </div>
 

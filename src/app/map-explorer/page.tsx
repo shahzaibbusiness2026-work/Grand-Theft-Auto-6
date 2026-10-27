@@ -5,7 +5,8 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/map-explorer" },
+  robots: { index: false, follow: true },
+  openGraph: { url: "/map-explorer" },
   title: "Interactive Map Explorer",
   description:
     "Explore the full interactive GTA 6 map of Vice City and Leonida — markers, collectibles, activities and verified locations.",
@@ -24,7 +25,9 @@ export default async function MapExplorerPage() {
   return (
     <AppShell>
       {/* SEO: single H1 for the page, visually hidden (map UI fills the viewport). */}
-      <h1 className="sr-only">GTA 6 Interactive Map Explorer — Leonida & Vice City</h1>
+      <h1 className="sr-only">
+        GTA 6 Interactive Map Explorer — Leonida & Vice City
+      </h1>
       <div className="w-full px-4 py-6 sm:px-6 md:px-8 lg:px-10 overflow-x-clip">
         <SatelliteInteractiveMap />
       </div>

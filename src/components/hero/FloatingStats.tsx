@@ -26,7 +26,8 @@ export interface FloatingStatsProps {
 export function FloatingStats({ stats }: FloatingStatsProps) {
   const items: StatItem[] = [
     {
-      metric: stats?.totalCharacters !== undefined ? `${stats.totalCharacters}` : "500+",
+      metric:
+        stats?.totalCharacters !== undefined ? `${stats.totalCharacters}` : "—",
       label: "Characters",
       href: "/characters",
       icon: Users,
@@ -34,31 +35,34 @@ export function FloatingStats({ stats }: FloatingStatsProps) {
       iconBg: "bg-gold/15 border-gold/30",
     },
     {
-      metric: stats?.totalVehicles !== undefined ? `${stats.totalVehicles}` : "200+",
-      label: "Vehicles",
+      metric:
+        stats?.totalVehicles !== undefined ? `${stats.totalVehicles}` : "—",
+      label: "Catalog entries",
       href: "/vehicles",
       icon: Car,
       iconColor: "text-sky-500 dark:text-cyan-400",
       iconBg: "bg-sky-500/15 border-sky-500/30",
     },
     {
-      metric: stats?.totalWeapons !== undefined ? `${stats.totalWeapons}` : "300+",
-      label: "Weapons",
+      metric: stats?.totalWeapons !== undefined ? `${stats.totalWeapons}` : "—",
+      label: "Weapon entries",
       href: "/weapons",
       icon: Crosshair,
       iconColor: "text-orange-500 dark:text-orange-400",
       iconBg: "bg-orange-500/15 border-orange-500/30",
     },
     {
-      metric: stats?.totalMissions !== undefined ? `${stats.totalMissions}` : "400+",
-      label: "Missions",
+      metric:
+        stats?.totalMissions !== undefined ? `${stats.totalMissions}` : "—",
+      label: "Mission concepts",
       href: "/missions",
       icon: Target,
       iconColor: "text-emerald-500 dark:text-emerald-400",
       iconBg: "bg-emerald-500/15 border-emerald-500/30",
     },
     {
-      metric: stats?.totalLocations !== undefined ? `${stats.totalLocations}` : "800+",
+      metric:
+        stats?.totalLocations !== undefined ? `${stats.totalLocations}` : "—",
       label: "Locations",
       href: "/locations",
       icon: MapPin,
@@ -66,7 +70,8 @@ export function FloatingStats({ stats }: FloatingStatsProps) {
       iconBg: "bg-gold/15 border-gold/30",
     },
     {
-      metric: stats?.totalMapMarkers !== undefined ? `${stats.totalMapMarkers}` : "100%",
+      metric:
+        stats?.totalMapMarkers !== undefined ? `${stats.totalMapMarkers}` : "—",
       label: stats?.totalMapMarkers !== undefined ? "Map Intel" : "Completion",
       href: "/map",
       icon: Trophy,

@@ -25,7 +25,9 @@ export function HeroSignup() {
     const res = await subscribeNewsletter(email);
     setLoading(false);
     if (res.success) {
-      setSuccessMessage(res.message || "Check your email to confirm your subscription.");
+      setSuccessMessage(
+        res.message || "Check your email to confirm your subscription.",
+      );
       setStatus("success");
       setEmail("");
     } else {
@@ -39,7 +41,10 @@ export function HeroSignup() {
         className="mx-auto mt-6 flex w-full max-w-md items-center justify-center gap-2.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4"
         role="status"
       >
-        <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-400" aria-hidden="true" />
+        <CheckCircle2
+          className="h-5 w-5 shrink-0 text-emerald-400"
+          aria-hidden="true"
+        />
         <p className="text-sm font-semibold text-emerald-300">
           {successMessage}
         </p>
@@ -79,11 +84,18 @@ export function HeroSignup() {
         </button>
       </form>
       <p className="mt-2.5 text-center text-xs leading-relaxed text-white/70">
-        Be first to know when the weapons database, interactive map and money
-        calculator go live. No spam, unsubscribe anytime.
+        Get GTA VI news and updates to our map, catalog and planning tools.
+        Subscription stores your email; see our{" "}
+        <a href="/privacy" className="underline">
+          privacy policy
+        </a>
+        .
       </p>
       {status === "error" && (
-        <p role="alert" className="mt-1.5 text-center text-xs font-semibold text-red-400">
+        <p
+          role="alert"
+          className="mt-1.5 text-center text-xs font-semibold text-red-400"
+        >
           Something went wrong — please try again.
         </p>
       )}

@@ -15,10 +15,11 @@ import type { ImageProps } from "next/image";
 const OPTIMIZED_HOSTS = new Set(
   [
     "i.ytimg.com",
+    "www.rockstargames.com",
     process.env.NEXT_PUBLIC_SUPABASE_URL
       ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
       : "",
-  ].filter(Boolean)
+  ].filter(Boolean),
 );
 
 function isOptimizable(src: ImageProps["src"]): boolean {
@@ -72,7 +73,13 @@ export function SafeImage({
       className={className}
       style={
         fill
-          ? { position: "absolute", inset: 0, width: "100%", height: "100%", ...style }
+          ? {
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              ...style,
+            }
           : style
       }
       loading={priority ? "eager" : "lazy"}

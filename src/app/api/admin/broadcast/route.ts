@@ -1,3 +1,4 @@
+import { newsletterUnsubscribeUrl } from "@/lib/newsletter-tokens";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { assertAdmin } from "@/lib/auth/assert-admin";
@@ -31,15 +32,23 @@ export async function POST(req: Request) {
   if (!apiKey) {
     return NextResponse.json(
       { error: "Email service not configured. Set RESEND_API_KEY in Vercel." },
-      { status: 503 }
+      { status: 503 },
     );
   }
 
-  let body: { subject?: string; message?: string; dryRun?: boolean; confirm?: boolean };
+  let body: {
+    subject?: string;
+    message?: string;
+    dryRun?: boolean;
+    confirm?: boolean;
+  };
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid request body" },
+      { status: 400 },
+    );
   }
 
   const subject = (body.subject || "").trim();
@@ -47,13 +56,13 @@ export async function POST(req: Request) {
   if (!subject || !message) {
     return NextResponse.json(
       { error: "Subject and message are required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
   if (subject.length > 200 || message.length > 10000) {
     return NextResponse.json(
       { error: "Subject or message too long" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -61,7 +70,7 @@ export async function POST(req: Request) {
   if (!subscribers || subscribers.length === 0) {
     return NextResponse.json(
       { error: "No subscribers to send to" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -71,16 +80,22 @@ export async function POST(req: Request) {
       dryRun: true,
       subscriberCount: subscribers.length,
       subject,
-      messagePreview: message.slice(0, 500) + (message.length > 500 ? "..." : ""),
-      from: process.env.BROADCAST_FROM_EMAIL || "Taish Gaming <onboarding@resend.dev>",
+      messagePreview:
+        message.slice(0, 500) + (message.length > 500 ? "..." : ""),
+      from:
+        process.env.BROADCAST_FROM_EMAIL ||
+        "Taish Gaming <onboarding@resend.dev>",
     });
   }
 
   // Require explicit confirmation to prevent accidental sends
   if (!body.confirm) {
     return NextResponse.json(
-      { error: "Confirmation required. Send dryRun: true first to preview, then confirm: true to send." },
-      { status: 400 }
+      {
+        error:
+          "Confirmation required. Send dryRun: true first to preview, then confirm: true to send.",
+      },
+      { status: 400 },
     );
   }
 
@@ -90,7 +105,14 @@ export async function POST(req: Request) {
   const referer = req.headers.get("referer");
   const host = req.headers.get("host") || "";
   const sameOrigin = (v: string | null) =>
-    !!v && (() => { try { return new URL(v).host === host; } catch { return false; } })();
+    !!v &&
+    (() => {
+      try {
+        return new URL(v).host === host;
+      } catch {
+        return false;
+      }
+    })();
   if (origin ? !sameOrigin(origin) : !sameOrigin(referer)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
@@ -102,7 +124,7 @@ export async function POST(req: Request) {
   // Plain-text + simple HTML version of the message
   const htmlMessage = message
     .split("\n")
-    .map((line) => line.trim() === "" ? "<br>" : `<p>${escapeHtml(line)}</p>`)
+    .map((line) => (line.trim() === "" ? "<br>" : `<p>${escapeHtml(line)}</p>`))
     .join("");
   const htmlBody = `<!DOCTYPE html><html><body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">${htmlMessage}<hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;"><p style="font-size: 12px; color: #888;">You received this because you signed up for Taish Gaming launch alerts.</p></body></html>`;
 
@@ -122,9 +144,15 @@ export async function POST(req: Request) {
           from,
           to: sub.email,
           subject,
-          text: message,
-          html: htmlBody,
-        }))
+          text:
+            message +
+            "\n\nUnsubscribe: " +
+            newsletterUnsubscribeUrl(sub.email, sub.subscribed_at),
+          html: htmlBody.replace(
+            "</body>",
+            `<p><a href="${newsletterUnsubscribeUrl(sub.email, sub.subscribed_at)}">Unsubscribe</a></p></body>`,
+          ),
+        })),
       );
       if (error) {
         failed += batch.length;
@@ -137,12 +165,13 @@ export async function POST(req: Request) {
           else failed++;
         }
         // If the API returned fewer results than the batch, count the rest as failed
-        if (results.length < batch.length) failed += batch.length - results.length;
+        if (results.length < batch.length)
+          failed += batch.length - results.length;
       }
     } catch (e) {
       failed += batch.length;
       errors.push(
-        `batch ${i / 100 + 1}: ${e instanceof Error ? e.message : "send failed"}`
+        `batch ${i / 100 + 1}: ${e instanceof Error ? e.message : "send failed"}`,
       );
     }
   }

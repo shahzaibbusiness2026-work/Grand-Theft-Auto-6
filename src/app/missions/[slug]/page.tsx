@@ -13,39 +13,76 @@ import {
 import { SiteShell } from "@/components/shells";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { canonicalMissions, canonicalLocations, type CanonicalMission } from "@/lib/canonical-data";
+import {
+  canonicalMissions,
+  canonicalLocations,
+  type CanonicalMission,
+} from "@/lib/canonical-data";
 import { getMissions } from "@/lib/services/missions";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { serializeJsonLd } from "@/lib/utils";
 
 /** Resolve a mission from live Supabase data, mapped to the canonical shape. */
-async function resolveMission(slug: string): Promise<CanonicalMission | undefined> {
-  const canonical = canonicalMissions.find((m) => m.slug === slug || m.id === slug);
+async function resolveMission(
+  slug: string,
+): Promise<CanonicalMission | undefined> {
+  const canonical = canonicalMissions.find(
+    (m) => m.slug === slug || m.id === slug,
+  );
   try {
     const dbRows = (await getMissions()) as Array<{
-      id: string; slug?: string; name: string; protagonist: string; act?: string;
-      mission_type?: string; difficulty?: string; duration?: string; district?: string;
-      cash_reward_display?: string; other_rewards?: string[]; requirements?: string[];
-      objectives?: string; description?: string; status: string; confidence?: string;
+      id: string;
+      slug?: string;
+      name: string;
+      protagonist: string;
+      act?: string;
+      mission_type?: string;
+      difficulty?: string;
+      duration?: string;
+      district?: string;
+      cash_reward_display?: string;
+      other_rewards?: string[];
+      requirements?: string[];
+      objectives?: string;
+      description?: string;
+      status: string;
+      confidence?: string;
     }>;
     const row = dbRows?.find((r) => r.slug === slug || r.id === slug);
     if (row) {
-      const objectives = (row.objectives || "").split("\n").map((s) => s.trim()).filter(Boolean);
+      const objectives = (row.objectives || "")
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean);
       return {
         ...(canonical || ({} as CanonicalMission)),
         id: row.id,
         slug: row.slug || slug,
         title: row.name,
-        type: (row.mission_type as CanonicalMission["type"]) || canonical?.type || "Main Story",
-        character: (row.protagonist as CanonicalMission["character"]) || canonical?.character || "Both",
-        difficulty: (row.difficulty as CanonicalMission["difficulty"]) || canonical?.difficulty || "Medium",
+        type:
+          (row.mission_type as CanonicalMission["type"]) ||
+          canonical?.type ||
+          "Main Story",
+        character:
+          (row.protagonist as CanonicalMission["character"]) ||
+          canonical?.character ||
+          "Both",
+        difficulty:
+          (row.difficulty as CanonicalMission["difficulty"]) ||
+          canonical?.difficulty ||
+          "Medium",
         duration: row.duration || canonical?.duration || "15-20 min",
         district: row.district || canonical?.district || "Vice City",
-        cashRewardDisplay: row.cash_reward_display || canonical?.cashRewardDisplay || "TBD",
+        cashRewardDisplay:
+          row.cash_reward_display || canonical?.cashRewardDisplay || "TBD",
         otherRewards: row.other_rewards || canonical?.otherRewards || [],
         requirements: row.requirements || canonical?.requirements || [],
-        objectives: objectives.length > 0 ? objectives : canonical?.objectives || [],
-        confidence: (row.confidence as CanonicalMission["confidence"]) || canonical?.confidence || "SPECULATION",
+        objectives:
+          objectives.length > 0 ? objectives : canonical?.objectives || [],
+        confidence:
+          (row.confidence as CanonicalMission["confidence"]) ||
+          canonical?.confidence ||
+          "SPECULATION",
         description: row.description || canonical?.description || "",
         source: canonical?.source || "Atlas Admin",
         img: canonical?.img || "/img/hero-dark.jpg",
@@ -64,7 +101,11 @@ export function generateStaticParams() {
   return canonicalMissions.map((m) => ({ slug: m.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const mission = await resolveMission(slug);
   if (!mission) notFound();
@@ -89,7 +130,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function MissionDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function MissionDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const mission = await resolveMission(slug);
 
@@ -98,9 +143,10 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
   }
 
   // Find related entities
-  const relatedLocation = canonicalLocations.find((l) =>
-    l.district.toLowerCase().includes(mission.district.toLowerCase()) ||
-    l.name.toLowerCase().includes(mission.district.toLowerCase())
+  const relatedLocation = canonicalLocations.find(
+    (l) =>
+      l.district.toLowerCase().includes(mission.district.toLowerCase()) ||
+      l.name.toLowerCase().includes(mission.district.toLowerCase()),
   );
 
   return (
@@ -114,22 +160,31 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
-                  { "@type": "ListItem", position: 2, name: "Missions", item: "https://www.taishgaming.com/missions" },
-                  { "@type": "ListItem", position: 3, name: mission.title, item: `https://www.taishgaming.com/missions/${mission.slug}` },
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://www.taishgaming.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Missions",
+                    item: "https://www.taishgaming.com/missions",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: mission.title,
+                    item: `https://www.taishgaming.com/missions/${mission.slug}`,
+                  },
                 ],
               },
               {
-                "@type": "HowTo",
-                name: `${mission.title} — GTA 6 Mission Guide`,
+                "@type": "WebPage",
+                name: `${mission.title} — GTA 6 Mission Concept`,
                 description: mission.description,
                 image: mission.img,
-                step: (mission.objectives?.length ? mission.objectives : [mission.description]).map((obj, i) => ({
-                  "@type": "HowToStep",
-                  position: i + 1,
-                  name: `Step ${i + 1}`,
-                  text: obj,
-                })),
               },
             ],
           }),
@@ -138,9 +193,16 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
       <section className="container-site pt-6 pb-10">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap mb-4">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+          <Link href="/" className="hover:text-primary transition-colors">
+            Home
+          </Link>
           <ChevronRight className="h-3 w-3" />
-          <Link href="/missions" className="hover:text-primary transition-colors">Missions</Link>
+          <Link
+            href="/missions"
+            className="hover:text-primary transition-colors"
+          >
+            Missions
+          </Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-muted-foreground">{mission.type}</span>
           <ChevronRight className="h-3 w-3" />
@@ -150,16 +212,27 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
         {/* HERO BANNER */}
         <div className="card-surface relative overflow-hidden rounded-3xl border border-border shadow-2xl p-6 sm:p-10">
           <div className="absolute right-0 top-0 h-full w-full lg:w-2/3 opacity-70 dark:opacity-40">
-            <img loading="lazy" src={mission.img} alt={mission.title} className="h-full w-full object-cover" />
+            <img
+              loading="lazy"
+              src={mission.img}
+              alt={mission.title}
+              className="h-full w-full object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           </div>
 
           <div className="relative max-w-xl space-y-4">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="default" className="bg-primary/20 text-primary border-primary/40 font-bold">
+              <Badge
+                variant="default"
+                className="bg-primary/20 text-primary border-primary/40 font-bold"
+              >
                 {mission.type}
               </Badge>
-              <ConfidenceBadge level={mission.confidence} source={mission.source} />
+              <ConfidenceBadge
+                level={mission.confidence}
+                source={mission.source}
+              />
             </div>
 
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white leading-tight">
@@ -173,20 +246,38 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             {/* Quick Metrics Bar */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
-                <span className="block text-xs uppercase font-bold text-muted-foreground">Operative</span>
-                <span className="font-display text-sm font-black text-accent">{mission.character}</span>
+                <span className="block text-xs uppercase font-bold text-muted-foreground">
+                  Operative
+                </span>
+                <span className="font-display text-sm font-black text-accent">
+                  {mission.character}
+                </span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
-                <span className="block text-xs uppercase font-bold text-muted-foreground">Cash Payout</span>
-                <span className="font-mono text-sm font-black text-gold-dark dark:text-gold-light">{mission.cashRewardDisplay === "TBD" ? "TBD" : `${mission.cashRewardDisplay} (est.)`}</span>
+                <span className="block text-xs uppercase font-bold text-muted-foreground">
+                  Cash Payout
+                </span>
+                <span className="font-mono text-sm font-black text-gold-dark dark:text-gold-light">
+                  {mission.cashRewardDisplay === "TBD"
+                    ? "TBD"
+                    : `${mission.cashRewardDisplay} (est.)`}
+                </span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
-                <span className="block text-xs uppercase font-bold text-muted-foreground">Duration</span>
-                <span className="font-display text-sm font-black text-foreground">{mission.duration}</span>
+                <span className="block text-xs uppercase font-bold text-muted-foreground">
+                  Duration
+                </span>
+                <span className="font-display text-sm font-black text-foreground">
+                  {mission.duration}
+                </span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">
-                <span className="block text-xs uppercase font-bold text-muted-foreground">Difficulty</span>
-                <span className="font-display text-sm font-black text-cyan-700 dark:text-[#00F0FF]">{mission.difficulty}</span>
+                <span className="block text-xs uppercase font-bold text-muted-foreground">
+                  Difficulty
+                </span>
+                <span className="font-display text-sm font-black text-cyan-700 dark:text-[#00F0FF]">
+                  {mission.difficulty}
+                </span>
               </div>
             </div>
           </div>
@@ -201,7 +292,10 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             </h2>
             <ul className="mt-4 space-y-3">
               {mission.objectives.map((obj, i) => (
-                <li key={obj} className="flex items-start gap-3 rounded-xl border border-border bg-muted/60 p-3 text-xs text-foreground">
+                <li
+                  key={obj}
+                  className="flex items-start gap-3 rounded-xl border border-border bg-muted/60 p-3 text-xs text-foreground"
+                >
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold/20 font-bold text-gold-dark dark:text-gold-light text-xs">
                     {i + 1}
                   </span>
@@ -217,7 +311,10 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
                   <Lightbulb className="h-4 w-4" /> Tactical Pro-Tip
                 </div>
                 {mission.guideTips.map((tip, idx) => (
-                  <p key={idx} className="text-xs text-foreground leading-relaxed font-medium">
+                  <p
+                    key={idx}
+                    className="text-xs text-foreground leading-relaxed font-medium"
+                  >
                     {tip}
                   </p>
                 ))}
@@ -230,11 +327,15 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             {/* Choices */}
             <div className="card-surface p-6 rounded-3xl border border-border">
               <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-                <Split className="h-4 w-4 text-gold-dark dark:text-gold-light" /> Approaches & Branching Choices
+                <Split className="h-4 w-4 text-gold-dark dark:text-gold-light" />{" "}
+                Approaches & Branching Choices
               </h2>
               <div className="mt-4 space-y-2.5">
                 {mission.choices.map((c, i) => (
-                  <div key={c} className="rounded-xl border border-border bg-muted/60 p-3 text-xs text-muted-foreground">
+                  <div
+                    key={c}
+                    className="rounded-xl border border-border bg-muted/60 p-3 text-xs text-muted-foreground"
+                  >
                     <span className="block text-xs uppercase font-bold text-gold-dark dark:text-gold-light mb-1">
                       Approach #{i + 1}:
                     </span>
@@ -247,17 +348,24 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
             {/* Rewards & Unlocks */}
             <div className="card-surface p-6 rounded-3xl border border-border">
               <h2 className="font-display text-base font-bold uppercase tracking-wider flex items-center gap-2 text-foreground">
-                <Unlock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" /> Rewards & Permanent Unlocks
+                <Unlock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />{" "}
+                Rewards & Permanent Unlocks
               </h2>
               <div className="mt-4 flex flex-wrap gap-2">
                 {mission.otherRewards.map((r) => (
-                  <span key={r} className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                  <span
+                    key={r}
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400"
+                  >
                     <CheckCircle2 className="h-3.5 w-3.5" />
                     <span>{r}</span>
                   </span>
                 ))}
                 {mission.unlocks.map((u) => (
-                  <span key={u} className="inline-flex items-center gap-1.5 rounded-xl border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary">
+                  <span
+                    key={u}
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary"
+                  >
                     <Sparkles className="h-3.5 w-3.5" />
                     <span>Unlocks: {u}</span>
                   </span>
@@ -271,16 +379,32 @@ export default async function MissionDetailPage({ params }: { params: Promise<{ 
         {relatedLocation && (
           <div className="mt-8 card-surface p-6 rounded-3xl border border-border flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <img loading="lazy" src={relatedLocation.img} alt={relatedLocation.name} className="h-16 w-20 rounded-2xl object-cover border border-border" />
+              <img
+                loading="lazy"
+                src={relatedLocation.img}
+                alt={relatedLocation.name}
+                className="h-16 w-20 rounded-2xl object-cover border border-border"
+              />
               <div>
-                <span className="text-xs uppercase font-bold text-muted-foreground">Mission District & Hotspot</span>
-                <h3 className="font-display text-lg font-bold text-foreground">{relatedLocation.name}</h3>
-                <p className="text-xs text-muted-foreground">{relatedLocation.district} &bull; Threat Level: {relatedLocation.threatLevel}</p>
+                <span className="text-xs uppercase font-bold text-muted-foreground">
+                  Mission District & Hotspot
+                </span>
+                <h3 className="font-display text-lg font-bold text-foreground">
+                  {relatedLocation.name}
+                </h3>
+                <p className="text-xs text-muted-foreground">
+                  {relatedLocation.district} &bull; Threat Level:{" "}
+                  {relatedLocation.threatLevel}
+                </p>
               </div>
             </div>
 
-            <Button href={`/map?poi=${relatedLocation.id}&top=${relatedLocation.top}&left=${relatedLocation.left}`} className="bg-primary font-bold text-xs">
-              <MapPin className="h-3.5 w-3.5 mr-1 text-[#00F0FF]" /> Open on Satellite Radar
+            <Button
+              href={`/map?poi=${relatedLocation.id}&top=${relatedLocation.top}&left=${relatedLocation.left}`}
+              className="bg-primary font-bold text-xs"
+            >
+              <MapPin className="h-3.5 w-3.5 mr-1 text-[#00F0FF]" /> Open on
+              Satellite Radar
             </Button>
           </div>
         )}

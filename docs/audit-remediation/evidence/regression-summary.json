@@ -1,0 +1,9 @@
+{
+  "command": "node --test tests/remediation.test.cjs",
+  "passed": 16,
+  "failed": 0,
+  "typecheck": "passed",
+  "npmVulnerabilities": 0,
+  "navbarSourceChanged": false,
+  "mockupRedesignApplied": false
+}

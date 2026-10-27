@@ -17,14 +17,6 @@ import {
   Flag,
   Newspaper,
 } from "lucide-react";
-import {
-  canonicalVehicles,
-  canonicalWeapons,
-  canonicalMissions,
-  canonicalLocations,
-  canonicalProperties,
-  canonicalCollectibles,
-} from "@/lib/canonical-data";
 import { TOOL_SEARCH_ITEMS, type SearchItem } from "@/lib/search-types";
 import { cn } from "@/lib/utils";
 
@@ -35,83 +27,44 @@ interface CommandPaletteProps {
 
 /** Bundled fallback index (used when /api/search-index hasn't loaded or fails). */
 function buildStaticIndex(): SearchItem[] {
-  const items: SearchItem[] = [...TOOL_SEARCH_ITEMS];
-
-  // Vehicles
-  canonicalVehicles.forEach((v) => {
-    items.push({
-      id: `veh-${v.id}`,
-      title: v.name,
-      subtitle: `${v.klass} • ${v.topSpeed} mph • ${v.priceDisplay}`,
+  return [
+    ...TOOL_SEARCH_ITEMS,
+    {
+      id: "hub-vehicles",
+      title: "Vehicle catalog",
+      subtitle: "Editorial identifications and evidence",
       category: "Vehicle",
-      href: `/vehicles/${v.slug}`,
-      img: v.img,
-    });
-  });
-
-  // Weapons
-  canonicalWeapons.forEach((w) => {
-    items.push({
-      id: `wep-${w.id}`,
-      title: w.name,
-      subtitle: `${w.klass} • ${w.damage} Dmg • ${w.priceDisplay}`,
+      href: "/vehicles",
+    },
+    {
+      id: "hub-weapons",
+      title: "Weapon catalog",
+      subtitle: "Editorial identifications and evidence",
       category: "Weapon",
-      href: `/weapons/${w.slug}`,
-      img: w.img,
-    });
-  });
-
-  // Missions
-  canonicalMissions.forEach((m) => {
-    items.push({
-      id: `mis-${m.id}`,
-      title: m.title,
-      subtitle: `${m.type} • ${m.character} • ${m.cashRewardDisplay}`,
-      category: "Mission",
-      href: `/missions/${m.slug}`,
-      img: m.img,
-    });
-  });
-
-  // Locations
-  canonicalLocations.forEach((l) => {
-    items.push({
-      id: `loc-${l.id}`,
-      title: l.name,
-      subtitle: `${l.district} • Threat: ${l.threatLevel}`,
-      category: "Location",
-      href: `/locations/${l.slug}`,
-      img: l.img,
-    });
-  });
-
-  // Properties
-  canonicalProperties.forEach((p) => {
-    items.push({
-      id: `prop-${p.id}`,
-      title: p.name,
-      subtitle: `${p.type} in ${p.district} • ${p.priceDisplay}`,
-      category: "Property",
-      href: `/properties/${p.slug}`,
-      img: p.img,
-    });
-  });
-
-  // Collectibles
-  canonicalCollectibles.forEach((c) => {
-    items.push({
-      id: `col-${c.id}`,
-      title: c.title,
-      subtitle: `${c.category} in ${c.district} • ${c.reward}`,
-      category: "Collectible",
-      href: `/collectibles/${c.slug}`,
-      img: c.img,
-    });
-  });
-
-  // Characters come from the live API index (CMS characters table).
-
-  return items;
+      href: "/weapons",
+    },
+    {
+      id: "hub-news",
+      title: "Latest articles",
+      subtitle: "GTA VI news and source reviews",
+      category: "News",
+      href: "/news",
+    },
+    {
+      id: "hub-guides",
+      title: "Guides",
+      subtitle: "Published guides",
+      category: "Guide",
+      href: "/guides",
+    },
+    {
+      id: "hub-characters",
+      title: "Characters",
+      subtitle: "Official character backgrounds",
+      category: "Character",
+      href: "/characters",
+    },
+  ];
 }
 
 export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
@@ -129,7 +82,12 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
     fetch("/api/search-index")
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
-        if (!cancelled && data && Array.isArray(data.items) && data.items.length > 0) {
+        if (
+          !cancelled &&
+          data &&
+          Array.isArray(data.items) &&
+          data.items.length > 0
+        ) {
           setLiveItems(data.items);
         }
       })
@@ -184,7 +142,10 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
         setSelectedIndex((prev) => (prev + 1) % (filteredResults.length || 1));
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
-        setSelectedIndex((prev) => (prev - 1 + filteredResults.length) % (filteredResults.length || 1));
+        setSelectedIndex(
+          (prev) =>
+            (prev - 1 + filteredResults.length) % (filteredResults.length || 1),
+        );
       } else if (e.key === "Enter" && filteredResults[selectedIndex]) {
         e.preventDefault();
         handleSelect(filteredResults[selectedIndex]);
@@ -211,21 +172,33 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
       case "Vehicle":
         return <Car className="h-4 w-4 text-accent" />;
       case "Weapon":
-        return <Crosshair className="h-4 w-4 text-gold-dark dark:text-gold-light" />;
+        return (
+          <Crosshair className="h-4 w-4 text-gold-dark dark:text-gold-light" />
+        );
       case "Location":
-        return <MapPin className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />;
+        return (
+          <MapPin className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+        );
       case "Property":
         return <Building2 className="h-4 w-4 text-sky-600 dark:text-sky-400" />;
       case "Collectible":
         return <Compass className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />;
       case "Mission":
-        return <Flag className="h-4 w-4 text-orange-600 dark:text-orange-400" />;
+        return (
+          <Flag className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+        );
       case "Character":
-        return <User className="h-4 w-4 text-purple-600 dark:text-purple-400" />;
+        return (
+          <User className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+        );
       case "News":
-        return <Newspaper className="h-4 w-4 text-rose-600 dark:text-rose-400" />;
+        return (
+          <Newspaper className="h-4 w-4 text-rose-600 dark:text-rose-400" />
+        );
       case "Guide":
-        return <BookOpen className="h-4 w-4 text-lime-600 dark:text-lime-400" />;
+        return (
+          <BookOpen className="h-4 w-4 text-lime-600 dark:text-lime-400" />
+        );
     }
   };
 
@@ -262,10 +235,14 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
         </div>
 
         {/* Results List */}
-        <div ref={listRef} className="max-h-96 overflow-y-auto p-2 divide-y divide-border">
+        <div
+          ref={listRef}
+          className="max-h-96 overflow-y-auto p-2 divide-y divide-border"
+        >
           {filteredResults.length === 0 ? (
             <div className="p-8 text-center text-xs text-muted-foreground">
-              No results found for &ldquo;{query}&rdquo;. Try &ldquo;map&rdquo;, &ldquo;grotti&rdquo;, &ldquo;m4&rdquo;, or &ldquo;malibu&rdquo;.
+              No results found for &ldquo;{query}&rdquo;. Try &ldquo;map&rdquo;,
+              &ldquo;grotti&rdquo;, &ldquo;m4&rdquo;, or &ldquo;malibu&rdquo;.
             </div>
           ) : (
             filteredResults.map((item, index) => {
@@ -277,7 +254,9 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                   onMouseEnter={() => setSelectedIndex(index)}
                   className={cn(
                     "flex items-center justify-between p-3 rounded-xl cursor-pointer transition-colors",
-                    isSelected ? "bg-primary/15 text-foreground" : "hover:bg-muted/50 text-muted-foreground"
+                    isSelected
+                      ? "bg-primary/15 text-foreground"
+                      : "hover:bg-muted/50 text-muted-foreground",
                   )}
                 >
                   <div className="flex items-center gap-3 min-w-0">
@@ -293,14 +272,16 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                           {item.category}
                         </span>
                       </div>
-                      <p className="text-xs text-muted-foreground truncate">{item.subtitle}</p>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {item.subtitle}
+                      </p>
                     </div>
                   </div>
 
                   <ArrowRight
                     className={cn(
                       "h-4 w-4 text-primary flex-shrink-0 transition-opacity ml-2",
-                      isSelected ? "opacity-100" : "opacity-0"
+                      isSelected ? "opacity-100" : "opacity-0",
                     )}
                   />
                 </div>

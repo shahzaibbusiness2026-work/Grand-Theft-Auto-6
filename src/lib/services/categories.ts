@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { logActivity } from "./activity";
 
@@ -21,7 +21,7 @@ const DEFAULT_CATEGORIES: AdminCategory[] = [];
  */
 export async function getCategories(): Promise<AdminCategory[]> {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
 
     // 1. Fetch saved categories from site_settings
     const { data: settingData } = await supabase
@@ -31,7 +31,12 @@ export async function getCategories(): Promise<AdminCategory[]> {
       .maybeSingle();
 
     let categories: AdminCategory[] = [];
-    if (settingData && settingData.value && Array.isArray(settingData.value) && settingData.value.length > 0) {
+    if (
+      settingData &&
+      settingData.value &&
+      Array.isArray(settingData.value) &&
+      settingData.value.length > 0
+    ) {
       categories = settingData.value as AdminCategory[];
     }
 
@@ -53,7 +58,10 @@ export async function getCategories(): Promise<AdminCategory[]> {
 
       categories = categories.map((cat) => ({
         ...cat,
-        count: counts[cat.name.toLowerCase().trim()] || counts[cat.slug.toLowerCase().trim()] || 0,
+        count:
+          counts[cat.name.toLowerCase().trim()] ||
+          counts[cat.slug.toLowerCase().trim()] ||
+          0,
       }));
     }
 
@@ -84,7 +92,11 @@ export async function saveCategory(category: AdminCategory) {
     const adminSupabase = createAdminClient();
     const { error } = await adminSupabase
       .from("site_settings")
-      .upsert({ key: "admin_categories", value: updated, updated_at: new Date().toISOString() });
+      .upsert({
+        key: "admin_categories",
+        value: updated,
+        updated_at: new Date().toISOString(),
+      });
 
     if (error) throw error;
 
@@ -118,12 +130,21 @@ export async function deleteCategory(id: string) {
     const adminSupabase = createAdminClient();
     const { error } = await adminSupabase
       .from("site_settings")
-      .upsert({ key: "admin_categories", value: updated, updated_at: new Date().toISOString() });
+      .upsert({
+        key: "admin_categories",
+        value: updated,
+        updated_at: new Date().toISOString(),
+      });
 
     if (error) throw error;
 
     if (deleted) {
-      await logActivity({ action: "delete", targetType: "category", targetId: id, targetLabel: deleted.name });
+      await logActivity({
+        action: "delete",
+        targetType: "category",
+        targetId: id,
+        targetLabel: deleted.name,
+      });
     }
 
     revalidatePath("/admin/categories");

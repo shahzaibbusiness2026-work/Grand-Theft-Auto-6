@@ -1,0 +1,129 @@
+ ✓ Compiled successfully in 24.9s
+   Generating static pages (0/111) ...
+   Generating static pages (27/111) 
+   Generating static pages (55/111) 
+   Generating static pages (83/111) 
+ ✓ Generating static pages (111/111)
+Route (app)                                         Size  First Load JS  Revalidate  Expire
+┌ ○ /                                            10.1 kB         140 kB          1h      1y
+├ ○ /_not-found                                    189 B         103 kB
+├ ○ /about                                       1.12 kB         126 kB
+├ ○ /achievements                                3.83 kB         128 kB
+├ ○ /activities                                   3.4 kB         128 kB
+├ ƒ /admin                                       11.2 kB         117 kB
+├ ƒ /admin/activity                              4.59 kB         118 kB
+├ ƒ /admin/analytics                             3.76 kB         106 kB
+├ ƒ /admin/articles                              8.14 kB         121 kB
+├ ƒ /admin/articles/[id]                         6.41 kB         120 kB
+├ ƒ /admin/categories                            6.62 kB         116 kB
+├ ƒ /admin/characters                            3.71 kB         119 kB
+├ ƒ /admin/collectibles                           3.3 kB         118 kB
+├ ƒ /admin/comparison                            4.07 kB         114 kB
+├ ƒ /admin/comparisons                           7.83 kB         121 kB
+├ ƒ /admin/database                              7.91 kB         118 kB
+├ ƒ /admin/guides                                3.86 kB         119 kB
+├ ƒ /admin/locations                             3.15 kB         118 kB
+├ ƒ /admin/login                                 2.95 kB         105 kB
+├ ƒ /admin/map                                     11 kB         121 kB
+├ ƒ /admin/media                                 8.11 kB         118 kB
+├ ƒ /admin/messages                              6.05 kB         116 kB
+├ ƒ /admin/missions                              3.09 kB         118 kB
+├ ƒ /admin/properties                            3.43 kB         119 kB
+├ ƒ /admin/radio                                 3.72 kB         119 kB
+├ ƒ /admin/seo                                   3.55 kB         117 kB
+├ ƒ /admin/settings                              8.29 kB         121 kB
+├ ƒ /admin/subscribers                           6.52 kB         116 kB
+├ ƒ /admin/tasks                                 6.82 kB         117 kB
+├ ƒ /admin/tracker                               3.79 kB         114 kB
+├ ƒ /admin/users                                 8.22 kB         118 kB
+├ ƒ /admin/vehicles                              10.1 kB         123 kB
+├ ƒ /admin/vehicles/[id]                         7.17 kB         120 kB
+├ ƒ /admin/weapons                               8.83 kB         122 kB
+├ ƒ /admin/weapons/[id]                          6.29 kB         120 kB
+├ ƒ /api/account/login                             189 B         103 kB
+├ ƒ /api/account/logout                            189 B         103 kB
+├ ƒ /api/account/set-password                      189 B         103 kB
+├ ƒ /api/account/signup                            189 B         103 kB
+├ ƒ /api/admin/broadcast                           189 B         103 kB
+├ ƒ /api/admin/login                               189 B         103 kB
+├ ƒ /api/admin/logout                              189 B         103 kB
+├ ƒ /api/admin/messages/reply                      189 B         103 kB
+├ ƒ /api/admin/revoke-sessions                     189 B         103 kB
+├ ƒ /api/csp-report                                189 B         103 kB
+├ ƒ /api/dashboard/stats                           189 B         103 kB
+├ ƒ /api/launch-reminder                           189 B         103 kB
+├ ƒ /api/search-index                              189 B         103 kB
+├ ƒ /auth/callback                                 189 B         103 kB
+├ ○ /auth/welcome                                3.24 kB         180 kB
+├ ○ /blog                                          214 B         133 kB          1h      1y
+├ ○ /businesses                                  1.12 kB         126 kB
+├ ○ /characters                                  6.86 kB         137 kB          1h      1y
+├ ● /characters/[slug]                           1.12 kB         126 kB
+├ ○ /checklist                                     189 B         103 kB
+├ ƒ /collectibles                                3.65 kB         146 kB
+├ ● /collectibles/[slug]                         1.12 kB         126 kB
+├ ○ /compare/vehicles                              208 B         137 kB          1h      1y
+├ ○ /compare/weapons                               208 B         137 kB          1h      1y
+├ ○ /contact                                     3.67 kB         132 kB
+├ ○ /controls                                    1.12 kB         126 kB
+├ ○ /cookies                                     1.12 kB         126 kB
+├ ○ /corrections                                 1.12 kB         126 kB
+├ ○ /dashboard                                   12.8 kB         133 kB          1m      1y
+├ ○ /database/vehicles                             189 B         103 kB
+├ ○ /database/weapons                              189 B         103 kB
+├ ○ /disclaimer                                  1.12 kB         126 kB
+├ ○ /dmca                                        1.12 kB         126 kB
+├ ○ /easter-eggs                                 1.12 kB         126 kB
+├ ○ /editorial-policy                            1.12 kB         126 kB
+├ ƒ /embed/countdown                               995 B         104 kB
+├ ○ /forgot-password                             3.92 kB         122 kB
+├ ƒ /guides                                      5.22 kB         130 kB
+├ ƒ /guides/[slug]                               1.12 kB         126 kB
+├ ○ /locations                                   3.64 kB         146 kB
+├ ● /locations/[slug]                            1.85 kB         126 kB
+├ ƒ /login                                       10.2 kB         198 kB
+├ ○ /map                                         2.79 kB         147 kB
+├ ○ /map-explorer                                  204 B         139 kB
+├ ○ /missions                                    2.81 kB         145 kB          1h      1y
+├ ● /missions/[slug]                             1.12 kB         126 kB
+├ ○ /money-guide                                 1.12 kB         126 kB
+├ ○ /news                                          214 B         133 kB          1h      1y
+├ ● /news/[slug]                                   214 B         133 kB
+├ ƒ /newsletter/confirm                            167 B         106 kB
+├ ○ /pricing                                     1.12 kB         126 kB
+├ ○ /privacy                                     4.25 kB         129 kB
+├ ƒ /properties                                  4.42 kB         146 kB
+├ ● /properties/[slug]                           1.85 kB         126 kB
+├ ○ /radio                                       2.61 kB         127 kB
+├ ○ /rankings                                    1.12 kB         126 kB
+├ ƒ /rankings/[slug]                             1.12 kB         126 kB
+├ ƒ /robots.txt                                    189 B         103 kB
+├ ○ /settings-guide                              1.12 kB         126 kB
+├ ○ /site-map                                    1.12 kB         126 kB
+├ ○ /sitemap.xml                                   189 B         103 kB          1h      1y
+├ ○ /team                                        1.12 kB         126 kB
+├ ○ /terms                                       1.12 kB         126 kB
+├ ○ /tools                                       1.12 kB         126 kB
+├ ○ /tools/business-income-calculator            5.47 kB         130 kB
+├ ○ /tools/business-profit-calculator            5.57 kB         130 kB
+├ ○ /tools/character-quiz                        6.05 kB         131 kB
+├ ○ /tools/countdown-widget                      4.62 kB         129 kB
+├ ○ /tools/day-night-converter                   5.61 kB         130 kB
+├ ○ /tools/garage-planner                        5.71 kB         130 kB
+├ ○ /tools/heist-payout-splitter                 5.75 kB         130 kB
+├ ○ /tools/loadout-builder                        2.4 kB         127 kB          1h      1y
+├ ○ /tools/map-distance-calculator               5.75 kB         130 kB
+├ ○ /tools/money-calculator                      5.65 kB         130 kB
+├ ○ /tools/money-maker                            2.1 kB         127 kB
+├ ○ /tools/photo-spot-finder                      5.1 kB         130 kB
+├ ○ /tools/vehicle-upgrade-calculator            6.21 kB         131 kB
+├ ○ /tools/wanted-level-guide                    6.12 kB         131 kB
+├ ○ /tools/weapon-dps-calculator                 5.27 kB         130 kB
+├ ○ /tracker                                     8.26 kB         133 kB
+├ ƒ /unsubscribe                                 1.12 kB         126 kB
+├ ○ /vehicles                                    2.08 kB         139 kB          1h      1y
+├ ● /vehicles/[slug]                             2.04 kB         127 kB
+├ ○ /weapons                                     2.08 kB         139 kB          1h      1y
+└ ● /weapons/[slug]                              2.04 kB         127 kB
++ First Load JS shared by all                     103 kB
+Build process exited successfully; existing lint warnings remain.

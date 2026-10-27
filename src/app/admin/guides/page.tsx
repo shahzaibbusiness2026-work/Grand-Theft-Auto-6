@@ -26,10 +26,11 @@ const EMPTY_FORM: GuideRecord = {
   title: "",
   description: "",
   category: "Getting Started",
-  read_time: "10 min read",
+  read_time: "",
+  content: "",
   image: "/img/hero-dark.jpg",
   tag: "",
-  status: "published",
+  status: "draft",
   featured: false,
   popular: false,
 };
@@ -65,7 +66,11 @@ export default function AdminGuidesPage() {
 
   const handleSave = async () => {
     if (!form.title.trim()) {
-      showToast({ title: "Title required", description: "Enter a guide title.", type: "danger" });
+      showToast({
+        title: "Title required",
+        description: "Enter a guide title.",
+        type: "danger",
+      });
       return;
     }
     setSaving(true);
@@ -73,6 +78,7 @@ export default function AdminGuidesPage() {
       title: form.title,
       slug: form.slug,
       description: form.description,
+      content: form.content,
       category: form.category,
       read_time: form.read_time,
       image: form.image,
@@ -92,19 +98,34 @@ export default function AdminGuidesPage() {
       setEditorOpen(false);
       loadGuides();
     } else {
-      showToast({ title: "Save failed", description: res.error, type: "danger" });
+      showToast({
+        title: "Save failed",
+        description: res.error,
+        type: "danger",
+      });
     }
   };
 
-  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
 
   const handleDelete = async (id: string) => {
     setGuides((prev) => prev.filter((g) => g.id !== id));
     const res = await deleteGuide(id);
     if (res.success) {
-      showToast({ title: "Guide Deleted", description: "Removed from Supabase.", type: "success" });
+      showToast({
+        title: "Guide Deleted",
+        description: "Removed from Supabase.",
+        type: "success",
+      });
     } else {
-      showToast({ title: "Delete failed", description: res.error, type: "danger" });
+      showToast({
+        title: "Delete failed",
+        description: res.error,
+        type: "danger",
+      });
       loadGuides();
     }
   };
@@ -118,8 +139,12 @@ export default function AdminGuidesPage() {
         <div className="flex items-center gap-2.5 min-w-0">
           <BookOpen className="w-4 h-4 text-indigo-400 shrink-0" />
           <div className="min-w-0">
-            <span className="font-bold text-[var(--admin-text)] block truncate">{g.title}</span>
-            <span className="text-xs text-[var(--admin-text-muted)]">{g.read_time || "—"}</span>
+            <span className="font-bold text-[var(--admin-text)] block truncate">
+              {g.title}
+            </span>
+            <span className="text-xs text-[var(--admin-text-muted)]">
+              {g.read_time || "—"}
+            </span>
           </div>
         </div>
       ),
@@ -128,13 +153,21 @@ export default function AdminGuidesPage() {
       key: "category",
       header: "Category",
       sortable: true,
-      render: (g) => <Badge variant="neutral" size="sm">{g.category}</Badge>,
+      render: (g) => (
+        <Badge variant="neutral" size="sm">
+          {g.category}
+        </Badge>
+      ),
     },
     {
       key: "status",
       header: "Status",
       render: (g) => (
-        <Badge variant={g.status === "published" ? "success" : "warning"} size="sm" dot>
+        <Badge
+          variant={g.status === "published" ? "success" : "warning"}
+          size="sm"
+          dot
+        >
           {g.status || "published"}
         </Badge>
       ),
@@ -143,7 +176,11 @@ export default function AdminGuidesPage() {
       key: "views",
       header: "Views",
       sortable: true,
-      render: (g) => <span className="font-mono text-xs text-[var(--admin-text-muted)]">{(g.views ?? 0).toLocaleString()}</span>,
+      render: (g) => (
+        <span className="font-mono text-xs text-[var(--admin-text-muted)]">
+          {(g.views ?? 0).toLocaleString()}
+        </span>
+      ),
     },
     {
       key: "featured",
@@ -151,14 +188,18 @@ export default function AdminGuidesPage() {
       render: (g) => (
         <div className="flex items-center gap-1.5 text-xs">
           {g.featured && (
-            <span className="px-1.5 py-0.5 rounded bg-[#2A2015] text-[#E5A83B] border border-[#4A3818]">Featured</span>
+            <span className="px-1.5 py-0.5 rounded bg-[#2A2015] text-[#E5A83B] border border-[#4A3818]">
+              Featured
+            </span>
           )}
           {g.popular && (
             <span className="px-1.5 py-0.5 rounded bg-[#12291B] text-[#4ADE80] border border-[#1F4D2E] inline-flex items-center gap-1">
               <Star className="w-3 h-3" /> Popular
             </span>
           )}
-          {!g.featured && !g.popular && <span className="text-[var(--admin-text-muted)]">—</span>}
+          {!g.featured && !g.popular && (
+            <span className="text-[var(--admin-text-muted)]">—</span>
+          )}
         </div>
       ),
     },
@@ -218,7 +259,9 @@ export default function AdminGuidesPage() {
             onClick={loadGuides}
             className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#111622] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs font-semibold transition-colors"
           >
-            <RefreshCw className={cn("w-3.5 h-3.5", isLoading && "animate-spin")} />
+            <RefreshCw
+              className={cn("w-3.5 h-3.5", isLoading && "animate-spin")}
+            />
             Refresh
           </button>
           <button
@@ -251,7 +294,12 @@ export default function AdminGuidesPage() {
         }
       />
 
-      <Modal isOpen={editorOpen} onClose={() => setEditorOpen(false)} title={form.id ? "Edit guide" : "Add guide"} size="lg">
+      <Modal
+        isOpen={editorOpen}
+        onClose={() => setEditorOpen(false)}
+        title={form.id ? "Edit guide" : "Add guide"}
+        size="lg"
+      >
         <div className="space-y-3.5 text-xs">
           <div>
             <label htmlFor="guide-title" className={labelCls}>
@@ -266,18 +314,24 @@ export default function AdminGuidesPage() {
             />
           </div>
           <div>
-            <label htmlFor="guide-desc" className={labelCls}>Description</label>
+            <label htmlFor="guide-desc" className={labelCls}>
+              Description
+            </label>
             <textarea
               id="guide-desc"
               rows={3}
               value={form.description || ""}
-              onChange={(e) => setForm({ ...form, description: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, description: e.target.value })
+              }
               className="w-full p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] text-white resize-none focus:outline-none focus:border-[#6366F1]"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor="guide-category" className={labelCls}>Category</label>
+              <label htmlFor="guide-category" className={labelCls}>
+                Category
+              </label>
               <select
                 id="guide-category"
                 value={form.category}
@@ -285,12 +339,27 @@ export default function AdminGuidesPage() {
                 className={inputCls}
               >
                 {CATEGORIES.map((c) => (
-                  <option key={c} value={c}>{c}</option>
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
                 ))}
               </select>
             </div>
             <div>
-              <label htmlFor="guide-status" className={labelCls}>Status</label>
+              <label htmlFor="guide-content" className={labelCls}>
+                Guide body (Markdown)
+              </label>
+              <textarea
+                id="guide-content"
+                value={form.content || ""}
+                onChange={(e) => setForm({ ...form, content: e.target.value })}
+                rows={14}
+                className={inputCls}
+                placeholder="Write the full, source-checked guide before publishing."
+              />
+              <label htmlFor="guide-status" className={labelCls}>
+                Status
+              </label>
               <select
                 id="guide-status"
                 value={form.status || "published"}
@@ -304,18 +373,22 @@ export default function AdminGuidesPage() {
           </div>
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label htmlFor="guide-read" className={labelCls}>Read time</label>
+              <label htmlFor="guide-read" className={labelCls}>
+                Read time
+              </label>
               <input
                 id="guide-read"
                 type="text"
-                value={form.read_time || ""}
-                onChange={(e) => setForm({ ...form, read_time: e.target.value })}
+                value={form.read_time || "Calculated from body on save"}
+                readOnly
                 placeholder="10 min read"
                 className={inputCls}
               />
             </div>
             <div>
-              <label htmlFor="guide-tag" className={labelCls}>Tag</label>
+              <label htmlFor="guide-tag" className={labelCls}>
+                Tag
+              </label>
               <input
                 id="guide-tag"
                 type="text"
@@ -325,7 +398,9 @@ export default function AdminGuidesPage() {
               />
             </div>
             <div>
-              <label htmlFor="guide-image" className={labelCls}>Image URL</label>
+              <label htmlFor="guide-image" className={labelCls}>
+                Image URL
+              </label>
               <input
                 id="guide-image"
                 type="text"
@@ -341,7 +416,9 @@ export default function AdminGuidesPage() {
               <input
                 type="checkbox"
                 checked={Boolean(form.featured)}
-                onChange={(e) => setForm({ ...form, featured: e.target.checked })}
+                onChange={(e) =>
+                  setForm({ ...form, featured: e.target.checked })
+                }
                 className="rounded border-[#2A344A] bg-[#0E131D] text-[#6366F1] focus:ring-0"
               />
               <span className="text-[#94A3B8]">Featured</span>
@@ -350,7 +427,9 @@ export default function AdminGuidesPage() {
               <input
                 type="checkbox"
                 checked={Boolean(form.popular)}
-                onChange={(e) => setForm({ ...form, popular: e.target.checked })}
+                onChange={(e) =>
+                  setForm({ ...form, popular: e.target.checked })
+                }
                 className="rounded border-[#2A344A] bg-[#0E131D] text-[#6366F1] focus:ring-0"
               />
               <span className="text-[#94A3B8]">Popular</span>
@@ -382,22 +461,29 @@ export default function AdminGuidesPage() {
         title="Delete permanently?"
         description={`This will permanently delete "${deleteTarget?.name}". This action cannot be undone.`}
         variant="danger"
-        footer={<>
-          <button
-            type="button"
-            onClick={() => setDeleteTarget(null)}
-            className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            onClick={() => { if (deleteTarget) { handleDelete(deleteTarget.id); setDeleteTarget(null); } }}
-            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
-          >
-            Delete
-          </button>
-        </>}
+        footer={
+          <>
+            <button
+              type="button"
+              onClick={() => setDeleteTarget(null)}
+              className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (deleteTarget) {
+                  handleDelete(deleteTarget.id);
+                  setDeleteTarget(null);
+                }
+              }}
+              className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+            >
+              Delete
+            </button>
+          </>
+        }
       />
     </div>
   );

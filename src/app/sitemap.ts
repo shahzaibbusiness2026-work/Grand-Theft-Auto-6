@@ -1,174 +1,94 @@
-import { MetadataRoute } from "next";
-import {
-  canonicalVehicles,
-  canonicalWeapons,
-  canonicalLocations,
-} from "@/lib/canonical-data";
+import type { MetadataRoute } from "next";
 import { getSeoSettings } from "@/lib/services/seo";
-import { getPublicArticles } from "@/lib/services/articles";
 import { getPublicGuides } from "@/lib/services/guides";
-
-/**
- * Revalidate at most once per hour: this keeps the sitemap fresh (new
- * articles published directly to Supabase by the daily cron show up
- * automatically) without re-rendering on every single request.
- */
+import { createPublicClient } from "@/lib/supabase/public";
+import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
+import { indexReady } from "@/lib/catalog-evidence";
+import { canonicalOrigin } from "@/lib/site-identity";
+import { characterEvidence } from "@/lib/character-evidence";
 export const revalidate = 3600;
-
-/**
- * DB/CMS-driven sitemap:
- *  - base URL comes from the admin SEO settings (canonicalBaseUrl)
- *  - published articles are included with their real published dates
- *  - canonical catalog routes stay static (they are code-defined content)
- */
+const realDate = (value?: string | null) => {
+  const date = value ? new Date(value) : null;
+  return date && Number.isFinite(date.getTime()) && date.getTime() <= Date.now()
+    ? date
+    : undefined;
+};
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const seo = await getSeoSettings();
-  // Prefer admin-set URL, but ignore the stale gta6atlas.com default (parked domain)
-  const adminUrl = seo.canonicalBaseUrl?.startsWith("http") && !seo.canonicalBaseUrl.includes("gta6atlas.com")
-    ? seo.canonicalBaseUrl
-    : null;
-  // Priority: admin-set canonical → NEXT_PUBLIC_SITE_URL → stable Vercel
-  // alias. The deployment-specific VERCEL_URL is deliberately NOT used —
-  // it changes on every redeploy and would make sitemap URLs drift.
-  const baseUrl = adminUrl
-    || process.env.NEXT_PUBLIC_SITE_URL
-    || "https://www.taishgaming.com";
-
-  // Core Static Routes
-  const staticRoutes = [
+  const base = canonicalOrigin((await getSeoSettings()).canonicalBaseUrl);
+  // Only canonical, indexable routes belong here. Public app variants,
+  // unreviewed concepts, redirects and incomplete guides remain crawlable via links.
+  const paths = [
     "",
     "/map",
-    "/map-explorer",
     "/vehicles",
     "/compare/vehicles",
     "/weapons",
     "/compare/weapons",
-    "/tracker",
     "/locations",
     "/tools",
     "/tools/money-calculator",
     "/tools/business-profit-calculator",
-    "/tools/money-maker",
-    "/tools/loadout-builder",
-    "/tools/vehicle-upgrade-calculator",
-    "/tools/wanted-level-guide",
-    "/tools/map-distance-calculator",
-    "/tools/day-night-converter",
-    "/tools/business-income-calculator",
-    "/tools/heist-payout-splitter",
-    "/tools/character-quiz",
-    "/tools/countdown-widget",
-    "/tools/photo-spot-finder",
-    "/tools/weapon-dps-calculator",
-    "/tools/garage-planner",
-    "/site-map",
-    "/pricing",
     "/characters",
     "/radio",
     "/guides",
     "/news",
-    // /blog removed: it 301-redirects to /news (editorial consolidation).
-    "/database/vehicles",
-    "/database/weapons",
-    "/achievements",
-    "/activities",
-    "/easter-eggs",
-    "/businesses",
-    "/money-guide",
-    "/settings-guide",
-    "/controls",
     "/about",
     "/contact",
+    "/team",
+    "/editorial-policy",
+    "/corrections",
     "/privacy",
     "/terms",
     "/disclaimer",
     "/cookies",
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route === "" ? ("daily" as const) : ("weekly" as const),
-    priority: route === "" ? 1.0 : 0.8,
-  }));
-
-  // Published CMS articles (respects excludeDraftsAndArchived — the public
-  // query already filters to status = "published").
-  let articleRoutes: MetadataRoute.Sitemap = [];
-  if (seo.excludeDraftsAndArchived !== false) {
-    try {
-      const articles = await getPublicArticles();
-      articleRoutes = articles
-        .filter((a) => a.slug)
-        .map((a) => {
-          // Use the article's real publish date when it parses; display dates
-          // are "Jan 5, 2026"-style strings, which Date() understands.
-          const published = a.date ? new Date(a.date) : null;
-          return {
-            url: `${baseUrl}/news/${a.slug}`,
-            lastModified: published && !Number.isNaN(published.getTime()) ? published : new Date(),
-            changeFrequency: "weekly" as const,
-            priority: 0.7,
-          };
-        });
-    } catch {
-      // Sitemap still ships without articles if the DB is unreachable
-    }
-  }
-
-  // Dynamic entity routes — index-ready gate: Rumored and Speculation
-  // pages stay crawlable through the hubs but are kept out of the sitemap,
-  // so search engines prioritize the better-evidenced pages.
-  // Dynamic Vehicle Routes
-  const vehicleRoutes = canonicalVehicles
-    .filter((v) => v.confidence !== "RUMORED" && v.confidence !== "SPECULATION")
-    .map((v) => ({
-    url: `${baseUrl}/vehicles/${v.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
-
-  // Dynamic Weapon Routes
-  const weaponRoutes = canonicalWeapons
-    .filter((w) => w.confidence !== "RUMORED" && w.confidence !== "SPECULATION")
-    .map((w) => ({
-    url: `${baseUrl}/weapons/${w.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
-
-  // Dynamic Location Routes
-  const locationRoutes = canonicalLocations
-    .filter((l) => l.confidence !== "RUMORED" && l.confidence !== "SPECULATION")
-    .map((l) => ({
-    url: `${baseUrl}/locations/${l.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
-
-  // Published guide detail pages (each guide record carries its own slug).
-  let guideRoutes: MetadataRoute.Sitemap = [];
-  try {
-    const guides = await getPublicGuides();
-    guideRoutes = guides
-      .filter((g) => g.slug)
-      .map((g) => ({
-        url: `${baseUrl}/guides/${g.slug}`,
-        lastModified: new Date(),
-        changeFrequency: "weekly" as const,
-        priority: 0.7,
-      }));
-  } catch {
-    // Sitemap still ships without guides if the DB is unreachable
-  }
-
-  return [
-    ...staticRoutes,
-    ...articleRoutes,
-    ...guideRoutes,
-    ...vehicleRoutes,
-    ...weaponRoutes,
-    ...locationRoutes,
   ];
+  const result: MetadataRoute.Sitemap = paths.map((path) => ({
+    url: base + path,
+  }));
+  try {
+    const { data, error } = await createPublicClient()
+      .from("articles")
+      .select("slug,content,published_at,updated_at")
+      .eq("status", "published");
+    if (error) throw error;
+    for (const a of data || [])
+      if (a.slug && a.content?.trim())
+        result.push({
+          url: base + "/news/" + a.slug,
+          lastModified: realDate(a.updated_at || a.published_at),
+        });
+  } catch {
+    /* No invented article URLs or timestamps during an outage. */
+  }
+  const [guides, vehicles, weapons] = await Promise.all([
+    getPublicGuides(),
+    getEvidenceCatalog("vehicles"),
+    getEvidenceCatalog("weapons"),
+  ]);
+  for (const g of guides)
+    if (g.slug)
+      result.push({
+        url: base + "/guides/" + g.slug,
+        lastModified: realDate(g.updated_at),
+      });
+  for (const [kind, entries] of [
+    ["vehicles", vehicles],
+    ["weapons", weapons],
+  ] as const)
+    for (const e of entries.filter(indexReady))
+      result.push({
+        url: base + "/" + kind + "/" + e.slug,
+        lastModified: realDate(
+          e.claims
+            .map((c) => c.reviewedAt)
+            .sort()
+            .at(-1),
+        ),
+      });
+  for (const slug of Object.keys(characterEvidence))
+    result.push({
+      url: base + "/characters/" + slug,
+      lastModified: new Date("2026-10-27T00:00:00Z"),
+    });
+  return Array.from(new Map(result.map((e) => [e.url, e])).values());
 }

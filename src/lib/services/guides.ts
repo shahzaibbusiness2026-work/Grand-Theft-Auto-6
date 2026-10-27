@@ -5,9 +5,16 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { logActivity } from "./activity";
+import {
+  hasGuideBody,
+  readingTime,
+  editorialProblems,
+} from "@/lib/editorial-quality";
 
 export interface GuideRecord {
+  content?: string;
   id: string;
+  updated_at?: string;
   slug?: string;
   title: string;
   description?: string;
@@ -29,14 +36,19 @@ export async function getPublicGuides(): Promise<GuideRecord[]> {
       .select("*")
       .eq("status", "published")
       .order("views", { ascending: false });
-    if (!error && data && data.length > 0) return data as GuideRecord[];
+    if (!error && data)
+      return (data as GuideRecord[])
+        .filter(hasGuideBody)
+        .map((g) => ({ ...g, read_time: readingTime(g.content || "") }));
   } catch {
     // Graceful fallback to static guides
   }
   return [];
 }
 
-export async function getPublicGuideBySlug(slug: string): Promise<GuideRecord | null> {
+export async function getPublicGuideBySlug(
+  slug: string,
+): Promise<GuideRecord | null> {
   try {
     const supabase = createPublicClient();
     const { data, error } = await supabase
@@ -67,9 +79,24 @@ export async function getAdminGuides(): Promise<GuideRecord[]> {
   return [];
 }
 
-export async function saveGuide(guide: Partial<GuideRecord> & { title: string }) {
+export async function saveGuide(
+  guide: Partial<GuideRecord> & { title: string },
+) {
   try {
     await assertAdmin();
+    const status = guide.status || "draft";
+    if (status === "published" && editorialProblems(guide.content || "").length)
+      return {
+        success: false,
+        error: editorialProblems(guide.content || "").join(" "),
+      };
+    if (status === "published" && !hasGuideBody(guide)) {
+      return {
+        success: false,
+        error:
+          "Add a complete guide body before publishing. A description alone is not a guide.",
+      };
+    }
     const supabase = createAdminClient();
     const id = guide.id || `guide-${Date.now()}`;
     const slug =
@@ -79,13 +106,25 @@ export async function saveGuide(guide: Partial<GuideRecord> & { title: string })
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
 
-    const payload = { ...guide, id, slug, updated_at: new Date().toISOString() };
-    let { error } = await supabase.from("guides").upsert(payload, { onConflict: "id" });
+    const payload = {
+      ...guide,
+      status,
+      ...(guide.content ? { read_time: readingTime(guide.content) } : {}),
+      id,
+      slug,
+      updated_at: new Date().toISOString(),
+    };
+    let { error } = await supabase
+      .from("guides")
+      .upsert(payload, { onConflict: "id" });
     if (error?.code === "23505" && !guide.id) {
       // New item whose generated slug is already taken — retry with a suffix.
       const retry = await supabase.from("guides").upsert(
-        { ...payload, slug: `${slug}-${Math.random().toString(36).slice(2, 6)}` },
-        { onConflict: "id" }
+        {
+          ...payload,
+          slug: `${slug}-${Math.random().toString(36).slice(2, 6)}`,
+        },
+        { onConflict: "id" },
       );
       error = retry.error;
     }
@@ -99,6 +138,8 @@ export async function saveGuide(guide: Partial<GuideRecord> & { title: string })
     });
 
     revalidatePath("/guides");
+    revalidatePath("/guides/[slug]", "page");
+    revalidatePath("/sitemap.xml");
     revalidatePath("/admin/guides");
     return { success: true, id };
   } catch (err) {
@@ -117,6 +158,8 @@ export async function deleteGuide(id: string) {
     await logActivity({ action: "delete", targetType: "guide", targetId: id });
 
     revalidatePath("/guides");
+    revalidatePath("/guides/[slug]", "page");
+    revalidatePath("/sitemap.xml");
     revalidatePath("/admin/guides");
     return { success: true };
   } catch (err) {

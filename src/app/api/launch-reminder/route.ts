@@ -1,3 +1,4 @@
+import { newsletterUnsubscribeUrl } from "@/lib/newsletter-tokens";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getNewsletterSubscribers } from "@/lib/services/newsletter";
@@ -7,10 +8,10 @@ export const dynamic = "force-dynamic";
 /**
  * GET /api/launch-reminder
  * Sends GTA 6 launch day reminder to all newsletter subscribers.
- * 
+ *
  * Triggered by Vercel Cron on Nov 19, 2026 (and daily check).
  * Only sends on Nov 19, 2026 (UTC). Other days return "not launch day".
- * 
+ *
  * Requires RESEND_API_KEY env var.
  */
 export async function GET(request: Request) {
@@ -23,15 +24,16 @@ export async function GET(request: Request) {
 
   // Only send on launch day (Nov 19, 2026 UTC)
   const now = new Date();
-  const isLaunchDay = now.getUTCFullYear() === 2026 && 
-                      now.getUTCMonth() === 10 && // 0-indexed: 10 = November
-                      now.getUTCDate() === 19;
+  const isLaunchDay =
+    now.getUTCFullYear() === 2026 &&
+    now.getUTCMonth() === 10 && // 0-indexed: 10 = November
+    now.getUTCDate() === 19;
 
   if (!isLaunchDay) {
-    return NextResponse.json({ 
-      message: "Not launch day yet", 
+    return NextResponse.json({
+      message: "Not launch day yet",
       date: now.toISOString(),
-      launchDate: "2026-11-19" 
+      launchDate: "2026-11-19",
     });
   }
 
@@ -39,7 +41,7 @@ export async function GET(request: Request) {
   if (!apiKey) {
     return NextResponse.json(
       { error: "Email service not configured. Set RESEND_API_KEY in Vercel." },
-      { status: 503 }
+      { status: 503 },
     );
   }
 
@@ -50,8 +52,10 @@ export async function GET(request: Request) {
     }
 
     const resend = new Resend(apiKey);
-    const from = process.env.BROADCAST_FROM_EMAIL || "Taish Gaming <onboarding@resend.dev>";
-    
+    const from =
+      process.env.BROADCAST_FROM_EMAIL ||
+      "Taish Gaming <onboarding@resend.dev>";
+
     let sent = 0;
     let failed = 0;
 
@@ -68,17 +72,17 @@ export async function GET(request: Request) {
               <p>The wait is over! <strong>Grand Theft Auto VI</strong> has officially launched today, November 19, 2026.</p>
               <p>Your Taish Gaming is ready with:</p>
               <ul>
-                <li>🗺️ Interactive Leonida map with all locations</li>
-                <li>🚗 106 vehicles database</li>
-                <li>🔫 32 weapons with stats</li>
-                <li>💰 Money-making guides</li>
-                <li>🎯 100% completion tracker</li>
+                <li>🗺️ Fan map and source reviews</li>
+                <li>🚗 Editorial vehicle catalog</li>
+                <li>🔫 Weapon evidence catalog</li>
+                <li>💰 Illustrative planning calculators</li>
+                <li>🎯 Tracker preview</li>
               </ul>
               <p style="text-align: center; margin: 30px 0;">
                 <a href="https://www.taishgaming.com" style="background: #C9A86A; color: #000; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;">Explore the Atlas →</a>
               </p>
               <p>Welcome to Leonida!</p>
-              <p style="color: #888; font-size: 12px;">You're receiving this because you signed up for Taish Gaming updates. <a href="https://www.taishgaming.com/unsubscribe?email=${encodeURIComponent(sub.email)}">Unsubscribe</a></p>
+              <p style="color: #888; font-size: 12px;">You're receiving this because you signed up for Taish Gaming updates. <a href="${newsletterUnsubscribeUrl(sub.email, sub.subscribed_at)}">Unsubscribe</a></p>
             </div>
           `,
         });
@@ -89,14 +93,17 @@ export async function GET(request: Request) {
       }
     }
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       message: `Launch reminder sent to ${sent} subscribers (${failed} failed)`,
       sent,
       failed,
-      total: subscribers.length
+      total: subscribers.length,
     });
   } catch (err) {
     console.error("Launch reminder error:", err);
-    return NextResponse.json({ error: "Failed to send reminders" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to send reminders" },
+      { status: 500 },
+    );
   }
 }

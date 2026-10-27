@@ -1,10 +1,14 @@
 "use server";
+import {
+  readingTime,
+  publicationImage,
+  editorialProblems,
+} from "@/lib/editorial-quality";
 
 import { cache } from "react";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
 import type { Article } from "@/lib/data";
@@ -46,7 +50,12 @@ export interface DatabaseArticleRow {
  * saving never hard-fails on a not-yet-migrated database.
  */
 let seoColumnsMissing = false;
-const SEO_FIELDS = ["seo_title", "seo_description", "canonical_url", "og_image"] as const;
+const SEO_FIELDS = [
+  "seo_title",
+  "seo_description",
+  "canonical_url",
+  "og_image",
+] as const;
 
 function rowToArticle(row: DatabaseArticleRow): Article {
   return {
@@ -59,8 +68,8 @@ function rowToArticle(row: DatabaseArticleRow): Article {
           year: "numeric",
         })
       : "Recent",
-    read: row.read_time || "4 min read",
-    img: row.cover_image || "/img/hero-dark.jpg",
+    read: readingTime(row.content || row.excerpt || ""),
+    img: publicationImage(row.cover_image, row.slug),
     tag: row.tag || row.category || "News",
     slug: row.slug,
     category: row.category,
@@ -107,7 +116,7 @@ function rowToAdminArticle(row: DatabaseArticleRow): AdminArticle {
  */
 export const getPublicArticles = cache(async (): Promise<Article[]> => {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("articles")
       .select("*")
@@ -129,30 +138,36 @@ export const getPublicArticles = cache(async (): Promise<Article[]> => {
  * Fetch one published article (full row) by slug for the public detail page.
  * Returns null when not found or not published (callers should 404).
  */
-export async function getPublicArticleBySlug(slug: string): Promise<DatabaseArticleRow | null> {
-  if (!slug) return null;
-  try {
-    const supabase = createPublicClient();
-    const { data, error } = await supabase
-      .from("articles")
-      .select("*")
-      .eq("slug", slug)
-      .eq("status", "published")
-      .maybeSingle();
+export const getPublicArticleBySlug = cache(
+  async (slug: string): Promise<DatabaseArticleRow | null> => {
+    if (!slug) return null;
+    try {
+      const supabase = createPublicClient();
+      const { data, error } = await supabase
+        .from("articles")
+        .select("*")
+        .eq("slug", slug)
+        .eq("status", "published")
+        .maybeSingle();
 
-    if (!error && data) return data as DatabaseArticleRow;
-    if (error) console.error("getPublicArticleBySlug: database error", error.message);
-  } catch {
-    // database unreachable
-  }
-  return null;
-}
+      if (error) throw new Error("Article data unavailable");
+      if (data) return data as DatabaseArticleRow;
+    } catch {
+      // A transient backend failure is not evidence that a published URL is gone.
+      // ISR keeps the prior successful render when regeneration throws.
+      throw new Error("Article data unavailable");
+    }
+    return null;
+  },
+);
 
 /**
  * Fetch a single article (any status) for the admin editor. Service-role
  * client: drafts are visible to authenticated admins only.
  */
-export async function getAdminArticleById(id: string): Promise<AdminArticle | null> {
+export async function getAdminArticleById(
+  id: string,
+): Promise<AdminArticle | null> {
   if (!id || id === "new") return null;
   try {
     await assertAdmin();
@@ -164,7 +179,8 @@ export async function getAdminArticleById(id: string): Promise<AdminArticle | nu
       .maybeSingle();
 
     if (!error && data) return rowToAdminArticle(data as DatabaseArticleRow);
-    if (error) console.error("getAdminArticleById: database error", error.message);
+    if (error)
+      console.error("getAdminArticleById: database error", error.message);
   } catch (err) {
     console.error("getAdminArticleById:", err);
   }
@@ -199,9 +215,20 @@ export async function getAdminArticles(): Promise<AdminArticle[]> {
 /**
  * Save or update an article in Supabase.
  */
-export async function saveArticle(article: Partial<AdminArticle> & { title: string; excerpt: string }) {
+export async function saveArticle(
+  article: Partial<AdminArticle> & { title: string; excerpt: string },
+) {
   try {
     await assertAdmin();
+    if ((article.status || "published") === "published") {
+      if (!article.content?.trim())
+        return {
+          success: false,
+          error: "Add an article body before publishing.",
+        };
+      const issues = editorialProblems(article.content);
+      if (issues.length) return { success: false, error: issues.join(" ") };
+    }
     const supabase = createAdminClient();
 
     const id = article.id || `art-${Date.now()}`;
@@ -220,13 +247,13 @@ export async function saveArticle(article: Partial<AdminArticle> & { title: stri
       excerpt: article.excerpt,
       content: article.content || "",
       category: article.category || "News",
-      tag: article.tags?.[0] || "Official",
+      tag: article.tags?.[0] || "News",
       status: article.status || "published",
       author_name: article.author?.name || "Taish Team",
       author_avatar: article.author?.avatar || "/img/avatar-admin.svg",
       author_role: article.author?.role || "Staff Writer",
       cover_image: article.coverImage || "/img/hero-dark.jpg",
-      read_time: article.readTime || "4 min",
+      read_time: readingTime(article.content || ""),
       views: article.views || 0,
       tags: article.tags || ["GTA 6"],
       updated_at: new Date().toISOString(),
@@ -248,20 +275,27 @@ export async function saveArticle(article: Partial<AdminArticle> & { title: stri
 
     let error: { message: string; code?: string } | null = null;
     {
-      const res = await supabase.from("articles").upsert(payload, { onConflict: "id" });
+      const res = await supabase
+        .from("articles")
+        .upsert(payload, { onConflict: "id" });
       error = res.error;
       // Migration 03 not applied yet → retry once without the SEO columns.
       if (error && (error as { code?: string }).code === "PGRST204") {
         seoColumnsMissing = true;
         for (const f of SEO_FIELDS) delete payload[f];
-        const retry = await supabase.from("articles").upsert(payload, { onConflict: "id" });
+        const retry = await supabase
+          .from("articles")
+          .upsert(payload, { onConflict: "id" });
         error = retry.error;
       }
     }
 
     if (error) {
       // Duplicate slug (unique constraint) → make the slug unique and retry.
-      if (error.code === "23505" || /duplicate key/i.test(error.message || "")) {
+      if (
+        error.code === "23505" ||
+        /duplicate key/i.test(error.message || "")
+      ) {
         const uniqueSlug = `${slug}-${Date.now().toString(36)}`;
         const retry = await supabase
           .from("articles")
@@ -275,6 +309,8 @@ export async function saveArticle(article: Partial<AdminArticle> & { title: stri
           detail: { status: payload.status },
         });
         revalidatePath("/news");
+        revalidatePath("/news/[slug]", "page");
+        revalidatePath("/sitemap.xml");
         revalidatePath("/");
         revalidatePath("/admin/articles");
         return { success: true, id, slug: uniqueSlug };
@@ -291,6 +327,8 @@ export async function saveArticle(article: Partial<AdminArticle> & { title: stri
     });
 
     revalidatePath("/news");
+    revalidatePath("/news/[slug]", "page");
+    revalidatePath("/sitemap.xml");
     revalidatePath("/");
     revalidatePath("/admin/articles");
 
@@ -312,9 +350,15 @@ export async function deleteArticle(id: string) {
 
     if (error) throw error;
 
-    await logActivity({ action: "delete", targetType: "article", targetId: id });
+    await logActivity({
+      action: "delete",
+      targetType: "article",
+      targetId: id,
+    });
 
     revalidatePath("/news");
+    revalidatePath("/news/[slug]", "page");
+    revalidatePath("/sitemap.xml");
     revalidatePath("/");
     revalidatePath("/admin/articles");
 

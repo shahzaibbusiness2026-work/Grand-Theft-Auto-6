@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { logActivity } from "./activity";
 
@@ -20,17 +20,30 @@ export interface MissionRecord {
 
 export async function getMissions(): Promise<MissionRecord[]> {
   try {
-    const supabase = await createServerSupabase();
-    const { data, error } = await supabase.from("missions").select("*").order("created_at", { ascending: true });
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from("missions")
+      .select("*")
+      .order("created_at", { ascending: true });
     if (!error && data && data.length > 0) return data as MissionRecord[];
 
     // Fallback to site_settings persistence
-    const { data: setting } = await supabase.from("site_settings").select("value").eq("key", "missions_data").single();
+    const { data: setting } = await supabase
+      .from("site_settings")
+      .select("value")
+      .eq("key", "missions_data")
+      .single();
     if (setting?.value) {
-      const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed as MissionRecord[];
+      const parsed =
+        typeof setting.value === "string"
+          ? JSON.parse(setting.value)
+          : setting.value;
+      if (Array.isArray(parsed) && parsed.length > 0)
+        return parsed as MissionRecord[];
     }
-  } catch { /* no fallback — never invent missions */ }
+  } catch {
+    /* no fallback — never invent missions */
+  }
   return [];
 }
 
@@ -40,7 +53,9 @@ export async function getMissions(): Promise<MissionRecord[]> {
  * (validation, connectivity, constraint) must surface instead of silently
  * rewriting the fallback blob.
  */
-function isMissingTableError(err: { code?: string; message?: string } | null): boolean {
+function isMissingTableError(
+  err: { code?: string; message?: string } | null,
+): boolean {
   if (!err) return false;
   return (
     err.code === "42P01" ||
@@ -49,14 +64,18 @@ function isMissingTableError(err: { code?: string; message?: string } | null): b
   );
 }
 
-export async function saveMission(mission: Partial<MissionRecord> & { name: string }) {
+export async function saveMission(
+  mission: Partial<MissionRecord> & { name: string },
+) {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
     const id = mission.id || `mis-${Date.now()}`;
     const itemToSave = { ...mission, id, updated_at: new Date().toISOString() };
 
-    const { error } = await supabase.from("missions").upsert(itemToSave, { onConflict: "id" });
+    const { error } = await supabase
+      .from("missions")
+      .upsert(itemToSave, { onConflict: "id" });
     if (error && !isMissingTableError(error)) {
       return { success: false, error: error.message };
     }
@@ -64,13 +83,20 @@ export async function saveMission(mission: Partial<MissionRecord> & { name: stri
       // Table doesn't exist, persist in site_settings
       const current = await getMissions();
       const idx = current.findIndex((m) => m.id === id);
-      const updated = idx >= 0
-        ? current.map((m, i) => (i === idx ? { ...m, ...mission, id } : m))
-        : [...current, itemToSave as MissionRecord];
-      await supabase.from("site_settings").upsert(
-        { key: "missions_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
-        { onConflict: "key" }
-      );
+      const updated =
+        idx >= 0
+          ? current.map((m, i) => (i === idx ? { ...m, ...mission, id } : m))
+          : [...current, itemToSave as MissionRecord];
+      await supabase
+        .from("site_settings")
+        .upsert(
+          {
+            key: "missions_data",
+            value: JSON.stringify(updated),
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: "key" },
+        );
     }
 
     await logActivity({
@@ -100,13 +126,23 @@ export async function deleteMission(id: string) {
       // Table doesn't exist, update in site_settings
       const current = await getMissions();
       const updated = current.filter((m) => m.id !== id);
-      await supabase.from("site_settings").upsert(
-        { key: "missions_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
-        { onConflict: "key" }
-      );
+      await supabase
+        .from("site_settings")
+        .upsert(
+          {
+            key: "missions_data",
+            value: JSON.stringify(updated),
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: "key" },
+        );
     }
 
-    await logActivity({ action: "delete", targetType: "mission", targetId: id });
+    await logActivity({
+      action: "delete",
+      targetType: "mission",
+      targetId: id,
+    });
 
     revalidatePath("/admin/missions");
     revalidatePath("/missions");

@@ -30,3 +30,7 @@ Thumbs.db
 !uploads/.gitkeep
 .vercel
 .env*
+
+# Local verification, exported reports and browser artifacts
+/tmp/
+/output/

@@ -1,0 +1,53 @@
+{
+  "samples": [
+    {
+      "file": "axe-release-home-light.json",
+      "completed": true,
+      "violations": [],
+      "note": ""
+    },
+    {
+      "file": "axe-release-home-dark.json",
+      "completed": true,
+      "violations": [],
+      "note": ""
+    },
+    {
+      "file": "axe-release-article-dark-final.json",
+      "completed": true,
+      "violations": [
+        {
+          "rule": "color-contrast",
+          "count": 1
+        }
+      ],
+      "note": ""
+    },
+    {
+      "file": "axe-mobile-comparison-dark.json",
+      "completed": true,
+      "violations": [],
+      "note": ""
+    },
+    {
+      "file": "axe-release-catalog-dark.json",
+      "completed": false,
+      "violations": [],
+      "note": "Do not count a stalled browser audit as a pass."
+    }
+  ],
+  "mobileComparison": {
+    "viewportWidth": 390,
+    "pageWidth": 390,
+    "tableRegionWidth": 314,
+    "tableContentWidth": 580,
+    "legacyUrlSelections": 2,
+    "detailFilter": "price",
+    "resetClearedLegacyQuery": true
+  },
+  "limitations": [
+    "Original navbar color retained; active News contrast is 3.43:1.",
+    "Favorite save updated the count. A subsequent automated filter click was obscured by the sticky header; it is not recorded as a successful interaction.",
+    "One catalog audit stalled; it is explicitly not counted as passing."
+  ]
+}

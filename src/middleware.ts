@@ -1,16 +1,31 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifyAdminSessionToken, getCurrentSessionVersion, verifyUserSessionToken, USER_SESSION_COOKIE } from "@/lib/auth/session";
+import {
+  verifyAdminSessionToken,
+  getCurrentSessionVersion,
+  verifyUserSessionToken,
+  USER_SESSION_COOKIE,
+} from "@/lib/auth/session";
 import { getMasterAdminEmails } from "@/lib/auth/assert-admin";
+import { reportOnlyCsp } from "@/lib/content-security-policy";
 
 /** Cached CMS-managed 301/302 redirects (seo_settings.redirects). */
-type RedirectRule = { id: string; fromUrl: string; toUrl: string; type: string; enabled: boolean };
+type RedirectRule = {
+  id: string;
+  fromUrl: string;
+  toUrl: string;
+  type: string;
+  enabled: boolean;
+};
 let redirectCache: { rules: RedirectRule[]; fetchedAt: number } | null = null;
 const REDIRECT_CACHE_TTL_MS = 60 * 60 * 1000;
 
 async function getCmsRedirects(): Promise<RedirectRule[]> {
-  if (redirectCache && Date.now() - redirectCache.fetchedAt < REDIRECT_CACHE_TTL_MS) {
+  if (
+    redirectCache &&
+    Date.now() - redirectCache.fetchedAt < REDIRECT_CACHE_TTL_MS
+  ) {
     return redirectCache.rules;
   }
   try {
@@ -20,15 +35,23 @@ async function getCmsRedirects(): Promise<RedirectRule[]> {
         headers: { apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "" },
         // Never let a slow CMS outage hang page loads; fail fast to "no redirects".
         signal: AbortSignal.timeout(1000),
-      }
+      },
     );
     if (!res.ok) throw new Error(`seo_settings fetch failed: ${res.status}`);
     const rows = (await res.json()) as { value: string }[];
-    const parsed = rows[0]?.value ? (JSON.parse(rows[0].value) as RedirectRule[]) : [];
-    redirectCache = { rules: Array.isArray(parsed) ? parsed : [], fetchedAt: Date.now() };
+    const parsed = rows[0]?.value
+      ? (JSON.parse(rows[0].value) as RedirectRule[])
+      : [];
+    redirectCache = {
+      rules: Array.isArray(parsed) ? parsed : [],
+      fetchedAt: Date.now(),
+    };
   } catch {
     // Serve without redirects if the CMS is unreachable; retry after TTL.
-    redirectCache = { rules: redirectCache?.rules ?? [], fetchedAt: Date.now() };
+    redirectCache = {
+      rules: redirectCache?.rules ?? [],
+      fetchedAt: Date.now(),
+    };
   }
   return redirectCache.rules;
 }
@@ -48,7 +71,7 @@ export async function middleware(request: NextRequest) {
     let allowed = false;
     try {
       const check = await verifyUserSessionToken(
-        request.cookies.get(USER_SESSION_COOKIE)?.value
+        request.cookies.get(USER_SESSION_COOKIE)?.value,
       );
       allowed = check.valid;
     } catch {
@@ -63,6 +86,9 @@ export async function middleware(request: NextRequest) {
   const response = NextResponse.next({
     request: { headers: request.headers },
   });
+  if (process.env.NODE_ENV === "production") {
+    response.headers.set("Content-Security-Policy-Report-Only", reportOnlyCsp);
+  }
 
   // Frame protection for every page EXCEPT the public /embed/* routes: the
   // countdown widget hands out iframe code for /embed/countdown, and a DENY
@@ -97,14 +123,19 @@ export async function middleware(request: NextRequest) {
   // A plain Supabase session must never grant admin access — any visitor
   // can create a Supabase account, which would be privilege escalation.
   // ------------------------------------------------------------------
+  // Public APIs enforce their own requirements. They must not read private
+  // admin-session settings or refresh authentication cookies on every call.
+  if (!pathname.startsWith("/admin") && !pathname.startsWith("/api/admin"))
+    return response;
   const adminCookieValue = request.cookies.get("gta6_admin_session")?.value;
   // Enforce session revocation here too (same fail-open policy as
   // assertAdmin): without this, a revoked cookie could still pass the
   // middleware gate on admin page loads.
-  const { version: sessionVersion, confirmed } = await getCurrentSessionVersion();
+  const { version: sessionVersion, confirmed } =
+    await getCurrentSessionVersion();
   const sessionCheck = await verifyAdminSessionToken(
     adminCookieValue,
-    confirmed ? sessionVersion : undefined
+    confirmed ? sessionVersion : undefined,
   );
 
   let isMasterSupabaseAdmin = false;
@@ -121,17 +152,19 @@ export async function middleware(request: NextRequest) {
           },
           setAll(cookiesToSet) {
             cookiesToSet.forEach(({ name, value }) =>
-              request.cookies.set(name, value)
+              request.cookies.set(name, value),
             );
             cookiesToSet.forEach(({ name, value, options }) =>
-              response.cookies.set(name, value, options)
+              response.cookies.set(name, value, options),
             );
           },
         },
-      }
+      },
     );
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       const email = user?.email?.toLowerCase();
       isMasterSupabaseAdmin = !!email && getMasterAdminEmails().includes(email);
     } catch {
@@ -148,7 +181,7 @@ export async function middleware(request: NextRequest) {
   if (isAdminApiRoute && !isLoginApi && !isAuthenticated) {
     return NextResponse.json(
       { success: false, error: "Unauthorized: Admin session required." },
-      { status: 401 }
+      { status: 401 },
     );
   }
 

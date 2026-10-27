@@ -7,12 +7,13 @@ import { Trophy } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/tracker" },
+  robots: { index: false, follow: true },
+  openGraph: { url: "/tracker" },
   title: "100% Completion Tracker & Checklist",
   description:
-    "Interactive 100% completion checklist for Grand Theft Auto VI (Leonida). Track story missions, submerged caches, stranger encounters, hobbies, and achievements with local auto-save.",
+    "A preview of Taish Gaming's completion tracker. Verified GTA VI requirements will be added when they can be checked; no game-completion rewards are currently asserted.",
   alternates: { canonical: "/tracker" },
-  };
+};
 
 export default async function TrackerPage() {
   const settings = await getSiteSettings();
@@ -39,8 +40,10 @@ export default async function TrackerPage() {
             LEONIDA <span className="text-primary">COMPLETION TRACKER</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            Track your road to 100% completion across all 11 core categories in Grand Theft Auto VI.
-            Mark completed objectives, record field notes, and export your offline progress backup anytime.
+            GTA VI completion requirements and rewards have not been verified
+            for this tracker. We have withdrawn illustrative mission and
+            achievement entries. Your saved local progress is retained; reviewed
+            requirements will be added when evidence is available.
           </p>
         </div>
 
