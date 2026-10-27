@@ -15,7 +15,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative w-full overflow-hidden bg-background pt-6 pb-6 sm:pt-6 sm:pb-7 lg:pt-6 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-[520px] flex flex-col justify-between transition-colors duration-300"
+      className="relative w-full overflow-hidden bg-background pt-6 pb-6 sm:pt-6 sm:pb-7 lg:pt-6 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-0 sm:min-h-[520px] flex flex-col justify-between transition-colors duration-300"
     >
       {/* 1. CINEMATIC BACKGROUND CANVAS */}
       <HeroBackground />
@@ -23,13 +23,13 @@ export function HeroSection({ settings }: HeroSectionProps) {
       {/* Accessible heading for SEO */}
       <h1
         id="hero-heading"
-        className="relative z-10 mx-auto mb-6 max-w-3xl text-center font-display text-2xl sm:text-4xl font-black text-white"
+        className="relative z-10 mx-auto mb-4 sm:mb-6 max-w-3xl text-center font-display text-xl sm:text-4xl font-black text-white"
       >
         GTA VI News, Characters & Fan Planning Tools
       </h1>
 
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
-      <div className="relative z-10 mx-auto w-full max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl flex flex-col items-center justify-center flex-1 pb-5 sm:pb-8 text-center">
+      <div className="relative z-10 mx-auto w-full max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl flex flex-col items-center justify-center flex-1 pb-3 sm:pb-8 text-center">
         {/* Countdown in Center */}
         <div className="hero-enter w-full" style={{ animationDelay: "0.05s" }}>
           <Countdown
@@ -42,12 +42,12 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
         {/* Action Buttons Centered Below Countdown */}
         <div
-          className="hero-enter flex flex-wrap items-center justify-center gap-4 pt-6"
+          className="hero-enter flex w-full flex-wrap items-center justify-center gap-3 pt-3 sm:gap-4 sm:pt-6"
           style={{ animationDelay: "0.45s" }}
         >
           <Link
             href="/map"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 dark:from-[#00D2FF] dark:via-[#00A3FF] dark:to-[#0066FF] hover:from-sky-400 hover:to-indigo-500 dark:hover:from-[#38BDF8] dark:hover:to-[#0055EE] px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all shadow-[0_4px_20px_rgba(14,165,233,0.35)] dark:shadow-[0_0_30px_rgba(0,210,255,0.45)] hover:shadow-[0_6px_25px_rgba(14,165,233,0.5)] dark:hover:shadow-[0_0_40px_rgba(0,210,255,0.7)] active:scale-95"
+            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 dark:from-[#00D2FF] dark:via-[#00A3FF] dark:to-[#0066FF] hover:from-sky-400 hover:to-indigo-500 dark:hover:from-[#38BDF8] dark:hover:to-[#0055EE] px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all shadow-[0_4px_20px_rgba(14,165,233,0.35)] dark:shadow-[0_0_30px_rgba(0,210,255,0.45)] hover:shadow-[0_6px_25px_rgba(14,165,233,0.5)] dark:hover:shadow-[0_0_40px_rgba(0,210,255,0.7)] active:scale-95"
           >
             <span>Explore the Atlas</span>
             <ArrowRight className="h-4 w-4 text-white" />
@@ -55,7 +55,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
           <Link
             href="/map-explorer"
-            className="inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 bg-black/60 hover:bg-black/80 px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all backdrop-blur-xl hover:border-[#00F0FF]/60 active:scale-95 shadow-lg"
+            className="hidden sm:inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 bg-black/60 hover:bg-black/80 px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all backdrop-blur-xl hover:border-[#00F0FF]/60 active:scale-95 shadow-lg"
           >
             <span>Open Map Explorer</span>
             <Map className="h-4 w-4 text-[#00F0FF]" />
@@ -63,7 +63,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
         </div>
         {/* Optional updates after the main product links */}
         <div
-          className="hero-enter w-full flex justify-center"
+          className="hero-enter hidden w-full justify-center sm:flex"
           style={{ animationDelay: "0.3s" }}
         >
           <HeroSignup />
@@ -72,7 +72,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
       {/* 3. BOTTOM QUICK-ACCESS FEATURE BAR */}
       <div
-        className="hero-enter relative z-10 w-full border-t border-white/10 pt-5 mt-6 max-w-7xl mx-auto"
+        className="hero-enter relative z-10 hidden sm:block w-full border-t border-white/10 pt-5 mt-6 max-w-7xl mx-auto"
         style={{ animationDelay: "0.65s" }}
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">

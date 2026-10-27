@@ -1,223 +1,261 @@
 import Link from "next/link";
 import {
-  FaInstagram,
-  FaTiktok,
-  FaFacebook,
-  FaYoutube,
-  FaDiscord,
-  FaXTwitter,
-  FaReddit,
-} from "react-icons/fa6";
-import { Logo } from "@/components/logo";
+  ArrowRight,
+  Car,
+  ChevronDown,
+  Crosshair,
+  Gamepad2,
+  Layers2,
+  List,
+  Map,
+} from "lucide-react";
+import { FaDiscord, FaReddit, FaXTwitter } from "react-icons/fa6";
+import { SafeImage } from "@/components/safe-image";
 import { getSiteSettings } from "@/lib/services/queries";
+import styles from "./footer.module.css";
 
-const COLS = [
+type FooterLink = { label: string; href: string };
+type Group = { title: string; links: FooterLink[] };
+const QUICK = [
+  { label: "Map", href: "/map", icon: Map },
+  { label: "Vehicles", href: "/vehicles", icon: Car },
+  { label: "Weapons", href: "/weapons", icon: Crosshair },
+  { label: "Compare", href: "/compare/vehicles", icon: Layers2 },
+];
+const GROUPS: Group[] = [
   {
     title: "Explore",
     links: [
       { label: "Characters", href: "/characters" },
-      { label: "Vehicles", href: "/vehicles" },
-      { label: "Missions", href: "/missions" },
-      { label: "Map", href: "/map" },
-      { label: "Collectibles", href: "/collectibles" },
-      { label: "Radio Stations", href: "/radio" },
+      { label: "Radio stations", href: "/radio" },
+      { label: "Vehicle comparison", href: "/compare/vehicles" },
+      { label: "Weapon comparison", href: "/compare/weapons" },
+      { label: "All tools", href: "/tools" },
     ],
   },
   {
-    title: "Community & Intel",
+    title: "News & editorial",
     links: [
-      { label: "Articles", href: "/news" },
+      { label: "News & articles", href: "/news" },
       { label: "Guides", href: "/guides" },
-      { label: "Tools", href: "/tools" },
-      { label: "Dashboard", href: "/dashboard" },
-    ],
-  },
-  {
-    title: "Support",
-    links: [
-      { label: "About Us", href: "/about" },
-      { label: "Editorial Team", href: "/team" },
-      { label: "Editorial Policy", href: "/editorial-policy" },
+      { label: "Editorial team", href: "/team" },
+      { label: "Editorial policy", href: "/editorial-policy" },
       { label: "Corrections", href: "/corrections" },
-      { label: "Contact Us", href: "/contact" },
-      { label: "Report Bug", href: "/contact" },
     ],
   },
   {
-    title: "Legal",
+    title: "Help & support",
     links: [
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms of Service", href: "/terms" },
-      { label: "Cookie Policy", href: "/cookies" },
-      { label: "DMCA", href: "/dmca" },
+      { label: "About Taish Gaming", href: "/about" },
+      { label: "Contact / report a problem", href: "/contact" },
+      { label: "Your dashboard", href: "/dashboard" },
+      { label: "Site directory", href: "/site-map" },
+    ],
+  },
+  {
+    title: "Policies",
+    links: [
+      { label: "Cookie policy", href: "/cookies" },
       { label: "Disclaimer", href: "/disclaimer" },
+      { label: "DMCA / rights enquiries", href: "/dmca" },
     ],
   },
 ];
-
+function safeHref(value: unknown): value is string {
+  if (typeof value !== "string" || value.includes("\\")) return false;
+  if (value.startsWith("/") && !value.startsWith("//")) return true;
+  try {
+    const u = new URL(value);
+    return u.protocol === "https:" && !u.username && !u.password;
+  } catch {
+    return false;
+  }
+}
+function publicSocial(value: string | undefined, hosts: string[]) {
+  if (!value) return "";
+  try {
+    const u = new URL(value);
+    return u.protocol === "https:" &&
+      !u.username &&
+      !u.password &&
+      hosts.includes(u.hostname.toLowerCase())
+      ? u.href
+      : "";
+  } catch {
+    return "";
+  }
+}
+function LinkGroups({ groups }: { groups: Group[] }) {
+  return (
+    <div className={styles.groups}>
+      {groups.map((group) => (
+        <section key={group.title}>
+          <h3 className={styles.groupTitle}>{group.title}</h3>
+          <ul className={styles.linkList}>
+            {group.links.map((link) => (
+              <li key={link.href}>
+                <Link className={styles.link} href={link.href}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+}
 export async function Footer() {
   const settings = await getSiteSettings();
-
-  // Admin → Settings → Navigation manages the extra links in the Explore
-  // column (visible items, in the owner's chosen order, de-duplicated).
-  const adminNav = [...((settings as any).navigationMenu ?? [])]
-    .filter((i: any) => i && i.visible !== false && i.label && i.url)
-    .sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0))
-    .map((i: any) => ({ label: i.label as string, href: i.url as string }));
-  const cols = COLS.map((col, idx) => {
-    if (idx !== 0 || adminNav.length === 0) return col;
-    const seen = new Set(col.links.map((l) => l.href));
-    return {
-      ...col,
-      links: [...col.links, ...adminNav.filter((l) => !seen.has(l.href))],
-    };
-  });
-
-  // Taish Gaming's own social row. X/Discord honor a configured setting when
-  // one exists; the rest point at the intended Taish handles. NOTE: an
-  // intended handle is not a claimed account — until each handle is claimed
-  // on its platform, its icon links to a "not found" page. Claim order:
-  // YouTube + TikTok (verified free), then Instagram/Facebook (in-app check),
-  // then X, Reddit, Discord.
+  const known = new Set([
+    ...QUICK.map((l) => l.href),
+    ...GROUPS.flatMap((g) => g.links.map((l) => l.href)),
+    "/privacy",
+    "/terms",
+    "/privacy#privacy-controls-title",
+  ]);
+  const seen = new Set(known);
+  const navigation = [
+    ...((
+      settings as {
+        navigationMenu?: {
+          label: string;
+          url: string;
+          visible?: boolean;
+          order?: number;
+        }[];
+      }
+    ).navigationMenu || []),
+  ]
+    .filter(
+      (item) =>
+        item && item.visible !== false && item.label && safeHref(item.url),
+    )
+    .sort((a, b) => (a.order || 0) - (b.order || 0))
+    .filter((item) => {
+      if (seen.has(item.url)) return false;
+      seen.add(item.url);
+      return true;
+    })
+    .map((item) => ({ label: item.label, href: item.url }));
+  const groups = navigation.length
+    ? [...GROUPS, { title: "More from Taish", links: navigation }]
+    : GROUPS;
+  const handle = settings.twitterHandle?.replace(/^@/, "");
   const socials = [
     {
-      icon: FaInstagram,
-      label: "Taish Gaming on Instagram",
-      href: "https://instagram.com/taishgaming",
-    },
-    {
-      icon: FaTiktok,
-      label: "Taish Gaming on TikTok",
-      href: "https://tiktok.com/@taishgaming",
-    },
-    {
-      icon: FaFacebook,
-      label: "Taish Gaming on Facebook",
-      href: "https://facebook.com/taishgaming",
-    },
-    {
-      icon: FaYoutube,
-      label: "Taish Gaming on YouTube",
-      href: "https://youtube.com/@TaishGaming",
-    },
-    {
-      icon: FaDiscord,
-      label: "Taish Gaming Discord",
-      href: settings.discordUrl || "https://discord.gg/taishgaming",
-    },
-    {
-      icon: FaXTwitter,
       label: "Taish Gaming on X",
-      href: settings.twitterHandle
-        ? `https://x.com/${settings.twitterHandle.replace("@", "")}`
-        : "https://x.com/TaishGaming",
+      icon: FaXTwitter,
+      href:
+        handle && /^[A-Za-z0-9_]{1,15}$/.test(handle)
+          ? "https://x.com/" + handle
+          : "",
     },
     {
-      icon: FaReddit,
-      label: "Taish Gaming on Reddit",
-      href: "https://reddit.com/r/TaishGaming",
+      label: "Taish Gaming Discord",
+      icon: FaDiscord,
+      href: publicSocial(settings.discordUrl, [
+        "discord.gg",
+        "discord.com",
+        "www.discord.com",
+      ]),
     },
-  ];
-
+    {
+      label: "Taish Gaming on Reddit",
+      icon: FaReddit,
+      href: publicSocial(settings.redditUrl, ["reddit.com", "www.reddit.com"]),
+    },
+  ].filter((item) => item.href);
   return (
-    <footer className="border-t border-border/60 bg-card/40">
-      <div className="container-site grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-6">
-        <div className="lg:col-span-2">
-          <Logo />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            {settings.siteDescription ||
-              "Your ultimate guide to Grand Theft Auto 6. Explore every location, character, vehicle, mission and secret across Leonida."}
-          </p>
-          <p className="mt-2 max-w-xs text-xs text-muted-foreground">
-            Taish Gaming is an unofficial fan site and is not affiliated with
-            Rockstar Games or Take-Two Interactive.
-          </p>
-          <p className="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
-            Follow Taish Gaming
-          </p>
-          <div className="mt-3 flex flex-wrap items-center gap-3">
-            {socials.map(({ icon: Icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-accent/40 text-accent transition-colors hover:bg-accent hover:text-white"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {cols.map((col) => (
-          <div key={col.title}>
-            <h2 className="section-eyebrow text-foreground">{col.title}</h2>
-            <ul className="mt-4 space-y-2.5">
-              {col.links.map((l) => (
-                <li key={l.label}>
-                  <Link
-                    href={l.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+    <footer className={styles.footer} aria-labelledby="footer-heading">
+      <div className={styles.backdrop} aria-hidden="true">
+        <SafeImage
+          src="/img/hero-vice-skyline-hd.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+          loading="lazy"
+        />
       </div>
-
-      {/* Bottom bar */}
-      <div className="border-t border-border/60">
-        <div className="container-site flex flex-col items-center justify-between gap-4 py-6 text-[13px] text-muted-foreground sm:flex-row">
-          <p>
-            {settings.copyrightText ||
-              "© 2026 Taish Gaming. Unofficial fan site — not affiliated with Rockstar Games or Take-Two Interactive."}
+      <div className={styles.inner}>
+        <h2 className={styles.eyebrow} id="footer-heading">
+          <span className="md:hidden">Quick access</span>
+          <span className="hidden md:inline">Explore Taish Gaming</span>
+        </h2>
+        <nav className={styles.quickGrid} aria-label="Footer quick access">
+          {QUICK.map((item) => (
+            <Link key={item.href} href={item.href} className={styles.quickLink}>
+              <item.icon className={styles.quickIcon} aria-hidden="true" />
+              <span className={styles.quickText}>{item.label}</span>
+              <ArrowRight className={styles.quickArrow} aria-hidden="true" />
+            </Link>
+          ))}
+        </nav>
+        <nav className={styles.desktopGroups} aria-label="Footer directory">
+          <LinkGroups groups={groups} />
+        </nav>
+        <details className={styles.mobileGroups}>
+          <summary>
+            <List className="h-5 w-5" aria-hidden="true" />
+            More links
+            <ChevronDown className={styles.disclosureIcon} aria-hidden="true" />
+          </summary>
+          <nav aria-label="More footer links">
+            <LinkGroups groups={groups} />
+          </nav>
+        </details>
+        <div className={styles.brandRow}>
+          <Link
+            href="/"
+            className={styles.brand}
+            aria-label="Taish Gaming home"
+          >
+            <Gamepad2 className={styles.brandMark} aria-hidden="true" />
+            <span>
+              TAISH <span className={styles.brandAccent}>GAMING</span>
+            </span>
+          </Link>
+          {socials.length > 0 && (
+            <nav aria-label="Taish Gaming community" className={styles.socials}>
+              {socials.map((s) => (
+                <a
+                  key={s.href}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                  aria-label={s.label}
+                >
+                  <s.icon className="h-4 w-4" aria-hidden="true" />
+                </a>
+              ))}
+            </nav>
+          )}
+        </div>
+        <div className={styles.bottom}>
+          <nav className={styles.legal} aria-label="Footer privacy and terms">
+            <Link href="/privacy" className={styles.link}>
+              Privacy
+            </Link>
+            <Link href="/terms" className={styles.link}>
+              Terms
+            </Link>
+            <Link
+              href="/privacy#privacy-controls-title"
+              className={styles.link}
+            >
+              Cookie choices
+            </Link>
+          </nav>
+          <p className={styles.note}>
+            Unofficial GTA VI fan site. Not affiliated with Rockstar Games or
+            Take-Two Interactive.
           </p>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/privacy"
-              className="hover:text-primary transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <span className="text-border" aria-hidden="true">
-              |
-            </span>
-            <Link
-              href="/terms"
-              className="hover:text-primary transition-colors"
-            >
-              Terms of Service
-            </Link>
-            <span className="text-border" aria-hidden="true">
-              |
-            </span>
-            <Link
-              href="/cookies"
-              className="hover:text-primary transition-colors"
-            >
-              Cookie Policy
-            </Link>
-            <span className="text-border" aria-hidden="true">
-              |
-            </span>
-            <Link href="/dmca" className="hover:text-primary transition-colors">
-              DMCA
-            </Link>
-            <span className="text-border" aria-hidden="true">
-              |
-            </span>
-            <Link
-              href="/site-map"
-              className="hover:text-primary transition-colors"
-            >
-              Sitemap
-            </Link>
-          </div>
+          <p className={styles.copyright}>
+            © {new Date().getFullYear()} Taish Gaming{" "}
+            <span aria-hidden="true">·</span> Pakistan
+          </p>
         </div>
       </div>
     </footer>
