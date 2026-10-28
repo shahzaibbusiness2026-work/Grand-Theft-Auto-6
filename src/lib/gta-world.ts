@@ -225,7 +225,7 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       },
       {
             "name": "Green iguana",
-            "observation": "Named as an invasive species; Trailer 2's opening shot shows a large iguana ambling toward Jason's house.",
+            "observation": "Named as an invasive species; the Launch Trailer shows a large green iguana crossing a road.",
             "source": "Game Informer cover story, Sept 29, 2026; Trailer 2",
             "tier": "Rockstar confirmed"
       },
@@ -332,7 +332,7 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       },
       {
             "name": "Brown pelican",
-            "observation": "Named by Rockstar; pelicans fly over the Trailer 2 opening.",
+            "observation": "Named by Rockstar; no pelican footage found in a frame-by-frame review of Trailer 2.",
             "source": "Game Informer cover story, Sept 29, 2026; Trailer 2",
             "tier": "Rockstar confirmed"
       },
