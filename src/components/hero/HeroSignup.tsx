@@ -9,8 +9,8 @@ import { subscribeNewsletter } from "@/lib/services/newsletter";
  * Reuses the existing `subscribeNewsletter` server action (stores in
  * private_settings via service-role — never anon-readable).
  *
- * Purpose: bank pre-launch visitors as a day-one audience before the
- * GTA 6 tools (weapons, map, money calculator) go live at game launch.
+ * Purpose: bank pre-launch visitors as a day-one audience for GTA VI
+ * news and updates to the live map, catalog and planning tools.
  */
 export function HeroSignup() {
   const [email, setEmail] = useState("");
@@ -56,7 +56,7 @@ export function HeroSignup() {
     <div className="mx-auto mt-6 w-full max-w-md">
       <form
         onSubmit={handleSubmit}
-        aria-label="Get notified when GTA 6 tools go live"
+        aria-label="Get notified about GTA VI news and updates"
         className="flex items-center gap-2 rounded-2xl border border-white/20 bg-[#0a0f1e]/90 p-2 pl-4 shadow-lg backdrop-blur-xl transition-shadow focus-within:shadow-md focus-within:border-[#C9A86A]/50"
       >
         <Mail className="h-4 w-4 shrink-0 text-white/50" aria-hidden="true" />

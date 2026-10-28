@@ -65,6 +65,7 @@ const LINKS: NavLink[] = [
   },
   { href: "/missions", label: "Missions", menu: [{ href: "/missions", label: "All Missions" }, { href: "/tracker", label: "100% Tracker" }] },
   { href: "/map", label: "Map" },
+  { href: "/gta-6-world", label: "GTA 6 World" },
 ];
 
 type MoreLink = { href: string; label: string; icon: LucideIcon };

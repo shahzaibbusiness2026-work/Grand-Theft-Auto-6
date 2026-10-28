@@ -1,2 +1,212 @@
-[]
-
+[
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "GTA VI appearance",
+    "value": "Girardi ES9",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Ultimate Edition contents — Jason's Girardi ES9",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "GTA VI appearance",
+    "value": "Klose K17",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Ultimate Edition contents — Lucia's Klose K17",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-little-morgan-revolvers",
+    "field": "GTA VI appearance",
+    "value": "Hawk & Little Morgan Revolvers",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Ultimate Edition contents — matching revolver pair",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "mustang-357",
+    "field": "GTA VI appearance",
+    "value": "Mustang .357",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "official screenshot: Ambrosia — name engraved on barrel next to Duke Arms logo",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "combat-mg-lmg",
+    "field": "GTA VI appearance",
+    "value": "Combat MG (LMG)",
+    "source": "https://www.youtube.com/embed/VQRLujxTm3c",
+    "locator": "Trailer 2, 2:09 — Phil's Ammu-Nation commercial, Phil fires LMG from rooftop",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "baseball-bat",
+    "field": "GTA VI appearance",
+    "value": "Baseball Bat",
+    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
+    "locator": "Trailer 1, liquor-store robbery sequence",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "unarmed-combat",
+    "field": "GTA VI appearance",
+    "value": "Unarmed Combat",
+    "source": "https://www.youtube.com/embed/VQRLujxTm3c",
+    "locator": "Trailer 2, fist-fight scenes",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "springfield-m1a-style-rifle",
+    "field": "GTA VI appearance",
+    "value": "Springfield M1A-Style Rifle",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "official screenshot: Grassrivers — mud-covered hunter carrying M1A-pattern rifle (also Extended Look)",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "scoped-hunting-rifles",
+    "field": "GTA VI appearance",
+    "value": "Scoped Bolt-Action Hunting Rifles",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "official promotional image: Mount Kalaga forest — poachers/hunters with scoped rifles",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "schyster-deviant",
+    "field": "GTA VI appearance",
+    "value": "Schyster Deviant",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Ultimate Edition contents (also Wyman's Classic Car Collection)",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-buggy-67",
+    "field": "GTA VI appearance",
+    "value": "'67 Vapid Dominator Buggy",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Ultimate Edition contents",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dinka-enduro",
+    "field": "GTA VI appearance",
+    "value": "Dinka Enduro",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Ultimate Edition contents",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "crest-kayak",
+    "field": "GTA VI appearance",
+    "value": "Crest Kayak",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Ultimate Edition contents",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "shitzu-squalo",
+    "field": "GTA VI appearance",
+    "value": "Shitzu Squalo",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Ultimate Edition contents",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier-55",
+    "field": "GTA VI appearance",
+    "value": "'55 Vapid Stanier",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Vintage Vice City Pack contents (pre-order)",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-ganado",
+    "field": "GTA VI appearance",
+    "value": "Vapid Ganado",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Ultimate Edition contents — customized Vapid Ganado pickup (also Jason's daily driver in Trailer 2/Extended Look)",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-riata",
+    "field": "GTA VI appearance",
+    "value": "Vapid Riata",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "Ultimate Edition contents — Wyman's Classic Car Collection (Vapid Riata)",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "tulip",
+    "field": "GTA VI appearance",
+    "value": "Declasse Tulip",
+    "source": "https://www.youtube.com/embed/VQRLujxTm3c",
+    "locator": "Trailer 2, 2:33 — final shot, driving into sunset (also Trailer 1, 1:00 getaway and 1:10 fleeing Port Gellhorn Pawn & Gun)",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "airboat",
+    "field": "GTA VI appearance",
+    "value": "Airboat",
+    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
+    "locator": "Trailer 1, 0:19 — airboat cutting through flooded Grassrivers (also official Grassrivers screenshots)",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "564440dd-70ac-4ea1-9ae4-0349be2aeb4b",
+    "field": "GTA VI appearance",
+    "value": "Principe Alvino V1",
+    "source": "https://www.rockstargames.com/VI",
+    "locator": "official cover art — wheelie on Ocean Drive (also Extended Look dirt-track scenes)",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-caracara-4x4",
+    "field": "GTA VI appearance",
+    "value": "Vapid Caracara 4x4",
+    "source": "https://www.youtube.com/embed/VQRLujxTm3c",
+    "locator": "Trailer 2, lifeguard-beach cutscenes (Brian Heder's vehicle)",
+    "reviewedAt": "2026-10-28",
+    "reviewer": "Muse"
+  }
+]

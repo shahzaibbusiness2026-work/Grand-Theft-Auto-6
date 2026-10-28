@@ -37,6 +37,14 @@ export default function DisclaimerPage() {
               registered trademarks of their respective owners, and all rights
               remain with those owners.
             </p>
+            <p>
+              Screenshots, trailer stills, and artwork shown on this site are
+              the property of Rockstar Games (and, where credited, Game
+              Informer) and are used for non-commercial editorial commentary
+              only. We claim no ownership over them, and we do not remove
+              source watermarks. If you are a rights holder and would like an
+              image removed, please reach out through our contact page.
+            </p>
           </section>
 
           <section className="space-y-3">

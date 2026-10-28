@@ -225,7 +225,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                   <span className="font-bold text-foreground">{collectible.confidence}</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-border">
-                  <span className="text-muted-foreground">Verified Source:</span>
+                  <span className="text-muted-foreground">Source:</span>
                   <span className="text-muted-foreground text-right truncate max-w-[160px]">
                     {collectible.source}
                   </span>

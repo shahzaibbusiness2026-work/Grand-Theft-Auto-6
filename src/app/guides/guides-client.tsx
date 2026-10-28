@@ -51,7 +51,7 @@ const quickLinks = [
   { label: "Map Explorer", icon: MapPin, href: "/map-explorer" },
   { label: "Mission List", icon: List, href: "/missions" },
   { label: "Collectible Tracker", icon: Package, href: "/collectibles" },
-  { label: "Vehicle Database", icon: Car, href: "/database/vehicles" },
+  { label: "Vehicle Database", icon: Car, href: "/vehicles" },
   { label: "Weapon Compare", icon: Crosshair, href: "/compare/weapons" },
   { label: "Money Calculator", icon: DollarSign, href: "/tools/money-calculator" },
 ];
@@ -133,7 +133,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
           <div className="pointer-events-none absolute left-1/3 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
           <div className="relative p-6">
-            <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">Guides Hub</h1>
+            <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">GTA 6 Guides</h1>
             <p className="mt-1 text-sm text-muted-foreground">Pre-release guides and analysis for Vice City and beyond.</p>
             <div className="relative mt-5 max-w-md">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
