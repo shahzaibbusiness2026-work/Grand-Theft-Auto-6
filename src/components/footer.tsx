@@ -208,15 +208,7 @@ export async function Footer() {
             <Link href="/dmca" className="hover:text-primary transition-colors">
               DMCA
             </Link>
-            <span className="text-border" aria-hidden="true">
-              |
-            </span>
-            <Link
-              href="/site-map"
-              className="hover:text-primary transition-colors"
-            >
-              Sitemap
-            </Link>
+
           </div>
         </div>
       </div>
