@@ -51,6 +51,23 @@ export default function SiteMapPage() {
       ],
     },
     {
+      title: "GTA VI World",
+      links: [
+        { label: "GTA VI World", href: "/gta-6-world", desc: "Wildlife, radio, city life & secrets across Leonida" },
+        { label: "Animals & Wildlife", href: "/gta-6-world/animals-wildlife", desc: "Alligators, dogs, wild animals and more" },
+        { label: "Birds & Marine Life", href: "/gta-6-world/birds-marine-life", desc: "Birds, sharks, dolphins, fish and more" },
+        { label: "Nature & Environment", href: "/gta-6-world/nature-environment", desc: "Beaches, swamps, forests and islands" },
+        { label: "Weather & Climate", href: "/gta-6-world/weather-climate", desc: "Rain, storms, sunshine and day/night" },
+        { label: "In-Game Brands & Ads", href: "/gta-6-world/in-game-brands-ads", desc: "Fictional companies, products and ads" },
+        { label: "Social Media & Apps", href: "/gta-6-world/social-media-apps", desc: "In-game social platforms and apps" },
+        { label: "TV Shows & Media", href: "/gta-6-world/tv-shows-media", desc: "Television, broadcasts and fictional media" },
+        { label: "Restaurants & Food", href: "/gta-6-world/restaurants-food", desc: "Food outlets, chains and restaurants" },
+        { label: "Hotels & Motels", href: "/gta-6-world/hotels-motels", desc: "Hotels, resorts, motels and stays" },
+        { label: "Gangs & Factions", href: "/gta-6-world/gangs-factions", desc: "Criminal groups and rival organizations" },
+        { label: "Clothing & Customization", href: "/gta-6-world/clothing-customization", desc: "Outfits, tattoos, hairstyles and more" },
+      ],
+    },
+    {
       title: "News & Content",
       links: [
         { label: "News", href: "/news", desc: "Latest GTA 6 coverage" },
