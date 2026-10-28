@@ -138,15 +138,17 @@ export default async function GTAWorldCategoryPage({ params }: Props) {
                     key={entry.name}
                     className="rounded-xl border border-white/10 bg-white/5 p-5"
                   >
-                    <figure className="mb-4 overflow-hidden rounded-lg border border-white/10">
-                      <SafeImage
-                        src={category.image}
-                        alt=""
-                        width={600}
-                        height={338}
-                        className="h-32 w-full object-cover"
-                      />
-                    </figure>
+                    {entry.image ? (
+                      <figure className="mb-4 overflow-hidden rounded-lg border border-white/10">
+                        <SafeImage
+                          src={entry.image}
+                          alt={entry.imageAlt ?? entry.name}
+                          width={600}
+                          height={338}
+                          className="h-32 w-full object-cover"
+                        />
+                      </figure>
+                    ) : null}
                     <div className="flex items-start justify-between gap-2">
                       <h2 className="text-base font-bold leading-snug text-white">
                         {entry.name}

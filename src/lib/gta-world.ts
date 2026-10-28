@@ -179,6 +179,9 @@ export type WorldEntry = {
   observation: string;
   source: string;
   tier: EvidenceTier;
+  /** Exact image for THIS entry only. No image = no figure on the card. */
+  image?: string;
+  imageAlt?: string;
 };
 
 export type WorldCategory = {
@@ -221,13 +224,17 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "American alligator",
             "observation": "Trailer 1 shows one walking into a convenience store, and Grassrivers screenshots show gators swimming around airboats and under a swamp dock at night.",
             "source": "Game Informer cover story, Sept 29, 2026; Trailer 1",
-            "tier": "Rockstar confirmed"
+            "tier": "Rockstar confirmed",
+            "image": "/img/wildlife/alligator-store.jpg",
+            "imageAlt": "An American alligator inside a store in GTA VI Trailer 1"
       },
       {
             "name": "Green iguana",
             "observation": "Named as an invasive species; the Launch Trailer shows a large green iguana crossing a road.",
             "source": "Game Informer cover story, Sept 29, 2026; Trailer 2",
-            "tier": "Rockstar confirmed"
+            "tier": "Rockstar confirmed",
+            "image": "/img/wildlife/iguana-road.jpg",
+            "imageAlt": "A green iguana crossing a road in the GTA VI Launch Trailer"
       },
       {
             "name": "Cane toad, feral cat & rhesus macaque",
@@ -263,7 +270,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "POACH wildlife enforcement",
             "observation": "An agency called POACH appears in Trailer 2: an officer in a liveried SUV pursues apparent poachers hauling alligators, and an officer recovers an alligator from a residential pool. Rockstar has not stated the agency's role or any poaching consequences.",
             "source": "Trailer 2",
-            "tier": "Observed in official media"
+            "tier": "Observed in official media",
+            "image": "/img/wildlife/alligator-pool.jpg",
+            "imageAlt": "A POACH officer recovering an alligator from a backyard pool in GTA VI Trailer 1"
       },
       {
             "name": "Fishing",
@@ -334,13 +343,17 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "American flamingo",
             "observation": "Named by Rockstar and pictured on the official cover art.",
             "source": "Game Informer cover story, Sept 29, 2026",
-            "tier": "Rockstar confirmed"
+            "tier": "Rockstar confirmed",
+            "image": "/img/wildlife/flamingo-wetlands.jpg",
+            "imageAlt": "American flamingos flying and wading in a GTA VI wetland"
       },
       {
             "name": "Brown pelican",
             "observation": "Named by Rockstar; no pelican footage found in a frame-by-frame review of Trailer 2.",
             "source": "Game Informer cover story, Sept 29, 2026; Trailer 2",
-            "tier": "Rockstar confirmed"
+            "tier": "Rockstar confirmed",
+            "image": "/img/wildlife/brown-pelican.webp",
+            "imageAlt": "A brown pelican in close-up among wetland grass in GTA VI"
       },
       {
             "name": "Manatee",
@@ -364,19 +377,25 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "Bottlenose dolphin",
             "observation": "Dolphins swim in Trailer 1 and in an Extended Look water sequence. \u201cBottlenose\u201d is a fan species identification, not Rockstar\u2019s word \u2014 and Trailer 1 ~0:11\u2019s dark shapes are claimed as dolphins by some fan sources and as a tiger shark by others, so that frame is genuinely ambiguous: label it \u201cprobable dolphins\u201d or \u201cmarine life,\u201d never certain.",
             "source": "Trailer 1 + Extended Look",
-            "tier": "Observed in official media"
+            "tier": "Observed in official media",
+            "image": "/img/wildlife/yacht-marine-life.jpg",
+            "imageAlt": "Dark marine shapes, most likely dolphins, near a yacht in GTA VI Trailer 1"
       },
       {
             "name": "Seagulls",
             "observation": "Small distant birds fly over the Keys aerial in Trailer 2 (0:07), verified at full resolution \u2014 too distant to identify as seagulls, let alone herring gulls, and too few to call a flock. Seagull presence in Leonida generally is fan-observed.",
             "source": "Trailer 2 (0:07, full-resolution check)",
-            "tier": "Community identification"
+            "tier": "Community identification",
+            "image": "/img/wildlife/t2-keys-birds-007.jpg",
+            "imageAlt": "Small distant birds over a Keys aerial in GTA VI Trailer 2"
       },
       {
             "name": "Sea turtle",
             "observation": "A sea turtle swims among reef fish in the Keys in official material. The 'loggerhead' species label is fan identification, not Rockstar's.",
             "source": "Official material (fan-spotted)",
-            "tier": "Community identification"
+            "tier": "Community identification",
+            "image": "/img/wildlife/sea-turtle.jpg",
+            "imageAlt": "A sea turtle swimming over a coral reef in GTA VI"
       },
       {
             "name": "Herring gull, roseate spoonbill, mottled duck, wood stork, red-crowned crane",
@@ -388,7 +407,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "Reef fish & eel",
             "observation": "Fish and an eel appear in an official underwater screenshot with divers and a coral reef; a stingray presence in high-bitrate trailer footage is a fan-sighting claim, not verified here.",
             "source": "Official screenshot/footage (fan-spotted)",
-            "tier": "Community identification"
+            "tier": "Community identification",
+            "image": "/img/wildlife/american-eel.webp",
+            "imageAlt": "A long eel swimming underwater in GTA VI"
       }
     ],
     related: [
@@ -415,37 +436,49 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "Vice City",
             "observation": "'The glamour, hustle, and greed of America captured in a single city.' Neon streets, beaches, downtown glass towers, and a port.",
             "source": "rockstargames.com/VI",
-            "tier": "Rockstar confirmed"
+            "tier": "Rockstar confirmed",
+            "image": "/img/hero-vice-skyline-hd.jpg",
+            "imageAlt": "The Vice City skyline at dusk"
       },
       {
             "name": "Leonida Keys",
             "observation": "Tropical archipelago 'right on the doorstep of some of the most beautiful and dangerous waters in all of America.' Jason's post-Army work for local drug runners happens here.",
             "source": "rockstargames.com/VI/only-in-leonida",
-            "tier": "Rockstar confirmed"
+            "tier": "Rockstar confirmed",
+            "image": "/img/regions/leonida-keys-boats.webp",
+            "imageAlt": "Boats on the water in the Leonida Keys"
       },
       {
             "name": "Grassrivers",
             "observation": "Wetlands and mangroves: 'the gators may be famous, but there are far deadlier predators and weirder discoveries among the mangroves.' Airboats appear in official screenshots.",
             "source": "rockstargames.com/VI",
-            "tier": "Rockstar confirmed"
+            "tier": "Rockstar confirmed",
+            "image": "/img/regions/grassrivers-airboat.jpg",
+            "imageAlt": "An airboat in the Grassrivers wetlands"
       },
       {
             "name": "Port Gellhorn",
             "observation": "'Leonida's forgotten coast,' its new economy 'fueled by malt liquor, painkillers, and truck stop energy drinks.' Faded beach resort of cheap motels, closed attractions, and a working port.",
             "source": "rockstargames.com/VI",
-            "tier": "Rockstar confirmed"
+            "tier": "Rockstar confirmed",
+            "image": "/img/regions/port-gellhorn-starlet-motel.webp",
+            "imageAlt": "The Starlet Motel in Port Gellhorn"
       },
       {
             "name": "Ambrosia",
             "observation": "'In the heart of Leonida.' 'The Allied Crystal sugar refinery provides the jobs, while the local biker gang provides almost everything else.' Flat farmland, sugarcane fields, and industrial yards.",
             "source": "rockstargames.com/VI",
-            "tier": "Rockstar confirmed"
+            "tier": "Rockstar confirmed",
+            "image": "/img/regions/ambrosia-refinery.webp",
+            "imageAlt": "The Ambrosia refinery"
       },
       {
             "name": "Mount Kalaga",
             "observation": "On the state's northern border, home to 'hillbilly mystics and paranoid radicals' in the backwoods. Forests, canyons, and rivers; Rockstar's tagline is 'Wild, wild country.' Outlets append 'National Park'; Rockstar's wording is 'Mount Kalaga,' a national landmark.",
             "source": "rockstargames.com/VI",
-            "tier": "Rockstar confirmed"
+            "tier": "Rockstar confirmed",
+            "image": "/img/regions/mount-kalaga-kayak.webp",
+            "imageAlt": "A kayak on the water near Mount Kalaga"
       },
       {
             "name": "Lake Leonida",
@@ -752,7 +785,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "Short-form video feed (name unconfirmed)",
             "observation": "Trailer 1 shows a TikTok/Reels-like vertical feed with usernames, captions, hashtags and a Follow button. Its in-game name is not officially confirmed. Accounts visible include @OfficialPOACH (~0:43, “Protection of Animals and Controlled Hunting”), have.a.vice.day, and HighRollerzMag (~1:08). Real-world accounts reusing these handles are fan-made, not Rockstar’s.",
             "source": "Trailer 1",
-            "tier": "Observed in official media"
+            "tier": "Observed in official media",
+            "image": "/img/world/trailer1-social-feed-108.jpg",
+            "imageAlt": "A social media post frame from GTA VI Trailer 1 showing the @HighRollerzMag account"
       },
       {
             "name": "Fitness app (reported)",
@@ -816,7 +851,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "Weazel News",
             "observation": "TV news network, returning from earlier GTA games. Trailer 1 (1:04) shows the 'WEAZEL NEWS 10:34 ET' bug, headline 'NO (OVER) TURNING ZONE!', and a ticker about a Peewees dine-and-dash arrest.",
             "source": "Trailer 1 (1:04)",
-            "tier": "Observed in official media"
+            "tier": "Observed in official media",
+            "image": "/img/world/trailer1-weazel-news-104.jpg",
+            "imageAlt": "A Weazel News broadcast frame from GTA VI Trailer 1"
       },
       {
             "name": "Mega Noticias",
@@ -905,7 +942,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "Jack of Hearts",
             "observation": "Strip club in Crosstown, Vice City, owned by Boobie Ike; Dre’Quan Priest handles entertainment booking. Interior in Trailer 1, appearances in Trailer 2, official screenshots and artwork, and the Extended Look (“Make It Rain Mondays” poster; Jason throwing money at a dancer).",
             "source": "Trailer 1 + Trailer 2 + official screenshots + Extended Look",
-            "tier": "Observed in official media"
+            "tier": "Observed in official media",
+            "image": "/img/world/nightclubs-jack-of-hearts.jpg",
+            "imageAlt": "The Jack of Hearts neon sign outside the club in GTA VI"
       },
       {
             "name": "Delights / Delights Cabaret",
@@ -988,7 +1027,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "Starlet Motel (Port Gellhorn)",
             "observation": "Roadside motel; Jason and Lucia's motel room in Trailer 1 (~1:12, the 'Trust?' scene), a parking-lot fight in Trailer 2 (~1:54), the room again (~2:25), and again in the Extended Look (~25:58). Bookable lodging, prices, and safehouse function not confirmed by Rockstar.",
             "source": "Trailer 1 + Trailer 2 + Extended Look",
-            "tier": "Observed in official media"
+            "tier": "Observed in official media",
+            "image": "/img/regions/port-gellhorn-starlet-motel.webp",
+            "imageAlt": "The Starlet Motel in Port Gellhorn"
       },
       {
             "name": "Boardwalk Hotel",
@@ -1053,7 +1094,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "Ambrosia biker gang (name disputed)",
             "observation": "Outlaw motorcycle club in Ambrosia. Rockstar's Ambrosia copy confirms a local biker gang's role ('the local biker gang provides almost everything else'). Game Informer reporting names it the First Chapter; 'Final Chapter' patch readings also circulate — Rockstar has not named the gang in its own text. The Thirsty Wolf appears to serve as a hangout (press characterization); a Sergeant-at-Arms rank marker is visible in a screenshot, not a confirmed rank system. No named members, no confirmed missions or business role.",
             "source": "Game Informer via press reports + rockstargames.com/VI",
-            "tier": "Community identification"
+            "tier": "Community identification",
+            "image": "/img/world/gangs-bikers-highway.jpg",
+            "imageAlt": "Ambrosia bikers with Final Chapter patches riding through town in GTA VI"
       },
       {
             "name": "Brian Heder's smuggling operation",
