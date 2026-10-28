@@ -2,9 +2,8 @@
  * GTA VI World hub + category data.
  *
  * Card order, titles and subtitles are exactly the PRD reference copy.
- * Card images are official trailer stills and official Rockstar
- * artwork. Only the entries inside each category page carry
- * evidence labels.
+ * Card images are official trailer stills only. Only the
+ * entries inside each category page carry evidence labels.
  */
 
 export type EvidenceTier =
@@ -46,8 +45,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Birds & Marine Life",
         subtitle: "Birds, sharks, dolphins, fish and more",
         href: "/gta-6-world/birds-marine-life",
-        image: "/img/boat.jpg",
-        imageAlt: "Boat on Leonida waters",
+        image: "/img/trailer-jason-marina.webp",
+        imageAlt: "Trailer still: Jason at a marina dock with boats",
       },
       {
         title: "Nature & Environment",
@@ -60,8 +59,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Weather & Climate",
         subtitle: "Rain, storms, sunshine and day/night",
         href: "/gta-6-world/weather-climate",
-        image: "/img/hero-light.jpg",
-        imageAlt: "Bright daytime Vice City scene",
+        image: "/img/world/weather-daytime-street.jpg",
+        imageAlt: "Trailer still: a sunny daytime street in Vice City",
       },
     ],
   },
@@ -75,15 +74,15 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Radio Stations & Music",
         subtitle: "Radio channels, DJs, playlists and songs",
         href: "/radio",
-        image: "/img/gta6-hero-clean-hd.jpg",
-        imageAlt: "GTA VI key artwork",
+        image: "/img/world/radio-club-stage.jpg",
+        imageAlt: "Trailer still: dancers on a club stage",
       },
       {
         title: "In-Game Brands & Ads",
         subtitle: "Fictional companies, products and ads",
         href: "/gta-6-world/in-game-brands-ads",
-        image: "/img/hero-vice-skyline.jpg",
-        imageAlt: "Vice City skyline with billboards",
+        image: "/img/world/brands-night-signage.jpg",
+        imageAlt: "Trailer still: lit signage on a Leonida street at night",
       },
       {
         title: "Social Media & Apps",
@@ -111,8 +110,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Restaurants & Food",
         subtitle: "Food outlets, chains and restaurants",
         href: "/gta-6-world/restaurants-food",
-        image: "/img/trailer-jason-marina.webp",
-        imageAlt: "Jason in a Leonida marina setting",
+        image: "/img/world/restaurants-night-market.jpg",
+        imageAlt: "Trailer still: a night street scene in Leonida",
       },
       {
         title: "Hotels & Motels",
@@ -125,8 +124,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Properties & Safehouses",
         subtitle: "Houses, apartments and hideouts",
         href: "/properties",
-        image: "/img/garage.jpg",
-        imageAlt: "Garage and property exterior",
+        image: "/img/world/properties-daytime-street.jpg",
+        imageAlt: "Trailer still: a daytime street scene in Leonida",
       },
       {
         title: "Nightclubs & Entertainment",
@@ -154,8 +153,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Clothing & Customization",
         subtitle: "Outfits, tattoos, hairstyles and more",
         href: "/gta-6-world/clothing-customization",
-        image: "/img/char-lucia.jpg",
-        imageAlt: "Lucia in her trailer outfit",
+        image: "/img/world/clothing-street-outfits.jpg",
+        imageAlt: "Trailer still: people in street outfits in Vice City",
       },
       {
         title: "Activities & Minigames",
@@ -168,8 +167,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Easter Eggs & Secrets",
         subtitle: "Hidden details, references and mysteries",
         href: "/easter-eggs",
-        image: "/img/satellite-map-hd.jpg",
-        imageAlt: "Satellite view of Leonida for hidden-detail hunting",
+        image: "/img/world/easter-eggs-car-interior.jpg",
+        imageAlt: "Trailer still: inside a car in Leonida",
       },
     ],
   },
@@ -312,8 +311,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "birds-marine-life",
-    image: "/img/boat.jpg",
-    imageAlt: "Boat on Leonida waters",
+    image: "/img/trailer-jason-marina.webp",
+    imageAlt: "Trailer still: Jason at a marina dock with boats",
     title: "Birds & Marine Life",
     seoTitle: "GTA 6 Birds & Marine Life",
     seoDescription:
@@ -481,8 +480,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "weather-climate",
-    image: "/img/hero-light.jpg",
-    imageAlt: "Bright daytime Vice City scene",
+    image: "/img/world/weather-daytime-street.jpg",
+    imageAlt: "Trailer still: a sunny daytime street in Vice City",
     title: "Weather & Climate",
     seoTitle: "GTA 6 Weather & Day-Night in Leonida",
     seoDescription:
@@ -544,8 +543,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "in-game-brands-ads",
-    image: "/img/hero-vice-skyline.jpg",
-    imageAlt: "Vice City skyline with billboards",
+    image: "/img/world/brands-night-signage.jpg",
+    imageAlt: "Trailer still: lit signage on a Leonida street at night",
     title: "In-Game Brands & Ads",
     seoTitle: "GTA 6 In-Game Brands & Fake Ads",
     seoDescription:
@@ -782,8 +781,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "restaurants-food",
-    image: "/img/trailer-jason-marina.webp",
-    imageAlt: "Jason in a Leonida marina setting",
+    image: "/img/world/restaurants-night-market.jpg",
+    imageAlt: "Trailer still: a night street scene in Leonida",
     title: "Restaurants & Food",
     seoTitle: "GTA 6 Restaurants & Food Outlets",
     seoDescription:
@@ -987,8 +986,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "clothing-customization",
-    image: "/img/char-lucia.jpg",
-    imageAlt: "Lucia in her trailer outfit",
+    image: "/img/world/clothing-street-outfits.jpg",
+    imageAlt: "Trailer still: people in street outfits in Vice City",
     title: "Clothing & Customization",
     seoTitle: "GTA 6 Clothing & Customization",
     seoDescription:
