@@ -45,8 +45,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Birds & Marine Life",
         subtitle: "Birds, sharks, dolphins, fish and more",
         href: "/gta-6-world/birds-marine-life",
-        image: "/img/trailer-jason-marina.webp",
-        imageAlt: "Trailer still: Jason at a marina dock with boats",
+        image: "/img/wildlife/yacht-marine-life.jpg",
+        imageAlt: "Trailer still: marine life near a yacht in Leonida waters",
       },
       {
         title: "Nature & Environment",
@@ -311,8 +311,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "birds-marine-life",
-    image: "/img/trailer-jason-marina.webp",
-    imageAlt: "Trailer still: Jason at a marina dock with boats",
+    image: "/img/wildlife/yacht-marine-life.jpg",
+    imageAlt: "Trailer still: marine life near a yacht in Leonida waters",
     title: "Birds & Marine Life",
     seoTitle: "GTA 6 Birds & Marine Life",
     seoDescription:

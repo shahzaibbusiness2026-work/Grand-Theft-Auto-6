@@ -168,9 +168,9 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     seoDescription:
       "Birds over the marina, distant birds over the wetlands, and marine life near a yacht — trailer frames where the species itself is not identified.",
     tier: "Observed in official media",
-    hero: "/img/wildlife/marina-birds.jpg",
+    hero: "/img/wildlife/yacht-marine-life.jpg",
     heroAlt:
-      "Birds flying over a marina in the GTA VI Launch Trailer, with a man on a dock and a seaplane",
+      "Dark marine shapes in the water near a yacht in GTA VI Trailer 1",
     tagline: "Visible in the trailers, but the species is not identified — so none is named.",
     intro: [
       "Not every animal in a trailer can be named honestly. These three frames show birds and marine life clearly enough to publish, but not clearly enough to pin a species on — so this page describes exactly what is visible and stops there.",
