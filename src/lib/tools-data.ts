@@ -145,7 +145,7 @@ export const ALL_TOOLS: ToolItem[] = [
     status: "simulator",
     name: "Vehicle Database",
     category: "Databases & Compare",
-    desc: "Browse 12 verified rides with acceleration dyno bars, top speed records, horsepower ratings, prices, and garage favorites.",
+    desc: "Browse 12 catalogued rides with acceleration dyno bars, top speed records, horsepower ratings, prices, and garage favorites.",
     href: "/vehicles",
     badge: "Tool 02",
     icon: Car,
