@@ -45,7 +45,7 @@ export const TOOL_STATUS_META: Record<
   { label: string; note: string; badgeClass: string }
 > = {
   verified: {
-    label: "Verified · Safe pre-launch",
+    label: "Ready · Safe pre-launch",
     note: "Works fully with official or trailer-observed information.",
     badgeClass: "border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
   },

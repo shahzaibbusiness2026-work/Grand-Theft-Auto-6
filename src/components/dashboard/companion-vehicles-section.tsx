@@ -24,7 +24,7 @@ export function CompanionVehiclesSection({
           <div>
             <div className="flex items-center gap-2">
               <span className="font-display text-sm font-extrabold uppercase tracking-wider text-white dark:text-white text-slate-900">
-                VERIFIED MOTOR POOL & GARAGE
+                MOTOR POOL & GARAGE
               </span>
               <span className="flex items-center gap-1 rounded-full bg-gold/15 dark:bg-gold/20 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-gold-light border border-gold/30">
                 <Flame className="h-3 w-3 text-gold animate-pulse" />

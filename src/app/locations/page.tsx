@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     openGraph: { url: "/locations" },
   title: "Leonida Locations & Points of Interest",
   description:
-    "Explore every confirmed location, landmark, gun shop, safehouse, and secret outpost across Vice City and the State of Leonida. Verified coordinates and satellite map sync.",
+    "Explore every confirmed location, landmark, gun shop, safehouse, and secret outpost across Vice City and the State of Leonida. Trailer-mapped coordinates and satellite map sync.",
 };
 
 type DbLocation = LocationRecord & {

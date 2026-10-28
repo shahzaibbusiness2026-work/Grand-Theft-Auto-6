@@ -1057,7 +1057,7 @@ export function SatelliteInteractiveMap({
               })}
             </div>
 
-            {/* Evidence filter: only pins with a verified source */}
+            {/* Evidence filter: only pins with a trailer source */}
             <div className="mt-3 pt-3 border-t border-border">
               <div
                 onClick={() => setVerifiedOnly((v) => !v)}
@@ -1065,7 +1065,7 @@ export function SatelliteInteractiveMap({
               >
                 <span className="flex items-center gap-2 truncate">
                   <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                  <span className="truncate">Verified pins only</span>
+                  <span className="truncate">Trailer-spotted pins only</span>
                 </span>
                 <span className="flex items-center gap-2">
                   <span className="text-xs font-mono text-muted-foreground">{allPOIs.filter((p) => p.verified).length}</span>
@@ -1087,7 +1087,7 @@ export function SatelliteInteractiveMap({
             <div className="mt-3 pt-3 border-t border-border">
               <div className="flex items-center justify-between text-xs font-bold text-white">
                 <span className="flex items-center gap-1.5 text-muted-foreground">
-                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Verified Visited
+                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Visited
                 </span>
                 <span className="text-gold-light">
                   {verifiedTotal} / {allPOIs.length}

@@ -308,7 +308,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
     return (
       <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
         <h2 className="text-2xl font-bold">
-          Verified checklist not yet available
+          Checklist not yet available
         </h2>
         <p>
           No completion percentage, mission reward or achievement requirement is

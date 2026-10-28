@@ -100,7 +100,7 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
         <div className="card-carbon p-4 text-center border-border">
           <span className="font-display text-2xl sm:text-3xl font-black text-foreground">{totalCount}</span>
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mt-1">
-            Verified Collectibles
+            Listed Collectibles
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-emerald-500/20 bg-emerald-950/10">

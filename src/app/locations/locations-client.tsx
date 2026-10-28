@@ -109,7 +109,7 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
             {locations.filter((l) => l.verified).length}
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
-            Trailer Verified
+            Spotted in Trailers
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-primary/20 bg-primary/10">

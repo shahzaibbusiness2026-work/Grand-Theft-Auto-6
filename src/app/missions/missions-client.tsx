@@ -166,7 +166,7 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
       <div>
         <div className="flex items-center justify-between mb-4">
           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Showing <span className="text-foreground font-mono">{filteredMissions.length}</span> Verified Missions & Contracts
+            Showing <span className="text-foreground font-mono">{filteredMissions.length}</span> Listed Missions & Contracts
           </p>
         </div>
 
