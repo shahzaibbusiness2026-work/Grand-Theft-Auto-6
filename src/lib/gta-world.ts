@@ -436,8 +436,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "tier": "Rockstar confirmed"
       },
       {
-            "name": "Mount Kalaga National Park",
-            "observation": "On the state's northern border, home to 'hillbilly mystics and paranoid radicals' in the backwoods. Forests, canyons, and rivers; Rockstar's tagline is 'Wild, Wild Country.'",
+            "name": "Mount Kalaga",
+            "observation": "On the state's northern border, home to 'hillbilly mystics and paranoid radicals' in the backwoods. Forests, canyons, and rivers; Rockstar's tagline is 'Wild, wild country.' Outlets append 'National Park'; Rockstar's wording is 'Mount Kalaga,' a national landmark.",
             "source": "rockstargames.com/VI",
             "tier": "Rockstar confirmed"
       },
@@ -487,11 +487,13 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
     seoDescription:
       "Rain, storms, sunsets, and day-night atmosphere visible in official GTA 6 footage, with sources.",
     intro:
-      "The trailers show Leonida in rain, storm light, and blazing sunsets. This page collects the weather and day-night atmosphere actually visible in official footage. No official day-night cycle length or dynamic weather system has been confirmed.",
+      "The trailers show Leonida in rain, storm light, and blazing sunsets. This page collects the weather and day-night atmosphere actually visible in official footage. Rockstar staff describe a localized, persistent weather system to Game Informer; no day-night cycle length has been published.",
     notConfirmed: [
-      "No dynamic weather system or day-night cycle length has been confirmed by Rockstar.",
+      "No day-night cycle length has been published by Rockstar.",
       "The site's day-night converter tool is illustrative, not an official game clock.",
-    ],
+      "Hurricane frequency, mission or story effects, flooding as a mechanic, and terrain or building damage are not confirmed.",
+      "Tornadoes have not been mentioned by Rockstar.",
+      "No seasons are confirmed; an Extended Look “seasonal flooding” reading is a fan inference, not a season system.",],
         entries: [
       {
             "name": "Tropical storms & seasonal hurricanes",
@@ -534,6 +536,24 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "observation": "Trailer comparisons show the shoreline moving against fixed structures and wet sand drying gradually. This is frame analysis, not a Rockstar-stated system.",
             "source": "Trailer analysis (fan)",
             "tier": "Community identification"
+      },
+      {
+            "name": "Localized, persistent weather",
+            "observation": "Conditions can differ across Leonida at the same time: you can stand in a dry, sunny area and spot storms pouring down in the distance.",
+            "source": "Game Informer cover story, Sept 29, 2026",
+            "tier": "Rockstar confirmed"
+      },
+      {
+            "name": "Dynamic clouds & wind system",
+            "observation": "Cloudscapes move across the map, with offshore breezes after sunset, convectional updrafts, and occlusion by buildings. Rockstar designer “Shepherd”: hair and debris swirl on rooftops, gusts ripple water and bend swamp grass.",
+            "source": "Game Informer cover story, Sept 29, 2026",
+            "tier": "Rockstar confirmed"
+      },
+      {
+            "name": "After-rain persistence & rainbows",
+            "observation": "Puddles and wet surfaces remain after rain passes; rainbows can appear after a shower under the right lighting conditions.",
+            "source": "Game Informer cover story, Sept 29, 2026",
+            "tier": "Rockstar confirmed"
       }
     ],
     related: [
@@ -554,7 +574,7 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
     notConfirmed: [
       "No brand list, product catalog, or purchasable product set has been confirmed by Rockstar.",
       "Signage glimpsed but not legible is not listed as a brand name.",
-    ],
+      "Miami marketing brand names (Dix, Juice Loose, Kronos, Vault Nightclub, Y Hotel, Big Chug, Chamber 106.6, Fruit, Coil) prove Rockstar created the names, not that each appears in-game. The Kaseya Center Burger Shot pop-up is real-world marketing, not a confirmed in-game storefront.",],
         entries: [
       {
             "name": "No real-world product placement",
@@ -651,6 +671,12 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "observation": "Spotted in Extended Look brand signage.",
             "source": "Extended Look (fan-spotted)",
             "tier": "Community identification"
+      },
+      {
+            "name": "Trailer fashion labels",
+            "observation": "Labels visible across trailers and marketing boards: Nola, Ferruccio Tucci, This/That, Caliber, Blagueurs, and Eris sportswear (on character clothing in Trailer 2). Fan-wiki compiled from footage; a marketing-board appearance does not prove in-game availability.",
+            "source": "Trailer survey (fan-wiki compiled)",
+            "tier": "Community identification"
       }
     ],
     related: [
@@ -671,14 +697,14 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
     notConfirmed: [
       "Posting your own photos is explicitly not possible — Jason and Lucia can only browse and follow (Nelson via IGN).",
       "No follower system, influencer career, or monetization has been confirmed.",
-      "Whether livestreamers can give the player away to police is not stated."
-    ],
+      "Whether livestreamers can give the player away to police is not stated.",
+      "WhatUp, Peekhole (as an app), BuckMe, LifeInvader, Bleeter, Fruit Pay and LeonidaGov are app names from disputed or leak-domain sources, not published as features. Peekhole appears only as poster text (see Brands).",],
         entries: [
       {
             "name": "Snapmatic returns",
-            "observation": "The photo/social app from GTA V is back: Lucia mentions it in the Extended Look, and IGN confirms it is on the phone. Players can browse feeds and follow accounts, but Jason and Lucia cannot post their own photos — Rockstar's Rob Nelson told IGN they are a couple on the run and don't want a digital trail.",
-            "source": "Extended Look + IGN interview",
-            "tier": "Rockstar confirmed"
+            "observation": "GTA V's photo/social app is reported back on the phone: players can scroll feeds and follow accounts, but Jason and Lucia cannot post their own photos — Rockstar's Rob Nelson told IGN they are a couple on the run and don't want a digital trail. Reported from IGN's hands-on demo, not a Rockstar-published app list.",
+            "source": "IGN hands-on demo + Extended Look (press reporting)",
+            "tier": "Community identification"
       },
       {
             "name": "Web browsing exists",
@@ -699,12 +725,6 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "tier": "Observed in official media"
       },
       {
-            "name": "WhatUp! messaging",
-            "observation": "Messaging app with group chats; text conversations run through it in the Extended Look.",
-            "source": "Extended Look",
-            "tier": "Observed in official media"
-      },
-      {
             "name": "NPC phone culture",
             "observation": "NPCs take selfies at the beach, record videos of events, and argue while scrolling, in both trailers; Trailer 1 opens on viral clips and phone footage.",
             "source": "Trailer 1 + Trailer 2",
@@ -720,6 +740,30 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "name": "Ryde Me rideshare",
             "observation": "Ride-hailing app for travel across the map, also described as fast travel, from IGN's hands-on demo. Spelling is not settled (IGN: 'Ryde Me'; others: 'RideMe').",
             "source": "IGN hands-on demo (press preview)",
+            "tier": "Community identification"
+      },
+      {
+            "name": "Short-form video feed (name unconfirmed)",
+            "observation": "Trailer 1 shows a TikTok/Reels-like vertical feed with usernames, captions, hashtags and a Follow button. Its in-game name is not officially confirmed. Accounts visible include @OfficialPOACH (~0:43, “Protection of Animals and Controlled Hunting”), have.a.vice.day, and HighRollerzMag (~1:08). Real-world accounts reusing these handles are fan-made, not Rockstar’s.",
+            "source": "Trailer 1",
+            "tier": "Observed in official media"
+      },
+      {
+            "name": "Fitness app (reported)",
+            "observation": "Tracks sleep and workouts; tiredness feeds attribute regeneration. Single-creator hands-on source with press pickup — a credible report, not a Rockstar statement.",
+            "source": "TGG hands-on, Sept 3, 2026 (press)",
+            "tier": "Community identification"
+      },
+      {
+            "name": "Scooter Bros vehicle retrieval (reported)",
+            "observation": "Retrieves your personal vehicle. Single-source report only — a credible report, not a Rockstar statement.",
+            "source": "TGG via GTA BOOM (press)",
+            "tier": "Community identification"
+      },
+      {
+            "name": "Floating text messages (reported)",
+            "observation": "Text messages between Jason and Lucia float over the screen during cutscenes, per press reporting.",
+            "source": "KeenGamer (press)",
             "tier": "Community identification"
       }
     ],
@@ -740,8 +784,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       "From in-game commercials to TV news shots, Leonida has its own media. This page lists only shows and broadcasts named or clearly shown in official material, and keeps fictional broadcast content separate from fan speculation.",
     notConfirmed: [
       "No in-game TV show has been officially named; the animated series is unnamed.",
-      "No watchable TV schedule or broadcast mechanic has been confirmed by Rockstar."
-    ],
+      "No watchable TV schedule or broadcast mechanic has been confirmed by Rockstar.",
+      "The GTA Wiki in-game TV channel list (Weazel 107, CCC 108, CNT 109, MeTV 110) is leak-sourced and excluded.",
+      "Macca & Friends “Coming November 19 on Weazel” is a real-world Miami billboard, not a confirmed in-game show.",],
         entries: [
       {
             "name": "Phil's Ammu-Nation commercial",
@@ -763,9 +808,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       },
       {
             "name": "Weazel News",
-            "observation": "TV news network; graphics visible in Trailer 1 news broadcasts.",
-            "source": "Trailer 1 (fan-spotted)",
-            "tier": "Community identification"
+            "observation": "TV news network, returning from earlier GTA games. Trailer 1 (1:04) shows the 'WEAZEL NEWS 10:34 ET' bug, headline 'NO (OVER) TURNING ZONE!', and a ticker about a Peewees dine-and-dash arrest.",
+            "source": "Trailer 1 (1:04)",
+            "tier": "Observed in official media"
       },
       {
             "name": "Mega Noticias",
@@ -792,7 +837,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
     notConfirmed: [
       "No menus, prices, or eat-to-restore mechanics have been confirmed by Rockstar.",
       "A visible restaurant is not proof it can be entered.",
-    ],
+      "Burger Shot and Cluckin’ Bell are NOT in-game: their Kaseya Center presence is a real-world Miami Heat promotion (Nov 18, 2026).",
+      "Lou’s café is leak-only and excluded; Malibu Club is explicitly not confirmed.",
+      "No opening hours or venue functions confirmed for any eatery listed here.",],
         entries: [
       {
             "name": "Prairie",
@@ -802,8 +849,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       },
       {
             "name": "Hank's Waffles",
-            "observation": "Signage spotted in Extended Look footage. No menu, price, or in-game function confirmed.",
-            "source": "Extended Look (fan-spotted)",
+            "observation": "Port Gellhorn waffle restaurant; signage in trailer material. No menu, price, or in-game function confirmed.",
+            "source": "Trailer material (fan-spotted)",
             "tier": "Community identification"
       },
       {
@@ -847,6 +894,54 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "observation": "Signage spotted in Extended Look footage. No further details confirmed.",
             "source": "Extended Look (fan-spotted)",
             "tier": "Community identification"
+      },
+      {
+            "name": "Jack of Hearts",
+            "observation": "Strip club in Crosstown, Vice City, owned by Boobie Ike; Dre’Quan Priest handles entertainment booking. Interior in Trailer 1, appearances in Trailer 2, official screenshots and artwork, and the Extended Look (“Make It Rain Mondays” poster; Jason throwing money at a dancer).",
+            "source": "Trailer 1 + Trailer 2 + official screenshots + Extended Look",
+            "tier": "Observed in official media"
+      },
+      {
+            "name": "Delights / Delights Cabaret",
+            "observation": "Second strip club, in Port Gellhorn; less premium presentation than Jack of Hearts (press characterization). Shown in official screenshots and trailers.",
+            "source": "Official screenshots + trailers",
+            "tier": "Observed in official media"
+      },
+      {
+            "name": "NINE1NINE",
+            "observation": "Nightclub in Vice City; seen in Trailer 1 signage and visited in Trailer 2.",
+            "source": "Trailer 1 + Trailer 2",
+            "tier": "Observed in official media"
+      },
+      {
+            "name": "Effluvia",
+            "observation": "Rooftop bar in Downtown Vice City; scene of the Extended Look meeting with Brian and Lori Heder.",
+            "source": "Extended Look",
+            "tier": "Observed in official media"
+      },
+      {
+            "name": "The Thirsty Wolf",
+            "observation": "Biker bar in Ambrosia; interior shown in Game Informer’s exclusive screenshots. “Gang hangout” is press characterization, not a Rockstar statement. No menu, prices, or services confirmed.",
+            "source": "Game Informer exclusive screenshots (press)",
+            "tier": "Community identification"
+      },
+      {
+            "name": "Uncle Jack’s Liquor",
+            "observation": "Port Gellhorn liquor store; trailers show a robbery here in Trailer 1’s closing scene (Jason + Lucia). An observed trailer action, not a confirmed gameplay system.",
+            "source": "Trailer 1",
+            "tier": "Observed in official media"
+      },
+      {
+            "name": "Gellhorn Roadhouse",
+            "observation": "Port Gellhorn bar; storefront signage in trailer material. No function confirmed.",
+            "source": "Trailer material (fan-spotted)",
+            "tier": "Community identification"
+      },
+      {
+            "name": "Keys bars (generic)",
+            "observation": "Rockstar’s Keys description says “the bars are loaded.” No individual Keys bar is named by Rockstar.",
+            "source": "rockstargames.com/VI",
+            "tier": "Rockstar confirmed"
       }
     ],
     related: [
@@ -866,7 +961,10 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       "This page lists accommodations visible by name or unmistakable signage in official material, with district context where footage supports it. A visible hotel is not evidence of bookable rooms, prices, or safehouse access.",
     notConfirmed: [
       "No bookable lodging, room prices, or hotel safehouse access has been confirmed by Rockstar.",
-    ],
+      "Easy Inn (Port Gellhorn) comes from community sources only and is unconfirmed.",
+      "Paradise Garage / Shore Court Garage are edition bonuses, not evidence of a property-purchase system.",
+      "No property-buying, hotel-stay, or room-rental system has been confirmed by Rockstar.",
+      "Grassrivers Hideout is speculation and excluded.",],
         entries: [
       {
             "name": "Port Gellhorn cheap motels",
@@ -876,9 +974,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       },
       {
             "name": "Ocean View Hotel",
-            "observation": "Art-deco hotel on the Ocean Beach strip, large pink neon sign, ground-floor outdoor bar and pool area. Seen in Trailer 1 (~0:33), closer in Trailer 2, and in official Vice City screenshots. HD-universe new building (same name as the 2002 safehouse, not the same building). Safehouse function not stated by Rockstar.",
-            "source": "Trailer 1 + Trailer 2 + official screenshots",
-            "tier": "Observed in official media"
+            "observation": "Name rumored from fan sources (Film Daily, Driffle); an art-deco hotel with a large pink neon sign, ground-floor outdoor bar and pool area appears on the Ocean Beach strip in trailers and official screenshots, but Rockstar has not confirmed this hotel’s name. Safehouse function not stated by Rockstar.",
+            "source": "Trailers + official screenshots (name fan-rumored)",
+            "tier": "Community identification"
       },
       {
             "name": "Starlet Motel (Port Gellhorn)",
@@ -909,6 +1007,12 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "observation": "Signage spotted in Extended Look footage.",
             "source": "Extended Look (fan-spotted)",
             "tier": "Community identification"
+      },
+      {
+            "name": "Unnamed abandoned motel (Port Gellhorn)",
+            "observation": "Appears in a Rockstar promotional postcard video. No name confirmed.",
+            "source": "Rockstar promotional postcard video",
+            "tier": "Observed in official media"
       }
     ],
     related: [
@@ -925,10 +1029,13 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
     seoDescription:
       "The groups and crews named in official GTA 6 material, with character relationships and sources.",
     intro:
-      "This page covers only groups and crews Rockstar has named in official material or character bios. Rivalries, territories, and ranks are not invented — where the official record is silent, this page says so.",
+      "This page covers groups and crews named in official material or character bios, plus the Ambrosia biker gang whose name is disputed. Rivalries, territories, and ranks are not invented — where the official record is silent, this page says so.",
     notConfirmed: [
       "No gang territories, rivalry map, or rank structure has been confirmed by Rockstar.",
-    ],
+      "The Ambrosia biker gang’s name (First Chapter vs Final Chapter) — Rockstar has not named it.",
+      "Lost MC presence in GTA VI is not confirmed.",
+      "San4San = Zoe Pound, Boobie Ike = a real person, and Kodak Black as a character are fan inferences, excluded.",
+      "No other Rockstar-named gang has been found in authentic sources.",],
         entries: [
       {
             "name": "PTT Youngin$",
@@ -937,10 +1044,10 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "tier": "Rockstar confirmed"
       },
       {
-            "name": "Final Chapter MC",
-            "observation": "Outlaw motorcycle club in Ambrosia. Rockstar's Ambrosia copy confirms a local biker gang's role ('the local biker gang provides almost everything else'); the club's name and 'est. 1982' are read from member patches in official screenshots and footage. No named members, no confirmed missions or business role.",
-            "source": "Official screenshots + rockstargames.com/VI",
-            "tier": "Observed in official media"
+            "name": "Ambrosia biker gang (name disputed)",
+            "observation": "Outlaw motorcycle club in Ambrosia. Rockstar's Ambrosia copy confirms a local biker gang's role ('the local biker gang provides almost everything else'). Game Informer reporting names it the First Chapter; 'Final Chapter' patch readings also circulate — Rockstar has not named the gang in its own text. The Thirsty Wolf appears to serve as a hangout (press characterization); a Sergeant-at-Arms rank marker is visible in a screenshot, not a confirmed rank system. No named members, no confirmed missions or business role.",
+            "source": "Game Informer via press reports + rockstargames.com/VI",
+            "tier": "Community identification"
       },
       {
             "name": "Brian Heder's smuggling operation",
@@ -997,8 +1104,9 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
     notConfirmed: [
       "Trailer outfits alone are not proof an item is player-selectable.",
       "Hair growth over time and body/physique systems are not in any Rockstar-published feature list.",
-      "The in-field clothing wheel's exact function has not been detailed by Rockstar."
-    ],
+      "The in-field clothing wheel's exact function has not been detailed by Rockstar.",
+      "An unsourced store list naming Fashion Fwd, Urban Outfitters and others is rejected (it includes a real-world brand).",
+      "Specific store locations beyond Stock 305’s Stockyard district, store inventories, and prices are not confirmed.",],
         entries: [
       {
             "name": "Thousands of outfits",
@@ -1059,6 +1167,24 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "observation": "Jason: tank tops, workwear, backward caps. Lucia: gold hoop earrings, boxing-glove pendant necklace, dark red paisley bandana (also used as a robbery mask), sunglasses, hats. Trailer outfits alone are not proof these items are player-selectable.",
             "source": "Trailers",
             "tier": "Observed in official media"
+      },
+      {
+            "name": "Rideout Customs",
+            "observation": "Vehicle mod shop (interiors, rims, donk-style upgrades) in the Ultimate Edition store set.",
+            "source": "Official edition copy",
+            "tier": "Rockstar confirmed"
+      },
+      {
+            "name": "One-Eyed Willie’s",
+            "observation": "Off-road mod shop with hand-painted vehicle art, at Lake Leonida, in the Ultimate Edition store set.",
+            "source": "Official edition copy",
+            "tier": "Rockstar confirmed"
+      },
+      {
+            "name": "Vanity & trend cycles (DAZED)",
+            "observation": "Rockstar hired Miami stylist Jillian Carr full-time in 2023 to architect Vice City’s fashion ecosystem; DAZED reports appearances carry significant weight and trend cycles turn over quickly, with NPC dress tailored to micro-environments (Little Cuba vs Mount Kalaga).",
+            "source": "DAZED cover story (press)",
+            "tier": "Community identification"
       }
     ],
     related: [
