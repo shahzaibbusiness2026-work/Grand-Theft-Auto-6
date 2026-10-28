@@ -168,10 +168,10 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     seoDescription:
       "Birds over the marina, distant birds over the wetlands, and marine life near a yacht — trailer frames where the species itself is not identified.",
     tier: "Observed in official media",
-    hero: "/img/wildlife/yacht-marine-life.jpg",
+    hero: "/img/wildlife/brown-pelican.webp",
     heroAlt:
-      "Dark marine shapes in the water near a yacht in GTA VI Trailer 1",
-    tagline: "Visible in the trailers, but the species is not identified — so none is named.",
+      "A brown pelican in close-up among wetland grass in GTA VI",
+    tagline: "Brown pelican hero image; the trailer frames below show birds and marine life without an identified species.",
     intro: [
       "Not every animal in a trailer can be named honestly. These three frames show birds and marine life clearly enough to publish, but not clearly enough to pin a species on — so this page describes exactly what is visible and stops there.",
       "That restraint is deliberate. A page that guessed species from distant shapes would break the same confirmed-only rule the rest of this site follows.",
@@ -200,6 +200,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
       "Birds are visible in flight in the Launch Trailer at 0:14 and 0:28.",
       "Marine life is visible near the surface in Trailer 1 at 0:11.",
       "Rockstar confirms more than 60 bird species in total; that total does not identify these frames.",
+      "Brown pelican: named by Rockstar; the hero image shows one in wetland grass.",
       "Bottlenose dolphins are separately observed in official media, but these specific frames are not confirmed as dolphins.",
     ],
     notConfirmed: [
