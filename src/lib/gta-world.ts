@@ -2,8 +2,9 @@
  * GTA VI World hub + category data.
  *
  * Card order, titles and subtitles are exactly the PRD reference copy.
- * Card artwork is editorial topic illustration, NOT evidence: only the
- * entries inside each category page carry evidence labels.
+ * Card images are official trailer stills and official Rockstar
+ * screenshots (wildlife images via Game Informer). Only the entries
+ * inside each category page carry evidence labels.
  */
 
 export type EvidenceTier =
@@ -38,29 +39,29 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Animals & Wildlife",
         subtitle: "Alligators, dogs, wild animals and more",
         href: "/gta-6-world/animals-wildlife",
-        image: "/img/trailer-keys-marina.webp",
-        imageAlt: "Leonida coastal wetlands, the habitat of the state's wildlife",
+        image: "/img/world/animals-swamp-dock-alligators.jpg",
+        imageAlt: "Official Rockstar screenshot via Game Informer: alligators in the water beneath a swamp dock at night",
       },
       {
         title: "Birds & Marine Life",
         subtitle: "Birds, sharks, dolphins, fish and more",
         href: "/gta-6-world/birds-marine-life",
-        image: "/img/flamingo.svg",
-        imageAlt: "Flamingo illustration",
+        image: "/img/world/birds-grassrivers-sunrise.jpg",
+        imageAlt: "Official Rockstar screenshot via Game Informer: Grassrivers wetland at sunrise with a spoonbill, crane, storks and flocks of birds",
       },
       {
         title: "Nature & Environment",
         subtitle: "Beaches, swamps, forests and islands",
         href: "/gta-6-world/nature-environment",
-        image: "/img/leonida-map-v2.jpg",
-        imageAlt: "Map of Leonida showing its regions and coastline",
+        image: "/img/world/nature-grassrivers-sunset.jpg",
+        imageAlt: "Trailer still: sunset over the Grassrivers wetlands",
       },
       {
         title: "Weather & Climate",
         subtitle: "Rain, storms, sunshine and day/night",
         href: "/gta-6-world/weather-climate",
-        image: "/img/vice-sunset.svg",
-        imageAlt: "Sunset over Leonida illustration",
+        image: "/img/world/weather-storm-keys.jpg",
+        imageAlt: "Official Rockstar screenshot via Game Informer: a storm front with lightning over the Leonida Keys",
       },
     ],
   },
@@ -95,8 +96,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "TV Shows & Media",
         subtitle: "Television, broadcasts and fictional media",
         href: "/gta-6-world/tv-shows-media",
-        image: "/img/hero-light.jpg",
-        imageAlt: "Bright daytime Vice City scene",
+        image: "/img/world/tv-halloween-horrors-poster.jpg",
+        imageAlt: "Trailer still: in-game Halloween Horrors poster art",
       },
     ],
   },
@@ -117,8 +118,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Hotels & Motels",
         subtitle: "Hotels, resorts, motels and stays",
         href: "/gta-6-world/hotels-motels",
-        image: "/img/heli.jpg",
-        imageAlt: "Aerial view over Leonida",
+        image: "/img/world/hotels-vice-city-night.jpg",
+        imageAlt: "Trailer still: Vice City skyline at night over the water",
       },
       {
         title: "Properties & Safehouses",
@@ -131,8 +132,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Nightclubs & Entertainment",
         subtitle: "Clubs, bars, concerts and nightlife",
         href: "/locations",
-        image: "/img/hero-dark.jpg",
-        imageAlt: "Vice City at night",
+        image: "/img/world/nightclubs-jack-of-hearts.jpg",
+        imageAlt: "Trailer still: outside the Jack of Hearts club in Vice City",
       },
     ],
   },
@@ -146,8 +147,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Gangs & Factions",
         subtitle: "Criminal groups and rival organizations",
         href: "/gta-6-world/gangs-factions",
-        image: "/img/trailer-vault-heli.webp",
-        imageAlt: "Helicopter lifting a vault during a heist",
+        image: "/img/world/gangs-bikers-highway.jpg",
+        imageAlt: "Trailer still: bikers riding on a Leonida highway",
       },
       {
         title: "Clothing & Customization",
@@ -160,8 +161,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Activities & Minigames",
         subtitle: "Fishing, diving, sports and activities",
         href: "/activities",
-        image: "/img/boat.jpg",
-        imageAlt: "Boat on Leonida waters",
+        image: "/img/world/activities-mini-golf.jpg",
+        imageAlt: "Trailer still: mini-golf in Leonida",
       },
       {
         title: "Easter Eggs & Secrets",
@@ -187,6 +188,8 @@ export type WorldCategory = {
   seoTitle: string;
   seoDescription: string;
   intro: string;
+  image: string;
+  imageAlt: string;
   /** Honest boundaries: what is NOT confirmed for this category. */
   notConfirmed: string[];
   entries: WorldEntry[];
@@ -201,6 +204,8 @@ export type WorldCategory = {
 export const WORLD_CATEGORIES: WorldCategory[] = [
   {
     slug: "animals-wildlife",
+    image: "/img/world/animals-swamp-dock-alligators.jpg",
+    imageAlt: "Official Rockstar screenshot via Game Informer: alligators in the water beneath a swamp dock at night",
     title: "Animals & Wildlife",
     seoTitle: "GTA 6 Animals & Wildlife in Leonida",
     seoDescription:
@@ -307,6 +312,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "birds-marine-life",
+    image: "/img/world/birds-grassrivers-sunrise.jpg",
+    imageAlt: "Official Rockstar screenshot via Game Informer: Grassrivers wetland at sunrise with a spoonbill, crane, storks and flocks of birds",
     title: "Birds & Marine Life",
     seoTitle: "GTA 6 Birds & Marine Life",
     seoDescription:
@@ -386,6 +393,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "nature-environment",
+    image: "/img/world/nature-grassrivers-sunset.jpg",
+    imageAlt: "Trailer still: sunset over the Grassrivers wetlands",
     title: "Nature & Environment",
     seoTitle: "GTA 6 Leonida Regions, Beaches & Swamps",
     seoDescription:
@@ -472,6 +481,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "weather-climate",
+    image: "/img/world/weather-storm-keys.jpg",
+    imageAlt: "Official Rockstar screenshot via Game Informer: a storm front with lightning over the Leonida Keys",
     title: "Weather & Climate",
     seoTitle: "GTA 6 Weather & Day-Night in Leonida",
     seoDescription:
@@ -533,6 +544,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "in-game-brands-ads",
+    image: "/img/hero-vice-skyline.jpg",
+    imageAlt: "Vice City skyline with billboards",
     title: "In-Game Brands & Ads",
     seoTitle: "GTA 6 In-Game Brands & Fake Ads",
     seoDescription:
@@ -648,6 +661,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "social-media-apps",
+    image: "/img/trailer-lucia-call.webp",
+    imageAlt: "Lucia on a phone call",
     title: "Social Media & Apps",
     seoTitle: "GTA 6 In-Game Social Media & Phone Apps",
     seoDescription:
@@ -716,6 +731,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "tv-shows-media",
+    image: "/img/world/tv-halloween-horrors-poster.jpg",
+    imageAlt: "Trailer still: in-game Halloween Horrors poster art",
     title: "TV Shows & Media",
     seoTitle: "GTA 6 TV Shows & Fictional Media",
     seoDescription:
@@ -765,6 +782,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "restaurants-food",
+    image: "/img/trailer-jason-marina.webp",
+    imageAlt: "Jason in a Leonida marina setting",
     title: "Restaurants & Food",
     seoTitle: "GTA 6 Restaurants & Food Outlets",
     seoDescription:
@@ -838,6 +857,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "hotels-motels",
+    image: "/img/world/hotels-vice-city-night.jpg",
+    imageAlt: "Trailer still: Vice City skyline at night over the water",
     title: "Hotels & Motels",
     seoTitle: "GTA 6 Hotels & Motels in Leonida",
     seoDescription:
@@ -898,6 +919,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "gangs-factions",
+    image: "/img/world/gangs-bikers-highway.jpg",
+    imageAlt: "Trailer still: bikers riding on a Leonida highway",
     title: "Gangs & Factions",
     seoTitle: "GTA 6 Gangs & Factions",
     seoDescription:
@@ -964,6 +987,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "clothing-customization",
+    image: "/img/char-lucia.jpg",
+    imageAlt: "Lucia in her trailer outfit",
     title: "Clothing & Customization",
     seoTitle: "GTA 6 Clothing & Customization",
     seoDescription:

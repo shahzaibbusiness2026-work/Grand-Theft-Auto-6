@@ -10,6 +10,7 @@ import {
   type EvidenceTier,
 } from "@/lib/gta-world";
 import { serializeJsonLd } from "@/lib/utils";
+import { SafeImage } from "@/components/safe-image";
 
 export function generateStaticParams() {
   return WORLD_CATEGORIES.map((c) => ({ slug: c.slug }));
@@ -107,6 +108,16 @@ export default async function GTAWorldCategoryPage({ params }: Props) {
               {category.intro}
             </p>
           </header>
+
+          <figure className="mt-6 overflow-hidden rounded-2xl border border-white/10">
+            <SafeImage
+              src={category.image}
+              alt={category.imageAlt}
+              width={1200}
+              height={675}
+              className="h-auto w-full object-cover"
+            />
+          </figure>
 
           <div className="mt-6 flex flex-wrap gap-2" aria-label="Evidence key">
             {(Object.keys(TIER_STYLES) as EvidenceTier[]).map((tier) => (
