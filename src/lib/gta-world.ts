@@ -3,8 +3,8 @@
  *
  * Card order, titles and subtitles are exactly the PRD reference copy.
  * Card images are official trailer stills and official Rockstar
- * screenshots (wildlife images via Game Informer). Only the entries
- * inside each category page carry evidence labels.
+ * artwork. Only the entries inside each category page carry
+ * evidence labels.
  */
 
 export type EvidenceTier =
@@ -39,15 +39,15 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Animals & Wildlife",
         subtitle: "Alligators, dogs, wild animals and more",
         href: "/gta-6-world/animals-wildlife",
-        image: "/img/world/animals-swamp-dock-alligators.jpg",
-        imageAlt: "Official Rockstar screenshot via Game Informer: alligators in the water beneath a swamp dock at night",
+        image: "/img/trailer-keys-marina.webp",
+        imageAlt: "Trailer still: a marina on the Leonida Keys",
       },
       {
         title: "Birds & Marine Life",
         subtitle: "Birds, sharks, dolphins, fish and more",
         href: "/gta-6-world/birds-marine-life",
-        image: "/img/world/birds-grassrivers-sunrise.jpg",
-        imageAlt: "Official Rockstar screenshot via Game Informer: Grassrivers wetland at sunrise with a spoonbill, crane, storks and flocks of birds",
+        image: "/img/boat.jpg",
+        imageAlt: "Boat on Leonida waters",
       },
       {
         title: "Nature & Environment",
@@ -60,8 +60,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Weather & Climate",
         subtitle: "Rain, storms, sunshine and day/night",
         href: "/gta-6-world/weather-climate",
-        image: "/img/world/weather-storm-keys.jpg",
-        imageAlt: "Official Rockstar screenshot via Game Informer: a storm front with lightning over the Leonida Keys",
+        image: "/img/hero-light.jpg",
+        imageAlt: "Bright daytime Vice City scene",
       },
     ],
   },
@@ -204,8 +204,8 @@ export type WorldCategory = {
 export const WORLD_CATEGORIES: WorldCategory[] = [
   {
     slug: "animals-wildlife",
-    image: "/img/world/animals-swamp-dock-alligators.jpg",
-    imageAlt: "Official Rockstar screenshot via Game Informer: alligators in the water beneath a swamp dock at night",
+    image: "/img/trailer-keys-marina.webp",
+    imageAlt: "Trailer still: a marina on the Leonida Keys",
     title: "Animals & Wildlife",
     seoTitle: "GTA 6 Animals & Wildlife in Leonida",
     seoDescription:
@@ -312,8 +312,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "birds-marine-life",
-    image: "/img/world/birds-grassrivers-sunrise.jpg",
-    imageAlt: "Official Rockstar screenshot via Game Informer: Grassrivers wetland at sunrise with a spoonbill, crane, storks and flocks of birds",
+    image: "/img/boat.jpg",
+    imageAlt: "Boat on Leonida waters",
     title: "Birds & Marine Life",
     seoTitle: "GTA 6 Birds & Marine Life",
     seoDescription:
@@ -481,8 +481,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   },
   {
     slug: "weather-climate",
-    image: "/img/world/weather-storm-keys.jpg",
-    imageAlt: "Official Rockstar screenshot via Game Informer: a storm front with lightning over the Leonida Keys",
+    image: "/img/hero-light.jpg",
+    imageAlt: "Bright daytime Vice City scene",
     title: "Weather & Climate",
     seoTitle: "GTA 6 Weather & Day-Night in Leonida",
     seoDescription:
