@@ -111,6 +111,11 @@ export default async function WildlifePage({ params }: Props) {
               className="h-auto w-full object-cover"
             />
           </figure>
+          {page.heroSource && (
+            <p className="mt-2 text-xs text-white/50">
+              Image: {page.heroSource}
+            </p>
+          )}
 
           <section className="mt-10 max-w-3xl">
             <h2 className="text-xl font-black leading-tight">What the footage shows</h2>

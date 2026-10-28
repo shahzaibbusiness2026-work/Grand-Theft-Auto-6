@@ -15,6 +15,7 @@ export type WildlifePage = {
   tier: EvidenceTier;
   hero: string;
   heroAlt: string;
+  heroSource: string;
   tagline: string;
   intro: string[];
   footage: WildlifeFrame[];
@@ -36,6 +37,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     hero: "/img/wildlife/flamingo-wetlands.jpg",
     heroAlt:
       "A flock of pink flamingos flying and wading in a GTA VI wetland at daytime",
+    heroSource: "Trailer 1, 0:21 — official Rockstar trailer frame",
     tagline: "A full flock in the wetlands, flying and wading in Trailer 1.",
     intro: [
       "The American flamingo is one of the bird species Rockstar has named for GTA VI, and Trailer 1 shows it in numbers: a whole flock moving through a wetland, some on the wing and some wading in the shallows.",
@@ -77,6 +79,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     hero: "/img/wildlife/alligator-store.jpg",
     heroAlt:
       "An alligator walking through the front door of a convenience store in GTA VI Trailer 1",
+    heroSource: "Trailer 1, 0:48 — official Rockstar trailer frame",
     tagline: "Three separate Trailer 1 appearances: a store, a pool, and the wetlands.",
     intro: [
       "No animal turns up in Trailer 1 more memorably than the American alligator. It walks into a convenience store on a security camera, it crashes a backyard pool under a wildlife officer's pole, and it sits in the wetlands among the flamingos.",
@@ -131,6 +134,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     hero: "/img/wildlife/iguana-road.jpg",
     heroAlt:
       "A large green iguana in close-up crossing a road in the GTA VI Launch Trailer",
+    heroSource: "Launch Trailer, 0:21 — official Rockstar trailer frame",
     tagline: "A close-up crossing in the Launch Trailer, not Trailer 2 as previously listed.",
     intro: [
       "The green iguana is named by Rockstar as an invasive species in Leonida, and the Launch Trailer gives it a full close-up: crest, dewlap, and scales in detail, crossing a road with traffic behind it.",
@@ -171,6 +175,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     hero: "/img/wildlife/brown-pelican.webp",
     heroAlt:
       "A brown pelican in close-up among wetland grass in GTA VI",
+    heroSource: "GTA Tracker animal catalog — official GTA VI game screenshot",
     tagline: "Brown pelican hero image; the trailer frames below show birds and marine life without an identified species.",
     intro: [
       "Not every animal in a trailer can be named honestly. These three frames show birds and marine life clearly enough to publish, but not clearly enough to pin a species on — so this page describes exactly what is visible and stops there.",
