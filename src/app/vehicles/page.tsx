@@ -33,7 +33,7 @@ export default async function VehiclesPage() {
               <Sparkles className="h-3 w-3" /> Editorial Catalog
             </div>
             <h1 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-white">
-              Vehicle Showcase
+              GTA 6 Vehicle Catalog
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-white/80">
               Browse editorial vehicle identifications. Filter the catalog,
