@@ -1,126 +1,32 @@
 export { metadata } from "./metadata";
-
-// Cache the rendered catalog for 1 hour (see weapons/page.tsx).
 export const revalidate = 3600;
-
-import { ArrowRight, Sparkles } from "lucide-react";
 import { SiteShell } from "@/components/shells";
-import { Button } from "@/components/ui/button";
-import { ThemeImage } from "@/components/theme-image";
+import {
+  CatalogPageHeader,
+  CatalogSwitcher,
+} from "@/components/catalog-page-header";
 import { EvidenceCatalog } from "@/components/evidence-catalog";
 import { SectionErrorBoundary } from "@/components/section-error-boundary";
 import { RelatedArticles } from "@/components/related-articles";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
+import styles from "@/components/catalog-ui.module.css";
 
-export default async function VehiclesPage() {
-  // Live Supabase data first (admin edits win); canonical static entries fill the rest.
-  const vehicles = await getEvidenceCatalog("vehicles");
-
+export default async function CatalogPage() {
+  const entries = await getEvidenceCatalog("vehicles");
   return (
     <SiteShell>
-      {/* HERO */}
-      <section className="container-site pt-8 sm:pt-10">
-        <div className="card-surface relative overflow-hidden rounded-3xl border border-border/80 shadow-sm">
-          <ThemeImage
-            dark="/img/car-purple.jpg"
-            light="/img/car-pink.jpg"
-            alt="Super car"
-            className="absolute right-0 top-0 h-full w-full object-cover object-[70%_60%] lg:w-2/3 opacity-80"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-          <div className="relative px-6 py-8 sm:py-12 sm:px-10 max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent">
-              <Sparkles className="h-3 w-3" /> Editorial Catalog
-            </div>
-            <h1 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-white">
-              Vehicle Showcase
-            </h1>
-            <p className="mt-4 text-sm leading-relaxed text-white/80">
-              Browse editorial vehicle identifications. Filter the catalog,
-              inspect reviewed evidence and save favorites to your garage.
-            </p>
-          </div>
-        </div>
-
-        {/* Global Live Stats Counter */}
-        <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-1 divide-border/80 sm:grid-cols-4 sm:divide-x rounded-2xl border border-border shadow-sm">
-          {[
-            [`${vehicles.length}`, "Catalog Entries"],
-            [
-              `${vehicles.filter((v) => v.category === "Super Car" || v.category === "Sports Car").length}`,
-              "Sports & Supercars",
-            ],
-            [
-              `${vehicles.filter((v) => v.category === "Motorcycle" || v.category === "Dirt Bike").length}`,
-              "Motorcycles & Dirt",
-            ],
-            [
-              `${vehicles.filter((v) => v.category === "Boat" || v.category === "Helicopter" || v.category === "Plane").length}`,
-              "Boats, Jets & Heli",
-            ],
-          ].map(([v, l], index) => (
-            <div
-              key={l}
-              className={
-                (index ? "hidden sm:flex" : "flex") +
-                " flex-col items-center gap-1 px-4 py-3 sm:py-5 text-center"
-              }
-            >
-              <span className="font-display text-2xl sm:text-3xl font-black text-accent">
-                {v}
-              </span>
-              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                {l}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* INTERACTIVE CLIENT FILTER & VEHICLE ROSTER */}
-      <section className="container-site py-8">
+      <CatalogPageHeader
+        kind="vehicles"
+        count={entries.length}
+        categories={new Set(entries.map((e) => e.category)).size}
+      />
+      <section className={styles.area} aria-label="Vehicles catalog">
+        <CatalogSwitcher kind="vehicles" />
         <SectionErrorBoundary fallbackTitle="Could not load vehicles. Please try refreshing.">
-          <EvidenceCatalog kind="vehicles" entries={vehicles} />
+          <EvidenceCatalog kind="vehicles" entries={entries} />
         </SectionErrorBoundary>
       </section>
-
-      {/* CTA BANNER */}
-      <section className="container-site pb-10">
-        {" "}
-        <div className="card-surface relative overflow-hidden rounded-3xl border-border/80">
-          <ThemeImage
-            dark="/img/car-purple.jpg"
-            light="/img/car-pink.jpg"
-            alt="Dream ride"
-            className="absolute inset-0 h-full w-full object-cover opacity-60 dark:opacity-30"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-          <div className="relative flex flex-col gap-5 px-6 py-10 sm:px-10 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <span className="text-xs font-black uppercase tracking-widest text-primary">
-                PLAYER GARAGE
-              </span>
-              <h3 className="mt-1 font-display text-2xl font-extrabold text-white">
-                Want to duel any two rides head-to-head?
-              </h3>
-              <p className="mt-1.5 max-w-md text-sm text-white/80">
-                Compare field-specific evidence side by side. Performance and
-                purchase details stay unverified until supported by reviewed
-                sources.
-              </p>
-            </div>
-            <Button
-              href="/compare/vehicles"
-              className="shrink-0 font-bold bg-primary min-h-[44px]"
-            >
-              Open Comparison Duel <ArrowRight className="h-4 w-4 ml-1" />
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* RELATED ARTICLES — internal linking for SEO/discovery */}
-      <RelatedArticles category="Vehicles" title="Vehicle Guides & News" />
+      <RelatedArticles category="Vehicles" title="Vehicles Guides & News" />
     </SiteShell>
   );
 }

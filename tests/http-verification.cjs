@@ -97,6 +97,25 @@ async function check(name, fn) {
       return { status: r.status };
     });
   }
+  for (const path of [
+    "/vehicles",
+    "/weapons",
+    "/compare/vehicles",
+    "/compare/weapons",
+  ]) {
+    await check("catalog page and canonical " + path, async () => {
+      const r = await request(path);
+      assert.equal(r.status, 200);
+      const canonical = r.body.match(
+        /<link rel="canonical" href="([^"]+)"/,
+      )?.[1];
+      assert.ok(canonical, "canonical is present");
+      assert.equal(new URL(canonical).pathname, path);
+      assert.equal((r.body.match(/<h1(?:\s|>)/g) || []).length, 1);
+      assert.ok(!r.headers["set-cookie"]);
+      return { status: r.status, canonical };
+    });
+  }
   await check("radio has sourced current lineup", async () => {
     const r = await request("/radio");
     for (const s of [

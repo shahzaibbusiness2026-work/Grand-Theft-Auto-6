@@ -6,7 +6,7 @@ The issue register is [status.json](status.json). READY means implemented and lo
 
 ## Scope and owner direction
 
-The proposed four-page visual redesign remains a preview. Desktop catalog headers and the navbar are preserved. Mobile changes shorten supporting copy/counters, retain essential controls, and keep comparison tables within scrollable regions. The source navbar is unchanged from the deployed baseline.
+At the original audit cutoff, the four-page visual redesign was held as a preview. The owner authorized implementation on 28 October 2026; the follow-up is documented in [catalog-comparison-redesign.md](../catalog-comparison-redesign.md). The source navbar remains unchanged from the deployed baseline. The dated audit register below retains its original verification snapshot.
 
 Unsafe pre-release statistics are withheld until field-specific evidence is reviewed. This intentionally withdraws unsupported ranking winners and illustrative tracker records. It does not delete saved local progress. The catalog retains search, normalized categories, local favorites/history, pagination and up to four selections. Comparisons expose the full field groups, source/reviewer information, detail filtering, removal, reset, share links and CSV export. Unknown values are not converted to zero or filled with older-game averages.
 

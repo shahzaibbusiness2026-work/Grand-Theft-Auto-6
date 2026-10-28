@@ -1,11 +1,92 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import {
+  ArrowRight,
+  Check,
+  ChevronDown,
+  Heart,
+  Layers2,
+  Plus,
+  Search,
+  ShieldCheck,
+  SlidersHorizontal,
+  X,
+} from "lucide-react";
 import { SafeImage } from "@/components/safe-image";
-import { FavoriteButton } from "@/components/favorite-button";
 import { EvidenceComparison } from "@/components/evidence-comparison";
-import { getStoredUserState } from "@/lib/user-store";
+import { getStoredUserState, toggleFavorite } from "@/lib/user-store";
+import { selectionFromParams, selectionUrl } from "@/lib/catalog-selection";
 import type { CatalogKind, EvidenceEntry } from "@/lib/catalog-evidence";
+import styles from "./catalog-ui.module.css";
+
+type FiltersProps = {
+  entries: EvidenceEntry[];
+  category: string;
+  setCategory: (value: string) => void;
+  saved: boolean;
+  setSaved: (value: boolean) => void;
+  recentOnly: boolean;
+  setRecentOnly: (value: boolean) => void;
+  savedCount: number;
+  recentCount: number;
+  clear: () => void;
+};
+function Filters(p: FiltersProps) {
+  return (
+    <div className={styles.filterContent}>
+      <div className={styles.filterTop}>
+        <h2>
+          <SlidersHorizontal size={16} aria-hidden="true" />
+          Filters
+        </h2>
+        <button type="button" onClick={p.clear} className={styles.textButton}>
+          Reset
+        </button>
+      </div>
+      <span className={styles.filterLabel}>Category</span>
+      <div className={styles.categoryList}>
+        {[
+          "",
+          ...Array.from(new Set(p.entries.map((e) => e.category))).sort(),
+        ].map((category) => (
+          <button
+            type="button"
+            key={category}
+            className={styles.categoryButton}
+            aria-pressed={p.category === category}
+            onClick={() => p.setCategory(category)}
+          >
+            <span>{category || "All categories"}</span>
+            <span className={styles.categoryCount}>
+              {
+                p.entries.filter((e) => !category || e.category === category)
+                  .length
+              }
+            </span>
+          </button>
+        ))}
+      </div>
+      <span className={styles.filterLabel}>Your collection</span>
+      <label className={styles.check}>
+        <input
+          type="checkbox"
+          checked={p.saved}
+          onChange={(e) => p.setSaved(e.target.checked)}
+        />
+        Saved ({p.savedCount})
+      </label>
+      <label className={styles.check}>
+        <input
+          type="checkbox"
+          checked={p.recentOnly}
+          onChange={(e) => p.setRecentOnly(e.target.checked)}
+        />
+        Recently viewed ({p.recentCount})
+      </label>
+    </div>
+  );
+}
 
 export function EvidenceCatalog({
   kind,
@@ -24,39 +105,52 @@ export function EvidenceCatalog({
   const [recent, setRecent] = useState<string[]>([]);
   const [recentOnly, setRecentOnly] = useState(false);
   const [sort, setSort] = useState("name");
-  const [limit, setLimit] = useState(24);
-  useEffect(() => setLimit(24), [query, category, saved, recentOnly, sort]);
+  const [limit, setLimit] = useState(compare ? 8 : 24);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const picker = useRef<HTMLDialogElement>(null);
+  const label = kind === "vehicles" ? "vehicle" : "weapon";
   const storageKey = "taish-recent-" + kind;
+  useEffect(
+    () => setLimit(compare ? 8 : 24),
+    [query, category, saved, recentOnly, sort, compare],
+  );
   useEffect(() => {
     const update = () => setFavorites(getStoredUserState().favorites[kind]);
+    const restore = () =>
+      setSelected(
+        selectionFromParams(
+          new URLSearchParams(window.location.search),
+          kind,
+          entries,
+        ),
+      );
     update();
+    restore();
     window.addEventListener("gta6_user_state_change", update);
+    window.addEventListener("popstate", restore);
     try {
       const ids = JSON.parse(localStorage.getItem(storageKey) || "[]");
       if (Array.isArray(ids))
         setRecent(ids.filter((x) => typeof x === "string"));
     } catch {}
-    if (compare) {
-      const params = new URLSearchParams(window.location.search);
-      const ids = (
-        params.get("ids") ||
-        params.get(kind === "vehicles" ? "v" : "w") ||
-        ""
-      ).split(",");
-      setSelected(
-        Array.from(
-          new Set(
-            ids
-              .map(
-                (id) => entries.find((e) => e.id === id || e.slug === id)?.id,
-              )
-              .filter((id): id is string => !!id),
-          ),
-        ).slice(0, 4),
-      );
-    }
-    return () => window.removeEventListener("gta6_user_state_change", update);
-  }, [kind, storageKey, compare, entries]);
+    return () => {
+      window.removeEventListener("gta6_user_state_change", update);
+      window.removeEventListener("popstate", restore);
+    };
+  }, [kind, storageKey, entries]);
+  useEffect(() => {
+    if (!pickerOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [pickerOpen]);
+  const openPicker = () => {
+    picker.current?.showModal();
+    setPickerOpen(true);
+  };
+  const closePicker = () => picker.current?.close();
   const visit = (id: string) => {
     const next = [id, ...recent.filter((x) => x !== id)].slice(0, 8);
     setRecent(next);
@@ -64,17 +158,26 @@ export function EvidenceCatalog({
       localStorage.setItem(storageKey, JSON.stringify(next));
     } catch {}
   };
-  const toggle = (id: string) => {
-    const next = selected.includes(id)
-      ? selected.filter((x) => x !== id)
-      : [...selected, id].slice(0, 4);
-    setSelected(next);
-    const url = new URL(window.location.href);
-    url.searchParams.delete("v");
-    url.searchParams.delete("w");
-    if (next.length) url.searchParams.set("ids", next.join(","));
-    else url.searchParams.delete("ids");
-    if (compare) window.history.replaceState(window.history.state, "", url);
+  const select = (ids: string[]) => {
+    setSelected(ids);
+    window.history.replaceState(
+      window.history.state,
+      "",
+      selectionUrl(new URL(window.location.href), ids),
+    );
+  };
+  const toggle = (id: string) =>
+    select(
+      selected.includes(id)
+        ? selected.filter((x) => x !== id)
+        : [...selected, id].slice(0, 4),
+    );
+  const clear = () => {
+    setQuery("");
+    setCategory("");
+    setSaved(false);
+    setRecentOnly(false);
+    setSort("name");
   };
   const recentRank = (id: string) =>
     recent.includes(id) ? recent.indexOf(id) : Number.MAX_SAFE_INTEGER;
@@ -84,7 +187,10 @@ export function EvidenceCatalog({
         (!category || e.category === category) &&
         (!saved || favorites.includes(e.id)) &&
         (!recentOnly || recent.includes(e.id)) &&
-        e.name.toLowerCase().includes(query.toLowerCase()),
+        [e.name, e.category]
+          .join(" ")
+          .toLowerCase()
+          .includes(query.trim().toLowerCase()),
     )
     .sort((a, b) =>
       sort === "recent"
@@ -94,185 +200,359 @@ export function EvidenceCatalog({
   const comparison = selected
     .map((id) => entries.find((e) => e.id === id))
     .filter((e): e is EvidenceEntry => !!e);
-  return (
-    <div className="space-y-6">
-      <p className="hidden sm:block rounded-xl border border-border bg-card p-4 text-sm text-muted-foreground">
-        This is an editorial identification catalog. Names, categories and
-        illustrations are provisional until linked evidence confirms them.
-        Speeds, prices, damage, spawns and attachments are not verified. Older
-        game values do not establish GTA VI performance.
-        <Link
-          href="/editorial-policy"
-          className="ml-1 underline text-foreground"
-        >
-          How we verify claims
-        </Link>
-        .
-      </p>
-      <p className="text-xs text-muted-foreground sm:hidden">
-        Editorial identifications · Statistics need reviewed evidence.{" "}
-        <Link href="/editorial-policy" className="underline">
-          Source policy
-        </Link>
-      </p>
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="text-sm font-semibold">
-          Search {kind}
-          <input
-            className="mt-2 w-full rounded-xl border border-border bg-background p-3"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            type="search"
-          />
-        </label>
-        <label className="text-sm font-semibold">
-          Editorial category
-          <select
-            className="mt-2 w-full rounded-xl border border-border bg-background p-3"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="">All categories ({entries.length})</option>
-            {Array.from(new Set(entries.map((e) => e.category)))
-              .sort()
-              .map((c) => (
-                <option key={c} value={c}>
-                  {c} ({entries.filter((e) => e.category === c).length})
-                </option>
-              ))}
-          </select>
-        </label>
+  const activeFilters = Number(!!category) + Number(saved) + Number(recentOnly);
+  const filters: FiltersProps = {
+    entries,
+    category,
+    setCategory,
+    saved,
+    setSaved,
+    recentOnly,
+    setRecentOnly,
+    clear,
+    savedCount: favorites.filter((id) => entries.some((e) => e.id === id))
+      .length,
+    recentCount: recent.filter((id) => entries.some((e) => e.id === id)).length,
+  };
+  const browser = (
+    <div className={styles.catalogLayout}>
+      <aside className={styles.filters} aria-label="Catalog filters">
+        <Filters {...filters} />
+      </aside>
+      <div className="min-w-0">
+        <div className={styles.toolbar}>
+          <label className={styles.search}>
+            <span className="sr-only">Search {kind}</span>
+            <Search size={17} aria-hidden="true" />
+            <input
+              className={styles.input}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              type="search"
+              placeholder={`Search ${kind} or categories…`}
+            />
+          </label>
+          <label className={styles.sortLabel}>
+            Sort by
+            <select
+              className={styles.select}
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+            >
+              <option value="name">Name A–Z</option>
+              <option value="reverse">Name Z–A</option>
+              <option value="recent">Recently viewed first</option>
+            </select>
+          </label>
+        </div>
+        <details className={styles.mobileFilter}>
+          <summary>
+            <span>Filters{activeFilters ? ` (${activeFilters})` : ""}</span>
+            <SlidersHorizontal size={16} aria-hidden="true" />
+          </summary>
+          <Filters {...filters} />
+        </details>
+        <div className={styles.results}>
+          <p role="status">
+            <strong>{shown.length}</strong> {kind}
+            {category ? ` / ${category}` : " in the catalog"}
+          </p>
+          <span>{selected.length}/4 selected</span>
+        </div>
+        <div className={styles.grid}>
+          {shown.slice(0, limit).map((e) => {
+            const picked = selected.includes(e.id);
+            const favorite = favorites.includes(e.id);
+            return (
+              <article
+                key={e.id}
+                className={styles.card}
+                data-selected={picked}
+              >
+                <Link
+                  href={`/${kind}/${e.slug}`}
+                  onClick={() => visit(e.id)}
+                  className={styles.cardImage}
+                  aria-label={`View ${e.name}`}
+                >
+                  <SafeImage
+                    src={e.img}
+                    alt=""
+                    fill
+                    sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
+                  />
+                  <span className={styles.imageTag}>
+                    Editorial illustration
+                  </span>
+                </Link>
+                <div className={styles.cardBody}>
+                  <p className={styles.cardCategory}>{e.category}</p>
+                  <h2 className={styles.cardTitle}>
+                    <Link
+                      href={`/${kind}/${e.slug}`}
+                      onClick={() => visit(e.id)}
+                    >
+                      {e.name}
+                    </Link>
+                  </h2>
+                  <p className={styles.cardEvidence}>
+                    <span className={styles.dot} />
+                    {e.claims.some((c) => c.field === "GTA VI appearance")
+                      ? "Appearance evidence reviewed"
+                      : "Identification awaiting review"}
+                  </p>
+                  <div className={styles.cardActions}>
+                    <button
+                      type="button"
+                      className={styles.compareButton}
+                      aria-pressed={picked}
+                      aria-label={`${picked ? "Remove" : "Compare"} ${e.name}`}
+                      disabled={!picked && selected.length >= 4}
+                      onClick={() => toggle(e.id)}
+                    >
+                      {picked ? (
+                        <Check size={14} aria-hidden="true" />
+                      ) : (
+                        <Plus size={14} aria-hidden="true" />
+                      )}
+                      {picked ? "Selected" : "Compare"}
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.favorite}
+                      aria-pressed={favorite}
+                      aria-label={`${favorite ? "Unsave" : "Save"} ${e.name}`}
+                      onClick={() => {
+                        toggleFavorite(kind, e.id);
+                        setFavorites(getStoredUserState().favorites[kind]);
+                      }}
+                    >
+                      <Heart
+                        size={16}
+                        fill={favorite ? "currentColor" : "none"}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        {!shown.length && (
+          <div className={styles.empty}>
+            <Search size={28} aria-hidden="true" />
+            <h3>No {kind} found</h3>
+            <p>Try another name or reset your filters.</p>
+            <button className={styles.secondary} type="button" onClick={clear}>
+              Reset filters
+            </button>
+          </div>
+        )}
+        {shown.length > limit && (
+          <div className={styles.loadMore}>
+            <button
+              className={styles.secondary}
+              type="button"
+              onClick={() => setLimit(limit + (compare ? 8 : 24))}
+            >
+              Show more · {Math.min(limit, shown.length)} of {shown.length}
+              <ChevronDown size={15} aria-hidden="true" />
+            </button>
+          </div>
+        )}
       </div>
-      <div className="flex flex-wrap gap-5 text-sm">
-        <label>
-          Order{" "}
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value)}
-            className="ml-2 rounded-lg border border-border bg-background p-2"
-          >
-            <option value="name">Name A–Z</option>
-            <option value="reverse">Name Z–A</option>
-            <option value="recent">Recently viewed first</option>
-          </select>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={saved}
-            onChange={(e) => setSaved(e.target.checked)}
-            className="mr-2"
-          />
-          Saved (
-          {favorites.filter((id) => entries.some((e) => e.id === id)).length})
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={recentOnly}
-            onChange={(e) => setRecentOnly(e.target.checked)}
-            className="mr-2"
-          />
-          Recently viewed (
-          {recent.filter((id) => entries.some((e) => e.id === id)).length})
-        </label>
-        <p role="status">
-          {shown.length} of {entries.length} entries
+    </div>
+  );
+  return (
+    <div
+      className={styles.root}
+      id={compare ? "comparison-workspace" : "catalog-browser"}
+      style={{ scrollMarginTop: 90 }}
+    >
+      <div className={styles.notice}>
+        <ShieldCheck size={17} aria-hidden="true" />
+        <p>
+          <span className={styles.desktopNotice}>
+            Editorial identifications and illustrations are provisional. Only
+            reviewed field-specific evidence establishes GTA VI details.{" "}
+          </span>
+          <span className={styles.mobileNotice}>
+            Editorial catalog · Unverified stats stay marked.{" "}
+          </span>
+          <Link href="/editorial-policy">Our source policy</Link>
         </p>
       </div>
-      {!!comparison.length && (
-        <section
-          className="rounded-xl border border-border p-5 space-y-4"
-          aria-label="Selected comparison"
-        >
-          <h2 className="text-xl font-bold">
-            Selected entries ({comparison.length}/4)
-          </h2>
-          {compare ? (
+      {compare ? (
+        <>
+          <section
+            className={styles.workspace}
+            aria-labelledby="selection-heading"
+          >
+            <div className={styles.workspaceHeading}>
+              <div>
+                <h2 id="selection-heading">
+                  Your comparison{" "}
+                  <span className="font-normal text-muted-foreground">
+                    {selected.length}/4
+                  </span>
+                </h2>
+                <p>
+                  Select up to four {kind}. Add, remove, or replace any pick.
+                </p>
+              </div>
+              <button
+                className={styles.secondary}
+                onClick={openPicker}
+                type="button"
+              >
+                <Plus size={16} aria-hidden="true" />
+                Choose {kind}
+              </button>
+            </div>
+            <div className={styles.slots}>
+              {Array.from({ length: 4 }, (_, i) => {
+                const entry = comparison[i];
+                return entry ? (
+                  <article className={styles.slot} key={entry.id}>
+                    <div className={styles.slotImage}>
+                      <SafeImage
+                        src={entry.img}
+                        alt=""
+                        fill
+                        sizes="(max-width:767px) 45vw, 23vw"
+                      />
+                    </div>
+                    <button
+                      className={styles.removeSlot}
+                      type="button"
+                      onClick={() => toggle(entry.id)}
+                      aria-label={`Remove ${entry.name} from comparison`}
+                    >
+                      <X size={16} aria-hidden="true" />
+                    </button>
+                    <div className={styles.slotText}>
+                      <h3>{entry.name}</h3>
+                      <p>{entry.category}</p>
+                    </div>
+                  </article>
+                ) : (
+                  <button
+                    key={"slot-" + i}
+                    type="button"
+                    className={styles.addSlot}
+                    onClick={openPicker}
+                    aria-label={`Add ${label} to slot ${i + 1}`}
+                  >
+                    <Plus aria-hidden="true" />
+                    <span>
+                      Add {label} {i + 1}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+          {comparison.length ? (
             <EvidenceComparison
               kind={kind}
               entries={comparison}
               onRemove={toggle}
-              onReset={() => {
-                setSelected([]);
-                const url = new URL(window.location.href);
-                url.searchParams.delete("ids");
-                url.searchParams.delete("v");
-                url.searchParams.delete("w");
-                window.history.replaceState(window.history.state, "", url);
-              }}
+              onReset={() => select([])}
             />
           ) : (
-            <Link
-              className="inline-flex min-h-11 items-center underline"
-              href={
-                "/compare/" +
-                kind +
-                "?ids=" +
-                encodeURIComponent(selected.join(","))
-              }
-            >
-              Compare selected entries
-            </Link>
-          )}
-        </section>
-      )}
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {shown.slice(0, limit).map((e) => (
-          <article
-            key={e.id}
-            className="overflow-hidden rounded-2xl border border-border bg-card"
-          >
-            <Link
-              href={"/" + kind + "/" + e.slug}
-              onClick={() => visit(e.id)}
-              className="block"
-            >
-              <div className="relative h-44">
-                <SafeImage
-                  src={e.img}
-                  alt={"Editorial illustration for " + e.name}
-                  fill
-                  sizes="(max-width:640px) 100vw, 33vw"
-                  className="object-cover"
-                />
-              </div>
-              <h2 className="px-4 pt-4 font-display text-base font-bold">
-                {e.name}
-              </h2>
-            </Link>
-            <div className="p-4 space-y-3">
-              <p className="text-sm text-muted-foreground">
-                {e.category} ·{" "}
-                {e.claims.some((c) => c.field === "GTA VI appearance")
-                  ? "Appearance evidence available"
-                  : "Identification awaiting review"}
+            <div className={styles.empty}>
+              <Layers2 size={32} aria-hidden="true" />
+              <h3>Start with your first {label}</h3>
+              <p>
+                Your selections appear above. Every comparison field remains
+                available below.
               </p>
-              <div className="flex flex-wrap items-center gap-3">
-                <FavoriteButton type={kind} id={e.id} />
-                <label className="inline-flex min-h-11 items-center gap-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={selected.includes(e.id)}
-                    disabled={!selected.includes(e.id) && selected.length >= 4}
-                    onChange={() => toggle(e.id)}
-                  />
-                  Compare {e.name}
-                </label>
-              </div>
+              <button
+                className={styles.primary}
+                type="button"
+                onClick={openPicker}
+              >
+                Choose {kind}
+                <ArrowRight size={16} aria-hidden="true" />
+              </button>
             </div>
-          </article>
-        ))}
-      </div>
-      {!shown.length && <p className="py-8">No entries match these filters.</p>}
-      {shown.length > limit && (
-        <button
-          type="button"
-          onClick={() => setLimit(limit + 24)}
-          className="min-h-11 rounded-xl border border-border px-5 font-semibold"
-        >
-          Show more ({Math.min(limit, shown.length)} of {shown.length} shown)
-        </button>
+          )}
+          <dialog
+            className={styles.dialog}
+            ref={picker}
+            aria-labelledby="picker-heading"
+            onClose={() => setPickerOpen(false)}
+          >
+            <div className={styles.dialogHeader}>
+              <h2 id="picker-heading">Choose {kind}</h2>
+              <button
+                type="button"
+                className={styles.iconButton}
+                onClick={closePicker}
+                aria-label="Close selection"
+              >
+                <X size={18} aria-hidden="true" />
+              </button>
+            </div>
+            <div className={styles.dialogBody}>{browser}</div>
+            <div className={styles.dialogFooter}>
+              <span role="status">
+                {selected.length}/4 selected
+                {selected.length === 4 ? " · Remove a pick to replace it" : ""}
+              </span>
+              <button
+                type="button"
+                className={styles.primary}
+                onClick={closePicker}
+              >
+                View comparison
+                <ArrowRight size={15} aria-hidden="true" />
+              </button>
+            </div>
+          </dialog>
+        </>
+      ) : (
+        <>
+          {browser}
+          {comparison.length > 0 && (
+            <section className={styles.tray} aria-label="Comparison shortlist">
+              <div>
+                <strong>
+                  {comparison.length}/4 {kind} selected
+                </strong>
+                <div className={styles.trayNames}>
+                  {comparison.map((e) => (
+                    <button
+                      key={e.id}
+                      type="button"
+                      onClick={() => toggle(e.id)}
+                      aria-label={`Remove ${e.name} from shortlist`}
+                    >
+                      {e.name} ×
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className={styles.trayActions}>
+                <button
+                  className={styles.textButton}
+                  type="button"
+                  onClick={() => select([])}
+                >
+                  Clear
+                </button>
+                <Link
+                  className={styles.primary}
+                  href={`/compare/${kind}?ids=${encodeURIComponent(selected.join(","))}`}
+                >
+                  Compare picks
+                  <ArrowRight size={15} aria-hidden="true" />
+                </Link>
+              </div>
+            </section>
+          )}
+        </>
       )}
     </div>
   );
