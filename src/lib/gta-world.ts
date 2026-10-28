@@ -237,7 +237,7 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       },
       {
             "name": "Nine-banded armadillo",
-            "observation": "Named among Leonida's invasive species.",
+            "observation": "Listed as confirmed/invasive in press summaries of Game Informer coverage \u2014 but it does not appear in the directly quoted GI species lists, so its Rockstar-named status is less directly evidenced than the eight named species. \u201cNine-banded\u201d is a press/fan qualifier.",
             "source": "Game Informer cover story, Sept 29, 2026",
             "tier": "Rockstar confirmed"
       },
@@ -285,20 +285,26 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       },
       {
             "name": "Raccoon",
-            "observation": "Seen twice digging through a trash can in Trailer 2.",
-            "source": "Trailer 2 (fan-spotted)",
+            "observation": "Fan lists claim raccoons digging through trash cans, but trailer attribution conflicts: this site previously said Trailer 2, another fan source says Trailer 1 \u2014 neither attribution is verified. Presence is community-claimed only.",
+            "source": "Fan lists (trailer attribution disputed)",
             "tier": "Community identification"
       },
       {
             "name": "Deer herds",
-            "observation": "Deer herds appear in official screenshots, including a hunter with a scoped rifle on an ATV nearby. Species identification is fan analysis.",
+            "observation": "Deer appear in official screenshots, including a hunter with a scoped rifle on an ATV nearby, and a buck in the Game Informer Grassrivers sunrise screenshot. Species is fan analysis (\u201cwhite-tailed\u201d vs \u201cKey deer\u201d \u2014 neither Rockstar-named); \u201cherds\u201d as a behaviour is fan description, not a confirmed mechanic. Whether deer are huntable is not confirmed.",
             "source": "Official screenshots (fan-spotted)",
             "tier": "Community identification"
       },
       {
-            "name": "Large wild cat",
-            "observation": "Screenshots show a large cat stalking deer and a dead small wildcat at a Grassrivers airboat dock. The exact species is disputed among fans and is not named here.",
-            "source": "Official screenshots (fan analysis, species disputed)",
+            "name": "Large wild cat stalking deer",
+            "observation": "Screenshots show a large cat stalking deer in Mount Kalaga screenshots \u2014 fan-identified as Florida panther/cougar. No cat species is Rockstar-named.",
+            "source": "Official screenshots (fan analysis)",
+            "tier": "Community identification"
+      },
+      {
+            "name": "Dead small wildcat at Grassrivers dock",
+            "observation": "A dead small wildcat lies on a cooler at a Grassrivers airboat dock in a May 2025 official screenshot \u2014 species disputed, possibly bobcat per fan lists. A separate observation from the deer-stalking cat; do not merge them.",
+            "source": "Official screenshot (fan analysis, species disputed)",
             "tier": "Community identification"
       }
     ],
@@ -337,8 +343,8 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
             "tier": "Rockstar confirmed"
       },
       {
-            "name": "West Indian manatee",
-            "observation": "Named by Rockstar and seen in the Extended Look.",
+            "name": "Manatee",
+            "observation": "Named by Rockstar (\u201cmanatees\u201d) and seen in the Extended Look water sequence. \u201cWest Indian\u201d is a fan/press qualifier, not Rockstar\u2019s species word.",
             "source": "Game Informer cover story, Sept 29, 2026; Extended Look",
             "tier": "Rockstar confirmed"
       },
@@ -356,15 +362,15 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       },
       {
             "name": "Bottlenose dolphin",
-            "observation": "Dolphins swim in Trailer 1 and in an Extended Look water sequence.",
+            "observation": "Dolphins swim in Trailer 1 and in an Extended Look water sequence. \u201cBottlenose\u201d is a fan species identification, not Rockstar\u2019s word \u2014 and Trailer 1 ~0:11\u2019s dark shapes are claimed as dolphins by some fan sources and as a tiger shark by others, so that frame is genuinely ambiguous: label it \u201cprobable dolphins\u201d or \u201cmarine life,\u201d never certain.",
             "source": "Trailer 1 + Extended Look",
             "tier": "Observed in official media"
       },
       {
             "name": "Seagulls",
-            "observation": "A flock passes overhead in the Trailer 2 opening shot.",
-            "source": "Trailer 2",
-            "tier": "Observed in official media"
+            "observation": "Small distant birds fly over the Keys aerial in Trailer 2 (0:07), verified at full resolution \u2014 too distant to identify as seagulls, let alone herring gulls, and too few to call a flock. Seagull presence in Leonida generally is fan-observed.",
+            "source": "Trailer 2 (0:07, full-resolution check)",
+            "tier": "Community identification"
       },
       {
             "name": "Sea turtle",
@@ -374,13 +380,13 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
       },
       {
             "name": "Herring gull, roseate spoonbill, mottled duck, wood stork, red-crowned crane",
-            "observation": "Identified by fans from Game Informer screenshots; none of these five are named by Rockstar.",
+            "observation": "Identified by fans from Game Informer screenshots; none of these five are named by Rockstar. Crane species is disputed among fan sources (whooping vs red-crowned); neither is settled. Mottled duck ID is tentative \u2014 the ducks in Trailer 1 ~0:21 are small and distant.",
             "source": "Game Informer screenshots (fan analysis)",
             "tier": "Community identification"
       },
       {
             "name": "Reef fish & eel",
-            "observation": "Fish and an eel appear in an official underwater screenshot with divers and a coral reef; stingrays are visible in high-bitrate trailer footage.",
+            "observation": "Fish and an eel appear in an official underwater screenshot with divers and a coral reef; a stingray presence in high-bitrate trailer footage is a fan-sighting claim, not verified here.",
             "source": "Official screenshot/footage (fan-spotted)",
             "tier": "Community identification"
       }
