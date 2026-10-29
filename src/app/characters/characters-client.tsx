@@ -363,7 +363,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               the criminal underworld of GTA 6.
             </p>
             <Button
-              href="/blog"
+              href="/news"
               className="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold"
             >
               Explore Character Stories <ArrowRight className="h-4 w-4" />

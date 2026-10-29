@@ -71,7 +71,7 @@ export default function SiteMapPage() {
       title: "News & Content",
       links: [
         { label: "News", href: "/news", desc: "Latest GTA 6 coverage" },
-        { label: "Blog", href: "/blog", desc: "Features & opinion" },
+        { label: "News", href: "/news", desc: "Features & opinion" },
         { label: "Guides", href: "/guides", desc: "How-tos & walkthroughs" },
         { label: "Radio Stations", href: "/radio", desc: "Leonida airwaves" },
       ],
@@ -79,7 +79,7 @@ export default function SiteMapPage() {
     {
       title: "Account & More",
       links: [
-        { label: "Dashboard", href: "/dashboard", desc: "Your Atlas HQ" },
+        { label: "Sign in", href: "/login", desc: "Your Atlas HQ" },
         { label: "Membership", href: "/pricing", desc: "Membership — everything on this site is free" },
         { label: "About Atlas", href: "/about", desc: "Who we are" },
         { label: "Contact Us", href: "/contact", desc: "Get in touch" },

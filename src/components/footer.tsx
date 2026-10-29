@@ -29,7 +29,6 @@ const COLS = [
       { label: "Articles", href: "/news" },
       { label: "Guides", href: "/guides" },
       { label: "Tools", href: "/tools" },
-      { label: "Dashboard", href: "/dashboard" },
     ],
   },
   {

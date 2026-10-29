@@ -386,7 +386,7 @@ export function Navbar() {
           <SplitNavDropdown
             href="/news"
             label="News"
-            menu={[{ href: "/blog", label: "Blog" }]}
+            menu={[{ href: "/news", label: "All News" }]}
             pathname={pathname}
           />
         </nav>
@@ -645,7 +645,7 @@ export function Navbar() {
               <div
                 className={cn(
                   "flex w-full items-center rounded-xl transition-colors",
-                  isActive("/news") || pathname === "/blog"
+                  isActive("/news")
                     ? "bg-[#FF2E9A] text-white"
                     : openMobileSection === "news"
                       ? "bg-[#FF2E9A] text-white"
@@ -682,18 +682,18 @@ export function Navbar() {
               {openMobileSection === "news" && (
                 <div className="flex flex-col gap-0.5 pb-1 pl-3">
                   <Link
-                    href="/blog"
+                    href="/news"
                     prefetch={true}
                     onClick={() => setMobileOpen(false)}
-                    aria-current={pathname === "/blog" ? "page" : undefined}
+                    aria-current={pathname === "/news" ? "page" : undefined}
                     className={cn(
                       "flex min-h-[44px] items-center rounded-lg px-4 text-sm font-medium tracking-wide transition-colors",
-                      pathname === "/blog"
+                      pathname === "/news"
                         ? "bg-[#FF2E9A] text-white font-bold"
                         : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
                     )}
                   >
-                    Blog
+                    All News
                   </Link>
                 </div>
               )}

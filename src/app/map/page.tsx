@@ -6,18 +6,18 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Interactive Map | Full Leonida & Vice City Satellite Atlas",
+  title: "GTA 6 Interactive Map: Leonida & Vice City",
   description:
     "Explore the fan-made Leonida and Vice City map: points of interest spotted in official footage, with evidence labels showing what is confirmed and what is still uncertain.",
   alternates: { canonical: "/map" },
   openGraph: { url: "/map",
-    title: "GTA 6 Interactive Map | Full Leonida & Vice City Satellite Atlas",
+    title: "GTA 6 Interactive Map: Leonida & Vice City",
     description:
       "Explore the fan-made Leonida and Vice City map: points of interest spotted in official footage, with evidence labels showing what is confirmed and what is still uncertain.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GTA 6 Interactive Map | Full Leonida & Vice City Satellite Atlas",
+    title: "GTA 6 Interactive Map: Leonida & Vice City",
     description:
       "Explore the fan-made Leonida and Vice City map: points of interest spotted in official footage, with evidence labels showing what is confirmed and what is still uncertain.",
   },

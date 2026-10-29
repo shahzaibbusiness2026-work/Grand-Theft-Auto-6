@@ -6,18 +6,18 @@ import { getPublicGuides } from "@/lib/services/guides";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Guides | Pre-Release Gameplay, Missions & Systems",
+  title: "GTA 6 Guides: Pre-Release Gameplay & Systems",
   description:
     "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",
   alternates: { canonical: "/guides" },
   openGraph: { type: "website", url: "/guides",
-    title: "GTA 6 Guides | Pre-Release Gameplay, Missions & Systems",
+    title: "GTA 6 Guides: Pre-Release Gameplay & Systems",
     description:
       "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GTA 6 Guides | Pre-Release Gameplay, Missions & Systems",
+    title: "GTA 6 Guides: Pre-Release Gameplay & Systems",
     description:
       "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",
   },
