@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       type: "article",
       publishedTime: article.published_at || undefined,
-      authors: [article.author_name || "Taish Team"],
+      authors: [authorIdentity(article.author_name).name],
       images: [
         {
           url: ogImage,

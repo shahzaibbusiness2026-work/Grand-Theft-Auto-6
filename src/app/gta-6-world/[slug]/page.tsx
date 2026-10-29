@@ -164,12 +164,17 @@ export default async function GTAWorldCategoryPage({ params }: Props) {
                         {entry.name}
                       </h2>
                       <span
-                        className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-bold ${TIER_STYLES[entry.tier]}`}
+                        className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-bold ${entry.sourceHref ? TIER_STYLES[entry.tier] : "border-amber-400/40 bg-amber-400/10 text-amber-300"}`}
                       >
-                        {entry.tier}
+                        {entry.sourceHref
+                          ? entry.tier
+                          : "Source review pending"}
                       </span>
                     </div>
                     <p className="mt-2 text-sm leading-relaxed text-white/70">
+                      {!entry.sourceHref && (
+                        <strong>Unreviewed source note: </strong>
+                      )}
                       {entry.observation}
                     </p>
                     <p className="mt-3 text-xs text-white/45">
