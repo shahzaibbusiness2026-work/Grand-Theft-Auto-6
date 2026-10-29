@@ -356,7 +356,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     spawnLocations: ["Downtown Tech District", "High Roller Casino Valet"],
     customizationOptions: ["Cyan/Pink Neon Light Ribbons", "Ceramic Carbon Rotors", "Digital HUD Dash", "Slick Racing Compounds"],
     confidence: "REPORTED",
-    source: "Verified Code String References",
+    source: "Code String References",
     description: "Futuristic neon superbike with supernatural cornering grip and immediate electric-assist launch. Rules the night-time Vice City expressways.",
     featured: true,
   },
@@ -4311,7 +4311,7 @@ export const canonicalCollectibles: CanonicalCollectible[] = [
     guideTip: "Crouch under the eastern boardwalk at low tide or swim underneath to locate the blinking green LED beacon.",
     coordinates: { top: "58%", left: "65%" },
     confidence: "CONFIRMED",
-    source: "Verified Collectibles Manifest",
+    source: "Collectibles Manifest",
     img: "/img/crate.svg",
   },
   {
