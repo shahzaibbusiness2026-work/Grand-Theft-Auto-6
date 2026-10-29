@@ -255,8 +255,7 @@ export async function Footer() {
             Take-Two Interactive.
           </p>
           <p className={styles.copyright}>
-            © {new Date().getFullYear()} Taish Gaming{" "}
-            <span aria-hidden="true">·</span> Pakistan
+            © {new Date().getFullYear()} Taish Gaming
           </p>
         </div>
       </div>
