@@ -111,8 +111,8 @@ export function EvidenceCatalog({
   const [pickerOpen, setPickerOpen] = useState(false);
   const picker = useRef<HTMLDialogElement>(null);
   // Slots shown in the comparison workspace. Two by default; the user can
-  // grow them to four with the "Add another" tile (and picking more
-  // vehicles than there are slots grows them automatically).
+  // grow them to four with the "Add another" button below the row (and
+  // picking more vehicles than there are slots grows them automatically).
   const [slotCount, setSlotCount] = useState(2);
   const label = kind === "vehicles" ? "vehicle" : "weapon";
   const storageKey = "taish-recent-" + kind;
@@ -535,18 +535,20 @@ export function EvidenceCatalog({
                   </button>
                 );
               })}
-              {slotCount < 4 && (
+            </div>
+            {slotCount < 4 && (
+              <div className={styles.addMoreRow}>
                 <button
                   type="button"
-                  className={styles.addSlot}
+                  className={styles.secondary}
                   onClick={() => setSlotCount((c) => Math.min(4, c + 1))}
                   aria-label={`Add another ${label} slot to the comparison`}
                 >
-                  <Plus aria-hidden="true" />
-                  <span>Add another {label}</span>
+                  <Plus size={16} aria-hidden="true" />
+                  Add another {label}
                 </button>
-              )}
-            </div>
+              </div>
+            )}
           </section>
           {comparison.length ? (
             <EvidenceComparison
