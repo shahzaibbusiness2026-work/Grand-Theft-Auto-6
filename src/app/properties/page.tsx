@@ -33,7 +33,7 @@ function dbToCanonical(
     id: p.id,
     slug: p.slug || match?.slug || p.id,
     name: p.name,
-    district: p.district || match?.district || "Vice City",
+    district: p.district || match?.district || "Unknown",
     type: (p.type as CanonicalProperty["type"]) || match?.type || "Safehouse",
     price: p.price ?? match?.price ?? null,
     priceDisplay: p.price_display || match?.priceDisplay || "TBD",
@@ -51,8 +51,8 @@ function dbToCanonical(
       "REPORTED",
     source: p.source || match?.source || "Atlas Admin",
     desc: p.description || match?.desc || "",
-    img: p.img || match?.img || "/img/hero-dark.jpg",
-    mapCoords: match?.mapCoords || { top: "50%", left: "50%" },
+    img: p.img || match?.img || "",
+    mapCoords: match?.mapCoords || { top: "", left: "" },
   };
 }
 

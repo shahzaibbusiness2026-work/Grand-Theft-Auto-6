@@ -48,7 +48,8 @@ const wScore = (w: CanonicalWeapon) => computeWeaponScore(w, DEFAULT_WEAPON_WEIG
 const hasFeature = (v: CanonicalVehicle, ...keys: string[]) =>
   (v.features || []).some((f) => keys.some((k) => f.toLowerCase().includes(k.toLowerCase())));
 
-const accelScore = (v: CanonicalVehicle) => Math.max(0, Math.min(100, ((6.5 - v.acceleration) / 5) * 100));
+const accelScore = (v: CanonicalVehicle): number | null =>
+  v.acceleration === null ? null : Math.max(0, Math.min(100, ((6.5 - v.acceleration) / 5) * 100));
 
 export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
   {
@@ -59,7 +60,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
       "Every confirmed GTA 6 vehicle ranked by top speed. The definitive fastest cars, bikes, boats and aircraft in Grand Theft Auto VI, updated automatically from our database.",
     metricLabel: "Top Speed",
     value: (v) => v.topSpeed,
-    format: (v) => `${v.topSpeed} mph`,
+    format: (v) => (v.topSpeed === null ? "—" : `${v.topSpeed} mph`),
   },
   {
     slug: "best-acceleration",
@@ -69,7 +70,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
       "GTA 6 vehicles ranked by 0–60 launch. Which GTA 6 vehicles hit the mark fastest, from hypercars to superbikes.",
     metricLabel: "0–60 Time",
     value: (v) => v.acceleration,
-    format: (v) => `${v.acceleration}s`,
+    format: (v) => (v.acceleration === null ? "—" : `${v.acceleration}s`),
     lowerIsBetter: true,
   },
   {
@@ -80,7 +81,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
       "The best handling cars and bikes in GTA 6, ranked by grip and cornering from our vehicle database.",
     metricLabel: "Handling",
     value: (v) => v.handling,
-    format: (v) => `${v.handling}/100`,
+    format: (v) => (v.handling === null ? "—" : `${v.handling}/100`),
   },
   {
     slug: "best-braking",
@@ -89,7 +90,7 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
     description: "GTA 6 vehicles with the strongest brakes, ranked from the community vehicle database.",
     metricLabel: "Braking",
     value: (v) => v.braking,
-    format: (v) => `${v.braking}/100`,
+    format: (v) => (v.braking === null ? "—" : `${v.braking}/100`),
   },
   {
     slug: "best-racing",
@@ -98,8 +99,16 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
     description:
       "The best race-day machines in GTA 6 — a composite of top speed, acceleration and handling computed from live database stats.",
     metricLabel: "Racing Score",
-    value: (v) => Math.round((v.topSpeed / 230) * 100 * 0.4 + accelScore(v) * 0.3 + v.handling * 0.3),
-    format: (v) => `${Math.round((v.topSpeed / 230) * 100 * 0.4 + accelScore(v) * 0.3 + v.handling * 0.3)} pts`,
+    value: (v) => {
+      const a = accelScore(v);
+      if (v.topSpeed === null || a === null || v.handling === null) return null;
+      return Math.round((v.topSpeed / 230) * 100 * 0.4 + a * 0.3 + v.handling * 0.3);
+    },
+    format: (v) => {
+      const a = accelScore(v);
+      if (v.topSpeed === null || a === null || v.handling === null) return "—";
+      return `${Math.round((v.topSpeed / 230) * 100 * 0.4 + a * 0.3 + v.handling * 0.3)} pts`;
+    },
   },
   {
     slug: "best-off-road",
@@ -149,8 +158,14 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
     description:
       "Overall performance per dollar — the best cheap-but-capable rides in GTA 6, computed automatically from database stats.",
     metricLabel: "Score per $100k",
-    value: (v) => (v.price && v.price > 0 ? Math.round((vScore(v) / (v.price / 100000)) * 10) / 10 : null),
-    format: (v) => `${vScore(v)}/100 for ${v.priceDisplay}`,
+    value: (v) => {
+      const sc = vScore(v);
+      return v.price && v.price > 0 && sc !== null ? Math.round((sc / (v.price / 100000)) * 10) / 10 : null;
+    },
+    format: (v) => {
+      const sc = vScore(v);
+      return sc === null ? "—" : `${sc}/100 for ${v.priceDisplay}`;
+    },
   },
   {
     slug: "best-vehicles-overall",
@@ -160,7 +175,10 @@ export const VEHICLE_RANKINGS: VehicleRankingDef[] = [
       "Every GTA 6 vehicle ranked by our weighted Overall Score — speed, acceleration, handling, braking, traction and special features combined.",
     metricLabel: "Overall Score",
     value: (v) => vScore(v),
-    format: (v) => `${vScore(v)}/100`,
+    format: (v) => {
+      const sc = vScore(v);
+      return sc === null ? "—" : `${sc}/100`;
+    },
   },
 ];
 
@@ -217,7 +235,10 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
       "DPS = Damage × rate of fire. The highest damage-per-second weapons in GTA 6, computed automatically — never manually entered.",
     metricLabel: "DPS Index",
     value: (w) => computeDpsIndex(w.damage, w.fireRate),
-    format: (w) => `${computeDpsIndex(w.damage, w.fireRate)} DPS`,
+    format: (w) => {
+      const dps = computeDpsIndex(w.damage, w.fireRate);
+      return dps === null ? "—" : `${dps} DPS`;
+    },
   },
   {
     slug: "best-pistols",
@@ -226,7 +247,10 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
     description: "Every confirmed GTA 6 pistol ranked by overall combat score.",
     metricLabel: "Overall Score",
     value: (w) => (w.klass === "Pistol" ? wScore(w) : null),
-    format: (w) => `${wScore(w)}/100`,
+    format: (w) => {
+      const sc = wScore(w);
+      return sc === null ? "—" : `${sc}/100`;
+    },
   },
   {
     slug: "best-smgs",
@@ -235,7 +259,10 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
     description: "The best submachine guns in GTA 6 ranked by overall combat score.",
     metricLabel: "Overall Score",
     value: (w) => (w.klass === "SMG" ? wScore(w) : null),
-    format: (w) => `${wScore(w)}/100`,
+    format: (w) => {
+      const sc = wScore(w);
+      return sc === null ? "—" : `${sc}/100`;
+    },
   },
   {
     slug: "best-assault-rifles",
@@ -244,7 +271,10 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
     description: "The best assault rifles in GTA 6 ranked by overall combat score.",
     metricLabel: "Overall Score",
     value: (w) => (w.klass === "Assault Rifle" ? wScore(w) : null),
-    format: (w) => `${wScore(w)}/100`,
+    format: (w) => {
+      const sc = wScore(w);
+      return sc === null ? "—" : `${sc}/100`;
+    },
   },
   {
     slug: "best-shotguns",
@@ -253,7 +283,10 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
     description: "The best shotguns in GTA 6 ranked by overall combat score.",
     metricLabel: "Overall Score",
     value: (w) => (w.klass === "Shotgun" ? wScore(w) : null),
-    format: (w) => `${wScore(w)}/100`,
+    format: (w) => {
+      const sc = wScore(w);
+      return sc === null ? "—" : `${sc}/100`;
+    },
   },
   {
     slug: "best-snipers",
@@ -262,7 +295,10 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
     description: "The best sniper rifles in GTA 6 ranked by overall combat score.",
     metricLabel: "Overall Score",
     value: (w) => (w.klass === "Sniper Rifle" ? wScore(w) : null),
-    format: (w) => `${wScore(w)}/100`,
+    format: (w) => {
+      const sc = wScore(w);
+      return sc === null ? "—" : `${sc}/100`;
+    },
   },
   {
     slug: "best-weapons-overall",
@@ -272,7 +308,10 @@ export const WEAPON_RANKINGS: WeaponRankingDef[] = [
       "Every GTA 6 weapon ranked by our weighted Overall Score — damage, fire rate, accuracy, range, reload, magazine and handling combined.",
     metricLabel: "Overall Score",
     value: (w) => wScore(w),
-    format: (w) => `${wScore(w)}/100`,
+    format: (w) => {
+      const sc = wScore(w);
+      return sc === null ? "—" : `${sc}/100`;
+    },
   },
 ];
 

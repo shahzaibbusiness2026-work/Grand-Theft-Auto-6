@@ -2,7 +2,6 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { SiteShell } from "@/components/shells";
 import { EvidenceDetail } from "@/components/evidence-detail";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
-import { indexReady } from "@/lib/catalog-evidence";
 export const revalidate = 3600;
 // An explicit runtime path list enables ISR for newly published CMS slugs.
 export function generateStaticParams() {
@@ -26,11 +25,25 @@ export async function generateMetadata({
   return {
     title: e.name + " — GTA VI Evidence Review",
     description:
-      "Review the evidence status of this provisional catalog identification. Unverified GTA VI statistics are withheld.",
+      `${e.name} — GTA VI evidence review: what official footage actually shows for this weapon, and which statistics are still unverified before launch.`,
     alternates: { canonical: "/weapons/" + e.slug },
-    openGraph: { url: "/weapons/" + e.slug },
+    openGraph: {
+      url: "/weapons/" + e.slug,
+      type: "website",
+      title: e.name + " — GTA VI Evidence Review",
+      description: `${e.name} — GTA VI evidence review: what official footage actually shows for this weapon, and which statistics are still unverified before launch.`,
+      images: e.img ? [{ url: e.img, alt: e.name }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: e.name + " — GTA VI Evidence Review",
+      images: e.img ? [e.img] : undefined,
+    },
     robots: {
-      index: indexReady(e),
+      // Pre-launch gate (29 Oct 2026): a single appearance claim is not
+      // substantive content. Index only after launch, when verified
+      // statistics exist. Follow stays true so hubs are still crawled.
+      index: false,
       follow: true,
       googleBot: { "max-image-preview": "large" as const },
     },

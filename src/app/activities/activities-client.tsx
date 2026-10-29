@@ -90,7 +90,7 @@ const ITEMS: Item[] = [
   },
   {
     name: "Wildlife Photography",
-    desc: "Photograph flamingos, gators and the Kalaga mountain lion.",
+    desc: "Photograph flamingos, gators and other wildlife; species identification remains unverified.",
     location: "Grassrivers / Kalaga",
     status: "Fan idea",
     category: "Outdoors",

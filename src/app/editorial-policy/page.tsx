@@ -2,8 +2,22 @@ import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 export const metadata = {
   title: "Editorial & Evidence Policy",
+  description:
+    "How Taish Gaming sources GTA 6 claims: official announcements, direct observations, attributed reporting and speculation, kept strictly separate.",
   alternates: { canonical: "/editorial-policy" },
-  openGraph: { url: "/editorial-policy" },
+  openGraph: {
+    type: "website",
+    url: "/editorial-policy",
+    title: "Editorial & Evidence Policy",
+    description:
+      "How Taish Gaming sources GTA 6 claims: official announcements, direct observations, attributed reporting and speculation, kept strictly separate.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Editorial & Evidence Policy",
+    description:
+      "How Taish Gaming sources GTA 6 claims, and why unknowns stay unknown.",
+  },
 };
 export default function Page() {
   return (

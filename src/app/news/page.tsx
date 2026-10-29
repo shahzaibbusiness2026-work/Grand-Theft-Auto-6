@@ -37,7 +37,7 @@ export default async function NewsPage() {
           <div className="relative px-6 py-12 sm:px-10">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-accent mb-3">News & Articles</div>
             <h1 className="mt-3 max-w-lg font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
-              Stay Updated with the Latest from <span className="text-primary">Leonida</span>
+              GTA 6 News: Stay Updated with the Latest from <span className="text-primary">Leonida</span>
             </h1>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Breaking news, in-depth articles, exclusive insights and everything GTA 6.

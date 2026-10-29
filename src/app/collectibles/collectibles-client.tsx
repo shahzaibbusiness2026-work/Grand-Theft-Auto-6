@@ -254,14 +254,16 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                 <div>
                   {/* Top Thumbnail */}
                   <div className="relative h-40 w-full overflow-hidden bg-background">
-                    <Image
-                      src={item.img}
-                      alt={`${item.title} - GTA 6 Collectible`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
-                      loading="lazy"
-                    />
+                    {item.img ? (
+                      <Image
+                        src={item.img}
+                        alt={`${item.title} - GTA 6 Collectible`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                        loading="lazy"
+                      />
+                    ) : null}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent pointer-events-none" />
 
                     {/* Toggle Button */}
@@ -323,12 +325,16 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
 
                 {/* Card Footer Actions */}
                 <div className="p-4 pt-0 flex items-center justify-between gap-2 border-t border-border/60 mt-2">
-                  <Link
-                    href={`/map?poi=${item.id}&top=${item.coordinates.top}&left=${item.coordinates.left}`}
-                    className="text-xs font-medium text-accent hover:underline flex items-center gap-1 py-2"
-                  >
-                    <MapPin className="h-3 w-3" /> Map View
-                  </Link>
+                  {item.coordinates.top && item.coordinates.left ? (
+                    <Link
+                      href={`/map?poi=${item.id}&top=${item.coordinates.top}&left=${item.coordinates.left}`}
+                      className="text-xs font-medium text-accent hover:underline flex items-center gap-1 py-2"
+                    >
+                      <MapPin className="h-3 w-3" /> Map View
+                    </Link>
+                  ) : (
+                    <span className="text-xs text-muted-foreground py-2">Location unconfirmed</span>
+                  )}
 
                   <Link
                     href={`/collectibles/${item.slug}`}

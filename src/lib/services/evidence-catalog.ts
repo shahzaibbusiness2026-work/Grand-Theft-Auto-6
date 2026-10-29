@@ -27,7 +27,7 @@ export const getEvidenceCatalog = cache(
         slug: row.slug || row.id,
         name: row.name,
         category: editorialCategory(row.klass),
-        img: row.img || "/img/hero-dark.jpg",
+        img: row.img || "",
         claims: claimsFor(kind, row.id),
       }));
   },

@@ -27,6 +27,7 @@ export async function generateMetadata({
     description: guide.description || undefined,
     alternates: { canonical: `/guides/${guide.slug}` },
     openGraph: {
+      type: "article",
       title: guide.title,
       description: guide.description || undefined,
       url: `/guides/${guide.slug}`,
@@ -36,6 +37,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: guide.title,
       description: guide.description || undefined,
+      images: guide.image ? [guide.image] : undefined,
     },
   };
 }
@@ -62,6 +64,35 @@ export default async function GuideDetailPage({
 
   return (
     <AppShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Guides",
+                item: "/guides",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: guide.title,
+                item: `/guides/${guide.slug}`,
+              },
+            ],
+          }),
+        }}
+      />
       {ready && (
         <script
           type="application/ld+json"
@@ -188,7 +219,7 @@ export default async function GuideDetailPage({
                       <img
                         loading="lazy"
                         src={g.image}
-                        alt=""
+                        alt={g.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>

@@ -195,14 +195,16 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
               >
                 {/* Image Banner */}
                 <div className="relative h-44 overflow-hidden bg-black/60">
-                  <Image
-                    src={m.img}
-                    alt={`${m.title} - GTA 6 Mission (${m.type})`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
+                  {m.img ? (
+                    <Image
+                      src={m.img}
+                      alt={`${m.title} - GTA 6 Mission (${m.type})`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  ) : null}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#070b15] via-transparent to-transparent pointer-events-none" />
 
                   {/* Badges */}
@@ -215,10 +217,10 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                     <span className="font-mono text-xs font-bold text-gold-light bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
-                      {m.cashRewardDisplay}
+                      {m.cashRewardDisplay === "TBD" ? "TBD" : `${m.cashRewardDisplay} (est.)`}
                     </span>
                     <span className="text-xs font-semibold text-white/80 bg-black/80 px-2 py-0.5 rounded border border-border backdrop-blur">
-                      ⏱ {m.duration}
+                      ⏱ {m.duration === "Unknown" ? "Unknown" : `${m.duration} (est.)`}
                     </span>
                   </div>
                 </div>

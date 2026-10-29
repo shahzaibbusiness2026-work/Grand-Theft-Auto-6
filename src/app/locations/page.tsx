@@ -40,25 +40,14 @@ function dbToCanonical(
     id: l.id,
     slug: l.slug || match?.slug || l.id,
     name: l.name,
-    district: l.district || match?.district || "Vice City Metro",
-    category:
-      (l.category as CanonicalLocation["category"]) ||
-      match?.category ||
-      "Point of Interest",
+    district: l.district || match?.district || "Unknown",
+    category: (l.category as CanonicalLocation["category"]) || match?.category || "Point of Interest",
     desc: l.description || match?.desc || "",
-    top: coordMatch?.[1] || match?.top || "50%",
-    left: coordMatch?.[2] || match?.left || "50%",
-    hours: l.hours || match?.hours || "Unknown",
-    threatLevel:
-      (l.threat_level as CanonicalLocation["threatLevel"]) ||
-      match?.threatLevel ||
-      "Low",
-    confidence:
-      (l.confidence as CanonicalLocation["confidence"]) ||
-      match?.confidence ||
-      "REPORTED",
-    source: l.source || match?.source || "Atlas Admin",
-    img: l.img || match?.img || "/img/map-dark.svg",
+    top: coordMatch?.[1] || match?.top || "",
+    left: coordMatch?.[2] || match?.left || "",
+    confidence: (l.confidence as CanonicalLocation["confidence"]) || match?.confidence || "RUMORED",
+    source: l.source || match?.source || "Unknown",
+    img: l.img || match?.img || "",
     verified: l.verification === "verified",
   };
 }

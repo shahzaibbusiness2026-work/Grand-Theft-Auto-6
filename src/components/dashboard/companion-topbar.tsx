@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Moon, Sun, Bell, ChevronDown, Menu, LogOut } from "lucide-react";
+import { Search, Moon, Sun, ChevronDown, Menu, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { CommandPalette } from "@/components/command-palette";
 import { logoutUser } from "@/lib/user-store";
@@ -28,7 +28,6 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
   const { resolvedTheme, setTheme } = useTheme();
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [notificationOpen, setNotificationOpen] = useState(false);
 
   function handleSignOut() {
     logoutUser();
@@ -38,7 +37,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
 
   return (
     <>
-      <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#070b14]/85 dark:bg-[#070b14]/85 bg-white/90 px-4 sm:px-6 backdrop-blur-xl transition-colors">
+      <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#070b14]/85 dark:bg-[#070b14]/85 bg-white/90 px-4 sm:px-6 backdrop-blur-xl transition-colors shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
         {/* Left: Mobile hamburger + Search bar */}
         <div className="flex items-center gap-3 flex-1 max-w-xl">
           {onMenuToggle && (
@@ -70,63 +69,24 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
 
         {/* Right: Controls & User Profile */}
         <div className="flex items-center gap-2 sm:gap-3 ml-4">
-          {/* Enhanced Theme switcher with Bright Mode Glow */}
+          {/* Theme switcher, icon only */}
           <button
             type="button"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
             className={cn(
-              "flex h-11 px-2.5 items-center gap-1.5 rounded-xl border transition-all active:scale-95 shadow-sm",
+              "flex h-11 w-11 items-center justify-center rounded-xl border transition-all active:scale-95 shadow-sm",
               resolvedTheme === "light"
                 ? "border-gold-light/60 bg-amber-50 text-gold-dark shadow-[0_0_12px_rgba(201,168,106,0.35)] ring-1 ring-gold-light/40"
                 : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-[#00F0FF]/40 hover:bg-white/[0.08] hover:text-[#00F0FF]"
             )}
-            title={`Switch to ${resolvedTheme === "dark" ? "Bright Mode" : "Dark Mode"}`}
+            title="Switch theme"
           >
             {resolvedTheme === "light" ? (
-              <>
-                <Sun className="h-4 w-4 text-gold fill-gold-light drop-shadow-[0_0_8px_rgba(201,168,106,0.9)] animate-pulse" />
-                <span className="hidden sm:inline font-mono text-xs font-black uppercase tracking-wider text-gold-dark">
-                  Bright
-                </span>
-              </>
+              <Sun className="h-4 w-4 text-gold fill-gold-light drop-shadow-[0_0_8px_rgba(201,168,106,0.9)] animate-pulse" />
             ) : (
-              <>
-                <Moon className="h-4 w-4 text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.7)]" />
-                <span className="hidden sm:inline font-mono text-xs font-black uppercase tracking-wider text-slate-400">
-                  Dark
-                </span>
-              </>
+              <Moon className="h-4 w-4 text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.7)]" />
             )}
           </button>
-
-          {/* Notifications button with badge */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setNotificationOpen((prev) => !prev)}
-              className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-slate-300 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
-              title="Notifications"
-            >
-              <Bell className="h-4 w-4" />
-              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-gold text-xs font-black text-slate-950 shadow-[0_0_8px_rgba(201,168,106,0.6)]">
-                1
-              </span>
-            </button>
-
-            {notificationOpen && (
-              <div className="absolute right-0 mt-2 w-72 rounded-2xl border border-white/15 bg-[#0c1220]/95 p-3 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 z-50">
-                <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                  <span className="font-display text-xs font-bold text-white">Notifications</span>
-                  <span className="text-xs text-gold-light font-semibold">1 New</span>
-                </div>
-                <div className="mt-2.5 p-2 rounded-xl bg-white/[0.04] border border-white/5 text-xs">
-                  <p className="font-semibold text-white">Trailer 2 Breakdown Active</p>
-                  <p className="text-xs text-slate-400 mt-0.5">24 locations mapped in Vice City.</p>
-                  <span className="text-xs text-slate-500 mt-1 block">10m ago</span>
-                </div>
-              </div>
-            )}
-          </div>
 
           {/* User Profile dropdown */}
           <div className="relative">
@@ -135,9 +95,11 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
               onClick={() => setProfileOpen((prev) => !prev)}
               className="flex items-center gap-2.5 rounded-xl border border-transparent p-1 sm:px-2 sm:py-1 transition-all hover:border-white/10 hover:bg-white/[0.04]"
             >
-              {/* Avatar circle — initials of the account's own name */}
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-yellow-400 text-xs font-black text-slate-950 shadow-[0_0_12px_rgba(201,168,106,0.4)]">
-                {initialsFor(userName)}
+              {/* Avatar circle — initials of the account's own name, premium gold ring */}
+              <div className="rounded-full bg-gradient-to-tr from-gold via-yellow-400 to-[#00F0FF] p-[2px] shadow-[0_0_16px_rgba(201,168,106,0.5)]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-yellow-400 text-xs font-black text-slate-950">
+                  {initialsFor(userName)}
+                </div>
               </div>
 
               {/* Text info */}
@@ -154,7 +116,6 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
               <div className="absolute right-0 mt-2 w-52 rounded-2xl border border-white/15 bg-[#0c1220]/95 p-2 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 z-50">
                 <div className="px-3 py-2 border-b border-white/10">
                   <p className="text-xs font-bold text-white">{userName}</p>
-                  <p className="text-xs text-cyan-400 font-mono">Vice City Legend · Lvl 12</p>
                 </div>
                 <div className="py-1">
                   <a

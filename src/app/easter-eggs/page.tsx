@@ -45,7 +45,7 @@ const EGGS: Egg[] = [
   {
     title: "NINE 1 NINE = E11EVEN",
     desc: "The nightclub in the trailers is unmistakably based on E11EVEN, the real 24/7 mega-club in downtown Miami. Miami locals clocked it instantly.",
-    status: "Confirmed in trailer",
+    status: "Community find",
     source: "Trailer 2",
   },
   {
@@ -63,7 +63,7 @@ const EGGS: Egg[] = [
   {
     title: "The Kalaga Mountain Lion",
     desc: "A mountain lion prowls Mount Kalaga National Park in the trailers, alongside confirmed flamingos and gators. Whether it's set dressing or something you'll dodge in the backcountry is one of launch's fun unknowns.",
-    status: "Confirmed in trailer",
+    status: "Community find",
     source: "Trailer 2",
   },
   {

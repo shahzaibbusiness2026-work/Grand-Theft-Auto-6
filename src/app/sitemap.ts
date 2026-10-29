@@ -3,7 +3,6 @@ import { getSeoSettings } from "@/lib/services/seo";
 import { getPublicGuides } from "@/lib/services/guides";
 import { createPublicClient } from "@/lib/supabase/public";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
-import { indexReady } from "@/lib/catalog-evidence";
 import { canonicalOrigin } from "@/lib/site-identity";
 import { characterEvidence } from "@/lib/character-evidence";
 export const revalidate = 3600;
@@ -101,20 +100,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: base + "/guides/" + g.slug,
         lastModified: realDate(g.updated_at),
       });
-  for (const [kind, entries] of [
-    ["vehicles", vehicles],
-    ["weapons", weapons],
-  ] as const)
-    for (const e of entries.filter(indexReady))
-      result.push({
-        url: base + "/" + kind + "/" + e.slug,
-        lastModified: realDate(
-          e.claims
-            .map((c) => c.reviewedAt)
-            .sort()
-            .at(-1),
-        ),
-      });
+  // Pre-launch gate (AdSense audit, 29 Oct 2026): vehicle/weapon detail
+  // pages each carry only a single "GTA VI appearance" claim with all
+  // statistics withheld, so they are thin content. They stay crawlable
+  // via hubs and are marked noindex on their own pages, and are NOT
+  // listed in the sitemap until launch, when verified statistics exist.
+  // The vehicles/weapons fetches above are kept so this file still
+  // fails loudly if the catalog service breaks, without publishing URLs.
+  void vehicles;
+  void weapons;
   for (const slug of Object.keys(characterEvidence))
     result.push({
       url: base + "/characters/" + slug,

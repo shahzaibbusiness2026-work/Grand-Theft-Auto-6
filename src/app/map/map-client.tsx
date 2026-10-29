@@ -8,49 +8,42 @@ const DISTRICT_GUIDES = [
   {
     name: "Vice City Downtown",
     desc: "The glittering neon metropolis of Leonida. High-rise penthouses, corporate headquarters, luxury dealerships, and intense underground syndicates.",
-    threat: "High Police Activity",
     img: "/img/apartment.jpg",
     tags: ["Safehouses", "Luxury Showrooms", "Ammu-Nation"],
   },
   {
     name: "Ocean Drive & South Beach",
     desc: "Sun-soaked beachfront strips, art-deco hotels, waterfront mod garages, and iconic late-night clubs like The Malibú.",
-    threat: "Medium Patrols",
     img: "/img/garage.jpg",
     tags: ["Mod Shops", "Nightclubs", "Waterfront"],
   },
   {
     name: "Leonida Keys",
     desc: "Vast archipelago of tropical islands, shallow coral reefs, smuggler marinas, hidden sunken caches, and coastal bank branches.",
-    threat: "Coastguard Patrols",
     img: "/img/boat.jpg",
     tags: ["Speedboats", "Submerged Loot", "Heists"],
   },
   {
     name: "Grassrivers Marshlands",
     desc: "Expansive untamed swamplands, wildlife sanctuaries, abandoned military silos, and mysterious extraterrestrial graffiti murals.",
-    threat: "Wildlife & Smugglers",
     img: "/img/ufo-mural.jpg",
     tags: ["Easter Eggs", "Airboats", "Wild Fauna"],
   },
   {
     name: "Port Gellhorn & Industrial",
     desc: "Heavy shipping cargo docks, industrial railyards, underground safehouses, container yards, and high-caliber weapon caches.",
-    threat: "Private Security",
     img: "/img/smg-gun.jpg",
     tags: ["Cargo Depots", "Weapons", "Escape Routes"],
   },
   {
     name: "Mount Kalaga National Park",
     desc: "Forested mountain wilderness, ranger stations, off-road trails, and panoramic lookouts. Confirmed as GTA 6's northern wilderness region.",
-    threat: "Remote / Wildlife",
-    img: "/img/hero-dark.jpg",
+    img: "",
     tags: ["Stunt Jumps", "Lookouts", "Off-Road"],
   },
   {
     name: "Ambrosia",
     desc: "Rural inland heartland with farmland, small towns, and backroad Americana. A quieter corner of Leonida with hidden secrets.",
-    threat: "Low Patrols",
     img: "/img/garage.jpg",
     tags: ["Farms", "Small Towns", "Backroads"],
   },
@@ -114,12 +107,8 @@ export function MapClient() {
                 </span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Districts
-                </span>
-                <span className="font-display text-lg font-black text-gold-light">
-                  6 Regions
-                </span>
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Districts</span>
+                <span className="font-display text-lg font-black text-gold-light">7 Districts</span>
               </div>
             </div>
           </div>
@@ -153,10 +142,10 @@ export function MapClient() {
             </p>
           </div>
           <Link
-            href="/dashboard"
+            href="/tracker"
             className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-xs font-bold text-foreground hover:text-foreground hover:border-gold/50 transition-all"
           >
-            <span>Open 100% Progress Tracker</span>
+            <span>Open Progress Tracker</span>
             <ChevronRight className="h-3.5 w-3.5 text-gold dark:text-gold-light" />
           </Link>
         </div>
@@ -168,16 +157,14 @@ export function MapClient() {
               className="group rounded-3xl border border-white/10 bg-[#070c18] overflow-hidden transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-2xl flex flex-col"
             >
               <div className="relative h-44 overflow-hidden bg-black/60">
-                <img
-                  loading="lazy"
-                  src={d.img}
-                  alt={d.name}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                {d.img ? (
+                  <img loading="lazy"
+                    src={d.img}
+                    alt={d.name}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : null}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#070c18] via-transparent to-black/30" />
-                <span className="absolute top-3 right-3 rounded-full bg-black/80 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-emerald-400 border border-emerald-500/30 backdrop-blur">
-                  Gameplay unverified
-                </span>
                 <div className="absolute bottom-3 left-4 right-4">
                   <h3 className="font-display text-lg font-black uppercase text-white drop-shadow-md">
                     {d.name}

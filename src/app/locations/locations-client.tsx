@@ -9,7 +9,6 @@ import {
   MapPin,
   Search,
   ExternalLink,
-  Clock,
   Car,
   Crosshair,
   HelpCircle,
@@ -48,7 +47,6 @@ export function LocationsClient({
 
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("All");
-  const [selectedThreat, setSelectedThreat] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const districts = useMemo(() => {
@@ -63,9 +61,6 @@ export function LocationsClient({
         return false;
       }
       if (selectedDistrict !== "All" && item.district !== selectedDistrict) {
-        return false;
-      }
-      if (selectedThreat !== "All" && item.threatLevel !== selectedThreat) {
         return false;
       }
 
@@ -96,29 +91,8 @@ export function LocationsClient({
 
       return true;
     });
-  }, [
-    locations,
-    selectedCategory,
-    selectedDistrict,
-    selectedThreat,
-    searchQuery,
-  ]);
+  }, [locations, selectedCategory, selectedDistrict, searchQuery]);
 
-
-  const threatColor = (level: string) => {
-    switch (level) {
-      case "Low":
-        return "text-emerald-400 bg-emerald-500/10 border-emerald-500/30";
-      case "Medium":
-        return "text-gold-light bg-gold/10 border-gold/30";
-      case "High":
-        return "text-orange-400 bg-orange-500/10 border-orange-500/30";
-      case "Restricted Area":
-        return "text-rose-400 bg-rose-500/10 border-rose-500/30";
-      default:
-        return "text-muted-foreground bg-muted border-border";
-    }
-  };
 
   return (
     <div className="space-y-8">
@@ -186,17 +160,6 @@ export function LocationsClient({
               ))}
             </select>
 
-            <select
-              value={selectedThreat}
-              onChange={(e) => setSelectedThreat(e.target.value)}
-              className="bg-card border border-border rounded-xl px-3 py-3 text-xs text-foreground focus:outline-none focus:border-primary"
-            >
-              <option value="All">All Danger Levels</option>
-              <option value="Low">Low Threat</option>
-              <option value="Medium">Medium Threat</option>
-              <option value="High">High Threat</option>
-              <option value="Restricted Area">Restricted Area</option>
-            </select>
           </div>
         </div>
 
@@ -245,7 +208,6 @@ export function LocationsClient({
               onClick={() => {
                 setSelectedCategory("All");
                 setSelectedDistrict("All");
-                setSelectedThreat("All");
                 setSearchQuery("");
               }}
               className="btn-secondary text-xs px-4 py-3 mt-4 inline-flex items-center gap-2"
@@ -263,27 +225,20 @@ export function LocationsClient({
                 <div>
                   {/* Thumbnail Image Header */}
                   <div className="relative h-44 w-full overflow-hidden bg-background">
-                    <Image
-                      src={item.img}
+                    {item.img ? (
+                      <Image
+                        src={item.img}
                       alt={`${item.name} - GTA 6 Location`}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-85 group-hover:opacity-100"
                       loading="lazy"
-                    />
+                      />
+                    ) : null}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none" />
 
                     {/* Top Badges */}
-                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                      <span
-                        className={cn(
-                          "text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded border backdrop-blur-md",
-                          threatColor(item.threatLevel),
-
-                        )}
-                      >
-                        {item.threatLevel}
-                      </span>
+                    <div className="absolute top-3 left-3 right-3 flex items-center justify-end">
                       <FavoriteButton type="locations" id={item.id} />
                     </div>
 
@@ -320,10 +275,6 @@ export function LocationsClient({
 
                     {/* Meta info chips */}
                     <div className="space-y-1.5 pt-1 text-xs font-mono text-muted-foreground">
-                      <div className="flex items-center gap-1.5">
-                        <Clock className="h-3 w-3 text-muted-foreground" />
-                        <span className="truncate">{item.hours}</span>
-                      </div>
 
                       {/* Associated Vehicles or Weapons */}
                       {(item.relatedVehicles?.length || 0) > 0 && (

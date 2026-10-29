@@ -24,7 +24,7 @@ export function ArticleCard({
       <div className="relative h-40 overflow-hidden">
         <SafeImage
           src={article.img}
-          alt=""
+          alt={article.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -69,7 +69,7 @@ export function PopularRow({ article }: { article: Article }) {
       <div className="relative h-11 w-14 shrink-0 overflow-hidden rounded-md">
         <SafeImage
           src={article.img}
-          alt=""
+          alt={article.title}
           fill
           sizes="56px"
           className="object-cover"

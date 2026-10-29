@@ -40,3 +40,7 @@ Final build, HTTP, browser and performance results are recorded in pull request 
 Use the tested commit and normal GitHub/Vercel release flow. Re-run representative public checks against the deployed host before saying a live issue is fixed. Preserve the navbar layout/content and the approved contrast-only color fix; verify three mobile trailer controls. A normal Git revert/prior verified deployment can roll back code. For CMS rollback, inspect current timestamps and subsequent editor changes before restoring any old fields; never overwrite a newer editorial revision blindly.
 
 Manual operational steps are in `privacy-operations.md`; private-data access and measurement steps are in `measurement-protocol-2026-10-28.md`. Never put account secrets, raw request records or private analytics exports into the public repository.
+
+## Final upstream reconciliation
+
+Integrated main through `6e2cddd`, retaining its weapon imagery, canonical-data withdrawals, title/link corrections and dashboard simplification. Retained the approved responsive catalog/comparison UI and three mobile trailers. Removed the withdrawn sample map pins and their featured rail; the accessible list is generated from current pins. New upstream pink active links receive the same approved contrast color. The DPS comparison bar now uses the edited selected-weapon inputs, matching the headline and copied summary.

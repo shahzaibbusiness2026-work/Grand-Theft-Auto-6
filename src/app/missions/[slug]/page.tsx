@@ -73,8 +73,8 @@ async function resolveMission(
           (row.difficulty as CanonicalMission["difficulty"]) ||
           canonical?.difficulty ||
           "Medium",
-        duration: row.duration || canonical?.duration || "15-20 min",
-        district: row.district || canonical?.district || "Vice City",
+        duration: row.duration || canonical?.duration || "Unknown",
+        district: row.district || canonical?.district || "Unknown",
         cashRewardDisplay:
           row.cash_reward_display || canonical?.cashRewardDisplay || "TBD",
         otherRewards: row.other_rewards || canonical?.otherRewards || [],
@@ -86,8 +86,8 @@ async function resolveMission(
           canonical?.confidence ||
           "SPECULATION",
         description: row.description || canonical?.description || "",
-        source: canonical?.source || "Atlas Admin",
-        img: canonical?.img || "/img/hero-dark.jpg",
+        source: canonical?.source || "Unknown",
+        img: canonical?.img || "",
         guideTips: canonical?.guideTips || [],
         choices: (canonical as any)?.choices || [],
         unlocks: (canonical as any)?.unlocks || [],
@@ -122,13 +122,13 @@ export async function generateMetadata({
       title: `${mission.title} — Fan Mission Concept`,
       description: `Fan concept: ${mission.description}`,
       url: `/missions/${mission.slug}`,
-      images: [mission.img],
+      images: mission.img ? [mission.img] : [],
     },
     twitter: {
       card: "summary_large_image",
       title: `${mission.title} — Fan Mission Concept`,
       description: `Fan concept: ${mission.description}`,
-      images: [mission.img],
+      images: mission.img ? [mission.img] : [],
     },
   };
 }
@@ -188,7 +188,7 @@ export default async function MissionDetailPage({
                 "@type": "WebPage",
                 name: `${mission.title} — GTA 6 Mission Concept`,
                 description: `Fan concept: ${mission.description}`,
-                image: mission.img,
+                ...(mission.img ? { image: mission.img } : {}),
               },
             ],
           }),
@@ -217,12 +217,14 @@ export default async function MissionDetailPage({
         {/* HERO BANNER */}
         <div className="card-surface relative overflow-hidden rounded-3xl border border-border shadow-2xl p-6 sm:p-10">
           <div className="absolute right-0 top-0 h-full w-full lg:w-2/3 opacity-70 dark:opacity-40">
-            <img
-              loading="lazy"
-              src={mission.img}
-              alt={mission.title}
-              className="h-full w-full object-cover"
-            />
+            {mission.img ? (
+              <img
+                loading="lazy"
+                src={mission.img}
+                alt={mission.title}
+                className="h-full w-full object-cover"
+              />
+            ) : null}
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           </div>
 
@@ -273,7 +275,7 @@ export default async function MissionDetailPage({
                   Duration
                 </span>
                 <span className="font-display text-sm font-black text-foreground">
-                  {mission.duration}
+                  {mission.duration === "Unknown" ? "Unknown" : `${mission.duration} (est.)`}
                 </span>
               </div>
               <div className="rounded-2xl border border-border bg-muted/70 p-3 text-center">

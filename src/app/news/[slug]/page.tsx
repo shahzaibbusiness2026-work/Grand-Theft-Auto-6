@@ -373,7 +373,7 @@ export default async function ArticleDetailPage({ params }: Props) {
                     <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded-md">
                       <SafeImage
                         src={a.img}
-                        alt=""
+                        alt={a.title}
                         fill
                         sizes="64px"
                         className="object-cover"

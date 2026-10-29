@@ -12,7 +12,6 @@ import {
   LocateFixed,
   Layers,
   X,
-  Sun,
   EyeOff,
   Flag,
   Star,
@@ -127,7 +126,7 @@ function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
     type: `${m.layer} ${m.category}`,
     district: m.category,
     desc: m.description || "Point of interest in Leonida.",
-    img: "/img/hero-dark.jpg",
+    img: "",
     hours: "Not confirmed",
     top: `${m.coordinates.y}%`,
     left: `${m.coordinates.x}%`,
@@ -140,84 +139,17 @@ function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
 }
 
 const CATEGORY_FILTERS = [
-  {
-    id: "all",
-    label: "Show All",
-    count: 312,
-    icon: Star,
-    color: "text-gold-light",
-    all: true,
-  },
-  {
-    id: "missions",
-    label: "Missions & Heists",
-    count: 48,
-    icon: Target,
-    color: "text-gold-light",
-  },
-  {
-    id: "garages",
-    label: "Garages & Safehouses",
-    count: 26,
-    icon: Warehouse,
-    color: "text-cyan-400",
-  },
-  {
-    id: "shops",
-    label: "Ammu-Nation & Shops",
-    count: 38,
-    icon: ShoppingBag,
-    color: "text-emerald-400",
-  },
-  {
-    id: "vehicles",
-    label: "Vehicles",
-    count: 63,
-    icon: Car,
-    color: "text-cyan-400",
-  },
-  {
-    id: "weapons",
-    label: "Weapons",
-    count: 45,
-    icon: Crosshair,
-    color: "text-orange-400",
-  },
-  {
-    id: "collectibles",
-    label: "Collectibles",
-    count: 62,
-    icon: Gem,
-    color: "text-purple-400",
-  },
-  {
-    id: "properties",
-    label: "Real Estate",
-    count: 30,
-    icon: Building2,
-    color: "text-indigo-400",
-  },
-  {
-    id: "activities",
-    label: "Stunts & Racing",
-    count: 40,
-    icon: Flame,
-    color: "text-yellow-400",
-  },
-  {
-    id: "easter-eggs",
-    label: "Secrets & Lore",
-    count: 21,
-    icon: Egg,
-    color: "text-teal-400",
-  },
-  {
-    id: "poi",
-    label: "Points of Interest",
-    count: 52,
-    icon: MapPin,
-    color: "text-gold-light",
-  },
+  { id: "all", label: "Show All", icon: Star, color: "text-gold-light", all: true },
+  { id: "missions", label: "Missions & Heists", icon: Target, color: "text-gold-light" },
+  { id: "garages", label: "Garages & Safehouses", icon: Warehouse, color: "text-cyan-400" },
+  { id: "shops", label: "Ammu-Nation & Shops", icon: ShoppingBag, color: "text-emerald-400" },
+  { id: "vehicles", label: "Vehicles", icon: Car, color: "text-cyan-400" },
+  { id: "weapons", label: "Weapons", icon: Crosshair, color: "text-orange-400" },
+  { id: "collectibles", label: "Collectibles", icon: Gem, color: "text-purple-400" },
+  { id: "properties", label: "Real Estate", icon: Building2, color: "text-indigo-400" },
+  { id: "activities", label: "Stunts & Racing", icon: Flame, color: "text-yellow-400" },
+  { id: "easter-eggs", label: "Secrets & Lore", icon: Egg, color: "text-teal-400" },
+  { id: "poi", label: "Points of Interest", icon: MapPin, color: "text-gold-light" },
 ];
 
 const DISTRICTS = [
@@ -299,7 +231,7 @@ const POIS: MapPOI[] = [
     category: "shops",
     type: "Weapon Shop",
     district: "Downtown Vice City",
-    desc: "Buy military weapons, heavy body armor, ammo and specialized weapon attachments.",
+    desc: "Ammu-Nation storefront spotted in Trailer 1.",
     source: "Trailer 1 Ammu-Nation Exterior Banner",
     img: "/img/ammu-nation.jpg",
     hours: "Not confirmed",
@@ -310,158 +242,14 @@ const POIS: MapPOI[] = [
     verified: true,
   },
   {
-    id: "poi-garage",
-    title: "Garage – Ocean Drive",
-    category: "garages",
-    type: "Garage & Mod Shop",
-    district: "Ocean Drive Waterfront",
-    desc: "Vehicle storage, custom widebody kits, performance turbo tuning, and instant respray.",
-    source: "Community research",
-    img: "/img/garage.jpg",
-    hours: "Not confirmed",
-    top: "56%",
-    left: "64%",
-    color: "bg-cyan-500 dark:bg-[#00F0FF]",
-    icon: Warehouse,
-    verified: false,
-  },
-  {
-    id: "poi-suite",
-    title: "High-End Bayfront Penthouse",
-    category: "properties",
-    type: "Safehouse / Property",
-    district: "Vice City Downtown",
-    desc: "Luxury penthouse with 10-car garage, private helipad, and panoramic Biscayne bay view.",
-    source: "Community research",
-    img: "/img/apartment.jpg",
-    hours: "Private Residence",
-    top: "51%",
-    left: "61%",
-    color: "bg-indigo-500",
-    icon: Building2,
-    verified: false,
-  },
-  {
-    id: "poi-cache",
-    title: "Hidden Smuggler Cache #12",
-    category: "collectibles",
-    type: "Submerged Collectible",
-    district: "Biscayne Bay Reef",
-    desc: "Smuggler's waterproof cargo chest submerged beneath coastal coral reef.",
-    source: "Community research",
-    img: "/img/cache-chest.jpg",
-    hours: "Requires Scuba Gear",
-    top: "62%",
-    left: "67%",
-    color: "bg-purple-500",
-    icon: Gem,
-    verified: false,
-  },
-  {
-    id: "poi-stunt",
-    title: "Stunt Jump #8 – Escobar Causeway",
-    category: "activities",
-    type: "Unique Stunt Jump",
-    district: "Escobar Causeway Ramp",
-    desc: "Highway bridge ramp launch over dual express lanes with cinematic slow-mo camera.",
-    source: "Community research",
-    img: "/img/stunt-bike.jpg",
-    hours: "Not confirmed",
-    top: "49%",
-    left: "53%",
-    color: "bg-gold",
-    icon: Star,
-    verified: false,
-  },
-  {
-    id: "poi-heist",
-    title: "Keys Depository Branch",
-    category: "story",
-    type: "Main Story Heist",
-    district: "Leonida Keys",
-    desc: "Main story bank heist target with Lucia and Jason targeting regional depository vault.",
-    source: "Community research",
-    img: "/img/boat.jpg",
-    hours: "Chapter 3 Mission",
-    top: "73%",
-    left: "44%",
-    color: "bg-rose-500",
-    icon: Star,
-    verified: false,
-  },
-  {
-    id: "poi-ufo",
-    title: "Cryptic UFO Swamplands Mural",
-    category: "easter_eggs",
-    type: "Mystery / Easter Egg",
-    district: "Grassrivers Marshlands",
-    desc: "Cryptic extraterrestrial artwork painted across abandoned cold-war military radar dome.",
-    source: "Community research",
-    img: "/img/ufo-mural.jpg",
-    hours: "Not confirmed",
-    top: "32%",
-    left: "54%",
-    color: "bg-emerald-500",
-    icon: Egg,
-    verified: false,
-  },
-  {
-    id: "poi-weapon-smg",
-    title: "Tactical SMG Drop",
-    category: "weapons",
-    type: "Rare Weapon Pickup",
-    district: "Port Gellhorn Docks",
-    desc: "Military suppressed submachine gun hidden inside high-security shipping depot container.",
-    source: "Community research",
-    img: "/img/smg-gun.jpg",
-    hours: "Unrestricted Pickup",
-    top: "41%",
-    left: "35%",
-    color: "bg-gold",
-    icon: Crosshair,
-    verified: false,
-  },
-  {
-    id: "poi-north-wilds",
-    title: "Northern Wilds Fire Lookout",
-    category: "poi",
-    type: "Scenic Vantage Point",
-    district: "Northern Wilds",
-    desc: "Mountain ridge fire lookout tower with 360-degree panorama spanning Leonida wilderness.",
-    source: "Community research",
-    img: "/img/hero-dark.jpg",
-    hours: "Not confirmed",
-    top: "22%",
-    left: "34%",
-    color: "bg-gold",
-    icon: MapPin,
-    verified: false,
-  },
-  {
-    id: "poi-port-gellhorn",
-    title: "Port Gellhorn Underground Safehouse",
-    category: "safehouses",
-    type: "Safehouse",
-    district: "Port Gellhorn",
-    desc: "Low-profile industrial safehouse with escape tunnel to docks, armory, and vehicle stash.",
-    source: "Community research",
-    img: "/img/garage.jpg",
-    hours: "Story Unlocked",
-    top: "44%",
-    left: "33%",
-    color: "bg-emerald-500",
-    icon: Home,
-    verified: false,
-  },
-  {
     id: "poi-club",
     title: "Malibú Neon Nightclub",
     category: "activities",
     type: "Nightlife & Syndicate",
     district: "Ocean Drive Waterfront",
-    desc: "Legendary 80s-inspired oceanfront nightclub. Hotspot for Vice City underground contacts.",
+    desc: "Nightclub interior spotted in Trailer 1.",
     source: "Trailer 1 Club Interior Shots",
-    img: "/img/vice-sunset.svg",
+    img: "",
     hours: "Not confirmed",
     top: "58%",
     left: "62%",
@@ -470,44 +258,12 @@ const POIS: MapPOI[] = [
     verified: true,
   },
   {
-    id: "poi-supercar",
-    title: "Grotti Visione Exotic Dealership",
-    category: "vehicles",
-    type: "Luxury Showroom",
-    district: "Downtown Vice City",
-    desc: "Exclusive showroom housing the fastest exotic hypercars and customized test vehicles.",
-    source: "Community research",
-    img: "/img/car-purple.jpg",
-    hours: "Not confirmed",
-    top: "47%",
-    left: "60%",
-    color: "bg-gold",
-    icon: Car,
-    verified: false,
-  },
-  {
-    id: "poi-heli",
-    title: "Vice International Helipad",
-    category: "vehicles",
-    type: "Aviation Hub",
-    district: "Escobar International",
-    desc: "Charter flight landing pad with available police and civilian transport helicopters.",
-    source: "Community research",
-    img: "/img/heli.jpg",
-    hours: "Not confirmed",
-    top: "54%",
-    left: "51%",
-    color: "bg-cyan-500",
-    icon: Car,
-    verified: false,
-  },
-  {
     id: "poi-keys-docks",
     title: "Smuggler Marina & Speedboats",
     category: "vehicles",
     type: "Marina",
     district: "Leonida Keys",
-    desc: "Deep-sea marina docked with high-speed offshore powerboats and jet-skis.",
+    desc: "Keys marina and waterways spotted in Trailer 1.",
     source: "Trailer 1 Keys Bridge & Waterways",
     img: "/img/boat.jpg",
     hours: "Not confirmed",
@@ -517,122 +273,7 @@ const POIS: MapPOI[] = [
     icon: Car,
     verified: true,
   },
-  {
-    id: "poi-ambrosia-refinery",
-    title: "Allied Crystal Sugar Refinery",
-    category: "locations",
-    type: "Industrial Landmark",
-    district: "Ambrosia",
-    desc: "Massive sugar refinery dominating Ambrosia — company town centerpiece, biker gang territory.",
-    source: "Community research",
-    img: "/img/hero-dark.jpg",
-    hours: "Restricted Area",
-    top: "28%",
-    left: "48%",
-    color: "bg-orange-600",
-    icon: Building2,
-    verified: false,
-  },
-  {
-    id: "poi-ambrosia-garage",
-    title: "Biker Garage & Chop Shop",
-    category: "garages",
-    type: "Garage & Mod Shop",
-    district: "Ambrosia",
-    desc: "Biker gang-run chop shop — custom choppers, off-road mods, no questions asked.",
-    source: "Community research",
-    img: "/img/garage.jpg",
-    hours: "Not confirmed",
-    top: "30%",
-    left: "52%",
-    color: "bg-cyan-500 dark:bg-[#00F0FF]",
-    icon: Warehouse,
-    verified: false,
-  },
-  {
-    id: "poi-kalaga-trails",
-    title: "Mount Kalaga Trailhead",
-    category: "collectibles",
-    type: "Wilderness Area",
-    district: "Mount Kalaga National Park",
-    desc: "Trailhead for hunting, fishing, and off-road adventures in the northern wilderness.",
-    source: "Community research",
-    img: "/img/cache-chest.jpg",
-    hours: "Not confirmed",
-    top: "18%",
-    left: "40%",
-    color: "bg-purple-500",
-    icon: Gem,
-    verified: false,
-  },
-  {
-    id: "poi-kalaga-lookout",
-    title: "Kalaga Summit Lookout",
-    category: "locations",
-    type: "Scenic Viewpoint",
-    district: "Mount Kalaga National Park",
-    desc: "Highest point in Leonida — panoramic views, hidden collectible caches nearby.",
-    source: "Community research",
-    img: "/img/hero-dark.jpg",
-    hours: "Not confirmed",
-    top: "15%",
-    left: "38%",
-    color: "bg-emerald-600",
-    icon: MapPin,
-    verified: false,
-  },
 ].map(publicMapPoi);
-
-const FOUND_ON_MAP_RAIL = [
-  {
-    title: "Hidden Cache #12",
-    poiId: "poi-cache",
-    type: "Collectible",
-    img: "/img/cache-chest.jpg",
-    icon: Gem,
-    color: "text-gold-light",
-  },
-  {
-    title: "Stunt Jump #8",
-    poiId: "poi-stunt",
-    type: "Activity",
-    img: "/img/stunt-bike.jpg",
-    icon: Star,
-    color: "text-purple-400",
-  },
-  {
-    title: "Garage – Ocean Drive",
-    poiId: "poi-garage",
-    type: "Garage",
-    img: "/img/garage.jpg",
-    icon: Warehouse,
-    color: "text-cyan-400",
-  },
-  {
-    title: "Tactical SMG Drop",
-    poiId: "poi-weapon-smg",
-    type: "Weapon",
-    img: "/img/smg-gun.jpg",
-    icon: Crosshair,
-    color: "text-rose-400",
-  },
-  {
-    title: "High-End Penthouse",
-    poiId: "poi-suite",
-    type: "Property",
-    img: "/img/apartment.jpg",
-    icon: Building2,
-    color: "text-indigo-400",
-  },
-  {
-    title: "UFO Swamplands Mural",
-    poiId: "poi-ufo",
-    type: "Easter Egg",
-    img: "/img/ufo-mural.jpg",
-    icon: Egg,
-    color: "text-emerald-400",
-  },
-];
 
 // Coordinate system bounds (virtual canvas width: 1400, height: 1050)
 const CANVAS_W = 1400;
@@ -1455,29 +1096,23 @@ export function SatelliteInteractiveMap({
               </button>
             </div>
 
-            <div className="relative mt-3 h-36 overflow-hidden rounded-xl border border-border bg-black/60 shadow-inner">
-              <img
-                src={selectedPOI.img}
-                alt={selectedPOI.title}
-                className="h-full w-full object-cover"
-              />
-              <span className="absolute left-2 top-2 rounded bg-black/75 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-gold-light backdrop-blur border border-border">
-                {selectedPOI.type}
-              </span>
-            </div>
+            {selectedPOI.img ? (
+              <div className="relative mt-3 h-36 overflow-hidden rounded-xl border border-border bg-black/60 shadow-inner">
+                <img
+                  src={selectedPOI.img}
+                  alt={selectedPOI.title}
+                  className="h-full w-full object-cover"
+                />
+                <span className="absolute left-2 top-2 rounded bg-black/75 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-gold-light backdrop-blur border border-border">
+                  {selectedPOI.type}
+                </span>
+              </div>
+            ) : null}
 
             <p className="mt-3 text-xs leading-relaxed text-muted-foreground font-medium">
               {selectedPOI.desc}
             </p>
 
-            <div className="mt-3 flex items-center justify-between rounded-xl border border-border bg-black/40 px-3 py-2 text-xs">
-              <span className="flex items-center gap-1.5 text-muted-foreground text-xs">
-                <Sun className="h-3.5 w-3.5 text-gold-light" /> Opening hours:
-              </span>
-              <span className="font-bold text-white text-xs font-mono">
-                {selectedPOI.hours}
-              </span>
-            </div>
 
             {/* Evidence: source, verification, added date */}
             <div className="mt-3 space-y-1.5 rounded-xl border border-border bg-black/40 px-3 py-2.5 text-xs">
@@ -1864,61 +1499,7 @@ export function SatelliteInteractiveMap({
         </details>
       )}
 
-      {/* ================================================================= */}
-      {/* BOTTOM CAROUSEL: RECENTLY FOUND ON MAP                            */}
-      {/* ================================================================= */}
-      {!isFullscreen && (
-        <div className="mt-8 space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="font-display text-sm font-black uppercase tracking-wider text-foreground">
-                Provisional Fan-Map Locations
-              </h2>
-              <p className="text-xs text-muted-foreground">
-                Click any key location below to center the satellite camera
-              </p>
-            </div>
-            <Link
-              href="/tracker"
-              className="text-xs font-bold text-accent hover:underline"
-            >
-              Checklist readiness →
-            </Link>
-          </div>
 
-          <div
-            tabIndex={0}
-            role="region"
-            aria-label="Scrollable featured fan-map pins"
-            className="flex gap-4 overflow-x-auto pb-2"
-          >
-            {FOUND_ON_MAP_RAIL.map((r) => {
-              const matchedPOI = allPOIs.find((p) => p.id === r.poiId);
-              return (
-                <button
-                  type="button"
-                  key={r.title}
-                  onClick={() => {
-                    if (matchedPOI) focusOnPOI(matchedPOI);
-                  }}
-                  className={`dark-panel ${mapStyles.darkSurface} group text-left w-48 shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-border bg-[#070c18] transition-all hover:-translate-y-1 hover:border-gold/60 shadow-xl`}
-                >
-                  <div className="relative h-24 overflow-hidden bg-black/50">
-                    <img
-                      loading="lazy"
-                      decoding="async"
-                      fetchPriority="low"
-                      width={384}
-                      height={192}
-                      src={r.img}
-                      alt={r.title}
-                      className="h-full w-full object-cover transition-transform group-hover:scale-110 duration-300"
-                    />
-                    <span
-                      className={cn(
-                        mapStyles.conceptBadge,
-                        "absolute left-2 top-2 rounded px-1.5 py-0.5 text-xs font-black uppercase tracking-wider shadow-sm",
-                      )}
                     >
                       Fan concept
                     </span>

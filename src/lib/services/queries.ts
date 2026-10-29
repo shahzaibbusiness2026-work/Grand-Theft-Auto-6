@@ -61,21 +61,21 @@ import { getMissions, MissionRecord } from "./missions";
 export interface DashboardVehicleItem {
   id: string;
   name: string;
-  class: string;
-  topSpeed: string;
+  class?: string;
+  topSpeed?: string;
   acceleration?: string;
-  priceDisplay: string;
-  img: string;
+  priceDisplay?: string;
+  img?: string;
   manufacturer?: string;
 }
 
 export interface DashboardWeaponItem {
   id: string;
   name: string;
-  category: string;
-  damage: string;
+  category?: string;
+  damage?: string;
   range?: string;
-  acquisitionMethod: string;
+  acquisitionMethod?: string;
   priceDisplay?: string;
   rarity?: string;
   attachments?: string[];
@@ -190,12 +190,12 @@ export async function getDashboardStats(): Promise<DashboardStats> {
         }) => ({
           id: row.id,
           name: row.name,
-          class: row.class || "Sports",
-          topSpeed: row.top_speed || "180 mph",
-          acceleration: row.acceleration || "3.5s",
-          priceDisplay: row.price_display || "$150,000",
-          img: Array.isArray(row.images) && row.images[0] ? row.images[0] : "/img/car-purple.jpg",
-          manufacturer: row.manufacturer || "Grotti",
+          class: row.class || "",
+          topSpeed: row.top_speed || "",
+          acceleration: row.acceleration || "",
+          priceDisplay: row.price_display || "",
+          img: Array.isArray(row.images) && row.images[0] ? row.images[0] : "",
+          manufacturer: row.manufacturer || "",
         })
       );
     }
@@ -216,12 +216,12 @@ export async function getDashboardStats(): Promise<DashboardStats> {
         }) => ({
           id: row.id,
           name: row.name,
-          category: row.category || "Assault Rifle",
-          damage: row.damage || "60/100",
-          range: row.range || "65m",
-          acquisitionMethod: row.acquisition_method || "Ammu-Nation",
-          priceDisplay: row.price_display || "$10,000",
-          rarity: row.rarity || "Common",
+          category: row.category || "",
+          damage: row.damage || "",
+          range: row.range || "",
+          acquisitionMethod: row.acquisition_method || "",
+          priceDisplay: row.price_display || "",
+          rarity: row.rarity || "",
           attachments: Array.isArray(row.attachments) ? row.attachments : [],
         })
       );

@@ -96,7 +96,7 @@ function rowToAdminArticle(row: DatabaseArticleRow): AdminArticle {
     scheduledFor: row.scheduled_for || undefined,
     updatedAt: row.updated_at || new Date().toISOString(),
     views: row.views || 0,
-    readTime: row.read_time || "4 min read",
+    readTime: row.read_time || readingTime(row.content || row.excerpt || ""),
     tags: row.tags || ["GTA 6"],
     coverImage: row.cover_image,
     seoTitle: row.seo_title || undefined,

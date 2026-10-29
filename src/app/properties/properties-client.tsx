@@ -263,14 +263,16 @@ export function PropertiesClient({
                 <div>
                   {/* Top Image */}
                   <div className="relative h-48 w-full overflow-hidden bg-background">
-                    <Image
-                      src={item.img}
-                      alt={`${item.name} - GTA 6 Property (${item.type})`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-85 group-hover:opacity-100"
-                      loading="lazy"
-                    />
+                    {item.img ? (
+                      <Image
+                        src={item.img}
+                        alt={`${item.name} - GTA 6 Property (${item.type})`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-85 group-hover:opacity-100"
+                        loading="lazy"
+                      />
+                    ) : null}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none" />
 
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
@@ -344,7 +346,7 @@ export function PropertiesClient({
                         "text-xs px-3 py-2.5 rounded-lg font-semibold border transition-colors flex items-center gap-1.5",
                         isCompared
                           ? "bg-primary text-primary-foreground border-primary"
-                          : "border-border bg-muted/80 text-muted-foreground hover:text-foreground hover:border-slate-600",
+                          : "border-border bg-muted/80 text-muted-foreground hover:text-foreground hover:border-slate-600"
                       )}
                     >
                       <ArrowRightLeft className="h-3 w-3" />

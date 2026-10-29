@@ -38,8 +38,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Animals & Wildlife",
         subtitle: "Alligators, dogs, wild animals and more",
         href: "/gta-6-world/animals-wildlife",
-        image: "/img/trailer-keys-marina.webp",
-        imageAlt: "Trailer still: a marina on the Leonida Keys",
+        image: "",
+        imageAlt: "",
       },
       {
         title: "Birds & Marine Life",
@@ -88,8 +88,8 @@ export const WORLD_SECTIONS: WorldSection[] = [
         title: "Social Media & Apps",
         subtitle: "In-game social platforms and apps",
         href: "/gta-6-world/social-media-apps",
-        image: "/img/trailer-lucia-call.webp",
-        imageAlt: "Lucia on a phone call",
+        image: "",
+        imageAlt: "",
       },
       {
         title: "TV Shows & Media",

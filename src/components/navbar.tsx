@@ -65,7 +65,6 @@ const LINKS: NavLink[] = [
   },
   { href: "/missions", label: "Missions", menu: [{ href: "/missions", label: "All Missions" }, { href: "/tracker", label: "100% Tracker" }] },
   { href: "/map", label: "Map" },
-  { href: "/gta-6-world", label: "GTA 6 World" },
 ];
 
 type MoreLink = { href: string; label: string; icon: LucideIcon };
@@ -369,11 +368,25 @@ export function Navbar() {
             )}
           </div>
 
+          {/* GTA6, after Tools */}
+          <Link
+            href="/gta-6-world"
+            aria-current={isActive("/gta-6-world") ? "page" : undefined}
+            className={cn(
+              "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
+              isActive("/gta-6-world")
+                ? "bg-[#FF2E9A] text-slate-950 font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
+                : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+            )}
+          >
+            GTA6
+          </Link>
+
           {/* News dropdown after Tools dropdown: label goes to /news, chevron reveals Blog */}
           <SplitNavDropdown
             href="/news"
             label="News"
-            menu={[{ href: "/blog", label: "Blog" }]}
+            menu={[{ href: "/news", label: "All News" }]}
             pathname={pathname}
           />
         </nav>
@@ -611,6 +624,22 @@ export function Navbar() {
               )}
             </div>
 
+            {/* GTA6, after Tools */}
+            <Link
+              href="/gta-6-world"
+              prefetch={true}
+              onClick={() => setMobileOpen(false)}
+              aria-current={isActive("/gta-6-world") ? "page" : undefined}
+              className={cn(
+                "flex min-h-[48px] w-full items-center rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
+                isActive("/gta-6-world")
+                  ? "bg-[#FF2E9A] text-slate-950 font-bold"
+                  : "text-foreground/90 hover:bg-muted hover:text-[#FF2E9A]"
+              )}
+            >
+              GTA6
+            </Link>
+
             {/* News accordion: label goes to /news, chevron reveals Blog */}
             <div className="flex flex-col">
               <div
@@ -653,18 +682,18 @@ export function Navbar() {
               {openMobileSection === "news" && (
                 <div className="flex flex-col gap-0.5 pb-1 pl-3">
                   <Link
-                    href="/blog"
+                    href="/news"
                     prefetch={true}
                     onClick={() => setMobileOpen(false)}
-                    aria-current={pathname === "/blog" ? "page" : undefined}
+                    aria-current={pathname === "/news" ? "page" : undefined}
                     className={cn(
                       "flex min-h-[44px] items-center rounded-lg px-4 text-sm font-medium tracking-wide transition-colors",
-                      pathname === "/blog"
+                      pathname === "/news"
                         ? "bg-[#FF2E9A] text-slate-950 font-bold"
                         : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
                     )}
                   >
-                    Blog
+                    All News
                   </Link>
                 </div>
               )}

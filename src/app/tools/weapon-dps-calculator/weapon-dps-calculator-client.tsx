@@ -176,10 +176,10 @@ export function WeaponDpsCalculatorClient() {
     () =>
       WEAPONS.map((w) => ({
         name: w.name,
-        dps: dpsFor(w, activeAttachments),
+        dps: dpsFor(w.name === weaponName ? weapon : w, activeAttachments),
         selected: w.name === weaponName,
       })).sort((a, b) => b.dps - a.dps),
-    [activeAttachments, weaponName],
+    [activeAttachments, weaponName, weapon],
   );
 
   const maxDps = Math.max(...comparison.map((c) => c.dps), 1);

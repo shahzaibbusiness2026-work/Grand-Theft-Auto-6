@@ -45,11 +45,8 @@ function dbToCanonical(
   // A community-researched source can never support an "Observed in Official
   // Media" or "Credible Report" badge: force the honest "Community Identified"
   // tier (RUMORED) whenever the resolved source is community research.
-  const resolvedConfidence =
-    (m.confidence as CanonicalMission["confidence"]) ||
-    match?.confidence ||
-    "REPORTED";
-  const resolvedSource = match?.source || "Atlas Admin";
+  const resolvedConfidence = (m.confidence as CanonicalMission["confidence"]) || match?.confidence || "RUMORED";
+  const resolvedSource = match?.source || "Unknown";
   const confidence =
     resolvedSource === "Community research" &&
     (resolvedConfidence === "CONFIRMED" || resolvedConfidence === "REPORTED")
@@ -59,20 +56,11 @@ function dbToCanonical(
     id: m.id,
     slug: m.slug || match?.slug || m.id,
     title: m.name,
-    type:
-      (m.mission_type as CanonicalMission["type"]) ||
-      match?.type ||
-      "Main Story",
-    character:
-      (m.protagonist as CanonicalMission["character"]) ||
-      match?.character ||
-      "Both",
-    difficulty:
-      (m.difficulty as CanonicalMission["difficulty"]) ||
-      match?.difficulty ||
-      "Medium",
-    duration: m.duration || match?.duration || "15-20 min",
-    district: m.district || match?.district || "Vice City",
+    type: (m.mission_type as CanonicalMission["type"]) || match?.type || "Main Story",
+    character: (m.protagonist as CanonicalMission["character"]) || match?.character || "Both",
+    difficulty: (m.difficulty as CanonicalMission["difficulty"]) || match?.difficulty || "Medium",
+    duration: m.duration || match?.duration || "Unknown",
+    district: m.district || match?.district || "Unknown",
     cashReward: match?.cashReward ?? null,
     cashRewardDisplay:
       m.cash_reward_display || match?.cashRewardDisplay || "TBD",
@@ -87,7 +75,7 @@ function dbToCanonical(
     source: resolvedSource,
     description: m.description || match?.description || "",
     guideTips: match?.guideTips || [],
-    img: match?.img || "/img/hero-dark.jpg",
+    img: match?.img || "",
   };
 }
 
@@ -155,12 +143,11 @@ export default async function MissionsPage() {
         </div>
 
         {/* Global Live Stats Counter */}
-        <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border sm:grid-cols-4 rounded-2xl shadow-xl border border-border">
+        <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border sm:grid-cols-3 rounded-2xl shadow-xl border border-border">
           {[
-            ["8+", "Story Arcs & Heists"],
-            ["100%", "Trailer-Sourced"],
+            [String(missions.length), "Missions Listed"],
             ["Lucia & Jason", "Dual Protagonists"],
-            ["$480K+", "Top Vault Score"],
+            ["Pre-Release", "Expected List"],
           ].map(([v, l]) => (
             <div
               key={l}

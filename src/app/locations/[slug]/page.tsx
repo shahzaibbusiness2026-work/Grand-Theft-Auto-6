@@ -4,8 +4,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   MapPin,
-  Clock,
-  ShieldAlert,
   ArrowLeft,
   ChevronRight,
   Car,
@@ -16,6 +14,8 @@ import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
 import {
   canonicalLocations,
+  canonicalVehicles,
+  canonicalWeapons,
   type CanonicalLocation,
 } from "@/lib/canonical-data";
 import { getLocations } from "@/lib/services/locations";
@@ -70,22 +70,14 @@ async function resolveLocation(
           canonical?.category ||
           "Point of Interest",
         desc: row.description || canonical?.desc || "",
-        top: coordMatch?.[1] || canonical?.top || "50%",
-        left: coordMatch?.[2] || canonical?.left || "50%",
-        hours: row.hours || canonical?.hours || "Unknown",
-        threatLevel:
-          (row.threat_level as CanonicalLocation["threatLevel"]) ||
-          canonical?.threatLevel ||
-          "Low",
+        top: coordMatch?.[1] || canonical?.top || "",
+        left: coordMatch?.[2] || canonical?.left || "",
         relatedVehicles: canonical?.relatedVehicles,
         relatedWeapons: canonical?.relatedWeapons,
         relatedMissions: canonical?.relatedMissions,
-        confidence:
-          (row.confidence as CanonicalLocation["confidence"]) ||
-          canonical?.confidence ||
-          "SPECULATION",
-        source: row.source || canonical?.source || "Atlas Admin",
-        img: row.img || canonical?.img || "/img/map-dark.svg",
+        confidence: (row.confidence as CanonicalLocation["confidence"]) || canonical?.confidence || "SPECULATION",
+        source: row.source || canonical?.source || "Unknown",
+        img: row.img || canonical?.img || "",
         verified: row.verification === "verified",
       });
     }
@@ -93,6 +85,27 @@ async function resolveLocation(
     // DB unreachable — canonical lookup stands
   }
   return canonical ? publicLocation(canonical) : undefined;
+}
+
+/** Resolve a catalog slug to a display name + detail link. Raw slugs are
+ * never shown to visitors; unknown slugs fall back to a formatted name. */
+function formatSlug(slug: string): string {
+  return slug
+    .split("-")
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ");
+}
+function vehicleAsset(slug: string): { label: string; href: string | null } {
+  const entry = canonicalVehicles.find((v) => v.slug === slug || v.id === slug);
+  return entry
+    ? { label: entry.name, href: `/vehicles/${entry.slug}` }
+    : { label: formatSlug(slug), href: null };
+}
+function weaponAsset(slug: string): { label: string; href: string | null } {
+  const entry = canonicalWeapons.find((w) => w.slug === slug || w.id === slug);
+  return entry
+    ? { label: entry.name, href: `/weapons/${entry.slug}` }
+    : { label: formatSlug(slug), href: null };
 }
 
 export async function generateStaticParams() {
@@ -133,20 +146,6 @@ export default async function LocationDetailPage({ params }: PageProps) {
     .filter((l) => l.id !== loc.id && l.district === loc.district)
     .slice(0, 3);
 
-  const threatColor = (level: string) => {
-    switch (level) {
-      case "Low":
-        return "text-emerald-400 bg-emerald-500/10 border-emerald-500/30";
-      case "Medium":
-        return "text-gold-light bg-gold/10 border-gold/30";
-      case "High":
-        return "text-orange-400 bg-orange-500/10 border-orange-500/30";
-      case "Restricted Area":
-        return "text-rose-400 bg-rose-500/10 border-rose-500/30";
-      default:
-        return "text-muted-foreground bg-muted border-border";
-    }
-  };
 
   return (
     <SiteShell>
@@ -228,17 +227,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
                   <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-primary/20 text-primary border border-primary/30">
                     {loc.category}
                   </span>
-                  <span
-                    className={`text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded border ${threatColor(
-                      loc.threatLevel,
-                    )}`}
-                  >
-                    Gameplay: unverified
-                  </span>
-                  <ConfidenceBadge
-                    confidence={loc.confidence}
-                    source={loc.source}
-                  />
+                  <ConfidenceBadge confidence={loc.confidence} source={loc.source} />
                 </div>
                 <FavoriteButton type="locations" id={loc.id} />
               </div>
@@ -258,50 +247,31 @@ export default async function LocationDetailPage({ params }: PageProps) {
             </div>
 
             {/* Photo / Visual */}
-            <div className="card-carbon overflow-hidden">
-              <div className="relative h-72 sm:h-96 w-full bg-background">
-                <img
-                  loading="lazy"
-                  src={loc.img}
-                  alt={loc.name}
-                  className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
-                  <span className="font-mono text-muted-foreground min-w-0 truncate">
-                    Map Grid: Top {loc.top} / Left {loc.left}
-                  </span>
-                  <Link
-                    href={`/map?poi=${loc.id}&top=${loc.top}&left=${loc.left}`}
-                    className="btn-primary text-xs px-3 py-2.5 min-h-[44px] font-bold flex items-center gap-1.5"
-                  >
-                    <Navigation className="h-3.5 w-3.5" /> Open fan-map pin
-                  </Link>
+            {loc.img ? (
+              <div className="card-carbon overflow-hidden">
+                <div className="relative h-72 sm:h-96 w-full bg-background">
+                  <img loading="lazy" src={loc.img} alt={loc.name} className="h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+                  {loc.top && loc.left ? (
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
+                      <span className="font-mono text-muted-foreground min-w-0 truncate">
+                        Map Grid: Top {loc.top} / Left {loc.left}
+                      </span>
+                      <Link
+                        href={`/map?poi=${loc.id}&top=${loc.top}&left=${loc.left}`}
+                        className="btn-primary text-xs px-3 py-2.5 min-h-[44px] font-bold flex items-center gap-1.5"
+                      >
+                        <Navigation className="h-3.5 w-3.5" /> Open fan-map pin
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="absolute bottom-4 left-4 right-4 text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
+                      Map position unconfirmed
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-
-            {/* Operating Intel & Associated Assets */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="card-carbon p-5 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  <Clock className="h-4 w-4 text-accent" /> Hours of Operation
-                </div>
-                <p className="text-sm font-semibold text-foreground font-mono">
-                  {loc.hours}
-                </p>
-              </div>
-
-              <div className="card-carbon p-5 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  <ShieldAlert className="h-4 w-4 text-primary" /> Security &
-                  Heat Rating
-                </div>
-                <p className="text-sm font-semibold text-foreground font-mono">
-                  Unknown; no verified response-time measurement
-                </p>
-              </div>
-            </div>
+            ) : null}
 
             {/* Related Vehicles & Armory */}
             {((loc.relatedVehicles?.length || 0) > 0 ||
@@ -316,13 +286,25 @@ export default async function LocationDetailPage({ params }: PageProps) {
                       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
                         <Car className="h-4 w-4" /> Spawning Vehicles
                       </div>
-                      <ul className="text-xs text-foreground font-mono space-y-1">
-                        {loc.relatedVehicles?.map((v) => (
-                          <li key={v} className="flex items-center gap-1.5">
-                            <span className="h-1.5 w-1.5 rounded-full bg-primary" />{" "}
-                            {v}
-                          </li>
-                        ))}
+                      <ul className="text-xs text-foreground space-y-1">
+                        {loc.relatedVehicles?.map((v) => {
+                          const asset = vehicleAsset(v);
+                          return (
+                            <li key={v} className="flex items-center gap-1.5">
+                              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                              {asset.href ? (
+                                <Link
+                                  href={asset.href}
+                                  className="hover:text-primary hover:underline"
+                                >
+                                  {asset.label}
+                                </Link>
+                              ) : (
+                                asset.label
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   )}
@@ -332,13 +314,25 @@ export default async function LocationDetailPage({ params }: PageProps) {
                       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold-light">
                         <Crosshair className="h-4 w-4" /> Available Armory
                       </div>
-                      <ul className="text-xs text-foreground font-mono space-y-1">
-                        {loc.relatedWeapons?.map((w) => (
-                          <li key={w} className="flex items-center gap-1.5">
-                            <span className="h-1.5 w-1.5 rounded-full bg-gold-light" />{" "}
-                            {w}
-                          </li>
-                        ))}
+                      <ul className="text-xs text-foreground space-y-1">
+                        {loc.relatedWeapons?.map((w) => {
+                          const asset = weaponAsset(w);
+                          return (
+                            <li key={w} className="flex items-center gap-1.5">
+                              <span className="h-1.5 w-1.5 rounded-full bg-gold-light" />
+                              {asset.href ? (
+                                <Link
+                                  href={asset.href}
+                                  className="hover:text-primary hover:underline"
+                                >
+                                  {asset.label}
+                                </Link>
+                              ) : (
+                                asset.label
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   )}

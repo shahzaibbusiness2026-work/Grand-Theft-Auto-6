@@ -3,7 +3,7 @@ import { getDashboardStats } from "@/lib/services/queries";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "100% Player Completion Tracker",
+  title: "Dashboard",
   description:
     "Track your story missions, side jobs, collectibles, activities and Leonida completion progress with local sync.",
   // Personal progress tool, not indexable content.

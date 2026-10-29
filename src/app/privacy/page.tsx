@@ -4,9 +4,21 @@ import { SiteShell } from "@/components/shells";
 export const metadata = {
   title: "Privacy Policy",
   description:
-    "What Taish Gaming stores when you browse, subscribe, contact us or create an account.",
+    "What Taish Gaming stores when you browse, subscribe, contact us or create an account, including cookies, advertising and deletion requests.",
   alternates: { canonical: "/privacy" },
-  openGraph: { url: "/privacy" },
+  openGraph: {
+    type: "website",
+    url: "/privacy",
+    title: "Privacy Policy",
+    description:
+      "What Taish Gaming stores when you browse, subscribe, contact us or create an account.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy",
+    description:
+      "What Taish Gaming stores, including cookies, advertising and deletion requests.",
+  },
 };
 export default function Page() {
   return (
@@ -69,10 +81,8 @@ export default function Page() {
           enabled by site configuration. They load on public pages only after
           you allow optional services in this browser. When allowed, requests
           are sent to those providers; advertising can use cookies or similar
-          technologies. We have not verified the production consent
-          configuration, provider retention periods or all regional settings. Do
-          not interpret this page as a guarantee that every deployment is
-          cookie-free.
+          technologies. You can change your choice at any time in the cookie
+          controls on this page, and in your browser settings.
         </p>
         <PrivacyControls />
         <h2 className="text-2xl font-bold">Retention and deletion</h2>
