@@ -6,11 +6,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
+import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+const title = "GTA 6 Upgrade Budget Simulator";
+const description = PUBLIC_TOOL_COPY["/tools/vehicle-upgrade-calculator"];
 export const metadata: Metadata = {
     openGraph: { url: "/tools/vehicle-upgrade-calculator" },
-  title: "GTA 6 Vehicle Upgrade Calculator — Tuning Costs & Performance Gains",
-  description:
-    "Calculate total tuning costs and estimated performance gains for your GTA 6 ride — engine, turbo, armor, brakes and cosmetic mods priced out before you visit Los Santos Customs.",
+  title,
+  description,
 
   alternates: { canonical: "/tools/vehicle-upgrade-calculator" },
 };
@@ -30,13 +32,13 @@ export default function VehicleUpgradeCalculatorPage() {
                 itemListElement: [
                   { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Vehicle Upgrade Calculator \u2014 Tuning Costs & Performance Gains", item: "https://www.taishgaming.com/tools/vehicle-upgrade-calculator" },
+                  { "@type": "ListItem", position: 3, name: title, item: "https://www.taishgaming.com/tools/vehicle-upgrade-calculator" },
                 ],
               },
               {
                 "@type": "WebApplication",
-                name: "GTA 6 Vehicle Upgrade Calculator \u2014 Tuning Costs & Performance Gains",
-                description: "Calculate total tuning costs and estimated performance gains for your GTA 6 ride \u2014 engine, turbo, armor, brakes and cosmetic mods priced out before you visit Los Santos Customs.",
+                name: title,
+                description,
                 url: "https://www.taishgaming.com/tools/vehicle-upgrade-calculator",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -64,10 +66,7 @@ export default function VehicleUpgradeCalculatorPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">VEHICLE UPGRADE CALCULATOR</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Pick your ride, tick off the mods, and instantly see the total build cost plus the
-            estimated performance gain before you roll into the tuning shop.
-          </p>
+          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
         </div>
 
         <VehicleUpgradeCalculatorClient />

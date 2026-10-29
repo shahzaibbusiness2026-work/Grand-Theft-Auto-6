@@ -6,10 +6,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
+import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+const title = "GTA 6 Business Income Simulator";
+const description = PUBLIC_TOOL_COPY["/tools/business-income-calculator"];
 export const metadata: Metadata = {
     openGraph: { url: "/tools/business-income-calculator" },
-  title: "GTA 6 Business Income Calculator — ROI & Break-Even Planner",
-  description: "Calculate daily and weekly business income, total investment, break-even days, and 30-day ROI for GTA 6 businesses — nightclub, chop shop, warehouse, and more.",
+  title,
+  description,
 
   alternates: { canonical: "/tools/business-income-calculator" },
 };
@@ -29,13 +32,13 @@ export default function BusinessIncomeCalculatorPage() {
                 itemListElement: [
                   { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Business Income Calculator \u2014 ROI & Break-Even Planner", item: "https://www.taishgaming.com/tools/business-income-calculator" },
+                  { "@type": "ListItem", position: 3, name: title, item: "https://www.taishgaming.com/tools/business-income-calculator" },
                 ],
               },
               {
                 "@type": "WebApplication",
-                name: "GTA 6 Business Income Calculator \u2014 ROI & Break-Even Planner",
-                description: "Calculate daily and weekly business income, total investment, break-even days, and 30-day ROI for GTA 6 businesses \u2014 nightclub, chop shop, warehouse, and more.",
+                name: title,
+                description,
                 url: "https://www.taishgaming.com/tools/business-income-calculator",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -63,9 +66,7 @@ export default function BusinessIncomeCalculatorPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">BUSINESS INCOME CALCULATOR</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Pick a business, choose an upgrade tier, and set your daily playtime to instantly see estimated passive income, total investment, break-even time, and 30-day ROI.
-          </p>
+          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
         </div>
 
         <BusinessIncomeCalculatorClient />

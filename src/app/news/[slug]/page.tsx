@@ -17,7 +17,7 @@ import {
 import { getSeoSettings } from "@/lib/services/seo";
 import { serializeJsonLd } from "@/lib/utils";
 import {
-  normalizeEditorialMarkdown,
+  articleBodyMarkdown,
   readingTime,
   publicationImage,
 } from "@/lib/editorial-quality";
@@ -95,8 +95,9 @@ export default async function ArticleDetailPage({ params }: Props) {
   const article = await getPublicArticleBySlug(slug);
   if (!article) notFound();
 
-  const bodyMarkdown = normalizeEditorialMarkdown(
+  const bodyMarkdown = articleBodyMarkdown(
     article.content || article.excerpt || "",
+    article.title,
   );
   const toc = extractHeadings(bodyMarkdown);
   // Shared per-render allocator so rendered heading ids match the TOC exactly

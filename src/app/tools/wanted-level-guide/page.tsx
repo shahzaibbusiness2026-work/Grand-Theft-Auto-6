@@ -6,10 +6,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
+import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+const title = "GTA 6 Wanted Levels: Evidence Status";
+const description = PUBLIC_TOOL_COPY["/tools/wanted-level-guide"];
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
     openGraph: { url: "/tools/wanted-level-guide" },
-  title: "GTA 6 Wanted Level Guide — Police Response & Escape Tips",
-  description: "Interactive guide to GTA 6's 1-5 star wanted levels: police units, helicopters, roadblocks, spike strips, estimated evade times, and escape tips for every level.",
+  title,
+  description,
 
   alternates: { canonical: "/tools/wanted-level-guide" },
 };
@@ -29,13 +33,13 @@ export default function WantedLevelGuidePage() {
                 itemListElement: [
                   { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Wanted Level Guide \u2014 Police Response & Escape Tips", item: "https://www.taishgaming.com/tools/wanted-level-guide" },
+                  { "@type": "ListItem", position: 3, name: title, item: "https://www.taishgaming.com/tools/wanted-level-guide" },
                 ],
               },
               {
                 "@type": "WebApplication",
-                name: "GTA 6 Wanted Level Guide \u2014 Police Response & Escape Tips",
-                description: "Interactive guide to GTA 6's 1-5 star wanted levels: police units, helicopters, roadblocks, spike strips, estimated evade times, and escape tips for every level.",
+                name: title,
+                description,
                 url: "https://www.taishgaming.com/tools/wanted-level-guide",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -63,9 +67,7 @@ export default function WantedLevelGuidePage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">WANTED LEVEL GUIDE</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Select any star level to see the police response, units deployed, estimated evade time, and the best escape tactics — from a single patrol car up to full FIB pursuit.
-          </p>
+          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
         </div>
 
         <WantedLevelGuideClient />
