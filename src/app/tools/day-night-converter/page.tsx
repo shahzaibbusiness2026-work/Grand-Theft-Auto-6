@@ -1,3 +1,4 @@
+import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
 import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
 import { DayNightConverterClient } from "./day-night-converter-client";
@@ -7,18 +8,17 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
-    openGraph: { url: "/tools/day-night-converter" },
+  openGraph: { url: "/tools/day-night-converter" },
   title: "GTA 6 Day/Night Time Converter — Real Time to Game Time",
-  description:
-    "Convert between real-world minutes and GTA 6 in-game hours. See exactly what time it will be in Leonida after your session, when the next sunrise or sunset hits, and track the sun with a live day/night indicator.",
+  description: PUBLIC_TOOL_COPY["/tools/day-night-converter"],
 
   alternates: { canonical: "/tools/day-night-converter" },
 };
 
 export default function DayNightConverterPage() {
   return (
-        <SiteShell>
-          <ToolStatusBanner status="simulator" />
+    <SiteShell>
+      <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -28,15 +28,30 @@ export default function DayNightConverterPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Day/Night Time Converter \u2014 Real Time to Game Time", item: "https://www.taishgaming.com/tools/day-night-converter" },
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://www.taishgaming.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Tools",
+                    item: "https://www.taishgaming.com/tools",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "GTA 6 Day/Night Time Converter \u2014 Real Time to Game Time",
+                    item: "https://www.taishgaming.com/tools/day-night-converter",
+                  },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Day/Night Time Converter \u2014 Real Time to Game Time",
-                description: "Convert between real-world minutes and GTA 6 in-game hours. See exactly what time it will be in Leonida after your session, when the next sunrise or sunset hits, and track the sun with a live day/night indicator.",
+                description: PUBLIC_TOOL_COPY["/tools/day-night-converter"],
                 url: "https://www.taishgaming.com/tools/day-night-converter",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -49,9 +64,13 @@ export default function DayNightConverterPage() {
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+          <Link href="/" className="hover:text-primary transition-colors">
+            Home
+          </Link>
           <ChevronRight className="h-3 w-3" />
-          <Link href="/tools" className="hover:text-primary transition-colors">Tools</Link>
+          <Link href="/tools" className="hover:text-primary transition-colors">
+            Tools
+          </Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-foreground font-bold">Day/Night Converter</span>
         </nav>
@@ -65,7 +84,9 @@ export default function DayNightConverterPage() {
             GTA 6 <span className="text-primary">DAY/NIGHT CONVERTER</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Time moves fast in Leonida — one in-game hour passes every 2 real-world minutes. Plan your heists, night patrols, and golden-hour screenshots by converting between real minutes and game time.
+            GTA VI’s clock rate is unverified. Explore a hypothetical day-night
+            model with an editable ratio; two real minutes per game hour is an
+            example input, not a confirmed mechanic.
           </p>
         </div>
 

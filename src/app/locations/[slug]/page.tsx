@@ -1,4 +1,6 @@
-﻿import { notFound } from "next/navigation";
+import { ConceptNotice } from "@/components/concept-notice";
+import { publicLocation } from "@/lib/world-evidence";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   MapPin,
@@ -12,7 +14,10 @@ import {
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
-import { canonicalLocations, type CanonicalLocation } from "@/lib/canonical-data";
+import {
+  canonicalLocations,
+  type CanonicalLocation,
+} from "@/lib/canonical-data";
 import { getLocations } from "@/lib/services/locations";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
@@ -23,43 +28,71 @@ interface PageProps {
 }
 
 /** Resolve a location from live Supabase data, mapped to the canonical shape. */
-async function resolveLocation(slug: string): Promise<CanonicalLocation | undefined> {
-  const canonical = canonicalLocations.find((l) => l.slug === slug || l.id === slug);
+async function resolveLocation(
+  slug: string,
+): Promise<CanonicalLocation | undefined> {
+  const canonical = canonicalLocations.find(
+    (l) => l.slug === slug || l.id === slug,
+  );
   try {
     const dbRows = (await getLocations()) as Array<{
-      id: string; slug?: string; name: string; district: string; category?: string;
-      verification: string; coordinates?: string; description?: string; hours?: string;
-      threat_level?: string; img?: string; confidence?: string; source?: string;
+      id: string;
+      slug?: string;
+      name: string;
+      district: string;
+      category?: string;
+      verification: string;
+      coordinates?: string;
+      description?: string;
+      hours?: string;
+      threat_level?: string;
+      img?: string;
+      confidence?: string;
+      source?: string;
     }>;
     const row = dbRows?.find(
-      (r) => r.slug === slug || r.id === slug || r.name.toLowerCase() === slug.replace(/-/g, " ")
+      (r) =>
+        r.slug === slug ||
+        r.id === slug ||
+        r.name.toLowerCase() === slug.replace(/-/g, " "),
     );
     if (row) {
-      const coordMatch = /top\s+([\d.]+%?),\s*left\s+([\d.]+%?)/.exec(row.coordinates || "");
-      return {
+      const coordMatch = /top\s+([\d.]+%?),\s*left\s+([\d.]+%?)/.exec(
+        row.coordinates || "",
+      );
+      return publicLocation({
         id: row.id,
         slug: row.slug || slug,
         name: row.name,
         district: row.district,
-        category: (row.category as CanonicalLocation["category"]) || canonical?.category || "Point of Interest",
+        category:
+          (row.category as CanonicalLocation["category"]) ||
+          canonical?.category ||
+          "Point of Interest",
         desc: row.description || canonical?.desc || "",
         top: coordMatch?.[1] || canonical?.top || "50%",
         left: coordMatch?.[2] || canonical?.left || "50%",
         hours: row.hours || canonical?.hours || "Unknown",
-        threatLevel: (row.threat_level as CanonicalLocation["threatLevel"]) || canonical?.threatLevel || "Low",
+        threatLevel:
+          (row.threat_level as CanonicalLocation["threatLevel"]) ||
+          canonical?.threatLevel ||
+          "Low",
         relatedVehicles: canonical?.relatedVehicles,
         relatedWeapons: canonical?.relatedWeapons,
         relatedMissions: canonical?.relatedMissions,
-        confidence: (row.confidence as CanonicalLocation["confidence"]) || canonical?.confidence || "SPECULATION",
+        confidence:
+          (row.confidence as CanonicalLocation["confidence"]) ||
+          canonical?.confidence ||
+          "SPECULATION",
         source: row.source || canonical?.source || "Atlas Admin",
         img: row.img || canonical?.img || "/img/map-dark.svg",
         verified: row.verification === "verified",
-      };
+      });
     }
   } catch {
     // DB unreachable — canonical lookup stands
   }
-  return canonical;
+  return canonical ? publicLocation(canonical) : undefined;
 }
 
 export async function generateStaticParams() {
@@ -68,7 +101,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const loc = await resolveLocation(slug);
 
@@ -78,8 +113,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${loc.name} (${loc.district}) — Point of Interest Dossier`,
-    description: `Official intel briefing and satellite map coordinates for ${loc.name} in ${loc.district}, State of Leonida. Threat level: ${loc.threatLevel}.`,
+    description: `Provisional fan-map entry for ${loc.name}. Placement, opening hours and gameplay remain unverified.`,
     alternates: { canonical: `/locations/${loc.slug}` },
+    robots: { index: false, follow: true },
     openGraph: { url: `/locations/${loc.slug}` },
   };
 }
@@ -93,6 +129,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
   }
 
   const nearbyLocations = canonicalLocations
+    .map(publicLocation)
     .filter((l) => l.id !== loc.id && l.district === loc.district)
     .slice(0, 3);
 
@@ -122,9 +159,24 @@ export default async function LocationDetailPage({ params }: PageProps) {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
-                  { "@type": "ListItem", position: 2, name: "Locations", item: "https://www.taishgaming.com/locations" },
-                  { "@type": "ListItem", position: 3, name: loc.name, item: `https://www.taishgaming.com/locations/${loc.slug}` },
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://www.taishgaming.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Locations",
+                    item: "https://www.taishgaming.com/locations",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: loc.name,
+                    item: `https://www.taishgaming.com/locations/${loc.slug}`,
+                  },
                 ],
               },
               {
@@ -144,7 +196,10 @@ export default async function LocationDetailPage({ params }: PageProps) {
             Home
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <Link href="/locations" className="hover:text-primary transition-colors">
+          <Link
+            href="/locations"
+            className="hover:text-primary transition-colors"
+          >
             Locations
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
@@ -174,12 +229,15 @@ export default async function LocationDetailPage({ params }: PageProps) {
                   </span>
                   <span
                     className={`text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded border ${threatColor(
-                      loc.threatLevel
+                      loc.threatLevel,
                     )}`}
                   >
-                    Threat: {loc.threatLevel}
+                    Gameplay: unverified
                   </span>
-                  <ConfidenceBadge confidence={loc.confidence} source={loc.source} />
+                  <ConfidenceBadge
+                    confidence={loc.confidence}
+                    source={loc.source}
+                  />
                 </div>
                 <FavoriteButton type="locations" id={loc.id} />
               </div>
@@ -201,7 +259,12 @@ export default async function LocationDetailPage({ params }: PageProps) {
             {/* Photo / Visual */}
             <div className="card-carbon overflow-hidden">
               <div className="relative h-72 sm:h-96 w-full bg-background">
-                <img loading="lazy" src={loc.img} alt={loc.name} className="h-full w-full object-cover" />
+                <img
+                  loading="lazy"
+                  src={loc.img}
+                  alt={loc.name}
+                  className="h-full w-full object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
                   <span className="font-mono text-muted-foreground min-w-0 truncate">
@@ -223,21 +286,25 @@ export default async function LocationDetailPage({ params }: PageProps) {
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                   <Clock className="h-4 w-4 text-accent" /> Hours of Operation
                 </div>
-                <p className="text-sm font-semibold text-foreground font-mono">{loc.hours}</p>
+                <p className="text-sm font-semibold text-foreground font-mono">
+                  {loc.hours}
+                </p>
               </div>
 
               <div className="card-carbon p-5 space-y-2">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  <ShieldAlert className="h-4 w-4 text-primary" /> Security & Heat Rating
+                  <ShieldAlert className="h-4 w-4 text-primary" /> Security &
+                  Heat Rating
                 </div>
                 <p className="text-sm font-semibold text-foreground font-mono">
-                  {loc.threatLevel} (Response time &lt; 90s)
+                  Unknown; no verified response-time measurement
                 </p>
               </div>
             </div>
 
             {/* Related Vehicles & Armory */}
-            {((loc.relatedVehicles?.length || 0) > 0 || (loc.relatedWeapons?.length || 0) > 0) && (
+            {((loc.relatedVehicles?.length || 0) > 0 ||
+              (loc.relatedWeapons?.length || 0) > 0) && (
               <div className="card-carbon p-6 space-y-4">
                 <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wider">
                   Associated Field Assets
@@ -251,7 +318,8 @@ export default async function LocationDetailPage({ params }: PageProps) {
                       <ul className="text-xs text-foreground font-mono space-y-1">
                         {loc.relatedVehicles?.map((v) => (
                           <li key={v} className="flex items-center gap-1.5">
-                            <span className="h-1.5 w-1.5 rounded-full bg-primary" /> {v}
+                            <span className="h-1.5 w-1.5 rounded-full bg-primary" />{" "}
+                            {v}
                           </li>
                         ))}
                       </ul>
@@ -266,7 +334,8 @@ export default async function LocationDetailPage({ params }: PageProps) {
                       <ul className="text-xs text-foreground font-mono space-y-1">
                         {loc.relatedWeapons?.map((w) => (
                           <li key={w} className="flex items-center gap-1.5">
-                            <span className="h-1.5 w-1.5 rounded-full bg-gold-light" /> {w}
+                            <span className="h-1.5 w-1.5 rounded-full bg-gold-light" />{" "}
+                            {w}
                           </li>
                         ))}
                       </ul>
@@ -285,7 +354,8 @@ export default async function LocationDetailPage({ params }: PageProps) {
                 Tactical Navigation
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Open the interactive satellite map focused on {loc.name}. Synchronize coordinates and add custom field notes.
+                Open the interactive satellite map focused on {loc.name}.
+                Synchronize coordinates and add custom field notes.
               </p>
               <Link
                 href={`/map?poi=${loc.id}`}

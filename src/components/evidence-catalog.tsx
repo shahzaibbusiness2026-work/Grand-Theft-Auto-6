@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { trackPublicEvent } from "@/lib/public-events";
 import {
   ArrowRight,
   Check,
@@ -19,6 +20,7 @@ import { getStoredUserState, toggleFavorite } from "@/lib/user-store";
 import { selectionFromParams, selectionUrl } from "@/lib/catalog-selection";
 import type { CatalogKind, EvidenceEntry } from "@/lib/catalog-evidence";
 import styles from "./catalog-ui.module.css";
+import { readCatalogState, catalogStateUrl } from "@/lib/catalog-url-state";
 
 type FiltersProps = {
   entries: EvidenceEntry[];
@@ -97,26 +99,67 @@ export function EvidenceCatalog({
   entries: EvidenceEntry[];
   compare?: boolean;
 }) {
-  const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("");
+  const [query, setQueryState] = useState("");
+  const [category, setCategoryState] = useState("");
   const [saved, setSaved] = useState(false);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
   const [recent, setRecent] = useState<string[]>([]);
   const [recentOnly, setRecentOnly] = useState(false);
-  const [sort, setSort] = useState("name");
-  const [limit, setLimit] = useState(compare ? 8 : 24);
+  const [sort, setSortState] = useState("name");
+  const [limit, setLimitState] = useState(compare ? 8 : 24);
   const [pickerOpen, setPickerOpen] = useState(false);
   const picker = useRef<HTMLDialogElement>(null);
   const label = kind === "vehicles" ? "vehicle" : "weapon";
   const storageKey = "taish-recent-" + kind;
-  useEffect(
-    () => setLimit(compare ? 8 : 24),
-    [query, category, saved, recentOnly, sort, compare],
-  );
+  const pageSize = compare ? 8 : 24;
+  const writeState = (
+    patch: Partial<{ q: string; category: string; sort: string; page: number }>,
+    push = true,
+  ) => {
+    trackPublicEvent("catalog_filter_used", {
+      kind,
+      filter:
+        Object.keys(patch)
+          .filter((key) => key !== "q")
+          .join(",") || "search",
+    });
+    const next = {
+      q: query,
+      category,
+      sort,
+      page: Math.ceil(limit / pageSize),
+      ...patch,
+    };
+    setQueryState(next.q);
+    setCategoryState(next.category);
+    setSortState(next.sort);
+    setLimitState(next.page * pageSize);
+    const url = catalogStateUrl(new URL(window.location.href), next);
+    if (url.href !== window.location.href)
+      window.history[push ? "pushState" : "replaceState"](
+        window.history.state,
+        "",
+        url,
+      );
+  };
+  const setQuery = (q: string) => writeState({ q, page: 1 }, false);
+  const setCategory = (category: string) => writeState({ category, page: 1 });
+  const setSort = (sort: string) => writeState({ sort, page: 1 });
+  const setLimit = (limit: number) =>
+    writeState({ page: Math.ceil(limit / pageSize) });
   useEffect(() => {
     const update = () => setFavorites(getStoredUserState().favorites[kind]);
-    const restore = () =>
+    const restore = () => {
+      const state = readCatalogState(
+        new URLSearchParams(window.location.search),
+        entries,
+        compare ? 8 : 24,
+      );
+      setQueryState(state.q);
+      setCategoryState(state.category);
+      setSortState(state.sort);
+      setLimitState(state.page * (compare ? 8 : 24));
       setSelected(
         selectionFromParams(
           new URLSearchParams(window.location.search),
@@ -124,6 +167,7 @@ export function EvidenceCatalog({
           entries,
         ),
       );
+    };
     update();
     restore();
     window.addEventListener("gta6_user_state_change", update);
@@ -137,7 +181,7 @@ export function EvidenceCatalog({
       window.removeEventListener("gta6_user_state_change", update);
       window.removeEventListener("popstate", restore);
     };
-  }, [kind, storageKey, entries]);
+  }, [kind, storageKey, entries, compare]);
   useEffect(() => {
     if (!pickerOpen) return;
     const previous = document.body.style.overflow;
@@ -173,11 +217,9 @@ export function EvidenceCatalog({
         : [...selected, id].slice(0, 4),
     );
   const clear = () => {
-    setQuery("");
-    setCategory("");
+    writeState({ q: "", category: "", sort: "name", page: 1 });
     setSaved(false);
     setRecentOnly(false);
-    setSort("name");
   };
   const recentRank = (id: string) =>
     recent.includes(id) ? recent.indexOf(id) : Number.MAX_SAFE_INTEGER;

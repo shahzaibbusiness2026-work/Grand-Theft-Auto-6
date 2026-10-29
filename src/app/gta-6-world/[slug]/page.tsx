@@ -42,7 +42,7 @@ const TIER_STYLES: Record<EvidenceTier, string> = {
 function sectionColorFor(slug: string): string {
   const href = `/gta-6-world/${slug}`;
   const section = WORLD_SECTIONS.find((s) =>
-    s.cards.some((c) => c.href === href)
+    s.cards.some((c) => c.href === href),
   );
   return section?.color ?? "#F13AAE";
 }
@@ -57,8 +57,18 @@ export default async function GTAWorldCategoryPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
-      { "@type": "ListItem", position: 2, name: "GTA VI World", item: "https://www.taishgaming.com/gta-6-world" },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.taishgaming.com/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "GTA VI World",
+        item: "https://www.taishgaming.com/gta-6-world",
+      },
       {
         "@type": "ListItem",
         position: 3,
@@ -161,7 +171,17 @@ export default async function GTAWorldCategoryPage({ params }: Props) {
                       {entry.observation}
                     </p>
                     <p className="mt-3 text-xs text-white/45">
-                      Source: {entry.source}
+                      Source:{" "}
+                      {entry.sourceHref ? (
+                        <a
+                          className="underline text-white/80"
+                          href={entry.sourceHref}
+                        >
+                          {entry.source}
+                        </a>
+                      ) : (
+                        <>{entry.source} · exact source link pending review</>
+                      )}
                     </p>
                   </article>
                 ))}

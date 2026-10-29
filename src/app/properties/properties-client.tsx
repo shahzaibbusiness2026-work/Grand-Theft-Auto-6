@@ -14,7 +14,10 @@ import {
   X,
   HelpCircle,
 } from "lucide-react";
-import { canonicalProperties as propertiesFallback, type CanonicalProperty } from "@/lib/canonical-data";
+import {
+  canonicalProperties as propertiesFallback,
+  type CanonicalProperty,
+} from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
 import { cn } from "@/lib/utils";
@@ -29,8 +32,15 @@ const PROPERTY_TYPES = [
   "Marina Dock",
 ] as const;
 
-export function PropertiesClient({ initialProperties }: { initialProperties?: CanonicalProperty[] }) {
-  const properties = initialProperties && initialProperties.length > 0 ? initialProperties : propertiesFallback;
+export function PropertiesClient({
+  initialProperties,
+}: {
+  initialProperties?: CanonicalProperty[];
+}) {
+  const properties =
+    initialProperties && initialProperties.length > 0
+      ? initialProperties
+      : propertiesFallback;
   const [selectedType, setSelectedType] = useState<string>("All");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -55,7 +65,9 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
         const matchName = item.name.toLowerCase().includes(q);
         const matchDistrict = item.district.toLowerCase().includes(q);
         const matchDesc = item.desc.toLowerCase().includes(q);
-        const matchFeatures = item.features.some((f) => f.toLowerCase().includes(q));
+        const matchFeatures = item.features.some((f) =>
+          f.toLowerCase().includes(q),
+        );
         return matchName || matchDistrict || matchDesc || matchFeatures;
       }
       return true;
@@ -89,28 +101,28 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
             {properties.length}
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mt-1">
-            Confirmed Properties
+            Fan Property Concepts
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-gold/20 bg-amber-950/10">
           <span className="font-display text-2xl sm:text-3xl font-black text-gold-light">
-            $3.5M
+            Example only
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-gold-light/80 block mt-1">
-            Top Luxury Price
+            Fictional prices
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-emerald-500/20 bg-emerald-950/10">
           <span className="font-display text-2xl sm:text-3xl font-black text-emerald-400">
-            $18.5k/hr
+            Unverified
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
-            Peak Passive Yield
+            No verified yields
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-primary/20 bg-primary/10">
           <span className="font-display text-2xl sm:text-3xl font-black text-primary">
-            10-Car
+            Example only
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-primary/80 block mt-1">
             Max Garage Storage
@@ -127,7 +139,8 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
             </span>
             <div>
               <span className="text-xs font-bold text-foreground uppercase tracking-wider block">
-                Side-by-Side Property Comparison ({compareIds.length} / 2 Selected)
+                Side-by-Side Property Comparison ({compareIds.length} / 2
+                Selected)
               </span>
               <span className="text-xs text-muted-foreground">
                 {compareIds.length === 1
@@ -189,9 +202,10 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
         <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
           {PROPERTY_TYPES.map((type) => {
             const isSelected = selectedType === type;
-            const count = type === "All"
-              ? properties.length
-              : properties.filter((p) => p.type === type).length;
+            const count =
+              type === "All"
+                ? properties.length
+                : properties.filter((p) => p.type === type).length;
             return (
               <button
                 key={type}
@@ -200,7 +214,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                   "text-xs px-3 py-2.5 rounded-full font-semibold transition-all border",
                   isSelected
                     ? "border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(244,63,94,0.4)]"
-                    : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
+                    : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card",
                 )}
               >
                 {type} <span className="opacity-60 text-xs">({count})</span>
@@ -215,7 +229,9 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
         {filteredProperties.length === 0 ? (
           <div className="col-span-full card-carbon p-12 text-center">
             <HelpCircle className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-            <h3 className="font-display text-lg font-bold text-foreground">No Properties Found</h3>
+            <h3 className="font-display text-lg font-bold text-foreground">
+              No Properties Found
+            </h3>
             <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
               No real estate listings match your search criteria.
             </p>
@@ -239,7 +255,9 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                 key={item.id}
                 className={cn(
                   "card-carbon overflow-hidden flex flex-col justify-between border transition-all duration-200 group bg-card/60",
-                  isCompared ? "border-primary shadow-[0_0_15px_rgba(244,63,94,0.3)]" : "border-border hover:border-primary/40"
+                  isCompared
+                    ? "border-primary shadow-[0_0_15px_rgba(244,63,94,0.3)]"
+                    : "border-border hover:border-primary/40",
                 )}
               >
                 <div>
@@ -266,7 +284,11 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                       <div className="text-lg font-display font-black text-gold-light drop-shadow-md">
                         {item.priceDisplay}
                       </div>
-                      <ConfidenceBadge confidence={item.confidence} source={item.source} size="sm" />
+                      <ConfidenceBadge
+                        confidence={item.confidence}
+                        source={item.source}
+                        size="sm"
+                      />
                     </div>
                   </div>
 
@@ -294,7 +316,8 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                           Garage Space
                         </span>
                         <span className="font-bold text-foreground flex items-center gap-1">
-                          <Car className="h-3.5 w-3.5 text-primary" /> {item.garageCapacity} Vehicles
+                          <Car className="h-3.5 w-3.5 text-primary" />{" "}
+                          {item.garageCapacity} Vehicles
                         </span>
                       </div>
                       <div className="p-2.5 rounded-lg bg-muted/50 border border-border">
@@ -303,7 +326,9 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                         </span>
                         <span className="font-bold text-emerald-400 flex items-center gap-1">
                           <TrendingUp className="h-3.5 w-3.5 text-emerald-400" />
-                          {item.passiveIncomePerHour ? `$${item.passiveIncomePerHour.toLocaleString()}/hr` : "None"}
+                          {item.passiveIncomePerHour
+                            ? `$${item.passiveIncomePerHour.toLocaleString()}/hr`
+                            : "None"}
                         </span>
                       </div>
                     </div>
@@ -319,7 +344,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                         "text-xs px-3 py-2.5 rounded-lg font-semibold border transition-colors flex items-center gap-1.5",
                         isCompared
                           ? "bg-primary text-primary-foreground border-primary"
-                          : "border-border bg-muted/80 text-muted-foreground hover:text-foreground hover:border-slate-600"
+                          : "border-border bg-muted/80 text-muted-foreground hover:text-foreground hover:border-slate-600",
                       )}
                     >
                       <ArrowRightLeft className="h-3 w-3" />
@@ -386,7 +411,9 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                   <div className="space-y-2 bg-muted/50 p-3 rounded-xl border border-border">
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">Price:</span>
-                      <span className="text-gold-light font-bold">{p.priceDisplay}</span>
+                      <span className="text-gold-light font-bold">
+                        {p.priceDisplay}
+                      </span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">District:</span>
@@ -394,18 +421,27 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                     </div>
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">Garage:</span>
-                      <span className="text-foreground font-bold">{p.garageCapacity} Vehicles</span>
+                      <span className="text-foreground font-bold">
+                        {p.garageCapacity} Vehicles
+                      </span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-border">
-                      <span className="text-muted-foreground">Passive Rate:</span>
+                      <span className="text-muted-foreground">
+                        Passive Rate:
+                      </span>
                       <span className="text-emerald-400 font-bold">
-                        {p.passiveIncomePerHour ? `$${p.passiveIncomePerHour.toLocaleString()}/hr` : "$0 (Private)"}
+                        {p.passiveIncomePerHour
+                          ? `$${p.passiveIncomePerHour.toLocaleString()}/hr`
+                          : "$0 (Private)"}
                       </span>
                     </div>
                     <div className="flex justify-between py-1">
-                      <span className="text-muted-foreground">Daily Revenue:</span>
+                      <span className="text-muted-foreground">
+                        Daily Revenue:
+                      </span>
                       <span className="text-emerald-400 font-bold">
-                        ${((p.passiveIncomePerHour || 0) * 24).toLocaleString()} / day
+                        ${((p.passiveIncomePerHour || 0) * 24).toLocaleString()}{" "}
+                        / day
                       </span>
                     </div>
                   </div>

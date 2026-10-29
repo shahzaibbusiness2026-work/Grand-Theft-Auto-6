@@ -1,4 +1,6 @@
-﻿import Link from "next/link";
+import { asConcept } from "@/lib/world-evidence";
+import { ConceptNotice } from "@/components/concept-notice";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   ChevronRight,
@@ -107,24 +109,25 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const mission = await resolveMission(slug);
+  const draft = await resolveMission(slug);
+  const mission = draft ? asConcept(draft) : undefined;
   if (!mission) notFound();
 
   return {
-    title: `${mission.title} — GTA 6 Mission Guide & Walkthrough`,
-    description: `Full mission guide for '${mission.title}' in GTA 6: Objectives, choices & outcomes, estimated rewards (${mission.cashRewardDisplay}), character requirements, and strategic tips.`,
+    title: `${mission.title} — Fan Mission Concept`,
+    description: `Fictional planning concept '${mission.title}'. Objectives, rewards and unlocks are examples, not verified GTA VI walkthrough instructions.`,
     alternates: { canonical: `/missions/${mission.slug}` },
     robots: { index: false, follow: true },
     openGraph: {
-      title: `${mission.title} — GTA 6 Mission Guide`,
-      description: mission.description,
+      title: `${mission.title} — Fan Mission Concept`,
+      description: `Fan concept: ${mission.description}`,
       url: `/missions/${mission.slug}`,
       images: [mission.img],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${mission.title} — GTA 6 Mission Guide`,
-      description: mission.description,
+      title: `${mission.title} — Fan Mission Concept`,
+      description: `Fan concept: ${mission.description}`,
       images: [mission.img],
     },
   };
@@ -136,7 +139,8 @@ export default async function MissionDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const mission = await resolveMission(slug);
+  const draft = await resolveMission(slug);
+  const mission = draft ? asConcept(draft) : undefined;
 
   if (!mission) {
     notFound();
@@ -183,7 +187,7 @@ export default async function MissionDetailPage({
               {
                 "@type": "WebPage",
                 name: `${mission.title} — GTA 6 Mission Concept`,
-                description: mission.description,
+                description: `Fan concept: ${mission.description}`,
                 image: mission.img,
               },
             ],
@@ -191,6 +195,7 @@ export default async function MissionDetailPage({
         }}
       />
       <section className="container-site pt-6 pb-10">
+        <ConceptNotice subject="mission scenarios" />
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap mb-4">
           <Link href="/" className="hover:text-primary transition-colors">

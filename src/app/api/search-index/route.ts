@@ -92,7 +92,7 @@ export async function GET() {
       items.push({
         id: `loc-${l.id}`,
         title: l.name,
-        subtitle: `${l.district} • Threat: ${l.threatLevel}`,
+        subtitle: `${l.district} • Fan concept; placement and gameplay unverified`,
         category: "Location",
         href: `/locations/${l.slug}`,
         img: l.img,
@@ -116,7 +116,7 @@ export async function GET() {
       items.push({
         id: `col-${c.id}`,
         title: c.title,
-        subtitle: `${c.category} in ${c.district} • ${c.reward}`,
+        subtitle: `${c.category} • Fan concept; availability and rewards unverified`,
         category: "Collectible",
         href: `/collectibles/${c.slug}`,
         img: c.img,

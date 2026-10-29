@@ -27,6 +27,8 @@ const GROUPS: Group[] = [
     title: "Explore",
     links: [
       { label: "Characters", href: "/characters" },
+      { label: "Leonida world", href: "/gta-6-world" },
+      { label: "Wildlife", href: "/wildlife" },
       { label: "Radio stations", href: "/radio" },
       { label: "Vehicle comparison", href: "/compare/vehicles" },
       { label: "Weapon comparison", href: "/compare/weapons" },

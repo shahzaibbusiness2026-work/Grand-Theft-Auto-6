@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 // Classic GTA time scale: 1 in-game hour = 2 real-world minutes (estimate until launch confirms)
-const GAME_MINUTES_PER_REAL_MINUTE = 30;
+
 const MINUTES_PER_GAME_DAY = 1440;
 
 type Mode = "real-to-game" | "game-to-real";
@@ -28,14 +28,19 @@ function parseTime(hhmm: string): number {
 }
 
 function formatGameTime(totalMinutes: number): string {
-  const m = ((Math.round(totalMinutes) % MINUTES_PER_GAME_DAY) + MINUTES_PER_GAME_DAY) % MINUTES_PER_GAME_DAY;
+  const m =
+    ((Math.round(totalMinutes) % MINUTES_PER_GAME_DAY) + MINUTES_PER_GAME_DAY) %
+    MINUTES_PER_GAME_DAY;
   const h = Math.floor(m / 60);
   const min = m % 60;
   return `${String(h).padStart(2, "0")}:${String(min).padStart(2, "0")}`;
 }
 
 function gamePhase(minutes: number): { label: string; icon: "sun" | "moon" } {
-  const h = ((minutes % MINUTES_PER_GAME_DAY) + MINUTES_PER_GAME_DAY) % MINUTES_PER_GAME_DAY / 60;
+  const h =
+    (((minutes % MINUTES_PER_GAME_DAY) + MINUTES_PER_GAME_DAY) %
+      MINUTES_PER_GAME_DAY) /
+    60;
   if (h >= 5 && h < 7) return { label: "Dawn", icon: "sun" };
   if (h >= 7 && h < 11) return { label: "Morning", icon: "sun" };
   if (h >= 11 && h < 15) return { label: "Midday", icon: "sun" };
@@ -59,6 +64,8 @@ function formatRealWait(realMinutes: number): string {
 }
 
 export function DayNightConverterClient() {
+  const [minutesPerHour, setMinutesPerHour] = useState(2);
+  const GAME_MINUTES_PER_REAL_MINUTE = 60 / minutesPerHour;
   const [mode, setMode] = useState<Mode>("real-to-game");
   const [currentGameTime, setCurrentGameTime] = useState("12:00");
   const [realMinutes, setRealMinutes] = useState<number>(30);
@@ -76,20 +83,27 @@ export function DayNightConverterClient() {
   const result = useMemo(() => {
     const nowGameMin = parseTime(currentGameTime);
     if (mode === "real-to-game") {
-      const gameMinAfter = nowGameMin + Math.max(0, realMinutes) * GAME_MINUTES_PER_REAL_MINUTE;
+      const gameMinAfter =
+        nowGameMin + Math.max(0, realMinutes) * GAME_MINUTES_PER_REAL_MINUTE;
       const phase = gamePhase(gameMinAfter);
       return {
         headline: formatGameTime(gameMinAfter),
         headlineCaption: `In-game time after ${Math.max(0, realMinutes)} real minute${realMinutes === 1 ? "" : "s"}`,
         phase: phase.label,
         phaseIcon: phase.icon,
-        markerGameMin: ((Math.round(gameMinAfter) % MINUTES_PER_GAME_DAY) + MINUTES_PER_GAME_DAY) % MINUTES_PER_GAME_DAY,
-        secondary: `${Math.max(0, realMinutes)} real min = ${(Math.max(0, realMinutes) * GAME_MINUTES_PER_REAL_MINUTE / 60).toFixed(1)} game hours`,
+        markerGameMin:
+          ((Math.round(gameMinAfter) % MINUTES_PER_GAME_DAY) +
+            MINUTES_PER_GAME_DAY) %
+          MINUTES_PER_GAME_DAY,
+        secondary: `${Math.max(0, realMinutes)} real min = ${((Math.max(0, realMinutes) * GAME_MINUTES_PER_REAL_MINUTE) / 60).toFixed(1)} game hours`,
       };
     }
     // game-to-real
     const targetMin = parseTime(targetGameTime);
-    const gameMinUntil = ((targetMin - nowGameMin) % MINUTES_PER_GAME_DAY + MINUTES_PER_GAME_DAY) % MINUTES_PER_GAME_DAY;
+    const gameMinUntil =
+      (((targetMin - nowGameMin) % MINUTES_PER_GAME_DAY) +
+        MINUTES_PER_GAME_DAY) %
+      MINUTES_PER_GAME_DAY;
     const waitRealMin = gameMinUntil / GAME_MINUTES_PER_REAL_MINUTE;
     const phase = gamePhase(targetMin);
     return {
@@ -100,7 +114,13 @@ export function DayNightConverterClient() {
       markerGameMin: targetMin,
       secondary: `${(gameMinUntil / 60).toFixed(1)} game hours away from ${formatGameTime(nowGameMin)}`,
     };
-  }, [mode, currentGameTime, realMinutes, targetGameTime]);
+  }, [
+    mode,
+    currentGameTime,
+    realMinutes,
+    targetGameTime,
+    GAME_MINUTES_PER_REAL_MINUTE,
+  ]);
 
   const handlePreset = (time: string) => {
     setTargetGameTime(time);
@@ -108,9 +128,10 @@ export function DayNightConverterClient() {
   };
 
   const handleCopySummary = () => {
-    const summary = mode === "real-to-game"
-      ? `GTA 6 Time Conversion: ${Math.max(0, realMinutes)} real minutes from ${formatGameTime(parseTime(currentGameTime))} = ${result.headline} in-game (${result.phase}). Rate: 1 game hour = 2 real minutes (estimate).`
-      : `GTA 6 Time Conversion: from ${formatGameTime(parseTime(currentGameTime))}, target ${formatGameTime(parseTime(targetGameTime))} (${result.phase}) arrives in ${result.headline}. Rate: 1 game hour = 2 real minutes (estimate).`;
+    const summary =
+      mode === "real-to-game"
+        ? `Hypothetical time conversion (GTA VI clock rate unverified): ${Math.max(0, realMinutes)} real minutes from ${formatGameTime(parseTime(currentGameTime))} = ${result.headline} in-game (${result.phase}). Rate: 1 game hour = ${minutesPerHour} real minutes (example assumption).`
+        : `Hypothetical time conversion (GTA VI clock rate unverified): from ${formatGameTime(parseTime(currentGameTime))}, target ${formatGameTime(parseTime(targetGameTime))} (${result.phase}) arrives in ${result.headline}. Rate: 1 game hour = ${minutesPerHour} real minutes (example assumption).`;
     navigator.clipboard.writeText(summary);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -120,10 +141,29 @@ export function DayNightConverterClient() {
 
   return (
     <div className="space-y-10">
+      <label className="block rounded-xl border border-amber-600/40 bg-amber-500/10 p-4 text-sm">
+        <strong>Hypothetical clock rate: real minutes per game hour</strong>
+        <input
+          type="number"
+          min="0.1"
+          max="120"
+          step="0.1"
+          value={minutesPerHour}
+          onChange={(e) => {
+            const n = Number(e.target.value);
+            if (Number.isFinite(n))
+              setMinutesPerHour(Math.max(0.1, Math.min(120, n)));
+          }}
+          className="mt-2 block w-full rounded-lg border border-border bg-card p-3"
+        />
+        GTA VI&apos;s actual clock rate is unverified. All results use this
+        editable example assumption.
+      </label>
       {/* Mode Toggle */}
       <div className="card-surface p-4 rounded-2xl border border-border flex flex-wrap items-center gap-2">
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mr-2 flex items-center gap-1">
-          <ArrowRightLeft className="h-3.5 w-3.5 text-gold-light" /> Conversion Mode:
+          <ArrowRightLeft className="h-3.5 w-3.5 text-gold-light" /> Conversion
+          Mode:
         </span>
         {(
           [
@@ -138,7 +178,7 @@ export function DayNightConverterClient() {
               "rounded-xl px-4 py-2 min-h-[44px] text-xs font-semibold transition-all border",
               mode === m.id
                 ? "border-accent bg-accent/20 text-foreground font-bold shadow-sm"
-                : "border-border bg-muted/60 text-muted-foreground hover:border-border hover:text-foreground"
+                : "border-border bg-muted/60 text-muted-foreground hover:border-border hover:text-foreground",
             )}
           >
             {m.label}
@@ -162,7 +202,9 @@ export function DayNightConverterClient() {
             <input
               type="time"
               value={currentGameTime}
-              onChange={(e) => e.target.value && setCurrentGameTime(e.target.value)}
+              onChange={(e) =>
+                e.target.value && setCurrentGameTime(e.target.value)
+              }
               className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
             />
             <p className="mt-1.5 text-xs text-muted-foreground">
@@ -175,7 +217,9 @@ export function DayNightConverterClient() {
             <div>
               <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
                 <span>Real Minutes You Will Play</span>
-                <span className="font-mono text-gold-light font-bold">{realMinutes} min</span>
+                <span className="font-mono text-gold-light font-bold">
+                  {realMinutes} min
+                </span>
               </label>
               <input
                 type="range"
@@ -195,7 +239,7 @@ export function DayNightConverterClient() {
                       "rounded-xl px-3 py-1.5 min-h-[44px] text-xs font-semibold transition-all border",
                       realMinutes === d
                         ? "border-accent bg-accent/20 text-foreground font-bold"
-                        : "border-border bg-muted/60 text-muted-foreground hover:text-foreground"
+                        : "border-border bg-muted/60 text-muted-foreground hover:text-foreground",
                     )}
                   >
                     {d >= 60 ? `${d / 60}h` : `${d}m`}
@@ -212,11 +256,14 @@ export function DayNightConverterClient() {
               <input
                 type="time"
                 value={targetGameTime}
-                onChange={(e) => e.target.value && setTargetGameTime(e.target.value)}
+                onChange={(e) =>
+                  e.target.value && setTargetGameTime(e.target.value)
+                }
                 className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-mono text-foreground focus:border-accent focus:outline-none"
               />
               <p className="mt-1.5 text-xs text-muted-foreground">
-                When do you want it to be in Leonida? We&apos;ll tell you how long to wait.
+                When do you want it to be in Leonida? We&apos;ll tell you how
+                long to wait.
               </p>
             </div>
           )}
@@ -228,16 +275,31 @@ export function DayNightConverterClient() {
           <div className="card-surface p-6 rounded-3xl border border-border shadow-2xl">
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
-                <span className="text-xs uppercase font-bold text-muted-foreground">{result.headlineCaption}</span>
+                <span className="text-xs uppercase font-bold text-muted-foreground">
+                  {result.headlineCaption}
+                </span>
                 <div className="font-display text-3xl sm:text-4xl font-black text-foreground mt-0.5">
                   {result.headline}
                 </div>
-                <p className="mt-1.5 text-xs text-muted-foreground">{result.secondary}</p>
+                <p className="mt-1.5 text-xs text-muted-foreground">
+                  {result.secondary}
+                </p>
               </div>
               <div className="text-center rounded-2xl border border-border bg-muted/60 px-5 py-3">
-                <PhaseIcon className={cn("h-6 w-6 mx-auto mb-1", result.phaseIcon === "sun" ? "text-gold-light" : "text-muted-foreground")} />
-                <span className="font-mono text-sm font-black text-foreground">{result.phase}</span>
-                <span className="block text-xs uppercase font-bold text-muted-foreground">Day Phase</span>
+                <PhaseIcon
+                  className={cn(
+                    "h-6 w-6 mx-auto mb-1",
+                    result.phaseIcon === "sun"
+                      ? "text-gold-light"
+                      : "text-muted-foreground",
+                  )}
+                />
+                <span className="font-mono text-sm font-black text-foreground">
+                  {result.phase}
+                </span>
+                <span className="block text-xs uppercase font-bold text-muted-foreground">
+                  Day Phase
+                </span>
               </div>
             </div>
 
@@ -258,7 +320,10 @@ export function DayNightConverterClient() {
                   {/* Marker */}
                   <div
                     className="absolute -top-1.5 flex flex-col items-center transition-all duration-300"
-                    style={{ left: `${(result.markerGameMin / MINUTES_PER_GAME_DAY) * 100}%`, transform: "translateX(-50%)" }}
+                    style={{
+                      left: `${(result.markerGameMin / MINUTES_PER_GAME_DAY) * 100}%`,
+                      transform: "translateX(-50%)",
+                    }}
                   >
                     <div className="rounded-full border-2 border-background bg-card p-1.5 shadow-lg">
                       {result.phaseIcon === "sun" ? (
@@ -287,7 +352,11 @@ export function DayNightConverterClient() {
                 onClick={handleCopySummary}
                 className="bg-muted/50 hover:bg-muted/60 text-foreground text-xs font-bold"
               >
-                {copied ? <Check className="h-3.5 w-3.5 mr-1 text-emerald-400" /> : <Copy className="h-3.5 w-3.5 mr-1" />}
+                {copied ? (
+                  <Check className="h-3.5 w-3.5 mr-1 text-emerald-400" />
+                ) : (
+                  <Copy className="h-3.5 w-3.5 mr-1" />
+                )}
                 <span>{copied ? "Conversion Copied!" : "Copy Conversion"}</span>
               </Button>
             </div>
@@ -307,18 +376,23 @@ export function DayNightConverterClient() {
                     "rounded-xl px-4 py-2 min-h-[44px] text-xs font-semibold transition-all border flex items-center gap-1.5",
                     mode === "game-to-real" && targetGameTime === p.time
                       ? "border-accent bg-accent/20 text-foreground font-bold"
-                      : "border-border bg-muted/60 text-muted-foreground hover:text-foreground"
+                      : "border-border bg-muted/60 text-muted-foreground hover:text-foreground",
                   )}
                 >
-                  {p.label === "Next sunrise" && <Sun className="h-3.5 w-3.5 text-gold-light" />}
+                  {p.label === "Next sunrise" && (
+                    <Sun className="h-3.5 w-3.5 text-gold-light" />
+                  )}
                   {p.label === "Midnight" && <Moon className="h-3.5 w-3.5" />}
                   {p.label}
-                  <span className="font-mono text-muted-foreground">{p.time}</span>
+                  <span className="font-mono text-muted-foreground">
+                    {p.time}
+                  </span>
                 </button>
               ))}
             </div>
             <p className="mt-3 text-xs text-muted-foreground">
-              Presets compute the real-world wait from your current in-game time to that target, wrapping past midnight.
+              Presets compute the real-world wait from your current in-game time
+              to that target, wrapping past midnight.
             </p>
           </div>
         </div>
@@ -331,19 +405,33 @@ export function DayNightConverterClient() {
             <Info className="h-4 w-4 text-gold-light" /> About the Time Scale
           </h3>
           <p className="text-xs leading-relaxed text-muted-foreground">
-            Every classic GTA title runs at roughly <strong className="text-foreground">1 in-game hour = 2 real-world minutes</strong> — one full 24-hour Leonida day takes about 48 real minutes. This is an estimate based on the series&apos; long-standing ratio; Rockstar may tune the clock for GTA 6, and we&apos;ll update this tool once launch-day timing is verified.
+            This tool uses your example ratio of{" "}
+            <strong className="text-foreground">
+              1 game hour = {minutesPerHour} real minutes
+            </strong>
+            . We have not verified GTA VI’s clock rate. Time-of-day labels are
+            also illustrative; this is not an official schedule for missions,
+            shops or lighting.
           </p>
         </div>
 
         <div className="card-surface p-6 rounded-3xl border border-border space-y-3">
           <h3 className="font-display text-base font-bold text-foreground flex items-center gap-2">
-            <HelpCircle className="h-4 w-4 text-accent" /> Day/Night Converter FAQ
+            <HelpCircle className="h-4 w-4 text-accent" /> Day/Night Converter
+            FAQ
           </h3>
           <p className="text-xs leading-relaxed text-muted-foreground">
-            <strong className="text-foreground">Why does &ldquo;wait&rdquo; wrap past midnight?</strong> In-game time is a 24-hour loop, so asking for 06:00 when it&apos;s 23:00 means waiting 7 game hours (14 real minutes) through midnight, not going backwards.
+            <strong className="text-foreground">
+              Why does &ldquo;wait&rdquo; wrap past midnight?
+            </strong>{" "}
+            In-game time is a 24-hour loop, so asking for 06:00 when it&apos;s
+            23:00 means waiting 7 game hours (14 real minutes) through midnight,
+            not going backwards.
           </p>
           <p className="text-xs leading-relaxed text-muted-foreground">
-            <strong className="text-foreground">Can I pause the clock?</strong> The in-game clock only advances while you&apos;re in the session — the converter assumes continuous play.
+            <strong className="text-foreground">Can I pause the clock?</strong>{" "}
+            The in-game clock only advances while you&apos;re in the session —
+            the converter assumes continuous play.
           </p>
         </div>
       </div>

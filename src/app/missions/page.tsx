@@ -1,3 +1,5 @@
+import { asConcept } from "@/lib/world-evidence";
+import { ConceptNotice } from "@/components/concept-notice";
 import { SiteShell } from "@/components/shells";
 // ISR: cache this public content page for 1 hour. Content changes
 // infrequently via the CMS; per-request SSR was causing multi-second loads.
@@ -5,16 +7,17 @@ export const revalidate = 3600;
 
 import { ThemeImage } from "@/components/theme-image";
 import { MissionsClient } from "./missions-client";
-import {  Flag } from "lucide-react";
+import { Flag } from "lucide-react";
 import type { Metadata } from "next";
 import { canonicalMissions, type CanonicalMission } from "@/lib/canonical-data";
 import { getMissions, type MissionRecord } from "@/lib/services/missions";
 
 export const metadata: Metadata = {
-    alternates: { canonical: "/missions" },
-    openGraph: { url: "/missions" },
-  title: "GTA 6 Missions & Contracts Database — Story, Heists & Walkthroughs",
-  description: "Comprehensive database of GTA 6 story missions, contracts, and heists. Filter by operative (Lucia, Jason), rewards, difficulty, and chapter.",
+  alternates: { canonical: "/missions" },
+  openGraph: { url: "/missions" },
+  title: "GTA 6 Fan Mission Concepts & Planning",
+  description:
+    "Fictional mission-planning examples. Names, objectives, rewards, difficulty and unlocks are not verified GTA VI walkthrough data.",
   robots: { index: false, follow: true },
 };
 
@@ -31,12 +34,21 @@ type DbMission = MissionRecord & {
 };
 
 /** Map a DB mission row onto the CanonicalMission shape the client renders. */
-function dbToCanonical(m: DbMission, match?: CanonicalMission): CanonicalMission {
-  const objectives = (m.objectives || "").split("\n").map((s) => s.trim()).filter(Boolean);
+function dbToCanonical(
+  m: DbMission,
+  match?: CanonicalMission,
+): CanonicalMission {
+  const objectives = (m.objectives || "")
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
   // A community-researched source can never support an "Observed in Official
   // Media" or "Credible Report" badge: force the honest "Community Identified"
   // tier (RUMORED) whenever the resolved source is community research.
-  const resolvedConfidence = (m.confidence as CanonicalMission["confidence"]) || match?.confidence || "REPORTED";
+  const resolvedConfidence =
+    (m.confidence as CanonicalMission["confidence"]) ||
+    match?.confidence ||
+    "REPORTED";
   const resolvedSource = match?.source || "Atlas Admin";
   const confidence =
     resolvedSource === "Community research" &&
@@ -47,13 +59,23 @@ function dbToCanonical(m: DbMission, match?: CanonicalMission): CanonicalMission
     id: m.id,
     slug: m.slug || match?.slug || m.id,
     title: m.name,
-    type: (m.mission_type as CanonicalMission["type"]) || match?.type || "Main Story",
-    character: (m.protagonist as CanonicalMission["character"]) || match?.character || "Both",
-    difficulty: (m.difficulty as CanonicalMission["difficulty"]) || match?.difficulty || "Medium",
+    type:
+      (m.mission_type as CanonicalMission["type"]) ||
+      match?.type ||
+      "Main Story",
+    character:
+      (m.protagonist as CanonicalMission["character"]) ||
+      match?.character ||
+      "Both",
+    difficulty:
+      (m.difficulty as CanonicalMission["difficulty"]) ||
+      match?.difficulty ||
+      "Medium",
     duration: m.duration || match?.duration || "15-20 min",
     district: m.district || match?.district || "Vice City",
     cashReward: match?.cashReward ?? null,
-    cashRewardDisplay: m.cash_reward_display || match?.cashRewardDisplay || "TBD",
+    cashRewardDisplay:
+      m.cash_reward_display || match?.cashRewardDisplay || "TBD",
     otherRewards: m.other_rewards || match?.otherRewards || [],
     requirements: m.requirements || match?.requirements || [],
     objectives: objectives.length > 0 ? objectives : match?.objectives || [],
@@ -74,8 +96,11 @@ export default async function MissionsPage() {
   let missions: CanonicalMission[] = canonicalMissions;
   try {
     // Timeout after 5s - don't let Supabase hang the page
-    const timeout = new Promise<null>((_, reject) => setTimeout(() => reject(new Error("timeout")), 5000));
-    const dbMissions = (await Promise.race([getMissions(), timeout])) as DbMission[] | null;
+    const timeout = new Promise<null>((_, reject) =>
+      setTimeout(() => reject(new Error("timeout")), 5000),
+    );
+    const dbMissions = (await Promise.race([getMissions(), timeout])) as
+      DbMission[] | null;
     if (dbMissions && dbMissions.length > 0) {
       const dbIds = new Set(dbMissions.map((m) => m.id.toLowerCase()));
       const dbNames = new Set(dbMissions.map((m) => m.name.toLowerCase()));
@@ -83,12 +108,15 @@ export default async function MissionsPage() {
         dbToCanonical(
           m,
           canonicalMissions.find(
-            (c) => c.id.toLowerCase() === m.id.toLowerCase() || c.title.toLowerCase() === m.name.toLowerCase()
-          )
-        )
+            (c) =>
+              c.id.toLowerCase() === m.id.toLowerCase() ||
+              c.title.toLowerCase() === m.name.toLowerCase(),
+          ),
+        ),
       );
       const remaining = canonicalMissions.filter(
-        (c) => !dbIds.has(c.id.toLowerCase()) && !dbNames.has(c.title.toLowerCase())
+        (c) =>
+          !dbIds.has(c.id.toLowerCase()) && !dbNames.has(c.title.toLowerCase()),
       );
       missions = [...dbMapped, ...remaining];
     }
@@ -98,6 +126,9 @@ export default async function MissionsPage() {
 
   return (
     <SiteShell>
+      <div className="container-site pt-6">
+        <ConceptNotice subject="mission scenarios" />
+      </div>
       {/* HERO */}
       <section className="container-site pt-6">
         <div className="card-surface relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
@@ -116,7 +147,9 @@ export default async function MissionsPage() {
               LEONIDA <span className="text-primary">MISSIONS & HEISTS</span>
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-white/80">
-              Browse story chapters, multi-approach bank heists, cartel side contracts, and dynamic stranger encounters across Vice City and beyond.
+              Browse story chapters, multi-approach bank heists, cartel side
+              contracts, and dynamic stranger encounters across Vice City and
+              beyond.
             </p>
           </div>
         </div>
@@ -129,9 +162,16 @@ export default async function MissionsPage() {
             ["Lucia & Jason", "Dual Protagonists"],
             ["$480K+", "Top Vault Score"],
           ].map(([v, l]) => (
-            <div key={l} className="flex flex-col items-center gap-1 px-4 py-5 text-center">
-              <span className="font-display text-xl sm:text-2xl font-black text-accent">{v}</span>
-              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{l}</span>
+            <div
+              key={l}
+              className="flex flex-col items-center gap-1 px-4 py-5 text-center"
+            >
+              <span className="font-display text-xl sm:text-2xl font-black text-accent">
+                {v}
+              </span>
+              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                {l}
+              </span>
             </div>
           ))}
         </div>
@@ -139,7 +179,7 @@ export default async function MissionsPage() {
 
       {/* INTERACTIVE MISSIONS FINDER */}
       <section className="container-site py-7">
-        <MissionsClient initialMissions={missions} />
+        <MissionsClient initialMissions={missions.map(asConcept)} />
       </section>
     </SiteShell>
   );

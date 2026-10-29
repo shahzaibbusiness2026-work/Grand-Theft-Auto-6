@@ -178,6 +178,7 @@ export type WorldEntry = {
   name: string;
   observation: string;
   source: string;
+  sourceHref?: string;
   tier: EvidenceTier;
 };
 
@@ -481,60 +482,15 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
   {
     slug: "weather-climate",
     image: "/img/world/weather-daytime-street.jpg",
-    imageAlt: "Trailer still: a sunny daytime street in Vice City",
+    imageAlt: "Official-media still used to illustrate daytime atmosphere in Leonida",
     title: "Weather & Climate",
-    seoTitle: "GTA 6 Weather & Day-Night in Leonida",
-    seoDescription:
-      "Rain, storms, sunsets, and day-night atmosphere visible in official GTA 6 footage, with sources.",
-    intro:
-      "The trailers show Leonida in rain, storm light, and blazing sunsets. This page collects the weather and day-night atmosphere actually visible in official footage. No official day-night cycle length or dynamic weather system has been confirmed.",
-    notConfirmed: [
-      "No dynamic weather system or day-night cycle length has been confirmed by Rockstar.",
-      "The site's day-night converter tool is illustrative, not an official game clock.",
-    ],
-        entries: [
-      {
-            "name": "Tropical storms & seasonal hurricanes",
-            "observation": "Rockstar confirms Leonida, like Florida, has tropical storms and seasonal hurricanes. How often they occur and how they affect gameplay or story was not stated.",
-            "source": "Game Informer cover story, Sept 29, 2026",
-            "tier": "Rockstar confirmed"
-      },
-      {
-            "name": "Heaviest-weather detail",
-            "observation": "Rockstar staff describe heavy cloud, strong wind, dense atmospherics, rain, everything dripping wet, water gushing off roof edges and lampposts, thunder, and lightning flashing through clouds.",
-            "source": "Game Informer cover story, Sept 29, 2026",
-            "tier": "Rockstar confirmed"
-      },
-      {
-            "name": "Mud Dog Mike",
-            "observation": "Back Country Radio's roving swamp meteorologist, broadcasting from a Grassrivers airboat. Announced with the official music reveal (Oct 8, 2026).",
-            "source": "Official music announcement, Oct 8, 2026",
-            "tier": "Rockstar confirmed"
-      },
-      {
-            "name": "Rain, varying intensity",
-            "observation": "Rain appears in at least two trailer moments; pavement wets and reflects, pedestrians react, and lighting turns cooler and diffused. Intensity appears to vary within a single sequence.",
-            "source": "Trailers",
-            "tier": "Observed in official media"
-      },
-      {
-            "name": "Severe storm & flooding",
-            "observation": "Trailer 1's highway sequence: heavy downpour, palm trees partially submerged, temporary lakes beside the freeway, water pooling in low points.",
-            "source": "Trailer 1",
-            "tier": "Observed in official media"
-      },
-      {
-            "name": "Day, sunset & night looks",
-            "observation": "Official footage moves between sunlit beaches, orange sunsets, neon-lit night streets, and rain-soaked nights. This shows day/night looks exist in footage; no cycle length or clock mechanic has been published.",
-            "source": "Trailers + Extended Look",
-            "tier": "Observed in official media"
-      },
-      {
-            "name": "Tidal shoreline shifts",
-            "observation": "Trailer comparisons show the shoreline moving against fixed structures and wet sand drying gradually. This is frame analysis, not a Rockstar-stated system.",
-            "source": "Trailer analysis (fan)",
-            "tier": "Community identification"
-      }
+    seoTitle: "GTA 6 Weather: Official Visuals and Unknown Mechanics",
+    seoDescription: "Separate the atmosphere depicted in official GTA VI media from unverified weather frequency, flooding, tides and clock-rate claims.",
+    intro: "Official media depicts Leonida with different lighting and atmospheric conditions. A visual scene does not establish a playable weather system, its frequency or its effects. Earlier precise weather claims on this page have been withdrawn pending traceable source review.",
+    notConfirmed: ["We have not verified weather frequency, seasonal hurricanes, flood mechanics or tides against a precise primary-source passage.", "The GTA VI day-night clock rate remains unverified here. The linked converter is a hypothetical model."],
+    entries: [
+      { name: "Official visual reference", observation: "Use Rockstar's official GTA VI media to inspect the depicted setting. This reference establishes a visual source, not a measured weather or gameplay rule.", source: "Rockstar Games: GTA VI official media", sourceHref: "https://www.rockstargames.com/VI", tier: "Observed in official media" },
+      { name: "Day-night planning model", observation: "Our converter uses editable example inputs. Its results are simulations, not measurements from GTA VI.", source: "Day-night converter assumptions", sourceHref: "/tools/day-night-converter", tier: "Community identification" }
     ],
     related: [
       { label: "Day-Night Converter", href: "/tools/day-night-converter" },

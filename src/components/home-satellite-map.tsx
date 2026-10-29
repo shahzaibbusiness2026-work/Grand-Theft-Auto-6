@@ -112,10 +112,10 @@ export function HomeSatelliteMap() {
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#00F0FF]" />
           </span>
           <span className="font-display text-xs font-black uppercase tracking-[0.25em] text-white">
-            LEONIDA SATELLITE RADAR
+            LEONIDA FAN-MAP PREVIEW
           </span>
           <span className="hidden font-mono text-xs text-cyan-400/80 sm:inline-block">
-            25°46&apos;31&quot;N 80°11&apos;32&quot;W // HD 4K
+            Illustration · pins and geography unverified
           </span>
         </div>
 
@@ -138,7 +138,7 @@ export function HomeSatelliteMap() {
           {/* Ultra-HD Satellite Map */}
           <Image
             src="/img/satellite-map-hd.jpg"
-            alt="Leonida & Vice City High Definition Satellite Map"
+            alt="Fan illustration of Leonida; geography and pin placement unverified"
             fill
             sizes="100vw"
             className={cn(

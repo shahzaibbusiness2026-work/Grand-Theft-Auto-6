@@ -1,3 +1,4 @@
+import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
 import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
 import { MapDistanceCalculatorClient } from "./map-distance-calculator-client";
@@ -7,17 +8,17 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
-    openGraph: { url: "/tools/map-distance-calculator" },
+  openGraph: { url: "/tools/map-distance-calculator" },
   title: "GTA 6 Map Distance Calculator — Travel Times Between Locations",
-  description: "Estimate distances and travel times between GTA 6 map locations. Compare drive, boat, and off-road routes across Leonida and get the fastest vehicle recommendation.",
+  description: PUBLIC_TOOL_COPY["/tools/map-distance-calculator"],
 
   alternates: { canonical: "/tools/map-distance-calculator" },
 };
 
 export default function MapDistanceCalculatorPage() {
   return (
-        <SiteShell>
-          <ToolStatusBanner status="simulator" />
+    <SiteShell>
+      <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -27,15 +28,30 @@ export default function MapDistanceCalculatorPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Map Distance Calculator \u2014 Travel Times Between Locations", item: "https://www.taishgaming.com/tools/map-distance-calculator" },
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://www.taishgaming.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Tools",
+                    item: "https://www.taishgaming.com/tools",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "GTA 6 Map Distance Calculator \u2014 Travel Times Between Locations",
+                    item: "https://www.taishgaming.com/tools/map-distance-calculator",
+                  },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Map Distance Calculator \u2014 Travel Times Between Locations",
-                description: "Estimate distances and travel times between GTA 6 map locations. Compare drive, boat, and off-road routes across Leonida and get the fastest vehicle recommendation.",
+                description: PUBLIC_TOOL_COPY["/tools/map-distance-calculator"],
                 url: "https://www.taishgaming.com/tools/map-distance-calculator",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -48,11 +64,17 @@ export default function MapDistanceCalculatorPage() {
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+          <Link href="/" className="hover:text-primary transition-colors">
+            Home
+          </Link>
           <ChevronRight className="h-3 w-3" />
-          <Link href="/tools" className="hover:text-primary transition-colors">Tools</Link>
+          <Link href="/tools" className="hover:text-primary transition-colors">
+            Tools
+          </Link>
           <ChevronRight className="h-3 w-3" />
-          <span className="text-foreground font-bold">Map Distance Calculator</span>
+          <span className="text-foreground font-bold">
+            Map Distance Calculator
+          </span>
         </nav>
 
         {/* Page Header */}
@@ -64,7 +86,9 @@ export default function MapDistanceCalculatorPage() {
             GTA 6 <span className="text-primary">MAP DISTANCE CALCULATOR</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Pick any two locations across Leonida to estimate the distance between them, compare drive and boat travel times, and see which vehicle gets you there fastest.
+            Explore a hypothetical straight-line model with editable scale and
+            speed assumptions. Fan-map coordinates do not establish real GTA VI
+            distances, traversable routes or a fastest vehicle.
           </p>
         </div>
 

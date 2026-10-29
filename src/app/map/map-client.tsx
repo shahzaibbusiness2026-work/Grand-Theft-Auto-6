@@ -1,11 +1,7 @@
-"use client";
+import mapStyles from "@/components/map-workspace.module.css";
 
 import Link from "next/link";
-import {
-  Compass,
-  Radio,
-  ChevronRight,
-} from "lucide-react";
+import { Compass, Radio, ChevronRight } from "lucide-react";
 import { SatelliteInteractiveMap } from "@/components/satellite-interactive-map";
 
 const DISTRICT_GUIDES = [
@@ -64,46 +60,66 @@ export function MapClient() {
   return (
     <div className="overflow-x-clip">
       {/* Top Breadcrumb & Page Banner */}
-      <div className="border-b border-white/10 bg-gradient-to-b from-[#0e0717] via-[#070b14] to-[#04070f] pt-8 pb-8">
+      <div
+        className={`dark-panel ${mapStyles.darkSurface} border-b border-white/10 bg-gradient-to-b from-[#0e0717] via-[#070b14] to-[#04070f] pt-8 pb-8`}
+      >
         <div className="container-site">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-xs font-semibold text-muted-foreground mb-4">
+          <nav className="flex items-center gap-2 text-xs font-semibold text-slate-300 mb-4">
             <Link href="/" className="hover:text-gold transition-colors">
               Home
             </Link>
             <ChevronRight className="h-3 w-3 text-muted-foreground/60" />
-            <span className="text-gold dark:text-gold-light font-bold">Interactive Map</span>
+            <span className="text-gold dark:text-gold-light font-bold">
+              Interactive Map
+            </span>
             <ChevronRight className="h-3 w-3 text-muted-foreground/60" />
-            <span className="text-foreground">Leonida Satellite Atlas</span>
+            <span className="text-slate-100">Leonida Satellite Atlas</span>
           </nav>
 
           {/* Header Row */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-gold dark:text-gold-light mb-3">
-                <Radio className="h-3 w-3 animate-pulse" /> Fan-made Interactive Atlas
+                <Radio className="h-3 w-3 animate-pulse" /> Fan-made Interactive
+                Atlas
               </div>
               <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
-                LEONIDA STATE <span className="text-primary">SATELLITE ATLAS</span>
+                LEONIDA STATE{" "}
+                <span className="text-primary">SATELLITE ATLAS</span>
               </h1>
               <p className="mt-3 text-sm leading-relaxed text-slate-300 font-medium">
-                Explore the fan-made Leonida atlas: districts, mission areas, weapon caches, and hidden spots identified from official footage, with evidence labels on every pin.
+                Explore a fan-made Leonida map illustration. All pins are
+                provisional concepts: placement, availability, hours, rewards
+                and gameplay have not passed field-specific evidence review.
               </p>
             </div>
 
             {/* Quick Stat Chips */}
             <div className="flex flex-wrap items-center gap-3">
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Coverage</span>
-                <span className="font-display text-lg font-black text-white">Statewide</span>
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">
+                  Coverage
+                </span>
+                <span className="font-display text-lg font-black text-white">
+                  Statewide
+                </span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Evidence</span>
-                <span className="font-display text-lg font-black text-[#00F0FF]">Labelled per pin</span>
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">
+                  Evidence
+                </span>
+                <span className="font-display text-lg font-black text-[#00F0FF]">
+                  Labelled per pin
+                </span>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Districts</span>
-                <span className="font-display text-lg font-black text-gold-light">6 Regions</span>
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">
+                  Districts
+                </span>
+                <span className="font-display text-lg font-black text-gold-light">
+                  6 Regions
+                </span>
               </div>
             </div>
           </div>
@@ -116,7 +132,13 @@ export function MapClient() {
       </div>
 
       {/* Regional Exploration Guides */}
-      <div className="container-site pb-20 pt-8 border-t border-border">
+      <div
+        className="container-site pb-20 pt-8 border-t border-border"
+        style={{
+          contentVisibility: "auto",
+          containIntrinsicSize: "auto 1000px",
+        }}
+      >
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-gold dark:text-gold-light mb-1">
@@ -126,7 +148,8 @@ export function MapClient() {
               Districts of Leonida
             </h2>
             <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-              Detailed breakdown of mission areas, collectibles, and points of interest by region
+              Explore official region background separately from speculative pin
+              placement and gameplay.
             </p>
           </div>
           <Link
@@ -145,14 +168,15 @@ export function MapClient() {
               className="group rounded-3xl border border-white/10 bg-[#070c18] overflow-hidden transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-2xl flex flex-col"
             >
               <div className="relative h-44 overflow-hidden bg-black/60">
-                <img loading="lazy"
+                <img
+                  loading="lazy"
                   src={d.img}
                   alt={d.name}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#070c18] via-transparent to-black/30" />
                 <span className="absolute top-3 right-3 rounded-full bg-black/80 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-emerald-400 border border-emerald-500/30 backdrop-blur">
-                  {d.threat}
+                  Gameplay unverified
                 </span>
                 <div className="absolute bottom-3 left-4 right-4">
                   <h3 className="font-display text-lg font-black uppercase text-white drop-shadow-md">
@@ -163,7 +187,8 @@ export function MapClient() {
 
               <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                 <p className="text-xs leading-relaxed text-slate-300 font-medium">
-                  {d.desc}
+                  Editorial region concept. Precise locations, services,
+                  missions and mechanics remain unverified.
                 </p>
 
                 {/* Tags */}

@@ -2,6 +2,9 @@
 
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
+import { trackPublicEvent } from "@/lib/public-events";
+import Image from "next/image";
+import mapStyles from "./map-workspace.module.css";
 import {
   Search,
   Plus,
@@ -62,6 +65,7 @@ export interface MapPOI {
   icon: any;
   verified?: boolean;
   source?: string;
+  sourceUrl?: string;
   addedOn?: string;
 }
 
@@ -70,26 +74,51 @@ function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
   let color = "bg-gold";
   const catLower = (m.category || "").toLowerCase();
 
-  if (m.icon === "car") { iconComponent = Car; color = "bg-cyan-500"; }
-  else if (m.icon === "star") { iconComponent = Star; color = "bg-gold"; }
-  else if (m.icon === "flag") { iconComponent = Flag; color = "bg-rose-500"; }
-  else if (m.icon === "square") { iconComponent = Crosshair; color = "bg-orange-500"; }
-  else if (m.icon === "dot") { iconComponent = Egg; color = "bg-emerald-500"; }
-  else if (catLower.includes("shop")) { iconComponent = ShoppingBag; color = "bg-emerald-500"; }
-  else if (catLower.includes("garage")) { iconComponent = Warehouse; color = "bg-cyan-500 dark:bg-[#00F0FF]"; }
-  else if (catLower.includes("prop")) { iconComponent = Building2; color = "bg-indigo-500"; }
-  else if (catLower.includes("collect")) { iconComponent = Gem; color = "bg-purple-500"; }
-  else if (catLower.includes("weapon")) { iconComponent = Crosshair; color = "bg-[#FF0055]"; }
+  if (m.icon === "car") {
+    iconComponent = Car;
+    color = "bg-cyan-500";
+  } else if (m.icon === "star") {
+    iconComponent = Star;
+    color = "bg-gold";
+  } else if (m.icon === "flag") {
+    iconComponent = Flag;
+    color = "bg-rose-500";
+  } else if (m.icon === "square") {
+    iconComponent = Crosshair;
+    color = "bg-orange-500";
+  } else if (m.icon === "dot") {
+    iconComponent = Egg;
+    color = "bg-emerald-500";
+  } else if (catLower.includes("shop")) {
+    iconComponent = ShoppingBag;
+    color = "bg-emerald-500";
+  } else if (catLower.includes("garage")) {
+    iconComponent = Warehouse;
+    color = "bg-cyan-500 dark:bg-[#00F0FF]";
+  } else if (catLower.includes("prop")) {
+    iconComponent = Building2;
+    color = "bg-indigo-500";
+  } else if (catLower.includes("collect")) {
+    iconComponent = Gem;
+    color = "bg-purple-500";
+  } else if (catLower.includes("weapon")) {
+    iconComponent = Crosshair;
+    color = "bg-[#FF0055]";
+  }
 
   let filterCategory = "poi";
   if (catLower.includes("shop")) filterCategory = "shops";
   else if (catLower.includes("garage")) filterCategory = "garages";
   else if (catLower.includes("collect")) filterCategory = "collectibles";
   else if (catLower.includes("weapon")) filterCategory = "weapons";
-  else if (catLower.includes("activ") || catLower.includes("stunt")) filterCategory = "activities";
-  else if (catLower.includes("prop") || catLower.includes("estate")) filterCategory = "properties";
-  else if (catLower.includes("easter") || catLower.includes("secret")) filterCategory = "easter_eggs";
-  else if (catLower.includes("vehic") || catLower.includes("car")) filterCategory = "vehicles";
+  else if (catLower.includes("activ") || catLower.includes("stunt"))
+    filterCategory = "activities";
+  else if (catLower.includes("prop") || catLower.includes("estate"))
+    filterCategory = "properties";
+  else if (catLower.includes("easter") || catLower.includes("secret"))
+    filterCategory = "easter_eggs";
+  else if (catLower.includes("vehic") || catLower.includes("car"))
+    filterCategory = "vehicles";
 
   return {
     id: m.id,
@@ -111,28 +140,157 @@ function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
 }
 
 const CATEGORY_FILTERS = [
-  { id: "all", label: "Show All", count: 312, icon: Star, color: "text-gold-light", all: true },
-  { id: "missions", label: "Missions & Heists", count: 48, icon: Target, color: "text-gold-light" },
-  { id: "garages", label: "Garages & Safehouses", count: 26, icon: Warehouse, color: "text-cyan-400" },
-  { id: "shops", label: "Ammu-Nation & Shops", count: 38, icon: ShoppingBag, color: "text-emerald-400" },
-  { id: "vehicles", label: "Vehicles", count: 63, icon: Car, color: "text-cyan-400" },
-  { id: "weapons", label: "Weapons", count: 45, icon: Crosshair, color: "text-orange-400" },
-  { id: "collectibles", label: "Collectibles", count: 62, icon: Gem, color: "text-purple-400" },
-  { id: "properties", label: "Real Estate", count: 30, icon: Building2, color: "text-indigo-400" },
-  { id: "activities", label: "Stunts & Racing", count: 40, icon: Flame, color: "text-yellow-400" },
-  { id: "easter-eggs", label: "Secrets & Lore", count: 21, icon: Egg, color: "text-teal-400" },
-  { id: "poi", label: "Points of Interest", count: 52, icon: MapPin, color: "text-gold-light" },
+  {
+    id: "all",
+    label: "Show All",
+    count: 312,
+    icon: Star,
+    color: "text-gold-light",
+    all: true,
+  },
+  {
+    id: "missions",
+    label: "Missions & Heists",
+    count: 48,
+    icon: Target,
+    color: "text-gold-light",
+  },
+  {
+    id: "garages",
+    label: "Garages & Safehouses",
+    count: 26,
+    icon: Warehouse,
+    color: "text-cyan-400",
+  },
+  {
+    id: "shops",
+    label: "Ammu-Nation & Shops",
+    count: 38,
+    icon: ShoppingBag,
+    color: "text-emerald-400",
+  },
+  {
+    id: "vehicles",
+    label: "Vehicles",
+    count: 63,
+    icon: Car,
+    color: "text-cyan-400",
+  },
+  {
+    id: "weapons",
+    label: "Weapons",
+    count: 45,
+    icon: Crosshair,
+    color: "text-orange-400",
+  },
+  {
+    id: "collectibles",
+    label: "Collectibles",
+    count: 62,
+    icon: Gem,
+    color: "text-purple-400",
+  },
+  {
+    id: "properties",
+    label: "Real Estate",
+    count: 30,
+    icon: Building2,
+    color: "text-indigo-400",
+  },
+  {
+    id: "activities",
+    label: "Stunts & Racing",
+    count: 40,
+    icon: Flame,
+    color: "text-yellow-400",
+  },
+  {
+    id: "easter-eggs",
+    label: "Secrets & Lore",
+    count: 21,
+    icon: Egg,
+    color: "text-teal-400",
+  },
+  {
+    id: "poi",
+    label: "Points of Interest",
+    count: 52,
+    icon: MapPin,
+    color: "text-gold-light",
+  },
 ];
 
 const DISTRICTS = [
   { id: "all", name: "Full Leonida State", top: 50, left: 50, zoom: 1.0 },
-  { id: "vice-city", name: "Vice City", top: 52, left: 60, zoom: 1.75, desc: "Neon-soaked urban heart of Leonida — Ocean Beach Art Deco, Little Cuba" },
-  { id: "keys", name: "Leonida Keys", top: 72, left: 45, zoom: 1.65, desc: "Tropical archipelago — boats, bars, dangerous waters" },
-  { id: "grassrivers", name: "Grassrivers", top: 35, left: 55, zoom: 1.6, desc: "Everglades-inspired wetlands — gators, airboats, mangroves" },
-  { id: "port-gellhorn", name: "Port Gellhorn", top: 42, left: 35, zoom: 1.75, desc: "Faded coastal resort town — cheap motels, empty strip malls" },
-  { id: "ambrosia", name: "Ambrosia", top: 28, left: 48, zoom: 1.65, desc: "Rural industrial town — Allied Crystal sugar refinery, biker gangs" },
-  { id: "mount-kalaga", name: "Mount Kalaga National Park", top: 18, left: 40, zoom: 1.6, desc: "Northern wilderness — hunting, fishing, off-road trails" },
+  {
+    id: "vice-city",
+    name: "Vice City",
+    top: 52,
+    left: 60,
+    zoom: 1.75,
+    desc: "Neon-soaked urban heart of Leonida — Ocean Beach Art Deco, Little Cuba",
+  },
+  {
+    id: "keys",
+    name: "Leonida Keys",
+    top: 72,
+    left: 45,
+    zoom: 1.65,
+    desc: "Tropical archipelago — boats, bars, dangerous waters",
+  },
+  {
+    id: "grassrivers",
+    name: "Grassrivers",
+    top: 35,
+    left: 55,
+    zoom: 1.6,
+    desc: "Everglades-inspired wetlands — gators, airboats, mangroves",
+  },
+  {
+    id: "port-gellhorn",
+    name: "Port Gellhorn",
+    top: 42,
+    left: 35,
+    zoom: 1.75,
+    desc: "Faded coastal resort town — cheap motels, empty strip malls",
+  },
+  {
+    id: "ambrosia",
+    name: "Ambrosia",
+    top: 28,
+    left: 48,
+    zoom: 1.65,
+    desc: "Rural industrial town — Allied Crystal sugar refinery, biker gangs",
+  },
+  {
+    id: "mount-kalaga",
+    name: "Mount Kalaga National Park",
+    top: 18,
+    left: 40,
+    zoom: 1.6,
+    desc: "Northern wilderness — hunting, fishing, off-road trails",
+  },
 ];
+
+/** A generic CMS verification flag is not a field-specific evidence review. */
+function publicMapPoi(poi: MapPOI): MapPOI {
+  const aliases: Record<string, string> = {
+    story: "missions",
+    side: "missions",
+    safehouses: "garages",
+    locations: "poi",
+    easter_eggs: "easter-eggs",
+  };
+  return {
+    ...poi,
+    category: aliases[poi.category] || poi.category,
+    verified: false,
+    desc: `Fan concept: ${poi.title}. Identity, placement, hours, rewards and gameplay are unverified. The background is a fan illustration, not an official GTA VI map.`,
+    hours: "Unknown",
+    source: "Source review pending; read our evidence policy",
+    sourceUrl: "/editorial-policy",
+  };
+}
 
 const POIS: MapPOI[] = [
   {
@@ -423,15 +581,69 @@ const POIS: MapPOI[] = [
     icon: MapPin,
     verified: false,
   },
-];
+].map(publicMapPoi);
 
 const FOUND_ON_MAP_RAIL = [
-  { title: "Hidden Cache #12", type: "Collectible", when: "2h ago", img: "/img/cache-chest.jpg", badge: "COLLECTIBLE", badgeColor: "bg-gold-dark", icon: Gem, color: "text-gold-light" },
-  { title: "Stunt Jump #8", type: "Activity", when: "5h ago", img: "/img/stunt-bike.jpg", badge: "ACTIVITY", badgeColor: "bg-[#7E22CE]", icon: Star, color: "text-purple-400" },
-  { title: "Garage – Ocean Drive", type: "Garage", when: "1d ago", img: "/img/garage.jpg", badge: "GARAGE", badgeColor: "bg-[#D97706]", icon: Warehouse, color: "text-cyan-400" },
-  { title: "Tactical SMG Drop", type: "Weapon", when: "2d ago", img: "/img/smg-gun.jpg", badge: "WEAPON", badgeColor: "bg-[#7E22CE]", icon: Crosshair, color: "text-rose-400" },
-  { title: "High-End Penthouse", type: "Property", when: "2d ago", img: "/img/apartment.jpg", badge: "PROPERTY", badgeColor: "bg-[#6366F1]", icon: Building2, color: "text-indigo-400" },
-  { title: "UFO Swamplands Mural", type: "Easter Egg", when: "3d ago", img: "/img/ufo-mural.jpg", badge: "EASTER EGG", badgeColor: "bg-[#059669]", icon: Egg, color: "text-emerald-400" },
+  {
+    title: "Hidden Cache #12",
+    type: "Collectible",
+    when: "2h ago",
+    img: "/img/cache-chest.jpg",
+    badge: "COLLECTIBLE",
+    badgeColor: "bg-gold-dark",
+    icon: Gem,
+    color: "text-gold-light",
+  },
+  {
+    title: "Stunt Jump #8",
+    type: "Activity",
+    when: "5h ago",
+    img: "/img/stunt-bike.jpg",
+    badge: "ACTIVITY",
+    badgeColor: "bg-[#7E22CE]",
+    icon: Star,
+    color: "text-purple-400",
+  },
+  {
+    title: "Garage – Ocean Drive",
+    type: "Garage",
+    when: "1d ago",
+    img: "/img/garage.jpg",
+    badge: "GARAGE",
+    badgeColor: "bg-[#D97706]",
+    icon: Warehouse,
+    color: "text-cyan-400",
+  },
+  {
+    title: "Tactical SMG Drop",
+    type: "Weapon",
+    when: "2d ago",
+    img: "/img/smg-gun.jpg",
+    badge: "WEAPON",
+    badgeColor: "bg-[#7E22CE]",
+    icon: Crosshair,
+    color: "text-rose-400",
+  },
+  {
+    title: "High-End Penthouse",
+    type: "Property",
+    when: "2d ago",
+    img: "/img/apartment.jpg",
+    badge: "PROPERTY",
+    badgeColor: "bg-[#6366F1]",
+    icon: Building2,
+    color: "text-indigo-400",
+  },
+  {
+    title: "UFO Swamplands Mural",
+    type: "Easter Egg",
+    when: "3d ago",
+    img: "/img/ufo-mural.jpg",
+    badge: "EASTER EGG",
+    badgeColor: "bg-[#059669]",
+    icon: Egg,
+    color: "text-emerald-400",
+  },
 ];
 
 // Coordinate system bounds (virtual canvas width: 1400, height: 1050)
@@ -445,36 +657,23 @@ export function SatelliteInteractiveMap({
   initialFullscreen?: boolean;
   standaloneMode?: boolean;
 }) {
-  const [checkedFilters, setCheckedFilters] = useState<Record<string, boolean>>({
-    all: true,
-    story: true,
-    side: true,
-    collectibles: true,
-    vehicles: true,
-    weapons: true,
-    garages: true,
-    properties: true,
-    safehouses: true,
-    shops: true,
-    activities: true,
-    poi: true,
-    easter_eggs: true,
-  });
-
+  const [checkedFilters, setCheckedFilters] = useState<Record<string, boolean>>(
+    () => Object.fromEntries(CATEGORY_FILTERS.map((f) => [f.id, true])),
+  );
   const [hideCollected, setHideCollected] = useState(false);
   const [allPOIs, setAllPOIs] = useState<MapPOI[]>(POIS);
-  const [selectedPOI, setSelectedPOI] = useState<MapPOI | null>(POIS[0]);
-  const [collectedPOIs, setCollectedPOIs] = useState<Record<string, boolean>>({
-    "poi-ammu": true,
-    "poi-garage": true,
-    "poi-suite": true,
-  });
+  const [selectedPOI, setSelectedPOI] = useState<MapPOI | null>(null);
+  const [collectedPOIs, setCollectedPOIs] = useState<Record<string, boolean>>(
+    {},
+  );
 
   // Deep link (?poi=…) that pointed at a CMS marker: resolved once the
   // live markers finish loading, since their ids never appear in POIS.
-  const pendingDeepLinkRef = useRef<{ id: string; top?: string | null; left?: string | null } | null>(
-    null
-  );
+  const pendingDeepLinkRef = useRef<{
+    id: string;
+    top?: string | null;
+    left?: string | null;
+  } | null>(null);
   const deepLinkTimeoutsRef = useRef<number[]>([]);
 
   useEffect(() => {
@@ -482,23 +681,37 @@ export function SatelliteInteractiveMap({
       try {
         const markers = await getMapMarkers();
         if (markers && markers.length > 0) {
-          const livePois = markers.filter((m) => m.visible !== false).map(adminMarkerToPoi);
+          const livePois = markers
+            .filter((m) => m.visible !== false)
+            .map(adminMarkerToPoi)
+            .map(publicMapPoi);
           // Merge: keep bundled POIs, overlay live/CMS markers (live wins on id conflicts)
           const liveIds = new Set(livePois.map((m) => m.id));
-          const mergedPois = [...POIS.filter((poi) => !liveIds.has(poi.id)), ...livePois];
+          const mergedPois = [
+            ...POIS.filter((poi) => !liveIds.has(poi.id)),
+            ...livePois,
+          ];
           setAllPOIs(mergedPois);
-          setSelectedPOI((prev) => (prev ? mergedPois.find(p => p.id === prev.id) || mergedPois[0] : mergedPois[0]));
+          setSelectedPOI((prev) =>
+            prev ? mergedPois.find((p) => p.id === prev.id) || null : null,
+          );
 
           const pending = pendingDeepLinkRef.current;
           if (pending) {
             pendingDeepLinkRef.current = null;
             const matched = mergedPois.find(
-              (p) => p.id === pending.id || p.id === pending.id.replace(/^poi-/, "")
+              (p) =>
+                p.id === pending.id || p.id === pending.id.replace(/^poi-/, ""),
             );
             if (matched) {
-              deepLinkTimeoutsRef.current.push(window.setTimeout(() => focusOnPOI(matched), 250));
+              deepLinkTimeoutsRef.current.push(
+                window.setTimeout(() => focusOnPOI(matched), 250),
+              );
             } else if (pending.top && pending.left) {
-              setTimeout(() => panToCanvasPoint(pending.top!, pending.left!), 250);
+              setTimeout(
+                () => panToCanvasPoint(pending.top!, pending.left!),
+                250,
+              );
             }
           }
         }
@@ -529,41 +742,48 @@ export function SatelliteInteractiveMap({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Only when map is in viewport and not typing in input
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      if (e.key === '+' || e.key === '=') {
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        e.target instanceof HTMLSelectElement
+      )
+        return;
+      if (!containerRef.current?.contains(document.activeElement)) return;
+      if (e.key === "+" || e.key === "=") {
         e.preventDefault();
         setZoom((z) => Math.min(3.2, +(z + 0.25).toFixed(2)));
-      } else if (e.key === '-' || e.key === '_') {
+      } else if (e.key === "-" || e.key === "_") {
         e.preventDefault();
         setZoom((z) => Math.max(0.65, +(z - 0.25).toFixed(2)));
-      } else if (e.key === '0') {
+      } else if (e.key === "0") {
         e.preventDefault();
         setZoom(1.0);
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
   const [pan, setPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [searchQuery, setSearchQuery] = useState("");
-  const [mapMode, setMapMode] = useState<"satellite" | "tactical" | "radar">("satellite");
+  const [mapMode, setMapMode] = useState<"satellite" | "tactical" | "radar">(
+    "satellite",
+  );
   const [showGrid, setShowGrid] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(initialFullscreen);
-  const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
-  const [rightDrawerOpen, setRightDrawerOpen] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth >= 640 : true
-  );
+  const [leftSidebarOpen, setLeftSidebarOpen] = useState(false);
+  const [rightDrawerOpen, setRightDrawerOpen] = useState(false);
   const [activeDistrict, setActiveDistrict] = useState("all");
-  const [mouseCoords, setMouseCoords] = useState<{ lat: string; lng: string }>({
-    lat: "25°46'31\"N",
-    lng: "80°11'32\"W",
-  });
 
   const toggleFullscreen = () => setIsFullscreen((prev) => !prev);
 
   // Dragging state
   const [isDragging, setIsDragging] = useState(false);
-  const dragStartRef = useRef<{ x: number; y: number; panX: number; panY: number }>({
+  const dragStartRef = useRef<{
+    x: number;
+    y: number;
+    panX: number;
+    panY: number;
+  }>({
     x: 0,
     y: 0,
     panX: 0,
@@ -571,12 +791,47 @@ export function SatelliteInteractiveMap({
   });
   const viewportRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const filtersButtonRef = useRef<HTMLButtonElement>(null);
+  const detailsCloseRef = useRef<HTMLButtonElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const livePanRef = useRef(pan);
+  const panFrameRef = useRef<number | null>(null);
+  const closeFilters = () => {
+    setLeftSidebarOpen(false);
+    filtersButtonRef.current?.focus();
+  };
+  const closeDetails = () => {
+    setRightDrawerOpen(false);
+    returnFocusRef.current?.focus();
+  };
+  const queuePan = (next: { x: number; y: number }) => {
+    livePanRef.current = next;
+    if (panFrameRef.current !== null) return;
+    panFrameRef.current = window.requestAnimationFrame(() => {
+      panFrameRef.current = null;
+      const value = livePanRef.current;
+      if (canvasRef.current)
+        canvasRef.current.style.transform = `translate(${value.x}px, ${value.y}px) scale(${zoom})`;
+    });
+  };
+  useEffect(() => {
+    if (rightDrawerOpen) detailsCloseRef.current?.focus();
+  }, [rightDrawerOpen, selectedPOI?.id]);
+  useEffect(
+    () => () => {
+      if (panFrameRef.current !== null)
+        cancelAnimationFrame(panFrameRef.current);
+    },
+    [],
+  );
 
   // Center the map in the container initially
   const centerMap = useCallback(() => {
     if (!viewportRef.current) return;
     const { clientWidth, clientHeight } = viewportRef.current;
-    const initialZoom = clientWidth < 640 ? 0.75 : clientWidth < 1024 ? 0.9 : 1.0;
+    const initialZoom =
+      clientWidth < 640 ? 0.75 : clientWidth < 1024 ? 0.9 : 1.0;
     const initialPanX = (clientWidth - CANVAS_W * initialZoom) / 2;
     const initialPanY = (clientHeight - CANVAS_H * initialZoom) / 2;
     setZoom(initialZoom);
@@ -601,14 +856,17 @@ export function SatelliteInteractiveMap({
         y: clientHeight / 2 - py * targetZoom,
       });
     },
-    [zoom, rightDrawerOpen]
+    [zoom, rightDrawerOpen],
   );
 
   // Center on a specific POI & sync shareable URL
   const focusOnPOI = useCallback(
     (poi: MapPOI) => {
       if (!viewportRef.current) return;
+      trackPublicEvent("map_pin_open");
+      returnFocusRef.current = document.activeElement as HTMLElement;
       setSelectedPOI(poi);
+      setLeftSidebarOpen(false);
       setRightDrawerOpen(true);
 
       if (typeof window !== "undefined") {
@@ -636,7 +894,7 @@ export function SatelliteInteractiveMap({
 
       setPan({ x: newPanX, y: newPanY });
     },
-    [zoom, rightDrawerOpen]
+    [zoom, rightDrawerOpen],
   );
 
   useEffect(() => {
@@ -664,17 +922,24 @@ export function SatelliteInteractiveMap({
       if (targetPoiId) {
         // Prefix-tolerant: /map?poi=ocean-drive and ?poi=poi-ocean-drive both work.
         const matched = POIS.find(
-          (p) => p.id === targetPoiId || p.id === targetPoiId.replace(/^poi-/, "")
+          (p) =>
+            p.id === targetPoiId || p.id === targetPoiId.replace(/^poi-/, ""),
         );
         if (matched) {
           setTimeout(() => focusOnPOI(matched), 250);
         } else {
           // Not a bundled marker — likely a CMS marker that loads async, or an
           // entity with only canvas coordinates (collectibles/properties).
-          pendingDeepLinkRef.current = { id: targetPoiId, top: targetTop, left: targetLeft };
+          pendingDeepLinkRef.current = {
+            id: targetPoiId,
+            top: targetTop,
+            left: targetLeft,
+          };
         }
       } else if (targetTop && targetLeft) {
-        deepLinkTimeoutsRef.current.push(window.setTimeout(() => panToCanvasPoint(targetTop, targetLeft), 250));
+        deepLinkTimeoutsRef.current.push(
+          window.setTimeout(() => panToCanvasPoint(targetTop, targetLeft), 250),
+        );
       }
     }
     // One-time deep-link resolution: focusOnPOI's identity changes with zoom,
@@ -714,6 +979,7 @@ export function SatelliteInteractiveMap({
   // Mouse pan handlers
   const handleMouseDown = (e: React.MouseEvent) => {
     if (e.button !== 0) return; // Left button only
+    livePanRef.current = pan;
     setIsDragging(true);
     dragStartRef.current = {
       x: e.clientX,
@@ -727,37 +993,28 @@ export function SatelliteInteractiveMap({
     if (isDragging) {
       const dx = e.clientX - dragStartRef.current.x;
       const dy = e.clientY - dragStartRef.current.y;
-      setPan({
+      queuePan({
         x: dragStartRef.current.panX + dx,
         y: dragStartRef.current.panY + dy,
-      });
-    }
-
-    // Update GPS coordinates based on cursor relative to canvas
-    if (viewportRef.current) {
-      const rect = viewportRef.current.getBoundingClientRect();
-      const mouseX = (e.clientX - rect.left - pan.x) / zoom;
-      const mouseY = (e.clientY - rect.top - pan.y) / zoom;
-
-      // Map canvas coords to Vice City lat/lng
-      const latDeg = (25.85 - (mouseY / CANVAS_H) * 0.35).toFixed(4);
-      const lngDeg = (80.35 - (mouseX / CANVAS_W) * 0.45).toFixed(4);
-      setMouseCoords({
-        lat: `${latDeg}°N`,
-        lng: `${lngDeg}°W`,
       });
     }
   };
 
   const handleMouseUp = () => {
+    if (isDragging) setPan(livePanRef.current);
     setIsDragging(false);
   };
 
   // Touch handlers for mobile
-  const touchStartRef = useRef<{ x: number; y: number; dist: number }>({ x: 0, y: 0, dist: 0 });
+  const touchStartRef = useRef<{ x: number; y: number; dist: number }>({
+    x: 0,
+    y: 0,
+    dist: 0,
+  });
 
   const handleTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length === 1) {
+      livePanRef.current = pan;
       setIsDragging(true);
       dragStartRef.current = {
         x: e.touches[0].clientX,
@@ -768,7 +1025,7 @@ export function SatelliteInteractiveMap({
     } else if (e.touches.length === 2) {
       const dist = Math.hypot(
         e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
+        e.touches[0].clientY - e.touches[1].clientY,
       );
       touchStartRef.current.dist = dist;
     }
@@ -778,14 +1035,14 @@ export function SatelliteInteractiveMap({
     if (e.touches.length === 1 && isDragging) {
       const dx = e.touches[0].clientX - dragStartRef.current.x;
       const dy = e.touches[0].clientY - dragStartRef.current.y;
-      setPan({
+      queuePan({
         x: dragStartRef.current.panX + dx,
         y: dragStartRef.current.panY + dy,
       });
     } else if (e.touches.length === 2) {
       const dist = Math.hypot(
         e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
+        e.touches[0].clientY - e.touches[1].clientY,
       );
       const factor = dist / touchStartRef.current.dist;
       touchStartRef.current.dist = dist;
@@ -794,6 +1051,7 @@ export function SatelliteInteractiveMap({
   };
 
   const handleTouchEnd = () => {
+    if (isDragging) setPan(livePanRef.current);
     setIsDragging(false);
   };
 
@@ -821,7 +1079,8 @@ export function SatelliteInteractiveMap({
     return allPOIs.filter((p) => {
       if (hideCollected && collectedPOIs[p.id]) return false;
       if (verifiedOnly && !p.verified) return false;
-      const isCategoryChecked = checkedFilters.all || checkedFilters[p.category];
+      const isCategoryChecked =
+        checkedFilters.all || checkedFilters[p.category];
       const matchesSearch =
         searchQuery.trim() === "" ||
         p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -830,24 +1089,40 @@ export function SatelliteInteractiveMap({
         p.type.toLowerCase().includes(searchQuery.toLowerCase());
       return isCategoryChecked && matchesSearch;
     });
-  }, [allPOIs, checkedFilters, searchQuery, hideCollected, collectedPOIs, verifiedOnly]);
+  }, [
+    allPOIs,
+    checkedFilters,
+    searchQuery,
+    hideCollected,
+    collectedPOIs,
+    verifiedOnly,
+  ]);
 
-  const verifiedTotal = Object.values(collectedPOIs).filter(Boolean).length;
+  const verifiedTotal = allPOIs.filter((poi) => collectedPOIs[poi.id]).length;
 
   return (
     <div
       ref={containerRef}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          if (rightDrawerOpen) closeDetails();
+          else if (leftSidebarOpen) closeFilters();
+          else if (isFullscreen) setIsFullscreen(false);
+        }
+      }}
       className={cn(
         "w-full select-none transition-all",
         isFullscreen
           ? "fixed inset-0 z-[9999] h-screen w-screen bg-[#02050b] p-0 overflow-hidden"
-          : "relative rounded-3xl"
+          : "relative rounded-3xl",
       )}
     >
       {/* ================================================================= */}
       {/* TOP COMMAND HEADER (GTA HUD BAR)                                  */}
       {/* ================================================================= */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-[#070b14]/95 px-4 py-3 backdrop-blur-xl sm:px-6 rounded-t-3xl">
+      <div
+        className={`dark-panel ${mapStyles.darkSurface} flex flex-wrap items-center justify-between gap-3 border-b border-border bg-[#070b14] px-4 py-3 sm:px-6 rounded-t-3xl`}
+      >
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-gold to-yellow-400 text-slate-950 shadow-[0_0_15px_rgba(201,168,106,0.4)]">
             <Radio className="h-5 w-5 animate-pulse" />
@@ -858,12 +1133,13 @@ export function SatelliteInteractiveMap({
                 LEONIDA SATELLITE ATLAS
               </span>
               <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-xs font-black uppercase text-emerald-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
-                LIVE GPS
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 " />
+                FAN MAP
               </span>
             </div>
             <p className="text-xs text-muted-foreground">
-              Fan-made Leonida Atlas • {visiblePOIs.length}{" "}Active Targets Displayed
+              Fan-made Leonida Atlas • {visiblePOIs.length} provisional pins
+              displayed
             </p>
           </div>
         </div>
@@ -878,7 +1154,7 @@ export function SatelliteInteractiveMap({
                 "rounded-lg px-2.5 py-1 text-xs font-bold uppercase transition-all",
                 activeDistrict === d.id
                   ? "bg-gold text-slate-950 font-black shadow-xs"
-                  : "text-muted-foreground hover:text-white hover:bg-muted/40"
+                  : "text-muted-foreground hover:text-white hover:bg-muted/40",
               )}
             >
               {d.name.replace("State", "").replace("Waterfront", "").trim()}
@@ -889,12 +1165,16 @@ export function SatelliteInteractiveMap({
         {/* Viewport Action Icons */}
         <div className="flex items-center gap-2">
           <button
+            ref={filtersButtonRef}
+            aria-expanded={leftSidebarOpen}
+            aria-controls="map-filters"
+            aria-label="Map filters"
             onClick={() => setLeftSidebarOpen((v) => !v)}
             className={cn(
               "flex h-9 items-center gap-1.5 rounded-xl border px-3 text-xs font-bold transition-all",
               leftSidebarOpen
                 ? "border-gold/50 bg-gold/15 text-white"
-                : "border-border bg-muted/40 text-muted-foreground hover:text-white"
+                : "border-border bg-muted/40 text-muted-foreground hover:text-white",
             )}
             title="Toggle Filter Sidebar"
           >
@@ -920,7 +1200,11 @@ export function SatelliteInteractiveMap({
             className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted/40 text-muted-foreground hover:text-white hover:border-gold/50 transition-all shadow-sm"
             title={isFullscreen ? "Exit Fullscreen" : "Full Screen"}
           >
-            {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+            {isFullscreen ? (
+              <Minimize2 className="h-4 w-4" />
+            ) : (
+              <Maximize2 className="h-4 w-4" />
+            )}
           </button>
         </div>
       </div>
@@ -930,21 +1214,30 @@ export function SatelliteInteractiveMap({
       {/* ================================================================= */}
       <div
         className={cn(
+          "dark-panel",
+          mapStyles.darkSurface,
           "relative w-full overflow-hidden bg-[#02050b]",
           isFullscreen
             ? "h-[calc(100vh-62px)]"
-            : "h-[640px] sm:h-[720px] lg:h-[780px] rounded-b-3xl border border-t-0 border-border shadow-2xl"
+            : "h-[640px] sm:h-[720px] lg:h-[780px] rounded-b-3xl border border-t-0 border-border shadow-2xl",
         )}
       >
         {/* ==================== 1. FLOATING LEFT FILTER DRAWER ==================== */}
         {leftSidebarOpen && (
-          <div className="absolute left-3 top-3 bottom-3 z-30 w-72 max-w-[calc(100vw-24px)] flex flex-col rounded-2xl border border-border bg-[#070c18]/95 p-4 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-left duration-200">
+          <div
+            id="map-filters"
+            role="region"
+            aria-label="Map filters"
+            className="absolute left-3 top-3 bottom-3 z-30 w-72 max-w-[calc(100vw-24px)] flex flex-col rounded-2xl border border-border bg-[#070c18]/95 p-4 shadow-2xl  animate-in slide-in-from-left duration-200"
+          >
             <div className="flex items-center justify-between pb-3 border-b border-border">
               <div>
-                <h3 className="font-display text-xs font-black uppercase tracking-wider text-white">
+                <h2 className="font-display text-xs font-black uppercase tracking-wider text-white">
                   Map Categories
-                </h3>
-                <p className="text-xs text-muted-foreground">Toggle pins and POIs</p>
+                </h2>
+                <p className="text-xs text-muted-foreground">
+                  Toggle pins and POIs
+                </p>
               </div>
               <div className="flex items-center gap-1">
                 <button
@@ -954,7 +1247,8 @@ export function SatelliteInteractiveMap({
                   {checkedFilters.all ? "Invert" : "Select All"}
                 </button>
                 <button
-                  onClick={() => setLeftSidebarOpen(false)}
+                  onClick={closeFilters}
+                  aria-label="Close map filters"
                   className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg p-1 text-muted-foreground hover:text-white hover:bg-muted/50 ml-2"
                 >
                   <X className="h-3.5 w-3.5" />
@@ -966,7 +1260,8 @@ export function SatelliteInteractiveMap({
             <div className="relative mt-3">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
               <input
-                type="text"
+                type="search"
+                aria-label="Search map pins"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search weapons, stunts, banks..."
@@ -974,6 +1269,7 @@ export function SatelliteInteractiveMap({
               />
               {searchQuery && (
                 <button
+                  aria-label="Clear map search"
                   onClick={() => setSearchQuery("")}
                   className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white"
                 >
@@ -984,10 +1280,17 @@ export function SatelliteInteractiveMap({
 
             {/* Collectible Tracker */}
             {(() => {
-              const collectiblePOIs = allPOIs.filter((p) => p.category === "collectibles");
-              const collectedCount = collectiblePOIs.filter((p) => collectedPOIs[p.id]).length;
+              const collectiblePOIs = allPOIs.filter(
+                (p) => p.category === "collectibles",
+              );
+              const collectedCount = collectiblePOIs.filter(
+                (p) => collectedPOIs[p.id],
+              ).length;
               const totalCount = collectiblePOIs.length;
-              const pct = totalCount > 0 ? Math.round((collectedCount / totalCount) * 100) : 0;
+              const pct =
+                totalCount > 0
+                  ? Math.round((collectedCount / totalCount) * 100)
+                  : 0;
               return (
                 <div className="mt-3 rounded-xl border border-purple-500/30 bg-purple-500/10 p-3">
                   <div className="flex items-center justify-between mb-1.5">
@@ -995,7 +1298,9 @@ export function SatelliteInteractiveMap({
                       <Gem className="h-3.5 w-3.5" />
                       Collectibles
                     </span>
-                    <span className="text-xs font-mono text-purple-300">{collectedCount}/{totalCount} ({pct}%)</span>
+                    <span className="text-xs font-mono text-purple-300">
+                      {collectedCount}/{totalCount} ({pct}%)
+                    </span>
                   </div>
                   <div className="h-2 rounded-full bg-black/40 overflow-hidden">
                     <div
@@ -1009,30 +1314,37 @@ export function SatelliteInteractiveMap({
                       "mt-2 flex w-full items-center justify-center gap-1.5 rounded-lg py-1.5 text-xs font-bold transition-all border",
                       hideCollected
                         ? "border-purple-500/50 bg-purple-500/20 text-purple-200"
-                        : "border-slate-600 bg-slate-800/50 text-slate-300 hover:bg-slate-700/50"
+                        : "border-slate-600 bg-slate-800/50 text-slate-300 hover:bg-slate-700/50",
                     )}
                   >
                     <EyeOff className="h-3 w-3" />
-                    {hideCollected ? "Showing All" : "Hide Collected"}
+                    {hideCollected ? "Show collected too" : "Hide Collected"}
                   </button>
                 </div>
               );
             })()}
 
             {/* Checklist items */}
-            <div className="mt-3 flex-1 space-y-0.5 overflow-y-auto pr-1 no-scrollbar">
+            <div
+              tabIndex={0}
+              role="region"
+              aria-label="Scrollable map categories"
+              className="mt-3 flex-1 space-y-0.5 overflow-y-auto pr-1"
+            >
               {CATEGORY_FILTERS.map((f) => {
                 const isChecked = checkedFilters[f.id] ?? false;
                 const Icon = f.icon;
                 return (
-                  <div
+                  <button
+                    type="button"
+                    aria-pressed={isChecked}
                     key={f.id}
                     onClick={() => toggleFilter(f.id)}
                     className={cn(
-                      "flex min-h-[44px] cursor-pointer select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-xs font-semibold transition-colors",
+                      "flex w-full min-h-[44px] select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-left text-xs font-semibold transition-colors",
                       f.all
                         ? "border border-gold/30 bg-gold/10 text-white font-bold"
-                        : "text-muted-foreground hover:bg-muted/40 hover:text-white"
+                        : "text-muted-foreground hover:bg-muted/40 hover:text-white",
                     )}
                   >
                     <span className="flex items-center gap-2 truncate">
@@ -1040,54 +1352,71 @@ export function SatelliteInteractiveMap({
                       <span className="truncate">{f.label}</span>
                     </span>
                     <span className="flex items-center gap-2">
-                      <span className="text-xs font-mono text-muted-foreground">{filterCounts[f.id] ?? 0}</span>
+                      <span className="text-xs font-mono text-muted-foreground">
+                        {filterCounts[f.id] ?? 0}
+                      </span>
                       <span
                         className={cn(
                           "flex h-4 w-4 items-center justify-center rounded transition-all",
                           isChecked
                             ? "bg-gold text-slate-950 shadow-xs"
-                            : "border border-border bg-black/40"
+                            : "border border-border bg-black/40",
                         )}
                       >
-                        {isChecked && <Check className="h-3 w-3 text-slate-950" strokeWidth={3.5} />}
+                        {isChecked && (
+                          <Check
+                            className="h-3 w-3 text-slate-950"
+                            strokeWidth={3.5}
+                          />
+                        )}
                       </span>
                     </span>
-                  </div>
+                  </button>
                 );
               })}
             </div>
 
             {/* Evidence filter: only pins with a verified source */}
             <div className="mt-3 pt-3 border-t border-border">
-              <div
+              <button
+                type="button"
+                aria-pressed={verifiedOnly}
                 onClick={() => setVerifiedOnly((v) => !v)}
-                className="flex min-h-[44px] cursor-pointer select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-xs font-semibold text-muted-foreground hover:bg-muted/40 hover:text-white transition-colors"
+                className="flex w-full min-h-[44px] cursor-pointer select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-xs font-semibold text-muted-foreground hover:bg-muted/40 hover:text-white transition-colors"
               >
                 <span className="flex items-center gap-2 truncate">
                   <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                  <span className="truncate">Verified pins only</span>
+                  <span className="truncate">Source-reviewed pins only</span>
                 </span>
                 <span className="flex items-center gap-2">
-                  <span className="text-xs font-mono text-muted-foreground">{allPOIs.filter((p) => p.verified).length}</span>
+                  <span className="text-xs font-mono text-muted-foreground">
+                    {allPOIs.filter((p) => p.verified).length}
+                  </span>
                   <span
                     className={cn(
                       "flex h-4 w-4 items-center justify-center rounded transition-all",
                       verifiedOnly
                         ? "bg-gold text-slate-950 shadow-xs"
-                        : "border border-border bg-black/40"
+                        : "border border-border bg-black/40",
                     )}
                   >
-                    {verifiedOnly && <Check className="h-3 w-3 text-slate-950" strokeWidth={3.5} />}
+                    {verifiedOnly && (
+                      <Check
+                        className="h-3 w-3 text-slate-950"
+                        strokeWidth={3.5}
+                      />
+                    )}
                   </span>
                 </span>
-              </div>
+              </button>
             </div>
 
             {/* Progress Strip */}
             <div className="mt-3 pt-3 border-t border-border">
               <div className="flex items-center justify-between text-xs font-bold text-white">
                 <span className="flex items-center gap-1.5 text-muted-foreground">
-                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Verified Visited
+                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Your
+                  marked pins
                 </span>
                 <span className="text-gold-light">
                   {verifiedTotal} / {allPOIs.length}
@@ -1096,7 +1425,9 @@ export function SatelliteInteractiveMap({
               <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-gold-light to-yellow-400 transition-all"
-                  style={{ width: `${(verifiedTotal / Math.max(1, allPOIs.length)) * 100}%` }}
+                  style={{
+                    width: `${(verifiedTotal / Math.max(1, allPOIs.length)) * 100}%`,
+                  }}
                 />
               </div>
             </div>
@@ -1105,21 +1436,28 @@ export function SatelliteInteractiveMap({
 
         {/* ==================== 2. FLOATING RIGHT POI DETAIL DRAWER ==================== */}
         {selectedPOI && rightDrawerOpen && (
-          <div className="absolute right-3 top-3 z-30 w-80 max-w-[calc(100vw-24px)] rounded-2xl border border-border bg-[#070c18]/95 p-5 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-right duration-200">
+          <div
+            role="region"
+            aria-label="Map pin details"
+            className="absolute right-3 top-3 bottom-3 overflow-y-auto z-30 w-80 max-w-[calc(100vw-24px)] rounded-2xl border border-border bg-[#070c18]/95 p-5 shadow-2xl  animate-in slide-in-from-right duration-200"
+          >
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/40 bg-gold/15 text-gold-light">
                   <selectedPOI.icon className="h-4 w-4" />
                 </span>
                 <div>
-                  <h3 className="font-display text-sm font-black uppercase text-white truncate max-w-[180px]">
+                  <h2 className="font-display text-sm font-black uppercase text-white truncate max-w-[180px]">
                     {selectedPOI.title}
-                  </h3>
-                  <p className="text-xs text-muted-foreground font-semibold">{selectedPOI.district}</p>
+                  </h2>
+                  <p className="text-xs text-muted-foreground font-semibold">
+                    {selectedPOI.district}
+                  </p>
                 </div>
               </div>
               <button
-                onClick={() => setRightDrawerOpen(false)}
+                ref={detailsCloseRef}
+                onClick={closeDetails}
                 className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg p-1 text-muted-foreground hover:text-white hover:bg-muted/50"
                 aria-label="Close details"
               >
@@ -1144,7 +1482,7 @@ export function SatelliteInteractiveMap({
 
             <div className="mt-3 flex items-center justify-between rounded-xl border border-border bg-black/40 px-3 py-2 text-xs">
               <span className="flex items-center gap-1.5 text-muted-foreground text-xs">
-                <Sun className="h-3.5 w-3.5 text-gold-light" /> Best Hours:
+                <Sun className="h-3.5 w-3.5 text-gold-light" /> Opening hours:
               </span>
               <span className="font-bold text-white text-xs font-mono">
                 {selectedPOI.hours}
@@ -1154,21 +1492,48 @@ export function SatelliteInteractiveMap({
             {/* Evidence: source, verification, added date */}
             <div className="mt-3 space-y-1.5 rounded-xl border border-border bg-black/40 px-3 py-2.5 text-xs">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-muted-foreground font-semibold">Evidence</span>
-                <span className={cn("font-bold", selectedPOI.verified ? "text-emerald-400" : "text-amber-400")}>
-                  {selectedPOI.verified ? "Observed in official media" : "Community mapped"}
+                <span className="text-muted-foreground font-semibold">
+                  Evidence
+                </span>
+                <span
+                  className={cn(
+                    "font-bold",
+                    selectedPOI.verified
+                      ? "text-emerald-400"
+                      : "text-amber-400",
+                  )}
+                >
+                  {selectedPOI.verified
+                    ? "Source-reviewed field"
+                    : "Fan concept; unverified"}
                 </span>
               </div>
               {selectedPOI.source && (
                 <div className="flex items-start justify-between gap-2">
-                  <span className="text-muted-foreground font-semibold shrink-0">Source</span>
-                  <span className="text-right font-medium text-white/90">{selectedPOI.source}</span>
+                  <span className="text-muted-foreground font-semibold shrink-0">
+                    Source
+                  </span>
+                  <a
+                    onClick={() =>
+                      trackPublicEvent("evidence_source_open", {
+                        surface: "map",
+                      })
+                    }
+                    href={selectedPOI.sourceUrl || "/editorial-policy"}
+                    className="text-right font-medium text-white underline"
+                  >
+                    {selectedPOI.source}
+                  </a>
                 </div>
               )}
               {selectedPOI.addedOn && (
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-muted-foreground font-semibold">Added</span>
-                  <span className="font-mono text-white/90">{selectedPOI.addedOn}</span>
+                  <span className="text-muted-foreground font-semibold">
+                    Added
+                  </span>
+                  <span className="font-mono text-white/90">
+                    {selectedPOI.addedOn}
+                  </span>
                 </div>
               )}
             </div>
@@ -1178,17 +1543,24 @@ export function SatelliteInteractiveMap({
               <button
                 onClick={() => {
                   const nextState = toggleMapCompleted(selectedPOI.id);
-                  setCollectedPOIs((prev) => ({ ...prev, [selectedPOI.id]: nextState }));
+                  setCollectedPOIs((prev) => ({
+                    ...prev,
+                    [selectedPOI.id]: nextState,
+                  }));
                 }}
                 className={cn(
                   "flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition-all border",
                   collectedPOIs[selectedPOI.id]
                     ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-300"
-                    : "border-slate-700 bg-slate-800 text-white hover:bg-slate-700"
+                    : "border-slate-700 bg-slate-800 text-white hover:bg-slate-700",
                 )}
               >
                 <Check className="h-3.5 w-3.5" />
-                <span>{collectedPOIs[selectedPOI.id] ? "Completed ✔" : "Mark Done"}</span>
+                <span>
+                  {collectedPOIs[selectedPOI.id]
+                    ? "Marked on this device"
+                    : "Mark locally"}
+                </span>
               </button>
 
               <button
@@ -1205,18 +1577,30 @@ export function SatelliteInteractiveMap({
                 onClick={() => {
                   const added = toggleFavorite("locations", selectedPOI.id);
                   setFavoriteLocations((prev) =>
-                    added ? [...prev, selectedPOI.id] : prev.filter((id) => id !== selectedPOI.id)
+                    added
+                      ? [...prev, selectedPOI.id]
+                      : prev.filter((id) => id !== selectedPOI.id),
                   );
                 }}
                 className={cn(
                   "flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition-all border",
                   favoriteLocations.includes(selectedPOI.id)
                     ? "border-[#C9A86A]/50 bg-[#C9A86A]/20 text-[#C9A86A]"
-                    : "border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    : "border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200",
                 )}
               >
-                <Heart className={cn("h-3.5 w-3.5", favoriteLocations.includes(selectedPOI.id) && "fill-[#C9A86A] text-[#C9A86A]")} />
-                <span>{favoriteLocations.includes(selectedPOI.id) ? "Saved" : "Favorite"}</span>
+                <Heart
+                  className={cn(
+                    "h-3.5 w-3.5",
+                    favoriteLocations.includes(selectedPOI.id) &&
+                      "fill-[#C9A86A] text-[#C9A86A]",
+                  )}
+                />
+                <span>
+                  {favoriteLocations.includes(selectedPOI.id)
+                    ? "Saved"
+                    : "Favorite"}
+                </span>
               </button>
 
               <button
@@ -1230,7 +1614,11 @@ export function SatelliteInteractiveMap({
                 }}
                 className="flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-slate-100 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200 transition-all"
               >
-                {copiedShare ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+                {copiedShare ? (
+                  <Check className="h-3.5 w-3.5 text-emerald-400" />
+                ) : (
+                  <Copy className="h-3.5 w-3.5" />
+                )}
                 <span>{copiedShare ? "Copied!" : "Share Link"}</span>
               </button>
             </div>
@@ -1242,6 +1630,7 @@ export function SatelliteInteractiveMap({
                 <span>Personal Field Notes</span>
               </div>
               <textarea
+                aria-label="Personal notes for this pin"
                 value={userNotes[selectedPOI.id] || ""}
                 onChange={(e) => {
                   const val = e.target.value;
@@ -1259,21 +1648,21 @@ export function SatelliteInteractiveMap({
         {/* ==================== 3. FLOATING TOP HUD CONTROLS ==================== */}
         <div className="pointer-events-none absolute left-0 right-0 top-3 z-20 flex justify-center px-4">
           <div className="pointer-events-auto flex items-center gap-2 rounded-2xl border border-border bg-black/80 px-3.5 py-1.5 shadow-2xl backdrop-blur-md">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 " />
             <span className="text-xs font-mono text-muted-foreground font-bold">
-              GPS: {mouseCoords.lat} {mouseCoords.lng}
+              Fan map · coordinates unverified
             </span>
             <span className="h-3 w-px bg-muted/60" />
             <span className="text-xs font-mono text-cyan-600 dark:text-[#00F0FF] font-bold">
               ZOOM: {Math.round(zoom * 100)}%
             </span>
-
           </div>
         </div>
 
         {/* ==================== 4. THE INTERACTIVE PAN/ZOOM CANVAS ==================== */}
         <div
           ref={viewportRef}
+          style={{ touchAction: "none" }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -1284,12 +1673,13 @@ export function SatelliteInteractiveMap({
           onTouchEnd={handleTouchEnd}
           className={cn(
             "relative h-full w-full overflow-hidden select-none",
-            isDragging ? "cursor-grabbing" : "cursor-grab"
+            isDragging ? "cursor-grabbing" : "cursor-grab",
           )}
         >
           {/* Scaled / Panned Coordinate Container */}
           <div
-            className="absolute origin-top-left transition-transform duration-75 ease-out"
+            ref={canvasRef}
+            className="absolute origin-top-left will-change-transform"
             style={{
               width: `${CANVAS_W}px`,
               height: `${CANVAS_H}px`,
@@ -1297,16 +1687,22 @@ export function SatelliteInteractiveMap({
             }}
           >
             {/* The Real Satellite Map Image */}
-            <img
+            <Image
+              width={1400}
+              height={1050}
+              sizes={zoom > 1.5 ? "1400px" : "(max-width: 640px) 600px, 1400px"}
+              quality={65}
+              fetchPriority="high"
+              priority
               src="/img/leonida-map-v2.jpg"
-              alt="Leonida Trailer-Accurate Satellite Map - Vice City, Leonida Keys, Grassrivers, Port Gellhorn"
+              alt="Fan illustration of Leonida; geography and pin coordinates unverified"
               draggable={false}
               className={cn(
                 "h-full w-full object-cover select-none pointer-events-none transition-all duration-300",
                 mapMode === "tactical" &&
                   "invert hue-rotate-180 brightness-90 saturate-200 contrast-125",
                 mapMode === "radar" &&
-                  "filter contrast-150 brightness-75 sepia hue-rotate-[130deg] saturate-[3]"
+                  "filter contrast-150 brightness-75 sepia hue-rotate-[130deg] saturate-[3]",
               )}
             />
 
@@ -1335,20 +1731,21 @@ export function SatelliteInteractiveMap({
                     e.stopPropagation();
                     focusOnPOI(m);
                   }}
-                  className="absolute z-10 -translate-x-1/2 -translate-y-1/2 group focus:outline-none transition-transform hover:scale-125"
+                  className="absolute z-10 -translate-x-1/2 -translate-y-1/2 group focus-visible:outline focus-visible:outline-4 focus-visible:outline-cyan-300 transition-transform hover:scale-125"
                   style={{ top: m.top, left: m.left }}
                   aria-label={m.title}
                 >
                   {/* Selected Ping Ring */}
                   {isSelected && (
-                    <span className="absolute -inset-3 rounded-full border-2 border-gold bg-gold/30 animate-ping" />
+                    <span className="absolute -inset-3 rounded-full border-2 border-gold bg-gold/30 " />
                   )}
 
                   <span
                     className={cn(
                       "flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-white shadow-[0_0_15px_rgba(0,0,0,0.9)] transition-all",
                       isCollected ? "bg-emerald-500" : m.color,
-                      isSelected && "ring-4 ring-white scale-125 shadow-[0_0_20px_#f59e0b]"
+                      isSelected &&
+                        "ring-4 ring-white scale-125 shadow-[0_0_20px_#f59e0b]",
                     )}
                   >
                     <Icon className="h-3.5 w-3.5" />
@@ -1356,8 +1753,12 @@ export function SatelliteInteractiveMap({
 
                   {/* Tooltip on Hover */}
                   <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 max-w-[70vw] whitespace-normal text-center rounded-lg bg-black/90 px-2.5 py-1 text-xs font-bold text-white opacity-0 shadow-2xl backdrop-blur-md border border-border group-hover:opacity-100 transition-opacity z-30">
-                    <span className="text-gold-light block font-black">{m.title}</span>
-                    <span className="text-muted-foreground font-medium text-xs">{m.district}</span>
+                    <span className="text-gold-light block font-black">
+                      {m.title}
+                    </span>
+                    <span className="text-muted-foreground font-medium text-xs">
+                      {m.district}
+                    </span>
                   </span>
                 </button>
               );
@@ -1371,10 +1772,10 @@ export function SatelliteInteractiveMap({
           <button
             onClick={() => setShowGrid((v) => !v)}
             className={cn(
-              "flex h-11 w-11 items-center justify-center rounded-xl border backdrop-blur-xl shadow-2xl transition-all",
+              "flex h-11 w-11 items-center justify-center rounded-xl border  shadow-2xl transition-all",
               showGrid
                 ? "border-[#00F0FF] bg-[#00F0FF]/20 text-[#00F0FF]"
-                : "border-border bg-black/80 text-white hover:bg-muted/60"
+                : "border-border bg-black/80 text-white hover:bg-muted/60",
             )}
             title="Toggle Tactical Grid"
           >
@@ -1382,7 +1783,7 @@ export function SatelliteInteractiveMap({
           </button>
 
           {/* Zoom Buttons */}
-          <div className="flex flex-col gap-1 rounded-xl border border-border bg-black/80 p-1.5 backdrop-blur-xl shadow-2xl">
+          <div className="flex flex-col gap-1 rounded-xl border border-border bg-black/80 p-1.5  shadow-2xl">
             <button
               onClick={() => {
                 const nextZoom = Math.min(3.2, +(zoom + 0.3).toFixed(2));
@@ -1415,7 +1816,7 @@ export function SatelliteInteractiveMap({
 
         {/* ==================== 6. BOTTOM LEFT COMPASS & HINT ==================== */}
         <div className="absolute left-4 bottom-4 z-20 flex items-center gap-2">
-          <div className="flex items-center gap-2 rounded-xl border border-border bg-black/80 px-3 py-1.5 backdrop-blur-xl shadow-2xl">
+          <div className="flex items-center gap-2 rounded-xl border border-border bg-black/80 px-3 py-1.5  shadow-2xl">
             <span className="font-display text-xs font-black text-gold-light tracking-wider">
               N ▲
             </span>
@@ -1426,6 +1827,53 @@ export function SatelliteInteractiveMap({
         </div>
       </div>
 
+      {!isFullscreen && (
+        <details className="mt-5 rounded-xl border border-border bg-card p-4">
+          <summary className="cursor-pointer min-h-11 font-bold">
+            Browse {visiblePOIs.length} visible pins as a text list
+          </summary>
+          <p className="my-3 text-sm text-muted-foreground">
+            These are fan concepts. No pin currently has an approved field-level
+            source; categories and placement are provisional. Your marks and
+            notes remain on this device.
+          </p>
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {visiblePOIs.map((poi) => (
+              <li key={poi.id}>
+                <button
+                  type="button"
+                  className="min-h-11 w-full rounded-lg border border-border p-3 text-left focus-visible:outline focus-visible:outline-2"
+                  onClick={() => {
+                    focusOnPOI(poi);
+                    containerRef.current?.scrollIntoView({
+                      block: "start",
+                      behavior: "auto",
+                    });
+                  }}
+                >
+                  {poi.title} · {poi.district}{" "}
+                  <span className="block text-xs text-muted-foreground">
+                    Fan concept; unverified
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          {!visiblePOIs.length && (
+            <p role="status" className="py-3">
+              No pins match. Clear the search, select all categories or turn off
+              the source-reviewed filter.
+            </p>
+          )}
+          <Link
+            className="mt-3 inline-block underline"
+            href="/editorial-policy"
+          >
+            How evidence is reviewed
+          </Link>
+        </details>
+      )}
+
       {/* ================================================================= */}
       {/* BOTTOM CAROUSEL: RECENTLY FOUND ON MAP                            */}
       {/* ================================================================= */}
@@ -1433,57 +1881,69 @@ export function SatelliteInteractiveMap({
         <div className="mt-8 space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="font-display text-sm font-black uppercase tracking-wider text-foreground">
-                Featured Intel & Key Locations
-              </h3>
+              <h2 className="font-display text-sm font-black uppercase tracking-wider text-foreground">
+                Provisional Fan-Map Locations
+              </h2>
               <p className="text-xs text-muted-foreground">
                 Click any key location below to center the satellite camera
               </p>
             </div>
             <Link
-              href="/collectibles"
-              className="text-xs font-bold text-gold-light hover:underline"
+              href="/tracker"
+              className="text-xs font-bold text-accent hover:underline"
             >
-              View Full 100% Checklist →
+              Checklist readiness →
             </Link>
           </div>
 
-          <div className="no-scrollbar flex gap-4 overflow-x-auto pb-2">
+          <div
+            tabIndex={0}
+            role="region"
+            aria-label="Scrollable featured fan-map pins"
+            className="flex gap-4 overflow-x-auto pb-2"
+          >
             {FOUND_ON_MAP_RAIL.map((r) => {
               const matchedPOI = POIS.find((p) => p.title.includes(r.title));
               return (
-                <div
+                <button
+                  type="button"
                   key={r.title}
                   onClick={() => {
                     if (matchedPOI) focusOnPOI(matchedPOI);
                   }}
-                  className="group w-48 shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-border bg-[#070c18] transition-all hover:-translate-y-1 hover:border-gold/60 shadow-xl"
+                  className={`dark-panel ${mapStyles.darkSurface} group text-left w-48 shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-border bg-[#070c18] transition-all hover:-translate-y-1 hover:border-gold/60 shadow-xl`}
                 >
                   <div className="relative h-24 overflow-hidden bg-black/50">
                     <img
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
+                      width={384}
+                      height={192}
                       src={r.img}
                       alt={r.title}
                       className="h-full w-full object-cover transition-transform group-hover:scale-110 duration-300"
                     />
                     <span
                       className={cn(
-                        "absolute left-2 top-2 rounded px-1.5 py-0.5 text-xs font-black uppercase tracking-wider text-white shadow-sm",
-                        r.badgeColor
+                        mapStyles.conceptBadge,
+                        "absolute left-2 top-2 rounded px-1.5 py-0.5 text-xs font-black uppercase tracking-wider shadow-sm",
                       )}
                     >
-                      {r.badge}
+                      Fan concept
                     </span>
                   </div>
                   <div className="p-3">
                     <p className="flex items-center gap-1.5 truncate text-xs font-bold text-white group-hover:text-gold-light transition-colors">
-                      <MapPin className={cn("h-3.5 w-3.5 shrink-0", r.color)} /> {r.title}
+                      <MapPin className={cn("h-3.5 w-3.5 shrink-0", r.color)} />{" "}
+                      {r.title}
                     </p>
                     <p className="mt-1 flex items-center justify-between text-xs text-muted-foreground">
                       <span>{r.type}</span>
-                      <span className="font-mono text-xs">{r.when}</span>
+                      <span className="font-mono text-xs">Unverified</span>
                     </p>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>

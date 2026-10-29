@@ -14,14 +14,14 @@ export default function Page() {
       <article className="container-site max-w-3xl py-12 space-y-6 leading-relaxed">
         <h1 className="font-display text-4xl font-bold">Privacy Policy</h1>
         <p className="text-sm text-muted-foreground">
-          Updated October 27, 2026
+          Updated October 28, 2026
         </p>
         <p>
           The operator is Taish Gaming, based in Pakistan. Taish Gaming is an
           independent fan website. This page describes the features implemented
           on the site. For privacy questions, deletion requests or to identify
           the operator responsible for a request, use our{" "}
-          <Link href="/contact" className="underline">
+          <Link href="/contact?topic=privacy" className="underline">
             contact form
           </Link>
           . A postal contact address has not been provided for publication.
@@ -75,23 +75,73 @@ export default function Page() {
           cookie-free.
         </p>
         <PrivacyControls />
-        <h2 className="text-2xl font-bold">Retention and your choices</h2>
+        <h2 className="text-2xl font-bold">Retention and deletion</h2>
         <p>
-          There is currently no verified automatic retention schedule for
-          server-held accounts, subscriptions or contact messages. Records can
-          remain until the operator removes them. You can clear local browser
-          data, sign out to end the current session, avoid optional video
-          playback and submit an access or deletion request through the contact
-          form. This page does not promise a response deadline that the operator
-          has not confirmed.
+          Effective 28 October 2026, Taish Gaming uses the following manual
+          review policy. These are operational targets; an automatic cleanup job
+          is not currently running.
+        </p>
+        <ul className="list-disc pl-6 space-y-3">
+          <li>
+            <strong>Contact messages:</strong> review resolved messages for
+            deletion 90 days after the enquiry is closed. Keep an unresolved
+            thread only while it is needed to handle the request, a dispute or
+            abuse prevention, and review the reason for keeping it.
+          </li>
+          <li>
+            <strong>Newsletter subscriptions:</strong> retain your address while
+            subscribed. A successful signed unsubscribe removes the matching
+            subscription from our active subscriber list. Previously delivered
+            emails and provider delivery logs may remain under the email
+            provider&apos;s own retention settings.
+          </li>
+          <li>
+            <strong>Accounts:</strong> retain account records while the account
+            is active or needed for the service. Review accounts after 12 months
+            of inactivity. This review does not automatically delete an account
+            or promise an automatic notification; verified deletion requests can
+            be made at any time.
+          </li>
+          <li>
+            <strong>Access and deletion requests:</strong> target a response and
+            action within 30 days after verifying the request and identifying
+            the records. If more time or information is needed, explain it
+            through the contact channel. This is a service target, not a
+            guarantee of an automated deadline.
+          </li>
+          <li>
+            <strong>Browser storage:</strong> favorites, notes and other local
+            records remain on your device until you clear them. Server-side
+            account deletion does not clear browser storage for you.
+          </li>
+        </ul>
+        <p>
+          <Link
+            href="/contact?topic=privacy"
+            className="font-semibold underline"
+          >
+            Start a privacy, access or deletion request
+          </Link>
+          . Describe the category of record and the address associated with it.
+          Do not send passwords, recovery codes, payment information or identity
+          documents in the initial message. We may ask you to verify control of
+          the relevant address or account before acting.
+        </p>
+        <p>
+          Some hosting, security and email-provider records have separate
+          retention settings that we have not fully verified. We do not promise
+          deletion from a provider&apos;s backups or logs on the same timetable
+          as our active records. The operator reviews outstanding requests and
+          records the date, action and any continuing reason for retention.
         </p>
         <h2 className="text-2xl font-bold">Security and policy changes</h2>
         <p>
           We use HTTPS and access controls, but no service can guarantee
           complete security. Material changes to this description should be
-          dated here. The operator still needs to confirm postal contact
-          details, retention periods, relevant processing terms and regional
-          consent requirements.
+          dated here. The public contact channel is the form linked above. A
+          postal address has not been supplied for publication. Provider
+          retention settings, relevant processing terms and regional consent
+          requirements remain subject to operational review.
         </p>
         <Link className="block underline" href="/cookies">
           Cookie and storage information

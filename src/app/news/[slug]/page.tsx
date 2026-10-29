@@ -1,3 +1,5 @@
+import { authorIdentity } from "@/lib/editorial-authors";
+import remarkGfm from "remark-gfm";
 import type { Metadata } from "next";
 import { SafeImage } from "@/components/safe-image";
 import Link from "next/link";
@@ -100,6 +102,18 @@ export default async function ArticleDetailPage({ params }: Props) {
   // Shared per-render allocator so rendered heading ids match the TOC exactly
   const allocateHeadingId = createHeadingIdAllocator();
   const markdownComponents = {
+    table: ({ children }: any) => (
+      <div
+        role="region"
+        tabIndex={0}
+        aria-label="Scrollable article table"
+        className="overflow-x-auto"
+      >
+        <table className="w-full border-collapse text-left [&_th]:border [&_td]:border [&_th]:p-3 [&_td]:p-3">
+          {children}
+        </table>
+      </div>
+    ),
     h2: ({ node, children, ...props }: any) => (
       <h2
         {...props}
@@ -132,6 +146,7 @@ export default async function ArticleDetailPage({ params }: Props) {
 
   const seo = await getSeoSettings();
   const base = canonicalOrigin(seo.canonicalBaseUrl);
+  const byline = authorIdentity(article.author_name);
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -168,13 +183,14 @@ export default async function ArticleDetailPage({ params }: Props) {
         ],
         datePublished: article.published_at || undefined,
         dateModified: article.updated_at || article.published_at || undefined,
-        author: /team/i.test(article.author_name || "Taish Team")
-          ? {
-              "@type": "Organization",
-              name: PUBLICATION.teamName,
-              url: `${base}/team`,
-            }
-          : { "@type": "Person", name: article.author_name },
+        "@id": `${base}/news/${article.slug}#article`,
+        isPartOf: { "@id": `${base}/#website` },
+        author: {
+          "@type": byline.collective ? "Organization" : "Person",
+          "@id": `${base}${byline.path}`,
+          name: byline.name,
+          url: `${base}${byline.path}`,
+        },
         publisher: {
           "@type": "Organization",
           name: "Taish Gaming",
@@ -241,12 +257,12 @@ export default async function ArticleDetailPage({ params }: Props) {
           </div>
           <div className="flex flex-wrap items-center gap-3 border-t border-border px-6 py-3 text-xs text-muted-foreground sm:px-10">
             <Link
-              href="/team"
+              href={byline.path}
               className="font-semibold text-foreground underline"
             >
-              {article.author_name || PUBLICATION.teamName}
+              {byline.name}
             </Link>
-            {article.author_role && <span>• {article.author_role}</span>}
+            <span>• {byline.role}</span>
             <span className="text-border">•</span>
             <time dateTime={article.published_at || undefined}>
               {formatDate(article.published_at)}
@@ -315,7 +331,10 @@ export default async function ArticleDetailPage({ params }: Props) {
             )}
             <div className="card-surface p-6 sm:p-10">
               <div className="mt-6 space-y-5 overflow-x-auto break-words text-base leading-[1.75] text-foreground/90 prose-headings:font-bold prose-headings:text-foreground prose-h2:text-2xl prose-h2:mt-8 prose-h3:text-xl prose-h3:mt-6 prose-p:my-4 prose-strong:text-foreground prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6 prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6 prose-li:my-1 prose-a:text-accent prose-a:underline hover:prose-a:text-foreground prose-blockquote:border-l-4 prose-blockquote:border-accent/40 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground">
-                <ReactMarkdown components={markdownComponents}>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={markdownComponents}
+                >
                   {bodyMarkdown}
                 </ReactMarkdown>
               </div>
