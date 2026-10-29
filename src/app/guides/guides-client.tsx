@@ -38,8 +38,8 @@ function toCard(g: GuideRecord): GuideCard {
   return {
     title: g.title,
     desc: g.description || "",
-    read: g.read_time || "10 min read",
-    img: g.image || "/img/hero-dark.jpg",
+    read: g.read_time || "",
+    img: g.image || "",
     slug: g.slug,
     category: g.category,
     featured: g.featured,
@@ -94,7 +94,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
   const weekTop = hasLive
     ? guides!
         .filter((g) => g.featured)
-        .map((g) => ({ title: g.title, read: g.read_time || "10 min read", img: g.image || "/img/hero-dark.jpg", slug: g.slug, category: g.category, desc: g.description || "" }))
+        .map((g) => ({ title: g.title, read: g.read_time || "", img: g.image || "", slug: g.slug, category: g.category, desc: g.description || "" }))
         .filter(matchesFilter)
         .slice(0, 5)
     : [];
@@ -153,14 +153,18 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
           <div className="no-scrollbar mt-5 flex gap-4 overflow-x-auto pb-1">
             {featuredCards.map((g) => (
               <Link key={g.title} href={g.slug ? `/guides/${g.slug}` : "/guides"} className="group card-surface w-56 shrink-0 overflow-hidden">
-                <div className="relative h-28 overflow-hidden">
-                  <img loading="lazy" src={g.img} alt={g.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div className="relative h-28 overflow-hidden bg-gradient-to-br from-[#0c1222] to-[#1a2340]">
+                  {g.img ? (
+                    <img loading="lazy" src={g.img} alt={g.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  ) : null}
                   {g.featured && <Badge variant="solid" className="absolute left-2 top-2">Featured</Badge>}
                 </div>
                 <div className="p-3.5">
-                  <p className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Clock className="h-3 w-3" /> {g.read}
-                  </p>
+                  {g.read ? (
+                    <p className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <Clock className="h-3 w-3" /> {g.read}
+                    </p>
+                  ) : null}
                   <h3 className="mt-1.5 font-display text-sm font-bold leading-snug">{g.title}</h3>
                   <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{g.desc}</p>
                   <div className="mt-2.5 flex justify-end text-xs text-muted-foreground">
@@ -190,9 +194,11 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
                   </div>
                 </div>
                 </Link>
-                <span className="hidden items-center gap-1 text-xs text-muted-foreground sm:flex">
-                  <Clock className="h-3 w-3" /> {g.read}
-                </span>
+                {g.read ? (
+                  <span className="hidden items-center gap-1 text-xs text-muted-foreground sm:flex">
+                    <Clock className="h-3 w-3" /> {g.read}
+                  </span>
+                ) : null}
                 <Bookmark className="h-4 w-4 text-accent" />
               </li>
             ))}
@@ -230,12 +236,16 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
             {weekTop.map((w, i) => (
               <li key={w.title} className="flex items-center gap-3">
                 <span className="w-4 text-center font-display text-[13px] font-extrabold text-accent">{i + 1}</span>
-                <img loading="lazy" src={w.img} alt={w.title} className="h-9 w-12 rounded-md object-cover" />
+                {w.img ? (
+                  <img loading="lazy" src={w.img} alt={w.title} className="h-9 w-12 rounded-md object-cover" />
+                ) : null}
                 <div className="flex-1">
                   <Link href={w.slug ? `/guides/${w.slug}` : "/guides"} className="line-clamp-2 text-xs font-bold leading-snug hover:text-accent">{w.title}</Link>
-                  <p className="text-xs text-muted-foreground">
-                    {w.read}
-                  </p>
+                  {w.read ? (
+                    <p className="text-xs text-muted-foreground">
+                      {w.read}
+                    </p>
+                  ) : null}
                 </div>
               </li>
             ))}

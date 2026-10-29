@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: { url: "/site-map" },
   title: "Sitemap — Every Page on Taish Gaming",
   description:
-    "Complete sitemap of Taish Gaming: all 26 interactive tools, vehicle and weapon databases, character guides, the Leonida map, news, and guides.",
+    "Complete sitemap of Taish Gaming: interactive tools, vehicle and weapon databases, character guides, the Leonida map, news, and guides.",
   alternates: { canonical: "/site-map" },
 };
 
@@ -30,13 +30,13 @@ export default function SiteMapPage() {
     {
       title: "Databases",
       links: [
-        { label: "Vehicle Database", href: "/vehicles", desc: "Every confirmed ride in Leonida" },
-        { label: "Vehicle Comparison Duel", href: "/compare/vehicles", desc: "Head-to-head stat battles" },
+        { label: "Vehicle Database", href: "/vehicles", desc: "Vehicle database" },
+        { label: "Vehicle Comparison Duel", href: "/compare/vehicles", desc: "Side-by-side comparison" },
         { label: "Vehicle Rankings", href: "/rankings", desc: "Fastest, best overall & more" },
         { label: "Weapon Database & Armory", href: "/weapons", desc: "DPS, recoil, attachments" },
         { label: "Weapon Comparison Duel", href: "/compare/weapons", desc: "Side-by-side firepower" },
         { label: "Characters", href: "/characters", desc: "Lucia, Jason & the Leonida cast" },
-        { label: "Missions", href: "/missions", desc: "Walkthroughs & rewards" },
+        { label: "Missions", href: "/missions", desc: "Mission guides" },
         { label: "Properties & Real Estate", href: "/properties", desc: "Safehouses & businesses" },
         { label: "Locations & POIs", href: "/locations", desc: "Landmarks across Leonida" },
         { label: "Collectibles", href: "/collectibles", desc: "Hidden packages & caches" },

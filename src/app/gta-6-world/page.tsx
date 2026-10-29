@@ -48,7 +48,8 @@ export default function GTAWorldHubPage() {
             Sixteen corners of Leonida, from its wetlands and airwaves to its
             hotels, gangs, and hidden secrets. Every guide inside labels its
             evidence: what Rockstar confirmed, what is visible in official
-            footage, and what is still unconfirmed. Card images are official trailer stills only;
+            footage, and what is still unconfirmed. Card images are official trailer stills only,
+            and cards without a verified exact still are text-only;
             the facts inside each guide are sourced.
           </p>
           <WorldHubSections />

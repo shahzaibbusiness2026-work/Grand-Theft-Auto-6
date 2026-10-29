@@ -33,13 +33,15 @@ function WorldCard({
       href={card.href}
       className="group relative block min-h-[150px] overflow-hidden rounded-[9px] border border-white/10 transition-all duration-200 hover:border-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
     >
-      <SafeImage
-        src={card.image}
-        alt={card.imageAlt}
-        fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-        className="object-cover transition-transform duration-300 group-hover:scale-105"
-      />
+      {card.image ? (
+        <SafeImage
+          src={card.image}
+          alt={card.imageAlt}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+      ) : null}
       <div
         className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"
         aria-hidden="true"

@@ -224,19 +224,22 @@ export function ProtagonistsShowcase({
                     </h3>
                   </div>
 
-                  {/* Quote Box */}
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                    From official trailers
-                  </p>
-                  <div className="rounded-2xl bg-pink-50/70 border border-pink-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
-                    <Quote className="w-5 h-5 text-pink-500 shrink-0 mt-0.5 rotate-180" />
-                    <p className="text-xs sm:text-[13px] italic font-medium text-pink-700 leading-relaxed">
-                      &ldquo;
-                      {lucia?.quote ||
-                        "The only way we're gonna get through this is by sticking together, being a team."}
-                      &rdquo;
-                    </p>
-                  </div>
+                  {lucia?.quote ? (
+                    <>
+                      {/* Quote Box */}
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        From official trailers
+                      </p>
+                      <div className="rounded-2xl bg-pink-50/70 border border-pink-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
+                        <Quote className="w-5 h-5 text-pink-500 shrink-0 mt-0.5 rotate-180" />
+                        <p className="text-xs sm:text-[13px] italic font-medium text-pink-700 leading-relaxed">
+                          &ldquo;
+                          {lucia?.quote}
+                          &rdquo;
+                        </p>
+                      </div>
+                    </>
+                  ) : null}
 
                   {/* Specs List: Vertical 4-Row Key-Value Stack */}
                   <p className="pt-1 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
@@ -414,19 +417,22 @@ export function ProtagonistsShowcase({
                     </h3>
                   </div>
 
-                  {/* Quote Box */}
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                    From official trailers
-                  </p>
-                  <div className="rounded-2xl bg-sky-50/70 border border-sky-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
-                    <Quote className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 rotate-180" />
-                    <p className="text-xs sm:text-[13px] italic font-medium text-sky-800 leading-relaxed">
-                      &ldquo;
-                      {jason?.quote ||
-                        "Trust. That's what it comes down to. You and me against the whole damn state."}
-                      &rdquo;
-                    </p>
-                  </div>
+                  {jason?.quote ? (
+                    <>
+                      {/* Quote Box */}
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        From official trailers
+                      </p>
+                      <div className="rounded-2xl bg-sky-50/70 border border-sky-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
+                        <Quote className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 rotate-180" />
+                        <p className="text-xs sm:text-[13px] italic font-medium text-sky-800 leading-relaxed">
+                          &ldquo;
+                          {jason?.quote}
+                          &rdquo;
+                        </p>
+                      </div>
+                    </>
+                  ) : null}
 
                   {/* Specs List: Vertical 4-Row Key-Value Stack */}
                   <p className="pt-1 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">

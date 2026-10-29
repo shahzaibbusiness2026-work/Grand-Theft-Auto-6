@@ -383,7 +383,7 @@ export default async function HomePage() {
                     },
                     {
                       title: "Exclusive Content",
-                      desc: "Early access to articles, screenshots and more.",
+                      desc: "New articles and screenshots in your inbox.",
                     },
                     {
                       title: "No Spam",

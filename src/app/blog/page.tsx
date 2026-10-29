@@ -78,7 +78,7 @@ export default async function BlogPage() {
                 </p>
                 <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
                   <span className="flex items-center gap-2">
-                    <span className="h-6 w-6 rounded-full bg-gradient-to-br from-primary to-accent" /> By Taish Team
+                    <span className="h-6 w-6 rounded-full bg-gradient-to-br from-primary to-accent" /> By Taish Gaming
                   </span>
                   <span>{featured.date}</span>
                   <span className="flex items-center gap-1">

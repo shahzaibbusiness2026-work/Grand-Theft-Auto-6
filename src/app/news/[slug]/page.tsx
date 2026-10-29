@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       type: "article",
       publishedTime: article.published_at || undefined,
-      authors: [article.author_name || "Taish Team"],
+      authors: article.author_name ? [article.author_name] : [],
       images: [
         {
           url: ogImage,
@@ -168,7 +168,7 @@ export default async function ArticleDetailPage({ params }: Props) {
         ],
         datePublished: article.published_at || undefined,
         dateModified: article.updated_at || article.published_at || undefined,
-        author: /team/i.test(article.author_name || "Taish Team")
+        author: /team/i.test(article.author_name || PUBLICATION.teamName)
           ? {
               "@type": "Organization",
               name: PUBLICATION.teamName,
