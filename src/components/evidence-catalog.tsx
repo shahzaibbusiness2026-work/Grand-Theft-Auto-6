@@ -110,6 +110,10 @@ export function EvidenceCatalog({
   const [limit, setLimitState] = useState(compare ? 8 : 24);
   const [pickerOpen, setPickerOpen] = useState(false);
   const picker = useRef<HTMLDialogElement>(null);
+  // Slots shown in the comparison workspace. Two by default; the user can
+  // grow them to four with the "Add another" tile (and picking more
+  // vehicles than there are slots grows them automatically).
+  const [slotCount, setSlotCount] = useState(2);
   const label = kind === "vehicles" ? "vehicle" : "weapon";
   const storageKey = "taish-recent-" + kind;
   const pageSize = compare ? 8 : 24;
@@ -160,12 +164,16 @@ export function EvidenceCatalog({
       setCategoryState(state.category);
       setSortState(state.sort);
       setLimitState(state.page * (compare ? 8 : 24));
-      setSelected(
-        selectionFromParams(
-          new URLSearchParams(window.location.search),
-          kind,
-          entries,
-        ),
+      const initialSelected = selectionFromParams(
+        new URLSearchParams(window.location.search),
+        kind,
+        entries,
+      );
+      setSelected(initialSelected);
+      // Slots follow the selection: never fewer than two, never more than
+      // four, and never fewer than the picks the URL already carries.
+      setSlotCount(
+        Math.max(2, Math.min(4, initialSelected.length)),
       );
     };
     update();
@@ -204,6 +212,8 @@ export function EvidenceCatalog({
   };
   const select = (ids: string[]) => {
     setSelected(ids);
+    // Picking past the visible slots grows them so no pick is hidden.
+    setSlotCount((c) => Math.max(c, Math.min(4, ids.length)));
     window.history.replaceState(
       window.history.state,
       "",
@@ -485,7 +495,7 @@ export function EvidenceCatalog({
               </button>
             </div>
             <div className={styles.slots}>
-              {Array.from({ length: 4 }, (_, i) => {
+              {Array.from({ length: slotCount }, (_, i) => {
                 const entry = comparison[i];
                 return entry ? (
                   <article className={styles.slot} key={entry.id}>
@@ -525,6 +535,17 @@ export function EvidenceCatalog({
                   </button>
                 );
               })}
+              {slotCount < 4 && (
+                <button
+                  type="button"
+                  className={styles.addSlot}
+                  onClick={() => setSlotCount((c) => Math.min(4, c + 1))}
+                  aria-label={`Add another ${label} slot to the comparison`}
+                >
+                  <Plus aria-hidden="true" />
+                  <span>Add another {label}</span>
+                </button>
+              )}
             </div>
           </section>
           {comparison.length ? (
@@ -532,7 +553,10 @@ export function EvidenceCatalog({
               kind={kind}
               entries={comparison}
               onRemove={toggle}
-              onReset={() => select([])}
+              onReset={() => {
+                select([]);
+                setSlotCount(2);
+              }}
             />
           ) : (
             <div className={styles.empty}>
