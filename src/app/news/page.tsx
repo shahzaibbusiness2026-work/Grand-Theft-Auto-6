@@ -74,7 +74,7 @@ export default async function NewsPage() {
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{heroArticle.excerpt}</p>
             <Button
-              href={heroArticle.slug ? `/news/${heroArticle.slug}` : "/blog"}
+              href={heroArticle.slug ? `/news/${heroArticle.slug}` : "/news"}
               size="default"
               className="mt-5 w-fit min-h-[44px]"
             >

@@ -6,10 +6,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
+import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+const title = "GTA 6 Photo Ideas: Fan Location Concepts";
+const description = PUBLIC_TOOL_COPY["/tools/photo-spot-finder"];
 export const metadata: Metadata = {
     openGraph: { url: "/tools/photo-spot-finder" },
-  title: "GTA 6 Photo Spot Finder — Best Screenshot Locations",
-  description: "The most cinematic photo spots in Leonida. Best time of day, region, and pro tips for every shot.",
+  title,
+  description,
 
   alternates: { canonical: "/tools/photo-spot-finder" },
 };
@@ -29,13 +32,13 @@ export default function PhotoSpotFinderPage() {
                 itemListElement: [
                   { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Photo Spot Finder \u2014 Best Screenshot Locations", item: "https://www.taishgaming.com/tools/photo-spot-finder" },
+                  { "@type": "ListItem", position: 3, name: title, item: "https://www.taishgaming.com/tools/photo-spot-finder" },
                 ],
               },
               {
                 "@type": "WebApplication",
-                name: "GTA 6 Photo Spot Finder \u2014 Best Screenshot Locations",
-                description: "The most cinematic photo spots in Leonida. Best time of day, region, and pro tips for every shot.",
+                name: title,
+                description,
                 url: "https://www.taishgaming.com/tools/photo-spot-finder",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -63,9 +66,7 @@ export default function PhotoSpotFinderPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">PHOTO SPOT FINDER</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">
-            The most cinematic screenshot locations across Leonida. Filter by region, check the best in-game time of day for every shot, and copy the full photo run checklist for your next session.
-          </p>
+          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
         </div>
 
         <PhotoSpotFinderClient />

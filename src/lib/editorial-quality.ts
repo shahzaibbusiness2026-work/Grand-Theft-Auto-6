@@ -35,6 +35,51 @@ export function normalizeEditorialMarkdown(markdown: string): string {
   );
 }
 
+/** The page owns its H1; imported document titles must not create another. */
+export function articleBodyMarkdown(markdown: string, title: string): string {
+  const lines = normalizeEditorialMarkdown(markdown).split(/\r?\n/);
+  const plain = (value: string) =>
+    value
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      .replace(/[*_`]/g, "")
+      .normalize("NFC")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  const first = lines.findIndex((line) => line.trim());
+  const heading = lines[first]?.match(/^ {0,3}#\s+(.+?)\s*#*\s*$/);
+  if (heading && plain(heading[1]) === plain(title)) lines.splice(first, 1);
+  else if (
+    first >= 0 &&
+    /^ {0,3}=+\s*$/.test(lines[first + 1] || "") &&
+    plain(lines[first]) === plain(title)
+  )
+    lines.splice(first, 2);
+
+  let fence: { character: string; length: number } | undefined;
+  return lines
+    .map((line, index) => {
+      const marker = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+      if (marker) {
+        if (!fence)
+          fence = { character: marker[1][0], length: marker[1].length };
+        else if (
+          marker[1][0] === fence.character &&
+          marker[1].length >= fence.length &&
+          !marker[2].trim()
+        )
+          fence = undefined;
+        return line;
+      }
+      if (fence) return line;
+      if (/^ {0,3}#\s/.test(line)) return line.replace(/^( {0,3})#/, "$1##");
+      if (/^ {0,3}=+\s*$/.test(line) && lines[index - 1]?.trim()) return "---";
+      return line;
+    })
+    .join("\n")
+    .replace(/^\n+|\n+$/g, "");
+}
+
 /** Reject unclosed web links in headings; fenced code examples are exempt. */
 export function editorialProblems(markdown: string): string[] {
   let fence = "";

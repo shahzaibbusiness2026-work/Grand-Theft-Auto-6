@@ -28,4 +28,16 @@ export const PUBLIC_TOOL_COPY: Record<string, string> = {
     "Explore hypothetical clock conversions with an editable ratio. GTA VI clock rate, sunrise and sunset schedules are unverified.",
   "/tools/map-distance-calculator":
     "Model straight-line distances with fictional coordinates, editable scale and example speeds. No verified routes or vehicle recommendations.",
+  "/tools/vehicle-upgrade-calculator":
+    "Explore a hypothetical tuning budget with example prices and performance multipliers. GTA VI upgrade costs and gains are unverified.",
+  "/tools/garage-planner":
+    "Organize a fictional vehicle collection on this device. Garage capacities, vehicle prices and ownership rules are example assumptions.",
+  "/tools/photo-spot-finder":
+    "Browse fan photography concepts for Leonida. Locations, camera access, lighting and suggested times are unverified examples.",
+  "/tools/wanted-level-guide":
+    "Verified GTA VI police-response data is unavailable here. The displayed star levels, units, escape times and tactics are fictional examples.",
+  "/tools/business-income-calculator":
+    "Model hypothetical business income and expenses with example inputs. GTA VI businesses, costs and yields are unverified.",
+  "/tools/heist-payout-splitter":
+    "Divide a hypothetical crew budget using your own amounts and percentages. This utility does not establish GTA VI heist payouts or rules.",
 };

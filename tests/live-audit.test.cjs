@@ -22,6 +22,7 @@ const { catalogSchema } = require("../src/lib/catalog-schema.ts");
 const {
   normalizeEditorialMarkdown,
   editorialProblems,
+  articleBodyMarkdown,
 } = require("../src/lib/editorial-quality.ts");
 const entries = Array.from({ length: 60 }, (_, i) => ({
   id: "entry-" + i,
@@ -148,4 +149,32 @@ test("the actual Markdown renderer emits semantic table cells and escapes raw HT
   assert.match(html, /<th>Platform<\/th>/);
   assert.match(html, /<td>Xbox Series X\|S<\/td>/);
   assert.doesNotMatch(html, /<script>/);
+});
+
+test("imported article titles render once while body sections stay navigable", async () => {
+  const React = require("react");
+  const { renderToStaticMarkup } = require("react-dom/server");
+  const Markdown = (await import("react-markdown")).default;
+  const { extractHeadings } = require("../src/lib/toc.ts");
+  const title = "How Money Works in GTA 6: Robberies, Fences & the Criminal Economy";
+  for (const heading of [`# ${title}`, `${title}\n===`]) {
+    const body = articleBodyMarkdown(
+      `${heading}\n\nIntroduction.\n\n# Robberies\n\n## Fences\n\nKeep the source links.`,
+      title,
+    );
+    const html = renderToStaticMarkup(React.createElement(Markdown, null, body));
+    assert.doesNotMatch(html, /<h1|How Money Works/);
+    assert.match(html, /<h2>Robberies<\/h2>/);
+    assert.match(html, /<h2>Fences<\/h2>/);
+    assert.deepEqual(extractHeadings(body).map((h) => h.id), ["robberies", "fences"]);
+    assert.match(html, /Introduction/);
+    assert.match(html, /Keep the source links/);
+  }
+});
+
+test("article heading normalization preserves fenced and indented code examples", () => {
+  const code = "````markdown\n# Literal title\n```\n# Still code\n````\n\n    # Indented example\n\n  # Real section";
+  const body = articleBodyMarkdown(code, "Different page title");
+  assert.equal(body, code.replace("  # Real section", "  ## Real section"));
+  assert.equal(articleBodyMarkdown("# A different title\n\nText", "Page title"), "## A different title\n\nText");
 });

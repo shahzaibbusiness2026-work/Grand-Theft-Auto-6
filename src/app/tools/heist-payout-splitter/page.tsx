@@ -6,10 +6,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
+import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+const title = "GTA 6 Heist Split Calculator: Custom Inputs";
+const description = PUBLIC_TOOL_COPY["/tools/heist-payout-splitter"];
 export const metadata: Metadata = {
     openGraph: { url: "/tools/heist-payout-splitter" },
-  title: "GTA 6 Heist Payout Splitter — Divide Crew Cuts Fairly",
-  description: "Split any GTA 6 heist take among your crew. Set each member's cut percentage and see everyone's payout instantly.",
+  title,
+  description,
 
   alternates: { canonical: "/tools/heist-payout-splitter" },
 };
@@ -29,13 +32,13 @@ export default function HeistPayoutSplitterPage() {
                 itemListElement: [
                   { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Heist Payout Splitter \u2014 Divide Crew Cuts Fairly", item: "https://www.taishgaming.com/tools/heist-payout-splitter" },
+                  { "@type": "ListItem", position: 3, name: title, item: "https://www.taishgaming.com/tools/heist-payout-splitter" },
                 ],
               },
               {
                 "@type": "WebApplication",
-                name: "GTA 6 Heist Payout Splitter \u2014 Divide Crew Cuts Fairly",
-                description: "Split any GTA 6 heist take among your crew. Set each member's cut percentage and see everyone's payout instantly.",
+                name: title,
+                description,
                 url: "https://www.taishgaming.com/tools/heist-payout-splitter",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -63,9 +66,7 @@ export default function HeistPayoutSplitterPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">HEIST PAYOUT SPLITTER</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Split any GTA 6 heist take among your crew. Set each member&apos;s cut percentage and see everyone&apos;s payout instantly — no more arguing over who gets what.
-          </p>
+          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
         </div>
 
         <HeistPayoutSplitterClient />

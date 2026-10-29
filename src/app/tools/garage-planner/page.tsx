@@ -6,10 +6,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
+import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+const title = "GTA 6 Garage Planner: Example Collection";
+const description = PUBLIC_TOOL_COPY["/tools/garage-planner"];
 export const metadata: Metadata = {
     openGraph: { url: "/tools/garage-planner" },
-  title: "GTA 6 Garage Planner — Organize Your Vehicle Collection",
-  description: "Plan your GTA 6 garage space. Assign vehicles to properties, track slots used, and see your collection's total value.",
+  title,
+  description,
 
   alternates: { canonical: "/tools/garage-planner" },
 };
@@ -29,13 +32,13 @@ export default function GaragePlannerPage() {
                 itemListElement: [
                   { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Garage Planner \u2014 Organize Your Vehicle Collection", item: "https://www.taishgaming.com/tools/garage-planner" },
+                  { "@type": "ListItem", position: 3, name: title, item: "https://www.taishgaming.com/tools/garage-planner" },
                 ],
               },
               {
                 "@type": "WebApplication",
-                name: "GTA 6 Garage Planner \u2014 Organize Your Vehicle Collection",
-                description: "Plan your GTA 6 garage space. Assign vehicles to properties, track slots used, and see your collection's total value.",
+                name: title,
+                description,
                 url: "https://www.taishgaming.com/tools/garage-planner",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -63,9 +66,7 @@ export default function GaragePlannerPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">GARAGE PLANNER</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Plan your GTA 6 garage space. Assign vehicles to properties, track slots used across your safehouses, and see your collection&apos;s total estimated value.
-          </p>
+          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
         </div>
 
         <GaragePlannerClient />
