@@ -30,6 +30,13 @@ export default function RegionsHubPage() {
             says plainly what is not. Rockstar has published no official map,
             so borders and positions are left unconfirmed throughout.
           </p>
+          <p className="mt-4 text-sm text-white/70">
+            <Link href="/map" className="underline text-white">
+              Explore our interactive Leonida fan map
+            </Link>{" "}
+            with provisional pins and device-local notes. Pin placement is
+            separate from Rockstar&apos;s confirmed destination names.
+          </p>
         </section>
         <section className="container-site px-4 pb-16">
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

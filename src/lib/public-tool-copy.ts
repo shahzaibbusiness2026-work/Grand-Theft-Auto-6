@@ -1,7 +1,7 @@
 /** Shared by search, tool cards, and page metadata to prevent stale promises. */
 export const PUBLIC_TOOL_COPY: Record<string, string> = {
   "/map":
-    "Explore provisional fan-map pins with filters and device-local notes. Placement and gameplay remain unverified.",
+    "Explore a fan-made GTA 6 map of Leonida and Vice City with filters and local notes. Pin locations and map size in km² remain unverified.",
   "/tracker":
     "The verified GTA VI completion checklist is not yet published. Check readiness and evidence status.",
   "/vehicles":
