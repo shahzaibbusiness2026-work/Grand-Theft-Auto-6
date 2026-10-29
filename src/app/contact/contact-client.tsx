@@ -119,6 +119,18 @@ export function ContactClient() {
               </div>
             </div>
           ))}
+          <div className="card-surface space-y-2 p-4">
+            <h3 className="font-display text-sm font-bold">What to write about</h3>
+            <ul className="space-y-1.5 text-[13px] text-muted-foreground">
+              <li>• A correction — something on a page is wrong or outdated.</li>
+              <li>• An image takedown — you own an image we show and want it removed.</li>
+              <li>• A bug — a page, tool, or map feature is not working.</li>
+              <li>• A tip — news, a trailer detail, or a guide idea for the site.</li>
+            </ul>
+            <p className="text-[13px] text-muted-foreground">
+              Rights-holder takedown requests are handled first.
+            </p>
+          </div>
         </div>
 
         {submitted ? (
@@ -141,14 +153,8 @@ export function ContactClient() {
           </div>
         ) : (
           <form className="card-surface p-6" onSubmit={handleSubmit}>
-            <h2 className="font-display text-lg font-bold">
-              Send Us a Message
-            </h2>
-            {submitted && (
-              <p className="mt-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-400">
-                Message sent! Our team will get back to you within 24 hours.
-              </p>
-            )}
+            <h2 className="font-display text-lg font-bold">Send Us a Message</h2>
+
             {error && (
               <p className="mt-3 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm font-semibold text-rose-400">
                 {error}

@@ -3,10 +3,10 @@ import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/disclaimer" },
+  openGraph: { url: "/disclaimer" },
   title: "Disclaimer",
   description:
-    "Read the Taish Gaming disclaimer: an unofficial fan site not affiliated with Rockstar Games or Take-Two Interactive, with pre-launch information clearly marked.",
+    "Read the Taish Gaming disclaimer: an unofficial fan site not affiliated with Rockstar Games or Take-Two Interactive, with pre-launch information clearly marked, plus advertising, corrections, and takedown notes.",
   alternates: { canonical: "/disclaimer" },
 };
 
@@ -16,13 +16,13 @@ export default function DisclaimerPage() {
       <div className="container-site py-12 sm:py-16 max-w-4xl space-y-10">
         <div className="space-y-3">
           <p className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-primary">
-            Legal & Compliance
+            Legal &amp; Compliance
           </p>
           <h1 className="font-display text-3xl sm:text-5xl font-black text-foreground tracking-tight">
             Disclaimer
           </h1>
           <p className="text-xs text-muted-foreground">
-            Last Updated: October 26, 2026
+            Last Updated: October 29, 2026
           </p>
         </div>
 
@@ -39,11 +39,13 @@ export default function DisclaimerPage() {
             </p>
             <p>
               Screenshots, trailer stills, and artwork shown on this site are
-              the property of Rockstar Games (and, where credited, Game
-              Informer) and are used for non-commercial editorial commentary
-              only. We claim no ownership over them, and we do not remove
-              source watermarks. If you are a rights holder and would like an
-              image removed, please reach out through our contact page.
+              the property of Rockstar Games and are used for non-commercial
+              editorial commentary only. A small number of game screenshots
+              come from public game catalogs and are credited on the page
+              where they appear. We claim no ownership over any of this
+              imagery, and we do not remove source watermarks. If you are a
+              rights holder and would like an image removed, please reach out
+              through our contact page — takedown requests are handled first.
             </p>
           </section>
 
@@ -53,9 +55,10 @@ export default function DisclaimerPage() {
               Grand Theft Auto VI has not been released yet (launch is scheduled
               for November 19, 2026). The information on this site is based on
               official trailers, previews, and public reporting. Anything that
-              has not been officially confirmed is labelled as speculation, and
-              content will be corrected with first-hand gameplay information
-              after launch.
+              has not been officially confirmed is labelled with its evidence
+              level — observed in official media, credible report, community
+              identification, or speculation — and content will be corrected
+              with first-hand gameplay information after launch.
             </p>
           </section>
 
@@ -76,12 +79,45 @@ export default function DisclaimerPage() {
               The tools and calculators on this site are fan-made planning
               helpers. They do not generate in-game money, RP, items, or
               unlocks, and they do not connect to Rockstar Games servers or to
-              any player account.
+              any player account. Figures they show are estimates or
+              community-sourced values unless explicitly labelled as officially
+              published.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-foreground">5. External Links</h2>
+            <h2 className="font-display text-xl font-bold text-foreground">5. Advertising</h2>
+            <p>
+              This site may display third-party advertisements. Advertisements
+              are not endorsements: advertisers are solely responsible for the
+              content of their ads, and an ad appearing on this site does not
+              mean we recommend the advertised product or service.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="font-display text-xl font-bold text-foreground">6. What We Do Not Publish</h2>
+            <p>
+              We do not publish cheats, money or RP generators, mod menus,
+              exploits, or fake giveaways, and we do not present fan-made
+              content as official Rockstar Games material. If you see anything
+              on this site that looks like it breaks this rule, please report
+              it through our contact page.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="font-display text-xl font-bold text-foreground">7. Corrections &amp; Takedowns</h2>
+            <p>
+              Pre-launch information changes fast and mistakes happen. When an
+              error is pointed out to us, we correct it. Rights holders may
+              request the removal of an image or other material at any time
+              through our contact page, and such requests are prioritized.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="font-display text-xl font-bold text-foreground">8. External Links</h2>
             <p>
               This site may link to third-party websites. We are not
               responsible for the content, accuracy, or privacy practices of
@@ -91,7 +127,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-foreground">6. Contact</h2>
+            <h2 className="font-display text-xl font-bold text-foreground">9. Contact</h2>
             <p>
               If you have any questions about this disclaimer, please reach out
               through our{" "}
