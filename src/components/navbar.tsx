@@ -65,7 +65,6 @@ const LINKS: NavLink[] = [
   },
   { href: "/missions", label: "Missions", menu: [{ href: "/missions", label: "All Missions" }, { href: "/tracker", label: "100% Tracker" }] },
   { href: "/map", label: "Map" },
-  { href: "/gta-6-world", label: "GTA 6 World" },
 ];
 
 type MoreLink = { href: string; label: string; icon: LucideIcon };
@@ -369,6 +368,20 @@ export function Navbar() {
             )}
           </div>
 
+          {/* GTA6, after Tools */}
+          <Link
+            href="/gta-6-world"
+            aria-current={isActive("/gta-6-world") ? "page" : undefined}
+            className={cn(
+              "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
+              isActive("/gta-6-world")
+                ? "bg-[#FF2E9A] text-white font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
+                : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+            )}
+          >
+            GTA6
+          </Link>
+
           {/* News dropdown after Tools dropdown: label goes to /news, chevron reveals Blog */}
           <SplitNavDropdown
             href="/news"
@@ -610,6 +623,22 @@ export function Navbar() {
                 </div>
               )}
             </div>
+
+            {/* GTA6, after Tools */}
+            <Link
+              href="/gta-6-world"
+              prefetch={true}
+              onClick={() => setMobileOpen(false)}
+              aria-current={isActive("/gta-6-world") ? "page" : undefined}
+              className={cn(
+                "flex min-h-[48px] w-full items-center rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
+                isActive("/gta-6-world")
+                  ? "bg-[#FF2E9A] text-white font-bold"
+                  : "text-foreground/90 hover:bg-muted hover:text-[#FF2E9A]"
+              )}
+            >
+              GTA6
+            </Link>
 
             {/* News accordion: label goes to /news, chevron reveals Blog */}
             <div className="flex flex-col">
