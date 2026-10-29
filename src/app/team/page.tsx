@@ -2,8 +2,22 @@ import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 export const metadata = {
   title: "Taish Gaming Editorial Team",
+  description:
+    "Who runs Taish Gaming: Shahzaib, founder and editor, and the editorial team behind its GTA 6 coverage, evidence labels and corrections process.",
   alternates: { canonical: "/team" },
-  openGraph: { url: "/team" },
+  openGraph: {
+    type: "website",
+    url: "/team",
+    title: "Taish Gaming Editorial Team",
+    description:
+      "Who runs Taish Gaming: Shahzaib, founder and editor, and the editorial team behind its GTA 6 coverage.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Taish Gaming Editorial Team",
+    description:
+      "Who runs Taish Gaming: Shahzaib, founder and editor, and the editorial team behind its GTA 6 coverage.",
+  },
 };
 export default function Page() {
   return (
@@ -15,14 +29,16 @@ export default function Page() {
         <p>
           Taish Gaming is an independent fan publication about Grand Theft Auto
           VI, based in Pakistan. Articles attributed to the Taish Gaming
-          Editorial Team use a shared editorial byline. That byline represents
-          the publication, not a named individual.
+          Editorial Team use a shared editorial byline for the publication.
         </p>
+        <h2 className="text-2xl font-bold">Founder and editor</h2>
         <p>
-          We have not published verified individual staff biographies or
-          professional credentials. A shared byline should not be interpreted as
-          proof of firsthand access to Rockstar Games, review copies or inside
-          information.
+          Shahzaib founded Taish Gaming and edits its GTA 6 coverage. He
+          researches Rockstar trailers and official material, checks articles
+          against their sources, and reviews corrections before publication.
+          He does not have firsthand access to Rockstar Games, review copies
+          or inside information, and no article on this site should be read
+          as claiming otherwise.
         </p>
         <p>
           Readers can reach the publication through our{" "}

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",
   alternates: { canonical: "/guides" },
-  openGraph: { url: "/guides",
+  openGraph: { type: "website", url: "/guides",
     title: "GTA 6 Guides | Pre-Release Gameplay, Missions & Systems",
     description:
       "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",

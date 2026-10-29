@@ -4,9 +4,21 @@ import { SiteShell } from "@/components/shells";
 export const metadata = {
   title: "Privacy Policy",
   description:
-    "What Taish Gaming stores when you browse, subscribe, contact us or create an account.",
+    "What Taish Gaming stores when you browse, subscribe, contact us or create an account, including cookies, advertising and deletion requests.",
   alternates: { canonical: "/privacy" },
-  openGraph: { url: "/privacy" },
+  openGraph: {
+    type: "website",
+    url: "/privacy",
+    title: "Privacy Policy",
+    description:
+      "What Taish Gaming stores when you browse, subscribe, contact us or create an account.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy",
+    description:
+      "What Taish Gaming stores, including cookies, advertising and deletion requests.",
+  },
 };
 export default function Page() {
   return (
@@ -14,7 +26,7 @@ export default function Page() {
       <article className="container-site max-w-3xl py-12 space-y-6 leading-relaxed">
         <h1 className="font-display text-4xl font-bold">Privacy Policy</h1>
         <p className="text-sm text-muted-foreground">
-          Updated October 27, 2026
+          Updated October 29, 2026
         </p>
         <p>
           The operator is Taish Gaming, based in Pakistan. Taish Gaming is an
@@ -69,29 +81,25 @@ export default function Page() {
           enabled by site configuration. They load on public pages only after
           you allow optional services in this browser. When allowed, requests
           are sent to those providers; advertising can use cookies or similar
-          technologies. We have not verified the production consent
-          configuration, provider retention periods or all regional settings. Do
-          not interpret this page as a guarantee that every deployment is
-          cookie-free.
+          technologies. You can change your choice at any time in the cookie
+          controls on this page, and in your browser settings.
         </p>
         <PrivacyControls />
         <h2 className="text-2xl font-bold">Retention and your choices</h2>
         <p>
-          There is currently no verified automatic retention schedule for
-          server-held accounts, subscriptions or contact messages. Records can
-          remain until the operator removes them. You can clear local browser
-          data, sign out to end the current session, avoid optional video
-          playback and submit an access or deletion request through the contact
-          form. This page does not promise a response deadline that the operator
-          has not confirmed.
+          Server-held accounts, subscriptions and contact messages are kept
+          only as long as needed to provide the service, respond to your
+          request, or meet a legal obligation, and are deleted when you ask
+          us to delete them through the contact form. You can clear local
+          browser data, sign out to end the current session, and avoid
+          optional video playback at any time.
         </p>
         <h2 className="text-2xl font-bold">Security and policy changes</h2>
         <p>
           We use HTTPS and access controls, but no service can guarantee
-          complete security. Material changes to this description should be
-          dated here. The operator still needs to confirm postal contact
-          details, retention periods, relevant processing terms and regional
-          consent requirements.
+          complete security. Material changes to this policy are dated at the
+          top of this page. The operator can be contacted through the contact
+          form; a postal address is not published on this site.
         </p>
         <Link className="block underline" href="/cookies">
           Cookie and storage information

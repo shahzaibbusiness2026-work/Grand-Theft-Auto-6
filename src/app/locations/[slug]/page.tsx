@@ -77,10 +77,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${loc.name} (${loc.district}) — Point of Interest Dossier`,
-    description: `Official intel briefing and satellite map coordinates for ${loc.name} in ${loc.district}, State of Leonida. Threat level: ${loc.threatLevel}.`,
+    title: `${loc.name} — GTA 6 Location`,
+    description: `Fan dossier and satellite map notes for ${loc.name} in ${loc.district}, State of Leonida. Threat level: ${loc.threatLevel}.`,
     alternates: { canonical: `/locations/${loc.slug}` },
-    openGraph: { url: `/locations/${loc.slug}` },
+    openGraph: { type: "website", url: `/locations/${loc.slug}` },
   };
 }
 

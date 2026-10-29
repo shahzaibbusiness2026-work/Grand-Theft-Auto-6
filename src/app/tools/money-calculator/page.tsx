@@ -82,7 +82,7 @@ export default function MoneyCalculatorPage() {
             <DollarSign className="h-3 w-3" /> Financial Planning Utility
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-            GTA 6 <span className="text-primary">MONEY CALCULATOR</span>
+            GTA 6 <span className="text-primary">Money Calculator</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
             Set your target savings goal for supercars, penthouses, or weapon

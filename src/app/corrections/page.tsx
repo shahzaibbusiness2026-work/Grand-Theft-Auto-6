@@ -2,8 +2,22 @@ import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 export const metadata = {
   title: "Corrections & Source Submissions",
+  description:
+    "Report an error on Taish Gaming or submit a primary source for a GTA 6 claim: include the page URL, the disputed statement and the source.",
   alternates: { canonical: "/corrections" },
-  openGraph: { url: "/corrections" },
+  openGraph: {
+    type: "website",
+    url: "/corrections",
+    title: "Corrections & Source Submissions",
+    description:
+      "Report an error on Taish Gaming or submit a primary source for a GTA 6 claim.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Corrections & Source Submissions",
+    description:
+      "Report an error or submit a primary source for a GTA 6 claim.",
+  },
 };
 export default function Page() {
   return (
