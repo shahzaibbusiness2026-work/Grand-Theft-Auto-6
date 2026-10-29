@@ -204,7 +204,12 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 p-4 bg-muted/50 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-2xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site search"
+        className="relative w-full max-w-2xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+      >
         {/* Search Input Bar */}
         <div className="flex items-center px-4 py-3.5 border-b border-border">
           <Search className="h-5 w-5 text-muted-foreground mr-3 flex-shrink-0" />
@@ -216,7 +221,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
               setQuery(e.target.value);
               setSelectedIndex(0);
             }}
-            placeholder="Search all 15 tools, rides, armory, missions, properties, or locations..."
+            placeholder="Search tools, catalogs, characters and articles..."
             aria-label="Search the Atlas"
             className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
@@ -248,12 +253,13 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
             filteredResults.map((item, index) => {
               const isSelected = index === selectedIndex;
               return (
-                <div
+                <button
+                  type="button"
                   key={item.id}
                   onClick={() => handleSelect(item)}
                   onMouseEnter={() => setSelectedIndex(index)}
                   className={cn(
-                    "flex items-center justify-between p-3 rounded-xl cursor-pointer transition-colors",
+                    "flex w-full text-left items-center justify-between p-3 rounded-xl cursor-pointer transition-colors",
                     isSelected
                       ? "bg-primary/15 text-foreground"
                       : "hover:bg-muted/50 text-muted-foreground",
@@ -284,7 +290,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                       isSelected ? "opacity-100" : "opacity-0",
                     )}
                   />
-                </div>
+                </button>
               );
             })
           )}

@@ -1,23 +1,34 @@
+import { asConcept } from "@/lib/world-evidence";
+import { ConceptNotice } from "@/components/concept-notice";
 import { SiteShell } from "@/components/shells";
 import { PropertiesClient } from "./properties-client";
 import { Building2 } from "lucide-react";
 import type { Metadata } from "next";
-import { canonicalProperties, type CanonicalProperty } from "@/lib/canonical-data";
-import { getPublicProperties, type PropertyRecord } from "@/lib/services/properties";
+import {
+  canonicalProperties,
+  type CanonicalProperty,
+} from "@/lib/canonical-data";
+import {
+  getPublicProperties,
+  type PropertyRecord,
+} from "@/lib/services/properties";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-    alternates: { canonical: "/properties" },
-    openGraph: { url: "/properties" },
+  alternates: { canonical: "/properties" },
+  openGraph: { url: "/properties" },
   title: "GTA 6 Real Estate & Property Database",
   description:
-    "Explore, compare, and calculate returns on all safehouses, nightclubs, luxury penthouses, chop shops, and marinos in Grand Theft Auto VI.",
+    "Explore fan-made property scenarios. Prices, garage sizes, income and availability have not been verified for GTA VI.",
   robots: { index: false, follow: true },
 };
 
 /** Map a DB property row onto the CanonicalProperty shape the client renders. */
-function dbToCanonical(p: PropertyRecord, match?: CanonicalProperty): CanonicalProperty {
+function dbToCanonical(
+  p: PropertyRecord,
+  match?: CanonicalProperty,
+): CanonicalProperty {
   return {
     id: p.id,
     slug: p.slug || match?.slug || p.id,
@@ -27,13 +38,18 @@ function dbToCanonical(p: PropertyRecord, match?: CanonicalProperty): CanonicalP
     price: p.price ?? match?.price ?? null,
     priceDisplay: p.price_display || match?.priceDisplay || "TBD",
     garageCapacity: p.garage_capacity ?? match?.garageCapacity ?? 0,
-    passiveIncomePerHour: p.passive_income_per_hour ?? match?.passiveIncomePerHour ?? null,
-    passiveIncomeDisplay: p.passive_income_display || match?.passiveIncomeDisplay || "None",
+    passiveIncomePerHour:
+      p.passive_income_per_hour ?? match?.passiveIncomePerHour ?? null,
+    passiveIncomeDisplay:
+      p.passive_income_display || match?.passiveIncomeDisplay || "None",
     features: p.features || match?.features || [],
     upgrades: p.upgrades || match?.upgrades || [],
     requirements: p.requirements || match?.requirements || [],
-    confidence: (p.confidence as CanonicalProperty["confidence"]) || match?.confidence || "RUMORED",
-    source: p.source || match?.source || "Unknown",
+    confidence:
+      (p.confidence as CanonicalProperty["confidence"]) ||
+      match?.confidence ||
+      "REPORTED",
+    source: p.source || match?.source || "Atlas Admin",
     desc: p.description || match?.desc || "",
     img: p.img || match?.img || "",
     mapCoords: match?.mapCoords || { top: "", left: "" },
@@ -52,12 +68,15 @@ export default async function PropertiesPage() {
         dbToCanonical(
           p,
           canonicalProperties.find(
-            (c) => c.id.toLowerCase() === p.id.toLowerCase() || c.name.toLowerCase() === p.name.toLowerCase()
-          )
-        )
+            (c) =>
+              c.id.toLowerCase() === p.id.toLowerCase() ||
+              c.name.toLowerCase() === p.name.toLowerCase(),
+          ),
+        ),
       );
       const remaining = canonicalProperties.filter(
-        (c) => !dbIds.has(c.id.toLowerCase()) && !dbNames.has(c.name.toLowerCase())
+        (c) =>
+          !dbIds.has(c.id.toLowerCase()) && !dbNames.has(c.name.toLowerCase()),
       );
       properties = [...dbMapped, ...remaining];
     }
@@ -68,6 +87,7 @@ export default async function PropertiesPage() {
   return (
     <SiteShell>
       <div className="container-site py-8">
+        <ConceptNotice subject="property scenarios" />
         {/* Header Hero */}
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-gold-light mb-3">
@@ -77,12 +97,13 @@ export default async function PropertiesPage() {
             PROPERTIES & <span className="text-primary">BUSINESSES</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            Browse and compare listed safehouses, commercial warehouses, chop shops, and nightclubs.
-            Prices, yields and garage sizes are pre-release estimates, unconfirmed until launch.
+            Browse and compare fictional safehouse and business scenarios. All
+            prices, income and garage values below are example inputs, not
+            established GTA VI mechanics.
           </p>
         </div>
 
-        <PropertiesClient initialProperties={properties} />
+        <PropertiesClient initialProperties={properties.map(asConcept)} />
       </div>
     </SiteShell>
   );

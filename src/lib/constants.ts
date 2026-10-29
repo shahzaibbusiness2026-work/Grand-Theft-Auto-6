@@ -13,21 +13,22 @@ export const SITE_CONFIG = {
   ogImage: "https://www.taishgaming.com/img/hero-vice-skyline-hd.jpg",
   disclaimer:
     "Taish Gaming is an independent fan platform and is not affiliated with, sponsored by, or endorsed by Rockstar Games or Take-Two Interactive.",
-  
+
   // Release Date Configuration:
-  // Rockstar has announced "Fall 2026". The specific calendar date remains unconfirmed.
+  // Rockstar official GTA VI page checked 28 October 2026; regional unlock times remain unverified.
   targetReleaseDate: "2026-11-19T00:00:00Z",
-  isReleaseDateConfirmed: false,
-  releaseWindowDisplay: "Fall 2026 (Target: Nov 19, 2026 • To Be Confirmed)",
-  countdownCaption: "GTA VI releases November 19, 2026 · Pre-load begins November 12, 2026",
-  
+  isReleaseDateConfirmed: true,
+  releaseWindowDisplay: "November 19, 2026",
+  countdownCaption:
+    "GTA VI scheduled for November 19, 2026 · Regional unlock and preload times unconfirmed",
+
   socials: {
     twitter: "https://twitter.com/rockstargames",
     youtube: "https://youtube.com/@rockstargames",
     instagram: "https://instagram.com/rockstargames",
     discord: "https://discord.gg/gta",
   },
-  
+
   platforms: [
     { name: "PlayStation 5", confirmed: true, badge: "PS5" },
     { name: "Xbox Series X|S", confirmed: true, badge: "XBOX SERIES X|S" },

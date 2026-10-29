@@ -25,14 +25,70 @@ interface Weapon {
 }
 
 const WEAPONS: Weapon[] = [
-  { name: "M4 Tactical Carbine", damage: 32, pellets: 1, rpm: 750, mag: 30, class: "Assault Rifle" },
-  { name: "Custom Glock 21", damage: 28, pellets: 1, rpm: 350, mag: 12, class: "Pistol" },
-  { name: "Combat Shotgun", damage: 18, pellets: 8, rpm: 70, mag: 8, class: "Shotgun" },
-  { name: "Micro SMG", damage: 22, pellets: 1, rpm: 900, mag: 32, class: "SMG" },
-  { name: "Heavy Sniper", damage: 150, pellets: 1, rpm: 30, mag: 6, class: "Sniper" },
-  { name: "Vom Feuer Heavy Pistol", damage: 40, pellets: 1, rpm: 280, mag: 10, class: "Pistol" },
-  { name: "Sawed-off Shotgun", damage: 22, pellets: 8, rpm: 60, mag: 2, class: "Shotgun" },
-  { name: "Military Rifle", damage: 36, pellets: 1, rpm: 650, mag: 30, class: "Assault Rifle" },
+  {
+    name: "M4 Tactical Carbine",
+    damage: 32,
+    pellets: 1,
+    rpm: 750,
+    mag: 30,
+    class: "Assault Rifle",
+  },
+  {
+    name: "Custom Glock 21",
+    damage: 28,
+    pellets: 1,
+    rpm: 350,
+    mag: 12,
+    class: "Pistol",
+  },
+  {
+    name: "Combat Shotgun",
+    damage: 18,
+    pellets: 8,
+    rpm: 70,
+    mag: 8,
+    class: "Shotgun",
+  },
+  {
+    name: "Micro SMG",
+    damage: 22,
+    pellets: 1,
+    rpm: 900,
+    mag: 32,
+    class: "SMG",
+  },
+  {
+    name: "Heavy Sniper",
+    damage: 150,
+    pellets: 1,
+    rpm: 30,
+    mag: 6,
+    class: "Sniper",
+  },
+  {
+    name: "Vom Feuer Heavy Pistol",
+    damage: 40,
+    pellets: 1,
+    rpm: 280,
+    mag: 10,
+    class: "Pistol",
+  },
+  {
+    name: "Sawed-off Shotgun",
+    damage: 22,
+    pellets: 8,
+    rpm: 60,
+    mag: 2,
+    class: "Shotgun",
+  },
+  {
+    name: "Military Rifle",
+    damage: 36,
+    pellets: 1,
+    rpm: 650,
+    mag: 30,
+    class: "Assault Rifle",
+  },
 ];
 
 interface Attachment {
@@ -77,7 +133,8 @@ const ATTACHMENTS: Attachment[] = [
 
 function dpsFor(weapon: Weapon, active: Set<string>): number {
   const dmgMult = active.has("suppressor") ? 0.9 : 1;
-  const dpsMult = 1 * (active.has("compensator") ? 1.15 : 1) * (active.has("grip") ? 1.1 : 1);
+  const dpsMult =
+    1 * (active.has("compensator") ? 1.15 : 1) * (active.has("grip") ? 1.1 : 1);
   return weapon.damage * weapon.pellets * (weapon.rpm / 60) * dmgMult * dpsMult;
 }
 
@@ -87,12 +144,18 @@ function magFor(weapon: Weapon, active: Set<string>): number {
 
 export function WeaponDpsCalculatorClient() {
   const [weaponName, setWeaponName] = useState(WEAPONS[0].name);
-  const [activeAttachments, setActiveAttachments] = useState<Set<string>>(new Set());
+  const [activeAttachments, setActiveAttachments] = useState<Set<string>>(
+    new Set(),
+  );
   const [copied, setCopied] = useState(false);
+  const [overrides, setOverrides] = useState<Partial<Weapon>>({});
 
   const weapon = useMemo(
-    () => WEAPONS.find((w) => w.name === weaponName) ?? WEAPONS[0],
-    [weaponName]
+    () => ({
+      ...(WEAPONS.find((w) => w.name === weaponName) ?? WEAPONS[0]),
+      ...overrides,
+    }),
+    [weaponName, overrides],
   );
 
   const stats = useMemo(() => {
@@ -113,10 +176,10 @@ export function WeaponDpsCalculatorClient() {
     () =>
       WEAPONS.map((w) => ({
         name: w.name,
-        dps: dpsFor(w, activeAttachments),
+        dps: dpsFor(w.name === weaponName ? weapon : w, activeAttachments),
         selected: w.name === weaponName,
       })).sort((a, b) => b.dps - a.dps),
-    [activeAttachments, weaponName]
+    [activeAttachments, weaponName, weapon],
   );
 
   const maxDps = Math.max(...comparison.map((c) => c.dps), 1);
@@ -132,6 +195,7 @@ export function WeaponDpsCalculatorClient() {
 
   const handleReset = () => {
     setWeaponName(WEAPONS[0].name);
+    setOverrides({});
     setActiveAttachments(new Set());
   };
 
@@ -142,16 +206,56 @@ export function WeaponDpsCalculatorClient() {
             .map((a) => a.name)
             .join(", ")
         : "None";
-    const summary = `GTA 6 Loadout: ${weapon.name} (${weapon.class})
+    const summary = `HYPOTHETICAL DPS SIMULATION - not verified GTA VI statistics.
+Example attachment assumptions: suppressor x0.9 damage, extended mag x1.5 capacity, compensator x1.15 DPS, grip x1.1 DPS.
+Inputs: ${weapon.damage} damage/pellet, ${weapon.pellets} pellets, ${weapon.rpm} rpm, ${weapon.mag} rounds.
+Example preset: ${weapon.name} (${weapon.class})
 Attachments: ${attList}
 DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Damage per mag: ${stats.damagePerMag.toFixed(0)} | Time to empty: ${stats.timeToEmpty.toFixed(1)}s (mag ${stats.mag})`;
-    navigator.clipboard.writeText(summary);
-    setCopied(true);
+    navigator.clipboard
+      .writeText(summary)
+      .then(() => setCopied(true))
+      .catch(() => setCopied(false));
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <div className="space-y-8">
+      <p className="rounded-xl border border-amber-600/40 bg-amber-500/10 p-4 text-sm">
+        <strong>Hypothetical simulation.</strong> Presets and attachment effects
+        are examples, not verified GTA VI data. Edit the input assumptions
+        below; all outputs depend on them.
+      </p>
+      <fieldset className="grid grid-cols-2 gap-4 rounded-xl border border-border p-4">
+        <legend className="px-2 font-bold">Editable example inputs</legend>
+        {(
+          [
+            ["damage", "Damage per pellet"],
+            ["pellets", "Pellets per shot"],
+            ["rpm", "Rounds per minute"],
+            ["mag", "Magazine rounds"],
+          ] as const
+        ).map(([field, label]) => (
+          <label key={field} className="text-sm">
+            {label}
+            <input
+              className="mt-1 block w-full rounded-lg border border-border bg-card p-3"
+              type="number"
+              min={1}
+              max={10000}
+              value={weapon[field]}
+              onChange={(e) => {
+                const n = Number(e.target.value);
+                if (Number.isFinite(n))
+                  setOverrides((old) => ({
+                    ...old,
+                    [field]: Math.max(1, Math.min(10000, n)),
+                  }));
+              }}
+            />
+          </label>
+        ))}
+      </fieldset>
       <div className="grid gap-8 lg:grid-cols-12 items-start">
         {/* INPUTS COLUMN (5 cols) */}
         <div className="lg:col-span-5 card-surface p-6 rounded-3xl border border-border shadow-xl space-y-5">
@@ -174,7 +278,10 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
             </label>
             <select
               value={weaponName}
-              onChange={(e) => setWeaponName(e.target.value)}
+              onChange={(e) => {
+                setWeaponName(e.target.value);
+                setOverrides({});
+              }}
               className="w-full min-h-[44px] rounded-xl border border-border bg-muted/70 p-3 text-sm text-foreground focus:border-accent focus:outline-none"
             >
               {WEAPONS.map((w) => (
@@ -185,8 +292,8 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
             </select>
             <p className="mt-1.5 text-xs text-muted-foreground font-mono">
               {weapon.damage}
-              {weapon.pellets > 1 ? ` × ${weapon.pellets} pellets` : ""} dmg · {weapon.rpm} rpm ·{" "}
-              {weapon.mag} rd mag
+              {weapon.pellets > 1 ? ` × ${weapon.pellets} pellets` : ""} dmg ·{" "}
+              {weapon.rpm} rpm · {weapon.mag} rd mag
             </p>
           </div>
 
@@ -205,7 +312,7 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
                       "flex items-center gap-3 rounded-xl border p-3 min-h-[44px] cursor-pointer transition-all",
                       checked
                         ? "border-accent bg-accent/10"
-                        : "border-border bg-muted/60 hover:border-border"
+                        : "border-border bg-muted/60 hover:border-border",
                     )}
                   >
                     <input
@@ -215,8 +322,12 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
                       className="h-4 w-4 accent-gold shrink-0"
                     />
                     <span className="flex-1">
-                      <span className="block text-sm font-bold text-foreground">{a.name}</span>
-                      <span className="block text-xs text-muted-foreground">{a.effect}</span>
+                      <span className="block text-sm font-bold text-foreground">
+                        {a.name}
+                      </span>
+                      <span className="block text-xs text-muted-foreground">
+                        {a.effect}
+                      </span>
                     </span>
                     <span className="flex flex-wrap justify-end gap-1 max-w-[45%]">
                       {a.tags.map((t) => (
@@ -240,7 +351,8 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
           {/* Live stat cards */}
           <div className="card-surface p-6 rounded-3xl border border-border shadow-2xl">
             <h2 className="font-display text-base font-black uppercase text-foreground mb-4 flex items-center gap-2">
-              <Zap className="h-4 w-4 text-gold-light" /> {weapon.name} — Live Stats
+              <Zap className="h-4 w-4 text-gold-light" /> {weapon.name} —
+              Simulated Outputs
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="rounded-2xl border border-gold/40 bg-gold/10 p-3.5 text-center">
@@ -272,7 +384,9 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
               </div>
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <Layers className="h-4 w-4 text-emerald-400 mx-auto mb-1" />
-                <span className="font-mono text-lg font-black text-foreground">{stats.mag}</span>
+                <span className="font-mono text-lg font-black text-foreground">
+                  {stats.mag}
+                </span>
                 <span className="block text-xs uppercase font-bold text-muted-foreground">
                   Mag Size
                 </span>
@@ -289,10 +403,13 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
                 ) : (
                   <Copy className="h-3.5 w-3.5 mr-1" />
                 )}
-                <span>{copied ? "Loadout Copied!" : "Copy loadout summary"}</span>
+                <span>
+                  {copied ? "Loadout Copied!" : "Copy loadout summary"}
+                </span>
               </Button>
               <span className="text-xs text-muted-foreground font-mono">
-                {activeAttachments.size} attachment{activeAttachments.size === 1 ? "" : "s"} equipped
+                {activeAttachments.size} attachment
+                {activeAttachments.size === 1 ? "" : "s"} equipped
               </span>
             </div>
           </div>
@@ -300,7 +417,8 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
           {/* DPS comparison chart */}
           <div className="card-surface p-6 rounded-3xl border border-border">
             <h3 className="font-display text-base font-bold uppercase tracking-wider text-foreground mb-4 flex items-center gap-2">
-              <Crosshair className="h-4 w-4 text-orange-400" /> DPS Comparison — All Weapons
+              <Crosshair className="h-4 w-4 text-orange-400" /> Example Presets
+              — Simulated DPS
             </h3>
             <div className="space-y-2.5">
               {comparison.map((c) => (
@@ -308,7 +426,7 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
                   <span
                     className={cn(
                       "w-36 sm:w-44 shrink-0 text-xs font-bold truncate",
-                      c.selected ? "text-gold-light" : "text-muted-foreground"
+                      c.selected ? "text-gold-light" : "text-muted-foreground",
                     )}
                   >
                     {c.name}
@@ -319,9 +437,11 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
                         "h-full rounded-lg transition-all duration-300",
                         c.selected
                           ? "bg-gradient-to-r from-gold via-gold-light to-gold"
-                          : "bg-gradient-to-r from-orange-500/70 to-orange-400/50"
+                          : "bg-gradient-to-r from-orange-500/70 to-orange-400/50",
                       )}
-                      style={{ width: `${Math.max(2, (c.dps / maxDps) * 100)}%` }}
+                      style={{
+                        width: `${Math.max(2, (c.dps / maxDps) * 100)}%`,
+                      }}
                     />
                   </div>
                   <span className="w-14 shrink-0 text-right font-mono text-xs font-bold text-foreground">
@@ -331,7 +451,9 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
               ))}
             </div>
             <p className="mt-3 text-xs text-muted-foreground">
-              Current attachments applied to every weapon for a fair comparison.
+              Example attachment multipliers apply to each preset. Preset
+              numbers are fictional inputs; this is not a ranking of GTA VI
+              weapons.
             </p>
           </div>
         </div>
@@ -341,9 +463,10 @@ DPS: ${stats.dps.toFixed(1)} | Damage per shot: ${stats.perShot.toFixed(1)} | Da
       <div className="card-surface p-5 rounded-3xl border border-border flex items-start gap-3">
         <Info className="h-4 w-4 text-orange-400 shrink-0 mt-0.5" />
         <p className="text-xs leading-relaxed text-muted-foreground">
-          All stats are estimates based on trailer analysis and series history — not confirmed
-          values. Attachments affect handling and stealth in-game; this calculator only models their
-          damage and DPS impact. Numbers may change at release.
+          All inputs and attachment effects are hypothetical examples, not
+          measured or predicted GTA VI values. The formula models damage ×
+          pellets × rounds per second, with the displayed example multipliers;
+          it does not establish actual weapon balance or attachment mechanics.
         </p>
       </div>
     </div>

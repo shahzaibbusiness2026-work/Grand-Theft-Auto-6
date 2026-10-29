@@ -1,4 +1,6 @@
-﻿import { notFound } from "next/navigation";
+import { ConceptNotice } from "@/components/concept-notice";
+import { publicLocation } from "@/lib/world-evidence";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   MapPin,
@@ -26,25 +28,47 @@ interface PageProps {
 }
 
 /** Resolve a location from live Supabase data, mapped to the canonical shape. */
-async function resolveLocation(slug: string): Promise<CanonicalLocation | undefined> {
-  const canonical = canonicalLocations.find((l) => l.slug === slug || l.id === slug);
+async function resolveLocation(
+  slug: string,
+): Promise<CanonicalLocation | undefined> {
+  const canonical = canonicalLocations.find(
+    (l) => l.slug === slug || l.id === slug,
+  );
   try {
     const dbRows = (await getLocations()) as Array<{
-      id: string; slug?: string; name: string; district: string; category?: string;
-      verification: string; coordinates?: string; description?: string; hours?: string;
-      threat_level?: string; img?: string; confidence?: string; source?: string;
+      id: string;
+      slug?: string;
+      name: string;
+      district: string;
+      category?: string;
+      verification: string;
+      coordinates?: string;
+      description?: string;
+      hours?: string;
+      threat_level?: string;
+      img?: string;
+      confidence?: string;
+      source?: string;
     }>;
     const row = dbRows?.find(
-      (r) => r.slug === slug || r.id === slug || r.name.toLowerCase() === slug.replace(/-/g, " ")
+      (r) =>
+        r.slug === slug ||
+        r.id === slug ||
+        r.name.toLowerCase() === slug.replace(/-/g, " "),
     );
     if (row) {
-      const coordMatch = /top\s+([\d.]+%?),\s*left\s+([\d.]+%?)/.exec(row.coordinates || "");
-      return {
+      const coordMatch = /top\s+([\d.]+%?),\s*left\s+([\d.]+%?)/.exec(
+        row.coordinates || "",
+      );
+      return publicLocation({
         id: row.id,
         slug: row.slug || slug,
         name: row.name,
         district: row.district,
-        category: (row.category as CanonicalLocation["category"]) || canonical?.category || "Point of Interest",
+        category:
+          (row.category as CanonicalLocation["category"]) ||
+          canonical?.category ||
+          "Point of Interest",
         desc: row.description || canonical?.desc || "",
         top: coordMatch?.[1] || canonical?.top || "",
         left: coordMatch?.[2] || canonical?.left || "",
@@ -55,12 +79,12 @@ async function resolveLocation(slug: string): Promise<CanonicalLocation | undefi
         source: row.source || canonical?.source || "Unknown",
         img: row.img || canonical?.img || "",
         verified: row.verification === "verified",
-      };
+      });
     }
   } catch {
     // DB unreachable — canonical lookup stands
   }
-  return canonical;
+  return canonical ? publicLocation(canonical) : undefined;
 }
 
 /** Resolve a catalog slug to a display name + detail link. Raw slugs are
@@ -90,7 +114,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const loc = await resolveLocation(slug);
 
@@ -99,10 +125,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${loc.name} — GTA 6 Location`,
-    description: `Fan dossier and satellite map notes for ${loc.name} in ${loc.district}, State of Leonida.`,
+    title: `${loc.name} (${loc.district}) — Point of Interest Dossier`,
+    description: `Provisional fan-map entry for ${loc.name}. Placement, opening hours and gameplay remain unverified.`,
     alternates: { canonical: `/locations/${loc.slug}` },
-    openGraph: { type: "website", url: `/locations/${loc.slug}` },
+    robots: { index: false, follow: true },
+    openGraph: { url: `/locations/${loc.slug}` },
   };
 }
 
@@ -115,6 +142,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
   }
 
   const nearbyLocations = canonicalLocations
+    .map(publicLocation)
     .filter((l) => l.id !== loc.id && l.district === loc.district)
     .slice(0, 3);
 
@@ -130,9 +158,24 @@ export default async function LocationDetailPage({ params }: PageProps) {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
-                  { "@type": "ListItem", position: 2, name: "Locations", item: "https://www.taishgaming.com/locations" },
-                  { "@type": "ListItem", position: 3, name: loc.name, item: `https://www.taishgaming.com/locations/${loc.slug}` },
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://www.taishgaming.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Locations",
+                    item: "https://www.taishgaming.com/locations",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: loc.name,
+                    item: `https://www.taishgaming.com/locations/${loc.slug}`,
+                  },
                 ],
               },
               {
@@ -146,13 +189,17 @@ export default async function LocationDetailPage({ params }: PageProps) {
         }}
       />
       <div className="container-site py-8">
+        <ConceptNotice subject="location records and fan-map placements" />
         {/* Breadcrumb Navigation */}
         <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6 font-mono">
           <Link href="/" className="hover:text-primary transition-colors">
             Home
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <Link href="/locations" className="hover:text-primary transition-colors">
+          <Link
+            href="/locations"
+            className="hover:text-primary transition-colors"
+          >
             Locations
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
@@ -214,7 +261,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
                         href={`/map?poi=${loc.id}&top=${loc.top}&left=${loc.left}`}
                         className="btn-primary text-xs px-3 py-2.5 min-h-[44px] font-bold flex items-center gap-1.5"
                       >
-                        <Navigation className="h-3.5 w-3.5" /> Fly to Live Pin
+                        <Navigation className="h-3.5 w-3.5" /> Open fan-map pin
                       </Link>
                     </div>
                   ) : (
@@ -227,7 +274,8 @@ export default async function LocationDetailPage({ params }: PageProps) {
             ) : null}
 
             {/* Related Vehicles & Armory */}
-            {((loc.relatedVehicles?.length || 0) > 0 || (loc.relatedWeapons?.length || 0) > 0) && (
+            {((loc.relatedVehicles?.length || 0) > 0 ||
+              (loc.relatedWeapons?.length || 0) > 0) && (
               <div className="card-carbon p-6 space-y-4">
                 <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wider">
                   Associated Field Assets
@@ -301,7 +349,8 @@ export default async function LocationDetailPage({ params }: PageProps) {
                 Tactical Navigation
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Open the interactive satellite map focused on {loc.name}. Synchronize coordinates and add custom field notes.
+                Open this provisional placement for {loc.name} on the fan-made
+                map. Notes stay on this device.
               </p>
               <Link
                 href={`/map?poi=${loc.id}`}
@@ -318,7 +367,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
               </h4>
               {nearbyLocations.length === 0 ? (
                 <p className="text-xs text-muted-foreground">
-                  No other confirmed locations in this specific sector yet.
+                  No other provisional entries in this sector yet.
                 </p>
               ) : (
                 <div className="space-y-3">

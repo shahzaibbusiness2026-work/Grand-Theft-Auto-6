@@ -1,3 +1,7 @@
+import { EvidenceSourceLink } from "./evidence-source-link";
+import { catalogSchema } from "@/lib/catalog-schema";
+import { SITE_CONFIG } from "@/lib/constants";
+import { serializeJsonLd } from "@/lib/utils";
 import Link from "next/link";
 import { FavoriteButton } from "./favorite-button";
 import { CatalogVisit } from "./catalog-visit";
@@ -11,7 +15,24 @@ export function EvidenceDetail({
 }) {
   return (
     <article className="container-site max-w-4xl py-10 space-y-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(catalogSchema(entry, kind, SITE_CONFIG.url)),
+        }}
+      />
       <CatalogVisit kind={kind} id={entry.id} />
+      <nav aria-label="Breadcrumb" className="flex flex-wrap gap-2 text-sm">
+        <Link href="/" className="underline">
+          Home
+        </Link>
+        <span aria-hidden="true">/</span>
+        <Link href={"/" + kind} className="underline">
+          {kind === "vehicles" ? "Vehicles" : "Weapons"}
+        </Link>
+        <span aria-hidden="true">/</span>
+        <span>{entry.name}</span>
+      </nav>
       <Link className="underline" href={"/" + kind}>
         All {kind}
       </Link>
@@ -20,9 +41,9 @@ export function EvidenceDetail({
       </p>
       <h1 className="font-display text-4xl font-bold">{entry.name}</h1>
       <p>
-        This entry is awaiting field-by-field evidence review. The catalog name
-        is a provisional identification and does not establish that this model
-        appears in GTA VI.
+        {entry.claims.some((c) => c.field === "GTA VI appearance")
+          ? "A GTA VI appearance claim has been reviewed below. Its source and scope apply only to that claim; the catalog identification does not verify performance, price or availability."
+          : "This entry is awaiting field-by-field evidence review. The catalog name is a provisional identification and does not establish that this model appears in GTA VI."}
       </p>
       <section className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h2 className="text-2xl font-bold">What is verified?</h2>
@@ -34,14 +55,14 @@ export function EvidenceDetail({
                 <dd>
                   {c.value}
                   <br />
-                  <a
+                  <EvidenceSourceLink
                     className="underline"
                     href={c.source}
                     target="_blank"
                     rel="noreferrer"
                   >
                     {c.locator}
-                  </a>
+                  </EvidenceSourceLink>
                   <p className="text-sm text-muted-foreground">
                     Reviewed {c.reviewedAt} by {c.reviewer}
                   </p>

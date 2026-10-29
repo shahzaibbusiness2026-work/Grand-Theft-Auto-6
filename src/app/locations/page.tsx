@@ -1,16 +1,21 @@
+import { publicLocation } from "@/lib/world-evidence";
 import { SiteShell } from "@/components/shells";
 import { LocationsClient } from "./locations-client";
 import { MapPin } from "lucide-react";
 import type { Metadata } from "next";
-import { canonicalLocations, type CanonicalLocation } from "@/lib/canonical-data";
+import {
+  canonicalLocations,
+  type CanonicalLocation,
+} from "@/lib/canonical-data";
 import { getLocations, type LocationRecord } from "@/lib/services/locations";
 
 export const metadata: Metadata = {
-    alternates: { canonical: "/locations" },
-    openGraph: { url: "/locations" },
+  alternates: { canonical: "/locations" },
+  openGraph: { url: "/locations" },
   title: "Leonida Locations & Points of Interest",
   description:
-    "Explore locations spotted in trailers, landmarks, gun shops, safehouses, and secret outposts across Vice City and the State of Leonida. Fan-mapped coordinates and satellite map sync.",
+    "Browse provisional Leonida fan-map entries. Check evidence status and distinguish editorial placements from confirmed GTA VI geography.",
+
 };
 
 type DbLocation = LocationRecord & {
@@ -24,8 +29,13 @@ type DbLocation = LocationRecord & {
 };
 
 /** Map a DB location row onto the CanonicalLocation shape the client renders. */
-function dbToCanonical(l: DbLocation, match?: CanonicalLocation): CanonicalLocation {
-  const coordMatch = /top\s+([\d.]+%?),\s*left\s+([\d.]+%?)/.exec(l.coordinates || "");
+function dbToCanonical(
+  l: DbLocation,
+  match?: CanonicalLocation,
+): CanonicalLocation {
+  const coordMatch = /top\s+([\d.]+%?),\s*left\s+([\d.]+%?)/.exec(
+    l.coordinates || "",
+  );
   return {
     id: l.id,
     slug: l.slug || match?.slug || l.id,
@@ -54,12 +64,15 @@ export default async function LocationsPage() {
         dbToCanonical(
           l,
           canonicalLocations.find(
-            (c) => c.id.toLowerCase() === l.id.toLowerCase() || c.name.toLowerCase() === l.name.toLowerCase()
-          )
-        )
+            (c) =>
+              c.id.toLowerCase() === l.id.toLowerCase() ||
+              c.name.toLowerCase() === l.name.toLowerCase(),
+          ),
+        ),
       );
       const remaining = canonicalLocations.filter(
-        (c) => !dbIds.has(c.id.toLowerCase()) && !dbNames.has(c.name.toLowerCase())
+        (c) =>
+          !dbIds.has(c.id.toLowerCase()) && !dbNames.has(c.name.toLowerCase()),
       );
       locations = [...dbMapped, ...remaining];
     }
@@ -79,11 +92,13 @@ export default async function LocationsPage() {
             LEONIDA <span className="text-primary">LOCATIONS & POIS</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            Directory of landmarks, nightlife venues, gun shops, luxury estates, and underground facilities across Vice City, Port Gellhorn, and the Keys.
+            An editorial directory of provisional fan-map locations. Pin
+            placement and business gameplay are unverified; these entries are
+            not official map coordinates.
           </p>
         </div>
 
-        <LocationsClient initialLocations={locations} />
+        <LocationsClient initialLocations={locations.map(publicLocation)} />
       </div>
     </SiteShell>
   );

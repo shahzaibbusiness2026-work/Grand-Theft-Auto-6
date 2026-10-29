@@ -1,3 +1,4 @@
+import remarkGfm from "remark-gfm";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -152,7 +153,25 @@ export default async function GuideDetailPage({
         <div className="mt-6 space-y-4">
           {ready ? (
             <div className="article-body">
-              <ReactMarkdown>{guide.content || ""}</ReactMarkdown>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  table: ({ children }) => (
+                    <div
+                      role="region"
+                      tabIndex={0}
+                      aria-label="Scrollable guide table"
+                      className="overflow-x-auto"
+                    >
+                      <table className="w-full border-collapse text-left [&_th]:border [&_td]:border [&_th]:p-3 [&_td]:p-3">
+                        {children}
+                      </table>
+                    </div>
+                  ),
+                }}
+              >
+                {guide.content || ""}
+              </ReactMarkdown>
             </div>
           ) : (
             <div className="rounded-xl border border-border bg-muted/40 p-5">

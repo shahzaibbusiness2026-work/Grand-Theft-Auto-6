@@ -1,4 +1,6 @@
 "use client";
+import { publicLocation } from "@/lib/world-evidence";
+
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
@@ -29,8 +31,20 @@ const LOCATION_CATEGORIES = [
   "Collectible",
 ] as const;
 
-export function LocationsClient({ initialLocations }: { initialLocations?: CanonicalLocation[] }) {
-  const locations = initialLocations && initialLocations.length > 0 ? initialLocations : locationsFallback;
+export function LocationsClient({
+  initialLocations,
+}: {
+  initialLocations?: CanonicalLocation[];
+}) {
+  const locations = useMemo(
+    () =>
+      (initialLocations && initialLocations.length > 0
+        ? initialLocations
+        : locationsFallback
+      ).map(publicLocation),
+    [initialLocations],
+  );
+
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -38,7 +52,8 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
   const districts = useMemo(() => {
     const set = new Set(locations.map((l) => l.district));
     return ["All", ...Array.from(set)];
-  }, []);
+  }, [locations]);
+
 
   const filteredLocations = useMemo(() => {
     return locations.filter((item) => {
@@ -54,15 +69,29 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
         const matchName = item.name.toLowerCase().includes(q);
         const matchDistrict = item.district.toLowerCase().includes(q);
         const matchDesc = item.desc.toLowerCase().includes(q);
-        const matchVehicles = (item.relatedVehicles || []).some((v) => v.toLowerCase().includes(q));
-        const matchWeapons = (item.relatedWeapons || []).some((w) => w.toLowerCase().includes(q));
-        const matchMissions = (item.relatedMissions || []).some((m) => m.toLowerCase().includes(q));
-        return matchName || matchDistrict || matchDesc || matchVehicles || matchWeapons || matchMissions;
+        const matchVehicles = (item.relatedVehicles || []).some((v) =>
+          v.toLowerCase().includes(q),
+        );
+        const matchWeapons = (item.relatedWeapons || []).some((w) =>
+          w.toLowerCase().includes(q),
+        );
+        const matchMissions = (item.relatedMissions || []).some((m) =>
+          m.toLowerCase().includes(q),
+        );
+        return (
+          matchName ||
+          matchDistrict ||
+          matchDesc ||
+          matchVehicles ||
+          matchWeapons ||
+          matchMissions
+        );
+
       }
 
       return true;
     });
-  }, [selectedCategory, selectedDistrict, searchQuery]);
+  }, [locations, selectedCategory, selectedDistrict, searchQuery]);
 
 
   return (
@@ -90,7 +119,8 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
             {locations.filter((l) => l.verified).length}
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
-            Spotted in Trailers
+            Source-reviewed records
+
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-primary/20 bg-primary/10">
@@ -137,9 +167,11 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
         <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
           {LOCATION_CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat;
-            const count = cat === "All"
-              ? locations.length
-              : locations.filter((l) => l.category === cat).length;
+            const count =
+              cat === "All"
+                ? locations.length
+                : locations.filter((l) => l.category === cat).length;
+
             return (
               <button
                 key={cat}
@@ -148,7 +180,8 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                   "text-xs px-3 py-3 rounded-full font-semibold transition-all border",
                   isSelected
                     ? "border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(244,63,94,0.4)]"
-                    : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card"
+                    : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card",
+
                 )}
               >
                 {cat} <span className="opacity-60 text-xs">({count})</span>
@@ -163,9 +196,13 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
         {filteredLocations.length === 0 ? (
           <div className="col-span-full card-carbon p-12 text-center">
             <HelpCircle className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-            <h3 className="font-display text-lg font-bold text-foreground">No Locations Found</h3>
+            <h3 className="font-display text-lg font-bold text-foreground">
+              No Locations Found
+            </h3>
             <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
-              No points of interest match your current search and filter settings.
+              No points of interest match your current search and filter
+              settings.
+
             </p>
             <button
               onClick={() => {
@@ -210,7 +247,12 @@ export function LocationsClient({ initialLocations }: { initialLocations?: Canon
                       <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted/80 text-foreground border border-border">
                         {item.category}
                       </span>
-                      <ConfidenceBadge confidence={item.confidence} source={item.source} size="sm" />
+                      <ConfidenceBadge
+                        confidence={item.confidence}
+                        source={item.source}
+                        size="sm"
+                      />
+
                     </div>
                   </div>
 

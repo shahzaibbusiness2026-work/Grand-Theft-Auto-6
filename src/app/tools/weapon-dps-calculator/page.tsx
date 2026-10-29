@@ -1,3 +1,4 @@
+import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
 import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
 import { WeaponDpsCalculatorClient } from "./weapon-dps-calculator-client";
@@ -7,17 +8,17 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
-    openGraph: { url: "/tools/weapon-dps-calculator" },
+  openGraph: { url: "/tools/weapon-dps-calculator" },
   title: "GTA 6 Weapon DPS Calculator — Damage, Fire Rate & Attachments",
-  description: "Compare GTA 6 weapons by DPS. Add attachments and see live damage-per-second, damage-per-magazine, and time-to-empty.",
+  description: PUBLIC_TOOL_COPY["/tools/weapon-dps-calculator"],
 
   alternates: { canonical: "/tools/weapon-dps-calculator" },
 };
 
 export default function WeaponDpsCalculatorPage() {
   return (
-        <SiteShell>
-          <ToolStatusBanner status="simulator" />
+    <SiteShell>
+      <ToolStatusBanner status="simulator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -27,15 +28,30 @@ export default function WeaponDpsCalculatorPage() {
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
-                  { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Weapon DPS Calculator \u2014 Damage, Fire Rate & Attachments", item: "https://www.taishgaming.com/tools/weapon-dps-calculator" },
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://www.taishgaming.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Tools",
+                    item: "https://www.taishgaming.com/tools",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "GTA 6 Weapon DPS Calculator \u2014 Damage, Fire Rate & Attachments",
+                    item: "https://www.taishgaming.com/tools/weapon-dps-calculator",
+                  },
                 ],
               },
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Weapon DPS Calculator \u2014 Damage, Fire Rate & Attachments",
-                description: "Compare GTA 6 weapons by DPS. Add attachments and see live damage-per-second, damage-per-magazine, and time-to-empty.",
+                description: PUBLIC_TOOL_COPY["/tools/weapon-dps-calculator"],
                 url: "https://www.taishgaming.com/tools/weapon-dps-calculator",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -48,11 +64,17 @@ export default function WeaponDpsCalculatorPage() {
       <div className="container-site py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+          <Link href="/" className="hover:text-primary transition-colors">
+            Home
+          </Link>
           <ChevronRight className="h-3 w-3" />
-          <Link href="/tools" className="hover:text-primary transition-colors">Tools</Link>
+          <Link href="/tools" className="hover:text-primary transition-colors">
+            Tools
+          </Link>
           <ChevronRight className="h-3 w-3" />
-          <span className="text-foreground font-bold">Weapon DPS Calculator</span>
+          <span className="text-foreground font-bold">
+            Weapon DPS Calculator
+          </span>
         </nav>
 
         {/* Page Header */}
@@ -64,7 +86,9 @@ export default function WeaponDpsCalculatorPage() {
             GTA 6 <span className="text-primary">WEAPON DPS CALCULATOR</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Pick a weapon, stack attachments, and watch damage-per-second update live. Compare every loadout at a glance, then copy your final build to share with your crew.
+            Choose an example preset, edit its assumptions and calculate
+            hypothetical damage per second. Copied outputs retain the simulation
+            label and input values.
           </p>
         </div>
 

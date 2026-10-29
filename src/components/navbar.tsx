@@ -149,9 +149,9 @@ function SplitNavDropdown({
       className={cn(
         "relative flex items-center rounded-lg transition-all duration-200",
         active
-          ? "bg-[#FF2E9A] text-white font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
+          ? "bg-[#FF2E9A] text-slate-950 font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
           : open
-            ? "bg-[#FF2E9A] text-white"
+            ? "bg-[#FF2E9A] text-slate-950"
             : "border border-transparent text-muted-foreground hover:bg-muted/80 hover:text-[#FF2E9A]"
       )}
     >
@@ -191,7 +191,7 @@ function SplitNavDropdown({
               className={cn(
                 "block rounded-lg px-3 py-2 text-xs font-medium tracking-wide transition-colors",
                 pathname === m.href
-                  ? "bg-[#FF2E9A] text-white font-bold"
+                  ? "bg-[#FF2E9A] text-slate-950 font-bold"
                   : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
               )}
             >
@@ -284,7 +284,7 @@ export function Navbar() {
                 className={cn(
                   "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
                   isActive(l.href)
-                    ? "bg-[#FF2E9A] text-white font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
+                    ? "bg-[#FF2E9A] text-slate-950 font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
                     : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
@@ -303,9 +303,9 @@ export function Navbar() {
               className={cn(
                 "flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
                 MORE_HREFS.some((href) => isActive(href))
-                  ? "bg-[#FF2E9A] text-white font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
+                  ? "bg-[#FF2E9A] text-slate-950 font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
                   : more.open
-                    ? "bg-[#FF2E9A] text-white"
+                    ? "bg-[#FF2E9A] text-slate-950"
                     : "text-muted-foreground hover:bg-muted/80 hover:text-[#FF2E9A]"
               )}
             >
@@ -341,7 +341,7 @@ export function Navbar() {
                               className={cn(
                                 "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-medium tracking-wide transition-colors",
                                 active
-                                  ? "bg-[#FF2E9A] text-white font-bold"
+                                  ? "bg-[#FF2E9A] text-slate-950 font-bold"
                                   : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
                               )}
                             >
@@ -349,7 +349,7 @@ export function Navbar() {
                                 className={cn(
                                   "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-colors",
                                   active
-                                    ? "border-[#FF2E9A]/40 bg-[#FF2E9A] text-white"
+                                    ? "border-[#FF2E9A]/40 bg-[#FF2E9A] text-slate-950"
                                     : "border-border/70 bg-muted/60 text-muted-foreground"
                                 )}
                                 aria-hidden="true"
@@ -375,7 +375,7 @@ export function Navbar() {
             className={cn(
               "rounded-lg px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 lg:text-[13px]",
               isActive("/gta-6-world")
-                ? "bg-[#FF2E9A] text-white font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
+                ? "bg-[#FF2E9A] text-slate-950 font-bold shadow-[0_0_12px_rgba(255,46,154,0.35)]"
                 : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
             )}
           >
@@ -425,7 +425,7 @@ export function Navbar() {
             <Link
               href="/dashboard"
               prefetch={true}
-              className="hidden h-9 items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-3.5 text-xs font-black uppercase tracking-wider text-white shadow-[0_2px_12px_rgba(255,46,154,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
+              className="hidden h-9 items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(255,46,154,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
             >
               <LayoutGrid className="h-3.5 w-3.5" />
               <span>Dashboard</span>
@@ -435,7 +435,7 @@ export function Navbar() {
               <Link
                 href="/login"
                 prefetch={true}
-                className="hidden h-9 items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-3.5 text-xs font-black uppercase tracking-wider text-white shadow-[0_2px_12px_rgba(255,46,154,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
+                className="hidden h-9 items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(255,46,154,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
               >
                 <LogIn className="h-3.5 w-3.5" />
                 <span>Login / Sign Up</span>
@@ -489,7 +489,7 @@ export function Navbar() {
                     className={cn(
                       "flex min-h-[48px] w-full items-center rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
                       parentActive
-                        ? "bg-[#FF2E9A] text-white font-bold"
+                        ? "bg-[#FF2E9A] text-slate-950 font-bold"
                         : "text-foreground/90 hover:bg-muted hover:text-[#FF2E9A]"
                     )}
                   >
@@ -504,9 +504,9 @@ export function Navbar() {
                     className={cn(
                       "flex w-full items-center rounded-xl transition-colors",
                       parentActive
-                        ? "bg-[#FF2E9A] text-white"
+                        ? "bg-[#FF2E9A] text-slate-950"
                         : expanded
-                          ? "bg-[#FF2E9A] text-white"
+                          ? "bg-[#FF2E9A] text-slate-950"
                           : "hover:bg-muted"
                     )}
                   >
@@ -551,7 +551,7 @@ export function Navbar() {
                             className={cn(
                               "flex min-h-[44px] items-center rounded-lg px-4 text-sm font-medium tracking-wide transition-colors",
                               subActive
-                                ? "bg-[#FF2E9A] text-white font-bold"
+                                ? "bg-[#FF2E9A] text-slate-950 font-bold"
                                 : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
                             )}
                           >
@@ -575,9 +575,9 @@ export function Navbar() {
                 className={cn(
                   "flex min-h-[48px] w-full items-center justify-between rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
                   MORE_HREFS.some((href) => isActive(href))
-                    ? "bg-[#FF2E9A] text-white font-bold"
+                    ? "bg-[#FF2E9A] text-slate-950 font-bold"
                     : openMobileSection === "tools"
-                      ? "bg-[#FF2E9A] text-white"
+                      ? "bg-[#FF2E9A] text-slate-950"
                       : "text-foreground/90 hover:bg-muted hover:text-[#FF2E9A]"
                 )}
               >
@@ -609,7 +609,7 @@ export function Navbar() {
                             className={cn(
                               "flex min-h-[44px] items-center gap-3 rounded-lg px-4 text-sm font-medium tracking-wide transition-colors",
                               subActive
-                                ? "bg-[#FF2E9A] text-white font-bold"
+                                ? "bg-[#FF2E9A] text-slate-950 font-bold"
                                 : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
                             )}
                           >
@@ -633,7 +633,7 @@ export function Navbar() {
               className={cn(
                 "flex min-h-[48px] w-full items-center rounded-xl px-4 text-[15px] font-semibold tracking-wide transition-colors",
                 isActive("/gta-6-world")
-                  ? "bg-[#FF2E9A] text-white font-bold"
+                  ? "bg-[#FF2E9A] text-slate-950 font-bold"
                   : "text-foreground/90 hover:bg-muted hover:text-[#FF2E9A]"
               )}
             >
@@ -645,10 +645,10 @@ export function Navbar() {
               <div
                 className={cn(
                   "flex w-full items-center rounded-xl transition-colors",
-                  isActive("/news")
-                    ? "bg-[#FF2E9A] text-white"
+                  isActive("/news") || pathname === "/blog"
+                    ? "bg-[#FF2E9A] text-slate-950"
                     : openMobileSection === "news"
-                      ? "bg-[#FF2E9A] text-white"
+                      ? "bg-[#FF2E9A] text-slate-950"
                       : "hover:bg-muted"
                 )}
               >
@@ -689,7 +689,7 @@ export function Navbar() {
                     className={cn(
                       "flex min-h-[44px] items-center rounded-lg px-4 text-sm font-medium tracking-wide transition-colors",
                       pathname === "/news"
-                        ? "bg-[#FF2E9A] text-white font-bold"
+                        ? "bg-[#FF2E9A] text-slate-950 font-bold"
                         : "text-muted-foreground hover:bg-muted hover:text-[#FF2E9A]"
                     )}
                   >
@@ -706,7 +706,7 @@ export function Navbar() {
                   <Link
                     href="/dashboard"
                     onClick={() => setMobileOpen(false)}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-4 py-3 text-sm font-black uppercase tracking-wider text-white"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-4 py-3 text-sm font-black uppercase tracking-wider text-slate-950"
                   >
                     <LayoutGrid className="h-4 w-4" /> Dashboard
                   </Link>
@@ -726,7 +726,7 @@ export function Navbar() {
                   <Link
                     href="/login"
                     onClick={() => setMobileOpen(false)}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-4 py-3 text-sm font-black uppercase tracking-wider text-white"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-4 py-3 text-sm font-black uppercase tracking-wider text-slate-950"
                   >
                     <LogIn className="h-4 w-4" /> Login / Sign Up
                   </Link>

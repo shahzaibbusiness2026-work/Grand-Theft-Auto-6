@@ -1,7 +1,38 @@
 "use client";
 import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 const RELEASE_DAY = "2026-11-19";
+function ReleaseNote({ confirmed }: { confirmed: boolean }) {
+  return (
+    <p className="text-xs text-white/85">
+      {confirmed ? "Scheduled calendar date" : "Expected calendar date; exact launch day unconfirmed"} at 00:00 UTC. Regional unlock times and
+      preload timing are not established by this timer.
+    </p>
+  );
+}
+function ReleaseReferences({ calendarUrl }: { calendarUrl: string }) {
+  return (
+    <div className="flex flex-wrap justify-center gap-5 text-sm">
+      <a
+        className="inline-flex min-h-11 items-center underline"
+        href="https://www.rockstargames.com/VI"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Rockstar release information
+      </a>
+      <a
+        className="inline-flex min-h-11 items-center underline"
+        href={calendarUrl}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Add release date to calendar
+      </a>
+    </div>
+  );
+}
 export function Countdown({
   className,
   targetDate,
@@ -32,13 +63,14 @@ export function Countdown({
     .toISOString()
     .slice(0, 10)
     .replace(/-/g, "");
+  const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=GTA+VI+${confirmed ? "scheduled" : "expected"}+release&dates=${calStart}/${calEnd}&details=Calendar+date.+Regional+unlock+time+unconfirmed.+Source%3A+Rockstar+Games.`;
   const [remaining, setRemaining] = useState<number | null>(null);
   useEffect(() => {
     const update = () => setRemaining(Math.max(0, boundary - Date.now()));
     update();
     const timer = setInterval(update, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [boundary]);
   const seconds = remaining === null ? null : Math.floor(remaining / 1000);
   const cells = [
     ["Days", seconds === null ? "—" : Math.floor(seconds / 86400)],
@@ -53,7 +85,7 @@ export function Countdown({
     >
       <h2
         id="release-countdown-title"
-        className="font-display text-2xl sm:text-3xl font-bold"
+        className="font-display text-xl sm:text-3xl font-bold"
       >
         GTA VI · {confirmed ? "" : "Expected "}
         {displayDate}
@@ -62,11 +94,17 @@ export function Countdown({
         {confirmed ? "Scheduled" : "Expected"} for PS5 and Xbox Series X|S.
       </p>
       {caption ? <p className="text-sm text-white/80">{caption}</p> : null}
-      <div className="grid grid-cols-4 gap-2 sm:gap-4" aria-live="off">
+      <div
+        className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-4"
+        aria-live="off"
+      >
         {cells.map(([label, value]) => (
           <div
             key={label}
-            className="rounded-2xl border border-white/25 bg-black/65 px-2 py-5"
+            className={cn(
+              "rounded-2xl border border-white/25 bg-black/65 px-2 py-4 sm:py-5",
+              label === "Seconds" && "hidden sm:block",
+            )}
           >
             <span className="block font-display text-3xl sm:text-5xl font-black tabular-nums">
               {value}
@@ -77,29 +115,20 @@ export function Countdown({
           </div>
         ))}
       </div>
-      <p className="text-xs text-white/85">
-        {confirmed
-          ? "Countdown to the calendar date at 00:00 UTC. Regional unlock times and preload timing are not established by this timer."
-          : "Expected date — Rockstar has not confirmed an exact launch day; this timer counts to the expected calendar date at 00:00 UTC. Regional unlock times are not established by this timer."}
-      </p>
-      <div className="flex flex-wrap justify-center gap-5 text-sm">
-        <a
-          className="inline-flex min-h-11 items-center underline"
-          href="https://www.rockstargames.com/VI"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Rockstar release information
-        </a>
-        <a
-          className="inline-flex min-h-11 items-center underline"
-          href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=GTA+VI+${confirmed ? "scheduled" : "expected"}+release&dates=${calStart}/${calEnd}&details=${confirmed ? "Scheduled" : "Expected"}+calendar+date.+Regional+unlock+time+unconfirmed.+Source%3A+Rockstar+Games.+Tracked+by+Taish+Gaming.`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Add release date to calendar
-        </a>
+      <div className="hidden space-y-4 sm:block">
+        <ReleaseNote confirmed={confirmed} />
+        <ReleaseReferences calendarUrl={calendarUrl} />
       </div>
+      <details className="rounded-xl border border-white/25 bg-black/50 text-left sm:hidden">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 text-xs font-semibold [&::-webkit-details-marker]:hidden">
+          Release details & calendar
+          <ChevronDown className="h-4 w-4" aria-hidden="true" />
+        </summary>
+        <div className="space-y-3 border-t border-white/20 px-4 py-3">
+          <ReleaseNote confirmed={confirmed} />
+          <ReleaseReferences calendarUrl={calendarUrl} />
+        </div>
+      </details>
     </section>
   );
 }

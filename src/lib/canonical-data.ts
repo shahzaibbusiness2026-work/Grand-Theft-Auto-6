@@ -163,7 +163,7 @@ export interface CanonicalLocation {
   top: string; // percentage on map
   left: string; // percentage on map
   hours?: string;
-  threatLevel?: "Low" | "Medium" | "High" | "Restricted Area";
+  threatLevel?: "Low" | "Medium" | "High" | "Restricted Area" | "Unknown";
   relatedVehicles?: string[];
   relatedWeapons?: string[];
   relatedMissions?: string[];

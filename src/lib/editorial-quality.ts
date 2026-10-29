@@ -27,11 +27,11 @@ export function publicationImage(src?: string | null, slug?: string): string {
   return src || "/img/hero-dark.jpg";
 }
 
-/** Repair the known missing ')' in an imported trailer heading without executing HTML. */
+/** Repair imported YouTube heading links without allowing raw HTML. */
 export function normalizeEditorialMarkdown(markdown: string): string {
   return markdown.replace(
-    /\[Launch Trailer\]\((https:\/\/(?:www\.)?youtube\.com\/watch\?v=[\w-]+)(?=:)/g,
-    "[Launch Trailer]($1)",
+    /\[([^\]\n]+)\]\((https:\/\/(?:www\.)?youtube\.com\/watch\?v=[\w-]+)(?=[:\s]|$)/gm,
+    "[$1]($2)",
   );
 }
 

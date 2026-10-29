@@ -1,4 +1,6 @@
-﻿import { notFound } from "next/navigation";
+import { asConcept } from "@/lib/world-evidence";
+import { ConceptNotice } from "@/components/concept-notice";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   TrendingUp,
@@ -12,11 +14,13 @@ import {
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
-import { canonicalProperties } from "@/lib/canonical-data";
+import { canonicalProperties as propertyDrafts } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
 import { EstimatedDataNote } from "@/components/estimated-data-note";
 import type { Metadata } from "next";
+
+const canonicalProperties = propertyDrafts.map(asConcept);
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -32,7 +36,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const prop = canonicalProperties.find((p) => p.slug === slug);
+  const prop = canonicalProperties.map(asConcept).find((p) => p.slug === slug);
 
   if (!prop) {
     notFound();
@@ -40,7 +44,7 @@ export async function generateMetadata({
 
   return {
     title: `${prop.name} (${prop.type}) — Property Dossier`,
-    description: `Fan-made real estate breakdown for ${prop.name} in ${prop.district}. Estimated price: ${prop.priceDisplay}, Garage: ${prop.garageCapacity} vehicles, Estimated passive income: ${prop.passiveIncomeDisplay}.`,
+    description: `Fan-made real estate breakdown for ${prop.name} in ${prop.district}. Values are fictional planning inputs, not confirmed prices, ownership or income mechanics.`,
     alternates: { canonical: `/properties/${prop.slug}` },
     openGraph: { url: `/properties/${prop.slug}` },
     robots: { index: false, follow: true },
@@ -49,7 +53,7 @@ export async function generateMetadata({
 
 export default async function PropertyDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const prop = canonicalProperties.find((p) => p.slug === slug);
+  const prop = canonicalProperties.map(asConcept).find((p) => p.slug === slug);
 
   if (!prop) {
     notFound();
@@ -108,6 +112,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
         }}
       />
       <div className="container-site py-8">
+        <ConceptNotice subject="property scenarios" />
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6 font-mono">
           <Link href="/" className="hover:text-primary transition-colors">

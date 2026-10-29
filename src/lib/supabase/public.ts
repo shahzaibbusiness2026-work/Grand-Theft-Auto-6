@@ -11,11 +11,12 @@ import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 // Public client is intentionally untyped (any) — it's only used for
 // simple public reads where the exact row shapes are handled by callers.
 // eslint-disable-next-line
-let publicClient: any = null;
+const publicClients = new Map<string, any>();
 
-export function createPublicClient() {
-  if (publicClient) return publicClient;
-  publicClient = createSupabaseClient(
+export function createPublicClient(cacheTag?: string) {
+  const key = cacheTag || "default";
+  if (publicClients.has(key)) return publicClients.get(key);
+  const publicClient = createSupabaseClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -29,10 +30,17 @@ export function createPublicClient() {
         fetch: (url, init) =>
           fetch(url, {
             ...init,
+            ...(cacheTag
+              ? {
+                  cache: "force-cache" as const,
+                  next: { revalidate: 300, tags: [cacheTag] },
+                }
+              : {}),
             signal: init?.signal || AbortSignal.timeout(6000),
           }),
       },
     },
   );
+  publicClients.set(key, publicClient);
   return publicClient;
 }

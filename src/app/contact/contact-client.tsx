@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Mail,
   MapPin,
@@ -23,8 +23,16 @@ import { cn } from "@/lib/utils";
 const contactCards = [
   // No public mailbox or Discord/forum exists yet, so the cards point at
   // the working form below instead of addresses that would bounce.
-  { icon: Mail, title: "Message Us", lines: ["Use the form below", "Every message lands in the admin inbox"] },
-  { icon: MapPin, title: "Community Hub", lines: ["Leonida & Vice City Fans", "Guides, tools and news in one place"] },
+  {
+    icon: Mail,
+    title: "Message Us",
+    lines: ["Use the form below", "Messages are submitted to the site inbox"],
+  },
+  {
+    icon: MapPin,
+    title: "Community Hub",
+    lines: ["Leonida & Vice City Fans", "Guides, tools and news in one place"],
+  },
 ];
 
 const faqIcons = [Bug, Star, ShieldCheck, Clock, Megaphone];
@@ -34,7 +42,23 @@ export function ContactClient() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  useEffect(() => {
+    if (
+      new URLSearchParams(window.location.search).get("topic") === "privacy"
+    ) {
+      setForm((old) => ({
+        ...old,
+        subject: "Privacy / access or deletion request",
+      }));
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,10 +84,12 @@ export function ContactClient() {
           <div className="relative px-6 py-12 sm:px-10">
             <p className="section-eyebrow text-accent">Contact Us</p>
             <h1 className="mt-3 max-w-md font-display text-4xl font-extrabold leading-tight">
-              We&apos;d Love to <br /> Hear from <span className="text-primary">You!</span>
+              We&apos;d Love to <br /> Hear from{" "}
+              <span className="text-primary">You!</span>
             </h1>
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-              Have questions, feedback, or need help? Send us a message and we&apos;ll get back to you as soon as possible.
+              Have questions, feedback, or need help? Send us a message and
+              we&apos;ll get back to you as soon as possible.
             </p>
           </div>
         </div>
@@ -73,14 +99,20 @@ export function ContactClient() {
       <section className="container-site grid gap-6 py-7 lg:grid-cols-[320px_1fr]">
         <div className="space-y-4">
           {contactCards.map((c) => (
-            <div key={c.title} className="card-surface flex items-start gap-4 p-4">
+            <div
+              key={c.title}
+              className="card-surface flex items-start gap-4 p-4"
+            >
               <span className="icon-tile border border-accent/40 bg-accent/10 text-accent">
                 <c.icon className="h-4 w-4" />
               </span>
               <div>
                 <h3 className="font-display text-sm font-bold">{c.title}</h3>
                 {c.lines.map((l) => (
-                  <p key={l} className="mt-0.5 text-[13px] text-muted-foreground">
+                  <p
+                    key={l}
+                    className="mt-0.5 text-[13px] text-muted-foreground"
+                  >
                     {l}
                   </p>
                 ))}
@@ -104,17 +136,25 @@ export function ContactClient() {
         {submitted ? (
           <div className="card-surface p-8 flex flex-col items-center justify-center text-center space-y-3">
             <CheckCircle className="w-12 h-12 text-emerald-500 animate-bounce" />
-            <h2 className="font-display text-xl font-bold">Message Transmitted!</h2>
+            <h2 className="font-display text-xl font-bold">
+              Message Transmitted!
+            </h2>
             <p className="text-sm text-muted-foreground max-w-sm">
-              Thank you for contacting the Taish Gaming team. Our dispatch team will review your inquiry shortly.
+              Thank you for contacting the Taish Gaming team. Our dispatch team
+              will review your inquiry shortly.
             </p>
-            <Button onClick={() => setSubmitted(false)} variant="outline" className="mt-4">
+            <Button
+              onClick={() => setSubmitted(false)}
+              variant="outline"
+              className="mt-4"
+            >
               Send Another Inquiry
             </Button>
           </div>
         ) : (
           <form className="card-surface p-6" onSubmit={handleSubmit}>
             <h2 className="font-display text-lg font-bold">Send Us a Message</h2>
+
             {error && (
               <p className="mt-3 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm font-semibold text-rose-400">
                 {error}
@@ -122,7 +162,12 @@ export function ContactClient() {
             )}
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <div>
-                <label htmlFor="contact-name" className="mb-1.5 block text-xs font-semibold text-foreground">Your Name</label>
+                <label
+                  htmlFor="contact-name"
+                  className="mb-1.5 block text-xs font-semibold text-foreground"
+                >
+                  Your Name
+                </label>
                 <Input
                   id="contact-name"
                   placeholder="Your Name"
@@ -132,7 +177,12 @@ export function ContactClient() {
                 />
               </div>
               <div>
-                <label htmlFor="contact-email" className="mb-1.5 block text-xs font-semibold text-foreground">Your Email</label>
+                <label
+                  htmlFor="contact-email"
+                  className="mb-1.5 block text-xs font-semibold text-foreground"
+                >
+                  Your Email
+                </label>
                 <Input
                   id="contact-email"
                   placeholder="Your Email"
@@ -144,7 +194,12 @@ export function ContactClient() {
               </div>
             </div>
             <div>
-              <label htmlFor="contact-subject" className="mb-1.5 block text-xs font-semibold text-foreground">Subject</label>
+              <label
+                htmlFor="contact-subject"
+                className="mb-1.5 block text-xs font-semibold text-foreground"
+              >
+                Subject
+              </label>
               <Input
                 id="contact-subject"
                 placeholder="Subject"
@@ -154,7 +209,12 @@ export function ContactClient() {
               />
             </div>
             <div>
-              <label htmlFor="contact-message" className="mb-1.5 block text-xs font-semibold text-foreground">Message</label>
+              <label
+                htmlFor="contact-message"
+                className="mb-1.5 block text-xs font-semibold text-foreground"
+              >
+                Message
+              </label>
               <textarea
                 id="contact-message"
                 placeholder="Message"
@@ -165,7 +225,8 @@ export function ContactClient() {
               />
             </div>
             <Button type="submit" className="mt-5 w-full" disabled={loading}>
-              {loading ? "Transmitting..." : "Send Message"} <Send className="h-4 w-4 ml-1.5" />
+              {loading ? "Transmitting..." : "Send Message"}{" "}
+              <Send className="h-4 w-4 ml-1.5" />
             </Button>
           </form>
         )}
@@ -173,7 +234,9 @@ export function ContactClient() {
 
       {/* FAQ */}
       <section className="container-site pb-8">
-        <h2 className="mb-6 font-display text-xl font-extrabold">Frequently Asked Questions</h2>
+        <h2 className="mb-6 font-display text-xl font-extrabold">
+          Frequently Asked Questions
+        </h2>
         <div className="space-y-3">
           {faqs.map((f, i) => (
             <div key={f.q} className="card-surface overflow-hidden">
@@ -189,7 +252,12 @@ export function ContactClient() {
                   })()}
                 </span>
                 <span className="flex-1 text-sm font-semibold">{f.q}</span>
-                <ChevronDown className={cn("h-4 w-4 text-muted-foreground transition-transform", open === i && "rotate-180")} />
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 text-muted-foreground transition-transform",
+                    open === i && "rotate-180",
+                  )}
+                />
               </button>
               {open === i && (
                 <p className="border-t border-border px-5 py-4 text-sm leading-relaxed text-muted-foreground">

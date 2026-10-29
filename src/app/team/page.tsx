@@ -1,3 +1,4 @@
+import { CONTRIBUTOR_CREDITS, authorIdentity } from "@/lib/editorial-authors";
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 export const metadata = {
@@ -23,7 +24,7 @@ export default function Page() {
   return (
     <SiteShell>
       <article className="container-site max-w-3xl py-12 space-y-6 leading-relaxed">
-        <h1 className="font-display text-4xl font-bold">
+        <h1 id="editorial-team" className="font-display text-4xl font-bold">
           Taish Gaming Editorial Team
         </h1>
         <p>
@@ -40,6 +41,32 @@ export default function Page() {
           or inside information, and no article on this site should be read
           as claiming otherwise.
         </p>
+        <section aria-labelledby="contributor-credits" className="space-y-4">
+          <h2 id="contributor-credits" className="text-2xl font-bold">
+            Contributor credits
+          </h2>
+          <p>
+            Some earlier articles retain named contributor credits from our
+            publishing records. We have not verified individual biographies,
+            credentials or first-hand access for these names. The publication
+            remains the contact for corrections and authorship enquiries; these
+            credits are not endorsements or verified professional profiles.
+          </p>
+          {CONTRIBUTOR_CREDITS.map((name) => (
+            <section
+              key={name}
+              id={authorIdentity(name).path.split("#")[1]}
+              className="rounded-xl border border-border p-4"
+            >
+              <h3 className="font-bold">{name}</h3>
+              <p>
+                Historical contributor credit. Verified biography and
+                credentials have not been published. Include the article URL
+                when contacting the editorial team.
+              </p>
+            </section>
+          ))}
+        </section>
         <p>
           Readers can reach the publication through our{" "}
           <Link href="/contact" className="underline">

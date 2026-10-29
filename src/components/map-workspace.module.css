@@ -1,0 +1,49 @@
+.darkSurface {
+  --foreground: 210 40% 96%;
+  --muted-foreground: 215 25% 82%;
+  --muted: 217 28% 19%;
+  --border: 215 22% 36%;
+  --primary: 42 65% 74%;
+  color: #f1f5f9;
+}
+.darkSurface.darkSurface.darkSurface {
+  background-color: #070c18 !important;
+  color: #f1f5f9 !important;
+}
+:global(.light) .darkSurface input,
+:global(.light) .darkSurface textarea {
+  background-color: #101827 !important;
+  color: #f1f5f9 !important;
+}
+.conceptBadge {
+  background: #1e293b;
+  color: #f1f5f9;
+}
+.darkSurface button:focus-visible,
+.darkSurface a:focus-visible,
+.darkSurface input:focus-visible,
+.darkSurface textarea:focus-visible,
+.darkSurface [tabindex]:focus-visible {
+  outline: 3px solid #67e8f9;
+  outline-offset: 3px;
+}
+.darkSurface button {
+  touch-action: manipulation;
+}
+.darkSurface input::placeholder,
+.darkSurface textarea::placeholder {
+  color: #b9c8dc;
+  opacity: 1;
+}
+.darkSurface :global(.bg-gold-dark),
+.darkSurface :global(.bg-gold) {
+  color: #101722;
+}
+@media (prefers-reduced-motion: reduce) {
+  .darkSurface *,
+  .darkSurface *::before,
+  .darkSurface *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

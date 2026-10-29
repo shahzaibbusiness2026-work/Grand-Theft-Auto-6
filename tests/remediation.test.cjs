@@ -319,3 +319,47 @@ test("comparison exports escape spreadsheet formulas and quotes", () => {
   assert.equal(comparisonHelpers.csvCell('Say "hello"'), '"Say ""hello"""');
   assert.ok(comparisonHelpers.csvCell("@command").includes("'@command"));
 });
+
+const {
+  selectionFromParams,
+  selectionUrl,
+} = require("../src/lib/catalog-selection.ts");
+test("shared comparisons resolve legacy slugs, remove unknowns and duplicates, and stop at four picks", () => {
+  const entries = Array.from({ length: 5 }, (_, index) => ({
+    id: "id-" + index,
+    slug: "slug-" + index,
+  }));
+  assert.deepEqual(
+    selectionFromParams(
+      new URLSearchParams("v=slug-0,id-0,unknown,slug-1,id-2,id-3,id-4"),
+      "vehicles",
+      entries,
+    ),
+    ["id-0", "id-1", "id-2", "id-3"],
+  );
+  assert.deepEqual(
+    selectionFromParams(new URLSearchParams("w=slug-1"), "weapons", entries),
+    ["id-1"],
+  );
+  assert.deepEqual(
+    selectionFromParams(
+      new URLSearchParams("ids=&v=id-1"),
+      "vehicles",
+      entries,
+    ),
+    [],
+  );
+});
+test("comparison URLs preserve unrelated parameters and remove legacy selections on reset", () => {
+  const original = new URL(
+    "https://example.org/compare/vehicles?v=old&w=other&view=full#details",
+  );
+  const selected = selectionUrl(original, ["one", "two"]);
+  assert.equal(selected.searchParams.get("ids"), "one,two");
+  assert.equal(selected.searchParams.get("view"), "full");
+  assert.equal(selected.hash, "#details");
+  assert.equal(selected.searchParams.has("v"), false);
+  assert.equal(selected.searchParams.has("w"), false);
+  assert.equal(selectionUrl(selected, []).searchParams.has("ids"), false);
+  assert.equal(original.searchParams.get("v"), "old");
+});
