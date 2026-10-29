@@ -1499,27 +1499,6 @@ export function SatelliteInteractiveMap({
         </details>
       )}
 
-
-                    >
-                      Fan concept
-                    </span>
-                  </div>
-                  <div className="p-3">
-                    <p className="flex items-center gap-1.5 truncate text-xs font-bold text-white group-hover:text-gold-light transition-colors">
-                      <MapPin className={cn("h-3.5 w-3.5 shrink-0", r.color)} />{" "}
-                      {r.title}
-                    </p>
-                    <p className="mt-1 flex items-center justify-between text-xs text-muted-foreground">
-                      <span>{r.type}</span>
-                      <span className="font-mono text-xs">Unverified</span>
-                    </p>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
