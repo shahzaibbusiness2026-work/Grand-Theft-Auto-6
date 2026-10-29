@@ -311,31 +311,63 @@ export function EvidenceCatalog({
                 className={styles.card}
                 data-selected={picked}
               >
-                <Link
-                  href={`/${kind}/${e.slug}`}
-                  onClick={() => visit(e.id)}
-                  className={styles.cardImage}
-                  aria-label={`View ${e.name}`}
-                >
-                  <SafeImage
-                    src={e.img}
-                    alt=""
-                    fill
-                    sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
-                  />
-                  <span className={styles.imageTag}>
-                    Editorial illustration
-                  </span>
-                </Link>
+                {compare ? (
+                  <button
+                    type="button"
+                    onClick={() => toggle(e.id)}
+                    aria-pressed={picked}
+                    aria-label={`${picked ? "Remove" : "Add"} ${e.name} ${picked ? "from" : "to"} comparison`}
+                    className={`${styles.cardImage} ${styles.cardPick} ${styles.cardPickImage}`}
+                  >
+                    <SafeImage
+                      src={e.img}
+                      alt=""
+                      fill
+                      sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
+                    />
+                    <span className={styles.imageTag}>
+                      Editorial illustration
+                    </span>
+                  </button>
+                ) : (
+                  <Link
+                    href={`/${kind}/${e.slug}`}
+                    onClick={() => visit(e.id)}
+                    className={styles.cardImage}
+                    aria-label={`View ${e.name}`}
+                  >
+                    <SafeImage
+                      src={e.img}
+                      alt=""
+                      fill
+                      sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
+                    />
+                    <span className={styles.imageTag}>
+                      Editorial illustration
+                    </span>
+                  </Link>
+                )}
                 <div className={styles.cardBody}>
                   <p className={styles.cardCategory}>{e.category}</p>
                   <h2 className={styles.cardTitle}>
-                    <Link
-                      href={`/${kind}/${e.slug}`}
-                      onClick={() => visit(e.id)}
-                    >
-                      {e.name}
-                    </Link>
+                    {compare ? (
+                      <button
+                        type="button"
+                        onClick={() => toggle(e.id)}
+                        aria-pressed={picked}
+                        aria-label={`${picked ? "Remove" : "Add"} ${e.name} ${picked ? "from" : "to"} comparison`}
+                        className={styles.cardPick}
+                      >
+                        {e.name}
+                      </button>
+                    ) : (
+                      <Link
+                        href={`/${kind}/${e.slug}`}
+                        onClick={() => visit(e.id)}
+                      >
+                        {e.name}
+                      </Link>
+                    )}
                   </h2>
                   <p className={styles.cardEvidence}>
                     <span className={styles.dot} />

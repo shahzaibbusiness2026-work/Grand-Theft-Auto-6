@@ -406,6 +406,20 @@
   margin-top: 6px;
   overflow-wrap: anywhere;
 }
+/* Picker (comparison) cards: tapping the image or name selects the
+   vehicle instead of navigating to its detail page — navigating away
+   mid-selection was the reported "comparison redirects" bug. */
+.cardPick {
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.cardPickImage {
+  width: 100%;
+}
 .cardEvidence {
   display: flex;
   align-items: center;
