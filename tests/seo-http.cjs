@@ -13,6 +13,26 @@ async function check(name, run) {
   console.log((results.at(-1).pass ? "PASS " : "FAIL ") + name);
 }
 (async () => {
+  await check("homepage retains one accessible page title after the visible hero heading removal", async () => {
+    const html = await page("/");
+    assert.equal((html.match(/<h1\b/g) || []).length, 1);
+    assert.match(html, /<h1[^>]*>Taish Gaming/);
+  });
+  await check("map answers place and size questions without inventing a playable-area measurement", async () => {
+    const html = await page("/map");
+    assert.match(html, /<title>GTA 6 Interactive Fan Map: Leonida &amp; Vice City/);
+    assert.equal((html.match(/<h1\b/g) || []).length, 1);
+    assert.match(html, /map size in km²/);
+    assert.match(html, /have not verified a primary-source measurement/);
+    assert.match(html, /href="https:\/\/www.rockstargames.com\/VI\/only-in-leonida"/);
+    assert.match(html, /href="\/news\/map-size-comparison-gtav-rdr2"/);
+  });
+  await check("world and region hubs offer contextual links to the interactive fan map", async () => {
+    const regions = await page("/regions");
+    const world = await page("/gta-6-world");
+    assert.match(regions, /href="\/map"[^>]*>Explore our interactive Leonida fan map/);
+    assert.match(world, /href="\/map"[^>]*>interactive GTA 6 fan map/);
+  });
   await check("imported money article has one page H1 and working section targets", async () => {
     const html = await page("/news/gta-6-money-guide-robberies-fences-economy");
     assert.equal((html.match(/<h1\b/g) || []).length, 1);

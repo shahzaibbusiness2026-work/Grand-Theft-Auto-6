@@ -77,6 +77,7 @@ export default async function HomePage() {
 
   return (
     <SiteShell>
+      <h1 className="sr-only">Taish Gaming — GTA 6 fan site</h1>
       {showSection("hero") && (
         <>
           {/* 1 — CINEMATIC AAA HERO SECTION */}

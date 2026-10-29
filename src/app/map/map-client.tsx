@@ -78,8 +78,8 @@ export function MapClient() {
                 Atlas
               </div>
               <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
-                LEONIDA STATE{" "}
-                <span className="text-primary">SATELLITE ATLAS</span>
+                GTA 6 LEONIDA{" "}
+                <span className="text-primary">INTERACTIVE MAP</span>
               </h1>
               <p className="mt-3 text-sm leading-relaxed text-slate-300 font-medium">
                 Explore a fan-made Leonida map illustration. All pins are

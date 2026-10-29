@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 import { SafeImage } from "@/components/safe-image";
 import { WorldHubSections } from "./world-hub-client";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   openGraph: { url: "/gta-6-world" },
@@ -53,6 +54,13 @@ export default function GTAWorldHubPage() {
             the facts inside each guide are sourced.
           </p>
           <WorldHubSections />
+          <p className="mt-8 text-sm leading-relaxed text-white/70">
+            Continue exploring with the{" "}
+            <Link href="/regions" className="underline text-white">Leonida destination guides</Link>{" "}
+            or the{" "}
+            <Link href="/map" className="underline text-white">interactive GTA 6 fan map</Link>.
+            Map pins and placement remain provisional.
+          </p>
         </div>
       </div>
     </SiteShell>
