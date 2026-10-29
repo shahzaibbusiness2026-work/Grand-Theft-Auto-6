@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation";
 import { verifyNewsletterToken } from "@/lib/newsletter-tokens";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { addSuppressedEmail } from "@/lib/services/newsletter";
 export async function unsubscribe(form: FormData) {
   const token = String(form.get("token") || "");
   const identity = verifyNewsletterToken(token);
@@ -52,5 +53,11 @@ export async function unsubscribe(form: FormData) {
       }
     }
   } catch {}
+  // Unsubscribing also suppresses future admin broadcasts to this address,
+  // including broadcasts that would otherwise reach them as a registered
+  // account (not just as a newsletter subscriber). Re-subscribing clears it.
+  if (success) {
+    await addSuppressedEmail(identity.email);
+  }
   redirect("/unsubscribe?status=" + (success ? "removed" : "unavailable"));
 }

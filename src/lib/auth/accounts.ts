@@ -106,17 +106,7 @@ function parseStoredValue(raw: unknown): Partial<AccountRow> {
   return {};
 }
 
-export async function getAccount(
-  supabase: SupabaseClient,
-  email: string
-): Promise<AccountRow | null> {
-  const { data, error } = await supabase
-    .from("private_settings")
-    .select("value")
-    .eq("key", accountKey(email))
-    .maybeSingle();
-  if (error || !data) return null;
-  const prev = parseStoredValue(data.value);
+export function normalizeAccount(prev: Partial<AccountRow>): AccountRow | null {
   if (!prev.email) return null;
   return {
     email: prev.email,
@@ -144,6 +134,47 @@ export async function getAccount(
     sign_in_count:
       typeof prev.sign_in_count === "number" ? prev.sign_in_count : 0,
   };
+}
+
+export async function getAccount(
+  supabase: SupabaseClient,
+  email: string
+): Promise<AccountRow | null> {
+  const { data, error } = await supabase
+    .from("private_settings")
+    .select("value")
+    .eq("key", accountKey(email))
+    .maybeSingle();
+  if (error || !data) return null;
+  return normalizeAccount(parseStoredValue(data.value));
+}
+
+/**
+ * Every registered site account (email signup, email login rows, and
+ * OAuth rows) — used so admin broadcasts can reach all registered users,
+ * not just newsletter subscribers. Paginated past the API's row cap.
+ */
+export async function getAllAccounts(
+  supabase: SupabaseClient
+): Promise<AccountRow[]> {
+  const rows: AccountRow[] = [];
+  const PAGE = 1000;
+  for (let from = 0; ; from += PAGE) {
+    const { data, error } = await supabase
+      .from("private_settings")
+      .select("value")
+      .like("key", "user_account:%")
+      .range(from, from + PAGE - 1);
+    if (error || !data || data.length === 0) break;
+    for (const row of data) {
+      const parsed = normalizeAccount(
+        parseStoredValue((row as { value: unknown }).value)
+      );
+      if (parsed) rows.push(parsed);
+    }
+    if (data.length < PAGE) break;
+  }
+  return rows;
 }
 
 export async function saveAccount(

@@ -21,6 +21,56 @@ interface PendingSubscription {
 const SUBSCRIBERS_KEY = "newsletter_subscribers";
 const PENDING_KEY = "newsletter_pending";
 
+/**
+ * Broadcast suppression list (private_settings key `broadcast_suppressed`,
+ * a plain string[] of lowercase emails). Anyone who unsubscribes — whether
+ * they were a newsletter subscriber or a registered account — lands here
+ * and is left out of future admin broadcasts, even though the broadcast
+ * audience is rebuilt from the live account + subscriber stores each time.
+ * Re-subscribing to the newsletter clears the suppression.
+ */
+const SUPPRESSED_KEY = "broadcast_suppressed";
+
+export async function getSuppressedEmails(): Promise<string[]> {
+  try {
+    const list =
+      (await getPrivateSetting<string[]>(SUPPRESSED_KEY)) || [];
+    return list.filter(
+      (e): e is string => typeof e === "string" && e.length > 0,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function addSuppressedEmail(email: string): Promise<void> {
+  try {
+    const clean = (email || "").trim().toLowerCase();
+    if (!clean) return;
+    const list = (await getPrivateSetting<string[]>(SUPPRESSED_KEY)) || [];
+    if (!list.includes(clean)) {
+      await setPrivateSetting(SUPPRESSED_KEY, [...list, clean]);
+    }
+  } catch {
+    // Suppression is best-effort; never fail the caller's flow over it.
+  }
+}
+
+export async function removeSuppressedEmail(email: string): Promise<void> {
+  try {
+    const clean = (email || "").trim().toLowerCase();
+    const list = (await getPrivateSetting<string[]>(SUPPRESSED_KEY)) || [];
+    if (list.includes(clean)) {
+      await setPrivateSetting(
+        SUPPRESSED_KEY,
+        list.filter((e) => e !== clean),
+      );
+    }
+  } catch {
+    // Best-effort only.
+  }
+}
+
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 
@@ -80,6 +130,9 @@ export async function subscribeNewsletter(
     const subscribers =
       (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || [];
     if (subscribers.some((s) => s?.email === cleanEmail)) {
+      // Already subscribed — a re-subscribe also lifts any broadcast
+      // suppression from an earlier unsubscribe.
+      await removeSuppressedEmail(cleanEmail);
       return { success: true, message: "You're already subscribed." };
     }
 
@@ -93,6 +146,7 @@ export async function subscribeNewsletter(
         message: "Subscription storage is unavailable. Please try again later.",
       };
 
+    await removeSuppressedEmail(cleanEmail);
     return { success: true, message: "You're subscribed — see you at launch!" };
   } catch (err) {
     console.error("Newsletter subscription error:", err);
@@ -182,6 +236,7 @@ export async function adminAddSubscriber(
     }
     list.push({ email: clean, subscribed_at: new Date().toISOString() });
     await setPrivateSetting(SUBSCRIBERS_KEY, list);
+    await removeSuppressedEmail(clean);
     return { success: true };
   } catch (err) {
     return { success: false, error: String(err) };

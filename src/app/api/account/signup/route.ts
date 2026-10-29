@@ -14,6 +14,7 @@ import {
   createUserSessionToken,
   userSessionCookieOptions,
 } from "@/lib/auth/session";
+import { sendWelcomeEmail } from "@/lib/email";
 
 /**
  * POST /api/account/signup
@@ -137,6 +138,14 @@ export async function POST(req: Request) {
         { ok: false, error: "Could not create your account. Please try again." },
         { status: 500 }
       );
+    }
+
+    // Welcome email from Taish Gaming for genuinely new registrations
+    // (not for legacy passwordless rows setting a first password). A
+    // failed send must never fail the signup itself, so it is awaited
+    // but its result is only logged inside the helper.
+    if (!existing) {
+      await sendWelcomeEmail(email, firstName);
     }
 
     // Issue the signed session cookie so the new account can reach the

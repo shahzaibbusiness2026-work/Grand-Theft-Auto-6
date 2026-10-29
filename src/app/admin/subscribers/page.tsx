@@ -96,7 +96,7 @@ export default function AdminSubscribersPage() {
     });
   };
 
-  const [previewData, setPreviewData] = useState<{subscriberCount: number; subject: string; messagePreview: string} | null>(null);
+  const [previewData, setPreviewData] = useState<{subscriberCount: number; newsletterCount?: number; accountCount?: number; subject: string; messagePreview: string} | null>(null);
 
   const handlePreview = async () => {
     if (!broadcastSubject.trim() || !broadcastMessage.trim() || sending) return;
@@ -124,7 +124,7 @@ export default function AdminSubscribersPage() {
 
   const handleBroadcast = async () => {
     if (!previewData) return;
-    if (!confirm(`Send this email to ${previewData.subscriberCount} subscriber(s)? This cannot be undone.`)) return;
+    if (!confirm(`Send this email to ${previewData.subscriberCount} recipient(s)? This cannot be undone.`)) return;
     setSending(true);
     try {
       const res = await fetch("/api/admin/broadcast", {
@@ -204,8 +204,9 @@ export default function AdminSubscribersPage() {
         {showBroadcast && (
           <div className="px-5 pb-5 space-y-3 border-t border-[#1C2436] pt-4">
             <p className="text-xs text-[#94A3B8]">
-              Sends an email to all <span className="font-bold text-white">{subscribers.length}</span> subscribers
-              individually (no addresses shared between recipients).
+              Sends an email to newsletter subscribers and registered accounts
+              individually (no addresses shared between recipients). The exact
+              recipient count shows in the preview.
             </p>
             <input
               type="text"
@@ -241,7 +242,7 @@ export default function AdminSubscribersPage() {
             </div>
             {previewData && (
               <div className="mt-4 p-4 rounded-xl bg-[#0B0F1A] border border-amber-500/30">
-                <div className="text-sm font-bold text-amber-400 mb-2">Preview — {previewData.subscriberCount} recipients</div>
+                <div className="text-sm font-bold text-amber-400 mb-2">Preview — {previewData.subscriberCount} recipients{previewData.newsletterCount !== undefined && previewData.accountCount !== undefined ? ` (${previewData.newsletterCount} newsletter · ${previewData.accountCount} accounts)` : ""}</div>
                 <div className="text-sm font-semibold text-white mb-1">{previewData.subject}</div>
                 <div className="text-xs text-[#94A3B8] whitespace-pre-wrap mb-4">{previewData.messagePreview}</div>
                 <div className="flex items-center gap-3">
