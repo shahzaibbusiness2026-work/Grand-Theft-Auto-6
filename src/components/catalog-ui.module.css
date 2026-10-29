@@ -417,6 +417,11 @@
   cursor: pointer;
   text-align: left;
 }
+/* At the four-pick maximum, unpicked cards visibly stop accepting picks. */
+.cardPick:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
 .cardPickImage {
   width: 100%;
 }
@@ -584,9 +589,6 @@
 }
 .slotsThree {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-.addMoreRow {
-  margin-top: 14px;
 }
 .slot {
   position: relative;

@@ -110,9 +110,8 @@ export function EvidenceCatalog({
   const [limit, setLimitState] = useState(compare ? 8 : 24);
   const [pickerOpen, setPickerOpen] = useState(false);
   const picker = useRef<HTMLDialogElement>(null);
-  // Slots shown in the comparison workspace. Two by default; the user can
-  // grow them to four with the "Add another" button below the row (and
-  // picking more vehicles than there are slots grows them automatically).
+  // Slots shown in the comparison workspace. Two by default; picking more
+  // vehicles than there are slots grows them automatically, up to four.
   const [slotCount, setSlotCount] = useState(2);
   const label = kind === "vehicles" ? "vehicle" : "weapon";
   const storageKey = "taish-recent-" + kind;
@@ -327,6 +326,7 @@ export function EvidenceCatalog({
                     onClick={() => toggle(e.id)}
                     aria-pressed={picked}
                     aria-label={`${picked ? "Remove" : "Add"} ${e.name} ${picked ? "from" : "to"} comparison`}
+                    disabled={!picked && selected.length >= 4}
                     className={`${styles.cardImage} ${styles.cardPick} ${styles.cardPickImage}`}
                   >
                     <SafeImage
@@ -366,6 +366,7 @@ export function EvidenceCatalog({
                         onClick={() => toggle(e.id)}
                         aria-pressed={picked}
                         aria-label={`${picked ? "Remove" : "Add"} ${e.name} ${picked ? "from" : "to"} comparison`}
+                        disabled={!picked && selected.length >= 4}
                         className={styles.cardPick}
                       >
                         {e.name}
@@ -547,19 +548,6 @@ export function EvidenceCatalog({
                 );
               })}
             </div>
-            {slotCount < 4 && (
-              <div className={styles.addMoreRow}>
-                <button
-                  type="button"
-                  className={styles.secondary}
-                  onClick={() => setSlotCount((c) => Math.min(4, c + 1))}
-                  aria-label={`Add another ${label} slot to the comparison`}
-                >
-                  <Plus size={16} aria-hidden="true" />
-                  Add another {label}
-                </button>
-              </div>
-            )}
           </section>
           {comparison.length ? (
             <EvidenceComparison
