@@ -14,19 +14,10 @@ interface HeroSectionProps {
 export function HeroSection({ settings }: HeroSectionProps) {
   return (
     <section
-      aria-labelledby="hero-heading"
       className="relative w-full overflow-hidden bg-background pt-6 pb-6 sm:pt-6 sm:pb-7 lg:pt-6 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-0 sm:min-h-[520px] flex flex-col justify-between transition-colors duration-300"
     >
       {/* 1. CINEMATIC BACKGROUND CANVAS */}
       <HeroBackground />
-
-      {/* Accessible heading for SEO */}
-      <h1
-        id="hero-heading"
-        className="relative z-10 mx-auto mb-4 sm:mb-6 max-w-3xl text-center font-display text-xl sm:text-4xl font-black text-white"
-      >
-        GTA VI News, Characters & Fan Planning Tools
-      </h1>
 
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
       <div className="relative z-10 mx-auto w-full max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl flex flex-col items-center justify-center flex-1 pb-3 sm:pb-8 text-center">
@@ -35,7 +26,6 @@ export function HeroSection({ settings }: HeroSectionProps) {
           <Countdown
             className="w-full max-w-xl sm:max-w-3xl mx-auto"
             targetDate={settings?.targetReleaseDate}
-            caption={settings?.countdownCaption}
             isConfirmed={settings?.isReleaseDateConfirmed}
           />
         </div>

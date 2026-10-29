@@ -36,12 +36,10 @@ function ReleaseReferences({ calendarUrl }: { calendarUrl: string }) {
 export function Countdown({
   className,
   targetDate,
-  caption,
   isConfirmed,
 }: {
   className?: string;
   targetDate?: string;
-  caption?: string;
   isConfirmed?: boolean;
 }) {
   // Honour the caller's date/confirmation instead of hardcoding the release day.
@@ -54,10 +52,6 @@ export function Countdown({
     : RELEASE_DAY;
   const boundary = Date.parse(target + "T00:00:00Z");
   const confirmed = isConfirmed !== false;
-  const displayDate = new Date(target + "T00:00:00Z").toLocaleDateString(
-    "en-US",
-    { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }
-  );
   const calStart = target.replace(/-/g, "");
   const calEnd = new Date(boundary + 86400000)
     .toISOString()
@@ -81,19 +75,7 @@ export function Countdown({
   return (
     <section
       className={cn("mx-auto w-full max-w-3xl space-y-4 text-white", className)}
-      aria-labelledby="release-countdown-title"
     >
-      <h2
-        id="release-countdown-title"
-        className="font-display text-xl sm:text-3xl font-bold"
-      >
-        GTA VI · {confirmed ? "" : "Expected "}
-        {displayDate}
-      </h2>
-      <p className="text-sm text-white/90">
-        {confirmed ? "Scheduled" : "Expected"} for PS5 and Xbox Series X|S.
-      </p>
-      {caption ? <p className="text-sm text-white/80">{caption}</p> : null}
       <div
         className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-4"
         aria-live="off"
