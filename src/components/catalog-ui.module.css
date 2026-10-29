@@ -577,6 +577,14 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
+/* The row always fills the whole section: two slots sit 50/50, three sit
+   in thirds. Four slots use the base four-column grid. */
+.slotsTwo {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.slotsThree {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 .addMoreRow {
   margin-top: 14px;
 }
@@ -1075,7 +1083,9 @@
   .workspaceHeading h2 {
     font-size: 18px;
   }
-  .slots {
+  .slots,
+  .slotsTwo,
+  .slotsThree {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }

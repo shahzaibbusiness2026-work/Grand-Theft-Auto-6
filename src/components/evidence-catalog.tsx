@@ -494,7 +494,18 @@ export function EvidenceCatalog({
                 Choose {kind}
               </button>
             </div>
-            <div className={styles.slots}>
+            <div
+              className={[
+                styles.slots,
+                slotCount === 2
+                  ? styles.slotsTwo
+                  : slotCount === 3
+                    ? styles.slotsThree
+                    : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
               {Array.from({ length: slotCount }, (_, i) => {
                 const entry = comparison[i];
                 return entry ? (
