@@ -266,7 +266,7 @@ export function Navbar() {
           <Logo />
         </div>
 
-        <nav aria-label="Main navigation" className="hidden items-center gap-3 lg:gap-5 md:flex">
+        <nav aria-label="Main navigation" className="hidden items-center gap-3 lg:gap-5 xl:flex">
           {LINKS.map((l) =>
             l.menu ? (
               <SplitNavDropdown
@@ -399,7 +399,7 @@ export function Navbar() {
             onClick={() => setPaletteOpen(true)}
             aria-label="Search the Atlas (⌘K)"
             title="Search the Atlas (⌘K)"
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-gold/50 hover:bg-gold/10 hover:text-gold-dark dark:hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95"
+            className="hidden h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-gold/50 hover:bg-gold/10 hover:text-gold-dark dark:hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95 xl:flex"
           >
             <Search className="h-4 w-4" />
           </button>
@@ -411,7 +411,7 @@ export function Navbar() {
             aria-label={mounted && resolvedTheme === "light" ? "Switch to dark mode" : "Switch to light mode"}
             title={mounted && resolvedTheme === "light" ? "Switch to dark mode" : "Switch to light mode"}
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-border hover:bg-muted hover:text-foreground focus-visible:outline-none active:scale-95"
+            className="hidden h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-border hover:bg-muted hover:text-foreground focus-visible:outline-none active:scale-95 xl:flex"
           >
             {mounted && resolvedTheme === "light" ? (
               <Sun className="h-4 w-4 text-gold" />
@@ -425,7 +425,7 @@ export function Navbar() {
             <Link
               href="/dashboard"
               prefetch={true}
-              className="hidden h-9 items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(255,46,154,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
+              className="hidden h-9 items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(255,46,154,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 xl:inline-flex"
             >
               <LayoutGrid className="h-3.5 w-3.5" />
               <span>Dashboard</span>
@@ -435,7 +435,7 @@ export function Navbar() {
               <Link
                 href="/login"
                 prefetch={true}
-                className="hidden h-9 items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(255,46,154,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 sm:inline-flex"
+                className="hidden h-9 items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-[0_2px_12px_rgba(255,46,154,0.25)] transition-all duration-200 hover:brightness-105 active:scale-95 xl:inline-flex"
               >
                 <LogIn className="h-3.5 w-3.5" />
                 <span>Login / Sign Up</span>
@@ -446,7 +446,7 @@ export function Navbar() {
           {/* Mobile menu button */}
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground hover:border-border hover:text-foreground md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground hover:border-border hover:text-foreground xl:hidden"
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             onClick={() => setMobileOpen((v) => !v)}
           >
@@ -457,7 +457,7 @@ export function Navbar() {
 
       {/* Mobile Drawer — accordion: parent buttons only, tap chevron to expand */}
       {mobileOpen && (
-        <div className="border-t border-border bg-card/98 backdrop-blur-2xl text-card-foreground md:hidden">
+        <div className="border-t border-border bg-card/98 backdrop-blur-2xl text-card-foreground xl:hidden">
           <nav
             aria-label="Mobile navigation"
             className="mx-auto flex w-full max-w-[1240px] flex-col gap-1 px-6 py-5 max-h-[75vh] overflow-y-auto"
@@ -472,6 +472,35 @@ export function Navbar() {
             >
               <Search className="h-4 w-4 shrink-0" />
               <span>Search All 20 Tools, Rides, Guns...</span>
+            </button>
+
+            {/* Theme toggle — inside the menu on mobile/tablet */}
+            <button
+              type="button"
+              suppressHydrationWarning
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              aria-label={mounted && resolvedTheme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+              className="mb-3 flex min-h-[48px] w-full items-center gap-2.5 rounded-xl border border-border bg-muted/40 px-4 py-3 text-left text-[15px] font-semibold text-foreground/90 transition-colors hover:text-[#FF2E9A]"
+            >
+              {mounted && resolvedTheme === "light" ? (
+                <Moon className="h-4 w-4 shrink-0 text-cyan-400" />
+              ) : (
+                <Sun className="h-4 w-4 shrink-0 text-gold" />
+              )}
+              <span>
+                {mounted && resolvedTheme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+              </span>
+              <span
+                aria-hidden="true"
+                className="ml-auto flex h-6 w-11 shrink-0 items-center rounded-full border border-border bg-muted px-0.5"
+              >
+                <span
+                  className={cn(
+                    "h-5 w-5 rounded-full bg-[#FF2E9A] transition-all",
+                    mounted && resolvedTheme === "dark" ? "ml-auto" : "mr-auto"
+                  )}
+                />
+              </span>
             </button>
 
             {/* LINKS parents: Home, Vehicles, Weapons, Missions, Map */}
