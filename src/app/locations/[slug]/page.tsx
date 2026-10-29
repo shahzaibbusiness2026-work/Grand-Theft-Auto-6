@@ -190,6 +190,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
         }}
       />
       <div className="container-site py-8">
+        <ConceptNotice subject="location records and fan-map placements" />
         {/* Breadcrumb Navigation */}
         <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6 font-mono">
           <Link href="/" className="hover:text-primary transition-colors">
@@ -274,7 +275,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
                     href={`/map?poi=${loc.id}&top=${loc.top}&left=${loc.left}`}
                     className="btn-primary text-xs px-3 py-2.5 min-h-[44px] font-bold flex items-center gap-1.5"
                   >
-                    <Navigation className="h-3.5 w-3.5" /> Fly to Live Pin
+                    <Navigation className="h-3.5 w-3.5" /> Open fan-map pin
                   </Link>
                 </div>
               </div>
@@ -354,8 +355,8 @@ export default async function LocationDetailPage({ params }: PageProps) {
                 Tactical Navigation
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Open the interactive satellite map focused on {loc.name}.
-                Synchronize coordinates and add custom field notes.
+                Open this provisional placement for {loc.name} on the fan-made
+                map. Notes stay on this device.
               </p>
               <Link
                 href={`/map?poi=${loc.id}`}
@@ -372,7 +373,7 @@ export default async function LocationDetailPage({ params }: PageProps) {
               </h4>
               {nearbyLocations.length === 0 ? (
                 <p className="text-xs text-muted-foreground">
-                  No other confirmed locations in this specific sector yet.
+                  No other provisional entries in this sector yet.
                 </p>
               ) : (
                 <div className="space-y-3">
