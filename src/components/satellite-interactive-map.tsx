@@ -586,61 +586,49 @@ const POIS: MapPOI[] = [
 const FOUND_ON_MAP_RAIL = [
   {
     title: "Hidden Cache #12",
+    poiId: "poi-cache",
     type: "Collectible",
-    when: "2h ago",
     img: "/img/cache-chest.jpg",
-    badge: "COLLECTIBLE",
-    badgeColor: "bg-gold-dark",
     icon: Gem,
     color: "text-gold-light",
   },
   {
     title: "Stunt Jump #8",
+    poiId: "poi-stunt",
     type: "Activity",
-    when: "5h ago",
     img: "/img/stunt-bike.jpg",
-    badge: "ACTIVITY",
-    badgeColor: "bg-[#7E22CE]",
     icon: Star,
     color: "text-purple-400",
   },
   {
     title: "Garage – Ocean Drive",
+    poiId: "poi-garage",
     type: "Garage",
-    when: "1d ago",
     img: "/img/garage.jpg",
-    badge: "GARAGE",
-    badgeColor: "bg-[#D97706]",
     icon: Warehouse,
     color: "text-cyan-400",
   },
   {
     title: "Tactical SMG Drop",
+    poiId: "poi-weapon-smg",
     type: "Weapon",
-    when: "2d ago",
     img: "/img/smg-gun.jpg",
-    badge: "WEAPON",
-    badgeColor: "bg-[#7E22CE]",
     icon: Crosshair,
     color: "text-rose-400",
   },
   {
     title: "High-End Penthouse",
+    poiId: "poi-suite",
     type: "Property",
-    when: "2d ago",
     img: "/img/apartment.jpg",
-    badge: "PROPERTY",
-    badgeColor: "bg-[#6366F1]",
     icon: Building2,
     color: "text-indigo-400",
   },
   {
     title: "UFO Swamplands Mural",
+    poiId: "poi-ufo",
     type: "Easter Egg",
-    when: "3d ago",
     img: "/img/ufo-mural.jpg",
-    badge: "EASTER EGG",
-    badgeColor: "bg-[#059669]",
     icon: Egg,
     color: "text-emerald-400",
   },
@@ -1570,7 +1558,7 @@ export function SatelliteInteractiveMap({
                 className="flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-[#C9A86A] py-2 text-xs font-black text-slate-950 shadow-md hover:brightness-105 transition-all"
               >
                 <Navigation className="h-3.5 w-3.5" />
-                <span>Center GPS</span>
+                <span>Center pin</span>
               </button>
             </div>
 
@@ -1905,7 +1893,7 @@ export function SatelliteInteractiveMap({
             className="flex gap-4 overflow-x-auto pb-2"
           >
             {FOUND_ON_MAP_RAIL.map((r) => {
-              const matchedPOI = POIS.find((p) => p.title.includes(r.title));
+              const matchedPOI = allPOIs.find((p) => p.id === r.poiId);
               return (
                 <button
                   type="button"
