@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Moon, Sun, Bell, ChevronDown, Menu, LogOut } from "lucide-react";
+import { Search, Moon, Sun, ChevronDown, Menu, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { CommandPalette } from "@/components/command-palette";
 import { logoutUser } from "@/lib/user-store";
@@ -28,7 +28,6 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
   const { resolvedTheme, setTheme } = useTheme();
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [notificationOpen, setNotificationOpen] = useState(false);
 
   function handleSignOut() {
     logoutUser();
@@ -99,35 +98,6 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
             )}
           </button>
 
-          {/* Notifications button with badge */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setNotificationOpen((prev) => !prev)}
-              className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-slate-300 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
-              title="Notifications"
-            >
-              <Bell className="h-4 w-4" />
-              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-gold text-xs font-black text-slate-950 shadow-[0_0_8px_rgba(201,168,106,0.6)]">
-                1
-              </span>
-            </button>
-
-            {notificationOpen && (
-              <div className="absolute right-0 mt-2 w-72 rounded-2xl border border-white/15 bg-[#0c1220]/95 p-3 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 z-50">
-                <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                  <span className="font-display text-xs font-bold text-white">Notifications</span>
-                  <span className="text-xs text-gold-light font-semibold">1 New</span>
-                </div>
-                <div className="mt-2.5 p-2 rounded-xl bg-white/[0.04] border border-white/5 text-xs">
-                  <p className="font-semibold text-white">Trailer 2 Breakdown Active</p>
-                  <p className="text-xs text-slate-400 mt-0.5">24 locations mapped in Vice City.</p>
-                  <span className="text-xs text-slate-500 mt-1 block">10m ago</span>
-                </div>
-              </div>
-            )}
-          </div>
-
           {/* User Profile dropdown */}
           <div className="relative">
             <button
@@ -154,7 +124,6 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
               <div className="absolute right-0 mt-2 w-52 rounded-2xl border border-white/15 bg-[#0c1220]/95 p-2 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 z-50">
                 <div className="px-3 py-2 border-b border-white/10">
                   <p className="text-xs font-bold text-white">{userName}</p>
-                  <p className="text-xs text-cyan-400 font-mono">Vice City Legend · Lvl 12</p>
                 </div>
                 <div className="py-1">
                   <a

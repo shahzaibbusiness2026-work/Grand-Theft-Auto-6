@@ -6,12 +6,12 @@ import type { DashboardWeaponItem } from "@/lib/services/queries";
 
 interface CompanionWeaponsSectionProps {
   weapons: DashboardWeaponItem[];
-  totalWeapons?: number;
+  totalWeapons: number;
 }
 
 export function CompanionWeaponsSection({
   weapons = [],
-  totalWeapons = 10,
+  totalWeapons,
 }: CompanionWeaponsSectionProps) {
   return (
     <section className="relative overflow-hidden rounded-3xl border border-white/10 dark:border-white/10 border-slate-200 bg-[#0a0f1d]/90 dark:bg-[#0a0f1d]/90 light:bg-white p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all">
@@ -51,8 +51,8 @@ export function CompanionWeaponsSection({
       {/* Grid: Live Confirmed Weapons */}
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {weapons.map((wep) => {
-          // Parse damage like "68/100" into a percentage
-          const dmgNum = parseInt(wep.damage.replace(/[^0-9]/g, ""), 10) || 50;
+          // Parse damage like "68/100" into a percentage; no fallback value
+          const dmgNum = wep.damage ? parseInt(wep.damage.replace(/[^0-9]/g, ""), 10) : NaN;
 
           return (
             <Link
@@ -63,35 +63,43 @@ export function CompanionWeaponsSection({
               <div>
                 {/* Category & Rarity tags */}
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="rounded-lg bg-rose-500/10 px-2 py-0.5 font-mono text-xs font-bold text-rose-400 dark:text-rose-400 text-rose-600 border border-rose-500/20">
-                    {wep.category}
-                  </span>
-                  <span className="font-mono text-xs font-black text-gold-light">
-                    {wep.priceDisplay || "$10,000"}
-                  </span>
+                  {wep.category ? (
+                    <span className="rounded-lg bg-rose-500/10 px-2 py-0.5 font-mono text-xs font-bold text-rose-400 dark:text-rose-400 text-rose-600 border border-rose-500/20">
+                      {wep.category}
+                    </span>
+                  ) : null}
+                  {wep.priceDisplay ? (
+                    <span className="font-mono text-xs font-black text-gold-light">
+                      {wep.priceDisplay}
+                    </span>
+                  ) : null}
                 </div>
 
                 {/* Name */}
                 <h4 className="font-display text-sm font-extrabold text-white dark:text-white text-slate-900 group-hover:text-rose-400 transition-colors truncate">
                   {wep.name}
                 </h4>
-                <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 font-medium truncate mt-0.5">
-                  {wep.acquisitionMethod}
-                </p>
+                {wep.acquisitionMethod ? (
+                  <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 font-medium truncate mt-0.5">
+                    {wep.acquisitionMethod}
+                  </p>
+                ) : null}
 
-                {/* Damage meter */}
-                <div className="mt-3 space-y-1">
-                  <div className="flex items-center justify-between text-xs font-semibold text-slate-400">
-                    <span>Firepower</span>
-                    <span className="font-mono text-rose-400 font-bold">{wep.damage}</span>
+                {/* Damage meter — only when the DB has a damage value */}
+                {wep.damage && !Number.isNaN(dmgNum) ? (
+                  <div className="mt-3 space-y-1">
+                    <div className="flex items-center justify-between text-xs font-semibold text-slate-400">
+                      <span>Firepower</span>
+                      <span className="font-mono text-rose-400 font-bold">{wep.damage}</span>
+                    </div>
+                    <div className="h-1.5 w-full rounded-full bg-white/10 dark:bg-white/10 bg-slate-200 overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-rose-500 to-gold transition-all duration-500"
+                        style={{ width: `${Math.min(100, Math.max(10, dmgNum))}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="h-1.5 w-full rounded-full bg-white/10 dark:bg-white/10 bg-slate-200 overflow-hidden">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-rose-500 to-gold transition-all duration-500"
-                      style={{ width: `${Math.min(100, Math.max(10, dmgNum))}%` }}
-                    />
-                  </div>
-                </div>
+                ) : null}
               </div>
 
               {/* Attachments Footer */}
@@ -100,7 +108,7 @@ export function CompanionWeaponsSection({
                   <Wrench className="h-3 w-3 text-cyan-400" />
                   {wep.attachments && wep.attachments.length > 0
                     ? `${wep.attachments.length} Mod Slots`
-                    : "Standard Issue"}
+                    : ""}
                 </span>
                 <span className="text-rose-400 font-bold group-hover:translate-x-0.5 transition-transform">
                   Armory Details &rarr;

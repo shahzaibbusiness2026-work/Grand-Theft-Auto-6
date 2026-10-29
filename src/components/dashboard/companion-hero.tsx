@@ -1,25 +1,20 @@
 "use client";
 
-import Link from "next/link";
-import { Shield, ArrowRight, Car, Crosshair, Newspaper, Users } from "lucide-react";
+import { Shield, Car, Crosshair } from "lucide-react";
 
 interface SiteStats {
   totalVehicles: number;
   totalWeapons: number;
-  totalArticles: number;
-  totalCharacters: number;
 }
 
 interface CompanionHeroProps {
   userName?: string;
-  completionRate?: number;
   /** Live DB counts from Supabase, passed in from the server page */
   siteStats?: SiteStats;
 }
 
 export function CompanionHero({
   userName = "Player",
-  completionRate = 72,
   siteStats,
 }: CompanionHeroProps) {
   const stats = [
@@ -34,18 +29,6 @@ export function CompanionHero({
       value: siteStats?.totalWeapons ?? "—",
       icon: Crosshair,
       color: "text-gold-light",
-    },
-    {
-      label: "Articles",
-      value: siteStats?.totalArticles ?? "—",
-      icon: Newspaper,
-      color: "text-purple-400",
-    },
-    {
-      label: "Characters",
-      value: siteStats?.totalCharacters ?? "—",
-      icon: Users,
-      color: "text-emerald-400",
     },
   ];
 
@@ -78,23 +61,10 @@ export function CompanionHero({
             {userName}
           </h1>
 
-          <p className="text-sm sm:text-base font-semibold text-slate-200">
-            <span className="text-[#00F0FF]">{completionRate}%</span> closer to conquering Vice City.
-          </p>
-
           <p className="font-serif italic text-xs sm:text-sm text-slate-400">
             &ldquo;Same chaos. A bigger tomorrow.&rdquo;
           </p>
 
-          <div className="pt-2">
-            <Link
-              href="/missions"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-6 py-3 font-display text-xs font-black uppercase tracking-wider text-white shadow-[0_0_24px_rgba(255,46,154,0.35)] transition-all duration-300 hover:brightness-105 hover:shadow-[0_0_32px_rgba(255,46,154,0.55)] hover:scale-[1.02] active:scale-95"
-            >
-              <span>Continue Your Journey</span>
-              <ArrowRight className="h-4 w-4 text-slate-950" />
-            </Link>
-          </div>
         </div>
 
         {/* Right column: Live Atlas DB Stats + Shield Badge */}
