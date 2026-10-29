@@ -14,7 +14,7 @@ interface HeroSectionProps {
 export function HeroSection({ settings }: HeroSectionProps) {
   return (
     <section
-      className="relative w-full overflow-hidden bg-background pt-6 pb-6 sm:pt-6 sm:pb-7 lg:pt-6 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-0 sm:min-h-[520px] flex flex-col justify-between transition-colors duration-300"
+      className="relative w-full overflow-hidden bg-background pt-12 pb-6 sm:pt-16 sm:pb-7 lg:pt-16 lg:pb-6 px-4 sm:px-8 lg:px-14 min-h-0 sm:min-h-[520px] flex flex-col justify-between transition-colors duration-300"
     >
       {/* 1. CINEMATIC BACKGROUND CANVAS */}
       <HeroBackground />
