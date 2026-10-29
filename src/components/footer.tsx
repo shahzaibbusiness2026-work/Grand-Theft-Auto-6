@@ -63,13 +63,14 @@ export async function Footer() {
     .filter((i: any) => i && i.visible !== false && i.label && i.url)
     .sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0))
     .map((i: any) => ({ label: i.label as string, href: i.url as string }));
+  // De-duplicate admin nav against EVERY coded column, not just Explore:
+  // a CMS menu item (e.g. Articles -> /news) must never reappear in a
+  // second footer column. First coded occurrence wins.
+  const allCodedHrefs = new Set(COLS.flatMap((c) => c.links.map((l) => l.href)));
+  const adminNavFiltered = adminNav.filter((l) => !allCodedHrefs.has(l.href));
   const cols = COLS.map((col, idx) => {
-    if (idx !== 0 || adminNav.length === 0) return col;
-    const seen = new Set(col.links.map((l) => l.href));
-    return {
-      ...col,
-      links: [...col.links, ...adminNav.filter((l) => !seen.has(l.href))],
-    };
+    if (idx !== 0 || adminNavFiltered.length === 0) return col;
+    return { ...col, links: [...col.links, ...adminNavFiltered] };
   });
 
   // Taish Gaming's own social row. X/Discord honor a configured setting when
@@ -207,7 +208,15 @@ export async function Footer() {
             <Link href="/dmca" className="hover:text-primary transition-colors">
               DMCA
             </Link>
-
+            <span className="text-border" aria-hidden="true">
+              |
+            </span>
+            <Link
+              href="/sitemap.xml"
+              className="hover:text-primary transition-colors"
+            >
+              Sitemap
+            </Link>
           </div>
         </div>
       </div>

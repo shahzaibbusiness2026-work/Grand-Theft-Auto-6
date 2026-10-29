@@ -10,7 +10,12 @@ import {
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
-import { canonicalLocations, type CanonicalLocation } from "@/lib/canonical-data";
+import {
+  canonicalLocations,
+  canonicalVehicles,
+  canonicalWeapons,
+  type CanonicalLocation,
+} from "@/lib/canonical-data";
 import { getLocations } from "@/lib/services/locations";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
@@ -56,6 +61,27 @@ async function resolveLocation(slug: string): Promise<CanonicalLocation | undefi
     // DB unreachable — canonical lookup stands
   }
   return canonical;
+}
+
+/** Resolve a catalog slug to a display name + detail link. Raw slugs are
+ * never shown to visitors; unknown slugs fall back to a formatted name. */
+function formatSlug(slug: string): string {
+  return slug
+    .split("-")
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ");
+}
+function vehicleAsset(slug: string): { label: string; href: string | null } {
+  const entry = canonicalVehicles.find((v) => v.slug === slug || v.id === slug);
+  return entry
+    ? { label: entry.name, href: `/vehicles/${entry.slug}` }
+    : { label: formatSlug(slug), href: null };
+}
+function weaponAsset(slug: string): { label: string; href: string | null } {
+  const entry = canonicalWeapons.find((w) => w.slug === slug || w.id === slug);
+  return entry
+    ? { label: entry.name, href: `/weapons/${entry.slug}` }
+    : { label: formatSlug(slug), href: null };
 }
 
 export async function generateStaticParams() {
@@ -212,12 +238,25 @@ export default async function LocationDetailPage({ params }: PageProps) {
                       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
                         <Car className="h-4 w-4" /> Spawning Vehicles
                       </div>
-                      <ul className="text-xs text-foreground font-mono space-y-1">
-                        {loc.relatedVehicles?.map((v) => (
-                          <li key={v} className="flex items-center gap-1.5">
-                            <span className="h-1.5 w-1.5 rounded-full bg-primary" /> {v}
-                          </li>
-                        ))}
+                      <ul className="text-xs text-foreground space-y-1">
+                        {loc.relatedVehicles?.map((v) => {
+                          const asset = vehicleAsset(v);
+                          return (
+                            <li key={v} className="flex items-center gap-1.5">
+                              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                              {asset.href ? (
+                                <Link
+                                  href={asset.href}
+                                  className="hover:text-primary hover:underline"
+                                >
+                                  {asset.label}
+                                </Link>
+                              ) : (
+                                asset.label
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   )}
@@ -227,12 +266,25 @@ export default async function LocationDetailPage({ params }: PageProps) {
                       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold-light">
                         <Crosshair className="h-4 w-4" /> Available Armory
                       </div>
-                      <ul className="text-xs text-foreground font-mono space-y-1">
-                        {loc.relatedWeapons?.map((w) => (
-                          <li key={w} className="flex items-center gap-1.5">
-                            <span className="h-1.5 w-1.5 rounded-full bg-gold-light" /> {w}
-                          </li>
-                        ))}
+                      <ul className="text-xs text-foreground space-y-1">
+                        {loc.relatedWeapons?.map((w) => {
+                          const asset = weaponAsset(w);
+                          return (
+                            <li key={w} className="flex items-center gap-1.5">
+                              <span className="h-1.5 w-1.5 rounded-full bg-gold-light" />
+                              {asset.href ? (
+                                <Link
+                                  href={asset.href}
+                                  className="hover:text-primary hover:underline"
+                                >
+                                  {asset.label}
+                                </Link>
+                              ) : (
+                                asset.label
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   )}
