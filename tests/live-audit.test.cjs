@@ -177,4 +177,7 @@ test("article heading normalization preserves fenced and indented code examples"
   const body = articleBodyMarkdown(code, "Different page title");
   assert.equal(body, code.replace("  # Real section", "  ## Real section"));
   assert.equal(articleBodyMarkdown("# A different title\n\nText", "Page title"), "## A different title\n\nText");
+  const { extractHeadings } = require("../src/lib/toc.ts");
+  const setext = articleBodyMarkdown("Other section\n===\n\n## Other section", "Page title");
+  assert.deepEqual(extractHeadings(setext).map((heading) => heading.id), ["other-section", "other-section-2"]);
 });

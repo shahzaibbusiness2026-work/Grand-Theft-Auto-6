@@ -73,7 +73,18 @@ export function articleBodyMarkdown(markdown: string, title: string): string {
       }
       if (fence) return line;
       if (/^ {0,3}#\s/.test(line)) return line.replace(/^( {0,3})#/, "$1##");
-      if (/^ {0,3}=+\s*$/.test(line) && lines[index - 1]?.trim()) return "---";
+      if (
+        line.trim() &&
+        !/^(?: {4}|\t)/.test(line) &&
+        /^ {0,3}=+\s*$/.test(lines[index + 1] || "")
+      )
+        return "## " + line.trim();
+      if (
+        /^ {0,3}=+\s*$/.test(line) &&
+        lines[index - 1]?.trim() &&
+        !/^(?: {4}|\t)/.test(lines[index - 1])
+      )
+        return "";
       return line;
     })
     .join("\n")
