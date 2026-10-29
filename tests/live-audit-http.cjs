@@ -249,7 +249,11 @@ const noindex = (html) =>
     "corrected map-size badge is fresh on embedded cards",
     async () => {
       const { html } = await page("/map");
-      const card = html.match(
+      const related = html.match(
+        /<section[^>]+aria-label="Map Guides &(?:amp;)? Location Intel"[^>]*>([\s\S]*?)<\/section>/,
+      )?.[1];
+      assert.ok(related, "related article section present");
+      const card = related.match(
         /<a[^>]+href="\/news\/map-size-comparison-gtav-rdr2"[\s\S]*?<\/a>/,
       )?.[0];
       assert.ok(card, "related card present");
