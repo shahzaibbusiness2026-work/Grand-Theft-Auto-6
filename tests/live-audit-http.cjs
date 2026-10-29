@@ -43,7 +43,7 @@ const noindex = (html) =>
       const { html, text } = await page("/locations/the-malibu-nightclub");
       assert.ok(noindex(html));
       assert.match(text, /Fan concept/);
-      assert.match(text, /Unknown/);
+      assert.match(text, /availability.*have not passed field-specific evidence review/);
       assert.doesNotMatch(text, /21:00|90s|passive.revenue/i);
     },
   );
@@ -102,9 +102,10 @@ const noindex = (html) =>
       const { html, text } = await page(
         "/news/gta-6-release-date-pre-order-editions",
       );
-      assert.match(text, /Preload opening.*Unverified here/);
+      assert.match(text, /Preload opening.*Confirmed: November 12, 2026/);
       assert.match(text, /November 19, 2026/);
-      assert.match(text, /withdrawn pending traceable/);
+      assert.match(text, /Regional unlock time.*Unverified here/);
+      assert.match(html, /https:\/\/www.take2games.com\/ir\/news\/rockstar-games-announces-pre-orders-grand-theft-auto-vi/);
       assert.doesNotMatch(
         text,
         /pre-ordering is low-risk|there.s genuinely no downside/,
