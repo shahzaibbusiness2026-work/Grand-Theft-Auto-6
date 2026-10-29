@@ -1,6 +1,7 @@
 "use client";
 import { publicLocation } from "@/lib/world-evidence";
 
+
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -44,6 +45,7 @@ export function LocationsClient({
       ).map(publicLocation),
     [initialLocations],
   );
+
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("All");
   const [selectedThreat, setSelectedThreat] = useState<string>("All");
@@ -53,6 +55,7 @@ export function LocationsClient({
     const set = new Set(locations.map((l) => l.district));
     return ["All", ...Array.from(set)];
   }, [locations]);
+
 
   const filteredLocations = useMemo(() => {
     return locations.filter((item) => {
@@ -88,6 +91,7 @@ export function LocationsClient({
           matchWeapons ||
           matchMissions
         );
+
       }
 
       return true;
@@ -99,6 +103,7 @@ export function LocationsClient({
     selectedThreat,
     searchQuery,
   ]);
+
 
   const threatColor = (level: string) => {
     switch (level) {
@@ -140,7 +145,8 @@ export function LocationsClient({
             {locations.filter((l) => l.verified).length}
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
-            Trailer Verified
+            Source-reviewed records
+
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-primary/20 bg-primary/10">
@@ -202,6 +208,7 @@ export function LocationsClient({
               cat === "All"
                 ? locations.length
                 : locations.filter((l) => l.category === cat).length;
+
             return (
               <button
                 key={cat}
@@ -211,6 +218,7 @@ export function LocationsClient({
                   isSelected
                     ? "border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(244,63,94,0.4)]"
                     : "border-border bg-card/80 text-muted-foreground hover:border-primary/40 hover:bg-card",
+
                 )}
               >
                 {cat} <span className="opacity-60 text-xs">({count})</span>
@@ -231,6 +239,7 @@ export function LocationsClient({
             <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
               No points of interest match your current search and filter
               settings.
+
             </p>
             <button
               onClick={() => {
@@ -270,6 +279,7 @@ export function LocationsClient({
                         className={cn(
                           "text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded border backdrop-blur-md",
                           threatColor(item.threatLevel),
+
                         )}
                       >
                         {item.threatLevel}
@@ -287,6 +297,7 @@ export function LocationsClient({
                         source={item.source}
                         size="sm"
                       />
+
                     </div>
                   </div>
 

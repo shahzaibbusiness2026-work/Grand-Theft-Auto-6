@@ -37,7 +37,7 @@ export function CompanionMapSection({
               </span>
             </div>
             <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 mt-0.5">
-              Live district telemetry, GPS waypoints, and verified points of interest
+              Live district telemetry, GPS waypoints, and mapped points of interest
             </p>
           </div>
         </div>
@@ -68,7 +68,7 @@ export function CompanionMapSection({
                 </span>
                 <span className="flex items-center gap-1 text-xs font-semibold text-emerald-400 dark:text-emerald-400 text-emerald-600">
                   <ShieldCheck className="h-3 w-3" />
-                  {loc.verification === "verified" ? "Verified" : "Reported"}
+                  {loc.verification === "verified" ? "Spotted" : "Reported"}
                 </span>
               </div>
 
@@ -101,7 +101,7 @@ export function CompanionMapSection({
           <span className="text-slate-300 dark:text-slate-300 text-slate-700">
             Active Satellite Mesh:{" "}
             <strong className="text-white dark:text-white text-slate-900 font-semibold">{totalLocations} Districts</strong> and{" "}
-            <strong className="text-cyan-400 dark:text-cyan-400 text-cyan-600 font-semibold">{totalMarkers} Verified Waypoints</strong> indexed from game trailers and official leaks.
+            <strong className="text-cyan-400 dark:text-cyan-400 text-cyan-600 font-semibold">{totalMarkers} Mapped Waypoints</strong> indexed from game trailers and community reports.
           </span>
         </div>
         <Link

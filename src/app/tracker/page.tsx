@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: { url: "/tracker" },
   title: "100% Completion Tracker & Checklist",
   description:
-    "A preview of Taish Gaming's completion tracker. Verified GTA VI requirements will be added when they can be checked; no game-completion rewards are currently asserted.",
+    "A preview of Taish Gaming's completion tracker. GTA VI requirements will be added when they can be checked; no game-completion rewards are currently asserted.",
   alternates: { canonical: "/tracker" },
 };
 

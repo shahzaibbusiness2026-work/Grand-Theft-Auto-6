@@ -39,7 +39,7 @@ export function CompanionAiCard() {
             <span className="ml-1 inline-block rounded-full bg-gold/20 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-gold align-middle">Beta</span>
           </h3>
           <p className="text-xs text-slate-400">
-            Knowledge-base assistant — quick answers from our verified GTA 6 database.
+            Knowledge-base assistant — quick answers from our GTA 6 database.
           </p>
         </div>
       </div>

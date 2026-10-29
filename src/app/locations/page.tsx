@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "Leonida Locations & Points of Interest",
   description:
     "Browse provisional Leonida fan-map entries. Check evidence status and distinguish editorial placements from confirmed GTA VI geography.",
+
 };
 
 type DbLocation = LocationRecord & {

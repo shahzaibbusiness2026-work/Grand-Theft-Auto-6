@@ -403,7 +403,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
           </h3>
           <p className="text-xs leading-relaxed text-muted-foreground">
             <strong>Are these prices and performance gains final?</strong> All prices and performance
-            values are estimates based on verified leak metadata and trailer analysis. Rockstar may
+            values are estimates based on leak reports and trailer analysis. Rockstar may
             rebalance the tuning economy before or after launch — treat these as planning figures.
           </p>
         </div>

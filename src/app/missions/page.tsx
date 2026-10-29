@@ -158,7 +158,7 @@ export default async function MissionsPage() {
         <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border sm:grid-cols-4 rounded-2xl shadow-xl border border-border">
           {[
             ["8+", "Story Arcs & Heists"],
-            ["100%", "Verified Grounding"],
+            ["100%", "Trailer-Sourced"],
             ["Lucia & Jason", "Dual Protagonists"],
             ["$480K+", "Top Vault Score"],
           ].map(([v, l]) => (

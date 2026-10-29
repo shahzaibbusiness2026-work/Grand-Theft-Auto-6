@@ -15,6 +15,7 @@ export type WildlifePage = {
   tier: EvidenceTier;
   hero: string;
   heroAlt: string;
+  heroSource: string;
   tagline: string;
   intro: string[];
   footage: WildlifeFrame[];
@@ -36,6 +37,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     hero: "/img/wildlife/flamingo-wetlands.jpg",
     heroAlt:
       "A flock of pink flamingos flying and wading in a GTA VI wetland at daytime",
+    heroSource: "Trailer 1, 0:21 — official Rockstar trailer frame",
     tagline: "A full flock in the wetlands, flying and wading in Trailer 1.",
     intro: [
       "The American flamingo is one of the bird species Rockstar has named for GTA VI, and Trailer 1 shows it in numbers: a whole flock moving through a wetland, some on the wing and some wading in the shallows.",
@@ -77,6 +79,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     hero: "/img/wildlife/alligator-store.jpg",
     heroAlt:
       "An alligator walking through the front door of a convenience store in GTA VI Trailer 1",
+    heroSource: "Trailer 1, 0:48 — official Rockstar trailer frame",
     tagline: "Three separate Trailer 1 appearances: a store, a pool, and the wetlands.",
     intro: [
       "No animal turns up in Trailer 1 more memorably than the American alligator. It walks into a convenience store on a security camera, it crashes a backyard pool under a wildlife officer's pole, and it sits in the wetlands among the flamingos.",
@@ -131,6 +134,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     hero: "/img/wildlife/iguana-road.jpg",
     heroAlt:
       "A large green iguana in close-up crossing a road in the GTA VI Launch Trailer",
+    heroSource: "Launch Trailer, 0:21 — official Rockstar trailer frame",
     tagline: "A close-up crossing in the Launch Trailer, not Trailer 2 as previously listed.",
     intro: [
       "The green iguana is named by Rockstar as an invasive species in Leonida, and the Launch Trailer gives it a full close-up: crest, dewlap, and scales in detail, crossing a road with traffic behind it.",
@@ -171,9 +175,10 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     hero: "/img/wildlife/brown-pelican.webp",
     heroAlt:
       "A brown pelican in close-up among wetland grass in GTA VI",
+    heroSource: "GTA Tracker animal catalog — official GTA VI game screenshot",
     tagline: "Brown pelican hero image; the trailer frames below show birds and marine life without an identified species.",
     intro: [
-      "Not every animal in a trailer can be named honestly. These three frames show birds and marine life clearly enough to publish, but not clearly enough to pin a species on — so this page describes exactly what is visible and stops there.",
+      "Not every animal in a trailer can be named honestly. These four frames show birds and marine life clearly enough to publish, but not clearly enough to pin a species on — so this page describes exactly what is visible and stops there.",
       "That restraint is deliberate. A page that guessed species from distant shapes would break the same confirmed-only rule the rest of this site follows.",
     ],
     footage: [
@@ -193,7 +198,13 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
         src: "/img/wildlife/yacht-marine-life.jpg",
         alt: "Dark marine shapes in the water near a yacht in GTA VI Trailer 1",
         caption:
-          "Trailer 1, 0:11 — dark shapes near the surface beside a yacht, most likely dolphins. Treated as probable, not certain.",
+          "Trailer 1, 0:11 — dark shapes near the surface beside a yacht, most likely dolphins \u2014 but the same frame is claimed as a tiger shark by other fan sources, so the reading is genuinely ambiguous. Treated as probable, not certain.",
+      },
+      {
+        src: "/img/wildlife/t2-keys-birds-007.jpg",
+        alt: "Small distant birds flying over a Keys aerial in GTA VI Trailer 2",
+        caption:
+          "Trailer 2, 0:07 — small distant birds over the Keys aerial. Species not identified \u2014 this corrects the earlier 'no wildlife in Trailer 2' conclusion, which came from a thumbnail review; at full resolution, birds are present but unidentifiable.",
       },
     ],
     confirmed: [
@@ -201,7 +212,8 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
       "Marine life is visible near the surface in Trailer 1 at 0:11.",
       "Rockstar confirms more than 60 bird species in total; that total does not identify these frames.",
       "Brown pelican: named by Rockstar; the hero image shows one in wetland grass.",
-      "Bottlenose dolphins are separately observed in official media, but these specific frames are not confirmed as dolphins.",
+      "Dolphins are separately observed in official media (\u201cbottlenose\u201d is a fan species ID, not Rockstar\u2019s word), but these specific frames are not confirmed as dolphins.",
+      "Birds are present in Trailer 2 at 0:07 (small, distant, species unidentified) \u2014 verified at full resolution.",
     ],
     notConfirmed: [
       "Species identification for any of the three frames.",
@@ -214,6 +226,127 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
       { label: "GTA VI World: Animals & Wildlife", href: "/gta-6-world/animals-wildlife" },
     ],
   },
+  {
+    slug: "sea-turtle",
+    name: "Sea Turtle",
+    title: "Sea Turtle in GTA 6",
+    seoTitle: "Sea Turtle in GTA 6: Reef Footage & Facts",
+    seoDescription:
+      "Turtles are Rockstar-confirmed as a marine category in GTA VI. See the official underwater screenshot of a sea turtle over a Keys reef, and what is still not confirmed.",
+    tier: "Rockstar confirmed",
+    hero: "/img/wildlife/sea-turtle.jpg",
+    heroAlt:
+      "A sea turtle swimming over a coral reef with reef fish and a diver's flipper in GTA VI",
+    heroSource: "GTA6Bible — official GTA VI screenshot (fan-article host; no watermark, no logo overlay)",
+    tagline: "A sea turtle over a Keys reef, in an official underwater screenshot.",
+    intro: [
+      "Turtles are one of the marine categories Rockstar confirms for Leonida's waters, and this official underwater screenshot shows one in the Keys: a sea turtle swimming over a coral reef, with reef fish around it and a diver's flipper at the edge of frame.",
+      "The image is hosted by a fan article, not by Rockstar directly — but it is eye-verified as GTA VI game graphics, clean, with no watermark and no third-party logo overlay. A TechWiser version of the same scene carries a logo overlay and was rejected; this file is the clean version.",
+    ],
+    footage: [
+      {
+        src: "/img/wildlife/sea-turtle.jpg",
+        alt: "A sea turtle swimming over a coral reef with reef fish in GTA VI",
+        caption:
+          "Official underwater screenshot — a sea turtle over a coral reef in the Keys, with reef fish and a diver nearby.",
+      },
+    ],
+    confirmed: [
+      "Turtles confirmed as a marine category by Rockstar (Game Informer marine list).",
+      "A sea turtle swims among reef fish in the Keys in official material.",
+      "Reef fish appear in the same official underwater scene.",
+    ],
+    notConfirmed: [
+      "Species: 'loggerhead' is a fan identification, not Rockstar's word.",
+      "Fishing, diving, or any marine-interaction mechanic.",
+      "Whether turtles are huntable, trackable, or in any tracking tier.",
+    ],
+    related: [
+      { label: "Birds & Marine Life in the Trailers", href: "/wildlife/birds-marine-life" },
+      { label: "GTA VI World: Birds & Marine Life", href: "/gta-6-world/birds-marine-life" },
+      { label: "GTA VI World: Animals & Wildlife", href: "/gta-6-world/animals-wildlife" },
+    ],
+  },
+  {
+    slug: "eel",
+    name: "Eel",
+    title: "Eel in GTA 6",
+    seoTitle: "Eel in GTA 6: Underwater Screenshot & Facts",
+    seoDescription:
+      "An eel appears in an official GTA VI underwater screenshot from the Leonida Keys. See the frame, what it shows, and why the 'American' label is the catalog's, not Rockstar's.",
+    tier: "Community identification",
+    hero: "/img/wildlife/american-eel.webp",
+    heroAlt: "A long eel swimming underwater in GTA VI",
+    heroSource: "GTA Tracker animal catalog — official GTA VI game screenshot (soft, low-detail image)",
+    tagline: "A long eel underwater, from the Keys diving screenshot.",
+    intro: [
+      "Fish and an eel appear in an official underwater screenshot with divers and a coral reef in the Leonida Keys — the eel at the far left of the Keys diving scene, per fan-wiki description.",
+      "This frame comes from the GTA Tracker animal catalog: eye-verified as game-style graphics with no watermark and no person, but soft and low-detail. The catalog's 'American' species label is the catalog's, not Rockstar's word — so this page calls it an eel, not an American eel.",
+    ],
+    footage: [
+      {
+        src: "/img/wildlife/american-eel.webp",
+        alt: "A long eel swimming in dark underwater in GTA VI",
+        caption:
+          "Official underwater screenshot (catalog host) — a long eel swimming in dark water.",
+      },
+    ],
+    confirmed: [
+      "An eel appears in an official underwater screenshot with divers and a coral reef in the Keys.",
+      "No fish species is named by Rockstar.",
+    ],
+    notConfirmed: [
+      "Species: 'American eel' is the catalog's label, not Rockstar's.",
+      "Fishing, diving, or any marine-interaction mechanic.",
+      "Stingray presence in high-bitrate trailer footage is a fan-sighting claim, not verified here.",
+    ],
+    related: [
+      { label: "Sea Turtle", href: "/wildlife/sea-turtle" },
+      { label: "Birds & Marine Life in the Trailers", href: "/wildlife/birds-marine-life" },
+      { label: "GTA VI World: Birds & Marine Life", href: "/gta-6-world/birds-marine-life" },
+    ],
+  },
+  {
+    slug: "poach",
+    name: "POACH Wildlife Enforcement",
+    title: "POACH in GTA 6",
+    seoTitle: "POACH Wildlife Enforcement in GTA 6: Trailer Scenes & Facts",
+    seoDescription:
+      "POACH — Protection of Animals and Controlled Hunting — appears in GTA VI trailers, recovering an alligator from a pool and pursuing apparent poachers. What the footage shows, and what is not confirmed.",
+    tier: "Observed in official media",
+    hero: "/img/wildlife/alligator-pool.jpg",
+    heroAlt:
+      "A POACH officer recovering an alligator from a backyard pool in GTA VI Trailer 1",
+    heroSource: "Trailer 1, 0:43 — official Rockstar trailer frame",
+    tagline: "Leonida's wildlife agency, seen recovering an alligator from a pool.",
+    intro: [
+      "POACH — Protection of Animals and Controlled Hunting — is the wildlife enforcement agency visible in GTA VI's trailers. Its logo shows a goose in crosshairs, and its officers appear in at least two scenes: recovering an alligator from a residential pool in Trailer 1, framed as an 'OfficialPOACH' social post warning residents, and pursuing apparent poachers hauling alligators in a liveried SUV (attributed to Trailer 2).",
+      "The Florida FWC parallel and the 'joke acronym' reading are press/fan analysis, not Rockstar statements — and the Trailer 2 pursuit scene still needs a timestamp verification.",
+    ],
+    footage: [
+      {
+        src: "/img/wildlife/alligator-pool.jpg",
+        alt: "A POACH officer with an alligator at a backyard pool in GTA VI Trailer 1",
+        caption:
+          "Trailer 1, 0:43 — a POACH officer recovers an alligator from a residential pool.",
+      },
+    ],
+    confirmed: [
+      "POACH (Protection of Animals and Controlled Hunting) appears in official material.",
+      "A POACH officer recovers an alligator from a residential pool in Trailer 1 (~0:43).",
+      "A POACH officer in a liveried SUV pursues apparent poachers hauling alligators (attributed to Trailer 2).",
+    ],
+    notConfirmed: [
+      "POACH's role, any poaching consequences, or any wanted-level response for harming wildlife or hunting illegally — Rockstar has not stated these.",
+      "POACH vehicle types beyond the liveried SUV (Bison pickup, helicopter) are fan/wiki claims, not verified here.",
+      "Whether hunting links to POACH enforcement, licences, or bounties.",
+    ],
+    related: [
+      { label: "American Alligator", href: "/wildlife/american-alligator" },
+      { label: "GTA VI World: Animals & Wildlife", href: "/gta-6-world/animals-wildlife" },
+      { label: "GTA VI World: Birds & Marine Life", href: "/gta-6-world/birds-marine-life" },
+    ],
+  }
 ];
 
 export function getWildlifePage(slug: string): WildlifePage | undefined {

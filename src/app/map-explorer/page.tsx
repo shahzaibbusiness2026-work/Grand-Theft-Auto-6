@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: { url: "/map-explorer" },
   title: "Interactive Map Explorer",
   description:
-    "Explore the full interactive GTA 6 map of Vice City and Leonida — markers, collectibles, activities and verified locations.",
+    "Explore the full interactive GTA 6 map of Vice City and Leonida — markers, collectibles, activities and trailer-spotted locations.",
   alternates: { canonical: "/map-explorer" },
 };
 

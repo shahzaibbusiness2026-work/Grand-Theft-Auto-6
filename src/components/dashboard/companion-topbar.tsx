@@ -121,7 +121,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
                 </div>
                 <div className="mt-2.5 p-2 rounded-xl bg-white/[0.04] border border-white/5 text-xs">
                   <p className="font-semibold text-white">Trailer 2 Breakdown Active</p>
-                  <p className="text-xs text-slate-400 mt-0.5">24 verified locations mapped in Vice City.</p>
+                  <p className="text-xs text-slate-400 mt-0.5">24 locations mapped in Vice City.</p>
                   <span className="text-xs text-slate-500 mt-1 block">10m ago</span>
                 </div>
               </div>
