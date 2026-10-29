@@ -1,6 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { ShieldCheck, Compass, Users, AlertTriangle } from "lucide-react";
+import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
@@ -86,16 +87,16 @@ export default function AboutPage() {
           <h2 className="font-display text-2xl font-bold text-foreground">What you will find here</h2>
           <ul className="grid gap-3 sm:grid-cols-2 text-sm text-muted-foreground leading-relaxed">
             <li className="rounded-xl border border-border bg-card p-4">
-              <a href="/vehicles" className="font-bold text-foreground underline">Vehicle &amp; weapon databases</a> — catalog entries with evidence labels, comparison tools, and stats marked as estimates wherever they are not officially published.
+              <Link href="/vehicles" className="font-bold text-foreground underline">Vehicle &amp; weapon databases</Link> — catalog entries with evidence labels, comparison tools, and stats marked as estimates wherever they are not officially published.
             </li>
             <li className="rounded-xl border border-border bg-card p-4">
-              <a href="/gta-6-world" className="font-bold text-foreground underline">GTA VI World</a> — regions, wildlife, brands, restaurants, hotels, gangs, and clothing, each entry sourced and tiered, with an exact image only where one exists.
+              <Link href="/gta-6-world" className="font-bold text-foreground underline">GTA VI World</Link> — regions, wildlife, brands, restaurants, hotels, gangs, and clothing, each entry sourced and tiered, with an exact image only where one exists.
             </li>
             <li className="rounded-xl border border-border bg-card p-4">
-              <a href="/map" className="font-bold text-foreground underline">Interactive map</a> — Leonida points of interest spotted in official footage, each labelled with its evidence level.
+              <Link href="/map" className="font-bold text-foreground underline">Interactive map</Link> — Leonida points of interest spotted in official footage, each labelled with its evidence level.
             </li>
             <li className="rounded-xl border border-border bg-card p-4">
-              <a href="/news" className="font-bold text-foreground underline">News &amp; guides</a> — researched articles and pre-release guides that say plainly what is known, what is reported, and what is still speculation.
+              <Link href="/news" className="font-bold text-foreground underline">News &amp; guides</Link> — researched articles and pre-release guides that say plainly what is known, what is reported, and what is still speculation.
             </li>
           </ul>
         </div>
@@ -119,10 +120,10 @@ export default function AboutPage() {
         <div className="max-w-4xl space-y-4">
           <h2 className="font-display text-2xl font-bold text-foreground">Corrections, and what happens after launch</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Pre-launch information changes fast, and we get things wrong sometimes. If you spot an error, tell us through the <a href="/contact" className="font-bold text-foreground underline">contact page</a> and we will fix it. From the November 19, 2026 launch onward, pre-launch reporting on this site is replaced with first-hand gameplay information as it is checked in game.
+            Pre-launch information changes fast, and we get things wrong sometimes. If you spot an error, tell us through the <Link href="/contact" className="font-bold text-foreground underline">contact page</Link> and we will fix it. From the November 19, 2026 launch onward, pre-launch reporting on this site is replaced with first-hand gameplay information as it is checked in game.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            For the fine print, see our <a href="/terms" className="font-bold text-foreground underline">Terms of Service</a>, <a href="/disclaimer" className="font-bold text-foreground underline">Disclaimer</a>, and <a href="/privacy" className="font-bold text-foreground underline">Privacy Policy</a>.
+            For the fine print, see our <Link href="/terms" className="font-bold text-foreground underline">Terms of Service</Link>, <Link href="/disclaimer" className="font-bold text-foreground underline">Disclaimer</Link>, and <Link href="/privacy" className="font-bold text-foreground underline">Privacy Policy</Link>.
           </p>
         </div>
       </div>
