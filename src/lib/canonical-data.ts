@@ -14,14 +14,14 @@ export interface CanonicalVehicle {
   klass: "Super Car" | "Sports Car" | "Muscle Car" | "Off-Road" | "Motorcycle" | "Dirt Bike" | "Boat" | "Helicopter" | "Plane" | "Van" | "Commercial";
   img: string;
   filter?: string;
-  topSpeed: number; // mph
-  acceleration: number; // 0-60 in seconds
-  braking: number; // score 0-100
-  handling: number; // score 0-100
-  power: number; // hp
+  topSpeed: number | null; // mph, null = unconfirmed
+  acceleration: number | null; // 0-60 in seconds, null = unconfirmed
+  braking: number | null; // score 0-100, null = unconfirmed
+  handling: number | null; // score 0-100, null = unconfirmed
+  power: number | null; // hp, null = unconfirmed
   weight: string;
-  seating: number;
-  drivetrain: "RWD" | "AWD" | "FWD";
+  seating: number | null;
+  drivetrain: "RWD" | "AWD" | "FWD" | "Unknown";
   price: number | null; // null if unconfirmed
   priceDisplay: string;
   purchaseLocation: string;
@@ -87,13 +87,13 @@ export interface CanonicalWeapon {
   slug: string;
   name: string;
   klass: "Pistol" | "SMG" | "Assault Rifle" | "Shotgun" | "Sniper Rifle" | "Heavy" | "Melee" | "Throwable";
-  damage: number; // score 0-100
-  fireRate: number; // score 0-100
-  accuracy: number; // score 0-100
-  range: number; // score 0-100
-  handling: number; // score 0-100
+  damage: number | null; // score 0-100, null = unconfirmed
+  fireRate: number | null; // score 0-100, null = unconfirmed
+  accuracy: number | null; // score 0-100, null = unconfirmed
+  range: number | null; // score 0-100, null = unconfirmed
+  handling: number | null; // score 0-100, null = unconfirmed
   reloadTime: string;
-  magazineSize: number;
+  magazineSize: number | null;
   ammoType: string;
   price: number | null;
   priceDisplay: string;
@@ -162,8 +162,8 @@ export interface CanonicalLocation {
   desc: string;
   top: string; // percentage on map
   left: string; // percentage on map
-  hours: string;
-  threatLevel: "Low" | "Medium" | "High" | "Restricted Area";
+  hours?: string;
+  threatLevel?: "Low" | "Medium" | "High" | "Restricted Area";
   relatedVehicles?: string[];
   relatedWeapons?: string[];
   relatedMissions?: string[];
@@ -241,7 +241,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     name: "Grotti Visione",
     manufacturer: "Grotti",
     klass: "Super Car",
-    img: "/img/car-purple.jpg",
+    img: "",
     topSpeed: 220,
     acceleration: 2.8,
     braking: 88,
@@ -316,7 +316,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     name: "Western Reever",
     manufacturer: "Western Company",
     klass: "Off-Road",
-    img: "/img/car-pickup.jpg",
+    img: "",
     topSpeed: 140,
     acceleration: 5.6,
     braking: 68,
@@ -341,7 +341,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     name: "Nagasaki Shotaro",
     manufacturer: "Nagasaki",
     klass: "Motorcycle",
-    img: "/img/moto-red.jpg",
+    img: "",
     topSpeed: 200,
     acceleration: 2.6,
     braking: 90,
@@ -2908,7 +2908,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "CONFIRMED",
     source: "Rockstar Trailer 1 Convenience Store Holdup",
     description: "The gold standard of combat assault rifles. Impeccably balanced fire rate and accuracy across medium-to-long range urban skirmishes.",
-    img: "/img/gta6/m4-carbine.webp",
+    img: "",
   },
   {
     id: "glock-21",
@@ -2931,7 +2931,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "CONFIRMED",
     source: "Jason Holster Promo Key Art",
     description: "Dependable polymer semi-automatic sidearm packing heavy .45 ACP stopping power with quick-draw ergonomics for close-quarters self defense.",
-    img: "/img/gta6/combat-pistol.jpg",
+    img: "",
   },
   {
     id: "tactical-smg",
@@ -2954,7 +2954,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "CONFIRMED",
     source: "Trailer 1 Nightclub Alleyway Shootout",
     description: "High cycle rate submachine gun built for room-clearing and drive-by engagements from moving vehicles. Unmatched close-range DPS.",
-    img: "/img/gta6/tactical-smg.webp",
+    img: "",
   },
   {
     id: "carbine-rifle-mk2",
@@ -2977,7 +2977,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "RUMORED",
     source: "Community research",
     description: "Military-grade conversion of the standard service rifle with armor-piercing ballistic rounds and precision thermal optics.",
-    img: "/img/rifle.svg",
+    img: "",
   },
   {
     id: "heavy-sniper",
@@ -3000,7 +3000,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "CONFIRMED",
     source: "Trailer 1 Swampland Rooftop Scene",
     description: "Devastating anti-materiel rifle capable of piercing light vehicle engine blocks, disabling helicopter tail rotors, and delivering instant one-shot neutralizations.",
-    img: "/img/rifle.svg",
+    img: "",
   },
   {
     id: "pump-shotgun",
@@ -3023,7 +3023,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "CONFIRMED",
     source: "Trailer 1 Police Officer Holdup",
     description: "Classic 12-gauge pump-action shotgun offering bone-crushing close-quarters stopping power and wall-breaching capability.",
-    img: "/img/gunstore.svg",
+    img: "",
   },
   {
     id: "rpg-7",
@@ -3046,7 +3046,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "RUMORED",
     source: "Community research",
     description: "Shoulder-fired unguided rocket launcher engineered to destroy armored security convoys, patrol boats, and fortification gates.",
-    img: "/img/gta6/grenade-launcher.webp",
+    img: "",
   },
   {
     id: "combat-knife",
@@ -3069,7 +3069,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "CONFIRMED",
     source: "Trailer 1 Swamp Wildlife Sequence",
     description: "Razor-sharp full-tang carbon steel hunting knife used for silent takedowns, skinning swamp wildlife, and close combat survival.",
-    img: "/img/gunstore.svg",
+    img: "",
   },
   {
     id: "ak-74",
@@ -3092,7 +3092,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "CONFIRMED",
     source: "Trailer 1 Cartel Port Scene",
     description: "Rugged and virtually unjammable assault rifle. Hits harder per round than western counterparts, ideal for gritty gangland confrontations.",
-    img: "/img/rifle.svg",
+    img: "",
   },
   {
     id: "pipe-bomb",
@@ -3115,7 +3115,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "RUMORED",
     source: "Community research",
     description: "Handmade fragmentation explosive wrapped in steel piping. Devastating blast radius against police barricades and bank teller security glass.",
-    img: "/img/gunstore.svg",
+    img: "",
   },
   {
     id: "girardi-es9",
@@ -3139,7 +3139,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 2 (~1:51); official Rockstar promotional material",
     description:
       "Jason's signature handgun with personalized engraved detailing, seen firing from the passenger window of a Bravado Gauntlet Hellfire in Trailer 2. Officially named by Rockstar; damage, capacity and upgrade path are unpublished.",
-    img: "/img/gta6/combat-pistol.jpg",
+    img: "",
     manufacturer: "Girardi",
   },
   {
@@ -3164,7 +3164,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar screenshot and promotional material",
     description:
       "Promoted as Lucia's preferred handgun. The personalized promotional version uses rose and signature decoration. No verified combat values have been published.",
-    img: "/img/gta6/combat-pistol.jpg",
+    img: "",
     manufacturer: "Klose",
   },
   {
@@ -3189,7 +3189,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar screenshot (desk still)",
     description:
       "A modern polymer-frame sidearm with gold and custom decorative treatment, shown on a desk in an official Rockstar screenshot. Exact in-game manufacturer and model name are unknown; player usability is unconfirmed.",
-    img: "/img/gta6/combat-pistol.jpg",
+    img: "",
   },
   {
     id: "hawk-little-morgan-revolvers",
@@ -3213,7 +3213,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official GTA 6 Ultimate Edition promotional material",
     description:
       "His-and-hers personalized large-frame magnum revolvers associated with Jason and Lucia. Promotional art shows engraved Vice City styling, palm-tree grip decoration, character initials and a mounted optic. Tied to the Ultimate Edition; base-game availability is unconfirmed.",
-    img: "/img/gta6/combat-pistol.jpg",
+    img: "",
     manufacturer: "Hawk & Little",
   },
   {
@@ -3238,7 +3238,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Ambrosia-region screenshot",
     description:
       "A revolver with visible Mustang .357 and Duke Arms Company markings, held by a biker in an official Ambrosia-region screenshot. Whether the player can equip this exact version is unconfirmed.",
-    img: "/img/gta6/combat-pistol.jpg",
+    img: "",
     manufacturer: "Duke Arms Company",
   },
   {
@@ -3263,7 +3263,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 2 (~1:15), bank-robbery sequence",
     description:
       "Compact shoulder-fired submachine gun carried by both Jason and Lucia in the Trailer 2 bank-robbery sequence. Jason's weapon has a clearly visible red-dot optic. Magazine size, fire rate and attachment system are unannounced.",
-    img: "/img/gta6/tactical-smg.webp",
+    img: "",
   },
   {
     id: "micro-smg",
@@ -3287,7 +3287,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Vintage Vice City Pack promotional image",
     description:
       "Compact automatic weapon shown with a tropical palm-pattern finish in the Vintage Vice City Pack promotional image. The finish is promotional; exact base model details and standard-edition access are unconfirmed.",
-    img: "/img/gta6/tactical-smg.webp",
+    img: "",
   },
   {
     id: "tropical-finish-smg",
@@ -3311,7 +3311,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Vintage Vice City Pack promotional image",
     description:
       "A second compact SMG with a palm-pattern tropical finish shown in promotional material. The in-game model name is not readable or officially listed. Player availability, magazine capacity and upgrade compatibility are unknown.",
-    img: "/img/gta6/tactical-smg.webp",
+    img: "",
   },
   {
     id: "eris-branded-smg",
@@ -3335,7 +3335,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Ultimate Edition promotional image (illegal-goods-store raid)",
     description:
       "Brightly colored customized SMG with ERIS in-universe branding, held by a PTT Youngin$ gang member in Ultimate Edition promotional material. Shown as contraband; player ownership and stats are unconfirmed.",
-    img: "/img/gta6/tactical-smg.webp",
+    img: "",
     manufacturer: "ERIS",
   },
   {
@@ -3360,7 +3360,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official GTA 6 media (Raul Bautista street standoff)",
     description:
       "Tactical carbine configuration seen with Raul Bautista in a street standoff across official media. Analysts note different official views may show two related carbine designs rather than one identical model. Player availability and attachment slots are unpublished.",
-    img: "/img/gta6/m4-carbine.webp",
+    img: "",
     manufacturer: "Duke Arms Company",
   },
   {
@@ -3385,7 +3385,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Grassrivers hunter/poacher screenshot",
     description:
       "Full-length rifle with traditional stock profile shown beside a mud-covered hunter in Grassrivers. The still confirms the model exists, not that it is player-equippable.",
-    img: "/img/gta6/m4-carbine.webp",
+    img: "",
   },
   {
     id: "duke-arms-assault-sniper",
@@ -3409,7 +3409,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Grassrivers poacher screenshot",
     description:
       "Long rifle with optic and Duke Arms Company identification, rested against a seated poacher's leg in Grassrivers. No official damage, range, zoom or ammo values are available.",
-    img: "/img/rifle.svg",
+    img: "",
     manufacturer: "Duke Arms Company",
   },
   {
@@ -3434,7 +3434,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Mount Kalaga hunter screenshot",
     description:
       "Bolt-action hunting rifle fitted with a large telescopic sight, held by a hunter in wooded Mount Kalaga terrain. Supports a scoped hunting-rifle class; player use and statistics are unknown.",
-    img: "/img/rifle.svg",
+    img: "",
   },
   {
     id: "scoped-hunting-rifles",
@@ -3458,7 +3458,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar woodland screenshot (two hunters)",
     description:
       "Multiple long guns with scopes visible with two hunters walking through the woods. The view is insufficient to prove every rifle is the same model; kept as a generic bolt-action hunting-rifle classification.",
-    img: "/img/rifle.svg",
+    img: "",
   },
   {
     id: "long-barrel-double-shotgun",
@@ -3482,7 +3482,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Grassrivers hunting/poacher imagery",
     description:
       "Traditional side-by-side or double-barrel long-gun profile seen with an NPC hunter/poacher in Grassrivers, also described in an alligator-hunting context. No confirmed reload, spread, damage or player-availability details.",
-    img: "/img/gunstore.svg",
+    img: "",
   },
   {
     id: "combat-mg-lmg",
@@ -3506,7 +3506,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 2 (~2:11), Phil's Ammu-Nation commercial",
     description:
       "Large automatic weapon lifted by the shopkeeper during Phil's Ammu-Nation commercial in Trailer 2, shown in front of a gun wall. The Ammu-Nation presentation strongly suggests an obtainable weapon class, but stats and purchase conditions are unannounced.",
-    img: "/img/gta6/grenade-launcher.webp",
+    img: "",
   },
   {
     id: "claw-hammers",
@@ -3530,7 +3530,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 1 (~0:58), Hamlet social-media clip",
     description:
       "Two ordinary claw hammers raised by an older woman in a Trailer 1 social-media clip. The scene confirms the objects exist, not a player melee loadout — treat as a possible melee prop until playable use is demonstrated.",
-    img: "/img/gunstore.svg",
+    img: "",
   },
   {
     id: "pool-cue",
@@ -3554,7 +3554,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar bar/pool screenshot",
     description:
       "Ordinary pool cue seen with Jason and Cal Hampton during a game of pool. Present as sports equipment with no attack animation shown — list as a possible melee item, not a confirmed weapon.",
-    img: "/img/gunstore.svg",
+    img: "",
   },
   {
     id: "minigolf-club",
@@ -3578,7 +3578,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar minigolf screenshot",
     description:
       "Short golf club brandished by Cal Hampton during a round of minigolf in an official screenshot. Its presence does not confirm that Jason or Lucia can equip it as a weapon.",
-    img: "/img/gunstore.svg",
+    img: "",
   },
   {
     id: "baseball-bat",
@@ -3602,7 +3602,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Port Gellhorn character screenshot",
     description:
       "Conventional wooden or dark-finished bat carried by an NPC in Port Gellhorn. A recurring GTA melee class, but GTA 6 mechanics and player usability remain unconfirmed.",
-    img: "/img/gunstore.svg",
+    img: "",
   },
   {
     id: "switchblade-knife",
@@ -3626,7 +3626,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Ultimate Edition weapon promotional image",
     description:
       "Compact folding knife with switchblade form shown alongside promoted weapon items in Ultimate Edition art. Visible in official art, but active player use and statistics are unconfirmed.",
-    img: "/img/gunstore.svg",
+    img: "",
   },
   {
     id: "unarmed-combat",
@@ -3650,7 +3650,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 1 (motel fight) and Trailer 2 (cargo-plane fight)",
     description:
       "Hand-to-hand combat shown across both trailers — punches and physical fighting without a held weapon. Unarmed fighting is visually established; the control system, damage model and moves are unpublished.",
-    img: "/img/gunstore.svg",
+    img: "",
   }
 ];
 
@@ -3684,7 +3684,7 @@ export const canonicalMissions: CanonicalMission[] = [
     outcomes: ["Establishes baseline trust between Lucia & Jason", "Unlocks free roaming across eastern Vice City"],
     unlocks: ["Ocean Drive Motel Safehouse", "Bravado Banshee spawn"],
     relatedMissions: ["back-in-vice"],
-    confidence: "OFFICIAL",
+    confidence: "RUMORED",
     source: "Rockstar Trailer 1 Opening & Dialogue",
     description: "Lucia's return to the neon-drenched streets of Vice City after incarceration, reuniting with Jason to plot their future in an unforgiving state.",
     guideTips: ["Keep your vehicle speed below 50 mph through the police patrol checkpoint to prevent immediate 2-star wanted level."],
@@ -3716,11 +3716,11 @@ export const canonicalMissions: CanonicalMission[] = [
     outcomes: ["Player can switch freely between Lucia and Jason during gameplay"],
     unlocks: ["Switch Character mechanic", "Convenience store robbing dynamic encounters"],
     relatedMissions: ["welcome-to-leonida", "the-score-bank-of-keys"],
-    confidence: "OFFICIAL",
+    confidence: "RUMORED",
     source: "Rockstar Trailer 1 Bandana Sequence",
     description: "The signature Bonnie & Clyde robbery showcased in Trailer 1. Coordinate dual protagonist actions under high pressure.",
     guideTips: ["Switch to Jason while Lucia manages the crowd so you can keep the cashier intimidated while cracking the lock."],
-    img: "/img/hero-dark.jpg",
+    img: "",
   },
   {
     id: "m-3",
@@ -3787,7 +3787,7 @@ export const canonicalMissions: CanonicalMission[] = [
     source: "Community research",
     description: "High-octane industrial firefight amidst towering cargo container stacks, concluding with a heavy truck escape.",
     guideTips: ["Shoot the explosive fuel tanks mounted on enemy pickup trucks to eliminate multiple cartel gunners in a single blast."],
-    img: "/img/smg-gun.jpg",
+    img: "",
   },
   {
     id: "m-5",
@@ -3815,7 +3815,7 @@ export const canonicalMissions: CanonicalMission[] = [
     outcomes: ["Ranger Station becomes friendly vendor for wilderness gear"],
     unlocks: ["Everglades Fanboat", "Wildlife Photography Challenge"],
     relatedMissions: [],
-    confidence: "CONFIRMED",
+    confidence: "RUMORED",
     source: "Trailer 1 Gator Extraction Sequence",
     description: "Wild Florida-style eccentric side contract hunting down rogue swamp poachers operating inside restricted national park swamplands.",
     guideTips: ["Watch the water surface for gator ripples — falling off your airboat in the deep bayou results in instant wildlife attack."],
@@ -3851,7 +3851,7 @@ export const canonicalMissions: CanonicalMission[] = [
     source: "Community research",
     description: "Electrifying midnight illegal drag competition against Vice City's top street tuners under flashing neon palm trees.",
     guideTips: ["Warm up your tires during staging by holding brake + gas until tire smoke turns dense white for 100% launch grip."],
-    img: "/img/car-orange.jpg",
+    img: "",
   },
   {
     id: "m-7",
@@ -3934,13 +3934,11 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "The world-famous neon art-deco strip. Lined with pastel hotels, bustling outdoor cafes, supercar valets, and sun-soaked coastal beaches.",
     top: "56%",
     left: "64%",
-    hours: "Open 24/7 (Nightlife peaks 22:00 - 05:00)",
-    threatLevel: "Medium",
     relatedVehicles: ["bravado-banshee-gts", "pfister-comet-s2"],
     relatedMissions: ["back-in-vice", "south-beach-drag-circuit"],
     confidence: "CONFIRMED",
     source: "Rockstar Trailer 1 Main Showcase",
-    img: "/img/hero-dark.jpg",
+    img: "",
     verified: true,
   },
   {
@@ -3952,10 +3950,8 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Premier military-grade firearms retailer with indoor underground shooting range, heavy armor racks, and high-caliber ammo restocking.",
     top: "46%",
     left: "58%",
-    hours: "08:00 – 23:00",
-    threatLevel: "Low",
     relatedWeapons: ["m4-carbine", "glock-21", "carbine-rifle-mk2"],
-    confidence: "CONFIRMED",
+    confidence: "REPORTED",
     source: "Trailer 1 Ammu-Nation Exterior Banner",
     img: "/img/gunstore.svg",
     verified: true,
@@ -3969,12 +3965,10 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Legendary multi-level 80s-inspired oceanfront nightclub. High-profile syndicate contacts, VIP bottle service, and massive weekly passive revenue.",
     top: "58%",
     left: "62%",
-    hours: "21:00 – 06:00",
-    threatLevel: "Medium",
     relatedMissions: ["malibu-vip-protection"],
     confidence: "CONFIRMED",
     source: "Trailer 1 Club Interior Shots",
-    img: "/img/vice-sunset.svg",
+    img: "",
     verified: true,
   },
   {
@@ -3986,14 +3980,12 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Sprawling industrial shipping hub on the western coast. Massive container yards, freight cranes, underground chop shops, and contraband shipping routes.",
     top: "42%",
     left: "35%",
-    hours: "Open 24/7 (Heavy freight traffic)",
-    threatLevel: "High",
     relatedVehicles: ["western-reever"],
     relatedWeapons: ["tactical-smg-vom-feuer", "ak-74-kalashnikov"],
     relatedMissions: ["the-exchange-port-ambush"],
-    confidence: "CONFIRMED",
+    confidence: "REPORTED",
     source: "Trailer 1 Port Gellhorn Road Signs",
-    img: "/img/smg-gun.jpg",
+    img: "",
     verified: true,
   },
   {
@@ -4005,8 +3997,6 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Archipelago boat slips, fueling docks, and speed boat tuning workshops catering to deep-sea anglers and coastal contraband runners.",
     top: "72%",
     left: "45%",
-    hours: "Open 24/7",
-    threatLevel: "Medium",
     relatedVehicles: ["speeder-vortex"],
     relatedMissions: ["the-score-bank-of-keys"],
     confidence: "CONFIRMED",
@@ -4023,14 +4013,12 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Endless wilderness wetlands inhabited by dangerous wildlife, airboat rental shacks, abandoned cold-war radio beacons, and hidden bootlegger stills.",
     top: "35%",
     left: "55%",
-    hours: "Open 24/7 (High danger after dark)",
-    threatLevel: "High",
     relatedVehicles: ["maibatsu-sanchez", "western-reever"],
     relatedWeapons: ["hunting-combat-knife", "remington-pump-shotgun"],
     relatedMissions: ["grassrivers-gator-bounty"],
-    confidence: "OFFICIAL",
+    confidence: "CONFIRMED",
     source: "Rockstar Trailer 1 Swampland Airboat Pan",
-    img: "/img/car-pickup.jpg",
+    img: "",
     verified: true,
   },
   {
@@ -4042,13 +4030,11 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Ultra-exclusive gated island community featuring billionaire waterfront mansions, private boat docks, and exotic hypercar collections.",
     top: "52%",
     left: "59%",
-    hours: "Gated Access (Armed Security)",
-    threatLevel: "Restricted Area",
     relatedVehicles: ["grotti-visione", "pfister-comet-s2"],
     relatedMissions: ["starfish-island-mansion-heist"],
     confidence: "CONFIRMED",
     source: "Trailer 1 Luxury Villa Helicopter Sequence",
-    img: "/img/car-purple.jpg",
+    img: "",
     verified: true,
   },
   {
@@ -4060,10 +4046,8 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Massive civil aviation hub featuring commercial runways, private jet hangars, police helipads, and extreme stunt ramp launch points.",
     top: "48%",
     left: "48%",
-    hours: "Open 24/7",
-    threatLevel: "Restricted Area",
     relatedVehicles: ["buckingham-maverick", "mammoth-dodo-seaplane"],
-    confidence: "CONFIRMED",
+    confidence: "REPORTED",
     source: "Trailer 1 Plane Takeoff Background",
     img: "/img/heli.jpg",
     verified: true,
@@ -4077,12 +4061,10 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Mysterious extraterrestrial artwork painted on an abandoned Cold War military radar installation. Emits strange audio frequencies during thunderstorms.",
     top: "32%",
     left: "54%",
-    hours: "00:00 – 04:00 (Rain/Thunderstorm only)",
-    threatLevel: "Low",
     confidence: "RUMORED",
     source: "Community research",
     img: "/img/ufo-mural.jpg",
-    verified: true,
+    verified: false,
   },
   {
     id: "loc-underground-garage",
@@ -4093,10 +4075,8 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "High-end vehicle modification garage offering widebody kits, engine dyno tuning, custom neon wraps, and instant resprays.",
     top: "57%",
     left: "63%",
-    hours: "Open 24/7",
-    threatLevel: "Low",
     relatedVehicles: ["bravado-banshee-gts", "declasse-tulip"],
-    confidence: "CONFIRMED",
+    confidence: "REPORTED",
     source: "Trailer 1 Lowrider & Tuner Car Meet",
     img: "/img/garage.jpg",
     verified: true,
@@ -4110,12 +4090,10 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Luxury glass penthouse overlooking the Biscayne bay and neon skyline with private 10-car garage, helipad roof access, and security armory.",
     top: "50%",
     left: "60%",
-    hours: "Private Residence",
-    threatLevel: "Low",
     confidence: "RUMORED",
     source: "Community research",
     img: "/img/apartment.jpg",
-    verified: true,
+    verified: false,
   },
   {
     id: "loc-northern-lookout",
@@ -4126,13 +4104,11 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Elevated scenic vantage tower atop the state's highest ridge offering 360-degree views across forests, logging trails, and distant city lights.",
     top: "22%",
     left: "34%",
-    hours: "Open 24/7",
-    threatLevel: "Low",
     relatedWeapons: ["heavy-sniper-50cal"],
     confidence: "RUMORED",
     source: "Community research",
-    img: "/img/hero-dark.jpg",
-    verified: true,
+    img: "",
+    verified: false,
   },
   {
     id: "loc-port-safehouse",
@@ -4143,13 +4119,11 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Reinforced industrial basement safehouse equipped with escape water tunnel to cargo docks, weapon modification bench, and vehicle stash.",
     top: "44%",
     left: "33%",
-    hours: "Story Unlocked",
-    threatLevel: "Medium",
     relatedMissions: ["the-exchange-port-ambush"],
     confidence: "RUMORED",
     source: "Community research",
     img: "/img/garage.jpg",
-    verified: true,
+    verified: false,
   },
   {
     id: "loc-submerged-cache",
@@ -4160,9 +4134,7 @@ export const canonicalLocations: CanonicalLocation[] = [
     desc: "Waterproof steel cargo chest dropped onto coastal coral reef shelf during high-speed Coastguard chase. Requires scuba apparatus.",
     top: "62%",
     left: "67%",
-    hours: "Requires Scuba Gear",
-    threatLevel: "Medium",
-    confidence: "CONFIRMED",
+    confidence: "REPORTED",
     source: "Underwater Marine Assets",
     img: "/img/cache-chest.jpg",
     verified: true,
@@ -4207,10 +4179,10 @@ export const canonicalProperties: CanonicalProperty[] = [
     features: ["Daily Cash Vault Collection", "Underground Nightclub Syndicate Office", "4-Car VIP Valet Garage", "Private VIP Booths"],
     upgrades: ["Top-Tier Resident DJ", "Heavy Security Bouncers", "VIP Champagne Bar", "Dry Ice & Laser System"],
     requirements: ["Complete 'The Malibú: Syndicate Escort' Mission"],
-    confidence: "CONFIRMED",
+    confidence: "RUMORED",
     source: "Trailer 1 Nightlife Sequences & Code Strings",
     desc: "Turn your street hustle into a legitimate entertainment empire. High cash flow with minimal police suspicion when popularity is managed.",
-    img: "/img/vice-sunset.svg",
+    img: "",
     mapCoords: { top: "58%", left: "62%" },
   },
   {
@@ -4227,7 +4199,7 @@ export const canonicalProperties: CanonicalProperty[] = [
     features: ["Hydraulic Vehicle Lifts", "Automated Parts Stripper", "Forged Title VIN Laser Printer", "8-Vehicle Stash Bay"],
     upgrades: ["Heavy Lift Crane", "Faster Disassembly Crew", "Police Heat Scrambler", "Custom Respray Booth"],
     requirements: ["Complete 'Little Haiti Turf Disruption'"],
-    confidence: "CONFIRMED",
+    confidence: "RUMORED",
     source: "Trailer 1 Lowrider & Garage Scenes",
     desc: "Discreet industrial garage where stolen supercars and muscle cruisers are scrubbed, stripped into valuable salvage, or fitted with cold plates.",
     img: "/img/garage.jpg",
@@ -4250,7 +4222,7 @@ export const canonicalProperties: CanonicalProperty[] = [
     confidence: "RUMORED",
     source: "Community research",
     desc: "Massive commercial storage terminal for consolidating high-value narcotics, counterfeit luxury electronics, and export weapons.",
-    img: "/img/smg-gun.jpg",
+    img: "",
     mapCoords: { top: "42%", left: "35%" },
   },
   {
@@ -4287,10 +4259,10 @@ export const canonicalProperties: CanonicalProperty[] = [
     features: ["Wardrobe & Outfit Changer", "Weapon Storage Trunk", "2-Car Curbside Parking", "Sleep & Save Bed"],
     upgrades: ["Radio Stations Tuner", "Wall Heist Planning Board"],
     requirements: ["Prologue Story Progression"],
-    confidence: "CONFIRMED",
+    confidence: "RUMORED",
     source: "Trailer 1 Motel Room Shot",
     desc: "Your starting base of operations in Vice City. Retro art-deco motel room with direct ocean view where Lucia and Jason strategize.",
-    img: "/img/hero-dark.jpg",
+    img: "",
     mapCoords: { top: "56%", left: "64%" },
   },
 ];
@@ -4305,12 +4277,12 @@ export const canonicalCollectibles: CanonicalCollectible[] = [
     title: "Hidden Package #01: Ocean View Marina Pier",
     category: "Hidden Packages",
     district: "Ocean Beach",
-    reward: "$5,000 Cash + Combat Pistol Ammo Cache",
-    requirements: "None (Explore under the wooden boardwalk)",
+    reward: "",
+    requirements: "",
     description: "Waterproof wrapped contraband package wedged under the wooden pilings of South Beach marina pier.",
-    guideTip: "Crouch under the eastern boardwalk at low tide or swim underneath to locate the blinking green LED beacon.",
-    coordinates: { top: "58%", left: "65%" },
-    confidence: "CONFIRMED",
+    guideTip: "",
+    coordinates: { top: "", left: "" },
+    confidence: "RUMORED",
     source: "Collectibles Manifest",
     img: "/img/crate.svg",
   },
@@ -4320,14 +4292,14 @@ export const canonicalCollectibles: CanonicalCollectible[] = [
     title: "Stunt Jump #08: Airport Highway Ramp",
     category: "Stunt Jumps",
     district: "VIA Airport",
-    reward: "500 RP + Stunt Driver Achievement Progress",
-    requirements: "Fast sports car or motorbike (minimum 120 mph launch)",
+    reward: "",
+    requirements: "",
     description: "Billboard maintenance steel ramp launching over six lanes of highway traffic leading to the commercial airport terminal.",
-    guideTip: "Line up your approach from 300 meters back on the service road. Land cleanly on four wheels without hitting street lamps.",
-    coordinates: { top: "49%", left: "50%" },
-    confidence: "CONFIRMED",
+    guideTip: "",
+    coordinates: { top: "", left: "" },
+    confidence: "RUMORED",
     source: "Trailer 1 Stunt Geometry",
-    img: "/img/car-orange.jpg",
+    img: "",
   },
   {
     id: "col-radio-01",
@@ -4335,14 +4307,14 @@ export const canonicalCollectibles: CanonicalCollectible[] = [
     title: "Rebel Radio Station Transmitter #04",
     category: "Rebel Radio",
     district: "Downtown Vice City",
-    reward: "Unlocks Wave 103 Underground Radio Track & $2,500",
-    requirements: "Climb maintenance ladder to rooftop transmission tower",
+    reward: "",
+    requirements: "",
     description: "Pirate radio frequency repeater unit clamped to the cellular antenna array atop the downtown bank building.",
-    guideTip: "Take the external fire escape stairs to roof level. Cut the security padlock with bolt cutters to access the relay box.",
-    coordinates: { top: "47%", left: "59%" },
-    confidence: "CONFIRMED",
+    guideTip: "",
+    coordinates: { top: "", left: "" },
+    confidence: "RUMORED",
     source: "In-Game Audio Asset References",
-    img: "/img/hero-dark.jpg",
+    img: "",
   },
   {
     id: "col-wildlife-01",
@@ -4350,12 +4322,12 @@ export const canonicalCollectibles: CanonicalCollectible[] = [
     title: "Wildlife Photography: Rare Caribbean Flamingo",
     category: "Wildlife Photos",
     district: "Grassrivers Sanctuary",
-    reward: "$3,500 Cash + Audubon Nature Perk",
-    requirements: "Telephoto Camera Lens (Equip from weapon wheel)",
+    reward: "",
+    requirements: "",
     description: "Capture a close-up clear photograph of the rare bright-pink Caribbean Flamingo wading through the swamp reeds.",
-    guideTip: "Crouch and approach against the wind so birds do not scatter. Capture photo while subject is centered in sunlight.",
-    coordinates: { top: "37%", left: "53%" },
-    confidence: "OFFICIAL",
+    guideTip: "",
+    coordinates: { top: "", left: "" },
+    confidence: "RUMORED",
     source: "Trailer 1 Wildlife Showcase",
     img: "/img/flamingo.svg",
   },
@@ -4365,11 +4337,11 @@ export const canonicalCollectibles: CanonicalCollectible[] = [
     title: "Unique Weapon Part: Titanium Pistol Suppressor",
     category: "Weapon Parts",
     district: "Port Gellhorn Docks",
-    reward: "Unlocks Free Suppressor Mount for all Handguns",
-    requirements: "Search inside open blue cargo container #714",
+    reward: "",
+    requirements: "",
     description: "Precision-milled aerospace-grade titanium suppressor prototype left behind in an abandoned smuggler crate.",
-    guideTip: "Container is guarded by two cartel sentries. Eliminate them silently or enter via roof hatch at night.",
-    coordinates: { top: "41%", left: "34%" },
+    guideTip: "",
+    coordinates: { top: "", left: "" },
     confidence: "RUMORED",
     source: "Community research",
     img: "/img/gunstore.svg",
@@ -4380,12 +4352,12 @@ export const canonicalCollectibles: CanonicalCollectible[] = [
     title: "Easter Egg: Mysterious Swampland Alien Mural",
     category: "Easter Eggs",
     district: "Grassrivers Marshlands",
-    reward: "Cryptic Radio Signal + Alien Investigator Badge",
-    requirements: "Visit between 00:00 and 04:00 during heavy rain",
+    reward: "",
+    requirements: "",
     description: "Luminescent graffiti depicting a flying saucer hovering over the Everglades. Emits harmonic frequency on CB channel 9.",
-    guideTip: "Set your in-game time or wait for an evening storm. The mural glows with green bioluminescent paint in pitch darkness.",
-    coordinates: { top: "32%", left: "54%" },
-    confidence: "CONFIRMED",
+    guideTip: "",
+    coordinates: { top: "", left: "" },
+    confidence: "RUMORED",
     source: "Trailer 1 Mystery Teasers",
     img: "/img/ufo-mural.jpg",
   },

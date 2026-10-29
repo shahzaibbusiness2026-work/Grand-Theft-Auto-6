@@ -107,18 +107,20 @@ export async function getPublicVehicleCatalog(): Promise<VehicleCatalogRow[]> {
   return [];
 }
 
+
 function rowToVehicle(row: DatabaseVehicleRow): Vehicle {
-  const speedNum = parseInt(row.top_speed || "180", 10) || 180;
-  const powerNum = parseInt(row.acceleration || "600", 10) || 600;
+  // No invented specs: missing values stay null/empty, never 180/600 defaults.
+  const speedNum = parseInt(row.top_speed || "", 10);
+  const powerNum = parseInt(row.acceleration || "", 10);
 
   return {
     id: row.id,
     name: row.name,
     klass: row.class,
-    img: row.images?.[0] || "/img/car-orange.jpg",
-    topSpeed: speedNum,
-    power: powerNum,
-    featured: true,
+    img: row.images?.[0] || "",
+    topSpeed: Number.isFinite(speedNum) ? speedNum : null,
+    power: Number.isFinite(powerNum) ? powerNum : null,
+    featured: false,
   };
 }
 

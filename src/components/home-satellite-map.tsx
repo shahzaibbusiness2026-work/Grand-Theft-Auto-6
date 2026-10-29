@@ -19,72 +19,29 @@ import {
   Egg,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { canonicalLocations } from "@/lib/canonical-data";
 
-const PREVIEW_PINS = [
-  {
-    id: "p-ammu",
-    name: "Ammu-Nation",
-    district: "Downtown Vice",
-    top: "44%",
-    left: "48%",
-    color: "bg-gold",
-    icon: Crosshair,
-  },
-  {
-    id: "p-garage",
-    name: "Ocean Drive Garage",
-    district: "Ocean Beach",
-    top: "56%",
-    left: "63%",
-    color: "bg-cyan-500",
-    icon: Warehouse,
-  },
-  {
-    id: "p-suite",
-    name: "Ocean View Suite",
-    district: "Vice City",
-    top: "66%",
-    left: "55%",
-    color: "bg-sky-500",
-    icon: Home,
-  },
-  {
-    id: "p-cache",
-    name: "Hidden Cache #12",
-    district: "Biscayne Reef",
-    top: "72%",
-    left: "50%",
-    color: "bg-purple-500",
-    icon: Gem,
-  },
-  {
-    id: "p-stunt",
-    name: "Stunt Jump #8",
-    district: "Causeway",
-    top: "52%",
-    left: "39%",
-    color: "bg-gold",
-    icon: Star,
-  },
-  {
-    id: "p-ufo",
-    name: "UFO Mural",
-    district: "Grassrivers",
-    top: "29%",
-    left: "66%",
-    color: "bg-emerald-500",
-    icon: Egg,
-  },
-  {
-    id: "p-heist",
-    name: "Keys Bank Heist",
-    district: "Leonida Keys",
-    top: "68%",
-    left: "41%",
-    color: "bg-orange-500",
-    icon: Star,
-  },
-];
+const PIN_STYLE_BY_CATEGORY: Record<string, { color: string; icon: typeof Crosshair }> = {
+  Shop: { color: "bg-gold", icon: Crosshair },
+  Garage: { color: "bg-cyan-500", icon: Warehouse },
+  Safehouse: { color: "bg-sky-500", icon: Home },
+  Collectible: { color: "bg-purple-500", icon: Gem },
+  "Easter Egg": { color: "bg-emerald-500", icon: Egg },
+};
+
+// Preview pins come from the real locations list (fan-mapped positions), never invented spots.
+const PREVIEW_PINS = canonicalLocations.map((l) => {
+  const style = PIN_STYLE_BY_CATEGORY[l.category] || { color: "bg-gold", icon: Star };
+  return {
+    id: l.id,
+    name: l.name,
+    district: l.district,
+    top: l.top,
+    left: l.left,
+    color: style.color,
+    icon: style.icon,
+  };
+});
 
 /**
  * Clean, cinematic HD Satellite Map for the Homepage.
@@ -94,7 +51,7 @@ const PREVIEW_PINS = [
 export function HomeSatelliteMap() {
   const [zoom, setZoom] = useState(1);
   const [satelliteMode, setSatelliteMode] = useState(true);
-  const [activePin, setActivePin] = useState<string | null>("p-ammu");
+  const [activePin, setActivePin] = useState<string | null>(PREVIEW_PINS[0]?.id ?? null);
 
   const handleZoom = (delta: number) => {
     setZoom((prev) => {

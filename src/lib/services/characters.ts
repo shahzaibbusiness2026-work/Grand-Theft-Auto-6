@@ -51,7 +51,7 @@ function rowToCharacter(row: DatabaseCharacterRow): Character {
     name: row.name,
     role: (row.role as Character["role"]) || "Supporting",
     desc: row.description,
-    img: row.img || "/img/char-lucia.jpg",
+    img: row.img || "",
     featured: Boolean(row.featured),
     alias: row.alias || undefined,
     voiceActor: row.voice_actor || undefined,
@@ -184,7 +184,6 @@ export async function saveCharacter(char: Partial<Character> & { name: string; i
       payload.name = payload.name || char.name;
       payload.role = payload.role || "Supporting";
       payload.description = payload.description || "Character in Grand Theft Auto VI";
-      payload.img = payload.img || "/img/char-lucia.jpg";
       payload.featured = payload.featured ?? false;
       payload.status = payload.status || "Active";
       payload.weapons = payload.weapons || [];

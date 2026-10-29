@@ -14,11 +14,11 @@ export function CompanionWeaponsSection({
   totalWeapons,
 }: CompanionWeaponsSectionProps) {
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-white/10 dark:border-white/10 border-slate-200 bg-[#0a0f1d]/90 dark:bg-[#0a0f1d]/90 light:bg-white p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all">
+    <section className="relative overflow-hidden rounded-3xl border border-white/10 dark:border-white/10 border-slate-200 bg-[#0a0f1d]/90 dark:bg-[#0a0f1d]/90 light:bg-white p-5 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.45)] ring-1 ring-rose-500/15 backdrop-blur-xl transition-all">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/5 dark:border-white/5 border-slate-100">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-rose-500/10 dark:bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-500/30 shadow-[0_0_12px_rgba(244,63,94,0.25)]">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500/30 to-rose-500/5 text-rose-400 dark:text-rose-400 border border-rose-500/40 shadow-[0_0_16px_rgba(244,63,94,0.35)]">
             <Crosshair className="h-5 w-5" />
           </div>
           <div>
@@ -40,7 +40,7 @@ export function CompanionWeaponsSection({
         {/* Action Link to full weapons */}
         <Link
           href="/weapons"
-          className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-rose-500/40 bg-rose-500/10 px-3.5 py-1.5 text-xs font-bold text-rose-400 dark:text-rose-400 text-rose-600 hover:bg-rose-500/20 hover:border-rose-500 transition-all active:scale-95 shadow-sm"
+          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-rose-500 to-rose-400 px-4 py-2 text-xs font-black text-white hover:brightness-110 transition-all active:scale-95 shadow-[0_8px_24px_rgba(244,63,94,0.4)]"
         >
           <Crosshair className="h-3.5 w-3.5" />
           <span>Access Full Arsenal</span>
@@ -58,7 +58,7 @@ export function CompanionWeaponsSection({
             <Link
               key={wep.id}
               href={`/weapons#${wep.id}`}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.06] dark:border-white/[0.06] border-slate-200 bg-white/[0.02] dark:bg-white/[0.02] bg-slate-50/80 p-4 transition-all duration-300 hover:border-rose-500/50 hover:bg-white/[0.06] hover:shadow-[0_8px_24px_rgba(244,63,94,0.15)] hover:-translate-y-0.5"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.06] dark:border-white/[0.06] border-slate-200 bg-white/[0.02] dark:bg-white/[0.02] bg-slate-50/80 p-4 transition-all duration-300 hover:border-rose-500/50 hover:bg-white/[0.06] hover:shadow-[0_12px_32px_rgba(244,63,94,0.22)] hover:-translate-y-1 hover:ring-1 hover:ring-rose-500/40"
             >
               <div>
                 {/* Category & Rarity tags */}

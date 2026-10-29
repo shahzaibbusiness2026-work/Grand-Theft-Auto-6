@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${collectible.title} — Location & Guide`,
-    description: `Complete guide and coordinate location for ${collectible.title} in ${collectible.district}. Requirements: ${collectible.requirements}.`,
+    description: `Rumoured collectible guide for ${collectible.title} in ${collectible.district}. Exact location unconfirmed until launch.`,
     alternates: { canonical: `/collectibles/${collectible.slug}` },
     openGraph: { url: `/collectibles/${collectible.slug}` },
     robots: { index: false, follow: true },
@@ -131,38 +131,48 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
               </p>
             </div>
 
-            {/* Photo / Image */}
-            <div className="card-carbon overflow-hidden">
-              <div className="relative h-72 sm:h-96 w-full bg-background">
-                <img loading="lazy"
-                  src={collectible.img}
-                  alt={collectible.title}
-                  className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-3 py-2 rounded-lg border border-border">
-                  <span className="flex min-w-0 items-center gap-1.5 font-mono truncate">
-                    <Compass className="h-4 w-4 text-accent" /> Relative Map Coordinates: Top {collectible.coordinates.top} / Left {collectible.coordinates.left}
-                  </span>
-                  <Link
-                    href={`/map?poi=${collectible.id}&top=${collectible.coordinates.top}&left=${collectible.coordinates.left}`}
-                    className="text-primary hover:underline flex items-center gap-1 font-bold"
-                  >
-                    Open Live Map <ExternalLink className="h-3 w-3" />
-                  </Link>
+            {/* Photo / Image — only when the entry has its own image */}
+            {collectible.img ? (
+              <div className="card-carbon overflow-hidden">
+                <div className="relative h-72 sm:h-96 w-full bg-background">
+                  <img loading="lazy"
+                    src={collectible.img}
+                    alt={collectible.title}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+                  {collectible.coordinates.top && collectible.coordinates.left ? (
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-3 py-2 rounded-lg border border-border">
+                      <span className="flex min-w-0 items-center gap-1.5 font-mono truncate">
+                        <Compass className="h-4 w-4 text-accent" /> Relative Map Coordinates: Top {collectible.coordinates.top} / Left {collectible.coordinates.left}
+                      </span>
+                      <Link
+                        href={`/map?poi=${collectible.id}&top=${collectible.coordinates.top}&left=${collectible.coordinates.left}`}
+                        className="text-primary hover:underline flex items-center gap-1 font-bold"
+                      >
+                        Open Live Map <ExternalLink className="h-3 w-3" />
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="absolute bottom-4 left-4 right-4 text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-3 py-2 rounded-lg border border-border">
+                      Location unconfirmed until launch
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
+            ) : null}
 
-            {/* Step-by-Step Guide Tip */}
-            <div className="card-carbon p-6 space-y-3 border-accent/30 bg-accent/5">
-              <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-wider">
-                <Lightbulb className="h-4 w-4" /> Discovery Guide & Tactics
+            {/* Step-by-Step Guide Tip — only when a real tip exists */}
+            {collectible.guideTip ? (
+              <div className="card-carbon p-6 space-y-3 border-accent/30 bg-accent/5">
+                <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-wider">
+                  <Lightbulb className="h-4 w-4" /> Discovery Guide & Tactics
+                </div>
+                <p className="text-sm text-foreground leading-relaxed">
+                  {collectible.guideTip}
+                </p>
               </div>
-              <p className="text-sm text-foreground leading-relaxed">
-                {collectible.guideTip}
-              </p>
-            </div>
+            ) : null}
 
             {/* Requirements & Unlock Details */}
             <div className="card-carbon p-6 space-y-4">
@@ -175,7 +185,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                     Prerequisites
                   </span>
                   <p className="text-xs text-foreground font-mono">
-                    {collectible.requirements}
+                    {collectible.requirements || "N/A"}
                   </p>
                 </div>
                 <div className="p-4 rounded-xl bg-card border border-gold/20 space-y-1">
@@ -183,7 +193,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                     <Trophy className="h-3 w-3" /> Reward Upon Collection
                   </span>
                   <p className="text-xs text-amber-600 dark:text-amber-300 font-mono font-semibold">
-                    {collectible.reward}
+                    {collectible.reward || "Unknown"}
                   </p>
                 </div>
               </div>

@@ -228,15 +228,17 @@ export function EvidenceCatalog({
               onClick={() => visit(e.id)}
               className="block"
             >
-              <div className="relative h-44">
-                <SafeImage
-                  src={e.img}
-                  alt={"Editorial illustration for " + e.name}
-                  fill
-                  sizes="(max-width:640px) 100vw, 33vw"
-                  className="object-cover"
-                />
-              </div>
+              {e.img ? (
+                <div className="relative h-44">
+                  <SafeImage
+                    src={e.img}
+                    alt={"Editorial illustration for " + e.name}
+                    fill
+                    sizes="(max-width:640px) 100vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
+              ) : null}
               <h2 className="px-4 pt-4 font-display text-base font-bold">
                 {e.name}
               </h2>

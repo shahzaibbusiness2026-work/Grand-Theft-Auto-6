@@ -82,38 +82,22 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
 
   return (
     <div className="space-y-8">
-      {/* Top Banner Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      {/* Top Banner Stats — honest counts only */}
+      <div className="grid grid-cols-2 gap-4">
         <div className="card-carbon p-4 text-center">
           <span className="font-display text-2xl sm:text-3xl font-black text-foreground">
             {properties.length}
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mt-1">
-            Confirmed Properties
+            Listed Properties
           </span>
         </div>
-        <div className="card-carbon p-4 text-center border-gold/20 bg-amber-950/10">
-          <span className="font-display text-2xl sm:text-3xl font-black text-gold-light">
-            $3.5M
+        <div className="card-carbon p-4 text-center">
+          <span className="font-display text-2xl sm:text-3xl font-black text-foreground">
+            Pre-Release
           </span>
-          <span className="text-xs font-bold uppercase tracking-wider text-gold-light/80 block mt-1">
-            Top Luxury Price
-          </span>
-        </div>
-        <div className="card-carbon p-4 text-center border-emerald-500/20 bg-emerald-950/10">
-          <span className="font-display text-2xl sm:text-3xl font-black text-emerald-400">
-            $18.5k/hr
-          </span>
-          <span className="text-xs font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
-            Peak Passive Yield
-          </span>
-        </div>
-        <div className="card-carbon p-4 text-center border-primary/20 bg-primary/10">
-          <span className="font-display text-2xl sm:text-3xl font-black text-primary">
-            10-Car
-          </span>
-          <span className="text-xs font-bold uppercase tracking-wider text-primary/80 block mt-1">
-            Max Garage Storage
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mt-1">
+            Expected Data — Prices & Yields Unconfirmed
           </span>
         </div>
       </div>
@@ -245,14 +229,16 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                 <div>
                   {/* Top Image */}
                   <div className="relative h-48 w-full overflow-hidden bg-background">
-                    <Image
-                      src={item.img}
-                      alt={`${item.name} - GTA 6 Property (${item.type})`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-85 group-hover:opacity-100"
-                      loading="lazy"
-                    />
+                    {item.img ? (
+                      <Image
+                        src={item.img}
+                        alt={`${item.name} - GTA 6 Property (${item.type})`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-85 group-hover:opacity-100"
+                        loading="lazy"
+                      />
+                    ) : null}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none" />
 
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
@@ -264,7 +250,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
 
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                       <div className="text-lg font-display font-black text-gold-light drop-shadow-md">
-                        {item.priceDisplay}
+                        {item.priceDisplay === "TBD" ? "TBD" : `${item.priceDisplay} (est.)`}
                       </div>
                       <ConfidenceBadge confidence={item.confidence} source={item.source} size="sm" />
                     </div>
@@ -294,7 +280,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                           Garage Space
                         </span>
                         <span className="font-bold text-foreground flex items-center gap-1">
-                          <Car className="h-3.5 w-3.5 text-primary" /> {item.garageCapacity} Vehicles
+                          <Car className="h-3.5 w-3.5 text-primary" /> {item.garageCapacity ? `${item.garageCapacity} Vehicles (est.)` : "Unknown"}
                         </span>
                       </div>
                       <div className="p-2.5 rounded-lg bg-muted/50 border border-border">
@@ -303,7 +289,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                         </span>
                         <span className="font-bold text-emerald-400 flex items-center gap-1">
                           <TrendingUp className="h-3.5 w-3.5 text-emerald-400" />
-                          {item.passiveIncomePerHour ? `$${item.passiveIncomePerHour.toLocaleString()}/hr` : "None"}
+                          {item.passiveIncomePerHour ? `$${item.passiveIncomePerHour.toLocaleString()}/hr (est.)` : "None"}
                         </span>
                       </div>
                     </div>
@@ -364,14 +350,16 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
               {comparedProps.map((p, idx) => (
                 <div key={p.id} className="space-y-4">
                   <div className="h-36 rounded-xl overflow-hidden relative bg-background">
-                    <Image
-                      src={p.img}
-                      alt={`${p.name} - GTA 6 Property`}
-                      fill
-                      sizes="280px"
-                      className="object-cover"
-                      loading="lazy"
-                    />
+                    {p.img ? (
+                      <Image
+                        src={p.img}
+                        alt={`${p.name} - GTA 6 Property`}
+                        fill
+                        sizes="280px"
+                        className="object-cover"
+                        loading="lazy"
+                      />
+                    ) : null}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute bottom-2 left-2 right-2">
                       <span className="text-xs uppercase font-bold text-primary block">
@@ -386,7 +374,7 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                   <div className="space-y-2 bg-muted/50 p-3 rounded-xl border border-border">
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">Price:</span>
-                      <span className="text-gold-light font-bold">{p.priceDisplay}</span>
+                      <span className="text-gold-light font-bold">{p.priceDisplay === "TBD" ? "TBD" : `${p.priceDisplay} (est.)`}</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">District:</span>
@@ -394,18 +382,18 @@ export function PropertiesClient({ initialProperties }: { initialProperties?: Ca
                     </div>
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">Garage:</span>
-                      <span className="text-foreground font-bold">{p.garageCapacity} Vehicles</span>
+                      <span className="text-foreground font-bold">{p.garageCapacity ? `${p.garageCapacity} Vehicles (est.)` : "Unknown"}</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-border">
                       <span className="text-muted-foreground">Passive Rate:</span>
                       <span className="text-emerald-400 font-bold">
-                        {p.passiveIncomePerHour ? `$${p.passiveIncomePerHour.toLocaleString()}/hr` : "$0 (Private)"}
+                        {p.passiveIncomePerHour ? `$${p.passiveIncomePerHour.toLocaleString()}/hr (est.)` : "None"}
                       </span>
                     </div>
                     <div className="flex justify-between py-1">
                       <span className="text-muted-foreground">Daily Revenue:</span>
                       <span className="text-emerald-400 font-bold">
-                        ${((p.passiveIncomePerHour || 0) * 24).toLocaleString()} / day
+                        {p.passiveIncomePerHour ? `$${(p.passiveIncomePerHour * 24).toLocaleString()} / day (est.)` : "None"}
                       </span>
                     </div>
                   </div>

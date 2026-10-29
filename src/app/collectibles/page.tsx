@@ -23,15 +23,15 @@ function dbToCanonical(c: CollectibleRecord, match?: CanonicalCollectible): Cano
     slug: c.slug || match?.slug || c.id,
     title: c.title,
     category: (c.category as CanonicalCollectible["category"]) || match?.category || "Hidden Packages",
-    district: c.district || match?.district || "Vice City",
+    district: c.district || match?.district || "Unknown",
     reward: c.reward || match?.reward || "Unknown",
     requirements: c.requirements || match?.requirements || "N/A",
     description: c.description || match?.description || "",
     guideTip: c.guide_tip || match?.guideTip || "",
-    coordinates: { top: c.coord_top || match?.coordinates.top || "50%", left: c.coord_left || match?.coordinates.left || "50%" },
-    confidence: (c.confidence as CanonicalCollectible["confidence"]) || match?.confidence || "REPORTED",
-    source: c.source || match?.source || "Atlas Admin",
-    img: c.img || match?.img || "/img/treasure.svg",
+    coordinates: { top: c.coord_top || match?.coordinates.top || "", left: c.coord_left || match?.coordinates.left || "" },
+    confidence: (c.confidence as CanonicalCollectible["confidence"]) || match?.confidence || "RUMORED",
+    source: c.source || match?.source || "Unknown",
+    img: c.img || match?.img || "",
   };
 }
 
@@ -72,8 +72,8 @@ export default async function CollectiblesPage() {
             COLLECTIBLES <span className="text-primary">FINDER & GUIDE</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            Locate every hidden contraband package, stunt ramp, pirate radio mast, and rare wildlife species across the State of Leonida.
-            Filter by district, check off collected items, and view coordinate guides.
+            Selected rumoured collectibles across the State of Leonida — hidden packages, stunt ramps, pirate radio masts, and wildlife subjects reported by the community.
+            Filter by district and check off collected items. Exact locations are unconfirmed until launch.
           </p>
         </div>
 

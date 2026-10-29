@@ -198,7 +198,8 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                   i === 0 && "border-pink-500/60",
                 )}
               >
-                {/* Perfectly Proportioned 3:4 Aspect Ratio Image Box */}
+                {/* Perfectly Proportioned 3:4 Aspect Ratio Image Box — only with the character's own image */}
+                {c.img ? (
                 <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/40">
                   <SafeImage
                     src={c.img}
@@ -228,6 +229,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                     </span>
                   </div>
                 </div>
+                ) : null}
 
                 {/* Card Meta Content */}
                 <div className="p-4 bg-card/95">
@@ -293,7 +295,8 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
               href={"/characters/" + c.id}
               className="group card-surface overflow-hidden rounded-xl border border-border hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer shadow-md hover:shadow-[0_0_20px_rgba(236,72,153,0.2)]"
             >
-              {/* Natural 3:4 Aspect Ratio Image */}
+              {/* Natural 3:4 Aspect Ratio Image — only with the character's own image */}
+              {c.img ? (
               <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/40">
                 <SafeImage
                   src={c.img}
@@ -317,6 +320,7 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
                   </span>
                 </div>
               </div>
+              ) : null}
 
               <div className="p-3 bg-card/95">
                 <h3 className="truncate font-display text-[13px] font-bold text-foreground group-hover:text-pink-600 dark:group-hover:text-pink-300 transition-colors">

@@ -55,7 +55,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
           onClick={onItemClick}
           className="group inline-flex flex-col leading-none focus:outline-none"
         >
-          <span className="text-primary font-display text-[26px] font-black tracking-tight">
+          <span className="bg-gradient-to-r from-white via-white to-gold-light bg-clip-text text-transparent font-display text-[26px] font-black tracking-tight drop-shadow-[0_0_16px_rgba(201,168,106,0.35)]">
             GTA 6
           </span>
           <span className="mt-0.5 font-mono text-xs font-black uppercase tracking-[0.45em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
@@ -64,7 +64,11 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
         </Link>
       </div>
 
+      <div className="mx-5 mt-4 h-px bg-gradient-to-r from-gold/60 via-white/10 to-transparent" />
       {/* Navigation list */}
+      <p className="px-5 pt-4 pb-1 font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+        Navigate
+      </p>
       <nav className="flex-1 space-y-1 px-3 py-2">
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
@@ -78,7 +82,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
               className={cn(
                 "group flex items-center gap-3 rounded-xl px-2.5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-200",
                 isActive
-                  ? "bg-gold/20 text-white font-bold shadow-[0_0_16px_rgba(201,168,106,0.25)] border border-gold/40"
+                  ? "bg-gradient-to-r from-gold/25 via-gold/10 to-transparent text-white font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)] border border-gold/40"
                   : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-100"
               )}
             >
@@ -123,6 +127,9 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
             style={{ fontFamily: "'Brush Script MT', 'Pacifico', cursive, sans-serif" }}
           >
             Lives Again
+          </span>
+          <span className="mt-2 font-mono text-[10px] font-black uppercase tracking-[0.35em] text-slate-500">
+            Taish Gaming
           </span>
         </div>
       </div>

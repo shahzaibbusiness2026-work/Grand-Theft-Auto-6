@@ -64,7 +64,10 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
         />
 
         {/* Scrollable Dashboard Body — weapons and vehicles only, all live DB data */}
-        <main className="flex-1 overflow-y-auto px-4 py-6 sm:px-6 lg:px-8 space-y-6">
+        <main className="relative flex-1 overflow-y-auto px-4 py-6 sm:px-6 lg:px-8 space-y-8">
+          {/* Ambient premium glows */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 -z-0 h-96 bg-[radial-gradient(ellipse_at_top,rgba(201,168,106,0.12),transparent_60%)]" />
+          <div className="pointer-events-none absolute right-0 top-1/3 -z-0 h-96 w-96 rounded-full bg-[#00F0FF]/[0.05] blur-[120px]" />
           <div className="mx-auto max-w-[1540px] space-y-6 pb-12">
             {/* Hero Welcome Card — shows live DB counts as site stats */}
             <CompanionHero
@@ -72,6 +75,8 @@ export function DashboardView({ liveStats }: DashboardViewProps) {
               siteStats={{
                 totalVehicles: liveStats.totalVehicles,
                 totalWeapons: liveStats.totalWeapons,
+                totalCharacters: liveStats.totalCharacters,
+                totalArticles: liveStats.totalArticles,
               }}
             />
 

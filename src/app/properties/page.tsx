@@ -22,7 +22,7 @@ function dbToCanonical(p: PropertyRecord, match?: CanonicalProperty): CanonicalP
     id: p.id,
     slug: p.slug || match?.slug || p.id,
     name: p.name,
-    district: p.district || match?.district || "Vice City",
+    district: p.district || match?.district || "Unknown",
     type: (p.type as CanonicalProperty["type"]) || match?.type || "Safehouse",
     price: p.price ?? match?.price ?? null,
     priceDisplay: p.price_display || match?.priceDisplay || "TBD",
@@ -32,11 +32,11 @@ function dbToCanonical(p: PropertyRecord, match?: CanonicalProperty): CanonicalP
     features: p.features || match?.features || [],
     upgrades: p.upgrades || match?.upgrades || [],
     requirements: p.requirements || match?.requirements || [],
-    confidence: (p.confidence as CanonicalProperty["confidence"]) || match?.confidence || "REPORTED",
-    source: p.source || match?.source || "Atlas Admin",
+    confidence: (p.confidence as CanonicalProperty["confidence"]) || match?.confidence || "RUMORED",
+    source: p.source || match?.source || "Unknown",
     desc: p.description || match?.desc || "",
-    img: p.img || match?.img || "/img/hero-dark.jpg",
-    mapCoords: match?.mapCoords || { top: "50%", left: "50%" },
+    img: p.img || match?.img || "",
+    mapCoords: match?.mapCoords || { top: "", left: "" },
   };
 }
 
@@ -77,8 +77,8 @@ export default async function PropertiesPage() {
             PROPERTIES & <span className="text-primary">BUSINESSES</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            Browse and compare confirmed safehouses, commercial warehouses, chop shops, and nightclubs.
-            Analyze passive hourly yields, garage sizes, and side-by-side specs.
+            Browse and compare listed safehouses, commercial warehouses, chop shops, and nightclubs.
+            Prices, yields and garage sizes are pre-release estimates, unconfirmed until launch.
           </p>
         </div>
 

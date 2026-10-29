@@ -91,10 +91,10 @@ export function vehicleFeatureScore(v: {
 
 export function computeVehicleScore(
   v: {
-    topSpeed: number;
-    acceleration: number; // seconds, lower is better
-    handling: number;
-    braking: number;
+    topSpeed: number | null;
+    acceleration: number | null; // seconds, lower is better
+    handling: number | null;
+    braking: number | null;
     traction?: number;
     features?: string[];
     armorRating?: number;
@@ -104,7 +104,11 @@ export function computeVehicleScore(
     specialAbility?: string;
   },
   weights: VehicleScoreWeights = DEFAULT_VEHICLE_WEIGHTS
-): number {
+): number | null {
+  // Missing core stats => no score at all (never score from invented numbers).
+  if (v.topSpeed === null || v.acceleration === null || v.handling === null || v.braking === null) {
+    return null;
+  }
   const w = normalizeWeights({ ...weights });
   const speedScore = clamp(((v.topSpeed - 80) / (230 - 80)) * 100);
   const accelScore = clamp(((6.5 - clamp(v.acceleration, 1.5, 6.5)) / (6.5 - 1.5)) * 100);
@@ -125,33 +129,45 @@ export function computeVehicleScore(
 
 export function computeWeaponScore(
   w: {
-    damage: number;
-    fireRate: number;
-    accuracy: number;
-    range: number;
+    damage: number | null;
+    fireRate: number | null;
+    accuracy: number | null;
+    range: number | null;
     reload?: number;
-    magazineSize: number;
-    handling: number;
+    magazineSize: number | null;
+    handling: number | null;
   },
   weights: WeaponScoreWeights = DEFAULT_WEAPON_WEIGHTS
-): number {
+): number | null {
+  // Missing core stats => no score at all. A missing reload rating simply
+  // drops out of the weighted average (never a placeholder 60).
+  if (
+    w.damage === null || w.fireRate === null || w.accuracy === null ||
+    w.range === null || w.magazineSize === null || w.handling === null
+  ) {
+    return null;
+  }
   const wt = normalizeWeights({ ...weights });
-  const reloadScore = clamp(w.reload ?? 60);
-  const magazineScore = clamp((w.magazineSize / 60) * 100);
-  const total =
-    (clamp(w.damage) * wt.damage +
-      clamp(w.fireRate) * wt.fireRate +
-      clamp(w.accuracy) * wt.accuracy +
-      clamp(w.range) * wt.range +
-      reloadScore * wt.reload +
-      magazineScore * wt.magazine +
-      clamp(w.handling) * wt.handling) /
-    100;
+  const dims: [number, number][] = [
+    [clamp(w.damage), wt.damage],
+    [clamp(w.fireRate), wt.fireRate],
+    [clamp(w.accuracy), wt.accuracy],
+    [clamp(w.range), wt.range],
+    [clamp((w.magazineSize / 60) * 100), wt.magazine],
+    [clamp(w.handling), wt.handling],
+  ];
+  if (w.reload !== undefined && w.reload !== null) {
+    dims.push([clamp(w.reload), wt.reload]);
+  }
+  const weightSum = dims.reduce((sum, [, weight]) => sum + weight, 0);
+  if (weightSum === 0) return null;
+  const total = dims.reduce((sum, [score, weight]) => sum + score * weight, 0) / weightSum;
   return Math.round(total);
 }
 
 /** DPS index — Damage × effective shots-per-second (rating-based). */
-export function computeDpsIndex(damage: number, fireRate: number): number {
+export function computeDpsIndex(damage: number | null, fireRate: number | null): number | null {
+  if (damage === null || fireRate === null) return null;
   return Math.round((clamp(damage) * clamp(fireRate)) / 100);
 }
 

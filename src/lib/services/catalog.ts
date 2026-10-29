@@ -66,11 +66,10 @@ const num = (s?: string | null): number | null => {
 
 /** Map a live DB vehicle row to the display shape — DB values WIN over canonical stats. */
 function dbVehicleToDisplay(v: VehicleCatalogRow, c?: CanonicalVehicle): CanonicalVehicle {
-  // Class-based stat defaults fill NULL columns so comparisons/rankings
-  // stay meaningful before the admin enters real values.
+  // Missing stats stay missing (null/undefined) — never invented defaults.
   const defaults = VEHICLE_CLASS_DEFAULTS[(v.class || "").trim()] || {};
-  const rating = (db: number | null | undefined, canon?: number, dflt?: number): number =>
-    db ?? canon ?? dflt ?? 60;
+  const rating = (db: number | null | undefined, canon?: number, dflt?: number): number | undefined =>
+    db ?? canon ?? dflt ?? undefined;
   return {
     id: v.id,
     slug: v.slug || c?.slug || v.id,
@@ -81,21 +80,21 @@ function dbVehicleToDisplay(v: VehicleCatalogRow, c?: CanonicalVehicle): Canonic
       : v.class === "Super"
         ? "Super Car"
         : (v.class as CanonicalVehicle["klass"])) || c?.klass || "Sports Car",
-    img: v.images?.[0] || c?.img || "/img/car-purple.jpg",
+    img: v.images?.[0] || c?.img || "",
     filter: c?.filter,
-    topSpeed: num(v.top_speed) ?? c?.topSpeed ?? 150,
-    acceleration: num(v.acceleration) ?? c?.acceleration ?? 4.0,
-    braking: c?.braking ?? 75,
-    handling: num(v.handling) ?? c?.handling ?? 75,
-    power: v.power_hp ?? c?.power ?? 500,
-    weight: v.weight || c?.weight || "1,500 kg",
-    seating: v.seating ?? c?.seating ?? 2,
-    drivetrain: (v.drivetrain as CanonicalVehicle["drivetrain"]) || c?.drivetrain || "RWD",
+    topSpeed: num(v.top_speed) ?? c?.topSpeed ?? null,
+    acceleration: num(v.acceleration) ?? c?.acceleration ?? null,
+    braking: c?.braking ?? null,
+    handling: num(v.handling) ?? c?.handling ?? null,
+    power: v.power_hp ?? c?.power ?? null,
+    weight: v.weight || c?.weight || "",
+    seating: v.seating ?? c?.seating ?? null,
+    drivetrain: (v.drivetrain as CanonicalVehicle["drivetrain"]) || c?.drivetrain || "Unknown",
     price: v.price ?? c?.price ?? null,
     priceDisplay: v.price_display || c?.priceDisplay || "TBD",
-    purchaseLocation: c?.purchaseLocation || "Southern San Andreas Super Autos",
-    spawnLocations: c?.spawnLocations ?? ["Vice City Downtown", "Ocean Drive"],
-    customizationOptions: v.customization?.length ? v.customization : c?.customizationOptions ?? ["Engine Tuning", "Brakes", "Suspension", "Turbo"],
+    purchaseLocation: c?.purchaseLocation || "",
+    spawnLocations: c?.spawnLocations ?? [],
+    customizationOptions: v.customization?.length ? v.customization : c?.customizationOptions ?? [],
     confidence: (v.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "SPECULATION",
     source: v.source || c?.source || "In-game Footage",
     description: v.summary || c?.description || `${v.name} in Grand Theft Auto VI.`,
@@ -140,7 +139,7 @@ function dbVehicleToDisplay(v: VehicleCatalogRow, c?: CanonicalVehicle): Canonic
     horn: v.horn || c?.horn || undefined,
     turboSound: v.turbo_sound || c?.turboSound || undefined,
     gearShiftSound: v.gear_shift_sound || c?.gearShiftSound || undefined,
-    availability: v.availability || c?.availability || "Confirmed for GTA 6",
+    availability: v.availability || c?.availability || "Unconfirmed",
     gallery: v.gallery?.length ? v.gallery : c?.gallery ?? [],
     tags: v.tags?.length ? v.tags : c?.tags ?? [],
   };
@@ -148,33 +147,33 @@ function dbVehicleToDisplay(v: VehicleCatalogRow, c?: CanonicalVehicle): Canonic
 
 /** Map a live DB weapon row to the display shape — DB values WIN over canonical stats. */
 function dbWeaponToDisplay(w: WeaponCatalogRow, c?: CanonicalWeapon): CanonicalWeapon {
-  // Category-based stat defaults fill NULL columns.
+  // Missing stats stay missing (null/undefined) — never invented defaults.
   const defaults = WEAPON_CATEGORY_DEFAULTS[(w.category || "").trim()] || {};
-  const rating = (db: number | null | undefined, canon?: number, dflt?: number): number =>
-    db ?? canon ?? dflt ?? 55;
+  const rating = (db: number | null | undefined, canon?: number, dflt?: number): number | undefined =>
+    db ?? canon ?? dflt ?? undefined;
   return {
     id: w.id,
     slug: w.slug || c?.slug || w.id,
     name: w.name,
     klass: (w.category as CanonicalWeapon["klass"]) || c?.klass || "Pistol",
-    damage: num(w.damage) ?? c?.damage ?? 50,
-    fireRate: num(w.rate_of_fire) ?? c?.fireRate ?? 50,
-    accuracy: num(w.range) ?? c?.accuracy ?? 50,
-    range: num(w.range) ?? c?.range ?? 50,
-    handling: c?.handling ?? 50,
-    reloadTime: c?.reloadTime ?? "2.5s",
-    magazineSize: num(w.magazine_size) ?? c?.magazineSize ?? 15,
-    ammoType: w.ammunition || c?.ammoType || "9mm Standard",
+    damage: num(w.damage) ?? c?.damage ?? null,
+    fireRate: num(w.rate_of_fire) ?? c?.fireRate ?? null,
+    accuracy: num(w.range) ?? c?.accuracy ?? null,
+    range: num(w.range) ?? c?.range ?? null,
+    handling: c?.handling ?? null,
+    reloadTime: c?.reloadTime ?? "",
+    magazineSize: num(w.magazine_size) ?? c?.magazineSize ?? null,
+    ammoType: w.ammunition || c?.ammoType || "",
     price: w.price ?? c?.price ?? null,
     priceDisplay: w.price_display || c?.priceDisplay || "TBD",
     rarity: (w.rarity as CanonicalWeapon["rarity"]) || c?.rarity || "Common",
-    locations: c?.locations || [w.acquisition_method || "Ammu-Nation"],
+    locations: c?.locations || (w.acquisition_method ? [w.acquisition_method] : []),
     attachments: w.attachments || c?.attachments || [],
     confidence: (w.confidence as CanonicalWeapon["confidence"]) ||
       (w.verification === "verified" ? "CONFIRMED" : "SPECULATION"),
     source: c?.source || "In-game Database",
     description: w.notes || c?.description || `${w.name} in Grand Theft Auto VI.`,
-    img: w.image || c?.img || "/img/hero-dark.jpg",
+    img: w.image || c?.img || "",
 
     /* Deep-dive fields (DB first → canonical → category defaults) */
     reload: rating(w.reload, c?.reload, defaults.reload),
@@ -189,7 +188,7 @@ function dbWeaponToDisplay(w: WeaponCatalogRow, c?: CanonicalWeapon): CanonicalW
     ammoCost: w.ammo_cost ?? c?.ammoCost ?? null,
     upgradeCost: w.upgrade_cost ?? c?.upgradeCost ?? null,
     manufacturer: w.manufacturer || c?.manufacturer || undefined,
-    availability: w.availability || c?.availability || "Confirmed for GTA 6",
+    availability: w.availability || c?.availability || "Unconfirmed",
     featured: w.featured ?? c?.featured ?? false,
     gallery: w.gallery?.length ? w.gallery : c?.gallery ?? [],
     tags: w.tags?.length ? w.tags : c?.tags ?? [],

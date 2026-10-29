@@ -37,7 +37,7 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
 
   return (
     <>
-      <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#070b14]/85 dark:bg-[#070b14]/85 bg-white/90 px-4 sm:px-6 backdrop-blur-xl transition-colors">
+      <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#070b14]/85 dark:bg-[#070b14]/85 bg-white/90 px-4 sm:px-6 backdrop-blur-xl transition-colors shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
         {/* Left: Mobile hamburger + Search bar */}
         <div className="flex items-center gap-3 flex-1 max-w-xl">
           {onMenuToggle && (
@@ -95,9 +95,11 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
               onClick={() => setProfileOpen((prev) => !prev)}
               className="flex items-center gap-2.5 rounded-xl border border-transparent p-1 sm:px-2 sm:py-1 transition-all hover:border-white/10 hover:bg-white/[0.04]"
             >
-              {/* Avatar circle — initials of the account's own name */}
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-yellow-400 text-xs font-black text-slate-950 shadow-[0_0_12px_rgba(201,168,106,0.4)]">
-                {initialsFor(userName)}
+              {/* Avatar circle — initials of the account's own name, premium gold ring */}
+              <div className="rounded-full bg-gradient-to-tr from-gold via-yellow-400 to-[#00F0FF] p-[2px] shadow-[0_0_16px_rgba(201,168,106,0.5)]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-yellow-400 text-xs font-black text-slate-950">
+                  {initialsFor(userName)}
+                </div>
               </div>
 
               {/* Text info */}

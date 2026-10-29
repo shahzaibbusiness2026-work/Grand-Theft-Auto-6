@@ -43,8 +43,8 @@ export interface Vehicle {
   klass: string;
   img: string;
   filter?: string;
-  topSpeed: number;
-  power: number;
+  topSpeed: number | null;
+  power: number | null;
   price?: string;
   featured?: boolean;
 }

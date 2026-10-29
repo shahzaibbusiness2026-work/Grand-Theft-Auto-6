@@ -2,8 +2,6 @@
 import Link from "next/link";
 import {
   MapPin,
-  Clock,
-  ShieldAlert,
   ArrowLeft,
   ChevronRight,
   Car,
@@ -43,16 +41,14 @@ async function resolveLocation(slug: string): Promise<CanonicalLocation | undefi
         district: row.district,
         category: (row.category as CanonicalLocation["category"]) || canonical?.category || "Point of Interest",
         desc: row.description || canonical?.desc || "",
-        top: coordMatch?.[1] || canonical?.top || "50%",
-        left: coordMatch?.[2] || canonical?.left || "50%",
-        hours: row.hours || canonical?.hours || "Unknown",
-        threatLevel: (row.threat_level as CanonicalLocation["threatLevel"]) || canonical?.threatLevel || "Low",
+        top: coordMatch?.[1] || canonical?.top || "",
+        left: coordMatch?.[2] || canonical?.left || "",
         relatedVehicles: canonical?.relatedVehicles,
         relatedWeapons: canonical?.relatedWeapons,
         relatedMissions: canonical?.relatedMissions,
         confidence: (row.confidence as CanonicalLocation["confidence"]) || canonical?.confidence || "SPECULATION",
-        source: row.source || canonical?.source || "Atlas Admin",
-        img: row.img || canonical?.img || "/img/map-dark.svg",
+        source: row.source || canonical?.source || "Unknown",
+        img: row.img || canonical?.img || "",
         verified: row.verification === "verified",
       };
     }
@@ -78,7 +74,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${loc.name} — GTA 6 Location`,
-    description: `Fan dossier and satellite map notes for ${loc.name} in ${loc.district}, State of Leonida. Threat level: ${loc.threatLevel}.`,
+    description: `Fan dossier and satellite map notes for ${loc.name} in ${loc.district}, State of Leonida.`,
     alternates: { canonical: `/locations/${loc.slug}` },
     openGraph: { type: "website", url: `/locations/${loc.slug}` },
   };
@@ -96,20 +92,6 @@ export default async function LocationDetailPage({ params }: PageProps) {
     .filter((l) => l.id !== loc.id && l.district === loc.district)
     .slice(0, 3);
 
-  const threatColor = (level: string) => {
-    switch (level) {
-      case "Low":
-        return "text-emerald-400 bg-emerald-500/10 border-emerald-500/30";
-      case "Medium":
-        return "text-gold-light bg-gold/10 border-gold/30";
-      case "High":
-        return "text-orange-400 bg-orange-500/10 border-orange-500/30";
-      case "Restricted Area":
-        return "text-rose-400 bg-rose-500/10 border-rose-500/30";
-      default:
-        return "text-muted-foreground bg-muted border-border";
-    }
-  };
 
   return (
     <SiteShell>
@@ -172,13 +154,6 @@ export default async function LocationDetailPage({ params }: PageProps) {
                   <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-primary/20 text-primary border border-primary/30">
                     {loc.category}
                   </span>
-                  <span
-                    className={`text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded border ${threatColor(
-                      loc.threatLevel
-                    )}`}
-                  >
-                    Threat: {loc.threatLevel}
-                  </span>
                   <ConfidenceBadge confidence={loc.confidence} source={loc.source} />
                 </div>
                 <FavoriteButton type="locations" id={loc.id} />
@@ -199,42 +174,31 @@ export default async function LocationDetailPage({ params }: PageProps) {
             </div>
 
             {/* Photo / Visual */}
-            <div className="card-carbon overflow-hidden">
-              <div className="relative h-72 sm:h-96 w-full bg-background">
-                <img loading="lazy" src={loc.img} alt={loc.name} className="h-full w-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
-                  <span className="font-mono text-muted-foreground min-w-0 truncate">
-                    Map Grid: Top {loc.top} / Left {loc.left}
-                  </span>
-                  <Link
-                    href={`/map?poi=${loc.id}&top=${loc.top}&left=${loc.left}`}
-                    className="btn-primary text-xs px-3 py-2.5 min-h-[44px] font-bold flex items-center gap-1.5"
-                  >
-                    <Navigation className="h-3.5 w-3.5" /> Fly to Live Pin
-                  </Link>
+            {loc.img ? (
+              <div className="card-carbon overflow-hidden">
+                <div className="relative h-72 sm:h-96 w-full bg-background">
+                  <img loading="lazy" src={loc.img} alt={loc.name} className="h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+                  {loc.top && loc.left ? (
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
+                      <span className="font-mono text-muted-foreground min-w-0 truncate">
+                        Map Grid: Top {loc.top} / Left {loc.left}
+                      </span>
+                      <Link
+                        href={`/map?poi=${loc.id}&top=${loc.top}&left=${loc.left}`}
+                        className="btn-primary text-xs px-3 py-2.5 min-h-[44px] font-bold flex items-center gap-1.5"
+                      >
+                        <Navigation className="h-3.5 w-3.5" /> Fly to Live Pin
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="absolute bottom-4 left-4 right-4 text-xs text-muted-foreground bg-muted/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-border">
+                      Map position unconfirmed
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-
-            {/* Operating Intel & Associated Assets */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="card-carbon p-5 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  <Clock className="h-4 w-4 text-accent" /> Hours of Operation
-                </div>
-                <p className="text-sm font-semibold text-foreground font-mono">{loc.hours}</p>
-              </div>
-
-              <div className="card-carbon p-5 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  <ShieldAlert className="h-4 w-4 text-primary" /> Security & Heat Rating
-                </div>
-                <p className="text-sm font-semibold text-foreground font-mono">
-                  {loc.threatLevel} (Response time &lt; 90s)
-                </p>
-              </div>
-            </div>
+            ) : null}
 
             {/* Related Vehicles & Armory */}
             {((loc.relatedVehicles?.length || 0) > 0 || (loc.relatedWeapons?.length || 0) > 0) && (
