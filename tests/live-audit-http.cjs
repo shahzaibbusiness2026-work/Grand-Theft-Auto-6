@@ -244,6 +244,18 @@ const noindex = (html) =>
       assert.doesNotMatch(html, /<loc>[^<]+\/locations\/the-malibu-nightclub/);
     },
   );
+  await check(
+    "corrected map-size badge is fresh on embedded cards",
+    async () => {
+      const { html } = await page("/map");
+      const card = html.match(
+        /<a[^>]+href="\/news\/map-size-comparison-gtav-rdr2"[\s\S]*?<\/a>/,
+      )?.[0];
+      assert.ok(card, "related card present");
+      assert.match(card, /Map Evidence/);
+      assert.doesNotMatch(card, />Confirmed</i);
+    },
+  );
   fs.mkdirSync("tmp/live-audit-fixes-2026-10-28", { recursive: true });
   fs.writeFileSync(
     "tmp/live-audit-fixes-2026-10-28/http.json",

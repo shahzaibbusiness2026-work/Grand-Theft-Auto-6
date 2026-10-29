@@ -6,7 +6,8 @@ import {
 } from "@/lib/editorial-quality";
 
 import { cache } from "react";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { PUBLISHED_ARTICLES_TAG } from "@/lib/article-cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
@@ -116,12 +117,13 @@ function rowToAdminArticle(row: DatabaseArticleRow): AdminArticle {
  */
 export const getPublicArticles = cache(async (): Promise<Article[]> => {
   try {
-    const supabase = createPublicClient();
+    const supabase = createPublicClient(PUBLISHED_ARTICLES_TAG);
     const { data, error } = await supabase
       .from("articles")
       .select("*")
       .eq("status", "published")
-      .order("published_at", { ascending: false });
+      .order("published_at", { ascending: false })
+      .order("id", { ascending: true });
 
     if (!error && data) {
       return (data as DatabaseArticleRow[]).map(rowToArticle);
@@ -142,12 +144,13 @@ export const getPublicArticleBySlug = cache(
   async (slug: string): Promise<DatabaseArticleRow | null> => {
     if (!slug) return null;
     try {
-      const supabase = createPublicClient();
+      const supabase = createPublicClient(PUBLISHED_ARTICLES_TAG);
       const { data, error } = await supabase
         .from("articles")
         .select("*")
         .eq("slug", slug)
         .eq("status", "published")
+        .order("id", { ascending: true })
         .maybeSingle();
 
       if (error) throw new Error("Article data unavailable");
@@ -308,6 +311,7 @@ export async function saveArticle(
           targetLabel: article.title,
           detail: { status: payload.status },
         });
+        revalidateTag(PUBLISHED_ARTICLES_TAG);
         revalidatePath("/news");
         revalidatePath("/news/[slug]", "page");
         revalidatePath("/sitemap.xml");
@@ -326,6 +330,7 @@ export async function saveArticle(
       detail: { status: payload.status },
     });
 
+    revalidateTag(PUBLISHED_ARTICLES_TAG);
     revalidatePath("/news");
     revalidatePath("/news/[slug]", "page");
     revalidatePath("/sitemap.xml");
@@ -356,6 +361,7 @@ export async function deleteArticle(id: string) {
       targetId: id,
     });
 
+    revalidateTag(PUBLISHED_ARTICLES_TAG);
     revalidatePath("/news");
     revalidatePath("/news/[slug]", "page");
     revalidatePath("/sitemap.xml");
