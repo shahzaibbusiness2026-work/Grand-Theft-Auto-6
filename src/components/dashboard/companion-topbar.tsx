@@ -69,32 +69,22 @@ export function CompanionTopBar({ onMenuToggle, userName = "Player" }: Companion
 
         {/* Right: Controls & User Profile */}
         <div className="flex items-center gap-2 sm:gap-3 ml-4">
-          {/* Enhanced Theme switcher with Bright Mode Glow */}
+          {/* Theme switcher, icon only */}
           <button
             type="button"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
             className={cn(
-              "flex h-11 px-2.5 items-center gap-1.5 rounded-xl border transition-all active:scale-95 shadow-sm",
+              "flex h-11 w-11 items-center justify-center rounded-xl border transition-all active:scale-95 shadow-sm",
               resolvedTheme === "light"
                 ? "border-gold-light/60 bg-amber-50 text-gold-dark shadow-[0_0_12px_rgba(201,168,106,0.35)] ring-1 ring-gold-light/40"
                 : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-[#00F0FF]/40 hover:bg-white/[0.08] hover:text-[#00F0FF]"
             )}
-            title={`Switch to ${resolvedTheme === "dark" ? "Bright Mode" : "Dark Mode"}`}
+            title="Switch theme"
           >
             {resolvedTheme === "light" ? (
-              <>
-                <Sun className="h-4 w-4 text-gold fill-gold-light drop-shadow-[0_0_8px_rgba(201,168,106,0.9)] animate-pulse" />
-                <span className="hidden sm:inline font-mono text-xs font-black uppercase tracking-wider text-gold-dark">
-                  Bright
-                </span>
-              </>
+              <Sun className="h-4 w-4 text-gold fill-gold-light drop-shadow-[0_0_8px_rgba(201,168,106,0.9)] animate-pulse" />
             ) : (
-              <>
-                <Moon className="h-4 w-4 text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.7)]" />
-                <span className="hidden sm:inline font-mono text-xs font-black uppercase tracking-wider text-slate-400">
-                  Dark
-                </span>
-              </>
+              <Moon className="h-4 w-4 text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.7)]" />
             )}
           </button>
 
