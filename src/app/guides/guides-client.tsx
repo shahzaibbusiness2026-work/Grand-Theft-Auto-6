@@ -102,14 +102,15 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
   return (
     <div className="grid w-full gap-6 px-4 py-8 sm:px-6 md:px-8 lg:px-10 lg:grid-cols-[240px_1fr_290px]">
       {/* LEFT SIDEBAR */}
-      <aside className="space-y-6">
+      <aside className="hidden space-y-6 lg:block">
         <div className="card-surface p-4">
           <h2 className="px-2 font-display text-xl font-extrabold uppercase tracking-wider text-foreground">Guide Categories</h2>
-          <nav className="mt-4 space-y-1">
+          <nav aria-label="Guide categories" className="mt-4 space-y-1">
             {liveCategories.map((c) => (
               <button
                 key={c.label}
                 onClick={() => setCat(c.label)}
+                aria-pressed={cat === c.label}
                 className={cn(
                   "flex w-full items-center justify-between rounded-lg px-3 py-3 text-[13px] font-semibold text-muted-foreground transition-colors hover:text-foreground",
                   cat === c.label && "border border-[#FF2E9A]/50 bg-[#FF2E9A]/10 text-[#FF2E9A] shadow-sm"
@@ -139,6 +140,9 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input aria-label="Search guides" placeholder="Search guides..." className="pl-9" value={search} onChange={(e) => setSearch(e.target.value)} />
             </div>
+            <select aria-label="Filter guides by category" value={cat} onChange={(event) => setCat(event.target.value)} className="mt-3 min-h-11 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground lg:hidden">
+              {liveCategories.map((category) => <option key={category.label} value={category.label}>{category.label} ({category.count})</option>)}
+            </select>
           </div>
         </div>
 
@@ -228,7 +232,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
           </div>
         </div>
 
-        <div className="card-surface p-5">
+        {weekTop.length > 0 && <div className="card-surface p-5">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-sm font-extrabold uppercase tracking-wider">Editor&apos;s Picks</h2>
             <a href="#browse-guides" className="text-xs font-semibold text-accent px-2 py-2">View All</a>
@@ -251,7 +255,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
               </li>
             ))}
           </ul>
-        </div>
+        </div>}
 
       </aside>
     </div>
