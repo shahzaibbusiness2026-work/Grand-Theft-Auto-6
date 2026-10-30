@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   openGraph: { url: "/tools/weapon-dps-calculator" },
-  title: "GTA 6 Weapon DPS Calculator — Damage, Fire Rate & Attachments",
+  title: "GTA 6 DPS Calculator: Example Damage & Fire Rate",
   description: PUBLIC_TOOL_COPY["/tools/weapon-dps-calculator"],
 
   alternates: { canonical: "/tools/weapon-dps-calculator" },

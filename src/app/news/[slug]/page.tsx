@@ -94,6 +94,8 @@ export default async function ArticleDetailPage({ params }: Props) {
   const { slug } = await params;
   const article = await getPublicArticleBySlug(slug);
   if (!article) notFound();
+  const subtitle = article.subtitle?.trim();
+  const showSubtitle = subtitle && subtitle !== article.excerpt?.trim();
 
   const bodyMarkdown = articleBodyMarkdown(
     article.content || article.excerpt || "",
@@ -249,9 +251,9 @@ export default async function ArticleDetailPage({ params }: Props) {
               <h1 className="mt-3 max-w-3xl font-display text-3xl sm:text-4xl font-extrabold leading-tight">
                 {article.title}
               </h1>
-              {article.subtitle && (
+              {showSubtitle && (
                 <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                  {article.subtitle}
+                  {subtitle}
                 </p>
               )}
             </div>

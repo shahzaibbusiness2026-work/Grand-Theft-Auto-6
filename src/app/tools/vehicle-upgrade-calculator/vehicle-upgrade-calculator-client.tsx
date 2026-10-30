@@ -117,13 +117,13 @@ export function VehicleUpgradeCalculatorClient() {
     const lines = calculations.selected.map(
       (u) => `• ${u.name} — $${u.cost.toLocaleString()}${u.perf > 0 ? ` (+${u.perf} perf)` : " (cosmetic)"}`
     );
-    const summary = `GTA 6 Vehicle Upgrade Build
+    const summary = `Hypothetical Vehicle Upgrade Build — fictional example values, not verified GTA VI statistics
 Vehicle: ${vehicle.name} — $${vehicle.price.toLocaleString()}
 Upgrades (${calculations.selected.length}):
 ${lines.join("\n")}
 Upgrade Cost: $${calculations.upgradeCost.toLocaleString()}
 Total Build Cost: $${calculations.totalBuild.toLocaleString()}
-Estimated Performance Gain: +${calculations.perfPoints} pts
+Example Performance Points: +${calculations.perfPoints} pts
 Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
     navigator.clipboard.writeText(summary);
     setCopied(true);
@@ -163,10 +163,10 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
       </div>
 
       {/* Main Calculator Grid */}
-      <div className="grid gap-8 lg:grid-cols-12 items-start">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 items-start">
         {/* INPUTS COLUMN (5 cols) */}
-        <div className="lg:col-span-5 card-surface p-6 rounded-3xl border border-border shadow-xl space-y-5">
-          <div className="flex items-center justify-between pb-3 border-b border-border">
+        <div className="min-w-0 lg:col-span-5 card-surface p-4 sm:p-6 rounded-3xl border border-border shadow-xl space-y-5">
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-border">
             <h2 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2">
               <Wrench className="h-4 w-4 text-accent" /> Build Configuration
             </h2>
@@ -180,16 +180,17 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
 
           {/* Vehicle Select */}
           <div>
-            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
-              <span>Base Vehicle</span>
+            <label htmlFor="upgrade-vehicle" className="text-xs font-bold text-muted-foreground mb-1.5 flex flex-wrap gap-2 justify-between">
+              <span>Example Vehicle &amp; Price</span>
               <span className="font-mono text-gold-light font-bold">
                 ${vehicle.price.toLocaleString()}
               </span>
             </label>
             <select
+              id="upgrade-vehicle"
               value={vehicleId}
               onChange={(e) => setVehicleId(e.target.value)}
-              className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-semibold text-foreground focus:border-accent focus:outline-none"
+              className="min-w-0 max-w-full w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-semibold text-foreground focus:border-accent focus:outline-none"
             >
               {VEHICLES.map((v) => (
                 <option key={v.id} value={v.id}>
@@ -202,7 +203,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
           {/* Upgrades */}
           <div>
             <span className="block text-xs font-bold text-muted-foreground mb-2">
-              Upgrades &amp; Mods
+              Example Upgrades &amp; Costs
             </span>
             <div className="space-y-2">
               {UPGRADES.map((u) => {
@@ -238,7 +239,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
                         ${u.cost.toLocaleString()}
                       </span>
                       {u.perf > 0 ? (
-                        <span className="block text-xs font-bold text-emerald-400">+{u.perf} perf</span>
+                        <span className="block text-xs font-bold text-emerald-700 dark:text-emerald-400">+{u.perf} perf</span>
                       ) : (
                         <span className="block text-xs font-bold text-muted-foreground">cosmetic</span>
                       )}
@@ -251,7 +252,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
         </div>
 
         {/* OUTPUTS / STATS (7 cols) */}
-        <div className="lg:col-span-7 space-y-6">
+        <div className="min-w-0 lg:col-span-7 space-y-6">
           {/* Totals Card */}
           <div className="card-surface p-6 rounded-3xl border border-border shadow-2xl bg-gradient-to-br from-card via-card to-primary/5 dark:from-[#0e0717] dark:via-[#070b15] dark:to-[#040810]">
             <div className="flex items-center justify-between gap-4">
@@ -269,7 +270,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
                   +{calculations.perfPoints}
                 </span>
                 <span className="block text-xs uppercase font-bold text-muted-foreground">
-                  Estimated Perf. Pts
+                  Example Perf. Pts
                 </span>
               </div>
             </div>
@@ -277,7 +278,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
             {/* Performance Bar */}
             <div className="mt-4">
               <div className="flex justify-between text-xs text-muted-foreground mb-1.5">
-                <span className="font-bold uppercase tracking-wider">Estimated Performance Gain</span>
+                <span className="font-bold uppercase tracking-wider">Example Performance Points</span>
                 <span className="font-mono">{perfPct}% of max</span>
               </div>
               <div className="h-2.5 w-full overflow-hidden rounded-full bg-muted/80 border border-border">
@@ -366,7 +367,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
                         ${u.cost.toLocaleString()}
                       </span>
                       {u.perf > 0 ? (
-                        <span className="block text-xs uppercase font-black text-emerald-400">
+                        <span className="block text-xs uppercase font-black text-emerald-700 dark:text-emerald-400">
                           +{u.perf} perf
                         </span>
                       ) : (
@@ -391,9 +392,9 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
           </h3>
           <p className="text-xs leading-relaxed text-muted-foreground">
             Total build cost is <code className="bg-muted/80 px-1.5 py-0.5 rounded text-gold-light">Base Price + Sum of Mod Costs</code>.
-            Estimated performance gain is the sum of each mod&apos;s performance points. Cost per performance
+            Example performance points are the sum of the selected preset values. Cost per performance
             point equals <code className="bg-muted/80 px-1.5 py-0.5 rounded text-cyan-600 dark:text-[#00F0FF]">Mods Cost / Total Perf Points</code> —
-            cosmetic mods (armor, chrome paint, neon) add cost but no speed.
+            the example cosmetic presets add cost but no performance points. These points are not measured speed gains.
           </p>
         </div>
 
@@ -402,9 +403,9 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
             <HelpCircle className="h-4 w-4 text-accent" /> Upgrade Calculator FAQ
           </h3>
           <p className="text-xs leading-relaxed text-muted-foreground">
-            <strong>Are these prices and performance gains final?</strong> All prices and performance
-            values are estimates based on leak reports and trailer analysis. Rockstar may
-            rebalance the tuning economy before or after launch — treat these as planning figures.
+            <strong>Are these real GTA VI prices or performance gains?</strong> No. Vehicle prices,
+            upgrade costs and performance points here are fictional presets for demonstrating a budget calculation.
+            They are not measurements, leak-based estimates or confirmed GTA VI tuning data.
           </p>
         </div>
       </div>

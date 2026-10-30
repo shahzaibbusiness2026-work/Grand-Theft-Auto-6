@@ -4,7 +4,7 @@ import { getPublicGuides } from "@/lib/services/guides";
 import { createPublicClient } from "@/lib/supabase/public";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import { canonicalOrigin } from "@/lib/site-identity";
-import { characterEvidence } from "@/lib/character-evidence";
+import { characterEvidence, CHARACTER_REVIEWED_AT } from "@/lib/character-evidence";
 export const revalidate = 3600;
 const realDate = (value?: string | null) => {
   const date = value ? new Date(value) : null;
@@ -30,6 +30,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/tools/day-night-converter",
     "/tools/weapon-dps-calculator",
     "/tools/map-distance-calculator",
+    "/tools/vehicle-upgrade-calculator",
+    "/tools/heist-payout-splitter",
+    "/tools/garage-planner",
+    "/tools/countdown-widget",
     "/characters",
     "/radio",
     "/guides",
@@ -112,7 +116,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const slug of Object.keys(characterEvidence))
     result.push({
       url: base + "/characters/" + slug,
-      lastModified: new Date("2026-10-27T00:00:00Z"),
+      lastModified: new Date(CHARACTER_REVIEWED_AT + "T00:00:00Z"),
     });
   return Array.from(new Map(result.map((e) => [e.url, e])).values());
 }

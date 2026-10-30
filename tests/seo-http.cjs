@@ -71,6 +71,67 @@ async function check(name, run) {
     assert.ok(html.includes('href="https://www.take2games.com/ir/news/rockstar-games-announces-pre-orders-grand-theft-auto-vi"'));
     assert.ok(!html.includes('href="http://www.take2games.com'));
   });
+  await check("release date is scheduled while the UTC timer boundary is distinguished from regional unlock", async () => {
+    const html = await page("/");
+    const visible = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+    assert.match(visible, /Scheduled release date:.*November 19, 2026/);
+    assert.match(visible, /not a confirmed regional unlock time/);
+    assert.doesNotMatch(visible, /exact launch day unconfirmed/);
+  });
+  await check("Guides offers useful crawlable resources instead of an empty popularity section", async () => {
+    const html = await page("/guides");
+    assert.match(html, /Browse Guides/);
+    assert.doesNotMatch(html, />Popular Guides</);
+    for (const path of ["/guides/vice-city-map-guide", "/news/map-size-comparison-gtav-rdr2", "/news/gta-6-release-date-pre-order-editions", "/characters", "/regions"])
+      assert.ok(html.includes(`href="${path}"`), path);
+  });
+  await check("all eight character profiles explain source limits and connect the cast", async () => {
+    for (const slug of ["jason", "lucia", "cal", "boobie-ike", "drequan-priest", "real-dimez", "raul-bautista", "brian-heder"]) {
+      const html = await page("/characters/" + slug);
+      assert.equal((html.match(/<h1\b/g) || []).length, 1, slug);
+      assert.match(html, /id="character-connections"/);
+      assert.match(html, /id="character-question"/);
+      assert.match(html, /not a first-hand gameplay test/);
+      assert.match(html, /href="https:\/\/www.rockstargames.com\/VI\/only-in-leonida"/);
+    }
+  });
+  await check("money landing page withdraws unsupported payout rankings", async () => {
+    const html = await page("/money-guide");
+    assert.match(html, /earlier payout and effort rankings were unsupported and have been withdrawn/);
+    assert.doesNotMatch(html, /Confirmed structure|High \(passive\)|pay the biggest single sums/);
+  });
+  await check("upgrade examples remain fictional in the FAQ, result labels and copied-summary scope", async () => {
+    const html = await page("/tools/vehicle-upgrade-calculator");
+    assert.match(html, /fictional presets for demonstrating a budget calculation/);
+    assert.match(html, /Example Performance Points/);
+    assert.doesNotMatch(html, /values are estimates based on leak reports/);
+  });
+  await check("article summaries do not repeat identical subtitles in sampled headers", async () => {
+    for (const slug of ["how-gta-6-was-really-made-bloomberg", "gta-6-money-guide-robberies-fences-economy", "gta-6-release-date-pre-order-editions", "map-size-comparison-gtav-rdr2", "gta-6-map-guide-leonida-regions-size", "gta-6-cal-hampton", "gta-6-port-gellhorn-forgotten-coast-guide", "gta-6-file-size-210-gb-ps5-storage-guide", "trailer-2-breakdown-analysis", "gta-6-characters-lucia-jason-cast"]) {
+      const html = await page("/news/" + slug);
+      const excerpt = html.match(/<p class="font-semibold leading-relaxed">([\s\S]*?)<\/p>/)?.[1]?.trim();
+      const header = html.match(/<header\b[^>]*>([\s\S]*?)<\/header>/)?.[1];
+      assert.ok(excerpt && header, slug);
+      assert.ok(!header.includes(excerpt), slug);
+    }
+  });
+  await check("corrected economy article withdraws claims and pricing table is removed", async () => {
+    const economy = await page("/news/gta-6-money-guide-robberies-fences-economy");
+    const development = await page("/news/how-gta-6-was-really-made-bloomberg");
+    assert.match(economy, /Those confirmation claims are withdrawn/);
+    assert.match(economy, /Unverified here/);
+    assert.doesNotMatch(economy, /Here&#x27;s everything confirmed|all confirmed via Rockstar/);
+    assert.doesNotMatch(development, /\$79\.99|\$99\.99/);
+    assert.match(development, /market-specific listing/);
+  });
+  await check("sitemap includes maintained utilities while noindex evidence details stay excluded", async () => {
+    const xml = await page("/sitemap.xml");
+    for (const path of ["/tools/vehicle-upgrade-calculator", "/tools/heist-payout-splitter", "/tools/garage-planner", "/tools/countdown-widget"])
+      assert.ok(xml.includes(path), path);
+    assert.ok(!xml.includes("/weapons/girardi-es9"));
+    assert.ok(!xml.includes("/tools/wanted-level-guide"));
+    assert.ok(!xml.includes("?ids="));
+  });
   const report = { base, checkedAt: new Date().toISOString(), passed: results.filter((r) => r.pass).length, total: results.length, checks: results };
   if (process.env.SEO_CHECK_OUTPUT) fs.writeFileSync(process.env.SEO_CHECK_OUTPUT, JSON.stringify(report, null, 2));
   if (report.passed !== report.total) process.exitCode = 1;

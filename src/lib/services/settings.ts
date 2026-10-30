@@ -39,8 +39,7 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   siteDescription: SITE_CONFIG.description,
   targetReleaseDate: SITE_CONFIG.targetReleaseDate,
   isReleaseDateConfirmed: SITE_CONFIG.isReleaseDateConfirmed,
-  countdownCaption:
-    "GTA VI scheduled for November 19, 2026 · Regional unlock and preload times unconfirmed",
+  countdownCaption: SITE_CONFIG.countdownCaption,
   heroHeading: "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas",
   heroSubtitle:
     "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",

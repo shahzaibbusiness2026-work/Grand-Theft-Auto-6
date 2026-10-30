@@ -943,14 +943,14 @@
   }
 }
 .hero-bg-img {
-  animation: heroBgFadeIn 1.2s ease both;
+  animation: none;
 }
 .hero-bg-kenburns {
   animation: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-bg-img {
-    animation: heroBgFadeIn 0.3s ease both;
+    animation: none;
   }
   .hero-bg-kenburns {
     animation: none;

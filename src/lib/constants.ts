@@ -15,12 +15,12 @@ export const SITE_CONFIG = {
     "Taish Gaming is an independent fan platform and is not affiliated with, sponsored by, or endorsed by Rockstar Games or Take-Two Interactive.",
 
   // Release Date Configuration:
-  // Rockstar official GTA VI page checked 28 October 2026; regional unlock times remain unverified.
+  // Rockstar GTA VI page and Store checked 30 October 2026; regional unlock times remain unverified.
   targetReleaseDate: "2026-11-19T00:00:00Z",
   isReleaseDateConfirmed: true,
   releaseWindowDisplay: "November 19, 2026",
   countdownCaption:
-    "GTA VI scheduled for November 19, 2026 · Regional unlock and preload times unconfirmed",
+    "GTA VI scheduled for November 19, 2026 · Pre-load begins November 12 · Check your platform for regional unlock times",
 
   socials: {
     twitter: "https://twitter.com/rockstargames",
