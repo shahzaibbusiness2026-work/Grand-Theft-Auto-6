@@ -34,6 +34,28 @@ export const PUBLIC_TOOL_COPY: Record<string, string> = {
     "Organize a fictional vehicle collection on this device. Garage capacities, vehicle prices and ownership rules are example assumptions.",
   "/tools/photo-spot-finder":
     "Browse fan photography concepts for Leonida. Locations, camera access, lighting and suggested times are unverified examples.",
+  "/tools/money-calculator":
+    "Plan a fictional GTA VI budget using amounts you choose. Verified game prices, payouts and required play time are not available.",
+  "/tools/business-profit-calculator":
+    "Model hypothetical business costs and returns with editable examples. GTA VI purchasable businesses and income mechanics are unverified.",
+  "/tools/money-maker":
+    "Compare fan-made earning scenarios with example inputs. No verified GTA VI money-making methods or payout rankings are available.",
+  "/tools/character-quiz":
+    "Take a fan-made personality quiz for entertainment. Its result is not an official characterization or game feature.",
+  "/achievements":
+    "Use a fan-made achievement checklist concept. Rockstar has not published GTA VI trophies or achievements; entries are fictional examples.",
+  "/activities":
+    "Save fan activity ideas on this device. Playable GTA VI activities, rewards and locations have not been verified.",
+  "/easter-eggs":
+    "Review fan-submitted Easter egg hypotheses. Interpretations and references are not official confirmations unless directly sourced.",
+  "/businesses":
+    "Fan-made business ideas for GTA VI. Purchasable businesses, income and operating mechanics have not been confirmed.",
+  "/money-guide":
+    "Review GTA VI money claims and corrections. Verified payouts, earning methods and efficiency rankings are not available.",
+  "/settings-guide":
+    "Rockstar has not published GTA VI's full settings menu. This pre-release page is not a tested settings recommendation.",
+  "/controls":
+    "A provisional PS5 and Xbox reference based on GTA V. Rockstar has not published the official GTA VI control layout.",
   "/tools/wanted-level-guide":
     "Verified GTA VI police-response data is unavailable here. The displayed star levels, units, escape times and tactics are fictional examples.",
   "/tools/business-income-calculator":

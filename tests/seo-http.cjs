@@ -128,9 +128,46 @@ async function check(name, run) {
     const xml = await page("/sitemap.xml");
     for (const path of ["/tools/vehicle-upgrade-calculator", "/tools/heist-payout-splitter", "/tools/garage-planner", "/tools/countdown-widget"])
       assert.ok(xml.includes(path), path);
+    for (const path of ["/tools/business-income-calculator", "/controls", "/money-guide"])
+      assert.ok(xml.includes(path), path);
+    for (const path of ["/dmca", "/pricing", "/tools/character-quiz"])
+      assert.ok(xml.includes(path), path);
+    assert.ok(!xml.includes("/tools/photo-spot-finder"));
     assert.ok(!xml.includes("/weapons/girardi-es9"));
     assert.ok(!xml.includes("/tools/wanted-level-guide"));
+    for (const path of ["/businesses", "/achievements", "/settings-guide", "/easter-eggs", "/activities", "/site-map", "/tools/photo-spot-finder"])
+      assert.ok(!xml.includes(path), path);
     assert.ok(!xml.includes("?ids="));
+  });
+  await check("speculative gameplay hubs are clearly disclosed and excluded from indexing", async () => {
+    for (const path of ["/businesses", "/achievements", "/settings-guide", "/easter-eggs", "/activities", "/site-map", "/tools/photo-spot-finder"]) {
+      const html = await page(path);
+      assert.match(html, /<meta name="robots" content="noindex, follow"/);
+    }
+    const controls = await page("/controls");
+    assert.match(controls, /has not published the official GTA VI control layout/);
+    assert.doesNotMatch(controls, /confirmed at launch/i);
+  });
+  await check("tool directory no longer promises unsupported business earnings or money rankings", async () => {
+    const html = await page("/tools");
+    assert.match(html, /Purchasable businesses, income and operating mechanics have not been confirmed/);
+    assert.match(html, /Confirmed payouts, earning methods and efficiency rankings are not available/);
+    assert.doesNotMatch(html, /Every way to make money in GTA 6 ranked by payout and effort/);
+    assert.doesNotMatch(html, /Expected GTA 6 trophy list with an interactive checklist/);
+    assert.doesNotMatch(html, /Everything to do between missions: hunting, fishing, mini-golf/);
+    assert.doesNotMatch(html, /Every GTA 6 Easter egg spotted so far/);
+    assert.doesNotMatch(html, /Best GTA 6 settings for PS5 and Xbox/);
+  });
+  await check("unsupported gameplay mechanics are withdrawn on both article URLs", async () => {
+    const duo = await page("/news/duo-protagonist-mechanics-lucia-jason");
+    const gameplay = await page("/news/gta-6-gameplay-confirmed-features-mechanics");
+    for (const html of [duo, gameplay]) {
+      assert.match(html, /Correction notice/);
+      assert.match(html, /claims are withdrawn|confirmations are withdrawn/i);
+      assert.match(html, /precise sources|exact source passages|time-coded official scene/i);
+    }
+    assert.doesNotMatch(gameplay, /six-star wanted level with a new Heat system/);
+    assert.doesNotMatch(duo, /optional romance is confirmed/i);
   });
   const report = { base, checkedAt: new Date().toISOString(), passed: results.filter((r) => r.pass).length, total: results.length, checks: results };
   if (process.env.SEO_CHECK_OUTPUT) fs.writeFileSync(process.env.SEO_CHECK_OUTPUT, JSON.stringify(report, null, 2));

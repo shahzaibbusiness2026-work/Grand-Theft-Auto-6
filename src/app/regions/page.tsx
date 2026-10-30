@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: { url: "/regions" },
   title: "GTA 6 Regions: Leonida’s Six Regions",
   description:
-    "The six regions of Leonida in GTA VI — Vice City, Leonida Keys, Grassrivers, Port Gellhorn, Ambrosia and Mount Kalaga — from Rockstar’s own descriptions, with what is still not confirmed.",
+    "Explore Rockstar's six named GTA VI regions, from Vice City to Mount Kalaga, with official descriptions separated from unconfirmed map details.",
 };
 
 export default function RegionsHubPage() {

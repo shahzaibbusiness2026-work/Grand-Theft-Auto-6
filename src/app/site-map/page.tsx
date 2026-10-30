@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Complete sitemap of Taish Gaming: interactive tools, vehicle and weapon databases, character guides, the Leonida map, news, and guides.",
   alternates: { canonical: "/site-map" },
+  robots: { index: false, follow: true },
 };
 
 interface SitemapSection {

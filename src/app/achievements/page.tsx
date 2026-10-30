@@ -3,10 +3,11 @@ import { AchievementsClient } from "./achievements-client";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/achievements" },
+  openGraph: { url: "/achievements" },
   title: "GTA 6 Achievements & Trophies Tracker",
-  description: "Pre-release data: the expected GTA 6 trophy and achievement list with an interactive tracker. Story, exploration, combat, collectible and hidden trophies — progress saves on your device.",
+  description: "Fan-made trophy checklist concept for GTA VI. Rockstar has not published an official trophy or achievement list.",
   alternates: { canonical: "/achievements" },
+  robots: { index: false, follow: true },
 };
 
 export default function AchievementsPage() {
@@ -16,7 +17,7 @@ export default function AchievementsPage() {
         <div className="max-w-3xl mb-8">
           <p className="text-xs font-black uppercase tracking-[0.25em] text-primary">Trackers</p>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground mt-2">Achievements &amp; Trophies</h1>
-          <p className="text-foreground/70 mt-3">The expected trophy list for Leonida, built from pre-release data — story milestones, exploration, combat, collectibles and the hidden ones. Tick them off as you plan your hunt; the list will be corrected against Rockstar’s real list at launch.</p>
+          <p className="text-foreground/70 mt-3">This is a fan-made checklist concept, not a leaked or expected official list. Rockstar has not published GTA VI trophies or achievements; individual checklist entries are unverified.</p>
         </div>
         <AchievementsClient />
       </div>

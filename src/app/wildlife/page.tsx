@@ -9,7 +9,7 @@ import { SafeImage } from "@/components/safe-image";
 export const metadata: Metadata = {
   title: "GTA 6 Wildlife: Animals Seen in Official Trailers",
   description:
-    "Every animal confirmed in GTA VI's official trailers, with real trailer frames: flamingos, alligators, the green iguana, and birds and marine life spotted on camera.",
+    "Review wildlife shown in official GTA VI media, including flamingos, alligators, an iguana and marine life, with species labels and evidence limits.",
   alternates: { canonical: "/wildlife" },
   openGraph: { url: "/wildlife" },
 };

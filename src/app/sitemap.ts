@@ -34,8 +34,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/tools/heist-payout-splitter",
     "/tools/garage-planner",
     "/tools/countdown-widget",
+    "/tools/business-income-calculator",
     "/characters",
     "/radio",
+    "/controls",
+    "/money-guide",
     "/guides",
     "/gta-6-world",
     "/gta-6-world/animals-wildlife",
@@ -67,6 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/news",
     "/about",
     "/contact",
+    "/dmca",
     "/team",
     "/editorial-policy",
     "/corrections",
@@ -74,6 +78,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/terms",
     "/disclaimer",
     "/cookies",
+    "/pricing",
+    "/tools/character-quiz",
   ];
   const result: MetadataRoute.Sitemap = paths.map((path) => ({
     url: base + path,
