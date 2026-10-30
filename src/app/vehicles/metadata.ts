@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Vehicle Catalog — Evidence & Comparisons",
   description:
-    "GTA 6 vehicle catalog: cars, bikes, boats and aircraft spotted in official GTA 6 footage, with evidence labels for every identification. Performance, prices and availability stay unverified unless Rockstar sources them.",
+    "Browse GTA 6 vehicle identifications with evidence labels. Compare cars, bikes, boats and aircraft; unknown prices and performance stay unverified.",
   alternates: { canonical: "/vehicles" },
   openGraph: {
     type: "website",

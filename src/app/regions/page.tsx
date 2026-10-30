@@ -36,6 +36,8 @@ export default function RegionsHubPage() {
             </Link>{" "}
             with provisional pins and device-local notes. Pin placement is
             separate from Rockstar&apos;s confirmed destination names.
+            {" "}Our <Link href="/guides/vice-city-map-guide" className="underline text-white">Leonida map guide</Link> explains
+            how the named destinations relate to the available official evidence.
           </p>
         </section>
         <section className="container-site px-4 pb-16">

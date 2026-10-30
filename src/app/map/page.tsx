@@ -56,6 +56,7 @@ export default async function MapPage() {
                 Rockstar&apos;s Only in Leonida guide
               </a>{" · "}
               <Link className="underline" href="/regions">Explore the six destinations</Link>
+              {" · "}<Link className="underline" href="/guides/vice-city-map-guide">Read the Leonida destination guide</Link>
             </p>
           </article>
           <article className="card-surface rounded-2xl p-5">

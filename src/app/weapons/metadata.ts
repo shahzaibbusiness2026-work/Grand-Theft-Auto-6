@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Weapon Catalog — Evidence & Comparisons",
   description:
-    "GTA 6 weapon catalog: pistols, rifles, shotguns and melee weapons seen in official GTA 6 footage, with evidence labels for every identification. Damage, prices and availability stay unverified unless Rockstar sources them.",
+    "Browse GTA 6 weapon identifications with evidence labels. Compare guns and melee weapons; unknown damage, prices and availability stay unverified.",
   alternates: { canonical: "/weapons" },
   openGraph: {
     type: "website",

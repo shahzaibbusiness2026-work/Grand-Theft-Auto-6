@@ -4,18 +4,18 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     openGraph: { url: "/money-guide" },
-  title: "GTA 6 Money Guide — How to Make Money Fast",
-  description: "Every way to make money in GTA 6: story heists, businesses, side jobs, collectibles and caches — ranked by effort and payout, with calculators to plan each route.",
+  title: "GTA 6 Money Guide: Evidence & Unverified Methods",
+  description: "What is verified about GTA 6 money? Check source limits for heists, businesses and other proposed methods before relying on payouts or income calculators.",
   alternates: { canonical: "/money-guide" },
 };
 
 type Method = { name: string; payout: string; effort: string; desc: string; status: string };
 const METHODS: Method[] = [
-  { name: "Story Heists", payout: "Highest", effort: "High", desc: "Jason and Lucia's headline jobs pay the biggest single sums in the game — the vault job from the trailers is the template. Progress-gated, unrepeatable, unforgettable.", status: "Confirmed structure" },
-  { name: "Businesses", payout: "High (passive)", effort: "Medium", desc: "Buy in, then earn while you do other things. Nightclubs, dealerships and smuggling warehouses stack into a real empire over time.", status: "See businesses" },
-  { name: "Side Jobs & Gigs", payout: "Medium", effort: "Medium", desc: "Taxi work, deliveries and odd jobs around Vice City. Steady money between big scores, and the fastest way to learn the map.", status: "Expected" },
-  { name: "Collectibles & Caches", payout: "Medium", effort: "Low–Medium", desc: "Hidden packages and submerged caches pay in cash and unlockables. Slow per item, but free money while exploring.", status: "Confirmed (caches)" },
-  { name: "Hunting & Fishing Trade", payout: "Low–Medium", effort: "Low", desc: "Sell what you catch and hunt in Kalaga and the Keys. Relaxing income that pairs with the outdoors activities.", status: "Expected" },
+  { name: "Story Heists", payout: "Unverified", effort: "Unverified", desc: "Rockstar's story setup places Jason and Lucia in a criminal conspiracy. That premise does not establish the number of heists, their rewards, whether they can be repeated or which missions require money.", status: "Payout rules unverified" },
+  { name: "Businesses", payout: "Unverified", effort: "Unverified", desc: "A character running a business does not establish that players can buy it or receive passive income. Purchase prices, running costs and return on investment need their own gameplay evidence.", status: "Player ownership unverified" },
+  { name: "Side Jobs & Gigs", payout: "Unverified", effort: "Unverified", desc: "Taxi work, deliveries and other activities from earlier GTA games should not be presented as verified GTA VI income methods without a direct source. We have not established a reliable payout comparison.", status: "Income methods unverified" },
+  { name: "Collectibles & Caches", payout: "Unverified", effort: "Unverified", desc: "A provisional fan-map pin is not a verified collectible location or reward. Cache payouts, unlockables and completion requirements remain unverified in this guide.", status: "Locations and rewards unverified" },
+  { name: "Hunting & Fishing Trade", payout: "Unverified", effort: "Unverified", desc: "Animals and outdoor scenery do not by themselves confirm a hunting or fishing economy. Selling rules, buyers and prices require explicit evidence before they can support a money-making guide.", status: "Trading mechanics unverified" },
 ];
 
 export default function MoneyGuidePage() {
@@ -25,7 +25,8 @@ export default function MoneyGuidePage() {
         <div className="max-w-3xl mb-8">
           <p className="text-xs font-black uppercase tracking-[0.25em] text-primary">Guides</p>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground mt-2">Money Guide</h1>
-          <p className="text-foreground/70 mt-3">Leonida rewards the patient and the bold in different ways. Every method below is ranked by payout and effort — no stock market has been confirmed for GTA 6, so don&apos;t plan around one.</p>
+          <p className="text-foreground/70 mt-3">There is no verified payout ranking in this guide. Use it to check which claims still need evidence before planning a money-making route. Our calculators demonstrate custom or fictional inputs; they do not establish GTA VI earnings.</p>
+          <p className="mt-3 text-sm text-foreground/70">Correction, October 30, 2026: earlier payout and effort rankings were unsupported and have been withdrawn. Story context: <a className="underline" href="https://www.rockstargames.com/VI" target="_blank" rel="noreferrer">Rockstar&apos;s official GTA VI page</a>. Character business backgrounds: <a className="underline" href="https://www.rockstargames.com/VI/only-in-leonida" target="_blank" rel="noreferrer">Only in Leonida</a>.</p>
         </div>
         <div className="grid gap-4">
           {METHODS.map((m) => (
@@ -50,6 +51,7 @@ export default function MoneyGuidePage() {
           <Link href="/tools/heist-payout-splitter" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold">Heist Payout Splitter</Link>
           <Link href="/businesses" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold">Businesses</Link>
         </div>
+        <p className="mt-6 text-sm text-foreground/70">Read the <Link className="underline" href="/news/gta-6-money-guide-robberies-fences-economy">economy claim correction log</Link> for the specific robbery, wanted-level and app claims awaiting source verification, or <Link className="underline" href="/corrections">send exact supporting evidence</Link>.</p>
       </div>
     </SiteShell>
   );

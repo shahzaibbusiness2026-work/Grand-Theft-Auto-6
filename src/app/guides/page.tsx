@@ -3,23 +3,23 @@ import { AppShell } from "@/components/app-shell";
 import { GuidesClient } from "./guides-client";
 import { getPublicGuides } from "@/lib/services/guides";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "GTA 6 Guides: Pre-Release Gameplay & Systems",
+  title: "GTA 6 Guides: Map, Characters & Release Planning",
   description:
-    "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",
+    "Explore GTA 6 map evidence, Leonida destinations, character backgrounds and release planning, with sources and clear limits on unverified gameplay claims.",
   alternates: { canonical: "/guides" },
   openGraph: { type: "website", url: "/guides",
-    title: "GTA 6 Guides: Pre-Release Gameplay & Systems",
+    title: "GTA 6 Guides: Map, Characters & Release Planning",
     description:
-      "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",
+      "Source-linked map, character and release guides, with official facts separated from unverified gameplay claims.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GTA 6 Guides: Pre-Release Gameplay & Systems",
+    title: "GTA 6 Guides: Map, Characters & Release Planning",
     description:
-      "Pre-release GTA 6 guides and analysis — money systems, weapons, missions, maps and characters based on official footage and reporting, before launch.",
+      "Source-linked map, character and release guides, with official facts separated from unverified gameplay claims.",
   },
 };
 

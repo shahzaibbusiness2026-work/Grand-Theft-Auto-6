@@ -2,12 +2,14 @@
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-const RELEASE_DAY = "2026-11-19";
-function ReleaseNote({ confirmed }: { confirmed: boolean }) {
+import { SITE_CONFIG } from "@/lib/constants";
+const RELEASE_DAY = SITE_CONFIG.targetReleaseDate.slice(0, 10);
+function ReleaseNote({ confirmed, date }: { confirmed: boolean; date: string }) {
   return (
     <p className="text-xs text-white/85">
-      {confirmed ? "Scheduled calendar date" : "Expected calendar date; exact launch day unconfirmed"} at 00:00 UTC. Regional unlock times and
-      preload timing are not established by this timer.
+      {confirmed ? "Scheduled release date: " : "Expected release date: "}
+      {new Date(date + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}.
+      {" "}This timer counts to 00:00 UTC on that calendar date, not a confirmed regional unlock time.
     </p>
   );
 }
@@ -98,7 +100,7 @@ export function Countdown({
         ))}
       </div>
       <div className="hidden space-y-4 sm:block">
-        <ReleaseNote confirmed={confirmed} />
+        <ReleaseNote confirmed={confirmed} date={target} />
         <ReleaseReferences calendarUrl={calendarUrl} />
       </div>
       <details className="rounded-xl border border-white/25 bg-black/50 text-left sm:hidden">
@@ -107,7 +109,7 @@ export function Countdown({
           <ChevronDown className="h-4 w-4" aria-hidden="true" />
         </summary>
         <div className="space-y-3 border-t border-white/20 px-4 py-3">
-          <ReleaseNote confirmed={confirmed} />
+          <ReleaseNote confirmed={confirmed} date={target} />
           <ReleaseReferences calendarUrl={calendarUrl} />
         </div>
       </details>

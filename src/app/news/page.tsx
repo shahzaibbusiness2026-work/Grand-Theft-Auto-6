@@ -40,7 +40,7 @@ export default async function NewsPage() {
               GTA 6 News: Stay Updated with the Latest from <span className="text-primary">Leonida</span>
             </h1>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Breaking news, in-depth articles, exclusive insights and everything GTA 6.
+              Official announcements, trailer analysis and guides, with linked sources and clear notes on unverified claims.
             </p>
           </div>
         </div>
