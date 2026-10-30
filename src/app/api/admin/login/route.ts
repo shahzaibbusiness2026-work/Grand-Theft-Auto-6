@@ -150,7 +150,10 @@ export async function POST(request: Request) {
           email,
           password,
           email_confirm: true,
-          user_metadata: { role: "admin", name: "Administrator" },
+          user_metadata: {
+            role: "admin",
+            name: process.env.ADMIN_DISPLAY_NAME?.trim() || email.split("@")[0],
+          },
         });
         if (createError) {
           // User likely already exists — rotate its password to the env value.

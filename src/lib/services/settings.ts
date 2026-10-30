@@ -26,10 +26,8 @@ export interface ComprehensiveSiteSettings extends AdminSiteSettings {
   homepageSectionToggles: string[];
   /** Tool ids with public access enabled (map_tool, comp_tool, track_tool). Read by the /map, compare and /tracker pages. */
   publicToolToggles: string[];
-  /** Analytics / webhook integrations (empty = not configured). */
+  /** Public GA4 measurement id. Private integration credentials are env-only. */
   ga4MeasurementId: string;
-  cloudflareToken: string;
-  discordWebhookUrl: string;
 }
 
 const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
@@ -61,8 +59,6 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   ],
   publicToolToggles: ["map_tool", "comp_tool", "track_tool"],
   ga4MeasurementId: "",
-  cloudflareToken: "",
-  discordWebhookUrl: "",
 };
 
 /**
@@ -78,6 +74,11 @@ export const getSiteSettings = cache(
       if (!error && data && data.length > 0) {
         const settingsMap = data.reduce(
           (acc: Record<string, any>, row: any) => {
+            // Never return credentials from this public settings reader,
+            // including values left behind by older settings rows.
+            if (["cloudflareToken", "discordWebhookUrl", "search_console_refresh_token", "google_refresh_token"].includes(row.key)) {
+              return acc;
+            }
             acc[row.key] = row.value;
             return acc;
           },
@@ -112,6 +113,10 @@ const RESERVED_SETTING_KEYS = new Set([
   "locations_data",
   "missions_data",
   "seo_settings_data",
+  "cloudflareToken",
+  "discordWebhookUrl",
+  "search_console_refresh_token",
+  "google_refresh_token",
 ]);
 
 const MAX_SETTING_VALUE_CHARS = 100_000;

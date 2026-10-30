@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -39,6 +39,13 @@ function slugify(value: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
+function toDatetimeLocal(value?: string): string {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60_000).toISOString().slice(0, 16);
+}
+
 export function ArticleEditor({
   initialArticle,
   articleId,
@@ -54,12 +61,17 @@ export function ArticleEditor({
   const [slugTouched, setSlugTouched] = useState(!!initialArticle?.slug);
   const [tags, setTags] = useState<string[]>(initialArticle?.tags || []);
   const [tagInput, setTagInput] = useState("");
-  const [publishDate, setPublishDate] = useState(
-    initialArticle?.scheduledFor ? initialArticle.scheduledFor.slice(0, 16) : ""
-  );
+  const [publishDate, setPublishDate] = useState(toDatetimeLocal(initialArticle?.scheduledFor));
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+
+  useEffect(() => {
+    setArticle(initialArticle || EMPTY_DRAFT);
+    setTags(initialArticle?.tags || []);
+    setPublishDate(toDatetimeLocal(initialArticle?.scheduledFor));
+    setSlugTouched(!!initialArticle?.slug);
+  }, [articleId, initialArticle]);
 
   const slug = article.slug || slugify(article.title);
 
@@ -76,8 +88,9 @@ export function ArticleEditor({
     status: AdminArticle["status"]
   ): Partial<AdminArticle> & { title: string; excerpt: string } => {
     const finalSlug = slugify(slug || article.title);
+    const scheduledDate = publishDate ? new Date(publishDate) : null;
     const scheduledFor =
-      status === "scheduled" && publishDate ? new Date(publishDate).toISOString() : undefined;
+      status === "scheduled" && scheduledDate && !Number.isNaN(scheduledDate.getTime()) ? scheduledDate.toISOString() : undefined;
     return {
       ...article,
       id: article.id || undefined,
@@ -102,12 +115,21 @@ export function ArticleEditor({
       return;
     }
     setSaving(true);
-    const result = await saveArticle(buildPayload(status));
+    let result;
+    try {
+      result = await saveArticle(buildPayload(status));
+    } catch (error) {
+      showToast({ title: "Save failed", description: error instanceof Error ? error.message : "The server could not save the article.", type: "danger" });
+      setSaving(false);
+      return;
+    }
     setSaving(false);
     if (result.success) {
+      setArticle((current) => ({ ...current, id: result.id || current.id, slug: result.slug || current.slug }));
+      setSlugTouched(true);
       showToast({
         title: status === "published" ? "Article published" : "Article saved",
-        description: `"${article.title}" was saved as ${status}.`,
+        description: `"${article.title}" was saved as ${status}${result.slug ? ` at /news/${result.slug}` : ""}.`,
         type: "success",
       });
       if (!article.id && result.id) {
@@ -123,7 +145,14 @@ export function ArticleEditor({
   const handleDelete = async () => {
     if (!article.id) return;
     setDeleting(true);
-    const result = await deleteArticle(article.id);
+    let result;
+    try {
+      result = await deleteArticle(article.id);
+    } catch (error) {
+      setDeleting(false);
+      showToast({ title: "Delete failed", description: error instanceof Error ? error.message : "The server could not delete the article.", type: "danger" });
+      return;
+    }
     setDeleting(false);
     if (result.success) {
       showToast({ title: "Article deleted", description: `"${article.title}" was removed.`, type: "success" });
@@ -135,6 +164,8 @@ export function ArticleEditor({
 
   const metaTitle = article.seoTitle || article.title;
   const metaDescription = article.seoDescription || article.excerpt;
+  const seoTitleLength = metaTitle.trim().length;
+  const seoDescriptionLength = metaDescription.trim().length;
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
@@ -202,20 +233,11 @@ export function ArticleEditor({
             <button
               type="button"
               disabled={saving}
-              onClick={() => {
-                // Preserve the current status — never silently demote a
-                // scheduled/review article to draft. The dedicated Publish
-                // button handles promotion; this one just saves in place.
-                const target = article.status === "scheduled" ? "draft" : article.status;
-                if (article.status === "scheduled") {
-                  if (!window.confirm("This article is scheduled for release. Saving now will unschedule it and move it to draft. Continue?")) return;
-                }
-                handleSave(target);
-              }}
+              onClick={() => handleSave(article.status)}
               className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#111622] hover:bg-[#161F30] border border-[#1C2436] text-[#94A3B8] hover:text-white text-xs font-semibold transition-colors disabled:opacity-60"
             >
               <Save className="w-3.5 h-3.5" />
-              <span>{saving ? "Saving…" : "Save draft"}</span>
+              <span>{saving ? "Saving…" : article.status === "scheduled" ? "Save schedule" : article.status === "published" ? "Save changes" : `Save ${article.status}`}</span>
             </button>
             <button
               type="button"
@@ -505,7 +527,7 @@ export function ArticleEditor({
                 <p className="text-xs text-[#94A3B8]">Taish Gaming</p>
                 <p className="text-xs font-semibold text-[#818CF8]">{metaTitle}</p>
                 <p className="text-xs text-emerald-400 font-mono truncate">
-                  www.taishgaming.com/news/{slug || "your-slug"}
+                  {article.canonicalUrl || `www.taishgaming.com/news/${slug || "your-slug"}`}
                 </p>
                 <p className="text-xs text-[#94A3B8] line-clamp-2 leading-tight">{metaDescription}</p>
               </div>
@@ -516,7 +538,7 @@ export function ArticleEditor({
                 <label htmlFor="meta-title-input" className="block text-xs font-medium text-[#94A3B8]">
                   SEO title
                 </label>
-                <span className="text-xs font-mono text-[#64748B]">{metaTitle.length} / 60</span>
+                <span className={cn("text-xs font-mono", seoTitleLength >= 30 && seoTitleLength <= 60 ? "text-emerald-400" : "text-amber-300")}>{seoTitleLength} chars · aim for 30–60</span>
               </div>
               <input
                 id="meta-title-input"
@@ -533,8 +555,8 @@ export function ArticleEditor({
                 <label htmlFor="meta-desc-input" className="block text-xs font-medium text-[#94A3B8]">
                   Meta description
                 </label>
-                <span className="text-xs font-mono text-[#64748B]">
-                  {(article.seoDescription || "").length} / 160
+                <span className={cn("text-xs font-mono", seoDescriptionLength >= 120 && seoDescriptionLength <= 160 ? "text-emerald-400" : "text-amber-300")}>
+                  {seoDescriptionLength} chars · aim for 120–160
                 </span>
               </div>
               <textarea
@@ -553,7 +575,7 @@ export function ArticleEditor({
               </label>
               <input
                 id="canonical-url-input"
-                type="text"
+                type="url"
                 value={article.canonicalUrl || ""}
                 onChange={(e) => setField("canonicalUrl", e.target.value)}
                 placeholder="https://www.taishgaming.com/news/…"

@@ -57,8 +57,6 @@ export default function AdminSettingsPage() {
     homepageSectionToggles: ["hero", "trailers", "map", "characters", "news", "community"],
     publicToolToggles: ["map_tool", "comp_tool", "track_tool"],
     ga4MeasurementId: "",
-    cloudflareToken: "",
-    discordWebhookUrl: "",
   });
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -747,12 +745,11 @@ export default function AdminSettingsPage() {
         </div>
       )}
 
-      {/* Tab 5: API Integrations — placeholders until analytics services are configured */}
+      {/* Tab 5: API Integrations */}
       {activeTab === "integrations" && (
         <div className="p-6 rounded-xl border border-[#1C2436] bg-[#111622] space-y-4 text-xs">
           <p className="text-[#64748B]">
-            Analytics and webhook integrations are not configured yet. Values entered here are
-            placeholders — connect Google Analytics / Cloudflare / Discord in code before use.
+            Search Console is not connected, so this dashboard cannot show its performance data yet. A verified Search Console property and Google OAuth server configuration are required before an authenticated connection can be added.
           </p>
           <div>
             <label className="block font-medium text-[#94A3B8] mb-1">Google Analytics 4 Measurement ID</label>
@@ -765,27 +762,9 @@ export default function AdminSettingsPage() {
             />
           </div>
 
-          <div>
-            <label className="block font-medium text-[#94A3B8] mb-1">Cloudflare Web Analytics Token</label>
-            <input
-              type="text"
-              value={settings.cloudflareToken ?? ""}
-              onChange={(e) => handleUpdate({ cloudflareToken: e.target.value })}
-              placeholder="cf_token_…"
-              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] font-mono focus:outline-none focus:border-[#6366F1]"
-            />
-          </div>
-
-          <div>
-            <label className="block font-medium text-[#94A3B8] mb-1">Discord Webhook for Editorial Alerts</label>
-            <input
-              type="text"
-              value={settings.discordWebhookUrl ?? ""}
-              onChange={(e) => handleUpdate({ discordWebhookUrl: e.target.value })}
-              placeholder="https://discord.com/api/webhooks/…"
-              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] font-mono focus:outline-none focus:border-[#6366F1]"
-            />
-          </div>
+          <p className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-3 text-amber-200/80">
+            Private API keys and webhook URLs must be configured as server-side environment secrets. They are intentionally not collected in this site-settings form.
+          </p>
         </div>
       )}
 
