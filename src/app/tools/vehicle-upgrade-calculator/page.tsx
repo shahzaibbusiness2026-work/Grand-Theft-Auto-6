@@ -50,7 +50,7 @@ export default function VehicleUpgradeCalculatorPage() {
       />
       <div className="container-site py-8">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
+        <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground mb-4">
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>
           <ChevronRight className="h-3 w-3" />
           <Link href="/tools" className="hover:text-primary transition-colors">Tools</Link>

@@ -163,10 +163,10 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
       </div>
 
       {/* Main Calculator Grid */}
-      <div className="grid gap-8 lg:grid-cols-12 items-start">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 items-start">
         {/* INPUTS COLUMN (5 cols) */}
-        <div className="lg:col-span-5 card-surface p-6 rounded-3xl border border-border shadow-xl space-y-5">
-          <div className="flex items-center justify-between pb-3 border-b border-border">
+        <div className="min-w-0 lg:col-span-5 card-surface p-4 sm:p-6 rounded-3xl border border-border shadow-xl space-y-5">
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-border">
             <h2 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2">
               <Wrench className="h-4 w-4 text-accent" /> Build Configuration
             </h2>
@@ -180,16 +180,17 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
 
           {/* Vehicle Select */}
           <div>
-            <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
+            <label htmlFor="upgrade-vehicle" className="text-xs font-bold text-muted-foreground mb-1.5 flex flex-wrap gap-2 justify-between">
               <span>Example Vehicle &amp; Price</span>
               <span className="font-mono text-gold-light font-bold">
                 ${vehicle.price.toLocaleString()}
               </span>
             </label>
             <select
+              id="upgrade-vehicle"
               value={vehicleId}
               onChange={(e) => setVehicleId(e.target.value)}
-              className="w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-semibold text-foreground focus:border-accent focus:outline-none"
+              className="min-w-0 max-w-full w-full rounded-xl border border-border bg-muted/70 p-3 text-sm font-semibold text-foreground focus:border-accent focus:outline-none"
             >
               {VEHICLES.map((v) => (
                 <option key={v.id} value={v.id}>
@@ -251,7 +252,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
         </div>
 
         {/* OUTPUTS / STATS (7 cols) */}
-        <div className="lg:col-span-7 space-y-6">
+        <div className="min-w-0 lg:col-span-7 space-y-6">
           {/* Totals Card */}
           <div className="card-surface p-6 rounded-3xl border border-border shadow-2xl bg-gradient-to-br from-card via-card to-primary/5 dark:from-[#0e0717] dark:via-[#070b15] dark:to-[#040810]">
             <div className="flex items-center justify-between gap-4">
