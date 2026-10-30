@@ -11,7 +11,7 @@ import {
   Navigation,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
-import { serializeJsonLd } from "@/lib/utils";
+import { fitTitle, serializeJsonLd } from "@/lib/utils";
 import {
   canonicalLocations,
   canonicalVehicles,
@@ -125,7 +125,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${loc.name} (${loc.district}) — Point of Interest Dossier`,
+    title: fitTitle(loc.name),
     description: `Provisional fan-map entry for ${loc.name}. Placement, opening hours and gameplay remain unverified.`,
     alternates: { canonical: `/locations/${loc.slug}` },
     robots: { index: false, follow: true },

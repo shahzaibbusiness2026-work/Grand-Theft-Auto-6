@@ -12,7 +12,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
-import { serializeJsonLd } from "@/lib/utils";
+import { fitTitle, serializeJsonLd } from "@/lib/utils";
 import { canonicalCollectibles } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import type { Metadata } from "next";
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${collectible.title} — Location & Guide`,
+    title: fitTitle(collectible.title),
     description: `Rumoured collectible guide for ${collectible.title} in ${collectible.district}. Exact location unconfirmed until launch.`,
     alternates: { canonical: `/collectibles/${collectible.slug}` },
     openGraph: { url: `/collectibles/${collectible.slug}` },

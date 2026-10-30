@@ -24,3 +24,16 @@ export function toIsoDate(display: string | undefined | null): string | undefine
   const d = new Date(display);
   return Number.isNaN(d.getTime()) ? undefined : d.toISOString().slice(0, 10);
 }
+
+/**
+ * Caps a page-title segment so the rendered <title> (page title + the
+ * " | Taish Gaming" template suffix) stays within 60 characters. Cuts at a
+ * word boundary and adds an ellipsis when truncation is needed.
+ */
+export function fitTitle(title: string, maxSegment = 45): string {
+  if (title.length <= maxSegment) return title;
+  const cut = title.slice(0, maxSegment - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  const base = lastSpace > 0 ? cut.slice(0, lastSpace) : cut;
+  return `${base}…`;
+}

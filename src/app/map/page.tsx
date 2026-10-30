@@ -7,7 +7,7 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
 import Link from "next/link";
 
-const title = "GTA 6 Interactive Fan Map: Leonida & Vice City";
+const title = "GTA 6 Map: Interactive Leonida & Vice City";
 
 export const metadata: Metadata = {
   title,

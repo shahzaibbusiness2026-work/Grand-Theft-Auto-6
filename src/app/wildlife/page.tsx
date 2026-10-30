@@ -7,7 +7,7 @@ import { serializeJsonLd } from "@/lib/utils";
 import { SafeImage } from "@/components/safe-image";
 
 export const metadata: Metadata = {
-  title: "GTA 6 Wildlife: Animals Seen in Official Trailers",
+  title: "GTA 6 Wildlife: Animals in Trailers",
   description:
     "Review wildlife shown in official GTA VI media, including flamingos, alligators, an iguana and marine life, with species labels and evidence limits.",
   alternates: { canonical: "/wildlife" },

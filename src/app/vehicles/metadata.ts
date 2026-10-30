@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "GTA 6 Vehicle Catalog — Evidence & Comparisons",
+  title: "GTA 6 Vehicles: Complete Cars List",
   description:
-    "Browse GTA 6 vehicle identifications with evidence labels. Compare cars, bikes, boats and aircraft; unknown prices and performance stay unverified.",
+    "Every GTA 6 vehicle and car spotted in official footage, with evidence labels. Compare cars, bikes, boats and aircraft; unknown prices stay unverified.",
   alternates: { canonical: "/vehicles" },
   openGraph: {
     type: "website",
     url: "/vehicles",
-    title: "GTA 6 Vehicle Catalog",
+    title: "GTA 6 Vehicles: Complete Cars List",
     description:
       "GTA 6 vehicles spotted in official footage, with evidence labels. Unknown values stay unverified.",
     images: [

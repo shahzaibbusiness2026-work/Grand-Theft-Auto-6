@@ -7,7 +7,7 @@ import { REGION_PAGES } from "@/lib/regions";
 export const metadata: Metadata = {
   alternates: { canonical: "/regions" },
   openGraph: { url: "/regions" },
-  title: "GTA 6 Regions: Leonida’s Six Regions",
+  title: "GTA 6 Leonida: All Six Regions & Map",
   description:
     "Explore Rockstar's six named GTA VI regions, from Vice City to Mount Kalaga, with official descriptions separated from unconfirmed map details.",
 };

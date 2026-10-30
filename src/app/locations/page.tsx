@@ -12,7 +12,7 @@ import { getLocations, type LocationRecord } from "@/lib/services/locations";
 export const metadata: Metadata = {
   alternates: { canonical: "/locations" },
   openGraph: { url: "/locations" },
-  title: "Leonida Locations & Points of Interest",
+  title: "GTA 6 Locations: Leonida Points of Interest",
   description:
     "Browse provisional Leonida fan-map entries. Check evidence status and distinguish editorial placements from confirmed GTA VI geography.",
 
