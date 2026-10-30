@@ -239,7 +239,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
                         ${u.cost.toLocaleString()}
                       </span>
                       {u.perf > 0 ? (
-                        <span className="block text-xs font-bold text-emerald-400">+{u.perf} perf</span>
+                        <span className="block text-xs font-bold text-emerald-700 dark:text-emerald-400">+{u.perf} perf</span>
                       ) : (
                         <span className="block text-xs font-bold text-muted-foreground">cosmetic</span>
                       )}
@@ -367,7 +367,7 @@ Cost per Performance Point: $${calculations.costPerPoint.toLocaleString()}`;
                         ${u.cost.toLocaleString()}
                       </span>
                       {u.perf > 0 ? (
-                        <span className="block text-xs uppercase font-black text-emerald-400">
+                        <span className="block text-xs uppercase font-black text-emerald-700 dark:text-emerald-400">
                           +{u.perf} perf
                         </span>
                       ) : (

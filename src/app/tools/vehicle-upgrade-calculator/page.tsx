@@ -60,7 +60,7 @@ export default function VehicleUpgradeCalculatorPage() {
 
         {/* Page Header */}
         <div className="mb-8 max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#C9A86A]/40 bg-[#C9A86A]/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-[#C9A86A] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#C9A86A]/40 bg-[#C9A86A]/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-[#76531F] dark:text-[#C9A86A] mb-3">
             <Wrench className="h-3 w-3" /> Performance Tuning Utility
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
