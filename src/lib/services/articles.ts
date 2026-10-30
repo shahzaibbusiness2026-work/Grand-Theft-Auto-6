@@ -13,8 +13,9 @@ import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
 import type { Article } from "@/lib/data";
-import { INITIAL_ADMIN_ARTICLES, AdminArticle } from "@/lib/admin-store";
+import { AdminArticle } from "@/lib/admin-store";
 import { logActivity } from "./activity";
+import { randomUUID } from "crypto";
 
 export interface DatabaseArticleRow {
   id: string;
@@ -57,6 +58,15 @@ const SEO_FIELDS = [
   "canonical_url",
   "og_image",
 ] as const;
+
+function isSafeHttpUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return (url.protocol === "https:" || url.protocol === "http:") && !!url.hostname && !url.username && !url.password;
+  } catch {
+    return false;
+  }
+}
 
 function rowToArticle(row: DatabaseArticleRow): Article {
   return {
@@ -172,22 +182,18 @@ export async function getAdminArticleById(
   id: string,
 ): Promise<AdminArticle | null> {
   if (!id || id === "new") return null;
-  try {
-    await assertAdmin();
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("articles")
-      .select("*")
-      .eq("id", id)
-      .maybeSingle();
-
-    if (!error && data) return rowToAdminArticle(data as DatabaseArticleRow);
-    if (error)
-      console.error("getAdminArticleById: database error", error.message);
-  } catch (err) {
-    console.error("getAdminArticleById:", err);
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("articles")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+  if (error) {
+    console.error("getAdminArticleById: database error", error.message);
+    throw new Error("Unable to load this article from the database.");
   }
-  return null;
+  return data ? rowToAdminArticle(data as DatabaseArticleRow) : null;
 }
 
 /**
@@ -196,23 +202,17 @@ export async function getAdminArticleById(
  * the true state instead of ghost demo rows.
  */
 export async function getAdminArticles(): Promise<AdminArticle[]> {
-  try {
-    await assertAdmin();
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("articles")
-      .select("*")
-      .order("updated_at", { ascending: false });
-
-    if (!error && data) {
-      return (data as DatabaseArticleRow[]).map(rowToAdminArticle);
-    }
-    console.error("getAdminArticles: database error", error?.message);
-  } catch {
-    // Connection failure — fall back to bundled content
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("articles")
+    .select("*")
+    .order("updated_at", { ascending: false });
+  if (error) {
+    console.error("getAdminArticles: database error", error.message);
+    throw new Error("Unable to load articles from the database.");
   }
-
-  return INITIAL_ADMIN_ARTICLES;
+  return (data as DatabaseArticleRow[]).map(rowToAdminArticle);
 }
 
 /**
@@ -232,15 +232,34 @@ export async function saveArticle(
       const issues = editorialProblems(article.content);
       if (issues.length) return { success: false, error: issues.join(" ") };
     }
+    if (article.status === "scheduled") {
+      const scheduledFor = article.scheduledFor ? new Date(article.scheduledFor) : null;
+      if (!scheduledFor || Number.isNaN(scheduledFor.getTime())) {
+        return { success: false, error: "Choose a valid date and time before scheduling this article." };
+      }
+      if (scheduledFor.getTime() <= Date.now()) {
+        return { success: false, error: "Choose a future date and time for the scheduled article." };
+      }
+    }
     const supabase = createAdminClient();
 
-    const id = article.id || `art-${Date.now()}`;
+    const id = article.id || `art-${randomUUID()}`;
     const slug =
       article.slug ||
       article.title
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
+    if (!slug) return { success: false, error: "Add a title or URL slug containing letters or numbers." };
+
+    const canonicalUrl = article.canonicalUrl?.trim();
+    if (canonicalUrl && !isSafeHttpUrl(canonicalUrl)) {
+      return { success: false, error: "Canonical URL must be a valid absolute HTTP or HTTPS URL." };
+    }
+    const ogImage = article.ogImage?.trim();
+    if (ogImage && ((ogImage.startsWith("/") && ogImage.startsWith("//")) || (!ogImage.startsWith("/") && !isSafeHttpUrl(ogImage)))) {
+      return { success: false, error: "Open Graph image must be a site path or an absolute HTTP/HTTPS URL." };
+    }
 
     const payload: Record<string, unknown> = {
       id,
@@ -285,6 +304,12 @@ export async function saveArticle(
       // Migration 03 not applied yet → retry once without the SEO columns.
       if (error && (error as { code?: string }).code === "PGRST204") {
         seoColumnsMissing = true;
+        if (article.seoTitle?.trim() || article.seoDescription?.trim() || canonicalUrl || ogImage) {
+          return {
+            success: false,
+            error: "Article SEO fields are not installed in the database yet. Apply supabase/03_content_seo_upgrade.sql, then save again.",
+          };
+        }
         for (const f of SEO_FIELDS) delete payload[f];
         const retry = await supabase
           .from("articles")
@@ -349,11 +374,13 @@ export async function saveArticle(
  */
 export async function deleteArticle(id: string) {
   try {
+    if (!id?.trim()) return { success: false, error: "Article id is required." };
     await assertAdmin();
     const supabase = createAdminClient();
-    const { error } = await supabase.from("articles").delete().eq("id", id);
+    const { data, error } = await supabase.from("articles").delete().eq("id", id).select("id").maybeSingle();
 
     if (error) throw error;
+    if (!data) return { success: false, error: "Article was not found or was already deleted." };
 
     await logActivity({
       action: "delete",

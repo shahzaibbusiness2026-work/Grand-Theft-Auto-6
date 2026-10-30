@@ -65,9 +65,8 @@ export function AchievementsClient() {
       <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 p-4 mb-8 flex gap-3">
         <AlertTriangle className="h-5 w-5 shrink-0 text-amber-400" />
         <p className="text-sm text-foreground/90">
-          <strong>Pre-release data — expected list, not official.</strong> Rockstar has not published GTA 6’s trophy or achievement list yet.
-          This tracker is built from GTA 5’s trophy patterns and trailer evidence. Every item below carries an Expected badge and
-          will be corrected against the real list at launch on November 19, 2026.
+          <strong>Fan-made checklist concept, not a prediction.</strong> Rockstar has not published GTA VI trophies or achievements.
+          The entries below are fictional examples for personal brainstorming and do not come from leaks or an official list.
         </p>
       </div>
 
@@ -109,7 +108,7 @@ export function AchievementsClient() {
                   </div>
                 </div>
                 <span className="flex shrink-0 flex-col items-end gap-1">
-                  <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border border-white/15 bg-black/20 text-foreground/60">Expected</span>
+                  <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border border-white/15 bg-black/20 text-foreground/60">Fan concept</span>
                   <span className={`text-xs font-black px-2 py-1 rounded-full border ${TIER_STYLE[item.tier]}`}>{item.tier}</span>
                 </span>
               </div>

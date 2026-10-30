@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description:
     "Fan activity ideas and device-local planning notes. Playable GTA VI activities, rewards and locations have not been verified for this list.",
   alternates: { canonical: "/activities" },
+  robots: { index: false, follow: true },
 };
 
 export default function ActivitiesPage() {

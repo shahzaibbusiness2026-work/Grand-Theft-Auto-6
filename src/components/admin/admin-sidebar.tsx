@@ -36,8 +36,10 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Tooltip } from "./ui/tooltip";
+import type { AdminIdentity } from "./admin-layout";
 
 interface AdminSidebarProps {
+  identity?: AdminIdentity | null;
   isCollapsed?: boolean;
   onToggleCollapse?: () => void;
   mobileOpen?: boolean;
@@ -112,6 +114,7 @@ export const ADMIN_NAV_SECTIONS: NavSection[] = [
 ];
 
 export function AdminSidebar({
+  identity,
   isCollapsed = false,
   onToggleCollapse,
   mobileOpen = false,
@@ -119,6 +122,8 @@ export function AdminSidebar({
 }: AdminSidebarProps) {
   const pathname = usePathname();
   const id = useId();
+  const profileName = identity?.name || "Loading profile…";
+  const profileInitials = profileName.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join("").toUpperCase() || "A";
 
   // Keyboard shortcut Ctrl+B / Cmd+B to toggle sidebar
   useEffect(() => {
@@ -319,22 +324,22 @@ export function AdminSidebar({
           )}
 
           {isCollapsed ? (
-            <Tooltip content="Jason Vance (Administrator)" position="right">
+            <Tooltip content={identity ? `${profileName} (${identity.role})` : "Loading admin profile"} position="right">
               <div className="w-8 h-8 mx-auto rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-inner cursor-pointer">
-                AD
+                {profileInitials}
               </div>
             </Tooltip>
           ) : (
             <div className="p-2.5 rounded-xl bg-[#111622] border border-[#1C2436] flex items-center gap-3">
               <div className="relative shrink-0">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-inner">
-                  AD
+                  {profileInitials}
                 </div>
                 <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#111622]" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold text-white truncate">Administrator</p>
-                <p className="text-xs text-[#64748B] truncate">admin@atlas-gta6.com</p>
+                <p className="text-xs font-bold text-white truncate">{identity?.name || "Loading profile…"}</p>
+                <p className="text-xs text-[#64748B] truncate">{identity?.email || ""}</p>
               </div>
             </div>
           )}

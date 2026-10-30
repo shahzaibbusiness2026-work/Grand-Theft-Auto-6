@@ -6,17 +6,17 @@ import { SiteShell } from "@/components/shells";
 
 export const metadata: Metadata = {
   title: { absolute: "About Taish Gaming | Independent GTA 6 Database" },
-  description: "Learn how Taish Gaming researches GTA 6 information, labels official evidence, community findings and speculation, and maintains its independent fan-made database.",
+  description: "Taish Gaming separates Rockstar-confirmed GTA VI facts, trailer observations, attributed reporting and fan speculation in its independent database.",
   alternates: { canonical: "/about" },
   openGraph: { url: "/about",
     title: "About Taish Gaming | Independent GTA 6 Database",
-    description: "Learn how Taish Gaming researches GTA 6 information, labels official evidence, community findings and speculation, and maintains its independent fan-made database.",
+    description: "Taish Gaming separates Rockstar-confirmed GTA VI facts, trailer observations, attributed reporting and fan speculation in its independent database.",
     images: ["/img/hero-dark.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "About Taish Gaming | Independent GTA 6 Database",
-    description: "Learn how Taish Gaming researches GTA 6 information, labels official evidence, community findings and speculation, and maintains its independent fan-made database.",
+    description: "Taish Gaming separates Rockstar-confirmed GTA VI facts, trailer observations, attributed reporting and fan speculation in its independent database.",
     images: ["/img/hero-dark.jpg"],
   },
 };

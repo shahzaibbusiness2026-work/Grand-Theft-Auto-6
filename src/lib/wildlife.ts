@@ -310,9 +310,9 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     slug: "poach",
     name: "POACH Wildlife Enforcement",
     title: "POACH in GTA 6",
-    seoTitle: "POACH Wildlife Enforcement in GTA 6: Trailer Scenes & Facts",
+    seoTitle: "POACH in GTA 6: Trailer Evidence",
     seoDescription:
-      "POACH — Protection of Animals and Controlled Hunting — appears in GTA VI trailers, recovering an alligator from a pool and pursuing apparent poachers. What the footage shows, and what is not confirmed.",
+      "Trailer footage shows a POACH-branded alligator recovery scene. See what is visible and which wildlife-enforcement details remain unconfirmed.",
     tier: "Observed in official media",
     hero: "/img/wildlife/alligator-pool.jpg",
     heroAlt:

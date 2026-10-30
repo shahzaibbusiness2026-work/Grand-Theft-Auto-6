@@ -18,10 +18,28 @@ interface AdminLayoutShellProps {
   children: React.ReactNode;
 }
 
+export interface AdminIdentity {
+  name: string;
+  email: string;
+  role: string;
+}
+
 export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
   const pathname = usePathname();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [identity, setIdentity] = useState<AdminIdentity | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/admin/profile", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : null)
+      .then((payload) => {
+        if (active && payload?.success && payload.user) setIdentity(payload.user);
+      })
+      .catch(() => undefined);
+    return () => { active = false; };
+  }, []);
 
   // Restore sidebar collapsed preference
   useEffect(() => {
@@ -51,6 +69,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
     <div className="min-h-screen bg-[#0B0E14] text-[#E2E8F0] flex flex-col font-sans antialiased selection:bg-[#6366F1] selection:text-white transition-colors duration-200">
       {/* Desktop & Mobile Sidebar */}
       <AdminSidebar
+        identity={identity}
         isCollapsed={isSidebarCollapsed}
         onToggleCollapse={toggleSidebarCollapse}
         mobileOpen={mobileMenuOpen}
@@ -66,6 +85,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
       >
         {/* Sticky Header with Sidebar Toggle & Search */}
         <AdminHeader
+          identity={identity}
           onOpenMobileMenu={() => setMobileMenuOpen(true)}
           isSidebarCollapsed={isSidebarCollapsed}
           onToggleSidebar={toggleSidebarCollapse}

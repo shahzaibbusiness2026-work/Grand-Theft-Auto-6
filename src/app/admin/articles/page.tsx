@@ -27,6 +27,8 @@ export default function AdminArticlesPage() {
   const { showToast } = useToast();
   const [articles, setArticles] = useState<AdminArticle[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
   const [activeTab, setActiveTab] = useState<"all" | "draft" | "review" | "scheduled" | "published">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedAuthor, setSelectedAuthor] = useState("all");
@@ -34,11 +36,19 @@ export default function AdminArticlesPage() {
   const [selectedDate, setSelectedDate] = useState("all");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  const loadArticles = () => {
+  const loadArticles = async () => {
     setIsLoading(true);
-    getAdminArticles()
-      .then((data) => setArticles(data || []))
-      .finally(() => setIsLoading(false));
+    setLoadError(null);
+    try {
+      const data = await getAdminArticles();
+      setArticles(data);
+      setIsConnected(true);
+    } catch (error) {
+      setIsConnected(false);
+      setLoadError(error instanceof Error ? error.message : "Could not load the articles from Supabase.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -105,7 +115,7 @@ export default function AdminArticlesPage() {
   // Reset to page 1 when filters change the result set
   useEffect(() => {
     setCurrentPage(1);
-  }, [activeTab, selectedAuthor, selectedCategory, searchQuery]);
+  }, [activeTab, selectedAuthor, selectedCategory, selectedDate, searchQuery]);
 
   const authors = useMemo(
     () => Array.from(new Set(articles.map((a) => a.author.name))).sort(),
@@ -159,11 +169,20 @@ export default function AdminArticlesPage() {
       type: "info",
     });
 
-    const res = await saveArticle(updated);
+    let res;
+    try {
+      res = await saveArticle(updated);
+    } catch (error) {
+      setArticles(previous);
+      showToast({ title: "Save failed — changes reverted", description: error instanceof Error ? error.message : "Could not save the article.", type: "danger" });
+      return;
+    }
     if (res.success) {
       showToast({
         title: "Article Saved",
-        description: `Persisted to Supabase and updated on live site!`,
+        description: updated.status === "published"
+          ? "Saved to Supabase and refreshed on the public site."
+          : "Saved to Supabase. It will appear publicly when published.",
         type: "success",
       });
       setQuickEditArticle(null);
@@ -182,7 +201,7 @@ export default function AdminArticlesPage() {
   const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
   const handleDeleteArticle = async (id: string) => {
-    const target = articles.find((a) => a.id === id);
+    const previous = articles;
     setArticles((prev) => prev.filter((a) => a.id !== id));
     setSelectedIds((prev) => prev.filter((i) => i !== id));
     showToast({
@@ -190,11 +209,18 @@ export default function AdminArticlesPage() {
       description: "Removing article...",
       type: "info",
     });
-    const res = await deleteArticle(id);
+    let res;
+    try {
+      res = await deleteArticle(id);
+    } catch (error) {
+      setArticles(previous);
+      showToast({ title: "Delete failed", description: error instanceof Error ? error.message : "Could not delete the article.", type: "danger" });
+      return;
+    }
     if (res.success) {
       showToast({
         title: "Article Deleted",
-        description: "Removed from Supabase and live site.",
+        description: "Removed from the database.",
         type: "success",
       });
     } else {
@@ -211,11 +237,16 @@ export default function AdminArticlesPage() {
     const targets = articles.filter((a) => selectedIds.includes(a.id) && a.status !== "archived");
     if (targets.length === 0) return;
     showToast({ title: "Archiving…", description: `${targets.length} article(s)…`, type: "info" });
-    for (const t of targets) {
-      await saveArticle({ ...t, status: "archived" });
-    }
+    const results = await Promise.allSettled(targets.map((article) => saveArticle({ ...article, status: "archived" })));
+    const failures = results.filter((result) => result.status === "rejected" || !result.value.success);
     setSelectedIds([]);
-    showToast({ title: "Archived", description: `${targets.length} article(s) moved to archive.`, type: "success" });
+    showToast({
+      title: failures.length ? "Some articles could not be archived" : "Archived",
+      description: failures.length
+        ? `${targets.length - failures.length} archived; ${failures.length} failed. ${failures[0]?.status === "fulfilled" ? failures[0].value.error || "" : "Database request failed."}`
+        : `${targets.length} article(s) moved to archive.`,
+      type: failures.length ? "danger" : "success",
+    });
     loadArticles();
   };
 
@@ -232,9 +263,9 @@ export default function AdminArticlesPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Articles
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Connected to Supabase
+            <span className={cn("px-2.5 py-0.5 rounded-full text-xs font-semibold border flex items-center gap-1.5", isConnected ? "bg-emerald-950/60 border-emerald-500/40 text-emerald-400" : "bg-amber-950/60 border-amber-500/40 text-amber-300")}>
+              <span className={cn("w-1.5 h-1.5 rounded-full", isConnected ? "bg-emerald-400 animate-pulse" : "bg-amber-400")} />
+              {isLoading ? "Connecting to Supabase…" : isConnected ? "Connected to Supabase" : "Database unavailable"}
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
@@ -251,7 +282,14 @@ export default function AdminArticlesPage() {
         </Link>
       </div>
 
-      {/* Filter Tabs matching Image 8: All 128, Drafts 18, Review 9, Scheduled 4, Published 97 */}
+      {loadError && (
+        <div role="alert" className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 text-xs text-amber-100">
+          <p>{loadError} No sample articles are shown, so edits cannot accidentally overwrite fallback data.</p>
+          <button type="button" onClick={loadArticles} className="shrink-0 rounded-lg border border-amber-500/30 px-3 py-2 font-semibold hover:bg-amber-500/10">Retry connection</button>
+        </div>
+      )}
+
+      {/* Filter articles by editorial status */}
       <div
         role="tablist"
         aria-label="Filter articles by status"

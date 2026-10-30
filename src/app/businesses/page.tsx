@@ -3,20 +3,21 @@ import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/businesses" },
-  title: "GTA 6 Businesses — Buy, Run & Profit",
-  description: "Every GTA 6 business type: bait & tackle, chop shop, luxury dealership, nightclub, smuggler warehouse and taxi depot — with income calculators to plan your empire.",
+  openGraph: { url: "/businesses" },
+  title: "GTA 6 Business Concepts | Taish Gaming",
+  description: "Fan-made business ideas for GTA VI. Rockstar has not confirmed purchasable businesses, income or operating mechanics.",
   alternates: { canonical: "/businesses" },
+  robots: { index: false, follow: true },
 };
 
-type Biz = { name: string; style: string; desc: string; tip: string };
+type Biz = { name: string; desc: string };
 const BIZ: Biz[] = [
-  { name: "Bait & Tackle Shop", style: "Passive + Active", desc: "Supply Leonida's fishing scene from the Keys. Steady foot traffic, low heat, and it pairs perfectly with a day on the water.", tip: "Run it alongside fishing runs for stacked income." },
-  { name: "Chop Shop", style: "Active", desc: "Strip stolen rides and sell the parts. High payout per car, high police attention — the classic risk-reward business.", tip: "Use the garage planner to keep your own fleet separate from stock." },
-  { name: "Luxury Car Dealership", style: "Passive + Active", desc: "Move high-end inventory to Vice City's wealthy buyers. Big margins, big upfront cost, and the best-looking front in Leonida.", tip: "Source rare vehicles first — rarity drives the margin." },
-  { name: "Malibú Nightclub", style: "Passive", desc: "The NINE 1 NINE-era club scene pays while you sleep — as long as you keep the venue popular and the cops unbothered.", tip: "Popularity drives nightly income; promote before big weekends." },
-  { name: "Smuggler Warehouse", style: "Active", desc: "Move product through Coast Guard-patrolled waters. The Keys smuggling routes pay the most — and carry the most risk.", tip: "Watch patrol patterns before every run; one seizure wipes a week's profit." },
-  { name: "Taxi Depot", style: "Passive + Active", desc: "A fleet of cabs working Vice City around the clock. Modest per-trip money, but it never stops while you do other jobs.", tip: "The best starter business — cheap to run, always earning." },
+  { name: "Bait & Tackle Shop", desc: "Fan concept only. No official source confirms that this business can be purchased or operated." },
+  { name: "Chop Shop", desc: "A chop shop appears in this fan-made list. Payouts, police response and ownership mechanics are unverified." },
+  { name: "Luxury Car Dealership", desc: "A fictional planning concept. Prices, margins, inventory and dealership ownership have not been confirmed." },
+  { name: "Malibú Nightclub", desc: "A fan-made business idea. The nightclub name and any related income or management system are unverified." },
+  { name: "Smuggler Warehouse", desc: "A fictional scenario for planning. No official source confirms warehouse ownership, patrol behavior or profit mechanics." },
+  { name: "Taxi Depot", desc: "A fan-made concept. Taxi ownership, passive income and business availability have not been confirmed." },
 ];
 
 export default function BusinessesPage() {
@@ -24,19 +25,19 @@ export default function BusinessesPage() {
     <SiteShell>
       <div className="container-site py-8">
         <div className="max-w-3xl mb-8">
-          <p className="text-xs font-black uppercase tracking-[0.25em] text-primary">Empire Building</p>
+          <p className="text-xs font-black uppercase tracking-[0.25em] text-primary">Fan concepts · Not confirmed</p>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground mt-2">Businesses</h1>
-          <p className="text-foreground/70 mt-3">Six ways to own Leonida instead of just robbing it. Business types match the site&apos;s income calculators — full GTA 6 business mechanics will be confirmed from gameplay at launch.</p>
+          <p className="text-foreground/70 mt-3">This is a fan-made concept list, not a guide to confirmed GTA VI features. Rockstar has not verified these businesses as purchasable, their income, or how they would operate. Calculator links below use hypothetical inputs only.</p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {BIZ.map((b) => (
             <article key={b.name} className="rounded-xl border border-white/10 bg-black/20 p-5 flex flex-col">
               <div className="flex items-start justify-between gap-3">
                 <h2 className="font-bold text-lg leading-snug">{b.name}</h2>
-                <span className="shrink-0 text-xs font-black px-2 py-1 rounded-full border bg-primary/10 text-primary border-primary/40">{b.style}</span>
+                <span className="shrink-0 text-xs font-black px-2 py-1 rounded-full border bg-primary/10 text-primary border-primary/40">Fan concept</span>
               </div>
               <p className="text-sm text-foreground/70 mt-2 leading-relaxed flex-1">{b.desc}</p>
-              <p className="text-sm text-foreground/90 mt-3"><strong>Tip:</strong> {b.tip}</p>
+              <p className="text-sm text-foreground/90 mt-3"><strong>Evidence:</strong> No verified ownership or income data.</p>
             </article>
           ))}
         </div>

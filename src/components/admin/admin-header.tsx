@@ -20,8 +20,10 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CommandMenu } from "./command-menu";
+import type { AdminIdentity } from "./admin-layout";
 
 interface AdminHeaderProps {
+  identity?: AdminIdentity | null;
   onOpenMobileMenu?: () => void;
   isSidebarCollapsed?: boolean;
   onToggleSidebar?: () => void;
@@ -40,6 +42,7 @@ interface NotificationItem {
 const INITIAL_NOTIFICATIONS: NotificationItem[] = [];
 
 export function AdminHeader({
+  identity,
   onOpenMobileMenu,
   isSidebarCollapsed = false,
   onToggleSidebar,
@@ -56,6 +59,8 @@ export function AdminHeader({
   const profileRef = useRef<HTMLDivElement>(null);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
+  const profileName = identity?.name || "Loading profile…";
+  const profileInitials = profileName.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join("").toUpperCase() || "A";
 
   useEffect(() => {
     setMounted(true);
@@ -304,7 +309,7 @@ export function AdminHeader({
             )}
           </div>
 
-          {/* User Profile Menu (Image 1: circle avatar AD + "Administrator" + ChevronDown) */}
+          {/* Signed-in administrator profile menu */}
           <div className="relative" ref={profileRef}>
             <button
               type="button"
@@ -318,10 +323,10 @@ export function AdminHeader({
               className="flex items-center gap-2 p-1 sm:px-2 sm:py-1 rounded-xl hover:bg-[#141B2A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]"
             >
               <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white font-bold text-xs shadow-sm shrink-0">
-                AD
+                {profileInitials}
               </div>
               <span className="hidden sm:inline text-xs font-semibold text-white">
-                Administrator
+                {profileName}
               </span>
               <svg className="w-3.5 h-3.5 text-[#94A3B8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <polyline points="6 9 12 15 18 9"/>
@@ -342,10 +347,10 @@ export function AdminHeader({
                   className="absolute right-0 mt-2 w-56 rounded-2xl bg-[#111622] border border-[#1C2436] shadow-2xl z-50 p-2 space-y-1 animate-in fade-in slide-in-from-top-2 duration-150"
                 >
                   <div className="px-3 py-2 border-b border-[#1C2436]">
-                    <p className="text-xs font-bold text-white">Administrator</p>
-                    <p className="text-xs text-[#64748B] truncate">admin@atlas-gta6.com</p>
+                    <p className="text-xs font-bold text-white">{identity?.name || "Loading profile…"}</p>
+                    <p className="text-xs text-[#64748B] truncate">{identity?.email || ""}</p>
                     <span className="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">
-                      <ShieldCheck className="w-3 h-3" /> Senior Editor
+                      <ShieldCheck className="w-3 h-3" /> {identity?.role || "Admin"}
                     </span>
                   </div>
 

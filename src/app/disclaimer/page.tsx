@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: { url: "/disclaimer" },
   title: "Disclaimer",
   description:
-    "Read the Taish Gaming disclaimer: an unofficial fan site not affiliated with Rockstar Games or Take-Two Interactive, with pre-launch information clearly marked, plus advertising, corrections, and takedown notes.",
+    "Taish Gaming is an unofficial GTA VI fan site, not affiliated with Rockstar Games or Take-Two. Read our content, advertising, correction and takedown notices.",
   alternates: { canonical: "/disclaimer" },
 };
 

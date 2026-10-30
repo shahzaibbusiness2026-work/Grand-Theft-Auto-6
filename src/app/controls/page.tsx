@@ -3,9 +3,9 @@ import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/controls" },
-  title: "GTA 6 Controls — PS5 & Xbox Button Layout",
-  description: "Full GTA 6 controls reference for PlayStation 5 and Xbox Series X|S: on foot, driving, flying, swimming and combat. Based on GTA 5's layout, confirmed at launch.",
+  openGraph: { url: "/controls" },
+  title: "GTA 6 Controls: Provisional PS5 & Xbox Layout",
+  description: "A provisional GTA VI controller reference based on GTA V. Rockstar has not published the official GTA VI control layout.",
   alternates: { canonical: "/controls" },
 };
 
