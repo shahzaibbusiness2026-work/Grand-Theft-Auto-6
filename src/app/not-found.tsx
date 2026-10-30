@@ -19,7 +19,7 @@ export default function NotFound() {
         <ThemeImage
           dark="/img/hero-dark.jpg"
           light="/img/hero-light.jpg"
-          alt=""
+          alt="GTA 6 Vice City artwork"
           role="presentation"
           className="absolute inset-0 h-full w-full object-cover opacity-80 dark:opacity-60 dark:brightness-110"
         />

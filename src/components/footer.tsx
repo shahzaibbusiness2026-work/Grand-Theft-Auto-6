@@ -173,7 +173,7 @@ export async function Footer() {
       <div className={styles.backdrop} aria-hidden="true">
         <SafeImage
           src="/img/hero-vice-skyline-hd.jpg"
-          alt=""
+          alt="Vice City skyline at dusk, GTA 6 artwork"
           fill
           sizes="100vw"
           className="object-cover object-center"

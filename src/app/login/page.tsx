@@ -31,7 +31,7 @@ export default async function LoginPage({
     <div className="relative min-h-screen">
       <Image
         src="/img/hero-vice-skyline-hd.jpg"
-        alt=""
+        alt="Vice City skyline, GTA 6 artwork"
         fill
         priority
         className="object-cover"

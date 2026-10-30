@@ -28,7 +28,7 @@ export function CatalogPageHeader({
     <header className={styles.hero}>
       <SafeImage
         src={vehicles ? "/img/car-purple.jpg" : "/img/hero-vice-skyline-hd.jpg"}
-        alt=""
+        alt={vehicles ? "GTA 6 vehicle showcase" : "Vice City skyline, GTA 6 artwork"}
         fill
         sizes="100vw"
         className={styles.heroImage}

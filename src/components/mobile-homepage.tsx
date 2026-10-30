@@ -105,7 +105,7 @@ export function MobileHomepage({
                 <div className="relative h-[70px] w-[88px] shrink-0 overflow-hidden rounded-lg">
                   <SafeImage
                     src={article.img}
-                    alt=""
+                    alt={article.title || "GTA 6 news article"}
                     fill
                     sizes="88px"
                     className="object-cover"
@@ -174,7 +174,7 @@ export function MobileHomepage({
                   <div className="relative h-[150px]">
                     <SafeImage
                       src={character.img}
-                      alt=""
+                      alt={character.name || "GTA 6 character"}
                       fill
                       sizes="126px"
                       className="object-cover object-top"
