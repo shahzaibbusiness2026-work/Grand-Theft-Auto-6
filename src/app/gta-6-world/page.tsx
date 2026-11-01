@@ -5,7 +5,7 @@ import { WorldHubSections } from "./world-hub-client";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/gta-6-world" },
+  openGraph: { url: "/gta-6-world", images: [{ url: "/img/hero-vice-skyline-hd.jpg", alt: "Vice City skyline at sunset over the water" }] },
   title: "GTA 6 World: Wildlife, Radio & City Life",
   description:
     "Explore the world of GTA 6: wildlife, regions, media, city life, activities and discoveries across Leonida. Source-backed guides and fan analysis.",
