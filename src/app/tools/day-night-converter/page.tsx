@@ -57,6 +57,27 @@ export default function DayNightConverterPage() {
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
               },
+              {
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "Why does “wait” wrap past midnight?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "In-game time is a 24-hour loop, so asking for 06:00 when it's 23:00 means waiting 7 game hours (14 real minutes) through midnight, not going backwards.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Can I pause the clock?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "The in-game clock only advances while you're in the session — the converter assumes continuous play.",
+                    },
+                  },
+                ],
+              },
             ],
           }),
         }}

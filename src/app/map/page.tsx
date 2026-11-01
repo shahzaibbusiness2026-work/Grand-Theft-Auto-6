@@ -17,11 +17,18 @@ export const metadata: Metadata = {
     url: "/map",
     title,
     description: PUBLIC_TOOL_COPY["/map"],
+    images: [
+      {
+        url: "/img/leonida-map-v2.jpg",
+        alt: "Fan-made satellite-style preview of the Leonida map for GTA 6",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description: PUBLIC_TOOL_COPY["/map"],
+    images: ["/img/leonida-map-v2.jpg"],
   },
 };
 

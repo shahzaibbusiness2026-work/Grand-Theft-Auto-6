@@ -44,6 +44,19 @@ export default function VehicleUpgradeCalculatorPage() {
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
               },
+              {
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "Are these real GTA VI prices or performance gains?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "No. Vehicle prices, upgrade costs and performance points here are fictional presets for demonstrating a budget calculation. They are not measurements, leak-based estimates or confirmed GTA VI tuning data.",
+                    },
+                  },
+                ],
+              },
             ],
           }),
         }}

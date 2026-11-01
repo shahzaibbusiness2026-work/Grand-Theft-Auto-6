@@ -47,7 +47,7 @@ export function MobileHomepage({
   characters,
   sections,
 }: {
-  articles: Article[];
+  articles: Pick<Article, "slug" | "title" | "img" | "date" | "category" | "excerpt">[];
   characters: Character[];
   sections: string[];
 }) {

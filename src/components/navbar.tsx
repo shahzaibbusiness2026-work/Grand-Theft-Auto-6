@@ -63,7 +63,7 @@ const LINKS: NavLink[] = [
       { href: "/rankings", label: "All Weapon Rankings" },
     ],
   },
-  { href: "/missions", label: "Missions", menu: [{ href: "/missions", label: "All Missions" }, { href: "/tracker", label: "100% Tracker" }] },
+  { href: "/guides", label: "Guides" },
   { href: "/map", label: "Map" },
 ];
 

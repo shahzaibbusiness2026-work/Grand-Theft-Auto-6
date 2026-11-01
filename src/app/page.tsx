@@ -77,7 +77,6 @@ export default async function HomePage() {
 
   return (
     <SiteShell>
-      <h1 className="sr-only">Taish Gaming — GTA 6 fan site</h1>
       {showSection("hero") && (
         <>
           {/* 1 — CINEMATIC AAA HERO SECTION */}
@@ -86,7 +85,14 @@ export default async function HomePage() {
       )}
 
       <MobileHomepage
-        articles={allArticles}
+        articles={allArticles.map((a) => ({
+          slug: a.slug,
+          title: a.title,
+          img: a.img,
+          date: a.date,
+          category: a.category,
+          excerpt: a.excerpt,
+        }))}
         characters={allCharacters}
         sections={sectionToggles}
       />

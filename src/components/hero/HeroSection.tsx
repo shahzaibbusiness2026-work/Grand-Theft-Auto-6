@@ -21,6 +21,13 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
       <div className="relative z-10 mx-auto w-full max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl flex flex-col items-center justify-center flex-1 pb-3 sm:pb-8 text-center">
+        {/* Visible keyword headline (the hero still leads with the timer below) */}
+        <h1
+          className="hero-enter text-2xl sm:text-3xl font-bold text-white drop-shadow-lg"
+          style={{ animationDelay: "0s" }}
+        >
+          GTA 6 Map, Vehicles, Weapons &amp; Database
+        </h1>
         {/* Countdown in Center */}
         <div className="hero-enter w-full" style={{ animationDelay: "0.05s" }}>
           <Countdown
@@ -44,7 +51,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
           </Link>
 
           <Link
-            href="/map-explorer"
+            href="/map"
             className="hidden sm:inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 bg-black/60 hover:bg-black/80 px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all backdrop-blur-xl hover:border-[#00F0FF]/60 active:scale-95 shadow-lg"
           >
             <span>Open Map Explorer</span>

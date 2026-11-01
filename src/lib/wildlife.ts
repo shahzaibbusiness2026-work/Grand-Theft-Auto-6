@@ -168,7 +168,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     slug: "birds-marine-life",
     name: "Birds & Marine Life",
     title: "Birds & Marine Life in the Trailers",
-    seoTitle: "Birds & Marine Life Spotted in GTA 6 Trailers",
+    seoTitle: "Unidentified Birds & Marine Life in GTA 6",
     seoDescription:
       "Birds over the marina, distant birds over the wetlands, and marine life near a yacht — trailer frames where the species itself is not identified.",
     tier: "Observed in official media",
