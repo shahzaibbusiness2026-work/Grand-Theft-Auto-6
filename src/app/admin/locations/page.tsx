@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { MapPin, Plus, Trash2, Pencil, RefreshCw } from "lucide-react";
 import { DataTable, Column } from "@/components/admin/data-table";
 import { Badge } from "@/components/admin/ui/badge";
-import { getLocations, saveLocation, deleteLocation } from "@/lib/services/locations";
+import { getAdminLocations, saveLocation, deleteLocation } from "@/lib/services/locations";
 import type { LocationRecord } from "@/lib/services/locations";
 import { useToast } from "@/components/admin/toast";
 import { Modal } from "@/components/admin/modal";
@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 const EMPTY_FORM: LocationRecord = {
   id: "",
   name: "",
-  district: "Vice City Metro",
+  district: "",
   type: "Landmark",
   verification: "pending",
   coordinates: "",
@@ -24,14 +24,16 @@ export default function AdminLocationsPage() {
   const { showToast } = useToast();
   const [locations, setLocations] = useState<LocationRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [editorOpen, setEditorOpen] = useState(false);
   const [form, setForm] = useState<LocationRecord>(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
 
   const loadLocations = () => {
     setIsLoading(true);
-    getLocations()
+    getAdminLocations()
       .then(setLocations)
+      .catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load locations."))
       .finally(() => setIsLoading(false));
   };
 
@@ -155,6 +157,7 @@ export default function AdminLocationsPage() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
         <div>
           <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight flex items-center gap-2.5">

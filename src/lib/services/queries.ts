@@ -21,6 +21,7 @@ import { getPublicWeapons as _getPublicWeapons } from "./weapons";
 import { getSiteSettings as _getSiteSettings } from "./settings";
 import type { DatabaseArticleRow } from "./articles";
 import type { ComprehensiveSiteSettings } from "./settings";
+import { claimsFor } from "@/lib/catalog-evidence";
 
 /* ------------------------------------------------------------------ */
 /* PUBLIC QUERY WRAPPERS (maintains backwards compat with all pages)   */
@@ -60,6 +61,7 @@ import { getMissions, MissionRecord } from "./missions";
 /* ------------------------------------------------------------------ */
 export interface DashboardVehicleItem {
   id: string;
+  slug?: string;
   name: string;
   class?: string;
   topSpeed?: string;
@@ -71,6 +73,7 @@ export interface DashboardVehicleItem {
 
 export interface DashboardWeaponItem {
   id: string;
+  slug?: string;
   name: string;
   category?: string;
   damage?: string;
@@ -82,6 +85,7 @@ export interface DashboardWeaponItem {
 }
 
 export interface DashboardStats {
+  dataAvailable?: boolean;
   totalVehicles: number;
   totalWeapons: number;
   totalCharacters: number;
@@ -103,6 +107,7 @@ export interface DashboardStats {
  */
 export async function getDashboardStats(): Promise<DashboardStats> {
   const defaults: DashboardStats = {
+    dataAvailable: false,
     totalVehicles: 0,
     totalWeapons: 0,
     totalCharacters: 0,
@@ -148,19 +153,20 @@ export async function getDashboardStats(): Promise<DashboardStats> {
       getMissions(),
       supabase
         .from("vehicles")
-        .select("id, name, class, top_speed, acceleration, price_display, images, manufacturer")
+        .select("id, slug, name, class, images")
         .eq("status", "published")
         .order("created_at", { ascending: true })
         .limit(4),
       supabase
         .from("weapons")
-        .select("id, name, category, damage, range, acquisition_method, price_display, rarity, attachments")
+        .select("id, slug, name, category")
         .eq("status", "published")
         .order("created_at", { ascending: true })
         .limit(4),
     ]);
 
     const stats: DashboardStats = {
+      dataAvailable: [vehiclesCountRes, weaponsCountRes, charsRes, articlesRes].every((result) => result.status === "fulfilled" && !result.value.error),
       totalVehicles: vehiclesCountRes.status === "fulfilled" ? (vehiclesCountRes.value.count ?? 0) : 0,
       totalWeapons: weaponsCountRes.status === "fulfilled" ? (weaponsCountRes.value.count ?? 0) : 0,
       totalCharacters: charsRes.status === "fulfilled" ? (charsRes.value.count ?? 0) : 0,
@@ -180,6 +186,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
       stats.featuredVehicles = vehiclesDataRes.value.data.map(
         (row: {
           id: string;
+          slug?: string;
           name: string;
           class?: string;
           top_speed?: string;
@@ -189,13 +196,14 @@ export async function getDashboardStats(): Promise<DashboardStats> {
           manufacturer?: string;
         }) => ({
           id: row.id,
+          slug: row.slug || row.id,
           name: row.name,
           class: row.class || "",
-          topSpeed: row.top_speed || "",
-          acceleration: row.acceleration || "",
-          priceDisplay: row.price_display || "",
+          topSpeed: claimsFor("vehicles", row.id).find((claim) => claim.field.toLowerCase() === "top speed")?.value || "",
+          acceleration: claimsFor("vehicles", row.id).find((claim) => claim.field.toLowerCase() === "acceleration")?.value || "",
+          priceDisplay: claimsFor("vehicles", row.id).find((claim) => claim.field.toLowerCase() === "price")?.value || "",
           img: Array.isArray(row.images) && row.images[0] ? row.images[0] : "",
-          manufacturer: row.manufacturer || "",
+          manufacturer: claimsFor("vehicles", row.id).find((claim) => claim.field.toLowerCase() === "manufacturer")?.value || "",
         })
       );
     }
@@ -205,6 +213,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
       stats.featuredWeapons = weaponsDataRes.value.data.map(
         (row: {
           id: string;
+          slug?: string;
           name: string;
           category?: string;
           damage?: string;
@@ -215,14 +224,15 @@ export async function getDashboardStats(): Promise<DashboardStats> {
           attachments?: string[];
         }) => ({
           id: row.id,
+          slug: row.slug || row.id,
           name: row.name,
           category: row.category || "",
-          damage: row.damage || "",
-          range: row.range || "",
-          acquisitionMethod: row.acquisition_method || "",
-          priceDisplay: row.price_display || "",
-          rarity: row.rarity || "",
-          attachments: Array.isArray(row.attachments) ? row.attachments : [],
+          damage: claimsFor("weapons", row.id).find((claim) => claim.field.toLowerCase() === "damage")?.value || "",
+          range: claimsFor("weapons", row.id).find((claim) => claim.field.toLowerCase() === "range")?.value || "",
+          acquisitionMethod: claimsFor("weapons", row.id).find((claim) => claim.field.toLowerCase() === "acquisition")?.value || "",
+          priceDisplay: claimsFor("weapons", row.id).find((claim) => claim.field.toLowerCase() === "price")?.value || "",
+          rarity: "",
+          attachments: [],
         })
       );
     }

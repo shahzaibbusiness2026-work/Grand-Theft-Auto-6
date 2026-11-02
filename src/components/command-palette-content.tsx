@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef, useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState, useRef, useMemo, useCallback } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { dashboardToolPath } from "@/lib/player-navigation";
 import {
   Search,
   X,
@@ -67,8 +68,12 @@ function buildStaticIndex(): SearchItem[] {
   ];
 }
 
-export function CommandPaletteContent({ isOpen, onClose }: CommandPaletteProps) {
+export function CommandPaletteContent({
+  isOpen,
+  onClose,
+}: CommandPaletteProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -132,6 +137,18 @@ export function CommandPaletteContent({ isOpen, onClose }: CommandPaletteProps) 
     }
   }, [isOpen]);
 
+  const handleSelect = useCallback(
+    (item: SearchItem) => {
+      onClose();
+      router.push(
+        pathname.startsWith("/dashboard")
+          ? dashboardToolPath(item.href)
+          : item.href,
+      );
+    },
+    [onClose, pathname, router],
+  );
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -156,12 +173,7 @@ export function CommandPaletteContent({ isOpen, onClose }: CommandPaletteProps) 
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, filteredResults, selectedIndex]);
-
-  const handleSelect = (item: SearchItem) => {
-    onClose();
-    router.push(item.href);
-  };
+  }, [isOpen, filteredResults, selectedIndex, handleSelect, onClose]);
 
   if (!isOpen) return null;
 

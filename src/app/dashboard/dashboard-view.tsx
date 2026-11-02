@@ -1,99 +1,235 @@
 "use client";
-
-import { useState, useEffect } from "react";
-import { getDisplayName } from "@/lib/user-store";
-import { CompanionSidebar } from "@/components/dashboard/companion-sidebar";
-import { CompanionTopBar } from "@/components/dashboard/companion-topbar";
+import { useEffect, useState } from "react";
+import Link from "@/components/player-tool-link";
+import {
+  getStoredUserState,
+  saveStoredUserState,
+  type UserState,
+} from "@/lib/user-store";
+import { PLAYER_TOOLS } from "@/lib/player-state";
+import { usePlayerSync } from "@/components/player-sync-provider";
 import { CompanionHero } from "@/components/dashboard/companion-hero";
 import { CompanionVehiclesSection } from "@/components/dashboard/companion-vehicles-section";
 import { CompanionWeaponsSection } from "@/components/dashboard/companion-weapons-section";
-import { X } from "lucide-react";
 import type { DashboardStats } from "@/lib/services/queries";
+import { NextSessionCard } from "@/components/player-session-planner";
 
-interface DashboardViewProps {
+export function DashboardView({
+  liveStats,
+  playerName,
+}: {
   liveStats: DashboardStats;
-}
-
-export function DashboardView({ liveStats }: DashboardViewProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // The account's own name — read from the local login on mount (never a
-  // hardcoded person). "Player" is the neutral fallback before login.
-  const [displayName, setDisplayName] = useState("Player");
+  playerName: string;
+}) {
+  const { profile } = usePlayerSync();
+  const [state, setState] = useState<UserState | null>(null);
   useEffect(() => {
-    setDisplayName(getDisplayName());
+    const update = () => setState(getStoredUserState());
+    update();
+    window.addEventListener("gta6_user_state_change", update);
+    return () => window.removeEventListener("gta6_user_state_change", update);
   }, []);
-
+  const latest = state?.recentActivity[0];
   return (
-    <div data-flip-text className="dashboard-type flex h-screen w-full overflow-hidden bg-[#070b14] dark:bg-[#070b14] text-slate-100 dark:text-slate-100 antialiased select-none transition-colors">
-      {/* SEO: single H1 for the page, visually hidden (dashboard is a tool UI). */}
-      <h1 className="sr-only">GTA 6 Dashboard</h1>
-      {/* 1. Desktop Fixed Sidebar */}
-      <div className="hidden md:flex shrink-0">
-        <CompanionSidebar />
-      </div>
-
-      {/* 2. Mobile Drawer Overlay */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 flex md:hidden">
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm animate-in fade-in"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-          {/* Drawer content */}
-          <div className="relative z-10 flex w-72 flex-col bg-[#04060d] shadow-2xl animate-in slide-in-from-left duration-300">
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:text-white"
-              aria-label="Close sidebar"
-            >
-              <X className="h-4 w-4" />
-            </button>
-            <CompanionSidebar onItemClick={() => setMobileMenuOpen(false)} />
+    <>
+      <CompanionHero
+        userName={profile?.displayName || playerName}
+        siteStats={liveStats}
+      />
+      <NextSessionCard />
+      <section
+        className="player-panel"
+        aria-labelledby="player-workspace-title"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 id="player-workspace-title" className="text-xl font-bold">
+              Your saved workspace
+            </h2>
+            <p className="mt-1 text-sm text-slate-400">
+              Saved items, checked locations and loadouts belong to your
+              account.
+            </p>
           </div>
+          <Link href="/dashboard/saved" className="player-button">
+            View saved items
+          </Link>
         </div>
-      )}
-
-      {/* 3. Main Content Viewport */}
-      <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Top Header Bar */}
-        <CompanionTopBar
-          onMenuToggle={() => setMobileMenuOpen(true)}
-          userName={displayName}
-        />
-
-        {/* Scrollable Dashboard Body — weapons and vehicles only, all live DB data */}
-        <main className="relative flex-1 overflow-y-auto px-4 py-6 sm:px-6 lg:px-8 space-y-8">
-          {/* Ambient premium glows */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 -z-0 h-96 bg-[radial-gradient(ellipse_at_top,rgba(201,168,106,0.12),transparent_60%)]" />
-          <div className="pointer-events-none absolute right-0 top-1/3 -z-0 h-96 w-96 rounded-full bg-[#00F0FF]/[0.05] blur-[120px]" />
-          <div className="mx-auto max-w-[1540px] space-y-6 pb-12">
-            {/* Hero Welcome Card — shows live DB counts as site stats */}
-            <CompanionHero
-              userName={displayName}
-              siteStats={{
-                totalVehicles: liveStats.totalVehicles,
-                totalWeapons: liveStats.totalWeapons,
-                totalCharacters: liveStats.totalCharacters,
-                totalArticles: liveStats.totalArticles,
-              }}
-            />
-
-            {/* Live Fleet / Vehicles Showcase */}
-            <CompanionVehiclesSection
-              vehicles={liveStats.featuredVehicles}
-              totalVehicles={liveStats.totalVehicles}
-            />
-
-            {/* Live Armory / Weapons Showcase */}
-            <CompanionWeaponsSection
-              weapons={liveStats.featuredWeapons}
-              totalWeapons={liveStats.totalWeapons}
-            />
+        <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {[
+            {
+              label: "Saved vehicles",
+              value: state?.favorites.vehicles.length,
+              path: "/dashboard/saved?type=vehicles",
+            },
+            {
+              label: "Saved weapons",
+              value: state?.favorites.weapons.length,
+              path: "/dashboard/saved?type=weapons",
+            },
+            {
+              label: "Map markers checked",
+              value: state?.mapCompletedIds.length,
+              path: "/map",
+            },
+            {
+              label: "Saved loadouts",
+              value: state?.savedLoadouts.length,
+              path: "/tools/loadout-builder",
+            },
+          ].map((item) => (
+            <Link
+              key={item.label}
+              href={item.path}
+              className="rounded-xl border border-white/10 bg-white/[0.03] p-4 hover:border-gold/50"
+            >
+              <strong className="block text-2xl">{item.value ?? "—"}</strong>
+              <span className="mt-1 block text-xs text-slate-400">
+                {item.label}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <div className="grid gap-5 lg:grid-cols-2">
+        <section className="player-panel">
+          <h2 className="text-lg font-bold">Continue where you left off</h2>
+          {latest ? (
+            <Link
+              href={latest.path}
+              className="mt-4 block rounded-xl border border-gold/30 bg-gold/10 p-4"
+            >
+              <span className="block capitalize">{latest.label}</span>
+              <span className="mt-1 block text-xs text-slate-400">
+                Resume your last page →
+              </span>
+            </Link>
+          ) : (
+            <p className="mt-4 text-sm text-slate-400">
+              Visit a tool or article and it will appear here.
+            </p>
+          )}
+          <h3 className="mb-2 mt-5 text-sm font-semibold text-slate-300">
+            Your quick tools
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {PLAYER_TOOLS.filter((tool) =>
+              state?.pinnedTools.includes(tool.path),
+            ).map((tool) => (
+              <Link key={tool.path} href={tool.path} className="player-button">
+                {tool.label}
+              </Link>
+            ))}
+            <Link className="player-button" href="/dashboard/saved">
+              Manage shortcuts
+            </Link>
           </div>
-        </main>
+        </section>
+        <section className="player-panel">
+          <div className="flex items-center justify-between gap-2">
+            <h2 className="text-lg font-bold">Your goals</h2>
+            <Link href="/dashboard/goals" className="text-sm text-gold-light">
+              Manage goals →
+            </Link>
+          </div>
+          {state?.goals
+            .filter((goal) => !goal.completed)
+            .slice(0, 3)
+            .map((goal) => (
+              <p
+                key={goal.id}
+                className="mt-3 rounded-lg border border-white/10 p-3 text-sm"
+              >
+                {goal.text}
+              </p>
+            ))}
+          {!state?.goals.some((goal) => !goal.completed) && (
+            <p className="mt-4 text-sm text-slate-400">
+              Set your first goal or create a private note to plan your next
+              session.
+            </p>
+          )}
+          <p className="mt-4 text-xs text-slate-500">
+            Game completion percentages will appear only when reviewed
+            requirements and calculation rules are available.
+          </p>
+          <Link
+            className="mt-2 inline-block text-sm text-gold-light"
+            href="/tracker"
+          >
+            Open completion tracker →
+          </Link>
+        </section>
       </div>
-    </div>
+      <section className="player-panel">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="text-lg font-bold">Recent activity</h2>
+          {!!state?.recentActivity.length && (
+            <button
+              className="player-button"
+              onClick={() => {
+                const next = getStoredUserState();
+                saveStoredUserState({
+                  ...next,
+                  recentActivity: [],
+                  recentCatalogIds: { vehicles: [], weapons: [] },
+                });
+              }}
+            >
+              Clear history
+            </button>
+          )}
+        </div>
+        {!state?.recentActivity.length && (
+          <p className="mt-3 text-sm text-slate-400">
+            Your history starts when you use a tool or read an article.
+          </p>
+        )}
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          {state?.recentActivity.slice(0, 6).map((item) => (
+            <Link
+              key={item.id}
+              href={item.path}
+              className="rounded-lg border border-white/10 p-3 text-sm capitalize hover:bg-white/5"
+            >
+              {item.label}
+              <time
+                dateTime={item.at}
+                className="mt-1 block text-xs text-slate-500"
+              >
+                {new Date(item.at).toLocaleString(undefined, {
+                  timeZone: state?.preferences.timeZone || undefined,
+                })}
+              </time>
+            </Link>
+          ))}
+        </div>
+      </section>
+      {!!liveStats.latestArticles.length && (
+        <section className="player-panel">
+          <h2 className="text-lg font-bold">Latest articles</h2>
+          <div className="mt-4 grid gap-3 lg:grid-cols-3">
+            {liveStats.latestArticles.map((article) => (
+              <Link
+                key={article.slug}
+                href={`/news/${article.slug}`}
+                className="rounded-xl border border-white/10 p-4 hover:border-gold/40"
+              >
+                <h3 className="font-semibold">{article.title}</h3>
+                <p className="mt-2 text-sm text-slate-400">{article.excerpt}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+      <CompanionVehiclesSection
+        vehicles={liveStats.featuredVehicles}
+        totalVehicles={liveStats.totalVehicles}
+      />
+      <CompanionWeaponsSection
+        weapons={liveStats.featuredWeapons}
+        totalWeapons={liveStats.totalWeapons}
+      />
+    </>
   );
 }

@@ -26,7 +26,7 @@ export default function Page() {
       <article className="container-site max-w-3xl py-12 space-y-6 leading-relaxed">
         <h1 className="font-display text-4xl font-bold">Privacy Policy</h1>
         <p className="text-sm text-muted-foreground">
-          Updated October 28, 2026
+          Updated November 2, 2026
         </p>
         <p>
           The operator is Taish Gaming, based in Pakistan. Taish Gaming is an
@@ -42,9 +42,10 @@ export default function Page() {
         <p>
           The site uses browser storage for theme preferences, favorites,
           tracker progress, notes, loadouts and recently viewed entries. This
-          local data can remain until you clear it in your browser. Signing in
-          does not by itself provide a verified cross-device backup of these
-          records. Clearing browser storage can remove local progress.
+          local data can remain until you clear it in your browser. Signed-in
+          players can sync their workspace with their account. The dashboard
+          reports saved, pending, offline and conflict states. Changes that have
+          not successfully synced can be lost if browser storage is cleared.
         </p>
         <h2 className="text-2xl font-bold">Accounts and security</h2>
         <p>
@@ -55,12 +56,20 @@ export default function Page() {
           account records. Account and admin sessions use cookies. Supabase
           supports database storage and authentication integrations. Optional
           sign-in providers process information under their own policies.
+          Your private workspace can include favorites, map pins and notes,
+          manual checklist progress, loadouts, bookmarks, collections, goals,
+          preferences and recent activity. Recent activity is limited to 50
+          entries and can be cleared from your dashboard. Your account settings
+          provide export and verified account deletion controls. Account deletion
+          also removes the active cloud workspace; copies on other devices and
+          provider backups may remain until they are cleared or expire.
         </p>
         <h2 className="text-2xl font-bold">Newsletter and contact forms</h2>
         <p>
           Newsletter signup stores your email address and subscription date on
-          the server. The current form adds your address directly; it does not
-          require an email confirmation. Email delivery uses Resend when
+          the server. Newsletter registration requires confirmation through the
+          email sent to your address. Optional account update emails are a
+          separate choice in account settings. Email delivery uses Resend when
           configured. Contact submissions send the fields you provide, including
           your message and contact details, to the server for review and
           replies. New newsletter emails include signed unsubscribe links with a
@@ -122,7 +131,9 @@ export default function Page() {
           <li>
             <strong>Browser storage:</strong> favorites, notes and other local
             records remain on your device until you clear them. Server-side
-            account deletion does not clear browser storage for you.
+            account deletion clears the current account copy in the browser
+            used for deletion. Clear site storage on other devices to remove
+            remaining cached copies.
           </li>
         </ul>
         <p>

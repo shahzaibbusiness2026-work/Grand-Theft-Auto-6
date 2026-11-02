@@ -45,7 +45,9 @@ import {
   toggleFavorite,
   toggleMapCompleted,
   setMapNote,
+  saveStoredUserState,
 } from "@/lib/user-store";
+import type { PersonalMarker } from "@/lib/player-state";
 import { getMapMarkers } from "@/lib/services/map";
 import { AdminMapMarker } from "@/lib/admin-store";
 
@@ -66,6 +68,7 @@ export interface MapPOI {
   source?: string;
   sourceUrl?: string;
   addedOn?: string;
+  personal?: boolean;
 }
 
 function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
@@ -139,17 +142,74 @@ function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
 }
 
 const CATEGORY_FILTERS = [
-  { id: "all", label: "Show All", icon: Star, color: "text-gold-light", all: true },
-  { id: "missions", label: "Missions & Heists", icon: Target, color: "text-gold-light" },
-  { id: "garages", label: "Garages & Safehouses", icon: Warehouse, color: "text-cyan-400" },
-  { id: "shops", label: "Ammu-Nation & Shops", icon: ShoppingBag, color: "text-emerald-400" },
+  {
+    id: "personal",
+    label: "My Private Pins",
+    icon: MapPin,
+    color: "text-violet-400",
+  },
+  {
+    id: "all",
+    label: "Show All",
+    icon: Star,
+    color: "text-gold-light",
+    all: true,
+  },
+  {
+    id: "missions",
+    label: "Missions & Heists",
+    icon: Target,
+    color: "text-gold-light",
+  },
+  {
+    id: "garages",
+    label: "Garages & Safehouses",
+    icon: Warehouse,
+    color: "text-cyan-400",
+  },
+  {
+    id: "shops",
+    label: "Ammu-Nation & Shops",
+    icon: ShoppingBag,
+    color: "text-emerald-400",
+  },
   { id: "vehicles", label: "Vehicles", icon: Car, color: "text-cyan-400" },
-  { id: "weapons", label: "Weapons", icon: Crosshair, color: "text-orange-400" },
-  { id: "collectibles", label: "Collectibles", icon: Gem, color: "text-purple-400" },
-  { id: "properties", label: "Real Estate", icon: Building2, color: "text-indigo-400" },
-  { id: "activities", label: "Stunts & Racing", icon: Flame, color: "text-yellow-400" },
-  { id: "easter-eggs", label: "Secrets & Lore", icon: Egg, color: "text-teal-400" },
-  { id: "poi", label: "Points of Interest", icon: MapPin, color: "text-gold-light" },
+  {
+    id: "weapons",
+    label: "Weapons",
+    icon: Crosshair,
+    color: "text-orange-400",
+  },
+  {
+    id: "collectibles",
+    label: "Collectibles",
+    icon: Gem,
+    color: "text-purple-400",
+  },
+  {
+    id: "properties",
+    label: "Real Estate",
+    icon: Building2,
+    color: "text-indigo-400",
+  },
+  {
+    id: "activities",
+    label: "Stunts & Racing",
+    icon: Flame,
+    color: "text-yellow-400",
+  },
+  {
+    id: "easter-eggs",
+    label: "Secrets & Lore",
+    icon: Egg,
+    color: "text-teal-400",
+  },
+  {
+    id: "poi",
+    label: "Points of Interest",
+    icon: MapPin,
+    color: "text-gold-light",
+  },
 ];
 
 const DISTRICTS = [
@@ -279,18 +339,46 @@ const POIS: MapPOI[] = [
 const CANVAS_W = 1400;
 const CANVAS_H = 1050;
 
+const personalToPoi = (marker: PersonalMarker): MapPOI => ({
+  id: marker.id,
+  title: marker.title,
+  category: "personal",
+  type: "Private planning pin",
+  district: "Your workspace",
+  desc: "You placed this private planning pin. Its position is relative to this fan map and is not a verified game location.",
+  img: "",
+  hours: "Not applicable",
+  top: `${marker.top}%`,
+  left: `${marker.left}%`,
+  color: "bg-violet-500",
+  icon: MapPin,
+  personal: true,
+});
 export function SatelliteInteractiveMap({
   initialFullscreen = false,
   standaloneMode = false,
+  playerMode = false,
 }: {
   initialFullscreen?: boolean;
   standaloneMode?: boolean;
+  playerMode?: boolean;
 }) {
   const [checkedFilters, setCheckedFilters] = useState<Record<string, boolean>>(
     () => Object.fromEntries(CATEGORY_FILTERS.map((f) => [f.id, true])),
   );
   const [hideCollected, setHideCollected] = useState(false);
-  const [allPOIs, setAllPOIs] = useState<MapPOI[]>(POIS);
+  const [editorialPOIs, setAllPOIs] = useState<MapPOI[]>(
+    playerMode ? [] : POIS,
+  );
+  const [personalMarkers, setPersonalMarkers] = useState<PersonalMarker[]>([]);
+  const [pinFormOpen, setPinFormOpen] = useState(false);
+  const [pinTitle, setPinTitle] = useState("");
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const personalDeepLink = useRef<string | null>(null);
+  const allPOIs = useMemo(
+    () => [...editorialPOIs, ...personalMarkers.map(personalToPoi)],
+    [editorialPOIs, personalMarkers],
+  );
   const [selectedPOI, setSelectedPOI] = useState<MapPOI | null>(null);
   const [collectedPOIs, setCollectedPOIs] = useState<Record<string, boolean>>(
     {},
@@ -317,12 +405,16 @@ export function SatelliteInteractiveMap({
           // Merge: keep bundled POIs, overlay live/CMS markers (live wins on id conflicts)
           const liveIds = new Set(livePois.map((m) => m.id));
           const mergedPois = [
-            ...POIS.filter((poi) => !liveIds.has(poi.id)),
+            ...(playerMode ? [] : POIS.filter((poi) => !liveIds.has(poi.id))),
             ...livePois,
           ];
           setAllPOIs(mergedPois);
           setSelectedPOI((prev) =>
-            prev ? mergedPois.find((p) => p.id === prev.id) || null : null,
+            prev?.personal
+              ? prev
+              : prev
+                ? mergedPois.find((p) => p.id === prev.id) || null
+                : null,
           );
 
           const pending = pendingDeepLinkRef.current;
@@ -354,6 +446,26 @@ export function SatelliteInteractiveMap({
   const [userNotes, setUserNotes] = useState<Record<string, string>>({});
   const [favoriteLocations, setFavoriteLocations] = useState<string[]>([]);
   const [copiedShare, setCopiedShare] = useState(false);
+  useEffect(() => {
+    const sync = () => {
+      const current = getStoredUserState();
+      setPersonalMarkers(current.personalMarkers);
+      setFavoriteLocations(current.favorites.locations);
+      setUserNotes(current.mapNotes);
+      setCollectedPOIs(
+        Object.fromEntries(current.mapCompletedIds.map((id) => [id, true])),
+      );
+      setSelectedPOI((previous) =>
+        previous?.personal &&
+        !current.personalMarkers.some((marker) => marker.id === previous.id)
+          ? null
+          : previous,
+      );
+    };
+    sync();
+    window.addEventListener("gta6_user_state_change", sync);
+    return () => window.removeEventListener("gta6_user_state_change", sync);
+  }, []);
 
   // Live category counts derived from the actual marker set (bundled + CMS).
   const filterCounts = useMemo(() => {
@@ -550,7 +662,7 @@ export function SatelliteInteractiveMap({
       const targetLeft = params.get("left");
       if (targetPoiId) {
         // Prefix-tolerant: /map?poi=ocean-drive and ?poi=poi-ocean-drive both work.
-        const matched = POIS.find(
+        const matched = allPOIs.find(
           (p) =>
             p.id === targetPoiId || p.id === targetPoiId.replace(/^poi-/, ""),
         );
@@ -575,6 +687,17 @@ export function SatelliteInteractiveMap({
     // so re-running this effect would yank the user back on every zoom.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [centerMap]);
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("poi");
+    const marker = personalMarkers.find((item) => item.id === id);
+    if (!marker || personalDeepLink.current === id) return;
+    const timer = window.setTimeout(() => {
+      personalDeepLink.current = id;
+      pendingDeepLinkRef.current = null;
+      focusOnPOI(personalToPoi(marker));
+    }, 100);
+    return () => window.clearTimeout(timer);
+  }, [personalMarkers, focusOnPOI]);
 
   // Clear pending deep-link timeouts on unmount so a late fire cannot
   // yank the viewport after navigation.
@@ -707,6 +830,7 @@ export function SatelliteInteractiveMap({
   const visiblePOIs = useMemo(() => {
     return allPOIs.filter((p) => {
       if (hideCollected && collectedPOIs[p.id]) return false;
+      if (favoritesOnly && !favoriteLocations.includes(p.id)) return false;
       if (verifiedOnly && !p.verified) return false;
       const isCategoryChecked =
         checkedFilters.all || checkedFilters[p.category];
@@ -725,6 +849,8 @@ export function SatelliteInteractiveMap({
     hideCollected,
     collectedPOIs,
     verifiedOnly,
+    favoritesOnly,
+    favoriteLocations,
   ]);
 
   const verifiedTotal = allPOIs.filter((poi) => collectedPOIs[poi.id]).length;
@@ -742,7 +868,7 @@ export function SatelliteInteractiveMap({
       className={cn(
         "w-full select-none transition-all",
         isFullscreen
-          ? "fixed inset-0 z-[9999] h-screen w-screen bg-[#02050b] p-0 overflow-hidden"
+          ? "fixed inset-0 z-[9999] flex h-dvh w-screen flex-col bg-[#02050b] p-0 overflow-hidden"
           : "relative rounded-3xl",
       )}
     >
@@ -792,7 +918,16 @@ export function SatelliteInteractiveMap({
         </div>
 
         {/* Viewport Action Icons */}
-        <div className="flex items-center gap-2">
+        <div className="flex max-w-full flex-wrap items-center gap-2">
+          {playerMode && (
+            <button
+              type="button"
+              className="player-button"
+              onClick={() => setPinFormOpen((value) => !value)}
+            >
+              + Private pin
+            </button>
+          )}
           <button
             ref={filtersButtonRef}
             aria-expanded={leftSidebarOpen}
@@ -841,13 +976,86 @@ export function SatelliteInteractiveMap({
       {/* ================================================================= */}
       {/* MAIN MAP WORKSPACE (FULL-HEIGHT INTERACTIVE VIEWPORT)             */}
       {/* ================================================================= */}
+      {pinFormOpen && (
+        <form
+          className="player-panel my-3 space-y-3"
+          onSubmit={(event) => {
+            event.preventDefault();
+            if (!pinTitle.trim() || !viewportRef.current) return;
+            const rect = viewportRef.current;
+            const marker: PersonalMarker = {
+              id: `personal-${crypto.randomUUID()}`,
+              title: pinTitle.trim(),
+              top: Math.min(
+                100,
+                Math.max(
+                  0,
+                  ((rect.clientHeight / 2 - pan.y) / zoom / CANVAS_H) * 100,
+                ),
+              ),
+              left: Math.min(
+                100,
+                Math.max(
+                  0,
+                  ((rect.clientWidth / 2 - pan.x) / zoom / CANVAS_W) * 100,
+                ),
+              ),
+            };
+            const current = getStoredUserState();
+            if (current.personalMarkers.length >= 200) return;
+            if (
+              saveStoredUserState({
+                ...current,
+                personalMarkers: [...current.personalMarkers, marker],
+              })
+            ) {
+              setPinTitle("");
+              setPinFormOpen(false);
+              setSelectedPOI(personalToPoi(marker));
+              setRightDrawerOpen(true);
+            }
+          }}
+        >
+          <label className="player-label">
+            Private pin name
+            <input
+              required
+              maxLength={120}
+              autoFocus
+              className="player-input"
+              value={pinTitle}
+              onChange={(event) => setPinTitle(event.target.value)}
+            />
+          </label>
+          <p className="text-xs text-slate-400">
+            The pin is placed at the current map view’s center. Pan the map to
+            the desired position first. Personal pins are private and do not
+            appear in shared map links.
+          </p>
+          <div className="flex gap-2">
+            <button
+              disabled={personalMarkers.length >= 200}
+              className="player-button player-button-primary"
+            >
+              Place at view center
+            </button>
+            <button
+              type="button"
+              className="player-button"
+              onClick={() => setPinFormOpen(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      )}
       <div
         className={cn(
           "dark-panel",
           mapStyles.darkSurface,
           "relative w-full overflow-hidden bg-[#02050b]",
           isFullscreen
-            ? "h-[calc(100vh-62px)]"
+            ? "min-h-0 flex-1"
             : "h-[640px] sm:h-[720px] lg:h-[780px] rounded-b-3xl border border-t-0 border-border shadow-2xl",
         )}
       >
@@ -857,7 +1065,7 @@ export function SatelliteInteractiveMap({
             id="map-filters"
             role="region"
             aria-label="Map filters"
-            className="absolute left-3 top-3 bottom-3 z-30 w-72 max-w-[calc(100vw-24px)] flex flex-col rounded-2xl border border-border bg-[#070c18]/95 p-4 shadow-2xl  animate-in slide-in-from-left duration-200"
+            className="absolute left-3 top-3 bottom-3 z-30 w-72 max-w-[calc(100%_-_24px)] flex flex-col rounded-2xl border border-border bg-[#070c18]/95 p-4 shadow-2xl  animate-in slide-in-from-left duration-200"
           >
             <div className="flex items-center justify-between pb-3 border-b border-border">
               <div>
@@ -1009,6 +1217,15 @@ export function SatelliteInteractiveMap({
             <div className="mt-3 pt-3 border-t border-border">
               <button
                 type="button"
+                aria-pressed={favoritesOnly}
+                onClick={() => setFavoritesOnly((value) => !value)}
+                className="mb-2 flex min-h-11 w-full items-center justify-between rounded-xl px-2.5 text-xs font-semibold text-slate-200"
+              >
+                <span>Favorites only</span>
+                <span>{favoritesOnly ? "On" : "Off"}</span>
+              </button>
+              <button
+                type="button"
                 aria-pressed={verifiedOnly}
                 onClick={() => setVerifiedOnly((v) => !v)}
                 className="flex w-full min-h-[44px] cursor-pointer select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-xs font-semibold text-muted-foreground hover:bg-muted/40 hover:text-white transition-colors"
@@ -1016,7 +1233,6 @@ export function SatelliteInteractiveMap({
                 <span className="flex items-center gap-2 truncate">
                   <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
                   <span className="truncate">Source-reviewed pins only</span>
-
                 </span>
                 <span className="flex items-center gap-2">
                   <span className="text-xs font-mono text-muted-foreground">
@@ -1047,7 +1263,6 @@ export function SatelliteInteractiveMap({
                 <span className="flex items-center gap-1.5 text-muted-foreground">
                   <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Your
                   marked pins
-
                 </span>
                 <span className="text-gold-light">
                   {verifiedTotal} / {allPOIs.length}
@@ -1070,7 +1285,7 @@ export function SatelliteInteractiveMap({
           <div
             role="region"
             aria-label="Map pin details"
-            className="absolute right-3 top-3 bottom-3 overflow-y-auto z-30 w-80 max-w-[calc(100vw-24px)] rounded-2xl border border-border bg-[#070c18]/95 p-5 shadow-2xl  animate-in slide-in-from-right duration-200"
+            className="absolute right-3 top-3 bottom-3 overflow-y-auto z-30 w-80 max-w-[calc(100%_-_24px)] rounded-2xl border border-border bg-[#070c18]/95 p-5 shadow-2xl  animate-in slide-in-from-right duration-200"
           >
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2.5">
@@ -1113,7 +1328,6 @@ export function SatelliteInteractiveMap({
               {selectedPOI.desc}
             </p>
 
-
             {/* Evidence: source, verification, added date */}
             <div className="mt-3 space-y-1.5 rounded-xl border border-border bg-black/40 px-3 py-2.5 text-xs">
               <div className="flex items-center justify-between gap-2">
@@ -1130,7 +1344,9 @@ export function SatelliteInteractiveMap({
                 >
                   {selectedPOI.verified
                     ? "Source-reviewed field"
-                    : "Fan concept; unverified"}
+                    : selectedPOI.personal
+                      ? "Private user pin"
+                      : "Fan concept; unverified"}
                 </span>
               </div>
               {selectedPOI.source && (
@@ -1182,9 +1398,7 @@ export function SatelliteInteractiveMap({
               >
                 <Check className="h-3.5 w-3.5" />
                 <span>
-                  {collectedPOIs[selectedPOI.id]
-                    ? "Marked on this device"
-                    : "Mark locally"}
+                  {collectedPOIs[selectedPOI.id] ? "Marked" : "Mark as visited"}
                 </span>
               </button>
 
@@ -1229,12 +1443,17 @@ export function SatelliteInteractiveMap({
               </button>
 
               <button
-                onClick={() => {
+                disabled={selectedPOI.personal}
+                onClick={async () => {
                   if (typeof window !== "undefined") {
                     const shareUrl = `${window.location.origin}/map?poi=${selectedPOI.id}`;
-                    navigator.clipboard.writeText(shareUrl);
-                    setCopiedShare(true);
-                    setTimeout(() => setCopiedShare(false), 2000);
+                    try {
+                      await navigator.clipboard.writeText(shareUrl);
+                      setCopiedShare(true);
+                      setTimeout(() => setCopiedShare(false), 2000);
+                    } catch {
+                      setCopiedShare(false);
+                    }
                   }
                 }}
                 className="flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-slate-100 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200 transition-all"
@@ -1244,7 +1463,13 @@ export function SatelliteInteractiveMap({
                 ) : (
                   <Copy className="h-3.5 w-3.5" />
                 )}
-                <span>{copiedShare ? "Copied!" : "Share Link"}</span>
+                <span>
+                  {selectedPOI.personal
+                    ? "Private pin"
+                    : copiedShare
+                      ? "Copied!"
+                      : "Share Link"}
+                </span>
               </button>
             </div>
 
@@ -1255,6 +1480,7 @@ export function SatelliteInteractiveMap({
                 <span>Personal Field Notes</span>
               </div>
               <textarea
+                maxLength={5000}
                 aria-label="Personal notes for this pin"
                 value={userNotes[selectedPOI.id] || ""}
                 onChange={(e) => {
@@ -1262,10 +1488,44 @@ export function SatelliteInteractiveMap({
                   setUserNotes((prev) => ({ ...prev, [selectedPOI.id]: val }));
                   setMapNote(selectedPOI.id, val);
                 }}
-                placeholder="Add tactical notes, stash codes, enemy routes..."
+                placeholder="Add a private planning note…"
                 rows={2}
                 className="w-full rounded-xl border border-border bg-black/50 p-2 text-xs text-white placeholder:text-muted-foreground focus:border-[#00F0FF]/50 focus:outline-none focus:ring-1 focus:ring-[#00F0FF]/30 resize-none font-sans"
               />
+              {selectedPOI.personal && (
+                <button
+                  className="player-button mt-3 text-rose-200"
+                  onClick={() => {
+                    if (
+                      !window.confirm("Delete this private pin and its note?")
+                    )
+                      return;
+                    const current = getStoredUserState();
+                    const { [selectedPOI.id]: removed, ...mapNotes } =
+                      current.mapNotes;
+                    saveStoredUserState({
+                      ...current,
+                      personalMarkers: current.personalMarkers.filter(
+                        (marker) => marker.id !== selectedPOI.id,
+                      ),
+                      mapNotes,
+                      mapCompletedIds: current.mapCompletedIds.filter(
+                        (id) => id !== selectedPOI.id,
+                      ),
+                      favorites: {
+                        ...current.favorites,
+                        locations: current.favorites.locations.filter(
+                          (id) => id !== selectedPOI.id,
+                        ),
+                      },
+                    });
+                    setSelectedPOI(null);
+                    setRightDrawerOpen(false);
+                  }}
+                >
+                  Delete private pin
+                </button>
+              )}
             </div>
           </div>
         )}
@@ -1292,7 +1552,6 @@ export function SatelliteInteractiveMap({
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -1460,7 +1719,8 @@ export function SatelliteInteractiveMap({
           <p className="my-3 text-sm text-muted-foreground">
             These are fan concepts. No pin currently has an approved field-level
             source; categories and placement are provisional. Your marks and
-            notes remain on this device.
+            notes are kept in your workspace; signed-in accounts sync through
+            the account connection.
           </p>
           <ul className="grid gap-2 sm:grid-cols-2">
             {visiblePOIs.map((poi) => (
@@ -1498,7 +1758,6 @@ export function SatelliteInteractiveMap({
           </Link>
         </details>
       )}
-
     </div>
   );
 }

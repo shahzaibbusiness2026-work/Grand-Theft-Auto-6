@@ -195,6 +195,7 @@ export interface AdminUser {
   status: "active" | "pending" | "suspended";
   lastActivity: string;
   avatar: string;
+  isProtectedAdmin?: boolean;
 }
 
 export interface AdminActivity {
@@ -278,8 +279,6 @@ export const INITIAL_ADMIN_MARKERS: AdminMapMarker[] = [];
 
 export const INITIAL_ADMIN_MEDIA: AdminMediaAsset[] = [];
 
-export const INITIAL_ADMIN_USERS: AdminUser[] = [];
-
 export const INITIAL_ADMIN_ACTIVITIES: AdminActivity[] = [];
 
 export const INITIAL_SEO_SETTINGS: AdminSeoSettings = {
@@ -288,10 +287,7 @@ export const INITIAL_SEO_SETTINGS: AdminSeoSettings = {
   canonicalBaseUrl: "",
   socialPreviewImage: "/img/hero-dark.jpg",
   excludeDraftsAndArchived: true,
-  redirects: [
-    { id: "red-1", fromUrl: "/old-map", toUrl: "/map", type: "301", enabled: true },
-    { id: "red-2", fromUrl: "/vehicle-list", toUrl: "/vehicles", type: "301", enabled: true }
-  ]
+  redirects: []
 };
 
 export const INITIAL_SITE_SETTINGS: AdminSiteSettings = {

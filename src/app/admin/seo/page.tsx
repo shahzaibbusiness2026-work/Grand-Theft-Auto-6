@@ -21,7 +21,7 @@ import {
   INITIAL_ADMIN_SEO,
   AdminSeoSettings,
 } from "@/lib/admin-store";
-import { getSeoSettings, saveSeoSettings } from "@/lib/services/seo";
+import { getAdminSeoSettings, saveSeoSettings } from "@/lib/services/seo";
 import { cn } from "@/lib/utils";
 
 export default function AdminSeoPage() {
@@ -30,13 +30,15 @@ export default function AdminSeoPage() {
   const [seoConfig, setSeoConfig] = useState<AdminSeoSettings>(INITIAL_ADMIN_SEO);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
 
   // Load from Supabase on mount
   useEffect(() => {
-    getSeoSettings().then((data) => {
+    getAdminSeoSettings().then((data) => {
       setSeoConfig(data);
       setIsConnected(true);
-    });
+    }).catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load SEO settings.")).finally(() => setIsLoading(false));
   }, []);
 
   // Character count calculation
@@ -64,19 +66,19 @@ export default function AdminSeoPage() {
   };
 
   const handleDiscard = () => {
-    getSeoSettings().then((data) => {
+    getAdminSeoSettings().then((data) => {
       setSeoConfig(data);
       setHasUnsavedChanges(false);
       showToast({ title: "Changes Discarded", description: "Restored from Supabase.", type: "info" });
-    });
+    }).catch((error) => showToast({ title: "Could not reload SEO settings", description: error instanceof Error ? error.message : "Database request failed.", type: "danger" }));
   };
 
 
   const handleAddRedirect = () => {
     const newRed = {
       id: `red-${Date.now()}`,
-      fromUrl: "/old-path",
-      toUrl: "/new-path",
+      fromUrl: "",
+      toUrl: "",
       type: "301" as const,
       enabled: true,
     };
@@ -93,7 +95,7 @@ export default function AdminSeoPage() {
               SEO & metadata
             </h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-              Live data
+              {isLoading ? "Loading settings…" : isConnected ? "Connected to Supabase" : "Database unavailable"}
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
@@ -123,6 +125,8 @@ export default function AdminSeoPage() {
           </Button>
         </div>
       </div>
+
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
 
       {/* Tabs (Image 11) */}
       <div className="flex items-center gap-2 border-b border-[#1C2436] pb-3">

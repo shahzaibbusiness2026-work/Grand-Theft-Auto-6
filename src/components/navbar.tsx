@@ -741,8 +741,8 @@ export function Navbar() {
                   </Link>
                   <button
                     type="button"
-                    onClick={() => {
-                      logoutUser();
+                    onClick={async () => {
+                      if (!await logoutUser()) { window.alert("Could not sign out. Check your connection and retry."); return; }
                       setMobileOpen(false);
                     }}
                     className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-muted-foreground"

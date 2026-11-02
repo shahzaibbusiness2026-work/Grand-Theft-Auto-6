@@ -15,6 +15,7 @@ import {
   createUserSessionToken,
   userSessionCookieOptions,
 } from "@/lib/auth/session";
+import { requireSameOrigin, playerJsonBody } from "@/lib/auth/player-account";
 
 /**
  * POST /api/account/set-password
@@ -45,16 +46,20 @@ function clientIp(req: Request): string {
 
 export async function POST(req: Request) {
   try {
+    requireSameOrigin(req);
     const ip = clientIp(req);
     if (await peekRateLimit("account-set-password", ip, RATE_LIMIT_MAX)) {
       return NextResponse.json(
-        { ok: false, error: "Too many attempts. Please try again in a few minutes." },
-        { status: 429 }
+        {
+          ok: false,
+          error: "Too many attempts. Please try again in a few minutes.",
+        },
+        { status: 429 },
       );
     }
     await recordRateLimitHit("account-set-password", ip, RATE_LIMIT_WINDOW_MS);
 
-    const body = await req.json().catch(() => null);
+    const body = await playerJsonBody(req, 4000);
     const email =
       typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
     const newPassword =
@@ -65,13 +70,13 @@ export async function POST(req: Request) {
     if (!validEmail(email)) {
       return NextResponse.json(
         { ok: false, error: "Please provide a valid email address." },
-        { status: 400 }
+        { status: 400 },
       );
     }
     if (newPassword.length < 8 || newPassword.length > 200) {
       return NextResponse.json(
         { ok: false, error: "Password must be at least 8 characters." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -81,45 +86,53 @@ export async function POST(req: Request) {
     } catch {
       return NextResponse.json(
         { ok: false, error: "Password reset is not configured on the server." },
-        { status: 503 }
+        { status: 503 },
       );
     }
 
     const account = await getAccount(supabase, email);
     if (!account) {
       return NextResponse.json(
-        { ok: false, error: "Could not reset the password. Check your email and recovery code." },
-        { status: 400 }
+        {
+          ok: false,
+          error:
+            "Could not reset the password. Check your email and recovery code.",
+        },
+        { status: 400 },
       );
     }
 
-    const isLegacySetup =
-      !account.password_hash &&
-      !account.recovery_code_hash &&
-      (account.auth_providers?.length || 0) === 0;
-    if (!isLegacySetup) {
+    {
       if (
         !account.recovery_code_hash ||
         !recoveryCode ||
         !verifyRecoveryCode(recoveryCode, account.recovery_code_hash)
       ) {
         return NextResponse.json(
-          { ok: false, error: "Invalid recovery code. Check the code and try again." },
-          { status: 403 }
+          {
+            ok: false,
+            error: "Invalid recovery code. Check the code and try again.",
+          },
+          { status: 403 },
         );
       }
     }
 
     const freshCode = generateRecoveryCode();
+    const sessionToken = await createUserSessionToken(
+      email,
+      (account.session_version ?? 0) + 1,
+    );
     const ok = await saveAccount(supabase, {
       ...account,
       password_hash: hashPassword(newPassword),
       recovery_code_hash: hashRecoveryCode(freshCode),
+      session_version: (account.session_version ?? 0) + 1,
     });
     if (!ok) {
       return NextResponse.json(
         { ok: false, error: "Could not reset the password. Please try again." },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -134,14 +147,14 @@ export async function POST(req: Request) {
     });
     res.cookies.set(
       USER_SESSION_COOKIE,
-      await createUserSessionToken(email),
-      userSessionCookieOptions()
+      sessionToken,
+      userSessionCookieOptions(),
     );
     return res;
   } catch {
     return NextResponse.json(
       { ok: false, error: "Could not reset the password. Please try again." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

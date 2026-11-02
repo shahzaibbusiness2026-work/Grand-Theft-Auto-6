@@ -35,18 +35,11 @@ export async function getPublicRadioStations(): Promise<RadioStationRecord[]> {
 }
 
 export async function getAdminRadioStations(): Promise<RadioStationRecord[]> {
-  try {
-    await assertAdmin();
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("radio_stations")
-      .select("*")
-      .order("sort_order", { ascending: true });
-    if (!error && data && data.length > 0) return data as RadioStationRecord[];
-  } catch {
-    // Graceful fallback
-  }
-  return [];
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("radio_stations").select("*").order("sort_order", { ascending: true });
+  if (error) throw new Error(`Could not load radio stations: ${error.message}`);
+  return data as RadioStationRecord[];
 }
 
 export async function saveRadioStation(station: Partial<RadioStationRecord> & { name: string }) {

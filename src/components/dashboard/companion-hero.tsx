@@ -3,6 +3,7 @@
 import { Shield, Car, Crosshair, Users, Newspaper } from "lucide-react";
 
 interface SiteStats {
+  dataAvailable?: boolean;
   totalVehicles: number;
   totalWeapons: number;
   totalCharacters?: number;
@@ -72,7 +73,7 @@ export function CompanionHero({
         <div className="max-w-xl space-y-3">
           <span className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.25em] text-gold-light">
             <span className="h-px w-8 bg-gradient-to-r from-gold to-transparent" />
-            GOOD TO SEE YOU AGAIN,
+            YOUR LEONIDA INTEL DASHBOARD
           </span>
 
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.8)]">
@@ -99,7 +100,7 @@ export function CompanionHero({
                   ATLAS DATABASE
                 </div>
                 <div className="text-xs font-semibold text-muted-foreground">
-                  Live Leonida Intel
+                  Published catalog records
                 </div>
               </div>
               <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-emerald-400">
@@ -107,7 +108,7 @@ export function CompanionHero({
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                 </span>
-                Live
+                {siteStats?.dataAvailable ? "Available" : "Unavailable"}
               </span>
             </div>
 
@@ -123,7 +124,7 @@ export function CompanionHero({
                     <Icon className={`h-4 w-4 shrink-0 ${stat.color}`} />
                     <div className="min-w-0">
                       <p className="text-sm font-black text-foreground leading-none">
-                        {stat.value}
+                        {siteStats?.dataAvailable ? stat.value : "—"}
                       </p>
                       <p className="text-xs text-muted-foreground mt-0.5 truncate">
                         {stat.label}

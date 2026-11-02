@@ -20,7 +20,7 @@ function getSessionSecret(): string {
   const secret = process.env.ADMIN_SESSION_SECRET;
   if (!secret) {
     throw new Error(
-      "ADMIN_SESSION_SECRET is not set. Add it to your environment before using admin sessions."
+      "ADMIN_SESSION_SECRET is not set. Add it to your environment before using admin sessions.",
     );
   }
   return secret;
@@ -39,7 +39,7 @@ async function getCryptoKey(secret: string): Promise<CryptoKey> {
     enc.encode(secret),
     { name: "HMAC", hash: "SHA-256" },
     false,
-    ["sign", "verify"]
+    ["sign", "verify"],
   );
 }
 
@@ -52,12 +52,15 @@ function bufferToHex(buffer: ArrayBuffer): string {
   return hex;
 }
 
-async function signPayloadWith(secret: string, payload: string): Promise<string> {
+async function signPayloadWith(
+  secret: string,
+  payload: string,
+): Promise<string> {
   const key = await getCryptoKey(secret);
   const signatureBuffer = await crypto.subtle.sign(
     "HMAC",
     key,
-    new TextEncoder().encode(payload)
+    new TextEncoder().encode(payload),
   );
   return bufferToHex(signatureBuffer);
 }
@@ -79,11 +82,10 @@ async function signPayload(payload: string): Promise<string> {
 /* token kinds cryptographically separated. Adding the dedicated     */
 /* secret later is a hardening step, not a breakage fix.               */
 /*                                                                     */
-/* User sessions live 7 days. There is no server-side revocation list: */
-/* a password reset does not instantly kill an already-issued cookie  */
-/* (it expires within 7 days at most). The dashboard holds no         */
-/* server-side private data — favorites/tracker are device-local — so  */
-/* this window is accepted.                                           */
+/* User sessions live 7 days and carry an account session version.     */
+/* Private routes validate that version against the canonical account */
+/* on every request. Password changes rotate it; account deletion     */
+/* removes the owner row, so old cookies cannot read private data.     */
 /* ------------------------------------------------------------------ */
 
 /** Cookie carrying the signed user session. */
@@ -104,22 +106,33 @@ export function userSessionCookieOptions() {
 }
 
 function getUserSessionSecret(): string {
-  const secret = process.env.USER_SESSION_SECRET || process.env.ADMIN_SESSION_SECRET;
+  const secret =
+    process.env.USER_SESSION_SECRET || process.env.ADMIN_SESSION_SECRET;
   if (!secret) {
     throw new Error(
-      "USER_SESSION_SECRET (or ADMIN_SESSION_SECRET) is not set. Add it to your environment before using user sessions."
+      "USER_SESSION_SECRET (or ADMIN_SESSION_SECRET) is not set. Add it to your environment before using user sessions.",
     );
   }
   return secret;
 }
 
 /** Creates a signed user session token for the dashboard gate. */
-export async function createUserSessionToken(email: string): Promise<string> {
+export async function createUserSessionToken(
+  email: string,
+  version = 0,
+): Promise<string> {
+  const issuedAt = Date.now();
   const expiresAt = Date.now() + SEVEN_DAYS_MS;
-  const payload = `tg-user:${email}:${expiresAt}`;
+  const payload = `tg-user:${email}:${expiresAt}:${version}:${issuedAt}`;
   const signature = await signPayloadWith(getUserSessionSecret(), payload);
 
-  const tokenData = JSON.stringify({ email, expiresAt, signature });
+  const tokenData = JSON.stringify({
+    email,
+    expiresAt,
+    version,
+    issuedAt,
+    signature,
+  });
   if (typeof Buffer !== "undefined") {
     return Buffer.from(tokenData).toString("base64");
   }
@@ -128,22 +141,48 @@ export async function createUserSessionToken(email: string): Promise<string> {
 
 /** Verifies a user session token's signature and expiry. */
 export async function verifyUserSessionToken(
-  tokenString: string | undefined | null
-): Promise<{ valid: boolean; email?: string }> {
+  tokenString: string | undefined | null,
+): Promise<{
+  valid: boolean;
+  email?: string;
+  version?: number;
+  issuedAt?: number;
+}> {
   if (!tokenString) return { valid: false };
 
   try {
-    const raw = typeof Buffer !== "undefined"
-      ? Buffer.from(tokenString, "base64").toString("utf-8")
-      : atob(tokenString);
+    const raw =
+      typeof Buffer !== "undefined"
+        ? Buffer.from(tokenString, "base64").toString("utf-8")
+        : atob(tokenString);
 
-    const { email, expiresAt, signature } = JSON.parse(raw);
+    const { email, expiresAt, signature, version, issuedAt } = JSON.parse(raw);
 
-    if (!email || !expiresAt || !signature) return { valid: false };
-    if (Date.now() > Number(expiresAt)) return { valid: false };
+    if (
+      typeof email !== "string" ||
+      typeof signature !== "string" ||
+      typeof expiresAt !== "number" ||
+      !Number.isFinite(expiresAt)
+    )
+      return { valid: false };
+    if (Date.now() >= expiresAt) return { valid: false };
+    if (
+      version !== undefined &&
+      (!Number.isSafeInteger(version) ||
+        version < 0 ||
+        !Number.isSafeInteger(issuedAt) ||
+        issuedAt > Date.now())
+    )
+      return { valid: false };
 
-    const payload = `tg-user:${email}:${expiresAt}`;
-    const expectedSignature = await signPayloadWith(getUserSessionSecret(), payload);
+    const payload =
+      version === undefined
+        ? `tg-user:${email}:${expiresAt}`
+        : `tg-user:${email}:${expiresAt}:${version}:${issuedAt}`;
+    const expectedSignature = await signPayloadWith(
+      getUserSessionSecret(),
+      payload,
+    );
 
     if (signature.length !== expectedSignature.length) return { valid: false };
 
@@ -153,7 +192,7 @@ export async function verifyUserSessionToken(
     }
 
     if (mismatch === 0) {
-      return { valid: true, email };
+      return { valid: true, email, version: version ?? 0, issuedAt };
     }
   } catch {
     // Malformed token, invalid JSON, or invalid Base64
@@ -169,10 +208,12 @@ export async function verifyUserSessionToken(
  */
 export async function createAdminSessionToken(
   email: string,
-  sessionVersion = 0
+  sessionVersion = 0,
 ): Promise<string> {
   const expiresAt = Date.now() + TWENTY_FOUR_HOURS_MS;
-  const version = Number.isFinite(sessionVersion) ? Math.floor(sessionVersion) : 0;
+  const version = Number.isFinite(sessionVersion)
+    ? Math.floor(sessionVersion)
+    : 0;
   const payload = `${email}:${expiresAt}:${version}`;
   const signature = await signPayload(payload);
 
@@ -196,14 +237,15 @@ export async function createAdminSessionToken(
  */
 export async function verifyAdminSessionToken(
   tokenString: string | undefined | null,
-  expectedVersion?: number
+  expectedVersion?: number,
 ): Promise<{ valid: boolean; email?: string }> {
   if (!tokenString) return { valid: false };
 
   try {
-    const raw = typeof Buffer !== "undefined"
-      ? Buffer.from(tokenString, "base64").toString("utf-8")
-      : atob(tokenString);
+    const raw =
+      typeof Buffer !== "undefined"
+        ? Buffer.from(tokenString, "base64").toString("utf-8")
+        : atob(tokenString);
 
     const { email, expiresAt, version, signature } = JSON.parse(raw);
 
@@ -276,7 +318,7 @@ export async function getCurrentSessionVersion(): Promise<{
         headers: { apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "" },
         // Never let a slow CMS outage hang admin auth; fail fast.
         signal: AbortSignal.timeout(2000),
-      }
+      },
     );
     if (!res.ok) throw new Error(`site_settings fetch failed: ${res.status}`);
     const rows = (await res.json()) as { value: string }[];

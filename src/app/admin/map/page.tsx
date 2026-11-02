@@ -26,12 +26,9 @@ import {
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
 import { Badge } from "@/components/admin/ui/badge";
+import { AdminMapMarker } from "@/lib/admin-store";
 import {
-  INITIAL_ADMIN_MAP_MARKERS,
-  AdminMapMarker,
-} from "@/lib/admin-store";
-import {
-  getMapMarkers,
+  getAdminMapMarkers,
   saveMapMarker,
   deleteMapMarker,
 } from "@/lib/services/map";
@@ -40,10 +37,8 @@ import { Modal } from "@/components/admin/modal";
 
 export default function AdminMapPage() {
   const { showToast } = useToast();
-  const [markers, setMarkers] = useState<AdminMapMarker[]>(INITIAL_ADMIN_MAP_MARKERS);
-  const [selectedMarkerId, setSelectedMarkerId] = useState<string>(
-    INITIAL_ADMIN_MAP_MARKERS[0]?.id || "mark-1"
-  );
+  const [markers, setMarkers] = useState<AdminMapMarker[]>([]);
+  const [selectedMarkerId, setSelectedMarkerId] = useState("");
   const [activeCategory, setActiveCategory] = useState<"all" | "Location" | "Collectibles" | "Activities">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeLayers, setActiveLayers] = useState({
@@ -56,19 +51,19 @@ export default function AdminMapPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
+  const [loadError, setLoadError] = useState("");
 
   // Fetch live markers from Supabase on mount
   useEffect(() => {
     async function loadMarkers() {
       try {
-        const liveMarkers = await getMapMarkers();
-        if (liveMarkers && liveMarkers.length > 0) {
-          setMarkers(liveMarkers);
-          setSelectedMarkerId(liveMarkers[0].id);
-        }
+        const liveMarkers = await getAdminMapMarkers();
+        setMarkers(liveMarkers);
+        setSelectedMarkerId(liveMarkers[0]?.id || "");
         setIsConnected(true);
       } catch (err) {
         console.error("Failed to load map markers from Supabase:", err);
+        setLoadError(err instanceof Error ? err.message : "Could not load map markers.");
       } finally {
         setIsLoading(false);
       }
@@ -146,13 +141,15 @@ export default function AdminMapPage() {
         showToast({ title: "Import failed", description: "No valid markers found in this file.", type: "danger" });
         return;
       }
-      setMarkers((prev) => [...imported, ...prev]);
-      setSelectedMarkerId(imported[0].id);
       let failed = 0;
+      const savedMarkers: AdminMapMarker[] = [];
       for (const m of imported) {
         const res = await saveMapMarker(m);
         if (!res.success) failed++;
+        else savedMarkers.push(m);
       }
+      setMarkers((prev) => [...savedMarkers, ...prev]);
+      if (savedMarkers[0]) setSelectedMarkerId(savedMarkers[0].id);
       showToast({
         title: failed === 0 ? "Markers imported" : "Import partially failed",
         description: failed === 0
@@ -199,6 +196,7 @@ export default function AdminMapPage() {
 
   const handleSaveCurrentMarker = async () => {
     if (!selectedMarker) return;
+    const previous = markers.find((marker) => marker.id === selectedMarker.id);
     setIsSaving(true);
     try {
       const res = await saveMapMarker(selectedMarker);
@@ -212,11 +210,8 @@ export default function AdminMapPage() {
         throw new Error(res.error);
       }
     } catch (err) {
-      showToast({
-        title: "Saved Locally",
-        description: "Updated locally. Ensure Supabase credentials and table are active.",
-        type: "info",
-      });
+      if (previous) setMarkers((items) => items.map((marker) => marker.id === previous.id ? previous : marker));
+      showToast({ title: "Save failed", description: err instanceof Error ? err.message : "Marker was not saved.", type: "danger" });
     } finally {
       setIsSaving(false);
     }
@@ -295,29 +290,23 @@ export default function AdminMapPage() {
   const handleAddMarker = async () => {
     const newMarker: AdminMapMarker = {
       id: `mark-${Date.now()}`,
-      name: "New Landmark Coordinate",
+      name: "",
       category: "Location",
       layer: "Research",
       visible: true,
       icon: "pin",
       coordinates: { x: 50, y: 50 },
-      description: "Coordinates identified from trailer landscape analysis.",
+      description: "",
       verification: "unverified",
     };
-    setMarkers([newMarker, ...markers]);
-    setSelectedMarkerId(newMarker.id);
-
-    try {
-      await saveMapMarker(newMarker);
-    } catch (err) {
-      console.error("Failed to persist new marker:", err);
+    const result = await saveMapMarker(newMarker);
+    if (!result.success) {
+      showToast({ title: "Create failed", description: result.error || "Marker was not saved.", type: "danger" });
+      return;
     }
-
-    showToast({
-      title: "Marker Created",
-      description: "New marker placed on Leonida map canvas and synced to Supabase.",
-      type: "success",
-    });
+    setMarkers((prev) => [newMarker, ...prev]);
+    setSelectedMarkerId(newMarker.id);
+    showToast({ title: "Marker created", description: `${newMarker.name} was saved.`, type: "success" });
   };
 
   const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
@@ -325,21 +314,15 @@ export default function AdminMapPage() {
   const handleDeleteMarker = async () => {
     if (!selectedMarker) return;
     const markerToDelete = selectedMarker;
+    const result = await deleteMapMarker(markerToDelete.id);
+    if (!result.success) {
+      showToast({ title: "Delete failed", description: result.error || "Marker was not deleted.", type: "danger" });
+      return;
+    }
     const remaining = markers.filter((m) => m.id !== markerToDelete.id);
     setMarkers(remaining);
     setSelectedMarkerId(remaining[0]?.id || "");
-
-    try {
-      await deleteMapMarker(markerToDelete.id);
-    } catch (err) {
-      console.error("Failed to delete marker from Supabase:", err);
-    }
-
-    showToast({
-      title: "Marker Deleted",
-      description: `${markerToDelete.name} removed from map and database.`,
-      type: "danger",
-    });
+    showToast({ title: "Marker deleted", description: `${markerToDelete.name} was deleted.`, type: "success" });
   };
 
 
@@ -377,7 +360,7 @@ export default function AdminMapPage() {
             ) : (
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gold/10 border border-gold/30 text-gold-light">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold-light" />
-                Offline (Local Cache)
+                {isLoading ? "Loading markers…" : loadError ? "Database unavailable" : "Not connected"}
               </span>
             )}
           </div>
@@ -437,6 +420,9 @@ export default function AdminMapPage() {
           </Button>
         </div>
       </div>
+
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
+      {!isLoading && !loadError && markers.length === 0 && <div className="rounded-lg border border-[#263044] bg-[#111622] px-4 py-6 text-center text-sm text-[#94A3B8]">No map markers are stored yet. Create the first marker to start building the map.</div>}
 
       {/* 3-Column Layout (Image 4) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-[calc(100vh-210px)] min-h-[640px]">

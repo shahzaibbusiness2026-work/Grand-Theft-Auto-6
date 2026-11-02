@@ -43,18 +43,11 @@ export async function getPublicProperties(): Promise<PropertyRecord[]> {
 }
 
 export async function getAdminProperties(): Promise<PropertyRecord[]> {
-  try {
-    await assertAdmin();
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("properties")
-      .select("*")
-      .order("updated_at", { ascending: false });
-    if (!error && data && data.length > 0) return data as PropertyRecord[];
-  } catch {
-    // Graceful fallback
-  }
-  return [];
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("properties").select("*").order("updated_at", { ascending: false });
+  if (error) throw new Error(`Could not load properties: ${error.message}`);
+  return data as PropertyRecord[];
 }
 
 export async function saveProperty(property: Partial<PropertyRecord> & { name: string }) {

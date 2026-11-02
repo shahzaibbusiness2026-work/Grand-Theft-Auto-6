@@ -40,18 +40,11 @@ export async function getPublicCollectibles(): Promise<CollectibleRecord[]> {
 }
 
 export async function getAdminCollectibles(): Promise<CollectibleRecord[]> {
-  try {
-    await assertAdmin();
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("collectibles")
-      .select("*")
-      .order("updated_at", { ascending: false });
-    if (!error && data && data.length > 0) return data as CollectibleRecord[];
-  } catch {
-    // Graceful fallback
-  }
-  return [];
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("collectibles").select("*").order("updated_at", { ascending: false });
+  if (error) throw new Error(`Could not load collectibles: ${error.message}`);
+  return data as CollectibleRecord[];
 }
 
 export async function saveCollectible(item: Partial<CollectibleRecord> & { title: string }) {

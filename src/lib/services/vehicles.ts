@@ -7,7 +7,7 @@ import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
 import type { Vehicle } from "@/lib/data";
-import { INITIAL_ADMIN_VEHICLES, AdminVehicle } from "@/lib/admin-store";
+import { AdminVehicle } from "@/lib/admin-store";
 import { logActivity } from "./activity";
 
 export interface DatabaseVehicleRow {
@@ -134,15 +134,15 @@ function rowToAdminVehicle(row: DatabaseVehicleRow): AdminVehicle {
     manufacturer: row.manufacturer,
     verification: (row.verification as AdminVehicle["verification"]) || "verified",
     status: (row.status as AdminVehicle["status"]) || "published",
-    summary: row.summary || "Cataloged vehicle in the State of Leonida",
-    topSpeed: row.top_speed || "180 mph",
-    acceleration: row.acceleration || "3.4s",
-    handling: row.handling || "8.5/10",
-    weight: row.weight || "3,200 lbs",
+    summary: row.summary || "",
+    topSpeed: row.top_speed || "",
+    acceleration: row.acceleration || "",
+    handling: row.handling || "",
+    weight: row.weight || "",
     sources: [],
-    images: row.images || ["/img/car-orange.jpg"],
-    lastEditor: row.last_editor || "Atlas Staff",
-    updatedAt: row.updated_at || new Date().toISOString(),
+    images: row.images || [],
+    lastEditor: row.last_editor || "",
+    updatedAt: row.updated_at || "",
     // Deep-dive fields
     slug: row.slug,
     price: row.price,
@@ -224,23 +224,11 @@ export async function getPublicVehicles(): Promise<Vehicle[]> {
  * returns an empty list rather than ghost demo rows.
  */
 export async function getAdminVehicles(): Promise<AdminVehicle[]> {
-  try {
-    await assertAdmin();
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("vehicles")
-      .select("*")
-      .order("updated_at", { ascending: false });
-
-    if (!error && data) {
-      return (data as DatabaseVehicleRow[]).map(rowToAdminVehicle);
-    }
-    console.error("getAdminVehicles: database error", error?.message);
-  } catch {
-    // Connection failure — fall back to bundled content
-  }
-
-  return INITIAL_ADMIN_VEHICLES;
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("vehicles").select("*").order("updated_at", { ascending: false });
+  if (error) throw new Error(`Could not load vehicles: ${error.message}`);
+  return (data as DatabaseVehicleRow[]).map(rowToAdminVehicle);
 }
 
 /**
@@ -257,10 +245,10 @@ export async function getAdminVehicleById(id: string): Promise<AdminVehicle | nu
       .eq("id", id)
       .maybeSingle();
 
-    if (!error && data) return rowToAdminVehicle(data as DatabaseVehicleRow);
-    if (error) console.error("getAdminVehicleById: database error", error.message);
+    if (error) throw new Error(`Could not load vehicle: ${error.message}`);
+    if (data) return rowToAdminVehicle(data as DatabaseVehicleRow);
   } catch (err) {
-    console.error("getAdminVehicleById:", err);
+    throw err;
   }
   return null;
 }
@@ -280,7 +268,8 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
     // row already exists, then write only the fields the caller provided.
     let existing: { id: string } | null = null;
     if (v.id) {
-      const { data } = await supabase.from("vehicles").select("id").eq("id", id).maybeSingle();
+      const { data, error } = await supabase.from("vehicles").select("id").eq("id", id).maybeSingle();
+      if (error) throw error;
       existing = data;
     }
 
@@ -315,15 +304,15 @@ export async function saveVehicle(v: Partial<AdminVehicle> & { name: string; id?
       payload.display_name ??= v.name;
       payload.class ??= "Sports";
       payload.manufacturer ??= "Unknown";
-      payload.top_speed ??= "180 mph";
-      payload.acceleration ??= "3.5s";
-      payload.handling ??= "8.0/10";
-      payload.weight ??= "3,200 lbs";
-      payload.summary ??= "Cataloged vehicle in the State of Leonida";
-      payload.images ??= ["/img/car-orange.jpg"];
-      payload.status ??= "published";
-      payload.verification ??= "verified";
-      payload.last_editor ??= "TG Staff";
+      payload.top_speed ??= "";
+      payload.acceleration ??= "";
+      payload.handling ??= "";
+      payload.weight ??= "";
+      payload.summary ??= "";
+      payload.images ??= [];
+      payload.status ??= "draft";
+      payload.verification ??= "unverified";
+      payload.last_editor ??= "";
     }
 
     // Deep-dive fields — only written when provided so partial saves don't clear data.
@@ -427,8 +416,9 @@ export async function deleteVehicle(id: string) {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
-    const { error } = await supabase.from("vehicles").delete().eq("id", id);
+    const { data, error } = await supabase.from("vehicles").delete().eq("id", id).select("id");
     if (error) throw error;
+    if (!data?.length) throw new Error("Vehicle was not found; no record was deleted.");
 
     await logActivity({ action: "delete", targetType: "vehicle", targetId: id });
 

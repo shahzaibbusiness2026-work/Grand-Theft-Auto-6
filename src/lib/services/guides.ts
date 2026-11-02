@@ -65,18 +65,11 @@ export async function getPublicGuideBySlug(
 }
 
 export async function getAdminGuides(): Promise<GuideRecord[]> {
-  try {
-    await assertAdmin();
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("guides")
-      .select("*")
-      .order("views", { ascending: false });
-    if (!error && data && data.length > 0) return data as GuideRecord[];
-  } catch {
-    // Graceful fallback
-  }
-  return [];
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("guides").select("*").order("views", { ascending: false });
+  if (error) throw new Error(`Could not load guides: ${error.message}`);
+  return data as GuideRecord[];
 }
 
 export async function saveGuide(

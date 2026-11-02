@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/player-tool-link";
 import { trackPublicEvent } from "@/lib/public-events";
 import {
   ArrowRight,
@@ -16,7 +16,11 @@ import {
 } from "lucide-react";
 import { SafeImage } from "@/components/safe-image";
 import { EvidenceComparison } from "@/components/evidence-comparison";
-import { getStoredUserState, toggleFavorite } from "@/lib/user-store";
+import {
+  getStoredUserState,
+  saveStoredUserState,
+  toggleFavorite,
+} from "@/lib/user-store";
 import { selectionFromParams, selectionUrl } from "@/lib/catalog-selection";
 import type { CatalogKind, EvidenceEntry } from "@/lib/catalog-evidence";
 import styles from "./catalog-ui.module.css";
@@ -114,7 +118,6 @@ export function EvidenceCatalog({
   // vehicles than there are slots grows them automatically, up to four.
   const [slotCount, setSlotCount] = useState(2);
   const label = kind === "vehicles" ? "vehicle" : "weapon";
-  const storageKey = "taish-recent-" + kind;
   const pageSize = compare ? 8 : 24;
   const writeState = (
     patch: Partial<{ q: string; category: string; sort: string; page: number }>,
@@ -152,7 +155,11 @@ export function EvidenceCatalog({
   const setLimit = (limit: number) =>
     writeState({ page: Math.ceil(limit / pageSize) });
   useEffect(() => {
-    const update = () => setFavorites(getStoredUserState().favorites[kind]);
+    const update = () => {
+      const state = getStoredUserState();
+      setFavorites(state.favorites[kind]);
+      setRecent(state.recentCatalogIds[kind]);
+    };
     const restore = () => {
       const state = readCatalogState(
         new URLSearchParams(window.location.search),
@@ -171,24 +178,17 @@ export function EvidenceCatalog({
       setSelected(initialSelected);
       // Slots follow the selection: never fewer than two, never more than
       // four, and never fewer than the picks the URL already carries.
-      setSlotCount(
-        Math.max(2, Math.min(4, initialSelected.length)),
-      );
+      setSlotCount(Math.max(2, Math.min(4, initialSelected.length)));
     };
     update();
     restore();
     window.addEventListener("gta6_user_state_change", update);
     window.addEventListener("popstate", restore);
-    try {
-      const ids = JSON.parse(localStorage.getItem(storageKey) || "[]");
-      if (Array.isArray(ids))
-        setRecent(ids.filter((x) => typeof x === "string"));
-    } catch {}
     return () => {
       window.removeEventListener("gta6_user_state_change", update);
       window.removeEventListener("popstate", restore);
     };
-  }, [kind, storageKey, entries, compare]);
+  }, [kind, entries, compare]);
   useEffect(() => {
     if (!pickerOpen) return;
     const previous = document.body.style.overflow;
@@ -205,9 +205,11 @@ export function EvidenceCatalog({
   const visit = (id: string) => {
     const next = [id, ...recent.filter((x) => x !== id)].slice(0, 8);
     setRecent(next);
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(next));
-    } catch {}
+    const state = getStoredUserState();
+    saveStoredUserState({
+      ...state,
+      recentCatalogIds: { ...state.recentCatalogIds, [kind]: next },
+    });
   };
   const select = (ids: string[]) => {
     setSelected(ids);

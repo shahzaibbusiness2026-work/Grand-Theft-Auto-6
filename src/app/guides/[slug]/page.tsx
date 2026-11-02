@@ -8,6 +8,7 @@ import { getPublicGuideBySlug, getPublicGuides } from "@/lib/services/guides";
 import ReactMarkdown from "react-markdown";
 import { hasGuideBody, readingTime } from "@/lib/editorial-quality";
 import { serializeJsonLd } from "@/lib/utils";
+import { PlayerBookmarkButton } from "@/components/player-bookmark-button";
 
 export const dynamic = "force-dynamic";
 
@@ -138,6 +139,7 @@ export default async function GuideDetailPage({
           <h1 className="mt-3 font-display text-3xl font-black leading-tight tracking-tight text-foreground sm:text-4xl">
             {guide.title}
           </h1>
+          <PlayerBookmarkButton title={guide.title} path={`/guides/${guide.slug}`} kind="guide" />
         </div>
 
         {guide.image && (

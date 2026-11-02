@@ -2,9 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
-
-import { INITIAL_ADMIN_MEDIA, AdminMediaAsset } from "@/lib/admin-store";
+import { AdminMediaAsset } from "@/lib/admin-store";
 
 export interface DatabaseMediaRow {
   id: string;
@@ -25,12 +23,12 @@ function rowToMediaAsset(row: DatabaseMediaRow): AdminMediaAsset {
   return {
     id: row.id,
     filename: row.filename,
-    dimensions: row.dimensions || "1920 × 1080",
-    fileSize: row.file_size || "500 KB",
+    dimensions: row.dimensions || "",
+    fileSize: row.file_size || "",
     type: (row.type as AdminMediaAsset["type"]) || "Image",
     url: row.public_url,
     altText: row.alt_text || "",
-    credit: row.credit || "Atlas Staff",
+    credit: row.credit || "",
     license: (row.license as AdminMediaAsset["license"]) || "Internal illustration",
     usedBy: Array.isArray(row.used_by) ? row.used_by : [],
 
@@ -40,7 +38,7 @@ function rowToMediaAsset(row: DatabaseMediaRow): AdminMediaAsset {
           day: "numeric",
           year: "numeric",
         })
-      : "Recent",
+      : "",
   };
 }
 
@@ -134,8 +132,11 @@ export async function uploadMediaFile(formData: FormData) {
       uploadedAt: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
     };
 
-    const saved = await saveMediaAsset({ ...asset, id, filename: clean });
-    if (!saved.success) throw new Error(saved.error || "Failed to save media metadata.");
+    const saved = await saveMediaAsset({ ...asset, id, filename: clean, storagePath: path });
+    if (!saved.success) {
+      await supabase.storage.from("media").remove([path]);
+      throw new Error(saved.error || "Failed to save media metadata.");
+    }
 
     await logActivity({
       action: "create",
@@ -157,46 +158,44 @@ export async function uploadMediaFile(formData: FormData) {
  * Fetch all media assets from Supabase
  */
 export async function getMediaAssets(): Promise<AdminMediaAsset[]> {
-  try {
-    const supabase = await createServerSupabase();
-    const { data, error } = await supabase
-      .from("media_assets")
-      .select("*")
-      .order("uploaded_at", { ascending: false });
-
-    if (!error && data && data.length > 0) {
-      return (data as DatabaseMediaRow[]).map(rowToMediaAsset);
-    }
-
-    // Fallback to site_settings persistence
-    const { data: setting } = await supabase.from("site_settings").select("value").eq("key", "media_assets_data").single();
-    if (setting?.value) {
-      const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed as AdminMediaAsset[];
-    }
-  } catch {
-    // fallback
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("media_assets").select("*").order("uploaded_at", { ascending: false });
+  if (!error) return (data as DatabaseMediaRow[]).map(rowToMediaAsset);
+  if ((error as { code?: string }).code !== "42P01") {
+    throw new Error(`Could not load media: ${error.message}`);
   }
-
-  return INITIAL_ADMIN_MEDIA;
+  const { data: setting, error: settingError } = await supabase
+    .from("site_settings").select("value").eq("key", "media_assets_data").maybeSingle();
+  if (settingError) throw new Error(`Could not load legacy media: ${settingError.message}`);
+  if (!setting?.value) return [];
+  const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
+  return Array.isArray(parsed) ? parsed as AdminMediaAsset[] : [];
 }
 
 /**
  * Save or update media asset metadata
  */
-export async function saveMediaAsset(asset: Partial<AdminMediaAsset> & { id: string; filename: string }) {
+export async function saveMediaAsset(asset: Partial<AdminMediaAsset> & { id: string; filename: string; storagePath?: string }) {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
 
+    let storagePath = asset.storagePath;
+    if (storagePath === undefined) {
+      const { data: existing, error: lookupError } = await supabase.from("media_assets").select("storage_path").eq("id", asset.id).maybeSingle();
+      if (lookupError) throw lookupError;
+      storagePath = existing?.storage_path || "";
+    }
+
     const payload: Partial<DatabaseMediaRow> = {
       id: asset.id,
       filename: asset.filename,
-      dimensions: asset.dimensions || "1920 × 1080",
-      file_size: asset.fileSize || "500 KB",
+      dimensions: asset.dimensions || "",
+      file_size: asset.fileSize || "",
       type: asset.type || "Image",
-      public_url: asset.url || "/img/hero-dark.jpg",
-      storage_path: asset.url || "",
+      public_url: asset.url || "",
+      storage_path: storagePath,
       alt_text: asset.altText || "",
       credit: asset.credit || "",
       license: asset.license || "Internal illustration",
@@ -205,31 +204,7 @@ export async function saveMediaAsset(asset: Partial<AdminMediaAsset> & { id: str
     };
 
     const { error } = await supabase.from("media_assets").upsert(payload, { onConflict: "id" });
-    if (error) {
-      // Table doesn't exist, persist in site_settings
-      const current = await getMediaAssets();
-      const idx = current.findIndex((m) => m.id === asset.id);
-      const fullAsset: AdminMediaAsset = {
-        id: asset.id,
-        filename: asset.filename,
-        dimensions: asset.dimensions || "1920 × 1080",
-        fileSize: asset.fileSize || "500 KB",
-        type: asset.type || "Image",
-        url: asset.url || "/img/hero-dark.jpg",
-        altText: asset.altText || "",
-        credit: asset.credit || "Atlas Staff",
-        license: asset.license || "Internal illustration",
-        usedBy: asset.usedBy || [],
-        uploadedAt: "Just now",
-      };
-      const updated = idx >= 0
-        ? current.map((m, i) => (i === idx ? { ...m, ...fullAsset } : m))
-        : [fullAsset, ...current];
-      await supabase.from("site_settings").upsert(
-        { key: "media_assets_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
-        { onConflict: "key" }
-      );
-    }
+    if (error) throw error;
 
     revalidatePath("/admin/media");
     return { success: true, id: asset.id };
@@ -249,28 +224,25 @@ export async function deleteMediaAsset(id: string) {
     const supabase = createAdminClient();
 
     // Resolve the storage path first so the file can be removed too.
-    const { data: row } = await supabase
+    const { data: row, error: lookupError } = await supabase
       .from("media_assets")
       .select("storage_path, public_url, filename")
       .eq("id", id)
       .maybeSingle();
+    if (lookupError) throw lookupError;
 
+    if (!row) throw new Error("Media asset was not found.");
     const storagePath = (row as { storage_path?: string } | null)?.storage_path || "";
-    if (storagePath && !storagePath.startsWith("/") && !storagePath.startsWith("http")) {
-      // Relative path → object inside the media bucket.
-      const { error: rmError } = await supabase.storage.from("media").remove([storagePath]);
-      if (rmError) console.warn("Storage object removal failed:", rmError.message);
-    }
+    const { data: deleted, error } = await supabase.from("media_assets").delete().eq("id", id).select("id");
+    if (error) throw error;
+    if (!deleted?.length) throw new Error("Media asset was not deleted.");
 
-    const { error } = await supabase.from("media_assets").delete().eq("id", id);
-    if (error) {
-      // Table doesn't exist, update in site_settings
-      const current = await getMediaAssets();
-      const updated = current.filter((m) => m.id !== id);
-      await supabase.from("site_settings").upsert(
-        { key: "media_assets_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
-        { onConflict: "key" }
-      );
+    if (storagePath && !storagePath.startsWith("/") && !storagePath.startsWith("http")) {
+      const { error: rmError } = await supabase.storage.from("media").remove([storagePath]);
+      if (rmError) {
+        revalidatePath("/admin/media");
+        return { success: true, warning: `Asset record deleted, but its storage object remains: ${rmError.message}` };
+      }
     }
 
     await logActivity({ action: "delete", targetType: "media", targetId: id, targetLabel: (row as { filename?: string } | null)?.filename });

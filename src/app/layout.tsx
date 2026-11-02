@@ -7,6 +7,7 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { serializeJsonLd } from "@/lib/utils";
 import { PUBLICATION, canonicalOrigin } from "@/lib/site-identity";
 import "./globals.css";
+import { PlayerSyncProvider } from "@/components/player-sync-provider";
 
 // Generic system font stacks - clean, familiar, non-robotic
 const fontDisplay = {
@@ -135,7 +136,7 @@ export default function RootLayout({
             domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
             adSenseId={process.env.NEXT_PUBLIC_ADSENSE_ID}
           />
-          {children}
+          <PlayerSyncProvider>{children}</PlayerSyncProvider>
         </ThemeProvider>
       </body>
     </html>

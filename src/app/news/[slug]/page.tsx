@@ -22,6 +22,7 @@ import {
   publicationImage,
 } from "@/lib/editorial-quality";
 import { PUBLICATION, canonicalOrigin } from "@/lib/site-identity";
+import { PlayerBookmarkButton } from "@/components/player-bookmark-button";
 
 export const revalidate = 300;
 // An explicit runtime path list enables ISR for newly published CMS slugs.
@@ -251,6 +252,7 @@ export default async function ArticleDetailPage({ params }: Props) {
               <h1 className="mt-3 max-w-3xl font-display text-3xl sm:text-4xl font-extrabold leading-tight">
                 {article.title}
               </h1>
+              <PlayerBookmarkButton title={article.title} path={`/news/${article.slug}`} kind="article" />
               {showSubtitle && (
                 <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
                   {subtitle}

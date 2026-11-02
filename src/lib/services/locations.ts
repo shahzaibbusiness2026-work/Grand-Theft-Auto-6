@@ -45,6 +45,19 @@ export async function getLocations(): Promise<LocationRecord[]> {
   return [];
 }
 
+export async function getAdminLocations(): Promise<LocationRecord[]> {
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("locations").select("*").order("created_at", { ascending: true });
+  if (!error) return data as LocationRecord[];
+  if (!isMissingTableError(error)) throw new Error(`Could not load locations: ${error.message}`);
+  const { data: setting, error: settingError } = await supabase.from("site_settings").select("value").eq("key", "locations_data").maybeSingle();
+  if (settingError) throw new Error(`Could not load legacy locations: ${settingError.message}`);
+  if (!setting?.value) return [];
+  const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
+  return Array.isArray(parsed) ? parsed as LocationRecord[] : [];
+}
+
 /**
  * True only when the error means the table itself is absent (pre-migration
  * DB) — the case the site_settings fallback exists for. Every other failure
@@ -83,13 +96,13 @@ export async function saveLocation(
     }
     if (error) {
       // Table doesn't exist, persist in site_settings
-      const current = await getLocations();
+      const current = await getAdminLocations();
       const idx = current.findIndex((l) => l.id === id);
       const updated =
         idx >= 0
           ? current.map((l, i) => (i === idx ? { ...l, ...location, id } : l))
           : [...current, itemToSave as LocationRecord];
-      await supabase
+      const { error: fallbackWriteError } = await supabase
         .from("site_settings")
         .upsert(
           {
@@ -99,6 +112,7 @@ export async function saveLocation(
           },
           { onConflict: "key" },
         );
+      if (fallbackWriteError) throw fallbackWriteError;
     }
 
     await logActivity({
@@ -121,15 +135,16 @@ export async function deleteLocation(id: string) {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
-    const { error } = await supabase.from("locations").delete().eq("id", id);
+    const { data, error } = await supabase.from("locations").delete().eq("id", id).select("id");
     if (error && !isMissingTableError(error)) {
       return { success: false, error: error.message };
     }
     if (error) {
       // Table doesn't exist, update in site_settings
-      const current = await getLocations();
+      const current = await getAdminLocations();
+      if (!current.some((location) => location.id === id)) throw new Error("Location was not found; no record was deleted.");
       const updated = current.filter((l) => l.id !== id);
-      await supabase
+      const { error: fallbackWriteError } = await supabase
         .from("site_settings")
         .upsert(
           {
@@ -139,6 +154,9 @@ export async function deleteLocation(id: string) {
           },
           { onConflict: "key" },
         );
+      if (fallbackWriteError) throw fallbackWriteError;
+    } else if (!data?.length) {
+      throw new Error("Location was not found; no record was deleted.");
     }
 
     await logActivity({

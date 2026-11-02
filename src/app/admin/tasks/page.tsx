@@ -26,6 +26,7 @@ export default function AdminTasksPage() {
   const { showToast } = useToast();
   const [tasks, setTasks] = useState<AdminTask[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [filterStatus, setFilterStatus] = useState<"all" | "pending" | "completed">("all");
   const [filterPriority, setFilterPriority] = useState<string>("all");
@@ -33,6 +34,7 @@ export default function AdminTasksPage() {
   useEffect(() => {
     getTasks()
       .then((data) => setTasks(data))
+      .catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load tasks."))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -55,13 +57,12 @@ export default function AdminTasksPage() {
     setTasks((prev) =>
       prev.map((t) => (t.id === id ? updated : t))
     );
-    await saveTask(updated);
-
-    showToast({
-      title: "Task Status Updated",
-      description: "Task completion status synced to Supabase.",
-      type: "info",
-    });
+    const result = await saveTask(updated);
+    if (result.success) showToast({ title: "Task updated", description: "Completion status saved.", type: "success" });
+    else {
+      setTasks((prev) => prev.map((task) => task.id === id ? target : task));
+      showToast({ title: "Update failed", description: result.error || "Task was not updated.", type: "danger" });
+    }
   };
 
   const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
@@ -70,13 +71,12 @@ export default function AdminTasksPage() {
     e?.stopPropagation();
     const taskToDelete = tasks.find((t) => t.id === id);
     setTasks((prev) => prev.filter((t) => t.id !== id));
-    await deleteTask(id);
-
-    showToast({
-      title: "Task Deleted",
-      description: `"${taskToDelete?.title || "Task"}" removed from Supabase queue.`,
-      type: "success",
-    });
+    const result = await deleteTask(id);
+    if (result.success) showToast({ title: "Task deleted", description: `"${taskToDelete?.title || "Task"}" was removed.`, type: "success" });
+    else {
+      if (taskToDelete) setTasks((prev) => [taskToDelete, ...prev]);
+      showToast({ title: "Delete failed", description: result.error || "Task was not deleted.", type: "danger" });
+    }
   };
 
   const handleAddTask = async (e: React.FormEvent) => {
@@ -85,7 +85,7 @@ export default function AdminTasksPage() {
     const created: AdminTask = {
       id: `task-${Date.now()}`,
       title: newTaskTitle.trim(),
-      assignee: "Administrator",
+      assignee: "",
       priority: "medium",
       dueDate: new Date(Date.now() + 86400000 * 3).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
       completed: false,
@@ -93,13 +93,12 @@ export default function AdminTasksPage() {
     };
     setTasks([created, ...tasks]);
     setNewTaskTitle("");
-    await saveTask(created);
-
-    showToast({
-      title: "Task Created",
-      description: `"${created.title}" saved to Supabase tasks.`,
-      type: "success",
-    });
+    const result = await saveTask(created);
+    if (result.success) showToast({ title: "Task created", description: `"${created.title}" saved.`, type: "success" });
+    else {
+      setTasks((prev) => prev.filter((task) => task.id !== created.id));
+      showToast({ title: "Create failed", description: result.error || "Task was not saved.", type: "danger" });
+    }
   };
 
   const resetFilters = () => {
@@ -122,6 +121,7 @@ export default function AdminTasksPage() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
         <div>

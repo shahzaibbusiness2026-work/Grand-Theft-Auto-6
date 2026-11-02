@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/player-tool-link";
 import { Crosshair, ShieldAlert, ArrowUpRight, Wrench } from "lucide-react";
 import type { DashboardWeaponItem } from "@/lib/services/queries";
 
@@ -32,7 +32,7 @@ export function CompanionWeaponsSection({
               </span>
             </div>
             <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 mt-0.5">
-              Service rifles, combat sidearms, suppressed SMGs, and tactical attachments cataloged across Leonida
+              Editorial weapon records with evidence reviewed separately for each gameplay claim.
             </p>
           </div>
         </div>
@@ -57,7 +57,7 @@ export function CompanionWeaponsSection({
           return (
             <Link
               key={wep.id}
-              href={`/weapons#${wep.id}`}
+              href={`/weapons/${wep.slug || wep.id}`}
               className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.06] dark:border-white/[0.06] border-slate-200 bg-white/[0.02] dark:bg-white/[0.02] bg-slate-50/80 p-4 transition-all duration-300 hover:border-rose-500/50 hover:bg-white/[0.06] hover:shadow-[0_12px_32px_rgba(244,63,94,0.22)] hover:-translate-y-1 hover:ring-1 hover:ring-rose-500/40"
             >
               <div>

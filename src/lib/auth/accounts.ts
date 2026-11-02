@@ -1,5 +1,6 @@
 import { randomBytes, scryptSync, timingSafeEqual, createHash } from "crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { parseWorkspace, type PlayerWorkspace } from "@/lib/player-state";
 
 /**
  * Site-account storage (server-only helpers).
@@ -23,6 +24,14 @@ export interface AccountRow {
   created_at: string;
   last_sign_in_at: string;
   sign_in_count: number;
+  session_version?: number;
+  auth_user_id?: string | null;
+  marketing_opt_in?: boolean;
+  email_verified_at?: string | null;
+  /** Compare-and-set token, not stored inside the account value. */
+  storage_version?: string;
+  workspace?: PlayerWorkspace;
+  workspace_version?: string | null;
 }
 
 export function accountKey(email: string): string {
@@ -50,8 +59,7 @@ export function verifyPassword(password: string, stored: string): boolean {
     const computed = scryptSync(password, salt, 64);
     const expected = Buffer.from(hash, "hex");
     return (
-      computed.length === expected.length &&
-      timingSafeEqual(computed, expected)
+      computed.length === expected.length && timingSafeEqual(computed, expected)
     );
   } catch {
     return false;
@@ -75,9 +83,7 @@ export function generateRecoveryCode(): string {
 }
 
 export function hashRecoveryCode(code: string): string {
-  return createHash("sha256")
-    .update(code.trim().toUpperCase())
-    .digest("hex");
+  return createHash("sha256").update(code.trim().toUpperCase()).digest("hex");
 }
 
 export function verifyRecoveryCode(code: string, storedHash: string): boolean {
@@ -85,8 +91,7 @@ export function verifyRecoveryCode(code: string, storedHash: string): boolean {
     const computed = Buffer.from(hashRecoveryCode(code), "hex");
     const expected = Buffer.from(storedHash, "hex");
     return (
-      computed.length === expected.length &&
-      timingSafeEqual(computed, expected)
+      computed.length === expected.length && timingSafeEqual(computed, expected)
     );
   } catch {
     return false;
@@ -107,9 +112,10 @@ function parseStoredValue(raw: unknown): Partial<AccountRow> {
 }
 
 export function normalizeAccount(prev: Partial<AccountRow>): AccountRow | null {
-  if (!prev.email) return null;
+  if (typeof prev.email !== "string" || !validEmail(prev.email.trim()))
+    return null;
   return {
-    email: prev.email,
+    email: prev.email.trim().toLowerCase(),
     first_name: typeof prev.first_name === "string" ? prev.first_name : null,
     last_name: typeof prev.last_name === "string" ? prev.last_name : null,
     display_name:
@@ -133,20 +139,36 @@ export function normalizeAccount(prev: Partial<AccountRow>): AccountRow | null {
         : new Date().toISOString(),
     sign_in_count:
       typeof prev.sign_in_count === "number" ? prev.sign_in_count : 0,
+    session_version:
+      typeof prev.session_version === "number" ? prev.session_version : 0,
+    auth_user_id:
+      typeof prev.auth_user_id === "string" ? prev.auth_user_id : null,
+    marketing_opt_in: prev.marketing_opt_in === true,
+    email_verified_at:
+      typeof prev.email_verified_at === "string"
+        ? prev.email_verified_at
+        : null,
+    workspace: prev.workspace ? parseWorkspace(prev.workspace) : undefined,
+    workspace_version:
+      typeof prev.workspace_version === "string"
+        ? prev.workspace_version
+        : null,
   };
 }
 
 export async function getAccount(
   supabase: SupabaseClient,
-  email: string
+  email: string,
 ): Promise<AccountRow | null> {
   const { data, error } = await supabase
     .from("private_settings")
-    .select("value")
+    .select("value, updated_at")
     .eq("key", accountKey(email))
     .maybeSingle();
-  if (error || !data) return null;
-  return normalizeAccount(parseStoredValue(data.value));
+  if (error) throw new Error("Account storage is unavailable.");
+  if (!data) return null;
+  const account = normalizeAccount(parseStoredValue(data.value));
+  return account ? { ...account, storage_version: data.updated_at } : null;
 }
 
 /**
@@ -155,7 +177,7 @@ export async function getAccount(
  * not just newsletter subscribers. Paginated past the API's row cap.
  */
 export async function getAllAccounts(
-  supabase: SupabaseClient
+  supabase: SupabaseClient,
 ): Promise<AccountRow[]> {
   const rows: AccountRow[] = [];
   const PAGE = 1000;
@@ -168,7 +190,7 @@ export async function getAllAccounts(
     if (error || !data || data.length === 0) break;
     for (const row of data) {
       const parsed = normalizeAccount(
-        parseStoredValue((row as { value: unknown }).value)
+        parseStoredValue((row as { value: unknown }).value),
       );
       if (parsed) rows.push(parsed);
     }
@@ -179,15 +201,33 @@ export async function getAllAccounts(
 
 export async function saveAccount(
   supabase: SupabaseClient,
-  row: AccountRow
+  row: AccountRow,
+  createOnly = false,
 ): Promise<boolean> {
-  const { error } = await supabase.from("private_settings").upsert(
-    {
-      key: accountKey(row.email),
-      value: JSON.stringify(row),
-      updated_at: new Date().toISOString(),
-    },
-    { onConflict: "key" }
-  );
+  const { storage_version, ...stored } = row;
+  const payload = {
+    key: accountKey(row.email),
+    value: JSON.stringify(stored),
+    updated_at: new Date(
+      Math.max(Date.now(), Date.parse(storage_version || "") + 1 || 0),
+    ).toISOString(),
+  };
+  if (createOnly) {
+    const { error } = await supabase.from("private_settings").insert(payload);
+    return !error;
+  }
+  if (storage_version) {
+    const { data, error } = await supabase
+      .from("private_settings")
+      .update(payload)
+      .eq("key", payload.key)
+      .eq("updated_at", storage_version)
+      .select("key")
+      .maybeSingle();
+    return !error && !!data;
+  }
+  const { error } = await supabase
+    .from("private_settings")
+    .upsert(payload, { onConflict: "key" });
   return !error;
 }

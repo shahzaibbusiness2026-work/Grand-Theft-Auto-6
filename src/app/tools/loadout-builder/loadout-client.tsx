@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/player-tool-link";
 import {
   getStoredUserState,
   saveStoredUserState,
@@ -19,8 +19,11 @@ export function LoadoutClient({ entries }: { entries: EvidenceEntry[] }) {
   const [slots, setSlots] = useState<Record<string, string>>({});
   const [saved, setSaved] = useState<SavedLoadout[]>([]);
   const [message, setMessage] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
   useEffect(() => {
-    setSaved(getStoredUserState().savedLoadouts);
+    const sync = () => setSaved(getStoredUserState().savedLoadouts); sync();
+    window.addEventListener("gta6_user_state_change", sync);
+    return () => window.removeEventListener("gta6_user_state_change", sync);
   }, []);
   const save = () => {
     if (!name.trim()) {
@@ -29,7 +32,7 @@ export function LoadoutClient({ entries }: { entries: EvidenceEntry[] }) {
     }
     const state = getStoredUserState();
     const item: SavedLoadout = {
-      id: crypto.randomUUID(),
+      id: editingId || crypto.randomUUID(),
       name: name.trim(),
       role: "Personal plan",
       primaryWeaponId: slots.primaryWeaponId || "",
@@ -40,10 +43,12 @@ export function LoadoutClient({ entries }: { entries: EvidenceEntry[] }) {
       notes,
       updatedAt: new Date().toISOString(),
     };
-    const next = [item, ...state.savedLoadouts];
-    saveStoredUserState({ ...state, savedLoadouts: next });
+    const next = [item, ...state.savedLoadouts.filter((existing) => existing.id !== item.id)];
+    if (next.length > 100) { setMessage("You can save up to 100 loadouts."); return; }
+    if (!saveStoredUserState({ ...state, savedLoadouts: next })) { setMessage("Your plan could not be saved. Check the workspace status."); return; }
     setSaved(next);
-    setMessage("Saved on this device.");
+    setEditingId(item.id);
+    setMessage("Plan saved in your workspace. Check account sync status for online confirmation.");
   };
   const remove = (id: string) => {
     const state = getStoredUserState();
@@ -62,6 +67,7 @@ export function LoadoutClient({ entries }: { entries: EvidenceEntry[] }) {
       <label className="block">
         Plan name
         <input
+          maxLength={120}
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="block w-full rounded-xl border border-border bg-background p-3"
@@ -103,6 +109,7 @@ export function LoadoutClient({ entries }: { entries: EvidenceEntry[] }) {
       <label className="block">
         Your notes
         <textarea
+          maxLength={5000}
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={4}
@@ -114,8 +121,9 @@ export function LoadoutClient({ entries }: { entries: EvidenceEntry[] }) {
         onClick={save}
         className="min-h-11 rounded-xl bg-primary px-5 font-bold text-primary-foreground"
       >
-        Save plan on this device
+        {editingId ? "Update saved plan" : "Save new plan"}
       </button>
+      {editingId && <button type="button" className="player-button" onClick={() => { setEditingId(null); setName(`${name.slice(0, 110)} copy`); setMessage("Edit this copy and save it as a new plan."); }}>Create a copy</button>}
       <p role="status">{message}</p>
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">Saved plans ({saved.length})</h2>
@@ -131,6 +139,7 @@ export function LoadoutClient({ entries }: { entries: EvidenceEntry[] }) {
                 className="min-h-11 underline"
                 onClick={() => {
                   setName(item.name);
+                  setEditingId(item.id);
                   setNotes(item.notes || "");
                   setSlots(Object.fromEntries(SLOTS.map((s) => [s, item[s]])));
                 }}
@@ -146,7 +155,7 @@ export function LoadoutClient({ entries }: { entries: EvidenceEntry[] }) {
             </div>
           </article>
         ))}
-        {!saved.length && <p>No plans saved in this browser.</p>}
+        {!saved.length && <p>You haven’t saved a loadout yet.</p>}
       </section>
     </div>
   );

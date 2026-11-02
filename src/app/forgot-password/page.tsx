@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ForgotForm } from "./forgot-form";
+import { EmailRecoveryRequest } from "./email-recovery";
 
 export const metadata: Metadata = {
     openGraph: { url: "/forgot-password" },
   title: "Forgot password",
-  description: "Reset your Taish Gaming account password with your recovery code.",
+  description: "Reset your Taish Gaming account password with an email link or your recovery code.",
   alternates: { canonical: "/forgot-password" },
   // Auth pages are utility routes, not search landing pages.
   robots: { index: false, follow: true },
@@ -43,9 +44,10 @@ export default function ForgotPasswordPage() {
                 Forgot password
               </h1>
               <p className="mt-2 text-sm text-slate-400">
-                Enter your email, your recovery code, and a new password.
+                Request an email reset link or use your saved recovery code.
               </p>
             </div>
+            <EmailRecoveryRequest />
             <ForgotForm />
           </div>
           <a

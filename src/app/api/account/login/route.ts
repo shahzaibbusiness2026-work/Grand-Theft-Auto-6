@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { peekRateLimit, recordRateLimitHit } from "@/lib/rate-limit";
-import { validEmail, verifyPassword, getAccount, saveAccount } from "@/lib/auth/accounts";
+import {
+  validEmail,
+  verifyPassword,
+  getAccount,
+  saveAccount,
+} from "@/lib/auth/accounts";
+import { requireSameOrigin, playerJsonBody } from "@/lib/auth/player-account";
 import {
   USER_SESSION_COOKIE,
   createUserSessionToken,
@@ -32,25 +38,28 @@ function clientIp(req: Request): string {
 
 export async function POST(req: Request) {
   try {
+    requireSameOrigin(req);
     const ip = clientIp(req);
     if (await peekRateLimit("account-login", ip, RATE_LIMIT_MAX)) {
       return NextResponse.json(
-        { ok: false, error: "Too many attempts. Please try again in a few minutes." },
-        { status: 429 }
+        {
+          ok: false,
+          error: "Too many attempts. Please try again in a few minutes.",
+        },
+        { status: 429 },
       );
     }
     await recordRateLimitHit("account-login", ip, RATE_LIMIT_WINDOW_MS);
 
-    const body = await req.json().catch(() => null);
+    const body = await playerJsonBody(req, 4000);
     const email =
       typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
-    const password =
-      typeof body?.password === "string" ? body.password : "";
+    const password = typeof body?.password === "string" ? body.password : "";
 
-    if (!validEmail(email) || !password) {
+    if (!validEmail(email) || !password || password.length > 200) {
       return NextResponse.json(
         { ok: false, error: "Invalid email or password." },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -60,7 +69,7 @@ export async function POST(req: Request) {
     } catch {
       return NextResponse.json(
         { ok: false, error: "Login is not configured on the server." },
-        { status: 503 }
+        { status: 503 },
       );
     }
 
@@ -68,41 +77,37 @@ export async function POST(req: Request) {
     if (!account) {
       return NextResponse.json(
         { ok: false, error: "Invalid email or password." },
-        { status: 401 }
+        { status: 401 },
       );
     }
     if (!account.password_hash) {
-      // Pure legacy row (no password, no OAuth link): offer first-time setup.
-      // OAuth-only rows must use their provider — never offer a password
-      // setup here, or anyone could set a password on someone's OAuth account.
-      if ((account.auth_providers?.length || 0) === 0) {
-        return NextResponse.json(
-          {
-            ok: false,
-            code: "PASSWORD_NOT_SET",
-            error: "This account was created before passwords. Please set a password to continue.",
-          },
-          { status: 409 }
-        );
-      }
+      // Never offer password setup based solely on knowing an account email.
       return NextResponse.json(
         { ok: false, error: "Invalid email or password." },
-        { status: 401 }
+        { status: 401 },
       );
     }
     if (!verifyPassword(password, account.password_hash)) {
       return NextResponse.json(
         { ok: false, error: "Invalid email or password." },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     const now = new Date().toISOString();
-    await saveAccount(supabase, {
+    const saved = await saveAccount(supabase, {
       ...account,
       last_sign_in_at: now,
       sign_in_count: account.sign_in_count + 1,
     });
+    if (!saved)
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "Your account changed during sign-in. Please retry.",
+        },
+        { status: 409 },
+      );
 
     // Issue the signed session cookie the dashboard gate checks. A login
     // that cannot sign a session is a server misconfiguration — fail
@@ -115,14 +120,15 @@ export async function POST(req: Request) {
     });
     res.cookies.set(
       USER_SESSION_COOKIE,
-      await createUserSessionToken(email),
-      userSessionCookieOptions()
+      await createUserSessionToken(email, account.session_version ?? 0),
+      userSessionCookieOptions(),
     );
     return res;
-  } catch {
+  } catch (error) {
+    console.error("Account login request failed:", error instanceof Error ? error.message : "Unknown error");
     return NextResponse.json(
       { ok: false, error: "Could not log you in. Please try again." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
