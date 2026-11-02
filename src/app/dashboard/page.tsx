@@ -1,24 +1,33 @@
 import { DashboardView } from "./dashboard-view";
 import { getDashboardStats } from "@/lib/services/queries";
 import type { Metadata } from "next";
+import { requirePlayer } from "@/lib/auth/player-account";
 
 export const metadata: Metadata = {
   title: "Dashboard",
   description:
-    "Track your story missions, side jobs, collectibles, activities and Leonida completion progress with local sync.",
+    "View your saved GTA 6 vehicles, weapons, map progress and loadouts alongside Taish Gaming's current catalog.",
   // Personal progress tool, not indexable content.
   robots: { index: false, follow: false },
 };
 
-// Revalidate every 60 seconds so dashboard data stays fresh without full SSR cost
-export const revalidate = 60;
+// Personalized pages require a current, verified account session.
+export const dynamic = "force-dynamic";
 
 /**
  * Dashboard Server Page — fetches live Supabase data and passes it to the client view.
- * Player-specific progress (completion %, activities) remains in localStorage
- * for zero-auth local tracking. Site-wide data (articles, DB counts) comes from Supabase.
+ * Private progress is synchronized by the player provider; public catalog
+ * counts and articles come from the published data source.
  */
 export default async function DashboardPage() {
-  const stats = await getDashboardStats();
-  return <DashboardView liveStats={stats} />;
+  const [stats, { account }] = await Promise.all([
+    getDashboardStats(),
+    requirePlayer(),
+  ]);
+  return (
+    <DashboardView
+      liveStats={stats}
+      playerName={account.display_name || account.first_name || "Player"}
+    />
+  );
 }

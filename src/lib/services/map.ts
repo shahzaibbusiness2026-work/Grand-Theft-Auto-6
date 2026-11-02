@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 
-import { INITIAL_ADMIN_MAP_MARKERS, AdminMapMarker } from "@/lib/admin-store";
+import { AdminMapMarker } from "@/lib/admin-store";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { logActivity } from "./activity";
 
@@ -34,8 +34,8 @@ function rowToMarker(row: DatabaseMapMarkerRow): AdminMapMarker {
     visible: row.visible ?? true,
     icon: (row.icon as AdminMapMarker["icon"]) || "pin",
     coordinates: {
-      x: Number(row.coord_x) || 50,
-      y: Number(row.coord_y) || 50,
+      x: Number.isFinite(Number(row.coord_x)) ? Number(row.coord_x) : 50,
+      y: Number.isFinite(Number(row.coord_y)) ? Number(row.coord_y) : 50,
     },
     description: row.description || "",
     verification: (row.verification as AdminMapMarker["verification"]) || "verified",
@@ -46,8 +46,8 @@ function rowToMarker(row: DatabaseMapMarkerRow): AdminMapMarker {
 }
 
 /**
- * Fetch map markers for the public interactive map and admin dashboard.
- * Static fallback only on connection failure — an empty table is an empty map.
+ * Fetch public map markers. An unavailable database returns no markers; it
+ * must never make demo markers look like saved site content.
  */
 export async function getMapMarkers(): Promise<AdminMapMarker[]> {
   try {
@@ -62,10 +62,18 @@ export async function getMapMarkers(): Promise<AdminMapMarker[]> {
     }
     console.error("getMapMarkers: database error", error?.message);
   } catch {
-    // Connection failure — fall back to bundled markers
+    // Public map degrades to an empty dataset when the database is unavailable.
   }
+  return [];
+}
 
-  return INITIAL_ADMIN_MAP_MARKERS;
+/** Admin reads fail loudly so database errors cannot masquerade as an empty map. */
+export async function getAdminMapMarkers(): Promise<AdminMapMarker[]> {
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("map_markers").select("*").order("created_at", { ascending: true });
+  if (error) throw new Error(`Could not load map markers: ${error.message}`);
+  return (data as DatabaseMapMarkerRow[]).map(rowToMarker);
 }
 
 /**
@@ -122,8 +130,9 @@ export async function deleteMapMarker(id: string) {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
-    const { error } = await supabase.from("map_markers").delete().eq("id", id);
+    const { data, error } = await supabase.from("map_markers").delete().eq("id", id).select("id");
     if (error) throw error;
+    if (!data?.length) throw new Error("Map marker was not found; no record was deleted.");
 
     await logActivity({ action: "delete", targetType: "map_marker", targetId: id });
 

@@ -19,7 +19,7 @@ import {
 import { DatabaseAsset } from "@/lib/admin-data";
 import { getAdminVehicles, saveVehicle, deleteVehicle } from "@/lib/services/vehicles";
 import { getAdminWeapons, saveWeapon, deleteWeapon } from "@/lib/services/weapons";
-import { getLocations, saveLocation, deleteLocation } from "@/lib/services/locations";
+import { getAdminLocations, saveLocation, deleteLocation } from "@/lib/services/locations";
 import { useToast } from "@/components/admin/toast";
 import { Modal } from "@/components/admin/modal";
 import { cn } from "@/lib/utils";
@@ -61,16 +61,16 @@ export default function AdminDatabasePage() {
     Promise.all([
       getAdminVehicles(),
       getAdminWeapons(),
-      getLocations(),
+      getAdminLocations(),
     ]).then(([vehicles, weapons, locations]) => {
       const vAssets: DatabaseAsset[] = vehicles.map(v => ({
         id: v.id,
         name: v.name,
         category: "vehicle",
         status: v.verification === "verified" ? "verified" : v.verification === "deprecated" ? "deprecated" : "unconfirmed",
-        source: v.manufacturer ? `Manufacturer: ${v.manufacturer}` : "Trailer 1 Footages",
+        source: v.manufacturer ? `Manufacturer: ${v.manufacturer}` : "",
         lastVerified: v.updatedAt ? v.updatedAt.substring(0, 10) : "—",
-        verifier: v.lastEditor || "TG Editor",
+        verifier: v.lastEditor || "",
         details: v.summary || `${v.name} (${v.class})`
       }));
       const wAssets: DatabaseAsset[] = weapons.map(w => ({
@@ -78,9 +78,9 @@ export default function AdminDatabasePage() {
         name: w.name,
         category: "weapon",
         status: w.verification === "verified" ? "verified" : w.verification === "deprecated" ? "deprecated" : "unconfirmed",
-        source: w.acquisitionMethod || "Ammu-Nation",
+        source: w.acquisitionMethod || "",
         lastVerified: w.updatedAt ? w.updatedAt.substring(0, 10) : "—",
-        verifier: "TG Staff",
+        verifier: "",
         details: w.notes || `${w.name} (${w.category})`
       }));
       const lAssets: DatabaseAsset[] = locations.map(l => ({
@@ -88,23 +88,18 @@ export default function AdminDatabasePage() {
         name: l.name,
         category: "location",
         status: l.verification === "verified" ? "verified" : l.verification === "deprecated" ? "deprecated" : "unconfirmed",
-        source: l.district || "State of Leonida",
+        source: l.district || "",
         lastVerified: "—",
-        verifier: "TG Staff",
+        verifier: "",
         details: l.description || `${l.name} (${l.type})`
       }));
       const combined = [...vAssets, ...wAssets, ...lAssets];
-      if (combined.length > 0) {
-        setAssets(combined);
-        setLoadError(null);
-      } else {
-        // No live data and no fallback — surface it instead of silently showing stale mocks
-        setLoadError("No assets returned from the database. Check your Supabase connection.");
-      }
+      setAssets(combined);
+      setLoadError(null);
     })
     .catch((err) => {
       console.error("Database portal load failed:", err);
-      setLoadError("Could not load assets from Supabase. Showing cached seed data — changes will not persist until the connection is restored.");
+      setLoadError(err instanceof Error ? err.message : "Could not load database records from Supabase.");
     })
     .finally(() => setIsLoading(false));
   }, []);

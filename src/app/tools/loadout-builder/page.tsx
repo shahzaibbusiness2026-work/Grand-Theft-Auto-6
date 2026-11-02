@@ -6,7 +6,7 @@ export const revalidate = 3600;
 export const metadata = {
   title: "GTA VI Personal Loadout Planner",
   description:
-    "Save personal equipment plans locally. Weapon identifications and loadout rules remain subject to source review.",
+    "Save personal equipment plans in your workspace and sync them when signed in. Weapon identifications and loadout rules remain subject to source review.",
   alternates: { canonical: "/tools/loadout-builder" },
   robots: { index: false, follow: true },
 };

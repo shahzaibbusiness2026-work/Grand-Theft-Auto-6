@@ -159,7 +159,7 @@ function RecoveryCodePanel({
       </div>
       <p className="text-xs leading-relaxed text-slate-400">
         This code is shown only once. If you ever forget your password, you
-        will need it to reset it — we cannot email you a reset link yet.
+        can use it to reset your password if you cannot receive an email reset link.
         Store it somewhere safe, like your password manager.
       </p>
       <Button onClick={onContinue} className="w-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 font-bold text-white hover:brightness-110">

@@ -13,7 +13,7 @@ interface CharacterRecord {
   name: string;
   role: "Lead Protagonist" | "Key Antagonist" | "Supporting Contact" | string;
   actor: string;
-  status: "Confirmed" | "Rumoured" | string;
+  status: "Unknown" | "Civilian" | "Active" | "Incarcerated" | "Under Surveillance";
   territory: string;
 }
 
@@ -21,6 +21,7 @@ export default function AdminCharactersPage() {
   const { showToast } = useToast();
   const [characters, setCharacters] = useState<CharacterRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   // Edit character state
@@ -28,16 +29,16 @@ export default function AdminCharactersPage() {
   const [editName, setEditName] = useState("");
   const [editRole, setEditRole] = useState("Supporting Contact");
   const [editActor, setEditActor] = useState("");
-  const [editStatus, setEditStatus] = useState("Confirmed");
+  const [editStatus, setEditStatus] = useState<CharacterRecord["status"]>("Unknown");
   const [editTerritory, setEditTerritory] = useState("");
 
   const openEditModal = (c: CharacterRecord) => {
     setEditingCharacter(c);
     setEditName(c.name);
     setEditRole(c.role);
-    setEditActor(c.actor === "Unconfirmed" ? "" : c.actor);
+    setEditActor(c.actor);
     setEditStatus(c.status);
-    setEditTerritory(c.territory === "Vice City" ? "" : c.territory);
+    setEditTerritory(c.territory);
   };
 
   const handleEditCharacter = async (e: React.FormEvent) => {
@@ -52,7 +53,7 @@ export default function AdminCharactersPage() {
         name: editName.trim(),
         role: roleForDb,
         voiceActor: editActor.trim() || undefined,
-        status: editStatus === "Confirmed" ? "Active" : "Under Surveillance",
+        status: editStatus as CharacterRecord["status"],
         origin: editTerritory.trim() || undefined,
         featured: editRole === "Lead Protagonist",
       });
@@ -69,9 +70,9 @@ export default function AdminCharactersPage() {
                 ...c,
                 name: editName.trim(),
                 role: editRole,
-                actor: editActor.trim() || "Unconfirmed",
+                actor: editActor.trim(),
                 status: editStatus,
-                territory: editTerritory.trim() || "Vice City",
+                territory: editTerritory.trim(),
               }
             : c
         )
@@ -89,26 +90,24 @@ export default function AdminCharactersPage() {
   const [newName, setNewName] = useState("");
   const [newRole, setNewRole] = useState("Supporting Contact");
   const [newActor, setNewActor] = useState("");
-  const [newStatus, setNewStatus] = useState("Confirmed");
+  const [newStatus, setNewStatus] = useState<CharacterRecord["status"]>("Unknown");
   const [newTerritory, setNewTerritory] = useState("");
 
   const loadCharacters = () => {
     setIsLoading(true);
     getAdminCharacters()
       .then((data) => {
-        if (data && data.length > 0) {
-          setCharacters(
-            data.map((c) => ({
-              id: c.id,
-              name: c.name,
-              role: c.role === "Protagonist" ? "Lead Protagonist" : c.role === "Antagonist" ? "Key Antagonist" : "Supporting Contact",
-              actor: c.actor,
-              status: c.status === "Active" ? "Confirmed" : "Rumoured",
-              territory: c.location,
-            }))
-          );
-        }
+        setCharacters(data.map((c) => ({
+          id: c.id,
+          name: c.name,
+          role: c.role === "Protagonist" ? "Lead Protagonist" : c.role === "Antagonist" ? "Key Antagonist" : "Supporting Contact",
+          actor: c.actor,
+              status: c.status as CharacterRecord["status"],
+          territory: c.location,
+        })));
+        setLoadError("");
       })
+      .catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load characters."))
       .finally(() => setIsLoading(false));
   };
 
@@ -146,7 +145,7 @@ export default function AdminCharactersPage() {
         name: newName.trim(),
         role: roleForDb,
         voiceActor: newActor.trim() || undefined,
-        status: newStatus === "Confirmed" ? "Active" : "Under Surveillance",
+        status: newStatus as CharacterRecord["status"],
         origin: newTerritory.trim() || undefined,
         desc: `${newName} in Grand Theft Auto VI.`,
         featured: newRole === "Lead Protagonist",
@@ -162,9 +161,9 @@ export default function AdminCharactersPage() {
           id,
           name: newName.trim(),
           role: newRole,
-          actor: newActor.trim() || "Unconfirmed",
+          actor: newActor.trim(),
           status: newStatus,
-          territory: newTerritory.trim() || "Vice City",
+          territory: newTerritory.trim(),
         },
         ...prev,
       ]);
@@ -216,8 +215,8 @@ export default function AdminCharactersPage() {
       key: "status",
       header: "Status",
       render: (c) => (
-        <Badge variant={c.status === "Confirmed" ? "success" : "warning"} size="sm" dot>
-          {c.status}
+        <Badge variant={c.status === "Active" ? "success" : "neutral"} size="sm" dot>
+          {c.status || "Not set"}
         </Badge>
       ),
     },
@@ -248,6 +247,7 @@ export default function AdminCharactersPage() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
         <div>
           <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight flex items-center gap-2.5">
@@ -255,7 +255,7 @@ export default function AdminCharactersPage() {
             <span>Characters & Cast Database</span>
           </h1>
           <p className="text-xs text-[var(--admin-text-muted)] mt-1">
-            Maintain confirmed voice actors, motion capture performers, and character dossiers.
+            Maintain character profiles and the source information recorded for each entry.
           </p>
         </div>
         <button
@@ -329,11 +329,14 @@ export default function AdminCharactersPage() {
                   <label className="block text-xs font-semibold text-[#94A3B8] mb-1">Status</label>
                   <select
                     value={newStatus}
-                    onChange={(e) => setNewStatus(e.target.value)}
+                    onChange={(e) => setNewStatus(e.target.value as CharacterRecord["status"])}
                     className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-white text-xs focus:outline-none focus:border-[#6366F1]"
                   >
-                    <option value="Confirmed">Confirmed</option>
-                    <option value="Rumoured">Rumoured</option>
+                    <option value="Unknown">Unknown</option>
+                    <option value="Civilian">Civilian</option>
+                    <option value="Active">Active</option>
+                    <option value="Incarcerated">Incarcerated</option>
+                    <option value="Under Surveillance">Under Surveillance</option>
                   </select>
                 </div>
               </div>
@@ -343,7 +346,7 @@ export default function AdminCharactersPage() {
                   type="text"
                   value={newActor}
                   onChange={(e) => setNewActor(e.target.value)}
-                  placeholder="e.g. Manni L. Perez"
+                  placeholder="Add a sourced performer name"
                   className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-white text-xs focus:outline-none focus:border-[#6366F1]"
                 />
               </div>
@@ -353,7 +356,7 @@ export default function AdminCharactersPage() {
                   type="text"
                   value={newTerritory}
                   onChange={(e) => setNewTerritory(e.target.value)}
-                  placeholder="e.g. Vice City Beach"
+                  placeholder="Add a sourced location"
                   className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-white text-xs focus:outline-none focus:border-[#6366F1]"
                 />
               </div>
@@ -419,11 +422,14 @@ export default function AdminCharactersPage() {
                   <label className="block text-xs font-semibold text-[#94A3B8] mb-1">Status</label>
                   <select
                     value={editStatus}
-                    onChange={(e) => setEditStatus(e.target.value)}
+                    onChange={(e) => setEditStatus(e.target.value as CharacterRecord["status"])}
                     className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-white text-xs focus:outline-none focus:border-[#6366F1]"
                   >
-                    <option value="Confirmed">Confirmed</option>
-                    <option value="Rumoured">Rumoured</option>
+                    <option value="Unknown">Unknown</option>
+                    <option value="Civilian">Civilian</option>
+                    <option value="Active">Active</option>
+                    <option value="Incarcerated">Incarcerated</option>
+                    <option value="Under Surveillance">Under Surveillance</option>
                   </select>
                 </div>
               </div>
@@ -433,7 +439,7 @@ export default function AdminCharactersPage() {
                   type="text"
                   value={editActor}
                   onChange={(e) => setEditActor(e.target.value)}
-                  placeholder="e.g. Manni L. Perez"
+                  placeholder="Add a sourced performer name"
                   className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-white text-xs focus:outline-none focus:border-[#6366F1]"
                 />
               </div>
@@ -443,7 +449,7 @@ export default function AdminCharactersPage() {
                   type="text"
                   value={editTerritory}
                   onChange={(e) => setEditTerritory(e.target.value)}
-                  placeholder="e.g. Vice City Beach"
+                  placeholder="Add a sourced location"
                   className="w-full px-3 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-white text-xs focus:outline-none focus:border-[#6366F1]"
                 />
               </div>

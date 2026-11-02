@@ -64,7 +64,7 @@ export function FavoriteButton({ type, id, className, showText = true }: Favorit
       )}
     >
       <Heart className={cn("h-4 w-4 transition-transform", favorited && "fill-gold text-gold dark:text-gold-light scale-110")} />
-      {showText && <span>{favorited ? "Saved in Garage" : "Add to Favorites"}</span>}
+      {showText && <span>{favorited ? "Saved" : "Add to Favorites"}</span>}
     </button>
   );
 }

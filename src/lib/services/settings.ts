@@ -98,6 +98,20 @@ export const getSiteSettings = cache(
   },
 );
 
+/** Admin read that never disguises a failed database request as defaults. */
+export async function getAdminSiteSettings(): Promise<ComprehensiveSiteSettings> {
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("site_settings").select("key,value");
+  if (error) throw new Error(`Could not load site settings: ${error.message}`);
+  const settingsMap = (data || []).reduce((acc: Record<string, unknown>, row: { key: string; value: unknown }) => {
+    if (["cloudflareToken", "discordWebhookUrl", "search_console_refresh_token", "google_refresh_token"].includes(row.key)) return acc;
+    acc[row.key] = row.value;
+    return acc;
+  }, {});
+  return { ...DEFAULT_SETTINGS, ...settingsMap } as ComprehensiveSiteSettings;
+}
+
 /**
  * Keys owned by specific services (or stored privately elsewhere). A settings
  * save must never write them: it would corrupt the owning feature or publish

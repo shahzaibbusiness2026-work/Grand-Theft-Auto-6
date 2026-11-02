@@ -15,8 +15,11 @@ import {
   BookOpen,
   Newspaper,
   Users,
+  Bookmark,
+  Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { dashboardToolPath } from "@/lib/player-navigation";
 
 interface CompanionSidebarProps {
   onItemClick?: () => void;
@@ -24,18 +27,23 @@ interface CompanionSidebarProps {
 }
 
 const NAV_ITEMS = [
+  { href: "/dashboard/session", label: "Plan My Next Session", icon: Target, color: "text-gold-light bg-gold/10 border-gold/25" },
   { href: "/dashboard", label: "Dashboard", icon: LayoutGrid, color: "text-gold-light group-hover:text-amber-300 light:text-gold-dark bg-gold/10 border-gold/25" },
+  { href: "/dashboard/saved", label: "Saved Items", icon: Bookmark, color: "text-gold-light bg-gold/10 border-gold/25" },
+  { href: "/dashboard/goals", label: "Goals & Notes", icon: Target, color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/25" },
+  { href: "/dashboard/progress", label: "My Progress", icon: Target, color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/25" },
+  { href: "/dashboard/settings", label: "Account & Privacy", icon: Settings, color: "text-sky-400 bg-sky-500/10 border-sky-500/25" },
+  { href: "/dashboard/collections", label: "Collections & Comparisons", icon: Layers, color: "text-sky-400 bg-sky-500/10 border-sky-500/25" },
   { href: "/map", label: "Interactive Map", icon: MapPin, color: "text-cyan-400 group-hover:text-cyan-300 light:text-cyan-600 bg-cyan-500/10 border-cyan-500/25" },
   { href: "/vehicles", label: "Vehicles", icon: Car, color: "text-gold-light group-hover:text-amber-300 light:text-gold-dark bg-gold/10 border-gold/25" },
   { href: "/weapons", label: "Weapons", icon: Crosshair, color: "text-rose-400 group-hover:text-rose-300 light:text-rose-600 bg-rose-500/10 border-rose-500/25" },
   { href: "/missions", label: "Missions", icon: Target, color: "text-emerald-400 group-hover:text-emerald-300 light:text-emerald-600 bg-emerald-500/10 border-emerald-500/25" },
   { href: "/properties", label: "Properties", icon: Building2, color: "text-purple-400 group-hover:text-purple-300 light:text-purple-600 bg-purple-500/10 border-purple-500/25" },
-  { href: "/tools", label: "Money Tools", icon: Coins, color: "text-yellow-400 group-hover:text-yellow-300 light:text-yellow-600 bg-yellow-500/10 border-yellow-500/25" },
+  { href: "/tools", label: "My Tools", icon: Coins, color: "text-yellow-400 group-hover:text-yellow-300 light:text-yellow-600 bg-yellow-500/10 border-yellow-500/25" },
   { href: "/tools/loadout-builder", label: "Loadout Builder", icon: Layers, color: "text-sky-400 group-hover:text-sky-300 light:text-sky-600 bg-sky-500/10 border-sky-500/25" },
   { href: "/collectibles", label: "Collectibles", icon: Sparkles, color: "text-fuchsia-400 group-hover:text-fuchsia-300 light:text-fuchsia-600 bg-fuchsia-500/10 border-fuchsia-500/25" },
   { href: "/guides", label: "Guides", icon: BookOpen, color: "text-orange-400 group-hover:text-orange-300 light:text-orange-600 bg-orange-500/10 border-orange-500/25" },
   { href: "/news", label: "News", icon: Newspaper, color: "text-indigo-400 group-hover:text-indigo-300 light:text-indigo-600 bg-indigo-500/10 border-indigo-500/25" },
-  { href: "/news", label: "Community", icon: Users, color: "text-pink-400 group-hover:text-pink-300 light:text-pink-600 bg-pink-500/10 border-pink-500/25" },
 ];
 
 export function CompanionSidebar({ onItemClick, className }: CompanionSidebarProps) {
@@ -44,7 +52,7 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
   return (
     <aside
       className={cn(
-        "flex h-full w-64 flex-col justify-between border-r border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#04060d] dark:bg-[#04060d] text-slate-200 dark:text-slate-200 select-none overflow-y-auto no-scrollbar transition-colors",
+        "player-sidebar flex h-full w-64 flex-col justify-between border-r border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#04060d] dark:bg-[#04060d] text-slate-200 dark:text-slate-200 select-none overflow-y-auto no-scrollbar transition-colors",
         className
       )}
     >
@@ -70,7 +78,8 @@ export function CompanionSidebar({ onItemClick, className }: CompanionSidebarPro
         Navigate
       </p>
       <nav className="flex-1 space-y-1 px-3 py-2">
-        {NAV_ITEMS.map((item) => {
+        {NAV_ITEMS.map((original) => {
+          const item = { ...original, href: dashboardToolPath(original.href) };
           const Icon = item.icon;
           const isActive = pathname === item.href;
 

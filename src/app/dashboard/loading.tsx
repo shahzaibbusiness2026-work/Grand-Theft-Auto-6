@@ -1,6 +1,9 @@
 export default function DashboardLoading() {
   return (
-    <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6 animate-pulse" aria-label="Loading Leonida Atlas System...">
+    <div
+      className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6 animate-pulse"
+      aria-label="Loading Leonida Atlas System..."
+    >
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
         {/* Left Column: Sidebar Skeleton */}
         <aside className="hidden lg:block w-64 xl:w-72 shrink-0">
@@ -32,12 +35,23 @@ export default function DashboardLoading() {
           {/* Category Cards Skeleton */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-28 rounded-2xl border border-white/10 bg-[#080d1a]/80" />
+              <div
+                key={i}
+                className="h-28 rounded-2xl border border-white/10 bg-[#080d1a]/80"
+              />
             ))}
           </div>
 
-          {/* Objective Checklist Skeleton */}
-          <div className="h-[480px] rounded-3xl border border-white/10 bg-[#080d1a]/80" />
+          {/* Account workspace and catalog skeletons */}
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="h-24 rounded-2xl border border-white/10 bg-[#080d1a]/80"
+              />
+            ))}
+          </div>
+          <div className="h-72 rounded-3xl border border-white/10 bg-[#080d1a]/80" />
         </div>
       </div>
     </div>

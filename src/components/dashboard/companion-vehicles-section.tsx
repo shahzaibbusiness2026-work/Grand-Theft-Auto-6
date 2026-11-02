@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/player-tool-link";
 import { Car, Gauge, Zap, ArrowUpRight, Flame } from "lucide-react";
 import type { DashboardVehicleItem } from "@/lib/services/queries";
 
@@ -32,7 +32,7 @@ export function CompanionVehiclesSection({
               </span>
             </div>
             <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 mt-0.5">
-              High-performance supercars, muscle legends, speedboats, and aircraft catalogued across Leonida
+              Editorial catalog entries and reviewed source details. Unknown specifications remain unknown.
             </p>
           </div>
         </div>
@@ -53,7 +53,7 @@ export function CompanionVehiclesSection({
         {vehicles.map((veh) => (
           <Link
             key={veh.id}
-            href={`/vehicles#${veh.id}`}
+            href={`/vehicles/${veh.slug || veh.id}`}
             className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.06] dark:border-white/[0.06] border-slate-200 bg-white/[0.02] dark:bg-white/[0.02] bg-slate-50/80 p-3.5 transition-all duration-300 hover:border-gold/50 hover:bg-white/[0.06] hover:shadow-[0_12px_32px_rgba(201,168,106,0.22)] hover:-translate-y-1 hover:ring-1 hover:ring-gold/40"
           >
             <div>

@@ -28,7 +28,7 @@ const EMPTY_FORM: GuideRecord = {
   category: "Getting Started",
   read_time: "",
   content: "",
-  image: "/img/hero-dark.jpg",
+  image: "",
   tag: "",
   status: "draft",
   featured: false,
@@ -39,6 +39,7 @@ export default function AdminGuidesPage() {
   const { showToast } = useToast();
   const [guides, setGuides] = useState<GuideRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [editorOpen, setEditorOpen] = useState(false);
   const [form, setForm] = useState<GuideRecord>(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
@@ -47,6 +48,7 @@ export default function AdminGuidesPage() {
     setIsLoading(true);
     getAdminGuides()
       .then(setGuides)
+      .catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load guides."))
       .finally(() => setIsLoading(false));
   };
 
@@ -243,6 +245,7 @@ export default function AdminGuidesPage() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
         <div>
           <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight flex items-center gap-2.5">

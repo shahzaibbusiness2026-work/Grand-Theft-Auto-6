@@ -40,9 +40,9 @@ const EMPTY_DRAFT: AdminWeapon = {
   range: "",
   rateOfFire: "",
   magazineSize: "",
-  acquisitionMethod: "Ammu-Nation",
+  acquisitionMethod: "",
   notes: "",
-  updatedAt: new Date().toISOString(),
+  updatedAt: "",
 };
 
 const WEAPON_CATEGORIES: AdminWeapon["category"][] = [
@@ -73,7 +73,7 @@ export function WeaponEditor({
     id: weapon.id || undefined,
     status,
     category: weapon.category || "Unknown",
-    ammunition: weapon.ammunition || "Unknown",
+    ammunition: weapon.ammunition || "",
   });
 
   const handleSave = async (status: AdminWeapon["status"]) => {

@@ -118,21 +118,12 @@ export interface SavedComparison {
 export async function getSavedComparisons(): Promise<
   { id: string; name: string; type: string; itemCount: number; updatedAt: string }[]
 > {
-  try {
-    const supabase = await createServerSupabase();
-    const { data } = await supabase
-      .from("site_settings")
-      .select("value")
-      .eq("key", "admin_saved_comparisons")
-      .maybeSingle();
-    if (data?.value && Array.isArray(data.value)) {
-      return data.value as { id: string; name: string; type: string; itemCount: number; updatedAt: string }[];
-    }
-    return [];
-  } catch (err) {
-    console.error("Failed to load saved comparisons:", err);
-    return [];
-  }
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("site_settings").select("value").eq("key", "admin_saved_comparisons").maybeSingle();
+  if (error) throw new Error(`Could not load saved comparisons: ${error.message}`);
+  const value = typeof data?.value === "string" ? JSON.parse(data.value) : data?.value;
+  return Array.isArray(value) ? value as { id: string; name: string; type: string; itemCount: number; updatedAt: string }[] : [];
 }
 
 /**
@@ -144,12 +135,14 @@ export async function saveComparisonDraft(
   try {
     await assertAdmin();
     const supabase = createAdminClient();
-    const { data: existing } = await supabase
+    const { data: existing, error: readError } = await supabase
       .from("site_settings")
       .select("value")
       .eq("key", "admin_saved_comparisons")
       .maybeSingle();
-    const list: SavedComparison[] = Array.isArray(existing?.value) ? existing.value : [];
+    if (readError) throw readError;
+    const existingValue = typeof existing?.value === "string" ? JSON.parse(existing.value) : existing?.value;
+    const list: SavedComparison[] = Array.isArray(existingValue) ? existingValue : [];
     const id = draft.id || `cmp-${Date.now()}`;
     const updatedAt = new Date().toISOString();
     const record: SavedComparison = { ...draft, id, updatedAt };
@@ -176,12 +169,14 @@ export async function deleteComparisonDraft(
   try {
     await assertAdmin();
     const supabase = createAdminClient();
-    const { data: existing } = await supabase
+    const { data: existing, error: readError } = await supabase
       .from("site_settings")
       .select("value")
       .eq("key", "admin_saved_comparisons")
       .maybeSingle();
-    const list: SavedComparison[] = Array.isArray(existing?.value) ? existing.value : [];
+    if (readError) throw readError;
+    const existingValue = typeof existing?.value === "string" ? JSON.parse(existing.value) : existing?.value;
+    const list: SavedComparison[] = Array.isArray(existingValue) ? existingValue : [];
     const next = list.filter((c) => c.id !== id);
     if (next.length === list.length) {
       return { success: false, error: "Saved comparison not found" };

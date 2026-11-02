@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .player-panel { @apply rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-lg sm:p-6; }
+  .player-label { @apply block text-sm font-medium text-slate-300; }
+  .player-input { @apply mt-1 block w-full min-w-0 rounded-lg border border-white/20 bg-[#111827] px-3 py-2.5 text-sm text-white outline-none focus:border-gold focus:ring-2 focus:ring-gold/30; color-scheme: dark; }
+  .player-button { @apply inline-flex min-h-10 items-center justify-center rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-sm font-semibold text-slate-100 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:cursor-not-allowed disabled:opacity-50; }
+  .player-button-primary { @apply border-gold bg-gold text-slate-950 hover:bg-gold-light; }
+}
+
+body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true"] *::before, body[data-player-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+}
+
 @layer base {
   :root {
     color-scheme: dark;
@@ -1068,3 +1080,39 @@
 .light .text-gold-dark {
   color: #6c4918 !important;
 }
+
+/* Player workspace surfaces must remain legible under the marketing site's
+   broad light-theme overrides. These rules do not change public navigation. */
+.light .dashboard-type.dashboard-type { background: #f1f5f9 !important; color: #0f172a !important; }
+.light .player-panel.player-panel, .light .player-sync-status.player-sync-status, .light .player-sync-dialog.player-sync-dialog {
+  background: #fff !important; background-image: none !important; border-color: #cbd5e1 !important; color: #0f172a !important;
+}
+.light .player-panel .player-label { color: #334155 !important; }
+.light .player-panel .player-input, .light .player-input.player-input {
+  color: #0f172a !important; background: #fff !important; border-color: #94a3b8 !important; color-scheme: light;
+}
+.light .player-input::placeholder { color: #64748b !important; }
+.light .player-panel .player-button, .light .player-button.player-button {
+  color: #334155 !important; background: #f1f5f9 !important; border-color: #94a3b8 !important;
+}
+.light .player-panel .player-button-primary, .light .player-button-primary.player-button-primary {
+  color: #241c0e !important; background: #c9a86a !important; border-color: #a98850 !important;
+}
+.light :is(.player-panel, .player-topbar, .player-sidebar, .player-sync-dialog) :is(.text-white, .text-slate-100, .text-slate-200, .text-slate-300) { color: #334155 !important; }
+.light :is(.player-panel, .player-topbar, .player-sidebar, .player-sync-status, .player-sync-dialog) :is(.text-slate-400, .text-slate-500) { color: #475569 !important; }
+.light :is(.player-panel, .player-topbar, .player-sidebar) .text-gold-light { color: #795713 !important; }
+.light :is(.player-panel, .player-sync-status) :is(.text-emerald-200, .text-emerald-300) { color: #047857 !important; }
+.light :is(.player-panel, .player-sync-status) :is(.text-amber-200, .text-amber-300) { color: #92400e !important; }
+.light :is(.player-panel, .player-sync-dialog) :is(.text-rose-200, .text-rose-300) { color: #be123c !important; }
+.light .player-panel [class~="border-white/10"] { border-color: #cbd5e1 !important; }
+.light .player-sidebar.player-sidebar { background: #f8fafc !important; color: #334155 !important; }
+.light .player-sidebar > div:first-child a > span:first-child { background: none !important; color: #0f172a !important; text-shadow: none !important; }
+.light .dashboard-type main > div > div > div:first-child > p,
+.light .dashboard-type main > div > div > p.text-slate-400 { color: #475569 !important; }
+.light .player-sidebar > div:first-child a > span:last-child { color: #087e93 !important; }
+.light .player-topbar button[title="Switch theme"] svg { color: #795713 !important; fill: none !important; }
+.dashboard-type :is(h1, h2, h3) { font-family: var(--font-display), sans-serif; }
+.dark .dashboard-type .text-slate-500 { color: #94a3b8 !important; }
+.light .player-profile-menu.player-profile-menu,
+.light .player-drawer.player-drawer { background: #f8fafc !important; border-color: #cbd5e1 !important; color: #334155 !important; }
+.light .player-profile-menu .text-rose-300 { color: #be123c !important; }

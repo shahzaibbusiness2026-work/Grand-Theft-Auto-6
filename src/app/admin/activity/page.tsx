@@ -19,6 +19,7 @@ import { getActivityLog, type ActivityEntry } from "@/lib/services/activity";
 export default function AdminActivityPage() {
   const [activities, setActivities] = useState<ActivityEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedAction, setSelectedAction] = useState("all");
@@ -33,7 +34,7 @@ export default function AdminActivityPage() {
           if (data.length > 0) setSelectedActivityId(data[0].id);
         }
       })
-      .catch(() => { if (!cancelled) setActivities([]); })
+      .catch((error) => { if (!cancelled) setLoadError(error instanceof Error ? error.message : "Could not load the activity log."); })
       .finally(() => { if (!cancelled) setIsLoading(false); });
     return () => { cancelled = true; };
   }, []);
@@ -90,11 +91,12 @@ export default function AdminActivityPage() {
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Activity log</h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Live data</span>
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#111622] border border-[#1C2436] text-[#94A3B8]">{isLoading ? "Loading activity…" : loadError ? "Database unavailable" : "Database connected"}</span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">Real editorial actions from the activity log — creates, updates, and deletes.</p>
         </div>
       </div>
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="relative sm:col-span-1">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />

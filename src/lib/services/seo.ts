@@ -58,6 +58,32 @@ export const getSeoSettings = cache(async (): Promise<AdminSeoSettings> => {
   return DEFAULT_SEO;
 });
 
+/** Admin reads distinguish a database error from an actually empty setting. */
+export async function getAdminSeoSettings(): Promise<AdminSeoSettings> {
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("seo_settings").select("*");
+  if (!error) {
+    if (!data?.length) return DEFAULT_SEO;
+    const map = data.reduce((acc: Record<string, string>, row: DatabaseSeoRow) => { acc[row.key] = row.value; return acc; }, {});
+    return {
+      titleTemplate: map.titleTemplate ?? DEFAULT_SEO.titleTemplate,
+      metaDescription: map.metaDescription ?? DEFAULT_SEO.metaDescription,
+      canonicalBaseUrl: map.canonicalBaseUrl ?? DEFAULT_SEO.canonicalBaseUrl,
+      socialPreviewImage: map.socialPreviewImage ?? DEFAULT_SEO.socialPreviewImage,
+      excludeDraftsAndArchived: map.excludeDraftsAndArchived !== "false",
+      robotsTxt: map.robotsTxt ?? "",
+      redirects: map.redirects ? JSON.parse(map.redirects) : [],
+    };
+  }
+  if ((error as { code?: string }).code !== "42P01") throw new Error(`Could not load SEO settings: ${error.message}`);
+  const { data: setting, error: fallbackError } = await supabase.from("site_settings").select("value").eq("key", "seo_settings_data").maybeSingle();
+  if (fallbackError) throw new Error(`Could not load legacy SEO settings: ${fallbackError.message}`);
+  if (!setting?.value) return DEFAULT_SEO;
+  const parsed = typeof setting.value === "string" ? JSON.parse(setting.value) : setting.value;
+  return { ...DEFAULT_SEO, ...parsed } as AdminSeoSettings;
+}
+
 /**
  * Save SEO settings to Supabase
  */
@@ -87,15 +113,17 @@ export async function saveSeoSettings(seo: Partial<AdminSeoSettings>) {
       )
     );
 
-    const hasError = results.some((r) => r.error);
-    if (hasError) {
-      // Table missing, persist to site_settings
-      const current = await getSeoSettings();
+    const failed = results.find((r) => r.error);
+    if (failed?.error && (failed.error as { code?: string }).code !== "42P01") throw failed.error;
+    if (failed?.error) {
+      // Legacy table is used only when the dedicated SEO table is absent.
+      const current = await getAdminSeoSettings();
       const updated = { ...current, ...seo };
-      await supabase.from("site_settings").upsert(
+      const { error: fallbackWriteError } = await supabase.from("site_settings").upsert(
         { key: "seo_settings_data", value: JSON.stringify(updated), updated_at: new Date().toISOString() },
         { onConflict: "key" }
       );
+      if (fallbackWriteError) throw fallbackWriteError;
     }
 
     revalidatePath("/admin/seo");

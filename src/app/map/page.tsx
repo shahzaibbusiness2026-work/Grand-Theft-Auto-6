@@ -96,9 +96,10 @@ export default async function MapPage() {
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Search or filter the pins, select a pin to read its evidence
               status, and use the text list as an alternative to the map.
-              Notes and marks are saved on your device. They record your own
+              Notes and marks are saved in your workspace, with account sync
+              available when signed in. They record your own
               planning choices; they do not prove in-game discovery or
-              completion. Clearing browser storage removes those local records.
+              completion. Check your dashboard sync status before clearing browser storage.
             </p>
           </article>
         </div>

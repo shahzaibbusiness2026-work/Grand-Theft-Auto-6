@@ -31,7 +31,7 @@ import {
   AdminSiteSettings,
 } from "@/lib/admin-store";
 import {
-  getSiteSettings,
+  getAdminSiteSettings,
   saveSiteSettings,
   ComprehensiveSiteSettings,
 } from "@/lib/services/settings";
@@ -62,6 +62,7 @@ export default function AdminSettingsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
+  const [loadError, setLoadError] = useState("");
   const [showRevokeModal, setShowRevokeModal] = useState(false);
   const [isRevoking, setIsRevoking] = useState(false);
   const [activeTab, setActiveTab] = useState<
@@ -72,13 +73,14 @@ export default function AdminSettingsPage() {
   useEffect(() => {
     async function loadSettings() {
       try {
-        const liveSettings = await getSiteSettings();
+        const liveSettings = await getAdminSiteSettings();
         if (liveSettings) {
           setSettings(liveSettings);
         }
         setIsConnected(true);
       } catch (err) {
         console.error("Failed to load site settings from Supabase:", err);
+        setLoadError(err instanceof Error ? err.message : "Could not load site settings.");
       } finally {
         setIsLoading(false);
       }
@@ -121,7 +123,7 @@ export default function AdminSettingsPage() {
   const handleDiscard = async () => {
     setIsLoading(true);
     try {
-      const live = await getSiteSettings();
+      const live = await getAdminSiteSettings();
       setSettings(live);
     } catch {
       // Fallback
@@ -168,9 +170,9 @@ export default function AdminSettingsPage() {
     const newItem = {
       id: `nav-${Date.now()}`,
       order: settings.navigationMenu.length + 1,
-      label: "New Link",
-      url: "/new-link",
-      visible: true,
+      label: "",
+      url: "",
+      visible: false,
     };
     handleUpdate({ navigationMenu: [...settings.navigationMenu, newItem] });
   };
@@ -193,17 +195,10 @@ export default function AdminSettingsPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Site settings
             </h1>
-            {isConnected ? (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+            <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold ${isConnected ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-400" : "bg-red-500/10 border border-red-500/30 text-red-300"}`}>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Connected to Supabase
-              </span>
-            ) : (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gold/10 border border-gold/30 text-gold-light">
-                <span className="w-1.5 h-1.5 rounded-full bg-gold-light" />
-                Offline (Local Cache)
-              </span>
-            )}
+                {isConnected ? "Connected to Supabase" : "Database unavailable"}
+            </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
             Manage site copy, headlines, countdown date, announcement banner, global navigation menus, and branding.
@@ -233,6 +228,8 @@ export default function AdminSettingsPage() {
           </Button>
         </div>
       </div>
+
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
 
       {/* Tabs (Image 14) */}
       <div className="flex items-center gap-2 border-b border-[#1C2436] pb-3 overflow-x-auto scrollbar-none">

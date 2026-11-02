@@ -29,7 +29,7 @@ import { getAdminArticles } from "@/lib/services/articles";
 import { getAdminVehicles } from "@/lib/services/vehicles";
 import { getAdminWeapons } from "@/lib/services/weapons";
 import { getAdminCharacters } from "@/lib/services/characters";
-import { getMapMarkers } from "@/lib/services/map";
+import { getAdminMapMarkers } from "@/lib/services/map";
 
 export default function AdminOverviewPage() {
   const router = useRouter();
@@ -52,14 +52,20 @@ export default function AdminOverviewPage() {
   >([]);
   const [attention, setAttention] = useState({ drafts: 0, unverifiedVehicles: 0, pendingMarkers: 0 });
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
 
   useEffect(() => {
+    const errors: string[] = [];
+    const read = <T,>(label: string, request: Promise<T>) => request.catch((error) => {
+      errors.push(`${label}: ${error instanceof Error ? error.message : "database request failed"}`);
+      return [] as unknown as T;
+    });
     Promise.all([
-      getAdminArticles().catch(() => []),
-      getAdminVehicles().catch(() => []),
-      getAdminWeapons().catch(() => []),
-      getAdminCharacters().catch(() => []),
-      getMapMarkers().catch(() => []),
+      read("Articles", getAdminArticles()),
+      read("Vehicles", getAdminVehicles()),
+      read("Weapons", getAdminWeapons()),
+      read("Characters", getAdminCharacters()),
+      read("Map markers", getAdminMapMarkers()),
     ]).then(([articles, vehicles, weapons, characters, markers]) => {
       const published =
         articles.filter((a) => a.status === "published").length +
@@ -100,7 +106,7 @@ export default function AdminOverviewPage() {
           id: a.id,
           title: a.title,
           type: "Article",
-          editor: a.author?.name || "TG Staff",
+          editor: a.author?.name || "—",
           time: a.updatedAt,
           href: `/admin/articles/${a.id}`,
         })),
@@ -108,7 +114,7 @@ export default function AdminOverviewPage() {
           id: v.id,
           title: v.name,
           type: "Vehicle",
-          editor: v.lastEditor || "TG Staff",
+          editor: v.lastEditor || "—",
           time: v.updatedAt,
           href: `/admin/vehicles/${v.id}`,
         })),
@@ -116,7 +122,7 @@ export default function AdminOverviewPage() {
           id: w.id,
           title: w.name,
           type: "Weapon",
-          editor: "TG Staff",
+          editor: "—",
           time: w.updatedAt,
           href: `/admin/weapons/${w.id}`,
         })),
@@ -153,6 +159,10 @@ export default function AdminOverviewPage() {
           }))
       );
 
+      setLoadError(errors.join(" • "));
+      setIsLoading(false);
+    }).catch((error) => {
+      setLoadError(error instanceof Error ? error.message : "Could not load dashboard data.");
       setIsLoading(false);
     });
   }, []);
@@ -168,11 +178,11 @@ export default function AdminOverviewPage() {
             </h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Live Database
+              {isLoading ? "Loading database" : loadError ? "Database issues" : "Database connected"}
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
-            Your publishing workspace • Real-time stats from Supabase
+            Your publishing workspace • Counts reflect the latest database read
           </p>
         </div>
 
@@ -184,6 +194,8 @@ export default function AdminOverviewPage() {
           <span>Create article</span>
         </Link>
       </div>
+
+      {loadError && <div role="alert" className="rounded-lg border border-amber-500/30 bg-amber-950/20 px-4 py-3 text-sm text-amber-200">Some dashboard data could not be loaded: {loadError}</div>}
 
       {/* 4 Stat Cards Row (Image 1) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

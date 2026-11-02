@@ -18,10 +18,7 @@ import {
 import { Drawer } from "@/components/admin/drawer";
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
-import {
-  INITIAL_ADMIN_WEAPONS,
-  AdminWeapon,
-} from "@/lib/admin-store";
+import { AdminWeapon } from "@/lib/admin-store";
 import { getAdminWeapons, saveWeapon, deleteWeapon } from "@/lib/services/weapons";
 import { cn } from "@/lib/utils";
 import { Modal } from "@/components/admin/modal";
@@ -55,8 +52,10 @@ function WeaponSilhouette({ category }: { category: string }) {
 export default function AdminWeaponsPage() {
   const router = useRouter();
   const { showToast } = useToast();
-  const [weapons, setWeapons] = useState<AdminWeapon[]>(INITIAL_ADMIN_WEAPONS);
-  const [isLoading, setIsLoading] = useState(false);
+  const [weapons, setWeapons] = useState<AdminWeapon[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+  const [isConnected, setIsConnected] = useState(false);
   const [activeTab, setActiveTab] = useState<"all" | "verification" | "drafts" | "archived">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -69,7 +68,8 @@ export default function AdminWeaponsPage() {
   React.useEffect(() => {
     setIsLoading(true);
     getAdminWeapons()
-      .then((data) => setWeapons(data || []))
+      .then((data) => { setWeapons(data); setIsConnected(true); })
+      .catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load weapons."))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -197,7 +197,7 @@ export default function AdminWeaponsPage() {
         <div className="flex items-center gap-2.5 text-xs text-[#94A3B8]">
           <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Connected to Supabase
+            {isLoading ? "Loading weapons…" : isConnected ? "Connected to Supabase" : "Database unavailable"}
           </span>
           <span>
             All records are sourced from the database. Changes persist to live site.
@@ -225,6 +225,9 @@ export default function AdminWeaponsPage() {
           </div>
         </div>
       </div>
+
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
+      {!isLoading && !loadError && weapons.length === 0 && <div className="rounded-lg border border-[#263044] bg-[#111622] px-4 py-8 text-center text-sm text-[#94A3B8]">No weapons are stored yet. Add a weapon to create the first record.</div>}
 
       {/* Filter Tabs matching Image 5: All weapons 36, Needs verification 14, Drafts 6, Archived 2 */}
       <div

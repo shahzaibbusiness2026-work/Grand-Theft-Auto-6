@@ -2,24 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import {
-  Shield,
   UserPlus,
   Search,
-  CheckCircle2,
-  Mail,
-  User,
-  Check,
-  X,
-  Lock,
-  Edit,
   RotateCcw,
-  Sparkles,
   Info
 } from "lucide-react";
 import { Drawer } from "@/components/admin/drawer";
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
-import { Badge } from "@/components/admin/ui/badge";
 import {
   AdminUser,
 } from "@/lib/admin-store";
@@ -27,7 +17,7 @@ import {
   getAdminUsers,
   inviteAdminUser,
   deleteAdminUser,
-  updateAdminUserRole,
+  setAdminUserSuspended,
 } from "@/lib/services/users";
 import { cn } from "@/lib/utils";
 import { Modal } from "@/components/admin/modal";
@@ -36,28 +26,41 @@ export default function AdminUsersPage() {
   const { showToast } = useToast();
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+  const [isConnected, setIsConnected] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRoleFilter, setSelectedRoleFilter] = useState("all");
   const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
-  const [activeTab, setActiveTab] = useState<"all" | "admin" | "editor" | "contributor" | "pending">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "admin" | "editor" | "contributor" | "pending" | "suspended">("all");
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isInviting, setIsInviting] = useState(false);
+  const [busyUserId, setBusyUserId] = useState<string | null>(null);
 
-  // Load from Supabase on mount
-  useEffect(() => {
-    getAdminUsers().then((data) => {
+  const loadUsers = async (refresh = false) => {
+    if (refresh) setIsRefreshing(true);
+    setLoadError("");
+    try {
+      const data = await getAdminUsers();
       setUsers(data);
+      setIsConnected(true);
+    } catch (error) {
+      setIsConnected(false);
+      setLoadError(error instanceof Error ? error.message : "Could not load users.");
+    } finally {
       setIsLoading(false);
-    });
-  }, []);
+      setIsRefreshing(false);
+    }
+  };
+  useEffect(() => { void loadUsers(); }, []);
 
   // Invite Drawer State (Image 12)
   const [isInviteOpen, setIsInviteOpen] = useState(false);
-  const [editingUser, setEditingUser] = useState<AdminUser | null>(null);
   const [emailError, setEmailError] = useState("");
 
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
-    role: "Editor" as AdminUser["role"],
+    role: "Publisher" as AdminUser["role"],
   });
 
   const filteredUsers = users.filter((u) => {
@@ -65,6 +68,7 @@ export default function AdminUsersPage() {
     if (activeTab === "editor" && u.role !== "Editor") return false;
     if (activeTab === "contributor" && u.role !== "Publisher") return false;
     if (activeTab === "pending" && u.status !== "pending") return false;
+    if (activeTab === "suspended" && u.status !== "suspended") return false;
 
     if (selectedRoleFilter !== "all" && u.role !== selectedRoleFilter) return false;
     if (selectedStatusFilter !== "all" && u.status !== selectedStatusFilter) return false;
@@ -91,84 +95,29 @@ export default function AdminUsersPage() {
     }
     setEmailError("");
 
-    const created: AdminUser = {
-      id: `usr-${Date.now()}`,
-      name: newUser.name,
-      email: newUser.email,
-      role: newUser.role,
-      status: "pending",
-      lastActivity: "Never",
-      avatar: newUser.name
-        .split(" ")
-        .map((p) => p[0])
-        .join("")
-        .toUpperCase()
-        .slice(0, 2),
-    };
-    setUsers([created, ...users]);
-    setIsInviteOpen(false);
-
-    showToast({
-      title: "Inviting User…",
-      description: `Sending invitation to ${created.email}…`,
-      type: "info",
-    });
-
+    setIsInviting(true);
     const res = await inviteAdminUser(newUser);
-    if (res.success) {
+    setIsInviting(false);
+    if (!res.success) {
       showToast({
-        title: "Invitation Sent",
-        description: `Invitation email dispatched to ${created.email}.`,
-        type: "success",
-      });
-    } else {
-      showToast({
-        title: "Invited Locally",
-        description: res.error || "User added to list. Configure Supabase SMTP for email dispatch.",
-        type: "warning",
-      });
-    }
-
-    setNewUser({ name: "", email: "", role: "Editor" });
-  };
-
-  const handleSaveRole = async () => {
-    if (!editingUser) return;
-    const target = editingUser;
-    // Snapshot for rollback if the save fails
-    const previous = users;
-    setUsers((prev) =>
-      prev.map((u) => (u.id === target.id ? target : u))
-    );
-    setEditingUser(null);
-    showToast({
-      title: "Saving role…",
-      description: `Updating ${target.name} to ${target.role}.`,
-      type: "info",
-    });
-    const res = await updateAdminUserRole(target.id, target.role);
-    if (res.success) {
-      showToast({
-        title: "User Role Updated",
-        description: `Updated role for ${target.name} to ${target.role}.`,
-        type: "success",
-      });
-    } else {
-      // Roll back the optimistic edit so the list matches the server
-      setUsers(previous);
-      showToast({
-        title: "Role update failed — change reverted",
-        description: res.error || "Could not persist the role change.",
+        title: "Invitation failed",
+        description: res.error || "The user was not created.",
         type: "danger",
       });
+      return;
     }
+    setIsInviteOpen(false);
+    showToast({ title: "Invitation accepted", description: `Supabase accepted an invitation request for ${newUser.email}.`, type: "success" });
+    setNewUser({ name: "", email: "", role: "Publisher" });
+    await loadUsers(true);
   };
 
-    const [deleteUserTarget, setDeleteUserTarget] = useState<AdminUser | null>(null);
+  const [deleteUserTarget, setDeleteUserTarget] = useState<AdminUser | null>(null);
 
   const handleDeleteUser = async (user: AdminUser) => {
     // Snapshot for rollback if the delete fails
     const previous = users;
+    setBusyUserId(user.id);
     setUsers((prev) => prev.filter((u) => u.id !== user.id));
     const res = await deleteAdminUser(user.id);
     if (res.success) {
@@ -186,17 +135,21 @@ export default function AdminUsersPage() {
         type: "danger",
       });
     }
+    setBusyUserId(null);
   };
 
-  const permissionsMatrix = [
-    { name: "View published content & public atlas", admin: true, publisher: true, editor: true, contributor: true },
-    { name: "Create & edit drafts in articles", admin: true, publisher: true, editor: true, contributor: true },
-    { name: "Publish articles & guides directly", admin: true, publisher: true, editor: false, contributor: false },
-    { name: "Manage vehicles & weapons database records", admin: true, publisher: false, editor: true, contributor: false },
-    { name: "Calibrate interactive map markers", admin: true, publisher: false, editor: true, contributor: false },
-    { name: "Configure site settings & SEO parameters", admin: true, publisher: false, editor: false, contributor: false },
-    { name: "Manage team accounts & user roles", admin: true, publisher: false, editor: false, contributor: false },
-  ];
+  const handleToggleSuspended = async (user: AdminUser) => {
+    setBusyUserId(user.id);
+    const suspended = user.status !== "suspended";
+    const result = await setAdminUserSuspended(user.id, suspended);
+    if (result.success) {
+      await loadUsers();
+      showToast({ title: suspended ? "Account suspended" : "Account restored", description: `${user.email} was ${suspended ? "suspended" : "restored"}.`, type: "success" });
+    } else {
+      showToast({ title: "Account status unchanged", description: result.error || "Could not update this account.", type: "danger" });
+    }
+    setBusyUserId(null);
+  };
 
   return (
     <div className="space-y-8 animate-in fade-in duration-200 pb-16">
@@ -205,32 +158,26 @@ export default function AdminUsersPage() {
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              Users & permissions
+              Users & account access
             </h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Connected to Supabase
+              {isLoading ? "Loading accounts…" : isConnected ? "Supabase Auth connected" : "Supabase Auth unavailable"}
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
-            Manage user accounts, roles, and access permissions across the admin dashboard.
-
+            Review real Supabase Auth accounts, send invitations, suspend or restore sign-in, and remove accounts.
           </p>
         </div>
 
-        <Button
-          variant="primary"
-          size="md"
-          onClick={() => {
-            setEmailError("");
-            setIsInviteOpen(true);
-          }}
-          leftIcon={<UserPlus className="w-4 h-4" />}
-          className="bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-md shadow-indigo-500/20"
-        >
-          + Invite user
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="secondary" size="md" onClick={() => void loadUsers(true)} isLoading={isRefreshing} leftIcon={<RotateCcw className="w-4 h-4" />} className="bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white">Refresh</Button>
+          <Button variant="primary" size="md" onClick={() => { setEmailError(""); setIsInviteOpen(true); }} leftIcon={<UserPlus className="w-4 h-4" />} className="bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-md shadow-indigo-500/20">+ Invite user</Button>
+        </div>
       </div>
+
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
+      {!isLoading && !loadError && users.length === 0 && <div className="rounded-lg border border-[#263044] bg-[#111622] px-4 py-6 text-center text-sm text-[#94A3B8]">No CMS team accounts found in Supabase Auth. Invite a team member to create a real account.</div>}
 
       {/* Tabs (Image 12: All users, Administrators, Editors, Contributors, Pending invites) */}
       <div className="flex items-center gap-2 border-b border-[#1C2436] pb-3 overflow-x-auto scrollbar-none">
@@ -313,6 +260,17 @@ export default function AdminUsersPage() {
             {users.filter((u) => u.status === "pending").length}
           </span>
         </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("suspended")}
+          className={cn(
+            "flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap",
+            activeTab === "suspended" ? "bg-[#3730A3]/50 text-white border border-[#4F46E5]/40 shadow-sm" : "bg-[#111622] text-[#94A3B8] hover:text-white border border-[#1C2436]"
+          )}
+        >
+          <span>Suspended</span>
+          <span className="px-1.5 py-0.2 rounded-full text-xs font-mono bg-[#182030] text-[#94A3B8]">{users.filter((u) => u.status === "suspended").length}</span>
+        </button>
       </div>
 
       {/* Filter Row */}
@@ -351,7 +309,7 @@ export default function AdminUsersPage() {
               <option value="all">All statuses</option>
               <option value="active">Active</option>
               <option value="pending">Pending</option>
-              <option value="inactive">Inactive</option>
+              <option value="suspended">Suspended</option>
             </select>
           </div>
         </div>
@@ -361,19 +319,12 @@ export default function AdminUsersPage() {
         </span>
       </div>
 
-      {/* Users Table (Image 12) */}
+      {/* Supabase Auth account list */}
       <div className="rounded-xl border border-[#1C2436] bg-[#111622] overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs" aria-label="Team members">
             <thead>
               <tr className="border-b border-[#1C2436] bg-[#0E131D] text-[#64748B] text-xs">
-                <th scope="col" className="p-3.5 w-10">
-                  <input
-                    type="checkbox"
-                    className="rounded border-[#1C2436] text-[#6366F1] focus:ring-0 bg-[#0E131D]"
-                    aria-label="Select all users"
-                  />
-                </th>
                 <th scope="col" className="p-3.5 font-medium">User</th>
                 <th scope="col" className="p-3.5 font-medium">Role</th>
                 <th scope="col" className="p-3.5 font-medium">Status</th>
@@ -384,13 +335,13 @@ export default function AdminUsersPage() {
             <tbody className="divide-y divide-[#182030]">
               {isLoading ? (
                 <tr>
-                  <td colSpan={7} className="p-8 text-center text-[#64748B]">
+                  <td colSpan={5} className="p-8 text-center text-[#64748B]">
                     Loading team members...
                   </td>
                 </tr>
               ) : filteredUsers.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="p-8 text-center text-[#64748B]">
+                  <td colSpan={5} className="p-8 text-center text-[#64748B]">
                     No team members found matching your search.
                   </td>
                 </tr>
@@ -398,19 +349,15 @@ export default function AdminUsersPage() {
                 filteredUsers.map((u) => (
                   <tr key={u.id} className="hover:bg-[#141B2A] transition-colors">
                     <td className="p-3.5">
-                      <input
-                        type="checkbox"
-                        className="rounded border-[#1C2436] text-[#6366F1] focus:ring-0 bg-[#0E131D]"
-                        aria-label={`Select ${u.name}`}
-                      />
-                    </td>
-                    <td className="p-3.5">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-inner">
                           {u.avatar}
                         </div>
                         <div>
-                          <p className="font-semibold text-white">{u.name}</p>
+                          <p className="font-semibold text-white flex items-center gap-2">
+                            {u.name}
+                            {u.isProtectedAdmin && <span className="rounded border border-indigo-400/30 bg-indigo-500/10 px-1.5 py-0.5 text-[10px] font-medium text-indigo-200">Deployment admin</span>}
+                          </p>
                           <p className="text-xs text-[#64748B]">{u.email}</p>
                         </div>
                       </div>
@@ -460,20 +407,10 @@ export default function AdminUsersPage() {
                     </td>
                     <td className="p-3.5 text-right">
                       <div className="flex items-center justify-end gap-3">
-                        <button
-                          type="button"
-                          onClick={() => setEditingUser(u)}
-                          className="text-xs text-[#6366F1] hover:underline font-semibold"
-                        >
-                          Edit role
+                        <button type="button" disabled={busyUserId === u.id || u.isProtectedAdmin} onClick={() => void handleToggleSuspended(u)} title={u.isProtectedAdmin ? "Manage this administrator in the deployment allowlist." : undefined} className="text-xs text-[#94A3B8] hover:text-white font-semibold disabled:opacity-40 disabled:cursor-not-allowed">
+                          {busyUserId === u.id ? "Saving…" : u.status === "suspended" ? "Restore" : "Suspend"}
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => setDeleteUserTarget(u)}
-                          className="text-xs text-[#64748B] hover:text-[#F87171] font-semibold"
-                        >
-                          Remove
-                        </button>
+                        <button type="button" disabled={busyUserId === u.id || u.isProtectedAdmin} onClick={() => setDeleteUserTarget(u)} title={u.isProtectedAdmin ? "Manage this administrator in the deployment allowlist." : undefined} className="text-xs text-[#64748B] hover:text-[#F87171] font-semibold disabled:opacity-40 disabled:cursor-not-allowed">Remove</button>
                       </div>
                     </td>
                   </tr>
@@ -484,65 +421,17 @@ export default function AdminUsersPage() {
         </div>
       </div>
 
-      {/* Role Permissions Comparison Matrix (Image 12 bottom) */}
-      <div className="rounded-xl border border-[#1C2436] bg-[#111622] p-6 space-y-4 shadow-sm">
-        <div>
-          <h2 className="text-sm font-bold text-white uppercase tracking-wider">
-            Role Permissions Comparison Matrix
-          </h2>
-          <p className="text-xs text-[#64748B] mt-0.5">
-            Overview of capabilities granted to each access tier in the Atlas content management system.
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-[#1C2436] overflow-hidden bg-[#0E131D]">
-          <table className="w-full text-left text-xs" aria-label="Permissions matrix">
-            <thead>
-              <tr className="border-b border-[#1C2436] bg-[#111622] text-[#64748B] text-xs">
-                <th scope="col" className="p-3.5 font-medium">System Capability</th>
-                <th scope="col" className="p-3.5 font-medium text-center w-36">Administrator</th>
-                <th scope="col" className="p-3.5 font-medium text-center w-36">Editor</th>
-                <th scope="col" className="p-3.5 font-medium text-center w-36">Contributor</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#182030]">
-              {permissionsMatrix.map((item, idx) => (
-                <tr key={idx} className="hover:bg-[#141B2A] transition-colors">
-                  <td className="p-3.5 font-medium text-white">{item.name}</td>
-                  <td className="p-3.5 text-center">
-                    {item.admin ? (
-                      <Check className="w-4 h-4 text-emerald-400 mx-auto" />
-                    ) : (
-                      <X className="w-4 h-4 text-[#64748B] mx-auto" />
-                    )}
-                  </td>
-                  <td className="p-3.5 text-center">
-                    {item.editor ? (
-                      <Check className="w-4 h-4 text-emerald-400 mx-auto" />
-                    ) : (
-                      <X className="w-4 h-4 text-[#64748B] mx-auto" />
-                    )}
-                  </td>
-                  <td className="p-3.5 text-center">
-                    {item.contributor ? (
-                      <Check className="w-4 h-4 text-emerald-400 mx-auto" />
-                    ) : (
-                      <X className="w-4 h-4 text-[#64748B] mx-auto" />
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      <div className="rounded-xl border border-amber-500/30 bg-amber-950/15 p-4 flex items-start gap-3 text-sm text-amber-100">
+        <Info className="w-4 h-4 mt-0.5 shrink-0 text-amber-300" />
+        <p><strong>Access model:</strong> the <code>ADMIN_MASTER_EMAILS</code> deployment allowlist grants CMS access. Editor and Publisher labels are account metadata only; they do not grant separate permissions. Add or remove CMS administrators through the deployment allowlist.</p>
       </div>
 
       {/* Slide-over Drawer: Invite User (Image 12) */}
       <Drawer
         isOpen={isInviteOpen}
         onClose={() => setIsInviteOpen(false)}
-        title="Invite user"
-        subtitle="Send an invitation email with role assignment."
+        title="Invite account"
+        subtitle="Send a Supabase Auth invitation."
         size="md"
         footer={
           <div className="flex items-center justify-end gap-3 w-full">
@@ -558,9 +447,10 @@ export default function AdminUsersPage() {
               variant="primary"
               size="md"
               onClick={handleInviteUser}
+              disabled={isInviting}
               className="bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold px-4 py-2 rounded-lg"
             >
-              Send invitation
+              {isInviting ? "Sending…" : "Send invitation"}
             </Button>
           </div>
         }
@@ -574,7 +464,7 @@ export default function AdminUsersPage() {
             <input
               id="invite-name"
               type="text"
-              placeholder="e.g. Jason Vance"
+              placeholder="Invited user's name"
               value={newUser.name}
               onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
               className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
@@ -607,110 +497,14 @@ export default function AdminUsersPage() {
             )}
           </div>
 
-          {/* Role Selection */}
-          <div>
-            <label className="block font-medium text-[#94A3B8] mb-2">
-              Assigned Role <span className="text-red-400">*</span>
-            </label>
-            <div className="space-y-2">
-              {[
-                {
-                  role: "Administrator" as const,
-                  title: "Administrator",
-                  desc: "Full system access. Can manage users, configure SEO, calibrate settings, and delete records.",
-                },
-                {
-                  role: "Editor" as const,
-                  title: "Editor",
-                  desc: "Can create, edit, and publish database records and articles. Can calibrate map markers.",
-                },
-                {
-                  role: "Publisher" as const,
-                  title: "Contributor",
-                  desc: "Can create and edit draft articles and database entries. Requires review before publication.",
-                },
-              ].map((r) => {
-                const isSelected = newUser.role === r.role;
-                return (
-                  <div
-                    key={r.role}
-                    onClick={() => setNewUser({ ...newUser, role: r.role })}
-                    className={cn(
-                      "p-3 rounded-xl border cursor-pointer transition-all",
-                      isSelected
-                        ? "bg-[#3730A3]/30 border-[#6366F1] ring-1 ring-[#6366F1]"
-                        : "bg-[#0E131D] border-[#1C2436] hover:border-[#243048]"
-                    )}
-                  >
-                    <div className="flex items-center justify-between">
-                      <p className="font-semibold text-white">{r.title}</p>
-                      {isSelected && <Check className="w-4 h-4 text-[#6366F1]" />}
-                    </div>
-                    <p className="text-xs text-[#64748B] mt-1 leading-relaxed">{r.desc}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Permissions Summary Notice Box */}
-          <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] flex items-start gap-2.5 text-[#94A3B8]">
+          <div className="p-3 rounded-xl bg-amber-950/20 border border-amber-500/30 flex items-start gap-2.5 text-amber-100">
             <Info className="w-4 h-4 text-[#38BDF8] shrink-0 mt-0.5" />
             <p className="text-xs leading-relaxed">
-              An invitation token with a 48-hour expiration will be sent via email. The recipient must verify their email and set up two-factor authentication.
+              Supabase must accept the invitation for it to appear here. This creates a Publisher metadata label only. CMS access is separately controlled by <code>ADMIN_MASTER_EMAILS</code> in the deployment settings.
             </p>
           </div>
         </div>
       </Drawer>
-
-      {/* Edit Role Modal / Drawer */}
-      {editingUser && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-2xl border border-[#1C2436] bg-[#111622] p-6 shadow-2xl space-y-4">
-            <h2 className="text-base font-bold text-white">Edit Role for {editingUser.name}</h2>
-            <p className="text-xs text-[#94A3B8]">
-              Select a new role tier for {editingUser.email}.
-            </p>
-
-            <div>
-              <label htmlFor="edit-role-select" className="block text-xs font-medium text-[#94A3B8] mb-1">
-                Role
-              </label>
-              <select
-                id="edit-role-select"
-                value={editingUser.role}
-                onChange={(e) =>
-                  setEditingUser({ ...editingUser, role: e.target.value as AdminUser["role"] })
-                }
-                className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
-              >
-                <option value="Administrator">Administrator</option>
-                <option value="Editor">Editor</option>
-                <option value="Publisher">Contributor / Publisher</option>
-              </select>
-            </div>
-
-            <div className="flex items-center justify-end gap-3 pt-3">
-              <Button
-                variant="secondary"
-                size="md"
-                onClick={() => setEditingUser(null)}
-                className="bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="primary"
-                size="md"
-                onClick={handleSaveRole}
-                className="bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold px-4 py-2 rounded-lg"
-              >
-                Save changes
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
       {/* Delete confirmation */}
       <Modal
         isOpen={!!deleteUserTarget}

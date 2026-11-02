@@ -28,15 +28,17 @@ export async function logActivity(entry: {
   detail?: Record<string, unknown>;
 }): Promise<void> {
   try {
+    const session = await assertAdmin();
     const supabase = createAdminClient();
-    await supabase.from("activity_log").insert({
-      actor: entry.actor || "admin",
+    const { error } = await supabase.from("activity_log").insert({
+      actor: entry.actor || session.userId || "",
       action: entry.action,
       target_type: entry.targetType,
       target_id: entry.targetId || null,
       target_label: entry.targetLabel || null,
       detail: entry.detail || {},
     });
+    if (error) throw error;
   } catch (err) {
     // Activity logging is best-effort; table may not exist yet.
     console.warn("logActivity failed:", err instanceof Error ? err.message : err);
@@ -47,18 +49,9 @@ export async function logActivity(entry: {
  * Fetch recent activity entries for the admin dashboard.
  */
 export async function getActivityLog(limit = 50): Promise<ActivityEntry[]> {
-  try {
-    await assertAdmin();
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("activity_log")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(limit);
-
-    if (!error && data) return data as ActivityEntry[];
-  } catch (err) {
-    console.warn("getActivityLog failed:", err instanceof Error ? err.message : err);
-  }
-  return [];
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("activity_log").select("*").order("created_at", { ascending: false }).limit(limit);
+  if (error) throw new Error(`Could not load activity log: ${error.message}`);
+  return data as ActivityEntry[];
 }

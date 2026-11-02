@@ -22,34 +22,31 @@ import {
 import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
 import { Badge } from "@/components/admin/ui/badge";
-import {
-  INITIAL_ADMIN_MEDIA,
-  AdminMediaAsset,
-} from "@/lib/admin-store";
+import { AdminMediaAsset } from "@/lib/admin-store";
 import { getMediaAssets, saveMediaAsset, deleteMediaAsset, uploadMediaFile } from "@/lib/services/media";
 import { cn } from "@/lib/utils";
 
 export default function AdminMediaPage() {
   const { showToast } = useToast();
-  const [assets, setAssets] = useState<AdminMediaAsset[]>(INITIAL_ADMIN_MEDIA);
+  const [assets, setAssets] = useState<AdminMediaAsset[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+  const [isConnected, setIsConnected] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [selectedLicense, setSelectedLicense] = useState("all");
-  const [selectedAssetId, setSelectedAssetId] = useState<string>(
-    INITIAL_ADMIN_MEDIA[0]?.id || "med-1"
-  );
+  const [selectedAssetId, setSelectedAssetId] = useState("");
   const [copied, setCopied] = useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   // Load from Supabase on mount
   useEffect(() => {
     getMediaAssets().then((data) => {
-      if (data && data.length > 0) {
-        setAssets(data);
-        setSelectedAssetId(data[0].id);
-      }
-    });
+      setAssets(data);
+      setSelectedAssetId(data[0]?.id || "");
+      setIsConnected(true);
+    }).catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load media assets.")).finally(() => setIsLoading(false));
   }, []);
 
   // Upload state
@@ -160,12 +157,14 @@ export default function AdminMediaPage() {
     setIsDeleteModalOpen(false);
     setConfirmUnderstood(false);
 
-    await deleteMediaAsset(assetToDelete.id);
-    showToast({
-      title: "Asset Deleted",
-      description: `${assetToDelete.filename} has been removed from Supabase media vault.`,
-      type: "danger",
-    });
+    const result = await deleteMediaAsset(assetToDelete.id);
+    if (result.success) {
+      showToast({ title: "Asset Deleted", description: result.warning || `${assetToDelete.filename} was deleted.`, type: result.warning ? "warning" : "success" });
+    } else {
+      setAssets(assets);
+      setSelectedAssetId(assetToDelete.id);
+      showToast({ title: "Delete failed", description: result.error || "The asset was not deleted.", type: "danger" });
+    }
   };
 
   const handleCopyUrl = () => {
@@ -191,7 +190,7 @@ export default function AdminMediaPage() {
             </h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Connected to Supabase
+              {isLoading ? "Loading media…" : isConnected ? "Connected to Supabase" : "Database unavailable"}
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
@@ -221,6 +220,9 @@ export default function AdminMediaPage() {
           </Button>
         </div>
       </div>
+
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
+      {!isLoading && !loadError && assets.length === 0 && <div className="rounded-lg border border-[#263044] bg-[#111622] px-4 py-8 text-center text-sm text-[#94A3B8]">No media assets are stored yet. Upload an image or video to begin.</div>}
 
       {/* Upload progress bar */}
       {isUploading && (

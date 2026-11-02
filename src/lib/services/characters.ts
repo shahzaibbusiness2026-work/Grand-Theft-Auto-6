@@ -73,14 +73,14 @@ function rowToAdminCharacter(row: DatabaseCharacterRow): AdminCharacter {
     id: row.id,
     name: row.name,
     role: (row.role as AdminCharacter["role"]) || "Supporting",
-    status: (row.status as AdminCharacter["status"]) || "Active",
-    affiliation: row.affiliation || "Independent",
-    actor: row.voice_actor || "Unconfirmed",
-    location: row.origin || "Vice City",
-    importance: row.featured ? "High" : "Medium",
-    verified: true,
-    lastEditor: "Atlas Staff",
-    updatedAt: row.updated_at || new Date().toISOString(),
+    status: (row.status as AdminCharacter["status"]) || "",
+    affiliation: row.affiliation || "",
+    actor: row.voice_actor || "",
+    location: row.origin || "",
+    importance: row.featured ? "High" : "",
+    verified: false,
+    lastEditor: "",
+    updatedAt: row.updated_at || "",
   };
 }
 
@@ -113,28 +113,15 @@ export async function getPublicCharacters(): Promise<Character[]> {
 }
 
 /**
- * Fetch characters for Admin Dashboard.
- * DB-authoritative: only falls back to the static roster when the database
- * is unreachable, never when the table is simply empty.
+ * Fetch characters for Admin Dashboard. Database and authorization failures
+ * are surfaced to the admin page; empty data remains a real empty result.
  */
 export async function getAdminCharacters(): Promise<AdminCharacter[]> {
-  try {
-    await assertAdmin();
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("characters")
-      .select("*")
-      .order("updated_at", { ascending: false });
-
-    if (!error && data) {
-      return (data as DatabaseCharacterRow[]).map(rowToAdminCharacter);
-    }
-    console.error("getAdminCharacters: database error", error?.message);
-  } catch {
-    // Graceful fallback
-  }
-
-  return [];
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("characters").select("*").order("updated_at", { ascending: false });
+  if (error) throw new Error(`Could not load characters: ${error.message}`);
+  return (data as DatabaseCharacterRow[]).map(rowToAdminCharacter);
 }
 
 import { assertAdmin } from "@/lib/auth/assert-admin";
@@ -183,7 +170,7 @@ export async function saveCharacter(char: Partial<Character> & { name: string; i
       // New character — fill required columns with safe defaults.
       payload.name = payload.name || char.name;
       payload.role = payload.role || "Supporting";
-      payload.description = payload.description || "Character in Grand Theft Auto VI";
+      payload.description = payload.description || "";
       payload.featured = payload.featured ?? false;
       payload.status = payload.status || "Active";
       payload.weapons = payload.weapons || [];

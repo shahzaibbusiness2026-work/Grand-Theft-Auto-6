@@ -81,7 +81,7 @@ export async function POST(req: Request) {
   const subscribers = await getNewsletterSubscribers();
   let accounts: { email: string; created_at: string }[] = [];
   try {
-    accounts = await getAllAccounts(createAdminClient());
+    accounts = (await getAllAccounts(createAdminClient())).filter((account) => account.marketing_opt_in === true);
   } catch (err) {
     console.error("Broadcast: could not load registered accounts:", err);
   }

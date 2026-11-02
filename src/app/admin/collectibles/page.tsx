@@ -27,13 +27,14 @@ const EMPTY_FORM: CollectibleRecord = {
   description: "",
   guide_tip: "",
   img: "",
-  status: "published",
+  status: "draft",
 };
 
 export default function AdminCollectiblesPage() {
   const { showToast } = useToast();
   const [collectibles, setCollectibles] = useState<CollectibleRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [editorOpen, setEditorOpen] = useState(false);
   const [form, setForm] = useState<CollectibleRecord>(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
@@ -42,6 +43,7 @@ export default function AdminCollectiblesPage() {
     setIsLoading(true);
     getAdminCollectibles()
       .then(setCollectibles)
+      .catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load collectibles."))
       .finally(() => setIsLoading(false));
   };
 
@@ -182,6 +184,7 @@ export default function AdminCollectiblesPage() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
         <div>
           <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight flex items-center gap-2.5">

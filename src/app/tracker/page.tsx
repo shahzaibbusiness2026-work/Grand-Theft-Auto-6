@@ -1,8 +1,8 @@
 import { SiteShell } from "@/components/shells";
-import { TrackerClient } from "./tracker-client";
+import { PlayerProgress } from "@/components/player-progress";
 import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
-import { getTrackerCategories } from "@/lib/services/tracker";
+import { getReviewedProgressItems } from "@/lib/services/player-progress";
 import { Trophy } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -26,7 +26,7 @@ export default async function TrackerPage() {
   }
   // Admin-configured categories (site_settings.completion_tracker_config)
   // drive which checklist categories the public tracker shows.
-  const trackerConfig = await getTrackerCategories();
+  const items = await getReviewedProgressItems();
 
   return (
     <SiteShell>
@@ -34,20 +34,18 @@ export default async function TrackerPage() {
         {/* Header Hero */}
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-gold-dark dark:text-gold-light mb-3">
-            <Trophy className="h-3 w-3" /> 100% Game Completion
+            <Trophy className="h-3 w-3" /> Source-reviewed checklist
           </div>
           <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">
             LEONIDA <span className="text-primary">COMPLETION TRACKER</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            GTA VI completion requirements and rewards have not been verified
-            for this tracker. We have withdrawn illustrative mission and
-            achievement entries. Your saved local progress is retained; reviewed
-            requirements will be added when evidence is available.
+            Track your own progress against published, source-reviewed requirements.
+            This checklist can be incomplete and is separate from the game’s official completion percentage.
           </p>
         </div>
 
-        <TrackerClient config={trackerConfig} />
+        <PlayerProgress items={items} embeddedHeading />
       </div>
     </SiteShell>
   );

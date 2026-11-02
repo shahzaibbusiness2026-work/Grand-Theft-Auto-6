@@ -6,7 +6,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
-import { INITIAL_ADMIN_WEAPONS, AdminWeapon } from "@/lib/admin-store";
+import { AdminWeapon } from "@/lib/admin-store";
 import { logActivity } from "./activity";
 
 export interface DatabaseWeaponRow {
@@ -84,14 +84,14 @@ function rowToAdminWeapon(row: DatabaseWeaponRow): AdminWeapon {
     code: row.code || `W-${row.id.toUpperCase()}`,
     name: row.name,
     category: (row.category as AdminWeapon["category"]) || "Pistol",
-    ammunition: row.ammunition || "Unknown",
+    ammunition: row.ammunition || "",
     verification: (row.verification as AdminWeapon["verification"]) || "unverified",
     status: (row.status as AdminWeapon["status"]) || "draft",
-    damage: row.damage || "Unknown",
-    range: row.range || "Unknown",
-    rateOfFire: row.rate_of_fire || "Unknown",
-    magazineSize: row.magazine_size || "Unknown",
-    acquisitionMethod: row.acquisition_method || "Ammu-Nation",
+    damage: row.damage || "",
+    range: row.range || "",
+    rateOfFire: row.rate_of_fire || "",
+    magazineSize: row.magazine_size || "",
+    acquisitionMethod: row.acquisition_method || "",
     notes: row.notes || "",
     updatedAt: row.updated_at
       ? new Date(row.updated_at).toLocaleDateString("en-US", {
@@ -99,7 +99,7 @@ function rowToAdminWeapon(row: DatabaseWeaponRow): AdminWeapon {
           day: "numeric",
           year: "numeric",
         })
-      : "Recent",
+      : "",
     // Deep-dive fields
     slug: row.slug,
     confidence: row.confidence || undefined,
@@ -133,23 +133,11 @@ function rowToAdminWeapon(row: DatabaseWeaponRow): AdminWeapon {
  * table returns an empty list rather than ghost demo rows.
  */
 export async function getAdminWeapons(): Promise<AdminWeapon[]> {
-  try {
-    await assertAdmin();
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("weapons")
-      .select("*")
-      .order("updated_at", { ascending: false });
-
-    if (!error && data) {
-      return (data as DatabaseWeaponRow[]).map(rowToAdminWeapon);
-    }
-    console.error("getAdminWeapons: database error", error?.message);
-  } catch {
-    // Connection failure — fall back to bundled content
-  }
-
-  return INITIAL_ADMIN_WEAPONS;
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("weapons").select("*").order("updated_at", { ascending: false });
+  if (error) throw new Error(`Could not load weapons: ${error.message}`);
+  return (data as DatabaseWeaponRow[]).map(rowToAdminWeapon);
 }
 
 /**
@@ -191,10 +179,10 @@ export async function getAdminWeaponById(id: string): Promise<AdminWeapon | null
       .eq("id", id)
       .maybeSingle();
 
-    if (!error && data) return rowToAdminWeapon(data as DatabaseWeaponRow);
-    if (error) console.error("getAdminWeaponById: database error", error.message);
+    if (error) throw new Error(`Could not load weapon: ${error.message}`);
+    if (data) return rowToAdminWeapon(data as DatabaseWeaponRow);
   } catch (err) {
-    console.error("getAdminWeaponById:", err);
+    throw err;
   }
   return null;
 }
@@ -214,7 +202,8 @@ export async function saveWeapon(weapon: Partial<AdminWeapon> & { name: string; 
     // row already exists, then write only the fields the caller provided.
     let existing: { id: string } | null = null;
     if (weapon.id) {
-      const { data } = await supabase.from("weapons").select("id").eq("id", id).maybeSingle();
+      const { data, error } = await supabase.from("weapons").select("id").eq("id", id).maybeSingle();
+      if (error) throw error;
       existing = data;
     }
 
@@ -245,12 +234,12 @@ export async function saveWeapon(weapon: Partial<AdminWeapon> & { name: string; 
       // New record — fill required columns with safe defaults.
       payload.code ??= `W-${id.toUpperCase()}`;
       payload.category ??= "Pistol";
-      payload.ammunition ??= "Unknown";
-      payload.damage ??= "Unknown";
-      payload.range ??= "Unknown";
-      payload.rate_of_fire ??= "Unknown";
-      payload.magazine_size ??= "Unknown";
-      payload.acquisition_method ??= "Ammu-Nation";
+      payload.ammunition ??= "";
+      payload.damage ??= "";
+      payload.range ??= "";
+      payload.rate_of_fire ??= "";
+      payload.magazine_size ??= "";
+      payload.acquisition_method ??= "";
       payload.notes ??= "";
       payload.status ??= "draft";
       payload.verification ??= "unverified";
@@ -332,8 +321,9 @@ export async function deleteWeapon(id: string) {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
-    const { error } = await supabase.from("weapons").delete().eq("id", id);
+    const { data, error } = await supabase.from("weapons").delete().eq("id", id).select("id");
     if (error) throw error;
+    if (!data?.length) throw new Error("Weapon was not found; no record was deleted.");
 
     await logActivity({ action: "delete", targetType: "weapon", targetId: id });
 

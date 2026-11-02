@@ -1,155 +1,285 @@
 "use client";
-
-import React, { useState, useEffect } from "react";
-import { CheckCircle2, Plus, Sliders, Trophy, Sparkles, ToggleLeft, ToggleRight } from "lucide-react";
-import { useToast } from "@/components/admin/toast";
-import { Button } from "@/components/admin/ui/button";
-import { Badge } from "@/components/admin/ui/badge";
-import { cn } from "@/lib/utils";
-import { getTrackerCategories, saveTrackerCategories, TrackerCategory } from "@/lib/services/tracker";
-
+import { useEffect, useState } from "react";
+import {
+  getReviewedProgressItems,
+  saveReviewedProgressItem,
+  deleteReviewedProgressItem,
+} from "@/lib/services/player-progress";
+import {
+  PROGRESS_CATEGORIES,
+  type ReviewedProgressItem,
+} from "@/lib/reviewed-progress";
+const emptyForm = (): ReviewedProgressItem => ({
+  id: "",
+  title: "",
+  category: "Story Missions",
+  description: "",
+  source: "",
+  confidence: "OFFICIAL",
+});
 export default function AdminTrackerPage() {
-  const { showToast } = useToast();
-  const [categories, setCategories] = useState<TrackerCategory[]>([
-    { id: "trk-1", name: "Story Missions", weight: 40, totalItems: 5, active: true },
-    { id: "trk-2", name: "Strangers & Freaks", weight: 8, totalItems: 3, active: true },
-    { id: "trk-3", name: "Collectibles", weight: 15, totalItems: 4, active: true },
-    { id: "trk-4", name: "Hobbies & Pastimes", weight: 7, totalItems: 4, active: true },
-    { id: "trk-5", name: "Random Events", weight: 5, totalItems: 3, active: true },
-    { id: "trk-6", name: "Miscellaneous", weight: 5, totalItems: 3, active: true },
-    { id: "trk-7", name: "Properties & Businesses", weight: 5, totalItems: 3, active: true },
-    { id: "trk-8", name: "Weapon Masteries", weight: 5, totalItems: 3, active: true },
-    { id: "trk-9", name: "Vehicle Collections", weight: 4, totalItems: 2, active: true },
-    { id: "trk-10", name: "Map Exploration", weight: 4, totalItems: 2, active: true },
-    { id: "trk-11", name: "Trophies & Achievements", weight: 2, totalItems: 3, active: true },
-  ]);
-
-  useEffect(() => {
-    getTrackerCategories().then((data) => {
-      if (data && data.length > 0) setCategories(data);
-    });
-  }, []);
-
-  const totalWeight = categories.filter((c) => c.active).reduce((sum, c) => sum + c.weight, 0);
-  const totalItems = categories.filter((c) => c.active).reduce((sum, c) => sum + c.totalItems, 0);
-
-  const toggleCategory = async (id: string) => {
-    const updated = categories.map((c) => (c.id === id ? { ...c, active: !c.active } : c));
-    const previous = categories;
-    setCategories(updated);
-    const cat = categories.find((c) => c.id === id);
-    const res = await saveTrackerCategories(updated);
-    if (res.success) {
-      showToast({
-        title: `Category ${cat?.active ? "Disabled" : "Enabled"}`,
-        description: `"${cat?.name}" ${cat?.active ? "excluded from" : "included in"} completion formula.`,
-        type: "info",
-      });
-    } else {
-      // Revert the optimistic toggle so the UI matches the database.
-      setCategories(previous);
-      showToast({
-        title: "Could not save change",
-        description: res.error || `Failed to update "${cat?.name}". Please try again.`,
-        type: "danger",
-      });
+  const [items, setItems] = useState<ReviewedProgressItem[]>([]);
+  const [form, setForm] = useState(emptyForm);
+  const [reviewed, setReviewed] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  async function load() {
+    try {
+      setItems(await getReviewedProgressItems());
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Could not load requirements.",
+      );
+    } finally {
+      setLoading(false);
     }
-  };
-
+  }
+  useEffect(() => {
+    void load();
+  }, []);
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight flex items-center gap-2.5">
-            <CheckCircle2 className="w-6 h-6 text-[var(--admin-primary)]" />
-            <span>100% Completion Tracker Manager</span>
-          </h1>
-          <p className="text-xs text-[var(--admin-text-muted)] mt-1">
-            Configure weighting and categories for public checklist completion milestones.
-          </p>
-        </div>
+    <div className="space-y-6 text-slate-100">
+      <div>
+        <h1 className="text-2xl font-bold">Reviewed completion requirements</h1>
+        <p className="mt-2 text-sm text-slate-400">
+          Publish sourced checklist entries for the player dashboard and public
+          tracker. Checklist coverage is calculated from real entries; no game
+          completion weights or totals are assumed.
+        </p>
       </div>
-
-      {/* Summary Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-4 shadow-sm">
-          <p className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)] mb-1">Active Categories</p>
-          <p className="text-2xl font-black text-[var(--admin-text)]">{categories.filter((c) => c.active).length}<span className="text-sm font-medium text-[var(--admin-text-muted)]">/{categories.length}</span></p>
+      {error && (
+        <p
+          role="alert"
+          className="rounded-lg border border-rose-400/30 p-4 text-sm text-rose-200"
+        >
+          {error}
+        </p>
+      )}
+      {message && (
+        <p role="status" className="text-sm text-emerald-200">
+          {message}
+        </p>
+      )}
+      <form
+        className="player-panel space-y-4"
+        onSubmit={async (event) => {
+          event.preventDefault();
+          if (!reviewed) return;
+          setBusy(true);
+          setError("");
+          setMessage("");
+          try {
+            const result = await saveReviewedProgressItem({
+              ...form,
+              id: form.id || `reviewed-${crypto.randomUUID()}`,
+            });
+            if (!result.success) throw new Error(result.error);
+            setForm(emptyForm());
+            setReviewed(false);
+            setMessage("Reviewed requirement published.");
+            await load();
+          } catch (err) {
+            setError(
+              err instanceof Error
+                ? err.message
+                : "Could not publish requirement.",
+            );
+          } finally {
+            setBusy(false);
+          }
+        }}
+      >
+        <h2 className="text-lg font-bold">
+          {form.id ? "Edit requirement" : "Add reviewed requirement"}
+        </h2>
+        <label className="player-label">
+          Requirement title
+          <input
+            required
+            maxLength={200}
+            className="player-input"
+            value={form.title}
+            onChange={(event) =>
+              setForm({ ...form, title: event.target.value })
+            }
+          />
+        </label>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="player-label">
+            Category
+            <select
+              className="player-input"
+              value={form.category}
+              onChange={(event) =>
+                setForm({ ...form, category: event.target.value })
+              }
+            >
+              {PROGRESS_CATEGORIES.map((category) => (
+                <option key={category}>{category}</option>
+              ))}
+            </select>
+          </label>
+          <label className="player-label">
+            Evidence status
+            <select
+              className="player-input"
+              value={form.confidence}
+              onChange={(event) =>
+                setForm({
+                  ...form,
+                  confidence: event.target
+                    .value as ReviewedProgressItem["confidence"],
+                })
+              }
+            >
+              <option value="OFFICIAL">Official source</option>
+              <option value="CONFIRMED">Observed and reviewed</option>
+            </select>
+          </label>
         </div>
-        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-4 shadow-sm">
-          <p className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)] mb-1">Total Weight</p>
-          <p className={cn("text-2xl font-black", totalWeight === 100 ? "text-emerald-400" : "text-gold-light")}>{totalWeight}%</p>
-          {totalWeight !== 100 && (
-            <p className="text-xs text-gold-light font-medium mt-0.5">⚠ Weights should sum to 100%</p>
+        <label className="player-label">
+          Source URL
+          <input
+            type="url"
+            required
+            maxLength={500}
+            className="player-input"
+            value={form.source}
+            onChange={(event) =>
+              setForm({ ...form, source: event.target.value })
+            }
+          />
+        </label>
+        <label className="player-label">
+          Requirement description and source context
+          <textarea
+            rows={4}
+            required
+            maxLength={3000}
+            className="player-input"
+            value={form.description}
+            onChange={(event) =>
+              setForm({ ...form, description: event.target.value })
+            }
+          />
+        </label>
+        <label className="flex items-start gap-3 text-sm">
+          <input
+            className="mt-1"
+            type="checkbox"
+            required
+            checked={reviewed}
+            onChange={(event) => setReviewed(event.target.checked)}
+          />
+          I reviewed the linked source and confirmed this requirement. It is not
+          an illustrative or invented objective.
+        </label>
+        <div className="flex gap-2">
+          <button
+            disabled={busy || !reviewed}
+            className="player-button player-button-primary"
+          >
+            {busy ? "Publishing…" : "Publish reviewed requirement"}
+          </button>
+          {form.id && (
+            <button
+              type="button"
+              className="player-button"
+              onClick={() => {
+                setForm(emptyForm());
+                setReviewed(false);
+              }}
+            >
+              Cancel edit
+            </button>
           )}
         </div>
-        <div className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-4 shadow-sm">
-          <p className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text-muted)] mb-1">Tracked Items</p>
-          <p className="text-2xl font-black text-[var(--admin-text)]">{totalItems}</p>
+      </form>
+      <section className="player-panel">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="text-lg font-bold">
+            Published requirements · {items.length}
+          </h2>
+          <button className="player-button" onClick={() => void load()}>
+            Refresh
+          </button>
         </div>
-      </div>
-
-      <div className="rounded-2xl border border-[var(--admin-border)] bg-[var(--admin-card)] p-6 space-y-4 shadow-sm">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--admin-text)]">
-          Completion Formula Weighting
-        </h2>
-
-        <div className="space-y-3">
-          {categories.map((cat) => (
-            <div
-              key={cat.id}
-              className={cn(
-                "p-4 rounded-xl border flex items-center justify-between transition-all",
-                cat.active
-                  ? "bg-[var(--admin-surface)] border-[var(--admin-border)] hover:border-[var(--admin-primary)]/30"
-                  : "bg-[var(--admin-surface)] border-[var(--admin-border-subtle)] opacity-50"
-              )}
-            >
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  role="switch"
-                  aria-checked={cat.active}
-                  aria-label={`Toggle ${cat.name} ${cat.active ? "off" : "on"}`}
-                  onClick={() => toggleCategory(cat.id)}
-                  className={cn(
-                    "relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--admin-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--admin-surface)]",
-                    cat.active ? "bg-[var(--admin-primary)]" : "bg-[var(--admin-border)]"
-                  )}
+        {loading ? (
+          <p className="mt-4 text-sm">Loading…</p>
+        ) : !items.length ? (
+          <p className="mt-4 text-sm text-slate-400">
+            No reviewed requirements are published. Players see an empty state.
+          </p>
+        ) : (
+          <div className="mt-4 space-y-3">
+            {items.map((item) => (
+              <article
+                key={item.id}
+                className="rounded-lg border border-white/10 p-4"
+              >
+                <h3 className="font-bold">{item.title}</h3>
+                <p className="my-2 text-sm text-slate-400">
+                  {item.category} · {item.confidence}
+                </p>
+                <a
+                  className="break-all text-sm text-gold-light"
+                  href={item.source}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <span
-                    className={cn(
-                      "inline-block h-3.5 w-3.5 rounded-full bg-white transition-transform shadow-sm",
-                      cat.active ? "translate-x-[18px]" : "translate-x-[3px]"
-                    )}
-                  />
-                </button>
-                <div>
-                  <p className="font-bold text-xs text-[var(--admin-text)]">{cat.name}</p>
-                  <p className="text-xs text-[var(--admin-text-muted)]">
-                    {cat.totalItems} items tracked in database
-                  </p>
+                  {item.source}
+                </a>
+                <div className="mt-3 flex gap-3">
+                  <button
+                    className="player-button"
+                    onClick={() => {
+                      setForm(item);
+                      setReviewed(false);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    disabled={busy}
+                    className="player-button text-rose-200"
+                    onClick={async () => {
+                      if (
+                        !window.confirm(
+                          `Remove “${item.title}” from the published checklist?`,
+                        )
+                      )
+                        return;
+                      setBusy(true);
+                      try {
+                        const result = await deleteReviewedProgressItem(
+                          item.id,
+                        );
+                        if (!result.success) throw new Error(result.error);
+                        await load();
+                        setMessage(
+                          "Requirement removed. Historical player data is preserved.",
+                        );
+                      } catch (err) {
+                        setError(
+                          err instanceof Error
+                            ? err.message
+                            : "Could not remove requirement.",
+                        );
+                      } finally {
+                        setBusy(false);
+                      }
+                    }}
+                  >
+                    Remove
+                  </button>
                 </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <span className="font-mono font-bold text-xs text-[var(--admin-primary)]">
-                  {cat.weight}%
-                </span>
-                <div className="w-24 h-1.5 bg-[var(--admin-border)] rounded-full overflow-hidden hidden sm:block">
-                  <div
-                    className="h-full rounded-full bg-[var(--admin-primary)] transition-all"
-                    style={{ width: `${cat.weight}%` }}
-                  />
-                </div>
-                <Badge variant={cat.active ? "success" : "neutral"} size="sm">
-                  {cat.active ? "Active" : "Disabled"}
-                </Badge>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   );
 }

@@ -14,8 +14,6 @@ export interface AdminCategory {
   description: string;
 }
 
-const DEFAULT_CATEGORIES: AdminCategory[] = [];
-
 /**
  * Fetch all categories from Supabase with live article counts
  */
@@ -72,13 +70,33 @@ export async function getCategories(): Promise<AdminCategory[]> {
   }
 }
 
+export async function getAdminCategories(): Promise<AdminCategory[]> {
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data: setting, error: settingsError } = await supabase.from("site_settings").select("value").eq("key", "admin_categories").maybeSingle();
+  if (settingsError) throw new Error(`Could not load categories: ${settingsError.message}`);
+  const raw = typeof setting?.value === "string" ? JSON.parse(setting.value) : setting?.value;
+  const categories = Array.isArray(raw) ? raw as AdminCategory[] : [];
+  const { data: articles, error: articlesError } = await supabase.from("articles").select("category").eq("status", "published");
+  if (articlesError) throw new Error(`Could not load category counts: ${articlesError.message}`);
+  const counts: Record<string, number> = {};
+  (articles || []).forEach((article) => {
+    const key = article.category?.toLowerCase().trim();
+    if (key) counts[key] = (counts[key] || 0) + 1;
+  });
+  return categories.map((category) => ({
+    ...category,
+    count: counts[category.name.toLowerCase().trim()] || counts[category.slug.toLowerCase().trim()] || 0,
+  }));
+}
+
 /**
  * Save / Update a category in Supabase
  */
 export async function saveCategory(category: AdminCategory) {
   try {
     await assertAdmin();
-    const current = await getCategories();
+    const current = await getAdminCategories();
     const existingIndex = current.findIndex((c) => c.id === category.id);
     let updated: AdminCategory[];
 
@@ -123,8 +141,9 @@ export async function saveCategory(category: AdminCategory) {
 export async function deleteCategory(id: string) {
   try {
     await assertAdmin();
-    const current = await getCategories();
+    const current = await getAdminCategories();
     const deleted = current.find((c) => c.id === id);
+    if (!deleted) throw new Error("Category was not found; no change was saved.");
     const updated = current.filter((c) => c.id !== id);
 
     const adminSupabase = createAdminClient();

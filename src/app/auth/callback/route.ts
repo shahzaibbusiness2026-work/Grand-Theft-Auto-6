@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getAccount, saveAccount } from "@/lib/auth/accounts";
+import { randomInt } from "crypto";
 import {
   USER_SESSION_COOKIE,
   createUserSessionToken,
@@ -52,7 +53,7 @@ export async function GET(req: Request) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user?.email) {
+  if (!user?.email || !user.email_confirmed_at) {
     return NextResponse.redirect(new URL("/login?oauth=error", req.url));
   }
 
@@ -67,18 +68,21 @@ export async function GET(req: Request) {
     "";
   const { first, last } = splitName(metaName);
   const now = new Date().toISOString();
+  let sessionVersion = 0;
 
   try {
     const admin = createAdminClient();
     const existing = await getAccount(admin, email);
+    sessionVersion = existing?.session_version ?? randomInt(1, 2_000_000_000);
     const providers = [...(existing?.auth_providers || [])];
     if (!providers.includes(provider)) providers.push(provider);
-    await saveAccount(admin, {
+    const saved = await saveAccount(admin, {
+      ...existing,
       email,
-      first_name: first || existing?.first_name || null,
-      last_name: last || existing?.last_name || null,
+      first_name: existing?.first_name || first || null,
+      last_name: existing?.last_name || last || null,
       display_name:
-        [first || existing?.first_name || "", last || existing?.last_name || ""]
+        existing?.display_name || [existing?.first_name || first || "", existing?.last_name || last || ""]
           .filter(Boolean)
           .join(" ") || existing?.display_name || null,
       password_hash: existing?.password_hash || null,
@@ -87,10 +91,15 @@ export async function GET(req: Request) {
       created_at: existing?.created_at || now,
       last_sign_in_at: now,
       sign_in_count: (existing?.sign_in_count || 0) + 1,
+      session_version: sessionVersion,
+      auth_user_id: user.id,
+      email_verified_at: user.email_confirmed_at || existing?.email_verified_at || null,
     });
+    if (!saved) throw new Error("Could not save linked account.");
   } catch {
     // The Supabase session itself is established; a failed account-row
-    // save only means the dashboard falls back to "Player" for this visit.
+    // save cannot open a private workspace without its canonical owner row.
+    return NextResponse.redirect(new URL("/login?oauth=error", req.url));
   }
 
   // OAuth users need the same signed cookie as email users, or the
@@ -99,7 +108,7 @@ export async function GET(req: Request) {
   try {
     res.cookies.set(
       USER_SESSION_COOKIE,
-      await createUserSessionToken(email),
+      await createUserSessionToken(email, sessionVersion),
       userSessionCookieOptions()
     );
   } catch (err) {

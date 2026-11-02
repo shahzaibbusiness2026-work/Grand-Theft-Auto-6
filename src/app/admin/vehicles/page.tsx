@@ -24,10 +24,7 @@ import {
   Check,
 } from "lucide-react";
 import { useToast } from "@/components/admin/toast";
-import {
-  INITIAL_ADMIN_VEHICLES,
-  AdminVehicle,
-} from "@/lib/admin-store";
+import { AdminVehicle } from "@/lib/admin-store";
 import { getAdminVehicles, saveVehicle, deleteVehicle } from "@/lib/services/vehicles";
 import { cn } from "@/lib/utils";
 import { Modal } from "@/components/admin/modal";
@@ -49,8 +46,10 @@ function VehicleSilhouette() {
 export default function AdminVehiclesPage() {
   const router = useRouter();
   const { showToast } = useToast();
-  const [vehicles, setVehicles] = useState<AdminVehicle[]>(INITIAL_ADMIN_VEHICLES);
-  const [isLoading, setIsLoading] = useState(false);
+  const [vehicles, setVehicles] = useState<AdminVehicle[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+  const [isConnected, setIsConnected] = useState(false);
   const [activeTab, setActiveTab] = useState<"all" | "verification" | "drafts" | "archived">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedClass, setSelectedClass] = useState("all");
@@ -127,7 +126,8 @@ export default function AdminVehiclesPage() {
   useEffect(() => {
     setIsLoading(true);
     getAdminVehicles()
-      .then((data) => setVehicles(data || []))
+      .then((data) => { setVehicles(data); setIsConnected(true); })
+      .catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load vehicles."))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -286,7 +286,7 @@ export default function AdminVehiclesPage() {
             </h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Connected to Supabase
+              {isLoading ? "Loading vehicles…" : isConnected ? "Connected to Supabase" : "Database unavailable"}
             </span>
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
@@ -304,6 +304,9 @@ export default function AdminVehiclesPage() {
           </Link>
         </div>
       </div>
+
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
+      {!isLoading && !loadError && vehicles.length === 0 && <div className="rounded-lg border border-[#263044] bg-[#111622] px-4 py-8 text-center text-sm text-[#94A3B8]">No vehicles are stored yet. Add a vehicle to create the first record.</div>}
 
       {/* Warning Callout Banner (Image 2: "Placcholder records. GTA 6 specifications are unverified.") */}
       <div

@@ -44,8 +44,8 @@ const EMPTY_DRAFT: AdminVehicle = {
   weight: "",
   sources: [],
   images: [],
-  lastEditor: "TG Staff",
-  updatedAt: new Date().toISOString(),
+  lastEditor: "",
+  updatedAt: "",
 };
 
 const VEHICLE_CLASSES: AdminVehicle["class"][] = [
@@ -79,8 +79,8 @@ export function VehicleEditor({
     code: vehicle.code || "",
     status,
     images: imageUrl ? [imageUrl] : [],
-    manufacturer: vehicle.manufacturer || "Unknown",
-    summary: vehicle.summary || "Cataloged vehicle in the State of Leonida",
+    manufacturer: vehicle.manufacturer || "",
+    summary: vehicle.summary || "",
   });
 
   const handleSave = async (status: AdminVehicle["status"]) => {

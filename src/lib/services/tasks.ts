@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 
 export interface AdminTask {
@@ -15,27 +14,18 @@ export interface AdminTask {
   category: string;
 }
 
-const DEFAULT_TASKS: AdminTask[] = [];
-
 /**
  * Fetch all admin tasks from Supabase
  */
 export async function getTasks(): Promise<AdminTask[]> {
-  try {
-    const supabase = await createServerSupabase();
-    const { data } = await supabase
-      .from("site_settings")
-      .select("value")
-      .eq("key", "admin_tasks")
-      .maybeSingle();
-
-    if (data && data.value && Array.isArray(data.value) && data.value.length > 0) {
-      return data.value as AdminTask[];
-    }
-  } catch (err) {
-    console.error("Error fetching tasks:", err);
-  }
-  return DEFAULT_TASKS;
+  await assertAdmin();
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from("site_settings").select("value").eq("key", "admin_tasks").maybeSingle();
+  if (error) throw new Error(`Could not load tasks: ${error.message}`);
+  if (!data?.value) return [];
+  const value = typeof data.value === "string" ? JSON.parse(data.value) : data.value;
+  if (!Array.isArray(value)) throw new Error("Saved tasks have an invalid format.");
+  return value as AdminTask[];
 }
 
 /**

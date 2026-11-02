@@ -6,20 +6,22 @@ import { useToast } from "@/components/admin/toast";
 import { Button } from "@/components/admin/ui/button";
 import { Badge } from "@/components/admin/ui/badge";
 import { Tooltip } from "@/components/admin/ui/tooltip";
-import { getCategories, saveCategory, deleteCategory, AdminCategory } from "@/lib/services/categories";
+import { getAdminCategories, saveCategory, deleteCategory, AdminCategory } from "@/lib/services/categories";
 import { Modal } from "@/components/admin/modal";
 
 export default function AdminCategoriesPage() {
   const { showToast } = useToast();
   const [categories, setCategories] = useState<AdminCategory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
 
   const [newCatName, setNewCatName] = useState("");
   const [newCatDesc, setNewCatDesc] = useState("");
 
   useEffect(() => {
-    getCategories()
+    getAdminCategories()
       .then((data) => setCategories(data))
+      .catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load categories."))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -31,7 +33,7 @@ export default function AdminCategoriesPage() {
       name: newCatName.trim(),
       slug: newCatName.trim().toLowerCase().replace(/\s+/g, "-"),
       count: 0,
-      description: newCatDesc.trim() || "No description provided.",
+      description: newCatDesc.trim(),
     };
     const prev = categories;
     setCategories((p) => [...p, created]);
@@ -121,6 +123,7 @@ export default function AdminCategoriesPage() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[var(--admin-border-subtle)]">
         <div>
           <h1 className="text-xl sm:text-2xl font-black text-[var(--admin-text)] tracking-tight flex items-center gap-2.5">
