@@ -84,14 +84,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/pricing",
     "/tools/character-quiz",
   ];
-  // Dated sources are fetched first so every static hub can carry an honest
-  // lastModified: the latest real content update behind it (articles,
-  // guides, character reviews). During an outage no timestamp is invented —
-  // a hub with no known update simply omits lastModified.
-  let latestContent: Date | undefined;
-  const note = (d?: Date) => {
-    if (d && (!latestContent || d > latestContent)) latestContent = d;
-  };
+  // Detail URLs use their own recorded update dates. Unrelated article edits
+  // do not establish when static pages were substantively changed.
   const articleEntries: MetadataRoute.Sitemap = [];
   try {
     const { data, error } = await createPublicClient()
@@ -102,7 +96,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const a of data || [])
       if (a.slug && a.content?.trim()) {
         const lm = realDate(a.updated_at || a.published_at);
-        note(lm);
         articleEntries.push({
           url: base + "/news/" + a.slug,
           lastModified: lm,
@@ -120,7 +113,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const g of guides)
     if (g.slug) {
       const lm = realDate(g.updated_at);
-      note(lm);
       guideEntries.push({
         url: base + "/guides/" + g.slug,
         lastModified: lm,
@@ -136,7 +128,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   void vehicles;
   void weapons;
   const characterReviewed = new Date(CHARACTER_REVIEWED_AT + "T00:00:00Z");
-  note(characterReviewed);
   const characterEntries: MetadataRoute.Sitemap = Object.keys(
     characterEvidence,
   ).map((slug) => ({
@@ -145,7 +136,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
   const result: MetadataRoute.Sitemap = paths.map((path) => ({
     url: base + path,
-    lastModified: latestContent,
   }));
   result.push(...articleEntries, ...guideEntries, ...characterEntries);
   return Array.from(new Map(result.map((e) => [e.url, e])).values());

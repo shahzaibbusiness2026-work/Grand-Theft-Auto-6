@@ -1,3 +1,4 @@
+import { articleResources, relatedArticles } from "@/lib/article-discovery";
 import { authorIdentity } from "@/lib/editorial-authors";
 import remarkGfm from "remark-gfm";
 import type { Metadata } from "next";
@@ -122,7 +123,7 @@ export default async function ArticleDetailPage({ params }: Props) {
       // Below-the-fold article images lazy-load; only the hero cover
       // above uses priority, so the page preloads a single image.
       // eslint-disable-next-line @next/next/no-img-element
-      <img {...props} loading="lazy" decoding="async" />
+      <img {...props} alt={props.alt || ""} loading="lazy" decoding="async" />
     ),
     h2: ({ node, children, ...props }: any) => (
       <h2
@@ -145,14 +146,9 @@ export default async function ArticleDetailPage({ params }: Props) {
   };
 
   const all = await getPublicArticles();
-  const related = all
-    .filter((a) => a.slug !== article.slug && a.category === article.category)
-    .concat(
-      all.filter(
-        (a) => a.slug !== article.slug && a.category !== article.category,
-      ),
-    )
-    .slice(0, 3);
+  const related = relatedArticles(article, all);
+  const resources = articleResources(article.title, article.category);
+
 
   const seo = await getSeoSettings();
   const base = canonicalOrigin(seo.canonicalBaseUrl);
@@ -349,6 +345,16 @@ export default async function ArticleDetailPage({ params }: Props) {
                   {bodyMarkdown}
                 </ReactMarkdown>
               </div>
+              {resources.length > 0 && (
+                <nav aria-label="Explore this topic" className="mt-8 border-t border-border pt-6">
+                  <h2 className="text-lg font-bold">Explore this topic</h2>
+                  <ul className="mt-3 space-y-2">
+                    {resources.map(({ href, label }) => (
+                      <li key={href}><Link href={href} className="text-accent underline">{label}</Link></li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
               {article.tags && article.tags.length > 0 && (
                 <div className="mt-8 flex flex-wrap gap-2 border-t border-border pt-6">
                   {article.tags.map((t) => (

@@ -49,6 +49,8 @@ Each asset has a descriptive filename, accurate alt text, dimensions, a source r
 
 The manifest is maintained in `src/lib/world-media-data.json` and exposed at `/img/world-evidence/sources.json`. The importer is `scripts/import-world-media.py`; it uses Pillow and FFmpeg for uncached trailer frames. Existing catalog illustrations remain provisional references. A related scene is labeled as such and is never promoted to an exact model photo or an appearance claim.
 
+A future media refresh requires a new visual review and review date; rerunning the importer alone is not editorial verification.
+
 The implementation follows [Google's image SEO guidance](https://developers.google.com/search/docs/appearance/google-images) for HTML images, contextual descriptions, descriptive filenames, responsive delivery and alt text. Attribution metadata follows the available facts; it does not imply ownership of Rockstar's media or eligibility for a licensing badge.
 
 ## Validation and remaining work
@@ -58,5 +60,7 @@ The implementation follows [Google's image SEO guidance](https://developers.goog
 - The local production crawl completed all 205 discovered URLs, with no remaining frontier, broken image URLs or missing HTML fragment targets.
 - Wildlife pages, image credits, catalog recovery, radio search/reset and character role selection were exercised in the browser. New wildlife images and the hub were checked in light/dark themes; sampled mobile widths were 320 and 390 px, with a 1440 px desktop check.
 - `git diff --check` passed.
+
+The final combined build also includes upstream commit `2cf1904` (contextual article discovery and accurate sitemap freshness). After that merge, all 54 tests passed again, the production build generated 142 static pages successfully, and the repeated production crawl retained the same 205-page/149-image clean result.
 
 Production deployment must still be checked before describing these fixes as live. Older entries marked **Source review pending** retain a claim-by-claim editorial verification backlog. The crawl result is not a claim that every content assertion or every possible interaction is fault-free.
