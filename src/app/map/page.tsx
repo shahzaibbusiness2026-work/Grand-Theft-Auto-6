@@ -44,6 +44,12 @@ export default async function MapPage() {
   }
   return (
     <SiteShell>
+      <link
+        rel="preload"
+        as="image"
+        href="/maps/gtadb-yanis17/overview.webp"
+        fetchPriority="high"
+      />
       <MapClient markers={await getMapMarkers()} />
       <section className="container-site pb-10" aria-labelledby="map-questions">
         <h2 id="map-questions" className="font-display text-2xl font-bold">

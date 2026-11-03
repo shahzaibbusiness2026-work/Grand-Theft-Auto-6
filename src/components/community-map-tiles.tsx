@@ -61,6 +61,10 @@ export function CommunityMapTiles({
       <img
         src="/maps/gtadb-yanis17/overview.webp"
         alt="Community reconstruction of Leonida by GTADB contributors, not official game geography"
+        width={1536}
+        height={1536}
+        fetchPriority="high"
+        decoding="async"
         draggable={false}
         className="absolute inset-0 h-full w-full"
       />
