@@ -531,6 +531,7 @@ export function SatelliteInteractiveMap({
   const [namedOnly, setNamedOnly] = useState(true);
   const [resultSort, setResultSort] = useState("name");
   const [clusterMembers, setClusterMembers] = useState<MapPOI[]>([]);
+  const [textListOpen, setTextListOpen] = useState(false);
   const [viewportSize, setViewportSize] = useState({
     width: 1000,
     height: 650,
@@ -2215,7 +2216,10 @@ export function SatelliteInteractiveMap({
       </div>
 
       {!isFullscreen && (
-        <details className="mt-5 rounded-xl border border-border bg-card p-4">
+        <details
+          className="mt-5 rounded-xl border border-border bg-card p-4"
+          onToggle={(event) => setTextListOpen(event.currentTarget.open)}
+        >
           <summary className="cursor-pointer min-h-11 font-bold">
             Browse {visiblePOIs.length} visible pins as a text list
           </summary>
@@ -2226,7 +2230,7 @@ export function SatelliteInteractiveMap({
             sync through the account connection.
           </p>
           <ul className="grid gap-2 sm:grid-cols-2">
-            {visiblePOIs.slice(0, 100).map((poi) => (
+            {(textListOpen ? visiblePOIs.slice(0, 100) : []).map((poi) => (
               <li key={poi.id}>
                 <button
                   type="button"

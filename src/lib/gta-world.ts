@@ -690,85 +690,44 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     image: "/img/trailer-lucia-call.webp",
     imageAlt: "Lucia on a phone call",
     title: "Social Media & Apps",
-    seoTitle: "GTA 6 In-Game Social Media & Phone Apps",
+    seoTitle: "GTA 6 Social Media: Trailer Evidence & App Unknowns",
     seoDescription:
-      "The in-world social media culture and phone apps shown in official GTA 6 footage, with sources.",
+      "Explore social-media imagery in GTA 6 Trailer 1 and Rockstar's character bios. Direct sources distinguish visible details from unverified playable app features.",
     intro:
-      "The trailers show Leonida's characters living half their lives on their phones. This page covers only the social platforms and app interfaces actually visible in official footage. No app names, follower counts, or social features are invented.",
+      "Social media is part of GTA VI's presentation and character stories. Trailer 1 includes in-world clips with account names and comments, while Rockstar's character biographies describe internet use and music promotion. Those sources establish the fictional setting; they do not by themselves establish which phone apps the player can operate. This guide separates the visible evidence from questions about posting, browsing, rides and vehicle scanning.",
     notConfirmed: [
-      "Posting your own photos is explicitly not possible — Jason and Lucia can only browse and follow (Nelson via IGN).",
-      "No follower system, influencer career, or monetization has been confirmed.",
-      "Whether livestreamers can give the player away to police is not stated.",
-      "WhatUp, Peekhole (as an app), BuckMe, LifeInvader, Bleeter, Fruit Pay and LeonidaGov are app names from disputed or leak-domain sources, not published as features. Peekhole appears only as poster text (see Brands).",],
-        entries: [
+      "The sources linked here do not establish whether Jason or Lucia can create posts, upload photos, gain followers or monetize an account.",
+      "A character biography mentioning internet use does not confirm a player-operated web browser or a complete in-game internet.",
+      "Trailer overlays do not establish a playable app interface or whether livestreams can affect police behavior.",
+      "Earlier notes about Snapmatic restrictions, WAINK scanning, rideshare, fitness, vehicle retrieval and floating text messages have been removed pending exact supporting sources. These notes should not be treated as verified features.",
+    ],
+    entries: [
       {
-            "name": "Snapmatic returns",
-            "observation": "GTA V's photo/social app is reported back on the phone: players can scroll feeds and follow accounts, but Jason and Lucia cannot post their own photos — Rockstar's Rob Nelson told IGN they are a couple on the run and don't want a digital trail. Reported from IGN's hands-on demo, not a Rockstar-published app list.",
-            "source": "IGN hands-on demo + Extended Look (press reporting)",
-            "tier": "Community identification"
+        name: "Social-media clips in Trailer 1",
+        observation:
+          "The clip around 0:45 includes an account name and comments. These are visible presentation details; the image does not show the player opening an app, creating a post or interacting with a feed.",
+        source: "Rockstar Games, GTA VI Trailer 1, 0:45",
+        sourceHref: "https://www.youtube.com/watch?v=QdBZY2fkU-0&t=45s",
+        tier: "Observed in official media",
+        image: "/img/world-evidence/gta-6-social-media-car-clip-trailer-1.webp",
+        imageAlt: "An in-world social-media clip with an account name and comments in GTA 6 Trailer 1.",
       },
       {
-            "name": "Web browsing exists",
-            "observation": "Cal Hampton's official bio says he snoops 'with a few beers and some private browser tabs open.' A full in-game internet has not been shown.",
-            "source": "rockstargames.com/VI/only-in-leonida",
-            "tier": "Rockstar confirmed"
+        name: "Cal Hampton's internet habits",
+        observation:
+          "Rockstar describes Cal spending time at home monitoring Coast Guard communications and browsing online. This is character background, not an announcement of a playable internet browser.",
+        source: "Rockstar Games, Only in Leonida: Cal Hampton",
+        sourceHref: "https://www.rockstargames.com/VI/only-in-leonida",
+        tier: "Rockstar confirmed",
       },
       {
-            "name": "Phone as a physical object",
-            "observation": "The Extended Look shows the camera moving to the character's hand when the phone is raised, rather than a flat overlay.",
-            "source": "Extended Look",
-            "tier": "Observed in official media"
+        name: "Real Dimez and social-media promotion",
+        observation:
+          "Rockstar's Real Dimez biography links the duo's music career with viral videos and a persistent social-media presence. It establishes their story, without promising player-controlled music uploads, accounts or influencer careers.",
+        source: "Rockstar Games, Only in Leonida: Real Dimez",
+        sourceHref: "https://www.rockstargames.com/VI/only-in-leonida",
+        tier: "Rockstar confirmed",
       },
-      {
-            "name": "Livestreams (Trunk challenge)",
-            "observation": "In the Extended Look, Lucia opens a car trunk to find a teenager mid-stream; the overlay shows a live viewer count and chat, and the stream is watchable. Whether streamers can give the player away to police is not stated.",
-            "source": "Extended Look",
-            "tier": "Observed in official media"
-      },
-      {
-            "name": "NPC phone culture",
-            "observation": "NPCs take selfies at the beach, record videos of events, and argue while scrolling, in both trailers; Trailer 1 opens on viral clips and phone footage.",
-            "source": "Trailer 1 + Trailer 2",
-            "tier": "Observed in official media"
-      },
-      {
-            "name": "WAINK vehicle scanner",
-            "observation": "Scans a parked vehicle before a theft attempt and reports what is needed to steal it, resale value, and registration cost. Reported from IGN's hands-on demo, not from a Rockstar-published app list.",
-            "source": "IGN hands-on demo (press preview)",
-            "tier": "Community identification"
-      },
-      {
-            "name": "Ryde Me rideshare",
-            "observation": "Ride-hailing app for travel across the map, also described as fast travel, from IGN's hands-on demo. Spelling is not settled (IGN: 'Ryde Me'; others: 'RideMe').",
-            "source": "IGN hands-on demo (press preview)",
-            "tier": "Community identification"
-      },
-      {
-            "name": "Short-form video feed (name unconfirmed)",
-            "observation": "Trailer 1 shows a TikTok/Reels-like vertical feed with usernames, captions, hashtags and a Follow button. Its in-game name is not officially confirmed. Accounts visible include @OfficialPOACH (~0:43, “Protection of Animals and Controlled Hunting”), have.a.vice.day, and HighRollerzMag (~1:08). Real-world accounts reusing these handles are fan-made, not Rockstar’s.",
-            "source": "Trailer 1",
-            "tier": "Observed in official media",
-            "image": "/img/world/trailer1-social-feed-108.jpg",
-            "imageAlt": "A social media post frame from GTA VI Trailer 1 showing the @HighRollerzMag account"
-      },
-      {
-            "name": "Fitness app (reported)",
-            "observation": "Tracks sleep and workouts; tiredness feeds attribute regeneration. Single-creator hands-on source with press pickup — a credible report, not a Rockstar statement.",
-            "source": "TGG hands-on, Sept 3, 2026 (press)",
-            "tier": "Community identification"
-      },
-      {
-            "name": "Scooter Bros vehicle retrieval (reported)",
-            "observation": "Retrieves your personal vehicle. Single-source report only — a credible report, not a Rockstar statement.",
-            "source": "TGG via GTA BOOM (press)",
-            "tier": "Community identification"
-      },
-      {
-            "name": "Floating text messages (reported)",
-            "observation": "Text messages between Jason and Lucia float over the screen during cutscenes, per press reporting.",
-            "source": "KeenGamer (press)",
-            "tier": "Community identification"
-      }
     ],
     related: [
       { label: "Characters", href: "/characters" },
