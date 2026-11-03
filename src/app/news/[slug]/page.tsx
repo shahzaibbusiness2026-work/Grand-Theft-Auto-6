@@ -244,17 +244,17 @@ export default async function ArticleDetailPage({ params }: Props) {
               sizes="(max-width: 768px) 100vw, 900px"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-card/90" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
-              <span className="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary border border-primary/30">
+            <div className="absolute inset-0 image-hero-shade" aria-hidden="true" />
+            <div className="relative px-6 pb-6 pt-32 sm:px-10 sm:pb-10 sm:pt-40">
+              <span className="inline-block rounded-full bg-black/60 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white border border-white/40">
                 {article.category}
               </span>
-              <h1 className="mt-3 max-w-3xl font-display text-3xl sm:text-4xl font-extrabold leading-tight">
+              <h1 className="mt-3 max-w-3xl font-display text-3xl sm:text-4xl font-extrabold leading-tight text-white">
                 {article.title}
               </h1>
               <PlayerBookmarkButton title={article.title} path={`/news/${article.slug}`} kind="article" />
               {showSubtitle && (
-                <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+                <p className="mt-2 max-w-2xl text-sm text-white/90">
                   {subtitle}
                 </p>
               )}

@@ -69,6 +69,22 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: "/maps/gtadb-yanis17/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      {
+        source: "/players/:path*",
+        headers: [
+          { key: "Cache-Control", value: "private, no-store" },
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+      {
         // Cache static images for 1 year
         source: "/img/(.*)",
         headers: [

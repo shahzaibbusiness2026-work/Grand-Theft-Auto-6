@@ -1,6 +1,10 @@
 import { randomBytes, scryptSync, timingSafeEqual, createHash } from "crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { parseWorkspace, type PlayerWorkspace } from "@/lib/player-state";
+import {
+  parsePublicShowcase,
+  type PublicShowcase,
+} from "@/lib/player-portfolio";
 
 /**
  * Site-account storage (server-only helpers).
@@ -32,6 +36,7 @@ export interface AccountRow {
   storage_version?: string;
   workspace?: PlayerWorkspace;
   workspace_version?: string | null;
+  showcase?: PublicShowcase | null;
 }
 
 export function accountKey(email: string): string {
@@ -149,6 +154,7 @@ export function normalizeAccount(prev: Partial<AccountRow>): AccountRow | null {
         ? prev.email_verified_at
         : null,
     workspace: prev.workspace ? parseWorkspace(prev.workspace) : undefined,
+    showcase: parsePublicShowcase(prev.showcase),
     workspace_version:
       typeof prev.workspace_version === "string"
         ? prev.workspace_version

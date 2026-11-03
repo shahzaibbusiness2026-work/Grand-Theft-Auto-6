@@ -76,6 +76,7 @@ export async function POST(request: Request) {
       .in("key", [
         accountKey(account.email),
         playerWorkspaceKey(account.email),
+        ...(account.showcase ? [`player_showcase:${account.showcase.id}`] : []),
       ]);
     if (error) throw error;
     const { error: tokenError } = await supabase

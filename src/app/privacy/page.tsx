@@ -55,14 +55,31 @@ export default function Page() {
           metadata; plaintext passwords and recovery codes are not stored as
           account records. Account and admin sessions use cookies. Supabase
           supports database storage and authentication integrations. Optional
-          sign-in providers process information under their own policies.
-          Your private workspace can include favorites, map pins and notes,
-          manual checklist progress, loadouts, bookmarks, collections, goals,
+          sign-in providers process information under their own policies. Your
+          private workspace can include favorites, map pins and notes, manual
+          checklist progress, loadouts, bookmarks, collections, goals,
           preferences and recent activity. Recent activity is limited to 50
           entries and can be cleared from your dashboard. Your account settings
-          provide export and verified account deletion controls. Account deletion
-          also removes the active cloud workspace; copies on other devices and
-          provider backups may remain until they are cleared or expire.
+          provide export and verified account deletion controls. Account
+          deletion also removes the active cloud workspace; copies on other
+          devices and provider backups may remain until they are cleared or
+          expire.
+        </p>
+        <h2 className="text-2xl font-bold">
+          Personal collections and public profiles
+        </h2>
+        <p>
+          Your private collection can include manually entered vehicles,
+          properties, garage assignments, values and compressed photos. Photos
+          are re-encoded in your browser and stored in your account workspace.
+          Collections are private by default. Publishing explicitly creates a
+          public snapshot of selected item names, types and ownership status,
+          your chosen display name and bio, and optionally photos and values.
+          Private notes, email, garage names and map pins are excluded. Later
+          private changes require republishing to update that snapshot. Making
+          the profile private withdraws the active public link; copies already
+          downloaded by others cannot be recalled. Deleting the account removes
+          its active public profile.
         </p>
         <h2 className="text-2xl font-bold">Newsletter and contact forms</h2>
         <p>
@@ -131,8 +148,8 @@ export default function Page() {
           <li>
             <strong>Browser storage:</strong> favorites, notes and other local
             records remain on your device until you clear them. Server-side
-            account deletion clears the current account copy in the browser
-            used for deletion. Clear site storage on other devices to remove
+            account deletion clears the current account copy in the browser used
+            for deletion. Clear site storage on other devices to remove
             remaining cached copies.
           </li>
         </ul>

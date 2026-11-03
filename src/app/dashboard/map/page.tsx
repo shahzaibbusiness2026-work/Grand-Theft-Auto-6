@@ -1,4 +1,5 @@
-import { SatelliteInteractiveMap } from "@/components/satellite-interactive-map";
+import { CommunityMapWorkspace } from "@/components/community-map-workspace";
+import { getMapMarkers } from "@/lib/services/map";
 import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
 export default async function PlayerMapPage() {
@@ -14,7 +15,7 @@ export default async function PlayerMapPage() {
           account. Editorial map coordinates remain provisional.
         </p>
       </div>
-      <SatelliteInteractiveMap playerMode />
+      <CommunityMapWorkspace playerMode markers={await getMapMarkers()} />
     </div>
   );
 }

@@ -46,6 +46,36 @@ export function SafeImage({
   width,
   height,
 }: ImageProps) {
+  if (typeof src === "string" && !src.trim()) {
+    return (
+      <span
+        role="img"
+        aria-label={alt ? `${alt} — image unavailable` : "Image unavailable"}
+        className={className}
+        style={{
+          ...(fill
+            ? {
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+              }
+            : {
+                width: width ? Number(width) : undefined,
+                height: height ? Number(height) : undefined,
+              }),
+          display: "grid",
+          placeItems: "center",
+          background: "hsl(var(--muted))",
+          color: "hsl(var(--muted-foreground))",
+          fontSize: "0.75rem",
+          ...style,
+        }}
+      >
+        <span aria-hidden="true">Image unavailable</span>
+      </span>
+    );
+  }
   if (isOptimizable(src)) {
     return (
       <Image

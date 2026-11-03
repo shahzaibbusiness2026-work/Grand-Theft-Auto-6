@@ -30,6 +30,21 @@ export async function PUT(request: Request) {
     const { supabase, account } = await requirePlayer();
     const body = await playerJsonBody(request);
     if (
+      account.workspace?.portfolio &&
+      (account.workspace.portfolio.assets.length ||
+        account.workspace.portfolio.garages.length ||
+        account.workspace.portfolio.profile.name ||
+        account.workspace.portfolio.profile.bio ||
+        account.workspace.portfolio.profile.image) &&
+      (!body.workspace ||
+        typeof body.workspace !== "object" ||
+        !Object.hasOwn(body.workspace, "portfolio"))
+    )
+      throw new PlayerError(
+        400,
+        "Reload Taish Gaming before saving. This older client cannot preserve your collection.",
+      );
+    if (
       body.version !== null &&
       (typeof body.version !== "string" ||
         !Number.isFinite(Date.parse(body.version)))

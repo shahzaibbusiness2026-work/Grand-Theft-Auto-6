@@ -1,8 +1,4 @@
-import SavedWorkspacePage from "../saved/page";
+import PlayerGaragePage from "../garage/page";
 export default function PlayerPropertiesPage() {
-  return (
-    <SavedWorkspacePage
-      searchParams={Promise.resolve({ type: "properties" })}
-    />
-  );
+  return <PlayerGaragePage />;
 }

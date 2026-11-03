@@ -21,7 +21,7 @@ export default function NotFound() {
           light="/img/hero-light.jpg"
           alt=""
           role="presentation"
-          className="absolute inset-0 h-full w-full object-cover opacity-80 dark:opacity-60 dark:brightness-110"
+          className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         <div className="container-site relative flex flex-col items-center pt-16 text-center">

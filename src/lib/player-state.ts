@@ -1,3 +1,8 @@
+import {
+  emptyPortfolio,
+  parsePortfolio,
+  type PlayerPortfolio,
+} from "./player-portfolio";
 /** Shared, bounded schema for private player data. Never contains credentials or entitlements. */
 export interface SavedLoadout {
   id: string;
@@ -31,6 +36,7 @@ export interface PersonalMarker {
   title: string;
   top: number;
   left: number;
+  mapSpace?: string;
 }
 export interface PlayerCollection {
   id: string;
@@ -98,6 +104,7 @@ export interface PlayerWorkspace {
   collections: PlayerCollection[];
   savedComparisons: SavedComparison[];
   sessionPlans: PlayerSessionPlan[];
+  portfolio: PlayerPortfolio;
   preferences: {
     platform: "" | "PS5" | "Xbox Series X|S";
     hideSpoilers: boolean;
@@ -107,6 +114,7 @@ export interface PlayerWorkspace {
 }
 
 export const PLAYER_TOOLS = [
+  { path: "/dashboard/garage", label: "My garage & wishlist" },
   { path: "/map", label: "Interactive map" },
   { path: "/tracker", label: "Completion tracker" },
   { path: "/vehicles", label: "Vehicles" },
@@ -136,6 +144,7 @@ export function emptyWorkspace(): PlayerWorkspace {
     collections: [],
     savedComparisons: [],
     sessionPlans: [],
+    portfolio: emptyPortfolio(),
     preferences: {
       platform: "",
       hideSpoilers: true,
@@ -225,6 +234,7 @@ export function parseWorkspace(input: unknown): PlayerWorkspace {
   }
   const result: PlayerWorkspace = {
     schemaVersion: 1,
+    portfolio: parsePortfolio(value.portfolio),
     recentCatalogIds: {
       vehicles: [
         ...new Set(list(recentCatalog.vehicles, (item) => str(item), 8)),
@@ -366,6 +376,13 @@ export function parseWorkspace(input: unknown): PlayerWorkspace {
           title: str(item.title, 120),
           top: item.top as number,
           left: item.left as number,
+          ...(item.mapSpace === undefined
+            ? {}
+            : item.mapSpace === "gtadb-world-32768-v1"
+              ? { mapSpace: item.mapSpace }
+              : (() => {
+                  throw new Error("Unknown private map coordinate space.");
+                })()),
         };
       },
       200,
@@ -497,11 +514,21 @@ export function hasWorkspaceData(value: PlayerWorkspace): boolean {
     value.collections.length > 0 ||
     value.savedComparisons.length > 0 ||
     value.sessionPlans.length > 0 ||
+    value.portfolio.assets.length > 0 ||
+    value.portfolio.garages.length > 0 ||
+    !!value.portfolio.profile.name ||
+    !!value.portfolio.profile.bio ||
+    !!value.portfolio.profile.image ||
     value.preferences.platform !== "" ||
     value.preferences.timeZone !== "" ||
     !value.preferences.hideSpoilers ||
     value.preferences.reducedMotion
   );
+}
+
+/** An unexpectedly missing cloud revision must never erase a previously synced browser copy. */
+export function workspaceNeedsResolution(knownVersion: string | null | undefined, incomingVersion: string | null, dirty: boolean, local: PlayerWorkspace) {
+  return (knownVersion === undefined && hasWorkspaceData(local)) || (dirty && knownVersion !== incomingVersion) || (!!knownVersion && incomingVersion === null && hasWorkspaceData(local));
 }
 
 /** Explicit merge: union checks/saves, preserve both notes when text conflicts; local preferences win. */
@@ -610,5 +637,31 @@ export function mergeWorkspaces(
     ),
     savedComparisons: byId(cloud.savedComparisons, local.savedComparisons, 100),
     sessionPlans: byId(cloud.sessionPlans, local.sessionPlans, 50),
+    portfolio: {
+      garages: byId(cloud.portfolio.garages, local.portfolio.garages, 50),
+      assets: byId(
+        cloud.portfolio.assets,
+        local.portfolio.assets.map((asset) => {
+          const previous = cloud.portfolio.assets.find(
+            (item) => item.id === asset.id,
+          );
+          return previous?.notes &&
+            asset.notes &&
+            previous.notes !== asset.notes
+            ? {
+                ...asset,
+                notes: `${previous.notes}\n\nImported note:\n${asset.notes}`,
+              }
+            : asset;
+        }),
+        300,
+      ),
+      profile:
+        local.portfolio.profile.name ||
+        local.portfolio.profile.bio ||
+        local.portfolio.profile.image
+          ? local.portfolio.profile
+          : cloud.portfolio.profile,
+    },
   });
 }

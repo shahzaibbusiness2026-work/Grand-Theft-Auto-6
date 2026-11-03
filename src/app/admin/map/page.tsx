@@ -34,12 +34,15 @@ import {
 } from "@/lib/services/map";
 import { cn } from "@/lib/utils";
 import { Modal } from "@/components/admin/modal";
+import { communityLandmarks } from "@/lib/community-map";
 
 export default function AdminMapPage() {
   const { showToast } = useToast();
   const [markers, setMarkers] = useState<AdminMapMarker[]>([]);
   const [selectedMarkerId, setSelectedMarkerId] = useState("");
-  const [activeCategory, setActiveCategory] = useState<"all" | "Location" | "Collectibles" | "Activities">("all");
+  const [activeCategory, setActiveCategory] = useState<
+    "all" | "Location" | "Collectibles" | "Activities"
+  >("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeLayers, setActiveLayers] = useState({
     Official: true,
@@ -47,11 +50,15 @@ export default function AdminMapPage() {
     Community: true,
   });
   const [zoomLevel, setZoomLevel] = useState(1);
-  const [previousCoordinates, setPreviousCoordinates] = useState<{ id: string; coords: { x: number; y: number } } | null>(null);
+  const [previousCoordinates, setPreviousCoordinates] = useState<{
+    id: string;
+    coords: { x: number; y: number };
+  } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [loadError, setLoadError] = useState("");
+  const [communitySearch, setCommunitySearch] = useState("");
 
   // Fetch live markers from Supabase on mount
   useEffect(() => {
@@ -63,7 +70,9 @@ export default function AdminMapPage() {
         setIsConnected(true);
       } catch (err) {
         console.error("Failed to load map markers from Supabase:", err);
-        setLoadError(err instanceof Error ? err.message : "Could not load map markers.");
+        setLoadError(
+          err instanceof Error ? err.message : "Could not load map markers.",
+        );
       } finally {
         setIsLoading(false);
       }
@@ -80,7 +89,9 @@ export default function AdminMapPage() {
       count: markers.length,
       markers,
     };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {
+      type: "application/json",
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -102,7 +113,11 @@ export default function AdminMapPage() {
       const parsed = JSON.parse(text);
       const raw: unknown[] = Array.isArray(parsed) ? parsed : parsed.markers;
       if (!Array.isArray(raw) || raw.length === 0) {
-        showToast({ title: "Import failed", description: "No markers found in this file.", type: "danger" });
+        showToast({
+          title: "Import failed",
+          description: "No markers found in this file.",
+          type: "danger",
+        });
         return;
       }
       const validCategories = ["Location", "Collectibles", "Activities"];
@@ -114,31 +129,54 @@ export default function AdminMapPage() {
       for (const r of raw) {
         const rec = r as Record<string, unknown>;
         if (!rec || typeof rec.name !== "string" || !rec.name.trim()) continue;
-        const coords = rec.coordinates as { x?: unknown; y?: unknown } | undefined;
-        const idBase = typeof rec.id === "string" && rec.id ? rec.id : `mark-${Date.now()}-${imported.length}`;
+        const coords = rec.coordinates as
+          | { x?: unknown; y?: unknown }
+          | undefined;
+        const idBase =
+          typeof rec.id === "string" && rec.id
+            ? rec.id
+            : `mark-${Date.now()}-${imported.length}`;
         const id = existingIds.has(idBase) ? `${idBase}-imported` : idBase;
         existingIds.add(id);
         imported.push({
           id,
           name: rec.name.trim(),
-          category: validCategories.includes(rec.category as string) ? (rec.category as AdminMapMarker["category"]) : "Location",
-          layer: validLayers.includes(rec.layer as string) ? (rec.layer as AdminMapMarker["layer"]) : "Research",
+          category: validCategories.includes(rec.category as string)
+            ? (rec.category as AdminMapMarker["category"])
+            : "Location",
+          layer: validLayers.includes(rec.layer as string)
+            ? (rec.layer as AdminMapMarker["layer"])
+            : "Research",
           visible: typeof rec.visible === "boolean" ? rec.visible : true,
-          icon: validIcons.includes(rec.icon as string) ? (rec.icon as AdminMapMarker["icon"]) : "pin",
+          icon: validIcons.includes(rec.icon as string)
+            ? (rec.icon as AdminMapMarker["icon"])
+            : "pin",
           coordinates: {
-            x: typeof coords?.x === "number" ? Math.max(0, Math.min(100, coords.x)) : 50,
-            y: typeof coords?.y === "number" ? Math.max(0, Math.min(100, coords.y)) : 50,
+            x:
+              typeof coords?.x === "number"
+                ? Math.max(0, Math.min(100, coords.x))
+                : 50,
+            y:
+              typeof coords?.y === "number"
+                ? Math.max(0, Math.min(100, coords.y))
+                : 50,
           },
-          description: typeof rec.description === "string" ? rec.description : "",
+          description:
+            typeof rec.description === "string" ? rec.description : "",
           verification: validVerifications.includes(rec.verification as string)
             ? (rec.verification as AdminMapMarker["verification"])
             : "unverified",
           source: typeof rec.source === "string" ? rec.source : undefined,
-          linkedRecord: typeof rec.linkedRecord === "string" ? rec.linkedRecord : undefined,
+          linkedRecord:
+            typeof rec.linkedRecord === "string" ? rec.linkedRecord : undefined,
         });
       }
       if (imported.length === 0) {
-        showToast({ title: "Import failed", description: "No valid markers found in this file.", type: "danger" });
+        showToast({
+          title: "Import failed",
+          description: "No valid markers found in this file.",
+          type: "danger",
+        });
         return;
       }
       let failed = 0;
@@ -152,13 +190,18 @@ export default function AdminMapPage() {
       if (savedMarkers[0]) setSelectedMarkerId(savedMarkers[0].id);
       showToast({
         title: failed === 0 ? "Markers imported" : "Import partially failed",
-        description: failed === 0
-          ? `${imported.length} markers imported and saved.`
-          : `${imported.length - failed} of ${imported.length} saved; ${failed} failed to persist.`,
+        description:
+          failed === 0
+            ? `${imported.length} markers imported and saved.`
+            : `${imported.length - failed} of ${imported.length} saved; ${failed} failed to persist.`,
         type: failed === 0 ? "success" : "danger",
       });
     } catch {
-      showToast({ title: "Import failed", description: "Could not read this file as marker JSON.", type: "danger" });
+      showToast({
+        title: "Import failed",
+        description: "Could not read this file as marker JSON.",
+        type: "danger",
+      });
     }
   };
 
@@ -174,7 +217,8 @@ export default function AdminMapPage() {
   // Filtered Markers for Left Column
   const filteredMarkers = useMemo(() => {
     return markers.filter((m) => {
-      if (activeCategory !== "all" && m.category !== activeCategory) return false;
+      if (activeCategory !== "all" && m.category !== activeCategory)
+        return false;
       if (!activeLayers[m.layer]) return false;
       if (
         searchQuery &&
@@ -190,7 +234,7 @@ export default function AdminMapPage() {
   const handleUpdateMarker = (updated: Partial<AdminMapMarker>) => {
     if (!selectedMarker) return;
     setMarkers((prev) =>
-      prev.map((m) => (m.id === selectedMarker.id ? { ...m, ...updated } : m))
+      prev.map((m) => (m.id === selectedMarker.id ? { ...m, ...updated } : m)),
     );
   };
 
@@ -210,8 +254,18 @@ export default function AdminMapPage() {
         throw new Error(res.error);
       }
     } catch (err) {
-      if (previous) setMarkers((items) => items.map((marker) => marker.id === previous.id ? previous : marker));
-      showToast({ title: "Save failed", description: err instanceof Error ? err.message : "Marker was not saved.", type: "danger" });
+      if (previous)
+        setMarkers((items) =>
+          items.map((marker) =>
+            marker.id === previous.id ? previous : marker,
+          ),
+        );
+      showToast({
+        title: "Save failed",
+        description:
+          err instanceof Error ? err.message : "Marker was not saved.",
+        type: "danger",
+      });
     } finally {
       setIsSaving(false);
     }
@@ -233,7 +287,7 @@ export default function AdminMapPage() {
     };
 
     setMarkers((prev) =>
-      prev.map((m) => (m.id === selectedMarker.id ? updatedMarker : m))
+      prev.map((m) => (m.id === selectedMarker.id ? updatedMarker : m)),
     );
 
     // Save coordinates to Supabase — await so failures surface instead of
@@ -245,8 +299,8 @@ export default function AdminMapPage() {
         prev.map((m) =>
           m.id === selectedMarker.id
             ? { ...m, coordinates: { ...selectedMarker.coordinates } }
-            : m
-        )
+            : m,
+        ),
       );
       showToast({
         title: "Sync failed",
@@ -267,8 +321,8 @@ export default function AdminMapPage() {
               prev.map((m) =>
                 m.id === previousCoordinates.id
                   ? { ...m, coordinates: previousCoordinates.coords }
-                  : m
-              )
+                  : m,
+              ),
             );
             const undoResult = await saveMapMarker({
               ...selectedMarker,
@@ -277,7 +331,8 @@ export default function AdminMapPage() {
             if (!undoResult.success) {
               showToast({
                 title: "Undo failed to sync",
-                description: "Coordinates were reverted locally but could not be saved.",
+                description:
+                  "Coordinates were reverted locally but could not be saved.",
                 type: "danger",
               });
             }
@@ -290,7 +345,7 @@ export default function AdminMapPage() {
   const handleAddMarker = async () => {
     const newMarker: AdminMapMarker = {
       id: `mark-${Date.now()}`,
-      name: "",
+      name: "New planning marker",
       category: "Location",
       layer: "Research",
       visible: true,
@@ -301,30 +356,48 @@ export default function AdminMapPage() {
     };
     const result = await saveMapMarker(newMarker);
     if (!result.success) {
-      showToast({ title: "Create failed", description: result.error || "Marker was not saved.", type: "danger" });
+      showToast({
+        title: "Create failed",
+        description: result.error || "Marker was not saved.",
+        type: "danger",
+      });
       return;
     }
     setMarkers((prev) => [newMarker, ...prev]);
     setSelectedMarkerId(newMarker.id);
-    showToast({ title: "Marker created", description: `${newMarker.name} was saved.`, type: "success" });
+    showToast({
+      title: "Marker created",
+      description: `${newMarker.name} was saved.`,
+      type: "success",
+    });
   };
 
-  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
 
   const handleDeleteMarker = async () => {
     if (!selectedMarker) return;
     const markerToDelete = selectedMarker;
     const result = await deleteMapMarker(markerToDelete.id);
     if (!result.success) {
-      showToast({ title: "Delete failed", description: result.error || "Marker was not deleted.", type: "danger" });
+      showToast({
+        title: "Delete failed",
+        description: result.error || "Marker was not deleted.",
+        type: "danger",
+      });
       return;
     }
     const remaining = markers.filter((m) => m.id !== markerToDelete.id);
     setMarkers(remaining);
     setSelectedMarkerId(remaining[0]?.id || "");
-    showToast({ title: "Marker deleted", description: `${markerToDelete.name} was deleted.`, type: "success" });
+    showToast({
+      title: "Marker deleted",
+      description: `${markerToDelete.name} was deleted.`,
+      type: "success",
+    });
   };
-
 
   const getMarkerIcon = (icon: AdminMapMarker["icon"]) => {
     switch (icon) {
@@ -360,12 +433,17 @@ export default function AdminMapPage() {
             ) : (
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gold/10 border border-gold/30 text-gold-light">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold-light" />
-                {isLoading ? "Loading markers…" : loadError ? "Database unavailable" : "Not connected"}
+                {isLoading
+                  ? "Loading markers…"
+                  : loadError
+                    ? "Database unavailable"
+                    : "Not connected"}
               </span>
             )}
           </div>
           <p className="text-xs text-[#94A3B8] mt-1">
-            Create, reposition, and manage interactive map markers for Leonida. Changes sync live to the public map.
+            Create, reposition, and manage interactive map markers for Leonida.
+            Changes sync live to the public map.
           </p>
         </div>
 
@@ -421,8 +499,114 @@ export default function AdminMapPage() {
         </div>
       </div>
 
-      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
-      {!isLoading && !loadError && markers.length === 0 && <div className="rounded-lg border border-[#263044] bg-[#111622] px-4 py-6 text-center text-sm text-[#94A3B8]">No map markers are stored yet. Create the first marker to start building the map.</div>}
+      {loadError && (
+        <div
+          role="alert"
+          className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300"
+        >
+          {loadError}
+        </div>
+      )}
+      <details className="rounded-xl border border-[#263044] bg-[#111622] p-4 space-y-3">
+        <summary className="font-bold text-white cursor-pointer">
+          Manage imported community landmarks
+        </summary>
+        <p className="mt-3 text-sm text-slate-300">
+          The attributed GTADB snapshot is bundled with the site. Search for a
+          record to create or edit its CMS override. Hide an override to remove
+          a location from the map; deleting the override restores the source
+          record. Community coordinates remain approximate.
+        </p>
+        <label className="block text-sm text-slate-300">
+          Find a source landmark
+          <input
+            className="mt-2 w-full rounded-lg border border-slate-600 bg-slate-950 px-3 py-2 text-white"
+            value={communitySearch}
+            maxLength={120}
+            onChange={(event) => setCommunitySearch(event.target.value)}
+            placeholder="Type at least two letters, or a source ID"
+          />
+        </label>
+        <div className="grid gap-2 sm:grid-cols-2">
+          {communitySearch.trim().length >= 2 &&
+            communityLandmarks
+              .filter(
+                (item) =>
+                  item.position &&
+                  `${item.id} ${item.name} ${item.area}`
+                    .toLowerCase()
+                    .includes(communitySearch.trim().toLowerCase()),
+              )
+              .slice(0, 20)
+              .map((item) => (
+                <button
+                  key={item.id}
+                  disabled={!isConnected || isSaving}
+                  className="rounded-lg border border-slate-600 p-3 text-left text-sm text-slate-200 hover:border-gold disabled:opacity-50"
+                  onClick={async () => {
+                    if (markers.some((marker) => marker.id === item.id)) {
+                      setSelectedMarkerId(item.id);
+                      return;
+                    }
+                    setIsSaving(true);
+                    try {
+                      const marker: AdminMapMarker = {
+                        id: item.id,
+                        name: item.name,
+                        category: "Location",
+                        layer: "Community",
+                        visible: true,
+                        icon: "pin",
+                        coordinates: {
+                          x: item.position!.left,
+                          y: item.position!.top,
+                        },
+                        description:
+                          "Community-source override. Coordinates and gameplay remain unverified.",
+                        verification: "unverified",
+                        source: item.reference,
+                      };
+                      const result = await saveMapMarker(marker);
+                      if (!result.success)
+                        throw new Error(
+                          result.error || "Override was not saved.",
+                        );
+                      setMarkers((old) => [marker, ...old]);
+                      setSelectedMarkerId(marker.id);
+                      showToast({
+                        title: "Community override created",
+                        description:
+                          "Edit this record below. The upstream source snapshot stays intact.",
+                        type: "success",
+                      });
+                    } catch (error) {
+                      showToast({
+                        title: "Could not create override",
+                        description:
+                          error instanceof Error
+                            ? error.message
+                            : "Storage unavailable.",
+                        type: "danger",
+                      });
+                    } finally {
+                      setIsSaving(false);
+                    }
+                  }}
+                >
+                  <strong>{item.name}</strong>
+                  <span className="block text-xs mt-1">
+                    {item.id} · {item.area}
+                  </span>
+                </button>
+              ))}
+        </div>
+      </details>
+      {!isLoading && !loadError && markers.length === 0 && (
+        <div className="rounded-lg border border-[#263044] bg-[#111622] px-4 py-6 text-center text-sm text-[#94A3B8]">
+          No map markers are stored yet. Create the first marker to start
+          building the map.
+        </div>
+      )}
 
       {/* 3-Column Layout (Image 4) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-[calc(100vh-210px)] min-h-[640px]">
@@ -456,21 +640,23 @@ export default function AdminMapPage() {
 
             {/* Category Filter Pills */}
             <div className="flex items-center gap-1 overflow-x-auto scrollbar-none pt-1">
-              {(["all", "Location", "Collectibles", "Activities"] as const).map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setActiveCategory(cat)}
-                  className={cn(
-                    "px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors whitespace-nowrap",
-                    activeCategory === cat
-                      ? "bg-[#6366F1] text-white"
-                      : "text-[#94A3B8] hover:bg-[#182030]"
-                  )}
-                >
-                  {cat === "all" ? "All" : cat}
-                </button>
-              ))}
+              {(["all", "Location", "Collectibles", "Activities"] as const).map(
+                (cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setActiveCategory(cat)}
+                    className={cn(
+                      "px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors whitespace-nowrap",
+                      activeCategory === cat
+                        ? "bg-[#6366F1] text-white"
+                        : "text-[#94A3B8] hover:bg-[#182030]",
+                    )}
+                  >
+                    {cat === "all" ? "All" : cat}
+                  </button>
+                ),
+              )}
             </div>
           </div>
 
@@ -492,7 +678,7 @@ export default function AdminMapPage() {
                       "w-full flex items-center justify-between p-2.5 rounded-xl text-left transition-colors group",
                       isSelected
                         ? "bg-[#3730A3]/50 text-white border border-[#4F46E5]/40 shadow-sm"
-                        : "hover:bg-[#141B2A] text-white"
+                        : "hover:bg-[#141B2A] text-white",
                     )}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
@@ -501,13 +687,15 @@ export default function AdminMapPage() {
                           "p-1.5 rounded-lg border",
                           isSelected
                             ? "bg-white/20 border-white/30 text-white"
-                            : "bg-[#0E131D] border-[#1C2436] text-indigo-400"
+                            : "bg-[#0E131D] border-[#1C2436] text-indigo-400",
                         )}
                       >
                         {getMarkerIcon(m.icon)}
                       </span>
                       <div className="min-w-0">
-                        <p className="text-xs font-semibold truncate">{m.name}</p>
+                        <p className="text-xs font-semibold truncate">
+                          {m.name}
+                        </p>
                         <p className="text-xs text-[#64748B] truncate">
                           {m.category} • Layer: {m.layer}
                         </p>
@@ -564,14 +752,14 @@ export default function AdminMapPage() {
           {/* Compass Rose */}
           <div className="absolute bottom-4 left-4 z-20 pointer-events-none flex items-center gap-2 bg-[#111622]/80 backdrop-blur-sm border border-[#1C2436] rounded-xl px-2.5 py-1 text-xs font-mono font-bold text-white">
             <Compass className="w-4 h-4 text-indigo-400" />
-            <span>N 25°46&apos;30&quot;</span>
+            <span>Normalized planning canvas</span>
           </div>
 
           {/* Scale Bar */}
           <div className="absolute bottom-4 right-4 z-20 pointer-events-none flex flex-col items-end gap-1">
             <div className="w-24 h-1.5 bg-[#1C2436] border-t border-b border-indigo-400 rounded-sm" />
             <span className="text-xs font-mono text-[#64748B] font-bold">
-              1,000 meters
+              Unverified scale
             </span>
           </div>
 
@@ -579,8 +767,12 @@ export default function AdminMapPage() {
           <div
             onClick={(e) => {
               const rect = e.currentTarget.getBoundingClientRect();
-              const clickX = Math.round(((e.clientX - rect.left) / rect.width) * 100);
-              const clickY = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+              const clickX = Math.round(
+                ((e.clientX - rect.left) / rect.width) * 100,
+              );
+              const clickY = Math.round(
+                ((e.clientY - rect.top) / rect.height) * 100,
+              );
               handleMoveMarkerOnCanvas(clickX, clickY);
             }}
             className="flex-1 w-full h-full relative cursor-crosshair overflow-hidden"
@@ -590,6 +782,15 @@ export default function AdminMapPage() {
               transition: "transform 0.15s ease-out",
             }}
           >
+            <img
+              src={
+                selectedMarker?.id.startsWith("gtadb-")
+                  ? "/maps/gtadb-yanis17/overview.webp"
+                  : "/img/leonida-map-v2.jpg"
+              }
+              alt="Planning map background; coordinates are provisional"
+              className="absolute inset-0 h-full w-full object-fill pointer-events-none"
+            />
             {/* Coordinate Grid Background */}
             <div
               className="absolute inset-0 opacity-20"
@@ -603,7 +804,7 @@ export default function AdminMapPage() {
             {/* Stylized Leonida Island Shapes */}
             <svg
               viewBox="0 0 100 100"
-              className="w-full h-full absolute inset-0 opacity-30 pointer-events-none"
+              className="hidden w-full h-full absolute inset-0 opacity-30 pointer-events-none"
               preserveAspectRatio="none"
               aria-hidden="true"
             >
@@ -629,50 +830,58 @@ export default function AdminMapPage() {
             </svg>
 
             {/* Render Map Markers */}
-            {filteredMarkers.map((m) => {
-              const isSelected = selectedMarker?.id === m.id;
-              return (
-                <div
-                  key={m.id}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedMarkerId(m.id);
-                  }}
-                  className={cn(
-                    "absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-150 group z-10",
-                    isSelected ? "scale-125 z-30" : "hover:scale-110"
-                  )}
-                  style={{
-                    left: `${m.coordinates.x}%`,
-                    top: `${m.coordinates.y}%`,
-                  }}
-                >
-                  {isSelected && (
-                    <span className="absolute -inset-2 rounded-2xl border-2 border-indigo-400/80 animate-ping opacity-75 pointer-events-none" />
-                  )}
+            {filteredMarkers
+              .filter(
+                (marker) =>
+                  marker.id.startsWith("gtadb-") ===
+                  !!selectedMarker?.id.startsWith("gtadb-"),
+              )
+              .map((m) => {
+                const isSelected = selectedMarker?.id === m.id;
+                return (
                   <div
+                    key={m.id}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedMarkerId(m.id);
+                    }}
                     className={cn(
-                      "relative p-1.5 rounded-xl border shadow-lg flex items-center justify-center transition-colors",
-                      isSelected
-                        ? "bg-[#6366F1] border-white text-white ring-4 ring-[#6366F1]/40"
-                        : "bg-[#111622] border-[#1C2436] text-indigo-400 hover:border-[#6366F1]"
+                      "absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-150 group z-10",
+                      isSelected ? "scale-125 z-30" : "hover:scale-110",
                     )}
+                    style={{
+                      left: `${m.coordinates.x}%`,
+                      top: `${m.coordinates.y}%`,
+                    }}
                   >
-                    {getMarkerIcon(m.icon)}
-                  </div>
+                    {isSelected && (
+                      <span className="absolute -inset-2 rounded-2xl border-2 border-indigo-400/80 animate-ping opacity-75 pointer-events-none" />
+                    )}
+                    <div
+                      className={cn(
+                        "relative p-1.5 rounded-xl border shadow-lg flex items-center justify-center transition-colors",
+                        isSelected
+                          ? "bg-[#6366F1] border-white text-white ring-4 ring-[#6366F1]/40"
+                          : "bg-[#111622] border-[#1C2436] text-indigo-400 hover:border-[#6366F1]",
+                      )}
+                    >
+                      {getMarkerIcon(m.icon)}
+                    </div>
 
-                  {/* Marker tooltip on hover / selected */}
-                  <div
-                    className={cn(
-                      "absolute top-full mt-1.5 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap bg-[#111622] border border-[#1C2436] text-white shadow-xl pointer-events-none transition-opacity",
-                      isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                    )}
-                  >
-                    {m.name}
+                    {/* Marker tooltip on hover / selected */}
+                    <div
+                      className={cn(
+                        "absolute top-full mt-1.5 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap bg-[#111622] border border-[#1C2436] text-white shadow-xl pointer-events-none transition-opacity",
+                        isSelected
+                          ? "opacity-100"
+                          : "opacity-0 group-hover:opacity-100",
+                      )}
+                    >
+                      {m.name}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
 
@@ -690,7 +899,13 @@ export default function AdminMapPage() {
             {selectedMarker && (
               <button
                 type="button"
-                onClick={() => selectedMarker && setDeleteTarget({ id: selectedMarker.id, name: selectedMarker.name })}
+                onClick={() =>
+                  selectedMarker &&
+                  setDeleteTarget({
+                    id: selectedMarker.id,
+                    name: selectedMarker.name,
+                  })
+                }
                 aria-label={`Delete ${selectedMarker.name}`}
                 className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 p-1 rounded transition-colors"
               >
@@ -775,7 +990,9 @@ export default function AdminMapPage() {
                   aria-label="Pin icon options"
                   className="grid grid-cols-6 gap-1.5"
                 >
-                  {(["pin", "flag", "star", "car", "square", "dot"] as const).map((ic) => (
+                  {(
+                    ["pin", "flag", "star", "car", "square", "dot"] as const
+                  ).map((ic) => (
                     <button
                       key={ic}
                       type="button"
@@ -787,7 +1004,7 @@ export default function AdminMapPage() {
                         "p-2 rounded-xl border flex items-center justify-center transition-colors",
                         selectedMarker.icon === ic
                           ? "bg-[#6366F1] text-white border-[#6366F1] shadow-sm"
-                          : "bg-[#0E131D] border-[#1C2436] text-[#64748B] hover:text-white"
+                          : "bg-[#0E131D] border-[#1C2436] text-[#64748B] hover:text-white",
                       )}
                     >
                       {getMarkerIcon(ic)}
@@ -819,7 +1036,10 @@ export default function AdminMapPage() {
                         handleUpdateMarker({
                           coordinates: {
                             ...selectedMarker.coordinates,
-                            x: Math.max(0, Math.min(100, Number(e.target.value) || 0)),
+                            x: Math.max(
+                              0,
+                              Math.min(100, Number(e.target.value) || 0),
+                            ),
                           },
                         })
                       }
@@ -844,7 +1064,10 @@ export default function AdminMapPage() {
                         handleUpdateMarker({
                           coordinates: {
                             ...selectedMarker.coordinates,
-                            y: Math.max(0, Math.min(100, Number(e.target.value) || 0)),
+                            y: Math.max(
+                              0,
+                              Math.min(100, Number(e.target.value) || 0),
+                            ),
                           },
                         })
                       }
@@ -853,7 +1076,8 @@ export default function AdminMapPage() {
                   </div>
                 </div>
                 <p className="text-xs text-[#64748B] mt-1">
-                  💡 Tip: Click anywhere on the map canvas to reposition this marker.
+                  💡 Tip: Click anywhere on the map canvas to reposition this
+                  marker.
                 </p>
               </div>
 
@@ -869,7 +1093,9 @@ export default function AdminMapPage() {
                   id="marker-description"
                   rows={3}
                   value={selectedMarker.description}
-                  onChange={(e) => handleUpdateMarker({ description: e.target.value })}
+                  onChange={(e) =>
+                    handleUpdateMarker({ description: e.target.value })
+                  }
                   className="w-full px-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
                 />
               </div>
@@ -877,18 +1103,26 @@ export default function AdminMapPage() {
               {/* Verification & Visibility */}
               <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-white">Public Visibility</span>
+                  <span className="font-semibold text-white">
+                    Public Visibility
+                  </span>
                   <button
                     type="button"
-                    onClick={() => handleUpdateMarker({ visible: !selectedMarker.visible })}
+                    onClick={() =>
+                      handleUpdateMarker({ visible: !selectedMarker.visible })
+                    }
                     className={cn(
                       "p-1.5 rounded-lg border transition-colors",
                       selectedMarker.visible
                         ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                        : "bg-[#182030] border-[#1C2436] text-[#64748B]"
+                        : "bg-[#182030] border-[#1C2436] text-[#64748B]",
                     )}
                   >
-                    {selectedMarker.visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                    {selectedMarker.visible ? (
+                      <Eye className="w-4 h-4" />
+                    ) : (
+                      <EyeOff className="w-4 h-4" />
+                    )}
                   </button>
                 </div>
 
@@ -904,7 +1138,8 @@ export default function AdminMapPage() {
                     value={selectedMarker.verification}
                     onChange={(e) =>
                       handleUpdateMarker({
-                        verification: e.target.value as AdminMapMarker["verification"],
+                        verification: e.target
+                          .value as AdminMapMarker["verification"],
                       })
                     }
                     className="px-2 py-1 rounded-lg bg-[#111622] border border-[#1C2436] text-xs text-white focus:outline-none"
@@ -952,22 +1187,29 @@ export default function AdminMapPage() {
         title="Delete permanently?"
         description={`This will permanently delete "${deleteTarget?.name}". This action cannot be undone.`}
         variant="danger"
-        footer={<>
-          <button
-                      type="button"
-                      onClick={() => setDeleteTarget(null)}
-                      className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
-                    >
-                      Cancel
-                    </button>
-          <button
-            type="button"
-            onClick={() => { if (deleteTarget) { handleDeleteMarker(); setDeleteTarget(null); } }}
-            className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
-          >
-            Delete
-          </button>
-        </>}
+        footer={
+          <>
+            <button
+              type="button"
+              onClick={() => setDeleteTarget(null)}
+              className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (deleteTarget) {
+                  handleDeleteMarker();
+                  setDeleteTarget(null);
+                }
+              }}
+              className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white transition-colors"
+            >
+              Delete
+            </button>
+          </>
+        }
       />
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 
 import { AdminMapMarker } from "@/lib/admin-store";
 import { assertAdmin } from "@/lib/auth/assert-admin";
@@ -38,7 +38,8 @@ function rowToMarker(row: DatabaseMapMarkerRow): AdminMapMarker {
       y: Number.isFinite(Number(row.coord_y)) ? Number(row.coord_y) : 50,
     },
     description: row.description || "",
-    verification: (row.verification as AdminMapMarker["verification"]) || "verified",
+    verification:
+      (row.verification as AdminMapMarker["verification"]) || "verified",
     source: row.source || undefined,
     linkedRecord: row.linked_record || undefined,
     createdAt: row.created_at || undefined,
@@ -51,14 +52,49 @@ function rowToMarker(row: DatabaseMapMarkerRow): AdminMapMarker {
  */
 export async function getMapMarkers(): Promise<AdminMapMarker[]> {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("map_markers")
       .select("*")
+      .eq("visible", true)
       .order("created_at", { ascending: true });
 
     if (!error && data) {
-      return (data as DatabaseMapMarkerRow[]).map(rowToMarker);
+      const publicRows = (data as DatabaseMapMarkerRow[]).filter(
+        (row) => !row.id.startsWith("gtadb-"),
+      );
+      // Only public community-source IDs can have overrides. Hidden overrides
+      // expose an ID and visibility flag, never unpublished names or notes.
+      const admin = createAdminClient();
+      const overrides: AdminMapMarker[] = [];
+      for (let start = 0; start < 4000; start += 1000) {
+        const result = await admin
+          .from("map_markers")
+          .select("*")
+          .like("id", "gtadb-%")
+          .range(start, start + 999)
+          .abortSignal(AbortSignal.timeout(6000));
+        if (result.error)
+          throw new Error("Community map overrides are unavailable.");
+        const batch = result.data as DatabaseMapMarkerRow[];
+        overrides.push(
+          ...batch.map((row) =>
+            rowToMarker(
+              row.visible
+                ? row
+                : {
+                    ...row,
+                    name: "",
+                    description: "",
+                    source: null,
+                    linked_record: null,
+                  },
+            ),
+          ),
+        );
+        if (batch.length < 1000) break;
+      }
+      return [...publicRows.map(rowToMarker), ...overrides];
     }
     console.error("getMapMarkers: database error", error?.message);
   } catch {
@@ -71,7 +107,10 @@ export async function getMapMarkers(): Promise<AdminMapMarker[]> {
 export async function getAdminMapMarkers(): Promise<AdminMapMarker[]> {
   await assertAdmin();
   const supabase = createAdminClient();
-  const { data, error } = await supabase.from("map_markers").select("*").order("created_at", { ascending: true });
+  const { data, error } = await supabase
+    .from("map_markers")
+    .select("*")
+    .order("created_at", { ascending: true });
   if (error) throw new Error(`Could not load map markers: ${error.message}`);
   return (data as DatabaseMapMarkerRow[]).map(rowToMarker);
 }
@@ -79,11 +118,33 @@ export async function getAdminMapMarkers(): Promise<AdminMapMarker[]> {
 /**
  * Save or update a map marker in Supabase
  */
-export async function saveMapMarker(marker: Partial<AdminMapMarker> & { name: string; id?: string }) {
+export async function saveMapMarker(
+  marker: Partial<AdminMapMarker> & { name: string; id?: string },
+) {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
     const id = marker.id || `mark-${Date.now()}`;
+    if (!/^[a-zA-Z0-9_-]{1,160}$/.test(id))
+      throw new Error("Invalid map marker ID.");
+    if (!marker.name.trim() || marker.name.length > 160)
+      throw new Error("Enter a marker name of at most 160 characters.");
+    if (
+      marker.coordinates &&
+      ![marker.coordinates.x, marker.coordinates.y].every(
+        (value) =>
+          typeof value === "number" &&
+          Number.isFinite(value) &&
+          value >= 0 &&
+          value <= 100,
+      )
+    )
+      throw new Error("Map coordinates must be between 0 and 100.");
+    if (
+      (marker.description?.length || 0) > 3000 ||
+      (marker.source?.length || 0) > 2000
+    )
+      throw new Error("Map description or source is too long.");
 
     const payload: Partial<DatabaseMapMarkerRow> = {
       id,
@@ -101,7 +162,9 @@ export async function saveMapMarker(marker: Partial<AdminMapMarker> & { name: st
       updated_at: new Date().toISOString(),
     };
 
-    const { error } = await supabase.from("map_markers").upsert(payload, { onConflict: "id" });
+    const { error } = await supabase
+      .from("map_markers")
+      .upsert(payload, { onConflict: "id" });
     if (error) throw error;
 
     await logActivity({
@@ -130,11 +193,20 @@ export async function deleteMapMarker(id: string) {
   try {
     await assertAdmin();
     const supabase = createAdminClient();
-    const { data, error } = await supabase.from("map_markers").delete().eq("id", id).select("id");
+    const { data, error } = await supabase
+      .from("map_markers")
+      .delete()
+      .eq("id", id)
+      .select("id");
     if (error) throw error;
-    if (!data?.length) throw new Error("Map marker was not found; no record was deleted.");
+    if (!data?.length)
+      throw new Error("Map marker was not found; no record was deleted.");
 
-    await logActivity({ action: "delete", targetType: "map_marker", targetId: id });
+    await logActivity({
+      action: "delete",
+      targetType: "map_marker",
+      targetId: id,
+    });
 
     revalidatePath("/map");
     revalidatePath("/map-explorer");

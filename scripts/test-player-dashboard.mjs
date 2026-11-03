@@ -35,6 +35,8 @@ function loader(mocks = {}, globals = {}) {
     const importModule = (name) => {
       if (Object.hasOwn(mocks, name)) return mocks[name];
       if (name === "server-only") return {};
+      if (name.endsWith(".json"))
+        return require(path.resolve(path.dirname(full), name));
       if (name.startsWith("@/")) return load(`src/${name.slice(2)}.ts`);
       if (name.startsWith("."))
         return load(
@@ -334,9 +336,28 @@ async function serverFixture() {
     ],
   ]);
   let writes = 0;
+  const publicIndexes = new Map();
   const supabase = {
     from: () => ({
+      select: () => ({
+        eq: (_, key) => ({
+          maybeSingle: async () => ({
+            data: publicIndexes.has(key)
+              ? { value: publicIndexes.get(key) }
+              : null,
+            error: null,
+          }),
+        }),
+      }),
+      insert: async (row) => {
+        publicIndexes.set(row.key, row.value);
+        return { error: null };
+      },
       delete: () => ({
+        eq: async (_, key) => {
+          publicIndexes.delete(key);
+          return { error: null };
+        },
         in: async (_, keys) => {
           for (const key of keys)
             if (key.startsWith("user_account:"))
@@ -394,6 +415,7 @@ async function serverFixture() {
       cookie = next;
     },
     getWrites: () => writes,
+    publicIndexes,
   };
 }
 test("a player cannot select another owner through the workspace payload", async () => {
@@ -526,4 +548,225 @@ test("confirmed account deletion removes only the authenticated owner's data and
   assert.equal(fixture.accounts.has("alice@example.com"), false);
   assert.equal(fixture.accounts.has("bob@example.com"), true);
   assert.equal((await fixture.route.GET()).status, 401);
+});
+
+const portfolioTools = load("src/lib/player-portfolio.ts");
+const collectionAsset = (change = {}) => ({
+  id: "my-car",
+  kind: "vehicle",
+  name: "My car",
+  status: "owned",
+  catalogPath: "",
+  garageId: "",
+  baseValue: 1000,
+  upgradeValue: 100,
+  image: "",
+  notes: "Never publish this private note",
+  showcase: true,
+  updatedAt: "2026-11-02T00:00:00Z",
+  ...change,
+});
+test("collection totals exclude wishlist and unknown values do not become known zeros", () => {
+  const result = portfolioTools.portfolioTotals([
+    collectionAsset(),
+    collectionAsset({ id: "wishlist", status: "wishlist", baseValue: 999999 }),
+    collectionAsset({ id: "unknown", baseValue: null, upgradeValue: null }),
+  ]);
+  assert.deepEqual(plain(result), {
+    owned: 2,
+    wishlist: 1,
+    knownValue: 1100,
+    unknownBaseValues: 1,
+  });
+});
+test("collection schema refuses unsafe images, duplicate IDs, invalid amounts and missing garages", () => {
+  for (const change of [
+    { image: "https://tracker.example/pixel" },
+    { image: "data:image/svg+xml;base64,PHN2Zz4=" },
+    { baseValue: -1 },
+    { baseValue: Infinity },
+    { upgradeValue: 1.5 },
+    { garageId: "nonexistent" },
+  ])
+    assert.throws(() =>
+      schema.parseWorkspace({
+        portfolio: { assets: [collectionAsset(change)] },
+      }),
+    );
+  assert.throws(
+    () =>
+      schema.parseWorkspace({
+        portfolio: { assets: [collectionAsset(), collectionAsset()] },
+      }),
+    /Duplicate/,
+  );
+  assert.equal(schema.parseWorkspace({}).portfolio.assets.length, 0);
+  assert.throws(() =>
+    schema.parseWorkspace({
+      personalMarkers: [
+        {
+          id: "personal-one",
+          title: "Pin",
+          top: 50,
+          left: 50,
+          mapSpace: "unknown-map",
+        },
+      ],
+    }),
+  );
+});
+test("public snapshots whitelist selected fields and never include private notes, garages or excluded items", () => {
+  const portfolio = portfolioTools.parsePortfolio({
+    profile: { name: "Public player", bio: "Chosen bio", image: "" },
+    garages: [
+      {
+        id: "private-garage",
+        name: "Private garage",
+        capacity: 10,
+        notes: "Private garage note",
+      },
+    ],
+    assets: [
+      collectionAsset(),
+      collectionAsset({ id: "hidden", showcase: false, name: "Hidden item" }),
+    ],
+  });
+  const result = portfolioTools.buildPublicShowcase(
+    portfolio,
+    "a".repeat(32),
+    false,
+    false,
+  );
+  assert.equal(result.assets.length, 1);
+  assert.equal(result.assets[0].baseValue, null);
+  assert.equal(result.assets[0].upgradeValue, null);
+  assert.doesNotMatch(
+    JSON.stringify(result),
+    /private note|Private garage|Hidden item|garageId|email/,
+  );
+  assert.equal(
+    portfolioTools.parsePublicShowcase(result).name,
+    "Public player",
+  );
+  assert.throws(() =>
+    portfolioTools.buildPublicShowcase(
+      { ...portfolio, profile: { name: "", bio: "", image: "" } },
+      "a".repeat(32),
+      false,
+      false,
+    ),
+  );
+});
+test("public profile publishing derives its owner, rejects stale writes and withdraws the public link", async () => {
+  const fixture = await serverFixture();
+  const alice = fixture.accounts.get("alice@example.com");
+  alice.workspace.portfolio = portfolioTools.parsePortfolio({
+    profile: { name: "Alice collection", bio: "", image: "" },
+    assets: [collectionAsset()],
+  });
+  const route = fixture.serverLoad("src/app/api/account/showcase/route.ts");
+  const reading = fixture.serverLoad("src/lib/player-showcase-server.ts");
+  assert.equal(
+    (
+      await route.POST(
+        fixture.makeRequest({
+          version: "stale",
+          showValues: false,
+          showImages: false,
+          confirmation: "PUBLISH SELECTED",
+        }),
+      )
+    ).status,
+    409,
+  );
+  assert.equal(fixture.publicIndexes.size, 0);
+  assert.equal(
+    (
+      await route.POST(
+        fixture.makeRequest({
+          version: null,
+          showValues: false,
+          showImages: false,
+          confirmation: "PUBLISH SELECTED",
+          email: "bob@example.com",
+        }),
+      )
+    ).status,
+    200,
+  );
+  assert.equal(fixture.accounts.get("bob@example.com").showcase, undefined);
+  const profile = fixture.accounts.get("alice@example.com").showcase;
+  assert.equal(
+    (await reading.readPublicShowcase(profile.id)).name,
+    "Alice collection",
+  );
+  assert.equal((await route.DELETE(fixture.makeRequest({}))).status, 200);
+  assert.equal(await reading.readPublicShowcase(profile.id), null);
+});
+test("an older client cannot silently erase an existing collection by omitting its schema field", async () => {
+  const fixture = await serverFixture();
+  fixture.accounts.get("alice@example.com").workspace.portfolio.assets = [
+    collectionAsset(),
+  ];
+  const workspace = schema.emptyWorkspace();
+  delete workspace.portfolio;
+  assert.equal(
+    (await fixture.route.PUT(fixture.makeRequest({ version: null, workspace })))
+      .status,
+    400,
+  );
+  assert.equal(fixture.getWrites(), 0);
+});
+test("map source preserves unknown positions and viewport clusters keep every visible record", () => {
+  const map = load("src/lib/community-map.ts");
+  assert.ok(map.communityLandmarks.some((item) => item.position === null));
+  assert.ok(
+    map.communityLandmarks
+      .filter((item) => item.position)
+      .every(
+        (item) =>
+          item.position.top >= 0 &&
+          item.position.top <= 100 &&
+          item.position.left >= 0 &&
+          item.position.left <= 100,
+      ),
+  );
+  const points = [
+    { id: "a", top: "50%", left: "50%" },
+    { id: "b", top: "51%", left: "51%" },
+    { id: "offscreen", top: "95%", left: "95%" },
+  ];
+  const clusters = map.clusterMapPins(
+    points,
+    1,
+    { x: -400, y: -400 },
+    { width: 600, height: 600 },
+  );
+  assert.deepEqual(
+    plain(
+      clusters.flatMap((item) => item.members.map((point) => point.id)),
+    ).sort(),
+    ["a", "b"],
+  );
+  assert.equal(
+    map.nextUnvisited(points, { a: true, b: true }, "b").id,
+    "offscreen",
+  );
+  assert.equal(
+    map.nextUnvisited(points, { a: true, b: true, offscreen: true }),
+    null,
+  );
+  const first = map.communityLandmarks.find((item) => item.position);
+  assert.ok(
+    !map
+      .applyCommunityOverrides([{ id: first.id, visible: false }])
+      .some((item) => item.id === first.id),
+  );
+});
+
+test("a missing cloud revision requests resolution instead of erasing a synced local collection", () => {
+  const local=schema.emptyWorkspace();local.portfolio.assets=[collectionAsset()];
+  assert.equal(schema.workspaceNeedsResolution("2026-11-02T00:00:00Z",null,false,local),true);
+  assert.equal(schema.workspaceNeedsResolution("2026-11-02T00:00:00Z","2026-11-02T01:00:00Z",false,local),false);
+  assert.equal(schema.workspaceNeedsResolution(undefined,null,false,schema.emptyWorkspace()),false);
 });

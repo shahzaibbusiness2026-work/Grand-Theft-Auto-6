@@ -24,6 +24,11 @@ export async function PlayerCatalogDetail({
         establish gameplay specifications.
       </p>
       <FavoriteButton type={kind} id={item.id} />
+      {kind === "vehicles" && (
+        <Link href="/dashboard/garage" className="player-button ml-2">
+          Manage my garage & wishlist
+        </Link>
+      )}
       <h2 className="mb-3 mt-6 text-lg font-bold">Reviewed evidence</h2>
       {!item.claims.length && (
         <p className="text-sm text-slate-400">

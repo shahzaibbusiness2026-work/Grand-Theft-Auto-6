@@ -6,8 +6,9 @@ import { MapClient } from "./map-client";
 import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
 import Link from "next/link";
+import { getMapMarkers } from "@/lib/services/map";
 
-const title = "GTA 6 Interactive Fan Map: Leonida & Vice City";
+const title = "GTA 6 Map: Interactive Leonida & Vice City";
 
 export const metadata: Metadata = {
   title,
@@ -36,7 +37,7 @@ export default async function MapPage() {
   }
   return (
     <SiteShell>
-      <MapClient />
+      <MapClient markers={await getMapMarkers()} />
       <section className="container-site pb-10" aria-labelledby="map-questions">
         <h2 id="map-questions" className="font-display text-2xl font-bold">
           GTA 6 map: Leonida, Vice City and map size
@@ -52,47 +53,70 @@ export default async function MapPage() {
               coordinates of our fan-map pins.
             </p>
             <p className="mt-3 text-sm">
-              <a className="underline" href="https://www.rockstargames.com/VI/only-in-leonida" target="_blank" rel="noreferrer">
+              <a
+                className="underline"
+                href="https://www.rockstargames.com/VI/only-in-leonida"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Rockstar&apos;s Only in Leonida guide
-              </a>{" · "}
-              <Link className="underline" href="/regions">Explore the six destinations</Link>
-              {" · "}<Link className="underline" href="/guides/vice-city-map-guide">Read the Leonida destination guide</Link>
+              </a>
+              {" · "}
+              <Link className="underline" href="/regions">
+                Explore the six destinations
+              </Link>
+              {" · "}
+              <Link className="underline" href="/guides/vice-city-map-guide">
+                Read the Leonida destination guide
+              </Link>
             </p>
           </article>
           <article className="card-surface rounded-2xl p-5">
-            <h3 className="text-lg font-bold">What is the GTA 6 map size in km²?</h3>
+            <h3 className="text-lg font-bold">
+              What is the GTA 6 map size in km²?
+            </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               We have not verified a primary-source measurement of the full
-              playable area in square kilometres. We therefore do not present
-              a km² total or a GTA V size ratio as confirmed. The illustration
-              on this page cannot establish either measurement.
+              playable area in square kilometres. We therefore do not present a
+              km² total or a GTA V size ratio as confirmed. Neither the community
+              reconstruction nor the planning illustration can establish either measurement.
             </p>
-            <Link className="mt-3 inline-block text-sm underline" href="/news/map-size-comparison-gtav-rdr2">
+            <Link
+              className="mt-3 inline-block text-sm underline"
+              href="/news/map-size-comparison-gtav-rdr2"
+            >
               Map-size evidence, estimates and comparison limits
             </Link>
           </article>
           <article className="card-surface rounded-2xl p-5">
-            <h3 className="text-lg font-bold">Is this an official GTA 6 map?</h3>
+            <h3 className="text-lg font-bold">
+              Is this an official GTA 6 map?
+            </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              This is an unofficial, interactive fan illustration. Its pins
-              are provisional concepts. Placement, opening hours, rewards,
-              item availability and gameplay mechanics have not passed
-              field-specific source review. An appearance in a trailer does
-              not verify all of those details.
+              This is an unofficial community reconstruction, using GTADB
+              contributors’ map tiles and landmark data under CC BY 4.0.
+              Proposed coordinates do not establish confirmed game geography,
+              opening hours, rewards or availability. The original planning
+              illustration remains a separate layer for older private pins.
             </p>
-            <Link className="mt-3 inline-block text-sm underline" href="/editorial-policy">
+            <Link
+              className="mt-3 inline-block text-sm underline"
+              href="/editorial-policy"
+            >
               How we review map evidence
             </Link>
           </article>
           <article className="card-surface rounded-2xl p-5">
-            <h3 className="text-lg font-bold">How can I use the interactive map?</h3>
+            <h3 className="text-lg font-bold">
+              How can I use the interactive map?
+            </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Search or filter the pins, select a pin to read its evidence
-              status, and use the text list as an alternative to the map.
-              Notes and marks are saved in your workspace, with account sync
-              available when signed in. They record your own
-              planning choices; they do not prove in-game discovery or
-              completion. Check your dashboard sync status before clearing browser storage.
+              status, and use the text list as an alternative to the map. Notes
+              and marks are saved in your workspace, with account sync available
+              when signed in. They record your own planning choices; they do not
+              prove in-game discovery or completion. Check your dashboard sync
+              status before clearing browser storage.
             </p>
           </article>
         </div>

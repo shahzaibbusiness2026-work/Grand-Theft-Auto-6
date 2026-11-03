@@ -14,6 +14,7 @@ import {
   hasWorkspaceData,
   mergeWorkspaces,
   parseWorkspace,
+  workspaceNeedsResolution,
   type PlayerWorkspace,
 } from "@/lib/player-state";
 import {
@@ -194,8 +195,7 @@ export function PlayerSyncProvider({
       if (JSON.stringify(local) === JSON.stringify(snapshot.workspace)) {
         apply(snapshot.workspace, snapshot.version, data.profile.email);
       } else if (
-        (knownVersion === undefined && hasWorkspaceData(local)) ||
-        (dirty && knownVersion !== snapshot.version)
+        workspaceNeedsResolution(knownVersion, snapshot.version, dirty, local)
       ) {
         blocked.current = true;
         setConflict(snapshot);

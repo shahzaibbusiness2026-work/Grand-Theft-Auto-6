@@ -124,7 +124,7 @@ export default async function MissionsPage() {
             dark="/img/hero-dark.jpg"
             light="/img/boat.jpg"
             alt="Leonida Missions"
-            className="absolute right-0 top-0 h-full w-full object-cover lg:w-2/3 opacity-70"
+            className="absolute right-0 top-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">

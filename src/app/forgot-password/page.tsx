@@ -26,7 +26,7 @@ export default function ForgotPasswordPage() {
         priority
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-black/65" />
+      <div className="absolute inset-0 bg-black/45" />
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-10">
         <div className="w-full max-w-md">
           <div className="rounded-[28px] border border-gold/40 bg-[rgba(7,11,20,0.85)] p-6 shadow-[0_0_80px_rgba(201,168,106,0.3)] backdrop-blur-xl sm:p-8">

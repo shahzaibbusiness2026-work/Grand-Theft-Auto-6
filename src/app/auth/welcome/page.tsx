@@ -61,7 +61,7 @@ export default function AuthWelcomePage() {
         priority
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-black/65" />
+      <div className="absolute inset-0 bg-black/45" />
       <div className="relative z-10 flex min-h-screen items-center justify-center px-4">
         <div className="flex items-center gap-3 rounded-3xl border border-gold/40 bg-[rgba(7,11,20,0.85)] px-6 py-5 text-white shadow-[0_0_60px_rgba(201,168,106,0.3)] backdrop-blur-xl">
           <Loader2 className="h-5 w-5 animate-spin text-gold" aria-hidden="true" />

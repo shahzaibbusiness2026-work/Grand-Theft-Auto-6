@@ -269,7 +269,7 @@ export function EvidenceCatalog({
   };
   const browser = (
     <div className={styles.catalogLayout}>
-      <aside className={styles.filters} aria-label="Catalog filters">
+      <aside className={styles.filters} aria-label="Catalog filters" tabIndex={0}>
         <Filters {...filters} />
       </aside>
       <div className="min-w-0">
