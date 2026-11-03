@@ -13,7 +13,7 @@ import {
   Layers,
 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
-import { serializeJsonLd } from "@/lib/utils";
+import { fitTitle, serializeJsonLd } from "@/lib/utils";
 import { canonicalProperties as propertyDrafts } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
@@ -43,7 +43,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${prop.name} (${prop.type}) — Property Dossier`,
+    title: fitTitle(prop.name),
     description: `Fan-made real estate breakdown for ${prop.name} in ${prop.district}. Values are fictional planning inputs, not confirmed prices, ownership or income mechanics.`,
     alternates: { canonical: `/properties/${prop.slug}` },
     openGraph: { url: `/properties/${prop.slug}` },

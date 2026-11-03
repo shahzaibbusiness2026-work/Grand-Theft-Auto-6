@@ -58,6 +58,19 @@ export default function MoneyCalculatorPage() {
                 operatingSystem: "Web",
                 offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
               },
+              {
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "Are these payout values guaranteed?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "No. Every preset is an illustrative savings target. Income, prices and playing time are your assumptions, not verified GTA VI payouts or purchase prices. A zero earning rate cannot reach a higher goal.",
+                    },
+                  },
+                ],
+              },
             ],
           }),
         }}

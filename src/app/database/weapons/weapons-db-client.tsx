@@ -248,7 +248,7 @@ export function WeaponsDbClient({ weapons, top }: { weapons?: DbWeaponCard[]; to
               {weaponCategories.map((c, i) => (
                 <a key={c.label} href="/database/weapons" className="card-surface flex flex-col items-center gap-2 p-3 text-center transition-colors hover:border-accent/60">
                   <div className="h-14 w-full overflow-hidden rounded-md">
-                    <img loading="lazy" src="/img/rifle.svg" alt="" className="h-full w-full object-cover opacity-90" style={{ filter: `hue-rotate(${i * 40}deg) grayscale(0.15) brightness(1.2)` }} />
+                    <img loading="lazy" src="/img/rifle.svg" alt={c.label} className="h-full w-full object-cover opacity-90" style={{ filter: `hue-rotate(${i * 40}deg) grayscale(0.15) brightness(1.2)` }} />
                   </div>
                   <span className="text-xs font-bold">{c.label}</span>
                 </a>

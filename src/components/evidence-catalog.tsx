@@ -333,7 +333,7 @@ export function EvidenceCatalog({
                   >
                     <SafeImage
                       src={e.img}
-                      alt=""
+                      alt={e.name}
                       fill
                       sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
                     />
@@ -350,7 +350,7 @@ export function EvidenceCatalog({
                   >
                     <SafeImage
                       src={e.img}
-                      alt=""
+                      alt={e.name}
                       fill
                       sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
                     />
@@ -516,7 +516,7 @@ export function EvidenceCatalog({
                     <div className={styles.slotImage}>
                       <SafeImage
                         src={entry.img}
-                        alt=""
+                        alt={entry.name}
                         fill
                         sizes="(max-width:767px) 45vw, 23vw"
                       />

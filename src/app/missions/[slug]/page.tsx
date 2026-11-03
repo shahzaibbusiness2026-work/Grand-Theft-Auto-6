@@ -22,7 +22,7 @@ import {
 } from "@/lib/canonical-data";
 import { getMissions } from "@/lib/services/missions";
 import { ConfidenceBadge } from "@/components/confidence-badge";
-import { serializeJsonLd } from "@/lib/utils";
+import { fitTitle, serializeJsonLd } from "@/lib/utils";
 
 /** Resolve a mission from live Supabase data, mapped to the canonical shape. */
 async function resolveMission(
@@ -114,19 +114,19 @@ export async function generateMetadata({
   if (!mission) notFound();
 
   return {
-    title: `${mission.title} — Fan Mission Concept`,
+    title: fitTitle(mission.title),
     description: `Fictional planning concept '${mission.title}'. Objectives, rewards and unlocks are examples, not verified GTA VI walkthrough instructions.`,
     alternates: { canonical: `/missions/${mission.slug}` },
     robots: { index: false, follow: true },
     openGraph: {
-      title: `${mission.title} — Fan Mission Concept`,
+      title: fitTitle(mission.title),
       description: `Fan concept: ${mission.description}`,
       url: `/missions/${mission.slug}`,
       images: mission.img ? [mission.img] : [],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${mission.title} — Fan Mission Concept`,
+      title: fitTitle(mission.title),
       description: `Fan concept: ${mission.description}`,
       images: mission.img ? [mission.img] : [],
     },

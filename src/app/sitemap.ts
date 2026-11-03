@@ -81,9 +81,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/pricing",
     "/tools/character-quiz",
   ];
-  const result: MetadataRoute.Sitemap = paths.map((path) => ({
-    url: base + path,
-  }));
+  // Dated sources are fetched first so every static hub can carry an honest
+  // lastModified: the latest real content update behind it (articles,
+  // guides, character reviews). During an outage no timestamp is invented —
+  // a hub with no known update simply omits lastModified.
+  let latestContent: Date | undefined;
+  const note = (d?: Date) => {
+    if (d && (!latestContent || d > latestContent)) latestContent = d;
+  };
+  const articleEntries: MetadataRoute.Sitemap = [];
   try {
     const { data, error } = await createPublicClient()
       .from("articles")
@@ -91,11 +97,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .eq("status", "published");
     if (error) throw error;
     for (const a of data || [])
-      if (a.slug && a.content?.trim())
-        result.push({
+      if (a.slug && a.content?.trim()) {
+        const lm = realDate(a.updated_at || a.published_at);
+        note(lm);
+        articleEntries.push({
           url: base + "/news/" + a.slug,
-          lastModified: realDate(a.updated_at || a.published_at),
+          lastModified: lm,
         });
+      }
   } catch {
     /* No invented article URLs or timestamps during an outage. */
   }
@@ -104,12 +113,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getEvidenceCatalog("vehicles"),
     getEvidenceCatalog("weapons"),
   ]);
+  const guideEntries: MetadataRoute.Sitemap = [];
   for (const g of guides)
-    if (g.slug)
-      result.push({
+    if (g.slug) {
+      const lm = realDate(g.updated_at);
+      note(lm);
+      guideEntries.push({
         url: base + "/guides/" + g.slug,
-        lastModified: realDate(g.updated_at),
+        lastModified: lm,
       });
+    }
   // Pre-launch gate (AdSense audit, 29 Oct 2026): vehicle/weapon detail
   // pages each carry only a single "GTA VI appearance" claim with all
   // statistics withheld, so they are thin content. They stay crawlable
@@ -119,10 +132,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // fails loudly if the catalog service breaks, without publishing URLs.
   void vehicles;
   void weapons;
-  for (const slug of Object.keys(characterEvidence))
-    result.push({
-      url: base + "/characters/" + slug,
-      lastModified: new Date(CHARACTER_REVIEWED_AT + "T00:00:00Z"),
-    });
+  const characterReviewed = new Date(CHARACTER_REVIEWED_AT + "T00:00:00Z");
+  note(characterReviewed);
+  const characterEntries: MetadataRoute.Sitemap = Object.keys(
+    characterEvidence,
+  ).map((slug) => ({
+    url: base + "/characters/" + slug,
+    lastModified: characterReviewed,
+  }));
+  const result: MetadataRoute.Sitemap = paths.map((path) => ({
+    url: base + path,
+    lastModified: latestContent,
+  }));
+  result.push(...articleEntries, ...guideEntries, ...characterEntries);
   return Array.from(new Map(result.map((e) => [e.url, e])).values());
 }
