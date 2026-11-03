@@ -36,7 +36,7 @@ export default async function LoginPage({
         priority
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-black/65" />
+      <div className="absolute inset-0 bg-black/45" />
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-10">
         <LoginCards oauthStatus={oauthStatus} />
         <Link

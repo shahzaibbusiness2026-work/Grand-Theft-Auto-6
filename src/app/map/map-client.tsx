@@ -1,199 +1,171 @@
-import mapStyles from "@/components/map-workspace.module.css";
-
 import Link from "next/link";
-import { Compass, Radio, ChevronRight } from "lucide-react";
-import { SatelliteInteractiveMap } from "@/components/satellite-interactive-map";
-
-const DISTRICT_GUIDES = [
-  {
-    name: "Vice City Downtown",
-    desc: "The glittering neon metropolis of Leonida. High-rise penthouses, corporate headquarters, luxury dealerships, and intense underground syndicates.",
-    img: "/img/apartment.jpg",
-    tags: ["Safehouses", "Luxury Showrooms", "Ammu-Nation"],
-  },
-  {
-    name: "Ocean Drive & South Beach",
-    desc: "Sun-soaked beachfront strips, art-deco hotels, waterfront mod garages, and iconic late-night clubs like The Malibú.",
-    img: "/img/garage.jpg",
-    tags: ["Mod Shops", "Nightclubs", "Waterfront"],
-  },
-  {
-    name: "Leonida Keys",
-    desc: "Vast archipelago of tropical islands, shallow coral reefs, smuggler marinas, hidden sunken caches, and coastal bank branches.",
-    img: "/img/boat.jpg",
-    tags: ["Speedboats", "Submerged Loot", "Heists"],
-  },
-  {
-    name: "Grassrivers Marshlands",
-    desc: "Expansive untamed swamplands, wildlife sanctuaries, abandoned military silos, and mysterious extraterrestrial graffiti murals.",
-    img: "/img/ufo-mural.jpg",
-    tags: ["Easter Eggs", "Airboats", "Wild Fauna"],
-  },
-  {
-    name: "Port Gellhorn & Industrial",
-    desc: "Heavy shipping cargo docks, industrial railyards, underground safehouses, container yards, and high-caliber weapon caches.",
-    img: "/img/smg-gun.jpg",
-    tags: ["Cargo Depots", "Weapons", "Escape Routes"],
-  },
-  {
-    name: "Mount Kalaga National Park",
-    desc: "Forested mountain wilderness, ranger stations, off-road trails, and panoramic lookouts. Confirmed as GTA 6's northern wilderness region.",
-    img: "",
-    tags: ["Stunt Jumps", "Lookouts", "Off-Road"],
-  },
-  {
-    name: "Ambrosia",
-    desc: "Rural inland heartland with farmland, small towns, and backroad Americana. A quieter corner of Leonida with hidden secrets.",
-    img: "/img/garage.jpg",
-    tags: ["Farms", "Small Towns", "Backroads"],
-  },
+import { CommunityMapWorkspace } from "@/components/community-map-workspace";
+import {
+  applyCommunityOverrides,
+  communityCategory,
+} from "@/lib/community-map";
+import type { AdminMapMarker } from "@/lib/admin-store";
+const destinations = [
+  { name: "Vice City", slug: "vice-city" },
+  { name: "Leonida Keys", slug: "leonida-keys" },
+  { name: "Grassrivers", slug: "grassrivers" },
+  { name: "Port Gellhorn", slug: "port-gellhorn" },
+  { name: "Ambrosia", slug: "ambrosia" },
+  { name: "Mount Kalaga", slug: "mount-kalaga" },
 ];
-
-export function MapClient() {
+export function MapClient({ markers = [] }: { markers?: AdminMapMarker[] }) {
+  const current = applyCommunityOverrides(markers);
+  const positioned = current.filter((item) => item.position);
+  const named = positioned.filter((item) => !item.name.startsWith("Unnamed "));
+  const categories = [
+    { id: "poi", name: "Landmarks" },
+    { id: "properties", name: "Buildings & properties" },
+    { id: "shops", name: "Shops & food" },
+    { id: "vehicles", name: "Vehicle-related places" },
+    { id: "nature", name: "Nature & landscape" },
+    { id: "transport", name: "Transport & roads" },
+    { id: "garages", name: "Garage-related places" },
+  ];
   return (
-    <div className="overflow-x-clip">
-      {/* Top Breadcrumb & Page Banner */}
-      <div
-        className={`dark-panel ${mapStyles.darkSurface} border-b border-white/10 bg-gradient-to-b from-[#0e0717] via-[#070b14] to-[#04070f] pt-8 pb-8`}
-      >
-        <div className="container-site">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-xs font-semibold text-slate-300 mb-4">
-            <Link href="/" className="hover:text-gold transition-colors">
-              Home
-            </Link>
-            <ChevronRight className="h-3 w-3 text-muted-foreground/60" />
-            <span className="text-gold dark:text-gold-light font-bold">
-              Interactive Map
-            </span>
-            <ChevronRight className="h-3 w-3 text-muted-foreground/60" />
-            <span className="text-slate-100">Leonida Satellite Atlas</span>
-          </nav>
-
-          {/* Header Row */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-gold dark:text-gold-light mb-3">
-                <Radio className="h-3 w-3 animate-pulse" /> Fan-made Interactive
-                Atlas
-              </div>
-              <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
-                GTA 6 LEONIDA{" "}
-                <span className="text-primary">INTERACTIVE MAP</span>
-              </h1>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300 font-medium">
-                Explore a fan-made Leonida map illustration. All pins are
-                provisional concepts: placement, availability, hours, rewards
-                and gameplay have not passed field-specific evidence review.
-              </p>
-            </div>
-
-            {/* Quick Stat Chips */}
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Coverage
-                </span>
-                <span className="font-display text-lg font-black text-white">
-                  Statewide
-                </span>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Evidence
-                </span>
-                <span className="font-display text-lg font-black text-[#00F0FF]">
-                  Labelled per pin
-                </span>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-black/50 px-4 py-2.5 backdrop-blur-md">
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Districts</span>
-                <span className="font-display text-lg font-black text-gold-light">7 Districts</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Map Container */}
-      <div className="container-site py-6 sm:py-8">
-        <SatelliteInteractiveMap />
-      </div>
-
-      {/* Regional Exploration Guides */}
-      <div
-        className="container-site pb-20 pt-8 border-t border-border"
-        style={{
-          contentVisibility: "auto",
-          containIntrinsicSize: "auto 1000px",
-        }}
-      >
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-          <div>
-            <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-gold dark:text-gold-light mb-1">
-              <Compass className="h-3.5 w-3.5" /> Regional Intel
-            </div>
-            <h2 className="font-display text-2xl sm:text-3xl font-black uppercase text-foreground tracking-wide">
-              Districts of Leonida
-            </h2>
-            <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-              Explore official region background separately from speculative pin
-              placement and gameplay.
-            </p>
-          </div>
-          <Link
-            href="/tracker"
-            className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-xs font-bold text-foreground hover:text-foreground hover:border-gold/50 transition-all"
-          >
-            <span>Open Progress Tracker</span>
-            <ChevronRight className="h-3.5 w-3.5 text-gold dark:text-gold-light" />
+    <div>
+      <header className="container-site pt-4 sm:pt-6 pb-4 space-y-3">
+        <nav
+          aria-label="Breadcrumb"
+          className="hidden sm:block text-sm text-muted-foreground"
+        >
+          <Link href="/" className="underline">
+            Home
           </Link>
+          <span aria-hidden="true"> / </span>
+          <span>GTA 6 map</span>
+        </nav>
+        <h1 className="font-display text-2xl sm:text-4xl font-black">
+          GTA 6 Interactive Map: Leonida & Vice City
+        </h1>
+        <p className="sm:hidden text-sm text-muted-foreground">
+          Search Leonida’s community map. Positions and boundaries remain
+          unofficial.
+        </p>
+        <p className="hidden sm:block max-w-3xl text-sm text-muted-foreground">
+          Search community-mapped landmarks, explore categories and keep your
+          own notes and planning marks. This reconstruction is unofficial:
+          positions, identities and boundaries can change.
+        </p>
+        <div className="hidden sm:flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <span>
+            <strong>{positioned.length.toLocaleString("en-US")}</strong>{" "}
+            positioned community records
+          </span>
+          <span>
+            <strong>{named.length.toLocaleString("en-US")}</strong> named
+            records
+          </span>
+          <span>
+            <strong>{current.length - positioned.length}</strong> records
+            without coordinates
+          </span>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {DISTRICT_GUIDES.map((d) => (
-            <div
-              key={d.name}
-              className="group rounded-3xl border border-white/10 bg-[#070c18] overflow-hidden transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-2xl flex flex-col"
+      </header>
+      <section
+        className="container-site pb-8"
+        aria-label="Interactive Leonida map"
+      >
+        <CommunityMapWorkspace markers={markers} />
+      </section>
+      <section
+        className="container-site pb-8 space-y-5"
+        aria-labelledby="map-directory"
+      >
+        <h2 id="map-directory" className="font-display text-2xl font-bold">
+          Explore the map by category
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Categories reflect contributor classifications, not verified gameplay
+          services. Unpositioned records are kept off the map instead of being
+          given invented coordinates.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {categories.map((category) => (
+            <a
+              href={`/map?category=${category.id}`}
+              key={category.id}
+              className="card-surface rounded-xl border border-border p-4 hover:border-gold"
             >
-              <div className="relative h-44 overflow-hidden bg-black/60">
-                {d.img ? (
-                  <img loading="lazy"
-                    src={d.img}
-                    alt={d.name}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                ) : null}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#070c18] via-transparent to-black/30" />
-                <div className="absolute bottom-3 left-4 right-4">
-                  <h3 className="font-display text-lg font-black uppercase text-white drop-shadow-md">
-                    {d.name}
-                  </h3>
-                </div>
-              </div>
-
-              <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                <p className="text-xs leading-relaxed text-slate-300 font-medium">
-                  Editorial region concept. Precise locations, services,
-                  missions and mechanics remain unverified.
-                </p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {d.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-lg bg-white/5 border border-white/10 px-2 py-0.5 text-xs font-semibold text-slate-400"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+              <h3 className="font-bold">{category.name}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {
+                  positioned.filter(
+                    (item) => communityCategory(item.types) === category.id,
+                  ).length
+                }{" "}
+                positioned community records · Open filter
+              </p>
+            </a>
           ))}
         </div>
-      </div>
+        <details className="card-surface rounded-xl border border-border p-5">
+          <summary className="cursor-pointer font-bold min-h-11">
+            Browse named community locations
+          </summary>
+          <p className="mb-4 text-sm text-muted-foreground">
+            A selection of named records from the snapshot. Search the map for
+            the full set. Names and placements are contributor interpretations.
+          </p>
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {named.slice(0, 60).map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`/map?poi=${encodeURIComponent(item.id)}`}
+                  className="block rounded-lg border border-border p-3 text-sm hover:border-gold"
+                >
+                  <strong>{item.name}</strong>
+                  <span className="block mt-1 text-muted-foreground">
+                    {item.area || "Area unclassified"}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </section>
+      <section
+        className="container-site pb-10 space-y-5"
+        aria-labelledby="official-destinations"
+      >
+        <h2
+          id="official-destinations"
+          className="font-display text-2xl font-bold"
+        >
+          Six destinations named by Rockstar
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Rockstar names these destinations in its{" "}
+          <a
+            href="https://www.rockstargames.com/VI/only-in-leonida"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            Only in Leonida guide
+          </a>
+          . Their names are separate from the community map’s proposed
+          coordinates.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {destinations.map((item) => (
+            <Link
+              className="card-surface rounded-xl border border-border p-5 hover:border-gold"
+              href={`/regions/${item.slug}`}
+              key={item.slug}
+            >
+              <h3 className="font-display text-xl font-bold">{item.name}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Read destination background and source context →
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { WorldMediaFigure } from "@/components/world-media-figure";
 import { asConcept } from "@/lib/world-evidence";
 import { ConceptNotice } from "@/components/concept-notice";
 import { SiteShell } from "@/components/shells";
@@ -103,6 +104,9 @@ export default async function PropertiesPage() {
           </p>
         </div>
 
+        <div className="mb-8">
+          <WorldMediaFigure path="/properties" priority />
+        </div>
         <PropertiesClient initialProperties={properties.map(asConcept)} />
       </div>
     </SiteShell>

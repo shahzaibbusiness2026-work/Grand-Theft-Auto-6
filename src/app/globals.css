@@ -954,6 +954,17 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
     transform: scale(1.08);
   }
 }
+/* Artwork stays visible in both themes. Keep the strongest shading behind
+   the article title, leaving the upper image clear rather than washing it
+   out with an almost opaque theme-colored card. */
+.image-hero-shade {
+  background: linear-gradient(
+    180deg,
+    rgba(7, 11, 20, 0.12) 0%,
+    rgba(7, 11, 20, 0.72) 40%,
+    rgba(7, 11, 20, 0.94) 100%
+  );
+}
 .hero-bg-img {
   animation: none;
 }

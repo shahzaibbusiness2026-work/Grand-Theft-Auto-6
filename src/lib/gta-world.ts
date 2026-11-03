@@ -1,3 +1,6 @@
+import { getWorldMedia } from "./world-media";
+import { WORLD_WILDLIFE_CATEGORIES } from "./world-wildlife-categories";
+
 /**
  * GTA VI World hub + category data.
  *
@@ -27,7 +30,7 @@ export type WorldSection = {
   cards: WorldCard[];
 };
 
-export const WORLD_SECTIONS: WorldSection[] = [
+const WORLD_SECTION_CONTENT: WorldSection[] = [
   {
     id: "nature-wildlife",
     title: "NATURE & WILDLIFE",
@@ -42,11 +45,25 @@ export const WORLD_SECTIONS: WorldSection[] = [
         imageAlt: "",
       },
       {
-        title: "Birds & Marine Life",
-        subtitle: "Birds, sharks, dolphins, fish and more",
-        href: "/gta-6-world/birds-marine-life",
-        image: "/img/wildlife/brown-pelican.webp",
-        imageAlt: "GTA VI screenshot: a brown pelican in wetland grass",
+        title: "Birds",
+        subtitle: "Flamingos and wetland birds in official footage",
+        href: "/gta-6-world/birds",
+        image: "",
+        imageAlt: "",
+      },
+      {
+        title: "Mammals",
+        subtitle: "Deer and dog sightings with direct sources",
+        href: "/gta-6-world/mammals",
+        image: "",
+        imageAlt: "",
+      },
+      {
+        title: "Marine Life",
+        subtitle: "Sea turtle and fish in official screenshots",
+        href: "/gta-6-world/marine-life",
+        image: "",
+        imageAlt: "",
       },
       {
         title: "Nature & Environment",
@@ -174,6 +191,14 @@ export const WORLD_SECTIONS: WorldSection[] = [
   },
 ];
 
+export const WORLD_SECTIONS: WorldSection[] = WORLD_SECTION_CONTENT.map(section => ({
+  ...section,
+  cards: section.cards.map(card => {
+    const media = getWorldMedia(card.href);
+    return media ? { ...card, image: media.src, imageAlt: media.alt } : card;
+  }),
+}));
+
 export type WorldEntry = {
   name: string;
   observation: string;
@@ -204,7 +229,7 @@ export type WorldCategory = {
  * research only; a category with no verified entries must not be published
  * with invented filler.
  */
-export const WORLD_CATEGORIES: WorldCategory[] = [
+const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
   {
     slug: "animals-wildlife",
     image: "/img/trailer-keys-marina.webp",
@@ -1179,6 +1204,22 @@ export const WORLD_CATEGORIES: WorldCategory[] = [
     ],
   },
 ];
+
+export const WORLD_CATEGORIES: WorldCategory[] = [
+  ...WORLD_CATEGORY_CONTENT,
+  ...WORLD_WILDLIFE_CATEGORIES,
+].map(category => {
+  const media = getWorldMedia(`/gta-6-world/${category.slug}`);
+  return {
+    ...category,
+    ...(media ? { image: media.src, imageAlt: media.alt } : {}),
+    entries: category.entries.map(entry =>
+      entry.image === "/img/world/tv-halloween-horrors-poster.jpg" ||
+      entry.image === "/img/world/weather-daytime-street.jpg"
+        ? { ...entry, image: undefined, imageAlt: undefined }
+        : entry),
+  };
+});
 
 export function getWorldCategory(slug: string): WorldCategory | undefined {
   return WORLD_CATEGORIES.find((c) => c.slug === slug);

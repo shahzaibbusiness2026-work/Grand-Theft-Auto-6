@@ -1,0 +1,11 @@
+{
+  "sourceRepository": "https://github.com/rolux/gtadb.org",
+  "commit": "6acc1b555ed68255078b850f5d4a984610fa1910",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "map": "Yanis Community Map v17, via GTADB contributors",
+  "landmarks": 3401,
+  "positioned": 3307,
+  "importedAt": "2026-11-02",
+  "changes": "Filtered fields, stable ID prefix, normalized coordinates, recompressed overview. Community estimates, not official geography."
+}

@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import type { ImageProps } from "next/image";
 
@@ -45,7 +46,39 @@ export function SafeImage({
   sizes,
   width,
   height,
+  onError,
+  onLoad,
 }: ImageProps) {
+  if (typeof src === "string" && !src.trim()) {
+    return (
+      <span
+        role="img"
+        aria-label={alt ? `${alt} — image unavailable` : "Image unavailable"}
+        className={className}
+        style={{
+          ...(fill
+            ? {
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+              }
+            : {
+                width: width ? Number(width) : undefined,
+                height: height ? Number(height) : undefined,
+              }),
+          display: "grid",
+          placeItems: "center",
+          background: "hsl(var(--muted))",
+          color: "hsl(var(--muted-foreground))",
+          fontSize: "0.75rem",
+          ...style,
+        }}
+      >
+        <span aria-hidden="true">Image unavailable</span>
+      </span>
+    );
+  }
   if (isOptimizable(src)) {
     return (
       <Image
@@ -59,6 +92,8 @@ export function SafeImage({
         sizes={sizes}
         width={width}
         height={height}
+        onError={onError}
+        onLoad={onLoad}
       />
     );
   }
@@ -84,6 +119,8 @@ export function SafeImage({
       }
       loading={priority ? "eager" : "lazy"}
       decoding="async"
+      onError={onError}
+      onLoad={onLoad}
     />
   );
 }

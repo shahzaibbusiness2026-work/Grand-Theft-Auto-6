@@ -55,11 +55,11 @@ export function CompanionHero({
         <img
           src="/img/hero-dark.jpg"
           alt="Vice City Skyline"
-          className="h-full w-full object-cover object-center opacity-45 brightness-90 contrast-125"
+          className="h-full w-full object-cover object-center"
         />
         {/* Layered Vignettes and neon gradients */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#070b14] via-[#070b14]/85 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070b14] via-transparent to-[#070b14]/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#070b14]/90 via-[#070b14]/60 to-[#070b14]/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#070b14]/70 via-transparent to-transparent" />
         {/* Ambient neon flares */}
         <div className="absolute -top-10 left-1/3 h-64 w-64 rounded-full bg-gold/15 blur-[120px]" />
         <div className="absolute -bottom-10 right-1/4 h-64 w-64 rounded-full bg-[#00F0FF]/15 blur-[120px]" />

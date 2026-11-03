@@ -14,7 +14,7 @@ import {
   SlidersHorizontal,
   X,
 } from "lucide-react";
-import { SafeImage } from "@/components/safe-image";
+import { CatalogArtwork } from "@/components/catalog-artwork";
 import { EvidenceComparison } from "@/components/evidence-comparison";
 import {
   getStoredUserState,
@@ -269,7 +269,11 @@ export function EvidenceCatalog({
   };
   const browser = (
     <div className={styles.catalogLayout}>
-      <aside className={styles.filters} aria-label="Catalog filters">
+      <aside
+        className={styles.filters}
+        aria-label="Catalog filters"
+        tabIndex={0}
+      >
         <Filters {...filters} />
       </aside>
       <div className="min-w-0">
@@ -331,15 +335,11 @@ export function EvidenceCatalog({
                     disabled={!picked && selected.length >= 4}
                     className={`${styles.cardImage} ${styles.cardPick} ${styles.cardPickImage}`}
                   >
-                    <SafeImage
-                      src={e.img}
-                      alt={e.name}
-                      fill
+                    <CatalogArtwork
+                      kind={kind}
+                      entry={e}
                       sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
                     />
-                    <span className={styles.imageTag}>
-                      Editorial illustration
-                    </span>
                   </button>
                 ) : (
                   <Link
@@ -348,15 +348,11 @@ export function EvidenceCatalog({
                     className={styles.cardImage}
                     aria-label={`View ${e.name}`}
                   >
-                    <SafeImage
-                      src={e.img}
-                      alt={e.name}
-                      fill
+                    <CatalogArtwork
+                      kind={kind}
+                      entry={e}
                       sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
                     />
-                    <span className={styles.imageTag}>
-                      Editorial illustration
-                    </span>
                   </Link>
                 )}
                 <div className={styles.cardBody}>
@@ -514,10 +510,9 @@ export function EvidenceCatalog({
                 return entry ? (
                   <article className={styles.slot} key={entry.id}>
                     <div className={styles.slotImage}>
-                      <SafeImage
-                        src={entry.img}
-                        alt={entry.name}
-                        fill
+                      <CatalogArtwork
+                        kind={kind}
+                        entry={entry}
                         sizes="(max-width:767px) 45vw, 23vw"
                       />
                     </div>

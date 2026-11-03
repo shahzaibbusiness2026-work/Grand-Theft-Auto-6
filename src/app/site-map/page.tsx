@@ -5,7 +5,7 @@ import { ALL_TOOLS } from "@/lib/tools-data";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/site-map" },
+  openGraph: { url: "/site-map" },
   title: "Sitemap — Every Page on Taish Gaming",
   description:
     "Complete sitemap of Taish Gaming: interactive tools, vehicle and weapon databases, character guides, the Leonida map, news, and guides.",
@@ -31,48 +31,153 @@ export default function SiteMapPage() {
     {
       title: "Databases",
       links: [
-        { label: "Vehicle Database", href: "/vehicles", desc: "Vehicle database" },
-        { label: "Vehicle Comparison Duel", href: "/compare/vehicles", desc: "Side-by-side comparison" },
-        { label: "Vehicle Rankings", href: "/rankings", desc: "Fastest, best overall & more" },
-        { label: "Weapon Database & Armory", href: "/weapons", desc: "DPS, recoil, attachments" },
-        { label: "Weapon Comparison Duel", href: "/compare/weapons", desc: "Side-by-side firepower" },
-        { label: "Characters", href: "/characters", desc: "Lucia, Jason & the Leonida cast" },
+        {
+          label: "Vehicle Database",
+          href: "/vehicles",
+          desc: "Vehicle database",
+        },
+        {
+          label: "Vehicle Comparison Duel",
+          href: "/compare/vehicles",
+          desc: "Side-by-side comparison",
+        },
+        {
+          label: "Vehicle Rankings",
+          href: "/rankings",
+          desc: "Fastest, best overall & more",
+        },
+        {
+          label: "Weapon Database & Armory",
+          href: "/weapons",
+          desc: "DPS, recoil, attachments",
+        },
+        {
+          label: "Weapon Comparison Duel",
+          href: "/compare/weapons",
+          desc: "Side-by-side firepower",
+        },
+        {
+          label: "Characters",
+          href: "/characters",
+          desc: "Lucia, Jason & the Leonida cast",
+        },
         { label: "Missions", href: "/missions", desc: "Mission guides" },
-        { label: "Properties & Real Estate", href: "/properties", desc: "Safehouses & businesses" },
-        { label: "Locations & POIs", href: "/locations", desc: "Landmarks across Leonida" },
-        { label: "Collectibles", href: "/collectibles", desc: "Hidden packages & caches" },
+        {
+          label: "Properties & Real Estate",
+          href: "/properties",
+          desc: "Safehouses & businesses",
+        },
+        {
+          label: "Locations & POIs",
+          href: "/locations",
+          desc: "Landmarks across Leonida",
+        },
+        {
+          label: "Collectibles",
+          href: "/collectibles",
+          desc: "Hidden packages & caches",
+        },
       ],
     },
     {
       title: "Map & Exploration",
       links: [
-        { label: "Interactive Satellite Map", href: "/map", desc: "Full Leonida atlas" },
-        { label: "Map Explorer", href: "/map-explorer", desc: "Alternate map view" },
-        { label: "100% Completion Tracker", href: "/tracker", desc: "Checklist & progress" },
+        {
+          label: "Interactive Satellite Map",
+          href: "/map",
+          desc: "Full Leonida atlas",
+        },
+        {
+          label: "Map Explorer",
+          href: "/map-explorer",
+          desc: "Alternate map view",
+        },
+        {
+          label: "100% Completion Tracker",
+          href: "/tracker",
+          desc: "Checklist & progress",
+        },
       ],
     },
     {
       title: "GTA VI World",
       links: [
-        { label: "GTA VI World", href: "/gta-6-world", desc: "Wildlife, radio, city life & secrets across Leonida" },
-        { label: "Animals & Wildlife", href: "/gta-6-world/animals-wildlife", desc: "Alligators, dogs, wild animals and more" },
-        { label: "Birds & Marine Life", href: "/gta-6-world/birds-marine-life", desc: "Birds, sharks, dolphins, fish and more" },
-        { label: "Nature & Environment", href: "/gta-6-world/nature-environment", desc: "Beaches, swamps, forests and islands" },
-        { label: "Weather & Climate", href: "/gta-6-world/weather-climate", desc: "Rain, storms, sunshine and day/night" },
-        { label: "In-Game Brands & Ads", href: "/gta-6-world/in-game-brands-ads", desc: "Fictional companies, products and ads" },
-        { label: "Social Media & Apps", href: "/gta-6-world/social-media-apps", desc: "In-game social platforms and apps" },
-        { label: "TV Shows & Media", href: "/gta-6-world/tv-shows-media", desc: "Television, broadcasts and fictional media" },
-        { label: "Restaurants & Food", href: "/gta-6-world/restaurants-food", desc: "Food outlets, chains and restaurants" },
-        { label: "Hotels & Motels", href: "/gta-6-world/hotels-motels", desc: "Hotels, resorts, motels and stays" },
-        { label: "Gangs & Factions", href: "/gta-6-world/gangs-factions", desc: "Criminal groups and rival organizations" },
-        { label: "Clothing & Customization", href: "/gta-6-world/clothing-customization", desc: "Outfits, tattoos, hairstyles and more" },
+        {
+          label: "GTA VI World",
+          href: "/gta-6-world",
+          desc: "Wildlife, radio, city life & secrets across Leonida",
+        },
+        {
+          label: "Animals & Wildlife",
+          href: "/gta-6-world/animals-wildlife",
+          desc: "Alligators, dogs, wild animals and more",
+        },
+        {
+          label: "Birds",
+          href: "/gta-6-world/birds",
+          desc: "Flamingos and wetland birds in official footage",
+        },
+        {
+          label: "Mammals",
+          href: "/gta-6-world/mammals",
+          desc: "Deer and dog sightings",
+        },
+        {
+          label: "Marine Life",
+          href: "/gta-6-world/marine-life",
+          desc: "Sea turtle and fish in official screenshots",
+        },
+        {
+          label: "Nature & Environment",
+          href: "/gta-6-world/nature-environment",
+          desc: "Beaches, swamps, forests and islands",
+        },
+        {
+          label: "Weather & Climate",
+          href: "/gta-6-world/weather-climate",
+          desc: "Rain, storms, sunshine and day/night",
+        },
+        {
+          label: "In-Game Brands & Ads",
+          href: "/gta-6-world/in-game-brands-ads",
+          desc: "Fictional companies, products and ads",
+        },
+        {
+          label: "Social Media & Apps",
+          href: "/gta-6-world/social-media-apps",
+          desc: "In-game social platforms and apps",
+        },
+        {
+          label: "TV Shows & Media",
+          href: "/gta-6-world/tv-shows-media",
+          desc: "Television, broadcasts and fictional media",
+        },
+        {
+          label: "Restaurants & Food",
+          href: "/gta-6-world/restaurants-food",
+          desc: "Food outlets, chains and restaurants",
+        },
+        {
+          label: "Hotels & Motels",
+          href: "/gta-6-world/hotels-motels",
+          desc: "Hotels, resorts, motels and stays",
+        },
+        {
+          label: "Gangs & Factions",
+          href: "/gta-6-world/gangs-factions",
+          desc: "Criminal groups and rival organizations",
+        },
+        {
+          label: "Clothing & Customization",
+          href: "/gta-6-world/clothing-customization",
+          desc: "Outfits, tattoos, hairstyles and more",
+        },
       ],
     },
     {
       title: "News & Content",
       links: [
         { label: "News", href: "/news", desc: "Latest GTA 6 coverage" },
-        { label: "News", href: "/news", desc: "Features & opinion" },
         { label: "Guides", href: "/guides", desc: "How-tos & walkthroughs" },
         { label: "Radio Stations", href: "/radio", desc: "Leonida airwaves" },
       ],
@@ -81,8 +186,12 @@ export default function SiteMapPage() {
       title: "Account & More",
       links: [
         { label: "Sign in", href: "/login", desc: "Your Atlas HQ" },
-        { label: "Membership", href: "/pricing", desc: "Membership — everything on this site is free" },
-        { label: "About Atlas", href: "/about", desc: "Who we are" },
+        {
+          label: "Membership",
+          href: "/pricing",
+          desc: "Membership — everything on this site is free",
+        },
+        { label: "About Taish Gaming", href: "/about", desc: "Who we are" },
         { label: "Contact Us", href: "/contact", desc: "Get in touch" },
       ],
     },
@@ -100,8 +209,13 @@ export default function SiteMapPage() {
     <SiteShell>
       <div className="container-site py-8">
         {/* Breadcrumb */}
-        <nav className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <Link href="/" className="transition-colors hover:text-primary">Home</Link>
+        <nav
+          className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground"
+          aria-label="Breadcrumb"
+        >
+          <Link href="/" className="transition-colors hover:text-primary">
+            Home
+          </Link>
           <ChevronRight className="h-3 w-3" aria-hidden="true" />
           <span className="font-bold text-foreground">Sitemap</span>
         </nav>
@@ -115,15 +229,26 @@ export default function SiteMapPage() {
             Site<span className="text-primary">map</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Every page on Taish Gaming, organized by section. Looking for the machine-readable
-            version? See our <Link href="/sitemap.xml" className="font-semibold text-primary hover:underline">XML sitemap</Link>.
+            Every page on Taish Gaming, organized by section. Looking for the
+            machine-readable version? See our{" "}
+            <Link
+              href="/sitemap.xml"
+              className="font-semibold text-primary hover:underline"
+            >
+              XML sitemap
+            </Link>
+            .
           </p>
         </div>
 
         {/* Main sections */}
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {sections.map((section) => (
-            <nav key={section.title} aria-label={section.title} className="card-surface p-5">
+            <nav
+              key={section.title}
+              aria-label={section.title}
+              className="card-surface p-5"
+            >
               <h2 className="font-display text-base font-extrabold uppercase tracking-wide text-foreground">
                 {section.title}
               </h2>
@@ -138,7 +263,9 @@ export default function SiteMapPage() {
                         {l.label}
                       </span>
                       {l.desc && (
-                        <span className="truncate text-xs text-muted-foreground">{l.desc}</span>
+                        <span className="truncate text-xs text-muted-foreground">
+                          {l.desc}
+                        </span>
                       )}
                     </Link>
                   </li>

@@ -37,6 +37,29 @@ export function DashboardView({
         siteStats={liveStats}
       />
       <NextSessionCard />
+      <section className="player-panel flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-bold">
+            Your garage & property collection
+          </h2>
+          <p className="mt-2 text-sm text-slate-400">
+            {state?.portfolio.assets.filter((item) => item.status === "owned")
+              .length ?? 0}{" "}
+            owned items ·{" "}
+            {state?.portfolio.assets.filter(
+              (item) => item.status === "wishlist",
+            ).length ?? 0}{" "}
+            wishlist items. Keep photos, personal garages and an optional public
+            showcase.
+          </p>
+        </div>
+        <Link
+          href="/dashboard/garage"
+          className="player-button player-button-primary"
+        >
+          Open my collection
+        </Link>
+      </section>
       <section
         className="player-panel"
         aria-labelledby="player-workspace-title"

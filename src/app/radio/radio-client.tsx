@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { WorldMediaFigure } from "@/components/world-media-figure";
 import {
   officialRadioStations,
   RADIO_SOURCE,
@@ -39,6 +40,7 @@ export function RadioClient() {
           . Reviewed <time dateTime={RADIO_REVIEWED_AT}>27 October 2026</time>.
         </p>
       </header>
+      <WorldMediaFigure path="/radio" priority />
       <div className="max-w-md">
         <label
           htmlFor="radio-search"

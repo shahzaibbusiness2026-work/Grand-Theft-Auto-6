@@ -216,7 +216,7 @@ export default async function MissionDetailPage({
 
         {/* HERO BANNER */}
         <div className="card-surface relative overflow-hidden rounded-3xl border border-border shadow-2xl p-6 sm:p-10">
-          <div className="absolute right-0 top-0 h-full w-full lg:w-2/3 opacity-70 dark:opacity-40">
+          <div className="absolute inset-0">
             {mission.img ? (
               <img
                 loading="lazy"

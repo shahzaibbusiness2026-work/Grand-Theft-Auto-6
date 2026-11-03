@@ -13,13 +13,14 @@ interface ThemeImageProps {
 }
 
 /** Renders consistent cinematic artwork across both dark and bright themes with Next.js image optimization. */
-export function ThemeImage({ dark, light, className, alt = "Taish Gaming Artwork", priority = false }: ThemeImageProps) {
+export function ThemeImage({ dark, light, className, alt = "Taish Gaming Artwork", priority = false, role }: ThemeImageProps) {
   const base = "object-cover transition-opacity duration-300 pointer-events-none";
   return (
     <>
       <Image
         src={light}
         alt={alt}
+        role={role}
         fill
         priority={priority}
         sizes="100vw"
@@ -28,6 +29,7 @@ export function ThemeImage({ dark, light, className, alt = "Taish Gaming Artwork
       <Image
         src={dark}
         alt={alt}
+        role={role}
         fill
         priority={priority}
         sizes="100vw"

@@ -1,3 +1,4 @@
+import { WorldMediaFigure } from "@/components/world-media-figure";
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
@@ -5,7 +6,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   openGraph: { url: "/easter-eggs" },
   title: "GTA 6 Easter Eggs: Correction Notice",
-  description: "The earlier Taish Gaming Easter egg list has been withdrawn pending source-level verification of its claims.",
+  description:
+    "The earlier Taish Gaming Easter egg list has been withdrawn pending source-level verification of its claims.",
   alternates: { canonical: "/easter-eggs" },
   robots: { index: false, follow: true },
 };
@@ -39,6 +41,9 @@ export default function EasterEggsPage() {
             This fan catalog is not currently making verified easter egg claims.
             Earlier entries have been withdrawn pending source-level review.
           </p>
+        </div>
+        <div className="mb-8">
+          <WorldMediaFigure path="/easter-eggs" priority />
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {EGGS.map((egg) => (
