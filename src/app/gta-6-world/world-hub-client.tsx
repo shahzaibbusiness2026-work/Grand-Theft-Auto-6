@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { SafeImage } from "@/components/safe-image";
 import { WORLD_SECTIONS, type WorldSection } from "@/lib/gta-world";
+import { getWorldMedia, mediaSourceLabel } from "@/lib/world-media";
 
 const SECTION_ICONS: Record<WorldSection["icon"], LucideIcon> = {
   leaf: Leaf,
@@ -28,10 +29,11 @@ function WorldCard({
   card: WorldSection["cards"][number];
   accent: string;
 }) {
+  const media = getWorldMedia(card.href);
   return (
     <Link
       href={card.href}
-      className="group relative block min-h-[150px] overflow-hidden rounded-[9px] border border-white/10 transition-all duration-200 hover:border-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+      className="group relative block min-h-[180px] overflow-hidden rounded-[9px] border border-white/10 transition-all duration-200 hover:border-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
     >
       {card.image ? (
         <SafeImage
@@ -42,16 +44,21 @@ function WorldCard({
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
       ) : null}
+      {media && (
+        <span className="absolute left-3 top-3 max-w-[calc(100%-24px)] rounded-full bg-black/75 px-2 py-1 text-[10px] font-semibold text-white">
+          {mediaSourceLabel(media)}
+        </span>
+      )}
       <div
         className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"
         aria-hidden="true"
       />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-3.5">
         <div className="min-w-0">
-          <p className="truncate text-[15px] font-bold leading-tight text-white">
+          <p className="text-[15px] font-bold leading-tight text-white">
             {card.title}
           </p>
-          <p className="mt-0.5 line-clamp-1 text-xs text-white/70">
+          <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-white/85">
             {card.subtitle}
           </p>
         </div>
@@ -93,7 +100,7 @@ export function WorldHubSections() {
         const isOpen = expanded === section.id;
         return (
           <section key={section.id} aria-labelledby={`${section.id}-heading`}>
-            <div className="mb-4 flex items-center gap-3">
+            <div className="mb-4 flex flex-wrap items-center gap-3">
               <span
                 className="flex h-8 w-8 shrink-0 items-center justify-center"
                 style={{ color: section.color }}
@@ -103,14 +110,14 @@ export function WorldHubSections() {
               </span>
               <h2
                 id={`${section.id}-heading`}
-                className="shrink-0 text-lg font-black uppercase tracking-wide sm:text-xl"
+                className="min-w-0 text-lg font-black uppercase tracking-wide sm:text-xl"
                 style={{ color: section.color }}
               >
                 {section.title}
               </h2>
               <span
                 aria-hidden="true"
-                className="h-px flex-1 opacity-60"
+                className="hidden h-px flex-1 opacity-60 sm:block"
                 style={{ backgroundColor: section.color }}
               />
               <button
@@ -121,9 +128,10 @@ export function WorldHubSections() {
                 onClick={() => toggle(section.id)}
                 aria-expanded={isOpen}
                 aria-controls={`${section.id}-panel`}
-                className="flex shrink-0 items-center gap-1 text-xs font-bold uppercase tracking-wider text-white/80 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded"
+                aria-label={`${isOpen ? "Hide" : "Show"} ${section.title.toLowerCase()} overview`}
+                className="ml-auto flex min-h-11 shrink-0 items-center gap-1 rounded px-2 text-xs font-bold uppercase tracking-wider text-white/80 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
               >
-                {isOpen ? "Close" : "Explore all"}
+                {isOpen ? "Hide overview" : "Show overview"}
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </button>
             </div>
@@ -172,13 +180,9 @@ export function WorldHubSections() {
               </div>
             )}
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 min-[380px]:grid-cols-2 xl:grid-cols-4">
               {section.cards.map((card) => (
-                <WorldCard
-                  key={card.href}
-                  card={card}
-                  accent={section.color}
-                />
+                <WorldCard key={card.href} card={card} accent={section.color} />
               ))}
             </div>
           </section>

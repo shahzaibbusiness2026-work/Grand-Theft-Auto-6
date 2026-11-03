@@ -1,3 +1,4 @@
+import { WorldMediaFigure } from "@/components/world-media-figure";
 import { SiteShell } from "@/components/shells";
 import { ActivitiesClient } from "./activities-client";
 import type { Metadata } from "next";
@@ -27,6 +28,9 @@ export default function ActivitiesPage() {
             planning list does not establish playable GTA VI activities or
             completion requirements.
           </p>
+        </div>
+        <div className="mb-8">
+          <WorldMediaFigure path="/activities" priority />
         </div>
         <ActivitiesClient />
       </div>

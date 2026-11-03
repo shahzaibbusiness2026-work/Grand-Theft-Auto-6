@@ -1,3 +1,4 @@
+import { WorldMediaFigure } from "@/components/world-media-figure";
 import { publicLocation } from "@/lib/world-evidence";
 import { SiteShell } from "@/components/shells";
 import { LocationsClient } from "./locations-client";
@@ -11,11 +12,15 @@ import { getLocations, type LocationRecord } from "@/lib/services/locations";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/locations" },
-  openGraph: { url: "/locations", images: [{ url: "/img/hero-dark.jpg", alt: "Taish Gaming — Leonida skyline" }] },
+  openGraph: {
+    url: "/locations",
+    images: [
+      { url: "/img/hero-dark.jpg", alt: "Taish Gaming — Leonida skyline" },
+    ],
+  },
   title: "GTA 6 Locations: Leonida Points of Interest",
   description:
     "Browse provisional Leonida fan-map entries. Check evidence status and distinguish editorial placements from confirmed GTA VI geography.",
-
 };
 
 type DbLocation = LocationRecord & {
@@ -41,11 +46,17 @@ function dbToCanonical(
     slug: l.slug || match?.slug || l.id,
     name: l.name,
     district: l.district || match?.district || "Unknown",
-    category: (l.category as CanonicalLocation["category"]) || match?.category || "Point of Interest",
+    category:
+      (l.category as CanonicalLocation["category"]) ||
+      match?.category ||
+      "Point of Interest",
     desc: l.description || match?.desc || "",
     top: coordMatch?.[1] || match?.top || "",
     left: coordMatch?.[2] || match?.left || "",
-    confidence: (l.confidence as CanonicalLocation["confidence"]) || match?.confidence || "RUMORED",
+    confidence:
+      (l.confidence as CanonicalLocation["confidence"]) ||
+      match?.confidence ||
+      "RUMORED",
     source: l.source || match?.source || "Unknown",
     img: l.img || match?.img || "",
     verified: l.verification === "verified",
@@ -98,6 +109,9 @@ export default async function LocationsPage() {
           </p>
         </div>
 
+        <div className="mb-8">
+          <WorldMediaFigure path="/locations" priority />
+        </div>
         <LocationsClient initialLocations={locations.map(publicLocation)} />
       </div>
     </SiteShell>

@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import type { ImageProps } from "next/image";
 
@@ -45,6 +46,8 @@ export function SafeImage({
   sizes,
   width,
   height,
+  onError,
+  onLoad,
 }: ImageProps) {
   if (typeof src === "string" && !src.trim()) {
     return (
@@ -89,6 +92,8 @@ export function SafeImage({
         sizes={sizes}
         width={width}
         height={height}
+        onError={onError}
+        onLoad={onLoad}
       />
     );
   }
@@ -114,6 +119,8 @@ export function SafeImage({
       }
       loading={priority ? "eager" : "lazy"}
       decoding="async"
+      onError={onError}
+      onLoad={onLoad}
     />
   );
 }

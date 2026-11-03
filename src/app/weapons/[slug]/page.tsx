@@ -1,3 +1,4 @@
+import { catalogArtwork } from "@/lib/catalog-artwork";
 import { notFound, permanentRedirect } from "next/navigation";
 import { SiteShell } from "@/components/shells";
 import { EvidenceDetail } from "@/components/evidence-detail";
@@ -22,22 +23,22 @@ export async function generateMetadata({
 }) {
   const e = await resolve((await params).slug);
   if (!e) notFound();
+  const artwork = catalogArtwork("weapons", e);
   return {
     title: e.name + " — GTA VI Evidence Review",
-    description:
-      `${e.name} — GTA VI evidence review: what official footage actually shows for this weapon, and which statistics are still unverified before launch.`,
+    description: `${e.name} — GTA VI evidence review: what official footage actually shows for this weapon, and which statistics are still unverified before launch.`,
     alternates: { canonical: "/weapons/" + e.slug },
     openGraph: {
       url: "/weapons/" + e.slug,
       type: "website",
       title: e.name + " — GTA VI Evidence Review",
       description: `${e.name} — GTA VI evidence review: what official footage actually shows for this weapon, and which statistics are still unverified before launch.`,
-      images: e.img ? [{ url: e.img, alt: e.name }] : undefined,
+      images: [{ url: artwork.src, alt: artwork.alt }],
     },
     twitter: {
       card: "summary_large_image",
       title: e.name + " — GTA VI Evidence Review",
-      images: e.img ? [e.img] : undefined,
+      images: [artwork.src],
     },
     robots: {
       // Pre-launch gate (29 Oct 2026): a single appearance claim is not

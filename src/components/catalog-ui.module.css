@@ -386,6 +386,9 @@
   position: absolute;
   bottom: 10px;
   left: 12px;
+  max-width: calc(100% - 24px);
+  text-align: left;
+  line-height: 1.4;
   z-index: 1;
   padding: 4px 8px;
   border: 1px solid #6a7490;

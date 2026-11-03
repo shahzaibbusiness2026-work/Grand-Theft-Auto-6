@@ -11,6 +11,9 @@ import {
 } from "@/lib/gta-world";
 import { serializeJsonLd } from "@/lib/utils";
 import { SafeImage } from "@/components/safe-image";
+import { WorldMediaFigure } from "@/components/world-media-figure";
+import { WildlifeNavigation } from "@/components/wildlife-navigation";
+import { getWorldMedia, worldImageSchema } from "@/lib/world-media";
 
 export function generateStaticParams() {
   return WORLD_CATEGORIES.map((c) => ({ slug: c.slug }));
@@ -22,8 +25,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const category = getWorldCategory(slug);
   if (!category) notFound();
+  const media = getWorldMedia(`/gta-6-world/${slug}`);
   return {
-    openGraph: { url: `/gta-6-world/${category.slug}` },
+    openGraph: {
+      url: `/gta-6-world/${category.slug}`,
+      title: category.seoTitle,
+      description: category.seoDescription,
+      images: media
+        ? [
+            {
+              url: media.src,
+              alt: media.alt,
+              width: media.width,
+              height: media.height,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: category.seoTitle,
+      description: category.seoDescription,
+      images: media ? [media.src] : undefined,
+    },
+    robots: { "max-image-preview": "large" },
     title: category.seoTitle,
     description: category.seoDescription,
     alternates: { canonical: `/gta-6-world/${category.slug}` },
@@ -52,6 +77,8 @@ export default async function GTAWorldCategoryPage({ params }: Props) {
   const category = getWorldCategory(slug);
   if (!category) notFound();
   const accent = sectionColorFor(category.slug);
+  const pageUrl = `https://www.taishgaming.com/gta-6-world/${category.slug}`;
+  const media = getWorldMedia(`/gta-6-world/${category.slug}`);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -77,12 +104,30 @@ export default async function GTAWorldCategoryPage({ params }: Props) {
       },
     ],
   };
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      { ...jsonLd, "@id": pageUrl + "#breadcrumb" },
+      {
+        "@type": "WebPage",
+        "@id": pageUrl + "#webpage",
+        url: pageUrl,
+        name: category.seoTitle,
+        description: category.seoDescription,
+        breadcrumb: { "@id": pageUrl + "#breadcrumb" },
+        ...(media
+          ? { primaryImageOfPage: { "@id": pageUrl + "#primaryimage" } }
+          : {}),
+      },
+      ...(media ? [worldImageSchema(media, pageUrl)] : []),
+    ],
+  };
 
   return (
     <SiteShell>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
       />
       <div className="bg-[#000713] text-white">
         <div className="container-site py-8">
@@ -104,6 +149,18 @@ export default async function GTAWorldCategoryPage({ params }: Props) {
             <span className="text-white">{category.title}</span>
           </nav>
 
+          {[
+            "animals-wildlife",
+            "birds",
+            "mammals",
+            "marine-life",
+            "birds-marine-life",
+          ].includes(category.slug) && (
+            <div className="mb-6">
+              <WildlifeNavigation active={`/gta-6-world/${category.slug}`} />
+            </div>
+          )}
+
           <header className="max-w-3xl">
             <p
               className="text-xs font-black uppercase tracking-[0.22em]"
@@ -114,20 +171,29 @@ export default async function GTAWorldCategoryPage({ params }: Props) {
             <h1 className="mt-2 font-display text-3xl font-black leading-tight sm:text-4xl">
               {category.title}
             </h1>
-            <p className="mt-3 text-base leading-relaxed text-white/75">
-              {category.intro}
-            </p>
           </header>
 
-          <figure className="mt-6 overflow-hidden rounded-2xl border border-white/10">
-            <SafeImage
-              src={category.image}
-              alt={category.imageAlt}
-              width={1200}
-              height={675}
-              className="h-auto w-full object-cover"
-            />
-          </figure>
+          {media ? (
+            <div className="mt-6">
+              <WorldMediaFigure
+                path={`/gta-6-world/${category.slug}`}
+                priority
+              />
+            </div>
+          ) : (
+            <figure className="mt-6 overflow-hidden rounded-2xl border border-white/10">
+              <SafeImage
+                src={category.image}
+                alt={category.imageAlt}
+                width={1200}
+                height={675}
+                className="h-auto w-full object-cover"
+              />
+            </figure>
+          )}
+          <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/75">
+            {category.intro}
+          </p>
 
           <div className="mt-6 flex flex-wrap gap-2" aria-label="Evidence key">
             {(Object.keys(TIER_STYLES) as EvidenceTier[]).map((tier) => (

@@ -6,6 +6,8 @@ import Link from "next/link";
 import { FavoriteButton } from "./favorite-button";
 import { CatalogVisit } from "./catalog-visit";
 import type { CatalogKind, EvidenceEntry } from "@/lib/catalog-evidence";
+import { CatalogArtwork } from "./catalog-artwork";
+import { catalogArtwork } from "@/lib/catalog-artwork";
 export function EvidenceDetail({
   entry,
   kind,
@@ -13,6 +15,7 @@ export function EvidenceDetail({
   entry: EvidenceEntry;
   kind: CatalogKind;
 }) {
+  const artwork = catalogArtwork(kind, entry);
   return (
     <article className="container-site max-w-4xl py-10 space-y-6">
       <script
@@ -40,6 +43,33 @@ export function EvidenceDetail({
         Editorial identification · {entry.category}
       </p>
       <h1 className="font-display text-4xl font-bold">{entry.name}</h1>
+      <figure className="overflow-hidden rounded-2xl border border-border bg-card">
+        <div className="relative aspect-video">
+          <CatalogArtwork
+            kind={kind}
+            entry={entry}
+            priority
+            sizes="(max-width: 768px) 100vw, 850px"
+          />
+        </div>
+        <figcaption className="px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+          {artwork.caption}
+          {artwork.sourceUrl && (
+            <>
+              {" "}
+              <a
+                href={artwork.sourceUrl}
+                className="underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Official trailer source
+              </a>
+              .
+            </>
+          )}
+        </figcaption>
+      </figure>
       <p>
         {entry.claims.some((c) => c.field === "GTA VI appearance")
           ? "A GTA VI appearance claim has been reviewed below. Its source and scope apply only to that claim; the catalog identification does not verify performance, price or availability."
