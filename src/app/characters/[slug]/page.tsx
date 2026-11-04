@@ -59,7 +59,7 @@ export default async function CharacterPage({
           </a>
         </p>
         <p className="text-sm text-muted-foreground">
-          Reviewed October 30, 2026. Background summaries cite Rockstar&apos;s published biographies.
+          Reviewed November 4, 2026. Background summaries cite Rockstar&apos;s published biographies.
           The questions above explain the limits of that evidence. This is a source-based profile,
           not a first-hand gameplay test. Send the exact source passage or video timestamp with a correction.
         </p>

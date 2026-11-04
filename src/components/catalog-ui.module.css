@@ -212,7 +212,7 @@
   gap: 8px;
   margin-bottom: 22px;
 }
-.filterTop h2 {
+.filterTop .filterHeading {
   font-size: 15px;
   font-weight: 800;
   display: flex;

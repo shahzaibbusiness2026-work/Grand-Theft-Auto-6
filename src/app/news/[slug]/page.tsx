@@ -123,7 +123,7 @@ export default async function ArticleDetailPage({ params }: Props) {
       // Below-the-fold article images lazy-load; only the hero cover
       // above uses priority, so the page preloads a single image.
       // eslint-disable-next-line @next/next/no-img-element
-      <img {...props} alt={props.alt || ""} loading="lazy" decoding="async" />
+      <img {...props} alt={props.alt || `Illustration for ${article.title}`} loading="lazy" decoding="async" />
     ),
     h2: ({ node, children, ...props }: any) => (
       <h2

@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     openGraph: { url: "/tools/character-quiz" },
-  title: "Which GTA 6 Character Are You? — Personality Quiz",
+  title: "Which GTA 6 Character Are You?",
   description: "Take the GTA 6 personality quiz and find out which character matches you: Lucia, Jason, Brian, Cal, Boobie, or Raul.",
 
   alternates: { canonical: "/tools/character-quiz" },

@@ -390,6 +390,8 @@ export default async function MissionDetailPage({
                 loading="lazy"
                 src={relatedLocation.img}
                 alt={relatedLocation.name}
+                width={80}
+                height={64}
                 className="h-16 w-20 rounded-2xl object-cover border border-border"
               />
               <div>

@@ -17,7 +17,7 @@ export const characterEvidence: Record<
     name: "Jason Duval",
     summary:
       "Jason previously served in the Army and now works with drug runners in the Keys.",
-    context: "Jason is one of the two people at the centre of Rockstar's story setup, alongside Lucia. Reading his profile together with Brian's gives context for the Keys connection; it does not establish which properties or businesses the player can own.",
+    context: "Rockstar opens Jason's bio with his own goal: he wants an easy life, but things just keep getting harder. He grew up around grifters and crooks, tried to shake off his troubled teens with a stint in the Army, and ended up in the Leonida Keys doing what he knows best, working for local drug runners. The bio hints it might be time to try something new, and that meeting Lucia could be the best or worst thing to ever happen to him — though he knows how he would like it to turn out. Reading his profile together with Brian's gives context for the Keys connection; it does not establish which properties or businesses the player can own, nor the outcome of his relationship with Lucia.",
     question: "Does Jason's Army background confirm a gameplay ability?",
     answer: "No. A biographical detail is not a measured character statistic. We do not infer a combat bonus, weapon proficiency, starting loadout or skill tree from his military service. Those claims need their own gameplay evidence. A trailer scene also cannot establish which character is controlled throughout the final game.",
     related: [
@@ -30,7 +30,7 @@ export const characterEvidence: Record<
     name: "Lucia Caminos",
     summary:
       "Lucia is recently released from Leonida Penitentiary and is planning a different future with Jason.",
-    context: "Lucia is the other central figure in Rockstar's story setup. Her published background is a starting point for understanding the story, rather than a walkthrough of what happens next. Read Jason's profile alongside hers to keep the two characters' backgrounds distinct.",
+    context: "Rockstar's bio says Lucia's father taught her to fight as soon as she could walk, and life has been coming at her swinging ever since. Fighting for her family landed her in the Leonida Penitentiary; sheer luck got her out, and her lesson is that only smart moves follow from here. More than anything, she wants the good life her mother has dreamed of since their days in Liberty City — but instead of half-baked fantasies, she is prepared to take matters into her own hands. Fresh out of prison and committed to her plan no matter what it takes, she sees a life with Jason as a possible way out. Her published background is a starting point for understanding the story, rather than a walkthrough of what happens next. Read Jason's profile alongside hers to keep the two characters' backgrounds distinct.",
     question: "Does Lucia's prison background reveal the opening missions?",
     answer: "No. Her biography provides story context, not an ordered mission list. We do not turn trailer editing into a confirmed sequence of playable events, prison missions or rewards. Any description of her abilities, progression or the outcome of her relationship with Jason needs separate evidence.",
     related: [
@@ -43,7 +43,7 @@ export const characterEvidence: Record<
     name: "Cal Hampton",
     summary:
       "Cal is Jason’s friend and an associate of Brian, with an interest in Coast Guard communications.",
-    context: "Cal connects two other published character backgrounds: Jason and Brian. That relationship is a useful way to follow the supporting cast without treating every named person as a mission giver. The official biography describes his interests; the links below explain the people in that circle.",
+    context: "Rockstar describes Cal as at the low tide of America and happy there: he feels safest hanging at home, snooping on Coast Guard communications with a few beers and some private browser tabs open. His bio plays up casual paranoia — too many birds flying in perfect formation, psychopaths in charge — and notes that while paranoia loves company, his friend Jason has bigger plans. Cal connects two other published character backgrounds: Jason and Brian. That relationship is a useful way to follow the supporting cast without treating every named person as a mission giver. The official biography describes his interests; the links below explain the people in that circle.",
     question: "Does Cal's interest in communications confirm a scanner mechanic?",
     answer: "No. A character listening to communications is different from a player-controlled scanning feature. This profile does not establish a hacking ability, purchasable tool, police-evasion bonus or mission reward. For such a claim we would need an explicit gameplay explanation or an identifiable demonstration, rather than a biographical inference.",
     related: [
@@ -56,7 +56,7 @@ export const characterEvidence: Record<
     name: "Boobie Ike",
     summary:
       "Boobie’s Vice City businesses include property, a club and a recording studio.",
-    context: "Boobie's background connects the cast to Vice City's business and music setting. The related profiles follow that music connection through Dre'Quan and Real Dimez. Keep the ownership described in a character biography separate from a list of businesses available to the player.",
+    context: "Rockstar calls Boobie a local Vice City legend — and says he acts like it. He is one of the few to transform his time in the streets into a legitimate empire spanning real estate, a strip club, and a recording studio, and he is all smiles until it is time to talk business. His own lines frame the money flow as club money paying for the studio and drug money paying for it all; that is character voice, not a verified in-game economy. What he is most invested in, per the bio, is his partnership with the young aspiring music mogul Dre'Quan for Only Raw Records — now they just need a hit. Boobie's background connects the cast to Vice City's business and music setting. The related profiles follow that music connection through Dre'Quan and Real Dimez. Keep the ownership described in a character biography separate from a list of businesses available to the player.",
     question: "Can the player buy Boobie's businesses?",
     answer: "This source does not establish that. A named club or studio may provide story setting without functioning as a purchasable asset. We do not infer purchase prices, passive income, management missions or investment returns from Boobie's business interests. Our money-planning tools use example inputs rather than a verified business economy.",
     related: [
@@ -69,7 +69,7 @@ export const characterEvidence: Record<
     name: "Dre’Quan Priest",
     summary:
       "Dre’Quan pursues a music career through Only Raw Records and has signed Real Dimez.",
-    context: "Dre'Quan is part of the music side of the supporting cast. Reading his profile with Real Dimez helps distinguish the label connection from the performers themselves. This is character and setting information, rather than confirmation of a music-management system.",
+    context: "Rockstar says Dre'Quan was always more of a hustler than a gangster: even when he was dealing on the streets to make ends meet, breaking into music was the goal. His voice lines frame dancers as his A&Rs — if the record is a hit, DJs will spin it. Now that he has signed Real Dimez, his days of booking acts into Boobie's strip club might be numbered as he sets his sights on the Vice City scene. Dre'Quan is part of the music side of the supporting cast. Reading his profile with Real Dimez helps distinguish the label connection from the performers themselves. This is character and setting information, rather than confirmation of a music-management system.",
     question: "Does the record-label story confirm a player business?",
     answer: "No. A business named in the narrative is not evidence of a purchasable business, revenue stream or management interface. We do not provide a studio price, payout ranking or unlock requirement from this biography. A soundtrack appearance would also need its own music source; a character connection alone is insufficient.",
     related: [
@@ -82,7 +82,7 @@ export const characterEvidence: Record<
     name: "Real Dimez",
     summary:
       "Bae-Luxe and Roxy form Real Dimez, a rap duo signed to Only Raw Records.",
-    context: "Real Dimez is a duo, so the name refers to two performers rather than a single character. The related profiles trace the recording connection through Dre'Quan and Boobie. That context helps distinguish the story's musicians from a confirmed in-game radio playlist.",
+    context: "Rockstar's bio says Bae-Luxe and Roxy have been friends since high school — girls with the savvy to turn their time shaking down local dealers into cold, hard cash via spicy rap tracks and a relentless social media presence. An early hit single with local rapper DWNPLY took Real Dimez to new heights; now, after five years and a whole lot of trouble, they are signed to Only Raw Records, hoping lightning can strike twice. Real Dimez is a duo, so the name refers to two performers rather than a single character. The related profiles trace the recording connection through Dre'Quan and Boobie. That context helps distinguish the story's musicians from a confirmed in-game radio playlist.",
     question: "Does this profile confirm radio tracks or voice actors?",
     answer: "No. A fictional music act's biography does not establish which recordings are playable on the radio, who performs each voice, or whether the player can interact with the group in a specific mission. Each of those questions needs an appropriate announcement, credit or gameplay source. We avoid guessing identities from a voice or likeness.",
     related: [
@@ -95,7 +95,7 @@ export const characterEvidence: Record<
     name: "Raul Bautista",
     summary:
       "Raul is an experienced bank robber recruiting people willing to take risks.",
-    context: "Raul's background places him on the robbery side of the supporting cast. His biography is useful story context, but it is not a heist guide. The central characters and the setting pages provide a safer introduction than an invented sequence of jobs or rewards.",
+    context: "Rockstar describes Raul with three words — confidence, charm, and cunning — and calls him a seasoned bank robber always on the hunt for talent ready to take the risks that bring the biggest rewards. His bio adds a warning of its own: his recklessness raises the stakes with every score, so sooner or later his crew will have to double down or pull their chips from the table. Raul's background places him on the robbery side of the supporting cast. His biography is useful story context, but it is not a heist guide. The central characters and the setting pages provide a safer introduction than an invented sequence of jobs or rewards.",
     question: "Does Raul's biography confirm heist payouts or crew selection?",
     answer: "No. An experienced robber in the cast does not establish a player-facing crew system, a number of heists, repeatability, entry costs or guaranteed earnings. We do not rank his missions or prescribe an optimal approach before those systems are verified. Narrative descriptions and numerical gameplay instructions require different evidence.",
     related: [
@@ -108,7 +108,7 @@ export const characterEvidence: Record<
     name: "Brian Heder",
     summary:
       "Brian runs a smuggling operation from a boat yard in the Keys and provides Jason a place to live.",
-    context: "Brian's boat-yard background connects Jason's living arrangements with the Leonida Keys setting. Cal is another person in the same published character circle. Follow those links to understand the relationships without turning a story location into a confirmed map coordinate.",
+    context: "Rockstar calls Brian a classic drug runner from the golden age of smuggling in the Keys, still moving product through his boat yard with his third wife, Lori. He has been around long enough to let others do his dirty work, and his bio's own image of him is a Leonida beach bum who moves like a great white shark. The arrangement with Jason is spelled out: Brian is letting Jason live rent-free at one of his properties, so long as Jason helps with local shakedowns and stops by for Lori's sangria once in a while. Brian's boat-yard background connects Jason's living arrangements with the Leonida Keys setting. Cal is another person in the same published character circle. Follow those links to understand the relationships without turning a story location into a confirmed map coordinate.",
     question: "Does Jason's accommodation confirm an ownable safehouse?",
     answer: "No. A place to stay in a biography does not establish property ownership, storage capacity, rental costs or a usable garage. The boat yard's narrative role also does not verify its exact position on our fan map. We keep location names, provisional map pins and purchasable-property claims separate until each has supporting evidence.",
     related: [

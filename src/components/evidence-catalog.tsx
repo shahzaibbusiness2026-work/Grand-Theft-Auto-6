@@ -42,10 +42,10 @@ function Filters(p: FiltersProps) {
   return (
     <div className={styles.filterContent}>
       <div className={styles.filterTop}>
-        <h2>
+        <p className={styles.filterHeading}>
           <SlidersHorizontal size={16} aria-hidden="true" />
           Filters
-        </h2>
+        </p>
         <button type="button" onClick={p.clear} className={styles.textButton}>
           Reset
         </button>

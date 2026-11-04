@@ -548,7 +548,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     image: "/img/world/weather-daytime-street.jpg",
     imageAlt: "Official-media still used to illustrate daytime atmosphere in Leonida",
     title: "Weather & Climate",
-    seoTitle: "GTA 6 Weather: Official Visuals and Unknown Mechanics",
+    seoTitle: "GTA 6 Weather: What Is Shown",
     seoDescription: "Separate the atmosphere depicted in official GTA VI media from unverified weather frequency, flooding, tides and clock-rate claims.",
     intro: "Official media depicts Leonida with different lighting and atmospheric conditions. A visual scene does not establish a playable weather system, its frequency or its effects. Earlier precise weather claims on this page have been withdrawn pending traceable source review.",
     notConfirmed: ["We have not verified weather frequency, seasonal hurricanes, flood mechanics or tides against a precise primary-source passage.", "The GTA VI day-night clock rate remains unverified here. The linked converter is a hypothetical model."],
@@ -690,7 +690,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     image: "/img/trailer-lucia-call.webp",
     imageAlt: "Lucia on a phone call",
     title: "Social Media & Apps",
-    seoTitle: "GTA 6 Social Media: Trailer Evidence & App Unknowns",
+    seoTitle: "GTA 6 Social Media in Trailers",
     seoDescription:
       "Explore social-media imagery in GTA 6 Trailer 1 and Rockstar's character bios. Direct sources distinguish visible details from unverified playable app features.",
     intro:

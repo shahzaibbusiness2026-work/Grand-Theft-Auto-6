@@ -29,10 +29,10 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
   {
     slug: "american-flamingo",
     name: "American Flamingo",
-    title: "American Flamingo in GTA 6",
-    seoTitle: "American Flamingo in GTA 6: Trailer Footage & Facts",
+    title: "GTA 6 American Flamingo",
+    seoTitle: "GTA 6 American Flamingo",
     seoDescription:
-      "The American flamingo is Rockstar-confirmed for GTA VI. See the Trailer 1 wetlands flock, what the footage shows, and what is still not confirmed.",
+      "GTA 6 American flamingo: the Trailer 1 wetlands flock, what the footage shows, and what is still not confirmed.",
     tier: "Rockstar confirmed",
     hero: "/img/wildlife/flamingo-wetlands.jpg",
     heroAlt:
@@ -71,10 +71,10 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
   {
     slug: "american-alligator",
     name: "American Alligator",
-    title: "American Alligator in GTA 6",
-    seoTitle: "American Alligator in GTA 6: Trailer Footage & Facts",
+    title: "GTA 6 American Alligator",
+    seoTitle: "GTA 6 American Alligator",
     seoDescription:
-      "American alligators appear all over GTA VI's first trailer: a store, a backyard pool, and the wetlands. What the footage confirms, and what it does not.",
+      "GTA 6 American alligator: the store, pool and wetlands scenes from Trailer 1, and what they do not confirm.",
     tier: "Rockstar confirmed",
     hero: "/img/wildlife/alligator-store.jpg",
     heroAlt:
@@ -126,10 +126,10 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
   {
     slug: "green-iguana",
     name: "Green Iguana",
-    title: "Green Iguana in GTA 6",
-    seoTitle: "Green Iguana in GTA 6: Launch Trailer Footage & Facts",
+    title: "GTA 6 Green Iguana",
+    seoTitle: "GTA 6 Green Iguana",
     seoDescription:
-      "A large green iguana crosses a road in GTA VI's Launch Trailer. Rockstar names the species invasive — here is what is confirmed and what is not.",
+      "GTA 6 green iguana: the Launch Trailer road crossing and the invasive-species label, with what is confirmed and what is not.",
     tier: "Rockstar confirmed",
     hero: "/img/wildlife/iguana-road.jpg",
     heroAlt:
@@ -230,9 +230,9 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     slug: "sea-turtle",
     name: "Sea Turtle",
     title: "Sea Turtle in GTA 6",
-    seoTitle: "Sea Turtle in GTA 6: Reef Footage & Facts",
+    seoTitle: "GTA 6 Sea Turtle: Keys Reef Screenshot",
     seoDescription:
-      "Turtles are Rockstar-confirmed as a marine category in GTA VI. See the official underwater screenshot of a sea turtle over a Keys reef, and what is still not confirmed.",
+      "GTA 6 sea turtle: the official Keys reef screenshot, what it shows, and what is still not confirmed.",
     tier: "Rockstar confirmed",
     hero: "/img/wildlife/sea-turtle.jpg",
     heroAlt:
@@ -271,9 +271,9 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     slug: "eel",
     name: "Eel",
     title: "Eel in GTA 6",
-    seoTitle: "Eel in GTA 6: Underwater Screenshot & Facts",
+    seoTitle: "GTA 6 Eel: Keys Diving Screenshot",
     seoDescription:
-      "An eel appears in an official GTA VI underwater screenshot from the Leonida Keys. See the frame, what it shows, and why the 'American' label is the catalog's, not Rockstar's.",
+      "GTA 6 eel: the Leonida Keys diving screenshot, what the frame shows, and why the species label is not Rockstar's.",
     tier: "Community identification",
     hero: "/img/wildlife/american-eel.webp",
     heroAlt: "A long eel swimming underwater in GTA VI",

@@ -33,7 +33,9 @@ export default async function PublicCollection({
           {profile.image && (
             <img
               src={profile.image}
-              alt=""
+              alt={profile.name ? `${profile.name} profile image` : "Player profile image"}
+              width={80}
+              height={80}
               className="h-20 w-20 rounded-full object-cover"
             />
           )}

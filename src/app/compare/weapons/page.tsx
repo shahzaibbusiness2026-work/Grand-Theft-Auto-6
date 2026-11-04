@@ -10,23 +10,23 @@ import styles from "@/components/catalog-ui.module.css";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "GTA 6 Weapon Comparison Tool | Compare Weapons & Evidence",
+    absolute: "GTA 6 Weapon Comparison",
   },
   description:
-    "Compare up to four editorial weapon identifications with reviewed field-specific evidence. Missing statistics remain unverified.",
+    "Compare GTA 6 weapons side by side — every weapon spotted in official footage, with evidence labels. No stats are claimed before launch.",
   alternates: { canonical: "/compare/weapons" },
   openGraph: {
     url: "/compare/weapons",
-    title: "GTA 6 Weapon Comparison Tool | Compare Weapons & Evidence",
+    title: "GTA 6 Weapon Comparison",
     description:
-      "Compare up to four editorial weapon identifications with reviewed field-specific evidence. Missing statistics remain unverified.",
+      "Compare GTA 6 weapons side by side — every weapon spotted in official footage, with evidence labels. No stats are claimed before launch.",
     images: ["/img/hero-dark.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GTA 6 Weapon Comparison Tool | Compare Weapons & Evidence",
+    title: "GTA 6 Weapon Comparison",
     description:
-      "Compare up to four editorial weapon identifications with reviewed field-specific evidence. Missing statistics remain unverified.",
+      "Compare GTA 6 weapons side by side — every weapon spotted in official footage, with evidence labels. No stats are claimed before launch.",
     images: ["/img/hero-dark.jpg"],
   },
 };

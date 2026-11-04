@@ -105,6 +105,8 @@ export function SafeImage({
     <img
       src={srcString}
       alt={alt}
+      width={width}
+      height={height}
       className={className}
       style={
         fill

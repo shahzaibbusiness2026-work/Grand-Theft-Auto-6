@@ -7,8 +7,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     openGraph: { url: "/tools/countdown-widget" },
-  title: "GTA 6 Countdown Widget — Embed on Your Site",
-  description: "Get a free embeddable GTA 6 launch countdown widget for your website or stream overlay. Copy-paste ready.",
+  title: "GTA 6 Countdown Widget",
+  description: "GTA 6 countdown widget — free embed for your website or stream overlay. Copy-paste ready, no account needed.",
 
   alternates: { canonical: "/tools/countdown-widget" },
 };
@@ -33,7 +33,7 @@ export default function CountdownWidgetPage() {
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Countdown Widget \u2014 Embed on Your Site",
-                description: "Get a free embeddable GTA 6 launch countdown widget for your website or stream overlay. Copy-paste ready.",
+                description: "GTA 6 countdown widget — free embed for your website or stream overlay. Copy-paste ready, no account needed.",
                 url: "https://www.taishgaming.com/tools/countdown-widget",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",

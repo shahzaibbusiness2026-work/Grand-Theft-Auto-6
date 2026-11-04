@@ -14,6 +14,10 @@ const nextConfig = {
     optimizePackageImports: ["lucide-react"],
   },
   images: {
+    // Cap served widths at 1920: the default deviceSizes go up to 3840, which
+    // made phones/desktops request 3840px hero variants (Screaming Frog, Nov 2026).
+    // No page layout is wider than 1920, so 2048/3840 variants were pure weight.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 3600,
     remotePatterns: [

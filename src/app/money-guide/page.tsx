@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     openGraph: { url: "/money-guide" },
-  title: "GTA 6 Money Guide: Evidence & Unverified Methods",
+  title: "GTA 6 Money: Evidence & Methods",
   description: "What is verified about GTA 6 money? Check source limits for heists, businesses and other proposed methods before relying on payouts or income calculators.",
   alternates: { canonical: "/money-guide" },
 };

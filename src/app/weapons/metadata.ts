@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "GTA 6 Weapons List: Full Catalog",
+  title: "GTA 6 Weapons List",
   description:
-    "Every GTA 6 weapon spotted in official footage, with evidence labels. Compare guns and melee weapons; unknown damage, prices and availability stay unverified.",
+    "GTA 6 weapons list: every weapon spotted in official footage, with evidence labels. No damage or availability stats are claimed.",
   alternates: { canonical: "/weapons" },
   openGraph: {
     type: "website",
     url: "/weapons",
-    title: "GTA 6 Weapons List: Full Catalog",
+    title: "GTA 6 Weapons List",
     description:
       "GTA 6 weapons seen in official footage, with evidence labels. Unknown values stay unverified.",
     images: [

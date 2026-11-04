@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   openGraph: { url: "/tools/map-distance-calculator" },
-  title: "GTA 6 Map Distance Tool: Hypothetical Travel Times",
+  title: "GTA 6 Map Distance Calculator",
   description: PUBLIC_TOOL_COPY["/tools/map-distance-calculator"],
 
   alternates: { canonical: "/tools/map-distance-calculator" },

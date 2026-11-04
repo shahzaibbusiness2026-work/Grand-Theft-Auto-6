@@ -15,7 +15,7 @@ export const WORLD_WILDLIFE_CATEGORIES: WorldCategory[] = [
   {
     slug: "birds",
     title: "Birds in GTA 6",
-    seoTitle: "GTA 6 Birds: Flamingos & Official Trailer Sightings",
+    seoTitle: "GTA 6 Birds in Trailer 1",
     seoDescription:
       "See flamingos and wetland birds in GTA 6 Trailer 1, with a timestamped source, real footage and clear limits on species and gameplay claims.",
     intro:
@@ -58,9 +58,9 @@ export const WORLD_WILDLIFE_CATEGORIES: WorldCategory[] = [
   {
     slug: "mammals",
     title: "Mammals in GTA 6",
-    seoTitle: "GTA 6 Mammals: Deer, Dogs & Official Image Evidence",
+    seoTitle: "GTA 6 Mammals Spotted in Trailers",
     seoDescription:
-      "See deer in Rockstar's Mount Kalaga screenshot and a dog on Vice City beach in Trailer 1. Real images and source links separate sightings from gameplay claims.",
+      "GTA 6 mammals spotted so far: deer at Mount Kalaga and a dog on Vice City beach, with sources for every sighting.",
     intro:
       "Mammals appear in both Rockstar's official GTA VI screenshots and its trailer footage. The Mount Kalaga image below shows deer beside a woodland stream. Trailer 1 also includes a small dog walking between beachgoers. These are documented visual sightings, rather than a promise of a complete wildlife roster. Exact species or breed labels, interactions, population sizes and player ownership need their own evidence. Follow each source to inspect the animal in the context of the original scene.",
     image: mammals.src,
@@ -95,7 +95,7 @@ export const WORLD_WILDLIFE_CATEGORIES: WorldCategory[] = [
   {
     slug: "marine-life",
     title: "Marine Life in GTA 6",
-    seoTitle: "GTA 6 Marine Life: Sea Turtle & Fish in Official Images",
+    seoTitle: "GTA 6 Marine Life in the Keys",
     seoDescription:
       "Explore the sea turtle, fish and underwater setting in Rockstar's Leonida Keys screenshot, with a real image, source link and clear evidence limits.",
     intro:
