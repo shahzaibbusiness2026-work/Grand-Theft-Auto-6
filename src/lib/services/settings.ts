@@ -22,6 +22,9 @@ export interface ComprehensiveSiteSettings extends AdminSiteSettings {
   twitterHandle: string;
   discordUrl: string;
   redditUrl: string;
+  instagramUrl: string;
+  facebookUrl: string;
+  youtubeUrl: string;
   /** Homepage section ids (hero, trailers, map, characters, news, community) with public visibility enabled. Read by the homepage. */
   homepageSectionToggles: string[];
   /** Tool ids with public access enabled (map_tool, comp_tool, track_tool). Read by the /map, compare and /tracker pages. */
@@ -49,6 +52,9 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   twitterHandle: "",
   discordUrl: "",
   redditUrl: "",
+  instagramUrl: "",
+  facebookUrl: "",
+  youtubeUrl: "",
   homepageSectionToggles: [
     "hero",
     "trailers",

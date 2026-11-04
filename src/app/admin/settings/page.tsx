@@ -54,6 +54,9 @@ export default function AdminSettingsPage() {
     twitterHandle: "",
     discordUrl: "",
     redditUrl: "",
+    instagramUrl: "",
+    facebookUrl: "",
+    youtubeUrl: "",
     homepageSectionToggles: ["hero", "trailers", "map", "characters", "news", "community"],
     publicToolToggles: ["map_tool", "comp_tool", "track_tool"],
     ga4MeasurementId: "",
@@ -739,6 +742,55 @@ export default function AdminSettingsPage() {
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
             />
           </div>
+
+          <div>
+            <label htmlFor="settings-reddit" className="block font-medium text-[#94A3B8] mb-1">Reddit Community URL</label>
+            <input
+              id="settings-reddit"
+              type="text"
+              value={settings.redditUrl || ""}
+              onChange={(e) => handleUpdate({ redditUrl: e.target.value })}
+              placeholder="https://www.reddit.com/r/…"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="settings-instagram" className="block font-medium text-[#94A3B8] mb-1">Instagram URL</label>
+            <input
+              id="settings-instagram"
+              type="text"
+              value={settings.instagramUrl || ""}
+              onChange={(e) => handleUpdate({ instagramUrl: e.target.value })}
+              placeholder="https://www.instagram.com/…"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="settings-facebook" className="block font-medium text-[#94A3B8] mb-1">Facebook Page URL</label>
+            <input
+              id="settings-facebook"
+              type="text"
+              value={settings.facebookUrl || ""}
+              onChange={(e) => handleUpdate({ facebookUrl: e.target.value })}
+              placeholder="https://www.facebook.com/…"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="settings-youtube" className="block font-medium text-[#94A3B8] mb-1">YouTube Channel URL</label>
+            <input
+              id="settings-youtube"
+              type="text"
+              value={settings.youtubeUrl || ""}
+              onChange={(e) => handleUpdate({ youtubeUrl: e.target.value })}
+              placeholder="https://www.youtube.com/@…"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
+            />
+          </div>
+          <p className="text-xs text-[#64748B]">Social icons appear in the footer only for URLs saved here, so no dead or lookalike profile links ever go live.</p>
         </div>
       )}
 

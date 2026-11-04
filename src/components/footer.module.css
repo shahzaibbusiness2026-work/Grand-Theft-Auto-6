@@ -6,6 +6,93 @@
   color: #d7dfef;
   border-top: 1px solid #29364d;
 }
+/* Design 3 — Launch Banner Footer */
+.ctaBand {
+  background: linear-gradient(90deg, #ff2e9a, #7c3aed);
+}
+.ctaInner {
+  width: min(1240px, 100%);
+  margin-inline: auto;
+  padding: 28px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+}
+.ctaTitle {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.ctaSub {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.badges span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 5px 11px;
+  color: #fff;
+}
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: #172033;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ctaButton:hover {
+  color: #172033;
+  opacity: 0.92;
+}
+.bodyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 16px;
+  padding: 36px 0 8px;
+}
+.bodyGrid > :first-child {
+  grid-column: 1 / -1;
+}
+.bodyColTitle {
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff63b7;
+  margin: 0 0 10px;
+}
+.bodyBlurb {
+  margin: 12px 0 0;
+  max-width: 340px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #9eafc9;
+}
+.bodyGrid .socials {
+  margin-top: 16px;
+}
 .backdrop {
   position: absolute;
   inset: 0 0 auto;
@@ -317,5 +404,21 @@
   }
   .quickLink:hover {
     transform: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .ctaInner {
+    padding: 28px 30px;
+  }
+  .ctaTitle {
+    font-size: 21px;
+  }
+  .bodyGrid {
+    grid-template-columns: 1.3fr 1fr 1fr 1.3fr;
+    gap: 28px;
+  }
+  .bodyGrid > :first-child {
+    grid-column: auto;
   }
 }
