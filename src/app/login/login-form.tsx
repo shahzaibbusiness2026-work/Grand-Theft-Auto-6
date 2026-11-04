@@ -235,7 +235,12 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
 
   async function handleOAuth(provider: OAuthProvider) {
     setOauthNotice("");
-    if (oauthEnabled?.[provider] !== true) {
+    // Only block when the live settings fetch has positively said the
+    // provider is off. While it is still loading (oauthEnabled === null)
+    // or the fetch failed, attempt the sign-in and let Supabase answer
+    // honestly — otherwise a fast click before the fetch lands shows a
+    // false "isn't available yet" even though the provider is enabled.
+    if (oauthEnabled?.[provider] === false) {
       setOauthNotice(
         `${OAUTH_LABEL[provider]} sign-in isn't available yet. It will appear here automatically once it's enabled.`
       );
