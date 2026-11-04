@@ -47,16 +47,21 @@ const GROUPS: Group[] = [
       { label: "About Taish Gaming", href: "/about" },
       { label: "Contact / report a problem", href: "/contact" },
       { label: "Site directory", href: "/site-map" },
-      { label: "Editorial team", href: "/team" },
-      { label: "Editorial policy", href: "/editorial-policy" },
-      { label: "Corrections", href: "/corrections" },
-      { label: "Privacy", href: "/privacy" },
-      { label: "Terms", href: "/terms" },
-      { label: "Cookie choices", href: "/privacy#privacy-controls-title" },
-      { label: "Disclaimer", href: "/disclaimer" },
-      { label: "DMCA / rights enquiries", href: "/dmca" },
     ],
   },
+];
+
+/* Trust/legal pages live in a slim inline strip under the columns instead
+   of a tall Site column, so the footer stays compact. No link is dropped. */
+const LEGAL_LINKS: FooterLink[] = [
+  { label: "Editorial team", href: "/team" },
+  { label: "Editorial policy", href: "/editorial-policy" },
+  { label: "Corrections", href: "/corrections" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
+  { label: "Cookie choices", href: "/privacy#privacy-controls-title" },
+  { label: "Disclaimer", href: "/disclaimer" },
+  { label: "DMCA / rights enquiries", href: "/dmca" },
 ];
 
 function publicSocial(value: string | undefined, hosts: string[]) {
@@ -216,6 +221,14 @@ export async function Footer() {
             </section>
           ))}
         </div>
+
+        <nav className={styles.legalStrip} aria-label="Footer legal pages">
+          {LEGAL_LINKS.map((link) => (
+            <Link key={link.href} className={styles.link} href={link.href}>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
         <div className={styles.bottom}>
           <p className={styles.note}>
