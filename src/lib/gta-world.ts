@@ -692,7 +692,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "Social Media & Apps",
     seoTitle: "GTA 6 Social Media in Trailers",
     seoDescription:
-      "Explore social-media imagery in GTA 6 Trailer 1 and Rockstar's character bios. Direct sources distinguish visible details from unverified playable app features.",
+      "GTA 6 social media in trailers: imagery from Trailer 1 and Rockstar's bios, with visible details separated from unverified app features.",
     intro:
       "Social media is part of GTA VI's presentation and character stories. Trailer 1 includes in-world clips with account names and comments, while Rockstar's character biographies describe internet use and music promotion. Those sources establish the fictional setting; they do not by themselves establish which phone apps the player can operate. This guide separates the visible evidence from questions about posting, browsing, rides and vehicle scanning.",
     notConfirmed: [
