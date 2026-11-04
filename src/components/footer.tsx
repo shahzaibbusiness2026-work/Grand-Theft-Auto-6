@@ -5,6 +5,7 @@ import {
   FaFacebook,
   FaInstagram,
   FaReddit,
+  FaTiktok,
   FaXTwitter,
   FaYoutube,
 } from "react-icons/fa6";
@@ -124,6 +125,14 @@ export async function Footer() {
       label: "Taish Gaming on Reddit",
       icon: FaReddit,
       href: publicSocial(settings.redditUrl, ["reddit.com", "www.reddit.com"]),
+    },
+    {
+      label: "Taish Gaming on TikTok",
+      icon: FaTiktok,
+      href: publicSocial(settings.tiktokUrl, [
+        "tiktok.com",
+        "www.tiktok.com",
+      ]),
     },
   ].filter((item) => item.href);
 
