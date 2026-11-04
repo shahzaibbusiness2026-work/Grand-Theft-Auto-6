@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { requirePlayer } from "@/lib/auth/player-account";
 import { LoginCards } from "./login-form";
 
 export const metadata: Metadata = {
@@ -23,6 +25,19 @@ export default async function LoginPage({
 }: {
   searchParams: Promise<{ oauth?: string }>;
 }) {
+  // A visitor who already holds a valid session must never be shown the
+  // sign-in form as if they were logged out: send them to the dashboard.
+  // The FULL check (cookie signature + account row + session version) is
+  // deliberate — a signature-only check would redirect-loop against the
+  // dashboard layout for version-mismatched sessions (e.g. after a
+  // password change on another device). Any failure here simply renders
+  // the form, so logged-out visitors are unaffected.
+  try {
+    await requirePlayer();
+    redirect("/dashboard");
+  } catch {
+    // No valid session — fall through to the sign-in form below.
+  }
   const params = await searchParams;
   const oauthStatus =
     params.oauth === "cancelled" || params.oauth === "error" ? params.oauth : undefined;
