@@ -35,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/tools/garage-planner",
     "/tools/countdown-widget",
     "/tools/business-income-calculator",
+    "/tools/download-time-calculator",
     "/characters",
     "/radio",
     "/controls",

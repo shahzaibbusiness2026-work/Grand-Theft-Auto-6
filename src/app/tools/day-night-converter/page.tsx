@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   openGraph: { url: "/tools/day-night-converter" },
-  title: "GTA 6 Day/Night Converter",
+  title: "GTA 6 Day/Night Converter: Hypothetical Calculator",
   description: PUBLIC_TOOL_COPY["/tools/day-night-converter"],
 
   alternates: { canonical: "/tools/day-night-converter" },

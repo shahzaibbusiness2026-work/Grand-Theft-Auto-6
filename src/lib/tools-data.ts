@@ -26,6 +26,7 @@ import {
   Warehouse,
   Egg,
   Gamepad2,
+  Download,
 } from "lucide-react";
 
 export interface ToolItem {
@@ -425,6 +426,16 @@ export const ALL_TOOLS: ToolItem[] = (
       href: "/controls",
       badge: "Tool 33",
       icon: Gamepad2,
+    },
+    {
+      id: "tool-download-time",
+      status: "verified",
+      name: "Download Time Calculator",
+      category: "Guides & Reference",
+      desc: "Estimate GTA 6 pre-load download time from your speed and game size, with realistic efficiency and storage guidance.",
+      href: "/tools/download-time-calculator",
+      badge: "Tool 34",
+      icon: Download,
     },
   ] satisfies ToolItem[]
 ).map((item) => ({ ...item, desc: PUBLIC_TOOL_COPY[item.href] || item.desc }));
