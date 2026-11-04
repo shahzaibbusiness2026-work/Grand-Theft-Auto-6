@@ -404,14 +404,18 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
   return (
     <div className="w-full max-w-md">
       <div className="rounded-[28px] border border-gold/40 bg-[rgba(7,11,20,0.85)] p-6 shadow-[0_0_80px_rgba(201,168,106,0.3)] backdrop-blur-xl sm:p-8">
-        {/* Brand — site gold + cyan, system font */}
+        {/* Brand — same colors as the navbar logo: TAISH in foreground,
+            GAMING in the pink-to-violet gradient (white here because the
+            card is always dark glass, so the light-theme navy would vanish). */}
         <div className="mb-6 text-center">
-          <p className="font-display text-4xl font-black leading-none tracking-tight text-gold">
+          <p className="font-display text-4xl font-black leading-none tracking-tight text-white">
             TAISH
           </p>
-          <p className="mt-1.5 flex items-center justify-center gap-2 text-[13px] font-bold tracking-[0.5em] text-cyan-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" aria-hidden="true" />
-            GAMING
+          <p className="mt-1.5 flex items-center justify-center gap-2 text-[13px] font-bold tracking-[0.5em]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#FF2E9A]" aria-hidden="true" />
+            <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">
+              GAMING
+            </span>
           </p>
         </div>
 
@@ -468,11 +472,6 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
           </div>
         )}
 
-        {oauthStatus === "cancelled" && (
-          <p role="alert" className="mb-4 rounded-xl border border-white/15 bg-white/5 p-3 text-xs text-slate-300">
-            Social sign-in was cancelled. You can sign in with email instead.
-          </p>
-        )}
         {oauthStatus === "error" && (
           <p role="alert" className="mb-4 rounded-xl border border-red-500/40 bg-red-500/10 p-3 text-xs text-red-300">
             Social sign-in failed. Please try again, or use email sign-in.
