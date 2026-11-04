@@ -110,10 +110,11 @@ export function CommandPaletteContent({
     return buildStaticIndex();
   }, [liveItems]);
 
-  // Filter items
+  // Filter items — nothing is shown until the user types: opening the
+  // search shows just the empty search bar, never a pre-filled list.
   const filteredResults = useMemo(() => {
     if (!query.trim()) {
-      return searchIndex.slice(0, 10);
+      return [];
     }
     const q = query.toLowerCase();
     return searchIndex
@@ -251,7 +252,8 @@ export function CommandPaletteContent({
           </kbd>
         </div>
 
-        {/* Results List */}
+        {/* Results List — only once the user has typed something */}
+        {query.trim() !== "" && (
         <div
           ref={listRef}
           className="max-h-96 overflow-y-auto p-2 divide-y divide-border"
@@ -307,12 +309,15 @@ export function CommandPaletteContent({
             })
           )}
         </div>
+        )}
 
-        {/* Bottom Footer Helper */}
+        {/* Bottom Footer Helper — also only once the user has typed */}
+        {query.trim() !== "" && (
         <div className="px-4 py-2.5 bg-muted/50 border-t border-border flex items-center justify-between text-xs text-muted-foreground font-mono">
           <span>Navigate with &uarr; &darr; arrow keys</span>
           <span>Press Enter to select</span>
         </div>
+        )}
       </div>
     </div>
   );
