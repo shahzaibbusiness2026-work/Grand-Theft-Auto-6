@@ -413,6 +413,48 @@ export default async function HomePage() {
           </>
         )}
       </div>
+      <section className="container-site py-6 sm:py-8" aria-labelledby="popular-heading">
+        <h2 id="popular-heading" className="font-display text-2xl font-bold">
+          Popular on Taish Gaming
+        </h2>
+        <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
+          The pages readers open most: the map, the size comparison, the tools and the controls.
+        </p>
+        <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <li className="card-surface rounded-2xl p-4">
+            <Link className="font-bold underline" href="/map">GTA 6 interactive map</Link>
+            <p className="mt-1 text-sm text-muted-foreground">Leonida regions, cities and locations, with fan-map pins.</p>
+          </li>
+          <li className="card-surface rounded-2xl p-4">
+            <Link className="font-bold underline" href="/news/map-size-comparison-gtav-rdr2">GTA 6 map size compared</Link>
+            <p className="mt-1 text-sm text-muted-foreground">Why there is no official km² number yet.</p>
+          </li>
+          <li className="card-surface rounded-2xl p-4">
+            <Link className="font-bold underline" href="/tools/day-night-converter">GTA time to real time converter</Link>
+            <p className="mt-1 text-sm text-muted-foreground">Convert game time to real time and back.</p>
+          </li>
+          <li className="card-surface rounded-2xl p-4">
+            <Link className="font-bold underline" href="/controls">GTA 6 controls</Link>
+            <p className="mt-1 text-sm text-muted-foreground">Provisional PS5 and Xbox controller layout.</p>
+          </li>
+          <li className="card-surface rounded-2xl p-4">
+            <Link className="font-bold underline" href="/news/gta-6-gameplay-confirmed-features-mechanics">GTA 6 gameplay mechanics</Link>
+            <p className="mt-1 text-sm text-muted-foreground">Shown versus unverified mechanics, separated.</p>
+          </li>
+          <li className="card-surface rounded-2xl p-4">
+            <Link className="font-bold underline" href="/tools/money-calculator">GTA 6 money calculator</Link>
+            <p className="mt-1 text-sm text-muted-foreground">Plan fictional earnings with custom inputs.</p>
+          </li>
+          <li className="card-surface rounded-2xl p-4">
+            <Link className="font-bold underline" href="/weapons">GTA 6 weapons</Link>
+            <p className="mt-1 text-sm text-muted-foreground">The full weapon database.</p>
+          </li>
+          <li className="card-surface rounded-2xl p-4">
+            <Link className="font-bold underline" href="/news">Latest GTA 6 news</Link>
+            <p className="mt-1 text-sm text-muted-foreground">Official updates and announcements.</p>
+          </li>
+        </ul>
+      </section>
     </SiteShell>
   );
 }

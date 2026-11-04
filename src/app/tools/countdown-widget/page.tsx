@@ -1,14 +1,15 @@
 import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
 import { CountdownWidgetClient } from "./countdown-widget-client";
+import { TimezoneNoteClient } from "./timezone-note-client";
 import { Code2, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     openGraph: { url: "/tools/countdown-widget" },
-  title: "GTA 6 Countdown Widget",
-  description: "GTA 6 countdown widget — free embed for your website or stream overlay. Copy-paste ready, no account needed.",
+  title: "GTA 6 Release Time & Countdown in Your Timezone",
+  description: "GTA 6 launches November 19, 2026 on PS5 and Xbox Series X|S, with digital preload from November 10. See the live countdown, your local launch day, and the free embed widget.",
 
   alternates: { canonical: "/tools/countdown-widget" },
 };
@@ -27,13 +28,13 @@ export default function CountdownWidgetPage() {
                 itemListElement: [
                   { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Countdown Widget \u2014 Embed on Your Site", item: "https://www.taishgaming.com/tools/countdown-widget" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Release Time & Countdown", item: "https://www.taishgaming.com/tools/countdown-widget" },
                 ],
               },
               {
                 "@type": "WebApplication",
-                name: "GTA 6 Countdown Widget \u2014 Embed on Your Site",
-                description: "GTA 6 countdown widget — free embed for your website or stream overlay. Copy-paste ready, no account needed.",
+                name: "GTA 6 Release Time & Countdown",
+                description: "GTA 6 launches November 19, 2026 on PS5 and Xbox Series X|S, with digital preload from November 10. See the live countdown, your local launch day, and the free embed widget.",
                 url: "https://www.taishgaming.com/tools/countdown-widget",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
@@ -59,11 +60,17 @@ export default function CountdownWidgetPage() {
             <Code2 className="h-3 w-3" /> Free Embed Widget
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-            GTA 6 <span className="text-primary">COUNTDOWN WIDGET</span>
+            GTA 6 <span className="text-primary">RELEASE TIME &amp; COUNTDOWN</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Pick a size, preview the live countdown below, then copy the embed code and paste it into your website or stream overlay. Free for everyone.
+            GTA 6 launches November 19, 2026 on PlayStation 5 and Xbox Series X|S,
+            at local midnight in your region. Digital pre-loading opens November 10:
+            at midnight local time on PS5, and at 12 a.m. GMT worldwide on Xbox Series X|S
+            (November 9 evening in the US). The pre-load file needs up to 212 GB
+            depending on your device. The live countdown below tracks launch day,
+            and the widget is free to embed on your site or stream.
           </p>
+          <TimezoneNoteClient />
         </div>
 
         <CountdownWidgetClient />

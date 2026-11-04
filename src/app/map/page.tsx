@@ -8,7 +8,7 @@ import { FeatureDisabled } from "@/components/feature-disabled";
 import Link from "next/link";
 import { getMapMarkers } from "@/lib/services/map";
 
-const title = "GTA 6 Map: Interactive Leonida & Vice City";
+const title = "GTA 6 Interactive Map: Leonida Regions, Cities & Locations";
 
 export const metadata: Metadata = {
   title,
@@ -134,8 +134,66 @@ export default async function MapPage() {
           </article>
         </div>
       </section>
+      <section className="container-site pb-10" aria-labelledby="map-guides">
+        <h2 id="map-guides" className="font-display text-2xl font-bold">
+          GTA 6 map guides
+        </h2>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          The map above is the hub for everything map-related on Taish Gaming.
+          Start with the destination guide, check what is known about the size,
+          or browse the six regions.
+        </p>
+        <ul className="mt-5 grid gap-5 md:grid-cols-2">
+          <li className="card-surface rounded-2xl p-5">
+            <Link className="text-base font-bold underline" href="/news/gta-6-map-guide-leonida-regions-size">
+              GTA 6 map guide: Leonida regions, size and locations
+            </Link>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Every named destination, what Rockstar confirmed, and what is still unconfirmed.
+            </p>
+          </li>
+          <li className="card-surface rounded-2xl p-5">
+            <Link className="text-base font-bold underline" href="/news/map-size-comparison-gtav-rdr2">
+              GTA 6 map size compared with GTA 5 and Red Dead Redemption 2
+            </Link>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Why there is no official km² number yet, and what the estimates can and cannot prove.
+            </p>
+          </li>
+          <li className="card-surface rounded-2xl p-5">
+            <Link className="text-base font-bold underline" href="/regions">
+              The six regions of Leonida
+            </Link>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Vice City, Leonida Keys, Grassrivers, Port Gellhorn, Ambrosia and Mount Kalaga, in Rockstar’s own words.
+            </p>
+          </li>
+          <li className="card-surface rounded-2xl p-5">
+            <Link className="text-base font-bold underline" href="/guides/vice-city-map-guide">
+              Vice City map guide
+            </Link>
+            <p className="mt-2 text-sm text-muted-foreground">
+              How the named destinations relate to the available official evidence.
+            </p>
+          </li>
+        </ul>
+      </section>
       {/* RELATED ARTICLES — internal linking for SEO/discovery */}
       <RelatedArticles category="Map" title="Map Guides & Location Intel" />
+      <section className="container-site pb-10" aria-labelledby="embed-map">
+        <h2 id="embed-map" className="font-display text-2xl font-bold">
+          Embed this map on your site
+        </h2>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          Copy the code below to show the interactive map on your own page.
+          A link back to Taish Gaming is appreciated.
+        </p>
+        <pre className="card-surface mt-5 overflow-x-auto rounded-2xl p-5 text-xs leading-relaxed">
+          <code>
+            {`<iframe src="https://www.taishgaming.com/embed/map" width="100%" height="600" style="border:0" loading="lazy" title="GTA 6 interactive map"></iframe>`}
+          </code>
+        </pre>
+      </section>
     </SiteShell>
   );
 }

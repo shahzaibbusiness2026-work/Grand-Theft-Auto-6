@@ -348,7 +348,7 @@ export const ALL_TOOLS: ToolItem[] = (
       status: "verified",
       name: "Countdown Embed Widget",
       category: "AI & Assistance",
-      desc: "Free embeddable GTA 6 launch countdown for your site or stream. Copy-paste ready iframe snippet.",
+      desc: "GTA 6 launch countdown and release-time guide, plus a free embeddable widget for your site or stream.",
       href: "/tools/countdown-widget",
       badge: "Tool 23",
       icon: Timer,

@@ -274,6 +274,20 @@ export default async function ArticleDetailPage({ params }: Props) {
             <time dateTime={article.published_at || undefined}>
               {formatDate(article.published_at)}
             </time>
+            {article.updated_at &&
+              article.published_at &&
+              article.updated_at.slice(0, 10) !==
+                article.published_at.slice(0, 10) && (
+                <>
+                  <span className="text-border">•</span>
+                  <span>
+                    Updated{" "}
+                    <time dateTime={article.updated_at}>
+                      {formatDate(article.updated_at)}
+                    </time>
+                  </span>
+                </>
+              )}
             <span className="text-border">•</span>
             <span className="flex items-center gap-1">
               <Clock className="h-3 w-3" aria-hidden="true" />{" "}

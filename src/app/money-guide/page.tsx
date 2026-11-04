@@ -49,6 +49,8 @@ export default function MoneyGuidePage() {
           <Link href="/tools/money-calculator" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white">Money Calculator</Link>
           <Link href="/tools/money-maker" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold">Money-Making Method Finder</Link>
           <Link href="/tools/heist-payout-splitter" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold">Heist Payout Splitter</Link>
+          <Link href="/tools/business-profit-calculator" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold">Business Profit Calculator</Link>
+          <Link href="/tools/business-income-calculator" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold">Business Income Calculator</Link>
           <Link href="/businesses" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold">Businesses</Link>
         </div>
         <p className="mt-6 text-sm text-foreground/70">Read the <Link className="underline" href="/news/gta-6-money-guide-robberies-fences-economy">economy claim correction log</Link> for the specific robbery, wanted-level and app claims awaiting source verification, or <Link className="underline" href="/corrections">send exact supporting evidence</Link>.</p>

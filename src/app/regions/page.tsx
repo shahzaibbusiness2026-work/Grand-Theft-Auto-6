@@ -31,8 +31,9 @@ export default function RegionsHubPage() {
             so borders and positions are left unconfirmed throughout.
           </p>
           <p className="mt-4 text-sm text-white/70">
+            Explore the{" "}
             <Link href="/map" className="underline text-white">
-              Explore our interactive Leonida fan map
+              GTA 6 map
             </Link>{" "}
             with provisional pins and device-local notes. Pin placement is
             separate from Rockstar&apos;s confirmed destination names.

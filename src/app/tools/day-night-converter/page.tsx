@@ -112,6 +112,20 @@ export default function DayNightConverterPage() {
         </div>
 
         <DayNightConverterClient />
+
+        <section className="mt-10 max-w-2xl" aria-labelledby="embed-converter">
+          <h2 id="embed-converter" className="font-display text-2xl font-bold">
+            Embed this converter on your site
+          </h2>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Copy the code below to show the converter on your own page. A link back to Taish Gaming is appreciated.
+          </p>
+          <pre className="card-surface mt-5 overflow-x-auto rounded-2xl p-5 text-xs leading-relaxed">
+            <code>
+              {`<iframe src="https://www.taishgaming.com/embed/day-night" width="100%" height="600" style="border:0" loading="lazy" title="GTA 6 day/night converter"></iframe>`}
+            </code>
+          </pre>
+        </section>
       </div>
     </SiteShell>
   );
