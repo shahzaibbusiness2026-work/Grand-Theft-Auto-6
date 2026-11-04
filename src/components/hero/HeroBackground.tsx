@@ -111,8 +111,10 @@ export function HeroBackground() {
       className="pointer-events-none absolute inset-0 w-full h-full overflow-hidden select-none"
       aria-hidden="true"
     >
-      {/* 1. Base background: adapts to light/dark */}
-      <div className="absolute inset-0 bg-slate-100 dark:bg-[#090d16] transition-colors duration-300" />
+      {/* 1. Base background: always black, so the letterbox bands left by
+          the fitted (object-contain) image read as cinematic bars, not
+          mismatched light/dark patches, in either theme. */}
+      <div className="absolute inset-0 bg-black" />
 
       {/* 2. Today's scene (base layer — correct from first paint) */}
       <div className="absolute inset-0 w-full h-full">
@@ -123,7 +125,7 @@ export function HeroBackground() {
           priority
           quality={80}
           sizes="100vw"
-          className="object-cover object-center hero-bg-img"
+          className="object-contain object-center hero-bg-img"
         />
       </div>
 
@@ -142,7 +144,7 @@ export function HeroBackground() {
               opacity: incomingReady ? 1 : 0,
               transition: "opacity 1000ms ease",
             }}
-            className="object-cover object-center hero-bg-kenburns"
+            className="object-contain object-center hero-bg-kenburns"
           />
         </div>
       )}
