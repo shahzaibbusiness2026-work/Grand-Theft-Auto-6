@@ -4,15 +4,16 @@ import Image from "next/image";
 
 /**
  * Fixed hero artwork — NO daily rotation (changed Nov 2026 at the owner's
- * request). Every visitor always sees the same scene: the official
- * "Welcome to Leonida" key art, full-bleed. The old 7-scene calendar
- * rotation (midnight crossfade, hourly checks) is deliberately removed,
- * so the home hero never changes on its own again.
+ * request). Every visitor always sees the same scene. First fixed to the
+ * official Leonida key art, then switched Nov 2026 to the Vice City
+ * skyline: the key art's faces sat right behind the centered countdown,
+ * while the skyline's center is clean sky and water, so nothing overlaps
+ * the timer. Full-bleed, never changes on its own.
  */
 const FIXED_SCENE = {
-  src: "/img/gta6-hero-official.webp",
-  label: "Welcome to Leonida",
-  alt: "GTA VI Leonida key art",
+  src: "/img/hero-vice-skyline-hd.jpg",
+  label: "Vice City Skyline",
+  alt: "GTA VI Vice City skyline and muscle car",
 } as const;
 
 export function HeroBackground() {
@@ -43,8 +44,10 @@ export function HeroBackground() {
         />
       </div>
 
-      {/* 3. Atmospheric overlay preserving readability */}
+      {/* 3. Atmospheric overlay preserving readability, plus a soft
+          center scrim so the white countdown never fights a bright sky. */}
       <div className="absolute inset-0 bg-black/15 transition-colors duration-300" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.45),transparent_68%)]" />
 
       {/* 3b. Ambient neon drift — slow Vice City glow (pink + cyan) */}
       <div className="hero-neon-a absolute -left-32 top-10 h-96 w-96 rounded-full bg-[#FF2E9A]/20 blur-[110px]" />
