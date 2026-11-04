@@ -20,7 +20,7 @@ export const SITE_CONFIG = {
   isReleaseDateConfirmed: true,
   releaseWindowDisplay: "November 19, 2026",
   countdownCaption:
-    "GTA VI scheduled for November 19, 2026 · Pre-load begins November 12 · Check your platform for regional unlock times",
+    "GTA VI scheduled for November 19, 2026 · Pre-load begins November 10 · Check your platform for regional unlock times",
 
   socials: {
     twitter: "https://twitter.com/rockstargames",
