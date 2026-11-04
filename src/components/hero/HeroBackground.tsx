@@ -111,12 +111,14 @@ export function HeroBackground() {
       className="pointer-events-none absolute inset-0 w-full h-full overflow-hidden select-none"
       aria-hidden="true"
     >
-      {/* 1. Base background: always black, so the letterbox bands left by
-          the fitted (object-contain) image read as cinematic bars, not
-          mismatched light/dark patches, in either theme. */}
+      {/* 1. Base background: always black, behind the full-bleed image. */}
       <div className="absolute inset-0 bg-black" />
 
-      {/* 2. Today's scene (base layer — correct from first paint) */}
+      {/* 2. Today's scene (base layer — correct from first paint).
+          Full-bleed (object-cover): the image fills the whole hero width
+          and height. This crops the top/bottom on wide screens instead of
+          leaving side bars — the full-width look requested Nov 2026,
+          superseding the earlier object-contain fit. */}
       <div className="absolute inset-0 w-full h-full">
         <Image
           src={scene.src}
@@ -125,7 +127,7 @@ export function HeroBackground() {
           priority
           quality={80}
           sizes="100vw"
-          className="object-contain object-center hero-bg-img"
+          className="object-cover object-center hero-bg-img"
         />
       </div>
 
@@ -144,7 +146,7 @@ export function HeroBackground() {
               opacity: incomingReady ? 1 : 0,
               transition: "opacity 1000ms ease",
             }}
-            className="object-contain object-center hero-bg-kenburns"
+            className="object-cover object-center hero-bg-kenburns"
           />
         </div>
       )}

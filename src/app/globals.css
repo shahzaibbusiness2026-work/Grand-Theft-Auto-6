@@ -1127,3 +1127,18 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
 .light .player-profile-menu.player-profile-menu,
 .light .player-drawer.player-drawer { background: #f8fafc !important; border-color: #cbd5e1 !important; color: #334155 !important; }
 .light .player-profile-menu .text-rose-300 { color: #be123c !important; }
+
+/* Bright-mode dashboard main content: text that sits directly on the
+   light shell (#f1f5f9) outside a .player-panel was never flipped, so
+   slate-400/500 body text and white/slate headings washed out on the
+   light background. Flip it here; permanent dark surfaces inside the
+   dashboard (.dark-panel hero, image scrims) keep their light text via
+   the stronger exception rules below. */
+.light .dashboard-type main :is(.text-slate-400, .text-slate-500) { color: #475569 !important; }
+.light .dashboard-type main :is(.text-white, .text-slate-100, .text-slate-200, .text-slate-300) { color: #334155 !important; }
+.light .dashboard-type main .dark-panel :is(.text-white, .text-slate-100, .text-slate-200, .text-slate-300) { color: #f8fafc !important; }
+.light .dashboard-type main .dark-panel :is(.text-slate-400, .text-slate-500) { color: #94a3b8 !important; }
+/* Top bar in bright mode: pin it to a light surface with a visible
+   border, so its (now dark-flipped) text never sits on a dark bar. */
+.light .player-topbar.player-topbar { background: rgba(255, 255, 255, 0.92) !important; border-color: #e2e8f0 !important; }
+.light .player-topbar .border-white\/10 { border-color: #cbd5e1 !important; }
