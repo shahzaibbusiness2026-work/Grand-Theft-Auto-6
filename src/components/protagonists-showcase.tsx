@@ -79,7 +79,7 @@ export function ProtagonistsShowcase({
             id="protagonists-heading"
             className="mt-3 font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-foreground"
           >
-            Meet the <span className="text-primary">Protagonists</span>
+            Meet the <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">Protagonists</span>
           </h2>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground">
             Two criminals bound by fate, trust, and ambition in the unforgiving
@@ -131,7 +131,7 @@ export function ProtagonistsShowcase({
         {(activeTab === "both" || activeTab === "lucia") && (
           <div
             className={cn(
-              "group relative overflow-hidden rounded-[28px] sm:rounded-[32px] bg-white border-2 border-pink-400/80 shadow-[0_0_35px_rgba(244,114,182,0.45),0_15px_35px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1",
+              "group relative overflow-hidden rounded-[28px] sm:rounded-[32px] bg-white dark:bg-slate-900 border-2 border-pink-400/80 shadow-[0_0_35px_rgba(244,114,182,0.45),0_15px_35px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1",
               activeTab === "lucia" && "lg:col-span-2 max-w-4xl mx-auto w-full",
             )}
           >
@@ -158,10 +158,10 @@ export function ProtagonistsShowcase({
 
                 {/* Soft gradient blend into the white right content pane */}
                 {!stacked && (
-                  <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/20 to-white pointer-events-none" />
+                  <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/20 dark:via-slate-900/20 to-white dark:to-slate-900 pointer-events-none" />
                 )}
                 {!stacked && (
-                  <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+                  <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-slate-900 via-white/50 dark:via-slate-900/50 to-transparent pointer-events-none" />
                 )}
 
                 {/* Top-Left Pill Badge: LEAD PROTAGONIST */}
@@ -196,7 +196,7 @@ export function ProtagonistsShowcase({
               </div>
 
               {/* Right Column: White Content Pane */}
-              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-white text-slate-900">
+              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                 <div className="space-y-4">
                   {/* Top Dossier Header */}
                   <div className="flex items-center justify-between gap-2">
@@ -209,7 +209,7 @@ export function ProtagonistsShowcase({
                       </span>
                       <span
                         title="Editorial nickname, not an official Rockstar alias"
-                        className="text-[10px] font-bold uppercase tracking-wider text-slate-500 border border-slate-300 rounded-full px-2 py-0.5"
+                        className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-600 rounded-full px-2 py-0.5"
                       >
                         Editorial label
                       </span>
@@ -218,7 +218,7 @@ export function ProtagonistsShowcase({
 
                   {/* Character Name */}
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 leading-none">
+                    <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 dark:text-white leading-none">
                       <span className="text-pink-600">{luciaName.first}</span>{" "}
                       {luciaName.rest}
                     </h3>
@@ -230,9 +230,9 @@ export function ProtagonistsShowcase({
                       <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                         From official trailers
                       </p>
-                      <div className="rounded-2xl bg-pink-50/70 border border-pink-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
+                      <div className="rounded-2xl bg-pink-50/70 dark:bg-pink-500/10 border border-pink-200/90 dark:border-pink-500/30 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
                         <Quote className="w-5 h-5 text-pink-500 shrink-0 mt-0.5 rotate-180" />
-                        <p className="text-xs sm:text-[13px] italic font-medium text-pink-700 leading-relaxed">
+                        <p className="text-xs sm:text-[13px] italic font-medium text-pink-700 dark:text-pink-200 leading-relaxed">
                           &ldquo;
                           {lucia?.quote}
                           &rdquo;
@@ -242,7 +242,7 @@ export function ProtagonistsShowcase({
                   ) : null}
 
                   {/* Specs List: Vertical 4-Row Key-Value Stack */}
-                  <p className="pt-1 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
+                  <p className="pt-1 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
                     Unconfirmed / Speculative — possible abilities, specialty,
                     signature vehicle and territory (editorial analysis, not
                     Rockstar-confirmed)
@@ -254,7 +254,7 @@ export function ProtagonistsShowcase({
                         <Zap className="w-4 h-4 text-gold shrink-0" />
                         <span>Special Ability:</span>
                       </div>
-                      <span className="font-bold text-slate-900 leading-snug">
+                      <span className="font-bold text-slate-900 dark:text-slate-100 leading-snug">
                         {lucia?.perk ||
                           "Tactical Reflexes (Bullet Time) & Lockpicking"}
                       </span>
@@ -266,7 +266,7 @@ export function ProtagonistsShowcase({
                         <Shield className="w-4 h-4 text-pink-500 shrink-0" />
                         <span>Specialty:</span>
                       </div>
-                      <span className="font-bold text-slate-900 leading-snug">
+                      <span className="font-bold text-slate-900 dark:text-slate-100 leading-snug">
                         {lucia?.specialty ||
                           "High-stakes Armed Robberies & Infiltration"}
                       </span>
@@ -278,7 +278,7 @@ export function ProtagonistsShowcase({
                         <Car className="w-4 h-4 text-purple-500 shrink-0" />
                         <span>Signature Ride:</span>
                       </div>
-                      <span className="font-bold text-slate-900 leading-snug">
+                      <span className="font-bold text-slate-900 dark:text-slate-100 leading-snug">
                         {lucia?.vehicle || "Bravado Banshee (Modified)"}
                       </span>
                     </div>
@@ -289,7 +289,7 @@ export function ProtagonistsShowcase({
                         <MapPin className="w-4 h-4 text-purple-500 shrink-0" />
                         <span>Territory:</span>
                       </div>
-                      <span className="font-bold text-slate-900 leading-snug">
+                      <span className="font-bold text-slate-900 dark:text-slate-100 leading-snug">
                         {lucia?.origin ||
                           "Vice City Metro / Leonida Penitentiary"}
                       </span>
@@ -298,10 +298,10 @@ export function ProtagonistsShowcase({
                 </div>
 
                 {/* Footer Row */}
-                <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
+                <div className="mt-6 pt-3.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
                   <div className="text-xs">
                     <span className="text-muted-foreground">Actor: </span>
-                    <span className="font-bold text-slate-900">
+                    <span className="font-bold text-slate-900 dark:text-slate-100">
                       {actorName(lucia?.voiceActor, "Manni L. Perez")}
                     </span>
                     <p className="text-xs text-muted-foreground">
@@ -325,7 +325,7 @@ export function ProtagonistsShowcase({
         {(activeTab === "both" || activeTab === "jason") && (
           <div
             className={cn(
-              "group relative overflow-hidden rounded-[28px] sm:rounded-[32px] bg-white border-2 border-cyan-400/80 shadow-[0_0_35px_rgba(56,189,248,0.45),0_15px_35px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1",
+              "group relative overflow-hidden rounded-[28px] sm:rounded-[32px] bg-white dark:bg-slate-900 border-2 border-cyan-400/80 shadow-[0_0_35px_rgba(56,189,248,0.45),0_15px_35px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1",
               activeTab === "jason" && "lg:col-span-2 max-w-4xl mx-auto w-full",
             )}
           >
@@ -352,10 +352,10 @@ export function ProtagonistsShowcase({
 
                 {/* Soft gradient blend into the white right content pane */}
                 {!stacked && (
-                  <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/20 to-white pointer-events-none" />
+                  <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent via-white/20 dark:via-slate-900/20 to-white dark:to-slate-900 pointer-events-none" />
                 )}
                 {!stacked && (
-                  <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+                  <div className="block lg:hidden absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-slate-900 via-white/50 dark:via-slate-900/50 to-transparent pointer-events-none" />
                 )}
 
                 {/* Top-Left Pill Badge: CO-PROTAGONIST */}
@@ -389,7 +389,7 @@ export function ProtagonistsShowcase({
               </div>
 
               {/* Right Column: White Content Pane */}
-              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-white text-slate-900">
+              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                 <div className="space-y-4">
                   {/* Top Dossier Header */}
                   <div className="flex items-center justify-between gap-2">
@@ -402,7 +402,7 @@ export function ProtagonistsShowcase({
                       </span>
                       <span
                         title="Editorial nickname, not an official Rockstar alias"
-                        className="text-[10px] font-bold uppercase tracking-wider text-slate-500 border border-slate-300 rounded-full px-2 py-0.5"
+                        className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-600 rounded-full px-2 py-0.5"
                       >
                         Editorial label
                       </span>
@@ -411,7 +411,7 @@ export function ProtagonistsShowcase({
 
                   {/* Character Name */}
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 leading-none">
+                    <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 dark:text-white leading-none">
                       <span className="text-blue-600">{jasonName.first}</span>{" "}
                       {jasonName.rest}
                     </h3>
@@ -423,9 +423,9 @@ export function ProtagonistsShowcase({
                       <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                         From official trailers
                       </p>
-                      <div className="rounded-2xl bg-sky-50/70 border border-sky-200/90 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
+                      <div className="rounded-2xl bg-sky-50/70 dark:bg-sky-500/10 border border-sky-200/90 dark:border-sky-500/30 p-3.5 sm:p-4 flex items-start gap-3 shadow-sm">
                         <Quote className="w-5 h-5 text-sky-500 shrink-0 mt-0.5 rotate-180" />
-                        <p className="text-xs sm:text-[13px] italic font-medium text-sky-800 leading-relaxed">
+                        <p className="text-xs sm:text-[13px] italic font-medium text-sky-800 dark:text-sky-200 leading-relaxed">
                           &ldquo;
                           {jason?.quote}
                           &rdquo;
@@ -435,7 +435,7 @@ export function ProtagonistsShowcase({
                   ) : null}
 
                   {/* Specs List: Vertical 4-Row Key-Value Stack */}
-                  <p className="pt-1 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
+                  <p className="pt-1 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
                     Unconfirmed / Speculative — possible abilities, specialty,
                     signature vehicle and territory (editorial analysis, not
                     Rockstar-confirmed)
@@ -447,7 +447,7 @@ export function ProtagonistsShowcase({
                         <Zap className="w-4 h-4 text-sky-500 shrink-0" />
                         <span>Special Ability:</span>
                       </div>
-                      <span className="font-bold text-slate-900 leading-snug">
+                      <span className="font-bold text-slate-900 dark:text-slate-100 leading-snug">
                         {jason?.perk ||
                           "Smuggler Eagle Eye (POI & Cache Detection)"}
                       </span>
@@ -459,7 +459,7 @@ export function ProtagonistsShowcase({
                         <Shield className="w-4 h-4 text-sky-500 shrink-0" />
                         <span>Specialty:</span>
                       </div>
-                      <span className="font-bold text-slate-900 leading-snug">
+                      <span className="font-bold text-slate-900 dark:text-slate-100 leading-snug">
                         {jason?.specialty ||
                           "Off-Road Getaway & Heavy Weapons Logistics"}
                       </span>
@@ -471,7 +471,7 @@ export function ProtagonistsShowcase({
                         <Car className="w-4 h-4 text-sky-500 shrink-0" />
                         <span>Signature Ride:</span>
                       </div>
-                      <span className="font-bold text-slate-900 leading-snug">
+                      <span className="font-bold text-slate-900 dark:text-slate-100 leading-snug">
                         {jason?.vehicle || "Declasse Tulip 1972 Muscle Car"}
                       </span>
                     </div>
@@ -482,7 +482,7 @@ export function ProtagonistsShowcase({
                         <MapPin className="w-4 h-4 text-sky-500 shrink-0" />
                         <span>Territory:</span>
                       </div>
-                      <span className="font-bold text-slate-900 leading-snug">
+                      <span className="font-bold text-slate-900 dark:text-slate-100 leading-snug">
                         {jason?.origin ||
                           "Port Gellhorn & Keys Smuggling Routes"}
                       </span>
@@ -491,10 +491,10 @@ export function ProtagonistsShowcase({
                 </div>
 
                 {/* Footer Row */}
-                <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
+                <div className="mt-6 pt-3.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
                   <div className="text-xs">
                     <span className="text-muted-foreground">Actor: </span>
-                    <span className="font-bold text-slate-900">
+                    <span className="font-bold text-slate-900 dark:text-slate-100">
                       {actorName(jason?.voiceActor, "Gregory Connors")}
                     </span>
                     <p className="text-xs text-muted-foreground">
