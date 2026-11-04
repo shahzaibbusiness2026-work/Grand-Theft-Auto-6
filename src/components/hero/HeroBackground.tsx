@@ -1,110 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 /**
- * Daily-rotating hero artwork.
- *
- * Every visitor sees the SAME scene on a given day: the scene is chosen
- * deterministically from the calendar date, so the background changes at
- * local midnight with no cron job, no API call, and no cache busting.
- *
- * Server and client both initialise to today's scene (same UTC-day
- * formula), so the first paint is already correct — no post-load swap.
- * An open tab crossfades to the next scene at rotation time.
+ * Fixed hero artwork — NO daily rotation (changed Nov 2026 at the owner's
+ * request). Every visitor always sees the same scene: the official
+ * "Welcome to Leonida" key art, full-bleed. The old 7-scene calendar
+ * rotation (midnight crossfade, hourly checks) is deliberately removed,
+ * so the home hero never changes on its own again.
  */
-const SCENES = [
-  {
-    src: "/img/hero-vice-skyline-hd.jpg",
-    label: "Vice City Skyline",
-    alt: "GTA VI Vice City skyline and muscle car",
-  },
-  {
-    src: "/img/gta6-hero-official.webp",
-    label: "Welcome to Leonida",
-    alt: "GTA VI Leonida key art",
-  },
-  {
-    src: "/img/hero-dark.jpg",
-    label: "Vice City Nights",
-    alt: "Vice City at night",
-  },
-  {
-    src: "/img/gta6-hero-clean-hd.jpg",
-    label: "Leonida Coast",
-    alt: "Leonida coastline artwork",
-  },
-  {
-    src: "/img/trailer-keys-marina.webp",
-    label: "The Leonida Keys",
-    alt: "Boat marina in the Leonida Keys, from the GTA VI trailer",
-  },
-  {
-    src: "/img/trailer-vault-heli.webp",
-    label: "The Vault Job",
-    alt: "Helicopter over the city during a heist, from the GTA VI trailer",
-  },
-  {
-    src: "/img/trailer-jason-marina.webp",
-    label: "Brian's Marina",
-    alt: "Jason at Brian's marina, from the GTA VI trailer",
-  },
-] as const;
-
-const DAY_MS = 86_400_000;
-
-function todaysIndex(): number {
-  return Math.floor(Date.now() / DAY_MS) % SCENES.length;
-}
+const FIXED_SCENE = {
+  src: "/img/gta6-hero-official.webp",
+  label: "Welcome to Leonida",
+  alt: "GTA VI Leonida key art",
+} as const;
 
 export function HeroBackground() {
-  // Initialise with TODAY's scene on both server and client, so the first
-  // paint is already correct — no post-load swap that reads as a refresh.
-  const [baseIdx, setBaseIdx] = useState<number>(() => todaysIndex());
-  const [incomingIdx, setIncomingIdx] = useState<number | null>(null);
-  const [incomingReady, setIncomingReady] = useState(false);
-  const scene = SCENES[baseIdx];
-  const incoming = incomingIdx !== null ? SCENES[incomingIdx] : null;
-
-  useEffect(() => {
-    const update = () => {
-      const t = todaysIndex();
-      if (t !== baseIdx && t !== incomingIdx) {
-        setIncomingReady(false);
-        setIncomingIdx(t);
-      }
-    };
-    update();
-
-    // Rotate an already-open page: check at the next local midnight, then hourly.
-    const now = new Date();
-    const nextMidnight = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate() + 1,
-      0,
-      0,
-      2,
-    );
-    const timer = setTimeout(update, nextMidnight.getTime() - now.getTime());
-    const hourly = setInterval(update, 3_600_000);
-    return () => {
-      clearTimeout(timer);
-      clearInterval(hourly);
-    };
-  }, [baseIdx, incomingIdx]);
-
-  // Once the incoming scene has fully faded in, promote it to the base layer.
-  useEffect(() => {
-    if (incomingIdx === null || !incomingReady) return;
-    const t = setTimeout(() => {
-      setBaseIdx(incomingIdx);
-      setIncomingIdx(null);
-      setIncomingReady(false);
-    }, 1100);
-    return () => clearTimeout(t);
-  }, [incomingIdx, incomingReady]);
+  const scene = FIXED_SCENE;
 
   return (
     <div
@@ -130,26 +42,6 @@ export function HeroBackground() {
           className="object-cover object-center hero-bg-img"
         />
       </div>
-
-      {/* 2b. Incoming scene (midnight rotation only): crossfades OVER the base
-          once fully loaded, so the background never pops or vanishes. */}
-      {incoming && (
-        <div className="absolute inset-0 w-full h-full">
-          <Image
-            src={incoming.src}
-            alt={incoming.alt}
-            fill
-            quality={80}
-            sizes="100vw"
-            onLoad={() => setIncomingReady(true)}
-            style={{
-              opacity: incomingReady ? 1 : 0,
-              transition: "opacity 1000ms ease",
-            }}
-            className="object-cover object-center hero-bg-kenburns"
-          />
-        </div>
-      )}
 
       {/* 3. Atmospheric overlay preserving readability */}
       <div className="absolute inset-0 bg-black/15 transition-colors duration-300" />
