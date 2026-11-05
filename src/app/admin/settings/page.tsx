@@ -36,6 +36,7 @@ import {
   ComprehensiveSiteSettings,
 } from "@/lib/services/settings";
 import { cn } from "@/lib/utils";
+import { HOME_HEADING } from "@/lib/home-content";
 
 export default function AdminSettingsPage() {
   const { showToast } = useToast();
@@ -47,7 +48,7 @@ export default function AdminSettingsPage() {
     targetReleaseDate: "2026-11-19T00:00:00Z",
     isReleaseDateConfirmed: false,
     countdownCaption: "Target countdown • Official date to be confirmed by Rockstar Games",
-    heroHeading: "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas",
+    heroHeading: HOME_HEADING,
     heroSubtitle: "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
     announcementBanner: "Taish Gaming — The Ultimate Interactive Companion for Grand Theft Auto VI",
     contactEmail: "",

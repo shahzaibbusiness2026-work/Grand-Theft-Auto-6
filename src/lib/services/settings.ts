@@ -6,6 +6,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { SITE_CONFIG } from "@/lib/constants";
+import { HOME_HEADING, resolveHomepageHeading } from "@/lib/home-content";
 import { INITIAL_ADMIN_SETTINGS, AdminSiteSettings } from "@/lib/admin-store";
 
 export interface ComprehensiveSiteSettings extends AdminSiteSettings {
@@ -42,7 +43,7 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   targetReleaseDate: SITE_CONFIG.targetReleaseDate,
   isReleaseDateConfirmed: SITE_CONFIG.isReleaseDateConfirmed,
   countdownCaption: SITE_CONFIG.countdownCaption,
-  heroHeading: "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas",
+  heroHeading: HOME_HEADING,
   heroSubtitle:
     "Explore Vice City & The State of Leonida with confirmed intelligence, vehicles, lore, and map coordinates.",
   announcementBanner:
@@ -96,6 +97,7 @@ export const getSiteSettings = cache(
         return {
           ...DEFAULT_SETTINGS,
           ...settingsMap,
+          heroHeading: resolveHomepageHeading(settingsMap.heroHeading),
         };
       }
     } catch {
@@ -117,7 +119,7 @@ export async function getAdminSiteSettings(): Promise<ComprehensiveSiteSettings>
     acc[row.key] = row.value;
     return acc;
   }, {});
-  return { ...DEFAULT_SETTINGS, ...settingsMap } as ComprehensiveSiteSettings;
+  return { ...DEFAULT_SETTINGS, ...settingsMap, heroHeading: resolveHomepageHeading(settingsMap.heroHeading) } as ComprehensiveSiteSettings;
 }
 
 /**
