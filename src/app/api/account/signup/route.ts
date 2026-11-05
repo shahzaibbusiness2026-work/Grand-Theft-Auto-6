@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { peekRateLimit, recordRateLimitHit } from "@/lib/rate-limit";
 import {
@@ -16,7 +16,7 @@ import {
 } from "@/lib/auth/session";
 import { sendWelcomeEmail } from "@/lib/email";
 import { randomInt } from "crypto";
-import { requireSameOrigin, playerJsonBody } from "@/lib/auth/player-account";
+import { requireSameOrigin, playerJsonBody, PlayerError, playerError } from "@/lib/auth/player-account";
 
 /**
  * POST /api/account/signup
@@ -27,8 +27,8 @@ import { requireSameOrigin, playerJsonBody } from "@/lib/auth/player-account";
  * user to save — it is never stored or shown again.
  *
  * If an account with this email already has a password, signup is refused
- * (prevents account takeover by re-registration). A legacy passwordless
- * row (created before passwords existed) may set its first password here.
+ * (prevents account takeover by re-registration). Existing rows use the
+ * sign-in or verified recovery flow instead of setting a password here.
  */
 export const dynamic = "force-dynamic";
 
@@ -147,11 +147,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // Welcome email from Taish Gaming for genuinely new registrations
-    // (not for legacy passwordless rows setting a first password). A
-    // failed send must never fail the signup itself, so it is awaited
-    // but its result is only logged inside the helper.
-    await sendWelcomeEmail(email, firstName);
+    // Delivery must not hold the session/recovery-code response behind
+    // the browser's request timeout after the account already exists.
+    after(() => sendWelcomeEmail(email, firstName));
 
     // Issue the signed session cookie so the new account can reach the
     // dashboard after saving the recovery code. Fails closed on a server
@@ -169,7 +167,8 @@ export async function POST(req: Request) {
       userSessionCookieOptions(),
     );
     return res;
-  } catch {
+  } catch (error) {
+    if (error instanceof PlayerError) return playerError(error);
     return NextResponse.json(
       { ok: false, error: "Could not create your account. Please try again." },
       { status: 500 },

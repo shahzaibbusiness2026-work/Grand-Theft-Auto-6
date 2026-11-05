@@ -168,16 +168,16 @@ export function CompanionSidebar({
           onClick={onItemClick}
           className="group inline-flex flex-col leading-none focus:outline-none"
         >
-          <span className="bg-gradient-to-r from-white via-white to-gold-light bg-clip-text text-transparent font-display text-[26px] font-black tracking-tight drop-shadow-[0_0_16px_rgba(201,168,106,0.35)]">
-            GTA 6
+          <span className="bg-gradient-to-r from-white via-white to-gold-light bg-clip-text text-transparent font-display text-[22px] font-black tracking-tight drop-shadow-[0_0_16px_rgba(201,168,106,0.35)]">
+            TAISH GAMING
           </span>
-          <span className="mt-0.5 font-mono text-xs font-black uppercase tracking-[0.45em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
-            COMPANION
+          <span className="mt-0.5 font-mono text-xs font-black uppercase tracking-[0.14em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
+            PLAYER WORKSPACE
           </span>
         </Link>
       </div>
 
-      <div className="mx-5 mt-4 h-px bg-gradient-to-r from-gold/60 via-white/10 to-transparent" />
+      <div className="mx-5 mt-4 h-px bg-gradient-to-r from-pink-500/40 via-white/10 to-transparent" />
       {/* Navigation list */}
       <p className="px-5 pt-4 pb-1 font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
         Navigate
@@ -191,12 +191,13 @@ export function CompanionSidebar({
           return (
             <Link
               key={item.href}
+              aria-current={isActive ? "page" : undefined}
               href={item.href}
               onClick={onItemClick}
               className={cn(
                 "group flex items-center gap-3 rounded-xl px-2.5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-200",
                 isActive
-                  ? "bg-gradient-to-r from-gold/25 via-gold/10 to-transparent text-white font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)] border border-gold/40"
+                  ? "bg-gradient-to-r from-pink-500/20 via-pink-500/10 to-transparent text-white font-bold shadow-sm border border-pink-500/30"
                   : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-100",
               )}
             >
@@ -204,7 +205,7 @@ export function CompanionSidebar({
                 className={cn(
                   "flex h-7 w-7 items-center justify-center rounded-lg border transition-all duration-200 shrink-0",
                   isActive
-                    ? "bg-gold/30 text-gold-light border-gold/50 shadow-[0_0_10px_rgba(201,168,106,0.4)] scale-105"
+                    ? "bg-pink-500/15 text-pink-700 dark:text-pink-300 border-pink-500/40 shadow-sm scale-105"
                     : cn(
                         "group-hover:scale-110 group-hover:shadow-[0_0_8px_rgba(255,255,255,0.15)]",
                         item.color,

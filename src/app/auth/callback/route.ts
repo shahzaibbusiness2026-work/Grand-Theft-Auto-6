@@ -72,29 +72,34 @@ export async function GET(req: Request) {
 
   try {
     const admin = createAdminClient();
-    const existing = await getAccount(admin, email);
-    sessionVersion = existing?.session_version ?? randomInt(1, 2_000_000_000);
-    const providers = [...(existing?.auth_providers || [])];
-    if (!providers.includes(provider)) providers.push(provider);
-    const saved = await saveAccount(admin, {
-      ...existing,
-      email,
-      first_name: existing?.first_name || first || null,
-      last_name: existing?.last_name || last || null,
-      display_name:
-        existing?.display_name || [existing?.first_name || first || "", existing?.last_name || last || ""]
-          .filter(Boolean)
-          .join(" ") || existing?.display_name || null,
-      password_hash: existing?.password_hash || null,
-      recovery_code_hash: existing?.recovery_code_hash || null,
-      auth_providers: providers,
-      created_at: existing?.created_at || now,
-      last_sign_in_at: now,
-      sign_in_count: (existing?.sign_in_count || 0) + 1,
-      session_version: sessionVersion,
-      auth_user_id: user.id,
-      email_verified_at: user.email_confirmed_at || existing?.email_verified_at || null,
-    });
+    let saved = false;
+    // Retry against the latest row so concurrent provider logins cannot
+    // overwrite credentials or falsely reject a valid sign-in.
+    for (let attempt = 0; attempt < 3 && !saved; attempt++) {
+      const existing = await getAccount(admin, email);
+      sessionVersion = existing?.session_version ?? randomInt(1, 2_000_000_000);
+      const providers = [...(existing?.auth_providers || [])];
+      if (!providers.includes(provider)) providers.push(provider);
+      saved = await saveAccount(admin, {
+        ...existing,
+        email,
+        first_name: existing?.first_name || first || null,
+        last_name: existing?.last_name || last || null,
+        display_name:
+          existing?.display_name || [existing?.first_name || first || "", existing?.last_name || last || ""]
+            .filter(Boolean)
+            .join(" ") || existing?.display_name || null,
+        password_hash: existing?.password_hash || null,
+        recovery_code_hash: existing?.recovery_code_hash || null,
+        auth_providers: providers,
+        created_at: existing?.created_at || now,
+        last_sign_in_at: now,
+        sign_in_count: (existing?.sign_in_count || 0) + 1,
+        session_version: sessionVersion,
+        auth_user_id: user.id,
+        email_verified_at: user.email_confirmed_at || existing?.email_verified_at || null,
+      }, !existing);
+    }
     if (!saved) throw new Error("Could not save linked account.");
   } catch {
     // The Supabase session itself is established; a failed account-row
@@ -111,11 +116,9 @@ export async function GET(req: Request) {
       await createUserSessionToken(email, sessionVersion),
       userSessionCookieOptions()
     );
-  } catch (err) {
-    // A missing session secret must not turn a good OAuth login into a
-    // 500 — the welcome bridge still signs the user in locally, and the
-    // dashboard gate will send them to email login if no cookie exists.
-    console.error("Could not issue user session cookie after OAuth:", err);
+  } catch {
+    console.error("Could not issue user session cookie after OAuth.");
+    return NextResponse.redirect(new URL("/login?oauth=error", req.url));
   }
   return res;
 }

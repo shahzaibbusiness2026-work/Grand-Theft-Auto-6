@@ -27,6 +27,7 @@ function loader(mocks = {}, globals = {}) {
       compilerOptions: {
         module: ts.ModuleKind.CommonJS,
         target: ts.ScriptTarget.ES2020,
+        jsx: ts.JsxEmit.ReactJSX,
         esModuleInterop: true,
       },
     }).outputText;
@@ -769,4 +770,121 @@ test("a missing cloud revision requests resolution instead of erasing a synced l
   assert.equal(schema.workspaceNeedsResolution("2026-11-02T00:00:00Z",null,false,local),true);
   assert.equal(schema.workspaceNeedsResolution("2026-11-02T00:00:00Z","2026-11-02T01:00:00Z",false,local),false);
   assert.equal(schema.workspaceNeedsResolution(undefined,null,false,schema.emptyWorkspace()),false);
+});
+
+// Authentication regressions: exercise real route/page control flow with bounded,
+// private storage adapters; never use production accounts or send messages.
+test("an existing player is redirected from login without swallowing Next's redirect", async () => {
+  const redirect = (path) => { throw Object.assign(new Error("NEXT_REDIRECT"), { destination: path }); };
+  const page = loader({
+    "next/navigation": { redirect }, "next/image": () => null, "next/link": () => null,
+    "./login-form": { LoginCards: () => null },
+    "@/lib/auth/player-account": { requirePlayer: async () => ({ account: { email: "qa@example.invalid" } }) },
+  })("src/app/login/page.tsx");
+  await assert.rejects(page.default({ searchParams: Promise.resolve({}) }), error => error.destination === "/dashboard");
+});
+
+test("OAuth welcome uses the canonical site session and handles expiry without a loop", async () => {
+  for (const valid of [true, false]) {
+    const page = loader({
+      "next/navigation": { redirect: (path) => { throw Object.assign(new Error("NEXT_REDIRECT"), { destination: path }); } },
+      "@/lib/auth/player-account": { requirePlayer: async () => { if (!valid) throw new Error("expired"); return {}; } },
+    })("src/app/auth/welcome/page.tsx");
+    await assert.rejects(page.default(), e => e.destination === (valid ? "/dashboard" : "/login?oauth=error"));
+  }
+});
+
+function oauthRoute({ verified = true, saves = [true], existing = [] } = {}) {
+  const captured = [];
+  let reads = 0;
+  const route = loader({
+    "@/lib/supabase/server": { createClient: async () => ({ auth: {
+      exchangeCodeForSession: async () => ({ error: null }),
+      getUser: async () => ({ data: { user: { id: "provider-id", email: "qa@example.invalid", email_confirmed_at: verified ? "2026-11-05T00:00:00Z" : null, app_metadata: { provider: "google" }, user_metadata: { full_name: "Provider Name" } } } }),
+    } }) },
+    "@/lib/supabase/admin": { createAdminClient: () => ({}) },
+    "@/lib/auth/accounts": {
+      getAccount: async () => existing[Math.min(reads++, existing.length - 1)] || null,
+      saveAccount: async (_, row, createOnly) => { captured.push({ row, createOnly }); return saves[Math.min(captured.length - 1, saves.length - 1)]; },
+    },
+  })("src/app/auth/callback/route.ts");
+  return { route, captured };
+}
+
+test("provider linking retries a stale row and preserves the latest password and workspace", async () => {
+  const base = { email: "qa@example.invalid", first_name: "My", last_name: "Name", display_name: "My name", password_hash: "original-secret-hash", recovery_code_hash: "recovery-hash", auth_providers: [], sign_in_count: 1, session_version: 42, workspace: { privateNote: "keep" }, storage_version: "v1" };
+  const latest = { ...base, password_hash: "new-secret-hash", storage_version: "v2" };
+  const { route, captured } = oauthRoute({ saves: [false, true], existing: [base, latest] });
+  const result = await route.GET(new Request("https://www.taishgaming.com/auth/callback?code=test-code"));
+  assert.equal(new URL(result.headers.get("location")).pathname, "/auth/welcome");
+  assert.equal(captured.length, 2);
+  assert.equal(captured[1].row.password_hash, "new-secret-hash");
+  assert.equal(captured[1].row.display_name, "My name");
+  assert.equal(captured[1].row.workspace.privateNote, "keep");
+  assert.equal(captured[1].createOnly, false);
+  const session = await sessions.verifyUserSessionToken(result.cookies.get("tg_user_session").value);
+  assert.equal(session.valid, true);
+  assert.equal(session.version, 42);
+});
+
+test("a new provider account uses insert-only storage; unverified provider identities cannot create accounts", async () => {
+  const fresh = oauthRoute();
+  const result = await fresh.route.GET(new Request("https://www.taishgaming.com/auth/callback?code=test-code"));
+  assert.equal(new URL(result.headers.get("location")).pathname, "/auth/welcome");
+  assert.equal(fresh.captured[0].createOnly, true);
+  const unverified = oauthRoute({ verified: false });
+  const refused = await unverified.route.GET(new Request("https://www.taishgaming.com/auth/callback?code=test-code"));
+  assert.equal(new URL(refused.headers.get("location")).searchParams.get("oauth"), "error");
+  assert.equal(unverified.captured.length, 0);
+});
+
+test("OAuth never reports successful completion when the site session cannot be signed", async () => {
+  const before = { user: process.env.USER_SESSION_SECRET, admin: process.env.ADMIN_SESSION_SECRET };
+  delete process.env.USER_SESSION_SECRET; delete process.env.ADMIN_SESSION_SECRET;
+  try {
+    const { route } = oauthRoute();
+    const result = await route.GET(new Request("https://www.taishgaming.com/auth/callback?code=test-code"));
+    assert.equal(new URL(result.headers.get("location")).searchParams.get("oauth"), "error");
+    assert.equal(result.cookies.get("tg_user_session"), undefined);
+  } finally {
+    process.env.USER_SESSION_SECRET = before.user;
+    process.env.ADMIN_SESSION_SECRET = before.admin;
+  }
+});
+
+test("signup returns its session before welcome delivery and rejects cross-origin input correctly", async () => {
+  let queued, mailed = false;
+  const accounts = load("src/lib/auth/accounts.ts");
+  const route = loader({
+    "next/server": { ...require("next/server"), after: fn => { queued = fn; } },
+    "@/lib/supabase/admin": { createAdminClient: () => ({}) },
+    "@/lib/auth/accounts": { ...accounts, getAccount: async () => null, saveAccount: async () => true },
+    "@/lib/email": { sendWelcomeEmail: async () => { mailed = true; return false; } },
+    "@/lib/rate-limit": { peekRateLimit: async () => false, recordRateLimitHit: async () => {} },
+    "next/headers": { cookies: async () => ({ get: () => undefined }) },
+  })("src/app/api/account/signup/route.ts");
+  const body = { email: "qa@example.invalid", firstName: "QA", password: "TemporaryPassword7!" };
+  const make = origin => new Request("https://www.taishgaming.com/api/account/signup", { method: "POST", headers: { origin, "content-type": "application/json" }, body: JSON.stringify(body) });
+  const created = await route.POST(make("https://www.taishgaming.com"));
+  assert.equal(created.status, 200);
+  assert.ok(created.cookies.get("tg_user_session"));
+  assert.equal(mailed, false);
+  await queued(); assert.equal(mailed, true);
+  assert.equal((await route.POST(make("https://foreign.example"))).status, 403);
+});
+
+test("transactional mail keeps the verified mailbox and always identifies Taish Gaming", () => {
+  const mail = load("src/lib/email.ts");
+  const before = process.env.BROADCAST_FROM_EMAIL;
+  try {
+    for (const configured of ["Other Name <hello@example.com>", "hello@example.com"]) {
+      process.env.BROADCAST_FROM_EMAIL = configured;
+      assert.equal(mail.taishFrom(), "Taish Gaming <hello@example.com>");
+    }
+    process.env.BROADCAST_FROM_EMAIL = "bad\r\nInjected: header";
+    assert.equal(mail.taishFrom(), "Taish Gaming <onboarding@resend.dev>");
+  } finally {
+    if (before === undefined) delete process.env.BROADCAST_FROM_EMAIL;
+    else process.env.BROADCAST_FROM_EMAIL = before;
+  }
 });

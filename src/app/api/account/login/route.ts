@@ -7,7 +7,7 @@ import {
   getAccount,
   saveAccount,
 } from "@/lib/auth/accounts";
-import { requireSameOrigin, playerJsonBody } from "@/lib/auth/player-account";
+import { requireSameOrigin, playerJsonBody, PlayerError, playerError } from "@/lib/auth/player-account";
 import {
   USER_SESSION_COOKIE,
   createUserSessionToken,
@@ -125,6 +125,7 @@ export async function POST(req: Request) {
     );
     return res;
   } catch (error) {
+    if (error instanceof PlayerError) return playerError(error);
     console.error("Account login request failed:", error instanceof Error ? error.message : "Unknown error");
     return NextResponse.json(
       { ok: false, error: "Could not log you in. Please try again." },

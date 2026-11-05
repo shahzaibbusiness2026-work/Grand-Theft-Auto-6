@@ -52,7 +52,7 @@ export function DashboardShell({
     };
   }, [open]);
   return (
-    <div className="dashboard-type flex h-dvh w-full overflow-hidden bg-[#070b14] text-slate-100">
+    <div className="dashboard-type flex h-dvh w-full overflow-hidden bg-background text-foreground">
       <div className="hidden shrink-0 md:flex">
         <CompanionSidebar />
       </div>
@@ -69,7 +69,7 @@ export function DashboardShell({
             aria-label="Close navigation"
             onClick={() => setOpen(false)}
           />
-          <div className="player-drawer relative z-10 flex w-72 flex-col bg-[#04060d]">
+          <div className="player-drawer relative z-10 flex w-72 flex-col bg-card">
             <button
               ref={closeButton}
               onClick={() => setOpen(false)}

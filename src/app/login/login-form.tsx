@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   Mail,
   User,
@@ -26,14 +25,11 @@ import { createClient } from "@/lib/supabase/client";
 /* Shared bits                                                         */
 /* ------------------------------------------------------------------ */
 
-// Dark-glass field styling. hero-dark-input is the site's own escape hatch
-// from the light theme, which otherwise forces every input white. The
-// visible border/background live on the wrapper; the input itself is
-// transparent and the wrapper carries the gold focus ring.
+// Theme-aware fields share the site palette and a visible pink focus ring.
 const DARK_INPUT =
-  "hero-dark-input border-transparent bg-transparent text-white placeholder:text-slate-500 focus-visible:ring-0";
+  "min-h-12 border-transparent bg-transparent text-foreground placeholder:text-muted-foreground focus-visible:ring-0";
 const FIELD_WRAP =
-  "relative rounded-lg border border-white/15 bg-white/5 focus-within:ring-2 focus-within:ring-gold";
+  "relative rounded-xl border border-border bg-muted/50 focus-within:ring-2 focus-within:ring-pink-500";
 
 async function callApi(
   path: string,
@@ -76,7 +72,7 @@ function PasswordField({
   const [show, setShow] = useState(false);
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-xs font-semibold text-slate-200">
+      <label htmlFor={id} className="mb-1.5 block text-xs font-semibold text-foreground">
         {label}
       </label>
       <div className={FIELD_WRAP}>
@@ -96,7 +92,7 @@ function PasswordField({
           onClick={() => setShow((s) => !s)}
           disabled={disabled}
           aria-label={show ? "Hide password" : "Show password"}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
         >
           {show ? <EyeOff className="h-4 w-4" aria-hidden="true" /> : <Eye className="h-4 w-4" aria-hidden="true" />}
         </button>
@@ -107,6 +103,7 @@ function PasswordField({
 
 function passwordStrength(pw: string): { score: number; label: string } {
   if (!pw) return { score: 0, label: "" };
+  if (pw.length < 8) return { score: 0, label: "Too short" };
   let score = 0;
   if (pw.length >= 8) score++;
   if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++;
@@ -135,16 +132,16 @@ function RecoveryCodePanel({
   return (
     <div className="space-y-4">
       <div className="rounded-2xl border border-gold/40 bg-gold/10 p-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Your recovery code — save it now
         </p>
-        <p className="mt-2 font-mono text-xl font-bold tracking-[0.2em] text-white">
+        <p className="mt-2 font-mono text-xl font-bold tracking-[0.2em] text-foreground">
           {code}
         </p>
         <button
           type="button"
           onClick={copy}
-          className="mx-auto mt-3 flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-bold text-white hover:bg-white/10"
+          className="mx-auto mt-3 flex items-center gap-1.5 rounded-lg border border-border bg-muted/50 px-3 py-1.5 text-xs font-bold text-foreground hover:bg-muted"
         >
           {copied ? (
             <>
@@ -157,12 +154,12 @@ function RecoveryCodePanel({
           )}
         </button>
       </div>
-      <p className="text-xs leading-relaxed text-slate-400">
+      <p className="text-xs leading-relaxed text-muted-foreground">
         This code is shown only once. If you ever forget your password, you
         can use it to reset your password if you cannot receive an email reset link.
         Store it somewhere safe, like your password manager.
       </p>
-      <Button onClick={onContinue} className="w-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 font-bold text-white hover:brightness-110">
+      <Button onClick={onContinue} className="auth-primary w-full bg-gradient-to-r from-pink-700 to-violet-700 font-bold text-white hover:brightness-110">
         I have saved my code — continue to dashboard <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </Button>
     </div>
@@ -184,7 +181,6 @@ const OAUTH_LABEL: Record<OAuthProvider, string> = {
 /* ------------------------------------------------------------------ */
 
 export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
-  const router = useRouter();
   const [tab, setTab] = useState<"signin" | "signup">("signin");
 
   /* Sign in state */
@@ -217,10 +213,11 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
     if (!url || !anon) return;
-    (async () => {
+    const refresh = async () => {
       try {
         const res = await fetch(`${url}/auth/v1/settings`, {
           headers: { apikey: anon },
+          signal: AbortSignal.timeout(5000),
         });
         const data = await res.json().catch(() => null);
         const ext = data?.external;
@@ -230,7 +227,10 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
       } catch {
         // Unknown state — buttons fall back to the honest notice on click.
       }
-    })();
+    };
+    refresh();
+    window.addEventListener("focus", refresh);
+    return () => window.removeEventListener("focus", refresh);
   }, []);
 
   async function handleOAuth(provider: OAuthProvider) {
@@ -274,7 +274,7 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
     } catch {
       // Local save failed — the database login still succeeded; continue.
     }
-    router.push("/dashboard");
+    window.location.replace("/dashboard");
   }
 
   async function handleLoginSubmit(e: React.FormEvent) {
@@ -402,34 +402,41 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
     (!isSignin && !!signupRecoveryCode);
 
   return (
-    <div className="w-full max-w-md">
-      <div className="rounded-[28px] border border-gold/40 bg-[rgba(7,11,20,0.85)] p-6 shadow-[0_0_80px_rgba(201,168,106,0.3)] backdrop-blur-xl sm:p-8">
+    <div className="auth-card w-full min-w-0 max-w-[480px]">
+      <div className="rounded-3xl border border-border bg-card p-5 shadow-2xl sm:p-8">
         {/* Brand — same colors as the navbar logo: TAISH in foreground,
             GAMING in the pink-to-violet gradient (white here because the
             card is always dark glass, so the light-theme navy would vanish). */}
-        <div className="mb-6 text-center">
-          <p className="font-display text-4xl font-black leading-none tracking-tight text-white">
+        <div className="mb-7 text-center">
+          <p className="font-display text-2xl font-black leading-none tracking-tight text-foreground">
             TAISH
           </p>
           <p className="mt-1.5 flex items-center justify-center gap-2 text-[13px] font-bold tracking-[0.5em]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#FF2E9A]" aria-hidden="true" />
-            <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-pink-700 to-violet-700 bg-clip-text text-transparent">
               GAMING
             </span>
           </p>
         </div>
 
         {/* Tab switcher — only one form is ever visible */}
-        <div role="tablist" aria-label="Account" className="mb-6 flex rounded-full bg-white/10 p-1">
+        <div role="tablist" aria-label="Account" onKeyDown={(event) => {
+          if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+          event.preventDefault();
+          const next = event.key === "Home" ? "signin" : event.key === "End" ? "signup" : isSignin ? "signup" : "signin";
+          setTab(next);
+          event.currentTarget.querySelectorAll<HTMLButtonElement>("[role=tab]")[next === "signin" ? 0 : 1]?.focus();
+        }} className="mb-7 flex rounded-xl border border-border bg-muted p-1">
           <button
             type="button"
             role="tab"
             aria-selected={isSignin}
+            tabIndex={isSignin ? 0 : -1}
             onClick={() => setTab("signin")}
-            className={`flex-1 rounded-full py-2.5 text-sm font-bold transition-all ${
+            className={`flex-1 rounded-lg py-3 text-sm font-bold transition-all ${
               isSignin
-                ? "bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white shadow"
-                : "text-slate-300 hover:text-white"
+                ? "auth-primary bg-gradient-to-r from-pink-700 to-violet-700 text-white shadow"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Sign in
@@ -438,11 +445,12 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
             type="button"
             role="tab"
             aria-selected={!isSignin}
+            tabIndex={!isSignin ? 0 : -1}
             onClick={() => setTab("signup")}
-            className={`flex-1 rounded-full py-2.5 text-sm font-bold transition-all ${
+            className={`flex-1 rounded-lg py-3 text-sm font-bold transition-all ${
               !isSignin
-                ? "bg-gradient-to-r from-[#FF2E9A] to-violet-500 text-white shadow"
-                : "text-slate-300 hover:text-white"
+                ? "auth-primary bg-gradient-to-r from-pink-700 to-violet-700 text-white shadow"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Sign up
@@ -452,7 +460,7 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
         {/* State header — gold icon box, like the reference design */}
         {!showingRecovery && (
           <div className="mb-6 flex items-center gap-4">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-gold/50 bg-gold/10 text-gold shadow-[0_0_20px_rgba(201,168,106,0.35)]">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-gold/50 bg-gold/10 text-gold">
               {isSignin ? (
                 <LogIn className="h-6 w-6" aria-hidden="true" />
               ) : (
@@ -460,22 +468,82 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
               )}
             </div>
             <div>
-              <h1 className="font-display text-2xl font-black tracking-tight text-white">
-                {isSignin ? "LOGIN" : "SIGN UP"}
+              <h1 className="font-display text-2xl font-black tracking-tight text-foreground">
+                {isSignin ? "Welcome back" : "Create your account"}
               </h1>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-muted-foreground">
                 {isSignin
-                  ? "Welcome back — enter your details to continue."
-                  : "New here? Create your account in seconds."}
+                  ? "Your saved maps, garage and next session are waiting."
+                  : "Keep your plans, collections and discoveries together."}
               </p>
             </div>
           </div>
         )}
 
         {oauthStatus === "error" && (
-          <p role="alert" className="mb-4 rounded-xl border border-red-500/40 bg-red-500/10 p-3 text-xs text-red-300">
+          <p role="alert" className="mb-4 rounded-xl border border-red-500/40 bg-red-500/10 p-3 text-xs text-red-700 dark:text-red-300">
             Social sign-in failed. Please try again, or use email sign-in.
           </p>
+        )}
+
+        {/* Social sign-in — shown on both tabs, like the reference design */}
+        {!showingRecovery && (
+          <>
+
+            {oauthNotice && (
+              <div role="alert" className="relative mb-4 rounded-xl border border-gold/40 bg-gold/10 p-3 pr-8 text-xs leading-relaxed text-foreground">
+                {oauthNotice}
+                <button
+                  type="button"
+                  onClick={() => setOauthNotice("")}
+                  aria-label="Dismiss"
+                  className="absolute right-2 top-2 text-muted-foreground hover:text-foreground"
+                >
+                  <X className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
+            )}
+
+            <div className="grid gap-3">
+              <button
+                type="button"
+                onClick={() => handleOAuth("google")}
+                disabled={oauthLoading !== null || oauthEnabled?.google === false}
+                className="flex items-center justify-center gap-2 rounded-xl border border-border bg-muted/50 min-h-12 px-3 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted disabled:opacity-60"
+              >
+                {oauthLoading === "google" ? (
+                  <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
+                ) : (
+                  <FcGoogle className="h-5 w-5 shrink-0" aria-hidden="true" />
+                )}
+                Continue with Google
+              </button>
+              <button
+                type="button"
+                onClick={() => handleOAuth("discord")}
+                disabled={oauthLoading !== null || oauthEnabled?.discord === false}
+                className="flex items-center justify-center gap-2 rounded-xl border border-border bg-muted/50 min-h-12 px-3 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted disabled:opacity-60"
+              >
+                {oauthLoading === "discord" ? (
+                  <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
+                ) : (
+                  <FaDiscord className="h-5 w-5 shrink-0 text-[#5865F2]" aria-hidden="true" />
+                )}
+                Continue with Discord
+              </button>
+            </div>
+            {(oauthEnabled?.discord === false || oauthEnabled?.google === false) && (
+              <p className="mt-3 text-xs text-muted-foreground" role="status">
+                {oauthEnabled?.discord === false ? "Discord" : "Google"} sign-in is currently unavailable.
+                {" "}<button type="button" className="underline" onClick={() => window.dispatchEvent(new Event("focus"))}>Refresh sign-in options</button>
+              </p>
+            )}
+            <div className="my-5 flex items-center gap-3" aria-hidden="true">
+              <span className="h-px flex-1 bg-border" />
+              <span className="text-xs text-muted-foreground">or use your email</span>
+              <span className="h-px flex-1 bg-border" />
+            </div>
+          </>
         )}
 
         {isSignin ? (
@@ -492,7 +560,7 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
             />
           ) : loginMode === "set-password" ? (
             <form onSubmit={handleLegacySetPassword} className="space-y-4">
-              <p className="rounded-xl border border-white/15 bg-white/5 p-3 text-xs text-slate-300">
+              <p className="rounded-xl border border-border bg-muted/50 p-3 text-xs text-muted-foreground">
                 This account was created before passwords were added. Set a
                 password now and you will also receive a recovery code.
               </p>
@@ -513,11 +581,11 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
                 disabled={loginLoading}
               />
               {loginError && (
-                <p role="alert" className="text-xs font-medium text-red-400">
+                <p role="alert" className="text-xs font-medium text-red-700 dark:text-red-300">
                   {loginError}
                 </p>
               )}
-              <Button type="submit" disabled={loginLoading} className="w-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 font-bold text-white hover:brightness-110">
+              <Button type="submit" disabled={loginLoading} className="auth-primary w-full bg-gradient-to-r from-pink-700 to-violet-700 font-bold text-white hover:brightness-110">
                 {loginLoading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Saving…
@@ -532,11 +600,11 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
           ) : (
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div>
-                <label htmlFor="login-email" className="mb-1.5 block text-xs font-semibold text-slate-200">
+                <label htmlFor="login-email" className="mb-1.5 block text-xs font-semibold text-foreground">
                   Email address
                 </label>
                 <div className={FIELD_WRAP}>
-                  <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
+                  <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
                   <Input
                     id="login-email"
                     type="email"
@@ -563,19 +631,19 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
               <div className="flex justify-end">
                 <a
                   href="/forgot-password"
-                  className="text-xs font-semibold text-gold underline hover:brightness-110"
+                  className="text-sm font-semibold text-pink-700 dark:text-pink-300 underline hover:brightness-110"
                 >
                   Forgot password?
                 </a>
               </div>
 
               {loginError && (
-                <p role="alert" className="text-xs font-medium text-red-400">
+                <p role="alert" className="text-xs font-medium text-red-700 dark:text-red-300">
                   {loginError}
                 </p>
               )}
 
-              <Button type="submit" disabled={loginLoading} className="w-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 font-bold text-white hover:brightness-110">
+              <Button type="submit" disabled={loginLoading} className="auth-primary w-full bg-gradient-to-r from-pink-700 to-violet-700 font-bold text-white hover:brightness-110">
                 {loginLoading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Signing in…
@@ -603,15 +671,15 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
           <form onSubmit={handleSignupSubmit} className="space-y-4">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label htmlFor="signup-first-name" className="mb-1.5 block text-xs font-semibold text-slate-200">
+                <label htmlFor="signup-first-name" className="mb-1.5 block text-xs font-semibold text-foreground">
                   First name
                 </label>
                 <div className={FIELD_WRAP}>
-                  <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
+                  <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
                   <Input
                     id="signup-first-name"
                     type="text"
-                    placeholder="John"
+                    placeholder="First name"
                     value={signupFirst}
                     onChange={(e) => setSignupFirst(e.target.value)}
                     required
@@ -623,15 +691,15 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
               </div>
 
               <div>
-                <label htmlFor="signup-last-name" className="mb-1.5 block text-xs font-semibold text-slate-200">
+                <label htmlFor="signup-last-name" className="mb-1.5 block text-xs font-semibold text-foreground">
                   Last name
                 </label>
                 <div className={FIELD_WRAP}>
-                  <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
+                  <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
                   <Input
                     id="signup-last-name"
                     type="text"
-                    placeholder="Doe"
+                    placeholder="Last name"
                     value={signupLast}
                     onChange={(e) => setSignupLast(e.target.value)}
                     autoComplete="family-name"
@@ -643,11 +711,11 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
             </div>
 
             <div>
-              <label htmlFor="signup-email" className="mb-1.5 block text-xs font-semibold text-slate-200">
+              <label htmlFor="signup-email" className="mb-1.5 block text-xs font-semibold text-foreground">
                 Email address
               </label>
               <div className={FIELD_WRAP}>
-                <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
+                <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
                 <Input
                   id="signup-email"
                   type="email"
@@ -678,12 +746,12 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
                     <div
                       key={i}
                       className={`h-1.5 flex-1 rounded-full ${
-                        i <= strength.score ? strengthColors[strength.score] : "bg-white/10"
+                        i <= strength.score ? strengthColors[strength.score] : "bg-muted"
                       }`}
                     />
                   ))}
                 </div>
-                <p className="mt-1 text-xs font-medium text-slate-400">
+                <p className="mt-1 text-xs font-medium text-muted-foreground">
                   Password strength: {strength.label}
                   {signupPassword.length < 8 ? " — use at least 8 characters." : ""}
                 </p>
@@ -700,12 +768,12 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
             />
 
             {signupError && (
-              <p role="alert" className="text-xs font-medium text-red-400">
+              <p role="alert" className="text-xs font-medium text-red-700 dark:text-red-300">
                 {signupError}
               </p>
             )}
 
-            <Button type="submit" disabled={signupLoading} className="w-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 font-bold text-white hover:brightness-110">
+            <Button type="submit" disabled={signupLoading} className="auth-primary w-full bg-gradient-to-r from-pink-700 to-violet-700 font-bold text-white hover:brightness-110">
               {signupLoading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Creating account…
@@ -719,60 +787,7 @@ export function LoginCards({ oauthStatus }: { oauthStatus?: string }) {
           </form>
         )}
 
-        {/* Social sign-in — shown on both tabs, like the reference design */}
-        {!showingRecovery && (
-          <>
-            <div className="my-6 flex items-center gap-3">
-              <span className="h-px flex-1 bg-white/15" aria-hidden="true" />
-              <span className="text-xs text-slate-400">Or continue with</span>
-              <span className="h-px flex-1 bg-white/15" aria-hidden="true" />
-            </div>
 
-            {oauthNotice && (
-              <div role="alert" className="relative mb-4 rounded-xl border border-gold/40 bg-gold/10 p-3 pr-8 text-xs leading-relaxed text-slate-200">
-                {oauthNotice}
-                <button
-                  type="button"
-                  onClick={() => setOauthNotice("")}
-                  aria-label="Dismiss"
-                  className="absolute right-2 top-2 text-slate-400 hover:text-white"
-                >
-                  <X className="h-4 w-4" aria-hidden="true" />
-                </button>
-              </div>
-            )}
-
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() => handleOAuth("google")}
-                disabled={oauthLoading !== null}
-                className="flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10 disabled:opacity-60"
-              >
-                {oauthLoading === "google" ? (
-                  <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
-                ) : (
-                  <FcGoogle className="h-5 w-5 shrink-0" aria-hidden="true" />
-                )}
-                {isSignin ? "Sign in with Google" : "Sign up with Google"}
-              </button>
-              <button
-                type="button"
-                onClick={() => handleOAuth("discord")}
-                disabled={oauthLoading !== null}
-                className="flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10 disabled:opacity-60"
-              >
-                {oauthLoading === "discord" ? (
-                  <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
-                ) : (
-                  <FaDiscord className="h-5 w-5 shrink-0 text-[#5865F2]" aria-hidden="true" />
-                )}
-                {isSignin ? "Login with Discord" : "Sign up with Discord"}
-              </button>
-            </div>
-
-          </>
-        )}
       </div>
     </div>
   );

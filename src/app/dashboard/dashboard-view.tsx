@@ -13,6 +13,7 @@ import { CompanionVehiclesSection } from "@/components/dashboard/companion-vehic
 import { CompanionWeaponsSection } from "@/components/dashboard/companion-weapons-section";
 import type { DashboardStats } from "@/lib/services/queries";
 import { NextSessionCard } from "@/components/player-session-planner";
+import { PlayerQuickActions } from "@/components/player-quick-actions";
 
 export function DashboardView({
   liveStats,
@@ -37,6 +38,7 @@ export function DashboardView({
         siteStats={liveStats}
       />
       <NextSessionCard />
+      <PlayerQuickActions />
       <section className="player-panel flex flex-wrap items-center justify-between gap-4">
         <div>
           <h2 className="text-xl font-bold">

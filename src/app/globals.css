@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer components {
-  .player-panel { @apply rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-lg sm:p-6; }
+  .player-panel { @apply rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-sm sm:p-6; }
   .player-label { @apply block text-sm font-medium text-slate-300; }
   .player-input { @apply mt-1 block w-full min-w-0 rounded-lg border border-white/20 bg-[#111827] px-3 py-2.5 text-sm text-white outline-none focus:border-gold focus:ring-2 focus:ring-gold/30; color-scheme: dark; }
-  .player-button { @apply inline-flex min-h-10 items-center justify-center rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-sm font-semibold text-slate-100 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:cursor-not-allowed disabled:opacity-50; }
-  .player-button-primary { @apply border-gold bg-gold text-slate-950 hover:bg-gold-light; }
+  .player-button { @apply inline-flex min-h-10 items-center justify-center rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-sm font-semibold text-slate-100 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 disabled:cursor-not-allowed disabled:opacity-50; }
+  .player-button-primary { @apply border-pink-700 bg-pink-700 text-white hover:bg-pink-800; }
 }
 
 body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true"] *::before, body[data-player-reduced-motion="true"] *::after {
@@ -961,8 +961,8 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
   background: linear-gradient(
     180deg,
     rgba(7, 11, 20, 0.12) 0%,
-    rgba(7, 11, 20, 0.72) 40%,
-    rgba(7, 11, 20, 0.94) 100%
+    rgba(7, 11, 20, 0.25) 40%,
+    rgba(7, 11, 20, 0.88) 100%
   );
 }
 .hero-bg-img {
@@ -1107,7 +1107,7 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
   color: #334155 !important; background: #f1f5f9 !important; border-color: #94a3b8 !important;
 }
 .light .player-panel .player-button-primary, .light .player-button-primary.player-button-primary {
-  color: #241c0e !important; background: #c9a86a !important; border-color: #a98850 !important;
+  color: #fff !important; background: #be185d !important; border-color: #be185d !important;
 }
 .light :is(.player-panel, .player-topbar, .player-sidebar, .player-sync-dialog) :is(.text-white, .text-slate-100, .text-slate-200, .text-slate-300) { color: #334155 !important; }
 .light :is(.player-panel, .player-topbar, .player-sidebar, .player-sync-status, .player-sync-dialog) :is(.text-slate-400, .text-slate-500) { color: #475569 !important; }
@@ -1142,3 +1142,23 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
    border, so its (now dark-flipped) text never sits on a dark bar. */
 .light .player-topbar.player-topbar { background: rgba(255, 255, 255, 0.92) !important; border-color: #e2e8f0 !important; }
 .light .player-topbar .border-white\/10 { border-color: #cbd5e1 !important; }
+
+/* Player surfaces use the same theme tokens as the public site. */
+.light .auth-card .auth-primary { color: #fff !important; }
+.light .dashboard-type .player-sidebar > div:first-child a > span:last-child { color: #086474 !important; opacity: 1; }
+.light .dashboard-type .player-panel { box-shadow: 0 2px 8px rgb(15 23 42 / 4%); }
+.light .dashboard-type :is(.player-topbar, .player-sidebar) { box-shadow: none !important; }
+.dashboard-type main { scrollbar-gutter: stable; }
+.dashboard-type :is(h1, h2, h3, p) { overflow-wrap: anywhere; }
+
+/* The private workspace follows Taish Gaming's pink/white action palette. */
+.dashboard-type .player-button-primary.player-button-primary { color: #fff !important; background: #be185d !important; border-color: #be185d !important; }
+.dashboard-type .player-button-primary.player-button-primary:hover { background: #9d174d !important; }
+.light .dashboard-type .player-button { background: #fff !important; border-color: #cbd5e1 !important; }
+.light .dashboard-type .player-button:hover { background: #fdf2f8 !important; border-color: #be185d !important; }
+.dashboard-type .player-input:focus { border-color: #ec4899 !important; box-shadow: 0 0 0 2px rgb(236 72 153 / 20%) !important; }
+.light .dashboard-type :is(.text-gold-light, .text-gold) { color: #9d174d !important; }
+.dark .dashboard-type :is(.text-gold-light, .text-gold) { color: #f9a8d4 !important; }
+
+.light .dashboard-type .player-button-primary.player-button-primary { background: #be185d !important; border-color: #be185d !important; color: #fff !important; }
+.dashboard-type .player-avatar.player-avatar { color: #fff !important; background: #be185d !important; }
