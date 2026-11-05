@@ -84,6 +84,14 @@ export default async function HomePage() {
         </>
       )}
 
+      {!showSection("hero") && (
+        <div className="container-site pt-8">
+          <h1 className="font-display text-2xl font-black leading-tight text-foreground sm:text-4xl">
+            {settings.heroHeading?.trim() || "GTA 6 Map, Vehicles & Weapons"}
+          </h1>
+        </div>
+      )}
+
       <MobileHomepage
         articles={allArticles.map((a) => ({
           slug: a.slug,
