@@ -175,7 +175,7 @@ export function ArticleEditor({
           <Link href="/admin/articles" className="hover:text-white transition-colors">
             Articles
           </Link>
-          <span className="text-[#64748B]">&gt;</span>
+          <span className="text-[#94A3B8]">&gt;</span>
           <span className="text-white font-medium">{isNew ? "New article" : "Edit article"}</span>
         </nav>
 
@@ -308,7 +308,7 @@ export function ArticleEditor({
               Slug <span className="text-red-400">*</span>
             </label>
             <div className="relative flex items-center">
-              <span className="absolute left-3.5 text-xs text-[#64748B] font-mono">/news/</span>
+              <span className="absolute left-3.5 text-xs text-[#94A3B8] font-mono">/news/</span>
               <input
                 id="article-slug"
                 type="text"
@@ -320,7 +320,7 @@ export function ArticleEditor({
                 className="w-full pl-14 pr-4 py-2 rounded-xl bg-[#111622] border border-[#1C2436] text-xs font-mono text-white focus:outline-none focus:border-[#6366F1] transition-colors"
               />
             </div>
-            <p className="text-xs text-[#64748B]">
+            <p className="text-xs text-[#94A3B8]">
               This will be used in the article URL: /news/{slug || "your-slug"}
             </p>
           </div>
@@ -368,7 +368,7 @@ export function ArticleEditor({
                   <div className="w-10 h-10 rounded-xl bg-[#182030]/80 border border-[#243048] flex items-center justify-center text-white mb-2">
                     <ImageIcon className="w-5 h-5 text-[#818CF8]" />
                   </div>
-                  <p className="text-xs text-[#64748B]">
+                  <p className="text-xs text-[#94A3B8]">
                     Paste an image URL above, or upload one in the Media library.
                   </p>
                 </div>
@@ -388,7 +388,7 @@ export function ArticleEditor({
               placeholder="Write the article body. Blank lines start new paragraphs."
               className="w-full p-4 rounded-xl bg-[#111622] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1] resize-y font-mono leading-relaxed"
             />
-            <p className="text-xs text-[#64748B]">
+            <p className="text-xs text-[#94A3B8]">
               Plain text and paragraphs — rendered on the public article page.
             </p>
           </div>
@@ -509,7 +509,7 @@ export function ArticleEditor({
                   Schedule for (optional)
                 </label>
                 <div className="relative">
-                  <Calendar className="w-3.5 h-3.5 text-[#64748B] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <Calendar className="w-3.5 h-3.5 text-[#94A3B8] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
                     id="article-publish-date"
                     type="datetime-local"
@@ -518,7 +518,7 @@ export function ArticleEditor({
                     className="w-full pl-8 pr-3 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
                   />
                 </div>
-                <p className="text-xs text-[#64748B] mt-1">
+                <p className="text-xs text-[#94A3B8] mt-1">
                   Set with status “Scheduled” to time a release.
                 </p>
               </div>
@@ -529,7 +529,7 @@ export function ArticleEditor({
             <h3 className="text-xs font-bold text-white uppercase tracking-wider">SEO</h3>
 
             <div className="space-y-1">
-              <p className="text-xs font-medium text-[#64748B]">Search result preview</p>
+              <p className="text-xs font-medium text-[#94A3B8]">Search result preview</p>
               <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-1">
                 <p className="text-xs text-[#94A3B8]">Taish Gaming</p>
                 <p className="text-xs font-semibold text-[#818CF8]">{metaTitle}</p>
