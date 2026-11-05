@@ -1,3 +1,13 @@
+export const HOME_HEADING = "Grand Theft Auto VI";
+
+/** Replace the old saved default while keeping custom CMS headings editable. */
+export function resolveHomepageHeading(value: unknown): string {
+  const heading = typeof value === "string" ? value.trim() : "";
+  return !heading || heading === "Grand Theft Auto VI — Fan-Made Database & Interactive Atlas"
+    ? HOME_HEADING
+    : heading;
+}
+
 export const HOME_TRAILERS = [
   {
     id: "QdBZY2fkU-0",
