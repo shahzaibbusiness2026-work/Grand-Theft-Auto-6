@@ -16,4 +16,5 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm run typecheck
-      - run: node --test tests/remediation.test.cjs tests/live-audit.test.cjs
+      - run: npm run test:player
+      - run: node --test tests/remediation.test.cjs tests/live-audit.test.cjs tests/media-review.test.cjs

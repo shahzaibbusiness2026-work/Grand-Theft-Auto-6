@@ -130,17 +130,23 @@ export default function AdminSettingsPage() {
     try {
       const live = await getAdminSiteSettings();
       setSettings(live);
-    } catch {
-      // Fallback
+      setHasUnsavedChanges(false);
+      setLoadError("");
+      setIsConnected(true);
+      showToast({
+        title: "Changes Discarded",
+        description: "Restored previous site configuration from Supabase.",
+        type: "info",
+      });
+    } catch (err) {
+      showToast({
+        title: "Could not restore settings",
+        description: err instanceof Error ? err.message : "Your unsaved changes are preserved. Try again.",
+        type: "danger",
+      });
     } finally {
       setIsLoading(false);
-      setHasUnsavedChanges(false);
     }
-    showToast({
-      title: "Changes Discarded",
-      description: "Restored previous site configuration from Supabase.",
-      type: "info",
-    });
   };
 
   const handleRevokeSessions = async () => {
@@ -200,8 +206,8 @@ export default function AdminSettingsPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Site settings
             </h1>
-            <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold ${isConnected ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-400" : "bg-red-500/10 border border-red-500/30 text-red-300"}`}>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold ${isConnected ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400" : "bg-red-500/10 border border-red-500/30 text-red-800 dark:text-red-300"}`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${isConnected ? "bg-emerald-500" : "bg-red-500"}`} />
                 {isConnected ? "Connected to Supabase" : "Database unavailable"}
             </span>
           </div>
@@ -216,6 +222,7 @@ export default function AdminSettingsPage() {
               variant="secondary"
               size="md"
               onClick={handleDiscard}
+              disabled={isLoading || isSaving}
               className="bg-[#0E131D] border border-[#1C2436] text-[#94A3B8] hover:text-white"
             >
               Discard
@@ -224,7 +231,7 @@ export default function AdminSettingsPage() {
           <Button
             variant="primary"
             size="md"
-            disabled={isSaving}
+            disabled={isSaving || isLoading || !isConnected || Boolean(loadError) || !hasUnsavedChanges}
             onClick={handleSave}
             leftIcon={isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
             className="bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-md shadow-indigo-500/20"
@@ -234,7 +241,7 @@ export default function AdminSettingsPage() {
         </div>
       </div>
 
-      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-300">{loadError}</div>}
+      {loadError && <div role="alert" className="rounded-lg border border-red-500/30 bg-red-950/20 px-4 py-3 text-sm text-red-800 dark:text-red-300">{loadError}</div>}
 
       {/* Tabs (Image 14) */}
       <div className="flex items-center gap-2 border-b border-[#1C2436] pb-3 overflow-x-auto scrollbar-none">
@@ -354,10 +361,10 @@ export default function AdminSettingsPage() {
 
             <div className="space-y-3">
               <div>
-                <label className="block font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="site-setting-heroHeading" className="block font-medium text-[#94A3B8] mb-1">
                   Main Hero Heading / Title
                 </label>
-                <input
+                <input id="site-setting-heroHeading" aria-label="Main hero heading"
                   type="text"
                   value={settings.heroHeading}
                   onChange={(e) => handleUpdate({ heroHeading: e.target.value })}
@@ -366,10 +373,10 @@ export default function AdminSettingsPage() {
               </div>
 
               <div>
-                <label className="block font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="site-setting-heroSubtitle" className="block font-medium text-[#94A3B8] mb-1">
                   Hero Subtitle & Descriptive Paragraph
                 </label>
-                <textarea
+                <textarea id="site-setting-heroSubtitle" aria-label="Hero subtitle"
                   rows={2}
                   value={settings.heroSubtitle}
                   onChange={(e) => handleUpdate({ heroSubtitle: e.target.value })}
@@ -393,10 +400,10 @@ export default function AdminSettingsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="site-setting-targetReleaseDate" className="block font-medium text-[#94A3B8] mb-1">
                   Target Release Date (ISO format or YYYY-MM-DD)
                 </label>
-                <input
+                <input id="site-setting-targetReleaseDate" aria-label="Target release date"
                   type="text"
                   value={settings.targetReleaseDate}
                   onChange={(e) => handleUpdate({ targetReleaseDate: e.target.value })}
@@ -409,10 +416,10 @@ export default function AdminSettingsPage() {
               </div>
 
               <div>
-                <label className="block font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="site-setting-countdownCaption" className="block font-medium text-[#94A3B8] mb-1">
                   Countdown Caption / Disclaimer
                 </label>
-                <input
+                <input id="site-setting-countdownCaption" aria-label="Countdown caption"
                   type="text"
                   value={settings.countdownCaption}
                   onChange={(e) => handleUpdate({ countdownCaption: e.target.value })}
@@ -428,9 +435,9 @@ export default function AdminSettingsPage() {
                   Enable when Rockstar Games announces the official release date.
                 </p>
               </div>
-              <input
+              <input id="site-setting-isReleaseDateConfirmed" aria-label="Official release date confirmed by Rockstar"
                 type="checkbox"
-                checked={settings.isReleaseDateConfirmed}
+                  checked={settings.isReleaseDateConfirmed}
                 onChange={(e) => handleUpdate({ isReleaseDateConfirmed: e.target.checked })}
                 className="w-4 h-4 rounded border-[#1C2436] text-[#6366F1] bg-[#0E131D]"
               />
@@ -450,12 +457,12 @@ export default function AdminSettingsPage() {
             </div>
 
             <div>
-              <label className="block font-medium text-[#94A3B8] mb-1">
+              <label htmlFor="site-setting-announcementBanner" className="block font-medium text-[#94A3B8] mb-1">
                 Banner Message
               </label>
-              <input
+              <input id="site-setting-announcementBanner" aria-label="Announcement banner message"
                 type="text"
-                value={settings.announcementBanner}
+                  value={settings.announcementBanner}
                 onChange={(e) => handleUpdate({ announcementBanner: e.target.value })}
                 className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white focus:outline-none focus:border-[#6366F1]"
               />
@@ -476,10 +483,10 @@ export default function AdminSettingsPage() {
 
             <div className="space-y-3">
               <div>
-                <label className="block font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="site-setting-siteDescription" className="block font-medium text-[#94A3B8] mb-1">
                   Footer Summary / About Paragraph
                 </label>
-                <textarea
+                <textarea id="site-setting-siteDescription" aria-label="Site description"
                   rows={2}
                   value={settings.siteDescription}
                   onChange={(e) => handleUpdate({ siteDescription: e.target.value })}
@@ -488,10 +495,10 @@ export default function AdminSettingsPage() {
               </div>
 
               <div>
-                <label className="block font-medium text-[#94A3B8] mb-1">
+                <label htmlFor="site-setting-copyrightText" className="block font-medium text-[#94A3B8] mb-1">
                   Copyright Notice
                 </label>
-                <input
+                <input id="site-setting-copyrightText" aria-label="Copyright text"
                   type="text"
                   value={settings.copyrightText}
                   onChange={(e) => handleUpdate({ copyrightText: e.target.value })}
@@ -636,7 +643,7 @@ export default function AdminSettingsPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className={`text-xs font-semibold ${(settings.homepageSectionToggles ?? []).includes(sec.id) ? "text-emerald-400" : "text-[#64748B]"}`}>
+                  <span className={`text-xs font-semibold ${(settings.homepageSectionToggles ?? []).includes(sec.id) ? "text-emerald-700 dark:text-emerald-400" : "text-[#64748B]"}`}>
                     {(settings.homepageSectionToggles ?? []).includes(sec.id) ? "Enabled" : "Disabled"}
                   </span>
                   <input
@@ -709,11 +716,10 @@ export default function AdminSettingsPage() {
       {activeTab === "branding" && (
         <div className="p-6 rounded-xl border border-[#1C2436] bg-[#111622] space-y-4 text-xs">
           <div>
-            <label htmlFor="settings-site-title" className="block font-medium text-[#94A3B8] mb-1">Site Title</label>
-            <input
-              id="settings-site-title"
+            <label htmlFor="site-setting-siteTitle" className="block font-medium text-[#94A3B8] mb-1">Site Title</label>
+            <input id="site-setting-siteTitle" aria-label="Site title"
               type="text"
-              value={settings.siteTitle || ""}
+                  value={settings.siteTitle || ""}
               onChange={(e) => handleUpdate({ siteTitle: e.target.value })}
               placeholder="Taish Gaming"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
@@ -722,11 +728,10 @@ export default function AdminSettingsPage() {
           </div>
 
           <div>
-            <label htmlFor="settings-twitter" className="block font-medium text-[#94A3B8] mb-1">Twitter / X Handle</label>
-            <input
-              id="settings-twitter"
+            <label htmlFor="site-setting-twitterHandle" className="block font-medium text-[#94A3B8] mb-1">Twitter / X Handle</label>
+            <input id="site-setting-twitterHandle" aria-label="X or Twitter profile"
               type="text"
-              value={settings.twitterHandle || ""}
+                  value={settings.twitterHandle || ""}
               onChange={(e) => handleUpdate({ twitterHandle: e.target.value })}
               placeholder="@TaishGaming"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
@@ -734,11 +739,10 @@ export default function AdminSettingsPage() {
           </div>
 
           <div>
-            <label htmlFor="settings-discord" className="block font-medium text-[#94A3B8] mb-1">Discord Community Invite URL</label>
-            <input
-              id="settings-discord"
+            <label htmlFor="site-setting-discordUrl" className="block font-medium text-[#94A3B8] mb-1">Discord Community Invite URL</label>
+            <input id="site-setting-discordUrl" aria-label="Discord invite URL"
               type="text"
-              value={settings.discordUrl || ""}
+                  value={settings.discordUrl || ""}
               onChange={(e) => handleUpdate({ discordUrl: e.target.value })}
               placeholder="https://discord.gg/…"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
@@ -746,11 +750,10 @@ export default function AdminSettingsPage() {
           </div>
 
           <div>
-            <label htmlFor="settings-reddit" className="block font-medium text-[#94A3B8] mb-1">Reddit Community URL</label>
-            <input
-              id="settings-reddit"
+            <label htmlFor="site-setting-redditUrl" className="block font-medium text-[#94A3B8] mb-1">Reddit Community URL</label>
+            <input id="site-setting-redditUrl" aria-label="Reddit community URL"
               type="text"
-              value={settings.redditUrl || ""}
+                  value={settings.redditUrl || ""}
               onChange={(e) => handleUpdate({ redditUrl: e.target.value })}
               placeholder="https://www.reddit.com/r/…"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
@@ -758,11 +761,10 @@ export default function AdminSettingsPage() {
           </div>
 
           <div>
-            <label htmlFor="settings-instagram" className="block font-medium text-[#94A3B8] mb-1">Instagram URL</label>
-            <input
-              id="settings-instagram"
+            <label htmlFor="site-setting-instagramUrl" className="block font-medium text-[#94A3B8] mb-1">Instagram URL</label>
+            <input id="site-setting-instagramUrl" aria-label="Instagram URL"
               type="text"
-              value={settings.instagramUrl || ""}
+                  value={settings.instagramUrl || ""}
               onChange={(e) => handleUpdate({ instagramUrl: e.target.value })}
               placeholder="https://www.instagram.com/…"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
@@ -770,11 +772,10 @@ export default function AdminSettingsPage() {
           </div>
 
           <div>
-            <label htmlFor="settings-facebook" className="block font-medium text-[#94A3B8] mb-1">Facebook Page URL</label>
-            <input
-              id="settings-facebook"
+            <label htmlFor="site-setting-facebookUrl" className="block font-medium text-[#94A3B8] mb-1">Facebook Page URL</label>
+            <input id="site-setting-facebookUrl" aria-label="Facebook URL"
               type="text"
-              value={settings.facebookUrl || ""}
+                  value={settings.facebookUrl || ""}
               onChange={(e) => handleUpdate({ facebookUrl: e.target.value })}
               placeholder="https://www.facebook.com/…"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
@@ -782,22 +783,20 @@ export default function AdminSettingsPage() {
           </div>
 
           <div>
-            <label htmlFor="settings-youtube" className="block font-medium text-[#94A3B8] mb-1">YouTube Channel URL</label>
-            <input
-              id="settings-youtube"
+            <label htmlFor="site-setting-youtubeUrl" className="block font-medium text-[#94A3B8] mb-1">YouTube Channel URL</label>
+            <input id="site-setting-youtubeUrl" aria-label="YouTube URL"
               type="text"
-              value={settings.youtubeUrl || ""}
+                  value={settings.youtubeUrl || ""}
               onChange={(e) => handleUpdate({ youtubeUrl: e.target.value })}
               placeholder="https://www.youtube.com/@…"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
             />
           </div>
           <div>
-            <label htmlFor="settings-tiktok" className="block font-medium text-[#94A3B8] mb-1">TikTok Profile URL</label>
-            <input
-              id="settings-tiktok"
+            <label htmlFor="site-setting-tiktokUrl" className="block font-medium text-[#94A3B8] mb-1">TikTok Profile URL</label>
+            <input id="site-setting-tiktokUrl" aria-label="TikTok URL"
               type="text"
-              value={settings.tiktokUrl || ""}
+                  value={settings.tiktokUrl || ""}
               onChange={(e) => handleUpdate({ tiktokUrl: e.target.value })}
               placeholder="https://www.tiktok.com/@…"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
@@ -814,10 +813,10 @@ export default function AdminSettingsPage() {
             Search Console is not connected, so this dashboard cannot show its performance data yet. A verified Search Console property and Google OAuth server configuration are required before an authenticated connection can be added.
           </p>
           <div>
-            <label className="block font-medium text-[#94A3B8] mb-1">Google Analytics 4 Measurement ID</label>
-            <input
+            <label htmlFor="site-setting-ga4MeasurementId" className="block font-medium text-[#94A3B8] mb-1">Google Analytics 4 Measurement ID</label>
+            <input id="site-setting-ga4MeasurementId" aria-label="GA4 measurement ID"
               type="text"
-              value={settings.ga4MeasurementId ?? ""}
+                  value={settings.ga4MeasurementId ?? ""}
               onChange={(e) => handleUpdate({ ga4MeasurementId: e.target.value })}
               placeholder="G-XXXXXXXXXX"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] font-mono focus:outline-none focus:border-[#6366F1]"
@@ -845,7 +844,7 @@ export default function AdminSettingsPage() {
             </p>
           </div>
           <div className="rounded-xl border border-red-500/30 bg-red-500/5 p-4">
-            <p className="font-semibold text-red-300 mb-1">Danger zone</p>
+            <p className="font-semibold text-red-800 dark:text-red-300 mb-1">Danger zone</p>
             <p className="text-[#94A3B8] mb-4 leading-relaxed">
               Revoking invalidates every active admin session at once. Use this if
               you suspect a session cookie has leaked or an unauthorized device has

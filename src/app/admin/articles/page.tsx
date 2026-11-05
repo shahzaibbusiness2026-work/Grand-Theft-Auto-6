@@ -453,7 +453,7 @@ export default function AdminArticlesPage() {
       {/* Main Grid: Data Table (Left) + Quick Edit Drawer (Right) matching Image 8 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Table Container */}
-        <div className={cn("transition-all duration-200", quickEditArticle ? "lg:col-span-8" : "lg:col-span-12")}>
+        <div className={cn("min-w-0 transition-all duration-200", quickEditArticle ? "lg:col-span-8" : "lg:col-span-12")}>
           <div className="rounded-xl border border-[#1C2436] bg-[#111622] overflow-hidden">
             {/* Bulk Actions Header */}
             {selectedIds.length > 0 && (
@@ -512,7 +512,7 @@ export default function AdminArticlesPage() {
                     <th scope="col" className="py-3 px-3 font-medium">
                       Publication date
                     </th>
-                    <th scope="col" className="py-3 px-3 text-right">
+                    <th scope="col" className="relative py-3 px-3 text-right">
                       <span className="sr-only">Actions</span>
                     </th>
                   </tr>

@@ -243,6 +243,7 @@ export function ArticleEditor({
               type="button"
               disabled={saving}
               onClick={() => handleSave("published")}
+              data-admin-variant="primary"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold transition-all shadow-md shadow-indigo-500/20 active:scale-[0.98] disabled:opacity-60"
             >
               <Calendar className="w-3.5 h-3.5" />
@@ -269,6 +270,7 @@ export function ArticleEditor({
               type="button"
               onClick={handleDelete}
               disabled={deleting}
+              data-admin-variant="danger"
               className="px-3 py-1.5 rounded-lg bg-[#7F1D1D] text-xs font-semibold text-white hover:bg-[#991B1B] disabled:opacity-60"
             >
               {deleting ? "Deleting…" : "Delete permanently"}
@@ -321,6 +323,11 @@ export function ArticleEditor({
             <p className="text-xs text-[#64748B]">
               This will be used in the article URL: /news/{slug || "your-slug"}
             </p>
+          </div>
+
+          <div className="space-y-1.5">
+            <label htmlFor="article-subtitle" className="block text-xs font-medium text-[#94A3B8]">Subtitle (optional)</label>
+            <input id="article-subtitle" type="text" value={article.subtitle || ""} onChange={(e) => setField("subtitle", e.target.value)} className="w-full rounded-xl border border-[#1C2436] bg-[#111622] px-4 py-2.5 text-sm text-white" />
           </div>
 
           <div className="space-y-1.5">
@@ -526,7 +533,7 @@ export function ArticleEditor({
               <div className="p-3 rounded-xl bg-[#0E131D] border border-[#1C2436] space-y-1">
                 <p className="text-xs text-[#94A3B8]">Taish Gaming</p>
                 <p className="text-xs font-semibold text-[#818CF8]">{metaTitle}</p>
-                <p className="text-xs text-emerald-400 font-mono truncate">
+                <p className="text-xs text-emerald-700 dark:text-emerald-400 font-mono truncate">
                   {article.canonicalUrl || `www.taishgaming.com/news/${slug || "your-slug"}`}
                 </p>
                 <p className="text-xs text-[#94A3B8] line-clamp-2 leading-tight">{metaDescription}</p>
@@ -538,7 +545,7 @@ export function ArticleEditor({
                 <label htmlFor="meta-title-input" className="block text-xs font-medium text-[#94A3B8]">
                   SEO title
                 </label>
-                <span className={cn("text-xs font-mono", seoTitleLength >= 30 && seoTitleLength <= 60 ? "text-emerald-400" : "text-amber-300")}>{seoTitleLength} chars · aim for 30–60</span>
+                <span className={cn("text-xs font-mono", seoTitleLength >= 30 && seoTitleLength <= 60 ? "text-emerald-700 dark:text-emerald-400" : "text-amber-700 dark:text-amber-300")}>{seoTitleLength} chars · aim for 30–60</span>
               </div>
               <input
                 id="meta-title-input"
@@ -555,7 +562,7 @@ export function ArticleEditor({
                 <label htmlFor="meta-desc-input" className="block text-xs font-medium text-[#94A3B8]">
                   Meta description
                 </label>
-                <span className={cn("text-xs font-mono", seoDescriptionLength >= 120 && seoDescriptionLength <= 160 ? "text-emerald-400" : "text-amber-300")}>
+                <span className={cn("text-xs font-mono", seoDescriptionLength >= 120 && seoDescriptionLength <= 160 ? "text-emerald-700 dark:text-emerald-400" : "text-amber-700 dark:text-amber-300")}>
                   {seoDescriptionLength} chars · aim for 120–160
                 </span>
               </div>

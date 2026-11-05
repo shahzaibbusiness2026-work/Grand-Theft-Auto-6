@@ -104,7 +104,7 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
     --admin-border: #e2e8f0;
     --admin-border-subtle: #edf2f7;
     --admin-text: #0f172a;
-    --admin-text-muted: #64748b;
+    --admin-text-muted: #475569;
     --admin-primary: #6366f1;
     --admin-primary-hover: #4f46e5;
     --admin-accent: #4f46e5;
@@ -405,11 +405,28 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
 
 .light [data-flip-text] .text-\[\#94A3B8\],
 .light [data-flip-text] .text-\[\#94a3b8\] {
-  color: #64748b !important;
+  color: #475569 !important;
 }
 
 .light [data-flip-text] .text-\[\#64748B\] {
-  color: #64748b !important;
+  color: #475569 !important;
+}
+
+/* Filled admin actions retain white text when light-mode body copy flips. */
+[data-flip-text] button[data-admin-variant="primary"],
+.light [data-flip-text] button[data-admin-variant="primary"],
+.light [data-flip-text] :is(button, a).bg-\[\#6366F1\] {
+  background-color: #be185d !important;
+  color: #fff !important;
+}
+[data-flip-text] button[data-admin-variant="primary"]:hover {
+  background-color: #9d174d !important;
+}
+.light [data-flip-text] button[data-admin-variant="danger"] {
+  color: #fff !important;
+}
+.light [data-flip-text] :is(button, a).bg-\[\#6366F1\] .text-white {
+  color: #fff !important;
 }
 
 /* Interactive Inputs, Textareas, and Dropdown Selects */
@@ -619,7 +636,7 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
 }
 
 .light aside[aria-label="Admin Navigation"] p[id^="nav-heading-"] {
-  color: #94a3b8 !important;
+  color: #475569 !important;
 }
 
 /* Inactive nav links */

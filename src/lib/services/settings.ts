@@ -174,18 +174,15 @@ export async function saveSiteSettings(
       }
     }
 
-    const upsertPromises = entries.map(([key, value]) =>
-      supabase.from("site_settings").upsert(
-        {
-          key,
-          value,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: "key" },
-      ),
+    if (!entries.length) return { success: true };
+    // One Postgres statement is atomic: an error must not leave half of the
+    // settings saved or produce a success toast for a rejected write.
+    const updatedAt = new Date().toISOString();
+    const { error } = await supabase.from("site_settings").upsert(
+      entries.map(([key, value]) => ({ key, value, updated_at: updatedAt })),
+      { onConflict: "key" },
     );
-
-    await Promise.all(upsertPromises);
+    if (error) throw new Error(error.message);
 
     revalidatePath("/");
     revalidatePath("/admin/settings");

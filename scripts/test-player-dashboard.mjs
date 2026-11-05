@@ -888,3 +888,143 @@ test("transactional mail keeps the verified mailbox and always identifies Taish 
     else process.env.BROADCAST_FROM_EMAIL = before;
   }
 });
+
+function settingsAdapter(upsert, revalidatePath = () => {}) {
+  return loader({
+    react: { cache: fn => fn },
+    "next/cache": { revalidatePath },
+    "@/lib/admin-store": { INITIAL_ADMIN_SETTINGS: {} },
+    "@/lib/constants": { SITE_CONFIG: {} },
+    "@/lib/auth/assert-admin": { assertAdmin: async () => ({ authorized: true }) },
+    "@/lib/supabase/admin": { createAdminClient: () => ({ from: () => ({ upsert }) }) },
+    "@/lib/supabase/public": { createPublicClient: () => { throw new Error("Unexpected public read"); } },
+  })("src/lib/services/settings.ts");
+}
+
+test("settings save reports a rejected database write without claiming success or invalidating pages", async () => {
+  const paths = [];
+  const service = settingsAdapter(async () => ({ error: { message: "Settings write unavailable" } }), path => paths.push(path));
+  const result = await service.saveSiteSettings({ siteTitle: "Owner title" });
+  assert.equal(result.success, false);
+  assert.match(result.error, /Settings write unavailable/);
+  assert.equal(paths.length, 0);
+});
+
+test("a settings batch uses one atomic database statement instead of partially saving separate keys", async () => {
+  const writes = [];
+  const service = settingsAdapter(async rows => { writes.push(plain(rows)); return { error: null }; });
+  assert.equal((await service.saveSiteSettings({ siteTitle: "Owner title", heroHeading: "Owner heading" })).success, true);
+  assert.equal(writes.length, 1);
+  assert.deepEqual(writes[0].map(row => row.key).sort(), ["heroHeading", "siteTitle"]);
+  assert.equal(writes[0][0].updated_at, writes[0][1].updated_at);
+});
+
+function adminRoute(filename, extra = {}) {
+  return loader({
+    "next/headers": { cookies: async () => ({ get: () => undefined, set: () => { throw new Error("Unexpected cookie mutation"); } }) },
+    "@/lib/auth/assert-admin": { assertAdmin: async () => ({ authorized: true, userId: "qa@example.invalid" }) },
+    "@/lib/supabase/admin": { createAdminClient: () => { throw new Error("Unexpected database operation"); } },
+    "@/lib/supabase/server": { createClient: async () => { throw new Error("Unexpected provider operation"); } },
+    "@/lib/rate-limit": { peekRateLimit: async () => false, recordRateLimitHit: async () => {} },
+    ...extra,
+  })(filename);
+}
+const adminRequest = (path, body, origin = "https://www.taishgaming.com", type = "application/json") => new Request(`https://www.taishgaming.com${path}`, {
+  method: "POST", headers: { origin, "content-type": type }, body: JSON.stringify(body),
+});
+
+test("admin login blocks foreign origins and malformed or oversized bodies before any credential operation", async () => {
+  const route = adminRoute("src/app/api/admin/login/route.ts");
+  assert.equal((await route.POST(adminRequest("/api/admin/login", {}, "https://foreign.example"))).status, 403);
+  assert.equal((await route.POST(adminRequest("/api/admin/login", { username: 12, password: {} }))).status, 400);
+  assert.equal((await route.POST(adminRequest("/api/admin/login", { email: "x".repeat(20_000) }))).status, 413);
+  assert.equal((await route.POST(adminRequest("/api/admin/login", {}, "https://www.taishgaming.com", "text/plain"))).status, 415);
+});
+
+test("foreign requests cannot revoke admin sessions or clear an admin's cookie", async () => {
+  for (const path of ["revoke-sessions", "logout"]) {
+    const route = adminRoute(`src/app/api/admin/${path}/route.ts`);
+    assert.equal((await route.POST(adminRequest(`/api/admin/${path}`, {}, "https://foreign.example"))).status, 403);
+  }
+});
+
+test("admin logout reports provider failure and clears its cookie only after successful local sign out", async () => {
+  let cleared = false;
+  const headers = { cookies: async () => ({ set: () => { cleared = true; } }) };
+  const failing = adminRoute("src/app/api/admin/logout/route.ts", {
+    "next/headers": headers,
+    "@/lib/supabase/server": { createClient: async () => ({ auth: { signOut: async () => ({ error: new Error("provider offline") }) } }) },
+  });
+  assert.equal((await failing.POST(adminRequest("/api/admin/logout", {}))).status, 503);
+  assert.equal(cleared, false);
+  const success = adminRoute("src/app/api/admin/logout/route.ts", {
+    "next/headers": headers,
+    "@/lib/supabase/server": { createClient: async () => ({ auth: { signOut: async (options) => { assert.equal(options.scope, "local"); return { error: null }; } } }) },
+  });
+  assert.equal((await success.POST(adminRequest("/api/admin/logout", {}))).status, 200);
+  assert.equal(cleared, true);
+});
+
+test("broadcast preview enforces origin and a string cannot act as send confirmation", async () => {
+  const before = process.env.RESEND_API_KEY;
+  process.env.RESEND_API_KEY = "qa-test-not-a-real-mail-key";
+  try {
+    const route = adminRoute("src/app/api/admin/broadcast/route.ts");
+    assert.equal((await route.POST(adminRequest("/api/admin/broadcast", { dryRun: true }, "https://foreign.example"))).status, 403);
+    assert.equal((await route.POST(adminRequest("/api/admin/broadcast", { subject: "QA", message: "QA", confirm: "false" }))).status, 400);
+  } finally {
+    if (before === undefined) delete process.env.RESEND_API_KEY;
+    else process.env.RESEND_API_KEY = before;
+  }
+});
+
+test("media validation rejects renamed executable content and accepts supported file signatures", () => {
+  const { mediaUploadType } = load("src/lib/media-validation.ts");
+  const svg = new TextEncoder().encode('<svg xmlns="http://www.w3.org/2000/svg" onload="alert(1)"/>');
+  assert.equal(mediaUploadType("image.png", "image/svg+xml", svg), null);
+  assert.equal(mediaUploadType("image.png", "image/png", svg), null);
+  assert.equal(mediaUploadType("image.svg", "image/png", new Uint8Array([137,80,78,71,13,10,26,10])), null);
+  assert.equal(mediaUploadType("image.png", "image/png", new Uint8Array([137,80,78,71,13,10,26,10])), "image/png");
+  assert.equal(mediaUploadType("image.jpg", "image/jpeg", new Uint8Array([255,216,255])), "image/jpeg");
+  assert.equal(mediaUploadType("image.webp", "image/webp", new TextEncoder().encode("RIFF0000WEBP")), "image/webp");
+  assert.equal(mediaUploadType("video.mp4", "video/mp4", new TextEncoder().encode("0000ftypisom0000mp42")), "video/mp4");
+});
+
+test("a successful reply with a failed database update does not claim the message was handled or invite a duplicate send", async () => {
+  let sent = 0;
+  const before = process.env.RESEND_API_KEY;
+  process.env.RESEND_API_KEY = "qa-test-not-a-real-mail-key";
+  try {
+    const route = adminRoute("src/app/api/admin/messages/reply/route.ts", {
+      resend: { Resend: class { emails = { send: async () => { sent++; return { error: null }; } }; } },
+      "@/lib/supabase/admin": { createAdminClient: () => ({ from: () => ({
+        select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: { id: "qa", email: "qa@example.invalid", name: "QA" }, error: null }) }) }),
+        update: () => ({ eq: async () => ({ error: { message: "Status write failed" } }) }),
+      }) }) },
+    });
+    const response = await route.POST(adminRequest("/api/admin/messages/reply", { messageId: "qa", subject: "QA", message: "Controlled unit test" }));
+    const body = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(sent, 1);
+    assert.equal(body.success, true);
+    assert.equal(body.statusUpdated, false);
+    assert.match(body.warning, /do not resend/);
+  } finally {
+    if (before === undefined) delete process.env.RESEND_API_KEY;
+    else process.env.RESEND_API_KEY = before;
+  }
+});
+
+test("unauthorized settings saves never reach privileged database writes", async () => {
+  const service = loader({
+    react: { cache: fn => fn }, "next/cache": { revalidatePath: () => {} },
+    "@/lib/admin-store": { INITIAL_ADMIN_SETTINGS: {} }, "@/lib/constants": { SITE_CONFIG: {} },
+    "@/lib/auth/assert-admin": { assertAdmin: async () => { throw new Error("Unauthorized"); } },
+    "@/lib/supabase/admin": { createAdminClient: () => { throw new Error("Privileged database reached"); } },
+    "@/lib/supabase/public": { createPublicClient: () => ({}) },
+  })("src/lib/services/settings.ts");
+  const result = await service.saveSiteSettings({ siteTitle: "Unauthorized attempt" });
+  assert.equal(result.success, false);
+  assert.match(result.error, /Unauthorized/);
+  assert.doesNotMatch(result.error, /Privileged database/);
+});

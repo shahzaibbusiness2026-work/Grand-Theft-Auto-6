@@ -91,8 +91,8 @@ export default function AdminMessagesPage() {
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.success) {
-        showToast({ title: "Reply sent", description: `Email delivered to ${replyTarget.email}. Message marked handled.`, type: "success" });
-        setMessages((prev) => prev.map((x) => (x.id === replyTarget.id ? { ...x, status: "handled" as ContactMessage["status"] } : x)));
+        showToast({ title: "Reply sent", description: data.warning || `Email accepted for ${replyTarget.email}. Message marked handled.`, type: data.statusUpdated === false ? "warning" : "success", duration: data.warning ? 10000 : 4000 });
+        if (data.statusUpdated !== false) setMessages((prev) => prev.map((x) => (x.id === replyTarget.id ? { ...x, status: "handled" as ContactMessage["status"] } : x)));
         setReplyTarget(null);
       } else {
         showToast({ title: "Reply failed", description: data.error || "Could not send the reply.", type: "danger" });

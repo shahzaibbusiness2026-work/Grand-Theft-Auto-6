@@ -100,7 +100,7 @@ export function DataTable<T extends { id: string; name?: string; title?: string 
   };
 
   return (
-    <div className={cn("space-y-3", className)}>
+    <div className={cn("min-w-0 space-y-3", className)}>
       {/* Bulk Action Bar (when rows are selected) */}
       {selectable && selectedIds.length > 0 && (
         <div

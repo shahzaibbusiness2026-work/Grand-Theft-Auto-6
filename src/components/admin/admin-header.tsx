@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import { useToast } from "./toast";
 import { useTheme } from "next-themes";
 import {
   Menu,
@@ -17,6 +19,7 @@ import {
   ExternalLink,
   Settings as SettingsIcon,
   User,
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CommandMenu } from "./command-menu";
@@ -53,6 +56,22 @@ export function AdminHeader({
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
+  const { showToast } = useToast();
+  const signOut = async () => {
+    if (signingOut) return;
+    setSigningOut(true);
+    try {
+      const response = await fetch("/api/admin/logout", { method: "POST" });
+      if (!response.ok) throw new Error("Could not complete sign out. Please try again.");
+      const { error } = await createClient().auth.signOut({ scope: "local" });
+      if (error) throw new Error("Could not complete sign out. Please try again.");
+      window.location.replace("/admin/login");
+    } catch (error) {
+      showToast({ title: "Sign out failed", description: error instanceof Error ? error.message : "Please try again.", type: "danger" });
+      setSigningOut(false);
+    }
+  };
   const [notifications, setNotifications] = useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
 
   const notificationsRef = useRef<HTMLDivElement>(null);
@@ -95,26 +114,11 @@ export function AdminHeader({
       <header className="sticky top-0 z-40 h-16 border-b border-[#1C2436] bg-[#0B0E14]/90 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between gap-4 transition-colors">
         {/* Left Side: Sidebar Toggle & Breadcrumbs */}
         <div className="flex items-center gap-3 min-w-0">
-          {/* Universal Sidebar Toggle Button (Mobile: drawer, Desktop: collapse/expand) */}
-          <button
-            type="button"
-            onClick={() => {
-              if (typeof window !== "undefined" && window.innerWidth < 1024) {
-                onOpenMobileMenu?.();
-              } else {
-                onToggleSidebar?.();
-              }
-            }}
-            className="p-2 rounded-xl text-[#94A3B8] hover:text-white hover:bg-[#141B2A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] shrink-0"
-            aria-label={isSidebarCollapsed ? "Expand sidebar navigation (⌘B)" : "Collapse sidebar navigation (⌘B)"}
-            title={isSidebarCollapsed ? "Expand sidebar (⌘B)" : "Collapse sidebar (⌘B)"}
-          >
-            {isSidebarCollapsed ? (
-              <PanelLeftOpen className="w-5 h-5 hidden lg:block" />
-            ) : (
-              <PanelLeftClose className="w-5 h-5 hidden lg:block" />
-            )}
-            <Menu className="w-5 h-5 lg:hidden" />
+          <button type="button" onClick={onOpenMobileMenu} aria-label="Open admin navigation" className="shrink-0 rounded-xl p-2 text-[#94A3B8] hover:bg-[#141B2A] hover:text-white focus-visible:ring-2 focus-visible:ring-pink-500 lg:hidden">
+            <Menu className="h-5 w-5" />
+          </button>
+          <button type="button" onClick={onToggleSidebar} aria-label={isSidebarCollapsed ? "Expand sidebar navigation" : "Collapse sidebar navigation"} className="hidden shrink-0 rounded-xl p-2 text-[#94A3B8] hover:bg-[#141B2A] hover:text-white focus-visible:ring-2 focus-visible:ring-pink-500 lg:block">
+            {isSidebarCollapsed ? <PanelLeftOpen className="h-5 w-5" /> : <PanelLeftClose className="h-5 w-5" />}
           </button>
 
           {/* Breadcrumbs (matching Image 1: Home icon > Workspace > Overview) */}
@@ -124,6 +128,7 @@ export function AdminHeader({
           >
             <Link
               href="/admin"
+              aria-label="Admin overview"
               className="hover:text-white font-medium transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] rounded shrink-0"
             >
               <svg className="w-3.5 h-3.5 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -375,6 +380,11 @@ export function AdminHeader({
                   </Link>
 
                   <div className="border-t border-[#1C2436] my-1" />
+
+                  <button type="button" role="menuitem" onClick={signOut} disabled={signingOut} className="flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 py-2 text-xs text-[#CBD5E1] hover:bg-[#182030] hover:text-white disabled:opacity-50">
+                    <LogOut className="h-3.5 w-3.5" />
+                    <span>{signingOut ? "Signing out…" : "Sign out"}</span>
+                  </button>
 
                   <Link
                     role="menuitem"

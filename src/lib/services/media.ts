@@ -44,30 +44,13 @@ function rowToMediaAsset(row: DatabaseMediaRow): AdminMediaAsset {
 
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { logActivity } from "./activity";
+import { mediaUploadType } from "@/lib/media-validation";
 
 /* ------------------------------------------------------------------ */
 /* Real Supabase Storage upload                                        */
 /* ------------------------------------------------------------------ */
 
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10 MB
-
-/**
- * Extension allowlist mapped to the required MIME family. Both must agree:
- * the client-declared `file.type` is spoofable metadata, so it can never be
- * the only check, and extensions like .svg (stored XSS via <script>) and
- * .html are excluded outright.
- */
-const ALLOWED_UPLOAD_TYPES: Record<string, "image" | "video"> = {
-  ".jpg": "image",
-  ".jpeg": "image",
-  ".png": "image",
-  ".webp": "image",
-  ".gif": "image",
-  ".avif": "image",
-  ".mp4": "video",
-  ".webm": "video",
-  ".mov": "video",
-};
 
 function sanitizeFileName(name: string): string {
   const base = name.toLowerCase().replace(/[^a-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "");
@@ -97,12 +80,11 @@ export async function uploadMediaFile(formData: FormData) {
     }
     const clean = sanitizeFileName(file.name || "upload");
     const ext = clean.includes(".") ? clean.slice(clean.lastIndexOf(".")) : "";
-    const family = ALLOWED_UPLOAD_TYPES[ext];
-    const mime = file.type || "";
-    if (!family || !mime.startsWith(`${family}/`)) {
+    const mime = mediaUploadType(clean, file.type, new Uint8Array(await file.slice(0, 64).arrayBuffer()));
+    if (!mime) {
       return {
         success: false as const,
-        error: "Only JPG, PNG, WebP, GIF or AVIF images and MP4, WebM or MOV videos are allowed.",
+        error: "Use a valid JPG, PNG, WebP, GIF, AVIF, MP4, WebM or MOV file. Its extension, content type and file signature must match.",
       };
     }
     const path = `uploads/${Date.now()}-${sanitizeFileName(clean.slice(0, clean.length - ext.length))}${ext}`;
