@@ -174,6 +174,7 @@ export function VehicleEditor({
             </button>
             <button
               type="button"
+              data-admin-variant="primary"
               disabled={saving}
               onClick={() => handleSave("published")}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold transition-all shadow-md shadow-indigo-500/20 active:scale-[0.98] disabled:opacity-60"

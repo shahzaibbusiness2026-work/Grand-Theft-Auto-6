@@ -91,6 +91,12 @@ const NAV_ITEMS = [
       "text-gold-light group-hover:text-amber-300 light:text-gold-dark bg-gold/10 border-gold/25",
   },
   {
+    href: "/locations",
+    label: "Locations",
+    icon: MapPin,
+    color: "text-cyan-400 bg-cyan-500/10 border-cyan-500/25",
+  },
+  {
     href: "/weapons",
     label: "Weapons",
     icon: Crosshair,

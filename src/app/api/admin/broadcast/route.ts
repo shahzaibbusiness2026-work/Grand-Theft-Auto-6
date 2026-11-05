@@ -9,6 +9,7 @@ import {
   getSuppressedEmails,
 } from "@/lib/services/newsletter";
 import { taishFrom } from "@/lib/email";
+import { PlayerError, playerJsonBody, requireSameOrigin } from "@/lib/auth/player-account";
 
 /**
  * POST /api/admin/broadcast
@@ -37,6 +38,12 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  try {
+    requireSameOrigin(req);
+  } catch {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
@@ -52,16 +59,21 @@ export async function POST(req: Request) {
     confirm?: boolean;
   };
   try {
-    body = await req.json();
-  } catch {
+    body = await playerJsonBody(req, 32_768);
+  } catch (error) {
     return NextResponse.json(
       { error: "Invalid request body" },
-      { status: 400 },
+      { status: error instanceof PlayerError ? error.status : 400 },
     );
   }
 
-  const subject = (body.subject || "").trim();
-  const message = (body.message || "").trim();
+  if (typeof body.subject !== "string" || typeof body.message !== "string" ||
+      (body.dryRun !== undefined && typeof body.dryRun !== "boolean") ||
+      (body.confirm !== undefined && typeof body.confirm !== "boolean")) {
+    return NextResponse.json({ error: "Subject and message must be text; dryRun and confirm must be booleans." }, { status: 400 });
+  }
+  const subject = body.subject.trim();
+  const message = body.message.trim();
   if (!subject || !message) {
     return NextResponse.json(
       { error: "Subject and message are required" },
@@ -149,24 +161,6 @@ export async function POST(req: Request) {
       },
       { status: 400 },
     );
-  }
-
-  // CSRF defense-in-depth: only accept same-origin requests for this
-  // high-impact action (sends email to the entire subscriber list).
-  const origin = req.headers.get("origin");
-  const referer = req.headers.get("referer");
-  const host = req.headers.get("host") || "";
-  const sameOrigin = (v: string | null) =>
-    !!v &&
-    (() => {
-      try {
-        return new URL(v).host === host;
-      } catch {
-        return false;
-      }
-    })();
-  if (origin ? !sameOrigin(origin) : !sameOrigin(referer)) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
   const resend = new Resend(apiKey);

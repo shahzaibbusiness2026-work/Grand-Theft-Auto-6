@@ -187,7 +187,7 @@ export default function AdminOverviewPage() {
         </div>
 
         <Link
-          href="/admin/articles?action=new"
+          href="/admin/articles/new"
           className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#5254D8] text-white text-xs font-semibold transition-all shadow-md shadow-indigo-500/20 active:scale-[0.98] w-fit"
         >
           <Plus className="w-4 h-4" />
@@ -428,7 +428,7 @@ export default function AdminOverviewPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {/* Add article - Active purple */}
               <Link
-                href="/admin/articles?action=new"
+                href="/admin/articles/new"
                 className="rounded-xl bg-[#6366F1] hover:bg-[#5254D8] p-3.5 flex items-center gap-3 transition-all shadow-md shadow-indigo-500/20 text-white group"
               >
                 <FileText className="w-5 h-5 shrink-0 text-white" />
@@ -440,7 +440,7 @@ export default function AdminOverviewPage() {
 
               {/* Add vehicle */}
               <Link
-                href="/admin/vehicles?action=new"
+                href="/admin/vehicles/new"
                 className="rounded-xl bg-[#111622] hover:bg-[#161F30] border border-[#1C2436] hover:border-[#6366F1]/50 p-3.5 flex items-center gap-3 transition-all text-white group"
               >
                 <Car className="w-5 h-5 shrink-0 text-[#94A3B8] group-hover:text-white transition-colors" />
@@ -452,7 +452,7 @@ export default function AdminOverviewPage() {
 
               {/* Add weapon */}
               <Link
-                href="/admin/weapons?action=new"
+                href="/admin/weapons/new"
                 className="rounded-xl bg-[#111622] hover:bg-[#161F30] border border-[#1C2436] hover:border-[#6366F1]/50 p-3.5 flex items-center gap-3 transition-all text-white group"
               >
                 <Crosshair className="w-5 h-5 shrink-0 text-[#94A3B8] group-hover:text-white transition-colors" />
@@ -464,7 +464,7 @@ export default function AdminOverviewPage() {
 
               {/* Add map marker */}
               <Link
-                href="/admin/map?action=new"
+                href="/admin/map"
                 className="rounded-xl bg-[#111622] hover:bg-[#161F30] border border-[#1C2436] hover:border-[#6366F1]/50 p-3.5 flex items-center gap-3 transition-all text-white group"
               >
                 <MapPin className="w-5 h-5 shrink-0 text-[#94A3B8] group-hover:text-white transition-colors" />

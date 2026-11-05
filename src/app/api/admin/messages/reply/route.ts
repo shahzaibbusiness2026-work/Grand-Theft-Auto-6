@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { taishFrom } from "@/lib/email";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { PlayerError, playerJsonBody, requireSameOrigin } from "@/lib/auth/player-account";
 
 /**
  * POST /api/admin/messages/reply
@@ -28,31 +29,23 @@ export async function POST(req: Request) {
     );
   }
 
-  // CSRF defense-in-depth: same-origin requests only.
-  const host = req.headers.get("host") || "";
-  const origin = req.headers.get("origin");
-  const referer = req.headers.get("referer");
-  const sameOrigin = (v: string | null) => {
-    if (!v) return false;
-    try {
-      return new URL(v).host === host;
-    } catch {
-      return false;
-    }
-  };
-  if (origin ? !sameOrigin(origin) : !sameOrigin(referer)) {
+  try {
+    requireSameOrigin(req);
+  } catch {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
   let body: { messageId?: string; subject?: string; message?: string };
   try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+    body = await playerJsonBody(req, 32_768);
+  } catch (error) {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: error instanceof PlayerError ? error.status : 400 });
   }
 
   const { messageId, subject, message } = body;
-  if (!messageId || !subject?.trim() || !message?.trim()) {
+  if (typeof messageId !== "string" || !messageId || messageId.length > 200 ||
+      typeof subject !== "string" || !subject.trim() || subject.length > 200 ||
+      typeof message !== "string" || !message.trim() || message.length > 10_000) {
     return NextResponse.json(
       { error: "messageId, subject and message are all required" },
       { status: 400 }
@@ -100,7 +93,13 @@ export async function POST(req: Request) {
   }
 
   // Mark the message handled so the dashboard reflects it.
-  await supabase.from("contact_messages").update({ status: "handled" }).eq("id", messageId);
-
-  return NextResponse.json({ success: true, to: contact.email });
+  const { error: statusError } = await supabase.from("contact_messages").update({ status: "handled" }).eq("id", messageId);
+  // The send already succeeded. Do not invite a duplicate email by reporting
+  // a failed send when only the database status update needs retrying.
+  return NextResponse.json({
+    success: true,
+    to: contact.email,
+    statusUpdated: !statusError,
+    ...(statusError ? { warning: "Reply accepted by the email provider, but the message status could not be saved. Mark it handled separately; do not resend the reply." } : {}),
+  });
 }

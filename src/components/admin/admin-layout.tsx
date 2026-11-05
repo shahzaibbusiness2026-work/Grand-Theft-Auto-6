@@ -79,7 +79,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
       {/* Main Content Wrapper */}
       <div
         className={cn(
-          "flex-1 flex flex-col transition-all duration-300 ease-in-out",
+          "min-w-0 flex-1 flex flex-col transition-all duration-300 ease-in-out",
           isSidebarCollapsed ? "lg:pl-20" : "lg:pl-64"
         )}
       >
@@ -92,7 +92,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
         />
 
         {/* Page Content Body */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1600px] w-full mx-auto pb-24 lg:pb-8">
+        <main id="admin-main" className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8 max-w-[1600px] w-full mx-auto pb-24 lg:pb-8">
           {children}
         </main>
       </div>
@@ -104,7 +104,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
           const isActive =
             item.href === "/admin"
               ? pathname === "/admin"
-              : pathname.startsWith(item.href);
+              : (pathname === item.href || pathname.startsWith(`${item.href}/`));
 
           return (
             <Link

@@ -1,39 +1,10 @@
 "use client";
 
-import React, { useId, useEffect } from "react";
+import React, { useId, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard,
-  CheckSquare,
-  Activity,
-  FileText,
-  Tag,
-  Image as ImageIcon,
-  Car,
-  Crosshair,
-  MapPin,
-  Users,
-  Compass,
-  GitCompare,
-  Sliders,
-  Map,
-  CheckCircle2,
-  Shield,
-  BarChart3,
-  Search,
-  Settings,
-  Mail,
-  MailPlus,
-  Database,
-  BookOpen,
-  Building2,
-  Package,
-  Radio as RadioIcon,
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-} from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { ADMIN_NAV_SECTIONS } from "@/lib/admin-navigation";
 import { cn } from "@/lib/utils";
 import { Tooltip } from "./ui/tooltip";
 import type { AdminIdentity } from "./admin-layout";
@@ -46,73 +17,6 @@ interface AdminSidebarProps {
   onCloseMobile?: () => void;
 }
 
-interface NavItem {
-  label: string;
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-  badge?: string | number;
-  badgeVariant?: "primary" | "warning" | "default";
-}
-
-interface NavSection {
-  title: string;
-  items: NavItem[];
-}
-
-export const ADMIN_NAV_SECTIONS: NavSection[] = [
-  {
-    title: "Workspace",
-    items: [
-      { label: "Overview", href: "/admin", icon: LayoutDashboard },
-      { label: "Tasks", href: "/admin/tasks", icon: CheckSquare },
-      { label: "Activity", href: "/admin/activity", icon: Activity },
-    ],
-  },
-  {
-    title: "Content",
-    items: [
-      { label: "Articles", href: "/admin/articles", icon: FileText },
-      { label: "Categories & Tags", href: "/admin/categories", icon: Tag },
-      { label: "Guides", href: "/admin/guides", icon: BookOpen },
-      { label: "Properties", href: "/admin/properties", icon: Building2 },
-      { label: "Collectibles", href: "/admin/collectibles", icon: Package },
-      { label: "Radio Stations", href: "/admin/radio", icon: RadioIcon },
-      { label: "Media", href: "/admin/media", icon: ImageIcon },
-      { label: "Messages", href: "/admin/messages", icon: Mail },
-      { label: "Subscribers", href: "/admin/subscribers", icon: MailPlus },
-    ],
-  },
-  {
-    title: "Game Database",
-    items: [
-      { label: "Vehicles", href: "/admin/vehicles", icon: Car },
-      { label: "Weapons", href: "/admin/weapons", icon: Crosshair },
-      { label: "Locations", href: "/admin/locations", icon: MapPin },
-      { label: "Characters", href: "/admin/characters", icon: Users },
-      { label: "Missions", href: "/admin/missions", icon: Compass },
-    ],
-  },
-  {
-    title: "Tools",
-    items: [
-      { label: "Comparisons", href: "/admin/comparisons", icon: GitCompare },
-      { label: "Comparison Settings", href: "/admin/comparison", icon: Sliders },
-      { label: "Interactive Map", href: "/admin/map", icon: Map },
-      { label: "Completion Tracker", href: "/admin/tracker", icon: CheckCircle2 },
-    ],
-  },
-  {
-    title: "Administration",
-    items: [
-      { label: "Users & Roles", href: "/admin/users", icon: Shield },
-      { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
-      { label: "SEO", href: "/admin/seo", icon: Search },
-      { label: "Site Settings", href: "/admin/settings", icon: Settings },
-      { label: "Database", href: "/admin/database", icon: Database },
-    ],
-  },
-];
-
 export function AdminSidebar({
   identity,
   isCollapsed = false,
@@ -124,6 +28,26 @@ export function AdminSidebar({
   const id = useId();
   const profileName = identity?.name || "Loading profile…";
   const profileInitials = profileName.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join("").toUpperCase() || "A";
+
+  const collapsed = isCollapsed && !mobileOpen;
+  const drawer = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prior = document.activeElement as HTMLElement | null;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    drawer.current?.querySelector<HTMLButtonElement>("[data-close-admin-menu]")?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { event.preventDefault(); onCloseMobile?.(); }
+      if (event.key !== "Tab") return;
+      const items = [...(drawer.current?.querySelectorAll<HTMLElement>("a[href],button:not([disabled]),input,select,textarea") || [])].filter(item => item.getClientRects().length);
+      const first = items[0], last = items[items.length - 1];
+      if (first && event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (last && !event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = overflow; prior?.focus(); };
+  }, [mobileOpen, onCloseMobile]);
 
   // Keyboard shortcut Ctrl+B / Cmd+B to toggle sidebar
   useEffect(() => {
@@ -150,12 +74,15 @@ export function AdminSidebar({
 
       {/* Sidebar Container */}
       <aside
+        ref={drawer}
+        role={mobileOpen ? "dialog" : undefined}
+        aria-modal={mobileOpen ? true : undefined}
         aria-label="Admin Navigation"
         className={cn(
           "fixed top-0 bottom-0 left-0 z-50 flex flex-col border-r transition-all duration-300 ease-in-out",
           "bg-[#0B0E14] border-[#1C2436] text-[#F8FAFC]",
-          isCollapsed ? "w-20" : "w-64",
-          mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          collapsed ? "w-20" : "w-64",
+          mobileOpen ? "visible translate-x-0" : "invisible -translate-x-full lg:visible lg:translate-x-0"
         )}
       >
         {/* Floating Edge Collapse Button (Desktop Only, Never Overlaps Content) */}
@@ -163,9 +90,9 @@ export function AdminSidebar({
           <button
             type="button"
             onClick={onToggleCollapse}
-            aria-expanded={!isCollapsed}
-            aria-label={isCollapsed ? "Expand sidebar navigation (⌘B)" : "Collapse sidebar navigation (⌘B)"}
-            title={isCollapsed ? "Expand sidebar (⌘B)" : "Collapse sidebar (⌘B)"}
+            aria-expanded={!collapsed}
+            aria-label={collapsed ? "Expand sidebar navigation (⌘B)" : "Collapse sidebar navigation (⌘B)"}
+            title={collapsed ? "Expand sidebar (⌘B)" : "Collapse sidebar (⌘B)"}
             className={cn(
               "hidden lg:flex items-center justify-center absolute -right-3 top-5 z-50",
               "w-6 h-6 rounded-full bg-[#111622] border border-[#1C2436] text-[#94A3B8]",
@@ -173,7 +100,7 @@ export function AdminSidebar({
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1]"
             )}
           >
-            {isCollapsed ? (
+            {collapsed ? (
               <ChevronRight className="w-3.5 h-3.5" />
             ) : (
               <ChevronLeft className="w-3.5 h-3.5" />
@@ -185,20 +112,20 @@ export function AdminSidebar({
         <div
           className={cn(
             "h-16 flex items-center border-b border-[#1C2436] px-4",
-            isCollapsed ? "justify-center px-0" : "justify-between"
+            collapsed ? "justify-center px-0" : "justify-between"
           )}
         >
           <Link
             href="/admin"
             className={cn(
               "flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] rounded-xl p-1",
-              isCollapsed && "justify-center"
+              collapsed && "justify-center"
             )}
           >
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white font-black text-xs shadow-md shadow-purple-500/20">
               VI
             </div>
-            {!isCollapsed && (
+            {!collapsed && (
               <div className="flex items-center gap-2 min-w-0">
                 <span className="font-bold text-sm tracking-tight text-white truncate">
                   Taish Gaming
@@ -209,6 +136,9 @@ export function AdminSidebar({
               </div>
             )}
           </Link>
+          <button type="button" data-close-admin-menu onClick={onCloseMobile} aria-label="Close admin navigation" className="rounded-lg p-2 text-white focus-visible:ring-2 focus-visible:ring-pink-500 lg:hidden">
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
         {/* Navigation Sections */}
@@ -223,13 +153,13 @@ export function AdminSidebar({
               <div
                 key={section.title}
                 role="group"
-                aria-labelledby={!isCollapsed ? headingId : undefined}
+                aria-labelledby={!collapsed ? headingId : undefined}
                 className="space-y-1"
               >
-                {!isCollapsed && (
+                {!collapsed && (
                   <p
                     id={headingId}
-                    className="px-3 text-xs font-bold uppercase tracking-wider text-[#64748B] select-none"
+                    className="px-3 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 select-none"
                   >
                     {section.title}
                   </p>
@@ -240,7 +170,7 @@ export function AdminSidebar({
                     const isActive =
                       item.href === "/admin"
                         ? pathname === "/admin"
-                        : pathname.startsWith(item.href);
+                        : (pathname === item.href || pathname.startsWith(`${item.href}/`));
 
                     const navLink = (
                       <Link
@@ -252,7 +182,7 @@ export function AdminSidebar({
                           isActive
                             ? "bg-[#3730A3]/50 text-white border border-[#4F46E5]/40 font-bold shadow-sm"
                             : "text-[#94A3B8] hover:text-white hover:bg-[#141B2A]",
-                          isCollapsed && "justify-center px-0 w-10 h-10 mx-auto"
+                          collapsed && "justify-center px-0 w-10 h-10 mx-auto"
                         )}
                       >
                         <Icon
@@ -263,10 +193,10 @@ export function AdminSidebar({
                               : "text-[#64748B] group-hover:text-[#94A3B8]"
                           )}
                         />
-                        {!isCollapsed && (
+                        {!collapsed && (
                           <span className="flex-1 truncate">{item.label}</span>
                         )}
-                        {!isCollapsed && item.badge && (
+                        {!collapsed && item.badge && (
                           <span
                             className={cn(
                               "px-1.5 py-0.5 rounded-full text-xs font-bold shrink-0 transition-colors",
@@ -283,7 +213,7 @@ export function AdminSidebar({
                       </Link>
                     );
 
-                    if (isCollapsed) {
+                    if (collapsed) {
                       return (
                         <Tooltip key={item.href} content={item.label} position="right">
                           {navLink}
@@ -301,7 +231,7 @@ export function AdminSidebar({
 
         {/* Sidebar Footer */}
         <div className="p-3 border-t border-[#1C2436] space-y-2 bg-[#0B0E14]">
-          {isCollapsed ? (
+          {collapsed ? (
             <Tooltip content="View Public Site" position="right">
               <Link
                 href="/"
@@ -323,7 +253,7 @@ export function AdminSidebar({
             </Link>
           )}
 
-          {isCollapsed ? (
+          {collapsed ? (
             <Tooltip content={identity ? `${profileName} (${identity.role})` : "Loading admin profile"} position="right">
               <div className="w-8 h-8 mx-auto rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-inner cursor-pointer">
                 {profileInitials}

@@ -69,6 +69,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
+        data-admin-variant={variant}
         disabled={disabled || isLoading}
         className={cn(
           baseStyles,

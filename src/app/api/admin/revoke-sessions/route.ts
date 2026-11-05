@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { PlayerError, requireSameOrigin } from "@/lib/auth/player-account";
 import {
   ADMIN_SESSION_VERSION_KEY,
   clearSessionVersionCache,
@@ -17,7 +18,7 @@ import {
  * serverless instances pick up the new version within the version-cache TTL
  * (currently 15 seconds).
  */
-export async function POST() {
+export async function POST(request: Request) {
   try {
     await assertAdmin();
   } catch {
@@ -28,6 +29,7 @@ export async function POST() {
   }
 
   try {
+    requireSameOrigin(request);
     const supabase = createAdminClient();
     const { version: current } = await getCurrentSessionVersion();
     const next = current + 1;
@@ -46,6 +48,7 @@ export async function POST() {
 
     return NextResponse.json({ success: true, sessionVersion: next });
   } catch (err) {
+    if (err instanceof PlayerError) return NextResponse.json({ success: false, error: err.message }, { status: err.status });
     console.error("Revoke sessions failed:", err);
     return NextResponse.json(
       {

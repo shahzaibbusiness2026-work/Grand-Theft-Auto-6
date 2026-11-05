@@ -406,7 +406,7 @@ export default function AdminWeaponsPage() {
       {/* Main Grid: Data Table (Left) + Slide-over Drawer (Right) matching Image 5 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Table Container (matches Image 5 width) */}
-        <div className={cn("transition-all duration-200", drawerWeapon ? "lg:col-span-8" : "lg:col-span-12")}>
+        <div className={cn("min-w-0 transition-all duration-200", drawerWeapon ? "lg:col-span-8" : "lg:col-span-12")}>
           <div className="rounded-xl border border-[#1C2436] bg-[#111622] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs" aria-label="Weapons data table">
@@ -457,7 +457,7 @@ export default function AdminWeaponsPage() {
                         <ArrowUpDown className="w-3 h-3 text-[#64748B]" />
                       </div>
                     </th>
-                    <th scope="col" className="py-3 px-3 text-right">
+                    <th scope="col" className="relative py-3 px-3 text-right">
                       <span className="sr-only">Actions</span>
                     </th>
                   </tr>

@@ -86,7 +86,7 @@ function AdminLoginForm() {
             <Lock className="w-7 h-7 text-[#6366F1]" />
           </div>
           <h1 className="font-sans text-3xl font-black uppercase tracking-tight text-white">Taish Gaming</h1>
-          <p className="text-sm text-[#64748B] mt-1">Admin Dashboard — Authorized Access Only</p>
+          <p className="text-sm text-slate-400 mt-1">Admin Dashboard — Authorized Access Only</p>
         </div>
 
         {/* Login Card */}
@@ -138,8 +138,8 @@ function AdminLoginForm() {
 
             {/* Error */}
             {error && (
-              <div role="alert" className="flex items-center gap-2.5 p-3 rounded-xl bg-red-950/40 border border-red-500/30 text-red-400 text-xs">
-                <AlertCircle className="w-4 h-4 shrink-0" />
+              <div role="alert" className="flex items-center gap-2.5 rounded-xl border border-red-300 bg-red-50 p-3 text-xs font-medium text-slate-900 dark:border-red-500/40 dark:bg-red-950/40 dark:text-slate-100">
+                <AlertCircle className="h-4 w-4 shrink-0 text-red-700 dark:text-red-300" aria-hidden="true" />
                 <span>{error}</span>
               </div>
             )}
@@ -148,6 +148,7 @@ function AdminLoginForm() {
             <button
               type="submit"
               disabled={loading}
+              data-admin-variant="primary"
               className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#6366F1] hover:bg-[#5254D8] disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-semibold transition-all active:scale-[0.98]"
             >
               {loading ? (
@@ -159,12 +160,12 @@ function AdminLoginForm() {
             </button>
           </form>
 
-          <p className="text-center text-xs text-[#374151] mt-6">
+          <p className="text-center text-xs text-slate-400 mt-6">
             Access restricted to authorized Taish Gaming team members only.
           </p>
         </div>
 
-        <p className="text-center text-xs text-[#1E293B] mt-4">Taish Gaming CMS • Secured by Supabase Auth</p>
+        <p className="text-center text-xs text-slate-400 mt-4">Taish Gaming CMS</p>
       </div>
     </div>
   );

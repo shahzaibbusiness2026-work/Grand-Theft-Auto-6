@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { createHash } from "crypto";
+import { createHash, timingSafeEqual } from "crypto";
+import { PlayerError, playerJsonBody, requireSameOrigin } from "@/lib/auth/player-account";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createAdminSessionToken, getCurrentSessionVersion } from "@/lib/auth/session";
@@ -46,7 +47,7 @@ async function recordLoginFailure(ip: string) {
 function timingSafeEqualStr(a: string, b: string): boolean {
   const ha = createHash("sha256").update(a).digest();
   const hb = createHash("sha256").update(b).digest();
-  return createHash("sha256").update(ha).digest().equals(createHash("sha256").update(hb).digest());
+  return timingSafeEqual(ha, hb);
 }
 
 async function setAdminCookie(cookieStore: Awaited<ReturnType<typeof cookies>>, email: string) {
@@ -66,6 +67,7 @@ async function setAdminCookie(cookieStore: Awaited<ReturnType<typeof cookies>>, 
 
 export async function POST(request: Request) {
   try {
+    requireSameOrigin(request);
     // Read env vars at request time — Next.js inlines process.env at build
     // time for module-scope constants, so they must be read here.
     const MASTER_EMAILS = (process.env.ADMIN_MASTER_EMAILS || "")
@@ -88,9 +90,13 @@ export async function POST(request: Request) {
       );
     }
 
-    const body = await request.json();
-    const rawUsername = (body.username || body.email || "").trim().toLowerCase();
-    const password = (body.password || "").trim();
+    const body = await playerJsonBody(request, 16_384);
+    const username = body.username || body.email;
+    if (typeof username !== "string" || typeof body.password !== "string" || username.length > 254 || body.password.length > 1024) {
+      return NextResponse.json({ success: false, error: "Provide a valid email and password." }, { status: 400 });
+    }
+    const rawUsername = username.trim().toLowerCase();
+    const password = body.password.trim();
 
     if (!rawUsername || !password) {
       return NextResponse.json(
@@ -185,6 +191,7 @@ export async function POST(request: Request) {
       { status: 401 }
     );
   } catch (err: unknown) {
+    if (err instanceof PlayerError) return NextResponse.json({ success: false, error: err.message }, { status: err.status });
     // Log internally, return generic message: never expose Supabase errors,
     // missing-env diagnostics, or stack details to the client.
     console.error("[admin/login] authentication error:", err);
