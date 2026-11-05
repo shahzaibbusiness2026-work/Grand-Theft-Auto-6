@@ -24,6 +24,7 @@ import { dashboardToolPath } from "@/lib/player-navigation";
 interface CompanionSidebarProps {
   onItemClick?: () => void;
   className?: string;
+  collapsed?: boolean;
 }
 
 const NAV_ITEMS = [
@@ -157,38 +158,53 @@ const NAV_ITEMS = [
 export function CompanionSidebar({
   onItemClick,
   className,
+  collapsed = false,
 }: CompanionSidebarProps) {
   const pathname = usePathname();
 
   return (
     <aside
       className={cn(
-        "player-sidebar flex h-full w-64 flex-col justify-between border-r border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#04060d] dark:bg-[#04060d] text-slate-200 dark:text-slate-200 select-none overflow-y-auto no-scrollbar transition-colors",
+        "player-sidebar flex h-full flex-col justify-between border-r border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#04060d] dark:bg-[#04060d] text-slate-200 dark:text-slate-200 select-none overflow-y-auto no-scrollbar transition-all duration-300",
+        collapsed ? "w-[72px]" : "w-64",
         className,
       )}
     >
       {/* Top Branding */}
-      <div className="p-5 pb-3">
+      <div className={cn("p-5 pb-3", collapsed && "flex justify-center px-0")}>
         <Link
           href="/"
           onClick={onItemClick}
           className="group inline-flex flex-col leading-none focus:outline-none"
+          title={collapsed ? "Taish Gaming — home" : undefined}
         >
-          <span className="bg-gradient-to-r from-white via-white to-gold-light bg-clip-text text-transparent font-display text-[22px] font-black tracking-tight drop-shadow-[0_0_16px_rgba(201,168,106,0.35)]">
-            TAISH GAMING
-          </span>
-          <span className="mt-0.5 font-mono text-xs font-black uppercase tracking-[0.14em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
-            PLAYER WORKSPACE
-          </span>
+          {collapsed ? (
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-pink-500 via-pink-600 to-violet-500 font-display text-sm font-black text-white shadow-md shadow-pink-500/20">
+              TG
+            </span>
+          ) : (
+            <>
+              <span className="bg-gradient-to-r from-white via-white to-gold-light bg-clip-text text-transparent font-display text-[22px] font-black tracking-tight drop-shadow-[0_0_16px_rgba(201,168,106,0.35)]">
+                TAISH GAMING
+              </span>
+              <span className="mt-0.5 font-mono text-xs font-black uppercase tracking-[0.14em] text-[#00F0FF] opacity-90 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
+                PLAYER WORKSPACE
+              </span>
+            </>
+          )}
         </Link>
       </div>
 
-      <div className="mx-5 mt-4 h-px bg-gradient-to-r from-pink-500/40 via-white/10 to-transparent" />
-      {/* Navigation list */}
-      <p className="px-5 pt-4 pb-1 font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
-        Navigate
-      </p>
-      <nav className="flex-1 space-y-1 px-3 py-2">
+      {!collapsed && (
+        <>
+          <div className="mx-5 mt-4 h-px bg-gradient-to-r from-pink-500/40 via-white/10 to-transparent" />
+          {/* Navigation list */}
+          <p className="px-5 pt-4 pb-1 font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+            Navigate
+          </p>
+        </>
+      )}
+      <nav className={cn("flex-1 space-y-1 px-3 py-2", collapsed && "pt-4")}>
         {NAV_ITEMS.map((original) => {
           const item = { ...original, href: dashboardToolPath(original.href) };
           const Icon = item.icon;
@@ -200,8 +216,10 @@ export function CompanionSidebar({
               aria-current={isActive ? "page" : undefined}
               href={item.href}
               onClick={onItemClick}
+              title={collapsed ? item.label : undefined}
               className={cn(
                 "group flex items-center gap-3 rounded-xl px-2.5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-200",
+                collapsed && "justify-center px-0",
                 isActive
                   ? "bg-gradient-to-r from-pink-500/20 via-pink-500/10 to-transparent text-white font-bold shadow-sm border border-pink-500/30"
                   : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-100",
@@ -220,13 +238,14 @@ export function CompanionSidebar({
               >
                 <Icon className="h-4 w-4" />
               </div>
-              <span className="truncate">{item.label}</span>
+              {!collapsed && <span className="truncate">{item.label}</span>}
             </Link>
           );
         })}
       </nav>
 
       {/* Bottom Section: Neon Art (the GO PRO upsell card was removed — everything on the site is free) */}
+      {!collapsed && (
       <div className="p-3.5 space-y-4">
         {/* Neon script & palm decoration */}
         <div className="relative flex flex-col items-center justify-center py-2 select-none pointer-events-none opacity-90 overflow-hidden">
@@ -258,6 +277,7 @@ export function CompanionSidebar({
           </span>
         </div>
       </div>
+      )}
     </aside>
   );
 }

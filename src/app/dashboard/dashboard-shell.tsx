@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { CompanionSidebar } from "@/components/dashboard/companion-sidebar";
 import { CompanionTopBar } from "@/components/dashboard/companion-topbar";
@@ -16,12 +16,40 @@ export function DashboardShell({
   initialProfile: PlayerProfile;
 }) {
   const [open, setOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const closeButton = useRef<HTMLButtonElement>(null);
   const { profile } = usePlayerSync();
   const name =
     (profile || initialProfile).displayName ||
     (profile || initialProfile).firstName ||
     "Player";
+  // Restore sidebar collapsed preference (desktop toggle, same pattern as admin)
+  useEffect(() => {
+    const stored = localStorage.getItem("taish_player_sidebar_collapsed");
+    if (stored) {
+      setCollapsed(stored === "true");
+    }
+  }, []);
+
+  const toggleSidebarCollapse = useCallback(() => {
+    setCollapsed((prev) => {
+      const next = !prev;
+      localStorage.setItem("taish_player_sidebar_collapsed", String(next));
+      return next;
+    });
+  }, []);
+
+  // Keyboard shortcut Ctrl+B / Cmd+B to toggle sidebar
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "b") {
+        event.preventDefault();
+        toggleSidebarCollapse();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [toggleSidebarCollapse]);
   useEffect(() => {
     if (!open) return;
     const prior = document.activeElement as HTMLElement;
@@ -54,7 +82,7 @@ export function DashboardShell({
   return (
     <div className="dashboard-type flex h-dvh w-full overflow-hidden bg-background text-foreground">
       <div className="hidden shrink-0 md:flex">
-        <CompanionSidebar />
+        <CompanionSidebar collapsed={collapsed} />
       </div>
       {open && (
         <div
@@ -83,7 +111,12 @@ export function DashboardShell({
         </div>
       )}
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-        <CompanionTopBar onMenuToggle={() => setOpen(true)} userName={name} />
+        <CompanionTopBar
+          onMenuToggle={() => setOpen(true)}
+          onToggleSidebar={toggleSidebarCollapse}
+          sidebarCollapsed={collapsed}
+          userName={name}
+        />
         <main
           id="player-main"
           className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 lg:px-8"

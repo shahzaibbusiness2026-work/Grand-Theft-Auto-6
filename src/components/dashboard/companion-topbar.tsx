@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Moon, Sun, ChevronDown, Menu, LogOut } from "lucide-react";
+import { Search, Moon, Sun, ChevronDown, Menu, LogOut, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { useTheme } from "next-themes";
 import { CommandPalette } from "@/components/command-palette";
 import { logoutUser } from "@/lib/user-store";
@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 
 interface CompanionTopBarProps {
   onMenuToggle?: () => void;
+  onToggleSidebar?: () => void;
+  sidebarCollapsed?: boolean;
   userName?: string;
 }
 
@@ -25,6 +27,8 @@ function initialsFor(name: string): string {
 
 export function CompanionTopBar({
   onMenuToggle,
+  onToggleSidebar,
+  sidebarCollapsed = false,
   userName = "Player",
 }: CompanionTopBarProps) {
   const router = useRouter();
@@ -47,8 +51,23 @@ export function CompanionTopBar({
   return (
     <>
       <header className="player-topbar sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#070b14]/85 dark:bg-[#070b14]/85 bg-white/90 px-4 sm:px-6 backdrop-blur-xl transition-colors shadow-sm">
-        {/* Left: Mobile hamburger + Search bar */}
+        {/* Left: Desktop sidebar toggle + Mobile hamburger + Search bar */}
         <div className="flex min-w-0 items-center gap-3 flex-1 max-w-xl">
+          {onToggleSidebar && (
+            <button
+              type="button"
+              onClick={onToggleSidebar}
+              className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-slate-300 hover:text-white md:flex"
+              aria-label={sidebarCollapsed ? "Expand sidebar navigation" : "Collapse sidebar navigation"}
+              title={sidebarCollapsed ? "Expand sidebar (Ctrl+B)" : "Collapse sidebar (Ctrl+B)"}
+            >
+              {sidebarCollapsed ? (
+                <PanelLeftOpen className="h-5 w-5" />
+              ) : (
+                <PanelLeftClose className="h-5 w-5" />
+              )}
+            </button>
+          )}
           {onMenuToggle && (
             <button
               type="button"
