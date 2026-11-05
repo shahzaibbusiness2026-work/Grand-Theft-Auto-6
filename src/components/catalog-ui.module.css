@@ -15,10 +15,17 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(11, 16, 32, 0.92) 8%,
-    rgba(11, 16, 32, 0.72) 43%,
-    rgba(11, 16, 32, 0.12)
+    rgba(11, 16, 32, 0.25) 8%,
+    rgba(11, 16, 32, 0.1) 43%,
+    rgba(11, 16, 32, 0.04)
   );
+}
+.heroCopy {
+  max-width: 680px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  background: rgba(7, 11, 20, 0.68);
 }
 .heroInner {
   position: relative;
@@ -948,8 +955,10 @@
     max-width: 500px;
   }
   .heroShade {
-    background: linear-gradient(90deg, #0b1020e6, #0b102099);
+    background: linear-gradient(180deg, #0b102010, #0b102040);
   }
+  .heroCopy { padding: 18px; }
+  .hero { padding-top: 92px; }
   .heroDescription {
     font-size: 13px;
     line-height: 1.7;

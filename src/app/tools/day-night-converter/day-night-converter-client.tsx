@@ -424,14 +424,11 @@ export function DayNightConverterClient() {
             <strong className="text-foreground">
               Why does &ldquo;wait&rdquo; wrap past midnight?
             </strong>{" "}
-            In-game time is a 24-hour loop, so asking for 06:00 when it&apos;s
-            23:00 means waiting 7 game hours (14 real minutes) through midnight,
-            not going backwards.
+            This model uses a 24-hour loop: 23:00 to 06:00 spans seven model hours. Real minutes depend on the editable ratio. This is not a verified GTA VI clock rate.
           </p>
           <p className="text-xs leading-relaxed text-muted-foreground">
             <strong className="text-foreground">Can I pause the clock?</strong>{" "}
-            The in-game clock only advances while you&apos;re in the session —
-            the converter assumes continuous play.
+            This calculator models elapsed time and does not track a game session. GTA VI pause and clock behavior have not been verified here.
           </p>
         </div>
       </div>

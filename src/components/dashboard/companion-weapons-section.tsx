@@ -14,7 +14,7 @@ export function CompanionWeaponsSection({
   totalWeapons,
 }: CompanionWeaponsSectionProps) {
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-white/10 dark:border-white/10 border-slate-200 bg-[#0a0f1d]/90 dark:bg-[#0a0f1d]/90 light:bg-white p-5 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.45)] ring-1 ring-rose-500/15 backdrop-blur-xl transition-all">
+    <section className="relative overflow-hidden rounded-3xl border border-white/10 dark:border-white/10 border-slate-200 bg-card p-5 sm:p-6 shadow-sm ring-1 ring-rose-500/15 backdrop-blur-xl transition-all">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/5 dark:border-white/5 border-slate-100">
         <div className="flex items-center gap-3">
@@ -23,7 +23,7 @@ export function CompanionWeaponsSection({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-display text-sm font-extrabold uppercase tracking-wider text-white dark:text-white text-slate-900">
+              <span className="font-display text-sm font-extrabold uppercase tracking-wider text-foreground">
                 LEONIDA ARMORY & WEAPON CACHES
               </span>
               <span className="flex items-center gap-1 rounded-full bg-rose-500/15 dark:bg-rose-500/20 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-rose-400 border border-rose-500/30">
@@ -31,7 +31,7 @@ export function CompanionWeaponsSection({
                 {totalWeapons} REGISTERED
               </span>
             </div>
-            <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 mt-0.5">
+            <p className="text-xs text-muted-foreground mt-0.5">
               Editorial weapon records with evidence reviewed separately for each gameplay claim.
             </p>
           </div>
@@ -58,7 +58,7 @@ export function CompanionWeaponsSection({
             <Link
               key={wep.id}
               href={`/weapons/${wep.slug || wep.id}`}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.06] dark:border-white/[0.06] border-slate-200 bg-white/[0.02] dark:bg-white/[0.02] bg-slate-50/80 p-4 transition-all duration-300 hover:border-rose-500/50 hover:bg-white/[0.06] hover:shadow-[0_12px_32px_rgba(244,63,94,0.22)] hover:-translate-y-1 hover:ring-1 hover:ring-rose-500/40"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.06] dark:border-white/[0.06] border-slate-200 bg-muted/40 p-4 transition-all duration-300 hover:border-rose-500/50 hover:bg-white/[0.06] hover:shadow-[0_12px_32px_rgba(244,63,94,0.22)] hover:-translate-y-1 hover:ring-1 hover:ring-rose-500/40"
             >
               <div>
                 {/* Category & Rarity tags */}
@@ -76,11 +76,11 @@ export function CompanionWeaponsSection({
                 </div>
 
                 {/* Name */}
-                <h4 className="font-display text-sm font-extrabold text-white dark:text-white text-slate-900 group-hover:text-rose-400 transition-colors truncate">
+                <h4 className="font-display text-sm font-extrabold text-foreground group-hover:text-rose-400 transition-colors truncate">
                   {wep.name}
                 </h4>
                 {wep.acquisitionMethod ? (
-                  <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 font-medium truncate mt-0.5">
+                  <p className="text-xs text-muted-foreground font-medium truncate mt-0.5">
                     {wep.acquisitionMethod}
                   </p>
                 ) : null}
@@ -104,7 +104,7 @@ export function CompanionWeaponsSection({
 
               {/* Attachments Footer */}
               <div className="mt-3.5 pt-2.5 border-t border-white/5 dark:border-white/5 border-slate-200/80 flex items-center justify-between text-xs">
-                <span className="flex items-center gap-1 text-slate-400 dark:text-slate-400 text-slate-500">
+                <span className="flex items-center gap-1 text-muted-foreground">
                   <Wrench className="h-3 w-3 text-cyan-400" />
                   {wep.attachments && wep.attachments.length > 0
                     ? `${wep.attachments.length} Mod Slots`

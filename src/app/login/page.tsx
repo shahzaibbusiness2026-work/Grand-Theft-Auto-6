@@ -32,12 +32,15 @@ export default async function LoginPage({
   // dashboard layout for version-mismatched sessions (e.g. after a
   // password change on another device). Any failure here simply renders
   // the form, so logged-out visitors are unaffected.
+  let signedIn = false;
   try {
     await requirePlayer();
-    redirect("/dashboard");
+    signedIn = true;
   } catch {
     // No valid session — fall through to the sign-in form below.
   }
+  // redirect() throws a Next.js control-flow exception; never swallow it.
+  if (signedIn) redirect("/dashboard");
   const params = await searchParams;
   const oauthStatus =
     params.oauth === "cancelled" || params.oauth === "error" ? params.oauth : undefined;
@@ -52,7 +55,18 @@ export default async function LoginPage({
         className="object-cover"
       />
       <div className="absolute inset-0 bg-black/45" />
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-10">
+      <div className="relative z-10 mx-auto grid min-h-screen max-w-6xl items-center gap-10 px-4 py-8 sm:px-8 lg:grid-cols-2 lg:py-12">
+        <aside className="dark-panel hidden max-w-lg rounded-3xl bg-black/55 p-8 text-white backdrop-blur-sm lg:block">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-pink-300">Taish Gaming · Player workspace</p>
+          <h2 className="mt-5 font-display text-5xl font-black leading-tight text-white">Your plans.<br />Your discoveries.<br />Your Leonida.</h2>
+          <p className="mt-5 leading-relaxed text-slate-200">Save what catches your eye and pick up where you left off.</p>
+          <ul className="mt-7 space-y-4 text-sm text-slate-200">
+            <li>Keep a personal garage and vehicle wishlist.</li>
+            <li>Collect private map pins, notes and saved guides.</li>
+            <li>Build a checklist for your next session.</li>
+          </ul>
+        </aside>
+        <div className="flex min-w-0 flex-col items-center">
         <LoginCards oauthStatus={oauthStatus} />
         <Link
           href="/"
@@ -60,6 +74,7 @@ export default async function LoginPage({
         >
           ← Back to home
         </Link>
+        </div>
       </div>
     </div>
   );

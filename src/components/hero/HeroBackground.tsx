@@ -46,19 +46,15 @@ export function HeroBackground() {
 
       {/* 3. Atmospheric overlay preserving readability, plus a soft
           center scrim so the white countdown never fights a bright sky. */}
-      <div className="absolute inset-0 bg-black/15 transition-colors duration-300" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.45),transparent_68%)]" />
+      <div className="absolute inset-0 bg-black/10 transition-colors duration-300" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.28),transparent_68%)]" />
 
       {/* 3b. Ambient neon drift — slow Vice City glow (pink + cyan) */}
       <div className="hero-neon-a absolute -left-32 top-10 h-96 w-96 rounded-full bg-[#FF2E9A]/20 blur-[110px]" />
       <div className="hero-neon-b absolute -right-32 bottom-8 h-[26rem] w-[26rem] rounded-full bg-[#00F0FF]/15 blur-[120px]" />
 
       {/* 4. Subtle center vignette for contrast behind centered countdown */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 transition-all duration-300" />
-
-      {/* 5. Edge vignettes */}
-      <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/60 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 transition-all duration-300" />
 
     </div>
   );

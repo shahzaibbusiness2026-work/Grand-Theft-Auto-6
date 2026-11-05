@@ -14,7 +14,7 @@ export function CompanionVehiclesSection({
   totalVehicles,
 }: CompanionVehiclesSectionProps) {
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-white/10 dark:border-white/10 border-slate-200 bg-[#0a0f1d]/90 dark:bg-[#0a0f1d]/90 light:bg-white p-5 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.45)] ring-1 ring-gold/15 backdrop-blur-xl transition-all">
+    <section className="relative overflow-hidden rounded-3xl border border-white/10 dark:border-white/10 border-slate-200 bg-card p-5 sm:p-6 shadow-sm ring-1 ring-gold/15 backdrop-blur-xl transition-all">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/5 dark:border-white/5 border-slate-100">
         <div className="flex items-center gap-3">
@@ -23,7 +23,7 @@ export function CompanionVehiclesSection({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-display text-sm font-extrabold uppercase tracking-wider text-white dark:text-white text-slate-900">
+              <span className="font-display text-sm font-extrabold uppercase tracking-wider text-foreground">
                 MOTOR POOL & GARAGE
               </span>
               <span className="flex items-center gap-1 rounded-full bg-gold/15 dark:bg-gold/20 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-gold-light border border-gold/30">
@@ -31,7 +31,7 @@ export function CompanionVehiclesSection({
                 {totalVehicles} LISTED
               </span>
             </div>
-            <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 mt-0.5">
+            <p className="text-xs text-muted-foreground mt-0.5">
               Editorial catalog entries and reviewed source details. Unknown specifications remain unknown.
             </p>
           </div>
@@ -54,7 +54,7 @@ export function CompanionVehiclesSection({
           <Link
             key={veh.id}
             href={`/vehicles/${veh.slug || veh.id}`}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.06] dark:border-white/[0.06] border-slate-200 bg-white/[0.02] dark:bg-white/[0.02] bg-slate-50/80 p-3.5 transition-all duration-300 hover:border-gold/50 hover:bg-white/[0.06] hover:shadow-[0_12px_32px_rgba(201,168,106,0.22)] hover:-translate-y-1 hover:ring-1 hover:ring-gold/40"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.06] dark:border-white/[0.06] border-slate-200 bg-muted/40 p-3.5 transition-all duration-300 hover:border-gold/50 hover:bg-white/[0.06] hover:shadow-[0_12px_32px_rgba(201,168,106,0.22)] hover:-translate-y-1 hover:ring-1 hover:ring-gold/40"
           >
             <div>
               {/* Vehicle image when the DB has one; text-only otherwise (no placeholder image) */}
@@ -93,11 +93,11 @@ export function CompanionVehiclesSection({
               )}
 
               {/* Title & Manufacturer */}
-              <h4 className="font-display text-sm font-extrabold text-white dark:text-white text-slate-900 group-hover:text-gold-light transition-colors truncate">
+              <h4 className="font-display text-sm font-extrabold text-foreground group-hover:text-gold-light transition-colors truncate">
                 {veh.name}
               </h4>
               {veh.manufacturer ? (
-                <p className="text-xs text-slate-400 dark:text-slate-400 text-slate-500 font-medium truncate">
+                <p className="text-xs text-muted-foreground font-medium truncate">
                   {veh.manufacturer}
                 </p>
               ) : null}
@@ -105,11 +105,11 @@ export function CompanionVehiclesSection({
 
             {/* Performance Stats bar */}
             <div className="mt-3 grid grid-cols-2 gap-2 pt-2.5 border-t border-white/5 dark:border-white/5 border-slate-200/80 text-xs">
-              <div className="flex items-center gap-1.5 text-slate-300 dark:text-slate-300 text-slate-700">
+              <div className="flex items-center gap-1.5 text-muted-foreground">
                 <Gauge className="h-3 w-3 text-gold-light" />
                 <span className="font-mono font-bold">{veh.topSpeed || "—"}</span>
               </div>
-              <div className="flex items-center justify-end gap-1.5 text-slate-300 dark:text-slate-300 text-slate-700">
+              <div className="flex items-center justify-end gap-1.5 text-muted-foreground">
                 <Zap className="h-3 w-3 text-cyan-400" />
                 <span className="font-mono font-bold">{veh.acceleration || "—"}</span>
               </div>

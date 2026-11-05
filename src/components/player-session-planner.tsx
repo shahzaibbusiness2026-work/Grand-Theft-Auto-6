@@ -12,12 +12,13 @@ import type { ReviewedProgressItem } from "@/lib/reviewed-progress";
 
 export function NextSessionCard() {
   const state = usePlayerState();
+  const [message, setMessage] = useState("");
   const plan = state?.sessionPlans.find((item) => !item.finishedAt);
   const next = plan?.tasks.find(
     (task) => state && !sessionTaskDone(task, state),
   );
   return (
-    <section className="player-panel border-gold/40 bg-gradient-to-br from-[#192333] to-[#0a0f1d]">
+    <section className="player-panel border-pink-500/30 bg-gradient-to-br from-pink-500/5 to-card">
       <p className="text-xs font-bold uppercase tracking-widest text-gold-light">
         Your next session
       </p>
@@ -47,7 +48,18 @@ export function NextSessionCard() {
             Open next task →
           </Link>
         )}
+        {next && plan && (
+          <button className="player-button" onClick={() => {
+            const current = getStoredUserState();
+            const latest = current.sessionPlans.find((item) => item.id === plan.id);
+            const task = latest?.tasks.find((item) => item.id === next.id);
+            if (!task || !latest || latest.finishedAt) return;
+            const updated = setSessionTaskDone(current, latest.id, task.id, true);
+            setMessage(saveStoredUserState({ ...current, ...updated }) ? "Task checked off in your personal plan." : "Your browser could not save this change. Please retry.");
+          }}>Check off next task</button>
+        )}
       </div>
+      {message && <p className="mt-3 text-sm" role="status">{message}</p>}
       {plan && state && (
         <p className="mt-3 text-xs text-slate-400">
           {plan.tasks.filter((task) => sessionTaskDone(task, state)).length}/
@@ -172,7 +184,7 @@ export function SessionPlanner({
         </p>
       )}
       {plan && (
-        <section className="player-panel border-gold/40">
+        <section className="player-panel border-pink-500/30">
           <p className="text-xs uppercase text-gold-light">
             {plan.finishedAt
               ? "Session summary"

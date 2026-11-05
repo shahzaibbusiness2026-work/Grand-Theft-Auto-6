@@ -12,9 +12,11 @@ import { Resend } from "resend";
  */
 
 export function taishFrom(): string {
-  return (
-    process.env.BROADCAST_FROM_EMAIL || "Taish Gaming <onboarding@resend.dev>"
-  );
+  const configured = (process.env.BROADCAST_FROM_EMAIL || "").trim();
+  const mailbox = configured.match(/<([^<>]+)>$/)?.[1] || configured;
+  const address = /^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/.test(mailbox) &&
+    !/[\r\n]/.test(configured) ? mailbox : "onboarding@resend.dev";
+  return `Taish Gaming <${address}>`;
 }
 
 function escapeHtml(s: string): string {

@@ -46,7 +46,7 @@ export function CompanionTopBar({
 
   return (
     <>
-      <header className="player-topbar sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#070b14]/85 dark:bg-[#070b14]/85 bg-white/90 px-4 sm:px-6 backdrop-blur-xl transition-colors shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
+      <header className="player-topbar sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] border-slate-200 bg-[#070b14]/85 dark:bg-[#070b14]/85 bg-white/90 px-4 sm:px-6 backdrop-blur-xl transition-colors shadow-sm">
         {/* Left: Mobile hamburger + Search bar */}
         <div className="flex min-w-0 items-center gap-3 flex-1 max-w-xl">
           {onMenuToggle && (
@@ -88,13 +88,14 @@ export function CompanionTopBar({
             className={cn(
               "flex h-11 w-11 items-center justify-center rounded-xl border transition-all active:scale-95 shadow-sm",
               isLight
-                ? "border-gold-light/60 bg-amber-50 text-gold-dark shadow-[0_0_12px_rgba(201,168,106,0.35)] ring-1 ring-gold-light/40"
+                ? "border-pink-200 bg-pink-50 text-pink-700"
                 : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-[#00F0FF]/40 hover:bg-white/[0.08] hover:text-[#00F0FF]",
             )}
             title="Switch theme"
+            aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
           >
             {isLight ? (
-              <Sun className="h-4 w-4 text-gold fill-gold-light drop-shadow-[0_0_8px_rgba(201,168,106,0.9)] animate-pulse" />
+              <Sun className="h-4 w-4 text-pink-700 " />
             ) : (
               <Moon className="h-4 w-4 text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.7)]" />
             )}
@@ -110,8 +111,8 @@ export function CompanionTopBar({
               className="flex items-center gap-2.5 rounded-xl border border-transparent p-1 sm:px-2 sm:py-1 transition-all hover:border-white/10 hover:bg-white/[0.04]"
             >
               {/* Avatar circle — initials of the account's own name, premium gold ring */}
-              <div className="rounded-full bg-gradient-to-tr from-gold via-yellow-400 to-[#00F0FF] p-[2px] shadow-[0_0_16px_rgba(201,168,106,0.5)]">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-yellow-400 text-xs font-black text-slate-950">
+              <div className="rounded-full bg-gradient-to-tr from-pink-500 via-pink-600 to-violet-500 p-[2px] shadow-sm">
+                <div className="player-avatar flex h-9 w-9 items-center justify-center rounded-full bg-pink-700 text-xs font-black text-white">
                   {initialsFor(userName)}
                 </div>
               </div>

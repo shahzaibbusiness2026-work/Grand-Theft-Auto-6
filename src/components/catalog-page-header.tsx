@@ -36,6 +36,7 @@ export function CatalogPageHeader({
       />
       <div className={styles.heroShade} />
       <div className={styles.heroInner}>
+        <div className={styles.heroCopy}>
         <nav aria-label="Breadcrumb" className={styles.breadcrumbs}>
           <Link href="/">Home</Link>
           <ChevronRight size={12} aria-hidden="true" />
@@ -106,6 +107,7 @@ export function CatalogPageHeader({
             <strong>{categories}</strong> categories
           </span>
           <span>Field-specific source reviews</span>
+        </div>
         </div>
       </div>
     </header>

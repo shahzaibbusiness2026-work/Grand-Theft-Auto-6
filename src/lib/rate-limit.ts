@@ -59,6 +59,7 @@ function memoryPeek(key: string): number {
 async function redisIncrement(key: string, windowMs: number): Promise<number | null> {
   try {
     const res = await fetch(`${REDIS_URL}/pipeline`, {
+      signal: AbortSignal.timeout(3000),
       method: "POST",
       headers: {
         Authorization: `Bearer ${REDIS_TOKEN}`,
@@ -86,6 +87,7 @@ async function redisIncrement(key: string, windowMs: number): Promise<number | n
 async function redisPeek(key: string): Promise<number | null> {
   try {
     const res = await fetch(`${REDIS_URL}/get/${encodeURIComponent(key)}`, {
+      signal: AbortSignal.timeout(3000),
       headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
     });
     if (!res.ok) return null;

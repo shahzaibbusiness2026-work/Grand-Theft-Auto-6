@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Weapons List",
   description:
-    "GTA 6 weapons list: every weapon spotted in official footage, with evidence labels. No damage or availability stats are claimed.",
+    "Browse editorial GTA 6 weapon identifications, field-level evidence and source links. Compare records while unverified damage and availability stay unknown.",
   alternates: { canonical: "/weapons" },
   openGraph: {
     type: "website",
     url: "/weapons",
     title: "GTA 6 Weapons List",
     description:
-      "GTA 6 weapons seen in official footage, with evidence labels. Unknown values stay unverified.",
+      "GTA 6 weapon identifications and source reviews. Unsupported model names and gameplay values remain unverified.",
     images: [
       {
         url: "/img/hero-dark.jpg",
