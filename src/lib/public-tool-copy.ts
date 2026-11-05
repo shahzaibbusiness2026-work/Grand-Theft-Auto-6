@@ -1,7 +1,7 @@
 /** Shared by search, tool cards, and page metadata to prevent stale promises. */
 export const PUBLIC_TOOL_COPY: Record<string, string> = {
   "/map":
-    "Explore the GTA 6 community map of Leonida and Vice City. Search landmarks, filter categories and save planning notes. Coordinates remain unofficial.",
+    "Explore the interactive GTA 6 map of Leonida: Vice City, regions, cities and landmarks, each labelled with its evidence status. Search, filter and plan.",
   "/tracker":
     "The verified GTA VI completion checklist is not yet published. Check readiness and evidence status.",
   "/vehicles":

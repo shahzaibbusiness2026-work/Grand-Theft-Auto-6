@@ -6,7 +6,7 @@ const radioImage = getWorldMedia("/radio")!;
 export const metadata: Metadata = {
   title: "GTA 6 Radio Stations: Official Reveals",
   description:
-    "Six GTA VI radio stations and hosts listed by Rockstar, with direct sources and a clear distinction between official reveals, trailer music and legacy stations.",
+    "Six GTA VI radio stations and hosts listed by Rockstar, with direct sources. Official reveals separated from trailer music and legacy stations.",
   alternates: { canonical: "/radio" },
   openGraph: {
     url: "/radio",

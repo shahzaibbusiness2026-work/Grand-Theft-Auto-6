@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GTA 6 Weapons List",
   description:
-    "Browse editorial GTA 6 weapon identifications, field-level evidence and source links. Compare records while unverified damage and availability stay unknown.",
+    "Browse editorial GTA 6 weapon identifications, field-level evidence and source links. Unverified damage and availability stay unknown.",
   alternates: { canonical: "/weapons" },
   openGraph: {
     type: "website",

@@ -8,7 +8,7 @@ import { FeatureDisabled } from "@/components/feature-disabled";
 import Link from "next/link";
 import { getMapMarkers } from "@/lib/services/map";
 
-const title = "GTA 6 Interactive Map: Leonida Regions, Cities & Locations";
+const title = "GTA 6 Interactive Map: Leonida & Vice City";
 
 export const metadata: Metadata = {
   title,

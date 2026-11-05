@@ -8,8 +8,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     openGraph: { url: "/tools/countdown-widget" },
-  title: "GTA 6 Release Time & Countdown in Your Timezone",
-  description: "GTA 6 launches November 19, 2026 on PS5 and Xbox Series X|S, with digital preload from November 10. See the live countdown, your local launch day, and the free embed widget.",
+  title: "GTA 6 Countdown: Release Time in Your Zone",
+  description: "GTA 6 launches 19 November 2026 on PS5 and Xbox, preload from 10 November. Live countdown in your timezone, local launch time and a free embed.",
 
   alternates: { canonical: "/tools/countdown-widget" },
 };
@@ -34,7 +34,7 @@ export default function CountdownWidgetPage() {
               {
                 "@type": "WebApplication",
                 name: "GTA 6 Release Time & Countdown",
-                description: "GTA 6 launches November 19, 2026 on PS5 and Xbox Series X|S, with digital preload from November 10. See the live countdown, your local launch day, and the free embed widget.",
+                description: "GTA 6 launches 19 November 2026 on PS5 and Xbox, preload from 10 November. Live countdown in your timezone, local launch time and a free embed.",
                 url: "https://www.taishgaming.com/tools/countdown-widget",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",
