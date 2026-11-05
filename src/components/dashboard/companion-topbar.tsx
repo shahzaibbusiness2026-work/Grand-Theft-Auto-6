@@ -83,15 +83,17 @@ export function CompanionTopBar({
           <button
             type="button"
             onClick={() => setPaletteOpen(true)}
-            className="flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs text-slate-400 shadow-inner transition-all hover:border-[#00F0FF]/40 hover:bg-white/[0.06] hover:text-slate-200"
+            className={cn(
+              "flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl border px-3.5 text-xs shadow-inner transition-all",
+              paletteOpen
+                ? "border-[#00F0FF]/60 bg-white/[0.08] py-3.5 text-slate-100"
+                : "border-white/10 bg-white/[0.03] py-2 text-slate-400 hover:border-[#00F0FF]/40 hover:bg-white/[0.06] hover:text-slate-200",
+            )}
           >
             <div className="flex min-w-0 items-center gap-2.5">
               <Search className="h-4 w-4 text-slate-400" />
               <span className="truncate">Search anything in GTA 6...</span>
             </div>
-            <kbd className="hidden sm:inline-flex items-center rounded border border-white/20 bg-white/[0.06] px-1.5 py-0.5 font-mono text-xs font-bold text-slate-300">
-              Ctrl K
-            </kbd>
           </button>
         </div>
 

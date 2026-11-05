@@ -224,7 +224,7 @@ export function CommandPaletteContent({
         className="relative w-full max-w-2xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
       >
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 py-3.5 border-b border-border">
+        <div className="flex items-center px-4 py-5 border-b border-border">
           <Search className="h-5 w-5 text-muted-foreground mr-3 flex-shrink-0" />
           <input
             ref={inputRef}
@@ -236,7 +236,7 @@ export function CommandPaletteContent({
             }}
             placeholder="Search tools, catalogs, characters and articles..."
             aria-label="Search the Atlas"
-            className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+            className="w-full bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
           {query && (
             <button
@@ -250,6 +250,15 @@ export function CommandPaletteContent({
           <kbd className="hidden sm:inline-block ml-2 px-2 py-0.5 text-xs font-mono font-semibold text-muted-foreground bg-muted rounded border border-border">
             ESC
           </kbd>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close search"
+            title="Close search (Esc)"
+            className="ml-2 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            <X className="h-4 w-4" />
+          </button>
         </div>
 
         {/* Results List — only once the user has typed something */}
