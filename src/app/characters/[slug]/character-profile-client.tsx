@@ -100,16 +100,19 @@ function Panel({
   icon: Icon,
   title,
   action,
+  className,
   children,
 }: {
   icon: typeof User;
   title: string;
   action?: React.ReactNode;
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none">
-      <div className="flex items-center justify-between gap-2">
+    <section
+      className={`rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none ${className ?? ""}`}
+    >      <div className="flex items-center justify-between gap-2">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-slate-100">
           <Icon className="h-5 w-5 shrink-0 text-[#FF2E9A]" aria-hidden />
           {title}
@@ -223,7 +226,7 @@ export function CharacterProfileClient({
           {tab === "overview" && (
             <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-12">
               {/* Character Information */}
-              <Panel icon={User} title="Character Information">
+              <Panel icon={User} title="Character Information" className="xl:col-span-3">
                 <dl className="divide-y divide-slate-100 dark:divide-white/5">
                   {facts.info.map((row) => {
                     const Icon = INFO_ICONS[row.label] ?? Film;
@@ -365,7 +368,7 @@ export function CharacterProfileClient({
               </div>
 
               {/* Quick Facts */}
-              <Panel icon={Zap} title="Quick Facts">
+              <Panel icon={Zap} title="Quick Facts" className="xl:col-span-2">
                 <dl className="space-y-4">
                   {facts.quickFacts.map((row) => {
                     const Icon = QUICK_FACT_ICONS[row.label] ?? Tag;
