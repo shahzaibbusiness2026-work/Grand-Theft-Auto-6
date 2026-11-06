@@ -351,13 +351,13 @@ export function CharacterProfileClient({
                       <button
                         key={img.src}
                         onClick={() => setTab("gallery")}
-                        className="overflow-hidden rounded-lg"
+                        className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-slate-950"
                         aria-label={`Open gallery — ${img.caption}`}
                       >
                         <img
                           src={img.src}
                           alt={img.caption}
-                          className="aspect-[3/4] w-full object-cover transition hover:opacity-85"
+                          className="h-full w-full object-contain transition hover:opacity-85"
                         />
                       </button>
                     ))}
@@ -401,7 +401,13 @@ export function CharacterProfileClient({
                     key={img.src}
                     className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none"
                   >
-                    <img src={img.src} alt={img.caption} className="aspect-[3/4] w-full object-cover" />
+                    <div className="aspect-[4/3] w-full bg-slate-950">
+                      <img
+                        src={img.src}
+                        alt={img.caption}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
                     <figcaption className="px-4 py-3 text-sm font-semibold text-slate-600 dark:text-slate-300">
                       {img.caption}
                     </figcaption>
