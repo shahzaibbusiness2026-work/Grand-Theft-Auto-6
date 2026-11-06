@@ -69,7 +69,7 @@ export default function CountdownWidgetPage() {
             at midnight local time on PS5, and at 12 a.m. GMT worldwide on Xbox Series X|S
             (November 9 evening in the US). The pre-load file needs up to 212 GB
             depending on your device. The live countdown below tracks launch day,
-            and the widget is free to embed on your site or stream.
+            and the widget is free to embed on your site or stream. The timer counts down to local midnight on 19 November 2026 in your timezone and shows the pre-load date alongside it. Pick a size below to copy the free embed code for your own page — it shows the same live countdown there.
           </p>
           <TimezoneNoteClient />
         </div>

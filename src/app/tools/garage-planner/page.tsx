@@ -67,7 +67,7 @@ export default function GaragePlannerPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">GARAGE PLANNER</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{description} Add vehicles to your garages to build the collection you want for launch, with example prices for each car and a total for the garage. Everything is stored on your device, and the prices, capacities and ownership rules are examples — not confirmed GTA VI mechanics.</p>
         </div>
 
         <GaragePlannerClient />

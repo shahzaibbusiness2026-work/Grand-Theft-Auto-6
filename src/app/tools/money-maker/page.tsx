@@ -90,7 +90,7 @@ export default function MoneyMakerPage() {
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
             Compare two editable scenarios using payout, costs and total run
-            time. The examples do not represent confirmed GTA VI activities.
+            time. The examples do not represent confirmed GTA VI activities. Build two earning scenarios side by side — payout, costs and total run time for each — and compare the results to see which one earns more per hour. The scenarios are fan-made examples with editable inputs; no verified GTA VI money-making method or payout ranking exists.
           </p>
         </div>
 

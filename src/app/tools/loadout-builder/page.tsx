@@ -60,6 +60,7 @@ export default async function Page() {
         <h1 className="text-4xl font-display font-bold">
           Personal Loadout Planner
         </h1>
+        <p className="mt-3 text-sm text-muted-foreground max-w-2xl">Organize a hypothetical loadout. Verified GTA VI firepower, mobility and stealth ratings are unavailable. Pick a primary, secondary, melee and heavy weapon to build a loadout, give it a name and save it — up to 100 plans, stored in your workspace and synced when you sign in. Weapon identifications and loadout rules are provisional and subject to source review; no firepower or mobility rating is verified.</p>
         <LoadoutClient entries={await getEvidenceCatalog("weapons")} />
       </section>
     </SiteShell>

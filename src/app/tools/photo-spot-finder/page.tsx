@@ -68,7 +68,7 @@ export default function PhotoSpotFinderPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">PHOTO SPOT FINDER</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{description} Filter spots by region to find fan-made photo ideas across Leonida, each with a suggested game time — sunrise, sunset or blue hour — and a framing tip for the shot. Locations, camera access and lighting are unverified examples, not confirmed game features.</p>
         </div>
 
         <PhotoSpotFinderClient />

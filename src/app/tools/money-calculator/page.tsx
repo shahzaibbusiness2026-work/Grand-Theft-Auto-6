@@ -101,7 +101,7 @@ export default function MoneyCalculatorPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             Set your target savings goal for supercars, penthouses, or weapon
             arsenals and instantly compute the required missions, grinding
-            hours, and real-world completion date.
+            hours, and real-world completion date. Pick a goal preset or enter your own target, set your earning rate, and the calculator shows the missions and grinding hours needed plus the real-world date you would reach it. The goal amounts are examples you choose — verified GTA VI prices, payouts and required play time are not available.
           </p>
         </div>
 

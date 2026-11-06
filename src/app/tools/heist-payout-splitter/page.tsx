@@ -67,7 +67,7 @@ export default function HeistPayoutSplitterPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">HEIST PAYOUT SPLITTER</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{description} Start from a heist preset or enter your own total, add crew members and set the cut for each member — the cuts must add up to 100% before the split is calculated. Copy the result to share it with your crew. The totals and percentages are yours; no GTA VI heist payout or rule is confirmed here.</p>
         </div>
 
         <HeistPayoutSplitterClient />

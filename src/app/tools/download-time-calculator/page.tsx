@@ -88,7 +88,7 @@ export default function DownloadTimeCalculatorPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             The GTA 6 pre-load file is up to 212 GB (Rockstar, November 3,
             2026). Enter your sustained download speed to see how long it
-            takes — and how much free space to keep.
+            takes — and how much free space to keep. The math is simple: the file size in megabits divided by your sustained speed. Use your real sustained speed, not the advertised maximum, for a realistic estimate — and keep extra free space beyond the 212 GB for updates.
           </p>
         </div>
 

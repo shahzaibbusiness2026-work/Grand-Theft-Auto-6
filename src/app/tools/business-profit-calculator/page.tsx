@@ -89,7 +89,7 @@ export default function BusinessProfitCalculatorPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             Model income, operating costs, losses and capital recovery using
             your own assumptions. These examples are not verified GTA VI
-            businesses.
+            businesses. Compare two businesses side by side across four illustrative scenarios: set income, costs and capital for each one, and the calculator works out net profit, losses and how long each takes to break even. Change any assumption and the comparison updates instantly — the scenarios are planning examples, not verified GTA VI business data.
           </p>
         </div>
 

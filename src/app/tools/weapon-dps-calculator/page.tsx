@@ -89,7 +89,7 @@ export default function WeaponDpsCalculatorPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             Choose an example preset, edit its assumptions and calculate
             hypothetical damage per second. Copied outputs retain the simulation
-            label and input values.
+            label and input values. Each preset lists damage per pellet, pellets per shot, rounds per minute and magazine size; toggle attachments to see how they change the damage per second. Presets and attachment effects are example inputs for planning — not verified GTA VI statistics.
           </p>
         </div>
 

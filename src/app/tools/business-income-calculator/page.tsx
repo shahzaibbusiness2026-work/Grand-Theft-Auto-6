@@ -67,7 +67,7 @@ export default function BusinessIncomeCalculatorPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">BUSINESS INCOME CALCULATOR</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{description} Pick a business to see its purchase price and daily income, then add upgrades — each one raises the daily rate for a cost — and the calculator shows when the investment breaks even at your playtime. All figures are example assumptions you can edit; nothing here is a confirmed GTA VI business, price or payout.</p>
         </div>
 
         <BusinessIncomeCalculatorClient />

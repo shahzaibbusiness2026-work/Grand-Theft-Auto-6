@@ -89,7 +89,7 @@ export default function MapDistanceCalculatorPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             Explore a hypothetical straight-line model with editable scale and
             speed assumptions. Fan-map coordinates do not establish real GTA VI
-            distances, traversable routes or a fastest vehicle.
+            distances, traversable routes or a fastest vehicle. Pick a start and a destination on the fan map and the calculator gives the straight-line distance, then estimates driving and boating time from the speeds you set. Distances use fictional coordinates and an editable scale — they do not establish real GTA VI distances, routes or a fastest vehicle.
           </p>
         </div>
 

@@ -68,7 +68,7 @@ export default function WantedLevelGuidePage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">WANTED LEVEL GUIDE</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{description} Select a wanted level to see how many stars it shows, which units respond, how long it takes to evade and the tactics that work at that level — like swapping vehicles, ducking into a spray shop or changing outfits at a safehouse. Everything shown is a fictional example, not confirmed GTA VI police behaviour.</p>
         </div>
 
         <WantedLevelGuideClient />

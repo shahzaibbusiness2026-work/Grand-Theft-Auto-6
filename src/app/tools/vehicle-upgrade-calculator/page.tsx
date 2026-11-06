@@ -80,7 +80,7 @@ export default function VehicleUpgradeCalculatorPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
             GTA 6 <span className="text-primary">VEHICLE UPGRADE CALCULATOR</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">{description}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{description} Choose a vehicle, then add upgrades — transmission, boost, brakes, downforce and more — to see the cost and the performance gain of each part. Start from a budget preset like the Budget Street Build or set your own limit. Prices and gains are examples; GTA VI upgrade costs and effects are unverified.</p>
         </div>
 
         <VehicleUpgradeCalculatorClient />

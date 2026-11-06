@@ -108,7 +108,7 @@ export default function DayNightConverterPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             GTA VI’s clock rate is unverified. Explore a hypothetical day-night
             model with an editable ratio; two real minutes per game hour is an
-            example input, not a confirmed mechanic.
+            example input, not a confirmed mechanic. Set the clock rate as real minutes per game hour, enter a game time, and the converter shows the matching real-world time and whether it falls in day or night. The rate, sunrise and sunset times are hypothetical — Rockstar has not confirmed GTA VI’s clock.
           </p>
         </div>
 
