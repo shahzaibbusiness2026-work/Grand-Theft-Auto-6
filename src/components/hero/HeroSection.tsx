@@ -21,7 +21,9 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
       {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
       <div className="relative z-10 mx-auto w-full max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl flex flex-col items-center justify-center flex-1 pb-3 sm:pb-8 text-center">
-        <h1 className="mb-5 max-w-3xl rounded-2xl bg-black/70 px-5 py-3 font-display text-2xl font-black leading-tight text-white sm:text-4xl">
+        {/* Page H1 kept for SEO / screen readers only — no visible
+            headline in the hero (per the 2026-11-07 request). */}
+        <h1 className="sr-only">
           {settings?.heroHeading?.trim() || "Grand Theft Auto VI"}
         </h1>
         {/* Countdown in Center */}
