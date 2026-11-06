@@ -6,6 +6,7 @@ import {
   Car,
   ChevronDown,
   CircleHelp,
+  Gamepad2,
   Crosshair,
   Footprints,
   LayoutGrid,
@@ -247,7 +248,7 @@ const FAQS = [
 
 function ButtonPill({ label }: { label: string }) {
   return (
-    <span className="inline-flex min-h-7 items-center justify-center rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 font-mono text-[11px] leading-tight text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+    <span className="inline-flex min-h-7 items-center justify-center px-1 py-1 font-mono text-xs font-semibold leading-tight text-slate-800 dark:rounded-full dark:border dark:border-white/10 dark:bg-white/5 dark:px-2.5 dark:text-[11px] dark:font-normal dark:text-slate-200">
       {label}
     </span>
   );
@@ -302,7 +303,18 @@ export function ControlsClient() {
 
   return (
     <>
-      <div className="mt-8 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
+      <div className="mt-10">
+        <h2 className="flex items-center gap-2 font-bold text-2xl text-slate-900 dark:text-slate-100">
+          <Gamepad2 className="h-6 w-6 text-[#FF2E9A]" aria-hidden />
+          Controls Breakdown
+        </h2>
+        <div className="mt-2 h-[3px] w-10 rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500" aria-hidden />
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Here&apos;s a complete breakdown of the controls, based on GTA 5&apos;s layout and current information.
+        </p>
+      </div>
+
+      <div className="mt-5 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
         {FILTERS.map((f) => {
           const Icon = f.icon;
           const active = filter === f.id;
@@ -331,7 +343,7 @@ export function ControlsClient() {
         ))}
       </div>
 
-      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none sm:p-6">
+      <section className="mt-8 rounded-2xl border border-violet-100 bg-violet-50/70 p-5 shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none sm:p-6">
         <h2 className="flex items-center gap-2 font-bold text-xl text-slate-900 dark:text-slate-100">
           <CircleHelp className="h-6 w-6 text-[#FF2E9A]" aria-hidden />
           FAQs

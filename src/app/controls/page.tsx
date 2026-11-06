@@ -18,10 +18,20 @@ export default function ControlsPage() {
       <div className="bg-white text-slate-900 dark:bg-[#07071a] dark:text-slate-100">
         <div className="container-site relative overflow-hidden py-10 sm:py-12">
           <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute -right-24 -top-32 h-[480px] w-40 rotate-[24deg] bg-gradient-to-b from-[#FF2E9A]/25 via-fuchsia-500/10 to-transparent blur-md dark:from-[#FF2E9A]/50 dark:via-fuchsia-500/20" />
-            <div className="absolute -right-2 top-10 h-[420px] w-24 rotate-[24deg] bg-gradient-to-b from-violet-500/25 via-violet-500/10 to-transparent blur-md dark:from-violet-500/50 dark:via-violet-500/15" />
-            <div className="absolute right-40 -top-24 h-[380px] w-10 rotate-[24deg] bg-gradient-to-b from-[#FF2E9A]/15 to-transparent blur-sm dark:from-[#FF2E9A]/30" />
-            <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-violet-400/20 blur-3xl dark:bg-violet-600/20" />
+            <div className="absolute inset-0 dark:hidden">
+              <img
+                src="/img/hero-vice-skyline-hd.jpg"
+                alt=""
+                className="h-full w-full object-cover object-right"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/10 sm:via-white/60" />
+            </div>
+            <div className="absolute inset-0 hidden dark:block">
+              <div className="absolute -right-24 -top-32 h-[480px] w-40 rotate-[24deg] bg-gradient-to-b from-[#FF2E9A]/50 via-fuchsia-500/20 to-transparent blur-md" />
+              <div className="absolute -right-2 top-10 h-[420px] w-24 rotate-[24deg] bg-gradient-to-b from-violet-500/50 via-violet-500/15 to-transparent blur-md" />
+              <div className="absolute right-40 -top-24 h-[380px] w-10 rotate-[24deg] bg-gradient-to-b from-[#FF2E9A]/30 to-transparent blur-sm" />
+              <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-violet-600/20 blur-3xl" />
+            </div>
           </div>
 
           <div className="relative">
@@ -107,7 +117,7 @@ export default function ControlsPage() {
               </div>
               <Link
                 href="/news"
-                className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-white/15 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-white/25 sm:self-auto"
+                className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-900 shadow-lg transition hover:bg-white/90 dark:bg-white/15 dark:text-white dark:shadow-none dark:hover:bg-white/25 sm:self-auto"
               >
                 Follow Us
                 <ArrowRight className="h-4 w-4" aria-hidden />
