@@ -316,25 +316,23 @@ export function CharacterProfileClient({
                   icon={Play}
                   title="Official Trailer"
                   action={
-                    <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-slate-600 dark:bg-white/10 dark:text-slate-300">
-                      {facts.trailer.title}
+                    <span className="shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-slate-600 dark:bg-white/10 dark:text-slate-300">
+                      {facts.trailer.title.replace("GTA VI — ", "")}
                     </span>
                   }
                 >
                   <div className="overflow-hidden rounded-xl">
                     <YouTubeLite videoId={facts.trailer.videoId} title={facts.trailer.title} />
                   </div>
-                  <p className="mt-3 flex items-center justify-between text-[13px] font-semibold text-slate-500 dark:text-slate-400">
-                    <span>
-                      {facts.trailer.date} &middot; {facts.trailer.duration}
-                    </span>
-                    <Link
-                      href={facts.trailer.breakdownHref}
-                      className="font-bold text-[#FF2E9A] hover:underline"
-                    >
-                      Read the breakdown &rarr;
-                    </Link>
+                  <p className="mt-3 text-[13px] font-semibold text-slate-500 dark:text-slate-400">
+                    {facts.trailer.date} &middot; {facts.trailer.duration}
                   </p>
+                  <Link
+                    href={facts.trailer.breakdownHref}
+                    className="mt-1 inline-block text-[13px] font-bold text-[#FF2E9A] hover:underline"
+                  >
+                    Read the breakdown &rarr;
+                  </Link>
                 </Panel>
                 <Panel
                   icon={ImageIcon}
