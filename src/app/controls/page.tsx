@@ -18,13 +18,14 @@ export default function ControlsPage() {
       <div className="bg-white text-slate-900 dark:bg-[#07071a] dark:text-slate-100">
         <div className="container-site relative overflow-hidden py-10 sm:py-12">
           <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-0 dark:hidden">
+            <div className="absolute inset-x-0 top-0 h-[640px] overflow-hidden dark:hidden">
               <img
                 src="/img/hero-vice-skyline-hd.jpg"
                 alt=""
                 className="h-full w-full object-cover object-right"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/10 sm:via-white/60" />
+              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-white" />
             </div>
             <div className="absolute inset-0 hidden dark:block">
               <div className="absolute -right-24 -top-32 h-[480px] w-40 rotate-[24deg] bg-gradient-to-b from-[#FF2E9A]/50 via-fuchsia-500/20 to-transparent blur-md" />
