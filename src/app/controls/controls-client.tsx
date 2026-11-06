@@ -251,7 +251,7 @@ const FAQS = [
 
 function ButtonPill({ label }: { label: string }) {
   return (
-    <span className="inline-flex min-h-7 items-center justify-center px-1 py-1 font-mono text-xs font-semibold leading-tight text-slate-800 dark:rounded-full dark:border dark:border-white/10 dark:bg-white/5 dark:px-2.5 dark:text-[11px] dark:font-normal dark:text-slate-200">
+    <span className="inline-flex min-h-7 items-center justify-center px-1 py-1 font-mono text-[13px] font-bold leading-tight text-slate-800 dark:rounded-full dark:border dark:border-white/10 dark:bg-white/5 dark:px-2.5 dark:font-semibold dark:text-slate-200">
       {label}
     </span>
   );
@@ -263,23 +263,23 @@ function SectionCard({ section }: { section: Section }) {
     <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none">
       <span aria-hidden className="absolute inset-y-0 left-0 hidden w-1 bg-gradient-to-b from-[#FF2E9A] to-violet-500 dark:block" />
       <div className="p-5 pl-6">
-        <div className="grid grid-cols-[minmax(0,1fr)_112px_112px] items-center gap-2 sm:grid-cols-[minmax(0,1fr)_128px_128px]">
-          <h2 className="flex min-w-0 items-center gap-2 text-lg font-bold text-slate-900 dark:text-slate-100">
+        <div className="grid grid-cols-[minmax(0,1fr)_120px_120px] items-center gap-2 sm:grid-cols-[minmax(0,1fr)_140px_140px]">
+          <h2 className="flex min-w-0 items-center gap-2 text-xl font-bold text-slate-900 dark:text-slate-100">
             <Icon className={`h-5 w-5 shrink-0 ${section.iconClass ?? "text-[#FF2E9A]"}`} aria-hidden />
             <span className="truncate">{section.title}</span>
           </h2>
-          <span className="text-center text-[11px] font-bold tracking-wide text-slate-500 dark:text-slate-400">PS5</span>
-          <span className="text-center text-[11px] font-bold tracking-wide text-slate-500 dark:text-slate-400">Xbox</span>
+          <span className="text-center text-xs font-extrabold tracking-wider text-slate-500 dark:text-slate-400">PS5</span>
+          <span className="text-center text-xs font-extrabold tracking-wider text-slate-500 dark:text-slate-400">Xbox</span>
         </div>
         <div className="mt-3">
           {section.rows.map((r) => (
             <div
               key={r.action}
-              className="grid grid-cols-[minmax(0,1fr)_112px_112px] items-center gap-2 border-b border-slate-100 py-2.5 last:border-b-0 dark:border-white/5 sm:grid-cols-[minmax(0,1fr)_128px_128px]"
+              className="grid grid-cols-[minmax(0,1fr)_120px_120px] items-center gap-2 border-b border-slate-100 py-3 last:border-b-0 dark:border-white/5 sm:grid-cols-[minmax(0,1fr)_140px_140px]"
             >
               <div className="min-w-0">
-                <p className="text-sm font-medium text-slate-800 dark:text-slate-200">{r.action}</p>
-                {r.note ? <p className="text-xs text-slate-500">{r.note}</p> : null}
+                <p className="text-[15px] font-semibold text-slate-800 dark:text-slate-200">{r.action}</p>
+                {r.note ? <p className="text-[13px] leading-snug text-slate-500">{r.note}</p> : null}
               </div>
               <div className="flex justify-center">
                 <ButtonPill label={r.ps5} />
@@ -307,12 +307,12 @@ export function ControlsClient() {
   return (
     <>
       <div className="mt-10">
-        <h2 className="flex items-center gap-2 font-bold text-2xl text-slate-900 dark:text-slate-100">
-          <Gamepad2 className="h-6 w-6 text-[#FF2E9A]" aria-hidden />
+        <h2 className="flex items-center gap-2 font-bold text-3xl text-slate-900 dark:text-slate-100">
+          <Gamepad2 className="h-7 w-7 text-[#FF2E9A]" aria-hidden />
           Controls Breakdown
         </h2>
         <div className="mt-2 h-[3px] w-10 rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500" aria-hidden />
-        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+        <p className="mt-2 text-base text-slate-600 dark:text-slate-400">
           Here&apos;s a complete breakdown of the controls, based on GTA 5&apos;s layout and current information.
         </p>
       </div>
@@ -347,7 +347,7 @@ export function ControlsClient() {
       </div>
 
       <section className="mt-8 rounded-2xl border border-violet-100 bg-violet-50/70 p-5 shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none sm:p-6">
-        <h2 className="flex items-center gap-2 font-bold text-xl text-slate-900 dark:text-slate-100">
+        <h2 className="flex items-center gap-2 font-bold text-2xl text-slate-900 dark:text-slate-100">
           <CircleHelp className="h-6 w-6 text-[#FF2E9A]" aria-hidden />
           FAQs
         </h2>
@@ -362,14 +362,14 @@ export function ControlsClient() {
                   aria-expanded={open}
                   className="flex w-full items-center justify-between gap-4 py-3.5 text-left"
                 >
-                  <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">{f.q}</span>
+                  <span className="text-[15px] font-semibold text-slate-800 dark:text-slate-200">{f.q}</span>
                   <ChevronDown
                     className={`h-4 w-4 shrink-0 text-slate-400 transition-transform ${open ? "rotate-180" : ""}`}
                     aria-hidden
                   />
                 </button>
                 {open ? (
-                  <p className="pb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{f.a}</p>
+                  <p className="pb-4 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">{f.a}</p>
                 ) : null}
               </div>
             );

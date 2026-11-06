@@ -39,13 +39,13 @@ export default function ControlsPage() {
             <p className="inline-flex rounded-full border border-transparent bg-violet-600 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-white dark:border-violet-400/40 dark:bg-violet-500/10 dark:text-violet-200">
               Provisional Reference
             </p>
-            <h1 className="mt-4 font-display text-5xl font-black uppercase leading-none tracking-tight sm:text-6xl">
+            <h1 className="mt-4 font-display text-6xl font-black uppercase leading-none tracking-tight sm:text-7xl">
               GTA VI{" "}
               <span className="bg-gradient-to-r from-[#FF2E9A] to-violet-500 bg-clip-text text-transparent">
                 Controls
               </span>
             </h1>
-            <p className="mt-4 max-w-3xl text-slate-600 dark:text-slate-300/90">
+            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300/90">
               Rockstar has not published GTA 6&apos;s official control layout. This reference follows GTA 5&apos;s
               default layout — the scheme Rockstar has kept consistent for a decade — and will be corrected against
               the real in-game layout at launch, from PS5 play on 19 November 2026. Anything GTA VI has actually shown
@@ -53,11 +53,11 @@ export default function ControlsPage() {
             </p>
 
             <section className="mt-8 rounded-2xl border border-amber-300 bg-amber-50 p-5 dark:border-amber-400/40 dark:bg-amber-400/10 sm:p-6">
-              <h2 className="flex items-center gap-2 font-bold text-lg text-amber-700 dark:text-amber-300">
+              <h2 className="flex items-center gap-2 font-bold text-xl text-amber-700 dark:text-amber-300">
                 <TriangleAlert className="h-5 w-5 shrink-0" aria-hidden />
                 What GTA VI has actually shown
               </h2>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-amber-900/80 marker:text-amber-600 dark:text-amber-100/85 dark:marker:text-amber-400">
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-[15px] leading-relaxed text-amber-900/80 marker:text-amber-600 dark:text-amber-100/85 dark:marker:text-amber-400">
                 <li>
                   <strong className="text-amber-800 dark:text-amber-200">Character switching is shown.</strong> Trailer 2 switches
                   between Lucia and Jason mid-mission. The button to switch is not confirmed — the GTA V method (hold
@@ -81,8 +81,8 @@ export default function ControlsPage() {
             <ControlsClient />
 
             <section className="mt-8">
-              <h2 className="font-bold text-xl text-slate-900 dark:text-slate-100">How to change controls</h2>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              <h2 className="font-bold text-2xl text-slate-900 dark:text-slate-100">How to change controls</h2>
+              <p className="mt-2 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
                 Pause the game and open <strong className="text-slate-900 dark:text-slate-200">Settings → Controls</strong>. On PS5 and
                 Xbox you can change targeting mode, sprint behaviour (tap vs hold), aiming sensitivity, vibration,
                 adaptive trigger strength (PS5 DualSense) and aircraft control type. Consoles do not offer full
@@ -110,15 +110,15 @@ export default function ControlsPage() {
               <div className="flex items-start gap-3">
                 <Rocket className="mt-1 h-7 w-7 shrink-0 text-white" aria-hidden />
                 <div>
-                  <h2 className="font-bold text-xl text-white">Stay Updated on GTA VI</h2>
-                  <p className="text-sm text-white/80">
+                  <h2 className="font-bold text-2xl text-white">Stay Updated on GTA VI</h2>
+                  <p className="text-[15px] text-white/80">
                     Get the latest guides, news and updates from TAISH GAMING.
                   </p>
                 </div>
               </div>
               <Link
                 href="/news"
-                className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-900 shadow-lg transition hover:bg-white/90 dark:bg-white/15 dark:text-white dark:shadow-none dark:hover:bg-white/25 sm:self-auto"
+                className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-white px-5 py-2.5 text-[15px] font-bold text-slate-900 shadow-lg transition hover:bg-white/90 dark:bg-white/15 dark:text-white dark:shadow-none dark:hover:bg-white/25 sm:self-auto"
               >
                 Follow Us
                 <ArrowRight className="h-4 w-4" aria-hidden />
