@@ -23,7 +23,7 @@ export const PUBLIC_TOOL_COPY: Record<string, string> = {
   "/tools/loadout-builder":
     "Organize a hypothetical loadout. Verified GTA VI firepower, mobility and stealth ratings are unavailable.",
   "/tools/weapon-dps-calculator":
-    "Model hypothetical DPS with editable example inputs. Presets and attachment effects are not verified GTA VI statistics.",
+    "Model hypothetical GTA 6 weapon DPS with editable example inputs. Presets and attachment effects are not verified GTA VI statistics — for planning only.",
   "/tools/day-night-converter":
     "Explore hypothetical clock conversions with an editable ratio. GTA VI clock rate, sunrise and sunset schedules are unverified.",
   "/tools/map-distance-calculator":

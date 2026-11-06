@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "Compare up to four editorial vehicle identifications with reviewed field-specific evidence. Missing statistics remain unverified.",
   alternates: { canonical: "/compare/vehicles" },
-  openGraph: {
+  openGraph: { type: "website",
     url: "/compare/vehicles",
     title: "GTA 6 Vehicle Comparison Tool | Compare Cars & Evidence",
     description:

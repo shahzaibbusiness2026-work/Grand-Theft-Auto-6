@@ -9,7 +9,7 @@ import { pageOpenGraph } from "@/lib/page-metadata";
 export const metadata: Metadata = {
     openGraph: pageOpenGraph("/tools/character-quiz"),
   title: "Which GTA 6 Character Are You?",
-  description: "Take the GTA 6 personality quiz and find out which character matches you: Lucia, Jason, Brian, Cal, Boobie, or Raul.",
+  description: "Take the GTA 6 personality quiz and find out which character matches you — Lucia, Jason, Brian, Cal, Boobie or Raul — and get your Leonida result.",
 
   alternates: { canonical: "/tools/character-quiz" },
 };
@@ -34,7 +34,7 @@ export default function CharacterQuizPage() {
               {
                 "@type": "WebApplication",
                 name: "Which GTA 6 Character Are You? \u2014 Personality Quiz",
-                description: "Take the GTA 6 personality quiz and find out which character matches you: Lucia, Jason, Brian, Cal, Boobie, or Raul.",
+                description: "Take the GTA 6 personality quiz and find out which character matches you — Lucia, Jason, Brian, Cal, Boobie or Raul — and get your Leonida result.",
                 url: "https://www.taishgaming.com/tools/character-quiz",
                 applicationCategory: "UtilitiesApplication",
                 operatingSystem: "Web",

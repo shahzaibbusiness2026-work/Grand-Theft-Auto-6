@@ -237,7 +237,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "Animals & Wildlife",
     seoTitle: "GTA 6 Animals & Wildlife in Leonida",
     seoDescription:
-      "Every animal spotted in official GTA 6 trailers, from alligators to dogs, with the exact footage each sighting comes from.",
+      "GTA 6 mammals spotted so far: deer at Mount Kalaga and a dog on Vice City beach, with sources for every sighting — plus what each one does not confirm.",
     intro:
       "Leonida's wildlife is one of the most freeze-framed parts of the trailers. This page lists animals confirmed by Rockstar, animals visible in official footage, and fan-spotted animals — each labelled. A visible animal is not proof of taming or of any interaction mechanic beyond what is listed here.",
     notConfirmed: [
@@ -357,7 +357,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "Birds & Marine Life",
     seoTitle: "GTA 6 Birds & Marine Life",
     seoDescription:
-      "Birds, sharks, dolphins, and fish spotted in official GTA 6 footage, with sources for every sighting.",
+      "Birds, sharks, dolphins and fish spotted in official GTA 6 footage, with sources for every sighting — plus what each appearance does and does not confirm.",
     intro:
       "From flamingos in the wetlands to sharks off the coast, this page collects the birds and sea creatures visible in Rockstar's official trailers and screenshots. Decorative background creatures are not given invented names or behaviors.",
     notConfirmed: [
@@ -450,7 +450,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "Nature & Environment",
     seoTitle: "GTA 6 Leonida Regions, Beaches & Swamps",
     seoDescription:
-      "The regions and natural landscapes of Leonida shown in official GTA 6 material, from beaches to swamps and islands.",
+      "The regions and natural landscapes of Leonida shown in official GTA 6 material, from beaches to swamps and islands — with sources for every location.",
     intro:
       "Leonida is bigger than Vice City alone. This page maps the regions and terrain Rockstar has actually shown — beaches, wetlands, islands, and the Keys — using only place names Rockstar itself uses. Map scale and exact boundaries are not confirmed.",
     notConfirmed: [
@@ -569,7 +569,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "In-Game Brands & Ads",
     seoTitle: "GTA 6 In-Game Brands & Fake Ads",
     seoDescription:
-      "Fictional companies, products, and parody ads spotted in official GTA 6 footage, with sources.",
+      "Fictional companies, products and parody ads spotted in official GTA 6 footage, with sources for every brand — and what each ad does and does not confirm.",
     intro:
       "GTA's parody advertising is back. This page lists fictional brands and ads only where their names are legible in official trailers or on Rockstar's official pages. Nothing here is taken from fan art or the reference mockup.",
     notConfirmed: [
@@ -741,7 +741,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "TV Shows & Media",
     seoTitle: "GTA 6 TV Shows & Fictional Media",
     seoDescription:
-      "Fictional TV shows and broadcasts named in official GTA 6 material, with sources.",
+      "Fictional TV shows and broadcasts named in official GTA 6 material, with sources for every show, station and clip spotted in trailers and artwork so far.",
     intro:
       "From in-game commercials to TV news shots, Leonida has its own media. This page lists only shows and broadcasts named or clearly shown in official material, and keeps fictional broadcast content separate from fan speculation.",
     notConfirmed: [
@@ -795,7 +795,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "Restaurants & Food",
     seoTitle: "GTA 6 Restaurants & Food Outlets",
     seoDescription:
-      "Food outlets and restaurants visible in official GTA 6 footage, with sources for every venue.",
+      "Food outlets and restaurants visible in official GTA 6 footage, with sources for every venue and what each sighting does and does not confirm.",
     intro:
       "This page lists food venues only where signage or a name is visible in official trailers or on Rockstar's pages. No menus, prices, or store locations are invented, and no venue is claimed as enterable unless footage shows it.",
     notConfirmed: [
@@ -922,7 +922,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "Hotels & Motels",
     seoTitle: "GTA 6 Hotels & Motels in Leonida",
     seoDescription:
-      "Hotels, resorts, and motels visible in official GTA 6 material, with sources and honest limits.",
+      "Hotels, resorts and motels visible in official GTA 6 material, with sources and honest limits on what each sighting does and does not confirm about stays.",
     intro:
       "This page lists accommodations visible by name or unmistakable signage in official material, with district context where footage supports it. A visible hotel is not evidence of bookable rooms, prices, or safehouse access.",
     notConfirmed: [
@@ -995,7 +995,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "Gangs & Factions",
     seoTitle: "GTA 6 Gangs & Factions",
     seoDescription:
-      "The groups and crews named in official GTA 6 material, with character relationships and sources.",
+      "The groups and crews named in official GTA 6 material, with character relationships and sources for every group, plus what is still unconfirmed.",
     intro:
       "This page covers groups and crews named in official material or character bios, plus the Ambrosia biker gang whose name is disputed. Rivalries, territories, and ranks are not invented — where the official record is silent, this page says so.",
     notConfirmed: [
@@ -1068,7 +1068,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "Clothing & Customization",
     seoTitle: "GTA 6 Clothing & Customization",
     seoDescription:
-      "Outfits and styles visible in official GTA 6 footage, plus only the customization Rockstar has confirmed.",
+      "Outfits and styles visible in official GTA 6 footage, plus only the customization Rockstar has confirmed — and what the footage does not confirm.",
     intro:
       "The trailers show a wide range of outfits, but clothes on a character are not proof the player can buy or select them. This page separates visible styles from explicitly confirmed customization functionality.",
     notConfirmed: [

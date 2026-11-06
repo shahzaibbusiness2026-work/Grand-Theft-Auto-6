@@ -116,10 +116,10 @@ export async function generateMetadata({
 
   return {
     title: fitTitle(mission.title),
-    description: `Fictional planning concept '${mission.title}'. Objectives, rewards and unlocks are examples, not verified GTA VI walkthrough instructions.`,
+    description: `Fictional planning concept '${mission.title}'. Objectives, rewards and unlocks are examples, not verified GTA VI walkthroughs.`,
     alternates: { canonical: `/missions/${mission.slug}` },
     robots: { index: false, follow: true },
-    openGraph: {
+    openGraph: { type: "website",
       title: fitTitle(mission.title),
       description: `Fan concept: ${mission.description}`,
       url: `/missions/${mission.slug}`,

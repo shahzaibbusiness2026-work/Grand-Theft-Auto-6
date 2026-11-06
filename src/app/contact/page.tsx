@@ -8,7 +8,7 @@ import { pageOpenGraph } from "@/lib/page-metadata";
 export const metadata: Metadata = {
     openGraph: pageOpenGraph("/contact"),
   title: "Contact Us",
-  description: "Get in touch with the Taish Gaming community team, report bugs, suggest map POIs, or ask inquiries.",
+  description: "Contact the Taish Gaming community team to report a bug, suggest a map POI, ask a question or share feedback about the GTA 6 database, tools and guides.",
   alternates: { canonical: "/contact" },
   };
 

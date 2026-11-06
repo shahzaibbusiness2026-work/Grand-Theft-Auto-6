@@ -32,7 +32,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     title: "GTA 6 American Flamingo",
     seoTitle: "GTA 6 American Flamingo",
     seoDescription:
-      "GTA 6 American flamingo: the Trailer 1 wetlands flock, what the footage shows, and what is still not confirmed.",
+      "GTA 6 American flamingo: the Trailer 1 wetlands flock, what the footage shows, where the birds appear, and what is still not confirmed about them.",
     tier: "Rockstar confirmed",
     hero: "/img/wildlife/flamingo-wetlands.jpg",
     heroAlt:
@@ -74,7 +74,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     title: "GTA 6 American Alligator",
     seoTitle: "GTA 6 American Alligator",
     seoDescription:
-      "GTA 6 American alligator: the store, pool and wetlands scenes from Trailer 1, and what they do not confirm.",
+      "GTA 6 American alligator: the store, pool and wetlands scenes from Trailer 1, where each sighting appears, and what they do not confirm about the animal.",
     tier: "Rockstar confirmed",
     hero: "/img/wildlife/alligator-store.jpg",
     heroAlt:
@@ -232,7 +232,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     title: "Sea Turtle in GTA 6",
     seoTitle: "GTA 6 Sea Turtle: Keys Reef Screenshot",
     seoDescription:
-      "GTA 6 sea turtle: the official Keys reef screenshot, what it shows, and what is still not confirmed.",
+      "GTA 6 sea turtle: the official Keys reef screenshot, what it shows, where the turtle was spotted, and what is still not confirmed about it.",
     tier: "Rockstar confirmed",
     hero: "/img/wildlife/sea-turtle.jpg",
     heroAlt:
@@ -273,7 +273,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     title: "Eel in GTA 6",
     seoTitle: "GTA 6 Eel: Keys Diving Screenshot",
     seoDescription:
-      "GTA 6 eel: the Leonida Keys diving screenshot, what the frame shows, and why the species label is not Rockstar's.",
+      "GTA 6 eel: the Leonida Keys diving screenshot, what the frame shows, why the species label is not Rockstar's, and what remains unconfirmed about it.",
     tier: "Community identification",
     hero: "/img/wildlife/american-eel.webp",
     heroAlt: "A long eel swimming underwater in GTA VI",

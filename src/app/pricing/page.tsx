@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: pageOpenGraph("/pricing"),
   title: "Membership — Everything Is Free",
   description:
-    "Taish Gaming has no paid plans. Every map, database, comparison, tracker and tool on the site is free to use.",
+    "Taish Gaming has no paid plans. Every map, database, comparison, tracker and tool is free to use — no subscriptions, no paywalls, no hidden costs.",
   alternates: { canonical: "/pricing" },
   };
 

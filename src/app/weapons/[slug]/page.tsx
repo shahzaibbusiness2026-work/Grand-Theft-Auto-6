@@ -26,13 +26,13 @@ export async function generateMetadata({
   const artwork = catalogArtwork("weapons", e);
   return {
     title: e.name + " — GTA VI Evidence Review",
-    description: `${e.name} — GTA VI evidence review: what official footage actually shows for this weapon, and which statistics are still unverified before launch.`,
+    description: `${e.name} — GTA VI evidence review: what official footage shows, and which statistics are still unverified.`,
     alternates: { canonical: "/weapons/" + e.slug },
     openGraph: {
       url: "/weapons/" + e.slug,
       type: "website",
       title: e.name + " — GTA VI Evidence Review",
-      description: `${e.name} — GTA VI evidence review: what official footage actually shows for this weapon, and which statistics are still unverified before launch.`,
+      description: `${e.name} — GTA VI evidence review: what official footage shows, and which statistics are still unverified.`,
       images: [{ url: artwork.src, alt: artwork.alt }],
     },
     twitter: {

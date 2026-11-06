@@ -45,7 +45,7 @@ export async function generateMetadata({
 
   return {
     title: fitTitle(prop.name),
-    description: `Fan-made real estate breakdown for ${prop.name} in ${prop.district}. Values are fictional planning inputs, not confirmed prices, ownership or income mechanics.`,
+    description: `Fan-made breakdown: ${prop.name} in ${prop.district}. Values are fictional, not confirmed prices, ownership or income.`,
     alternates: { canonical: `/properties/${prop.slug}` },
     openGraph: pageOpenGraph(`/properties/${prop.slug}`),
     robots: { index: false, follow: true },

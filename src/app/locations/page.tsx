@@ -12,7 +12,7 @@ import { getLocations, type LocationRecord } from "@/lib/services/locations";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/locations" },
-  openGraph: {
+  openGraph: { type: "website",
     url: "/locations",
     images: [
       { url: "/img/hero-dark.jpg", alt: "Taish Gaming — Leonida skyline" },

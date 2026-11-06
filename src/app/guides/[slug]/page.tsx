@@ -12,6 +12,16 @@ import { PlayerBookmarkButton } from "@/components/player-bookmark-button";
 
 export const revalidate = 3600;
 
+// Prerender guide pages at build (SSG + ISR) so they are served cached.
+// Without this the route is fully dynamic and every request pays a
+// Supabase round-trip (~1.4s TTFB, Ahrefs Nov 2026 slow-page flag).
+export async function generateStaticParams() {
+  const guides = await getPublicGuides();
+  return guides
+    .filter((g) => g.slug)
+    .map((g) => ({ slug: g.slug as string }));
+}
+
 export async function generateMetadata({
   params,
 }: {

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: pageOpenGraph("/cookies"),
   title: "Cookie Policy",
   description:
-    "Learn how Taish Gaming uses cookies and client storage to remember your preferences and interactive map layers.",
+    "Learn how Taish Gaming uses cookies and client storage to remember your preferences and interactive map layers — and how to change or clear them any time.",
   alternates: { canonical: "/cookies" },
 };
 

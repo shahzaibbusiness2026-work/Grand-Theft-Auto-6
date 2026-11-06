@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!category) notFound();
   const media = getWorldMedia(`/gta-6-world/${slug}`);
   return {
-    openGraph: {
+    openGraph: { type: "website",
       url: `/gta-6-world/${category.slug}`,
       title: category.seoTitle,
       description: category.seoDescription,

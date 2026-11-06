@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title,
   description: PUBLIC_TOOL_COPY["/map"],
   alternates: { canonical: "/map" },
-  openGraph: {
+  openGraph: { type: "website",
     url: "/map",
     title,
     description: PUBLIC_TOOL_COPY["/map"],

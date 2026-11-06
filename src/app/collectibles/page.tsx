@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     openGraph: pageOpenGraph("/collectibles"),
   title: "Collectibles Finder & Checklist",
   description:
-    "Interactive GTA 6 Collectibles Finder across Leonida. Track Hidden Packages, Stunt Jumps, Rebel Radio Transmitters, Wildlife Photos, and Easter Eggs with coordinate guides.",
+    "Interactive GTA 6 Collectibles Finder across Leonida: track Hidden Packages, Stunt Jumps, Rebel Radio Transmitters, Wildlife Photos and Easter Eggs.",
   robots: { index: false, follow: true },
 };
 

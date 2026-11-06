@@ -6,7 +6,7 @@ import { pageOpenGraph } from "@/lib/page-metadata";
 export const metadata: Metadata = {
   openGraph: pageOpenGraph("/terms"),
   title: "Terms of Service",
-  description: "Terms of service for Taish Gaming, including accounts, tools and estimates, advertising, and acceptable use.",
+  description: "Terms of service for Taish Gaming, including accounts, tools and estimates, advertising and acceptable use — the rules for using the site.",
   alternates: { canonical: "/terms" },
 };
 

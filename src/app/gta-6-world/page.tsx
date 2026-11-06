@@ -15,7 +15,7 @@ import { serializeJsonLd } from "@/lib/utils";
 const hubImage = getWorldMedia("/gta-6-world/hotels-motels")!;
 
 export const metadata: Metadata = {
-  openGraph: {
+  openGraph: { type: "website",
     url: "/gta-6-world",
     images: [
       {

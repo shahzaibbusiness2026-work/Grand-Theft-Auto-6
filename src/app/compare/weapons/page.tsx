@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "Compare GTA 6 weapons side by side — every weapon spotted in official footage, with evidence labels. No stats are claimed before launch.",
   alternates: { canonical: "/compare/weapons" },
-  openGraph: {
+  openGraph: { type: "website",
     url: "/compare/weapons",
     title: "GTA 6 Weapon Comparison",
     description:

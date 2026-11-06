@@ -23,7 +23,7 @@ export async function generateMetadata({
     title: page.seoTitle,
     description: page.seoDescription,
     alternates: { canonical: `/regions/${page.slug}` },
-    openGraph: {
+    openGraph: { type: "website",
       title: page.seoTitle,
       description: page.seoDescription,
       url: `/regions/${page.slug}`,

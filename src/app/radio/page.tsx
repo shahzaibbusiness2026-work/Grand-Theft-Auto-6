@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Six GTA VI radio stations and hosts listed by Rockstar, with direct sources. Official reveals separated from trailer music and legacy stations.",
   alternates: { canonical: "/radio" },
-  openGraph: {
+  openGraph: { type: "website",
     url: "/radio",
     images: [
       {
