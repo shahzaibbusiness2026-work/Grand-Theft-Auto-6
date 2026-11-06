@@ -15,17 +15,17 @@ export const metadata: Metadata = {
 export default function ControlsPage() {
   return (
     <SiteShell>
-      <div className="bg-[#07071a] text-slate-100">
+      <div className="bg-white text-slate-900 dark:bg-[#07071a] dark:text-slate-100">
         <div className="container-site relative overflow-hidden py-10 sm:py-12">
           <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute -right-24 -top-32 h-[480px] w-40 rotate-[24deg] bg-gradient-to-b from-[#FF2E9A]/50 via-fuchsia-500/20 to-transparent blur-md" />
-            <div className="absolute -right-2 top-10 h-[420px] w-24 rotate-[24deg] bg-gradient-to-b from-violet-500/50 via-violet-500/15 to-transparent blur-md" />
-            <div className="absolute right-40 -top-24 h-[380px] w-10 rotate-[24deg] bg-gradient-to-b from-[#FF2E9A]/30 to-transparent blur-sm" />
-            <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-violet-600/20 blur-3xl" />
+            <div className="absolute -right-24 -top-32 h-[480px] w-40 rotate-[24deg] bg-gradient-to-b from-[#FF2E9A]/25 via-fuchsia-500/10 to-transparent blur-md dark:from-[#FF2E9A]/50 dark:via-fuchsia-500/20" />
+            <div className="absolute -right-2 top-10 h-[420px] w-24 rotate-[24deg] bg-gradient-to-b from-violet-500/25 via-violet-500/10 to-transparent blur-md dark:from-violet-500/50 dark:via-violet-500/15" />
+            <div className="absolute right-40 -top-24 h-[380px] w-10 rotate-[24deg] bg-gradient-to-b from-[#FF2E9A]/15 to-transparent blur-sm dark:from-[#FF2E9A]/30" />
+            <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-violet-400/20 blur-3xl dark:bg-violet-600/20" />
           </div>
 
           <div className="relative">
-            <p className="inline-flex rounded-full border border-violet-400/40 bg-violet-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-violet-200">
+            <p className="inline-flex rounded-full border border-violet-300 bg-violet-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-violet-700 dark:border-violet-400/40 dark:bg-violet-500/10 dark:text-violet-200">
               Provisional Reference
             </p>
             <h1 className="mt-4 font-display text-5xl font-black uppercase leading-none tracking-tight sm:text-6xl">
@@ -34,34 +34,34 @@ export default function ControlsPage() {
                 Controls
               </span>
             </h1>
-            <p className="mt-4 max-w-3xl text-slate-300/90">
+            <p className="mt-4 max-w-3xl text-slate-600 dark:text-slate-300/90">
               Rockstar has not published GTA 6&apos;s official control layout. This reference follows GTA 5&apos;s
               default layout — the scheme Rockstar has kept consistent for a decade — and will be corrected against
               the real in-game layout at launch, from PS5 play on 19 November 2026. Anything GTA VI has actually shown
               is labelled as shown; everything else is the GTA V layout, provisionally.
             </p>
 
-            <section className="mt-8 rounded-2xl border border-amber-400/40 bg-amber-400/10 p-5 sm:p-6">
-              <h2 className="flex items-center gap-2 font-bold text-lg text-amber-300">
+            <section className="mt-8 rounded-2xl border border-amber-300 bg-amber-50 p-5 dark:border-amber-400/40 dark:bg-amber-400/10 sm:p-6">
+              <h2 className="flex items-center gap-2 font-bold text-lg text-amber-700 dark:text-amber-300">
                 <TriangleAlert className="h-5 w-5 shrink-0" aria-hidden />
                 What GTA VI has actually shown
               </h2>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-amber-100/85 marker:text-amber-400">
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-amber-900/80 marker:text-amber-600 dark:text-amber-100/85 dark:marker:text-amber-400">
                 <li>
-                  <strong className="text-amber-200">Character switching is shown.</strong> Trailer 2 switches
+                  <strong className="text-amber-800 dark:text-amber-200">Character switching is shown.</strong> Trailer 2 switches
                   between Lucia and Jason mid-mission. The button to switch is not confirmed — the GTA V method (hold
                   Down D-Pad) is our provisional guess.
                 </li>
                 <li>
-                  <strong className="text-amber-200">The weapon wheel is shown</strong> in the trailers. Its exact
+                  <strong className="text-amber-800 dark:text-amber-200">The weapon wheel is shown</strong> in the trailers. Its exact
                   layout is unconfirmed.
                 </li>
                 <li>
-                  <strong className="text-amber-200">The phone is shown</strong> throughout the trailers, with
+                  <strong className="text-amber-800 dark:text-amber-200">The phone is shown</strong> throughout the trailers, with
                   social-media apps. The button to open it is unconfirmed.
                 </li>
                 <li>
-                  <strong className="text-amber-200">First-person mode is not confirmed</strong> for GTA VI. Neither
+                  <strong className="text-amber-800 dark:text-amber-200">First-person mode is not confirmed</strong> for GTA VI. Neither
                   are special abilities for Lucia or Jason.
                 </li>
               </ul>
@@ -70,9 +70,9 @@ export default function ControlsPage() {
             <ControlsClient />
 
             <section className="mt-8">
-              <h2 className="font-bold text-xl text-slate-100">How to change controls</h2>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">
-                Pause the game and open <strong className="text-slate-200">Settings → Controls</strong>. On PS5 and
+              <h2 className="font-bold text-xl text-slate-900 dark:text-slate-100">How to change controls</h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                Pause the game and open <strong className="text-slate-900 dark:text-slate-200">Settings → Controls</strong>. On PS5 and
                 Xbox you can change targeting mode, sprint behaviour (tap vs hold), aiming sensitivity, vibration,
                 adaptive trigger strength (PS5 DualSense) and aircraft control type. Consoles do not offer full
                 button-by-button remapping — for that, use your console&apos;s accessibility controller remapping.

@@ -247,7 +247,7 @@ const FAQS = [
 
 function ButtonPill({ label }: { label: string }) {
   return (
-    <span className="inline-flex min-h-7 items-center justify-center rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[11px] leading-tight text-slate-200">
+    <span className="inline-flex min-h-7 items-center justify-center rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 font-mono text-[11px] leading-tight text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
       {label}
     </span>
   );
@@ -256,25 +256,25 @@ function ButtonPill({ label }: { label: string }) {
 function SectionCard({ section }: { section: Section }) {
   const Icon = section.icon;
   return (
-    <section className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#10102a]/90">
+    <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none">
       <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#FF2E9A] to-violet-500" />
       <div className="p-5 pl-6">
         <div className="grid grid-cols-[minmax(0,1fr)_112px_112px] items-center gap-2 sm:grid-cols-[minmax(0,1fr)_128px_128px]">
-          <h2 className="flex min-w-0 items-center gap-2 font-bold text-slate-100">
+          <h2 className="flex min-w-0 items-center gap-2 text-lg font-bold text-slate-900 dark:text-slate-100">
             <Icon className="h-5 w-5 shrink-0 text-[#FF2E9A]" aria-hidden />
             <span className="truncate">{section.title}</span>
           </h2>
-          <span className="text-center text-[11px] font-bold tracking-wide text-slate-400">PS5</span>
-          <span className="text-center text-[11px] font-bold tracking-wide text-slate-400">Xbox</span>
+          <span className="text-center text-[11px] font-bold tracking-wide text-slate-500 dark:text-slate-400">PS5</span>
+          <span className="text-center text-[11px] font-bold tracking-wide text-slate-500 dark:text-slate-400">Xbox</span>
         </div>
         <div className="mt-3">
           {section.rows.map((r) => (
             <div
               key={r.action}
-              className="grid grid-cols-[minmax(0,1fr)_112px_112px] items-center gap-2 border-b border-white/5 py-2.5 last:border-b-0 sm:grid-cols-[minmax(0,1fr)_128px_128px]"
+              className="grid grid-cols-[minmax(0,1fr)_112px_112px] items-center gap-2 border-b border-slate-100 py-2.5 last:border-b-0 dark:border-white/5 sm:grid-cols-[minmax(0,1fr)_128px_128px]"
             >
               <div className="min-w-0">
-                <p className="text-sm font-medium text-slate-200">{r.action}</p>
+                <p className="text-sm font-medium text-slate-800 dark:text-slate-200">{r.action}</p>
                 {r.note ? <p className="text-xs text-slate-500">{r.note}</p> : null}
               </div>
               <div className="flex justify-center">
@@ -302,7 +302,7 @@ export function ControlsClient() {
 
   return (
     <>
-      <div className="mt-8 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mt-8 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
         {FILTERS.map((f) => {
           const Icon = f.icon;
           const active = filter === f.id;
@@ -315,7 +315,7 @@ export function ControlsClient() {
               className={
                 active
                   ? "inline-flex shrink-0 items-center gap-1.5 rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-pink-500/25"
-                  : "inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-300 transition hover:border-white/25 hover:text-white"
+                  : "inline-flex shrink-0 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:border-white/25 dark:hover:text-white"
               }
             >
               <Icon className="h-4 w-4" aria-hidden />
@@ -331,8 +331,8 @@ export function ControlsClient() {
         ))}
       </div>
 
-      <section className="mt-8 rounded-2xl border border-white/10 bg-[#10102a]/90 p-5 sm:p-6">
-        <h2 className="flex items-center gap-2 font-bold text-xl text-slate-100">
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none sm:p-6">
+        <h2 className="flex items-center gap-2 font-bold text-xl text-slate-900 dark:text-slate-100">
           <CircleHelp className="h-6 w-6 text-[#FF2E9A]" aria-hidden />
           FAQs
         </h2>
@@ -340,21 +340,21 @@ export function ControlsClient() {
           {FAQS.map((f, i) => {
             const open = openFaq === i;
             return (
-              <div key={f.q} className="border-b border-white/5 last:border-b-0">
+              <div key={f.q} className="border-b border-slate-100 last:border-b-0 dark:border-white/5">
                 <button
                   type="button"
                   onClick={() => setOpenFaq(open ? null : i)}
                   aria-expanded={open}
                   className="flex w-full items-center justify-between gap-4 py-3.5 text-left"
                 >
-                  <span className="text-sm font-semibold text-slate-200">{f.q}</span>
+                  <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">{f.q}</span>
                   <ChevronDown
                     className={`h-4 w-4 shrink-0 text-slate-400 transition-transform ${open ? "rotate-180" : ""}`}
                     aria-hidden
                   />
                 </button>
                 {open ? (
-                  <p className="pb-4 text-sm leading-relaxed text-slate-400">{f.a}</p>
+                  <p className="pb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{f.a}</p>
                 ) : null}
               </div>
             );
