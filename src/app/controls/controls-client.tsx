@@ -26,6 +26,7 @@ type Section = {
   group: string;
   title: string;
   icon: LucideIcon;
+  iconClass?: string;
   rows: ControlRow[];
   footnote?: string;
 };
@@ -41,6 +42,7 @@ const SECTIONS: Section[] = [
     group: "general",
     title: "General & Menus",
     icon: Settings,
+    iconClass: "text-violet-500 dark:text-[#FF2E9A]",
     rows: [
       { action: "Pause menu", ps5: "Options", xbox: "Menu" },
       { action: "Change camera", note: "cycles to first-person in GTA V", ps5: "Touchpad (press)", xbox: "View (press)" },
@@ -172,6 +174,7 @@ const SECTIONS: Section[] = [
     group: "swimming",
     title: "Swimming & Diving",
     icon: Waves,
+    iconClass: "text-violet-500 dark:text-[#FF2E9A]",
     rows: [
       { action: "Swim (direction)", ps5: "L Stick", xbox: "L Stick" },
       { action: "Swim faster", note: "tap repeatedly", ps5: "✕", xbox: "A" },
@@ -258,11 +261,11 @@ function SectionCard({ section }: { section: Section }) {
   const Icon = section.icon;
   return (
     <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none">
-      <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#FF2E9A] to-violet-500" />
+      <span aria-hidden className="absolute inset-y-0 left-0 hidden w-1 bg-gradient-to-b from-[#FF2E9A] to-violet-500 dark:block" />
       <div className="p-5 pl-6">
         <div className="grid grid-cols-[minmax(0,1fr)_112px_112px] items-center gap-2 sm:grid-cols-[minmax(0,1fr)_128px_128px]">
           <h2 className="flex min-w-0 items-center gap-2 text-lg font-bold text-slate-900 dark:text-slate-100">
-            <Icon className="h-5 w-5 shrink-0 text-[#FF2E9A]" aria-hidden />
+            <Icon className={`h-5 w-5 shrink-0 ${section.iconClass ?? "text-[#FF2E9A]"}`} aria-hidden />
             <span className="truncate">{section.title}</span>
           </h2>
           <span className="text-center text-[11px] font-bold tracking-wide text-slate-500 dark:text-slate-400">PS5</span>
@@ -327,7 +330,7 @@ export function ControlsClient() {
               className={
                 active
                   ? "inline-flex shrink-0 items-center gap-1.5 rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-pink-500/25"
-                  : "inline-flex shrink-0 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:border-white/25 dark:hover:text-white"
+                  : "inline-flex shrink-0 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm transition hover:border-slate-300 hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:shadow-none dark:hover:border-white/25 dark:hover:text-white"
               }
             >
               <Icon className="h-4 w-4" aria-hidden />
