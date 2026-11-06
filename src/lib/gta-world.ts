@@ -237,7 +237,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     title: "Animals & Wildlife",
     seoTitle: "GTA 6 Animals & Wildlife in Leonida",
     seoDescription:
-      "GTA 6 mammals spotted so far: deer at Mount Kalaga and a dog on Vice City beach, with sources for every sighting — plus what each one does not confirm.",
+      "Animals spotted in official GTA 6 trailers, from alligators to dogs, with the footage for each sighting — and what each one does and does not confirm.",
     intro:
       "Leonida's wildlife is one of the most freeze-framed parts of the trailers. This page lists animals confirmed by Rockstar, animals visible in official footage, and fan-spotted animals — each labelled. A visible animal is not proof of taming or of any interaction mechanic beyond what is listed here.",
     notConfirmed: [

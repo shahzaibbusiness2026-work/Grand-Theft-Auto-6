@@ -60,7 +60,7 @@ export const WORLD_WILDLIFE_CATEGORIES: WorldCategory[] = [
     title: "Mammals in GTA 6",
     seoTitle: "GTA 6 Mammals Spotted in Trailers",
     seoDescription:
-      "GTA 6 mammals spotted so far: deer at Mount Kalaga and a dog on Vice City beach, with sources for every sighting.",
+      "GTA 6 mammals spotted so far: deer at Mount Kalaga and a dog on Vice City beach, with sources for every sighting — plus what each one does not confirm.",
     intro:
       "Mammals appear in both Rockstar's official GTA VI screenshots and its trailer footage. The Mount Kalaga image below shows deer beside a woodland stream. Trailer 1 also includes a small dog walking between beachgoers. These are documented visual sightings, rather than a promise of a complete wildlife roster. Exact species or breed labels, interactions, population sizes and player ownership need their own evidence. Follow each source to inspect the animal in the context of the original scene.",
     image: mammals.src,
