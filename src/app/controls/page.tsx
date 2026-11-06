@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/controls" },
+  openGraph: pageOpenGraph("/controls"),
   title: "GTA 6 PS5 & Xbox Controls (Provisional)",
   description: "A provisional GTA VI controller reference based on GTA V. Rockstar has not published the official GTA VI control layout.",
   alternates: { canonical: "/controls" },

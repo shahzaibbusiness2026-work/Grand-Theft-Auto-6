@@ -4,6 +4,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { REGION_PAGES, getRegionPage } from "@/lib/regions";
+import { serializeJsonLd } from "@/lib/utils";
+import { articleJsonLd } from "@/lib/page-metadata";
 
 export function generateStaticParams() {
   return REGION_PAGES.map((p) => ({ slug: p.slug }));
@@ -65,6 +67,20 @@ export default async function RegionPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(
+            articleJsonLd({
+              headline: page.seoTitle,
+              description: page.seoDescription,
+              url: `https://www.taishgaming.com/regions/${page.slug}`,
+              image: page.hero,
+              articleSection: "Regions",
+            }),
+          ),
+        }}
       />
       <main className="min-h-screen bg-[#000713] text-white">
         <section className="container-site px-4 pt-10 pb-6">

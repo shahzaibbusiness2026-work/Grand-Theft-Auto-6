@@ -23,6 +23,7 @@ import {
 import { getMissions } from "@/lib/services/missions";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { fitTitle, serializeJsonLd } from "@/lib/utils";
+import { DEFAULT_OG_IMAGE } from "@/lib/page-metadata";
 
 /** Resolve a mission from live Supabase data, mapped to the canonical shape. */
 async function resolveMission(
@@ -122,13 +123,13 @@ export async function generateMetadata({
       title: fitTitle(mission.title),
       description: `Fan concept: ${mission.description}`,
       url: `/missions/${mission.slug}`,
-      images: mission.img ? [mission.img] : [],
+      images: mission.img ? [mission.img] : [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: fitTitle(mission.title),
       description: `Fan concept: ${mission.description}`,
-      images: mission.img ? [mission.img] : [],
+      images: mission.img ? [mission.img] : [DEFAULT_OG_IMAGE],
     },
   };
 }

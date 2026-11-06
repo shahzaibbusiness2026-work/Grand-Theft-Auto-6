@@ -14,6 +14,8 @@ import { NewsletterBar } from "@/components/newsletter-bar";
 import { ArticleCard, PopularRow, CategoryList } from "@/components/article-card";
 import { getPublicArticles } from "@/lib/services/queries";
 import { getCategories } from "@/lib/services/categories";
+import { serializeJsonLd } from "@/lib/utils";
+import { itemListJsonLd } from "@/lib/page-metadata";
 
 
 export default async function NewsPage() {
@@ -29,6 +31,23 @@ export default async function NewsPage() {
 
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(
+            itemListJsonLd(
+              "GTA 6 News & Articles",
+              "Published GTA 6 news and articles from Taish Gaming.",
+              liveArticles
+                .filter((a) => a.slug)
+                .map((a) => ({
+                  name: a.title,
+                  url: `https://www.taishgaming.com/news/${a.slug}`,
+                })),
+            ),
+          ),
+        }}
+      />
       {/* HERO */}
       <section className="container-site pt-6">
         <div className="card-surface relative overflow-hidden bg-gradient-to-br from-card via-card/85 to-primary/5">

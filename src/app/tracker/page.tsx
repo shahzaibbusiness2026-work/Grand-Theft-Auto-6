@@ -5,10 +5,11 @@ import { FeatureDisabled } from "@/components/feature-disabled";
 import { getReviewedProgressItems } from "@/lib/services/player-progress";
 import { Trophy } from "lucide-react";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: true },
-  openGraph: { url: "/tracker" },
+  openGraph: pageOpenGraph("/tracker"),
   title: "100% Completion Tracker & Checklist",
   description:
     "A preview of Taish Gaming's completion tracker. GTA VI requirements will be added when they can be checked; no game-completion rewards are currently asserted.",

@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/shells";
 import { characterEvidence, CHARACTER_SOURCE } from "@/lib/character-evidence";
+import { pageOpenGraph, articleJsonLd } from "@/lib/page-metadata";
+import { serializeJsonLd } from "@/lib/utils";
 export function generateStaticParams() {
   return Object.keys(characterEvidence).map((slug) => ({ slug }));
 }
@@ -17,7 +19,7 @@ export async function generateMetadata({
     title: c.name + " — GTA VI Character",
     description: c.summary,
     alternates: { canonical: "/characters/" + slug },
-    openGraph: { url: "/characters/" + slug },
+    openGraph: pageOpenGraph("/characters/" + slug),
   };
 }
 export default async function CharacterPage({
@@ -30,6 +32,21 @@ export default async function CharacterPage({
   if (!c) notFound();
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(
+            articleJsonLd({
+              headline: `${c.name} — GTA VI Character`,
+              description: c.summary,
+              url: `https://www.taishgaming.com/characters/${slug}`,
+              // Review date stated on the page itself.
+              dateModified: "2026-11-04",
+              articleSection: "Characters",
+            }),
+          ),
+        }}
+      />
       <article className="container-site max-w-3xl py-12 space-y-6">
         <Link href="/characters" className="underline">
           All characters

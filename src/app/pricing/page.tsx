@@ -2,9 +2,10 @@ import { SiteShell } from "@/components/shells";
 import { PricingClient } from "./pricing-client";
 import { Crown } from "lucide-react";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/pricing" },
+    openGraph: pageOpenGraph("/pricing"),
   title: "Membership — Everything Is Free",
   description:
     "Taish Gaming has no paid plans. Every map, database, comparison, tracker and tool on the site is free to use.",

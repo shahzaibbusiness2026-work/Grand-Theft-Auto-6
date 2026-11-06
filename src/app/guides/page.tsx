@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { AppShell } from "@/components/app-shell";
 import { GuidesClient } from "./guides-client";
 import { getPublicGuides } from "@/lib/services/guides";
+import { serializeJsonLd } from "@/lib/utils";
+import { itemListJsonLd } from "@/lib/page-metadata";
 
 export const revalidate = 300;
 
@@ -36,6 +38,25 @@ export default async function GuidesPage() {
 
   return (
     <AppShell>
+      {guides.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: serializeJsonLd(
+              itemListJsonLd(
+                "GTA 6 Guides",
+                "Source-linked GTA 6 guides from Taish Gaming.",
+                guides
+                  .filter((g) => g.slug)
+                  .map((g) => ({
+                    name: g.title,
+                    url: `https://www.taishgaming.com/guides/${g.slug}`,
+                  })),
+              ),
+            ),
+          }}
+        />
+      )}
       <GuidesClient guides={guides} />
     </AppShell>
   );

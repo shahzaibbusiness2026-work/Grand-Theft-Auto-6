@@ -90,6 +90,15 @@ export default function RootLayout({
         name: PUBLICATION.name,
         url: siteUrl,
         logo: { "@type": "ImageObject", url: `${siteUrl}${PUBLICATION.logo}` },
+        // Social profiles (Ahrefs, Nov 2026: Organization was "incomplete"
+        // without sameAs). Facebook is deliberately absent: the only
+        // Facebook URL supplied is a share link, not a profile page.
+        sameAs: [
+          "https://www.instagram.com/taishgaming1619/",
+          "https://www.tiktok.com/@taishgaming1619",
+          "https://www.reddit.com/u/taishgaming1619/",
+          "https://x.com/taishgaming1619",
+        ],
       },
       {
         "@type": "WebSite",

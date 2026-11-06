@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from "@/lib/page-metadata";
 export const metadata = {
   title: "Editorial & Evidence Policy",
   description:
@@ -8,6 +9,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "/editorial-policy",
+    images: [{ url: DEFAULT_OG_IMAGE, alt: DEFAULT_OG_IMAGE_ALT }],
     title: "Editorial & Evidence Policy",
     description:
       "How Taish Gaming sources GTA 6 claims: official announcements, direct observations, attributed reporting and speculation, kept strictly separate.",

@@ -3,9 +3,10 @@ import { ChevronRight, Map as MapIcon } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { ALL_TOOLS } from "@/lib/tools-data";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/site-map" },
+  openGraph: pageOpenGraph("/site-map"),
   title: "Sitemap — Every Page on Taish Gaming",
   description:
     "Complete sitemap of Taish Gaming: interactive tools, vehicle and weapon databases, character guides, the Leonida map, news, and guides.",

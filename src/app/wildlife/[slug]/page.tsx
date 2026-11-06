@@ -7,6 +7,7 @@ import { WILDLIFE_PAGES, getWildlifePage } from "@/lib/wildlife";
 import type { EvidenceTier } from "@/lib/gta-world";
 import { serializeJsonLd } from "@/lib/utils";
 import { SafeImage } from "@/components/safe-image";
+import { pageOpenGraph, articleJsonLd } from "@/lib/page-metadata";
 
 export function generateStaticParams() {
   return WILDLIFE_PAGES.map((p) => ({ slug: p.slug }));
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: page.seoTitle,
     description: page.seoDescription,
     alternates: { canonical: `/wildlife/${page.slug}` },
-    openGraph: { url: `/wildlife/${page.slug}` },
+    openGraph: pageOpenGraph(`/wildlife/${page.slug}`),
   };
 }
 
@@ -55,6 +56,20 @@ export default async function WildlifePage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(
+            articleJsonLd({
+              headline: page.seoTitle,
+              description: page.seoDescription,
+              url: `https://www.taishgaming.com/wildlife/${page.slug}`,
+              image: page.hero,
+              articleSection: "Wildlife",
+            }),
+          ),
+        }}
       />
       <div className="bg-[#000713] text-white">
         <div className="container-site py-8">

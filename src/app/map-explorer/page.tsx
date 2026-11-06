@@ -3,10 +3,11 @@ import { AppShell } from "@/components/app-shell";
 import { SatelliteInteractiveMap } from "@/components/satellite-interactive-map";
 import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: true },
-  openGraph: { url: "/map-explorer" },
+  openGraph: pageOpenGraph("/map-explorer"),
   title: "Interactive Map Explorer",
   description:
     "Explore the full interactive GTA 6 map of Vice City and Leonida — markers, collectibles, activities and trailer-spotted locations.",

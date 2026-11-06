@@ -2,9 +2,10 @@ import { WorldMediaFigure } from "@/components/world-media-figure";
 import { SiteShell } from "@/components/shells";
 import { ActivitiesClient } from "./activities-client";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/activities" },
+  openGraph: pageOpenGraph("/activities"),
   title: "GTA 6 Activities & Hobbies",
   description:
     "Fan activity ideas and device-local planning notes. Playable GTA VI activities, rewards and locations have not been verified for this list.",

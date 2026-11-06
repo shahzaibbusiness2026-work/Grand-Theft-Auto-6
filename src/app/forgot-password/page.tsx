@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ForgotForm } from "./forgot-form";
 import { EmailRecoveryRequest } from "./email-recovery";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/forgot-password" },
+    openGraph: pageOpenGraph("/forgot-password"),
   title: "Forgot password",
   description: "Reset your Taish Gaming account password with an email link or your recovery code.",
   alternates: { canonical: "/forgot-password" },

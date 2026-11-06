@@ -4,9 +4,10 @@ import { DownloadTimeCalculatorClient } from "./download-time-calculator-client"
 import { Download, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/tools/download-time-calculator" },
+  openGraph: pageOpenGraph("/tools/download-time-calculator"),
   title: "GTA 6 Download Time Calculator",
   description:
     "How long will the GTA 6 pre-load take? Enter your download speed and game size to estimate ideal and realistic download times, plus the free space to keep.",

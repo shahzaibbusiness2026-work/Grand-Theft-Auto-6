@@ -7,8 +7,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
+import { pageOpenGraph } from "@/lib/page-metadata";
 export const metadata: Metadata = {
-  openGraph: { url: "/tools/map-distance-calculator" },
+  openGraph: pageOpenGraph("/tools/map-distance-calculator"),
   title: "GTA 6 Map Distance Calculator",
   description: PUBLIC_TOOL_COPY["/tools/map-distance-calculator"],
 

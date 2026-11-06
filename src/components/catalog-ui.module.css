@@ -530,6 +530,21 @@
   justify-content: center;
   margin-top: 25px;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.pagination a {
+  min-width: 44px;
+  padding: 10px 14px;
+}
+.pageCurrent {
+  border-color: #ff2e9a;
+  color: #ff2e9a;
+}
 .tray {
   position: sticky;
   bottom: 16px;

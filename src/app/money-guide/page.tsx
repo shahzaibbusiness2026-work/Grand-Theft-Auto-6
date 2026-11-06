@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/money-guide" },
+    openGraph: pageOpenGraph("/money-guide"),
   title: "GTA 6 Money: Evidence & Methods",
   description: "What is verified about GTA 6 money? Check source limits for heists, businesses and other proposed methods before relying on payouts or income calculators.",
   alternates: { canonical: "/money-guide" },

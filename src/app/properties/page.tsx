@@ -13,12 +13,13 @@ import {
   getPublicProperties,
   type PropertyRecord,
 } from "@/lib/services/properties";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   alternates: { canonical: "/properties" },
-  openGraph: { url: "/properties" },
+  openGraph: pageOpenGraph("/properties"),
   title: "GTA 6 Real Estate & Property Database",
   description:
     "Explore fan-made property scenarios. Prices, garage sizes, income and availability have not been verified for GTA VI.",

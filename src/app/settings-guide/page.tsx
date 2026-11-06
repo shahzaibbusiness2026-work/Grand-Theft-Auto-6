@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/settings-guide" },
+  openGraph: pageOpenGraph("/settings-guide"),
   title: "GTA 6 Settings: What Is Known So Far",
   description: "Rockstar has not published the full GTA VI settings menu. This page lists what to verify after release, not pre-release recommendations.",
   alternates: { canonical: "/settings-guide" },

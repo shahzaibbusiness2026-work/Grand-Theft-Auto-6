@@ -1,6 +1,7 @@
 import { CONTRIBUTOR_CREDITS, authorIdentity } from "@/lib/editorial-authors";
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from "@/lib/page-metadata";
 export const metadata = {
   title: "Taish Gaming Editorial Team",
   description:
@@ -9,6 +10,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "/team",
+    images: [{ url: DEFAULT_OG_IMAGE, alt: DEFAULT_OG_IMAGE_ALT }],
     title: "Taish Gaming Editorial Team",
     description:
       "Who runs Taish Gaming: Shahzaib, founder and editor, and the editorial team behind its GTA 6 coverage.",

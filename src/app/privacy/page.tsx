@@ -1,6 +1,7 @@
 import { PrivacyControls } from "@/components/optional-integrations";
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from "@/lib/page-metadata";
 export const metadata = {
   title: "Privacy Policy",
   description:
@@ -9,6 +10,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "/privacy",
+    images: [{ url: DEFAULT_OG_IMAGE, alt: DEFAULT_OG_IMAGE_ALT }],
     title: "Privacy Policy",
     description:
       "What Taish Gaming stores when you browse, subscribe, contact us or create an account.",

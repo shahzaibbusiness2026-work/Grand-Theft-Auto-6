@@ -1,9 +1,10 @@
 import { SiteShell } from "@/components/shells";
 import { AchievementsClient } from "./achievements-client";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/achievements" },
+  openGraph: pageOpenGraph("/achievements"),
   title: "GTA 6 Achievements & Trophies Tracker",
   description: "Fan-made trophy checklist concept for GTA VI. Rockstar has not published an official trophy or achievement list.",
   alternates: { canonical: "/achievements" },

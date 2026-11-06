@@ -1,3 +1,4 @@
+import { pageOpenGraph } from "@/lib/page-metadata";
 ﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: fitTitle(collectible.title),
     description: `Rumoured collectible guide for ${collectible.title} in ${collectible.district}. Exact location unconfirmed until launch.`,
     alternates: { canonical: `/collectibles/${collectible.slug}` },
-    openGraph: { url: `/collectibles/${collectible.slug}` },
+    openGraph: pageOpenGraph(`/collectibles/${collectible.slug}`),
     robots: { index: false, follow: true },
   };
 }

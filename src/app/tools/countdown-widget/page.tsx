@@ -5,9 +5,10 @@ import { TimezoneNoteClient } from "./timezone-note-client";
 import { Code2, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/tools/countdown-widget" },
+    openGraph: pageOpenGraph("/tools/countdown-widget"),
   title: "GTA 6 Countdown: Release Time in Your Zone",
   description: "GTA 6 launches 19 November 2026 on PS5 and Xbox, preload from 10 November. Live countdown in your timezone, local launch time and a free embed.",
 

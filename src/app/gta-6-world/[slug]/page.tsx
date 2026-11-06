@@ -14,6 +14,7 @@ import { SafeImage } from "@/components/safe-image";
 import { WorldMediaFigure } from "@/components/world-media-figure";
 import { WildlifeNavigation } from "@/components/wildlife-navigation";
 import { getWorldMedia, worldImageSchema } from "@/lib/world-media";
+import { absoluteUrl } from "@/lib/page-metadata";
 
 export function generateStaticParams() {
   return WORLD_CATEGORIES.map((c) => ({ slug: c.slug }));
@@ -120,6 +121,27 @@ export default async function GTAWorldCategoryPage({ params }: Props) {
           : {}),
       },
       ...(media ? [worldImageSchema(media, pageUrl)] : []),
+      {
+        "@type": "Article",
+        "@id": pageUrl + "#article",
+        headline: category.seoTitle,
+        description: category.seoDescription,
+        ...(media ? { image: [absoluteUrl(media.src)] } : {}),
+        isPartOf: { "@id": pageUrl + "#webpage" },
+        author: {
+          "@type": "Organization",
+          "@id": "https://www.taishgaming.com/team#editorial-team",
+          name: "Taish Gaming Editorial Team",
+          url: "https://www.taishgaming.com/team",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Taish Gaming",
+          "@id": "https://www.taishgaming.com/#organization",
+        },
+        mainEntityOfPage: pageUrl,
+        articleSection: "GTA VI World",
+      },
     ],
   };
 

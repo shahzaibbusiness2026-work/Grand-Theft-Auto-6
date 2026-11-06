@@ -1,9 +1,10 @@
 import React from "react";
 import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/disclaimer" },
+  openGraph: pageOpenGraph("/disclaimer"),
   title: "Disclaimer",
   description:
     "Taish Gaming is an unofficial GTA VI fan site, not affiliated with Rockstar Games or Take-Two. Read our content, advertising, correction and takedown notices.",

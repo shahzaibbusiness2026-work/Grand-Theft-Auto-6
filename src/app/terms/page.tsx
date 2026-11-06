@@ -1,9 +1,10 @@
 import React from "react";
 import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/terms" },
+  openGraph: pageOpenGraph("/terms"),
   title: "Terms of Service",
   description: "Terms of service for Taish Gaming, including accounts, tools and estimates, advertising, and acceptable use.",
   alternates: { canonical: "/terms" },

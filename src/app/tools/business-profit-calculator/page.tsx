@@ -1,3 +1,4 @@
+import { pageOpenGraph } from "@/lib/page-metadata";
 ﻿import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
 import { BusinessCalculatorClient } from "./business-calculator-client";
@@ -7,7 +8,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
-  openGraph: { url: "/tools/business-profit-calculator" },
+  openGraph: pageOpenGraph("/tools/business-profit-calculator"),
   title: "Business Profit & ROI Scenario Calculator",
   description:
     "Model net profit, losses and break-even time with editable assumptions. Example values are not verified GTA VI business data.",

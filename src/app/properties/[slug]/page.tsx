@@ -19,6 +19,7 @@ import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
 import { EstimatedDataNote } from "@/components/estimated-data-note";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 const canonicalProperties = propertyDrafts.map(asConcept);
 
@@ -46,7 +47,7 @@ export async function generateMetadata({
     title: fitTitle(prop.name),
     description: `Fan-made real estate breakdown for ${prop.name} in ${prop.district}. Values are fictional planning inputs, not confirmed prices, ownership or income mechanics.`,
     alternates: { canonical: `/properties/${prop.slug}` },
-    openGraph: { url: `/properties/${prop.slug}` },
+    openGraph: pageOpenGraph(`/properties/${prop.slug}`),
     robots: { index: false, follow: true },
   };
 }

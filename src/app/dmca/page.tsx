@@ -1,9 +1,10 @@
 import React from "react";
 import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/dmca" },
+    openGraph: pageOpenGraph("/dmca"),
   title: "DMCA & Copyright Policy",
   description: "DMCA takedown and copyright infringement policy for Taish Gaming. How to submit a copyright complaint or counter-notice.",
   alternates: { canonical: "/dmca" },

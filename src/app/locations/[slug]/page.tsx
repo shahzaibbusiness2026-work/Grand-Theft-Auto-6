@@ -22,6 +22,7 @@ import { getLocations } from "@/lib/services/locations";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -129,7 +130,7 @@ export async function generateMetadata({
     description: `Provisional fan-map entry for ${loc.name}. Placement, opening hours and gameplay remain unverified.`,
     alternates: { canonical: `/locations/${loc.slug}` },
     robots: { index: false, follow: true },
-    openGraph: { url: `/locations/${loc.slug}` },
+    openGraph: pageOpenGraph(`/locations/${loc.slug}`),
   };
 }
 

@@ -4,9 +4,10 @@ import { CharacterQuizClient } from "./character-quiz-client";
 import { UserCheck, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/tools/character-quiz" },
+    openGraph: pageOpenGraph("/tools/character-quiz"),
   title: "Which GTA 6 Character Are You?",
   description: "Take the GTA 6 personality quiz and find out which character matches you: Lucia, Jason, Brian, Cal, Boobie, or Raul.",
 

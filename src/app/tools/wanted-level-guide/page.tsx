@@ -7,11 +7,12 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+import { pageOpenGraph } from "@/lib/page-metadata";
 const title = "GTA 6 Wanted Levels: Evidence Status";
 const description = PUBLIC_TOOL_COPY["/tools/wanted-level-guide"];
 export const metadata: Metadata = {
   robots: { index: false, follow: true },
-    openGraph: { url: "/tools/wanted-level-guide" },
+    openGraph: pageOpenGraph("/tools/wanted-level-guide"),
   title,
   description,
 

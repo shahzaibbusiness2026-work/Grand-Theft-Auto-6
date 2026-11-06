@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/businesses" },
+  openGraph: pageOpenGraph("/businesses"),
   title: "GTA 6 Business Concepts | Taish Gaming",
   description: "Fan-made business ideas for GTA VI. Rockstar has not confirmed purchasable businesses, income or operating mechanics.",
   alternates: { canonical: "/businesses" },

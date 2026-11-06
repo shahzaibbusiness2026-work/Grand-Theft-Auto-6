@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "@/components/player-tool-link";
 import { trackPublicEvent } from "@/lib/public-events";
 import {
@@ -98,10 +99,16 @@ export function EvidenceCatalog({
   kind,
   entries,
   compare = false,
+  // Server-read ?page=N (hub pages pass it from searchParams). Without it,
+  // only the first 24 entries are ever in the HTML and the other ~86
+  // vehicle / ~10 weapon detail pages are unreachable to crawlers — the
+  // "Show more" button is JS-only, so no crawler can follow it.
+  initialPage,
 }: {
   kind: CatalogKind;
   entries: EvidenceEntry[];
   compare?: boolean;
+  initialPage?: number;
 }) {
   const [query, setQueryState] = useState("");
   const [category, setCategoryState] = useState("");
@@ -111,7 +118,9 @@ export function EvidenceCatalog({
   const [recent, setRecent] = useState<string[]>([]);
   const [recentOnly, setRecentOnly] = useState(false);
   const [sort, setSortState] = useState("name");
-  const [limit, setLimitState] = useState(compare ? 8 : 24);
+  const [limit, setLimitState] = useState(
+    (initialPage ?? 1) * (compare ? 8 : 24),
+  );
   const [pickerOpen, setPickerOpen] = useState(false);
   const picker = useRef<HTMLDialogElement>(null);
   // Slots shown in the comparison workspace. Two by default; picking more
@@ -189,6 +198,14 @@ export function EvidenceCatalog({
       window.removeEventListener("popstate", restore);
     };
   }, [kind, entries, compare]);
+  // Server pagination (?page=N) arrives as a prop: client-side navigation
+  // between ?page= URLs preserves this component's state, so keep the
+  // rendered limit in sync when the prop changes. (The restore effect
+  // above covers mount + back/forward; this covers <Link> navigation.)
+  useEffect(() => {
+    if (initialPage !== undefined)
+      setLimitState(initialPage * (compare ? 8 : 24));
+  }, [initialPage, compare]);
   useEffect(() => {
     if (!pickerOpen) return;
     const previous = document.body.style.overflow;
@@ -250,6 +267,24 @@ export function EvidenceCatalog({
         ? recentRank(a.id) - recentRank(b.id)
         : (sort === "reverse" ? -1 : 1) * a.name.localeCompare(b.name),
     );
+  // Crawlable server pagination: real links to every ?page=N, so crawlers
+  // can reach every detail page (see initialPage above). Mirrors
+  // catalogStateUrl: defaults (page 1, sort name) stay out of the URL.
+  const pathname = usePathname();
+  const totalPages = Math.max(1, Math.ceil(shown.length / pageSize));
+  const currentPage = Math.min(
+    totalPages,
+    Math.max(1, Math.ceil(limit / pageSize)),
+  );
+  const pageHref = (n: number) => {
+    const params = new URLSearchParams();
+    if (query) params.set("q", query);
+    if (category) params.set("category", category);
+    if (sort === "reverse") params.set("sort", "reverse");
+    if (n > 1) params.set("page", String(n));
+    const qs = params.toString();
+    return qs ? `${pathname}?${qs}` : pathname;
+  };
   const comparison = selected
     .map((id) => entries.find((e) => e.id === id))
     .filter((e): e is EvidenceEntry => !!e);
@@ -443,6 +478,20 @@ export function EvidenceCatalog({
               <ChevronDown size={15} aria-hidden="true" />
             </button>
           </div>
+        )}
+        {!compare && totalPages > 1 && (
+          <nav className={styles.pagination} aria-label={`${label} pages`}>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+              <Link
+                key={n}
+                href={pageHref(n)}
+                aria-current={n === currentPage ? "page" : undefined}
+                className={`${styles.secondary} ${n === currentPage ? styles.pageCurrent : ""}`}
+              >
+                {n}
+              </Link>
+            ))}
+          </nav>
         )}
       </div>
     </div>

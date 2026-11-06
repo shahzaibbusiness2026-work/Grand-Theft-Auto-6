@@ -10,7 +10,7 @@ import { hasGuideBody, readingTime } from "@/lib/editorial-quality";
 import { serializeJsonLd } from "@/lib/utils";
 import { PlayerBookmarkButton } from "@/components/player-bookmark-button";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params,

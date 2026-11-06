@@ -7,10 +7,11 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+import { pageOpenGraph } from "@/lib/page-metadata";
 const title = "GTA 6 Garage Planner: Example Collection";
 const description = PUBLIC_TOOL_COPY["/tools/garage-planner"];
 export const metadata: Metadata = {
-    openGraph: { url: "/tools/garage-planner" },
+    openGraph: pageOpenGraph("/tools/garage-planner"),
   title,
   description,
 

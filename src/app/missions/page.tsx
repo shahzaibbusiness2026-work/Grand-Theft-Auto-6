@@ -1,6 +1,7 @@
 import { asConcept } from "@/lib/world-evidence";
 import { ConceptNotice } from "@/components/concept-notice";
 import { SiteShell } from "@/components/shells";
+import { pageOpenGraph } from "@/lib/page-metadata";
 // ISR: cache this public content page for 1 hour. Content changes
 // infrequently via the CMS; per-request SSR was causing multi-second loads.
 export const revalidate = 3600;
@@ -14,7 +15,7 @@ import { getMissions, type MissionRecord } from "@/lib/services/missions";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/missions" },
-  openGraph: { url: "/missions" },
+  openGraph: pageOpenGraph("/missions"),
   title: "GTA 6 Fan Mission Concepts & Planning",
   description:
     "Fictional mission-planning examples. Names, objectives, rewards, difficulty and unlocks are not verified GTA VI walkthrough data.",

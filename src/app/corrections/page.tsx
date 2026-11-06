@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from "@/lib/page-metadata";
 export const metadata = {
   title: "Corrections & Source Submissions",
   description:
@@ -8,6 +9,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "/corrections",
+    images: [{ url: DEFAULT_OG_IMAGE, alt: DEFAULT_OG_IMAGE_ALT }],
     title: "Corrections & Source Submissions",
     description:
       "Report an error on Taish Gaming or submit a primary source for a GTA 6 claim.",

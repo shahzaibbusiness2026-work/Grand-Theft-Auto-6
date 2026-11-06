@@ -36,7 +36,7 @@ const GROUPS: Group[] = [
       { label: "Vehicle comparison", href: "/compare/vehicles" },
       { label: "Weapon comparison", href: "/compare/weapons" },
       { label: "All tools", href: "/tools" },
-      { label: "Your dashboard", href: "/dashboard" },
+      { label: "Your dashboard", href: "/login" },
     ],
   },
   {

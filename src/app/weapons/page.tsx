@@ -9,12 +9,41 @@ import { EvidenceCatalog } from "@/components/evidence-catalog";
 import { SectionErrorBoundary } from "@/components/section-error-boundary";
 import { RelatedArticles } from "@/components/related-articles";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
+import { readCatalogState } from "@/lib/catalog-url-state";
+import { serializeJsonLd } from "@/lib/utils";
+import { itemListJsonLd } from "@/lib/page-metadata";
 import styles from "@/components/catalog-ui.module.css";
 
-export default async function CatalogPage() {
+export default async function CatalogPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const entries = await getEvidenceCatalog("weapons");
+  const raw = (await searchParams) || {};
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(raw)) {
+    if (typeof value === "string") params.set(key, value);
+  }
+  // Server pagination (?page=N) so crawlers can reach every detail page.
+  const initialPage = readCatalogState(params, entries, 24).page;
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(
+            itemListJsonLd(
+              "GTA 6 Weapons List",
+              "Every weapon identified in GTA 6 official media, with evidence and sources.",
+              entries.map((e) => ({
+                name: e.name,
+                url: `https://www.taishgaming.com/weapons/${e.slug}`,
+              })),
+            ),
+          ),
+        }}
+      />
       <CatalogPageHeader
         kind="weapons"
         count={entries.length}
@@ -23,7 +52,7 @@ export default async function CatalogPage() {
       <section className={styles.area} aria-label="Weapons catalog">
         <CatalogSwitcher kind="weapons" />
         <SectionErrorBoundary fallbackTitle="Could not load weapons. Please try refreshing.">
-          <EvidenceCatalog kind="weapons" entries={entries} />
+          <EvidenceCatalog kind="weapons" entries={entries} initialPage={initialPage} />
         </SectionErrorBoundary>
       </section>
       <RelatedArticles category="Weapons" title="Weapons Guides & News" />

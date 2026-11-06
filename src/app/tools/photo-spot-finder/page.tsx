@@ -7,10 +7,11 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+import { pageOpenGraph } from "@/lib/page-metadata";
 const title = "GTA 6 Photo Ideas: Fan Location Concepts";
 const description = PUBLIC_TOOL_COPY["/tools/photo-spot-finder"];
 export const metadata: Metadata = {
-    openGraph: { url: "/tools/photo-spot-finder" },
+    openGraph: pageOpenGraph("/tools/photo-spot-finder"),
   title,
   description,
 

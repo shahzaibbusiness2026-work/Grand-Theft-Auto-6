@@ -1,3 +1,4 @@
+import { pageOpenGraph } from "@/lib/page-metadata";
 ﻿import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
 import { MoneyMakerClient } from "./money-maker-client";
@@ -7,7 +8,7 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
-  openGraph: { url: "/tools/money-maker" },
+  openGraph: pageOpenGraph("/tools/money-maker"),
   robots: { index: false, follow: true },
   title: "Illustrative Money-Making Scenario Comparator",
   description:

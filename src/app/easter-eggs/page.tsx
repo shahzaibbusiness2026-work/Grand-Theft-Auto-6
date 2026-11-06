@@ -2,9 +2,10 @@ import { WorldMediaFigure } from "@/components/world-media-figure";
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  openGraph: { url: "/easter-eggs" },
+  openGraph: pageOpenGraph("/easter-eggs"),
   title: "GTA 6 Easter Eggs: Correction Notice",
   description:
     "The earlier Taish Gaming Easter egg list has been withdrawn pending source-level verification of its claims.",

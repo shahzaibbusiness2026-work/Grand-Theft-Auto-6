@@ -4,9 +4,10 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { requirePlayer } from "@/lib/auth/player-account";
 import { LoginCards } from "./login-form";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-    openGraph: { url: "/login" },
+    openGraph: pageOpenGraph("/login"),
   title: "Login",
   description: "Log in to your Taish Gaming dashboard or create a free account — your dashboard, favorites, and tracker progress are saved for you.",
   alternates: { canonical: "/login" },

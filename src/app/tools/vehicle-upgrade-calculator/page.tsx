@@ -7,10 +7,11 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+import { pageOpenGraph } from "@/lib/page-metadata";
 const title = "GTA 6 Upgrade Budget Simulator";
 const description = PUBLIC_TOOL_COPY["/tools/vehicle-upgrade-calculator"];
 export const metadata: Metadata = {
-    openGraph: { url: "/tools/vehicle-upgrade-calculator" },
+    openGraph: pageOpenGraph("/tools/vehicle-upgrade-calculator"),
   title,
   description,
 

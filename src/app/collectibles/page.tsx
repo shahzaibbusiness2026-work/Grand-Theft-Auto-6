@@ -4,12 +4,13 @@ import {  Compass } from "lucide-react";
 import type { Metadata } from "next";
 import { canonicalCollectibles, type CanonicalCollectible } from "@/lib/canonical-data";
 import { getPublicCollectibles, type CollectibleRecord } from "@/lib/services/collectibles";
+import { pageOpenGraph } from "@/lib/page-metadata";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
     alternates: { canonical: "/collectibles" },
-    openGraph: { url: "/collectibles" },
+    openGraph: pageOpenGraph("/collectibles"),
   title: "Collectibles Finder & Checklist",
   description:
     "Interactive GTA 6 Collectibles Finder across Leonida. Track Hidden Packages, Stunt Jumps, Rebel Radio Transmitters, Wildlife Photos, and Easter Eggs with coordinate guides.",

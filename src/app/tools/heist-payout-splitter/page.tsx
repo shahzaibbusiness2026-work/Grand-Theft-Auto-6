@@ -7,10 +7,11 @@ import type { Metadata } from "next";
 
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
+import { pageOpenGraph } from "@/lib/page-metadata";
 const title = "GTA 6 Heist Split Calculator: Custom Inputs";
 const description = PUBLIC_TOOL_COPY["/tools/heist-payout-splitter"];
 export const metadata: Metadata = {
-    openGraph: { url: "/tools/heist-payout-splitter" },
+    openGraph: pageOpenGraph("/tools/heist-payout-splitter"),
   title,
   description,
 
