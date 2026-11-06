@@ -266,7 +266,7 @@ function SectionCard({ section }: { section: Section }) {
         <div className="grid grid-cols-[minmax(0,1fr)_120px_120px] items-center gap-2 sm:grid-cols-[minmax(0,1fr)_140px_140px]">
           <h2 className="flex min-w-0 items-center gap-2 text-xl font-bold text-slate-900 dark:text-slate-100">
             <Icon className={`h-5 w-5 shrink-0 ${section.iconClass ?? "text-[#FF2E9A]"}`} aria-hidden />
-            <span className="truncate">{section.title}</span>
+            <span className="leading-tight">{section.title}</span>
           </h2>
           <span className="text-center text-xs font-extrabold tracking-wider text-slate-500 dark:text-slate-400">PS5</span>
           <span className="text-center text-xs font-extrabold tracking-wider text-slate-500 dark:text-slate-400">Xbox</span>
