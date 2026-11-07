@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Taish Gaming has no paid plans. Every map, database, comparison, tracker and tool is free to use — no subscriptions, no paywalls, no hidden costs.",
   alternates: { canonical: "/pricing" },
+  robots: { index: false, follow: true },
   };
 
 export default function PricingPage() {

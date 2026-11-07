@@ -28,6 +28,8 @@ export type CharacterProfileFacts = {
     title: string;
     duration: string;
     date: string;
+    /** ISO upload date (YYYY-MM-DD) — explicit so no timezone shifts it. */
+    uploadDate: string;
     breakdownHref: string;
   };
   relationships: { slug: string; name: string; label: string; portrait: string }[];
@@ -38,6 +40,7 @@ const T1 = {
   title: "GTA VI — Trailer 1",
   duration: "1:31",
   date: "4 December 2023",
+  uploadDate: "2023-12-04",
   breakdownHref: "/news/gta-6-trailer-1-breakdown",
 };
 const T2 = {
@@ -45,6 +48,7 @@ const T2 = {
   title: "GTA VI — Trailer 2",
   duration: "2:47",
   date: "6 May 2025",
+  uploadDate: "2025-05-06",
   breakdownHref: "/news/trailer-2-breakdown-analysis",
 };
 
@@ -77,7 +81,7 @@ export const characterProfiles: Record<string, CharacterProfileFacts> = {
       { label: "Focus", value: "Crime, Survival, A Better Life" },
     ],
     gallery: [
-      { src: "/img/char-lucia.jpg", caption: "Official Rockstar portrait" },
+      { src: "/img/char-lucia.jpg", caption: "Lucia Caminos — official Rockstar portrait" },
       {
         src: "/img/trailer-lucia-call.webp",
         caption: "Lucia's prison call — Trailer 1",
@@ -127,7 +131,7 @@ export const characterProfiles: Record<string, CharacterProfileFacts> = {
       { label: "Focus", value: "An easy life, Lucia" },
     ],
     gallery: [
-      { src: "/img/char-jason.jpg", caption: "Official Rockstar portrait" },
+      { src: "/img/char-jason.jpg", caption: "Jason Duval — official Rockstar portrait" },
       {
         src: "/img/trailer-jason-marina.webp",
         caption: "At the marina — Trailer 1",
@@ -185,7 +189,7 @@ export const characterProfiles: Record<string, CharacterProfileFacts> = {
       { label: "Affiliation Type", value: "Jason's circle" },
       { label: "Focus", value: "Coast Guard radio, beers" },
     ],
-    gallery: [{ src: "/img/char-cal.jpg", caption: "Official Rockstar portrait" }],
+    gallery: [{ src: "/img/char-cal.jpg", caption: "Cal Hampton — official Rockstar portrait" }],
     trailer: T2,
     relationships: [
       {
@@ -231,7 +235,7 @@ export const characterProfiles: Record<string, CharacterProfileFacts> = {
       { label: "Focus", value: "Real estate, clubs, music" },
     ],
     gallery: [
-      { src: "/img/char-boobie-ike.jpg", caption: "Official Rockstar portrait" },
+      { src: "/img/char-boobie-ike.jpg", caption: "Boobie Ike — official Rockstar portrait" },
     ],
     trailer: T2,
     relationships: [
@@ -278,7 +282,7 @@ export const characterProfiles: Record<string, CharacterProfileFacts> = {
       { label: "Focus", value: "Music, artists" },
     ],
     gallery: [
-      { src: "/img/char-drequan-priest.jpg", caption: "Official Rockstar portrait" },
+      { src: "/img/char-drequan-priest.jpg", caption: "Dre'Quan Priest — official Rockstar portrait" },
     ],
     trailer: T2,
     relationships: [
@@ -325,7 +329,7 @@ export const characterProfiles: Record<string, CharacterProfileFacts> = {
       { label: "Focus", value: "Rap, social media" },
     ],
     gallery: [
-      { src: "/img/char-real-dimez.jpg", caption: "Official Rockstar portrait" },
+      { src: "/img/char-real-dimez.jpg", caption: "Real Dimez — official Rockstar portrait" },
     ],
     trailer: T2,
     relationships: [
@@ -372,7 +376,7 @@ export const characterProfiles: Record<string, CharacterProfileFacts> = {
       { label: "Focus", value: "Big scores, talent" },
     ],
     gallery: [
-      { src: "/img/char-raul-bautista.jpg", caption: "Official Rockstar portrait" },
+      { src: "/img/char-raul-bautista.jpg", caption: "Raul Bautista — official Rockstar portrait" },
     ],
     trailer: T2,
     relationships: [
@@ -419,7 +423,7 @@ export const characterProfiles: Record<string, CharacterProfileFacts> = {
       { label: "Focus", value: "Product, sangria, shakedowns" },
     ],
     gallery: [
-      { src: "/img/char-brian-heder.jpg", caption: "Official Rockstar portrait" },
+      { src: "/img/char-brian-heder.jpg", caption: "Brian Heder — official Rockstar portrait" },
     ],
     trailer: T2,
     relationships: [

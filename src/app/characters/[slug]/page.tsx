@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/shells";
 import { characterEvidence } from "@/lib/character-evidence";
-import { characterProfiles } from "@/lib/character-profile";
+import { characterProfiles, OFFICIAL_TRAILERS } from "@/lib/character-profile";
 import { pageOpenGraph, articleJsonLd } from "@/lib/page-metadata";
 import { serializeJsonLd } from "@/lib/utils";
 import { CharacterProfileClient } from "./character-profile-client";
@@ -39,6 +39,20 @@ export default async function CharacterPage({
   const c = characterEvidence[slug];
   const facts = characterProfiles[slug];
   if (!c || !facts) notFound();
+  // Both official trailers are embedded on every character page
+  // (Trailers tab), so they each get a VideoObject entry.
+  const videoObjects = OFFICIAL_TRAILERS.map((t) => {
+    const [minutes, seconds] = t.duration.split(":").map(Number);
+    return {
+      "@type": "VideoObject",
+      name: t.title,
+      description: `Official ${t.title} from Rockstar Games.`,
+      thumbnailUrl: `https://i.ytimg.com/vi/${t.videoId}/hqdefault.jpg`,
+      uploadDate: t.uploadDate,
+      duration: `PT${minutes}M${seconds}S`,
+      embedUrl: `https://www.youtube.com/embed/${t.videoId}`,
+    };
+  });
   return (
     <SiteShell>
       <script
@@ -54,6 +68,15 @@ export default async function CharacterPage({
               articleSection: "Characters",
             }),
           ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@graph": videoObjects,
+          }),
         }}
       />
       <CharacterProfileClient

@@ -82,7 +82,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/terms",
     "/disclaimer",
     "/cookies",
-    "/pricing",
     "/tools/character-quiz",
   ];
   // Detail URLs use their own recorded update dates. Unrelated article edits
