@@ -297,7 +297,7 @@ export default async function ArticleDetailPage({ params }: Props) {
         </header>
 
         {/* Body */}
-        <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_300px]">
+        <div className="mt-8">
           <div className="min-w-0">
             <div className="card-surface mb-5 border-l-4 border-primary p-5">
               <p className="font-semibold leading-relaxed">{article.excerpt}</p>
@@ -391,33 +391,6 @@ export default async function ArticleDetailPage({ params }: Props) {
             </Link>
           </div>
 
-          <aside className="space-y-6">
-            <div className="card-surface p-5">
-              <h2 className="section-eyebrow mb-3">Related Articles</h2>
-              <div className="space-y-4">
-                {related.map((a) => (
-                  <Link
-                    key={a.slug || a.title}
-                    href={a.slug ? `/news/${a.slug}` : "/news"}
-                    className="flex items-center gap-3 py-1 hover:text-accent transition-colors"
-                  >
-                    <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded-md">
-                      <SafeImage
-                        src={a.img}
-                        alt={a.title}
-                        fill
-                        sizes="64px"
-                        className="object-cover"
-                      />
-                    </div>
-                    <p className="line-clamp-2 text-[13px] font-semibold leading-snug">
-                      {a.title}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </aside>
         </div>
 
         {related.length > 0 && (
