@@ -118,15 +118,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: lm,
       });
     }
-  // Pre-launch gate (AdSense audit, 29 Oct 2026): vehicle/weapon detail
-  // pages each carry only a single "GTA VI appearance" claim with all
-  // statistics withheld, so they are thin content. They stay crawlable
-  // via hubs and are marked noindex on their own pages, and are NOT
-  // listed in the sitemap until launch, when verified statistics exist.
-  // The vehicles/weapons fetches above are kept so this file still
-  // fails loudly if the catalog service breaks, without publishing URLs.
-  void vehicles;
-  void weapons;
+  // Indexed on the user's instruction (8 Nov 2026): all vehicle and
+  // weapon detail pages, including verification-pending entries.
+  // No lastModified: the catalog service does not expose recorded update
+  // dates for these rows, so none is invented.
+  const detailEntries: MetadataRoute.Sitemap = [
+    ...vehicles.map((e) => ({ url: base + "/vehicles/" + e.slug })),
+    ...weapons.map((e) => ({ url: base + "/weapons/" + e.slug })),
+  ];
   const characterReviewed = new Date(CHARACTER_REVIEWED_AT + "T00:00:00Z");
   const characterEntries: MetadataRoute.Sitemap = Object.keys(
     characterEvidence,
@@ -137,6 +136,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const result: MetadataRoute.Sitemap = paths.map((path) => ({
     url: base + path,
   }));
-  result.push(...articleEntries, ...guideEntries, ...characterEntries);
+  result.push(...articleEntries, ...guideEntries, ...characterEntries, ...detailEntries);
   return Array.from(new Map(result.map((e) => [e.url, e])).values());
 }

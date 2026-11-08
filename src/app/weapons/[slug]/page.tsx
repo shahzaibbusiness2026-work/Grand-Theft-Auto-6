@@ -41,10 +41,9 @@ export async function generateMetadata({
       images: [artwork.src],
     },
     robots: {
-      // Pre-launch gate (29 Oct 2026): a single appearance claim is not
-      // substantive content. Index only after launch, when verified
-      // statistics exist. Follow stays true so hubs are still crawled.
-      index: false,
+      // Indexed on the user's instruction (8 Nov 2026): all weapon
+      // detail pages, including verification-pending entries.
+      index: true,
       follow: true,
       googleBot: { "max-image-preview": "large" as const },
     },
