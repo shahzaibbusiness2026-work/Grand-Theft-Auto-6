@@ -208,5 +208,45 @@
     "locator": "Trailer 2, lifeguard-beach cutscenes (Brian Heder's vehicle)",
     "reviewedAt": "2026-10-28",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-furia",
+    "field": "GTA VI appearance",
+    "value": "Grotti Furia",
+    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
+    "locator": "Trailer 1, 0:25 — Vice City freeway at night; silver-grey, passenger leaning out photographing Lucia in the trailing red Zorrusso. Identification unverified — community-identified, Rockstar has not named this model.",
+    "reviewedAt": "2026-11-08",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-zorrusso",
+    "field": "GTA VI appearance",
+    "value": "Pegassi Zorrusso",
+    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
+    "locator": "Trailer 1, 0:25 — red roadster on the Vice City freeway at night; Lucia standing in the passenger seat, Jason driving. Identification unverified — community-identified, Rockstar has not named this model.",
+    "reviewedAt": "2026-11-08",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cheetah-classic",
+    "field": "GTA VI appearance",
+    "value": "Grotti Cheetah Classic",
+    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
+    "locator": "Trailer 1, 0:34 — white, parked on Ocean Drive at dusk; louvered rear deck, plate CH33TAH. Identification unverified — community-identified, Rockstar has not named this model.",
+    "reviewedAt": "2026-11-08",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-buffalo-stx",
+    "field": "GTA VI appearance",
+    "value": "Bravado Buffalo STX",
+    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
+    "locator": "Trailer 1, 0:46 — street takeover in Crosstown at night, seen from above among the takeover cars. Identification unverified — community identification from the takeover scene, Rockstar has not named this model.",
+    "reviewedAt": "2026-11-08",
+    "reviewer": "Muse"
   }
 ]
