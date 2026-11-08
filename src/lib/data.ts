@@ -166,6 +166,7 @@ export const topWeapons: { rank: number; name: string; klass: string; score: str
 // Weapon category labels only — live counts from the database.
 export const weaponCategories = [
   { label: "Pistols" },
+  { label: "Revolvers" },
   { label: "SMGs" },
   { label: "Shotguns" },
   { label: "Assault Rifles" },

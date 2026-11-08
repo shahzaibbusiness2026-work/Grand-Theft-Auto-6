@@ -37,7 +37,7 @@ export interface AdminVehicle {
   code: string;
   name: string;
   displayName: string;
-  class: "Sports" | "SUV" | "Sedan" | "Motorcycle" | "Truck" | "Off-Road" | "Boat" | "Unknown";
+  class: "Sports" | "SUV" | "Sedan" | "Classic sedan" | "Motorcycle" | "Truck" | "Off-Road" | "Boat" | "Unknown";
   manufacturer: string;
   verification: "unverified" | "pending_source" | "verified" | "deprecated";
   status: "draft" | "review" | "published" | "archived";
@@ -113,7 +113,7 @@ export interface AdminWeapon {
   id: string;
   code: string;
   name: string;
-  category: "Pistol" | "Rifle" | "SMG" | "Shotgun" | "Heavy" | "Melee" | "Unknown";
+  category: "Pistol" | "Revolver" | "Rifle" | "SMG" | "Shotgun" | "Heavy" | "Melee" | "Unknown";
   ammunition: string;
   verification: "unverified" | "pending_source" | "verified" | "deprecated";
   status: "draft" | "review" | "published" | "archived";

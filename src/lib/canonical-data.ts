@@ -11,7 +11,7 @@ export interface CanonicalVehicle {
   slug: string;
   name: string;
   manufacturer: string;
-  klass: "Super Car" | "Sports Car" | "Muscle Car" | "Off-Road" | "Motorcycle" | "Dirt Bike" | "Boat" | "Helicopter" | "Plane" | "Van" | "Commercial";
+  klass: "Super Car" | "Sports Car" | "Muscle Car" | "Classic sedan" | "Off-Road" | "Motorcycle" | "Dirt Bike" | "Boat" | "Helicopter" | "Plane" | "Van" | "Commercial";
   img: string;
   filter?: string;
   topSpeed: number | null; // mph, null = unconfirmed
@@ -86,7 +86,7 @@ export interface CanonicalWeapon {
   id: string;
   slug: string;
   name: string;
-  klass: "Pistol" | "SMG" | "Assault Rifle" | "Shotgun" | "Sniper Rifle" | "Heavy" | "Melee" | "Throwable";
+  klass: "Pistol" | "Revolver" | "SMG" | "Assault Rifle" | "Shotgun" | "Sniper Rifle" | "Heavy" | "Melee" | "Throwable";
   damage: number | null; // score 0-100, null = unconfirmed
   fireRate: number | null; // score 0-100, null = unconfirmed
   accuracy: number | null; // score 0-100, null = unconfirmed
@@ -661,7 +661,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     slug: "vapid-stanier-55",
     name: "'55 Vapid Stanier",
     manufacturer: "Vapid",
-    klass: "Sports Car",
+    klass: "Classic sedan",
     img: "/img/gta6/vapid-stanier-55.jpg",
     topSpeed: 184,
     acceleration: 3.8,
@@ -3195,7 +3195,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     id: "hawk-little-morgan-revolvers",
     slug: "hawk-little-morgan-revolvers",
     name: "Hawk & Little Morgan Revolvers",
-    klass: "Pistol",
+    klass: "Revolver",
     damage: 42,
     fireRate: 55,
     accuracy: 65,
@@ -3220,7 +3220,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     id: "mustang-357",
     slug: "mustang-357",
     name: "Mustang .357",
-    klass: "Pistol",
+    klass: "Revolver",
     damage: 42,
     fireRate: 55,
     accuracy: 65,

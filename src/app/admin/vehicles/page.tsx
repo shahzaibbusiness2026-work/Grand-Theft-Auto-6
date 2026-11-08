@@ -427,6 +427,7 @@ export default function AdminVehiclesPage() {
               <option value="Sports">Sports</option>
               <option value="SUV">SUV</option>
               <option value="Sedan">Sedan</option>
+              <option value="Classic sedan">Classic sedan</option>
               <option value="Motorcycle">Motorcycle</option>
               <option value="Truck">Truck</option>
               <option value="Off-Road">Off-Road</option>

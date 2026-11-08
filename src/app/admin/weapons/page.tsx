@@ -333,6 +333,7 @@ export default function AdminWeaponsPage() {
           >
             <option value="all">All categories</option>
             <option value="Pistol">Pistol</option>
+            <option value="Revolver">Revolver</option>
             <option value="Rifle">Rifle</option>
             <option value="SMG">SMG</option>
             <option value="Shotgun">Shotgun</option>
@@ -691,6 +692,7 @@ export default function AdminWeaponsPage() {
                 >
                   <option value="Unknown">Unknown</option>
                   <option value="Pistol">Pistol</option>
+                  <option value="Revolver">Revolver</option>
                   <option value="Rifle">Rifle</option>
                   <option value="SMG">SMG</option>
                   <option value="Shotgun">Shotgun</option>

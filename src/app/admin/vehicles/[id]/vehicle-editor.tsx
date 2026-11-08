@@ -49,7 +49,7 @@ const EMPTY_DRAFT: AdminVehicle = {
 };
 
 const VEHICLE_CLASSES: AdminVehicle["class"][] = [
-  "Sports", "SUV", "Sedan", "Motorcycle", "Truck", "Off-Road", "Boat", "Unknown",
+  "Sports", "SUV", "Sedan", "Classic sedan", "Motorcycle", "Truck", "Off-Road", "Boat", "Unknown",
 ];
 
 export function VehicleEditor({

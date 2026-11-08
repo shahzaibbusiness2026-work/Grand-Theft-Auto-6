@@ -46,7 +46,7 @@ const EMPTY_DRAFT: AdminWeapon = {
 };
 
 const WEAPON_CATEGORIES: AdminWeapon["category"][] = [
-  "Pistol", "Rifle", "SMG", "Shotgun", "Heavy", "Melee", "Unknown",
+  "Pistol", "Revolver", "Rifle", "SMG", "Shotgun", "Heavy", "Melee", "Unknown",
 ];
 
 export function WeaponEditor({
