@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: { card: "summary_large_image", images: [hubImage.src] },
-  robots: { "max-image-preview": "large" },
+  robots: { index: true, follow: true, "max-image-preview": "large" },
   title: "GTA 6 World: Wildlife, Radio & City Life",
   description:
     "Explore the world of GTA 6: wildlife, regions, media, city life, activities and discoveries across Leonida. Source-backed guides and fan analysis.",

@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: category.seoDescription,
       images: media ? [media.src] : undefined,
     },
-    robots: { "max-image-preview": "large" },
+    robots: { index: true, follow: true, "max-image-preview": "large" },
     title: category.seoTitle,
     description: category.seoDescription,
     alternates: { canonical: `/gta-6-world/${category.slug}` },

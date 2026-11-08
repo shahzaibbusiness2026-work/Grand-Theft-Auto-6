@@ -1305,7 +1305,7 @@ export function SatelliteInteractiveMap({
           </label>
           {!playerMode && (
             <Link
-              href="/dashboard/map"
+              href="/login"
               className="hidden sm:inline underline text-gold-light"
             >
               My private map & account sync
