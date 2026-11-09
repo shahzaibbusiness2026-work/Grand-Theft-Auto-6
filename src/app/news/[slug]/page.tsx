@@ -369,18 +369,6 @@ export default async function ArticleDetailPage({ params }: Props) {
                   </ul>
                 </nav>
               )}
-              {article.tags && article.tags.length > 0 && (
-                <div className="mt-8 flex flex-wrap gap-2 border-t border-border pt-6">
-                  {article.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground"
-                    >
-                      #{t}
-                    </span>
-                  ))}
-                </div>
-              )}
             </div>
             <Link
               href="/news"
