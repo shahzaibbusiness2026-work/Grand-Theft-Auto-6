@@ -59,7 +59,7 @@ export default async function NewsPage() {
               GTA 6 News: Stay Updated with the Latest from <span className="text-primary">Leonida</span>
             </h1>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Official announcements, trailer analysis and guides, with linked sources and clear notes on unverified claims.
+              Official announcements, trailer analysis and guides, with linked sources and clear notes on unverified claims. This is where Taish Gaming covers GTA 6 as it happens — Rockstar&apos;s Newswire posts, trailer breakdowns, pre-load and launch details, and the guides that follow from them. Every article links to its sources, separates what Rockstar confirmed from what is reported or speculated, and shows its update date when new information changes the story. New coverage lands here first and is filed under the categories below.
             </p>
           </div>
         </div>

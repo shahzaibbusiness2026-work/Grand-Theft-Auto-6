@@ -98,6 +98,7 @@ function dbVehicleToDisplay(v: VehicleCatalogRow, c?: CanonicalVehicle): Canonic
     confidence: (v.confidence as CanonicalVehicle["confidence"]) || c?.confidence || "SPECULATION",
     source: v.source || c?.source || "In-game Footage",
     description: v.summary || c?.description || `${v.name} in Grand Theft Auto VI.`,
+    notes: c?.notes,
     featured: v.featured ?? c?.featured ?? true,
 
     /* Deep-dive fields (DB first → canonical → class defaults) */

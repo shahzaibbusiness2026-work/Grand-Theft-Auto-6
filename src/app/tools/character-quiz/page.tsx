@@ -65,6 +65,9 @@ export default function CharacterQuizPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             Answer 8 quick questions about how you&apos;d survive Vice City and discover which GTA 6 character matches your personality — Lucia, Jason, Brian, Cal, Boobie, or Raul. Each question asks how you would handle a situation in Vice City, and your answers point to the character whose approach matches yours. The result is for fun — a fan-made personality quiz, not an official characterization or game feature.
           </p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            How it works: each question drops you into a Vice City situation — a Friday night, a job gone sideways, a choice between loyalty and a payday — and your answers are matched to the character whose approach fits best. The six possible results are Lucia, Jason, Brian, Cal, Boobie and Raul, and each result explains why that character&apos;s way of handling Leonida matches yours. The quiz takes about two minutes, and your answers stay on your device — nothing is uploaded or stored.
+          </p>
         </div>
 
         <CharacterQuizClient />

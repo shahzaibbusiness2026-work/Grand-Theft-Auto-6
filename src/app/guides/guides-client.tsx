@@ -135,7 +135,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
           <div className="pointer-events-none absolute left-1/3 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
           <div className="relative p-6">
             <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">GTA 6 Guides</h1>
-            <p className="mt-1 text-sm text-muted-foreground">Start with Leonida&apos;s destinations, character backgrounds or release planning. These pre-release guides distinguish official information from unverified gameplay claims and fan-map estimates.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Start with Leonida&apos;s destinations, character backgrounds or release planning. These pre-release guides distinguish official information from unverified gameplay claims and fan-map estimates. Every guide is built the same way: official Rockstar announcements and trailer footage first, clearly labelled analysis second, and speculation kept out of the facts. Before launch, that means some guides are short on purpose — where Rockstar has said nothing, we say so rather than filling the gap with guesses. As the launch approaches and more is confirmed, the guides are updated in place, with the update date shown on the page.</p>
             <div className="relative mt-5 max-w-md">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input aria-label="Search guides" placeholder="Search guides..." className="pl-9" value={search} onChange={(e) => setSearch(e.target.value)} />

@@ -91,7 +91,16 @@ export function CharactersClient({ initialCharacters }: CharactersClientProps) {
 
               <p className="max-w-xl text-sm sm:text-base text-muted-foreground leading-relaxed">
                 Profiles based on Rockstar&apos;s official character
-                information, trailers and clearly labelled analysis.
+                information, trailers and clearly labelled analysis. Lucia
+                Caminos and Jason Duval lead the story — a couple pulled back
+                into crime in Vice City and the Leonida Keys — and the pages
+                below cover the people around them: fixers, smugglers,
+                hustlers and law enforcement. Each profile starts from what
+                Rockstar has actually published — official bios, trailer
+                footage and the Leonida introductions — and anything beyond
+                that is labelled as analysis or speculation, never presented
+                as fact. Use the filters to browse by role, or search for a
+                name.
               </p>
 
               <div className="pt-2 max-w-lg">

@@ -21,6 +21,7 @@ export interface EvidenceEntry {
   name: string;
   category: string;
   img: string;
+  notes?: string;
   claims: EvidenceClaim[];
 }
 export function validClaim(c: EvidenceClaim): boolean {

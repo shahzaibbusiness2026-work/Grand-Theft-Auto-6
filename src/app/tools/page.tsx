@@ -70,6 +70,7 @@ export default function ToolsPage() {
             <p className="text-sm text-muted-foreground leading-relaxed">
               Explore all {ALL_TOOLS.length} tools, calculators and trackers for Grand Theft Auto VI,
               from satellite map navigation and comparison duels to financial simulators and loadout builders.
+              Every tool is free — no accounts, no subscriptions, no paywalls. The maps and comparisons are built from Rockstar&apos;s official material and clearly labelled trailer evidence, and anything that is not yet confirmed is marked as provisional rather than presented as fact. Use the categories below to find what you need: maps and exploration, vehicle and weapon comparisons, money and economy calculators, or the trackers that follow the countdown to launch.
             </p>
           </div>
         </div>

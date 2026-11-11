@@ -75,6 +75,12 @@ export function EvidenceDetail({
           ? "A GTA VI appearance claim has been reviewed below. Its source and scope apply only to that claim; the catalog identification does not verify performance, price or availability."
           : "This entry is awaiting field-by-field evidence review. The catalog name is a provisional identification and does not establish that this model appears in GTA VI."}
       </p>
+      {entry.notes && (
+        <section className="space-y-2">
+          <h2 className="text-2xl font-bold">What was spotted</h2>
+          <p>{entry.notes}</p>
+        </section>
+      )}
       <section className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h2 className="text-2xl font-bold">What is verified?</h2>
         {entry.claims.length ? (

@@ -45,6 +45,23 @@ export default function Page() {
           and reason for the change.
         </p>
         <p>
+          How corrections work: every report is checked against the primary
+          source before anything changes. If the evidence supports the
+          correction, the claim is fixed and the change is noted on the
+          affected page with the date and the reason. If the evidence is thin
+          or the source cannot be traced, the claim stays as it is and is
+          labelled with its confidence level instead of being quietly
+          rewritten.
+        </p>
+        <p>
+          What makes a good report: a link to the exact page, the sentence you
+          believe is wrong, what it should say, and the source that proves
+          it — an official Rockstar page, a trailer timestamp, or a reputable
+          outlet quoting the primary source. A screenshot of the page helps,
+          and a short note on why the current wording misleads is more useful
+          than a long argument.
+        </p>
+        <p>
           We cannot promise a response time. Reports about privacy, account data
           or artwork rights can use the same contact form and should clearly
           state the nature of the request.

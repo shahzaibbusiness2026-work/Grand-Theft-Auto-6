@@ -30,6 +30,17 @@ export default function RegionsHubPage() {
             says plainly what is not. Rockstar has published no official map,
             so borders and positions are left unconfirmed throughout.
           </p>
+          <p className="mt-3 max-w-3xl text-white/70">
+            The six regions are Vice City — Rockstar&apos;s sun and fun capital
+            of America; the Leonida Keys, a tropical archipelago where
+            Jason&apos;s story begins; Grassrivers, the untamable jewel of
+            Leonida&apos;s crown; Port Gellhorn, the forgotten coast of cheap
+            motels and shut-down attractions; Ambrosia, the industrial heart
+            built around the Allied Crystal sugar refinery; and Mount Kalaga,
+            the state&apos;s wild backwoods. Each region page quotes
+            Rockstar&apos;s own description and lists the places, people and
+            details the trailers and official material actually confirm.
+          </p>
           <p className="mt-4 text-sm text-white/70">
             Explore the{" "}
             <Link href="/map" className="underline text-white">

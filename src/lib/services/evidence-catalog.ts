@@ -28,6 +28,7 @@ export const getEvidenceCatalog = cache(
         name: row.name,
         category: editorialCategory(row.klass),
         img: row.img || "",
+        notes: row.notes,
         claims: claimsFor(kind, row.id),
       }));
   },

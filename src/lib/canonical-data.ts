@@ -30,6 +30,9 @@ export interface CanonicalVehicle {
   confidence: ConfidenceLevel;
   source: string;
   description: string;
+  /* Honest spotting notes shown on the detail page (analyst identification,
+     labelled as such — never a stat, price or spawn claim). */
+  notes?: string;
   featured?: boolean;
 
   /* ---- Deep-dive optional fields (CMS-managed, added Oct 2026) ---- */
@@ -104,6 +107,9 @@ export interface CanonicalWeapon {
   source: string;
   description: string;
   img: string;
+  /* Honest spotting notes shown on the detail page (analyst identification,
+     labelled as such — never a stat, price or spawn claim). */
+  notes?: string;
 
   /* ---- Deep-dive optional fields (CMS-managed, added Oct 2026) ---- */
   // Stats 0-100 (unless noted)
@@ -954,6 +960,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "RUMORED",
     source: "GTA 6 Trailer 1 custom-car street (analyst identification)",
     description: "Green, chrome-heavy sedan facing the camera.",
+    notes: "Analysts identified a green, chrome-heavy sedan facing the camera in the Trailer 1 custom-car street scene, and that sighting is the basis for this entry. Rockstar has not confirmed the Primo by name, so this is an analyst identification, not an official one. The name comes from GTA V, where the Albany Primo was a four-door sedan; that history says nothing about the GTA VI version's specs or availability. No performance, price, unlock or spawn detail is confirmed for GTA VI, and the chrome-heavy sedan in the trailer frame is the only appearance detail on record. Like the other provisional entries in this catalog, it stays labelled as rumored until the game itself proves otherwise.",
     featured: false,
   },
   {
@@ -1029,6 +1036,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "RUMORED",
     source: "GTA 6 Trailer 1 custom-car street (analyst identification)",
     description: "Blue lowrider with show-car stance.",
+    notes: "Analysts identified a blue lowrider with a show-car stance in the Trailer 1 custom-car street scene, and that single sighting is the basis for this entry. Rockstar has not confirmed the Buccaneer Custom by name, so the identification is an analyst call, not an official one. The name comes from GTA V and GTA Online, where the Buccaneer Custom was a lowrider variant; that history does not confirm anything about the GTA VI version. No performance, price, unlock or spawn detail is confirmed, and the show-car stance in the trailer is the only appearance detail on record. If the car is in the game at launch, its real specs will come from hands-on play, not from this listing.",
     featured: false,
   },
   {
@@ -1629,6 +1637,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "RUMORED",
     source: "GTA 6 trailer (analyst identification)",
     description: "Trailer 1, lower-confidence analyst ID Listed by one trailer-spotting source without a dependable timestamp.",
+    notes: "The Alpha's place in this catalog rests on a single trailer-spotting source, and the identification is lower-confidence — no dependable timestamp ties it to a specific moment in Trailer 1. Rockstar has not named the Alpha or confirmed that it appears in GTA VI, so treat this entry as provisional, not a confirmed appearance. The name comes from GTA V, where the Albany Alpha was a four-door sedan; that history says nothing about the GTA VI version's body style, performance or price, and none of those are confirmed. What is known is only that analysts have listed the name against trailer footage. Everything else — speed, handling, cost, where it spawns — stays unverified until the game is out.",
     featured: false,
   },
   {
