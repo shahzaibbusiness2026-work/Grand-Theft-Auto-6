@@ -16,11 +16,11 @@ export const metadata: Metadata = {
     title: "GTA 6 Guides: Map, Characters & Release",
     description:
       "Source-linked map, character and release guides, with official facts separated from unverified gameplay claims.",
-    images: [{ url: "/img/hero-dark.jpg", alt: "Taish Gaming — Leonida skyline" }],
+    images: [{ url: "/img/hero-vice-skyline-hd.jpg", alt: "Taish Gaming — Leonida skyline" }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/img/hero-dark.jpg"],
+    images: ["/img/hero-vice-skyline-hd.jpg"],
     title: "GTA 6 Guides: Map, Characters & Release",
     description:
       "Source-linked map, character and release guides, with official facts separated from unverified gameplay claims.",

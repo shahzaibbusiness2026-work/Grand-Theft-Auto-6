@@ -41,7 +41,7 @@ function toCard(g: GuideRecord): GuideCard {
     title: g.title,
     desc: g.description || "",
     read: g.read_time || "",
-    img: g.image || "/img/hero-dark.jpg",
+    img: g.image || "/img/hero-vice-skyline-hd.jpg",
     href: `/guides/${g.slug}`,
     slug: g.slug,
     category: g.category,
@@ -52,11 +52,11 @@ function toCard(g: GuideRecord): GuideCard {
 
 // Link to maintained pages; do not invent guide records to fill the catalogue.
 const resources: GuideCard[] = [
-  { title: "GTA 6 map size: evidence and unknowns", desc: "What can and cannot be established about playable area and comparisons with GTA V.", href: "/news/map-size-comparison-gtav-rdr2", category: "Locations", read: "", img: "/img/hero-dark.jpg" },
-  { title: "GTA 6 release date, preload and editions", desc: "The scheduled console release, official preload information and what to check before buying.", href: "/news/gta-6-release-date-pre-order-editions", category: "Getting Started", read: "", img: "/img/hero-dark.jpg" },
-  { title: "Leonida's six named destinations", desc: "Source-linked destination profiles, with confirmed place names separated from fan-map positions.", href: "/regions", category: "Locations", read: "", img: "/img/hero-dark.jpg" },
-  { title: "GTA 6 character backgrounds and relationships", desc: "Meet Jason, Lucia and the supporting cast through Rockstar's published character backgrounds.", href: "/characters", category: "Characters", read: "", img: "/img/hero-dark.jpg" },
-  { title: "GTA 6 money: what remains unverified", desc: "Check the evidence before relying on payout rankings, business income or pre-release money methods.", href: "/money-guide", category: "Money & Economy", read: "", img: "/img/hero-dark.jpg" },
+  { title: "GTA 6 map size: evidence and unknowns", desc: "What can and cannot be established about playable area and comparisons with GTA V.", href: "/news/map-size-comparison-gtav-rdr2", category: "Locations", read: "", img: "/img/satellite-map-hd.jpg" },
+  { title: "GTA 6 release date, preload and editions", desc: "The scheduled console release, official preload information and what to check before buying.", href: "/news/gta-6-release-date-pre-order-editions", category: "Getting Started", read: "", img: "/img/gta6-official-logo.png" },
+  { title: "Leonida's six named destinations", desc: "Source-linked destination profiles, with confirmed place names separated from fan-map positions.", href: "/regions", category: "Locations", read: "", img: "/img/leonida-map-v2.jpg" },
+  { title: "GTA 6 character backgrounds and relationships", desc: "Meet Jason, Lucia and the supporting cast through Rockstar's published character backgrounds.", href: "/characters", category: "Characters", read: "", img: "/img/char-jason.jpg" },
+  { title: "GTA 6 money: what remains unverified", desc: "Check the evidence before relying on payout rankings, business income or pre-release money methods.", href: "/money-guide", category: "Money & Economy", read: "", img: "/img/cache-chest.jpg" },
 ];
 
 const quickLinks = [

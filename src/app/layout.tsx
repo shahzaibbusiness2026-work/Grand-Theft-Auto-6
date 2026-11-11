@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = canonicalOrigin(seo.canonicalBaseUrl);
   const siteTitle = settings.siteTitle || "Taish Gaming";
   const description = seo.metaDescription || settings.siteDescription;
-  const ogImage = seo.socialPreviewImage || "/img/hero-dark.jpg";
+  const ogImage = seo.socialPreviewImage || "/img/hero-vice-skyline-hd.jpg";
   // Title template from the CMS; fall back to the classic "%s | Site" form.
   const template = seo.titleTemplate?.includes("%s")
     ? seo.titleTemplate

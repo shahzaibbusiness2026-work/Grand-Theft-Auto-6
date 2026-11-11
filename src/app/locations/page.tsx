@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: { type: "website",
     url: "/locations",
     images: [
-      { url: "/img/hero-dark.jpg", alt: "Taish Gaming — Leonida skyline" },
+      { url: "/img/satellite-map-hd.jpg", alt: "Leonida satellite map" },
     ],
   },
   title: "GTA 6 Locations: Leonida Points of Interest",

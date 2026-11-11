@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   openGraph: { type: "website", url: "/about",
     title: "About Taish Gaming | Independent GTA 6 Database",
     description: "Taish Gaming separates Rockstar-confirmed GTA VI facts, trailer observations, attributed reporting and fan speculation in its independent database.",
-    images: ["/img/hero-dark.jpg"],
+    images: ["/img/hero-vice-skyline-hd.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "About Taish Gaming | Independent GTA 6 Database",
     description: "Taish Gaming separates Rockstar-confirmed GTA VI facts, trailer observations, attributed reporting and fan speculation in its independent database.",
-    images: ["/img/hero-dark.jpg"],
+    images: ["/img/hero-vice-skyline-hd.jpg"],
   },
 };
 

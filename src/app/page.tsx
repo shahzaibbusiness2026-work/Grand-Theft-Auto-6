@@ -358,7 +358,7 @@ export default async function HomePage() {
             >
               <div className="card-surface relative overflow-hidden min-h-[340px]">
                 <SafeImage
-                  src="/img/hero-dark.jpg"
+                  src="/img/hero-vice-skyline-hd.jpg"
                   alt="GTA 6 Vice City Skyline"
                   fill
                   sizes="100vw"
