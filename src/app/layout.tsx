@@ -49,6 +49,16 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     authors: [{ name: PUBLICATION.teamName, url: "/team" }],
     creator: PUBLICATION.name,
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+        { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      ],
+      apple: [
+        { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      ],
+    },
     robots: { index: true, follow: true, "max-image-preview": "large" },
     // NOTE: no openGraph.url/title/description here — those are per-page.
     // A layout-level og:url leaked the homepage URL onto every child page
