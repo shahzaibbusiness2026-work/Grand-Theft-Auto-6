@@ -32,19 +32,19 @@ export async function generateMetadata({
     alt: DEFAULT_OG_IMAGE_ALT,
   };
   return {
-    title: e.name + " — GTA VI Evidence Review",
+    title: e.name + " — GTA VI",
     description: `${e.name} — GTA VI evidence review: what official footage shows, and which statistics are still unverified.`,
     alternates: { canonical: "/vehicles/" + e.slug },
     openGraph: {
       url: "/vehicles/" + e.slug,
       type: "website",
-      title: e.name + " — GTA VI Evidence Review",
+      title: e.name + " — GTA VI",
       description: `${e.name} — GTA VI evidence review: what official footage shows, and which statistics are still unverified.`,
       images: [{ url: ogImage.src, alt: ogImage.alt }],
     },
     twitter: {
       card: "summary_large_image",
-      title: e.name + " — GTA VI Evidence Review",
+      title: e.name + " — GTA VI",
       images: [ogImage.src],
     },
     robots: {

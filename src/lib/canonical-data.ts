@@ -289,6 +289,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "CONFIRMED",
     source: "Rockstar Games Trailer 1 (0:42 mark)",
     description: "Classic American big-block muscle with intoxicating engine roar and high tail-out drifting control. Perfect getaway cruiser for four passengers.",
+    notes: "Spotted in Trailer 2 at 2:33 — the Tulip in the final shot, driving into the sunset. The identification is community-based (the car is not named on screen), so confidence is RUMORED. An earlier draft cited Trailer 1 timestamps for this car that did not check out, so only the Trailer 2 sighting is used here. The Tulip name is from GTA V; that is history. Top speed, price and spawn are unverified.",
     featured: true,
   },
   {
@@ -511,6 +512,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "RUMORED",
     source: "Community research",
     description: "The definitive 1980s Miami icon. Glistening side strakes, pop-up lights, and intoxicating high-RPM exhaust notes scream retro Vice City royalty.",
+    notes: "Spotted in Trailer 1 at 0:34 — a white Cheetah Classic parked on Ocean Drive at dusk, with a louvered rear window and the plate CH33TAH. The identification is community-based (the car is not named on screen), so confidence is RUMORED. The Cheetah Classic name is from GTA V; that is history. Top speed, price and spawn are unverified.",
   },
   {
     id: "seaplane-dodo",
@@ -560,6 +562,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "REPORTED",
     source: "GTA 6 Trailer 2 opening; Rockstar edition promotion",
     description: "Jason's weathered personal pickup in the Leonida Keys; a Retro Build version was promoted.",
+    notes: "Rockstar\'s official Ultimate Edition contents list a customized Vapid Ganado pickup, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so top speed, handling, price and spawn all stay unverified until the game is out.",
     featured: false,
   },
   {
@@ -585,6 +588,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "REPORTED",
     source: "Rockstar edition promotion",
     description: "Army-fatigue livery; listed among Jason's safehouse vehicles.",
+    notes: "Rockstar\'s official Ultimate Edition contents list the Dinka Enduro, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so top speed, handling, price and spawn all stay unverified until the game is out.",
     featured: false,
   },
   {
@@ -610,6 +614,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "REPORTED",
     source: "Rockstar edition promotion",
     description: "Paddle craft listed among Jason's safehouse vehicles.",
+    notes: "Rockstar\'s official Ultimate Edition contents list the Crest Kayak, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so top speed, handling, price and spawn all stay unverified until the game is out.",
     featured: false,
   },
   {
@@ -635,6 +640,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "REPORTED",
     source: "GTA 6 Pink-and-blue boat promoted at",
     description: "Washington Beach with a weapons crate.",
+    notes: "Rockstar\'s official Ultimate Edition contents list the Shitzu Squalo, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so top speed, handling, price and spawn all stay unverified until the game is out.",
     featured: false,
   },
   {
@@ -660,6 +666,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "REPORTED",
     source: "Rockstar edition promotion",
     description: "Mud Club build connected to Paradise Garage in Watson Bay.",
+    notes: "Rockstar\'s official Ultimate Edition contents list the \'67 Vapid Dominator Buggy, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so top speed, handling, price and spawn all stay unverified until the game is out.",
     featured: false,
   },
   {
@@ -685,6 +692,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "REPORTED",
     source: "GTA 6 Vintage Vice City promotional pack",
     description: "Two-tone vintage sedan used as a nostalgia-focused bonus vehicle.",
+    notes: "Rockstar\'s official Vintage Vice City Pack contents (pre-order) list the \'55 Vapid Stanier, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so top speed, handling, price and spawn all stay unverified until the game is out.",
     featured: false,
   },
   {
@@ -710,6 +718,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "REPORTED",
     source: "GTA 6 Classic Car Collection promotion",
     description: "Stars-and-Stripes livery in the promoted Classic Car Collection.",
+    notes: "Rockstar\'s official Ultimate Edition contents list the Schyster Deviant (it is also in Wyman\'s Classic Car Collection), so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so top speed, handling, price and spawn all stay unverified until the game is out.",
     featured: false,
   },
   {
@@ -735,6 +744,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "REPORTED",
     source: "GTA 6 Classic Car Collection promotion",
     description: "Off-road truck included in the promoted vehicle collection.",
+    notes: "Rockstar\'s official Ultimate Edition contents list the Vapid Riata in Wyman\'s Classic Car Collection, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so top speed, handling, price and spawn all stay unverified until the game is out.",
     featured: false,
   },
   {
@@ -885,6 +895,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "RUMORED",
     source: "GTA 6 Trailers 1 and 2 (analyst identification)",
     description: "Lifeguard-liveried example at the beach; another appears in Jason's yard.",
+    notes: "Spotted in Trailer 2 in the lifeguard-beach cutscenes — the Caracara 4x4 appears as Brian Heder\'s vehicle. The identification is community-based (the car is not named on screen), so confidence is RUMORED. The Caracara name is from GTA V; that is history. Top speed, price and spawn are unverified.",
     featured: false,
   },
   {
@@ -910,6 +921,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "RUMORED",
     source: "GTA 6 Trailer 1 supercar highway run (analyst identification)",
     description: "Open-roof supercar in the coastal highway sequence.",
+    notes: "Spotted in Trailer 1 at 0:25 — a red Zorrusso roadster on the Vice City freeway at night, alongside the Furia. The identification is community-based (the car is not named on screen), so confidence is RUMORED. The Zorrusso name is from GTA V; that is history. Top speed, price and spawn are unverified.",
     featured: false,
   },
   {
@@ -935,6 +947,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "RUMORED",
     source: "GTA 6 Trailer 1 supercar highway run (analyst identification)",
     description: "Low, sculpted supercar running ahead of the Zorrusso.",
+    notes: "Spotted in Trailer 1 at 0:25 — a silver-grey Furia on the Vice City freeway at night, seen from a passenger-side angle. The identification is community-based (the car is not named on screen), so confidence is RUMORED. The Furia name is from GTA V; that is history. Top speed, price and spawn are unverified.",
     featured: false,
   },
   {
@@ -1913,6 +1926,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "RUMORED",
     source: "GTA 6 trailer (analyst identification)",
     description: "Trailer 2 grenade-launcher action Police/pursuit-style sedan is destroyed in the explosion sequence.",
+    notes: "Spotted in Trailer 1 at 0:46 — a Buffalo STX in a street takeover in Crosstown at night, seen from above. The identification is community-based (the car is not named on screen), so confidence is RUMORED. The Buffalo STX name is from GTA V; that is history. Top speed, price and spawn are unverified.",
     featured: false,
   },
   {
@@ -2268,7 +2282,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "first-generation-mustang-inspired-coupe",
     slug: "first-generation-mustang-inspired-coupe",
-    name: "Unnamed first- generation Mustang- inspired coupe",
+    name: "Unnamed first-generation Mustang-inspired coupe",
     manufacturer: "Unknown",
     klass: "Muscle Car",
     img: "",
@@ -2293,7 +2307,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "aventador-inspired-supercar",
     slug: "aventador-inspired-supercar",
-    name: "Unnamed Aventador- inspired supercar",
+    name: "Unnamed Aventador-inspired supercar",
     manufacturer: "Unknown",
     klass: "Super Car",
     img: "",
@@ -2318,7 +2332,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "fifth-generation-ram-inspired-pickup",
     slug: "fifth-generation-ram-inspired-pickup",
-    name: "Unnamed fifth- generation Ram- inspired pickup",
+    name: "Unnamed fifth-generation Ram-inspired pickup",
     manufacturer: "Unknown",
     klass: "Off-Road",
     img: "",
@@ -2343,7 +2357,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "ford-explorer-style-police-suv",
     slug: "ford-explorer-style-police-suv",
-    name: "Unnamed Ford Explorer- style police SUV",
+    name: "Unnamed Ford Explorer-style police SUV",
     manufacturer: "Unknown",
     klass: "Off-Road",
     img: "",
@@ -2368,7 +2382,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "chevrolet-sonic-inspired-compact",
     slug: "chevrolet-sonic-inspired-compact",
-    name: "Unnamed Chevrolet Sonic- inspired compact",
+    name: "Unnamed Chevrolet Sonic-inspired compact",
     manufacturer: "Unknown",
     klass: "Sports Car",
     img: "",
@@ -2393,7 +2407,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "second-generation-explorer-inspired-suv",
     slug: "second-generation-explorer-inspired-suv",
-    name: "Unnamed second- generation Explorer- inspired SUV",
+    name: "Unnamed second-generation Explorer-inspired SUV",
     manufacturer: "Unknown",
     klass: "Off-Road",
     img: "",
@@ -2418,7 +2432,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "second-generation-ram-inspired-pickup",
     slug: "second-generation-ram-inspired-pickup",
-    name: "Unnamed second- generation Ram- inspired pickup",
+    name: "Unnamed second-generation Ram-inspired pickup",
     manufacturer: "Unknown",
     klass: "Off-Road",
     img: "",
@@ -2443,7 +2457,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "dodge-caravan-inspired-minivan",
     slug: "dodge-caravan-inspired-minivan",
-    name: "Unnamed Dodge Caravan- inspired minivan",
+    name: "Unnamed Dodge Caravan-inspired minivan",
     manufacturer: "Unknown",
     klass: "Van",
     img: "/img/gta6/dodge-caravan-inspired-minivan.jpg",
@@ -2468,7 +2482,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "1959-cadillac-inspired-car",
     slug: "1959-cadillac-inspired-car",
-    name: "Unnamed 1959 Cadillac- inspired car",
+    name: "Unnamed 1959 Cadillac-inspired car",
     manufacturer: "Unknown",
     klass: "Sports Car",
     img: "",
@@ -2518,7 +2532,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "ram-1500-inspired-bison-variant",
     slug: "ram-1500-inspired-bison-variant",
-    name: "Unnamed Ram 1500- inspired Bison variant",
+    name: "Unnamed Ram 1500-inspired Bison variant",
     manufacturer: "Unknown",
     klass: "Off-Road",
     img: "",
@@ -2543,7 +2557,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
   {
     id: "ram-3500-dually-inspired-pickup",
     slug: "ram-3500-dually-inspired-pickup",
-    name: "Unnamed Ram 3500 dually- inspired pickup",
+    name: "Unnamed Ram 3500 dually-inspired pickup",
     manufacturer: "Unknown",
     klass: "Off-Road",
     img: "",
@@ -2613,6 +2627,32 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "RUMORED",
     source: "GTA 6 Trailer 2 transport montage (analyst identification)",
     description: "Jason rides up the rear of a semi during a vehicle-steal stunt.",
+    featured: false,
+  },
+  {
+    id: "principe-alvino-v1",
+    slug: "principe-alvino-v1",
+    name: "Principe Alvino V1",
+    manufacturer: "Principe",
+    klass: "Motorcycle",
+    img: "",
+    topSpeed: null,
+    acceleration: null,
+    braking: null,
+    handling: null,
+    power: null,
+    weight: "Unknown",
+    seating: null,
+    drivetrain: "Unknown",
+    price: null,
+    priceDisplay: "TBA",
+    purchaseLocation: "TBA",
+    spawnLocations: [],
+    customizationOptions: [],
+    confidence: "REPORTED",
+    source: "Official Rockstar cover art (analyst identification)",
+    description: "Principe Alvino V1 motorcycle, shown on the official GTA VI cover art doing a wheelie on Ocean Drive. Stats, price and spawn are unconfirmed.",
+    notes: "Confirmed on the official cover art — the Alvino V1 is shown doing a wheelie on Ocean Drive. The appearance is officially shown. Stats, price and spawn are unverified.",
     featured: false,
   },
   {
@@ -2788,6 +2828,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "RUMORED",
     source: "GTA 6 Trailer 1 Grassrivers scene (analyst identification)",
     description: "Flat-bottom craft with rear propeller moves through wetlands and scatters flamingos.",
+    notes: "Spotted in Trailer 1 at 0:19 — an airboat cutting through flooded Grassrivers. The identification is community-based (the boat is not named on screen), so confidence is RUMORED. Top speed, price and spawn are unverified.",
     featured: false,
   },
   {
@@ -3148,6 +3189,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 2 (~1:51); official Rockstar promotional material",
     description:
       "Jason's signature handgun with personalized engraved detailing, seen firing from the passenger window of a Bravado Gauntlet Hellfire in Trailer 2. Officially named by Rockstar; damage, capacity and upgrade path are unpublished.",
+    notes: "Rockstar\'s official Ultimate Edition contents list the Girardi ES9 as Jason\'s weapon, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so damage, fire rate, price and unlock all stay unverified until the game is out.",
     img: "",
     manufacturer: "Girardi",
   },
@@ -3173,6 +3215,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar screenshot and promotional material",
     description:
       "Promoted as Lucia's preferred handgun. The personalized promotional version uses rose and signature decoration. No verified combat values have been published.",
+    notes: "Rockstar\'s official Ultimate Edition contents list the Klose K17 as Lucia\'s weapon, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so damage, fire rate, price and unlock all stay unverified until the game is out.",
     img: "",
     manufacturer: "Klose",
   },
@@ -3222,6 +3265,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official GTA 6 Ultimate Edition promotional material",
     description:
       "His-and-hers personalized large-frame magnum revolvers associated with Jason and Lucia. Promotional art shows engraved Vice City styling, palm-tree grip decoration, character initials and a mounted optic. Tied to the Ultimate Edition; base-game availability is unconfirmed.",
+    notes: "Rockstar\'s official Ultimate Edition contents list the Hawk & Little Morgan Revolvers as a matching pair, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so damage, fire rate, price and unlock all stay unverified until the game is out.",
     img: "",
     manufacturer: "Hawk & Little",
   },
@@ -3247,6 +3291,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Ambrosia-region screenshot",
     description:
       "A revolver with visible Mustang .357 and Duke Arms Company markings, held by a biker in an official Ambrosia-region screenshot. Whether the player can equip this exact version is unconfirmed.",
+    notes: "An official Rockstar screenshot from Ambrosia shows the name \'Mustang .357\' engraved on the barrel, so this appearance is officially shown — not a rumour. The screenshot gives no gameplay detail beyond the name, so damage, fire rate, price and unlock all stay unverified until the game is out.",
     img: "",
     manufacturer: "Duke Arms Company",
   },
@@ -3394,6 +3439,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Grassrivers hunter/poacher screenshot",
     description:
       "Full-length rifle with traditional stock profile shown beside a mud-covered hunter in Grassrivers. The still confirms the model exists, not that it is player-equippable.",
+    notes: "An official Rockstar screenshot from Grassrivers shows a mud-covered hunter carrying an M1A-pattern rifle, so this appearance is officially shown — not a rumour. The screenshot gives no gameplay detail beyond the look, so damage, fire rate, price and unlock all stay unverified until the game is out.",
     img: "",
   },
   {
@@ -3467,6 +3513,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar woodland screenshot (two hunters)",
     description:
       "Multiple long guns with scopes visible with two hunters walking through the woods. The view is insufficient to prove every rifle is the same model; kept as a generic bolt-action hunting-rifle classification.",
+    notes: "An official Rockstar promotional image from the Mount Kalaga forest shows hunters with scoped bolt-action rifles, so this appearance is officially shown — not a rumour. The image gives no gameplay detail beyond the look, so damage, fire rate, price and unlock all stay unverified until the game is out.",
     img: "",
   },
   {
@@ -3515,6 +3562,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 2 (~2:11), Phil's Ammu-Nation commercial",
     description:
       "Large automatic weapon lifted by the shopkeeper during Phil's Ammu-Nation commercial in Trailer 2, shown in front of a gun wall. The Ammu-Nation presentation strongly suggests an obtainable weapon class, but stats and purchase conditions are unannounced.",
+    notes: "Spotted in Trailer 2 at 2:09 — Phil fires an LMG from a rooftop during the Ammu-Nation commercial. The identification is community-based (the weapon is not named on screen), so confidence is RUMORED. Damage, fire rate, price and unlock are all unverified.",
     img: "",
   },
   {
@@ -3611,6 +3659,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "Official Rockstar Port Gellhorn character screenshot",
     description:
       "Conventional wooden or dark-finished bat carried by an NPC in Port Gellhorn. A recurring GTA melee class, but GTA 6 mechanics and player usability remain unconfirmed.",
+    notes: "Spotted in Trailer 1 in the liquor-store robbery sequence — a baseball bat is visible during the robbery. The identification is community-based (the weapon is not named on screen), so confidence is RUMORED. Damage, price and unlock are all unverified.",
     img: "",
   },
   {
@@ -3659,6 +3708,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 Trailer 1 (motel fight) and Trailer 2 (cargo-plane fight)",
     description:
       "Hand-to-hand combat shown across both trailers — punches and physical fighting without a held weapon. Unarmed fighting is visually established; the control system, damage model and moves are unpublished.",
+    notes: "Spotted in Trailer 2 in the fist-fight scenes — unarmed combat is shown directly on screen. This is footage rather than a named weapon, so the \'Unarmed Combat\' label is a cataloguing choice and confidence is RUMORED. Damage and mechanics are unverified.",
     img: "",
   }
 ];

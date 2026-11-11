@@ -174,6 +174,9 @@ function dbWeaponToDisplay(w: WeaponCatalogRow, c?: CanonicalWeapon): CanonicalW
       (w.verification === "verified" ? "CONFIRMED" : "SPECULATION"),
     source: c?.source || "In-game Database",
     description: w.notes || c?.description || `${w.name} in Grand Theft Auto VI.`,
+    /* Honest spotting note from the canonical entry (renders as "What was
+       spotted"); the DB w.notes is a stats summary used as description. */
+    notes: c?.notes,
     img: w.image || c?.img || "",
 
     /* Deep-dive fields (DB first → canonical → category defaults) */

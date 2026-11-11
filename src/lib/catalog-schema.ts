@@ -13,7 +13,7 @@ export function catalogSchema(
         "@type": "WebPage",
         "@id": page + "#webpage",
         url: page,
-        name: `${entry.name} - GTA VI Evidence Review`,
+        name: `${entry.name} - GTA VI`,
         isPartOf: { "@id": base + "/#website" },
         breadcrumb: { "@id": page + "#breadcrumb" },
         mainEntity: { "@id": page + "#entity" },
