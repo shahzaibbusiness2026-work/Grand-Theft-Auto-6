@@ -9,24 +9,16 @@ import { EvidenceCatalog } from "@/components/evidence-catalog";
 import { SectionErrorBoundary } from "@/components/section-error-boundary";
 import { RelatedArticles } from "@/components/related-articles";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
-import { readCatalogState } from "@/lib/catalog-url-state";
 import { serializeJsonLd } from "@/lib/utils";
 import { itemListJsonLd } from "@/lib/page-metadata";
 import styles from "@/components/catalog-ui.module.css";
 
-export default async function CatalogPage({
-  searchParams,
-}: {
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
-}) {
+export default async function CatalogPage() {
+  // No searchParams on this page: awaiting it would force the whole route
+  // dynamic (every hit re-renders, ~1.3s+ TTFB, no cache). The catalog
+  // reads ?page=N client-side instead (EvidenceCatalog's CatalogUrlSync),
+  // so the page prerenders and is served from the ISR cache.
   const entries = await getEvidenceCatalog("weapons");
-  const raw = (await searchParams) || {};
-  const params = new URLSearchParams();
-  for (const [key, value] of Object.entries(raw)) {
-    if (typeof value === "string") params.set(key, value);
-  }
-  // Server pagination (?page=N) so crawlers can reach every detail page.
-  const initialPage = readCatalogState(params, entries, 24).page;
   return (
     <SiteShell>
       <script
@@ -52,7 +44,7 @@ export default async function CatalogPage({
       <section className={styles.area} aria-label="Weapons catalog">
         <CatalogSwitcher kind="weapons" />
         <SectionErrorBoundary fallbackTitle="Could not load weapons. Please try refreshing.">
-          <EvidenceCatalog kind="weapons" entries={entries} initialPage={initialPage} />
+          <EvidenceCatalog kind="weapons" entries={entries} />
         </SectionErrorBoundary>
       </section>
       <RelatedArticles category="Weapons" title="Weapons Guides & News" />

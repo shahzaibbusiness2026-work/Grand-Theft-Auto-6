@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "@/components/player-tool-link";
 import { trackPublicEvent } from "@/lib/public-events";
 import {
@@ -96,20 +96,31 @@ function Filters(p: FiltersProps) {
   );
 }
 
+// Reads the URL search params client-side and syncs catalog state.
+// useSearchParams suspends during static prerendering, so this component
+// must live inside a Suspense boundary (see the usage in EvidenceCatalog).
+// The boundary renders nothing while suspended, so the catalog itself still
+// prerenders fully — only the URL sync waits for hydration.
+function CatalogUrlSync({
+  onSync,
+}: {
+  onSync: (params: URLSearchParams) => void;
+}) {
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    onSync(new URLSearchParams(searchParams.toString()));
+  }, [searchParams, onSync]);
+  return null;
+}
+
 export function EvidenceCatalog({
   kind,
   entries,
   compare = false,
-  // Server-read ?page=N (hub pages pass it from searchParams). Without it,
-  // only the first 24 entries are ever in the HTML and the other ~86
-  // vehicle / ~10 weapon detail pages are unreachable to crawlers — the
-  // "Show more" button is JS-only, so no crawler can follow it.
-  initialPage,
 }: {
   kind: CatalogKind;
   entries: EvidenceEntry[];
   compare?: boolean;
-  initialPage?: number;
 }) {
   const [query, setQueryState] = useState("");
   const [category, setCategoryState] = useState("");
@@ -119,9 +130,9 @@ export function EvidenceCatalog({
   const [recent, setRecent] = useState<string[]>([]);
   const [recentOnly, setRecentOnly] = useState(false);
   const [sort, setSortState] = useState("name");
-  const [limit, setLimitState] = useState(
-    (initialPage ?? 1) * (compare ? 8 : 24),
-  );
+  // First page by default; CatalogUrlSync expands this from ?page=N
+  // client-side after hydration (and on pagination navigation).
+  const [limit, setLimitState] = useState(compare ? 8 : 24);
   const [pickerOpen, setPickerOpen] = useState(false);
   const picker = useRef<HTMLDialogElement>(null);
   // Slots shown in the comparison workspace. Two by default; picking more
@@ -164,49 +175,39 @@ export function EvidenceCatalog({
   const setSort = (sort: string) => writeState({ sort, page: 1 });
   const setLimit = (limit: number) =>
     writeState({ page: Math.ceil(limit / pageSize) });
+  // Sync catalog state from the URL (?q, ?category, ?sort, ?page, ?ids).
+  // Runs on mount and whenever the search params change — pagination
+  // <Link> clicks, back/forward, and shared deep links. The hub pages are
+  // static (no server-side searchParams), so this client-side sync is what
+  // makes ?page=N work. It lives in a suspended child (CatalogUrlSync
+  // below) so the catalog itself still prerenders fully on the server.
+  const syncFromParams = useCallback(
+    (params: URLSearchParams) => {
+      const state = readCatalogState(params, entries, compare ? 8 : 24);
+      setQueryState(state.q);
+      setCategoryState(state.category);
+      setSortState(state.sort);
+      setLimitState(state.page * (compare ? 8 : 24));
+      const initialSelected = selectionFromParams(params, kind, entries);
+      setSelected(initialSelected);
+      // Slots follow the selection: never fewer than two, never more than
+      // four, and never fewer than the picks the URL already carries.
+      setSlotCount(Math.max(2, Math.min(4, initialSelected.length)));
+    },
+    [entries, kind, compare],
+  );
   useEffect(() => {
     const update = () => {
       const state = getStoredUserState();
       setFavorites(state.favorites[kind]);
       setRecent(state.recentCatalogIds[kind]);
     };
-    const restore = () => {
-      const state = readCatalogState(
-        new URLSearchParams(window.location.search),
-        entries,
-        compare ? 8 : 24,
-      );
-      setQueryState(state.q);
-      setCategoryState(state.category);
-      setSortState(state.sort);
-      setLimitState(state.page * (compare ? 8 : 24));
-      const initialSelected = selectionFromParams(
-        new URLSearchParams(window.location.search),
-        kind,
-        entries,
-      );
-      setSelected(initialSelected);
-      // Slots follow the selection: never fewer than two, never more than
-      // four, and never fewer than the picks the URL already carries.
-      setSlotCount(Math.max(2, Math.min(4, initialSelected.length)));
-    };
     update();
-    restore();
     window.addEventListener("gta6_user_state_change", update);
-    window.addEventListener("popstate", restore);
     return () => {
       window.removeEventListener("gta6_user_state_change", update);
-      window.removeEventListener("popstate", restore);
     };
-  }, [kind, entries, compare]);
-  // Server pagination (?page=N) arrives as a prop: client-side navigation
-  // between ?page= URLs preserves this component's state, so keep the
-  // rendered limit in sync when the prop changes. (The restore effect
-  // above covers mount + back/forward; this covers <Link> navigation.)
-  useEffect(() => {
-    if (initialPage !== undefined)
-      setLimitState(initialPage * (compare ? 8 : 24));
-  }, [initialPage, compare]);
+  }, [kind]);
   useEffect(() => {
     if (!pickerOpen) return;
     const previous = document.body.style.overflow;
@@ -268,9 +269,11 @@ export function EvidenceCatalog({
         ? recentRank(a.id) - recentRank(b.id)
         : (sort === "reverse" ? -1 : 1) * a.name.localeCompare(b.name),
     );
-  // Crawlable server pagination: real links to every ?page=N, so crawlers
-  // can reach every detail page (see initialPage above). Mirrors
-  // catalogStateUrl: defaults (page 1, sort name) stay out of the URL.
+  // Crawlable pagination: real links to every ?page=N, so crawlers can
+  // reach every detail page (the sitemap lists them all too). The hub pages
+  // are static, so ?page=N serves the same first-page HTML and the catalog
+  // expands to the requested page client-side (CatalogUrlSync above).
+  // Mirrors catalogStateUrl: defaults (page 1, sort name) stay out of the URL.
   const pathname = usePathname();
   const totalPages = Math.max(1, Math.ceil(shown.length / pageSize));
   const currentPage = Math.min(
@@ -507,6 +510,9 @@ export function EvidenceCatalog({
       id={compare ? "comparison-workspace" : "catalog-browser"}
       style={{ scrollMarginTop: 90 }}
     >
+      <Suspense fallback={null}>
+        <CatalogUrlSync onSync={syncFromParams} />
+      </Suspense>
       <div className={styles.notice}>
         <ShieldCheck size={17} aria-hidden="true" />
         <p>
