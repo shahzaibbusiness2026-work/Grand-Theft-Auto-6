@@ -250,7 +250,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
             })
           : "Recent",
         read: row.read_time || "4 min read",
-        img: row.cover_image || "/img/hero-dark.jpg",
+        img: row.cover_image || "/img/hero-vice-skyline-hd.jpg",
         tag: row.tag || row.category || "News",
         slug: row.slug,
         category: row.category,

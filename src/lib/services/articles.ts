@@ -274,7 +274,7 @@ export async function saveArticle(
       author_name: article.author?.name || "Taish Team",
       author_avatar: article.author?.avatar || "/img/avatar-admin.svg",
       author_role: article.author?.role || "Staff Writer",
-      cover_image: article.coverImage || "/img/hero-dark.jpg",
+      cover_image: article.coverImage || "/img/hero-vice-skyline-hd.jpg",
       read_time: readingTime(article.content || ""),
       views: article.views || 0,
       tags: article.tags || ["GTA 6"],

@@ -12,10 +12,10 @@ export const metadata: Metadata = {
       "GTA 6 weapon identifications and source reviews. Unsupported model names and gameplay values remain unverified.",
     images: [
       {
-        url: "/img/hero-dark.jpg",
-        alt: "Editorial illustration for the weapon catalog",
+        url: "/img/ammu-nation.jpg",
+        alt: "Ammu-Nation gun store in GTA VI",
       },
     ],
   },
-  twitter: { card: "summary_large_image", images: ["/img/hero-dark.jpg"] },
+  twitter: { card: "summary_large_image", images: ["/img/ammu-nation.jpg"] },
 };

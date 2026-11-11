@@ -10,7 +10,7 @@
  * (or explicitly include `images`), so the share image can never be lost
  * again. The weekly live-audit sweep re-checks og:image on every template.
  */
-export const DEFAULT_OG_IMAGE = "/img/hero-dark.jpg";
+export const DEFAULT_OG_IMAGE = "/img/hero-vice-skyline-hd.jpg";
 export const DEFAULT_OG_IMAGE_ALT =
   "Taish Gaming — GTA 6 Leonida skyline";
 

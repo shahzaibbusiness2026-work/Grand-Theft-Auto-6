@@ -49,13 +49,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       url: "/",
-      images: [{ url: "/img/hero-dark.jpg", alt: title }],
+      images: [{ url: "/img/hero-vice-skyline-hd.jpg", alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/img/hero-dark.jpg"],
+      images: ["/img/hero-vice-skyline-hd.jpg"],
     },
   };
 }

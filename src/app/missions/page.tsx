@@ -122,7 +122,7 @@ export default async function MissionsPage() {
       <section className="container-site pt-6">
         <div className="card-surface relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
           <ThemeImage
-            dark="/img/hero-dark.jpg"
+            dark="/img/hero-vice-skyline-hd.jpg"
             light="/img/boat.jpg"
             alt="Leonida Missions"
             className="absolute right-0 top-0 h-full w-full object-cover"

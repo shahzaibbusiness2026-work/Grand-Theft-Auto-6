@@ -15,7 +15,7 @@ export function CompanionHero({ userName = "Player", siteStats }: { userName?: s
   ];
   return <section className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm" aria-label="Your player overview">
     <div className="dark-panel relative isolate overflow-hidden bg-[#0c1222] px-5 py-7 sm:px-8 sm:py-9">
-      <SafeImage src="/img/hero-dark.jpg" alt="" fill sizes="(max-width: 768px) 100vw, 1200px" className="z-0 object-cover object-center" />
+      <SafeImage src="/img/hero-vice-skyline-hd.jpg" alt="" fill sizes="(max-width: 768px) 100vw, 1200px" className="z-0 object-cover object-center" />
       <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/45 via-black/10 to-transparent" />
       <div className="relative z-20 max-w-2xl rounded-2xl bg-black/60 p-4 sm:p-5">
       <p className="text-xs font-bold uppercase tracking-[0.18em] text-pink-300">Taish Gaming · Your player workspace</p>

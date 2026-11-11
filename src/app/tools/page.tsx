@@ -13,14 +13,14 @@ export const metadata: Metadata = {
     title: "GTA 6 Tools, Trackers & Calculators | Taish Gaming",
     description:
       "Explore Taish Gaming's GTA 6 interactive tools, including the Leonida map, vehicle and weapon comparisons, completion tracker, calculators and planners.",
-    images: ["/img/hero-dark.jpg"],
+    images: ["/img/hero-vice-skyline-hd.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "GTA 6 Tools, Trackers & Calculators | Taish Gaming",
     description:
       "Explore Taish Gaming's GTA 6 interactive tools, including the Leonida map, vehicle and weapon comparisons, completion tracker, calculators and planners.",
-    images: ["/img/hero-dark.jpg"],
+    images: ["/img/hero-vice-skyline-hd.jpg"],
   },
 };
 

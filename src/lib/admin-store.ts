@@ -285,7 +285,7 @@ export const INITIAL_SEO_SETTINGS: AdminSeoSettings = {
   titleTemplate: "{title} | Taish Gaming",
   metaDescription: "Your independent guide to GTA 6. News, articles, locations, vehicles, weapons and more — all in one place.",
   canonicalBaseUrl: "",
-  socialPreviewImage: "/img/hero-dark.jpg",
+  socialPreviewImage: "/img/hero-vice-skyline-hd.jpg",
   excludeDraftsAndArchived: true,
   redirects: []
 };
