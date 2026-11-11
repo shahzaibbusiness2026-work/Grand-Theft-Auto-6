@@ -41,17 +41,7 @@ export default async function Page() {
                     item: "https://www.taishgaming.com/tools/loadout-builder",
                   },
                 ],
-              },
-              {
-                "@type": "WebApplication",
-                name: "GTA VI Personal Loadout Planner",
-                description:
-                  "Save personal equipment plans locally. Weapon identifications and loadout rules remain subject to source review.",
-                url: "https://www.taishgaming.com/tools/loadout-builder",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
+              }
             ],
           }),
         }}

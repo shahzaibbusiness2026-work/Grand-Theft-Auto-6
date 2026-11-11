@@ -45,17 +45,7 @@ export default function DownloadTimeCalculatorPage() {
                     item: "https://www.taishgaming.com/tools/download-time-calculator",
                   },
                 ],
-              },
-              {
-                "@type": "WebApplication",
-                name: "GTA 6 Download Time Calculator",
-                description:
-                  "How long will the GTA 6 pre-load take? Enter your download speed and game size to estimate ideal and realistic download times, plus the free space to keep.",
-                url: "https://www.taishgaming.com/tools/download-time-calculator",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
+              }
             ],
           }),
         }}

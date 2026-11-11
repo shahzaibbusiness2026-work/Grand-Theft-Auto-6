@@ -36,16 +36,7 @@ export default function PhotoSpotFinderPage() {
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
                   { "@type": "ListItem", position: 3, name: title, item: "https://www.taishgaming.com/tools/photo-spot-finder" },
                 ],
-              },
-              {
-                "@type": "WebApplication",
-                name: title,
-                description,
-                url: "https://www.taishgaming.com/tools/photo-spot-finder",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
+              }
             ],
           }),
         }}

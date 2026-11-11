@@ -1,0 +1,37 @@
+# Taish Gaming — GTA 6 Database, Map & Guides
+
+> Taish Gaming is an independent GTA 6 (Grand Theft Auto VI) database, map and guide site.
+> It separates Rockstar-confirmed facts, trailer observations, attributed reporting and
+> fan speculation, and labels each claim with its evidence level. Nothing is labelled
+> "Confirmed" unless Rockstar officially confirmed it.
+
+## Key facts
+
+- GTA 6 launches November 19, 2026, on PlayStation 5 and Xbox Series X|S (local midnight).
+- Pre-load opened November 10, 2026; download size up to 212 GB.
+- Standard Edition $79.99; Ultimate Edition $99.99. No early access.
+- No crossplay at launch; single-player only, no online mode announced.
+- 30 FPS target on all consoles (Rockstar, November 10, 2026).
+
+## Main pages
+
+- [Home](https://www.taishgaming.com/): GTA 6 database, countdown, news and tools.
+- [GTA 6 Map](https://www.taishgaming.com/map): Interactive Leonida map with markers.
+- [GTA 6 Vehicles](https://www.taishgaming.com/vehicles): Vehicle database with trailer evidence.
+- [GTA 6 Weapons](https://www.taishgaming.com/weapons): Weapon database with trailer evidence.
+- [GTA 6 Characters](https://www.taishgaming.com/characters): Lucia, Jason and the full cast.
+- [GTA 6 News](https://www.taishgaming.com/news): Official updates and analysis.
+- [GTA 6 Guides](https://www.taishgaming.com/guides): Map, characters and release guides.
+- [GTA 6 Tools](https://www.taishgaming.com/tools): Map, comparisons, calculators and trackers.
+- [GTA 6 Regions](https://www.taishgaming.com/regions): The six named destinations of Leonida.
+- [GTA 6 World](https://www.taishgaming.com/gta-6-world): Locations, wildlife, businesses and more.
+- [GTA 6 Money Guide](https://www.taishgaming.com/money-guide): Money-making claims, checked against evidence.
+- [GTA 6 Controls](https://www.taishgaming.com/controls): Verified control defaults.
+- [Compare Vehicles](https://www.taishgaming.com/compare/vehicles): Side-by-side vehicle comparison.
+- [Compare Weapons](https://www.taishgaming.com/compare/weapons): Side-by-side weapon comparison.
+
+## About
+
+- [About Taish Gaming](https://www.taishgaming.com/about)
+- [Editorial Policy](https://www.taishgaming.com/editorial-policy)
+- [Corrections](https://www.taishgaming.com/corrections)

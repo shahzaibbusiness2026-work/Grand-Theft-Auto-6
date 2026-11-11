@@ -48,16 +48,7 @@ export default function MapDistanceCalculatorPage() {
                     item: "https://www.taishgaming.com/tools/map-distance-calculator",
                   },
                 ],
-              },
-              {
-                "@type": "WebApplication",
-                name: "GTA 6 Map Distance Calculator \u2014 Travel Times Between Locations",
-                description: PUBLIC_TOOL_COPY["/tools/map-distance-calculator"],
-                url: "https://www.taishgaming.com/tools/map-distance-calculator",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
+              }
             ],
           }),
         }}

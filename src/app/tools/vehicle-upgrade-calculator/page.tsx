@@ -37,15 +37,6 @@ export default function VehicleUpgradeCalculatorPage() {
                 ],
               },
               {
-                "@type": "WebApplication",
-                name: title,
-                description,
-                url: "https://www.taishgaming.com/tools/vehicle-upgrade-calculator",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
-              {
                 "@type": "FAQPage",
                 mainEntity: [
                   {

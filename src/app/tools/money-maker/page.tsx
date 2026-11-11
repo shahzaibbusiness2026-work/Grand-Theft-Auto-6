@@ -49,17 +49,7 @@ export default function MoneyMakerPage() {
                     item: "https://www.taishgaming.com/tools/money-maker",
                   },
                 ],
-              },
-              {
-                "@type": "WebApplication",
-                name: "Money-Making Method Finder & Grinding Strategies \u2014 Taish Gaming",
-                description:
-                  "Compare net hourly returns using your own payout, cost and duration assumptions. No verified GTA VI economy data is supplied.",
-                url: "https://www.taishgaming.com/tools/money-maker",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
+              }
             ],
           }),
         }}

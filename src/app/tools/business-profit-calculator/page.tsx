@@ -48,17 +48,7 @@ export default function BusinessProfitCalculatorPage() {
                     item: "https://www.taishgaming.com/tools/business-profit-calculator",
                   },
                 ],
-              },
-              {
-                "@type": "WebApplication",
-                name: "Business Profit & ROI Scenario Calculator",
-                description:
-                  "Model net profit, losses and break-even time with editable assumptions. Example values are not verified GTA VI business data.",
-                url: "https://www.taishgaming.com/tools/business-profit-calculator",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
+              }
             ],
           }),
         }}

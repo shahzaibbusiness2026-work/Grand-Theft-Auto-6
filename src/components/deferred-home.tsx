@@ -38,7 +38,7 @@ export function DeferredHome({
     return () => observer.disconnect();
   }, []);
   return (
-    <div ref={node} style={{ minHeight: kind === "map" ? 720 : 900 }}>
+    <div ref={node} style={kind === "map" ? { minHeight: 720 } : undefined}>
       {visible ? (
         kind === "map" ? (
           <Map />

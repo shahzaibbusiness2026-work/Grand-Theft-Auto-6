@@ -50,15 +50,6 @@ export default function DayNightConverterPage() {
                 ],
               },
               {
-                "@type": "WebApplication",
-                name: "GTA 6 Day/Night Time Converter \u2014 Real Time to Game Time",
-                description: PUBLIC_TOOL_COPY["/tools/day-night-converter"],
-                url: "https://www.taishgaming.com/tools/day-night-converter",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
-              {
                 "@type": "FAQPage",
                 mainEntity: [
                   {

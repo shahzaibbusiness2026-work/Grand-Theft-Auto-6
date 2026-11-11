@@ -31,16 +31,7 @@ export default function CountdownWidgetPage() {
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
                   { "@type": "ListItem", position: 3, name: "GTA 6 Release Time & Countdown", item: "https://www.taishgaming.com/tools/countdown-widget" },
                 ],
-              },
-              {
-                "@type": "WebApplication",
-                name: "GTA 6 Release Time & Countdown",
-                description: "GTA 6 launches 19 November 2026 on PS5 and Xbox, preload from 10 November. Live countdown in your timezone, local launch time and a free embed.",
-                url: "https://www.taishgaming.com/tools/countdown-widget",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
+              }
             ],
           }),
         }}

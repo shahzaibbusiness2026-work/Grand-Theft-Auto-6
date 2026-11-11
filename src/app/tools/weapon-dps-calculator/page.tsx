@@ -48,16 +48,7 @@ export default function WeaponDpsCalculatorPage() {
                     item: "https://www.taishgaming.com/tools/weapon-dps-calculator",
                   },
                 ],
-              },
-              {
-                "@type": "WebApplication",
-                name: "GTA 6 Weapon DPS Calculator \u2014 Damage, Fire Rate & Attachments",
-                description: PUBLIC_TOOL_COPY["/tools/weapon-dps-calculator"],
-                url: "https://www.taishgaming.com/tools/weapon-dps-calculator",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
+              }
             ],
           }),
         }}

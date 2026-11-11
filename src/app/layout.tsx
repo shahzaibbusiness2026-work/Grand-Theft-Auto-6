@@ -117,21 +117,7 @@ export default function RootLayout({
         name: "Taish Gaming",
         description: "The Ultimate GTA 6 Companion Platform & Database",
         publisher: { "@id": `${siteUrl}/#organization` },
-      },
-      {
-        "@type": "VideoGame",
-        "@id": `${siteUrl}/#game`,
-        name: "Grand Theft Auto VI",
-        alternateName: ["GTA 6", "GTA VI", "Grand Theft Auto 6"],
-        description:
-          "Grand Theft Auto VI heads to the state of Leonida, home to the neon-soaked streets of Vice City and beyond.",
-        genre: ["Action-adventure", "Open world", "Action"],
-        gamePlatform: ["PlayStation 5", "Xbox Series X and Series S"],
-        publisher: {
-          "@type": "Organization",
-          name: "Rockstar Games",
-        },
-      },
+      }
     ],
   };
 

@@ -50,16 +50,6 @@ export default function MoneyCalculatorPage() {
                 ],
               },
               {
-                "@type": "WebApplication",
-                name: "GTA 6 Money Calculator \u2014 Hours, Missions & Estimated Goal Date",
-                description:
-                  "Estimate savings time from your own income and goal assumptions. Example inputs are illustrative, not verified GTA VI payouts or prices.",
-                url: "https://www.taishgaming.com/tools/money-calculator",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
-              {
                 "@type": "FAQPage",
                 mainEntity: [
                   {

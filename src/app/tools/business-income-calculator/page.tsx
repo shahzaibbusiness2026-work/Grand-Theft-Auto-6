@@ -35,16 +35,7 @@ export default function BusinessIncomeCalculatorPage() {
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
                   { "@type": "ListItem", position: 3, name: title, item: "https://www.taishgaming.com/tools/business-income-calculator" },
                 ],
-              },
-              {
-                "@type": "WebApplication",
-                name: title,
-                description,
-                url: "https://www.taishgaming.com/tools/business-income-calculator",
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Web",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
+              }
             ],
           }),
         }}
