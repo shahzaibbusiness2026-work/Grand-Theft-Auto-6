@@ -3,12 +3,7 @@ import { getWorldMedia } from "./world-media";
 
 const references: Record<string, string> = {
   "m4-carbine": "/img/weapons/m4-carbine.jpg",
-  "glock-21": "/img/weapons/glock-21.jpg",
   "tactical-smg": "/img/gta6/tactical-smg.webp",
-  "rpg-7": "/img/gta6/grenade-launcher.webp",
-  "combat-knife": "/img/gta6/tactical-knife.jpg",
-  "girardi-es9": "/img/weapons/girardi-es9.jpg",
-  "klose-k17": "/img/weapons/klose-k17.jpg",
   "hawk-little-morgan-revolvers":
     "/img/weapons/hawk-little-morgan-revolvers.jpg",
   "mustang-357": "/img/weapons/mustang-357.jpg",
@@ -19,12 +14,9 @@ const references: Record<string, string> = {
     "/img/weapons/duke-arms-special-ops-carbine.jpg",
   "duke-arms-assault-sniper": "/img/weapons/duke-arms-assault-sniper.jpg",
   "remington-700-style-rifle": "/img/weapons/remington-700-style-rifle.jpg",
-  "long-barrel-double-shotgun": "/img/weapons/long-barrel-double-shotgun.jpg",
-  "claw-hammers": "/img/weapons/claw-hammers.jpg",
   "pool-cue": "/img/weapons/pool-cue.jpg",
   "minigolf-club": "/img/weapons/minigolf-club.jpg",
   "baseball-bat": "/img/weapons/baseball-bat.jpg",
-  "switchblade-knife": "/img/weapons/switchblade-knife.jpg",
 };
 
 export function relatedCatalogScene(kind: CatalogKind, entry?: { id: string }) {
@@ -50,7 +42,16 @@ export function catalogArtwork(
 ) {
   const image =
     entry.img?.trim() || (kind === "weapons" ? references[entry.id] : "");
-  if (!image) return relatedCatalogScene(kind, entry);
+  if (!image) {
+    // No verified image of this entry: text-only. The generic related
+    // trailer scene is not a picture of this entry — it was shared by 19
+    // vehicles and 11 weapons, so it reads as a cover for a subject it
+    // does not show. Exception: unarmed-combat keeps its related
+    // activities scene (Lucia boxing), which is on-topic for the entry.
+    if (kind === "weapons" && entry.id === "unarmed-combat")
+      return relatedCatalogScene(kind, entry);
+    return null;
+  }
   return {
     src: image,
     alt: `${entry.name}: provisional catalog reference image.`,

@@ -43,33 +43,35 @@ export function EvidenceDetail({
         Editorial identification · {entry.category}
       </p>
       <h1 className="font-display text-4xl font-bold">{entry.name}</h1>
-      <figure className="overflow-hidden rounded-2xl border border-border bg-card">
-        <div className="relative aspect-video">
-          <CatalogArtwork
-            kind={kind}
-            entry={entry}
-            priority
-            sizes="(max-width: 768px) 100vw, 850px"
-          />
-        </div>
-        <figcaption className="px-4 py-3 text-xs leading-relaxed text-muted-foreground">
-          {artwork.caption}
-          {artwork.sourceUrl && (
-            <>
-              {" "}
-              <a
-                href={artwork.sourceUrl}
-                className="underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Official trailer source
-              </a>
-              .
-            </>
-          )}
-        </figcaption>
-      </figure>
+      {artwork && (
+        <figure className="overflow-hidden rounded-2xl border border-border bg-card">
+          <div className="relative aspect-video">
+            <CatalogArtwork
+              kind={kind}
+              entry={entry}
+              priority
+              sizes="(max-width: 768px) 100vw, 850px"
+            />
+          </div>
+          <figcaption className="px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+            {artwork.caption}
+            {artwork.sourceUrl && (
+              <>
+                {" "}
+                <a
+                  href={artwork.sourceUrl}
+                  className="underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Official trailer source
+                </a>
+                .
+              </>
+            )}
+          </figcaption>
+        </figure>
+      )}
       <p>
         {entry.claims.some((c) => c.field === "GTA VI appearance")
           ? "A GTA VI appearance claim has been reviewed below. Its source and scope apply only to that claim; the catalog identification does not verify performance, price or availability."

@@ -387,14 +387,16 @@ export default async function MissionDetailPage({
         {relatedLocation && (
           <div className="mt-8 card-surface p-6 rounded-3xl border border-border flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <img
-                loading="lazy"
-                src={relatedLocation.img}
-                alt={relatedLocation.name}
-                width={80}
-                height={64}
-                className="h-16 w-20 rounded-2xl object-cover border border-border"
-              />
+              {relatedLocation.img ? (
+                <img
+                  loading="lazy"
+                  src={relatedLocation.img}
+                  alt={relatedLocation.name}
+                  width={80}
+                  height={64}
+                  className="h-16 w-20 rounded-2xl object-cover border border-border"
+                />
+              ) : null}
               <div>
                 <span className="text-xs uppercase font-bold text-muted-foreground">
                   Mission District & Hotspot

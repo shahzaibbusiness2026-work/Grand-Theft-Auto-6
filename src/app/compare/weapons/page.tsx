@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     title: "GTA 6 Weapon Comparison Tool | Compare Guns & Evidence",
     description:
       "Compare GTA 6 weapons side by side — every weapon spotted in official footage, with evidence labels. No stats are claimed before launch.",
-    images: ["/img/ammu-nation.jpg"],
+    images: ["/img/world-evidence/gta-6-handgun-robbery-scene-trailer-1.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: "GTA 6 Weapon Comparison Tool | Compare Guns & Evidence",
     description:
       "Compare GTA 6 weapons side by side — every weapon spotted in official footage, with evidence labels. No stats are claimed before launch.",
-    images: ["/img/ammu-nation.jpg"],
+    images: ["/img/world-evidence/gta-6-handgun-robbery-scene-trailer-1.webp"],
   },
 };
 

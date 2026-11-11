@@ -391,14 +391,16 @@ export function PropertiesClient({
               {comparedProps.map((p, idx) => (
                 <div key={p.id} className="space-y-4">
                   <div className="h-36 rounded-xl overflow-hidden relative bg-background">
-                    <Image
-                      src={p.img}
-                      alt={`${p.name} - GTA 6 Property`}
-                      fill
-                      sizes="280px"
-                      className="object-cover"
-                      loading="lazy"
-                    />
+                    {p.img ? (
+                      <Image
+                        src={p.img}
+                        alt={`${p.name} - GTA 6 Property`}
+                        fill
+                        sizes="280px"
+                        className="object-cover"
+                        loading="lazy"
+                      />
+                    ) : null}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute bottom-2 left-2 right-2">
                       <span className="text-xs uppercase font-bold text-primary block">

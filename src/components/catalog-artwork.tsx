@@ -21,6 +21,9 @@ export function CatalogArtwork({
   const initial = catalogArtwork(kind, entry);
   const [failedSrc, setFailedSrc] = useState("");
   const [unavailableSrc, setUnavailableSrc] = useState("");
+  // No verified image of this entry: render nothing (text-only). The
+  // caller is responsible for hiding the image container.
+  if (!initial) return null;
   const art =
     failedSrc === initial.src ? relatedCatalogScene(kind, entry) : initial;
   const unavailable = unavailableSrc === initial.src;

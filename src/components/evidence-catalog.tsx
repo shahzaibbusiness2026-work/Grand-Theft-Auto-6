@@ -16,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { CatalogArtwork } from "@/components/catalog-artwork";
+import { catalogArtwork } from "@/lib/catalog-artwork";
 import { EvidenceComparison } from "@/components/evidence-comparison";
 import {
   getStoredUserState,
@@ -355,41 +356,45 @@ export function EvidenceCatalog({
           {shown.slice(0, limit).map((e) => {
             const picked = selected.includes(e.id);
             const favorite = favorites.includes(e.id);
+            // Text-only entries have no verified image: hide the image
+            // area entirely instead of showing an empty box.
+            const hasArtwork = !!catalogArtwork(kind, e);
             return (
               <article
                 key={e.id}
                 className={styles.card}
                 data-selected={picked}
               >
-                {compare ? (
-                  <button
-                    type="button"
-                    onClick={() => toggle(e.id)}
-                    aria-pressed={picked}
-                    aria-label={`${picked ? "Remove" : "Add"} ${e.name} ${picked ? "from" : "to"} comparison`}
-                    disabled={!picked && selected.length >= 4}
-                    className={`${styles.cardImage} ${styles.cardPick} ${styles.cardPickImage}`}
-                  >
-                    <CatalogArtwork
-                      kind={kind}
-                      entry={e}
-                      sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
-                    />
-                  </button>
-                ) : (
-                  <Link
-                    href={`/${kind}/${e.slug}`}
-                    onClick={() => visit(e.id)}
-                    className={styles.cardImage}
-                    aria-label={`View ${e.name}`}
-                  >
-                    <CatalogArtwork
-                      kind={kind}
-                      entry={e}
-                      sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
-                    />
-                  </Link>
-                )}
+                {hasArtwork &&
+                  (compare ? (
+                    <button
+                      type="button"
+                      onClick={() => toggle(e.id)}
+                      aria-pressed={picked}
+                      aria-label={`${picked ? "Remove" : "Add"} ${e.name} ${picked ? "from" : "to"} comparison`}
+                      disabled={!picked && selected.length >= 4}
+                      className={`${styles.cardImage} ${styles.cardPick} ${styles.cardPickImage}`}
+                    >
+                      <CatalogArtwork
+                        kind={kind}
+                        entry={e}
+                        sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
+                      />
+                    </button>
+                  ) : (
+                    <Link
+                      href={`/${kind}/${e.slug}`}
+                      onClick={() => visit(e.id)}
+                      className={styles.cardImage}
+                      aria-label={`View ${e.name}`}
+                    >
+                      <CatalogArtwork
+                        kind={kind}
+                        entry={e}
+                        sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
+                      />
+                    </Link>
+                  ))}
                 <div className={styles.cardBody}>
                   <p className={styles.cardCategory}>{e.category}</p>
                   <h2 className={styles.cardTitle}>
@@ -558,13 +563,15 @@ export function EvidenceCatalog({
                 const entry = comparison[i];
                 return entry ? (
                   <article className={styles.slot} key={entry.id}>
-                    <div className={styles.slotImage}>
-                      <CatalogArtwork
-                        kind={kind}
-                        entry={entry}
-                        sizes="(max-width:767px) 45vw, 23vw"
-                      />
-                    </div>
+                    {catalogArtwork(kind, entry) && (
+                      <div className={styles.slotImage}>
+                        <CatalogArtwork
+                          kind={kind}
+                          entry={entry}
+                          sizes="(max-width:767px) 45vw, 23vw"
+                        />
+                      </div>
+                    )}
                     <button
                       className={styles.removeSlot}
                       type="button"

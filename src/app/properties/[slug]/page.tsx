@@ -182,8 +182,9 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               </p>
             </div>
 
-            {/* Photo / Visual */}
-            <div className="card-carbon overflow-hidden">
+            {/* Photo / Visual — only when the property has its own image */}
+            {prop.img ? (
+              <div className="card-carbon overflow-hidden">
               <div className="relative h-72 sm:h-96 w-full bg-background">
                 <img
                   loading="lazy"
@@ -205,7 +206,8 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                   </Link>
                 </div>
               </div>
-            </div>
+              </div>
+            ) : null}
 
             {/* Financial ROI Calculator Box */}
             {hourly > 0 ? (

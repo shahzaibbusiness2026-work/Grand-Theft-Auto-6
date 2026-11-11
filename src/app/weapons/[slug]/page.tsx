@@ -1,4 +1,5 @@
 import { catalogArtwork } from "@/lib/catalog-artwork";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from "@/lib/page-metadata";
 import { notFound, permanentRedirect } from "next/navigation";
 import { SiteShell } from "@/components/shells";
 import { EvidenceDetail } from "@/components/evidence-detail";
@@ -24,6 +25,12 @@ export async function generateMetadata({
   const e = await resolve((await params).slug);
   if (!e) notFound();
   const artwork = catalogArtwork("weapons", e);
+  // Text-only entries (no verified image) share the neutral skyline og
+  // image instead of a generic scene that does not show the weapon.
+  const ogImage = artwork ?? {
+    src: DEFAULT_OG_IMAGE,
+    alt: DEFAULT_OG_IMAGE_ALT,
+  };
   return {
     title: e.name + " — GTA VI Evidence Review",
     description: `${e.name} — GTA VI evidence review: what official footage shows, and which statistics are still unverified.`,
@@ -33,12 +40,12 @@ export async function generateMetadata({
       type: "website",
       title: e.name + " — GTA VI Evidence Review",
       description: `${e.name} — GTA VI evidence review: what official footage shows, and which statistics are still unverified.`,
-      images: [{ url: artwork.src, alt: artwork.alt }],
+      images: [{ url: ogImage.src, alt: ogImage.alt }],
     },
     twitter: {
       card: "summary_large_image",
       title: e.name + " — GTA VI Evidence Review",
-      images: [artwork.src],
+      images: [ogImage.src],
     },
     robots: {
       // Indexed on the user's instruction (8 Nov 2026): all weapon

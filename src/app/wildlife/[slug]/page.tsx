@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: page.seoTitle,
     description: page.seoDescription,
     alternates: { canonical: `/wildlife/${page.slug}` },
-    openGraph: pageOpenGraph(`/wildlife/${page.slug}`),
+    openGraph: pageOpenGraph(`/wildlife/${page.slug}`, page.hero),
   };
 }
 

@@ -12,10 +12,10 @@ export const metadata: Metadata = {
       "GTA 6 weapon identifications and source reviews. Unsupported model names and gameplay values remain unverified.",
     images: [
       {
-        url: "/img/ammu-nation.jpg",
-        alt: "Ammu-Nation gun store in GTA VI",
+        url: "/img/world-evidence/gta-6-handgun-robbery-scene-trailer-1.webp",
+        alt: "Lucia and Jason with handguns in the Trailer 1 robbery scene",
       },
     ],
   },
-  twitter: { card: "summary_large_image", images: ["/img/ammu-nation.jpg"] },
+  twitter: { card: "summary_large_image", images: ["/img/world-evidence/gta-6-handgun-robbery-scene-trailer-1.webp"] },
 };
