@@ -77,7 +77,7 @@ export function HeroSignup() {
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-[#C9A86A] px-5 text-sm font-bold text-[#0a0f1e] transition-colors hover:bg-[#d4b578] active:scale-95 disabled:opacity-60"
+          className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#FF2E9A] to-violet-500 px-5 text-sm font-bold text-white shadow-md transition-all hover:brightness-110 active:scale-95 disabled:opacity-60"
         >
           <BellRing className="h-4 w-4" aria-hidden="true" />
           {loading ? "Joining…" : "Notify me"}
