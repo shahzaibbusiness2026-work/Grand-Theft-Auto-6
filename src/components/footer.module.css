@@ -434,3 +434,54 @@
     grid-column: auto;
   }
 }
+
+/* Bright (light) mode — the launch band keeps its pink→violet gradient
+   (white text on it reads in both modes); only the footer body flips to
+   light surfaces so it stops staying dark when the rest of the site is
+   bright. Matches the site's light tokens in globals.css. */
+:global(.light) .footer {
+  background: #f8fafc;
+  color: #172033;
+  border-top-color: #d8deea;
+}
+:global(.light) .bodyColTitle {
+  color: #db2777;
+}
+:global(.light) .bodyBlurb,
+:global(.light) .note,
+:global(.light) .copyright {
+  color: #536179;
+}
+:global(.light) .link {
+  color: #334155;
+}
+:global(.light) .link:hover {
+  color: #db2777;
+}
+:global(.light) .brand {
+  color: #172033;
+}
+:global(.light) .brandMark {
+  color: #ff2e9a;
+}
+:global(.light) .brandAccent {
+  background: linear-gradient(100deg, #ff2e9a, #7c3aed);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+:global(.light) .socialLink {
+  border-color: #d8deea;
+  color: #334155;
+}
+:global(.light) .socialLink:hover {
+  background: #eef1f7;
+  color: #172033;
+}
+:global(.light) .legalStrip,
+:global(.light) .bottom {
+  border-top-color: #d8deea;
+}
+:global(.light) .footer a:focus-visible,
+:global(.light) .footer summary:focus-visible {
+  outline-color: #db2777;
+}
