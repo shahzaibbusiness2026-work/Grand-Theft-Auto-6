@@ -6,66 +6,6 @@
   color: #d7dfef;
   border-top: 1px solid #29364d;
 }
-/* Design 3 — Launch Banner Footer */
-.ctaBand {
-  background: linear-gradient(90deg, #ff2e9a, #7c3aed);
-}
-.ctaInner {
-  width: min(1240px, 100%);
-  margin-inline: auto;
-  padding: 28px 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  align-items: center;
-  justify-content: space-between;
-}
-.ctaTitle {
-  margin: 0;
-  font-size: 19px;
-  font-weight: 800;
-  line-height: 1.35;
-  color: #fff;
-  letter-spacing: -0.01em;
-}
-.ctaSub {
-  margin: 6px 0 0;
-  font-size: 13px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
-}
-.badges {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 12px;
-}
-.badges span {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 999px;
-  padding: 5px 11px;
-  color: #fff;
-}
-.ctaButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #fff;
-  color: #172033;
-  font-weight: 800;
-  font-size: 14px;
-  padding: 13px 22px;
-  border-radius: 999px;
-  text-decoration: none;
-  white-space: nowrap;
-}
-.ctaButton:hover {
-  color: #172033;
-  opacity: 0.92;
-}
 .bodyGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -82,6 +22,27 @@
   text-transform: uppercase;
   color: #ff63b7;
   margin: 0 0 10px;
+}
+.colSlash {
+  color: #ff2e9a;
+  font-weight: 900;
+  font-size: 14px;
+  margin-right: 2px;
+}
+/* Neon Vice City skyline + pink wave band between the link columns and
+   the legal strip. The SVG scales to the full footer width; on narrow
+   screens it keeps the right-hand skyline visible. */
+.skyline {
+  height: 110px;
+  margin-top: 26px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.skylineSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 14px rgba(255, 46, 154, 0.35));
 }
 .bodyBlurb {
   margin: 12px 0 0;
@@ -230,7 +191,7 @@
   max-width: 100%;
   font-size: 13px;
   line-height: 1.5;
-  color: #bac7dc;
+  color: #e6ebf5;
   text-decoration: none;
   overflow-wrap: anywhere;
 }
@@ -280,13 +241,13 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  border: 1px solid #35445d;
+  border: 1px solid rgba(255, 99, 183, 0.4);
   border-radius: 50%;
   color: #dce5f6;
 }
 .socialLink:hover {
-  background: #202d46;
-  border-color: #b788bf;
+  background: rgba(255, 46, 154, 0.12);
+  border-color: #ff2e9a;
   color: #fff;
 }
 .bottom {
@@ -383,27 +344,21 @@
     height: 32px;
   }
   .bottom {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: start;
-    gap: 5px 26px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 26px;
     margin-top: 24px;
     padding-top: 16px;
   }
-  .legal {
-    grid-column: 1;
-    grid-row: 1;
-  }
   .note {
-    grid-column: 2;
-    grid-row: 1;
     max-width: 510px;
     text-align: right;
-    margin-top: 8px;
+    margin-top: 0;
   }
   .copyright {
-    grid-column: 1/-1;
-    margin-top: 3px;
+    margin-top: 0;
   }
   .legal .link {
     font-size: 12px;
@@ -420,18 +375,34 @@
 }
 
 @media (min-width: 768px) {
-  .ctaInner {
-    padding: 28px 30px;
-  }
-  .ctaTitle {
-    font-size: 21px;
-  }
   .bodyGrid {
-    grid-template-columns: 1.3fr 1fr 1fr 1.3fr;
+    grid-template-columns: 1.4fr 0.9fr 1.1fr 1.1fr;
     gap: 28px;
   }
   .bodyGrid > :first-child {
     grid-column: auto;
+  }
+  /* Thin vertical dividers between the link columns (mockup). */
+  .bodyCol {
+    border-left: 1px solid #29364d;
+    padding-left: 28px;
+  }
+  .skyline {
+    height: 190px;
+    margin-top: 30px;
+  }
+  /* Bar separators between the legal links (mockup), desktop only so a
+     wrapped link never starts a line with a stray bar. */
+  .legalStrip .link + .link {
+    border-left: 1px solid #29364d;
+    padding-left: 20px;
+  }
+  .brand {
+    font-size: 26px;
+  }
+  .brandMark {
+    width: 34px;
+    height: 34px;
   }
 }
 
@@ -480,6 +451,15 @@
 :global(.light) .legalStrip,
 :global(.light) .bottom {
   border-top-color: #d8deea;
+}
+:global(.light) .bodyCol {
+  border-left-color: #d8deea;
+}
+:global(.light) .legalStrip .link + .link {
+  border-left-color: #d8deea;
+}
+:global(.light) .skylineSvg {
+  filter: drop-shadow(0 0 10px rgba(255, 46, 154, 0.2));
 }
 :global(.light) .footer a:focus-visible,
 :global(.light) .footer summary:focus-visible {
