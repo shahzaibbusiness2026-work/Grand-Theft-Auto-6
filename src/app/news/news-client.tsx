@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, CheckCircle, Gamepad2, Mail } from "lucide-react";
 import { SafeImage } from "@/components/safe-image";
 import type { Article } from "@/lib/data";
 import { toIsoDate } from "@/lib/utils";
 import { subscribeNewsletter } from "@/lib/services/newsletter";
+import { SITE_CONFIG } from "@/lib/constants";
 
 const PAGE_SIZE = 6;
 
@@ -83,6 +84,54 @@ export function NewsArticleGrid({ articles }: { articles: Article[] }) {
         </div>
       )}
     </>
+  );
+}
+
+/* Compact launch countdown for the news sidebar. Counts to local
+   midnight on release day in the visitor's own time zone — the same
+   rule as the site's home-page countdown. */
+export function NewsLaunchCountdown() {
+  const target = SITE_CONFIG.targetReleaseDate.slice(0, 10); // "2026-11-19"
+  const [year, month, day] = target.split("-").map(Number);
+  const boundary = new Date(year, month - 1, day, 0, 0, 0).getTime();
+  const [remaining, setRemaining] = useState<number | null>(null);
+  useEffect(() => {
+    const update = () => setRemaining(Math.max(0, boundary - Date.now()));
+    update();
+    const timer = setInterval(update, 1000);
+    return () => clearInterval(timer);
+  }, [boundary]);
+  const seconds = remaining === null ? null : Math.floor(remaining / 1000);
+  const cells: [string, string | number][] = [
+    ["Days", seconds === null ? "—" : Math.floor(seconds / 86400)],
+    ["Hours", seconds === null ? "—" : Math.floor(seconds / 3600) % 24],
+    ["Mins", seconds === null ? "—" : Math.floor(seconds / 60) % 60],
+    ["Secs", seconds === null ? "—" : seconds % 60],
+  ];
+  return (
+    <div className="card-surface p-4">
+      <h3 className="font-display text-base font-extrabold">
+        GTA 6 launches in
+      </h3>
+      <p className="mt-0.5 text-xs text-muted-foreground">
+        19 November 2026 — midnight local time.
+      </p>
+      <div className="mt-3 grid grid-cols-4 gap-2">
+        {cells.map(([label, value]) => (
+          <div
+            key={label}
+            className="rounded-xl bg-muted/60 px-1 py-2.5 text-center"
+          >
+            <span className="block font-display text-xl font-black tabular-nums text-[#ff2e9a]">
+              {value}
+            </span>
+            <span className="mt-0.5 block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+              {label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 

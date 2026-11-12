@@ -14,7 +14,7 @@ import { getPublicArticles } from "@/lib/services/queries";
 import { getCategories } from "@/lib/services/categories";
 import { serializeJsonLd, toIsoDate } from "@/lib/utils";
 import { itemListJsonLd } from "@/lib/page-metadata";
-import { NewsArticleGrid, NewsSidebarNewsletter } from "./news-client";
+import { NewsArticleGrid, NewsLaunchCountdown, NewsSidebarNewsletter } from "./news-client";
 
 
 export default async function NewsPage() {
@@ -88,7 +88,7 @@ export default async function NewsPage() {
                 Read Full Article <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Button>
             </div>
-            <div className="relative min-h-[260px] md:min-h-[380px]">
+            <div className="relative aspect-video">
               <SafeImage
                 src={heroArticle.img}
                 alt={`${heroArticle.title} - Featured GTA 6 Article`}
@@ -123,7 +123,7 @@ export default async function NewsPage() {
           <NewsArticleGrid articles={listArticles} />
         </div>
 
-        <aside className="space-y-6">
+        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
           <CategoryList categories={categories} />
 
           <div className="rounded-2xl border border-pink-100 bg-pink-50 p-4 dark:border-pink-900/50 dark:bg-pink-950/40">
@@ -157,6 +157,8 @@ export default async function NewsPage() {
           </div>
 
           <NewsSidebarNewsletter />
+
+          <NewsLaunchCountdown />
         </aside>
       </section>
     </SiteShell>
