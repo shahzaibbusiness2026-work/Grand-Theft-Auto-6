@@ -8,7 +8,7 @@ export const metadata = {
   description:
     "Save personal equipment plans in your workspace and sync them when signed in. Weapon identifications and loadout rules remain subject to source review.",
   alternates: { canonical: "/tools/loadout-builder" },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 export default async function Page() {
   return (

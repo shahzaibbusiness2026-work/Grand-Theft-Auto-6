@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   openGraph: pageOpenGraph("/tools/money-maker"),
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
   title: "Illustrative Money-Making Scenario Comparator",
   description:
     "Compare net hourly returns using your own payout, cost and duration assumptions. No verified GTA VI economy data is supplied.",

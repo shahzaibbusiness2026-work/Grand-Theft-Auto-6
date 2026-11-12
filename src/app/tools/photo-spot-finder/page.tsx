@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description,
 
   alternates: { canonical: "/tools/photo-spot-finder" },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 export default function PhotoSpotFinderPage() {

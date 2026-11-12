@@ -11,7 +11,7 @@ import { pageOpenGraph } from "@/lib/page-metadata";
 const title = "GTA 6 Wanted Levels: Evidence Status";
 const description = PUBLIC_TOOL_COPY["/tools/wanted-level-guide"];
 export const metadata: Metadata = {
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
     openGraph: pageOpenGraph("/tools/wanted-level-guide"),
   title,
   description,
