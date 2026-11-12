@@ -12,7 +12,11 @@ const description =
   "Fan-made, searchable GTA 6 interactive map of Leonida and Vice City — an unofficial fan atlas with regions, cities and landmarks labelled by evidence status.";
 
 export const metadata: Metadata = {
-  title,
+  // Absolute title: the plan's exact title (53 chars) must render without the
+  // " | Taish Gaming" suffix, which would push it to 68 chars and truncate
+  // the "Fan Atlas" branding in search results. og/twitter titles keep the
+  // same string.
+  title: { absolute: title },
   description,
   alternates: { canonical: "/map" },
   openGraph: { type: "website",
