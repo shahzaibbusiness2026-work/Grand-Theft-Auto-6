@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "GTA 6 Settings: What Is Known So Far",
   description: "Rockstar has not published the full GTA VI settings menu. This page lists what to verify after release, not pre-release recommendations.",
   alternates: { canonical: "/settings-guide" },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
