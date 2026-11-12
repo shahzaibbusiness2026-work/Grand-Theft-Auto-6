@@ -10,31 +10,31 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 28px 16px;
-  padding: 36px 0 8px;
+  padding: 24px 0 0;
 }
 .bodyGrid > :first-child {
   grid-column: 1 / -1;
 }
 .bodyColTitle {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 750;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #ff63b7;
-  margin: 0 0 10px;
+  margin: 0 0 12px;
 }
 .colSlash {
   color: #ff2e9a;
   font-weight: 900;
-  font-size: 14px;
+  font-size: 18px;
   margin-right: 2px;
 }
 /* Neon Vice City skyline + pink wave band between the link columns and
    the legal strip. The SVG scales to the full footer width; on narrow
    screens it keeps the right-hand skyline visible. */
 .skyline {
-  height: 110px;
-  margin-top: 26px;
+  height: 90px;
+  margin-top: 10px;
   overflow: hidden;
   pointer-events: none;
 }
@@ -45,10 +45,10 @@
   filter: drop-shadow(0 0 14px rgba(255, 46, 154, 0.35));
 }
 .bodyBlurb {
-  margin: 12px 0 0;
-  max-width: 340px;
-  font-size: 13px;
-  line-height: 1.7;
+  margin: 14px 0 0;
+  max-width: 420px;
+  font-size: 15px;
+  line-height: 1.65;
   color: #9eafc9;
 }
 .bodyGrid .socials {
@@ -58,12 +58,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0 20px;
-  margin-top: 26px;
-  padding-top: 18px;
+  margin-top: 18px;
+  padding-top: 14px;
   border-top: 1px solid #29364d;
 }
 .legalStrip .link {
-  font-size: 12px;
+  font-size: 13px;
   min-height: 36px;
 }
 .backdrop {
@@ -214,14 +214,14 @@
   align-items: center;
   gap: 10px;
   color: #f4f6fc;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 850;
   letter-spacing: -0.035em;
   line-height: 1.2;
 }
 .brandMark {
-  width: 29px;
-  height: 29px;
+  width: 36px;
+  height: 36px;
   color: #ff63b7;
 }
 .brandAccent {
@@ -239,8 +239,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border: 1px solid rgba(255, 99, 183, 0.4);
   border-radius: 50%;
   color: #dce5f6;
@@ -268,13 +268,13 @@
 .note {
   margin: 8px 0 0;
   max-width: 760px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.7;
   color: #9eafc9;
 }
 .copyright {
   margin: 7px 0 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.7;
   color: #9eafc9;
 }
@@ -289,7 +289,7 @@
     display: block;
   }
   .inner {
-    padding: 42px 30px 26px;
+    padding: 30px 30px 22px;
   }
   .eyebrow {
     font-size: 22px;
@@ -323,8 +323,8 @@
     margin-top: 0;
   }
   .link {
-    min-height: 32px;
-    font-size: 14px;
+    min-height: 40px;
+    font-size: 16px;
   }
   .mobileGroups {
     display: none;
@@ -349,8 +349,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 4px 26px;
-    margin-top: 24px;
-    padding-top: 16px;
+    margin-top: 16px;
+    padding-top: 12px;
   }
   .note {
     max-width: 510px;
@@ -388,8 +388,8 @@
     padding-left: 28px;
   }
   .skyline {
-    height: 190px;
-    margin-top: 30px;
+    height: 150px;
+    margin-top: 10px;
   }
   /* Bar separators between the legal links (mockup), desktop only so a
      wrapped link never starts a line with a stray bar. */
@@ -398,11 +398,11 @@
     padding-left: 20px;
   }
   .brand {
-    font-size: 26px;
+    font-size: 34px;
   }
   .brandMark {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
   }
 }
 

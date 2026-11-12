@@ -123,15 +123,15 @@ function NeonSkyline() {
           </g>
         </defs>
 
-        {/* Pink wave sweeping up to the right — a thin ribbon, dark
-            navy above and below it, passing behind the skyline. */}
+        {/* Pink wave sweeping up to the right — a bold band filling the
+            lower part of the skyline band, passing behind the skyline. */}
         <path
-          d="M0,150 C260,100 520,115 780,145 C1020,173 1240,135 1440,80 L1440,118 C1240,170 1020,205 780,180 C520,150 260,135 0,185 Z"
+          d="M0,70 C260,30 520,45 780,75 C1020,100 1240,65 1440,20 L1440,200 L0,200 Z"
           fill="url(#neonWave)"
-          opacity="0.55"
+          opacity="0.6"
         />
         <path
-          d="M0,150 C260,100 520,115 780,145 C1020,173 1240,135 1440,80"
+          d="M0,70 C260,30 520,45 780,75 C1020,100 1240,65 1440,20"
           fill="none"
           stroke="#ff5db1"
           strokeWidth="2.5"
@@ -256,7 +256,7 @@ export async function Footer() {
                     className={styles.socialLink}
                     aria-label={s.label}
                   >
-                    <s.icon className="h-4 w-4" aria-hidden="true" />
+                    <s.icon className="h-5 w-5" aria-hidden="true" />
                   </a>
                 ))}
               </nav>
