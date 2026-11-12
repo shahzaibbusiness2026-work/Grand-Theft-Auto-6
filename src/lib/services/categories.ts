@@ -15,59 +15,89 @@ export interface AdminCategory {
 }
 
 /**
- * Fetch all categories from Supabase with live article counts
+ * Fetch all categories from Supabase with live article counts.
+ * Supabase reads are flaky at build time, so each query retries; and if
+ * no categories were ever saved in site_settings, the list is derived
+ * from the published articles instead of rendering an empty sidebar.
  */
 export async function getCategories(): Promise<AdminCategory[]> {
-  try {
-    const supabase = createPublicClient();
+  const supabase = createPublicClient();
 
-    // 1. Fetch saved categories from site_settings
-    const { data: settingData } = await supabase
-      .from("site_settings")
-      .select("value")
-      .eq("key", "admin_categories")
-      .maybeSingle();
-
-    let categories: AdminCategory[] = [];
-    if (
-      settingData &&
-      settingData.value &&
-      Array.isArray(settingData.value) &&
-      settingData.value.length > 0
-    ) {
-      categories = settingData.value as AdminCategory[];
-    }
-
-    // 2. Fetch live published-article counts from the articles table.
-    //    Only published posts count toward the public-facing numbers.
-    const { data: articles } = await supabase
-      .from("articles")
-      .select("category")
-      .eq("status", "published");
-
-    if (articles && articles.length > 0) {
-      const counts: Record<string, number> = {};
-      articles.forEach((a: { category?: string | null }) => {
-        if (a.category) {
-          const key = a.category.toLowerCase().trim();
-          counts[key] = (counts[key] || 0) + 1;
+  // 1. Fetch saved categories from site_settings (retry on transport errors).
+  let saved: AdminCategory[] = [];
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const { data, error } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", "admin_categories")
+        .maybeSingle();
+      if (!error) {
+        if (
+          data?.value &&
+          Array.isArray(data.value) &&
+          data.value.length > 0
+        ) {
+          saved = data.value as AdminCategory[];
         }
-      });
-
-      categories = categories.map((cat) => ({
-        ...cat,
-        count:
-          counts[cat.name.toLowerCase().trim()] ||
-          counts[cat.slug.toLowerCase().trim()] ||
-          0,
-      }));
+        break; // no error: the row is genuinely present or genuinely missing
+      }
+    } catch {
+      // transport failure — retry below
     }
-
-    return categories;
-  } catch (err) {
-    console.error("Error fetching categories:", err);
-    return [];
+    await new Promise((r) => setTimeout(r, 300 * (attempt + 1)));
   }
+
+  // 2. Fetch live published-article counts from the articles table.
+  //    Only published posts count toward the public-facing numbers.
+  let articles: { category?: string | null }[] = [];
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const { data, error } = await supabase
+        .from("articles")
+        .select("category")
+        .eq("status", "published");
+      if (!error && data) {
+        articles = data;
+        break;
+      }
+    } catch {
+      // transport failure — retry below
+    }
+    await new Promise((r) => setTimeout(r, 300 * (attempt + 1)));
+  }
+
+  const counts: Record<string, number> = {};
+  articles.forEach((a: { category?: string | null }) => {
+    if (a.category) {
+      const key = a.category.toLowerCase().trim();
+      counts[key] = (counts[key] || 0) + 1;
+    }
+  });
+
+  // 3. Fallback: no saved list — derive the categories from the published
+  //    articles so the sidebar never renders empty while articles exist.
+  let categories = saved;
+  if (categories.length === 0 && Object.keys(counts).length > 0) {
+    const names = Object.keys(counts).sort(
+      (a, b) => counts[b] - counts[a] || a.localeCompare(b),
+    );
+    categories = names.map((name) => ({
+      id: `derived-${name}`,
+      name: name.charAt(0).toUpperCase() + name.slice(1),
+      slug: name,
+      count: counts[name],
+      description: "",
+    }));
+  }
+
+  return categories.map((cat) => ({
+    ...cat,
+    count:
+      counts[cat.name.toLowerCase().trim()] ||
+      counts[cat.slug.toLowerCase().trim()] ||
+      0,
+  }));
 }
 
 export async function getAdminCategories(): Promise<AdminCategory[]> {
