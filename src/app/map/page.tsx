@@ -7,15 +7,15 @@ import { FeatureDisabled } from "@/components/feature-disabled";
 import Link from "next/link";
 import { getMapMarkers } from "@/lib/services/map";
 
-const title = "GTA 6 Interactive Map – Leonida & Vice City Fan Atlas";
+const title = "GTA 6 Interactive Map: Explore Leonida Regions & Locations";
 const description =
-  "Fan-made, searchable GTA 6 interactive map of Leonida and Vice City — an unofficial fan atlas with regions, cities and landmarks labelled by evidence status.";
+  "Explore the fan-made GTA 6 Leonida map with our interactive tool. Browse regions, cities and landmarks, zoom in and plan your routes before launch.";
 
 export const metadata: Metadata = {
-  // Absolute title: the plan's exact title (53 chars) must render without the
-  // " | Taish Gaming" suffix, which would push it to 68 chars and truncate
-  // the "Fan Atlas" branding in search results. og/twitter titles keep the
-  // same string.
+  // Absolute title: the title (58 chars) must render without the
+  // " | Taish Gaming" suffix, which would push it to 73 chars and truncate.
+  // og/twitter titles keep the same string. The description keeps the
+  // "fan-made" label.
   title: { absolute: title },
   description,
   alternates: { canonical: "/map" },
