@@ -17,8 +17,8 @@ type Group = { title: string; links: FooterLink[] };
 
 /* Neon footer (Nov 2026, from the user's mockup): dark navy, brand +
    tagline + socials in the first column, three link columns with pink
-   slash headings and thin dividers, a neon Vice City skyline + pink
-   wave across the bottom, then the legal strip and the copyright row. */
+   slash headings and thin dividers, then the legal strip and the
+   copyright row — all over a neon Vice City skyline background image. */
 const GROUPS: Group[] = [
   {
     title: "Explore",
@@ -53,7 +53,7 @@ const GROUPS: Group[] = [
   },
 ];
 
-/* Trust/legal pages live in a slim inline strip under the skyline instead
+/* Trust/legal pages live in a slim inline strip under the columns instead
    of a tall Site column, so the footer stays compact. No link is dropped. */
 const LEGAL_LINKS: FooterLink[] = [
   { label: "Editorial team", href: "/team" },
@@ -79,81 +79,6 @@ function publicSocial(value: string | undefined, hosts: string[]) {
   } catch {
     return "";
   }
-}
-
-/* Neon Vice City skyline + pink wave, drawn as one inline SVG so it
-   stays crisp at any width. The skyline sits on the right; the wave
-   sweeps from the lower left up to the right edge. Pure decoration. */
-function NeonSkyline() {
-  return (
-    <div className={styles.skyline} aria-hidden="true">
-      <svg
-        className={styles.skylineSvg}
-        viewBox="0 0 1440 200"
-        preserveAspectRatio="xMaxYMax slice"
-        focusable="false"
-      >
-        <defs>
-          <linearGradient id="neonWave" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#ff2e9a" stopOpacity="0.75" />
-            <stop offset="55%" stopColor="#d946ef" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.6" />
-          </linearGradient>
-          <linearGradient id="neonSky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#e879f9" />
-            <stop offset="100%" stopColor="#7c3aed" />
-          </linearGradient>
-          <radialGradient id="neonGlow" cx="0.5" cy="0.5" r="0.5">
-            <stop offset="0%" stopColor="#ff2e9a" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#ff2e9a" stopOpacity="0" />
-          </radialGradient>
-          <g
-            id="neonPalm"
-            fill="none"
-            stroke="#b026d6"
-            strokeWidth="5"
-            strokeLinecap="round"
-          >
-            <path d="M0,0 C3,-25 5,-50 2,-72" />
-            <path d="M2,-72 C-12,-82 -28,-84 -40,-76" />
-            <path d="M2,-72 C-8,-88 -22,-94 -36,-92" />
-            <path d="M2,-72 C10,-88 24,-94 38,-90" />
-            <path d="M2,-72 C16,-80 30,-78 42,-70" />
-            <path d="M2,-72 C2,-88 6,-98 12,-104" />
-          </g>
-        </defs>
-
-        {/* Pink wave sweeping up to the right — a bold band filling the
-            lower part of the skyline band, passing behind the skyline. */}
-        <path
-          d="M0,70 C260,30 520,45 780,75 C1020,100 1240,65 1440,20 L1440,200 L0,200 Z"
-          fill="url(#neonWave)"
-          opacity="0.6"
-        />
-        <path
-          d="M0,70 C260,30 520,45 780,75 C1020,100 1240,65 1440,20"
-          fill="none"
-          stroke="#ff5db1"
-          strokeWidth="2.5"
-          opacity="0.9"
-        />
-
-        {/* Horizon glow behind the skyline */}
-        <ellipse cx="1240" cy="185" rx="330" ry="95" fill="url(#neonGlow)" />
-
-        {/* Building silhouettes, right side */}
-        <path
-          d="M1040,200 L1040,140 L1065,140 L1065,125 L1080,125 L1080,110 L1095,110 L1095,140 L1120,140 L1120,95 L1135,95 L1135,78 L1145,78 L1145,95 L1160,95 L1160,150 L1190,150 L1190,120 L1210,120 L1210,140 L1240,140 L1240,100 L1260,100 L1260,84 L1270,84 L1270,100 L1290,100 L1290,145 L1320,145 L1320,110 L1340,110 L1340,130 L1370,130 L1370,90 L1390,90 L1390,120 L1415,120 L1415,150 L1440,150 L1440,200 Z"
-          fill="url(#neonSky)"
-        />
-
-        {/* Palm trees in front of the skyline */}
-        <use href="#neonPalm" transform="translate(1175,200) scale(1.15)" />
-        <use href="#neonPalm" transform="translate(1330,200) scale(0.95)" />
-        <use href="#neonPalm" transform="translate(1428,200) scale(0.7)" />
-      </svg>
-    </div>
-  );
 }
 
 export async function Footer() {
@@ -284,8 +209,6 @@ export async function Footer() {
             </section>
           ))}
         </div>
-
-        <NeonSkyline />
 
         <nav className={styles.legalStrip} aria-label="Footer legal pages">
           {LEGAL_LINKS.map((link) => (
