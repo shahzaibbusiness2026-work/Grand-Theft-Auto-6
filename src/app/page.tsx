@@ -430,8 +430,12 @@ export default async function HomePage() {
         </p>
         <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <li className="card-surface rounded-2xl p-4">
-            <Link className="font-bold underline" href="/map">GTA 6 interactive map</Link>
+            <Link className="font-bold underline" href="/map">Explore the GTA 6 interactive fan map</Link>
             <p className="mt-1 text-sm text-muted-foreground">Leonida regions, cities and locations, with fan-map pins.</p>
+          </li>
+          <li className="card-surface rounded-2xl p-4">
+            <Link className="font-bold underline" href="/tools/download-time-calculator">Estimate GTA 6 download time</Link>
+            <p className="mt-1 text-sm text-muted-foreground">How long the up-to-212 GB pre-load takes at your speed.</p>
           </li>
           <li className="card-surface rounded-2xl p-4">
             <Link className="font-bold underline" href="/news/map-size-comparison-gtav-rdr2">GTA 6 map size compared</Link>

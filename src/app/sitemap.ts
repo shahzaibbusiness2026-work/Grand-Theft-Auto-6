@@ -83,6 +83,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/disclaimer",
     "/cookies",
     "/tools/character-quiz",
+    // Indexed 12 Nov 2026 (commit 39baaa3): these four were flipped to
+    // index,follow but left out of the sitemap. A sitemap must list every
+    // indexable URL, so they belong here now that they are indexable.
+    "/tools/loadout-builder",
+    "/tools/money-maker",
+    "/tools/photo-spot-finder",
+    "/tools/wanted-level-guide",
   ];
   // Detail URLs use their own recorded update dates. Unrelated article edits
   // do not establish when static pages were substantively changed.

@@ -11,9 +11,13 @@ import { catalogArtwork } from "@/lib/catalog-artwork";
 export function EvidenceDetail({
   entry,
   kind,
+  prev,
+  next,
 }: {
   entry: EvidenceEntry;
   kind: CatalogKind;
+  prev?: { name: string; slug: string } | null;
+  next?: { name: string; slug: string } | null;
 }) {
   const artwork = catalogArtwork(kind, entry);
   return (
@@ -136,6 +140,27 @@ export function EvidenceDetail({
       <Link className="block underline" href="/editorial-policy">
         Read our evidence policy
       </Link>
+      {(prev || next) && (
+        <nav
+          aria-label="More in this catalog"
+          className="flex flex-wrap justify-between gap-4 border-t border-border pt-6"
+        >
+          {prev ? (
+            <Link className="underline" href={`/${kind}/${prev.slug}`}>
+              ← {prev.name}
+            </Link>
+          ) : (
+            <span />
+          )}
+          {next ? (
+            <Link className="underline" href={`/${kind}/${next.slug}`}>
+              {next.name} →
+            </Link>
+          ) : (
+            <span />
+          )}
+        </nav>
+      )}
     </article>
   );
 }

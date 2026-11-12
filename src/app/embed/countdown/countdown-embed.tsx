@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-const TARGET = new Date("2026-11-19T00:00:00Z").getTime();
+// Rockstar Support: GTA VI releases at midnight LOCAL time on 19 Nov 2026
+// in all regions. Count to local midnight in the viewer's time zone.
+const TARGET = new Date(2026, 10, 19, 0, 0, 0).getTime();
 
 function pad(n: number) {
   return n.toString().padStart(2, "0");

@@ -83,6 +83,27 @@ export default function DownloadTimeCalculatorPage() {
         </div>
 
         <DownloadTimeCalculatorClient />
+
+        {/* Related launch guides */}
+        <section className="mt-10" aria-labelledby="related-guides-heading">
+          <h2 id="related-guides-heading" className="font-display text-2xl font-bold">
+            Related launch guides
+          </h2>
+          <ul className="mt-5 grid gap-4 sm:grid-cols-3">
+            <li className="card-surface rounded-2xl p-4">
+              <Link className="font-bold underline" href="/news/gta-6-release-date-pre-order-editions">GTA 6 release date, platforms and pre-order checks</Link>
+              <p className="mt-1 text-sm text-muted-foreground">Midnight-local release on 19 November 2026 and pre-load start times.</p>
+            </li>
+            <li className="card-surface rounded-2xl p-4">
+              <Link className="font-bold underline" href="/news/gta-6-preload-ps5-xbox-how-to">How to pre-load GTA 6 on PS5 and Xbox</Link>
+              <p className="mt-1 text-sm text-muted-foreground">Platform start times, setup steps and fixes for the 212 GB download.</p>
+            </li>
+            <li className="card-surface rounded-2xl p-4">
+              <Link className="font-bold underline" href="/map">Explore the GTA 6 interactive fan map</Link>
+              <p className="mt-1 text-sm text-muted-foreground">Leonida regions, cities and landmarks, with fan-map pins.</p>
+            </li>
+          </ul>
+        </section>
       </div>
     </SiteShell>
   );

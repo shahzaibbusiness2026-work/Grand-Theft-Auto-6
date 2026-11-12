@@ -1,4 +1,3 @@
-import { PUBLIC_TOOL_COPY } from "@/lib/public-tool-copy";
 import { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 import { RelatedArticles } from "@/components/related-articles";
@@ -8,16 +7,18 @@ import { FeatureDisabled } from "@/components/feature-disabled";
 import Link from "next/link";
 import { getMapMarkers } from "@/lib/services/map";
 
-const title = "GTA 6 Interactive Map: Leonida & Vice City";
+const title = "GTA 6 Interactive Map – Leonida & Vice City Fan Atlas";
+const description =
+  "Fan-made, searchable GTA 6 interactive map of Leonida and Vice City — an unofficial fan atlas with regions, cities and landmarks labelled by evidence status.";
 
 export const metadata: Metadata = {
   title,
-  description: PUBLIC_TOOL_COPY["/map"],
+  description,
   alternates: { canonical: "/map" },
   openGraph: { type: "website",
     url: "/map",
     title,
-    description: PUBLIC_TOOL_COPY["/map"],
+    description,
     images: [
       {
         url: "/img/leonida-map-v2.jpg",
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title,
-    description: PUBLIC_TOOL_COPY["/map"],
+    description,
     images: ["/img/leonida-map-v2.jpg"],
   },
 };

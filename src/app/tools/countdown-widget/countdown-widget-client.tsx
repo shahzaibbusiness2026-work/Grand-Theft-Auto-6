@@ -14,8 +14,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// Expected launch window (estimate) — Nov 19, 2026 00:00:00 UTC
-const TARGET_DATE = new Date("2026-11-19T00:00:00Z");
+// Rockstar Support (last updated 3 Nov 2026): GTA VI releases at midnight
+// LOCAL time on 19 Nov 2026 in all regions. Count to local midnight on the
+// release date in the visitor's own time zone (same as the homepage countdown).
+const TARGET_DATE = new Date(2026, 10, 19, 0, 0, 0);
 const EMBED_BASE_URL = "https://www.taishgaming.com/embed/countdown";
 
 type SizeId = "small" | "medium" | "large";
@@ -115,10 +117,10 @@ export function CountdownWidgetClient() {
             <CalendarClock className="h-4 w-4 text-gold-light" /> Counting Down To
           </h2>
           <p className="font-display text-xl font-black text-foreground">November 19, 2026</p>
-          <p className="text-xs text-muted-foreground mt-1">00:00:00 UTC &bull; expected launch window (estimate)</p>
+          <p className="text-xs text-muted-foreground mt-1">Midnight local time &bull; confirmed release time</p>
           <p className="text-xs leading-relaxed text-muted-foreground mt-3 flex gap-1.5">
             <Info className="h-3.5 w-3.5 shrink-0 mt-0.5 text-gold-light" />
-            Rockstar hasn&apos;t confirmed an exact hour, so this countdown targets the expected launch window. We&apos;ll tighten it the moment an official time drops.
+            Rockstar Support confirms GTA VI releases at midnight local time on November 19, 2026, in all regions — so this countdown targets midnight in your time zone.
           </p>
         </div>
       </div>

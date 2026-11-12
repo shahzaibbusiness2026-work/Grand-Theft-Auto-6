@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import {
   Search,
   Users,
-  ArrowRight,
 } from "lucide-react";
 import { canonicalMissions as missionsFallback, CanonicalMission } from "@/lib/canonical-data";
 import { cn } from "@/lib/utils";
@@ -209,6 +207,9 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
 
                   {/* Badges */}
                   <div className="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
+                    <span className="rounded-full bg-amber-500/90 px-2.5 py-0.5 text-xs font-black uppercase text-black border border-amber-300 backdrop-blur">
+                      Fan concept
+                    </span>
                     <span className="rounded-full bg-black/75 px-2.5 py-0.5 text-xs font-black uppercase text-accent border border-accent/30 backdrop-blur">
                       {m.type}
                     </span>
@@ -257,13 +258,9 @@ export function MissionsClient({ initialMissions }: { initialMissions?: Canonica
                       {m.difficulty}
                     </span>
 
-                    <Link
-                      href={`/missions/${m.slug}`}
-                      className="inline-flex items-center gap-1 py-2 text-xs font-bold text-accent hover:text-foreground transition-colors"
-                    >
-                      <span>Full Walkthrough</span>
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
+                    <span className="inline-flex items-center gap-1 py-2 text-xs font-bold text-muted-foreground">
+                      <span>Fan concept — no walkthrough yet</span>
+                    </span>
                   </div>
                 </div>
               </div>

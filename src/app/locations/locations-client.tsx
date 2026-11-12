@@ -8,7 +8,6 @@ import Image from "next/image";
 import {
   MapPin,
   Search,
-  ExternalLink,
   Car,
   Crosshair,
   HelpCircle,
@@ -263,11 +262,9 @@ export function LocationsClient({
                       <span>{item.district}</span>
                     </div>
 
-                    <Link href={`/locations/${item.slug}`}>
-                      <h3 className="font-display text-base font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
-                        {item.name}
-                      </h3>
-                    </Link>
+                    <h3 className="font-display text-base font-bold text-foreground leading-snug">
+                      {item.name}
+                    </h3>
 
                     <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
                       {item.desc}
@@ -307,12 +304,9 @@ export function LocationsClient({
                     <Navigation className="h-3.5 w-3.5" /> Locate On Map
                   </Link>
 
-                  <Link
-                    href={`/locations/${item.slug}`}
-                    className="btn-secondary text-xs px-3 py-2.5 inline-flex items-center gap-1 font-semibold"
-                  >
-                    View Dossier <ExternalLink className="h-3 w-3" />
-                  </Link>
+                  <span className="text-xs px-3 py-2.5 inline-flex items-center gap-1 font-semibold text-muted-foreground">
+                    Fan concept — no dossier yet
+                  </span>
                 </div>
               </div>
             );

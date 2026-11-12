@@ -15,12 +15,16 @@ export const SITE_CONFIG = {
     "Taish Gaming is an independent fan platform and is not affiliated with, sponsored by, or endorsed by Rockstar Games or Take-Two Interactive.",
 
   // Release Date Configuration:
-  // Rockstar GTA VI page and Store checked 30 October 2026; regional unlock times remain unverified.
+  // Rockstar Support, last updated 3 November 2026: GTA VI releases at
+  // midnight local time on 19 November 2026 in all regions, for both PS5
+  // and Xbox Series X|S. Pre-load: PS5 midnight local 10 Nov; Xbox
+  // 12:00 a.m. GMT 10 Nov. The homepage countdown counts to the visitor's
+  // local midnight on the release date (see src/components/hero/Countdown.tsx).
   targetReleaseDate: "2026-11-19T00:00:00Z",
   isReleaseDateConfirmed: true,
   releaseWindowDisplay: "November 19, 2026",
   countdownCaption:
-    "GTA VI scheduled for November 19, 2026 · Pre-load begins November 10 · Check your platform for regional unlock times",
+    "GTA VI scheduled for November 19, 2026 · Releases at midnight local time · Pre-load begins November 10",
 
   socials: {
     twitter: "https://twitter.com/rockstargames",

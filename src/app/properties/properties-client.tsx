@@ -7,7 +7,6 @@ import {
   Car,
   TrendingUp,
   Search,
-  ExternalLink,
   MapPin,
   CheckCircle2,
   ArrowRightLeft,
@@ -301,11 +300,9 @@ export function PropertiesClient({
                       <span>{item.district}</span>
                     </div>
 
-                    <Link href={`/properties/${item.slug}`}>
-                      <h3 className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
-                        {item.name}
-                      </h3>
-                    </Link>
+                    <h3 className="font-display text-lg font-bold text-foreground leading-snug">
+                      {item.name}
+                    </h3>
 
                     <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
                       {item.desc}
@@ -353,12 +350,9 @@ export function PropertiesClient({
                       {isCompared ? "Remove Compare" : "Compare"}
                     </button>
 
-                    <Link
-                      href={`/properties/${item.slug}`}
-                      className="btn-secondary text-xs px-3 py-2.5 inline-flex items-center gap-1 font-semibold"
-                    >
-                      Dossier <ExternalLink className="h-3 w-3" />
-                    </Link>
+                    <span className="text-xs px-3 py-2.5 inline-flex items-center gap-1 font-semibold text-muted-foreground">
+                      Fan concept — no dossier yet
+                    </span>
                   </div>
                 </div>
               </div>
@@ -465,12 +459,9 @@ export function PropertiesClient({
                     </ul>
                   </div>
 
-                  <Link
-                    href={`/properties/${p.slug}`}
-                    className="btn-primary w-full py-2 text-center block text-xs font-bold"
-                  >
-                    View Full Dossier
-                  </Link>
+                  <span className="btn-primary w-full py-2 text-center block text-xs font-bold opacity-60">
+                    Fan concept — no dossier yet
+                  </span>
                 </div>
               ))}
             </div>

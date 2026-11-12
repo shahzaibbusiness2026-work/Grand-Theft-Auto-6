@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/shells";
-import { characterEvidence } from "@/lib/character-evidence";
+import { characterEvidence, CHARACTER_REVIEWED_AT } from "@/lib/character-evidence";
 import { characterProfiles, OFFICIAL_TRAILERS } from "@/lib/character-profile";
 import { pageOpenGraph, articleJsonLd } from "@/lib/page-metadata";
 import { serializeJsonLd } from "@/lib/utils";
@@ -63,8 +63,11 @@ export default async function CharacterPage({
               headline: `${c.name} — GTA VI Character`,
               description: c.summary,
               url: `https://www.taishgaming.com/characters/${slug}`,
-              // Review date stated on the page itself.
-              dateModified: "2026-11-04",
+              // Evidence review date (src/lib/character-evidence.ts) — the
+              // same date the sitemap uses as lastmod. The previous
+              // hard-coded 2026-11-04 had no source and was not stated on
+              // the page; the reviewed date is 2026-10-30.
+              dateModified: CHARACTER_REVIEWED_AT,
               articleSection: "Characters",
             }),
           ),

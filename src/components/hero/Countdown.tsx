@@ -5,11 +5,17 @@ import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants";
 const RELEASE_DAY = SITE_CONFIG.targetReleaseDate.slice(0, 10);
 function ReleaseNote({ confirmed, date }: { confirmed: boolean; date: string }) {
+  const [year, month, day] = date.split("-").map(Number);
+  const display = new Date(year, month - 1, day).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
   return (
     <p className="text-xs text-white/85">
       {confirmed ? "Scheduled release date: " : "Expected release date: "}
-      {new Date(date + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}.
-      {" "}This timer counts to 00:00 UTC on that calendar date, not a confirmed regional unlock time.
+      {display}.
+      {" "}This timer counts to midnight in your time zone on that date — Rockstar Support confirms GTA VI releases at midnight local time on November 19, 2026, in all regions.
     </p>
   );
 }
@@ -52,14 +58,22 @@ export function Countdown({
   const target = Number.isFinite(parsed)
     ? new Date(parsed).toISOString().slice(0, 10)
     : RELEASE_DAY;
-  const boundary = Date.parse(target + "T00:00:00Z");
+  // Rockstar Support (last updated 3 Nov 2026): GTA VI releases at midnight
+  // LOCAL time on 19 Nov 2026 in all regions, for both PS5 and Xbox Series
+  // X|S. A single UTC target cannot represent that — it would read 5 hours
+  // late in PKT and 5 hours early in US Eastern. Count to local midnight on
+  // the release date in the visitor's own time zone instead. Only the date
+  // part of targetDate is used, so a stored "T00:00:00Z" suffix is ignored.
+  const [targetYear, targetMonth, targetDay] = target.split("-").map(Number);
+  const boundary = new Date(targetYear, targetMonth - 1, targetDay, 0, 0, 0).getTime();
   const confirmed = isConfirmed !== false;
   const calStart = target.replace(/-/g, "");
-  const calEnd = new Date(boundary + 86400000)
-    .toISOString()
-    .slice(0, 10)
-    .replace(/-/g, "");
-  const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=GTA+VI+${confirmed ? "scheduled" : "expected"}+release&dates=${calStart}/${calEnd}&details=Calendar+date.+Regional+unlock+time+unconfirmed.+Source%3A+Rockstar+Games.`;
+  // All-day calendar event: end is the day after the release date, computed
+  // in local date parts (adding 24h to a local-midnight timestamp then
+  // converting to UTC would shift the date for time zones ahead of UTC).
+  const calEndDate = new Date(targetYear, targetMonth - 1, targetDay + 1);
+  const calEnd = `${calEndDate.getFullYear()}${String(calEndDate.getMonth() + 1).padStart(2, "0")}${String(calEndDate.getDate()).padStart(2, "0")}`;
+  const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=GTA+VI+${confirmed ? "scheduled" : "expected"}+release&dates=${calStart}/${calEnd}&details=Releases+at+midnight+local+time.+Source%3A+Rockstar+Games.`;
   const [remaining, setRemaining] = useState<number | null>(null);
   useEffect(() => {
     const update = () => setRemaining(Math.max(0, boundary - Date.now()));

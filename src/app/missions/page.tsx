@@ -130,15 +130,16 @@ export default async function MissionsPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           <div className="relative px-6 py-12 sm:px-10 max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-accent mb-3">
-              <Flag className="h-3 w-3" /> Campaign & Heists Archive
+              <Flag className="h-3 w-3" /> Fan Concepts — Not Confirmed Missions
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-white">
-              LEONIDA <span className="text-primary">MISSIONS & HEISTS</span>
+              LEONIDA <span className="text-primary">MISSION CONCEPTS</span>
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-white/80">
-              Browse story chapters, multi-approach bank heists, cartel side
-              contracts, and dynamic stranger encounters across Vice City and
-              beyond.
+              Fictional mission-planning examples — names, objectives,
+              rewards and unlocks are not verified GTA VI missions. Browse
+              the concepts and compare ideas; the real mission list arrives
+              at launch.
             </p>
           </div>
         </div>
@@ -146,7 +147,7 @@ export default async function MissionsPage() {
         {/* Global Live Stats Counter */}
         <div className="card-surface -mt-6 relative mx-4 sm:mx-6 grid grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border sm:grid-cols-3 rounded-2xl shadow-xl border border-border">
           {[
-            [String(missions.length), "Missions Listed"],
+            [String(missions.length), "Fan Concepts Listed"],
             ["Lucia & Jason", "Dual Protagonists"],
             ["Pre-Release", "Expected List"],
           ].map(([v, l]) => (

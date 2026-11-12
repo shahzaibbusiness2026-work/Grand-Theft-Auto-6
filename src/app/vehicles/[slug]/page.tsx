@@ -31,15 +31,30 @@ export async function generateMetadata({
     src: DEFAULT_OG_IMAGE,
     alt: DEFAULT_OG_IMAGE_ALT,
   };
+  // The layout appends " | Taish Gaming" (15 chars). Names that would push
+  // the rendered title past 60 chars use an absolute title instead, so the
+  // full catalog name is kept without truncation.
+  const baseTitle = e.name + " — GTA VI";
+  const title =
+    baseTitle.length + 15 > 60 ? { absolute: baseTitle } : baseTitle;
+  // The compare link is rendered on every detail page (see EvidenceDetail),
+  // so the closing sentence is true for all entries. It is appended only
+  // when the templated description would otherwise fall under 120 chars;
+  // long names already land in the 120–155 range without it.
+  const baseDescription = `${e.name} — GTA VI evidence review: what official footage shows, and which statistics are still unverified.`;
+  const description =
+    baseDescription.length < 120
+      ? baseDescription + " Compare with other GTA VI entries."
+      : baseDescription;
   return {
-    title: e.name + " — GTA VI",
-    description: `${e.name} — GTA VI evidence review: what official footage shows, and which statistics are still unverified.`,
+    title,
+    description,
     alternates: { canonical: "/vehicles/" + e.slug },
     openGraph: {
       url: "/vehicles/" + e.slug,
       type: "website",
-      title: e.name + " — GTA VI",
-      description: `${e.name} — GTA VI evidence review: what official footage shows, and which statistics are still unverified.`,
+      title: baseTitle,
+      description,
       images: [{ url: ogImage.src, alt: ogImage.alt }],
     },
     twitter: {
@@ -65,9 +80,25 @@ export default async function Detail({
   const entry = await resolve(slug);
   if (!entry) notFound();
   if (slug !== entry.slug) permanentRedirect("/vehicles/" + entry.slug);
+  // Plain-HTML prev/next links: the catalog hub only server-renders the
+  // first 24 cards (the rest expand client-side), so without these, 96
+  // detail pages had zero inlinks in crawler-visible HTML (audit 12 Nov
+  // 2026). Neighbours follow the hub's default name sort (localeCompare).
+  const sorted = [...(await getEvidenceCatalog("vehicles"))].sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
+  const index = sorted.findIndex((e) => e.slug === entry.slug);
+  const prev = index > 0 ? sorted[index - 1] : null;
+  const next =
+    index >= 0 && index < sorted.length - 1 ? sorted[index + 1] : null;
   return (
     <SiteShell>
-      <EvidenceDetail kind="vehicles" entry={entry} />
+      <EvidenceDetail
+        kind="vehicles"
+        entry={entry}
+        prev={prev ? { name: prev.name, slug: prev.slug } : null}
+        next={next ? { name: next.name, slug: next.slug } : null}
+      />
     </SiteShell>
   );
 }

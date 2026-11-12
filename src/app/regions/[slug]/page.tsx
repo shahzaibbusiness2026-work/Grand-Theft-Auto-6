@@ -51,13 +51,15 @@ export default async function RegionPage({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-      { "@type": "ListItem", position: 2, name: "Regions", item: "/regions" },
+      // Google requires absolute URLs in breadcrumb items; relative
+      // paths ("/", "/regions") were flagged unvalidatable (audit 12 Nov 2026).
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
+      { "@type": "ListItem", position: 2, name: "Regions", item: "https://www.taishgaming.com/regions" },
       {
         "@type": "ListItem",
         position: 3,
         name: page.name,
-        item: `/regions/${page.slug}`,
+        item: `https://www.taishgaming.com/regions/${page.slug}`,
       },
     ],
   };

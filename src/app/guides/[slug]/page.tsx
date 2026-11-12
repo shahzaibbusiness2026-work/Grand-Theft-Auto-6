@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { getPublicGuideBySlug, getPublicGuides } from "@/lib/services/guides";
 import ReactMarkdown from "react-markdown";
 import { hasGuideBody, readingTime } from "@/lib/editorial-quality";
+import { absoluteUrl } from "@/lib/page-metadata";
 import { serializeJsonLd } from "@/lib/utils";
 import { PlayerBookmarkButton } from "@/components/player-bookmark-button";
 
@@ -86,19 +87,21 @@ export default async function GuideDetailPage({
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "/",
+                // Google requires absolute URLs in breadcrumb items;
+                // relative paths were flagged unvalidatable (audit 12 Nov 2026).
+                item: absoluteUrl("/"),
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Guides",
-                item: "/guides",
+                item: absoluteUrl("/guides"),
               },
               {
                 "@type": "ListItem",
                 position: 3,
                 name: guide.title,
-                item: `/guides/${guide.slug}`,
+                item: absoluteUrl(`/guides/${guide.slug}`),
               },
             ],
           }),
@@ -113,8 +116,20 @@ export default async function GuideDetailPage({
               "@type": "Article",
               headline: guide.title,
               description: guide.description || undefined,
-              image: guide.image || undefined,
-              mainEntityOfPage: `/guides/${guide.slug}`,
+              image: guide.image ? absoluteUrl(guide.image) : undefined,
+              // Real recorded timestamp from the guides table (also used
+              // as the sitemap lastmod); omitted when absent, never invented.
+              ...(guide.updated_at
+                ? { dateModified: guide.updated_at }
+                : {}),
+              author: {
+                "@type": "Organization",
+                "@id":
+                  "https://www.taishgaming.com/team#editorial-team",
+                name: "Taish Gaming Editorial Team",
+                url: "https://www.taishgaming.com/team",
+              },
+              mainEntityOfPage: absoluteUrl(`/guides/${guide.slug}`),
             }),
           }}
         />

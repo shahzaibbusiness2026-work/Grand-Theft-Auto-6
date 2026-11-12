@@ -8,7 +8,6 @@ import {
   Circle,
   Search,
   MapPin,
-  ExternalLink,
   HelpCircle,
   Trophy,
 } from "lucide-react";
@@ -296,16 +295,14 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                       <span>{item.district}</span>
                     </div>
 
-                    <Link href={`/collectibles/${item.slug}`}>
-                      <h3
-                        className={cn(
-                          "font-display text-base font-bold text-foreground group-hover:text-primary transition-colors",
-                          isDone && "line-through text-muted-foreground"
-                        )}
-                      >
-                        {item.title}
-                      </h3>
-                    </Link>
+                    <h3
+                      className={cn(
+                        "font-display text-base font-bold text-foreground",
+                        isDone && "line-through text-muted-foreground"
+                      )}
+                    >
+                      {item.title}
+                    </h3>
 
                     <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
                       {item.description}
@@ -336,12 +333,9 @@ export function CollectiblesClient({ initialCollectibles }: { initialCollectible
                     <span className="text-xs text-muted-foreground py-2">Location unconfirmed</span>
                   )}
 
-                  <Link
-                    href={`/collectibles/${item.slug}`}
-                    className="btn-secondary text-xs px-3 py-2.5 inline-flex items-center gap-1 font-semibold"
-                  >
-                    Walkthrough <ExternalLink className="h-3 w-3" />
-                  </Link>
+                  <span className="text-xs px-3 py-2.5 inline-flex items-center gap-1 font-semibold text-muted-foreground">
+                    Rumoured — no walkthrough yet
+                  </span>
                 </div>
               </div>
             );

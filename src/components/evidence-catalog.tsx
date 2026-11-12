@@ -269,10 +269,11 @@ export function EvidenceCatalog({
         ? recentRank(a.id) - recentRank(b.id)
         : (sort === "reverse" ? -1 : 1) * a.name.localeCompare(b.name),
     );
-  // Crawlable pagination: real links to every ?page=N, so crawlers can
-  // reach every detail page (the sitemap lists them all too). The hub pages
-  // are static, so ?page=N serves the same first-page HTML and the catalog
-  // expands to the requested page client-side (CatalogUrlSync above).
+  // Pagination links to every ?page=N exist, but each ?page=N serves the
+  // same first-page HTML and the catalog expands to the requested page
+  // client-side — so a non-JS crawler never sees links to items past the
+  // first 24. Detail pages therefore carry plain prev/next links as well
+  // (EvidenceDetail), and the sitemap lists them all.
   // Mirrors catalogStateUrl: defaults (page 1, sort name) stay out of the URL.
   const pathname = usePathname();
   const totalPages = Math.max(1, Math.ceil(shown.length / pageSize));
