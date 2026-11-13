@@ -81,7 +81,7 @@ function publicSocial(value: string | undefined, hosts: string[]) {
   }
 }
 
-export async function Footer() {
+export async function Footer({ variant }: { variant?: "news" }) {
   const settings = await getSiteSettings();
   const handle = settings.twitterHandle?.replace(/^@/, "");
   // Every icon renders only when a real, validated URL/handle is saved in
@@ -143,58 +143,58 @@ export async function Footer() {
     },
   ].filter((item) => item.href);
 
+  const isNews = variant === "news";
+  const socialLinks = socials.length > 0 && (
+    <nav aria-label="Taish Gaming community" className={styles.socials}>
+      {socials.map((s) => (
+        <a
+          key={s.href}
+          href={s.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.socialLink}
+          aria-label={s.label}
+        >
+          <s.icon className="h-5 w-5" aria-hidden="true" />
+        </a>
+      ))}
+    </nav>
+  );
+  const brand = (
+    <>
+      <Link href="/" className={styles.brand} aria-label="Taish Gaming home">
+        <Gamepad2 className={styles.brandMark} aria-hidden="true" />
+        <span>
+          TAISH <span className={styles.brandAccent}>GAMING</span>
+        </span>
+      </Link>
+      <p className={styles.bodyBlurb}>
+        {isNews
+          ? "Independent coverage of GTA 6 and gaming."
+          : "An independent fan platform tracking GTA VI — no first-hand gameplay yet, everything labelled by evidence."}
+      </p>
+    </>
+  );
+
   return (
-    <footer className={styles.footer} aria-labelledby="footer-heading">
+    <footer
+      className={isNews ? `${styles.footer} ${styles.newsFooter}` : styles.footer}
+      aria-labelledby="footer-heading"
+    >
       <h2 id="footer-heading" className="sr-only">
         Taish Gaming footer
       </h2>
 
-      <div className={styles.inner}>
+      <div className={isNews ? "container-site" : styles.inner}>
+        {isNews && <div className={styles.newsBanner}>{brand}</div>}
         <div className={styles.bodyGrid}>
-          {/* Brand + socials */}
-          <div>
-            <Link
-              href="/"
-              className={styles.brand}
-              aria-label="Taish Gaming home"
-            >
-              <Gamepad2 className={styles.brandMark} aria-hidden="true" />
-              <span>
-                TAISH <span className={styles.brandAccent}>GAMING</span>
-              </span>
-            </Link>
-            <p className={styles.bodyBlurb}>
-              An independent fan platform tracking GTA VI — no first-hand
-              gameplay yet, everything labelled by evidence.
-            </p>
-            {socials.length > 0 && (
-              <nav
-                aria-label="Taish Gaming community"
-                className={styles.socials}
-              >
-                {socials.map((s) => (
-                  <a
-                    key={s.href}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.socialLink}
-                    aria-label={s.label}
-                  >
-                    <s.icon className="h-5 w-5" aria-hidden="true" />
-                  </a>
-                ))}
-              </nav>
-            )}
-          </div>
+          {!isNews && <div>{brand}{socialLinks}</div>}
 
           {/* Link columns */}
           {GROUPS.map((group) => (
             <section key={group.title} className={styles.bodyCol}>
               <h3 className={styles.bodyColTitle}>
-                <span className={styles.colSlash} aria-hidden="true">
-                  /
-                </span>{" "}
+                {!isNews && <span className={styles.colSlash} aria-hidden="true">/ </span>}
                 {group.title}
               </h3>
               <ul className={styles.linkList}>
@@ -208,6 +208,12 @@ export async function Footer() {
               </ul>
             </section>
           ))}
+          {isNews && socialLinks && (
+            <section className={styles.bodyCol}>
+              <h3 className={styles.bodyColTitle}>Follow Taish Gaming</h3>
+              {socialLinks}
+            </section>
+          )}
         </div>
 
         <nav className={styles.legalStrip} aria-label="Footer legal pages">
