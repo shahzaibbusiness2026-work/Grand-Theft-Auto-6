@@ -9,7 +9,7 @@ import { toIsoDate } from "@/lib/utils";
 import { subscribeNewsletter } from "@/lib/services/newsletter";
 import { SITE_CONFIG } from "@/lib/constants";
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 4;
 
 /* News-only article card (matches the news-page mockup). ArticleCard in
    components/article-card.tsx is shared with the blog + article pages, so
@@ -161,69 +161,58 @@ export function NewsSidebarNewsletter() {
   }
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#8a0f56] via-[#4d0a34] to-[#200619] p-5 text-white">
-      <div
-        className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#ff2e9a]/30 blur-3xl"
-        aria-hidden="true"
-      />
-      <div className="relative">
-        <span
-          className="flex h-11 w-11 items-center justify-center rounded-full bg-[#ff2e9a]"
-          aria-hidden="true"
-        >
-          <Mail className="h-5 w-5 text-white" />
-        </span>
-        <h3 className="mt-3 font-display text-xl font-extrabold leading-tight">
-          Get the Latest Gaming News
-        </h3>
-        <p className="mt-2 text-[13px] leading-relaxed text-white/80">
-          Subscribe to Taish Gaming and never miss a GTA 6 update, leak, or
-          major announcement.
+    <div className="rounded-xl border border-white/10 bg-[#2b1837] p-5 text-white">
+      <h3 className="flex items-start gap-3 font-display text-xl font-extrabold leading-tight">
+        <Mail className="mt-0.5 h-6 w-6 shrink-0 text-pink-300" aria-hidden="true" />
+        Get the Latest Gaming News
+      </h3>
+      <p className="mt-2 text-[13px] leading-relaxed text-white/80">
+        Subscribe to Taish Gaming and never miss a GTA 6 update, leak, or
+        major announcement.
+      </p>
+      {status === "success" ? (
+        <p className="mt-4 flex items-start gap-2 rounded-xl bg-white/10 px-3 py-3 text-sm font-semibold">
+          <CheckCircle
+            className="mt-0.5 h-4 w-4 shrink-0"
+            aria-hidden="true"
+          />
+          {message}
         </p>
-        {status === "success" ? (
-          <p className="mt-4 flex items-start gap-2 rounded-xl bg-white/10 px-3 py-3 text-sm font-semibold">
-            <CheckCircle
-              className="mt-0.5 h-4 w-4 shrink-0"
-              aria-hidden="true"
-            />
-            {message}
-          </p>
-        ) : (
-          <form
-            className="mt-4"
-            onSubmit={handleSubmit}
-            aria-label="Newsletter sign-up"
+      ) : (
+        <form
+          className="mt-4"
+          onSubmit={handleSubmit}
+          aria-label="Newsletter sign-up"
+        >
+          <label htmlFor="news-sidebar-email" className="sr-only">
+            Email address
+          </label>
+          <input
+            id="news-sidebar-email"
+            type="email"
+            placeholder="Enter your email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            autoComplete="email"
+            disabled={loading}
+            className="h-11 w-full rounded-lg bg-white px-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-[#ff2e9a]"
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-[#c70062] text-sm font-bold text-white transition-colors hover:bg-[#a90053] disabled:opacity-60"
           >
-            <label htmlFor="news-sidebar-email" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="news-sidebar-email"
-              type="email"
-              placeholder="Enter your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              autoComplete="email"
-              disabled={loading}
-              className="h-11 w-full rounded-lg bg-white px-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-[#ff2e9a]"
-            />
-            <button
-              type="submit"
-              disabled={loading}
-              className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-[#ff2e9a] text-sm font-bold text-white transition-colors hover:bg-[#e01e87] disabled:opacity-60"
-            >
-              {loading ? "..." : "Subscribe"}{" "}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </button>
-            {status === "error" && (
-              <p className="mt-2 text-xs font-semibold text-rose-200">
-                Something went wrong — please try again.
-              </p>
-            )}
-          </form>
-        )}
-      </div>
+            {loading ? "..." : "Subscribe"}{" "}
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </button>
+          {status === "error" && (
+            <p className="mt-2 text-xs font-semibold text-rose-200">
+              Something went wrong — please try again.
+            </p>
+          )}
+        </form>
+      )}
     </div>
   );
 }

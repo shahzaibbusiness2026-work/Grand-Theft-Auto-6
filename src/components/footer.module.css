@@ -429,3 +429,115 @@
 :global(.light) .footer summary:focus-visible {
   outline-color: #db2777;
 }
+
+.newsFooter {
+  padding-block: 1.5rem;
+  background: #0b1020;
+}
+
+.newsBanner {
+  display: grid;
+  justify-items: start;
+  align-content: center;
+  min-height: 7.5rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  border: 1px solid #34405a;
+  border-radius: 0.875rem;
+  background:
+    linear-gradient(90deg, #0b1020 3%, rgb(11 16 32 / 90%) 35%, transparent 85%),
+    url("/img/news-footer-waterfront.webp") right 61% / cover no-repeat,
+    #0b1020;
+}
+
+.newsBanner .brand {
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+}
+
+.newsBanner .brandMark {
+  width: 2rem;
+  height: 2rem;
+}
+
+.newsBanner .brandAccent {
+  background: none;
+  color: #ff63b7;
+}
+
+.newsBanner .bodyBlurb {
+  max-width: 23rem;
+  margin-top: 0.25rem;
+  color: #f4f6fc;
+  font-size: 0.875rem;
+}
+
+.newsFooter .bodyGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 1rem;
+}
+
+.newsFooter .bodyCol {
+  grid-column: auto;
+  padding-left: 0;
+  border-left: 0;
+}
+
+.newsFooter .bodyColTitle {
+  margin-bottom: 0.5rem;
+  padding-left: 0.625rem;
+  border-left: 3px solid #ff2e9a;
+  color: #f4f6fc;
+  font-size: 1rem;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.newsFooter .link {
+  min-height: 32px;
+  font-size: 0.875rem;
+}
+
+.newsFooter .socials {
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.newsFooter .socialLink {
+  width: 44px;
+  height: 44px;
+  border-color: #59657e;
+}
+
+.newsFooter .socialLink:hover {
+  border-color: #ff63b7;
+}
+
+.newsFooter .legalStrip {
+  gap: 0 1rem;
+}
+
+.newsFooter .legalStrip .link + .link {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.newsFooter a:focus-visible,
+:global(.light) .newsFooter a:focus-visible {
+  outline-color: #ff9bd4;
+  outline-offset: 2px;
+}
+
+@media (max-width: 479px) {
+  .newsBanner {
+    background-image:
+      linear-gradient(90deg, #0b1020, rgb(11 16 32 / 86%) 55%, rgb(11 16 32 / 20%)),
+      url("/img/news-footer-waterfront.webp");
+  }
+}
+
+@media (min-width: 768px) {
+  .newsFooter .bodyGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}

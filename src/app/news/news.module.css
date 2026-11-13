@@ -1,0 +1,125 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  background: #0b1020;
+  color: white;
+}
+
+.heroArtwork {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.heroArtwork::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(11 16 32 / 8%),
+    rgb(11 16 32 / 55%) 28%,
+    #0b1020 64%
+  );
+  content: "";
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: 68% 28%;
+}
+
+.heroInner {
+  display: grid;
+  align-items: end;
+  padding-block: clamp(11rem, 54vw, 18rem) 2rem;
+}
+
+.heroStory {
+  width: min(100%, 34rem);
+  overflow-wrap: anywhere;
+}
+
+.heroLabel {
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  margin-top: 0.75rem;
+  color: inherit;
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.heroAction {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.625rem 1rem;
+  border-radius: 0.625rem;
+  background: #c70062;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: background-color 160ms ease;
+}
+
+.heroAction:hover {
+  background: #a90053;
+}
+
+.heroAction:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+  .heroArtwork {
+    bottom: auto;
+    height: clamp(19rem, 92vw, 31rem);
+  }
+
+  .heroArtwork::after {
+    background: linear-gradient(
+      to bottom,
+      transparent 20%,
+      rgb(11 16 32 / 83%) 58%,
+      #0b1020 94%
+    );
+  }
+}
+
+@media (min-width: 768px) {
+  .heroArtwork::after {
+    background: linear-gradient(
+      90deg,
+      #0b1020 3%,
+      rgb(11 16 32 / 94%) 29%,
+      rgb(11 16 32 / 85%) 43%,
+      rgb(11 16 32 / 48%) 56%,
+      rgb(11 16 32 / 5%) 75%
+    );
+  }
+
+  .heroImage {
+    object-position: center 38%;
+  }
+
+  .heroInner {
+    min-height: clamp(25rem, 35vw, 35rem);
+    align-items: center;
+    padding-block: 2.75rem;
+  }
+
+  .heroStory {
+    width: min(51%, 34rem);
+  }
+}
