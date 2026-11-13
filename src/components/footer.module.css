@@ -23,8 +23,8 @@
 }
 .bodyGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px 16px;
+  grid-template-columns: 1fr;
+  gap: 26px 16px;
   padding: 24px 0 0;
 }
 .bodyGrid > :first-child {
@@ -187,9 +187,9 @@
 .link {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: 40px;
   max-width: 100%;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: #e6ebf5;
   text-decoration: none;
@@ -284,6 +284,25 @@
   outline-offset: 5px;
   border-radius: 6px;
 }
+/* Mobile: the footer is tall and narrow, so the wide desktop skyline
+   would show only a thin strip. Use a cropped mobile version of the
+   skyline (central buildings + palms + wave) as a band along the
+   bottom, with a lighter overlay so it stays visible. */
+@media (max-width: 767px) {
+  .footer {
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(9, 15, 27, 0) 55%,
+        rgba(9, 15, 27, 0.35) 82%,
+        rgba(9, 15, 27, 0.6) 100%
+      ),
+      url("/img/footer-neon-skyline-bg-mobile.jpg");
+    background-size: cover, 100% auto;
+    background-position: center bottom, center bottom;
+  }
+}
+
 @media (min-width: 768px) {
   .backdrop {
     display: block;
