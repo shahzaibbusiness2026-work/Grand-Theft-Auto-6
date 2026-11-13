@@ -24,7 +24,7 @@ export function publicationImage(src?: string | null, slug?: string): string {
       src.includes("Port_Gellhorn_01.0fmisvza-5-cq.jpg"))
   )
     return "/img/port-gellhorn-official.jpg";
-  return src || "/img/hero-vice-skyline-hd.jpg";
+  return src || "/img/gta6-hero-official.webp";
 }
 
 /** Repair imported YouTube heading links without allowing raw HTML. */
