@@ -1,189 +1,109 @@
+/* Footer (Nov 2026, from the user's design): plain dark navy, a rounded
+   banner with the brand + tagline over a Vice City sunset skyline, four
+   link columns, a plain legal row and the copyright row. */
+
 .footer {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
   background-color: #090f1b;
-  /* Neon Vice City skyline background image (footer-neon-skyline-bg.jpg):
-     dark navy on top so the brand and columns read, skyline + pink wave
-     along the bottom. The gradient overlay dims the lower part just
-     enough to keep the legal strip readable. */
-  background-image:
-    linear-gradient(
-      to bottom,
-      rgba(9, 15, 27, 0) 45%,
-      rgba(9, 15, 27, 0.5) 78%,
-      rgba(9, 15, 27, 0.78) 100%
-    ),
-    url("/img/footer-neon-skyline-bg.jpg");
-  background-size: cover;
-  background-position: center bottom;
-  background-repeat: no-repeat;
   color: #d7dfef;
   border-top: 1px solid #29364d;
 }
-.bodyGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 26px 16px;
-  padding: 24px 0 0;
-}
-.bodyGrid > :first-child {
-  grid-column: 1 / -1;
-}
-.bodyColTitle {
-  font-size: 15px;
-  font-weight: 750;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #ff63b7;
-  margin: 0 0 12px;
-}
-.colSlash {
-  color: #ff2e9a;
-  font-weight: 900;
-  font-size: 18px;
-  margin-right: 2px;
-}
-.bodyBlurb {
-  margin: 14px 0 0;
-  max-width: 420px;
-  font-size: 15px;
-  line-height: 1.65;
-  color: #9eafc9;
-}
-.bodyGrid .socials {
-  margin-top: 16px;
-}
-.legalStrip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 20px;
-  margin-top: 18px;
-  padding-top: 14px;
-  border-top: 1px solid #29364d;
-}
-.legalStrip .link {
-  font-size: 13px;
-  min-height: 36px;
-}
-.backdrop {
-  position: absolute;
-  inset: 0 0 auto;
-  height: 270px;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.12;
-  display: none;
-}
+
 .inner {
   width: min(1240px, 100%);
   margin-inline: auto;
   padding: 26px 20px 20px;
 }
-.eyebrow {
-  margin: 0 0 16px;
-  font-size: 17px;
-  font-weight: 750;
-  color: #fff;
-  letter-spacing: -0.02em;
-}
-.quickGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-.quickLink {
+
+/* Rounded banner: sunset skyline image, brand + tagline on the dark
+   left. The gradient fades the image into the dark so the text reads. */
+.banner {
+  position: relative;
+  overflow: hidden;
+  min-height: 190px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  border: 1px solid #29364d;
+  border-radius: 16px;
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(9, 15, 27, 0.95) 0%,
+      rgba(9, 15, 27, 0.72) 22%,
+      rgba(9, 15, 27, 0.18) 42%,
+      rgba(9, 15, 27, 0) 58%
+    ),
+    url("/img/footer-banner-skyline-sunset.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bannerText {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  padding: 28px 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
   gap: 10px;
-  min-width: 0;
-  min-height: 82px;
-  padding: 15px 13px;
-  border: 1px solid #30415c;
-  border-radius: 12px;
-  background: rgba(18, 28, 46, 0.85);
-  color: #f4f7ff;
-  font-size: 14px;
+  color: #f4f6fc;
+  font-size: 24px;
+  font-weight: 850;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.brandMark {
+  width: 36px;
+  height: 36px;
+  color: #ff63b7;
+}
+
+.brandAccent {
+  background: linear-gradient(100deg, #ff63b7, #b29bff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.bannerBlurb {
+  margin: 12px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e6ebf5;
+}
+
+/* Four columns: Explore, Compare & Tools, Site, Follow Taish Gaming. */
+.bodyGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 26px 16px;
+  padding: 28px 0 0;
+}
+
+.bodyColTitle {
+  font-size: 18px;
   font-weight: 700;
-  transition:
-    background 0.18s,
-    border-color 0.18s,
-    transform 0.18s;
+  color: #f4f6fc;
+  margin: 0 0 12px;
 }
-.quickLink:hover {
-  background: #1c2943;
-  border-color: #b66baf;
-  transform: translateY(-2px);
+
+.colBar {
+  color: #ff2e9a;
+  font-weight: 900;
+  margin-right: 8px;
 }
-.quickIcon {
-  flex: none;
-  width: 23px;
-  height: 23px;
-  color: #ee9bcd;
-}
-.quickArrow {
-  flex: none;
-  width: 15px;
-  height: 15px;
-  color: #ee9bcd;
-}
-.quickText {
-  flex: 1;
-  min-width: 0;
-}
-.desktopGroups {
-  display: none;
-}
-.mobileGroups {
-  margin-top: 18px;
-  border: 1px solid #30415c;
-  border-radius: 12px;
-  background: #111b2d;
-}
-.mobileGroups > summary {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 52px;
-  padding: 12px 16px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 650;
-  color: #f1f5fc;
-  list-style: none;
-}
-.mobileGroups > summary::-webkit-details-marker {
-  display: none;
-}
-.disclosureIcon {
-  width: 17px;
-  height: 17px;
-  margin-left: auto;
-  transition: transform 0.18s;
-}
-.mobileGroups[open] .disclosureIcon {
-  transform: rotate(180deg);
-}
-.groups {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 23px 16px;
-  padding: 5px 16px 18px;
-}
-.groupTitle {
-  font-size: 12px;
-  font-weight: 750;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #f5f7fc;
-  margin: 10px 0 7px;
-}
+
 .linkList {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
 .link {
   display: inline-flex;
   align-items: center;
@@ -195,46 +115,19 @@
   text-decoration: none;
   overflow-wrap: anywhere;
 }
+
 .link:hover {
   color: #f4b6e0;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.brandRow {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 17px;
-  margin-top: 22px;
-  padding-top: 22px;
-  border-top: 1px solid #29364d;
-}
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: #f4f6fc;
-  font-size: 24px;
-  font-weight: 850;
-  letter-spacing: -0.035em;
-  line-height: 1.2;
-}
-.brandMark {
-  width: 36px;
-  height: 36px;
-  color: #ff63b7;
-}
-.brandAccent {
-  background: linear-gradient(100deg, #ff63b7, #b29bff);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
+
 .socials {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
+
 .socialLink {
   display: flex;
   align-items: center;
@@ -245,188 +138,123 @@
   border-radius: 50%;
   color: #dce5f6;
 }
+
 .socialLink:hover {
   background: rgba(255, 46, 154, 0.12);
   border-color: #ff2e9a;
   color: #fff;
 }
-.bottom {
-  margin-top: 18px;
-  padding-top: 15px;
-  border-top: 1px solid #29364d;
-}
-.legal {
+
+/* Plain legal row, no separators; spread across the width on desktop. */
+.legalStrip {
   display: flex;
   flex-wrap: wrap;
-  gap: 3px 18px;
-  align-items: center;
+  gap: 8px 28px;
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid #29364d;
 }
-.legal .link {
-  font-size: 12px;
+
+.legalStrip .link {
+  font-size: 13px;
   min-height: 36px;
 }
-.note {
-  margin: 8px 0 0;
-  max-width: 760px;
-  font-size: 12px;
-  line-height: 1.7;
-  color: #9eafc9;
+
+.bottom {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #29364d;
 }
+
 .copyright {
-  margin: 7px 0 0;
+  margin: 0;
   font-size: 12px;
   line-height: 1.7;
   color: #9eafc9;
 }
-.footer a:focus-visible,
-.footer summary:focus-visible {
+
+.note {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #9eafc9;
+}
+
+.footer a:focus-visible {
   outline: 2px solid #f1a9d9;
   outline-offset: 5px;
   border-radius: 6px;
 }
-/* Mobile: the footer is tall and narrow, so the wide desktop skyline
-   would show only a thin strip. Use a cropped mobile version of the
-   skyline (central buildings + palms + wave) as a band along the
-   bottom, with a lighter overlay so it stays visible. */
+
+/* Mobile: the banner text spans the full width, so dim the whole image
+   behind it instead of only the left side. */
 @media (max-width: 767px) {
-  .footer {
+  .banner {
     background-image:
-      linear-gradient(
-        to bottom,
-        rgba(9, 15, 27, 0) 55%,
-        rgba(9, 15, 27, 0.35) 82%,
-        rgba(9, 15, 27, 0.6) 100%
-      ),
-      url("/img/footer-neon-skyline-bg-mobile.jpg");
-    background-size: cover, 100% auto;
-    background-position: center bottom, center bottom;
+      linear-gradient(rgba(9, 15, 27, 0.62), rgba(9, 15, 27, 0.62)),
+      url("/img/footer-banner-skyline-sunset.jpg");
   }
 }
 
 @media (min-width: 768px) {
-  .backdrop {
-    display: block;
-  }
   .inner {
     padding: 30px 30px 22px;
   }
-  .eyebrow {
-    font-size: 22px;
-    margin-bottom: 20px;
+
+  .banner {
+    min-height: 200px;
   }
-  .quickGrid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
+
+  .bannerText {
+    padding: 32px;
   }
-  .quickLink {
-    min-height: 94px;
-    padding: 20px;
-    font-size: 16px;
-  }
-  .quickIcon {
-    width: 29px;
-    height: 29px;
-  }
-  .desktopGroups {
-    display: block;
-    margin-top: 30px;
-    padding-top: 26px;
-    border-top: 1px solid #29364d;
-  }
-  .groups {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 30px;
-    padding: 0;
-  }
-  .groupTitle {
-    margin-top: 0;
-  }
-  .link {
-    min-height: 40px;
-    font-size: 16px;
-  }
-  .mobileGroups {
-    display: none;
-  }
-  .brandRow {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 30px;
-    padding-top: 26px;
-  }
+
   .brand {
-    font-size: 23px;
+    font-size: 34px;
   }
+
   .brandMark {
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
   }
+
+  .bodyGrid {
+    grid-template-columns: 1.05fr 0.95fr 0.95fr 1.15fr;
+    gap: 28px;
+    padding-top: 32px;
+  }
+
+  /* Follow column is wider so all five social circles fit in one row. */
+  .socials {
+    gap: 8px;
+  }
+
+  .link {
+    font-size: 16px;
+  }
+
+  .legalStrip {
+    justify-content: space-between;
+  }
+
   .bottom {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 4px 26px;
-    margin-top: 16px;
-    padding-top: 12px;
   }
+
   .note {
-    max-width: 510px;
+    margin-top: 0;
     text-align: right;
-    margin-top: 0;
-  }
-  .copyright {
-    margin-top: 0;
-  }
-  .legal .link {
-    font-size: 12px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .quickLink,
-  .disclosureIcon {
-    transition: none;
-  }
-  .quickLink:hover {
-    transform: none;
+    max-width: 600px;
   }
 }
 
-@media (min-width: 768px) {
-  .bodyGrid {
-    grid-template-columns: 1.4fr 0.9fr 1.1fr 1.1fr;
-    gap: 28px;
-  }
-  .bodyGrid > :first-child {
-    grid-column: auto;
-  }
-  /* Thin vertical dividers between the link columns (mockup). */
-  .bodyCol {
-    border-left: 1px solid #29364d;
-    padding-left: 28px;
-  }
-  /* Bar separators between the legal links (mockup), desktop only so a
-     wrapped link never starts a line with a stray bar. */
-  .legalStrip .link + .link {
-    border-left: 1px solid #29364d;
-    padding-left: 20px;
-  }
-  .brand {
-    font-size: 34px;
-  }
-  .brandMark {
-    width: 44px;
-    height: 44px;
-  }
-}
-
-/* Bright (light) mode — the footer keeps the dark neon design (with
-   its background image) in both modes, exactly as the mockup shows,
-   so none of the light-surface flips apply here. Only the focus ring
-   colour is adjusted for the dark background. */
-:global(.light) .footer a:focus-visible,
-:global(.light) .footer summary:focus-visible {
+/* Bright (light) mode — the footer keeps the dark design in both modes,
+   exactly as the mockup shows. Only the focus ring colour is adjusted. */
+:global(.light) .footer a:focus-visible {
   outline-color: #db2777;
 }
 
