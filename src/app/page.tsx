@@ -60,6 +60,88 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+/**
+ * "Popular on Taish Gaming" — Design 2 (image cards).
+ * Every card image is distinct within the section AND is not used
+ * anywhere else on the homepage (hero, map preview, characters,
+ * protagonist showcase, news/articles, newsletter), so no image
+ * appears twice on the page. All are real Rockstar trailer frames
+ * or official art — no AI illustrations, no fan-made maps.
+ * Replacements vs the first draft: map card uses the Leonida
+ * wetlands sunset (satellite-map-hd.jpg is already the map
+ * section's image); map-size card uses the Vice City beach
+ * (gta6-hero-official.webp was near-identical to the key art and
+ * is already two articles' cover); money card uses the nightclub
+ * (cache-chest.jpg is a 140x76 thumbnail); gameplay card uses
+ * Lucia boxing (trailer-keys-marina.webp was flagged AI in the
+ * 14 Nov cover audit, so it is not used).
+ */
+const POPULAR_PAGES = [
+  {
+    href: "/map",
+    title: "Explore the GTA 6 interactive fan map",
+    desc: "Leonida regions, cities and locations, with fan-map pins.",
+    img: "/img/world-evidence/gta-6-leonida-wetlands-sunset-trailer-1.webp",
+    tag: "Map",
+  },
+  {
+    href: "/tools/download-time-calculator",
+    title: "Estimate GTA 6 download time",
+    desc: "How long the up-to-212 GB pre-load takes at your speed.",
+    img: "/img/gta6-hero-clean-hd.jpg",
+    tag: "Tool",
+  },
+  {
+    href: "/news/map-size-comparison-gtav-rdr2",
+    title: "GTA 6 map size compared",
+    desc: "Why there is no official km² number yet.",
+    img: "/img/world-evidence/gta-6-vice-city-beach-sunny-weather-trailer-1.webp",
+    tag: "News",
+  },
+  {
+    href: "/tools/day-night-converter",
+    title: "GTA time to real time converter",
+    desc: "Convert game time to real time and back.",
+    img: "/img/hero-dark.jpg",
+    tag: "Tool",
+  },
+  {
+    href: "/controls",
+    title: "GTA 6 controls",
+    desc: "Provisional PS5 and Xbox controller layout.",
+    img: "/img/hero-artwork-right.jpg",
+    tag: "Guide",
+  },
+  {
+    href: "/news/gta-6-gameplay-confirmed-features-mechanics",
+    title: "GTA 6 gameplay mechanics",
+    desc: "Shown versus unverified mechanics, separated.",
+    img: "/img/world-evidence/gta-6-lucia-boxing-trailer-2.webp",
+    tag: "News",
+  },
+  {
+    href: "/tools/money-calculator",
+    title: "GTA 6 money calculator",
+    desc: "Plan fictional earnings with custom inputs.",
+    img: "/img/world-evidence/gta-6-nightclub-dj-dancefloor-trailer-1.webp",
+    tag: "Tool",
+  },
+  {
+    href: "/weapons",
+    title: "GTA 6 weapons",
+    desc: "The full weapon database.",
+    img: "/img/weapons-phil-ammu-nation.jpg",
+    tag: "Database",
+  },
+  {
+    href: "/news",
+    title: "Latest GTA 6 news",
+    desc: "Official updates and announcements.",
+    img: "/img/heli.jpg",
+    tag: "News",
+  },
+];
+
 export default async function HomePage() {
   const [allArticles, allCharacters, settings, stats] = await Promise.all([
     getPublicArticles(),
@@ -428,44 +510,37 @@ export default async function HomePage() {
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
           The pages readers open most: the map, the size comparison, the tools and the controls.
         </p>
-        <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <li className="card-surface rounded-2xl p-4">
-            <Link className="font-bold underline" href="/map">Explore the GTA 6 interactive fan map</Link>
-            <p className="mt-1 text-sm text-muted-foreground">Leonida regions, cities and locations, with fan-map pins.</p>
-          </li>
-          <li className="card-surface rounded-2xl p-4">
-            <Link className="font-bold underline" href="/tools/download-time-calculator">Estimate GTA 6 download time</Link>
-            <p className="mt-1 text-sm text-muted-foreground">How long the up-to-212 GB pre-load takes at your speed.</p>
-          </li>
-          <li className="card-surface rounded-2xl p-4">
-            <Link className="font-bold underline" href="/news/map-size-comparison-gtav-rdr2">GTA 6 map size compared</Link>
-            <p className="mt-1 text-sm text-muted-foreground">Why there is no official km² number yet.</p>
-          </li>
-          <li className="card-surface rounded-2xl p-4">
-            <Link className="font-bold underline" href="/tools/day-night-converter">GTA time to real time converter</Link>
-            <p className="mt-1 text-sm text-muted-foreground">Convert game time to real time and back.</p>
-          </li>
-          <li className="card-surface rounded-2xl p-4">
-            <Link className="font-bold underline" href="/controls">GTA 6 controls</Link>
-            <p className="mt-1 text-sm text-muted-foreground">Provisional PS5 and Xbox controller layout.</p>
-          </li>
-          <li className="card-surface rounded-2xl p-4">
-            <Link className="font-bold underline" href="/news/gta-6-gameplay-confirmed-features-mechanics">GTA 6 gameplay mechanics</Link>
-            <p className="mt-1 text-sm text-muted-foreground">Shown versus unverified mechanics, separated.</p>
-          </li>
-          <li className="card-surface rounded-2xl p-4">
-            <Link className="font-bold underline" href="/tools/money-calculator">GTA 6 money calculator</Link>
-            <p className="mt-1 text-sm text-muted-foreground">Plan fictional earnings with custom inputs.</p>
-          </li>
-          <li className="card-surface rounded-2xl p-4">
-            <Link className="font-bold underline" href="/weapons">GTA 6 weapons</Link>
-            <p className="mt-1 text-sm text-muted-foreground">The full weapon database.</p>
-          </li>
-          <li className="card-surface rounded-2xl p-4">
-            <Link className="font-bold underline" href="/news">Latest GTA 6 news</Link>
-            <p className="mt-1 text-sm text-muted-foreground">Official updates and announcements.</p>
-          </li>
-        </ul>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {POPULAR_PAGES.map((p) => (
+            <Link
+              key={p.href}
+              href={p.href}
+              className="group card-surface block overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-sm"
+            >
+              <div className="relative h-40 overflow-hidden">
+                <SafeImage
+                  src={p.img}
+                  alt={p.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <Badge variant="solid" className="absolute left-2 top-2 z-10">
+                  {p.tag}
+                </Badge>
+              </div>
+              <div className="p-4">
+                <h3 className="font-display text-sm font-bold leading-snug group-hover:text-primary">
+                  {p.title}
+                </h3>
+                <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
+                  {p.desc}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
     </SiteShell>
   );
