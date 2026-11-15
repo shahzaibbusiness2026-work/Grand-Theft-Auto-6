@@ -39,7 +39,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/characters",
     "/radio",
     "/controls",
-    "/gta6",
     "/money-guide",
     "/guides",
     "/gta-6-world",
