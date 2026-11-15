@@ -7,7 +7,7 @@ export const revalidate = 3600;
 
 import Link from "next/link";
 import { SafeImage } from "@/components/safe-image";
-import { Clock, Mail } from "lucide-react";
+import { Clock } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeader } from "@/components/section-header";
@@ -17,7 +17,6 @@ import { DeferredHome } from "@/components/deferred-home";
 import { MobileHomepage } from "@/components/mobile-homepage";
 import { HOME_TRAILERS as TRAILERS } from "@/lib/home-content";
 import { YouTubeLite } from "@/components/youtube-lite";
-import { NewsletterForm } from "@/components/newsletter-form";
 
 import {
   getPublicArticles,
@@ -431,77 +430,6 @@ export default async function HomePage() {
           </>
         )}
 
-        {showSection("community") && (
-          <>
-            {/* 7 — NEWSLETTER */}
-            <section
-              aria-labelledby="newsletter-heading"
-              className="container-site py-6"
-            >
-              <div className="card-surface relative overflow-hidden min-h-[340px]">
-                <SafeImage
-                  src="/img/hero-vice-skyline-hd.jpg"
-                  alt="GTA 6 Vice City Skyline"
-                  fill
-                  sizes="100vw"
-                  className="object-cover object-right opacity-90 dark:opacity-75 dark:brightness-110 pointer-events-none"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent pointer-events-none" />
-                <div className="relative px-6 py-9 sm:px-10">
-                  <p className="section-eyebrow text-[#F3A398]">Newsletter</p>
-                  <h2
-                    id="newsletter-heading"
-                    className="mt-3 max-w-md font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl text-white"
-                  >
-                    Never Miss <br /> an{" "}
-                    <span className="text-[#F3A398] text-glow-amber">
-                      Update
-                    </span>
-                  </h2>
-                  <p className="mt-4 max-w-md text-sm leading-relaxed text-white/80">
-                    Subscribe to our newsletter and get the latest GTA 6 news,
-                    articles, trailers and exclusive updates straight to your
-                    inbox.
-                  </p>
-                  <NewsletterForm />
-                  <div className="mt-6 grid max-w-lg grid-cols-1 gap-4 sm:grid-cols-3">
-                    {[
-                      {
-                        title: "Latest News",
-                        desc: "Get all official updates and announcements.",
-                      },
-                      {
-                        title: "Exclusive Content",
-                        desc: "Early access to articles, screenshots and more.",
-                      },
-                      {
-                        title: "No Spam",
-                        desc: "We respect your inbox. Unsubscribe anytime.",
-                      },
-                    ].map((p) => (
-                      <div key={p.title} className="flex items-start gap-2.5">
-                        <span
-                          className="icon-tile h-8 w-8 shrink-0 border border-accent/40 bg-accent/10 text-accent"
-                          aria-hidden="true"
-                        >
-                          <Mail className="h-3.5 w-3.5" />
-                        </span>
-                        <div>
-                          <p className="text-[13px] font-bold text-white">
-                            {p.title}
-                          </p>
-                          <p className="mt-0.5 text-xs leading-relaxed text-white/70">
-                            {p.desc}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </section>
-          </>
-        )}
       </div>
       <section className="container-site py-6 sm:py-8" aria-labelledby="popular-heading">
         <h2 id="popular-heading" className="font-display text-2xl font-bold">

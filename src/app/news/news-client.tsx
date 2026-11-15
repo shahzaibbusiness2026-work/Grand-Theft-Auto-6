@@ -102,12 +102,27 @@ export function NewsLaunchCountdown() {
     return () => clearInterval(timer);
   }, [boundary]);
   const seconds = remaining === null ? null : Math.floor(remaining / 1000);
+  // Post-release state: once local midnight on 19 Nov 2026 has passed, the
+  // timer would otherwise sit at 0 Days / 0 Hours / 0 Mins / 0 Secs forever.
+  const isReleased = remaining !== null && remaining <= 0;
   const cells: [string, string | number][] = [
     ["Days", seconds === null ? "—" : Math.floor(seconds / 86400)],
     ["Hours", seconds === null ? "—" : Math.floor(seconds / 3600) % 24],
     ["Mins", seconds === null ? "—" : Math.floor(seconds / 60) % 60],
     ["Secs", seconds === null ? "—" : seconds % 60],
   ];
+  if (isReleased) {
+    return (
+      <div className="card-surface p-4">
+        <h3 className="font-display text-base font-extrabold">
+          GTA 6 is out now
+        </h3>
+        <p className="mt-0.5 text-xs text-muted-foreground">
+          Released 19 November 2026 — midnight local time.
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="card-surface p-4">
       <h3 className="font-display text-base font-extrabold">

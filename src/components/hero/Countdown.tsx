@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -82,12 +83,43 @@ export function Countdown({
     return () => clearInterval(timer);
   }, [boundary]);
   const seconds = remaining === null ? null : Math.floor(remaining / 1000);
+  // Post-release state: once local midnight on 19 Nov 2026 has passed, the
+  // countdown would otherwise sit at 0 Days / 0 Hours / 0 Mins / 0 Secs
+  // forever. Show "out now" instead of a stale zeroed timer.
+  const isReleased = remaining !== null && remaining <= 0;
   const cells = [
     ["Days", seconds === null ? "—" : Math.floor(seconds / 86400)],
     ["Hours", seconds === null ? "—" : Math.floor(seconds / 3600) % 24],
     ["Minutes", seconds === null ? "—" : Math.floor(seconds / 60) % 60],
     ["Seconds", seconds === null ? "—" : seconds % 60],
   ];
+  if (isReleased) {
+    return (
+      <section
+        className={cn("mx-auto w-full max-w-3xl space-y-4 text-center text-white", className)}
+      >
+        <p className="font-display text-4xl font-black tracking-tight sm:text-5xl">
+          GTA VI IS <span className="text-primary">OUT NOW</span>
+        </p>
+        <p className="text-sm text-white/85">
+          Released 19 November 2026 — midnight local time in all regions.
+        </p>
+        <div className="flex flex-wrap justify-center gap-5 text-sm">
+          <a
+            className="inline-flex min-h-11 items-center underline"
+            href="https://www.rockstargames.com/VI"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Rockstar release information
+          </a>
+          <Link className="inline-flex min-h-11 items-center underline" href="/guides">
+            Read the launch guides
+          </Link>
+        </div>
+      </section>
+    );
+  }
   return (
     <section
       className={cn("mx-auto w-full max-w-3xl space-y-4 text-white", className)}
