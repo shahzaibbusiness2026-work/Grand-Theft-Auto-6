@@ -168,6 +168,41 @@ export default function Gta6HubPage() {
         </div>
 
         <section className="mt-10 rounded-xl border border-white/10 bg-black/20 p-5 sm:p-6">
+          <h2 className="font-bold text-xl mb-3">Launch week timeline</h2>
+          <ul className="space-y-3 text-sm leading-relaxed text-foreground/75">
+            <li className="flex gap-3">
+              <span className="shrink-0 font-bold text-primary">Nov 10</span>
+              <span>
+                Pre-loading opened — PS5 at local midnight, Xbox at 12 a.m.
+                GMT (5 a.m. PKT). Download up to 212 GB.
+              </span>
+            </li>
+            <li className="flex gap-3">
+              <span className="shrink-0 font-bold text-primary">Nov 12</span>
+              <span>
+                Code-in-box retail copies on sale; codes redeemable. No disc
+                in the box.
+              </span>
+            </li>
+            <li className="flex gap-3">
+              <span className="shrink-0 font-bold text-primary">Nov 19</span>
+              <span>
+                Launch — midnight local time on PS5 and Xbox Series X|S.
+                GTA VI: The Album (34 tracks) releases the same day.
+              </span>
+            </li>
+            <li className="flex gap-3">
+              <span className="shrink-0 font-bold text-primary">Nov 19</span>
+              <span>
+                YouTube 24-hour launch livestream starts 12 a.m. ET on
+                youtube.com/youtube, with an RDCWorld pre-show at 11 p.m. ET
+                on Nov 18.
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <section className="mt-10 rounded-xl border border-white/10 bg-black/20 p-5 sm:p-6">
           <h2 className="font-bold text-xl mb-3">What is confirmed so far</h2>
           <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-foreground/75">
             <li>
