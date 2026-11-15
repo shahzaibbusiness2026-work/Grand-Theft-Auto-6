@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import { Countdown } from "@/components/hero/Countdown";
+import { SafeImage } from "@/components/safe-image";
+import { Badge } from "@/components/ui/badge";
 import type { Metadata } from "next";
 import { pageOpenGraph } from "@/lib/page-metadata";
 import { serializeJsonLd } from "@/lib/utils";
@@ -14,60 +16,77 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+// No-duplicate rule (owner, 2026-11-15): every card below has its own image,
+// and none of the 9 images appears anywhere on the homepage. The 9
+// destinations also do not repeat the homepage "Popular on Taish Gaming"
+// cards (/map, download-time, map-size, day-night, /controls, gameplay,
+// /money-guide, /weapons, /news) — this hub links to different pages.
+// NOTE: gta-6-store-signs-brands-trailer-1.webp and
+// gta-6-handgun-robbery-scene-trailer-1.webp are the SAME file (identical
+// md5) — never use both. The robbery file is used once, for Compare weapons.
 const HUB_LINKS = [
   {
-    href: "/map",
-    title: "Interactive Map",
-    desc: "Leonida regions, cities and locations, with fan-map pins.",
-    tag: "Map",
-  },
-  {
     href: "/news/gta-6-preload-ps5-xbox-how-to",
-    title: "Pre-load Guide",
+    title: "GTA 6 pre-load guide",
     desc: "Pre-loading opened November 10. How to get the up-to-212 GB download ready.",
+    img: "/img/world-evidence/gta-6-vice-city-buildings-palms-trailer-1.webp",
     tag: "Pre-load",
   },
   {
     href: "/news/gta-6-file-size-210-gb-ps5-storage-guide",
-    title: "File Size & Storage",
+    title: "GTA 6 file size & storage",
     desc: "Up to 212 GB. Check whether it fits your PS5 or Xbox before November 19.",
+    img: "/img/world-evidence/gta-6-living-room-tv-details-trailer-2.webp",
     tag: "212 GB",
   },
   {
     href: "/news/gta-6-release-date-pre-order-editions",
-    title: "Editions & Release Date",
+    title: "GTA 6 editions & release date",
     desc: "Standard $79.99 vs Ultimate $99.99, and what each edition includes.",
+    img: "/img/world-evidence/gta-6-jason-lucia-bar-drinks-trailer-2.webp",
     tag: "Editions",
   },
   {
-    href: "/controls",
-    title: "Controls",
-    desc: "Provisional PS5 and Xbox controller layout. Rockstar has not published the official one yet.",
-    tag: "Controls",
-  },
-  {
     href: "/vehicles",
-    title: "Vehicles",
+    title: "GTA 6 vehicles",
     desc: "110 catalogued vehicles. Stats stay blank until verified in-game at launch.",
+    img: "/img/world-evidence/gta-6-highway-vehicle-scene-trailer-2.webp",
     tag: "110 vehicles",
   },
   {
-    href: "/weapons",
-    title: "Weapons",
-    desc: "34 catalogued weapons, including the seven Rockstar-named guns.",
-    tag: "34 weapons",
+    href: "/characters",
+    title: "GTA 6 characters",
+    desc: "Lucia, Jason and the Leonida cast Rockstar has shown so far.",
+    img: "/img/world-evidence/gta-6-characters-table-trailer-2.webp",
+    tag: "Characters",
   },
   {
-    href: "/tools",
-    title: "Tools & Calculators",
-    desc: "Download-time, money, DPS and day-night calculators for launch week.",
-    tag: "Tools",
+    href: "/gta-6-world",
+    title: "Leonida world",
+    desc: "Regions, wildlife, weather, brands and life across the state of Leonida.",
+    img: "/img/world-evidence/gta-6-flamingos-wetland-birds-trailer-1.webp",
+    tag: "World",
   },
   {
-    href: "/news",
-    title: "Latest GTA 6 News",
-    desc: "Official updates and announcements, with sources cited.",
-    tag: "News",
+    href: "/radio",
+    title: "GTA 6 radio stations",
+    desc: "The six stations Rockstar confirmed, plus GTA VI: The Album.",
+    img: "/img/world-evidence/gta-6-music-dj-nightclub-trailer-1.webp",
+    tag: "Radio",
+  },
+  {
+    href: "/compare/vehicles",
+    title: "Compare vehicles",
+    desc: "Pick two vehicles and compare them side by side.",
+    img: "/img/world-evidence/gta-6-social-media-car-clip-trailer-1.webp",
+    tag: "Compare",
+  },
+  {
+    href: "/compare/weapons",
+    title: "Compare weapons",
+    desc: "Pick two weapons and compare them side by side.",
+    img: "/img/world-evidence/gta-6-handgun-robbery-scene-trailer-1.webp",
+    tag: "Compare",
   },
 ];
 
@@ -121,20 +140,29 @@ export default function Gta6HubPage() {
             <Link
               key={l.href}
               href={l.href}
-              className="group card-surface block overflow-hidden p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-sm"
+              className="group card-surface block overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-sm"
             >
-              <span className="text-[11px] font-black uppercase tracking-[0.2em] text-primary">
-                {l.tag}
-              </span>
-              <h2 className="mt-2 font-display text-lg font-bold leading-snug group-hover:text-primary">
-                {l.title}
-              </h2>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                {l.desc}
-              </p>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary">
-                Open →
-              </span>
+              <div className="relative h-40 overflow-hidden">
+                <SafeImage
+                  src={l.img}
+                  alt={l.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <Badge variant="solid" className="absolute left-2 top-2 z-10">
+                  {l.tag}
+                </Badge>
+              </div>
+              <div className="p-4">
+                <h2 className="font-display text-sm font-bold leading-snug group-hover:text-primary">
+                  {l.title}
+                </h2>
+                <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
+                  {l.desc}
+                </p>
+              </div>
             </Link>
           ))}
         </div>
