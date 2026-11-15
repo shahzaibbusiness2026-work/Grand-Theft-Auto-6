@@ -13,12 +13,26 @@ import { serializeJsonLd } from "@/lib/utils";
 import { itemListJsonLd } from "@/lib/page-metadata";
 import styles from "@/components/catalog-ui.module.css";
 
-export default async function CatalogPage() {
-  // No searchParams on this page: awaiting it would force the whole route
-  // dynamic (every hit re-renders, ~1.3s+ TTFB, no cache). The catalog
-  // reads ?page=N client-side instead (EvidenceCatalog's CatalogUrlSync),
-  // so the page prerenders and is served from the ISR cache.
+export default async function CatalogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  // ?page=N is read server-side so each page renders its own cards in the
+  // HTML (audit 15 Nov 2026: ?page=2 returned byte-identical page-1 HTML,
+  // hiding 86 vehicles / 10 weapons from non-JS crawlers). This forces the
+  // route dynamic (no ISR cache); crawlability of the catalog matters more
+  // than the cached TTFB here. The client still syncs from the URL after
+  // hydration (CatalogUrlSync), so the initial limit and the URL agree.
+  const params = await searchParams;
+  const pageSize = 24;
   const entries = await getEvidenceCatalog("vehicles");
+  const totalPages = Math.max(1, Math.ceil(entries.length / pageSize));
+  const page = Math.min(
+    totalPages,
+    Math.max(1, parseInt(params.page || "1", 10) || 1),
+  );
+  const initialLimit = page * pageSize;
   return (
     <SiteShell>
       <script
@@ -44,7 +58,11 @@ export default async function CatalogPage() {
       <section className={styles.area} aria-label="Vehicles catalog">
         <CatalogSwitcher kind="vehicles" />
         <SectionErrorBoundary fallbackTitle="Could not load vehicles. Please try refreshing.">
-          <EvidenceCatalog kind="vehicles" entries={entries} />
+          <EvidenceCatalog
+            kind="vehicles"
+            entries={entries}
+            initialLimit={initialLimit}
+          />
         </SectionErrorBoundary>
       </section>
       <RelatedArticles category="Vehicles" title="Vehicles Guides & News" />

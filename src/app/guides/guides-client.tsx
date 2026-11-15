@@ -60,7 +60,9 @@ const resources: GuideCard[] = [
 ];
 
 const quickLinks = [
-  { label: "Map Explorer", icon: MapPin, href: "/map-explorer" },
+  // /map is the indexed map hub; /map-explorer is a noindex duplicate
+  // (fan map, unverified pins) and must not be promoted from here.
+  { label: "Interactive Map", icon: MapPin, href: "/map" },
   { label: "Mission List", icon: List, href: "/missions" },
   { label: "Collectible Tracker", icon: Package, href: "/collectibles" },
   { label: "Vehicle Database", icon: Car, href: "/vehicles" },

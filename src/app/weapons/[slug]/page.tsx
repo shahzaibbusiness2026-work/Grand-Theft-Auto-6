@@ -63,9 +63,10 @@ export async function generateMetadata({
       images: [ogImage.src],
     },
     robots: {
-      // Indexed on the user's instruction (8 Nov 2026): all weapon
-      // detail pages, including verification-pending entries.
-      index: true,
+      // Indexed only when the entry has reviewed "GTA VI appearance"
+      // evidence (15 Nov 2026, reversing the 8 Nov 2026 blanket index).
+      // Provisional entries with no evidence stay noindex, follow.
+      index: e.claims.some((c) => c.field === "GTA VI appearance"),
       follow: true,
       googleBot: { "max-image-preview": "large" as const },
     },

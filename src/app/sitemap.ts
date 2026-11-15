@@ -125,13 +125,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: lm,
       });
     }
-  // Indexed on the user's instruction (8 Nov 2026): all vehicle and
-  // weapon detail pages, including verification-pending entries.
-  // No lastModified: the catalog service does not expose recorded update
-  // dates for these rows, so none is invented.
+  // Detail URLs: only entries with reviewed "GTA VI appearance" evidence
+  // belong in the sitemap (15 Nov 2026, reversing the 8 Nov 2026 blanket
+  // index). Provisional entries are noindex and must not be listed.
+  // lastModified is the evidence claim's reviewedAt — the last date the
+  // entry's evidence was actually reviewed, not an invented date.
+  const hasEvidence = (e: { claims?: { field?: string }[] }) =>
+    (e.claims || []).some((c) => c.field === "GTA VI appearance");
+  const evidenceLastModified = (e: {
+    claims?: { field?: string; reviewedAt?: string }[];
+  }) => {
+    const dates = (e.claims || [])
+      .filter((c) => c.field === "GTA VI appearance")
+      .map((c) => realDate(c.reviewedAt))
+      .filter((d): d is Date => !!d);
+    return dates.length
+      ? new Date(Math.max(...dates.map((d) => d.getTime())))
+      : undefined;
+  };
   const detailEntries: MetadataRoute.Sitemap = [
-    ...vehicles.map((e) => ({ url: base + "/vehicles/" + e.slug })),
-    ...weapons.map((e) => ({ url: base + "/weapons/" + e.slug })),
+    ...vehicles
+      .filter(hasEvidence)
+      .map((e) => ({
+        url: base + "/vehicles/" + e.slug,
+        lastModified: evidenceLastModified(e),
+      })),
+    ...weapons
+      .filter(hasEvidence)
+      .map((e) => ({
+        url: base + "/weapons/" + e.slug,
+        lastModified: evidenceLastModified(e),
+      })),
   ];
   const characterReviewed = new Date(CHARACTER_REVIEWED_AT + "T00:00:00Z");
   const characterEntries: MetadataRoute.Sitemap = Object.keys(
@@ -140,8 +164,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: base + "/characters/" + slug,
     lastModified: characterReviewed,
   }));
+  // Static routes: lastModified is the sitemap regeneration date
+  // (15 Nov 2026). These pages are served from the current build and are
+  // under active pre-launch review; the date marks the last sitemap
+  // verification, not a per-page content edit.
+  const staticLastModified = new Date("2026-11-15T00:00:00Z");
   const result: MetadataRoute.Sitemap = paths.map((path) => ({
     url: base + path,
+    lastModified: staticLastModified,
   }));
   result.push(...articleEntries, ...guideEntries, ...characterEntries, ...detailEntries);
   return Array.from(new Map(result.map((e) => [e.url, e])).values());

@@ -117,10 +117,15 @@ export function EvidenceCatalog({
   kind,
   entries,
   compare = false,
+  initialLimit,
 }: {
   kind: CatalogKind;
   entries: EvidenceEntry[];
   compare?: boolean;
+  // Server-rendered initial card count, from ?page=N (see the listing
+  // pages). Without it every ?page=N serves the first-page HTML and only
+  // the client expands after hydration.
+  initialLimit?: number;
 }) {
   const [query, setQueryState] = useState("");
   const [category, setCategoryState] = useState("");
@@ -132,7 +137,11 @@ export function EvidenceCatalog({
   const [sort, setSortState] = useState("name");
   // First page by default; CatalogUrlSync expands this from ?page=N
   // client-side after hydration (and on pagination navigation).
-  const [limit, setLimitState] = useState(compare ? 8 : 24);
+  // When the server already read ?page=N it passes initialLimit, so the
+  // first render matches the requested page instead of always page 1.
+  const [limit, setLimitState] = useState(
+    initialLimit ?? (compare ? 8 : 24),
+  );
   const [pickerOpen, setPickerOpen] = useState(false);
   const picker = useRef<HTMLDialogElement>(null);
   // Slots shown in the comparison workspace. Two by default; picking more
@@ -269,11 +278,13 @@ export function EvidenceCatalog({
         ? recentRank(a.id) - recentRank(b.id)
         : (sort === "reverse" ? -1 : 1) * a.name.localeCompare(b.name),
     );
-  // Pagination links to every ?page=N exist, but each ?page=N serves the
-  // same first-page HTML and the catalog expands to the requested page
-  // client-side — so a non-JS crawler never sees links to items past the
-  // first 24. Detail pages therefore carry plain prev/next links as well
-  // (EvidenceDetail), and the sitemap lists them all.
+  // Pagination links to every ?page=N exist, and each ?page=N now renders
+  // its own cards server-side (initialLimit, from the listing page's
+  // searchParams). Before the 15 Nov 2026 fix every ?page=N served the
+  // same first-page HTML and the catalog only expanded client-side, so a
+  // non-JS crawler never saw links to items past the first 24. Detail
+  // pages also carry plain prev/next links (EvidenceDetail), and the
+  // sitemap lists the indexable detail pages.
   // Mirrors catalogStateUrl: defaults (page 1, sort name) stay out of the URL.
   const pathname = usePathname();
   const totalPages = Math.max(1, Math.ceil(shown.length / pageSize));
