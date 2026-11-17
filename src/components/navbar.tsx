@@ -17,7 +17,6 @@ import {
   Building2,
   Users,
   Newspaper,
-  BookOpen,
   Wrench,
   Calculator,
   TrendingUp,
@@ -77,7 +76,6 @@ const MORE_SECTIONS: MoreSection[] = [
       { href: "/locations", label: "Locations & POIs", icon: MapPin },
       { href: "/properties", label: "Properties & Real Estate", icon: Building2 },
       { href: "/characters", label: "Characters", icon: Users },
-      { href: "/guides", label: "Guides", icon: BookOpen },
     ],
   },
   {
