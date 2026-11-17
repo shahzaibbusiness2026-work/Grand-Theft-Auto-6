@@ -5,19 +5,19 @@ import { serializeJsonLd } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: { absolute: "GTA 6 Tools, Trackers & Calculators | Taish Gaming" },
+  title: { absolute: "Free GTA 6 Tools, Calculators & Trackers | Taish Gaming" },
   description:
     "Explore Taish Gaming's GTA 6 interactive tools, including the Leonida map, vehicle and weapon comparisons, completion tracker, calculators and planners.",
   alternates: { canonical: "/tools" },
   openGraph: { type: "website", url: "/tools",
-    title: "GTA 6 Tools, Trackers & Calculators | Taish Gaming",
+    title: "Free GTA 6 Tools, Calculators & Trackers | Taish Gaming",
     description:
       "Explore Taish Gaming's GTA 6 interactive tools, including the Leonida map, vehicle and weapon comparisons, completion tracker, calculators and planners.",
     images: ["/img/hero-vice-skyline-hd.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GTA 6 Tools, Trackers & Calculators | Taish Gaming",
+    title: "Free GTA 6 Tools, Calculators & Trackers | Taish Gaming",
     description:
       "Explore Taish Gaming's GTA 6 interactive tools, including the Leonida map, vehicle and weapon comparisons, completion tracker, calculators and planners.",
     images: ["/img/hero-vice-skyline-hd.jpg"],

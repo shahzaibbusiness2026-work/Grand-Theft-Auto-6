@@ -1473,6 +1473,25 @@ export function SatelliteInteractiveMap({
             : "h-[640px] sm:h-[720px] lg:h-[780px] rounded-b-3xl border border-t-0 border-border shadow-2xl",
         )}
       >
+        {/* Static preview — paints immediately on first load (server HTML) so
+            the map image is the LCP element before the interactive map's JS
+            mounts. The interactive canvas renders on top once hydrated; this
+            preview is then covered (it stays in the DOM, hidden underneath).
+            object-contain matches the interactive map's initial centered,
+            whole-map view. Community edition only — legacy uses a different
+            base image. */}
+        {edition === "community" && (
+          <img
+            src="/maps/gtadb-yanis17/overview.webp"
+            alt="Community reconstruction of Leonida by GTADB contributors, not official game geography"
+            width={1536}
+            height={1536}
+            fetchPriority="high"
+            decoding="sync"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-contain"
+          />
+        )}
         {/* ==================== 1. FLOATING LEFT FILTER DRAWER ==================== */}
         {leftSidebarOpen && (
           <div
