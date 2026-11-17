@@ -152,11 +152,13 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Map tiles + overview are static, versioned assets that never
+        // change in place — cache them for a year like /img/ (was 1 day).
         source: "/maps/gtadb-yanis17/:path*",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=86400, stale-while-revalidate=604800",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

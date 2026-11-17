@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { useState, useRef, useEffect, useLayoutEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { trackPublicEvent } from "@/lib/public-events";
 import Image from "next/image";
@@ -769,8 +769,17 @@ export function SatelliteInteractiveMap({
     [zoom, rightDrawerOpen, edition, CANVAS_H],
   );
 
-  useEffect(() => {
+  // Center the map BEFORE first paint (layout effect, not a passive effect):
+  // the initial state renders zoomed 1.0 at the top-left corner, and the old
+  // passive effect recentered it after paint — a visible jump that also
+  // delayed the LCP paint of the overview image. Centering here means the
+  // first paint after hydration is already the final centered map.
+  useLayoutEffect(() => {
     centerMap();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const state = getStoredUserState();
       if (state.favorites?.locations) {
