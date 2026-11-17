@@ -168,11 +168,11 @@ export default async function GuideDetailPage({
         </div>
 
         {guide.image && (
-          <div className="mt-6 overflow-hidden rounded-2xl border border-border">
+          <div className="mt-6 aspect-video overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-[#0c1222] to-[#1a2340]">
             <img
               src={guide.image}
               alt={guide.title}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
             />
           </div>
         )}
@@ -242,12 +242,12 @@ export default async function GuideDetailPage({
                   className="group card-surface overflow-hidden"
                 >
                   {g.image && (
-                    <div className="relative h-32 overflow-hidden">
+                    <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-[#0c1222] to-[#1a2340]">
                       <img
                         loading="lazy"
                         src={g.image}
                         alt={g.title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
                   )}

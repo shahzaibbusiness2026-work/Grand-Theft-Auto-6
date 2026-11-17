@@ -159,9 +159,9 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
           <div className="no-scrollbar mt-5 flex gap-4 overflow-x-auto pb-1">
             {featuredCards.map((g) => (
               <Link key={g.href} href={g.href} className="group card-surface w-56 shrink-0 overflow-hidden">
-                <div className="relative h-28 overflow-hidden bg-gradient-to-br from-[#0c1222] to-[#1a2340]">
+                <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-[#0c1222] to-[#1a2340]">
                   {g.img ? (
-                    <SafeImage loading="lazy" src={g.img} alt={g.title} width={224} height={112} sizes="224px" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <SafeImage loading="lazy" src={g.img} alt={g.title} width={224} height={126} sizes="224px" className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110" />
                   ) : null}
                   {g.featured && <Badge variant="solid" className="absolute left-2 top-2">Featured</Badge>}
                 </div>
@@ -191,7 +191,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
             {(expanded ? allFiltered : allFiltered.slice(0, 6)).map((g) => (
               <li key={g.title} className="flex items-center gap-4 rounded-lg border border-border/60 p-3">
                 <Link href={g.href} className="flex min-w-0 flex-1 items-center gap-4">
-                <SafeImage loading="lazy" src={g.img} alt={g.title} width={80} height={56} sizes="80px" style={g.filter ? { filter: g.filter } : undefined} className="h-14 w-20 shrink-0 rounded-md object-cover" />
+                <SafeImage loading="lazy" src={g.img} alt={g.title} width={80} height={45} sizes="80px" style={g.filter ? { filter: g.filter } : undefined} className="aspect-video w-20 shrink-0 rounded-md object-contain" />
                 <div className="min-w-0 flex-1">
                   <h3 className="text-sm font-bold">{g.title}</h3>
                   <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
@@ -244,7 +244,7 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
               <li key={w.title} className="flex items-center gap-3">
                 <span className="w-4 text-center font-display text-[13px] font-extrabold text-accent">{i + 1}</span>
                 {w.img ? (
-                  <SafeImage loading="lazy" src={w.img} alt={w.title} width={48} height={36} sizes="48px" className="h-9 w-12 shrink-0 rounded-md object-cover" />
+                  <SafeImage loading="lazy" src={w.img} alt={w.title} width={48} height={27} sizes="48px" className="aspect-video w-12 shrink-0 rounded-md object-contain" />
                 ) : null}
                 <div className="flex-1">
                   <Link href={w.href} className="line-clamp-2 text-xs font-bold leading-snug hover:text-accent">{w.title}</Link>
