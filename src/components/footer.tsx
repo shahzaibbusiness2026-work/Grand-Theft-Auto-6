@@ -4,6 +4,7 @@ import {
   FaDiscord,
   FaFacebook,
   FaInstagram,
+  FaPinterest,
   FaReddit,
   FaTiktok,
   FaXTwitter,
@@ -142,6 +143,14 @@ export async function Footer({ variant }: { variant?: "news" }) {
       href: publicSocial(settings.tiktokUrl, [
         "tiktok.com",
         "www.tiktok.com",
+      ]),
+    },
+    {
+      label: "Taish Gaming on Pinterest",
+      icon: FaPinterest,
+      href: publicSocial(settings.pinterestUrl, [
+        "pinterest.com",
+        "www.pinterest.com",
       ]),
     },
   ].filter((item) => item.href);

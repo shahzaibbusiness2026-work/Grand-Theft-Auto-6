@@ -27,6 +27,7 @@ export interface ComprehensiveSiteSettings extends AdminSiteSettings {
   facebookUrl: string;
   youtubeUrl: string;
   tiktokUrl: string;
+  pinterestUrl: string;
   /** Homepage section ids (hero, trailers, map, characters, news, community) with public visibility enabled. Read by the homepage. */
   homepageSectionToggles: string[];
   /** Tool ids with public access enabled (map_tool, comp_tool, track_tool). Read by the /map, compare and /tracker pages. */
@@ -58,6 +59,7 @@ const DEFAULT_SETTINGS: ComprehensiveSiteSettings = {
   facebookUrl: "",
   youtubeUrl: "",
   tiktokUrl: "",
+  pinterestUrl: "",
   homepageSectionToggles: [
     "hero",
     "trailers",

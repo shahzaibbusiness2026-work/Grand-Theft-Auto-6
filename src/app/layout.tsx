@@ -108,6 +108,7 @@ export default function RootLayout({
           "https://www.tiktok.com/@taishgaming1619",
           "https://www.reddit.com/u/taishgaming1619/",
           "https://x.com/taishgaming1619",
+          "https://www.pinterest.com/taishgaming_1619/",
         ],
       },
       {

@@ -13,6 +13,32 @@ import { PlayerBookmarkButton } from "@/components/player-bookmark-button";
 
 export const revalidate = 3600;
 
+/* Short SERP titles for guides (≤45 chars so the rendered title stays
+   ≤60 after the layout appends " | Taish Gaming"). The guides table has
+   no seo_title column, so the full guide.title is the H1 and the OG title
+   — this map overrides only the <title> (and OG/Twitter titles) so the
+   on-page headings keep their full wording. Add a row here whenever a new
+   guide's title exceeds 45 characters. */
+const GUIDE_SEO_TITLES: Record<string, string> = {
+  "100-percent-completion-guide": "GTA 6 100% Completion Guide",
+  "all-main-characters-explained": "GTA 6 Characters: Jason, Lucia & Cast",
+  "best-gta-6-settings-ps5": "Best GTA 6 Settings for PS5",
+  "best-gta-6-settings-ps5-pro": "GTA 6 PS5 Pro Settings Guide",
+  "best-gta-6-settings-xbox-series-x": "Best GTA 6 Settings for Xbox",
+  "best-weapons-tier-list": "GTA 6 Weapons Guide & Tier List",
+  "complete-beginner-guide": "GTA 6 Story, Map & Characters Guide",
+  "gta-6-beginners-guide": "GTA 6 Beginner's Guide: 10 Things to Do",
+  "gta-6-ps5-controls": "GTA 6 PS5 Controls: Button Guide",
+  "gta-6-standard-vs-ultimate-edition": "GTA 6 Standard vs Ultimate Edition",
+  "gta-6-xbox-controls": "GTA 6 Xbox Controls: Button Guide",
+  "heists-big-score-guide": "GTA 6 Heists & Robberies Guide",
+  "make-money-fast": "How to Make Money in GTA 6",
+};
+
+function guideSeoTitle(guide: { slug?: string | null; title: string }) {
+  return GUIDE_SEO_TITLES[guide.slug ?? ""] ?? guide.title;
+}
+
 // Prerender guide pages at build (SSG + ISR) so they are served cached.
 // Without this the route is fully dynamic and every request pays a
 // Supabase round-trip (~1.4s TTFB, Ahrefs Nov 2026 slow-page flag).
@@ -31,23 +57,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const guide = await getPublicGuideBySlug(slug);
   if (!guide) return { title: "Guide Not Found" };
+  const seoTitle = guideSeoTitle(guide);
   return {
     robots: hasGuideBody(guide)
       ? { index: true, follow: true, "max-image-preview": "large" }
       : { index: false, follow: true },
-    title: guide.title,
+    title: seoTitle,
     description: guide.description || undefined,
     alternates: { canonical: `/guides/${guide.slug}` },
     openGraph: {
       type: "article",
-      title: guide.title,
+      title: seoTitle,
       description: guide.description || undefined,
       url: `/guides/${guide.slug}`,
       images: guide.image ? [guide.image] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: guide.title,
+      title: seoTitle,
       description: guide.description || undefined,
       images: guide.image ? [guide.image] : undefined,
     },

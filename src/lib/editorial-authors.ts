@@ -1,10 +1,5 @@
 import { PUBLICATION } from "./site-identity";
 
-export const CONTRIBUTOR_CREDITS = [
-  "Darius King",
-  "Marcus Vance",
-  "Elena Rostova",
-];
 export function authorIdentity(value?: string | null) {
   const name = value?.trim() || PUBLICATION.teamName;
   const collective = /team|editorial|staff/i.test(name);

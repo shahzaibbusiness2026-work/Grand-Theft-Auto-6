@@ -59,6 +59,7 @@ export default function AdminSettingsPage() {
     facebookUrl: "",
     youtubeUrl: "",
     tiktokUrl: "",
+    pinterestUrl: "",
     homepageSectionToggles: ["hero", "trailers", "map", "characters", "news", "community"],
     publicToolToggles: ["map_tool", "comp_tool", "track_tool"],
     ga4MeasurementId: "",
@@ -799,6 +800,16 @@ export default function AdminSettingsPage() {
                   value={settings.tiktokUrl || ""}
               onChange={(e) => handleUpdate({ tiktokUrl: e.target.value })}
               placeholder="https://www.tiktok.com/@…"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
+            />
+          </div>
+          <div>
+            <label htmlFor="site-setting-pinterestUrl" className="block font-medium text-[#94A3B8] mb-1">Pinterest Profile URL</label>
+            <input id="site-setting-pinterestUrl" aria-label="Pinterest URL"
+              type="text"
+                  value={settings.pinterestUrl || ""}
+              onChange={(e) => handleUpdate({ pinterestUrl: e.target.value })}
+              placeholder="https://www.pinterest.com/…"
               className="w-full px-3.5 py-2 rounded-xl bg-[#0E131D] border border-[#1C2436] text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#6366F1]"
             />
           </div>

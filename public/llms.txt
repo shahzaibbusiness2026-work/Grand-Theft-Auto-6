@@ -26,7 +26,7 @@
 - [GTA 6 Regions](https://www.taishgaming.com/regions): The six named destinations of Leonida.
 - [GTA 6 World](https://www.taishgaming.com/gta-6-world): Locations, wildlife, businesses and more.
 - [GTA 6 Money Guide](https://www.taishgaming.com/money-guide): Money-making claims, checked against evidence.
-- [GTA 6 Controls](https://www.taishgaming.com/controls): Verified control defaults.
+- [GTA 6 Controls](https://www.taishgaming.com/controls): Provisional control defaults based on the GTA V layout; GTA VI controls unconfirmed.
 - [Compare Vehicles](https://www.taishgaming.com/compare/vehicles): Side-by-side vehicle comparison.
 - [Compare Weapons](https://www.taishgaming.com/compare/weapons): Side-by-side weapon comparison.
 
