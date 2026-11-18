@@ -338,5 +338,15 @@
     "locator": "IGN '15 Minutes of GTA 6 PS5 Pro Gameplay (First Mission)', 12:35-14:40 — white/blue 'Brian's' livery seaplane; 'Get in the sea plane' objective; Jason flies it over the Leonida Keys in the storm",
     "reviewedAt": "2026-11-18",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "imponte-phoenix",
+    "field": "GTA VI appearance",
+    "value": "Imponte Phoenix",
+    "source": "https://www.youtube.com/watch?v=Vc5-wQ2Igr0",
+    "locator": "Sirloin GTA 6 Walkthrough Part 02, 44:00",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
   }
 ]
