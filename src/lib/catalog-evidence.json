@@ -318,5 +318,25 @@
     "locator": "Launch Trailer, 0:06–0:10 — white boat Jason polishes at Brian's Marina. Name 'Shasa' reported by IGN; Rockstar has not confirmed the name on screen.",
     "reviewedAt": "2026-11-18",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-bison",
+    "field": "GTA VI appearance",
+    "value": "Bravado Bison",
+    "source": "https://www.youtube.com/watch?v=3PiR0G3rVw8",
+    "locator": "IGN '15 Minutes of GTA 6 PS5 Pro Gameplay (First Mission)', 11:30 — 'BISON' badge on the grille of the olive-green full-size pickup during the compound shootout",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mammoth-dodo-seaplane",
+    "field": "GTA VI appearance",
+    "value": "Mammoth Dodo Seaplane",
+    "source": "https://www.youtube.com/watch?v=3PiR0G3rVw8",
+    "locator": "IGN '15 Minutes of GTA 6 PS5 Pro Gameplay (First Mission)', 12:35-14:40 — white/blue 'Brian's' livery seaplane; 'Get in the sea plane' objective; Jason flies it over the Leonida Keys in the storm",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
   }
 ]
