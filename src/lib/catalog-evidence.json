@@ -248,5 +248,55 @@
     "locator": "Trailer 1, 0:46 — street takeover in Crosstown at night, seen from above among the takeover cars. Identification unverified — community identification from the takeover scene, Rockstar has not named this model.",
     "reviewedAt": "2026-11-08",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "biplane",
+    "field": "GTA VI appearance",
+    "value": "Biplane",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
+    "locator": "Launch Trailer, 0:54 — vintage biplane over Vice City beach trailing pink smoke, wing-walker on the top wing (DacityCoin livery per IGN)",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "m4-carbine",
+    "field": "GTA VI appearance",
+    "value": "M4 Carbine",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
+    "locator": "Launch Trailer, 1:12 — Lucia aiming an AR-pattern rifle (M4-style, carry handle, STANAG magazine) during a street shootout; second AR-pattern rifle at 0:52. Identification unverified — community-identified, Rockstar has not named this model.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ford-explorer-style-police-suv",
+    "field": "GTA VI appearance",
+    "value": "Ford Explorer-style police SUV",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
+    "locator": "Launch Trailer, 0:46 — white Explorer-style police SUV with light bar pursuing a hypercar on Ocean Drive; second police SUV on a dirt road at night, 1:10. Identification unverified — community-identified, Rockstar has not named this model.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-police-cruiser-interceptor",
+    "field": "GTA VI appearance",
+    "value": "Vapid Police Cruiser Interceptor",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
+    "locator": "Launch Trailer, 0:47 — white modern police sedan with blue stripe sliding through an intersection. Identification unverified — community-identified, Rockstar has not named this model.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "large-cargo-plane",
+    "field": "GTA VI appearance",
+    "value": "Large cargo plane",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
+    "locator": "Launch Trailer, 0:38 — large cargo aircraft on an airport tarmac, pickup driving beneath it.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
   }
 ]
