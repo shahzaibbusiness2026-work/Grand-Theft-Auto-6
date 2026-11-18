@@ -298,5 +298,25 @@
     "locator": "Launch Trailer, 0:38 — large cargo aircraft on an airport tarmac, pickup driving beneath it.",
     "reviewedAt": "2026-11-18",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "GTA VI appearance",
+    "value": "Moreland 850 Shotgun",
+    "source": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
+    "locator": "An Extended Look, ~04:27 — on-screen pickup label 'MORELAND 850 SHOTGUN' during the opening-job firefight (per GTA Boss scene breakdown; frame verification pending)",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "shasa-boat",
+    "field": "GTA VI appearance",
+    "value": "Shasa",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
+    "locator": "Launch Trailer, 0:06–0:10 — white boat Jason polishes at Brian's Marina. Name 'Shasa' reported by IGN; Rockstar has not confirmed the name on screen.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
   }
 ]
