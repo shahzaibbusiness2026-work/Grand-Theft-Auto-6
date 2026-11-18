@@ -448,5 +448,15 @@
     "locator": "Mission 9 'Island Dreams' (Chapter 1), 18 Nov 2026 — 'two hits with the Arras Bullhead harpoon gun drive it off' (shark circling the wreck). Mission gear: scuba diving, metal detector, Arras Bullhead harpoon.",
     "reviewedAt": "2026-11-18",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "hunting-combat-knife",
+    "field": "GTA VI appearance",
+    "value": "Tactical Bowie Hunting Knife",
+    "source": "https://www.youtube.com/watch?v=E8ODxo9vbs0",
+    "locator": "Vice City Standard 'GTA 6 - Inside the Gun Store', 05:06 — Jason's Weapon Locker, MELEE tab: 'JASON'S HUNTING KNIFE', equipped",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
   }
 ]
