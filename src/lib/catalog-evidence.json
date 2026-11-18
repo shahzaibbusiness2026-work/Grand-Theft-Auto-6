@@ -378,5 +378,75 @@
     "locator": "TmarTn2 'GTA 6 - Part 1 - The Beginning', ~24:10 — white centre-console boat, name shown on screen",
     "reviewedAt": "2026-11-18",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "banshee-gts",
+    "field": "GTA VI appearance",
+    "value": "Bravado Banshee",
+    "source": "https://kotaku.com/we-tested-how-long-it-takes-to-run-out-of-gas-in-gta-6-2000755601",
+    "locator": "Kotaku fuel test, 18 Nov 2026 — reviewer drove a Banshee sports car on a highway loop south of Vice City; 'it took 18 minutes and 31 seconds to drain my tank entirely.' Kotaku calls it 'Banshee' — the GTS suffix is not confirmed in GTA VI.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "seashark",
+    "field": "GTA VI appearance",
+    "value": "Seashark",
+    "source": "https://www.instagram.com/reel/Df4sBvIu0Uy/",
+    "locator": "Launch-gameplay clip, 18 Nov 2026 — Lucia swims to a blue jet ski, mounts it, and rides away from the harbor; clip description names it a 'Seashark Hydroblast' jet ski. Corroborated by COMPLEX and Culture Crave clips of the same jet ski in Leonida Bay.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "b48ea1a4-c274-4c1e-a152-8de650300daa",
+    "field": "GTA VI appearance",
+    "value": "Invetero Coquette",
+    "source": "https://www.instagram.com/reel/Df4xB9FBXT-/",
+    "locator": "Launch-gameplay clip, 18 Nov 2026 (TypicalGamer launch stream footage) — player's 'first stolen car': bright blue-to-purple Corvette-style car with 'COQUETTE' badging on the rear, doing burnouts in Vice City, 2-star wanted level.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "claw-hammers",
+    "field": "GTA VI appearance",
+    "value": "Claw Hammers (Pair)",
+    "source": "https://www.videogameschronicle.com/guide/gta-6-gone-fishing-mission-walkthrough/",
+    "locator": "VGC Gone Fishing walkthrough, 18 Nov 2026 — 'If you want an extra melee weapon for this section, there's a hammer behind the building.' Only one hammer was found — the 'pair' part is unconfirmed.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "GTA VI appearance",
+    "value": "Scorpio Nipper .38",
+    "source": "https://www.facebook.com/reel/1160820563581382/",
+    "locator": "Chuck's Tackle & Shot shop menu, 18 Nov 2026 — Pistols/Sidearms lists 'Scorpio Nipper .38' at $550. Corroborated by @gta6detail, @fnl.clips and @gta.mallu clips showing the same menu.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "GTA VI appearance",
+    "value": "Duke 1922",
+    "source": "https://www.facebook.com/reel/1160820563581382/",
+    "locator": "Chuck's Tackle & Shot shop menu, 18 Nov 2026 — Pistols lists 'Duke 1922' at $1,050. Corroborated by @gta6detail carousel showing the same menu.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "arras-bullhead-harpoon-gun",
+    "field": "GTA VI appearance",
+    "value": "Arras Bullhead Harpoon Gun",
+    "source": "https://www.vice-atlas.com/briefings/gta6-first-missions-walkthrough/",
+    "locator": "Mission 9 'Island Dreams' (Chapter 1), 18 Nov 2026 — 'two hits with the Arras Bullhead harpoon gun drive it off' (shark circling the wreck). Mission gear: scuba diving, metal detector, Arras Bullhead harpoon.",
+    "reviewedAt": "2026-11-18",
+    "reviewer": "Muse"
   }
 ]
