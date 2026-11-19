@@ -46,6 +46,7 @@ export function SafeImage({
   sizes,
   width,
   height,
+  unoptimized,
   onError,
   onLoad,
 }: ImageProps) {
@@ -92,6 +93,7 @@ export function SafeImage({
         sizes={sizes}
         width={width}
         height={height}
+        unoptimized={unoptimized}
         onError={onError}
         onLoad={onLoad}
       />

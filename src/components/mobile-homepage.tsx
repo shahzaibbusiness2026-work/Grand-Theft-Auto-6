@@ -108,6 +108,7 @@ export function MobileHomepage({
                     alt={article.title || "GTA 6 news article"}
                     fill
                     sizes="88px"
+                    unoptimized
                     className="object-cover"
                   />
                 </div>

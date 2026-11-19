@@ -354,6 +354,7 @@ export default async function HomePage() {
                             alt={a.title}
                             fill
                             sizes="112px"
+                            unoptimized
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                           />
                         </div>
@@ -404,6 +405,7 @@ export default async function HomePage() {
                             alt={a.title}
                             fill
                             sizes="112px"
+                            unoptimized
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                           />
                         </div>
