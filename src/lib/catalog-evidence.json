@@ -458,5 +458,15 @@
     "locator": "Vice City Standard 'GTA 6 - Inside the Gun Store', 05:06 — Jason's Weapon Locker, MELEE tab: 'JASON'S HUNTING KNIFE', equipped",
     "reviewedAt": "2026-11-18",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "commercial-airliner",
+    "field": "GTA VI appearance",
+    "value": "Commercial Airliner",
+    "source": "https://www.youtube.com/watch?v=Wd-vKw3XYP0",
+    "locator": "jackfrags GTA 6 Gameplay and Impressions, 04:10",
+    "reviewedAt": "2026-11-19",
+    "reviewer": "Muse"
   }
 ]
