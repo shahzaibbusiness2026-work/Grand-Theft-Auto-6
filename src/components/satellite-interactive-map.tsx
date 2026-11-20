@@ -44,6 +44,7 @@ import {
   Map as MapIcon,
   Moon,
   Satellite,
+  Camera,
 } from "lucide-react";
 import {
   locationSubcategoryForTypes,
@@ -220,6 +221,12 @@ const CATEGORY_FILTERS = [
     color: "text-slate-200",
   },
   {
+    id: "photo-spots",
+    label: "Photo Spots",
+    icon: Camera,
+    color: "text-slate-200",
+  },
+  {
     id: "properties",
     label: "Real Estate",
     icon: Building2,
@@ -331,15 +338,23 @@ function publicMapPoi(poi: MapPOI): MapPOI {
       verification flag (see publicMapPoi), so only a field-specific
       in-game source counts — no pin carries one yet, so this is 0 today.
     - "trailer": the pin's source is a Rockstar trailer frame.
+    - "official": the pin's source is an official Rockstar Launch
+      Gallery screenshot — official media, but not a trailer frame and
+      not a player-verified in-game sighting. Only Photo Spots use it.
     - "community-guess": everything else — the default. Never invent
       evidence: an unverified pin stays a community guess, and a private
       planning pin carries no game evidence at all. */
-export type EvidenceLevel = "in-game" | "trailer" | "community-guess";
+export type EvidenceLevel =
+  | "in-game"
+  | "trailer"
+  | "official"
+  | "community-guess";
 export function evidenceLevel(poi: MapPOI): EvidenceLevel {
   if (poi.personal) return "community-guess";
   const source = `${poi.source || ""} ${poi.sourceUrl || ""}`;
   if (poi.verified && /(in-?game|launch gameplay|ps5 play)/i.test(source))
     return "in-game";
+  if (poi.verified && /launch gallery/i.test(source)) return "official";
   if (poi.verified && /trailer/i.test(source)) return "trailer";
   return "community-guess";
 }
@@ -382,6 +397,132 @@ const COMMUNITY_POIS: MapPOI[] = communityLandmarks
   // mappable location type fall back to the MapPin pictogram, which reads
   // as a checkpoint pin. Only real location pictograms are shown.
   .filter((poi) => poi.subcategory !== "poi");
+
+/** Photo Spots — the best Snapmatic / photo-mode views in Leonida.
+    Every spot has a verified real photo (official Rockstar Launch
+    Gallery screenshot or Trailer 1 frame) that opens in the detail
+    card, with its source labelled. Positions are anchored to real
+    named places on the community map (Vice Beach mural/marina,
+    Bayside marina, Downtown Metro, Little Cuba, Grassrivers Visitor
+    Center). Spots with no verified photo were dropped, never faked:
+    no Keys causeway shot exists (the Keys gallery image is underwater)
+    and the Port Gellhorn gallery image is a strip-club interior. */
+const PHOTO_SPOTS: MapPOI[] = [
+  {
+    id: "photo-vice-beach",
+    title: "Vice Beach",
+    category: "photo-spots",
+    subcategory: "photo-spot",
+    subcategoryLabel: "Photo spot",
+    type: "Photo spot",
+    district: "Vice Beach",
+    desc: "Daytime aerial of Vice Beach — white sand, turquoise water and the Ocean Drive hotels with the Downtown skyline behind. Open photo mode on the sand for the same framing.",
+    img: "/img/gta-6-vice-city-aerial-trailer.jpg",
+    hours: "Day",
+    top: "46.5%",
+    left: "55.0%",
+    color: "bg-[#FF2E9A]",
+    icon: Camera,
+    verified: true,
+    source: "Rockstar Games — Trailer 1 frame",
+    sourceUrl: "https://www.youtube.com/watch?v=QdBZY2fkU-0",
+  },
+  {
+    id: "photo-downtown-marina",
+    title: "Downtown Marina",
+    category: "photo-spots",
+    subcategory: "photo-spot",
+    subcategoryLabel: "Photo spot",
+    type: "Photo spot",
+    district: "Downtown, Vice City",
+    desc: "The Downtown marina in daylight — yachts at the docks with the Vice City skyline across the water. Official Rockstar Launch Gallery image.",
+    img: "/img/vice-city-15.jpg",
+    hours: "Day",
+    top: "48.5%",
+    left: "49.5%",
+    color: "bg-[#FF2E9A]",
+    icon: Camera,
+    verified: true,
+    source: "Rockstar Games — official Launch Gallery (Nov 2026)",
+    sourceUrl: "https://www.rockstargames.com/VI",
+  },
+  {
+    id: "photo-downtown-night",
+    title: "Downtown Skyline at Night",
+    category: "photo-spots",
+    subcategory: "photo-spot",
+    subcategoryLabel: "Photo spot",
+    type: "Photo spot",
+    district: "Downtown, Vice City",
+    desc: "The Downtown skyline at night from across the river, drawbridge raised. Best after dark. Official Rockstar Launch Gallery image.",
+    img: "/img/vice-city-27.jpg",
+    hours: "Night",
+    top: "52.0%",
+    left: "48.5%",
+    color: "bg-[#FF2E9A]",
+    icon: Camera,
+    verified: true,
+    source: "Rockstar Games — official Launch Gallery (Nov 2026)",
+    sourceUrl: "https://www.rockstargames.com/VI",
+  },
+  {
+    id: "photo-downtown-dusk",
+    title: "Downtown at Dusk",
+    category: "photo-spots",
+    subcategory: "photo-spot",
+    subcategoryLabel: "Photo spot",
+    type: "Photo spot",
+    district: "Little Cuba, Vice City",
+    desc: "A Vice City street at dusk — neon, palms and the Downtown towers behind. Official Rockstar Launch Gallery image.",
+    img: "/img/vice-city-22.jpg",
+    hours: "Dusk",
+    top: "50.0%",
+    left: "46.3%",
+    color: "bg-[#FF2E9A]",
+    icon: Camera,
+    verified: true,
+    source: "Rockstar Games — official Launch Gallery (Nov 2026)",
+    sourceUrl: "https://www.rockstargames.com/VI",
+  },
+  {
+    id: "photo-waterfront-meet",
+    title: "Waterfront Car Meet",
+    category: "photo-spots",
+    subcategory: "photo-spot",
+    subcategoryLabel: "Photo spot",
+    type: "Photo spot",
+    district: "Downtown, Vice City",
+    desc: "A car meet on the waterfront promenade — the classic Snapmatic selfie spot, skyline behind. Official Rockstar Launch Gallery image.",
+    img: "/img/vice-city-24.jpg",
+    hours: "Day",
+    top: "50.5%",
+    left: "51.5%",
+    color: "bg-[#FF2E9A]",
+    icon: Camera,
+    verified: true,
+    source: "Rockstar Games — official Launch Gallery (Nov 2026)",
+    sourceUrl: "https://www.rockstargames.com/VI",
+  },
+  {
+    id: "photo-grassrivers-night",
+    title: "Grassrivers by Moonlight",
+    category: "photo-spots",
+    subcategory: "photo-spot",
+    subcategoryLabel: "Photo spot",
+    type: "Photo spot",
+    district: "Grassrivers, Mariana County",
+    desc: "An airboat in the Grassrivers at night under a crescent moon, alligator in the foreground. Official Rockstar Launch Gallery image.",
+    img: "/img/grassrivers-08.jpg",
+    hours: "Night",
+    top: "63.0%",
+    left: "40.5%",
+    color: "bg-[#FF2E9A]",
+    icon: Camera,
+    verified: true,
+    source: "Rockstar Games — official Launch Gallery (Nov 2026)",
+    sourceUrl: "https://www.rockstargames.com/VI",
+  },
+];
 
 // Bounding box of the bundled community pins, in canvas percent. The
 // landmass occupies only the left ~40% of the square canvas (left
@@ -494,6 +635,7 @@ export function SatelliteInteractiveMap({
   const allPOIs = useMemo(
     () => [
       ...editorialPOIs,
+      ...PHOTO_SPOTS,
       ...personalMarkers
         .filter((marker) =>
           edition === "community"
@@ -1670,18 +1812,19 @@ export function SatelliteInteractiveMap({
     (verifiedTotal / Math.max(1, allPOIs.length)) * 100;
   const leonidaPctLabel =
     leonidaPct < 10 ? leonidaPct.toFixed(1) : String(Math.round(leonidaPct));
-  // Evidence totals over the public pins (private planning pins excluded —
-  // they carry no game evidence). Honest numbers: today every public pin
-  // is a community guess, because no pin carries a field-specific
-  // in-game or trailer source yet.
+  // Evidence totals over the public pins (private planning pins and the
+  // curated Photo Spots layer excluded — they carry no game evidence).
+  // Honest numbers: today every public pin is a community guess, because
+  // no pin carries a field-specific in-game or trailer source yet.
   const evidenceCounts = useMemo(() => {
     const counts: Record<EvidenceLevel, number> = {
       "in-game": 0,
       trailer: 0,
+      official: 0,
       "community-guess": 0,
     };
     for (const poi of allPOIs) {
-      if (poi.personal) continue;
+      if (poi.personal || poi.category === "photo-spots") continue;
       counts[evidenceLevel(poi)] += 1;
     }
     return counts;
@@ -2652,7 +2795,9 @@ export function SatelliteInteractiveMap({
                           ? "Confirmed in launch gameplay or Shahzaib's PS5 play."
                           : selectedEvidenceLevel === "trailer"
                             ? "Seen in a Rockstar trailer frame."
-                            : "Community guess — not yet confirmed in-game."
+                            : selectedEvidenceLevel === "official"
+                              ? "Official Rockstar image — Launch Gallery screenshot."
+                              : "Community guess — not yet confirmed in-game."
                       }
                       className={cn(
                         "mt-1.5 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-bold",
@@ -2660,14 +2805,18 @@ export function SatelliteInteractiveMap({
                           ? "bg-emerald-500/20 text-emerald-300"
                           : selectedEvidenceLevel === "trailer"
                             ? "bg-violet-500/20 text-violet-300"
-                            : "bg-slate-700/60 text-slate-300",
+                            : selectedEvidenceLevel === "official"
+                              ? "bg-[#FF2E9A]/20 text-[#FF2E9A]"
+                              : "bg-slate-700/60 text-slate-300",
                       )}
                     >
                       {selectedEvidenceLevel === "in-game"
                         ? "Seen in-game"
                         : selectedEvidenceLevel === "trailer"
                           ? "Seen in trailer"
-                          : "Community guess"}
+                          : selectedEvidenceLevel === "official"
+                            ? "Official Rockstar image"
+                            : "Community guess"}
                     </span>
                   )}
                 </div>
