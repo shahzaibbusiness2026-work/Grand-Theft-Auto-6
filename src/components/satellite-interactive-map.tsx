@@ -3147,6 +3147,13 @@ export function SatelliteInteractiveMap({
           style={{
             touchAction: "none",
             scrollMarginTop: "80px",
+            // Ocean background: the canvas never covers the whole frame
+            // (it is centred on the island), so any uncovered strip reads
+            // as ocean, not the frame's near-black. It must match the
+            // tile ocean — in Streets the tiles are darkened by the
+            // filter to #102338 (sampled from the filtered ocean), so a
+            // #2C66A5 strip would read as a bright blue seam.
+            backgroundColor: mapStyle === "streets" ? "#102338" : "#2C66A5",
             // Taish Tilt: the perspective lives on the viewport so the
             // tilt wrapper below leans the map plane back around the
             // visible-rect centre. No perspective in 2D — the map is
@@ -3162,11 +3169,10 @@ export function SatelliteInteractiveMap({
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           className={cn(
-            // Ocean background: the canvas never covers the whole frame
-            // (it is centred on the island), so any uncovered strip reads
-            // as ocean, not the frame's near-black. Matches the tile
-            // ocean / margin-mask colour.
-            "relative h-full w-full overflow-hidden select-none bg-[#2C66A5]",
+            // Ocean background colour comes from the style above (it
+            // varies by map style so the uncovered strip matches the
+            // tile ocean).
+            "relative h-full w-full overflow-hidden select-none",
             isDragging ? "cursor-grabbing" : "cursor-grab",
           )}
         >
