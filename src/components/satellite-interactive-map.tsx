@@ -62,7 +62,6 @@ import {
   communityLandmarks,
   communityCategory,
   COMMUNITY_MAP_SPACE,
-  clusterMapPins,
   nextUnvisited,
 } from "@/lib/community-map";
 import { CommunityMapTiles } from "./community-map-tiles";
@@ -1189,9 +1188,31 @@ export function SatelliteInteractiveMap({
     resultSort,
   ]);
 
+  // No clustering: every visible pin shows its own location pictogram.
+  // The gold numbered cluster badges are gone — close-together pins
+  // render as individual icons instead. Viewport culling is kept so
+  // off-screen pins are not rendered.
   const clusters = useMemo(
     () =>
-      clusterMapPins(visiblePOIs, zoom, pan, viewportSize, CANVAS_W, CANVAS_H),
+      visiblePOIs
+        .filter((item) => {
+          const x = (parseFloat(item.left) / 100) * CANVAS_W;
+          const y = (parseFloat(item.top) / 100) * CANVAS_H;
+          const screenX = x * zoom + pan.x;
+          const screenY = y * zoom + pan.y;
+          return (
+            screenX >= -80 &&
+            screenY >= -80 &&
+            screenX <= viewportSize.width + 80 &&
+            screenY <= viewportSize.height + 80
+          );
+        })
+        .map((item) => ({
+          key: item.id,
+          top: parseFloat(item.top),
+          left: parseFloat(item.left),
+          members: [item],
+        })),
     [visiblePOIs, zoom, pan, viewportSize, CANVAS_H],
   );
 
