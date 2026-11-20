@@ -3,7 +3,7 @@
   --muted-foreground: 215 25% 82%;
   --muted: 217 28% 19%;
   --border: 215 22% 36%;
-  --primary: 42 65% 74%;
+  --primary: 328 100% 54%;
   color: #f1f5f9;
 }
 .darkSurface.darkSurface.darkSurface {
@@ -34,10 +34,6 @@
 .darkSurface textarea::placeholder {
   color: #b9c8dc;
   opacity: 1;
-}
-.darkSurface :global(.bg-gold-dark),
-.darkSurface :global(.bg-gold) {
-  color: #101722;
 }
 @media (prefers-reduced-motion: reduce) {
   .darkSurface *,

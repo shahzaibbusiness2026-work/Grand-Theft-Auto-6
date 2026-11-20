@@ -92,7 +92,7 @@ export interface MapPOI {
 
 function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
   let iconComponent: any = MapPin;
-  let color = "bg-gold";
+  let color = "bg-[#FF2E9A]";
   const catLower = (m.category || "").toLowerCase();
 
   if (m.icon === "car") {
@@ -100,7 +100,7 @@ function adminMarkerToPoi(m: AdminMapMarker): MapPOI {
     color = "bg-cyan-500";
   } else if (m.icon === "star") {
     iconComponent = Star;
-    color = "bg-gold";
+    color = "bg-[#FF2E9A]";
   } else if (m.icon === "flag") {
     iconComponent = Flag;
     color = "bg-rose-500";
@@ -165,81 +165,81 @@ const CATEGORY_FILTERS = [
     id: "nature",
     label: "Nature & landscape",
     icon: Compass,
-    color: "text-emerald-400",
+    color: "text-slate-200",
   },
   {
     id: "transport",
     label: "Transport & roads",
     icon: Navigation,
-    color: "text-cyan-400",
+    color: "text-slate-200",
   },
   {
     id: "personal",
     label: "My Private Pins",
     icon: MapPin,
-    color: "text-violet-400",
+    color: "text-slate-200",
   },
   {
     id: "all",
     label: "Show All",
     icon: Star,
-    color: "text-gold-light",
+    color: "text-slate-200",
     all: true,
   },
   {
     id: "missions",
     label: "Missions & Heists",
     icon: Target,
-    color: "text-gold-light",
+    color: "text-slate-200",
   },
   {
     id: "garages",
     label: "Garages & Safehouses",
     icon: Warehouse,
-    color: "text-cyan-400",
+    color: "text-slate-200",
   },
   {
     id: "shops",
     label: "Ammu-Nation & Shops",
     icon: ShoppingBag,
-    color: "text-emerald-400",
+    color: "text-slate-200",
   },
-  { id: "vehicles", label: "Vehicles", icon: Car, color: "text-cyan-400" },
+  { id: "vehicles", label: "Vehicles", icon: Car, color: "text-slate-200" },
   {
     id: "weapons",
     label: "Weapons",
     icon: Crosshair,
-    color: "text-orange-400",
+    color: "text-slate-200",
   },
   {
     id: "collectibles",
     label: "Collectibles",
     icon: Gem,
-    color: "text-purple-400",
+    color: "text-slate-200",
   },
   {
     id: "properties",
     label: "Real Estate",
     icon: Building2,
-    color: "text-indigo-400",
+    color: "text-slate-200",
   },
   {
     id: "activities",
     label: "Stunts & Racing",
     icon: Flame,
-    color: "text-yellow-400",
+    color: "text-slate-200",
   },
   {
     id: "easter-eggs",
     label: "Secrets & Lore",
     icon: Egg,
-    color: "text-teal-400",
+    color: "text-slate-200",
   },
   {
     id: "poi",
     label: "Points of Interest",
     icon: MapPin,
-    color: "text-gold-light",
+    color: "text-slate-200",
   },
 ];
 
@@ -295,6 +295,14 @@ const DISTRICTS = [
   },
 ];
 
+/** Map base styles. Shared by the floating switcher (panel closed) and the
+    in-panel switcher (panel open) so the two never drift apart. */
+const MAP_STYLE_OPTIONS = [
+  { id: "community", label: "Community", icon: Satellite },
+  { id: "official", label: "In-game", icon: MapIcon },
+  { id: "streets", label: "Streets", icon: Moon },
+] as const;
+
 /** A generic CMS verification flag is not a field-specific evidence review. */
 function publicMapPoi(poi: MapPOI): MapPOI {
   const aliases: Record<string, string> = {
@@ -342,7 +350,7 @@ const COMMUNITY_POIS: MapPOI[] = communityLandmarks
             transport: "bg-blue-700",
             nature: "bg-emerald-700",
           } as Record<string, string>
-        )[communityCategory(item.types)] || "bg-gold",
+        )[communityCategory(item.types)] || "bg-[#FF2E9A]",
       icon: sub.icon,
       verified: false,
       source: "GTADB community record",
@@ -731,12 +739,18 @@ export function SatelliteInteractiveMap({
     [],
   );
 
-  // Center the map in the container initially
+  // Center the map in the container initially. Cover-fit (not contain):
+  // the square canvas fills the whole frame like gtamap.io, instead of
+  // sitting narrow and centred with black bars left and right. The
+  // north/south edges crop out on wide screens — pan or zoom out to see
+  // them.
   const centerMap = useCallback(() => {
     if (!viewportRef.current) return;
     const { clientWidth, clientHeight } = viewportRef.current;
-    const initialZoom =
-      Math.min(clientWidth / CANVAS_W, clientHeight / CANVAS_H) * 0.95;
+    const initialZoom = Math.max(
+      clientWidth / CANVAS_W,
+      clientHeight / CANVAS_H,
+    );
     const initialPanX = (clientWidth - CANVAS_W * initialZoom) / 2;
     const initialPanY = (clientHeight - CANVAS_H * initialZoom) / 2;
     setZoom(initialZoom);
@@ -825,7 +839,9 @@ export function SatelliteInteractiveMap({
       setClusterMembers([]);
       if (poi.title.startsWith("Unnamed ")) setNamedOnly(false);
       setSelectedPOI(poi);
-      setLeftSidebarOpen(false);
+      // On mobile the filter panel is a full overlay, so close it for the
+      // detail card. On desktop the panel is persistent and stays open.
+      if (window.innerWidth < 1024) setLeftSidebarOpen(false);
       setRightDrawerOpen(true);
       if (window.innerWidth < 640)
         window.setTimeout(
@@ -872,6 +888,14 @@ export function SatelliteInteractiveMap({
   // first paint after hydration is already the final centered map.
   useLayoutEffect(() => {
     centerMap();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Desktop: the filter panel starts open (gtamap.io pattern) — it overlays
+  // the left of the map and collapses with the Filters button. Mobile
+  // starts closed so the map itself is visible first.
+  useLayoutEffect(() => {
+    if (window.innerWidth >= 1024) setLeftSidebarOpen(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -1188,33 +1212,83 @@ export function SatelliteInteractiveMap({
     resultSort,
   ]);
 
-  // No clustering: every visible pin shows its own location pictogram.
-  // The gold numbered cluster badges are gone — close-together pins
-  // render as individual icons instead. Viewport culling is kept so
-  // off-screen pins are not rendered.
-  const clusters = useMemo(
-    () =>
-      visiblePOIs
-        .filter((item) => {
-          const x = (parseFloat(item.left) / 100) * CANVAS_W;
-          const y = (parseFloat(item.top) / 100) * CANVAS_H;
-          const screenX = x * zoom + pan.x;
-          const screenY = y * zoom + pan.y;
-          return (
-            screenX >= -80 &&
-            screenY >= -80 &&
-            screenX <= viewportSize.width + 80 &&
-            screenY <= viewportSize.height + 80
-          );
-        })
-        .map((item) => ({
-          key: item.id,
-          top: parseFloat(item.top),
-          left: parseFloat(item.left),
-          members: [item],
-        })),
-    [visiblePOIs, zoom, pan, viewportSize, CANVAS_H],
-  );
+  // Large, clearly visible pictograms: 30px at overview, 36px at the
+  // district zoom (1.8x), up to 44px deep in. The pin button is
+  // counter-scaled by 1/zoom, so the on-screen size is exactly iconPx at
+  // any zoom — including mobile.
+  const iconPx = Math.round(Math.min(44, Math.max(30, 22 + zoom * 8)));
+
+  // No clustering, and no position nudging: every visible pin shows its own
+  // location pictogram at its true coordinates. The numbered cluster badges
+  // are gone. Crowding is solved with zoom-gated density instead: at the
+  // current zoom, only one pin may occupy each icon-sized screen cell.
+  // Pins are accepted in priority order — the selected pin and personal
+  // pins first, then named pins, then by title — so the most useful pins
+  // win the visible slot and the rest appear as you zoom in (their screen
+  // separation grows with zoom). A gated pin is never hidden for good: it
+  // is reachable by search, and selecting it always shows it. Viewport
+  // culling is kept so off-screen pins are not rendered.
+  const { clusters, densityHidden } = useMemo(() => {
+    const inView = visiblePOIs.filter((item) => {
+      const x = (parseFloat(item.left) / 100) * CANVAS_W;
+      const y = (parseFloat(item.top) / 100) * CANVAS_H;
+      const screenX = x * zoom + pan.x;
+      const screenY = y * zoom + pan.y;
+      return (
+        screenX >= -80 &&
+        screenY >= -80 &&
+        screenX <= viewportSize.width + 80 &&
+        screenY <= viewportSize.height + 80
+      );
+    });
+    // Minimum on-screen gap between two pins: the icon size plus a small
+    // margin, so icons never touch or stack at any zoom.
+    const minSep = iconPx + 6;
+    const rank = (p: MapPOI) =>
+      p.id === selectedPOI?.id
+        ? 0
+        : p.personal
+          ? 1
+          : p.title.startsWith("Unnamed ")
+            ? 3
+            : 2;
+    const ordered = [...inView].sort(
+      (a, b) => rank(a) - rank(b) || a.title.localeCompare(b.title),
+    );
+    const accepted: MapPOI[] = [];
+    const acceptedXY: { x: number; y: number }[] = [];
+    for (const item of ordered) {
+      const x = (parseFloat(item.left) / 100) * CANVAS_W;
+      const y = (parseFloat(item.top) / 100) * CANVAS_H;
+      const sx = x * zoom + pan.x;
+      const sy = y * zoom + pan.y;
+      const exempt = item.id === selectedPOI?.id || item.personal;
+      if (
+        !exempt &&
+        acceptedXY.some((p) => Math.hypot(p.x - sx, p.y - sy) < minSep)
+      )
+        continue;
+      accepted.push(item);
+      acceptedXY.push({ x: sx, y: sy });
+    }
+    return {
+      clusters: accepted.map((item) => ({
+        key: item.id,
+        top: parseFloat(item.top),
+        left: parseFloat(item.left),
+        members: [item],
+      })),
+      densityHidden: inView.length - accepted.length,
+    };
+  }, [
+    visiblePOIs,
+    zoom,
+    pan,
+    viewportSize,
+    CANVAS_H,
+    selectedPOI?.id,
+    iconPx,
+  ]);
 
   const verifiedTotal = allPOIs.filter((poi) => collectedPOIs[poi.id]).length;
 
@@ -1242,7 +1316,7 @@ export function SatelliteInteractiveMap({
         className={`dark-panel ${mapStyles.darkSurface} flex flex-wrap items-center justify-between gap-3 border-b border-border bg-[#070b14] px-4 py-3 sm:px-6 rounded-t-3xl`}
       >
         <div className="hidden sm:flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-gold to-yellow-400 text-slate-950 shadow-[0_0_15px_rgba(201,168,106,0.4)]">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-[#FF2E9A] to-violet-500 text-white shadow-[0_0_15px_rgba(255,46,154,0.4)]">
             <Radio className="h-5 w-5 animate-pulse" />
           </div>
           <div>
@@ -1252,14 +1326,13 @@ export function SatelliteInteractiveMap({
                   ? "LEONIDA COMMUNITY ATLAS"
                   : "ORIGINAL PLANNING MAP"}
               </span>
-              <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-xs font-black uppercase text-emerald-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 " />
+              <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-[#FF2E9A]/30 bg-[#FF2E9A]/10 px-2 py-0.5 text-xs font-black uppercase text-[#FF2E9A]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#FF2E9A] " />
                 FAN MAP
               </span>
             </div>
             <p className="text-xs text-muted-foreground">
               Fan-made Leonida Atlas • {visiblePOIs.length} provisional pins
-              displayed
             </p>
           </div>
         </div>
@@ -1273,7 +1346,7 @@ export function SatelliteInteractiveMap({
               className={cn(
                 "rounded-lg px-2.5 py-1 text-xs font-bold uppercase transition-all",
                 activeDistrict === d.id
-                  ? "bg-gold text-slate-950 font-black shadow-xs"
+                  ? "bg-[#FF2E9A] text-white font-black shadow-xs"
                   : "text-muted-foreground hover:text-white hover:bg-muted/40",
               )}
             >
@@ -1302,12 +1375,12 @@ export function SatelliteInteractiveMap({
             className={cn(
               "flex h-9 items-center gap-1.5 rounded-xl border px-3 text-xs font-bold transition-all",
               leftSidebarOpen
-                ? "border-gold/50 bg-gold/15 text-white"
+                ? "border-[#FF2E9A]/50 bg-[#FF2E9A]/15 text-white"
                 : "border-border bg-muted/40 text-muted-foreground hover:text-white",
             )}
             title="Toggle Filter Sidebar"
           >
-            <Sliders className="h-3.5 w-3.5 text-gold-light" />
+            <Sliders className="h-3.5 w-3.5 text-[#FF2E9A]" />
             <span className="hidden sm:inline">Filters</span>
           </button>
 
@@ -1320,7 +1393,7 @@ export function SatelliteInteractiveMap({
             className="flex h-9 items-center gap-1.5 rounded-xl border border-border bg-muted/40 px-3 text-xs font-bold text-muted-foreground hover:text-white transition-colors"
             title="Cycle Map Visual Mode"
           >
-            <Layers className="h-3.5 w-3.5 text-cyan-400" />
+            <Layers className="h-3.5 w-3.5 text-slate-200" />
             <span className="capitalize">
               {mapMode === "satellite" ? "Map" : mapMode}
             </span>
@@ -1328,7 +1401,7 @@ export function SatelliteInteractiveMap({
 
           <button
             onClick={toggleFullscreen}
-            className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted/40 text-muted-foreground hover:text-white hover:border-gold/50 transition-all shadow-sm"
+            className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted/40 text-muted-foreground hover:text-white hover:border-[#FF2E9A]/50 transition-all shadow-sm"
             title={isFullscreen ? "Exit Fullscreen" : "Full Screen"}
           >
             {isFullscreen ? (
@@ -1352,7 +1425,7 @@ export function SatelliteInteractiveMap({
             <input
               type="search"
               maxLength={120}
-              className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-sm bg-[#101827] text-white"
+              className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-sm bg-[#101827] text-white focus:border-[#FF2E9A] focus:outline-none"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
               placeholder="Search names, areas or landmarks"
@@ -1458,6 +1531,11 @@ export function SatelliteInteractiveMap({
             {visiblePOIs.length.toLocaleString("en-US")} matching pins ·{" "}
             {verifiedTotal} marked
           </span>
+          {densityHidden > 0 && (
+            <span className="text-muted-foreground">
+              {densityHidden} more in view appear as you zoom in
+            </span>
+          )}
           <label className="hidden sm:flex items-center gap-2">
             <input
               type="checkbox"
@@ -1477,7 +1555,7 @@ export function SatelliteInteractiveMap({
           {!playerMode && (
             <Link
               href="/login"
-              className="hidden sm:inline underline text-gold-light"
+              className="hidden sm:inline underline text-[#FF2E9A]"
             >
               My private map & account sync
             </Link>
@@ -1598,7 +1676,7 @@ export function SatelliteInteractiveMap({
               required
               maxLength={120}
               autoFocus
-              className="player-input"
+              className="mt-1 block w-full min-w-0 rounded-lg border border-white/20 bg-[#111827] px-3 py-2.5 text-sm text-white outline-none focus:border-[#FF2E9A] focus:ring-2 focus:ring-[#FF2E9A]/30"
               value={pinTitle}
               onChange={(event) => setPinTitle(event.target.value)}
             />
@@ -1639,9 +1717,8 @@ export function SatelliteInteractiveMap({
             the map image is the LCP element before the interactive map's JS
             mounts. The interactive canvas renders on top once hydrated; this
             preview is then covered (it stays in the DOM, hidden underneath).
-            object-contain matches the interactive map's initial centered,
-            whole-map view. Community edition only — legacy uses a different
-            base image. */}
+            object-cover matches the interactive map's cover-fit first view.
+            Community edition only — legacy uses a different base image. */}
         {edition === "community" && (
           <img
             src="/maps/gtadb-yanis17/overview.webp"
@@ -1651,7 +1728,7 @@ export function SatelliteInteractiveMap({
             fetchPriority="high"
             decoding="sync"
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-contain"
+            className="absolute inset-0 h-full w-full object-cover"
           />
         )}
         {/* ==================== 1. FLOATING LEFT FILTER DRAWER ==================== */}
@@ -1674,14 +1751,14 @@ export function SatelliteInteractiveMap({
               <div className="flex items-center gap-1">
                 <button
                   onClick={showAllFilters}
-                  className="text-xs font-bold text-gold-light hover:underline"
+                  className="text-xs font-bold text-[#FF2E9A] hover:underline"
                 >
                   Show all
                 </button>
                 <span className="text-xs text-muted-foreground">·</span>
                 <button
                   onClick={hideAllFilters}
-                  className="text-xs font-bold text-gold-light hover:underline"
+                  className="text-xs font-bold text-[#FF2E9A] hover:underline"
                 >
                   Hide all
                 </button>
@@ -1695,6 +1772,40 @@ export function SatelliteInteractiveMap({
               </div>
             </div>
 
+            {/* Map style — lives here while the panel is open, so it never
+                hides behind the panel. The floating switcher takes over
+                when the panel is closed. */}
+            {edition === "community" && (
+              <div className="mt-3">
+                <p className="mb-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  Map style
+                </p>
+                <div className="grid grid-cols-3 gap-1 rounded-xl border border-border bg-black/50 p-1">
+                  {MAP_STYLE_OPTIONS.map((s) => {
+                    const SIcon = s.icon;
+                    const active = mapStyle === s.id;
+                    return (
+                      <button
+                        key={s.id}
+                        type="button"
+                        aria-pressed={active}
+                        onClick={() => setMapStyle(s.id)}
+                        className={cn(
+                          "flex flex-col items-center gap-1 rounded-lg px-1 py-2 text-[11px] font-bold transition-all",
+                          active
+                            ? "bg-[#FF2E9A] text-white shadow"
+                            : "text-muted-foreground hover:text-white",
+                        )}
+                      >
+                        <SIcon className="h-3.5 w-3.5" />
+                        {s.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* Filter Search */}
             <div className="relative mt-3">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
@@ -1704,7 +1815,7 @@ export function SatelliteInteractiveMap({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search weapons, stunts, banks..."
-                className="w-full rounded-xl border border-border bg-black/50 py-2 pl-9 pr-3 text-xs text-white placeholder:text-muted-foreground focus:border-gold focus:outline-none"
+                className="w-full rounded-xl border border-border bg-black/50 py-2 pl-9 pr-3 text-xs text-white placeholder:text-muted-foreground focus:border-[#FF2E9A] focus:outline-none"
               />
               {searchQuery && (
                 <button
@@ -1731,19 +1842,19 @@ export function SatelliteInteractiveMap({
                   ? Math.round((collectedCount / totalCount) * 100)
                   : 0;
               return (
-                <div className="mt-3 rounded-xl border border-purple-500/30 bg-purple-500/10 p-3">
+                <div className="mt-3 rounded-xl border border-border bg-black/40 p-3">
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-bold text-purple-300 flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-[#FF2E9A] flex items-center gap-1.5">
                       <Gem className="h-3.5 w-3.5" />
                       Collectibles
                     </span>
-                    <span className="text-xs font-mono text-purple-300">
+                    <span className="text-xs font-mono text-[#FF2E9A]">
                       {collectedCount}/{totalCount} ({pct}%)
                     </span>
                   </div>
                   <div className="h-2 rounded-full bg-black/40 overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-400 transition-all duration-500"
+                      className="h-full rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 transition-all duration-500"
                       style={{ width: `${pct}%` }}
                     />
                   </div>
@@ -1752,7 +1863,7 @@ export function SatelliteInteractiveMap({
                     className={cn(
                       "mt-2 flex w-full items-center justify-center gap-1.5 rounded-lg py-1.5 text-xs font-bold transition-all border",
                       hideCollected
-                        ? "border-purple-500/50 bg-purple-500/20 text-purple-200"
+                        ? "border-[#FF2E9A]/50 bg-[#FF2E9A]/20 text-[#FF2E9A]"
                         : "border-slate-600 bg-slate-800/50 text-slate-300 hover:bg-slate-700/50",
                     )}
                   >
@@ -1781,7 +1892,7 @@ export function SatelliteInteractiveMap({
                       className={cn(
                         "flex w-full min-h-[44px] select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-left text-xs font-semibold transition-colors",
                         f.all
-                          ? "border border-gold/30 bg-gold/10 text-white font-bold"
+                          ? "border border-[#FF2E9A]/30 bg-[#FF2E9A]/10 text-white font-bold"
                           : "text-muted-foreground hover:bg-muted/40 hover:text-white",
                       )}
                     >
@@ -1833,13 +1944,13 @@ export function SatelliteInteractiveMap({
                           className={cn(
                             "flex h-4 w-4 items-center justify-center rounded transition-all",
                             isChecked
-                              ? "bg-gold text-slate-950 shadow-xs"
+                              ? "bg-[#FF2E9A] text-white shadow-xs"
                               : "border border-border bg-black/40",
                           )}
                         >
                           {isChecked && (
                             <Check
-                              className="h-3 w-3 text-slate-950"
+                              className="h-3 w-3 text-white"
                               strokeWidth={3.5}
                             />
                           )}
@@ -1908,7 +2019,7 @@ export function SatelliteInteractiveMap({
                 className="flex w-full min-h-[44px] cursor-pointer select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-xs font-semibold text-muted-foreground hover:bg-muted/40 hover:text-white transition-colors"
               >
                 <span className="flex items-center gap-2 truncate">
-                  <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                  <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-slate-200" />
                   <span className="truncate">With community source link</span>
                 </span>
                 <span className="flex items-center gap-2">
@@ -1922,13 +2033,13 @@ export function SatelliteInteractiveMap({
                     className={cn(
                       "flex h-4 w-4 items-center justify-center rounded transition-all",
                       verifiedOnly
-                        ? "bg-gold text-slate-950 shadow-xs"
+                        ? "bg-[#FF2E9A] text-white shadow-xs"
                         : "border border-border bg-black/40",
                     )}
                   >
                     {verifiedOnly && (
                       <Check
-                        className="h-3 w-3 text-slate-950"
+                        className="h-3 w-3 text-white"
                         strokeWidth={3.5}
                       />
                     )}
@@ -1941,16 +2052,16 @@ export function SatelliteInteractiveMap({
             <div className="mt-3 pt-3 border-t border-border">
               <div className="flex items-center justify-between text-xs font-bold text-white">
                 <span className="flex items-center gap-1.5 text-muted-foreground">
-                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Your
+                  <ShieldCheck className="h-3.5 w-3.5 text-slate-200" /> Your
                   marked pins
                 </span>
-                <span className="text-gold-light">
+                <span className="text-[#FF2E9A]">
                   {verifiedTotal} / {allPOIs.length}
                 </span>
               </div>
               <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-gold-light to-yellow-400 transition-all"
+                  className="h-full rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 transition-all"
                   style={{
                     width: `${(verifiedTotal / Math.max(1, allPOIs.length)) * 100}%`,
                   }}
@@ -1965,11 +2076,11 @@ export function SatelliteInteractiveMap({
           <div
             role="region"
             aria-label="Map pin details"
-            className="absolute right-3 top-3 bottom-3 overflow-y-auto z-30 w-80 max-w-[calc(100%_-_24px)] rounded-2xl border border-border bg-[#070c18]/95 p-5 shadow-2xl  animate-in slide-in-from-right duration-200"
+            className="absolute right-3 top-3 bottom-3 overflow-y-auto z-30 w-80 max-w-[calc(100%_-_24px)] rounded-2xl border border-border border-t-[3px] border-t-[#FF2E9A] bg-[#070c18]/95 p-5 shadow-2xl  animate-in slide-in-from-right duration-200"
           >
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2.5">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/40 bg-gold/15 text-gold-light">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#FF2E9A]/40 bg-[#FF2E9A]/15 text-[#FF2E9A]">
                   <selectedPOI.icon className="h-4 w-4" />
                 </span>
                 <div>
@@ -1979,7 +2090,7 @@ export function SatelliteInteractiveMap({
                   <p className="text-xs text-muted-foreground font-semibold">
                     {selectedPOI.district}
                   </p>
-                  <p className="text-xs font-bold text-gold-light">
+                  <p className="text-xs font-bold text-[#FF2E9A]">
                     {CATEGORY_FILTERS.find(
                       (f) => f.id === selectedPOI.category,
                     )?.label || selectedPOI.category}
@@ -2006,7 +2117,7 @@ export function SatelliteInteractiveMap({
                   alt={selectedPOI.title}
                   className="h-full w-full object-cover"
                 />
-                <span className="absolute left-2 top-2 rounded bg-black/75 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-gold-light backdrop-blur border border-border">
+                <span className="absolute left-2 top-2 rounded bg-black/75 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-[#FF2E9A] backdrop-blur border border-border">
                   {selectedPOI.type}
                 </span>
               </div>
@@ -2027,7 +2138,7 @@ export function SatelliteInteractiveMap({
                     "font-bold",
                     selectedPOI.verified
                       ? "text-emerald-400"
-                      : "text-amber-400",
+                      : "text-slate-300",
                   )}
                 >
                   {selectedPOI.verified
@@ -2107,7 +2218,7 @@ export function SatelliteInteractiveMap({
 
               <button
                 onClick={() => focusOnPOI(selectedPOI)}
-                className="flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-[#C9A86A] py-2 text-xs font-black text-slate-950 shadow-md hover:brightness-105 transition-all"
+                className="flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#FF2E9A] to-violet-500 py-2 text-xs font-black text-white shadow-md hover:brightness-105 transition-all"
               >
                 <Navigation className="h-3.5 w-3.5" />
                 <span>Center pin</span>
@@ -2127,15 +2238,15 @@ export function SatelliteInteractiveMap({
                 className={cn(
                   "flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition-all border",
                   favoriteLocations.includes(selectedPOI.id)
-                    ? "border-[#C9A86A]/50 bg-[#C9A86A]/20 text-[#C9A86A]"
-                    : "border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200",
+                    ? "border-[#FF2E9A]/50 bg-[#FF2E9A]/20 text-[#FF2E9A]"
+                    : "border-slate-700 bg-slate-800 text-white hover:bg-slate-700",
                 )}
               >
                 <Heart
                   className={cn(
                     "h-3.5 w-3.5",
                     favoriteLocations.includes(selectedPOI.id) &&
-                      "fill-[#C9A86A] text-[#C9A86A]",
+                      "fill-[#FF2E9A] text-[#FF2E9A]",
                   )}
                 />
                 <span>
@@ -2159,7 +2270,7 @@ export function SatelliteInteractiveMap({
                     }
                   }
                 }}
-                className="flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-slate-100 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200 transition-all"
+                className="flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border border-slate-700 bg-slate-800 py-2 text-xs font-bold text-white hover:bg-slate-700 transition-all"
               >
                 {copiedShare ? (
                   <Check className="h-3.5 w-3.5 text-emerald-400" />
@@ -2179,7 +2290,7 @@ export function SatelliteInteractiveMap({
             {/* Personal Notes Section */}
             <div className="mt-4 pt-3 border-t border-border">
               <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
-                <FileText className="h-3 w-3 text-[#00F0FF]" />
+                <FileText className="h-3 w-3 text-[#FF2E9A]" />
                 <span>Personal Field Notes</span>
               </div>
               <textarea
@@ -2193,7 +2304,7 @@ export function SatelliteInteractiveMap({
                 }}
                 placeholder="Add a private planning note…"
                 rows={2}
-                className="w-full rounded-xl border border-border bg-black/50 p-2 text-xs text-white placeholder:text-muted-foreground focus:border-[#00F0FF]/50 focus:outline-none focus:ring-1 focus:ring-[#00F0FF]/30 resize-none font-sans"
+                className="w-full rounded-xl border border-border bg-black/50 p-2 text-xs text-white placeholder:text-muted-foreground focus:border-[#FF2E9A]/50 focus:outline-none focus:ring-1 focus:ring-[#FF2E9A]/30 resize-none font-sans"
               />
               {selectedPOI.personal && (
                 <button
@@ -2234,19 +2345,15 @@ export function SatelliteInteractiveMap({
         )}
 
         {/* ==================== 2b. MAP STYLE SWITCHER ==================== */}
-        {edition === "community" && (
+        {/* Floating only while the filter panel is closed; when the panel
+            is open the switcher lives inside it (see the panel section). */}
+        {edition === "community" && !leftSidebarOpen && (
           <div
             className="absolute left-3 top-3 z-20 flex rounded-xl border border-border bg-black/80 p-1 shadow-2xl backdrop-blur-md"
             role="group"
             aria-label="Map style"
           >
-            {(
-              [
-                { id: "community", label: "Community", icon: Satellite },
-                { id: "official", label: "In-game", icon: MapIcon },
-                { id: "streets", label: "Streets", icon: Moon },
-              ] as const
-            ).map((s) => {
+            {MAP_STYLE_OPTIONS.map((s) => {
               const SIcon = s.icon;
               const active = mapStyle === s.id;
               return (
@@ -2258,7 +2365,7 @@ export function SatelliteInteractiveMap({
                   className={cn(
                     "flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-bold transition-all",
                     active
-                      ? "bg-gold text-slate-950 shadow"
+                      ? "bg-[#FF2E9A] text-white shadow"
                       : "text-muted-foreground hover:text-white",
                   )}
                 >
@@ -2272,21 +2379,27 @@ export function SatelliteInteractiveMap({
 
         {/* ==================== 3. FLOATING TOP HUD CONTROLS ==================== */}
         {edition === "community" && mapStyle === "official" && (
-          <div className="pointer-events-none absolute left-0 right-0 top-14 z-20 flex justify-center px-4">
-            <p className="rounded-xl border border-border bg-black/80 px-3 py-1.5 text-xs font-bold text-amber-300 shadow-2xl backdrop-blur-md">
+          <div className={cn(
+            "pointer-events-none absolute left-0 right-0 top-14 z-20 flex justify-center px-4",
+            leftSidebarOpen && "lg:left-[300px]",
+          )}>
+            <p className="rounded-xl border border-border bg-black/80 px-3 py-1.5 text-xs font-bold text-[#FF2E9A] shadow-2xl backdrop-blur-md">
               Official Rockstar map — pins are positioned on the Community
               map, so they are hidden here.
             </p>
           </div>
         )}
-        <div className="pointer-events-none absolute left-0 right-0 top-3 z-20 flex justify-center px-4">
+        <div className={cn(
+          "pointer-events-none absolute left-0 right-0 top-3 z-20 flex justify-center px-4",
+          leftSidebarOpen && "lg:left-[300px]",
+        )}>
           <div className="pointer-events-auto flex items-center gap-2 rounded-2xl border border-border bg-black/80 px-3.5 py-1.5 shadow-2xl backdrop-blur-md">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 " />
+            <span className="flex h-2 w-2 rounded-full bg-[#FF2E9A] " />
             <span className="text-xs font-mono text-muted-foreground font-bold">
               Fan map · coordinates unverified
             </span>
             <span className="h-3 w-px bg-muted/60" />
-            <span className="text-xs font-mono text-cyan-600 dark:text-[#00F0FF] font-bold">
+            <span className="text-xs font-mono text-white font-bold">
               ZOOM: {Math.round(zoom * 100)}%
             </span>
           </div>
@@ -2376,7 +2489,7 @@ export function SatelliteInteractiveMap({
                   <button
                     key={`cluster:${cluster.key}`}
                     aria-label={`Explore cluster of ${cluster.members.length} locations`}
-                    className="absolute z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-gold text-slate-950 h-11 min-w-11 px-2 font-bold shadow-xl"
+                    className="absolute z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-[#FF2E9A] text-white h-11 min-w-11 px-2 font-bold shadow-xl"
                     style={{
                       top: `${cluster.top}%`,
                       left: `${cluster.left}%`,
@@ -2406,11 +2519,6 @@ export function SatelliteInteractiveMap({
               const isSelected = selectedPOI?.id === m.id;
               const isCollected = collectedPOIs[m.id];
               const Icon = m.icon;
-              // Pictogram size grows gently with zoom so the icon stays
-              // readable up close without ballooning at deep zoom.
-              const iconPx = Math.round(
-                Math.min(32, Math.max(22, 16 + zoom * 2.5)),
-              );
 
               return (
                 <button
@@ -2431,32 +2539,32 @@ export function SatelliteInteractiveMap({
                 >
                   {/* Selected outline */}
                   {isSelected && (
-                    <span className="absolute -inset-2 rounded-lg border-2 border-gold bg-gold/20" />
+                    <span className="absolute -inset-2 rounded-lg border-2 border-[#FF2E9A] bg-[#FF2E9A]/20" />
                   )}
 
-                  {/* Bare pictogram: white thin-line icon with a dark halo
+                  {/* Bare pictogram: large white icon with a thick dark halo
                       for contrast on any base map. No coloured disc. A
                       marked (found) pin turns emerald. */}
                   <span
                     className={cn(
                       "flex items-center justify-center transition-all",
                       isCollected ? "text-emerald-400" : "text-white",
-                      isSelected && "text-gold-light",
+                      isSelected && "text-[#FF2E9A]",
                     )}
                     style={{
                       filter:
-                        "drop-shadow(0 0 4px rgba(0,0,0,1)) drop-shadow(0 1px 3px rgba(0,0,0,0.95))",
+                        "drop-shadow(0 0 5px rgba(0,0,0,1)) drop-shadow(0 2px 4px rgba(0,0,0,0.95))",
                     }}
                   >
                     <Icon
                       style={{ width: iconPx, height: iconPx }}
-                      strokeWidth={2.5}
+                      strokeWidth={3}
                     />
                   </span>
 
                   {/* Tooltip on Hover */}
                   <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 max-w-[70vw] whitespace-normal text-center rounded-lg bg-black/90 px-2.5 py-1 text-xs font-bold text-white opacity-0 shadow-2xl backdrop-blur-md border border-border group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity z-30">
-                    <span className="text-gold-light block font-black">
+                    <span className="text-[#FF2E9A] block font-black">
                       {m.title}
                     </span>
                     <span className="text-muted-foreground font-medium text-xs">
@@ -2512,7 +2620,7 @@ export function SatelliteInteractiveMap({
             className={cn(
               "flex h-11 w-11 items-center justify-center rounded-xl border  shadow-2xl transition-all",
               showGrid
-                ? "border-[#00F0FF] bg-[#00F0FF]/20 text-[#00F0FF]"
+                ? "border-[#FF2E9A] bg-[#FF2E9A]/20 text-[#FF2E9A]"
                 : "border-border bg-black/80 text-white hover:bg-muted/60",
             )}
             title="Toggle Tactical Grid"
@@ -2549,7 +2657,7 @@ export function SatelliteInteractiveMap({
         {/* ==================== 6. BOTTOM LEFT COMPASS & HINT ==================== */}
         <div className="absolute left-4 bottom-4 z-20 flex items-center gap-2">
           <div className="flex items-center gap-2 rounded-xl border border-border bg-black/80 px-3 py-1.5  shadow-2xl">
-            <span className="font-display text-xs font-black text-gold-light tracking-wider">
+            <span className="font-display text-xs font-black text-[#FF2E9A] tracking-wider">
               N ▲
             </span>
             <span className="hidden min-[420px]:inline text-xs text-muted-foreground font-medium">

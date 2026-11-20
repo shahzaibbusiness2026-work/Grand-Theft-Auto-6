@@ -62,7 +62,7 @@ export function CommunityMapWorkspace({
       <div className="hidden sm:flex flex-wrap items-center gap-3 text-sm">
         <span className="font-bold">Map layer</span>
         <button
-          className="player-button"
+          className={`player-button ${edition === "community" ? "border-[#FF2E9A] bg-[#FF2E9A] text-white hover:bg-[#FF2E9A]" : ""}`}
           aria-pressed={edition === "community"}
           onClick={() => {
             setEdition("community");
@@ -75,7 +75,7 @@ export function CommunityMapWorkspace({
           Community reconstruction
         </button>
         <button
-          className="player-button"
+          className={`player-button ${edition === "legacy" ? "border-[#FF2E9A] bg-[#FF2E9A] text-white hover:bg-[#FF2E9A]" : ""}`}
           aria-pressed={edition === "legacy"}
           onClick={() => {
             setEdition("legacy");
