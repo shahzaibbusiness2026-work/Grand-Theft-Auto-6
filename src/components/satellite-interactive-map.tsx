@@ -3177,13 +3177,19 @@ export function SatelliteInteractiveMap({
               visible-rect centre, and carries preserve-3d so the pins
               inside the canvas can counter-rotate upright. The LCP
               preview and filter panel sit OUTSIDE this wrapper (siblings
-              of the viewport), so they never tilt. */}
+              of the viewport), so they never tilt. preserve-3d is
+              3D-only: left on in 2D it forces Chromium to rasterize
+              the 1400px canvas (scaled up to 12x) as one 3D render
+              surface capped by the max texture size, so sharp z5 tiles
+              render as a ~2x upscale blur at max zoom. In 2D the
+              wrapper is flat and the tiles rasterize tiled at full
+              scale — crisp. */}
           <div
             className="absolute inset-0"
             style={{
               transform: is3D ? `rotateX(${TILT_DEG}deg)` : "rotateX(0deg)",
               transformOrigin: `${tiltOrigin.x}px ${tiltOrigin.y}px`,
-              transformStyle: "preserve-3d",
+              transformStyle: is3D ? "preserve-3d" : "flat",
               transition: tiltAnimating ? "transform 400ms ease" : "none",
             }}
           >
@@ -3195,7 +3201,9 @@ export function SatelliteInteractiveMap({
                 width: `${CANVAS_W}px`,
                 height: `${CANVAS_H}px`,
                 transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-                transformStyle: "preserve-3d",
+                // 3D-only: preserve-3d in 2D blurs max-zoom tiles (see
+                // the tilt wrapper comment above).
+                transformStyle: is3D ? "preserve-3d" : "flat",
               }}
             >
             {/* The Real Satellite Map Image */}
