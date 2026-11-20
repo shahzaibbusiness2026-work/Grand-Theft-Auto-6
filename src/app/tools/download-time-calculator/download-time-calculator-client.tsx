@@ -14,7 +14,7 @@ function formatDuration(totalSeconds: number): string {
 }
 
 const SPEED_PRESETS = [25, 50, 100, 200, 500, 1000];
-const PRELOAD_WINDOW_SECONDS = 9 * 86400;
+const DOWNLOAD_WINDOW_SECONDS = 9 * 86400;
 
 export function DownloadTimeCalculatorClient() {
   const [speedMbps, setSpeedMbps] = useState(100);
@@ -31,7 +31,7 @@ export function DownloadTimeCalculatorClient() {
         idealSeconds: ideal,
         realisticSeconds: realistic,
         recommendedFreeGb: Math.ceil((sizeGb * 1.2) / 10) * 10,
-        fitsWindow: realistic > 0 && realistic <= PRELOAD_WINDOW_SECONDS,
+        fitsWindow: realistic > 0 && realistic <= DOWNLOAD_WINDOW_SECONDS,
       };
     }, [speedMbps, sizeGb, efficiency]);
 
@@ -96,8 +96,8 @@ export function DownloadTimeCalculatorClient() {
             className={inputClass}
           />
           <p className="mt-2 text-xs text-muted-foreground">
-            Default 212 GB: Rockstar’s official up-to figure for the pre-load
-            file (November 3, 2026). Actual size varies by device.
+            Default 212 GB: Rockstar’s official up-to figure for the game
+            download (November 3, 2026). Actual size varies by device.
           </p>
         </div>
 
@@ -156,14 +156,14 @@ export function DownloadTimeCalculatorClient() {
             </dd>
             <dd className="mt-1 text-xs text-muted-foreground">
               The download itself plus room for installation. The final
-              installed size may differ from the pre-load file.
+              installed size may differ from the download.
             </dd>
           </div>
         </dl>
         <p className="mt-5 rounded-xl border border-border bg-muted/50 p-4 text-sm leading-relaxed">
           {fitsWindow
-            ? "That fits comfortably inside the 9-day pre-load window (November 10–19). Start on November 10 and it will be ready well before launch."
-            : "That is longer than the 9-day pre-load window (November 10–19). Start the moment pre-loading opens, use a wired connection if you can, and avoid pausing the download."}
+            ? "That fits comfortably — at that speed the download finishes in under 9 days."
+            : "That is longer than 9 days. Use a wired connection if you can, and avoid pausing the download."}
         </p>
         <p className="mt-3 text-xs text-muted-foreground">
           How the math works: time = size in megabits ÷ speed. {sizeGb} GB is{" "}

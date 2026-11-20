@@ -58,20 +58,20 @@ export const TOOL_STATUS_META: Record<
       "border-cyan-600/40 bg-cyan-500/10 text-cyan-800 dark:text-cyan-300",
   },
   verified: {
-    label: "Ready · Safe pre-launch",
+    label: "Ready",
     note: "A working reference utility; inspect the individual page for evidence limits.",
     badgeClass:
       "border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
 
   },
   simulator: {
-    label: "Pre-release simulator",
+    label: "Simulator",
     note: "Uses hypothetical example assumptions; values are not verified GTA VI data.",
     badgeClass:
       "border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400",
   },
   postlaunch: {
-    label: "Coming soon · Data unavailable",
+    label: "Awaiting verified data",
     note: "Verified game data has not been published for this tool. Future publication requires source review.",
     badgeClass:
       "border-slate-500/40 bg-slate-500/10 text-slate-600 dark:text-slate-400",

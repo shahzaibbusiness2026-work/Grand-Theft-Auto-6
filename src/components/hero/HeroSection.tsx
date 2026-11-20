@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowRight, Map, Newspaper, Car } from "lucide-react";
 import { HeroBackground } from "./HeroBackground";
-import { Countdown } from "./Countdown";
 import { HeroSignup } from "./HeroSignup";
 import type { ComprehensiveSiteSettings } from "@/lib/services/settings";
 
@@ -19,23 +18,25 @@ export function HeroSection({ settings }: HeroSectionProps) {
       {/* 1. CINEMATIC BACKGROUND CANVAS */}
       <HeroBackground />
 
-      {/* 2. MAIN HERO CONTENT (Centered Transparent Countdown) */}
+      {/* 2. MAIN HERO CONTENT (Centered Post-Launch Hero) */}
       <div className="relative z-10 mx-auto w-full max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl flex flex-col items-center justify-center flex-1 pb-3 sm:pb-8 text-center">
         {/* Page H1 kept for SEO / screen readers only — no visible
             headline in the hero (per the 2026-11-07 request). */}
         <h1 className="sr-only">
           {settings?.heroHeading?.trim() || "Grand Theft Auto VI"}
         </h1>
-        {/* Countdown in Center */}
+        {/* Post-launch hero — GTA 6 released 19 Nov 2026 */}
         <div className="hero-enter w-full" style={{ animationDelay: "0.05s" }}>
-          <Countdown
-            className="w-full max-w-xl sm:max-w-3xl mx-auto"
-            targetDate={settings?.targetReleaseDate}
-            isConfirmed={settings?.isReleaseDateConfirmed}
-          />
+          <p className="font-display text-5xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
+            GTA 6 is <span className="text-primary">OUT NOW</span>
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-white/85 sm:text-lg">
+            Leonida is open. Start with the first-hours guide, see how it
+            runs on your console, and explore the map.
+          </p>
         </div>
 
-        {/* Action Buttons Centered Below Countdown */}
+        {/* Action Buttons Centered Below Headline */}
         <div
           className="hero-enter flex w-full flex-wrap items-center justify-center gap-3 pt-3 sm:gap-4 sm:pt-6"
           style={{ animationDelay: "0.45s" }}
@@ -44,17 +45,37 @@ export function HeroSection({ settings }: HeroSectionProps) {
             href="/map"
             className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 dark:from-[#00D2FF] dark:via-[#00A3FF] dark:to-[#0066FF] hover:from-sky-400 hover:to-indigo-500 dark:hover:from-[#38BDF8] dark:hover:to-[#0055EE] px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all shadow-[0_4px_20px_rgba(14,165,233,0.35)] dark:shadow-[0_0_30px_rgba(0,210,255,0.45)] hover:shadow-[0_6px_25px_rgba(14,165,233,0.5)] dark:hover:shadow-[0_0_40px_rgba(0,210,255,0.7)] active:scale-95"
           >
-            <span>Explore the Atlas</span>
+            <span>Explore the Map</span>
             <ArrowRight className="h-4 w-4 text-white" />
           </Link>
 
           <Link
-            href="/map"
-            className="hidden sm:inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 bg-black/60 hover:bg-black/80 px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all backdrop-blur-xl hover:border-[#00F0FF]/60 active:scale-95 shadow-lg"
+            href="/news/gta-6-fps-performance"
+            className="inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 bg-black/60 hover:bg-black/80 px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all backdrop-blur-xl hover:border-[#00F0FF]/60 active:scale-95 shadow-lg"
           >
-            <span>Open Map Explorer</span>
-            <Map className="h-4 w-4 text-[#00F0FF]" />
+            <span>FPS &amp; Performance</span>
           </Link>
+
+          <Link
+            href="/guides"
+            className="inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 bg-black/60 hover:bg-black/80 px-8 py-3.5 text-sm sm:text-base font-bold text-white transition-all backdrop-blur-xl hover:border-[#00F0FF]/60 active:scale-95 shadow-lg"
+          >
+            <span>Browse Guides</span>
+          </Link>
+        </div>
+        {/* Rockstar release information */}
+        <div
+          className="hero-enter mt-4 flex w-full flex-wrap items-center justify-center gap-5 text-sm"
+          style={{ animationDelay: "0.55s" }}
+        >
+          <a
+            className="inline-flex min-h-11 items-center underline text-white/85 hover:text-white"
+            href="https://www.rockstargames.com/VI"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Rockstar release information
+          </a>
         </div>
         {/* Optional updates after the main product links */}
         <div

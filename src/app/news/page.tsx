@@ -13,7 +13,7 @@ import { getPublicArticles } from "@/lib/services/queries";
 import { getCategories } from "@/lib/services/categories";
 import { serializeJsonLd, toIsoDate } from "@/lib/utils";
 import { itemListJsonLd } from "@/lib/page-metadata";
-import { NewsArticleGrid, NewsLaunchCountdown, NewsSidebarNewsletter } from "./news-client";
+import { NewsArticleGrid, NewsSidebarNewsletter } from "./news-client";
 import styles from "./news.module.css";
 
 
@@ -144,8 +144,6 @@ export default async function NewsPage() {
           )}
 
           <NewsSidebarNewsletter />
-
-          <NewsLaunchCountdown />
 
           {categories.length > 0 && <CategoryList categories={categories} />}
         </aside>

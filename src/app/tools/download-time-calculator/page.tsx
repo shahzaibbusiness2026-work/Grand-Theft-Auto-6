@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: pageOpenGraph("/tools/download-time-calculator"),
   title: "GTA 6 Download Time Calculator",
   description:
-    "How long will the GTA 6 pre-load take? Enter your download speed and game size to estimate ideal and realistic download times, plus the free space to keep.",
+    "How long does the GTA 6 download take? Enter your download speed and game size to estimate ideal and realistic download times, plus the free space to keep.",
   alternates: { canonical: "/tools/download-time-calculator" },
 };
 
@@ -69,14 +69,14 @@ export default function DownloadTimeCalculatorPage() {
         {/* Page Header */}
         <div className="mb-8 max-w-2xl">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-black uppercase tracking-widest text-muted-foreground">
-            <Download className="h-3 w-3 text-gold-light" /> Launch Prep
+            <Download className="h-3 w-3 text-gold-light" /> Download
             Utility
           </div>
           <h1 className="font-display text-3xl font-black uppercase leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
             GTA 6 <span className="text-primary">DOWNLOAD TIME CALCULATOR</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            The GTA 6 pre-load file is up to 212 GB (Rockstar, November 3,
+            The GTA 6 download is up to 212 GB (Rockstar, November 3,
             2026). Enter your sustained download speed to see how long it
             takes — and how much free space to keep. The math is simple: the file size in megabits divided by your sustained speed. Use your real sustained speed, not the advertised maximum, for a realistic estimate — and keep extra free space beyond the 212 GB for updates.
           </p>
