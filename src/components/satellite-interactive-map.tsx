@@ -325,6 +325,25 @@ function publicMapPoi(poi: MapPOI): MapPOI {
   };
 }
 
+/** Evidence level of a pin, from its existing fields only.
+    - "in-game": the pin's source records verified launch gameplay or
+      Shahzaib's PS5 play. The public pipeline strips the generic CMS
+      verification flag (see publicMapPoi), so only a field-specific
+      in-game source counts — no pin carries one yet, so this is 0 today.
+    - "trailer": the pin's source is a Rockstar trailer frame.
+    - "community-guess": everything else — the default. Never invent
+      evidence: an unverified pin stays a community guess, and a private
+      planning pin carries no game evidence at all. */
+export type EvidenceLevel = "in-game" | "trailer" | "community-guess";
+export function evidenceLevel(poi: MapPOI): EvidenceLevel {
+  if (poi.personal) return "community-guess";
+  const source = `${poi.source || ""} ${poi.sourceUrl || ""}`;
+  if (poi.verified && /(in-?game|launch gameplay|ps5 play)/i.test(source))
+    return "in-game";
+  if (poi.verified && /trailer/i.test(source)) return "trailer";
+  return "community-guess";
+}
+
 const COMMUNITY_POIS: MapPOI[] = communityLandmarks
   .filter((item) => item.position)
   .map((item) => {
@@ -1506,12 +1525,14 @@ export function SatelliteInteractiveMap({
 
   // Filtered POIs
   const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const [seenInGameOnly, setSeenInGameOnly] = useState(false);
 
   const visiblePOIs = useMemo(() => {
     const filtered = allPOIs.filter((p) => {
       if (hideCollected && collectedPOIs[p.id]) return false;
       if (favoritesOnly && !favoriteLocations.includes(p.id)) return false;
       if (verifiedOnly && !p.sourceUrl?.startsWith("https://")) return false;
+      if (seenInGameOnly && evidenceLevel(p) !== "in-game") return false;
       if (namedOnly && !p.personal && p.title.startsWith("Unnamed "))
         return false;
       const isCategoryChecked =
@@ -1543,6 +1564,7 @@ export function SatelliteInteractiveMap({
     hideCollected,
     collectedPOIs,
     verifiedOnly,
+    seenInGameOnly,
     favoritesOnly,
     favoriteLocations,
     namedOnly,
@@ -1648,6 +1670,25 @@ export function SatelliteInteractiveMap({
     (verifiedTotal / Math.max(1, allPOIs.length)) * 100;
   const leonidaPctLabel =
     leonidaPct < 10 ? leonidaPct.toFixed(1) : String(Math.round(leonidaPct));
+  // Evidence totals over the public pins (private planning pins excluded —
+  // they carry no game evidence). Honest numbers: today every public pin
+  // is a community guess, because no pin carries a field-specific
+  // in-game or trailer source yet.
+  const evidenceCounts = useMemo(() => {
+    const counts: Record<EvidenceLevel, number> = {
+      "in-game": 0,
+      trailer: 0,
+      "community-guess": 0,
+    };
+    for (const poi of allPOIs) {
+      if (poi.personal) continue;
+      counts[evidenceLevel(poi)] += 1;
+    }
+    return counts;
+  }, [allPOIs]);
+  const selectedEvidenceLevel = selectedPOI
+    ? evidenceLevel(selectedPOI)
+    : null;
 
   return (
     <div
@@ -1816,6 +1857,7 @@ export function SatelliteInteractiveMap({
               setSearchQuery("");
               setNamedOnly(true);
               setVerifiedOnly(false);
+              setSeenInGameOnly(false);
               setFavoritesOnly(false);
               setHideCollected(false);
               setCheckedFilters(
@@ -1922,6 +1964,16 @@ export function SatelliteInteractiveMap({
           <p role="status" className="text-sm">
             {mapFeedback}
           </p>
+        )}
+        {seenInGameOnly && visiblePOIs.length === 0 && (
+          <div
+            role="status"
+            className="rounded-xl border border-[#FF2E9A]/30 bg-[#FF2E9A]/10 p-3 text-sm text-slate-200"
+          >
+            No pins confirmed seen in-game yet. This filter hides every
+            community guess — pins appear here as launch gameplay is
+            verified. Turn it off to see the community map again.
+          </div>
         )}
         {searchQuery.trim() && (
           <div className="rounded-xl border border-border p-3 space-y-2">
@@ -2366,6 +2418,13 @@ export function SatelliteInteractiveMap({
             </label>
             {/* Evidence filter: only pins with a trailer source */}
             <div className="mt-3 pt-3 border-t border-border">
+              <p className="mb-2 px-2.5 text-[11px] leading-relaxed text-muted-foreground">
+                {evidenceCounts["in-game"].toLocaleString("en-US")} seen
+                in-game · {evidenceCounts["trailer"].toLocaleString("en-US")}{" "}
+                in trailers ·{" "}
+                {evidenceCounts["community-guess"].toLocaleString("en-US")}{" "}
+                community guesses
+              </p>
               <button
                 type="button"
                 aria-pressed={favoritesOnly}
@@ -2401,6 +2460,37 @@ export function SatelliteInteractiveMap({
                     )}
                   >
                     {verifiedOnly && (
+                      <Check
+                        className="h-3 w-3 text-white"
+                        strokeWidth={3.5}
+                      />
+                    )}
+                  </span>
+                </span>
+              </button>
+              <button
+                type="button"
+                aria-pressed={seenInGameOnly}
+                onClick={() => setSeenInGameOnly((v) => !v)}
+                className="flex w-full min-h-[44px] cursor-pointer select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-xs font-semibold text-muted-foreground hover:bg-muted/40 hover:text-white transition-colors"
+              >
+                <span className="flex items-center gap-2 truncate">
+                  <Crosshair className="h-3.5 w-3.5 shrink-0 text-slate-200" />
+                  <span className="truncate">Seen in-game only</span>
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-muted-foreground">
+                    {evidenceCounts["in-game"]}
+                  </span>
+                  <span
+                    className={cn(
+                      "flex h-4 w-4 items-center justify-center rounded transition-all",
+                      seenInGameOnly
+                        ? "bg-[#FF2E9A] text-white shadow-xs"
+                        : "border border-border bg-black/40",
+                    )}
+                  >
+                    {seenInGameOnly && (
                       <Check
                         className="h-3 w-3 text-white"
                         strokeWidth={3.5}
@@ -2555,6 +2645,31 @@ export function SatelliteInteractiveMap({
                       ? ` · ${selectedPOI.subcategoryLabel}`
                       : ""}
                   </p>
+                  {selectedEvidenceLevel && (
+                    <span
+                      title={
+                        selectedEvidenceLevel === "in-game"
+                          ? "Confirmed in launch gameplay or Shahzaib's PS5 play."
+                          : selectedEvidenceLevel === "trailer"
+                            ? "Seen in a Rockstar trailer frame."
+                            : "Community guess — not yet confirmed in-game."
+                      }
+                      className={cn(
+                        "mt-1.5 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-bold",
+                        selectedEvidenceLevel === "in-game"
+                          ? "bg-emerald-500/20 text-emerald-300"
+                          : selectedEvidenceLevel === "trailer"
+                            ? "bg-violet-500/20 text-violet-300"
+                            : "bg-slate-700/60 text-slate-300",
+                      )}
+                    >
+                      {selectedEvidenceLevel === "in-game"
+                        ? "Seen in-game"
+                        : selectedEvidenceLevel === "trailer"
+                          ? "Seen in trailer"
+                          : "Community guess"}
+                    </span>
+                  )}
                 </div>
               </div>
               <button
