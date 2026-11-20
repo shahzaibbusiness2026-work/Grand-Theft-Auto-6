@@ -204,7 +204,7 @@ export default async function GuideDetailPage({
             <img
               src={guide.image}
               alt={guide.title}
-              className="h-full w-full object-contain"
+              className="h-full w-full object-cover"
             />
           </div>
         )}
