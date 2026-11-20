@@ -349,7 +349,11 @@ const COMMUNITY_POIS: MapPOI[] = communityLandmarks
       source: "GTADB community record",
       sourceUrl: item.reference,
     };
-  });
+  })
+  // No generic teardrop/checkpoint pins on the map: entries with no
+  // mappable location type fall back to the MapPin pictogram, which reads
+  // as a checkpoint pin. Only real location pictograms are shown.
+  .filter((poi) => poi.subcategory !== "poi");
 
 const personalToPoi = (marker: PersonalMarker): MapPOI => ({
   id: marker.id,
