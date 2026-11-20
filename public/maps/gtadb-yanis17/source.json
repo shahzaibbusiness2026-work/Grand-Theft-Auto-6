@@ -1,11 +1,11 @@
 {
   "sourceRepository": "https://github.com/rolux/gtadb.org",
-  "commit": "6acc1b555ed68255078b850f5d4a984610fa1910",
+  "commit": "d406fea099e1df2bce42fd6b87eed04bce646629",
   "license": "CC BY 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-  "map": "Yanis Community Map v17, via GTADB contributors",
+  "map": "Yanis Community Map v18, via GTADB contributors",
   "landmarks": 3401,
   "positioned": 3307,
-  "importedAt": "2026-11-02",
-  "changes": "Filtered fields, stable ID prefix, normalized coordinates, recompressed overview. Community estimates, not official geography."
+  "importedAt": "2026-11-20",
+  "changes": "Real v18 tiles z0-z5 (z4/z5 replace Lanczos-upscaled z3 copies); overview regenerated from v18 z2. Landmarks not refreshed in this run. Community estimates, not official geography."
 }
