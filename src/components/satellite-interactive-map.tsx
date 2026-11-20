@@ -25,6 +25,7 @@ import {
   MapPin,
   Egg,
   Building2,
+  Box,
   Check,
   Maximize2,
   Minimize2,
@@ -435,6 +436,21 @@ export function SatelliteInteractiveMap({
 }) {
   const CANVAS_W = 1400;
   const CANVAS_H = edition === "community" ? 1400 : 1050;
+
+  // Taish Tilt (3D view): a fixed 55° tilt of the map plane, pure CSS —
+  // no library, no new data, no invented buildings. Under the tilt the
+  // island's on-screen height compresses by cos(55°) ≈ 0.57; the fit,
+  // the pan math and the pin-separation gate all account for that.
+  const TILT_DEG = 55;
+  const TILT_RAD = (TILT_DEG * Math.PI) / 180;
+  const COS_TILT = Math.cos(TILT_RAD);
+  const SIN_TILT = Math.sin(TILT_RAD);
+  // Perspective distance. 1200px blew up: the canvas bottom edge swings
+  // ~1000px toward the viewer under the tilt, so at 1200px its
+  // perspective scale hit ~6.3× and the island overflowed the frame.
+  // At 3000px the near-edge scale is ~1.5× — a clear 3D feel with no
+  // explosion — and the fit below solves the projection exactly.
+  const PERSPECTIVE = 3000;
   const [checkedFilters, setCheckedFilters] = useState<Record<string, boolean>>(
     () => Object.fromEntries(CATEGORY_FILTERS.map((f) => [f.id, true])),
   );
@@ -692,6 +708,33 @@ export function SatelliteInteractiveMap({
     "satellite",
   );
   const [showGrid, setShowGrid] = useState(false);
+  // 3D view ("Taish Tilt") — session-only for v1 (no localStorage).
+  // is3DRef mirrors the state so centerMap / toggle3D can read the
+  // current mode without changing their identity (centerMap's identity
+  // feeds effects that must not re-run on a mode toggle).
+  const [is3D, setIs3D] = useState(false);
+  const is3DRef = useRef(false);
+  useEffect(() => {
+    is3DRef.current = is3D;
+  }, [is3D]);
+  // Point the tilt pivots on, in viewport px — the visible-rect centre,
+  // so the island (centred there by centerMap) stays put when tilting.
+  const [tiltOrigin, setTiltOrigin] = useState({ x: 0, y: 0 });
+  // True only while the 400ms tilt animation runs; the transition is
+  // removed afterwards so later origin updates never animate the view.
+  const [tiltAnimating, setTiltAnimating] = useState(false);
+  // Hide the toggle where preserve-3d is unsupported (old Safari/iOS).
+  const [supports3D, setSupports3D] = useState(false);
+  useEffect(() => {
+    try {
+      setSupports3D(
+        typeof CSS !== "undefined" &&
+          CSS.supports("transform-style", "preserve-3d"),
+      );
+    } catch {
+      setSupports3D(false);
+    }
+  }, []);
   const [isFullscreen, setIsFullscreen] = useState(initialFullscreen);
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false);
   const [rightDrawerOpen, setRightDrawerOpen] = useState(false);
@@ -838,9 +881,15 @@ export function SatelliteInteractiveMap({
   // load, land as large as the frame allows, with no icons clipped and
   // none hidden behind the filter panel — the remaining space is map
   // ocean. The legacy illustration keeps the old cover-fit (its pins
-  // span the whole illustration).
-  const centerMap = useCallback(() => {
+  // span the whole illustration). In 3D the island's on-screen height
+  // is compressed by cos(55°), so the contain uses the compressed
+  // height — the island fits larger in 3D and still shows whole.
+  // fit3D lets the 3D toggle pass the NEW mode explicitly (the ref still
+  // holds the old mode until the next render); callers without an
+  // argument read the ref.
+  const centerMap = useCallback((fit3D?: boolean) => {
     if (!viewportRef.current) return;
+    const in3D = fit3D ?? is3DRef.current;
     const { clientWidth, clientHeight } = viewportRef.current;
     if (edition === "community") {
       const rect = visibleMapRect();
@@ -857,18 +906,102 @@ export function SatelliteInteractiveMap({
       const cy =
         ((COMMUNITY_BOUNDS.minTop + COMMUNITY_BOUNDS.maxTop) / 2 / 100) *
         CANVAS_H;
-      // Contain the whole content box in the VISIBLE area (94% — a small
-      // margin so edge icons never clip), centered on the visible area,
-      // so the entire island is visible at any viewport size.
-      const initialZoom =
-        boxW > 0 && boxH > 0
-          ? Math.min(rect.width / boxW, rect.height / boxH) * 0.94
-          : 1;
-      setZoom(initialZoom);
-      setPan({
-        x: (rect.left + rect.right) / 2 - cx * initialZoom,
-        y: (rect.top + rect.bottom) / 2 - cy * initialZoom,
-      });
+      const ox = (rect.left + rect.right) / 2;
+      const oy = (rect.top + rect.bottom) / 2;
+      if (!in3D) {
+        // Contain the whole content box in the VISIBLE area (94% — a
+        // small margin so edge icons never clip), centered on the
+        // visible area, so the entire island is visible at any
+        // viewport size.
+        const initialZoom =
+          boxW > 0 && boxH > 0
+            ? Math.min(rect.width / boxW, rect.height / boxH) * 0.94
+            : 1;
+        setZoom(initialZoom);
+        setPan({
+          x: ox - cx * initialZoom,
+          y: oy - cy * initialZoom,
+        });
+      } else {
+        // 3D fit: the tilt + perspective project the box NON-linearly
+        // — the near (bottom) half is magnified and the projected
+        // centre shifts down — so the cos-only fit overflows the
+        // frame (at 1200px perspective it exploded ~6×). Solve by
+        // iterating on the EXACT projection: start from the analytic
+        // zoom, project the box corners, shrink the zoom until the
+        // projected box contains in the visible area, and nudge the
+        // pan so the projected box centres on the visible area. Five
+        // rounds converge the centre to ~1px (pure math, no DOM reads).
+        const project = (
+          px: number,
+          py: number,
+          z: number,
+          panX: number,
+          panY: number,
+        ) => {
+          const dx = panX + px * z - ox;
+          const dy = panY + py * z - oy;
+          const s = PERSPECTIVE / (PERSPECTIVE - dy * SIN_TILT);
+          return { x: ox + dx * s, y: oy + dy * COS_TILT * s };
+        };
+        const x0 = cx - boxW / 2;
+        const x1 = cx + boxW / 2;
+        const y0 = cy - boxH / 2;
+        const y1 = cy + boxH / 2;
+        const limitW = rect.width * 0.94;
+        const limitH = rect.height * 0.94;
+        const projectBox = (zz: number, px: number, py: number) => {
+          const corners = [
+            project(x0, y0, zz, px, py),
+            project(x1, y0, zz, px, py),
+            project(x0, y1, zz, px, py),
+            project(x1, y1, zz, px, py),
+          ];
+          return {
+            left: Math.min(...corners.map((c) => c.x)),
+            right: Math.max(...corners.map((c) => c.x)),
+            top: Math.min(...corners.map((c) => c.y)),
+            bottom: Math.max(...corners.map((c) => c.y)),
+          };
+        };
+        let z =
+          boxW > 0 && boxH > 0
+            ? Math.min(rect.width / boxW, rect.height / (boxH * COS_TILT)) *
+              0.94
+            : 1;
+        let panX = ox - cx * z;
+        let panY = oy - cy * z;
+        // Two phases. (1) Settle the zoom: shrink until the projected
+        // box contains in the visible area. (2) Centre the projected
+        // box with ACCUMULATING pan nudges — one nudge under-corrects,
+        // because under perspective the top edge moves slower than the
+        // pan (its projected movement is damped), so a single nudge
+        // leaves ~23px at 1919px. Each accumulated nudge shrinks the
+        // residual ~2.5×, so a few rounds land within ~1px. (Resetting
+        // the pan to the analytic centre each round — the first
+        // version — discarded the previous nudge and never converged.)
+        for (let i = 0; i < 8; i++) {
+          const b = projectBox(z, panX, panY);
+          const shrink = Math.min(
+            1,
+            limitW / (b.right - b.left),
+            limitH / (b.bottom - b.top),
+          );
+          if (shrink < 0.999) {
+            z *= shrink;
+            panX = ox - cx * z;
+            panY = oy - cy * z;
+            continue;
+          }
+          const dx = ox - (b.left + b.right) / 2;
+          const dy = oy - (b.top + b.bottom) / 2;
+          if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) break;
+          panX += dx;
+          panY += dy;
+        }
+        setZoom(z);
+        setPan({ x: panX, y: panY });
+      }
     } else {
       const initialZoom = Math.max(
         clientWidth / CANVAS_W,
@@ -882,25 +1015,56 @@ export function SatelliteInteractiveMap({
     }
     setActiveDistrict("all");
     hasInteractedRef.current = false;
-  }, [CANVAS_H, edition, visibleMapRect]);
+  }, [CANVAS_H, edition, visibleMapRect, COS_TILT, SIN_TILT, PERSPECTIVE]);
 
   const zoomAround = useCallback(
     (nextZoom: number, anchorX?: number, anchorY?: number) => {
       hasInteractedRef.current = true;
       const next = Math.min(12, Math.max(0.2, nextZoom));
       const rect = visibleMapRect();
-      const x =
-          anchorX ?? (rect ? (rect.left + rect.right) / 2 : viewportSize.width / 2),
-        y =
-          anchorY ?? (rect ? (rect.top + rect.bottom) / 2 : viewportSize.height / 2);
+      // In 3D the screen↔canvas mapping is only exact at the tilt pivot
+      // (the visible-area centre), so zoom anchors there and ignores the
+      // cursor/pinch midpoint. In 2D the anchor is the cursor (or the
+      // visible centre when none is given).
+      const centerX = rect
+        ? (rect.left + rect.right) / 2
+        : viewportSize.width / 2;
+      const centerY = rect
+        ? (rect.top + rect.bottom) / 2
+        : viewportSize.height / 2;
+      const x = is3D ? centerX : (anchorX ?? centerX);
+      const y = is3D ? centerY : (anchorY ?? centerY);
       setPan({
         x: x - ((x - pan.x) / zoom) * next,
         y: y - ((y - pan.y) / zoom) * next,
       });
       setZoom(next);
     },
-    [pan, zoom, viewportSize, visibleMapRect],
+    [pan, zoom, viewportSize, visibleMapRect, is3D],
   );
+
+  // 3D toggle ("Taish Tilt"): flip the map plane 0↔55° over ~400ms.
+  // The pivot is measured from the visible rect first, so the island
+  // (centred there) stays put. If the user has not moved the map yet,
+  // re-fit with the NEW mode's framing; otherwise tilt in place (same
+  // rule as the panel toggle). Reduced-motion snaps instead of animating.
+  const toggle3D = useCallback(() => {
+    const next = !is3DRef.current;
+    const rect = visibleMapRect();
+    if (rect)
+      setTiltOrigin({
+        x: (rect.left + rect.right) / 2,
+        y: (rect.top + rect.bottom) / 2,
+      });
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTiltAnimating(!reduceMotion);
+    setIs3D(next);
+    if (!reduceMotion)
+      window.setTimeout(() => setTiltAnimating(false), 420);
+    if (!hasInteractedRef.current) centerMap(next);
+  }, [visibleMapRect, centerMap]);
   useEffect(() => {
     const element = viewportRef.current;
     if (!element) return;
@@ -931,15 +1095,16 @@ export function SatelliteInteractiveMap({
         hasInteractedRef.current = true;
         const [x, y] = shifts[event.key];
         setPan((old) => ({ x: old.x + x, y: old.y + y }));
-      } else if (["+", "=", "-", "0"].includes(event.key)) {
+      } else if (["+", "=", "-", "0", "3"].includes(event.key)) {
         event.preventDefault();
         if (event.key === "0") centerMap();
+        else if (event.key === "3") toggle3D();
         else zoomAround(zoom * (event.key === "-" ? 0.8 : 1.25));
       }
     };
     window.addEventListener("keydown", keydown);
     return () => window.removeEventListener("keydown", keydown);
-  }, [zoom, zoomAround, centerMap]);
+  }, [zoom, zoomAround, centerMap, toggle3D]);
 
   // Pan/zoom to raw canvas coordinates without selecting a POI drawer —
   // used by deep links that carry &top=&left= for entities with no marker.
@@ -1206,9 +1371,13 @@ export function SatelliteInteractiveMap({
     if (isDragging) {
       const dx = e.clientX - dragStartRef.current.x;
       const dy = e.clientY - dragStartRef.current.y;
+      // In 3D the ground plane is compressed vertically by cos(55°),
+      // so a screen drag covers more canvas vertically — divide dy out
+      // so dragging still feels 1:1 with the cursor. Horizontal is
+      // unaffected by the tilt.
       queuePan({
         x: dragStartRef.current.panX + dx,
-        y: dragStartRef.current.panY + dy,
+        y: dragStartRef.current.panY + (is3D ? dy / COS_TILT : dy),
       });
     }
   };
@@ -1250,7 +1419,7 @@ export function SatelliteInteractiveMap({
       const dy = e.touches[0].clientY - dragStartRef.current.y;
       queuePan({
         x: dragStartRef.current.panX + dx,
-        y: dragStartRef.current.panY + dy,
+        y: dragStartRef.current.panY + (is3D ? dy / COS_TILT : dy),
       });
     } else if (e.touches.length === 2) {
       const dist = Math.hypot(
@@ -1435,10 +1604,14 @@ export function SatelliteInteractiveMap({
       const exempt = item.id === selectedPOI?.id || item.personal;
       if (
         !exempt &&
-        acceptedXY.some(
-          (p) =>
-            Math.max(Math.abs(p.x - sx), Math.abs(p.y - sy)) < minSep,
-        )
+        acceptedXY.some((p) => {
+          // In 3D the tilt compresses on-screen vertical gaps by
+          // cos(55°) — a pair that clears the gate in canvas space can
+          // still touch on screen. Compare the COMPRESSED vertical gap,
+          // so the gate guarantees minSep on screen in both modes.
+          const dy = Math.abs(p.y - sy) * (is3D ? COS_TILT : 1);
+          return Math.max(Math.abs(p.x - sx), dy) < minSep;
+        })
       )
         continue;
       accepted.push(item);
@@ -1461,6 +1634,8 @@ export function SatelliteInteractiveMap({
     CANVAS_H,
     selectedPOI?.id,
     iconPx,
+    is3D,
+    COS_TILT,
   ]);
 
   const verifiedTotal = allPOIs.filter((poi) => collectedPOIs[poi.id]).length;
@@ -2585,6 +2760,14 @@ export function SatelliteInteractiveMap({
             <span className="text-xs font-mono text-white font-bold">
               ZOOM: {Math.round(zoom * 100)}%
             </span>
+            {is3D && (
+              <>
+                <span className="h-3 w-px bg-muted/60" />
+                <span className="text-xs font-mono font-bold text-[#FF2E9A]">
+                  3D
+                </span>
+              </>
+            )}
           </div>
         </div>
 
@@ -2593,8 +2776,17 @@ export function SatelliteInteractiveMap({
           ref={viewportRef}
           tabIndex={0}
           role="region"
-          aria-label="Map canvas. Arrow keys pan, plus and minus zoom, zero resets. Focus the map or hold Control to zoom with the mouse wheel."
-          style={{ touchAction: "none", scrollMarginTop: "80px" }}
+          aria-label="Map canvas. Arrow keys pan, plus and minus zoom, zero resets, 3 toggles the 3D view. Focus the map or hold Control to zoom with the mouse wheel."
+          style={{
+            touchAction: "none",
+            scrollMarginTop: "80px",
+            // Taish Tilt: the perspective lives on the viewport so the
+            // tilt wrapper below leans the map plane back around the
+            // visible-rect centre. No perspective in 2D — the map is
+            // exactly today's map.
+            perspective: is3D ? `${PERSPECTIVE}px` : "none",
+            perspectiveOrigin: `${tiltOrigin.x}px ${tiltOrigin.y}px`,
+          }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -2611,16 +2803,34 @@ export function SatelliteInteractiveMap({
             isDragging ? "cursor-grabbing" : "cursor-grab",
           )}
         >
-          {/* Scaled / Panned Coordinate Container */}
+          {/* Taish Tilt wrapper — the 3D tilt lives HERE, not on the
+              canvas: drags write the canvas transform directly every
+              frame (queuePan), so a tilt on the canvas would fight
+              every drag. The wrapper is viewport-sized, pivots on the
+              visible-rect centre, and carries preserve-3d so the pins
+              inside the canvas can counter-rotate upright. The LCP
+              preview and filter panel sit OUTSIDE this wrapper (siblings
+              of the viewport), so they never tilt. */}
           <div
-            ref={canvasRef}
-            className="absolute origin-top-left will-change-transform"
+            className="absolute inset-0"
             style={{
-              width: `${CANVAS_W}px`,
-              height: `${CANVAS_H}px`,
-              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+              transform: is3D ? `rotateX(${TILT_DEG}deg)` : "rotateX(0deg)",
+              transformOrigin: `${tiltOrigin.x}px ${tiltOrigin.y}px`,
+              transformStyle: "preserve-3d",
+              transition: tiltAnimating ? "transform 400ms ease" : "none",
             }}
           >
+            {/* Scaled / Panned Coordinate Container */}
+            <div
+              ref={canvasRef}
+              className="absolute origin-top-left will-change-transform"
+              style={{
+                width: `${CANVAS_W}px`,
+                height: `${CANVAS_H}px`,
+                transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+                transformStyle: "preserve-3d",
+              }}
+            >
             {/* The Real Satellite Map Image */}
             {edition === "community" ? (
               <CommunityMapTiles
@@ -2680,7 +2890,9 @@ export function SatelliteInteractiveMap({
                     style={{
                       top: `${cluster.top}%`,
                       left: `${cluster.left}%`,
-                      transform: `translate(-50%, -50%) scale(${1 / zoom})`,
+                      // In 3D the badge counter-rotates so it stays
+                      // upright while its position follows the tilted plane.
+                      transform: `translate(-50%, -50%) scale(${1 / zoom})${is3D ? ` rotateX(${-TILT_DEG}deg)` : ""}`,
                     }}
                     onMouseDown={(event) => event.stopPropagation()}
                     onTouchStart={(event) => event.stopPropagation()}
@@ -2728,7 +2940,11 @@ export function SatelliteInteractiveMap({
                   style={{
                     top: m.top,
                     left: m.left,
-                    transform: `translate(-50%, -50%) scale(${1 / zoom})`,
+                    // In 3D the icon counter-rotates so it stays upright
+                    // while its position follows the tilted plane. The
+                    // tooltip lives inside the button, so it stays
+                    // upright too.
+                    transform: `translate(-50%, -50%) scale(${1 / zoom})${is3D ? ` rotateX(${-TILT_DEG}deg)` : ""}`,
                   }}
                   aria-label={m.title}
                 >
@@ -2770,6 +2986,7 @@ export function SatelliteInteractiveMap({
               );
             })}
           </div>
+          </div>
         </div>
 
         {!!clusterMembers.length && (
@@ -2809,6 +3026,24 @@ export function SatelliteInteractiveMap({
         )}
         {/* ==================== 5. BOTTOM RIGHT ZOOM & HUD CONTROLS ==================== */}
         <div className="absolute right-4 bottom-4 z-20 flex flex-col gap-2">
+          {/* 3D View Toggle ("Taish Tilt") — hidden where preserve-3d
+              is unsupported. Same 44×44 styling as the grid toggle. */}
+          {supports3D && (
+            <button
+              onClick={toggle3D}
+              aria-pressed={is3D}
+              className={cn(
+                "flex h-11 w-11 items-center justify-center rounded-xl border  shadow-2xl transition-all",
+                is3D
+                  ? "border-[#FF2E9A] bg-[#FF2E9A]/20 text-[#FF2E9A]"
+                  : "border-border bg-black/80 text-white hover:bg-muted/60",
+              )}
+              title={is3D ? "2D view" : "3D view"}
+            >
+              <Box className="h-4 w-4" />
+            </button>
+          )}
+
           {/* Tactical Grid Toggle */}
           <button
             onClick={() => setShowGrid((v) => !v)}
@@ -2840,7 +3075,7 @@ export function SatelliteInteractiveMap({
               <Minus className="h-4 w-4" />
             </button>
             <button
-              onClick={centerMap}
+              onClick={() => centerMap()}
               className="flex h-11 w-11 items-center justify-center rounded-lg text-white hover:bg-muted/60 transition-colors"
               title="Reset Center"
             >
