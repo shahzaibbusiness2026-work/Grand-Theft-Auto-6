@@ -738,6 +738,19 @@ export function SatelliteInteractiveMap({
   // below only runs while this is false, so it never yanks the map out
   // from under the user. centerMap / reset clears it.
   const hasInteractedRef = useRef(false);
+  // Static-preview fade: the LCP preview (cover-fit poster) is painted by
+  // the server HTML, but once hydrated the interactive canvas owns the
+  // view — and the canvas never covers the whole frame (it is centred on
+  // the island), so the preview's west coast / Keys peek out west of the
+  // canvas edge as a ghost image at a different scale/position from the
+  // canvas. Fade it out shortly after mount; by then the in-canvas
+  // overview (same URL, cached) is painted and the viewport's ocean
+  // background covers the rest.
+  const [previewVisible, setPreviewVisible] = useState(true);
+  useEffect(() => {
+    const t = window.setTimeout(() => setPreviewVisible(false), 600);
+    return () => window.clearTimeout(t);
+  }, []);
   const closeFilters = () => {
     setLeftSidebarOpen(false);
     filtersButtonRef.current?.focus();
@@ -1875,10 +1888,13 @@ export function SatelliteInteractiveMap({
       >
         {/* Static preview — paints immediately on first load (server HTML) so
             the map image is the LCP element before the interactive map's JS
-            mounts. The interactive canvas renders on top once hydrated; this
-            preview is then covered (it stays in the DOM, hidden underneath).
-            object-cover matches the interactive map's cover-fit first view.
-            Community edition only — legacy uses a different base image. */}
+            mounts. The interactive canvas renders on top once hydrated; the
+            preview then fades out (see previewVisible) — it must not stay
+            visible, because the canvas never covers the whole frame and the
+            preview's west coast / Keys would peek out west of the canvas
+            edge as a ghost image. object-cover matches the interactive
+            map's cover-fit first view. Community edition only — legacy
+            uses a different base image. */}
         {edition === "community" && (
           <img
             src="/maps/gtadb-yanis17/overview.webp"
@@ -1888,7 +1904,10 @@ export function SatelliteInteractiveMap({
             fetchPriority="high"
             decoding="sync"
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover"
+            className={cn(
+              "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
+              previewVisible ? "opacity-100" : "opacity-0",
+            )}
           />
         )}
         {/* ==================== 1. FLOATING LEFT FILTER DRAWER ==================== */}
@@ -2584,7 +2603,11 @@ export function SatelliteInteractiveMap({
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           className={cn(
-            "relative h-full w-full overflow-hidden select-none",
+            // Ocean background: the canvas never covers the whole frame
+            // (it is centred on the island), so any uncovered strip reads
+            // as ocean, not the frame's near-black. Matches the tile
+            // ocean / margin-mask colour.
+            "relative h-full w-full overflow-hidden select-none bg-[#2C66A5]",
             isDragging ? "cursor-grabbing" : "cursor-grab",
           )}
         >

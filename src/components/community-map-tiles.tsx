@@ -101,26 +101,52 @@ export function CommunityMapTiles({
         />
       )}
       {tiles}
-      {/* Legend-panel mask (YANIS base only): the poster's legend /
-          credits / trailer-thumbnail side panel is baked into the tiles
-          on the right ~38% of the canvas. It is not map content, and no
-          pin sits there (max pin left is ~60%), so it is covered with the
-          surrounding ocean colour. Positioned in canvas coordinates so it
-          pans/zooms with the map, and inside the filtered container so
-          the Streets / tactical / radar filters apply to it too. The
-          official base has no such panel, so it is skipped there. */}
+      {/* Poster-margin masks (YANIS base only): the YANIS poster's map
+          image occupies only the central square (12.5%–81.25% on both
+          axes); everything outside it is flat pale poster background
+          (#6396AC). The tile grid never covers those margins (tiles start
+          at canvas 175px), so without a mask the overview shows a pale
+          blue-grey band west of the island and pale strips top/bottom —
+          it reads as a rendering bug, not ocean. The legend / credits /
+          trailer-thumbnail side panel is likewise baked into the tiles
+          on the right ~38% of the canvas. All four margins are covered
+          with the surrounding ocean colour (#2C66A5), in canvas
+          coordinates so they pan/zoom with the map, and inside the
+          filtered container so the Streets / tactical / radar filters
+          apply to them too. No land or pin sits in any masked area
+          (land spans ~21–60% left, ~20–76% top), and the mask colour
+          matches the tile ocean, so the seams are invisible. The
+          official base has no such panel or margins, so all masks are
+          skipped there. */}
       {base !== "official" && (
-        <div
-          aria-hidden="true"
-          className="absolute pointer-events-none"
-          style={{
-            left: "61%",
-            top: "16%",
-            width: "39%",
-            height: "69%",
-            background: "#2C66A5",
-          }}
-        />
+        <>
+          <div
+            aria-hidden="true"
+            className="absolute pointer-events-none"
+            style={{ left: 0, top: 0, width: "12.5%", height: "100%", background: "#2C66A5" }}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute pointer-events-none"
+            style={{ left: 0, top: 0, width: "100%", height: "12.5%", background: "#2C66A5" }}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute pointer-events-none"
+            style={{ left: 0, top: "81.25%", width: "100%", height: "18.75%", background: "#2C66A5" }}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute pointer-events-none"
+            style={{
+              left: "61%",
+              top: 0,
+              width: "39%",
+              height: "100%",
+              background: "#2C66A5",
+            }}
+          />
+        </>
       )}
     </div>
   );
