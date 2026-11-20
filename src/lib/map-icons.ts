@@ -235,4 +235,11 @@ export const DEFAULT_HIDDEN_SUBCATEGORIES: string[] = [
   "industrial",
   "public",
   "utilities",
+  // Noisy generic kinds that drown the first load (nature spots,
+  // government buildings, bus stops, generic leisure). The user can
+  // turn any of them back on in the filter sidebar.
+  "natural",
+  "government",
+  "bus",
+  "leisure",
 ];

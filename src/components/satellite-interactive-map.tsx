@@ -2409,7 +2409,7 @@ export function SatelliteInteractiveMap({
               // Pictogram size grows gently with zoom so the icon stays
               // readable up close without ballooning at deep zoom.
               const iconPx = Math.round(
-                Math.min(30, Math.max(20, 14 + zoom * 2.5)),
+                Math.min(32, Math.max(22, 16 + zoom * 2.5)),
               );
 
               return (
@@ -2445,12 +2445,12 @@ export function SatelliteInteractiveMap({
                     )}
                     style={{
                       filter:
-                        "drop-shadow(0 0 3px rgba(0,0,0,0.95)) drop-shadow(0 1px 2px rgba(0,0,0,0.9))",
+                        "drop-shadow(0 0 4px rgba(0,0,0,1)) drop-shadow(0 1px 3px rgba(0,0,0,0.95))",
                     }}
                   >
                     <Icon
                       style={{ width: iconPx, height: iconPx }}
-                      strokeWidth={2.2}
+                      strokeWidth={2.5}
                     />
                   </span>
 

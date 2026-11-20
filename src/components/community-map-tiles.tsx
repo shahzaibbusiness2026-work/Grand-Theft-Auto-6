@@ -101,6 +101,27 @@ export function CommunityMapTiles({
         />
       )}
       {tiles}
+      {/* Legend-panel mask (YANIS base only): the poster's legend /
+          credits / trailer-thumbnail side panel is baked into the tiles
+          on the right ~38% of the canvas. It is not map content, and no
+          pin sits there (max pin left is ~60%), so it is covered with the
+          surrounding ocean colour. Positioned in canvas coordinates so it
+          pans/zooms with the map, and inside the filtered container so
+          the Streets / tactical / radar filters apply to it too. The
+          official base has no such panel, so it is skipped there. */}
+      {base !== "official" && (
+        <div
+          aria-hidden="true"
+          className="absolute pointer-events-none"
+          style={{
+            left: "61%",
+            top: "16%",
+            width: "39%",
+            height: "69%",
+            background: "#2C66A5",
+          }}
+        />
+      )}
     </div>
   );
 }
