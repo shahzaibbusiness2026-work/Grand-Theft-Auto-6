@@ -3,8 +3,10 @@ import { ArrowRight, Car, Crosshair, Users, Wrench } from "lucide-react";
 import { SafeImage } from "@/components/safe-image";
 import { YouTubeLite } from "@/components/youtube-lite";
 import { NewsletterForm } from "@/components/newsletter-form";
+import { DeferredHome } from "@/components/deferred-home";
 import { HOME_TRAILERS } from "@/lib/home-content";
 import type { Article, Character } from "@/lib/data";
+import type { AdminMapMarker } from "@/lib/admin-store";
 import { toIsoDate } from "@/lib/utils";
 
 const QUICK = [
@@ -46,10 +48,12 @@ export function MobileHomepage({
   articles,
   characters,
   sections,
+  markers = [],
 }: {
   articles: Pick<Article, "slug" | "title" | "img" | "date" | "category" | "excerpt">[];
   characters: Character[];
   sections: string[];
+  markers?: AdminMapMarker[];
 }) {
   const show = (section: string) => sections.includes(section);
   const ranks = ["jason", "lucia", "cal", "brian-heder"];
@@ -152,6 +156,17 @@ export function MobileHomepage({
               </figure>
             ))}
           </div>
+        </section>
+      )}
+      {show("map") && (
+        <section aria-labelledby="mobile-map-heading">
+          <Heading
+            id="mobile-map-heading"
+            title="Interactive World Map"
+            href="/map"
+            label="Open full map"
+          />
+          <DeferredHome kind="map" markers={markers} />
         </section>
       )}
       {show("characters") && cast.length > 0 && (

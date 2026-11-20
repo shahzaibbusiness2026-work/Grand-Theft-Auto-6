@@ -187,6 +187,7 @@ export default async function HomePage() {
         }))}
         characters={allCharacters}
         sections={sectionToggles}
+        markers={mapMarkers}
       />
       <div className="hidden sm:block" data-desktop-home>
         {/* QUICK STATS ATLAS STRIP */}

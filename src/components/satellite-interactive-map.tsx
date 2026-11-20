@@ -362,6 +362,29 @@ const COMMUNITY_POIS: MapPOI[] = communityLandmarks
   // as a checkpoint pin. Only real location pictograms are shown.
   .filter((poi) => poi.subcategory !== "poi");
 
+// Bounding box of the bundled community pins, in canvas percent. The
+// landmass occupies only the left ~40% of the square canvas (left
+// ~20–60%, top ~23–74%), so cover-fitting the whole canvas leaves the
+// first load mostly empty ocean. The default framing fits this box
+// instead. Computed once from the static dataset — it never changes at
+// runtime, so centering never re-runs when live markers arrive.
+const COMMUNITY_BOUNDS = (() => {
+  let minLeft = 100;
+  let maxLeft = 0;
+  let minTop = 100;
+  let maxTop = 0;
+  for (const poi of COMMUNITY_POIS) {
+    const left = parseFloat(poi.left);
+    const top = parseFloat(poi.top);
+    if (!Number.isFinite(left) || !Number.isFinite(top)) continue;
+    if (left < minLeft) minLeft = left;
+    if (left > maxLeft) maxLeft = left;
+    if (top < minTop) minTop = top;
+    if (top > maxTop) maxTop = top;
+  }
+  return { minLeft, maxLeft, minTop, maxTop };
+})();
+
 const personalToPoi = (marker: PersonalMarker): MapPOI => ({
   id: marker.id,
   title: marker.title,
@@ -739,22 +762,66 @@ export function SatelliteInteractiveMap({
     [],
   );
 
-  // Center the map in the container initially. Cover-fit (not contain):
-  // the square canvas fills the whole frame like gtamap.io, instead of
-  // sitting narrow and centred with black bars left and right. The
-  // north/south edges crop out on wide screens — pan or zoom out to see
-  // them.
+  // Default framing (first load + reset): fit the CONTENT box, not the
+  // whole square canvas. The landmass occupies only the left ~40% of the
+  // canvas, so cover-fitting the canvas leaves the first load mostly
+  // empty ocean with only ~44 of 193 pins visible. Fitting the content
+  // width to the frame makes the first load full and useful — the dense
+  // middle band (Vice City) fills the frame and far more pins are
+  // visible. North/south edges crop on wide screens, as before — pan or
+  // zoom out to see them. The legacy illustration keeps the old
+  // cover-fit (its pins span the whole illustration).
   const centerMap = useCallback(() => {
+    if (!viewportRef.current) return;
+    const { clientWidth, clientHeight } = viewportRef.current;
+    if (edition === "community") {
+      const boxW =
+        ((COMMUNITY_BOUNDS.maxLeft - COMMUNITY_BOUNDS.minLeft) / 100) *
+        CANVAS_W;
+      const cx =
+        ((COMMUNITY_BOUNDS.minLeft + COMMUNITY_BOUNDS.maxLeft) / 2 / 100) *
+        CANVAS_W;
+      const cy =
+        ((COMMUNITY_BOUNDS.minTop + COMMUNITY_BOUNDS.maxTop) / 2 / 100) *
+        CANVAS_H;
+      // Fit the content width to the frame (94% — a small margin), so the
+      // landmass spans the frame instead of sitting in its left half.
+      const initialZoom = boxW > 0 ? (clientWidth / boxW) * 0.94 : 1;
+      setZoom(initialZoom);
+      setPan({
+        x: clientWidth / 2 - cx * initialZoom,
+        y: clientHeight / 2 - cy * initialZoom,
+      });
+    } else {
+      const initialZoom = Math.max(
+        clientWidth / CANVAS_W,
+        clientHeight / CANVAS_H,
+      );
+      setZoom(initialZoom);
+      setPan({
+        x: (clientWidth - CANVAS_W * initialZoom) / 2,
+        y: (clientHeight - CANVAS_H * initialZoom) / 2,
+      });
+    }
+    setActiveDistrict("all");
+  }, [CANVAS_H, edition]);
+
+  // Whole-state overview (FULL LEONIDA button): the old cover-fit of the
+  // full square canvas, so the button truly shows the whole state —
+  // sparse but complete. First load uses the tighter content framing
+  // above instead.
+  const overviewMap = useCallback(() => {
     if (!viewportRef.current) return;
     const { clientWidth, clientHeight } = viewportRef.current;
     const initialZoom = Math.max(
       clientWidth / CANVAS_W,
       clientHeight / CANVAS_H,
     );
-    const initialPanX = (clientWidth - CANVAS_W * initialZoom) / 2;
-    const initialPanY = (clientHeight - CANVAS_H * initialZoom) / 2;
     setZoom(initialZoom);
-    setPan({ x: initialPanX, y: initialPanY });
+    setPan({
+      x: (clientWidth - CANVAS_W * initialZoom) / 2,
+      y: (clientHeight - CANVAS_H * initialZoom) / 2,
+    });
     setActiveDistrict("all");
   }, [CANVAS_H]);
 
@@ -997,7 +1064,7 @@ export function SatelliteInteractiveMap({
       return;
     }
     if (districtId === "all") {
-      centerMap();
+      overviewMap();
       return;
     }
     const targetZoom = edition === "community" ? 1.8 : d.zoom;
@@ -1242,7 +1309,12 @@ export function SatelliteInteractiveMap({
       );
     });
     // Minimum on-screen gap between two pins: the icon size plus a small
-    // margin, so icons never touch or stack at any zoom.
+    // margin, so icons never touch or stack at any zoom. Measured with
+    // Chebyshev distance (the larger of |dx|, |dy|), NOT Euclidean:
+    // icons are square, so two pins ~42px apart diagonally pass a
+    // Euclidean check yet their square boxes overlap at the corners —
+    // exactly the Downtown touching seen live at 180% zoom. Chebyshev
+    // separation >= icon size guarantees the icon squares never touch.
     const minSep = iconPx + 6;
     const rank = (p: MapPOI) =>
       p.id === selectedPOI?.id
@@ -1265,7 +1337,10 @@ export function SatelliteInteractiveMap({
       const exempt = item.id === selectedPOI?.id || item.personal;
       if (
         !exempt &&
-        acceptedXY.some((p) => Math.hypot(p.x - sx, p.y - sy) < minSep)
+        acceptedXY.some(
+          (p) =>
+            Math.max(Math.abs(p.x - sx), Math.abs(p.y - sy)) < minSep,
+        )
       )
         continue;
       accepted.push(item);
@@ -2393,10 +2468,14 @@ export function SatelliteInteractiveMap({
           "pointer-events-none absolute left-0 right-0 top-3 z-20 flex justify-center px-4",
           leftSidebarOpen && "lg:left-[300px]",
         )}>
-          <div className="pointer-events-auto flex items-center gap-2 rounded-2xl border border-border bg-black/80 px-3.5 py-1.5 shadow-2xl backdrop-blur-md">
-            <span className="flex h-2 w-2 rounded-full bg-[#FF2E9A] " />
+          <div className="pointer-events-auto flex max-w-full items-center gap-2 whitespace-nowrap rounded-2xl border border-border bg-black/80 px-3.5 py-1.5 shadow-2xl backdrop-blur-md">
+            <span className="flex h-2 w-2 shrink-0 rounded-full bg-[#FF2E9A] " />
             <span className="text-xs font-mono text-muted-foreground font-bold">
-              Fan map · coordinates unverified
+              Fan map
+              <span className="hidden min-[420px]:inline">
+                {" "}
+                · coordinates unverified
+              </span>
             </span>
             <span className="h-3 w-px bg-muted/60" />
             <span className="text-xs font-mono text-white font-bold">

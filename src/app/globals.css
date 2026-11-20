@@ -1230,6 +1230,12 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
 .light .player-panel .player-button, .light .player-button.player-button {
   color: #334155 !important; background: #f1f5f9 !important; border-color: #94a3b8 !important;
 }
+/* Light theme: the pressed (active) map-layer button must stay brand
+   pink. The generic .light .player-button override above would
+   otherwise wash it out to grey, leaving no visible active state. */
+.light .map-layer-toggle .player-button[aria-pressed="true"] {
+  color: #fff !important; background: #FF2E9A !important; border-color: #FF2E9A !important;
+}
 .light .player-panel .player-button-primary, .light .player-button-primary.player-button-primary {
   color: #fff !important; background: #be185d !important; border-color: #be185d !important;
 }

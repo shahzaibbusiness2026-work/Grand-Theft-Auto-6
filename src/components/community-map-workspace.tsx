@@ -59,7 +59,7 @@ export function CommunityMapWorkspace({
           </option>
         </select>
       </label>
-      <div className="hidden sm:flex flex-wrap items-center gap-3 text-sm">
+      <div className="map-layer-toggle hidden sm:flex flex-wrap items-center gap-3 text-sm">
         <span className="font-bold">Map layer</span>
         <button
           className={`player-button ${edition === "community" ? "border-[#FF2E9A] bg-[#FF2E9A] text-white hover:bg-[#FF2E9A]" : ""}`}

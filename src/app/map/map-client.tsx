@@ -34,17 +34,23 @@ export function MapClient({ markers = [] }: { markers?: AdminMapMarker[] }) {
         <div className="hidden sm:flex flex-wrap gap-x-5 gap-y-2 text-sm">
           <span>
             <strong>{positioned.length.toLocaleString("en-US")}</strong>{" "}
-            positioned community records
+            community records with positions
           </span>
           <span>
             <strong>{named.length.toLocaleString("en-US")}</strong> named
-            records
+            places
           </span>
           <span>
             <strong>{current.length - positioned.length}</strong> records
-            without coordinates
+            still need coordinates
           </span>
         </div>
+        <p className="hidden sm:block max-w-3xl text-xs text-muted-foreground">
+          Those are the full community dataset totals — the map itself shows
+          the named places first. Everyday categories such as bus stops,
+          housing and generic shops stay hidden until you switch them on in
+          Filters.
+        </p>
       </header>
       <section
         className="container-site pb-8"
