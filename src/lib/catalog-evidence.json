@@ -478,5 +478,255 @@
     "locator": "TheBurntPeanut 'Peanut's First Look At Vice City | GTA 6', 56:58 — HUD card 'PFISTER / GROWLER' with 'Growler' script on the door, Lucia driving to 'Artist's Garden'; 'Growler' badging also visible 39:02, 52:02 and 55:02 (Joey's mod shop)",
     "reviewedAt": "2026-11-19",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "comet-s2",
+    "field": "GTA VI appearance",
+    "value": "Pfister Comet S2",
+    "source": "https://gameempress.com/gta-6-first-hours-impressions/",
+    "locator": "GameEmpress PS5 launch-night hands-on: the WAiNK app names a 'Pfister Comet S2' and the author drove a stolen Comet S2; launch-gameplay video shows the green convertible in a driveway.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gauntlet-hellfire",
+    "field": "GTA VI appearance",
+    "value": "Bravado Gauntlet Hellfire",
+    "source": "https://www.pushsquare.com/guides/gta-6-randys-wish-list-vehicle-locations",
+    "locator": "Push Square Randy's Wish List guide (in-game feature): Gauntlet Hellfire pictured parked at the back of the M7 junkyard east of Boone Speedway, Hamlet. Radio Times lists the same Wish List entry.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maverick",
+    "field": "GTA VI appearance",
+    "value": "Buckingham Maverick",
+    "source": "https://www.instagram.com/reel/Df5-m1QIR7D/",
+    "locator": "Launch-gameplay reel: on-screen text identifies the yellow/black/white helicopter as 'BUCKINGHAM MAVERICK' on the Southwind dock; launch guides place it at the Marque Hoppers gate, Southwind.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-speedo",
+    "field": "GTA VI appearance",
+    "value": "Vapid Speedo",
+    "source": "https://www.youtube.com/watch?v=7qEY29Yn9Sc",
+    "locator": "Launch-gameplay video, 1:38:33: vehicle panel by the minimap reads VAPID / SPEEDO over a white 'PORT VICE CITY' panel van.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "invetero-coquette-d10",
+    "field": "GTA VI appearance",
+    "value": "Invetero Coquette D10",
+    "source": "https://www.youtube.com/watch?v=IuHt5BkE7TA",
+    "locator": "Launch-gameplay video, ~19:45: green mid-engine C8-style car, rear lettering reads COQUETTE; the video chapter names it 'Corvette C8 (Invetero Coquette D10)' and LeonidaRacing lists it as read in-game on PS5. The frame alone does not distinguish the D10 from the base Coquette.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dundreary-landstalker-xl",
+    "field": "GTA VI appearance",
+    "value": "Dundreary Landstalker XL",
+    "source": "https://www.instagram.com/reel/Df8X5pjBt3P/",
+    "locator": "Launch-gameplay reel, ~0:12: HUD card reads DUNDREARY / LANDSTALKER XL beside a dark gray SUV.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "annis-hellion",
+    "field": "GTA VI appearance",
+    "value": "Annis Hellion",
+    "source": "https://www.powerpyx.com/gta-6-steal-vehicles-for-moses-walkthrough/",
+    "locator": "PowerPyx Moses walkthrough: objective 3, 'Annis Hellion parked at one of the houses on Orchard Avenue', $1,400, Port Gellhorn driveway; launch gameplay shows the map UI with the same objective.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-vamos",
+    "field": "GTA VI appearance",
+    "value": "Declasse Vamos",
+    "source": "https://www.powerpyx.com/gta-6-steal-vehicles-for-moses-walkthrough/",
+    "locator": "PowerPyx Moses walkthrough: objective 5, 'souped up Declasse Vamos in Grayson', $4,200, shed keypad code 2727.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-carbonizzare",
+    "field": "GTA VI appearance",
+    "value": "Grotti Carbonizzare",
+    "source": "https://www.sportskeeda.com/esports/7-best-early-game-cars-gta-6-get",
+    "locator": "Sportskeeda (19 Nov): #1 early-game car, 'often spotted cruising the streets of Vice City'; a dedicated launch-gameplay showcase video drives the Carbonizzare. No HUD-name frame was personally viewed.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "imponte-ruiner",
+    "field": "GTA VI appearance",
+    "value": "Imponte Ruiner",
+    "source": "https://www.facebook.com/reel/2045317262799822/",
+    "locator": "Launch-day gameplay reels (19-20 Nov): the silver flame-decal supercharged Ruiner is stolen in Key Lento and registered at the Port Gellhorn garage menu. One reel calls it the '82 Ruiner, so the exact in-game variant name is still unclear.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "schyster-pmp-700",
+    "field": "GTA VI appearance",
+    "value": "Schyster PMP 700",
+    "source": "https://www.youtube.com/watch?v=AgWNK1Uy6-M",
+    "locator": "Dedicated launch-day YouTube showcase driving the PMP 700 in GTA 6; a launch reel shows a red sedan labelled 'Schyster PMP 700' in the Coastal Auto Care garage Bodywork menu.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier",
+    "field": "GTA VI appearance",
+    "value": "Vapid Stanier",
+    "source": "https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions",
+    "locator": "Rockstar Support: the Vintage Vice City Pack includes the ''55 Vapid Stanier Sedan and Garage'; Dexerto's launch guide says collect it at the Ocean View Hotel in Chapter 3.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-rancher",
+    "field": "GTA VI appearance",
+    "value": "Declasse Rancher",
+    "source": "https://www.youtube.com/watch?v=Mhd9VvZxVu0",
+    "locator": "Launch-gameplay video, 0:36: WAiNK phone panel reads 'DECLASSE / '86 RANCHER' beside a white pickup (Access Locked, Security Alarmed, Tracker None). Frame personally viewed.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-sultan",
+    "field": "GTA VI appearance",
+    "value": "Karin Sultan",
+    "source": "https://www.instagram.com/reel/Df7PchXAA68/",
+    "locator": "Launch-day (19 Nov) gameplay reel, ~0:03: silver sedan driving Vice Beach with on-screen label 'Karin Sultan / VICE BEACH'. Frame personally viewed.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-penumbra",
+    "field": "GTA VI appearance",
+    "value": "Maibatsu Penumbra",
+    "source": "https://www.youtube.com/watch?v=Ubp-TANAQ7c",
+    "locator": "Launch-gameplay video, 0:55: HUD card reads 'MAIBATSU / '97 PENUMBRA FF' as the lime-green Eclipse-style car with blue graphics drives out of the Vespucci Island villa garage. Frame personally viewed; Jalopnik and SlashGear corroborate the tribute car.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "nagasaki-carbon-rs",
+    "field": "GTA VI appearance",
+    "value": "Nagasaki Carbon RS",
+    "source": "https://gamerant.com/all-grand-theft-auto-vi-gta-6-cheat-codes-list/",
+    "locator": "The shipped game's in-game Cheats menu lists 'Nagasaki Carbon RS - Spawns a Nagasaki Carbon RS - Complete all exploration challenges' (Game Rant, Insider Gaming, Destructoid, TrueAchievements, PSU all agree).",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "western-sovereign",
+    "field": "GTA VI appearance",
+    "value": "Western Sovereign",
+    "source": "https://www.instagram.com/reel/Df5R8M3TonV/",
+    "locator": "Launch-gameplay reel, ~0:30: HUD card reads 'WESTERN SOVEREIGN 107' as Jason rides the white cruiser down the runway in the Donnie mission. Frame personally viewed.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buzzard",
+    "field": "GTA VI appearance",
+    "value": "Buzzard",
+    "source": "https://www.youtube.com/watch?v=upcl34cTuGc",
+    "locator": "Launch-gameplay video, ~4:30: HUD card reads 'BOTTCHER BUZZARD' over the attack helicopter on the Mile Zero Air Station apron. Frame personally viewed.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "sea-sparrow",
+    "field": "GTA VI appearance",
+    "value": "Sea Sparrow",
+    "source": "https://www.polygon.com/gta-6-cheat-codes-list-unlock/",
+    "locator": "The shipped game's in-game Cheats menu lists 'Nagasaki Sea Sparrow - Spawns a Nagasaki Sea Sparrow - Complete 5 exploration challenges' (Polygon, Destructoid, Insider Gaming, PSU, Pure Xbox, TrueAchievements agree).",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cargo-ship",
+    "field": "GTA VI appearance",
+    "value": "Cargo ship",
+    "source": "https://www.instagram.com/reel/Df9BKl4CM2P/",
+    "locator": "Launch-gameplay reel, ~0:00-0:04: Jason climbing the gangway of a large green-hulled container ship at port, then on its red deck among stacked containers. Present in-game as a docked freighter; the bridge is locked and the ship is undriveable.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bed6214e-4820-440a-9ef9-c246934b4c9e",
+    "field": "GTA VI appearance",
+    "value": "Globe Oil Truck",
+    "source": "https://www.instagram.com/reel/Df48gBpPYwf/",
+    "locator": "Launch-gameplay reel, ~0:04: 'GLOBE OIL' logos clearly readable on the silver/red tanker trailer as the character aims a pistol at it (GTA VI aim reticle visible); the same tanker is shot at and carjacked in several independent 18-19 Nov launch-gameplay clips.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "sanchez",
+    "field": "GTA VI appearance",
+    "value": "Maibatsu Sanchez",
+    "source": "https://www.destructoid.com/all-gta-6-cheat-codes-and-how-to-unlock-them/",
+    "locator": "The shipped game's in-game Cheats menu lists 'Maibatsu Sanchez - Spawns a Maibatsu Sanchez, complete 5 criminal challenges' (Destructoid, Insider Gaming, AltChar, TrueAchievements, GameRant, The Hook agree).",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cruise-ship",
+    "field": "GTA VI appearance",
+    "value": "Cruise ship",
+    "source": "https://www.youtube.com/watch?v=OnWC__OxyTk",
+    "locator": "Launch-gameplay video, 0:40 and 1:40: hull with red lifeboats and gangway, aerial shows pool deck and helicopter on the bow helipad. CruiseHive names the ship Reef Clipper II (hull lettering REEF CLIPPER visible in launch clips).",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-schafter-v12",
+    "field": "GTA VI appearance",
+    "value": "Benefactor Schafter V12",
+    "source": "https://www.youtube.com/watch?v=6kXcv7B7PQ4",
+    "locator": "Launch-gameplay video, 1:10: on-screen objective 'Get back in the Schafter V12' during the Car Service mission; PowerPyx walkthrough lists the same mission objectives.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-futo",
+    "field": "GTA VI appearance",
+    "value": "Karin Futo",
+    "source": "https://www.youtube.com/watch?v=tgOiVDnA4p8",
+    "locator": "Launch-gameplay video, 0:35: HUD card reads 'KARIN '85 FUTO' as Lucia enters the red coupe; PowerPyx lists Karin Futo as a Moses steal target at Draper Island Docks.",
+    "reviewedAt": "2026-11-20",
+    "reviewer": "Muse"
   }
 ]
