@@ -23,6 +23,7 @@ import {
   getPublicCharacters,
   getDashboardStats,
 } from "@/lib/services/queries";
+import { getMapMarkers } from "@/lib/services/map";
 import { roleColor } from "@/lib/data";
 
 import { cn, toIsoDate } from "@/lib/utils";
@@ -142,12 +143,14 @@ const POPULAR_PAGES = [
 ];
 
 export default async function HomePage() {
-  const [allArticles, allCharacters, settings, stats] = await Promise.all([
-    getPublicArticles(),
-    getPublicCharacters(),
-    getSiteSettings(),
-    getDashboardStats(),
-  ]);
+  const [allArticles, allCharacters, settings, stats, mapMarkers] =
+    await Promise.all([
+      getPublicArticles(),
+      getPublicCharacters(),
+      getSiteSettings(),
+      getDashboardStats(),
+      getMapMarkers(),
+    ]);
 
   const newsPosts = allArticles.slice(0, 3);
   const blogPosts = allArticles.slice(3, 6);
@@ -254,7 +257,7 @@ export default async function HomePage() {
                 viewAllHref="/map"
                 viewAllLabel="Open Fullscreen Map"
               />
-              <DeferredHome kind="map" />
+              <DeferredHome kind="map" markers={mapMarkers} />
             </section>
           </>
         )}

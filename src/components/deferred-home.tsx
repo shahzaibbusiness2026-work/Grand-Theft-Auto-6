@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import type { Character } from "@/lib/data";
+import type { AdminMapMarker } from "@/lib/admin-store";
 const Map = dynamic(
   () => import("./home-satellite-map").then((m) => m.HomeSatelliteMap),
   { ssr: false },
@@ -13,9 +14,11 @@ const Cast = dynamic(
 export function DeferredHome({
   kind,
   characters,
+  markers,
 }: {
   kind: "map" | "cast";
   characters?: Character[];
+  markers?: AdminMapMarker[];
 }) {
   const node = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -41,7 +44,7 @@ export function DeferredHome({
     <div ref={node} style={kind === "map" ? { minHeight: 720 } : undefined}>
       {visible ? (
         kind === "map" ? (
-          <Map />
+          <Map markers={markers} />
         ) : (
           <Cast characters={characters} />
         )
