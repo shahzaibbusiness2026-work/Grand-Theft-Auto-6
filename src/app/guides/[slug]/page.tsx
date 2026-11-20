@@ -28,6 +28,7 @@ const GUIDE_SEO_TITLES: Record<string, string> = {
   "best-weapons-tier-list": "GTA 6 Weapons Guide & Tier List",
   "complete-beginner-guide": "GTA 6 Story, Map & Characters Guide",
   "gta-6-beginners-guide": "GTA 6 Beginner's Guide: 10 Things to Do",
+  "gta-6-easter-eggs-found-first-24-hours": "GTA 6 Easter Eggs: 7 Secrets Found",
   "gta-6-ps5-controls": "GTA 6 PS5 Controls: Button Guide",
   "gta-6-standard-vs-ultimate-edition": "GTA 6 Standard vs Ultimate Edition",
   "gta-6-xbox-controls": "GTA 6 Xbox Controls: Button Guide",
@@ -144,8 +145,11 @@ export default async function GuideDetailPage({
               headline: guide.title,
               description: guide.description || undefined,
               image: guide.image ? absoluteUrl(guide.image) : undefined,
-              // Real recorded timestamp from the guides table (also used
+              // Real recorded timestamps from the guides table (also used
               // as the sitemap lastmod); omitted when absent, never invented.
+              ...(guide.created_at
+                ? { datePublished: guide.created_at }
+                : {}),
               ...(guide.updated_at
                 ? { dateModified: guide.updated_at }
                 : {}),
