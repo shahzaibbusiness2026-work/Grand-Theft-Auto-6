@@ -32,18 +32,122 @@ export function applyCommunityOverrides(markers: AdminMapMarker[] = []) {
 export const COMMUNITY_MAP_CREDIT =
   "GTA VI Map Tiles & Landmarks Data — GTADB and contributors, CC BY 4.0. Community reconstruction; not an official map.";
 export function communityCategory(types: string[]) {
+  const tokens = types.map((t) =>
+    t.toLowerCase().replace(/^(#|\/\/)+/, "").trim(),
+  );
+  const has = (...wanted: string[]) =>
+    wanted.some((w) => tokens.includes(w));
   const label = types.join(" ").toLowerCase();
-  if (/garage|safehouse/.test(label)) return "garages";
-  if (/automotive|vehicle|car_dealer|marina|boat/.test(label))
-    return "vehicles";
-  if (/shop|store|restaurant|cafe|food|clothing|gas_station|bar\b/.test(label))
-    return "shops";
-  if (/residential|hotel|property|apartment/.test(label)) return "properties";
   if (
+    has(
+      "garage",
+      "safehouse",
+      "modshop",
+      "pay'n'spray",
+      "carwash",
+      "bikeshop",
+    ) ||
+    /garage|safehouse/.test(label)
+  )
+    return "garages";
+  if (
+    has("guns", "gun") ||
+    /weapon/.test(label)
+  )
+    return "weapons";
+  if (
+    has(
+      "automotive",
+      "vehicle",
+      "car_dealer",
+      "marina",
+      "boat",
+      "blimp",
+    ) ||
+    /automotive|vehicle|car_dealer|marina|boat/.test(label)
+  )
+    return "vehicles";
+  if (
+    has(
+      "shop",
+      "store",
+      "restaurant",
+      "cafe",
+      "food",
+      "fastfood",
+      "clothing",
+      "clothes",
+      "gas",
+      "supermarket",
+      "bar",
+      "liquor",
+      "drinks",
+      "hair",
+      "tattoos",
+      "electronics",
+      "pharmacy",
+      "shoes",
+      "vendor",
+    ) ||
+    /shop|store|restaurant|cafe|food|clothing|gas_station|bar\b/.test(label)
+  )
+    return "shops";
+  if (
+    has("residential", "hotel", "property", "apartment", "office") ||
+    /residential|hotel|property|apartment/.test(label)
+  )
+    return "properties";
+  if (
+    has(
+      "tennis",
+      "racetrack",
+      "golf",
+      "beach_volleyball",
+      "gym",
+      "cinema",
+      "nightclub",
+      "stripclub",
+      "ferriswheel",
+      "leisure",
+      "recreation",
+      "events",
+    )
+  )
+    return "activities";
+  if (
+    has(
+      "nature",
+      "natural",
+      "water",
+      "forest",
+      "beach",
+      "mountain",
+      "park",
+      "island",
+      "river",
+      "agriculture",
+    ) ||
     /nature|natural|water|forest|beach|mountain|park|island|river/.test(label)
   )
     return "nature";
-  if (/transport|rail|airport|station|bridge|road|highway/.test(label))
+  if (
+    has(
+      "transport",
+      "transportation",
+      "rail",
+      "airport",
+      "station",
+      "bridge",
+      "road",
+      "highway",
+      "train",
+      "metro",
+      "metromover",
+      "bus",
+      "airbase",
+    ) ||
+    /transport|rail|airport|station|bridge|road|highway/.test(label)
+  )
     return "transport";
   return "poi";
 }
@@ -85,7 +189,7 @@ export function clusterMapPins<
       screenY > viewport.height + 80
     )
       continue;
-    const cellSize = zoom >= 4 ? 28 : 56;
+    const cellSize = zoom >= 3 ? 20 : 40;
     const key = `${Math.floor((x * zoom) / cellSize)}:${Math.floor((y * zoom) / cellSize)}`;
     const cell = cells.get(key) || { key, top: 0, left: 0, members: [] };
     cell.top += parseFloat(item.top);

@@ -12,6 +12,7 @@ import {
   LocateFixed,
   Layers,
   X,
+  Eye,
   EyeOff,
   Flag,
   Star,
@@ -38,7 +39,16 @@ import {
   Target,
   ShoppingBag,
   Flame,
+  ChevronDown,
+  Map as MapIcon,
+  Moon,
+  Satellite,
 } from "lucide-react";
+import {
+  locationSubcategoryForTypes,
+  DEFAULT_HIDDEN_SUBCATEGORIES,
+} from "@/lib/map-icons";
+import type { MapBaseStyle } from "./community-map-tiles";
 import { cn } from "@/lib/utils";
 import {
   getStoredUserState,
@@ -63,6 +73,8 @@ export interface MapPOI {
   id: string;
   title: string;
   category: string;
+  subcategory?: string;
+  subcategoryLabel?: string;
   type: string;
   district: string;
   desc: string;
@@ -306,43 +318,38 @@ function publicMapPoi(poi: MapPOI): MapPOI {
 
 const COMMUNITY_POIS: MapPOI[] = communityLandmarks
   .filter((item) => item.position)
-  .map((item) => ({
-    id: item.id,
-    title: item.name,
-    category: communityCategory(item.types),
-    type: `Community ${item.types.filter((tag) => tag !== "enterable").join(" · ") || "landmark"}`,
-    district: item.area || "Community-mapped area",
-    desc: `Community interpretation, not official geography or confirmed gameplay. ${item.counterpart ? `Contributors suggest a real-world counterpart: ${item.counterpart}.` : ""} Placement and identity may change as evidence improves.`,
-    img: "",
-    hours: "Unknown",
-    top: `${item.position!.top}%`,
-    left: `${item.position!.left}%`,
-    color:
-      (
-        {
-          shops: "bg-emerald-700",
-          vehicles: "bg-cyan-700",
-          properties: "bg-violet-700",
-          garages: "bg-orange-700",
-          transport: "bg-blue-700",
-          nature: "bg-emerald-700",
-        } as Record<string, string>
-      )[communityCategory(item.types)] || "bg-gold",
-    icon:
-      (
-        {
-          shops: ShoppingBag,
-          vehicles: Car,
-          properties: Building2,
-          garages: Warehouse,
-          transport: Navigation,
-          nature: Compass,
-        } as Record<string, typeof MapPin>
-      )[communityCategory(item.types)] || MapPin,
-    verified: false,
-    source: "GTADB community record",
-    sourceUrl: item.reference,
-  }));
+  .map((item) => {
+    const sub = locationSubcategoryForTypes(item.types);
+    return {
+      id: item.id,
+      title: item.name,
+      category: communityCategory(item.types),
+      subcategory: sub.id,
+      subcategoryLabel: sub.label,
+      type: `Community ${item.types.filter((tag) => tag !== "enterable").join(" · ") || "landmark"}`,
+      district: item.area || "Community-mapped area",
+      desc: `Community interpretation, not official geography or confirmed gameplay. ${item.counterpart ? `Contributors suggest a real-world counterpart: ${item.counterpart}.` : ""} Placement and identity may change as evidence improves.`,
+      img: "",
+      hours: "Unknown",
+      top: `${item.position!.top}%`,
+      left: `${item.position!.left}%`,
+      color:
+        (
+          {
+            shops: "bg-emerald-700",
+            vehicles: "bg-cyan-700",
+            properties: "bg-violet-700",
+            garages: "bg-orange-700",
+            transport: "bg-blue-700",
+            nature: "bg-emerald-700",
+          } as Record<string, string>
+        )[communityCategory(item.types)] || "bg-gold",
+      icon: sub.icon,
+      verified: false,
+      source: "GTADB community record",
+      sourceUrl: item.reference,
+    };
+  });
 
 const personalToPoi = (marker: PersonalMarker): MapPOI => ({
   id: marker.id,
@@ -524,6 +531,92 @@ export function SatelliteInteractiveMap({
     return counts;
   }, [allPOIs]);
 
+  // Per-subcategory counts + which subcategories exist under each category.
+  const subcategoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const poi of allPOIs) {
+      const key = poi.subcategory || "poi";
+      counts[key] = (counts[key] ?? 0) + 1;
+    }
+    return counts;
+  }, [allPOIs]);
+  // Found (marked) counts per category and per subcategory.
+  const foundByCategory = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const poi of allPOIs) {
+      if (!collectedPOIs[poi.id]) continue;
+      const key = (poi.category || "poi").toLowerCase().replace(/_/g, "-");
+      counts[key] = (counts[key] ?? 0) + 1;
+    }
+    return counts;
+  }, [allPOIs, collectedPOIs]);
+  const foundBySubcategory = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const poi of allPOIs) {
+      if (!collectedPOIs[poi.id]) continue;
+      const key = poi.subcategory || "poi";
+      counts[key] = (counts[key] ?? 0) + 1;
+    }
+    return counts;
+  }, [allPOIs, collectedPOIs]);
+  const categorySubcategories = useMemo(() => {
+    const grouped: Record<string, { id: string; label: string }[]> = {};
+    const seen = new Set<string>();
+    for (const poi of allPOIs) {
+      const cat = (poi.category || "poi").toLowerCase().replace(/_/g, "-");
+      const sub = poi.subcategory || "poi";
+      const key = `${cat}:${sub}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      (grouped[cat] ??= []).push({
+        id: sub,
+        label: poi.subcategoryLabel || "Point of interest",
+      });
+    }
+    for (const list of Object.values(grouped))
+      list.sort((a, b) => a.label.localeCompare(b.label));
+    return grouped;
+  }, [allPOIs]);
+
+  // Map base style: community (YANIS) | official (Rockstar map) | streets
+  // (dark). Kept in the URL (?style=) like gtamap.io keeps layer state.
+  const [mapStyle, setMapStyle] = useState<MapBaseStyle>("community");
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const style = params.get("style");
+    if (style === "official" || style === "streets" || style === "community")
+      setMapStyle(style);
+  }, []);
+  useEffect(() => {
+    const url = new URL(location.href);
+    if (mapStyle === "community") url.searchParams.delete("style");
+    else url.searchParams.set("style", mapStyle);
+    history.replaceState(null, "", url.toString());
+  }, [mapStyle]);
+
+  // Switching base style closes an open cluster list (its pins are not on
+  // the official map, and the panel would otherwise linger over it).
+  useEffect(() => {
+    setClusterMembers([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mapStyle]);
+
+  // Per-subcategory visibility. Noisy/generic kinds are hidden by default so
+  // the map is readable on first load; everything else starts visible.
+  const [checkedSubcategories, setCheckedSubcategories] = useState<
+    Record<string, boolean>
+  >(() => {
+    const initial: Record<string, boolean> = {};
+    return initial;
+  });
+  const isSubcategoryChecked = (id: string) =>
+    checkedSubcategories[id] ?? !DEFAULT_HIDDEN_SUBCATEGORIES.includes(id);
+  const [expandedCategories, setExpandedCategories] = useState<
+    Record<string, boolean>
+  >(() =>
+    Object.fromEntries(CATEGORY_FILTERS.map((f) => [f.id, true])),
+  );
+
   const [zoom, setZoom] = useState<number>(1.0);
 
   const [pan, setPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -650,7 +743,7 @@ export function SatelliteInteractiveMap({
 
   const zoomAround = useCallback(
     (nextZoom: number, anchorX?: number, anchorY?: number) => {
-      const next = Math.min(6, Math.max(0.2, nextZoom));
+      const next = Math.min(12, Math.max(0.2, nextZoom));
       const x = anchorX ?? viewportSize.width / 2,
         y = anchorY ?? viewportSize.height / 2;
       setPan({
@@ -1000,13 +1093,51 @@ export function SatelliteInteractiveMap({
         updated[c.id] = nextVal;
       });
       setCheckedFilters(updated);
+      const subUpdated: Record<string, boolean> = {};
+      for (const list of Object.values(categorySubcategories))
+        for (const sub of list) subUpdated[sub.id] = nextVal;
+      setCheckedSubcategories(subUpdated);
     } else {
+      const nextVal = !checkedFilters[id];
       setCheckedFilters((prev) => ({
         ...prev,
-        [id]: !prev[id],
+        [id]: nextVal,
         all: false,
       }));
+      const subUpdated: Record<string, boolean> = {};
+      for (const sub of categorySubcategories[id] || [])
+        subUpdated[sub.id] = nextVal;
+      setCheckedSubcategories((prev) => ({ ...prev, ...subUpdated }));
     }
+  };
+
+  const toggleSubcategory = (id: string) => {
+    const nextVal = !isSubcategoryChecked(id);
+    setCheckedSubcategories((prev) => ({ ...prev, [id]: nextVal }));
+  };
+
+  const showAllFilters = () => {
+    const allOn: Record<string, boolean> = {};
+    CATEGORY_FILTERS.forEach((c) => {
+      allOn[c.id] = true;
+    });
+    setCheckedFilters(allOn);
+    const subOn: Record<string, boolean> = {};
+    for (const list of Object.values(categorySubcategories))
+      for (const sub of list) subOn[sub.id] = true;
+    setCheckedSubcategories(subOn);
+  };
+
+  const hideAllFilters = () => {
+    const allOff: Record<string, boolean> = {};
+    CATEGORY_FILTERS.forEach((c) => {
+      allOff[c.id] = false;
+    });
+    setCheckedFilters(allOff);
+    const subOff: Record<string, boolean> = {};
+    for (const list of Object.values(categorySubcategories))
+      for (const sub of list) subOff[sub.id] = false;
+    setCheckedSubcategories(subOff);
   };
 
   // Filtered POIs
@@ -1021,13 +1152,16 @@ export function SatelliteInteractiveMap({
         return false;
       const isCategoryChecked =
         checkedFilters.all || checkedFilters[p.category];
+      const isSubcategoryChecked =
+        (checkedSubcategories[p.subcategory || "poi"] ??
+          !DEFAULT_HIDDEN_SUBCATEGORIES.includes(p.subcategory || "poi"));
       const matchesSearch =
         searchQuery.trim() === "" ||
         p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.district.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.type.toLowerCase().includes(searchQuery.toLowerCase());
-      return isCategoryChecked && matchesSearch;
+      return isCategoryChecked && isSubcategoryChecked && matchesSearch;
     });
     return filtered.sort((a, b) =>
       resultSort === "area"
@@ -1040,6 +1174,7 @@ export function SatelliteInteractiveMap({
   }, [
     allPOIs,
     checkedFilters,
+    checkedSubcategories,
     searchQuery,
     hideCollected,
     collectedPOIs,
@@ -1264,6 +1399,8 @@ export function SatelliteInteractiveMap({
                 const url = new URL("/map", location.origin);
                 if (edition === "legacy")
                   url.searchParams.set("edition", "legacy");
+                if (mapStyle !== "community")
+                  url.searchParams.set("style", mapStyle);
                 if (searchQuery.trim())
                   url.searchParams.set("q", searchQuery.trim());
                 const active = CATEGORY_FILTERS.filter(
@@ -1511,10 +1648,17 @@ export function SatelliteInteractiveMap({
               </div>
               <div className="flex items-center gap-1">
                 <button
-                  onClick={() => toggleFilter("all")}
+                  onClick={showAllFilters}
                   className="text-xs font-bold text-gold-light hover:underline"
                 >
-                  {checkedFilters.all ? "Invert" : "Select All"}
+                  Show all
+                </button>
+                <span className="text-xs text-muted-foreground">·</span>
+                <button
+                  onClick={hideAllFilters}
+                  className="text-xs font-bold text-gold-light hover:underline"
+                >
+                  Hide all
                 </button>
                 <button
                   onClick={closeFilters}
@@ -1594,7 +1738,7 @@ export function SatelliteInteractiveMap({
               );
             })()}
 
-            {/* Checklist items */}
+            {/* Checklist items: per-category toggle + per-subcategory eye toggles */}
             <div
               tabIndex={0}
               role="region"
@@ -1604,44 +1748,111 @@ export function SatelliteInteractiveMap({
               {CATEGORY_FILTERS.map((f) => {
                 const isChecked = checkedFilters[f.id] ?? false;
                 const Icon = f.icon;
+                const subs = categorySubcategories[f.id] || [];
+                const expanded = expandedCategories[f.id] ?? true;
                 return (
-                  <button
-                    type="button"
-                    aria-pressed={isChecked}
-                    key={f.id}
-                    onClick={() => toggleFilter(f.id)}
-                    className={cn(
-                      "flex w-full min-h-[44px] select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-left text-xs font-semibold transition-colors",
-                      f.all
-                        ? "border border-gold/30 bg-gold/10 text-white font-bold"
-                        : "text-muted-foreground hover:bg-muted/40 hover:text-white",
-                    )}
-                  >
-                    <span className="flex items-center gap-2 truncate">
-                      <Icon className={cn("h-3.5 w-3.5 shrink-0", f.color)} />
-                      <span className="truncate">{f.label}</span>
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <span className="text-xs font-mono text-muted-foreground">
-                        {filterCounts[f.id] ?? 0}
-                      </span>
-                      <span
-                        className={cn(
-                          "flex h-4 w-4 items-center justify-center rounded transition-all",
-                          isChecked
-                            ? "bg-gold text-slate-950 shadow-xs"
-                            : "border border-border bg-black/40",
-                        )}
+                  <div key={f.id}>
+                    <div
+                      className={cn(
+                        "flex w-full min-h-[44px] select-none items-center justify-between rounded-xl px-2.5 py-2.5 text-left text-xs font-semibold transition-colors",
+                        f.all
+                          ? "border border-gold/30 bg-gold/10 text-white font-bold"
+                          : "text-muted-foreground hover:bg-muted/40 hover:text-white",
+                      )}
+                    >
+                      <button
+                        type="button"
+                        aria-pressed={isChecked}
+                        onClick={() => toggleFilter(f.id)}
+                        className="flex min-w-0 flex-1 items-center gap-2 truncate"
                       >
-                        {isChecked && (
-                          <Check
-                            className="h-3 w-3 text-slate-950"
-                            strokeWidth={3.5}
-                          />
+                        <Icon
+                          className={cn("h-3.5 w-3.5 shrink-0", f.color)}
+                        />
+                        <span className="truncate">{f.label}</span>
+                      </button>
+                      <span className="flex items-center gap-1.5">
+                        <span className="text-xs font-mono text-muted-foreground">
+                          {foundByCategory[f.id] ?? 0}/{filterCounts[f.id] ?? 0}
+                        </span>
+                        {subs.length > 0 && (
+                          <button
+                            type="button"
+                            aria-label={
+                              expanded
+                                ? `Collapse ${f.label} subcategories`
+                                : `Expand ${f.label} subcategories`
+                            }
+                            aria-expanded={expanded}
+                            onClick={() =>
+                              setExpandedCategories((prev) => ({
+                                ...prev,
+                                [f.id]: !expanded,
+                              }))
+                            }
+                            className="flex h-6 w-6 items-center justify-center rounded text-muted-foreground hover:text-white"
+                          >
+                            <ChevronDown
+                              className={cn(
+                                "h-3.5 w-3.5 transition-transform",
+                                !expanded && "-rotate-90",
+                              )}
+                            />
+                          </button>
                         )}
+                        <button
+                          type="button"
+                          aria-pressed={isChecked}
+                          aria-label={`Toggle ${f.label}`}
+                          onClick={() => toggleFilter(f.id)}
+                          className={cn(
+                            "flex h-4 w-4 items-center justify-center rounded transition-all",
+                            isChecked
+                              ? "bg-gold text-slate-950 shadow-xs"
+                              : "border border-border bg-black/40",
+                          )}
+                        >
+                          {isChecked && (
+                            <Check
+                              className="h-3 w-3 text-slate-950"
+                              strokeWidth={3.5}
+                            />
+                          )}
+                        </button>
                       </span>
-                    </span>
-                  </button>
+                    </div>
+                    {expanded &&
+                      subs.map((sub) => {
+                        const on = isSubcategoryChecked(sub.id);
+                        return (
+                          <button
+                            key={sub.id}
+                            type="button"
+                            aria-pressed={on}
+                            onClick={() => toggleSubcategory(sub.id)}
+                            className={cn(
+                              "ml-5 flex w-[calc(100%-20px)] min-h-[36px] select-none items-center justify-between rounded-lg px-2 py-1.5 text-left text-xs transition-colors",
+                              on
+                                ? "text-slate-200 hover:bg-muted/40"
+                                : "text-muted-foreground/60 hover:bg-muted/40 hover:text-white",
+                            )}
+                          >
+                            <span className="flex min-w-0 items-center gap-2 truncate">
+                              {on ? (
+                                <Eye className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                              ) : (
+                                <EyeOff className="h-3.5 w-3.5 shrink-0" />
+                              )}
+                              <span className="truncate">{sub.label}</span>
+                            </span>
+                            <span className="shrink-0 text-xs font-mono text-muted-foreground">
+                              {foundBySubcategory[sub.id] ?? 0}/
+                              {subcategoryCounts[sub.id] ?? 0}
+                            </span>
+                          </button>
+                        );
+                      })}
+                  </div>
                 );
               })}
             </div>
@@ -1743,6 +1954,14 @@ export function SatelliteInteractiveMap({
                   <p className="text-xs text-muted-foreground font-semibold">
                     {selectedPOI.district}
                   </p>
+                  <p className="text-xs font-bold text-gold-light">
+                    {CATEGORY_FILTERS.find(
+                      (f) => f.id === selectedPOI.category,
+                    )?.label || selectedPOI.category}
+                    {selectedPOI.subcategoryLabel
+                      ? ` · ${selectedPOI.subcategoryLabel}`
+                      : ""}
+                  </p>
                 </div>
               </div>
               <button
@@ -1815,6 +2034,15 @@ export function SatelliteInteractiveMap({
                   </a>
                 </div>
               )}
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-muted-foreground font-semibold">
+                  Coordinates
+                </span>
+                <span className="font-mono text-white/90">
+                  x {parseFloat(selectedPOI.left).toFixed(1)} · y{" "}
+                  {parseFloat(selectedPOI.top).toFixed(1)}
+                </span>
+              </div>
               {selectedPOI.addedOn && (
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-muted-foreground font-semibold">
@@ -1846,7 +2074,9 @@ export function SatelliteInteractiveMap({
               >
                 <Check className="h-3.5 w-3.5" />
                 <span>
-                  {collectedPOIs[selectedPOI.id] ? "Marked" : "Mark as visited"}
+                  {collectedPOIs[selectedPOI.id]
+                    ? "✓ Found"
+                    : "Mark as found"}
                 </span>
               </button>
 
@@ -1894,7 +2124,7 @@ export function SatelliteInteractiveMap({
                 disabled={selectedPOI.personal}
                 onClick={async () => {
                   if (typeof window !== "undefined") {
-                    const shareUrl = `${window.location.origin}/map?poi=${encodeURIComponent(selectedPOI.id)}${edition === "legacy" ? "&edition=legacy" : ""}`;
+                    const shareUrl = `${window.location.origin}/map?poi=${encodeURIComponent(selectedPOI.id)}${edition === "legacy" ? "&edition=legacy" : ""}${mapStyle !== "community" ? `&style=${mapStyle}` : ""}`;
                     try {
                       await navigator.clipboard.writeText(shareUrl);
                       setCopiedShare(true);
@@ -1978,7 +2208,52 @@ export function SatelliteInteractiveMap({
           </div>
         )}
 
+        {/* ==================== 2b. MAP STYLE SWITCHER ==================== */}
+        {edition === "community" && (
+          <div
+            className="absolute left-3 top-3 z-20 flex rounded-xl border border-border bg-black/80 p-1 shadow-2xl backdrop-blur-md"
+            role="group"
+            aria-label="Map style"
+          >
+            {(
+              [
+                { id: "community", label: "Community", icon: Satellite },
+                { id: "official", label: "In-game", icon: MapIcon },
+                { id: "streets", label: "Streets", icon: Moon },
+              ] as const
+            ).map((s) => {
+              const SIcon = s.icon;
+              const active = mapStyle === s.id;
+              return (
+                <button
+                  key={s.id}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => setMapStyle(s.id)}
+                  className={cn(
+                    "flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-bold transition-all",
+                    active
+                      ? "bg-gold text-slate-950 shadow"
+                      : "text-muted-foreground hover:text-white",
+                  )}
+                >
+                  <SIcon className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">{s.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+
         {/* ==================== 3. FLOATING TOP HUD CONTROLS ==================== */}
+        {edition === "community" && mapStyle === "official" && (
+          <div className="pointer-events-none absolute left-0 right-0 top-14 z-20 flex justify-center px-4">
+            <p className="rounded-xl border border-border bg-black/80 px-3 py-1.5 text-xs font-bold text-amber-300 shadow-2xl backdrop-blur-md">
+              Official Rockstar map — pins are positioned on the Community
+              map, so they are hidden here.
+            </p>
+          </div>
+        )}
         <div className="pointer-events-none absolute left-0 right-0 top-3 z-20 flex justify-center px-4">
           <div className="pointer-events-auto flex items-center gap-2 rounded-2xl border border-border bg-black/80 px-3.5 py-1.5 shadow-2xl backdrop-blur-md">
             <span className="flex h-2 w-2 rounded-full bg-emerald-400 " />
@@ -2028,6 +2303,7 @@ export function SatelliteInteractiveMap({
                 pan={pan}
                 viewport={viewportSize}
                 mode={mapMode}
+                base={mapStyle}
               />
             ) : (
               <Image
@@ -2064,8 +2340,11 @@ export function SatelliteInteractiveMap({
               />
             )}
 
-            {/* Interactive POI Pins */}
-            {clusters.map((cluster) => {
+            {/* Interactive POI Pins — hidden on the official base: Rockstar's
+                map does not align with the community pin coordinates, so
+                showing pins there would place them in the wrong place. */}
+            {mapStyle !== "official" &&
+              clusters.map((cluster) => {
               const m = cluster.members[0];
               if (cluster.members.length > 1)
                 return (
@@ -2102,6 +2381,11 @@ export function SatelliteInteractiveMap({
               const isSelected = selectedPOI?.id === m.id;
               const isCollected = collectedPOIs[m.id];
               const Icon = m.icon;
+              // Pictogram size grows gently with zoom so the icon stays
+              // readable up close without ballooning at deep zoom.
+              const iconPx = Math.round(
+                Math.min(30, Math.max(20, 14 + zoom * 2.5)),
+              );
 
               return (
                 <button
@@ -2112,7 +2396,7 @@ export function SatelliteInteractiveMap({
                     e.stopPropagation();
                     focusOnPOI(m);
                   }}
-                  className="absolute z-10 -translate-x-1/2 -translate-y-1/2 group focus-visible:outline focus-visible:outline-4 focus-visible:outline-cyan-300 transition-transform hover:scale-125"
+                  className="absolute z-10 -translate-x-1/2 -translate-y-1/2 group focus-visible:outline focus-visible:outline-4 focus-visible:outline-cyan-300 transition-transform"
                   style={{
                     top: m.top,
                     left: m.left,
@@ -2120,22 +2404,29 @@ export function SatelliteInteractiveMap({
                   }}
                   aria-label={m.title}
                 >
-                  {/* Selected Ping Ring */}
+                  {/* Selected outline */}
                   {isSelected && (
-                    <span className="absolute -inset-3 rounded-lg border-2 border-gold bg-gold/30 " />
+                    <span className="absolute -inset-2 rounded-lg border-2 border-gold bg-gold/20" />
                   )}
 
+                  {/* Bare pictogram: white thin-line icon with a dark halo
+                      for contrast on any base map. No coloured disc. A
+                      marked (found) pin turns emerald. */}
                   <span
                     className={cn(
-                      "flex h-11 w-11 items-center justify-center rounded-lg border-2 border-white text-white shadow-[0_0_15px_rgba(0,0,0,0.9)] transition-all",
-                      isCollected ? "bg-emerald-500" : m.color,
-                      (isCollected || m.color === "bg-gold") &&
-                        "text-slate-950",
-                      isSelected &&
-                        "ring-4 ring-white scale-125 shadow-[0_0_20px_#f59e0b]",
+                      "flex items-center justify-center transition-all",
+                      isCollected ? "text-emerald-400" : "text-white",
+                      isSelected && "text-gold-light",
                     )}
+                    style={{
+                      filter:
+                        "drop-shadow(0 0 3px rgba(0,0,0,0.95)) drop-shadow(0 1px 2px rgba(0,0,0,0.9))",
+                    }}
                   >
-                    <Icon className="h-5 w-5" />
+                    <Icon
+                      style={{ width: iconPx, height: iconPx }}
+                      strokeWidth={2.2}
+                    />
                   </span>
 
                   {/* Tooltip on Hover */}
