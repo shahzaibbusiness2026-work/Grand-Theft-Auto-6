@@ -598,6 +598,16 @@ export function SatelliteInteractiveMap({
   const CANVAS_W = 1400;
   const CANVAS_H = edition === "community" ? 1400 : 1050;
 
+  // Max zoom: the deepest tiles (z5) are 1400 / (4 × 2^5) = 10.9375
+  // canvas px, so they display at native 256px when zoom ≈ 23.4
+  // (10.9375 × 23.4 = 256). The old cap of 12 showed them at ~131px —
+  // half native — which is why small street names stayed soft at max
+  // zoom even though the tile files are sharp. 24 lands just past
+  // native (~262px, 1.02×) with no visible upscale. The HUD shows
+  // zoom × 100, so the new max reads 2400%.
+  const MAX_ZOOM = 24;
+  const MIN_ZOOM = 0.2;
+
   // Taish Tilt (3D view): a fixed 55° tilt of the map plane, pure CSS —
   // no library, no new data, no invented buildings. Under the tilt the
   // island's on-screen height compresses by cos(55°) ≈ 0.57; the fit,
@@ -1184,7 +1194,7 @@ export function SatelliteInteractiveMap({
   const zoomAround = useCallback(
     (nextZoom: number, anchorX?: number, anchorY?: number) => {
       hasInteractedRef.current = true;
-      const next = Math.min(12, Math.max(0.2, nextZoom));
+      const next = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, nextZoom));
       const rect = visibleMapRect();
       // In 3D the screen↔canvas mapping is only exact at the tilt pivot
       // (the visible-area centre), so zoom anchors there and ignores the
