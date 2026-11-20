@@ -53,6 +53,7 @@ import type { MapBaseStyle } from "./community-map-tiles";
 import { cn } from "@/lib/utils";
 import {
   getStoredUserState,
+  isLoggedIn,
   toggleFavorite,
   toggleMapCompleted,
   setMapNote,
@@ -488,6 +489,7 @@ export function SatelliteInteractiveMap({
   const [collectedPOIs, setCollectedPOIs] = useState<Record<string, boolean>>(
     {},
   );
+  const [loggedIn, setLoggedIn] = useState(false);
 
   // Deep link (?poi=…) that pointed at a CMS marker: resolved once the
   // live markers finish loading, since their ids never appear in POIS.
@@ -553,6 +555,7 @@ export function SatelliteInteractiveMap({
   useEffect(() => {
     const sync = () => {
       const current = getStoredUserState();
+      setLoggedIn(isLoggedIn());
       setPersonalMarkers(current.personalMarkers);
       setFavoriteLocations(current.favorites.locations);
       setUserNotes(current.mapNotes);
@@ -1639,6 +1642,12 @@ export function SatelliteInteractiveMap({
   ]);
 
   const verifiedTotal = allPOIs.filter((poi) => collectedPOIs[poi.id]).length;
+  // My Leonida progress: one decimal below 10% so the first marks move
+  // the ring (1 of 1,300 is 0.1%, not 0%), whole numbers above that.
+  const leonidaPct =
+    (verifiedTotal / Math.max(1, allPOIs.length)) * 100;
+  const leonidaPctLabel =
+    leonidaPct < 10 ? leonidaPct.toFixed(1) : String(Math.round(leonidaPct));
 
   return (
     <div
@@ -2402,25 +2411,119 @@ export function SatelliteInteractiveMap({
               </button>
             </div>
 
-            {/* Progress Strip */}
+            {/* My Leonida — 100% completion tracker on the map.
+                The ring is the share of named places marked as found;
+                per-category progress already shows on every category row
+                above (found/total). The map tracks places visited — the
+                full 35-requirement checklist lives in the guide. */}
             <div className="mt-3 pt-3 border-t border-border">
-              <div className="flex items-center justify-between text-xs font-bold text-white">
-                <span className="flex items-center gap-1.5 text-muted-foreground">
-                  <ShieldCheck className="h-3.5 w-3.5 text-slate-200" /> Your
-                  marked pins
-                </span>
-                <span className="text-[#FF2E9A]">
-                  {verifiedTotal} / {allPOIs.length}
-                </span>
+              <div className="flex items-center gap-3">
+                <svg
+                  width="72"
+                  height="72"
+                  viewBox="0 0 72 72"
+                  role="img"
+                  aria-label={`You have explored ${leonidaPctLabel}% of Leonida`}
+                  className="shrink-0"
+                >
+                  <defs>
+                    <linearGradient
+                      id="myLeonidaRingGrad"
+                      x1="0"
+                      y1="0"
+                      x2="1"
+                      y2="1"
+                    >
+                      <stop offset="0%" stopColor="#FF2E9A" />
+                      <stop offset="100%" stopColor="#8B5CF6" />
+                    </linearGradient>
+                  </defs>
+                  <circle
+                    cx="36"
+                    cy="36"
+                    r="30"
+                    fill="none"
+                    stroke="#1e293b"
+                    strokeWidth="7"
+                  />
+                  <circle
+                    cx="36"
+                    cy="36"
+                    r="30"
+                    fill="none"
+                    stroke="url(#myLeonidaRingGrad)"
+                    strokeWidth="7"
+                    strokeLinecap="round"
+                    strokeDasharray={188.5}
+                    strokeDashoffset={
+                      188.5 *
+                      (1 - verifiedTotal / Math.max(1, allPOIs.length))
+                    }
+                    transform="rotate(-90 36 36)"
+                    className="transition-all"
+                  />
+                  <text
+                    x="36"
+                    y="41"
+                    textAnchor="middle"
+                    className="fill-white"
+                    fontSize="15"
+                    fontWeight="800"
+                  >
+                    {leonidaPctLabel}%
+                  </text>
+                </svg>
+                <div className="min-w-0">
+                  <p className="text-xs font-black uppercase tracking-wider text-white">
+                    My Leonida
+                  </p>
+                  <p className="mt-0.5 text-xs font-semibold text-slate-200">
+                    You have explored {leonidaPctLabel}% of Leonida
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {verifiedTotal.toLocaleString("en-US")} of{" "}
+                    {allPOIs.length.toLocaleString("en-US")} places visited
+                  </p>
+                </div>
               </div>
-              <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500 transition-all"
-                  style={{
-                    width: `${(verifiedTotal / Math.max(1, allPOIs.length)) * 100}%`,
-                  }}
-                />
-              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const next = nextUnvisited(
+                    visiblePOIs,
+                    collectedPOIs,
+                    selectedPOI?.id,
+                  );
+                  if (next) {
+                    focusOnPOI(next);
+                    setMapFeedback(`Next unvisited: ${next.title}`);
+                  } else
+                    setMapFeedback(
+                      "All matching pins are marked, or there are no matching pins.",
+                    );
+                }}
+                className="mt-3 flex min-h-[44px] w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#FF2E9A] to-violet-500 py-2 text-xs font-black text-white shadow-md hover:brightness-105 transition-all"
+              >
+                <Navigation className="h-3.5 w-3.5" />
+                <span>Next unvisited</span>
+              </button>
+              <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">
+                The map tracks the places you have visited. The full
+                checklist — 35 requirements across story, exploration and
+                discovery — is in the guide.
+              </p>
+              <Link
+                href="/guides/100-percent-completion-guide"
+                className="mt-1.5 flex min-h-[44px] items-center gap-2 rounded-xl border border-[#FF2E9A]/30 bg-[#FF2E9A]/10 px-3 py-2 text-xs font-bold text-white hover:bg-[#FF2E9A]/20 transition-colors"
+              >
+                <FileText className="h-3.5 w-3.5 shrink-0 text-[#FF2E9A]" />
+                <span>Full 100% checklist · 35 requirements</span>
+              </Link>
+              <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
+                {loggedIn
+                  ? "Marks are saved to your account."
+                  : "Marks are saved on this device only — sign in to keep them on your account."}
+              </p>
             </div>
           </div>
         )}
