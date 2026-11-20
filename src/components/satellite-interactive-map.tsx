@@ -762,15 +762,16 @@ export function SatelliteInteractiveMap({
     [],
   );
 
-  // Default framing (first load + reset): fit the CONTENT box, not the
-  // whole square canvas. The landmass occupies only the left ~40% of the
-  // canvas, so cover-fitting the canvas leaves the first load mostly
-  // empty ocean with only ~44 of 193 pins visible. Fitting the content
-  // width to the frame makes the first load full and useful — the dense
-  // middle band (Vice City) fills the frame and far more pins are
-  // visible. North/south edges crop on wide screens, as before — pan or
-  // zoom out to see them. The legacy illustration keeps the old
-  // cover-fit (its pins span the whole illustration).
+  // Default framing (first load + reset + FULL LEONIDA): fit the WHOLE
+  // content box into the frame (contain, not cover). The landmass
+  // occupies only the left ~40% of the square canvas, so cover-fitting
+  // the canvas leaves the first load mostly empty ocean; fitting only
+  // the content width zooms so far in (~271%) that the island's edges
+  // crop and icons clip at the viewport edges. Containing the whole box
+  // shows the entire island on first load, land as large as the frame
+  // allows, with no icons clipped — the remaining space is map ocean.
+  // The legacy illustration keeps the old cover-fit (its pins span the
+  // whole illustration).
   const centerMap = useCallback(() => {
     if (!viewportRef.current) return;
     const { clientWidth, clientHeight } = viewportRef.current;
@@ -778,15 +779,21 @@ export function SatelliteInteractiveMap({
       const boxW =
         ((COMMUNITY_BOUNDS.maxLeft - COMMUNITY_BOUNDS.minLeft) / 100) *
         CANVAS_W;
+      const boxH =
+        ((COMMUNITY_BOUNDS.maxTop - COMMUNITY_BOUNDS.minTop) / 100) *
+        CANVAS_H;
       const cx =
         ((COMMUNITY_BOUNDS.minLeft + COMMUNITY_BOUNDS.maxLeft) / 2 / 100) *
         CANVAS_W;
       const cy =
         ((COMMUNITY_BOUNDS.minTop + COMMUNITY_BOUNDS.maxTop) / 2 / 100) *
         CANVAS_H;
-      // Fit the content width to the frame (94% — a small margin), so the
-      // landmass spans the frame instead of sitting in its left half.
-      const initialZoom = boxW > 0 ? (clientWidth / boxW) * 0.94 : 1;
+      // Contain the whole content box in the frame (94% — a small margin
+      // so edge icons never clip), so the entire island is visible.
+      const initialZoom =
+        boxW > 0 && boxH > 0
+          ? Math.min(clientWidth / boxW, clientHeight / boxH) * 0.94
+          : 1;
       setZoom(initialZoom);
       setPan({
         x: clientWidth / 2 - cx * initialZoom,
@@ -805,25 +812,6 @@ export function SatelliteInteractiveMap({
     }
     setActiveDistrict("all");
   }, [CANVAS_H, edition]);
-
-  // Whole-state overview (FULL LEONIDA button): the old cover-fit of the
-  // full square canvas, so the button truly shows the whole state —
-  // sparse but complete. First load uses the tighter content framing
-  // above instead.
-  const overviewMap = useCallback(() => {
-    if (!viewportRef.current) return;
-    const { clientWidth, clientHeight } = viewportRef.current;
-    const initialZoom = Math.max(
-      clientWidth / CANVAS_W,
-      clientHeight / CANVAS_H,
-    );
-    setZoom(initialZoom);
-    setPan({
-      x: (clientWidth - CANVAS_W * initialZoom) / 2,
-      y: (clientHeight - CANVAS_H * initialZoom) / 2,
-    });
-    setActiveDistrict("all");
-  }, [CANVAS_H]);
 
   const zoomAround = useCallback(
     (nextZoom: number, anchorX?: number, anchorY?: number) => {
@@ -1064,7 +1052,8 @@ export function SatelliteInteractiveMap({
       return;
     }
     if (districtId === "all") {
-      overviewMap();
+      // FULL LEONIDA shows the same whole-island framing as first load.
+      centerMap();
       return;
     }
     const targetZoom = edition === "community" ? 1.8 : d.zoom;
