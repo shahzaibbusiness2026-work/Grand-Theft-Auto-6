@@ -733,6 +733,11 @@ export function SatelliteInteractiveMap({
   const returnFocusRef = useRef<HTMLElement | null>(null);
   const livePanRef = useRef(pan);
   const panFrameRef = useRef<number | null>(null);
+  // True once the user has moved the map themselves (drag, wheel, pinch,
+  // zoom buttons, keyboard, region jump, or POI focus). The auto re-fit
+  // below only runs while this is false, so it never yanks the map out
+  // from under the user. centerMap / reset clears it.
+  const hasInteractedRef = useRef(false);
   const closeFilters = () => {
     setLeftSidebarOpen(false);
     filtersButtonRef.current?.focus();
@@ -742,6 +747,7 @@ export function SatelliteInteractiveMap({
     returnFocusRef.current?.focus();
   };
   const queuePan = (next: { x: number; y: number }) => {
+    hasInteractedRef.current = true;
     livePanRef.current = next;
     if (panFrameRef.current !== null) return;
     panFrameRef.current = window.requestAnimationFrame(() => {
@@ -762,20 +768,70 @@ export function SatelliteInteractiveMap({
     [],
   );
 
+  // The part of the canvas the user can actually SEE, in canvas pixels.
+  // Two things the old fit ignored:
+  //  (1) the open filter panel overlays the left ~300px of the frame
+  //      (#map-filters, absolute over the canvas) — centering in the
+  //      full frame shifts the island ~150px left, so left pins hide
+  //      behind the panel and the right side is empty ocean;
+  //  (2) the frame is a fixed 640–780px tall starting ~620px down the
+  //      page, so on a 768px window only the top ~150px of it is in view
+  //      at scroll 0 — fitting to the full frame height overflows the
+  //      VISIBLE height once the canvas is scrolled into view, cutting
+  //      Vice City and the Keys off the bottom edge.
+  // So the fit uses the visible rect only: width = frame minus the open
+  // panel, height = the canvas height actually visible when the canvas
+  // is scrolled into view (viewport height minus the ~80px scroll
+  // margin the canvas lands at, plus a 16px margin). Measured from the
+  // DOM at call time, so it is correct no matter when centerMap runs.
+  // A panel covering most of the width (mobile overlay) is ignored —
+  // the user closes it to see the map.
+  const visibleMapRect = useCallback(() => {
+    const el = viewportRef.current;
+    if (!el) return null;
+    const cw = el.clientWidth;
+    const ch = el.clientHeight;
+    const panel = document.querySelector("#map-filters");
+    let left = 12;
+    if (panel instanceof HTMLElement) {
+      // offsetLeft/offsetWidth, NOT getBoundingClientRect: the panel
+      // slides in with `animate-in slide-in-from-left duration-200`, and
+      // getBoundingClientRect reads its animated start position (fully
+      // translated off-screen) for the first ~200ms after it opens —
+      // that measured the panel as zero-width and left the island
+      // ~150px left of the visible center on first load. Offsets ignore
+      // the transform and give the panel's final position.
+      const panelRight =
+        panel.offsetLeft + panel.offsetWidth - el.offsetLeft + 12;
+      if (panelRight < cw * 0.6) left = panelRight;
+    }
+    const right = cw - 12;
+    const top = 12;
+    const visibleH = Math.max(
+      240,
+      Math.min(ch, window.innerHeight - 96),
+    );
+    const bottom = Math.min(ch - 12, visibleH);
+    return { left, right, top, bottom, width: right - left, height: bottom - top };
+  }, []);
+
   // Default framing (first load + reset + FULL LEONIDA): fit the WHOLE
-  // content box into the frame (contain, not cover). The landmass
-  // occupies only the left ~40% of the square canvas, so cover-fitting
-  // the canvas leaves the first load mostly empty ocean; fitting only
-  // the content width zooms so far in (~271%) that the island's edges
-  // crop and icons clip at the viewport edges. Containing the whole box
-  // shows the entire island on first load, land as large as the frame
-  // allows, with no icons clipped — the remaining space is map ocean.
-  // The legacy illustration keeps the old cover-fit (its pins span the
-  // whole illustration).
+  // content box into the VISIBLE map area (contain, not cover). The
+  // landmass occupies only the left ~40% of the square canvas, so
+  // cover-fitting the canvas leaves the first load mostly empty ocean;
+  // fitting only the content width zooms so far in (~271%) that the
+  // island's edges crop and icons clip at the viewport edges. Containing
+  // the whole box in the visible area shows the entire island on first
+  // load, land as large as the frame allows, with no icons clipped and
+  // none hidden behind the filter panel — the remaining space is map
+  // ocean. The legacy illustration keeps the old cover-fit (its pins
+  // span the whole illustration).
   const centerMap = useCallback(() => {
     if (!viewportRef.current) return;
     const { clientWidth, clientHeight } = viewportRef.current;
     if (edition === "community") {
+      const rect = visibleMapRect();
+      if (!rect) return;
       const boxW =
         ((COMMUNITY_BOUNDS.maxLeft - COMMUNITY_BOUNDS.minLeft) / 100) *
         CANVAS_W;
@@ -788,16 +844,17 @@ export function SatelliteInteractiveMap({
       const cy =
         ((COMMUNITY_BOUNDS.minTop + COMMUNITY_BOUNDS.maxTop) / 2 / 100) *
         CANVAS_H;
-      // Contain the whole content box in the frame (94% — a small margin
-      // so edge icons never clip), so the entire island is visible.
+      // Contain the whole content box in the VISIBLE area (94% — a small
+      // margin so edge icons never clip), centered on the visible area,
+      // so the entire island is visible at any viewport size.
       const initialZoom =
         boxW > 0 && boxH > 0
-          ? Math.min(clientWidth / boxW, clientHeight / boxH) * 0.94
+          ? Math.min(rect.width / boxW, rect.height / boxH) * 0.94
           : 1;
       setZoom(initialZoom);
       setPan({
-        x: clientWidth / 2 - cx * initialZoom,
-        y: clientHeight / 2 - cy * initialZoom,
+        x: (rect.left + rect.right) / 2 - cx * initialZoom,
+        y: (rect.top + rect.bottom) / 2 - cy * initialZoom,
       });
     } else {
       const initialZoom = Math.max(
@@ -811,20 +868,25 @@ export function SatelliteInteractiveMap({
       });
     }
     setActiveDistrict("all");
-  }, [CANVAS_H, edition]);
+    hasInteractedRef.current = false;
+  }, [CANVAS_H, edition, visibleMapRect]);
 
   const zoomAround = useCallback(
     (nextZoom: number, anchorX?: number, anchorY?: number) => {
+      hasInteractedRef.current = true;
       const next = Math.min(12, Math.max(0.2, nextZoom));
-      const x = anchorX ?? viewportSize.width / 2,
-        y = anchorY ?? viewportSize.height / 2;
+      const rect = visibleMapRect();
+      const x =
+          anchorX ?? (rect ? (rect.left + rect.right) / 2 : viewportSize.width / 2),
+        y =
+          anchorY ?? (rect ? (rect.top + rect.bottom) / 2 : viewportSize.height / 2);
       setPan({
         x: x - ((x - pan.x) / zoom) * next,
         y: y - ((y - pan.y) / zoom) * next,
       });
       setZoom(next);
     },
-    [pan, zoom, viewportSize],
+    [pan, zoom, viewportSize, visibleMapRect],
   );
   useEffect(() => {
     const element = viewportRef.current;
@@ -853,6 +915,7 @@ export function SatelliteInteractiveMap({
       };
       if (shifts[event.key]) {
         event.preventDefault();
+        hasInteractedRef.current = true;
         const [x, y] = shifts[event.key];
         setPan((old) => ({ x: old.x + x, y: old.y + y }));
       } else if (["+", "=", "-", "0"].includes(event.key)) {
@@ -870,6 +933,7 @@ export function SatelliteInteractiveMap({
   const panToCanvasPoint = useCallback(
     (topPct: string, leftPct: string) => {
       if (!viewportRef.current) return;
+      hasInteractedRef.current = true;
       const { clientWidth, clientHeight } = viewportRef.current;
       const targetZoom = Math.max(zoom, edition === "community" ? 3.0 : 1.65);
       setZoom(targetZoom);
@@ -877,18 +941,25 @@ export function SatelliteInteractiveMap({
       const px = (parseFloat(leftPct) / 100) * CANVAS_W;
       const py = (parseFloat(topPct) / 100) * CANVAS_H;
       const offsetX = rightDrawerOpen && clientWidth > 1024 ? -120 : 0;
+      const rect = visibleMapRect();
+      const centerX = rect ? (rect.left + rect.right) / 2 : clientWidth / 2;
+      // Center on the visible area vertically too: after a search the
+      // layout above the canvas grows (~150px), which can push the frame
+      // center below a short viewport and clip the focused pin.
+      const centerY = rect ? (rect.top + rect.bottom) / 2 : clientHeight / 2;
       setPan({
-        x: clientWidth / 2 - px * targetZoom + offsetX,
-        y: clientHeight / 2 - py * targetZoom,
+        x: centerX - px * targetZoom + offsetX,
+        y: centerY - py * targetZoom,
       });
     },
-    [zoom, rightDrawerOpen, edition, CANVAS_H],
+    [zoom, rightDrawerOpen, edition, CANVAS_H, visibleMapRect],
   );
 
   // Center on a specific POI & sync shareable URL
   const focusOnPOI = useCallback(
     (poi: MapPOI) => {
       if (!viewportRef.current) return;
+      hasInteractedRef.current = true;
       trackPublicEvent("map_pin_open");
       returnFocusRef.current = document.activeElement as HTMLElement;
       setClusterMembers([]);
@@ -928,12 +999,20 @@ export function SatelliteInteractiveMap({
       // Adjust center slightly left if right drawer is open
       const offsetX = rightDrawerOpen && clientWidth > 1024 ? -120 : 0;
 
-      const newPanX = clientWidth / 2 - px * targetZoom + offsetX;
-      const newPanY = clientHeight / 2 - py * targetZoom;
+      // Center on the VISIBLE area, not the frame middle — the open
+      // filter panel covers the left ~300px, so a POI centered in the
+      // frame would land behind the panel; and after a search the layout
+      // above the canvas grows, which can push the frame center below a
+      // short viewport and clip the pin.
+      const rect = visibleMapRect();
+      const centerX = rect ? (rect.left + rect.right) / 2 : clientWidth / 2;
+      const centerY = rect ? (rect.top + rect.bottom) / 2 : clientHeight / 2;
+      const newPanX = centerX - px * targetZoom + offsetX;
+      const newPanY = centerY - py * targetZoom;
 
       setPan({ x: newPanX, y: newPanY });
     },
-    [zoom, rightDrawerOpen, edition, CANVAS_H],
+    [zoom, rightDrawerOpen, edition, CANVAS_H, visibleMapRect],
   );
 
   // Center the map BEFORE first paint (layout effect, not a passive effect):
@@ -953,6 +1032,16 @@ export function SatelliteInteractiveMap({
     if (window.innerWidth >= 1024) setLeftSidebarOpen(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Re-fit when the VISIBLE area changes — the filter panel opening or
+  // closing, or the window resizing — because centerMap fits to the
+  // visible area, not the frame. Guarded by hasInteractedRef: once the
+  // user has moved the map themselves, resizing or toggling the panel
+  // must not yank their view back. centerMap itself is stable, so this
+  // runs only when the panel or the frame size actually changes.
+  useLayoutEffect(() => {
+    if (!hasInteractedRef.current) centerMap();
+  }, [leftSidebarOpen, viewportSize, centerMap]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -1056,6 +1145,7 @@ export function SatelliteInteractiveMap({
       centerMap();
       return;
     }
+    hasInteractedRef.current = true;
     const targetZoom = edition === "community" ? 1.8 : d.zoom;
     setZoom(targetZoom);
 
@@ -1074,8 +1164,14 @@ export function SatelliteInteractiveMap({
         100) *
       CANVAS_H;
 
-    const newPanX = clientWidth / 2 - px * targetZoom;
-    const newPanY = clientHeight / 2 - py * targetZoom;
+    // Center on the visible area's horizontal middle (open filter panel
+    // excluded) and vertical middle (viewport-capped), so the district
+    // lands in view, not behind the panel or below a short viewport.
+    const rect = visibleMapRect();
+    const centerX = rect ? (rect.left + rect.right) / 2 : clientWidth / 2;
+    const centerY = rect ? (rect.top + rect.bottom) / 2 : clientHeight / 2;
+    const newPanX = centerX - px * targetZoom;
+    const newPanY = centerY - py * targetZoom;
 
     setPan({ x: newPanX, y: newPanY });
   };
@@ -2567,16 +2663,24 @@ export function SatelliteInteractiveMap({
                     onTouchStart={(event) => event.stopPropagation()}
                     onClick={(event) => {
                       event.stopPropagation();
+                      hasInteractedRef.current = true;
                       setClusterMembers(cluster.members);
                       setRightDrawerOpen(false);
                       const next = Math.min(6, zoom * 1.8);
                       setZoom(next);
+                      const rect = visibleMapRect();
+                      const centerX = rect
+                        ? (rect.left + rect.right) / 2
+                        : viewportSize.width / 2;
+                      const centerY = rect
+                        ? (rect.top + rect.bottom) / 2
+                        : viewportSize.height / 2;
                       setPan({
                         x:
-                          viewportSize.width / 2 -
+                          centerX -
                           (cluster.left / 100) * CANVAS_W * next,
                         y:
-                          viewportSize.height / 2 -
+                          centerY -
                           (cluster.top / 100) * CANVAS_H * next,
                       });
                     }}
