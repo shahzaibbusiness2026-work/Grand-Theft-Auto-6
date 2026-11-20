@@ -2122,12 +2122,12 @@ export function SatelliteInteractiveMap({
                 >
                   {/* Selected Ping Ring */}
                   {isSelected && (
-                    <span className="absolute -inset-3 rounded-full border-2 border-gold bg-gold/30 " />
+                    <span className="absolute -inset-3 rounded-lg border-2 border-gold bg-gold/30 " />
                   )}
 
                   <span
                     className={cn(
-                      "flex h-11 w-11 items-center justify-center rounded-full border-2 border-white text-white shadow-[0_0_15px_rgba(0,0,0,0.9)] transition-all",
+                      "flex h-11 w-11 items-center justify-center rounded-lg border-2 border-white text-white shadow-[0_0_15px_rgba(0,0,0,0.9)] transition-all",
                       isCollected ? "bg-emerald-500" : m.color,
                       (isCollected || m.color === "bg-gold") &&
                         "text-slate-950",
@@ -2135,7 +2135,7 @@ export function SatelliteInteractiveMap({
                         "ring-4 ring-white scale-125 shadow-[0_0_20px_#f59e0b]",
                     )}
                   >
-                    <Icon className="h-3.5 w-3.5" />
+                    <Icon className="h-5 w-5" />
                   </span>
 
                   {/* Tooltip on Hover */}
