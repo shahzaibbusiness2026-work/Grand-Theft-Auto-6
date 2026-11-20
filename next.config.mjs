@@ -147,6 +147,14 @@ const nextConfig = {
       // Withdrawn / empty single pages
       { source: "/easter-eggs", destination: "/gta-6-world", permanent: true },
       { source: "/tracker", destination: "/tools", permanent: true },
+      // Weapon renames (20 Nov 2026): contradicted-identity slugs -> real in-game names.
+      { source: "/weapons/glock-21", destination: "/weapons/capo-pistol", permanent: true },
+      { source: "/weapons/m4-carbine", destination: "/weapons/duke-556", permanent: true },
+      { source: "/weapons/rpg-7", destination: "/weapons/milkor-mark-14-mgl", permanent: true },
+      { source: "/weapons/rpg-7-launcher", destination: "/weapons/milkor-mark-14-mgl", permanent: true },
+      // Remington Pump Shotgun was a fan-guess name for the Fortune & Son Moreland (Moreland 850).
+      { source: "/weapons/remington-pump-shotgun", destination: "/weapons/moreland-850-shotgun", permanent: true },
+      { source: "/weapons/pump-shotgun", destination: "/weapons/moreland-850-shotgun", permanent: true },
     ];
   },
   async headers() {

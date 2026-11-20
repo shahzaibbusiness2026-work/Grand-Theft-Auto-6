@@ -263,10 +263,10 @@
     "kind": "weapons",
     "id": "m4-carbine",
     "field": "GTA VI appearance",
-    "value": "M4 Carbine",
-    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
-    "locator": "Launch Trailer, 1:12 — Lucia aiming an AR-pattern rifle (M4-style, carry handle, STANAG magazine) during a street shootout; second AR-pattern rifle at 0:52. Identification unverified — community-identified, Rockstar has not named this model.",
-    "reviewedAt": "2026-11-18",
+    "value": "Duke 556",
+    "source": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
+    "locator": "Extended Look (Rockstar, 27 Aug 2026) — the in-game pickup prompt names this AR-pattern rifle 'Duke 556'. The same rifle appears in the Launch Trailer at 1:12 (Lucia aiming during a street shootout) and at 0:52. Renamed from 'M4 Carbine' 20 Nov 2026; the old slug /weapons/m4-carbine 301s to /weapons/duke-556.",
+    "reviewedAt": "2026-11-20",
     "reviewer": "Muse"
   },
   {
