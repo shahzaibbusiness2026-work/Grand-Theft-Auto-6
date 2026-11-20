@@ -3196,7 +3196,13 @@ export function SatelliteInteractiveMap({
             {/* Scaled / Panned Coordinate Container */}
             <div
               ref={canvasRef}
-              className="absolute origin-top-left will-change-transform"
+              // No will-change here: promoting the 1400px canvas to one
+              // composited layer makes Chromium rasterize it once at the
+              // max texture size, so at 12x zoom the sharp z5 tiles
+              // paint as a ~2x upscale blur (the pins stay sharp — each
+              // is its own transform layer). Without it the tiles
+              // rasterize tiled at display scale — crisp at max zoom.
+              className="absolute origin-top-left"
               style={{
                 width: `${CANVAS_W}px`,
                 height: `${CANVAS_H}px`,
