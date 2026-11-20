@@ -32,6 +32,7 @@ const GUIDE_SEO_TITLES: Record<string, string> = {
   "gta-6-planes-helicopters-locations": "GTA 6 Planes & Helicopters: Locations",
   "gta-6-ps5-controls": "GTA 6 PS5 Controls: Button Guide",
   "gta-6-standard-vs-ultimate-edition": "GTA 6 Standard vs Ultimate Edition",
+  "gta-6-ultimate-edition-bonus-locations": "GTA 6 Ultimate Edition Bonus Locations",
   "gta-6-xbox-controls": "GTA 6 Xbox Controls: Button Guide",
   "heists-big-score-guide": "GTA 6 Heists & Robberies Guide",
   "make-money-fast": "How to Make Money in GTA 6",
