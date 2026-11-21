@@ -788,5 +788,55 @@
     "locator": "GamersPrey 'GTA 6 Full Gameplay Walkthrough Part 11', 01:46:00 — weapon HUD reads 'DEEVER TECH DSG SMG' during the Dre'Quan shootout under the bridge",
     "reviewedAt": "2026-11-20",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mer-can-outlaw",
+    "field": "GTA VI appearance",
+    "value": "Mer-Can Outlaw",
+    "source": "https://www.youtube.com/watch?v=VddjFHhO5eY",
+    "locator": "GameRiot 'GTA 6 Gameplay Walkthrough Part 12 - FIRST STORE ROBBERY', 15:00 — Pay 'N' Spray (Port Gellhorn) stats panel reads 'MER-CAN / OUTLAW', blue/teal Can-Am-style buggy, Speed 3.3 / Accel 5.8 / Off-road 8.4, 'Purchased'. Corroborated by gta6library, gta6everything, damnmodz, overgear. Renamed from 'Nagasaki Outlaw' 21 Nov 2026; the old slug /vehicles/nagasaki-outlaw 301s to /vehicles/mer-can-outlaw.",
+    "reviewedAt": "2026-11-21",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-yosemite-1500",
+    "field": "GTA VI appearance",
+    "value": "Declasse Yosemite 1500",
+    "source": "https://www.youtube.com/watch?v=VddjFHhO5eY",
+    "locator": "GameRiot 'GTA 6 Gameplay Walkthrough Part 12 - FIRST STORE ROBBERY', 43:00 — in-game HUD name card 'DECLASSE / YOSEMITE 1500', yellow crew-cab pickup with pink lightning livery + 'Yosemite' tailgate script, nitrous prompt.",
+    "reviewedAt": "2026-11-21",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-manchez",
+    "field": "GTA VI appearance",
+    "value": "Maibatsu Manchez",
+    "source": "https://www.youtube.com/watch?v=VddjFHhO5eY",
+    "locator": "GameRiot 'GTA 6 Gameplay Walkthrough Part 12 - FIRST STORE ROBBERY', 41:01 — in-game HUD name card 'MAIBATSU / MANCHEZ' while Lucia rides the motorcycle at night.",
+    "reviewedAt": "2026-11-21",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-crawler",
+    "field": "GTA VI appearance",
+    "value": "Canis Crawler",
+    "source": "https://www.youtube.com/watch?v=VddjFHhO5eY",
+    "locator": "GameRiot 'GTA 6 Gameplay Walkthrough Part 12 - FIRST STORE ROBBERY', 27:27 — beige/white Jeep-style pickup tailgate reads 'CRAWLER' + 'CANIS'; 29:00 on-screen text \"'82 Crawler -> Moses\" at Moses' garage.",
+    "reviewedAt": "2026-11-21",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-toros",
+    "field": "GTA VI appearance",
+    "value": "Pegassi Toros",
+    "source": "https://www.youtube.com/watch?v=yN6IhaZltkI",
+    "locator": "GamersPrey 'GTA 6 Full Gameplay Walkthrough Part 13 | FULL GAME 4K No Commentary', 36:00 — red performance SUV with black tribal livery at a gated entrance; fender badge reads 'TOROS' (verified by clean-file crop). Corroborated by gta6db.io and overgear.",
+    "reviewedAt": "2026-11-21",
+    "reviewer": "Muse"
   }
 ]

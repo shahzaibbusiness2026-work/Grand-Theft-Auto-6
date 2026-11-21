@@ -155,6 +155,8 @@ const nextConfig = {
       // Remington Pump Shotgun was a fan-guess name for the Fortune & Son Moreland (Moreland 850).
       { source: "/weapons/remington-pump-shotgun", destination: "/weapons/moreland-850-shotgun", permanent: true },
       { source: "/weapons/pump-shotgun", destination: "/weapons/moreland-850-shotgun", permanent: true },
+      // Vehicle rename (21 Nov 2026): pre-launch community name -> real in-game manufacturer.
+      { source: "/vehicles/nagasaki-outlaw", destination: "/vehicles/mer-can-outlaw", permanent: true },
     ];
   },
   async headers() {
