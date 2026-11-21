@@ -20,7 +20,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-type ControlRow = { action: string; note?: string; ps5: string; xbox: string };
+type ControlRow = { action: string; note?: string; ps5: string; xbox: string; verified?: boolean };
 type Section = {
   id: string;
   group: string;
@@ -46,7 +46,6 @@ const SECTIONS: Section[] = [
     rows: [
       { action: "Pause menu", ps5: "Options", xbox: "Menu" },
       { action: "Change camera", note: "cycles to first-person in GTA V", ps5: "Touchpad (press)", xbox: "View (press)" },
-      { action: "Interaction menu (GTA Online)", ps5: "Touchpad (hold)", xbox: "View (hold)" },
       { action: "Open map", ps5: "Options → Map", xbox: "Menu → Map" },
     ],
   },
@@ -58,13 +57,13 @@ const SECTIONS: Section[] = [
     rows: [
       { action: "Move", ps5: "L Stick", xbox: "L Stick" },
       { action: "Look / camera", ps5: "R Stick", xbox: "R Stick" },
-      { action: "Sprint", note: "tap repeatedly, or hold — depends on Sprint Mode", ps5: "✕", xbox: "A" },
+      { action: "Sprint", note: "tap repeatedly, or hold — depends on Sprint Mode", ps5: "✕", xbox: "A", verified: true },
       { action: "Jump / Climb", ps5: "□", xbox: "X" },
       { action: "Stealth mode", ps5: "L3", xbox: "L Stick" },
       { action: "Look behind", ps5: "R3", xbox: "R Stick" },
-      { action: "Enter / exit vehicle", ps5: "△", xbox: "Y" },
-      { action: "Take cover", ps5: "R1", xbox: "RB" },
-      { action: "Contextual interaction", note: "talk, pick up, open doors", ps5: "D-Pad Right", xbox: "D-Pad Right" },
+      { action: "Enter / exit vehicle", ps5: "△", xbox: "Y", verified: true },
+      { action: "Take cover", ps5: "R1", xbox: "RB", verified: true },
+      { action: "Contextual interaction", note: "talk, pick up, open doors", ps5: "D-Pad Right", xbox: "D-Pad Right", verified: true },
     ],
   },
   {
@@ -76,7 +75,7 @@ const SECTIONS: Section[] = [
       { action: "Aim weapon", ps5: "L2", xbox: "LT" },
       { action: "Fire weapon", ps5: "R2", xbox: "RT" },
       { action: "Reload", ps5: "○", xbox: "B" },
-      { action: "Melee attack", note: "close to a target", ps5: "○", xbox: "B" },
+      { action: "Melee attack", note: "close to a target", ps5: "○", xbox: "B", verified: true },
       { action: "Dodge / combat roll", note: "while aiming", ps5: "□", xbox: "X" },
       { action: "Weapon wheel", ps5: "L1 (hold)", xbox: "LB (hold)" },
       { action: "Quick weapon cycle", ps5: "L1 (tap)", xbox: "LB (tap)" },
@@ -108,7 +107,7 @@ const SECTIONS: Section[] = [
       { action: "Radio — next / previous station", note: "tap to change station", ps5: "D-Pad L / R", xbox: "D-Pad L / R" },
       { action: "Radio wheel", ps5: "D-Pad L (hold)", xbox: "D-Pad L (hold)" },
       { action: "Cinematic camera", note: "while driving", ps5: "○", xbox: "B" },
-      { action: "Phone", ps5: "D-Pad Up", xbox: "D-Pad Up" },
+      { action: "Phone", ps5: "D-Pad Up", xbox: "D-Pad Up", verified: true },
       { action: "Exit vehicle", ps5: "△", xbox: "Y" },
     ],
   },
@@ -202,7 +201,7 @@ const SECTIONS: Section[] = [
     title: "Phone",
     icon: Smartphone,
     rows: [
-      { action: "Open phone", ps5: "D-Pad Up", xbox: "D-Pad Up" },
+      { action: "Open phone", ps5: "D-Pad Up", xbox: "D-Pad Up", verified: true },
       { action: "Navigate phone", ps5: "D-Pad", xbox: "D-Pad" },
       { action: "Select", ps5: "✕", xbox: "A" },
       { action: "Back / hang up", ps5: "○", xbox: "B" },
@@ -229,7 +228,7 @@ const FILTERS: { id: string; label: string; icon: LucideIcon }[] = [
 const FAQS = [
   {
     q: "Is this the official GTA 6 control layout?",
-    a: "No. Rockstar has not published one. This is GTA 5's default layout, which Rockstar has kept consistent for a decade. It will be corrected against the real in-game layout from PS5 play at launch on 19 November 2026.",
+    a: "No. Rockstar has not published one. This page starts from GTA 5's default layout, which Rockstar has kept consistent for a decade. Rows marked Verified have been checked against the game since launch on 19 November 2026; the rest are still provisional.",
   },
   {
     q: "How do you switch between Lucia and Jason?",
@@ -237,15 +236,15 @@ const FAQS = [
   },
   {
     q: "Does GTA 6 have first-person mode?",
-    a: "Not confirmed. GTA 5 added first-person on PS4, Xbox One and PC; Rockstar has said nothing about it for GTA VI.",
+    a: "Yes — players found a first-person mode in the game at launch, and you can save while using it. It is not an official setting: it works through a glitch, you leave it only by reloading a save, and a future patch may remove it.",
   },
   {
     q: "Can I remap controls on PS5 or Xbox?",
     a: "Only through presets and settings (targeting mode, sprint mode, sensitivity, adaptive triggers). Full button-by-button remapping needs the console's accessibility controller settings.",
   },
   {
-    q: "Will this page change at launch?",
-    a: "Yes. Every mapping will be checked against the real game on PS5 from 19 November and corrected where Rockstar changed it.",
+    q: "Which controls are verified?",
+    a: "Melee (Circle / B), interaction (D-Pad Right), take cover (R1 / RB), entering and exiting vehicles (Triangle / Y), sprint (tap or hold) and opening the phone (D-Pad Up). The rest of the table still follows GTA V's layout and is provisional until it is checked against the game.",
   },
 ];
 
@@ -278,7 +277,14 @@ function SectionCard({ section }: { section: Section }) {
               className="grid grid-cols-[minmax(0,1fr)_120px_120px] items-center gap-2 border-b border-slate-100 py-3 last:border-b-0 dark:border-white/5 sm:grid-cols-[minmax(0,1fr)_140px_140px]"
             >
               <div className="min-w-0">
-                <p className="text-[15px] font-semibold text-slate-800 dark:text-slate-200">{r.action}</p>
+                <p className="text-[15px] font-semibold text-slate-800 dark:text-slate-200">
+                  {r.action}
+                  {r.verified ? (
+                    <span className="ml-2 inline-flex items-center rounded-full bg-emerald-500/15 px-2 py-0.5 align-middle text-[11px] font-bold text-emerald-600 dark:text-emerald-300">
+                      Verified
+                    </span>
+                  ) : null}
+                </p>
                 {r.note ? <p className="text-[13px] leading-snug text-slate-500">{r.note}</p> : null}
               </div>
               <div className="flex justify-center">
@@ -313,7 +319,8 @@ export function ControlsClient() {
         </h2>
         <div className="mt-2 h-[3px] w-10 rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500" aria-hidden />
         <p className="mt-2 text-base text-slate-600 dark:text-slate-400">
-          Here&apos;s a complete breakdown of the controls, based on GTA 5&apos;s layout and current information.
+          Rows marked Verified match GTA VI&apos;s in-game layout as confirmed since launch. Unmarked rows follow
+          GTA V&apos;s default layout and are provisional — Rockstar has not published an official layout.
         </p>
       </div>
 

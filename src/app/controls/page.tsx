@@ -8,7 +8,7 @@ import { ControlsClient } from "./controls-client";
 export const metadata: Metadata = {
   openGraph: pageOpenGraph("/controls"),
   title: "GTA 6 Controls: PS5 & Xbox Button List",
-  description: "GTA 6 controls in one place: on-foot, driving, shooting and menus for PS5 and Xbox. Provisional layout — Rockstar has not published the official one yet.",
+  description: "GTA 6 controls for PS5 & Xbox: rows marked Verified match the in-game layout; the rest follows GTA V's layout. Rockstar has not published an official layout.",
   alternates: { canonical: "/controls" },
 };
 
@@ -37,7 +37,7 @@ export default function ControlsPage() {
 
           <div className="relative">
             <p className="inline-flex rounded-full border border-transparent bg-violet-600 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-white dark:border-violet-400/40 dark:bg-violet-500/10 dark:text-violet-200">
-              Provisional Reference
+              Post-Launch Reference
             </p>
             <h1 className="mt-4 font-display text-6xl font-black uppercase leading-none tracking-tight sm:text-7xl">
               GTA VI{" "}
@@ -46,10 +46,11 @@ export default function ControlsPage() {
               </span>
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300/90">
-              Rockstar has not published GTA 6&apos;s official control layout. This reference follows GTA 5&apos;s
-              default layout — the scheme Rockstar has kept consistent for a decade — and will be corrected against
-              the real in-game layout at launch, from PS5 play on 19 November 2026. Anything GTA VI has actually shown
-              is labelled as shown; everything else is the GTA V layout, provisionally.
+              Rockstar has not published GTA 6&apos;s official control layout. This reference starts from GTA 5&apos;s
+              default layout — the scheme Rockstar has kept consistent for a decade. Rows marked Verified match the
+              in-game layout as confirmed since launch on 19 November 2026; everything else is still the GTA V
+              layout, provisionally. First-person mode exists in the game, but it is not an official setting — see
+              below.
             </p>
 
             <section className="mt-8 rounded-2xl border border-amber-300 bg-amber-50 p-5 dark:border-amber-400/40 dark:bg-amber-400/10 sm:p-6">
@@ -68,12 +69,21 @@ export default function ControlsPage() {
                   layout is unconfirmed.
                 </li>
                 <li>
-                  <strong className="text-amber-800 dark:text-amber-200">The phone is shown</strong> throughout the trailers, with
-                  social-media apps. The button to open it is unconfirmed.
+                  <strong className="text-amber-800 dark:text-amber-200">The phone opens with D-Pad Up</strong> — the same as GTA V,
+                  and how cheat codes are entered. See the{" "}
+                  <Link href="/news/gta-6-cheat-codes" className="font-bold underline">cheat codes guide</Link>.
                 </li>
                 <li>
-                  <strong className="text-amber-800 dark:text-amber-200">First-person mode is not confirmed</strong> for GTA VI. Neither
-                  are special abilities for Lucia or Jason.
+                  <strong className="text-amber-800 dark:text-amber-200">First-person mode exists in GTA VI</strong> — players found
+                  it in the game at launch. It is not an official setting: it works through a glitch, you leave it
+                  only by reloading a save, and a patch may remove it. See{" "}
+                  <Link href="/news/gta-6-first-person-mode" className="font-bold underline">first-person mode</Link>.
+                  Special abilities for Lucia or Jason are still unconfirmed.
+                </li>
+                <li>
+                  <strong className="text-amber-800 dark:text-amber-200">Melee, interaction, take cover and sprint are verified.</strong>{" "}
+                  Melee is Circle / B, interaction is D-Pad Right, take cover is R1 / RB, and sprint is tap or hold
+                  depending on Sprint Mode. These rows are marked Verified below.
                 </li>
               </ul>
             </section>

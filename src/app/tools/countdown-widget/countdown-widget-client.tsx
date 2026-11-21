@@ -57,7 +57,7 @@ export function CountdownWidgetClient() {
 
   const embedCode = useMemo(() => {
     const s = SIZES[size];
-    return `<iframe src="${EMBED_BASE_URL}?size=${size}" width="${s.width}" height="${s.height}" frameborder="0" title="GTA 6 Countdown" loading="lazy"></iframe>`;
+    return `<iframe src="${EMBED_BASE_URL}?size=${size}" width="${s.width}" height="${s.height}" frameborder="0" title="GTA 6 Launch" loading="lazy"></iframe>`;
   }, [size]);
 
   const handleCopy = () => {
@@ -114,13 +114,14 @@ export function CountdownWidgetClient() {
         {/* Target date card */}
         <div className="lg:col-span-5 card-surface p-6 rounded-3xl border border-border">
           <h2 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2 mb-3">
-            <CalendarClock className="h-4 w-4 text-gold-light" /> Counting Down To
+            <CalendarClock className="h-4 w-4 text-gold-light" /> Launch Day
           </h2>
           <p className="font-display text-xl font-black text-foreground">November 19, 2026</p>
-          <p className="text-xs text-muted-foreground mt-1">Midnight local time &bull; confirmed release time</p>
+          <p className="text-xs text-muted-foreground mt-1">Midnight local time &bull; the game is out now</p>
           <p className="text-xs leading-relaxed text-muted-foreground mt-3 flex gap-1.5">
             <Info className="h-3.5 w-3.5 shrink-0 mt-0.5 text-gold-light" />
-            Rockstar Support confirms GTA VI releases at midnight local time on November 19, 2026, in all regions — so this countdown targets midnight in your time zone.
+            GTA VI released at midnight local time on 19 November 2026 in all regions. The timer reached zero at
+            launch — the widget now shows the game is out.
           </p>
         </div>
       </div>
@@ -143,29 +144,30 @@ export function CountdownWidgetClient() {
             style={{ width: "100%", maxWidth: previewSize.width }}
           >
             <span className="text-[11px] font-black uppercase tracking-[0.25em] text-neutral-400">
-              GTA 6 Launches In
+              {parts.live ? "GTA 6 Launches In" : "GTA 6 Is Out Now"}
             </span>
-            <div className="flex items-center gap-2 sm:gap-3">
-              {units.map((u) => (
-                <div key={u.label} className="text-center">
-                  <div className="font-mono text-2xl sm:text-3xl font-black text-gold-light tabular-nums">
-                    {u.value}
+            {parts.live ? (
+              <div className="flex items-center gap-2 sm:gap-3">
+                {units.map((u) => (
+                  <div key={u.label} className="text-center">
+                    <div className="font-mono text-2xl sm:text-3xl font-black text-gold-light tabular-nums">
+                      {u.value}
+                    </div>
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mt-0.5">
+                      {u.label}
+                    </div>
                   </div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mt-0.5">
-                    {u.label}
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm font-bold text-neutral-300">Launched 19 November 2026 — see you in Leonida!</p>
+            )}
             <Link
               href="/"
               className="text-[10px] font-semibold text-neutral-500 hover:text-gold-light transition-colors inline-flex items-center gap-1"
             >
               Powered by Taish Gaming <ExternalLink className="h-2.5 w-2.5" />
             </Link>
-            {!parts.live && (
-              <span className="text-xs font-bold text-emerald-400">GTA 6 is out now — see you in Leonida!</span>
-            )}
           </div>
         </div>
         <p className="text-xs text-muted-foreground text-center mt-3">
@@ -196,7 +198,7 @@ export function CountdownWidgetClient() {
           </Button>
           <p className="text-xs text-muted-foreground flex items-center gap-1.5">
             <Info className="h-3.5 w-3.5 text-gold-light" />
-            Copy the code above and paste it into your website to show the live countdown.
+            Copy the code above and paste it into your website to show the launch widget.
           </p>
         </div>
       </div>

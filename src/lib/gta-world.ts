@@ -821,48 +821,56 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
             "name": "Chaco's",
             "observation": "Signage spotted in Extended Look footage. No further details confirmed.",
             "source": "Extended Look (fan-spotted)",
+            "sourceHref": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
             "tier": "Community identification"
       },
       {
             "name": "Juicy Joes",
             "observation": "Signage spotted in Extended Look footage. No further details confirmed.",
             "source": "Extended Look (fan-spotted)",
+            "sourceHref": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
             "tier": "Community identification"
       },
       {
             "name": "Perkins Deli",
             "observation": "Signage spotted in Extended Look footage. No further details confirmed.",
             "source": "Extended Look (fan-spotted)",
+            "sourceHref": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
             "tier": "Community identification"
       },
       {
             "name": "Lickety Split Ice Cream Parlor",
             "observation": "Signage spotted in Extended Look footage. No further details confirmed.",
             "source": "Extended Look (fan-spotted)",
+            "sourceHref": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
             "tier": "Community identification"
       },
       {
             "name": "Edgy Veggie",
             "observation": "Signage spotted in Extended Look footage. No further details confirmed.",
             "source": "Extended Look (fan-spotted)",
+            "sourceHref": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
             "tier": "Community identification"
       },
       {
             "name": "Wow That's Fowl",
             "observation": "Signage spotted in Extended Look footage. No further details confirmed.",
             "source": "Extended Look (fan-spotted)",
+            "sourceHref": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
             "tier": "Community identification"
       },
       {
             "name": "Homeslice",
             "observation": "Signage spotted in Extended Look footage. No further details confirmed.",
             "source": "Extended Look (fan-spotted)",
+            "sourceHref": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
             "tier": "Community identification"
       },
       {
             "name": "Jack of Hearts",
             "observation": "Strip club in Crosstown, Vice City, owned by Boobie Ike; Dre’Quan Priest handles entertainment booking. Interior in Trailer 1, appearances in Trailer 2, official screenshots and artwork, and the Extended Look (“Make It Rain Mondays” poster; Jason throwing money at a dancer).",
             "source": "Trailer 1 + Trailer 2 + official screenshots + Extended Look",
+            "sourceHref": "https://www.youtube.com/watch?v=QdBZY2fkU-0",
             "tier": "Observed in official media",
             "image": "/img/world/nightclubs-jack-of-hearts.jpg",
             "imageAlt": "The Jack of Hearts neon sign outside the club in GTA VI"
@@ -877,12 +885,14 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
             "name": "NINE1NINE",
             "observation": "Nightclub in Vice City; seen in Trailer 1 signage and visited in Trailer 2.",
             "source": "Trailer 1 + Trailer 2",
+            "sourceHref": "https://www.youtube.com/watch?v=QdBZY2fkU-0",
             "tier": "Observed in official media"
       },
       {
             "name": "Effluvia",
             "observation": "Rooftop bar in Downtown Vice City; scene of the Extended Look meeting with Brian and Lori Heder.",
             "source": "Extended Look",
+            "sourceHref": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
             "tier": "Observed in official media"
       },
       {
@@ -895,6 +905,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
             "name": "Uncle Jack’s Liquor",
             "observation": "Port Gellhorn liquor store; trailers show a robbery here in Trailer 1’s closing scene (Jason + Lucia). An observed trailer action, not a confirmed gameplay system.",
             "source": "Trailer 1",
+            "sourceHref": "https://www.youtube.com/watch?v=QdBZY2fkU-0",
             "tier": "Observed in official media"
       },
       {
@@ -907,6 +918,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
             "name": "Keys bars (generic)",
             "observation": "Rockstar’s Keys description says “the bars are loaded.” No individual Keys bar is named by Rockstar.",
             "source": "rockstargames.com/VI",
+            "sourceHref": "https://www.rockstargames.com/VI",
             "tier": "Rockstar confirmed"
       }
     ],

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import { readPublicShowcase } from "@/lib/player-showcase-server";
 import { portfolioTotals } from "@/lib/player-portfolio";
@@ -104,6 +105,13 @@ export default async function PublicCollection({
             </section>
           ))}
         </div>
+        <p className="text-sm text-muted-foreground">
+          Something wrong with this profile?{" "}
+          <Link href="/contact" className="font-semibold underline">
+            Report it
+          </Link>{" "}
+          — please include this page&apos;s link in your message.
+        </p>
       </article>
     </SiteShell>
   );

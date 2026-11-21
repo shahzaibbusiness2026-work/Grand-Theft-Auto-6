@@ -9,8 +9,8 @@ import { pageOpenGraph } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
     openGraph: pageOpenGraph("/tools/countdown-widget"),
-  title: "GTA 6 Countdown: Release Time in Your Zone",
-  description: "GTA 6 launches 19 November 2026 on PS5 and Xbox, preload from 10 November. Live countdown in your timezone, local launch time and a free embed.",
+  title: "GTA 6 Release Date & Launch Timeline",
+  description: "GTA 6 launched 19 November 2026 on PS5 and Xbox at local midnight, with pre-loading from 10 November. Launch timeline, time zones and a free embed widget.",
 
   alternates: { canonical: "/tools/countdown-widget" },
 };
@@ -29,7 +29,7 @@ export default function CountdownWidgetPage() {
                 itemListElement: [
                   { "@type": "ListItem", position: 1, name: "Home", item: "https://www.taishgaming.com/" },
                   { "@type": "ListItem", position: 2, name: "Tools", item: "https://www.taishgaming.com/tools" },
-                  { "@type": "ListItem", position: 3, name: "GTA 6 Release Time & Countdown", item: "https://www.taishgaming.com/tools/countdown-widget" },
+                  { "@type": "ListItem", position: 3, name: "GTA 6 Release Date & Launch Timeline", item: "https://www.taishgaming.com/tools/countdown-widget" },
                 ],
               }
             ],
@@ -52,15 +52,16 @@ export default function CountdownWidgetPage() {
             <Code2 className="h-3 w-3" /> Free Embed Widget
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-            GTA 6 <span className="text-primary">RELEASE TIME &amp; COUNTDOWN</span>
+            GTA 6 <span className="text-primary">RELEASE DATE &amp; LAUNCH TIMELINE</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            GTA 6 launches November 19, 2026 on PlayStation 5 and Xbox Series X|S,
-            at local midnight in your region. Digital pre-loading opens November 10:
+            GTA 6 launched on 19 November 2026 on PlayStation 5 and Xbox Series X|S,
+            at local midnight in every region. Digital pre-loading opened on 10 November:
             at midnight local time on PS5, and at 12 a.m. GMT worldwide on Xbox Series X|S
-            (November 9 evening in the US). The pre-load file needs up to 212 GB
-            depending on your device. The live countdown below tracks launch day,
-            and the widget is free to embed on your site or stream. The timer counts down to local midnight on 19 November 2026 in your timezone and shows the pre-load date alongside it. Pick a size below to copy the free embed code for your own page — it shows the same live countdown there.
+            (9 November evening in the US). The pre-load file needs up to 212 GB
+            depending on your device. The widget below reached zero at launch and now
+            shows the game is out — and it is still free to embed on your site or stream
+            as a launch-time reference. Pick a size below to copy the embed code.
           </p>
           <TimezoneNoteClient />
         </div>
