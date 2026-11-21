@@ -349,6 +349,12 @@ export function EvidenceComparison({
         Swipe a table sideways on mobile to see every selection. Open “Source &
         review” for the evidence behind a published value.
       </p>
+      <p className={styles.status}>
+        Reviews marked “Muse” are done by Taish Gaming&apos;s research
+        assistant, which checks each claim against official footage and
+        reporting under the editor&apos;s review — see the{" "}
+        <a href="/editorial-policy">editorial policy</a>.
+      </p>
     </section>
   );
 }

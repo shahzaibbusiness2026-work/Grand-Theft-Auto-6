@@ -41,6 +41,13 @@ export default function Page() {
           review date and reviewer. Attribute third-party reporting. Anonymous
           claims and community guesses remain labelled as speculation.
         </p>
+        <p>
+          Catalog evidence is reviewed by Muse, the publication&apos;s research
+          assistant, which checks each claim against official footage and
+          reporting; the editor reviews corrections. A catalog page that names
+          Muse as reviewer means the claim was checked this way — it is not a
+          claim that Muse played the game or spoke to Rockstar.
+        </p>
         <h2 className="text-2xl font-bold">Unknowns stay unknown</h2>
         <p>
           Do not fill missing GTA VI data with GTA V values, class averages or

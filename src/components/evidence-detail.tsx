@@ -120,6 +120,15 @@ export function EvidenceDetail({
           </p>
         )}
       </section>
+      <p className="text-sm text-muted-foreground">
+        Evidence reviews are done by Muse, Taish Gaming&apos;s research
+        assistant: it checks each claim against official footage and reporting,
+        and the editor reviews corrections. See the{" "}
+        <Link href="/editorial-policy" className="underline">
+          editorial policy
+        </Link>
+        .
+      </p>
       <p>
         We do not substitute GTA V statistics or class averages for missing GTA
         VI data. Official footage may establish an appearance without proving

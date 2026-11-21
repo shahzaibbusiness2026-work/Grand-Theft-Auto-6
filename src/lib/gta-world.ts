@@ -948,6 +948,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
             "name": "Port Gellhorn cheap motels",
             "observation": "Rockstar's official Port Gellhorn description includes cheap motels as part of the town's fabric. No individual motel names are given.",
             "source": "rockstargames.com/VI",
+            "sourceHref": "https://www.rockstargames.com/VI/only-in-leonida",
             "tier": "Rockstar confirmed"
       },
       {
@@ -960,6 +961,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
             "name": "Starlet Motel (Port Gellhorn)",
             "observation": "Roadside motel; Jason and Lucia's motel room in Trailer 1 (~1:12, the 'Trust?' scene), a parking-lot fight in Trailer 2 (~1:54), the room again (~2:25), and again in the Extended Look (~25:58). Bookable lodging, prices, and safehouse function not confirmed by Rockstar.",
             "source": "Trailer 1 + Trailer 2 + Extended Look",
+            "sourceHref": "https://www.youtube.com/watch?v=QdBZY2fkU-0&t=72s",
             "tier": "Observed in official media",
             "image": "/img/regions/port-gellhorn-starlet-motel.webp",
             "imageAlt": "The Starlet Motel in Port Gellhorn"
@@ -986,6 +988,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
             "name": "Banner Hotel & Spa",
             "observation": "Signage spotted in Extended Look footage.",
             "source": "Extended Look (fan-spotted)",
+            "sourceHref": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
             "tier": "Community identification"
       },
       {

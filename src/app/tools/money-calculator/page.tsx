@@ -96,6 +96,65 @@ export default function MoneyCalculatorPage() {
         </div>
 
         <MoneyCalculatorClient />
+
+        {/* Worked example + assumptions (illustrative figures only) */}
+        <section className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="card-surface p-6 rounded-3xl border border-border space-y-3">
+            <h2 className="font-display text-base font-bold text-foreground">
+              Worked example
+            </h2>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Using the tool&apos;s starting figures — $50,000 saved, a
+              $2,850,000 goal, $35,000 per mission, $120,000 per hour and 2.5
+              hours a day — here is what the calculator does with them. Every
+              figure is an example you can change; none of them is a verified
+              GTA VI price or payout.
+            </p>
+            <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted-foreground">
+              <li>
+                Remaining to save: $2,850,000 − $50,000 ={" "}
+                <strong className="text-foreground">$2,800,000</strong>.
+              </li>
+              <li>
+                Missions needed: $2,800,000 ÷ $35,000 ={" "}
+                <strong className="text-foreground">80 missions</strong>.
+              </li>
+              <li>
+                Hours needed: $2,800,000 ÷ $120,000 ={" "}
+                <strong className="text-foreground">23.3 hours</strong>.
+              </li>
+              <li>
+                Playing days: 23.3 ÷ 2.5 ={" "}
+                <strong className="text-foreground">9.3 days</strong> — so the
+                goal date lands 10 calendar days after you start.
+              </li>
+            </ul>
+          </div>
+          <div className="card-surface p-6 rounded-3xl border border-border space-y-3">
+            <h2 className="font-display text-base font-bold text-foreground">
+              Assumptions &amp; limits
+            </h2>
+            <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted-foreground">
+              <li>
+                Your earning rate is assumed constant — no mission variance,
+                no expenses and no in-game fees or taxes.
+              </li>
+              <li>
+                It assumes you play every day at the hours you set. A day off
+                pushes the goal date back by a day.
+              </li>
+              <li>
+                It does not account for story-gated unlocks, one-time payouts
+                or money you spend along the way.
+              </li>
+              <li>
+                Verified GTA VI prices, payouts and required play time are not
+                available — the calculator plans from your assumptions, it does
+                not predict the game economy.
+              </li>
+            </ul>
+          </div>
+        </section>
       </div>
     </SiteShell>
   );
