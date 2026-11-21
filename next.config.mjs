@@ -157,6 +157,9 @@ const nextConfig = {
       { source: "/weapons/pump-shotgun", destination: "/weapons/moreland-850-shotgun", permanent: true },
       // Vehicle rename (21 Nov 2026): pre-launch community name -> real in-game manufacturer.
       { source: "/vehicles/nagasaki-outlaw", destination: "/vehicles/mer-can-outlaw", permanent: true },
+      // Duplicate consolidation (22 Nov 2026): the 02:00 hourly watch published a second
+      // Florida Joker article on the same story. The longer, better-sourced one wins.
+      { source: "/news/gta-6-florida-joker-credits-role", destination: "/news/gta-6-florida-joker-credits", permanent: true },
     ];
   },
   async headers() {
