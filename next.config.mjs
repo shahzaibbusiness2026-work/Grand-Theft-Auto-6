@@ -144,8 +144,8 @@ const nextConfig = {
       { source: "/rankings/best-shotguns", destination: "/weapons", permanent: true },
       { source: "/rankings/best-snipers", destination: "/weapons", permanent: true },
       { source: "/rankings/best-weapons-overall", destination: "/weapons", permanent: true },
-      // Withdrawn / empty single pages
-      { source: "/easter-eggs", destination: "/gta-6-world", permanent: true },
+      // Easter Eggs: withdrawn list replaced by the published launch-day guide (21 Nov 2026).
+      { source: "/easter-eggs", destination: "/guides/gta-6-easter-eggs-found-first-24-hours", permanent: true },
       { source: "/tracker", destination: "/tools", permanent: true },
       // Weapon renames (20 Nov 2026): contradicted-identity slugs -> real in-game names.
       { source: "/weapons/glock-21", destination: "/weapons/capo-pistol", permanent: true },
