@@ -1,6 +1,7 @@
 import { OptionalIntegrations } from "@/components/optional-integrations";
 import { WebVitals } from "@/components/web-vitals";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getSeoSettings } from "@/lib/services/seo";
 import { getSiteSettings } from "@/lib/services/settings";
@@ -18,6 +19,10 @@ const fontSans = {
 };
 
 const FALLBACK_SITE_URL = "https://www.taishgaming.com";
+
+// Google Analytics 4 — stream "Taish Gaming", https://www.taishgaming.com.
+// Installed 22 Nov 2026 (user's GA4 setup). Public measurement ID, not a secret.
+const GA_MEASUREMENT_ID = "G-1TEX9MNXDX";
 
 /**
  * Site-wide metadata is CMS-driven (admin → SEO settings / site settings),
@@ -131,6 +136,19 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
         />
+        {/* Google tag (GA4) — loads on every page */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
       </head>
       <body
         suppressHydrationWarning
