@@ -948,5 +948,15 @@
     "locator": "Waxman Island Robbery Opportunity #1 — Quarter Mile ES9 Pistol, upstairs shack table, Chatfield Storage & Logistics",
     "reviewedAt": "2026-11-22",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "zhang-wu-type-9",
+    "field": "GTA VI appearance",
+    "value": "Zhang Wu Type 9",
+    "source": "https://www.youtube.com/watch?v=ECk0VuRa7p0",
+    "locator": "GameRiot Part 18, 39:00",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
   }
 ]
