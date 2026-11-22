@@ -22,7 +22,7 @@ export default function TermsPage() {
             Terms of Service
           </h1>
           <p className="text-xs text-muted-foreground">
-            Last Updated: October 29, 2026
+            Last Updated: November 23, 2026
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
             These terms govern your use of Taish Gaming. Taish Gaming is an independent, unofficial fan site — it is not affiliated with, endorsed by, or connected to Rockstar Games or Take-Two Interactive. If you do not agree to these terms, please do not use the site.
@@ -83,14 +83,14 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">7. Disclaimer of Warranties</h2>
             <p>
-              Taish Gaming is provided on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind, either express or implied. Information regarding unreleased gameplay mechanics or release windows is subject to change at any time by Rockstar Games, and pre-launch information on this site may turn out to be incomplete or incorrect.
+              Taish Gaming is provided on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind, either express or implied. Information about the game may change at any time — Rockstar Games can update, patch, or alter gameplay — and information on this site may turn out to be incomplete or incorrect.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">8. Limitation of Liability</h2>
             <p>
-              To the fullest extent permitted by law, Taish Gaming is not liable for any loss or damage arising from your use of, or reliance on, pre-launch information, estimates, or fan-made tools on this site. Use the site’s information at your own judgment, and verify important details against official Rockstar Games sources.
+              To the fullest extent permitted by law, Taish Gaming is not liable for any loss or damage arising from your use of, or reliance on, information, estimates, or fan-made tools on this site. Use the site’s information at your own judgment, and verify important details against official Rockstar Games sources.
             </p>
           </section>
 

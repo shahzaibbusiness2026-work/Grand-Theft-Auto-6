@@ -34,7 +34,7 @@ export default function AboutPage() {
             Independent GTA 6 Database
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Taish Gaming is an independent fan project that catalogs the vehicles, weapons, districts, missions, and easter eggs spotted so far in Grand Theft Auto VI — built from trailers, official news, and community research, with every claim labelled by how solid its evidence is.
+            Taish Gaming is an independent fan project that catalogs the vehicles, weapons, districts, missions, and easter eggs of Grand Theft Auto VI — built from official trailers and news, first-hand gameplay, and community research, with every claim labelled by how solid its evidence is.
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export default function AboutPage() {
               <Link href="/map" className="font-bold text-foreground underline">Interactive map</Link> — Leonida points of interest spotted in official footage, each labelled with its evidence level.
             </li>
             <li className="rounded-xl border border-border bg-card p-4">
-              <Link href="/news" className="font-bold text-foreground underline">News &amp; guides</Link> — researched articles and pre-release guides that say plainly what is known, what is reported, and what is still speculation.
+              <Link href="/news" className="font-bold text-foreground underline">News &amp; guides</Link> — researched articles and guides that say plainly what is known, what is reported, and what is still speculation.
             </li>
           </ul>
         </div>
@@ -118,9 +118,9 @@ export default function AboutPage() {
 
         {/* Corrections + after launch */}
         <div className="max-w-4xl space-y-4">
-          <h2 className="font-display text-2xl font-bold text-foreground">Corrections, and what happens after launch</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground">Corrections, and how we update</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Pre-launch information changes fast, and we get things wrong sometimes. If you spot an error, tell us through the <Link href="/contact" className="font-bold text-foreground underline">contact page</Link> and we will fix it. From the November 19, 2026 launch onward, pre-launch reporting on this site is replaced with first-hand gameplay information as it is checked in game.
+            Information about a live game changes fast, and we get things wrong sometimes. If you spot an error, tell us through the <Link href="/contact" className="font-bold text-foreground underline">contact page</Link> and we will fix it. Since the November 19, 2026 launch, pre-launch reporting on this site is being replaced with first-hand gameplay information as it is checked in game.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
             For the fine print, see our <Link href="/terms" className="font-bold text-foreground underline">Terms of Service</Link>, <Link href="/disclaimer" className="font-bold text-foreground underline">Disclaimer</Link>, and <Link href="/privacy" className="font-bold text-foreground underline">Privacy Policy</Link>.
