@@ -938,5 +938,15 @@
     "locator": "GameRant Vespucci Mansion guide (21 Nov 2026) — legendary Kingpin Heathen assault rifle among the mansion's four Key Valuables, alongside the Royal Ruby Emerus and two safes (~$9,000). Corroborated by Sportskeeda (same location + $9,000 safes). No stats published yet — all null/TBA.",
     "reviewedAt": "2026-11-22",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "quarter-mile-es9",
+    "field": "GTA VI appearance",
+    "value": "Quarter Mile ES9",
+    "source": "https://gamerant.com/gta-6-nitrous-emerus-supercar-location-waxman-island-robbery/",
+    "locator": "Waxman Island Robbery Opportunity #1 — Quarter Mile ES9 Pistol, upstairs shack table, Chatfield Storage & Logistics",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
   }
 ]
