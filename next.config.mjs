@@ -55,6 +55,10 @@ const nextConfig = {
       // Trailer 2 consolidation: also mirrored here (not only the CMS rule)
       // because the middleware CMS fetch can time out and drop the 301.
       { source: "/news/gta-6-trailer-2-breakdown", destination: "/news/trailer-2-breakdown-analysis", permanent: true },
+      // FPS consolidation (22 Nov 2026 weekly audit): the pre-launch
+      // 30fps-target article duplicates the DF performance article.
+      // Unique facts were folded into the performance article first.
+      { source: "/news/gta-6-fps-30-fps-ps5-xbox-ps5-pro", destination: "/news/gta-6-fps-performance", permanent: true },
       { source: "/articles", destination: "/news", permanent: true },
       // Editorial consolidation (P0 SEO fix): /blog duplicates the /news
       // hub around the same articles. /news is canonical; /blog 301s to it.
