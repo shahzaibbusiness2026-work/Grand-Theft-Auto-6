@@ -908,5 +908,35 @@
     "locator": "Polygon guide (21 Nov 2026) — Pelican Valley Outpost: computer password CLEAVES, safe code 0072, boathouse code 0212; SMG picked up from the caretaker's corpse in the boathouse. Corroborated by YouTube 'Free Legendary SMG Hidden in GTA 6' (same location + codes).",
     "reviewedAt": "2026-11-22",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "purple-drank-emerus",
+    "field": "GTA VI appearance",
+    "value": "Purple Drank Emerus",
+    "source": "https://gamerant.com/gta-6-nitrous-emerus-supercar-location-waxman-island-robbery/",
+    "locator": "GameRant guide (21 Nov 2026) — Waxman Island Robbery Opportunity: Purple Drank Emerus in a shipping container at Chatfield Storage and Logistics; same shack holds a safe (code 5800); register $29,000 at Pay 'n' Spray per GameRant (other guides $28,000-$29,900, price stays TBA). Corroborated by Game8 dedicated page, Deltias, gta6gps, ggwtb and video guides; spelling Emerus settled.",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "royal-ruby-emerus",
+    "field": "GTA VI appearance",
+    "value": "Royal Ruby Emerus",
+    "source": "https://gamerant.com/gta-6-vespucci-mansion-kingpin-heathen-rifle-ar-progen-royal-ruby-emerus-super-car/",
+    "locator": "GameRant guide (21 Nov 2026) — Vespucci Mansion Robbery: Progen Royal Ruby Emerus outside the mansion on Vespucci Island, no lock or tracker; sell ~$30,000, register ~$30,000 (igamepost $33,000/$29,900, figures stay TBA). Corroborated by Game8 dedicated page, FandomWire, Sportskeeda, gta6gps and video guides.",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "kingpin-heathen",
+    "field": "GTA VI appearance",
+    "value": "Kingpin Heathen",
+    "source": "https://gamerant.com/gta-6-vespucci-mansion-kingpin-heathen-rifle-ar-progen-royal-ruby-emerus-super-car/",
+    "locator": "GameRant Vespucci Mansion guide (21 Nov 2026) — legendary Kingpin Heathen assault rifle among the mansion's four Key Valuables, alongside the Royal Ruby Emerus and two safes (~$9,000). Corroborated by Sportskeeda (same location + $9,000 safes). No stats published yet — all null/TBA.",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
   }
 ]
