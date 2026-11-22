@@ -23,7 +23,7 @@ export default function DisclaimerPage() {
             Disclaimer
           </h1>
           <p className="text-xs text-muted-foreground">
-            Last Updated: October 29, 2026
+            Last Updated: November 23, 2026
           </p>
         </div>
 
@@ -40,26 +40,26 @@ export default function DisclaimerPage() {
             </p>
             <p>
               Screenshots, trailer stills, and artwork shown on this site are
-              the property of Rockstar Games and are used for non-commercial
-              editorial commentary only. A small number of game screenshots
-              come from public game catalogs and are credited on the page
-              where they appear. We claim no ownership over any of this
-              imagery, and we do not remove source watermarks. If you are a
-              rights holder and would like an image removed, please reach out
-              through our contact page — takedown requests are handled first.
+              the property of Rockstar Games and are used for editorial
+              commentary. A small number of game screenshots come from public
+              game catalogs and are credited on the page where they appear. We
+              claim no ownership over any of this imagery, and we do not
+              remove source watermarks. If you are a rights holder and would
+              like an image removed, please reach out through our contact page
+              — takedown requests are handled first.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-foreground">2. Pre-Launch Information</h2>
+            <h2 className="font-display text-xl font-bold text-foreground">2. Post-Launch Information</h2>
             <p>
-              Grand Theft Auto VI has not been released yet (launch is scheduled
-              for November 19, 2026). The information on this site is based on
-              official trailers, previews, and public reporting. Anything that
-              has not been officially confirmed is labelled with its evidence
-              level — observed in official media, credible report, community
-              identification, or speculation — and content will be corrected
-              with first-hand gameplay information after launch.
+              Grand Theft Auto VI launched on November 19, 2026. This site
+              includes historical pre-release reporting alongside current
+              gameplay guides. Anything that has not been officially confirmed
+              is labelled with its evidence level — observed in official
+              media, credible report, community identification, or
+              speculation — and content is corrected with first-hand gameplay
+              information as it is verified.
             </p>
           </section>
 
@@ -110,10 +110,11 @@ export default function DisclaimerPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl font-bold text-foreground">7. Corrections &amp; Takedowns</h2>
             <p>
-              Pre-launch information changes fast and mistakes happen. When an
-              error is pointed out to us, we correct it. Rights holders may
-              request the removal of an image or other material at any time
-              through our contact page, and such requests are prioritized.
+              Information about a live game changes fast and mistakes happen.
+              When an error is pointed out to us, we correct it. Rights
+              holders may request the removal of an image or other material at
+              any time through our contact page, and such requests are
+              prioritized.
             </p>
           </section>
 
