@@ -7,8 +7,8 @@ import { ControlsClient } from "./controls-client";
 
 export const metadata: Metadata = {
   openGraph: pageOpenGraph("/controls"),
-  title: "GTA 6 Controls: PS5 & Xbox Button List",
-  description: "GTA 6 controls for PS5 & Xbox: rows marked Verified match the in-game layout; the rest follows GTA V's layout. Rockstar has not published a layout.",
+  title: "GTA 6 Controls: Every PS5 & Xbox Button",
+  description: "Every GTA 6 button on PS5 and Xbox — driving, shooting, flying, swimming — with verified rows marked. Rockstar has not published an official layout.",
   alternates: { canonical: "/controls" },
 };
 

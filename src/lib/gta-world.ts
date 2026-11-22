@@ -793,9 +793,9 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     image: "/img/world/restaurants-night-market.jpg",
     imageAlt: "Trailer still: a night street scene in Leonida",
     title: "Restaurants & Food",
-    seoTitle: "GTA 6 Restaurants & Food Outlets",
+    seoTitle: "Where to Get Food in GTA 6: Restaurants",
     seoDescription:
-      "Food outlets and restaurants visible in official GTA 6 footage, with sources for every venue and what each sighting does and does not confirm.",
+      "Where to eat in GTA 6: every restaurant and food outlet spotted in official footage, with sources for each venue — no menus or prices confirmed yet.",
     intro:
       "This page lists food venues only where signage or a name is visible in official trailers or on Rockstar's pages. No menus, prices, or store locations are invented, and no venue is claimed as enterable unless footage shows it.",
     notConfirmed: [

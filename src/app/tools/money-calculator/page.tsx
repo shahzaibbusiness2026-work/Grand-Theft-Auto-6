@@ -9,9 +9,9 @@ import type { Metadata } from "next";
 import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   openGraph: pageOpenGraph("/tools/money-calculator"),
-  title: "GTA 6 Money Calculator: Hours & Goal Date",
+  title: "GTA 6 Money Calculator: How Long to Save",
   description:
-    "Estimate savings time from your own income and goal assumptions. Example inputs are illustrative, not verified GTA VI payouts or prices.",
+    "Work out how long it takes to save for your GTA 6 goal — enter income per mission and hours played. Example figures only, not verified GTA VI payouts.",
 
   alternates: { canonical: "/tools/money-calculator" },
 };
