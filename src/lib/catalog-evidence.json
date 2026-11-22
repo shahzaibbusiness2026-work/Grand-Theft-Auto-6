@@ -838,5 +838,45 @@
     "locator": "GamersPrey 'GTA 6 Full Gameplay Walkthrough Part 13 | FULL GAME 4K No Commentary', 36:00 — red performance SUV with black tribal livery at a gated entrance; fender badge reads 'TOROS' (verified by clean-file crop). Corroborated by gta6db.io and overgear.",
     "reviewedAt": "2026-11-21",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-sentinel-85",
+    "field": "GTA VI appearance",
+    "value": "'85 Übermacht Sentinel",
+    "source": "https://www.youtube.com/watch?v=u3yw2pnRQFc",
+    "locator": "GameRiot 'GTA 6 Gameplay Walkthrough Part 15', 28:30 — trunk badge reads 'SENTINEL' above the Übermacht roundel on a red sedan, plate HRP R69. Corroborated as the '85 Übermacht Sentinel (BMW E30 M3) by IGN, gta6db.io ('Verified in game'), gta6library game-files list, planetgta6 and mapheist.",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-montagne-pickup",
+    "field": "GTA VI appearance",
+    "value": "Vapid Montagne Pickup",
+    "source": "https://www.youtube.com/watch?v=YzoV-bJCkKU",
+    "locator": "GameRiot 'GTA 6 Gameplay Walkthrough Part 16', 1:00:00 — in-game vehicle menu reads 'VAPID / MONTAGNE PICKUP' on a white crew-cab pickup in a dirt lot: Sell Value $1,595, Cost to Register $5,000, Access Locked, Security Alarmed, Tracker None. Corroborated by Dexerto wiki, gta6db.io ('Verified in game'), gta6info, gta6intel and GTA Wiki.",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-gorse-425",
+    "field": "GTA VI appearance",
+    "value": "Fortune & Son Gorse 425",
+    "source": "https://www.youtube.com/watch?v=1He0X_LaM4U",
+    "locator": "GameRiot 'GTA 6 Gameplay Walkthrough Part 14', 45:00 — weapon HUD reads 'GORSE 425 SHOTGUN' while Lucia stands over a downed NPC in a trailer-park yard. Corroborated by Dexerto wiki ($850, 5 rounds 12-Gauge, pump-action, Big Shots and Chuck's Tackle & Shot), IGN, thegameswiki and gta6info.",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "scrapper-vf5c-smg",
+    "field": "GTA VI appearance",
+    "value": "Scrapper VF5C",
+    "source": "https://www.youtube.com/watch?v=BXYQWf0bhtY",
+    "locator": "Kuvani 'GTA VI - Drug Gang Hideout with Legendary Weapon (Scrapper VF5C SMG)', 09:45–11:00 — Lucia loots the fourth-floor weapon case in the La Cascara Motel Illegal Operation, Port Gellhorn ('+ SMG Ammo' and '+ Frag Grenade' notifications; SMG with suppressor-shaped barrel carried out). Name not shown in frame; location match exact per IGN, thegameswiki, GameRant, showgamer and gta6info, all placing the Scrapper VF5C SMG in that case.",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
   }
 ]
