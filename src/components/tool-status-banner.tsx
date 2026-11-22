@@ -13,8 +13,8 @@ export function ToolStatusBanner({ status }: { status: "simulator" | "postlaunch
         )}
       >
         {isSimulator
-          ? "Pre-release simulator — this tool uses estimated and example values until verified after launch."
-          : "Post-launch data — exact in-game data for this tool is not verified yet and will be added after launch."}
+          ? "Planning calculator — this tool uses example values you can change. Figures are estimates unless labelled as verified in-game data."
+          : "Post-launch data — exact in-game data for this tool is not verified yet and will be added as it is checked in game."}
       </div>
     </div>
   );
