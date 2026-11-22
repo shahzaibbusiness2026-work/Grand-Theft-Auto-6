@@ -958,5 +958,25 @@
     "locator": "GameRiot Part 18, 39:00",
     "reviewedAt": "2026-11-22",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-rhino",
+    "field": "GTA VI appearance",
+    "value": "Hauners Rhino",
+    "source": "https://www.marinecorpstimes.com/off-duty/military-culture/2026/11/19/how-to-steal-a-fighter-jet-and-battle-tank-in-gta-6/",
+    "locator": "Mile Zero Air Station, Goose Key — Hauners Rhino parked at the south end of the base, near the hangars",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "black-eagle-import-m306-tmr",
+    "field": "GTA VI appearance",
+    "value": "Black Eagle Import M306 TMR",
+    "source": "https://detonated.com/all-gta-6-unique-weapon-variant-locations/",
+    "locator": "Black Eagle warehouse, Balsero — Lucia only; weapon case past the barred door behind the cargo truck",
+    "reviewedAt": "2026-11-22",
+    "reviewer": "Muse"
   }
 ]
