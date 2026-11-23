@@ -3245,7 +3245,6 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     featured: false,
   },
   {
-  {
     id: "benefactor-nightlight-schafter",
     slug: "benefactor-nightlight-schafter",
     name: "Benefactor Nightlight Schafter",
@@ -3297,6 +3296,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     notes: "Game8: a '65 Dundreary Chino with a modern muscle overhaul, kept at a Little Cuba boatyard by the Guardia Brothers; in-game menu ratings Speed 6, Acceleration 6.6, Asphalt Handling 3.6, Off-Road Handling 4.2, Strength 3 — reported in notes only, so all stats stay null. Mobalytics: parked near the giant gate in the centre of the yard; open the front gate before driving it out or you will be trapped, and sell it for $11,700 — GTA6Info cites a GTABase WAiNK scan card with a $5,335 stolen sell value and $17,750 registration, so both figures stay TBA. gamerhour: stealing the red car is the only valuable that immediately triggers hostile enemies; open the main gate from the security booth first. Game8 lists 2 seats; mapninja lists 2 in one row and 4 in another — seating stays null.",
     featured: false,
   },
+  {
     id: "royal-ruby-emerus",
     slug: "royal-ruby-emerus",
     name: "Royal Ruby Emerus",
@@ -4544,7 +4544,6 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     manufacturer: "BZI",
   },
   {
-  {
     id: "the-guardian-es18",
     slug: "the-guardian-es18",
     name: "The Guardian ES18",
@@ -4619,6 +4618,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     notes: "IGN Wiki lists it as a Kozlov 7.62x39mm full-auto compact assault rifle with in-game menu ratings Damage 5.4, Accuracy 2.5, Handling 7.8, Range 4.5 and a 40-round magazine — reported in notes only, so all stats stay null. Sportskeeda, ShowGamer and thegameswiki agree it is sold at Martez Empeños in Little Cuba for $3,570 — price stays TBA until read from an in-game menu. Yellow-and-orange frame with worn wood near the barrel and a domino decal ringed with pink flowers, per thegameswiki.",
     manufacturer: "Kozlov",
   },
+  {
     id: "zhang-wu-type-9",
     slug: "zhang-wu-type-9",
     name: "Zhang Wu Type 9",
