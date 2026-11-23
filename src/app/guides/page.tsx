@@ -8,22 +8,22 @@ import { itemListJsonLd } from "@/lib/page-metadata";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "GTA 6 Guides: Map, Characters & Release",
+  title: "GTA 6 Guides: Map, Characters & Money",
   description:
-    "Explore GTA 6 map evidence, Leonida destinations, character backgrounds and release planning, with sources and clear limits on unverified gameplay claims.",
+    "Explore GTA 6 map evidence, Leonida destinations, character backgrounds and money methods, with sources and clear limits on unverified gameplay claims.",
   alternates: { canonical: "/guides" },
   openGraph: { type: "website", url: "/guides",
-    title: "GTA 6 Guides: Map, Characters & Release",
+    title: "GTA 6 Guides: Map, Characters & Money",
     description:
-      "Source-linked map, character and release guides, with official facts separated from unverified gameplay claims.",
+      "Source-linked map, character and money guides, with confirmed gameplay separated from unverified claims.",
     images: [{ url: "/img/hero-vice-skyline-hd.jpg", alt: "Taish Gaming — Leonida skyline" }],
   },
   twitter: {
     card: "summary_large_image",
     images: ["/img/hero-vice-skyline-hd.jpg"],
-    title: "GTA 6 Guides: Map, Characters & Release",
+    title: "GTA 6 Guides: Map, Characters & Money",
     description:
-      "Source-linked map, character and release guides, with official facts separated from unverified gameplay claims.",
+      "Source-linked map, character and money guides, with confirmed gameplay separated from unverified claims.",
   },
 };
 
