@@ -97,6 +97,10 @@ export default function ControlsPage() {
                 Xbox you can change targeting mode, sprint behaviour (tap vs hold), aiming sensitivity, vibration,
                 adaptive trigger strength (PS5 DualSense) and aircraft control type. Consoles do not offer full
                 button-by-button remapping — for that, use your console&apos;s accessibility controller remapping.
+                For the full button-by-button tables per platform, see the{" "}
+                <Link href="/guides/gta-6-ps5-controls" className="font-bold underline">PS5 controls guide</Link>{" "}
+                and the{" "}
+                <Link href="/guides/gta-6-xbox-controls" className="font-bold underline">Xbox controls guide</Link>.
               </p>
             </section>
 

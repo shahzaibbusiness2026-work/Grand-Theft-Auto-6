@@ -1,4 +1,5 @@
 import { WorldMediaFigure } from "@/components/world-media-figure";
+import Link from "next/link";
 import { publicLocation } from "@/lib/world-evidence";
 import { SiteShell } from "@/components/shells";
 import { LocationsClient } from "./locations-client";
@@ -106,6 +107,17 @@ export default async function LocationsPage() {
             An editorial directory of provisional fan-map locations. Pin
             placement and business gameplay are unverified; these entries are
             not official map coordinates.
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
+            Pair this directory with the{" "}
+            <Link href="/guides/vice-city-map-guide" className="font-semibold text-primary underline">
+              GTA 6 map guide
+            </Link>{" "}
+            and the{" "}
+            <Link href="/map" className="font-semibold text-primary underline">
+              interactive map
+            </Link>
+            .
           </p>
         </div>
 

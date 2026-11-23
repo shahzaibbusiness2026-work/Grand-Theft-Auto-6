@@ -1,5 +1,6 @@
 export { metadata } from "./metadata";
 export const revalidate = 3600;
+import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import {
   CatalogPageHeader,
@@ -66,6 +67,16 @@ export default async function CatalogPage({
         </SectionErrorBoundary>
       </section>
       <RelatedArticles category="Weapons" title="Weapons Guides & News" />
+      <p className="container-site pb-10 text-sm text-muted-foreground">
+        Related guides:{" "}
+        <Link href="/guides/best-weapons-tier-list" className="font-semibold text-primary underline">
+          Weapons guide: names and gameplay footage
+        </Link>
+        {" · "}
+        <Link href="/guides/heists-big-score-guide" className="font-semibold text-primary underline">
+          Heists and robberies
+        </Link>
+      </p>
     </SiteShell>
   );
 }

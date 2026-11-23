@@ -1,5 +1,6 @@
 export { metadata } from "./metadata";
 export const revalidate = 3600;
+import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import {
   CatalogPageHeader,
@@ -66,6 +67,16 @@ export default async function CatalogPage({
         </SectionErrorBoundary>
       </section>
       <RelatedArticles category="Vehicles" title="Vehicles Guides & News" />
+      <p className="container-site pb-10 text-sm text-muted-foreground">
+        Related guides:{" "}
+        <Link href="/guides/gta-6-best-early-cars-steal-keep-guide" className="font-semibold text-primary underline">
+          Best early cars to steal and keep
+        </Link>
+        {" · "}
+        <Link href="/guides/gta-6-planes-helicopters-locations" className="font-semibold text-primary underline">
+          Planes and helicopters: where to find every aircraft
+        </Link>
+      </p>
     </SiteShell>
   );
 }
