@@ -409,7 +409,7 @@ export const ALL_TOOLS: ToolItem[] = (
     },
     {
       id: "tool-settings-guide",
-      status: "postlaunch",
+      status: "verified",
       name: "Settings Guide",
       category: "Guides & Reference",
       desc: "The full settings menu is documented from the live game. This page is a settings reference, not a tested recommendation.",
@@ -419,7 +419,7 @@ export const ALL_TOOLS: ToolItem[] = (
     },
     {
       id: "tool-controls",
-      status: "postlaunch",
+      status: "verified",
       name: "Controls Reference",
       category: "Guides & Reference",
       desc: "PS5 and Xbox controls checked against the live game, with verified rows marked. Rockstar has not published an official button chart.",
