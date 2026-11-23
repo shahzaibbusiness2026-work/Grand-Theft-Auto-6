@@ -797,7 +797,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     seoDescription:
       "Where to eat in GTA 6: every restaurant and food outlet spotted in official footage, with sources for each venue — no menus or prices confirmed yet.",
     intro:
-      "This page lists food venues only where signage or a name is visible in official trailers or on Rockstar's pages. No menus, prices, or store locations are invented, and no venue is claimed as enterable unless footage shows it.",
+      "Where can you get food in GTA 6? Seventeen food and drink venues are visible by name or signage in official footage — but no restaurant has a confirmed menu, price, or eat-to-restore function yet. This page lists every venue only where signage or a name is visible in official trailers or on Rockstar's pages. No menus, prices, or store locations are invented, and no venue is claimed as enterable unless footage shows it.",
     notConfirmed: [
       "No menus, prices, or eat-to-restore mechanics have been confirmed by Rockstar.",
       "A visible restaurant is not proof it can be entered.",

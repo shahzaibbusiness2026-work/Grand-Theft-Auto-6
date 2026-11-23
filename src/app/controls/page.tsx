@@ -100,6 +100,41 @@ export default function ControlsPage() {
               </p>
             </section>
 
+            <section className="mt-8">
+              <h2 className="font-bold text-2xl text-slate-900 dark:text-slate-100">Controls FAQ</h2>
+              <div className="mt-4 space-y-4">
+                <div>
+                  <h3 className="font-bold text-[17px] text-slate-900 dark:text-slate-100">Can I remap buttons on PS5 or Xbox?</h3>
+                  <p className="mt-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+                    Consoles do not offer full button-by-button remapping. You can change targeting mode, sprint
+                    behaviour, aiming sensitivity, vibration, adaptive trigger strength (PS5 DualSense) and aircraft
+                    control type in Settings → Controls — for full remapping, use your console&apos;s accessibility
+                    controller remapping.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-bold text-[17px] text-slate-900 dark:text-slate-100">How do I open the phone in GTA 6?</h3>
+                  <p className="mt-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+                    Press D-Pad Up — the same as GTA V. The phone is also how cheat codes are entered.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-bold text-[17px] text-slate-900 dark:text-slate-100">How do I sprint?</h3>
+                  <p className="mt-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+                    Sprint is tap or hold, depending on your Sprint Mode setting. The sprint row is marked Verified in
+                    the table above.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-bold text-[17px] text-slate-900 dark:text-slate-100">Is there a first-person mode?</h3>
+                  <p className="mt-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+                    First-person mode exists in the game, but it is not an official setting — players found it through
+                    a glitch, you leave it only by reloading a save, and a patch may remove it.
+                  </p>
+                </div>
+              </div>
+            </section>
+
             <p className="mt-8 text-sm text-slate-500">
               Pair this with the{" "}
               <Link href="/settings-guide" className="font-bold text-[#FF2E9A] underline">
