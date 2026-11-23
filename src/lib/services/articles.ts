@@ -11,6 +11,7 @@ import {
 import { cache } from "react";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { PUBLISHED_ARTICLES_TAG } from "@/lib/article-cache";
+import { correctPublishedArticle } from "@/lib/published-editorial-corrections";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
@@ -136,7 +137,10 @@ export const getPublicArticles = cache(async (): Promise<Article[]> => {
       .order("id", { ascending: true });
 
     if (!error && data) {
-      return (data as DatabaseArticleRow[]).filter(hasArticleBody).map(rowToArticle);
+      return (data as DatabaseArticleRow[])
+        .map(correctPublishedArticle)
+        .filter(hasArticleBody)
+        .map(rowToArticle);
     }
     console.error("getPublicArticles: database error", error?.message);
   } catch {
@@ -164,7 +168,7 @@ export const getPublicArticleBySlug = cache(
         .maybeSingle();
 
       if (error) throw new Error("Article data unavailable");
-      if (data) return data as DatabaseArticleRow;
+      if (data) return correctPublishedArticle(data as DatabaseArticleRow);
     } catch {
       // A transient backend failure is not evidence that a published URL is gone.
       // ISR keeps the prior successful render when regeneration throws.

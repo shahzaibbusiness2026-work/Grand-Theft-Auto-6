@@ -31,6 +31,81 @@ const {
   createHeadingIdAllocator,
 } = require("../src/lib/toc.ts");
 const { validClaim, claimsFor } = require("../src/lib/catalog-evidence.ts");
+const {
+  correctPublishedArticle,
+  correctPublishedGuideContent,
+} = require("../src/lib/published-editorial-corrections.ts");
+
+test("the aircraft guide drops the dead reference and retains the route instructions", () => {
+  const slug = "gta-6-planes-helicopters-locations";
+  const instruction = "- **By air:** Use the dirt-mound stunt jump.";
+  const original = instruction + " Our [stunt jumps guide](/guides/best-stunt-jumps-locations) has more on how these jumps work.";
+  assert.equal(correctPublishedGuideContent(slug, original), instruction);
+  assert.equal(correctPublishedGuideContent("unrelated-guide", original), original);
+  assert.equal(correctPublishedGuideContent(slug, instruction), instruction);
+});
+
+test("public editorial corrections retain the album table and respect newer CMS copy", () => {
+  const original = {
+    slug: "gta-6-soundtrack-the-album-out-now",
+    title: "GTA 6 Soundtrack: The Album Is Out Now",
+    excerpt: "Find all 34 tracks.",
+    content: [
+      "One honesty note before the list: Rockstar has not published the running order itself.",
+      "## The full 34-track list",
+      "| # | Song | Artist |",
+      "|---|---|---|",
+      "| 1 | Starting From Zero | Justice |",
+      "The list above follows the order published today by news outlets.",
+    ].join("\n\n"),
+  };
+  const corrected = correctPublishedArticle(original);
+  assert.match(corrected.content, /\[Rockstar’s official 34-track list\]\(https:\/\/www\.rockstargames\.com\/VI\/music\)/);
+  assert.match(corrected.content, /\| 1 \| Starting From Zero \| Justice \|/);
+  assert.doesNotMatch(corrected.content, /has not published the running order/);
+  assert.deepEqual(correctPublishedArticle(corrected), corrected);
+  const edited = { ...original, content: "A newly edited introduction and its own sources." };
+  assert.deepEqual(correctPublishedArticle(edited), edited);
+  const unrelated = { ...original, slug: "future-soundtrack-story" };
+  assert.equal(correctPublishedArticle(unrelated), unrelated);
+});
+
+test("crossplay coverage links both platforms and updates the purchase claim", () => {
+  const article = correctPublishedArticle({
+    slug: "is-gta-6-crossplay",
+    title: "Is GTA 6 Crossplay?",
+    excerpt: "Single player on PS5 and Xbox.",
+    content: [
+      "No — not at launch, and not because Rockstar blocked it. GTA 6 launches as a single-player game.",
+      "The store listings agree. The PlayStation Store lists one player. The Microsoft Store lists only single player.",
+      "| No microtransactions at launch | Confirmed | Zelnick, 17 September 2026 shareholder meeting |",
+    ].join("\n\n"),
+  });
+  assert.match(article.content, /playstation\.com/);
+  assert.match(article.content, /xbox\.com/);
+  assert.match(article.content, /Optional in-game purchases/);
+  assert.doesNotMatch(article.content, /No microtransactions at launch/);
+  assert.deepEqual(correctPublishedArticle(article), article);
+});
+
+test("the seaplane roundup keeps its URL and distinguishes a mission sighting from a spawn", () => {
+  const article = correctPublishedArticle({
+    slug: "gta-6-watercraft-aircraft-guide",
+    title: "From Airboats to Executive Jets: Every GTA 6 Boat, Plane & Helicopter Spotted So Far",
+    excerpt: "Leonida is ocean, swamp, and open sky — so boats and aircraft matter as much as supercars in GTA 6. Here's the full watercraft and aircraft rundown from both trailers and the Extended Look, from the Airgator to the Mammoth Dodo.",
+    subtitle: "Airboats, executive jets, and the Sea Sparrow on the cover",
+    content: "Our vehicle catalog lists each entry with its evidence status. Our vehicle catalog lists each entry with its evidence status.",
+    seo_title: "GTA 6 Seaplane Locations & Water Planes",
+    seo_description: "Where to find seaplanes and water planes in GTA 6 — every boat, plane and helicopter spotted so far, with the scene each one appears in.",
+  });
+  assert.equal(article.slug, "gta-6-watercraft-aircraft-guide");
+  assert.match(article.title, /^GTA 6 Seaplanes/);
+  assert.match(article.excerpt, /fixed free-roam spawn is still unverified/);
+  assert.match(article.seo_description, /fixed Dodo spawn is unverified/);
+  assert.equal(article.content, "Our vehicle catalog lists each entry with its evidence status.");
+  assert.deepEqual(correctPublishedArticle(article), article);
+});
+
 test("zero income cannot produce a completion date or mission count", () => {
   const r = savingsScenario(0, 1000, 0, 0, 3);
   assert.equal(r.missionsNeeded, UNREACHABLE);
