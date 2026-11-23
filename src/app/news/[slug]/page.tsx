@@ -21,6 +21,7 @@ import {
   articleBodyMarkdown,
   articlePublicationDates,
   formatArticleDate,
+  hasArticleBody,
   readingTime,
   publicationImage,
 } from "@/lib/editorial-quality";
@@ -63,6 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     authors: [{ name: byline.name, url: `${base}${byline.path}` }],
     alternates: { canonical },
+    ...(!hasArticleBody(article) ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title,
       description,

@@ -1,8 +1,15 @@
+import htmlBots from "next/dist/shared/lib/router/utils/html-bots.js";
+
+const defaultHtmlLimitedBots = htmlBots.HTML_LIMITED_BOT_UA_RE;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
+  // Send canonicals in the initial head to Googlebot and keep Next's other
+  // crawler and social preview defaults. Human browsers still stream metadata.
+  htmlLimitedBots: new RegExp(`${defaultHtmlLimitedBots.source}|Googlebot`, defaultHtmlLimitedBots.flags),
   devIndicators: false,
   compiler: {
     removeConsole:

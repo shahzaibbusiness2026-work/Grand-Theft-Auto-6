@@ -3,6 +3,7 @@ import {
   readingTime,
   publicationImage,
   editorialProblems,
+  hasArticleBody,
   articlePublicationDates,
   formatArticleDate,
 } from "@/lib/editorial-quality";
@@ -135,7 +136,7 @@ export const getPublicArticles = cache(async (): Promise<Article[]> => {
       .order("id", { ascending: true });
 
     if (!error && data) {
-      return (data as DatabaseArticleRow[]).map(rowToArticle);
+      return (data as DatabaseArticleRow[]).filter(hasArticleBody).map(rowToArticle);
     }
     console.error("getPublicArticles: database error", error?.message);
   } catch {
@@ -222,13 +223,14 @@ export async function saveArticle(
 ) {
   try {
     await assertAdmin();
-    if ((article.status || "published") === "published") {
-      if (!article.content?.trim())
+    const status = article.status || "published";
+    if (status === "published" || status === "scheduled") {
+      if (!hasArticleBody(article))
         return {
           success: false,
-          error: "Add an article body before publishing.",
+          error: "Add article content beyond the headline, summary, or placeholder before publishing or scheduling.",
         };
-      const issues = editorialProblems(article.content);
+      const issues = editorialProblems(article.content || "");
       if (issues.length) return { success: false, error: issues.join(" ") };
     }
     if (article.status === "scheduled") {

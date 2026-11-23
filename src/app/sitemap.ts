@@ -4,6 +4,8 @@ import { getPublicGuides } from "@/lib/services/guides";
 import { createPublicClient } from "@/lib/supabase/public";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import { canonicalOrigin } from "@/lib/site-identity";
+import { articlePublicationDates, hasArticleBody } from "@/lib/editorial-quality";
+import { indexReady } from "@/lib/catalog-evidence";
 import { characterEvidence, CHARACTER_REVIEWED_AT } from "@/lib/character-evidence";
 export const revalidate = 3600;
 const realDate = (value?: string | null) => {
@@ -98,12 +100,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const { data, error } = await createPublicClient()
       .from("articles")
-      .select("slug,content,published_at,updated_at")
+      .select("slug,title,excerpt,content,published_at,updated_at")
       .eq("status", "published");
     if (error) throw error;
     for (const a of data || [])
-      if (a.slug && a.content?.trim()) {
-        const lm = realDate(a.updated_at || a.published_at);
+      if (a.slug && hasArticleBody(a)) {
+        const { published, modified } = articlePublicationDates(a.published_at, a.updated_at);
+        const lm = realDate(modified) || realDate(published);
         articleEntries.push({
           url: base + "/news/" + a.slug,
           lastModified: lm,
@@ -131,8 +134,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // index). Provisional entries are noindex and must not be listed.
   // lastModified is the evidence claim's reviewedAt — the last date the
   // entry's evidence was actually reviewed, not an invented date.
-  const hasEvidence = (e: { claims?: { field?: string }[] }) =>
-    (e.claims || []).some((c) => c.field === "GTA VI appearance");
   const evidenceLastModified = (e: {
     claims?: { field?: string; reviewedAt?: string }[];
   }) => {
@@ -146,13 +147,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   };
   const detailEntries: MetadataRoute.Sitemap = [
     ...vehicles
-      .filter(hasEvidence)
+      .filter(indexReady)
       .map((e) => ({
         url: base + "/vehicles/" + e.slug,
         lastModified: evidenceLastModified(e),
       })),
     ...weapons
-      .filter(hasEvidence)
+      .filter(indexReady)
       .map((e) => ({
         url: base + "/weapons/" + e.slug,
         lastModified: evidenceLastModified(e),

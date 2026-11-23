@@ -28,6 +28,8 @@ const {
   editorialProblems,
   articleBodyMarkdown,
   articlePublicationDates,
+  hasArticleBody,
+  hasGuideBody,
 } = require("../src/lib/editorial-quality.ts");
 const entries = Array.from({ length: 60 }, (_, i) => ({
   id: "entry-" + i,
@@ -226,4 +228,16 @@ test("article heading normalization preserves fenced and indented code examples"
   const { extractHeadings } = require("../src/lib/toc.ts");
   const setext = articleBodyMarkdown("Other section\n===\n\n## Other section", "Page title");
   assert.deepEqual(extractHeadings(setext).map((heading) => heading.id), ["other-section", "other-section-2"]);
+});
+
+test("published stories and guides need useful text beyond a placeholder or summary", () => {
+  const title = "GTA 6 Map Guide";
+  const excerpt = "Explore the Leonida regions.";
+  for (const content of ["", "Coming soon.", "# GTA 6 Map Guide\n\nTBD", "**Explore the Leonida regions.**", "<!-- unpublished -->\n\n![Cover](/img/map.jpg)", "https://www.rockstargames.com/VI"]) {
+    assert.equal(hasArticleBody({ content, title, excerpt }), false, content);
+    assert.equal(hasGuideBody({ content, title, description: excerpt }), false, content);
+  }
+  const content = "## Where is Vice City?\n\nVice City is one of Rockstar’s six featured destinations in Leonida.";
+  assert.equal(hasArticleBody({ content, title, excerpt }), true);
+  assert.equal(hasGuideBody({ content, title, description: excerpt }), true);
 });
