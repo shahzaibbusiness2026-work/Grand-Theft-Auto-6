@@ -191,6 +191,7 @@ export function LocationsClient({
       </div>
 
       {/* Locations Grid */}
+      <h2 className="font-display text-xl font-bold text-foreground">Browse all locations</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredLocations.length === 0 ? (
           <div className="col-span-full card-carbon p-12 text-center">

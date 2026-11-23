@@ -107,7 +107,7 @@ export function ContactClient() {
                 <c.icon className="h-4 w-4" />
               </span>
               <div>
-                <h3 className="font-display text-sm font-bold">{c.title}</h3>
+                <h2 className="font-display text-sm font-bold">{c.title}</h2>
                 {c.lines.map((l) => (
                   <p
                     key={l}
@@ -120,7 +120,7 @@ export function ContactClient() {
             </div>
           ))}
           <div className="card-surface space-y-2 p-4">
-            <h3 className="font-display text-sm font-bold">What to write about</h3>
+            <h2 className="font-display text-sm font-bold">What to write about</h2>
             <ul className="space-y-1.5 text-[13px] text-muted-foreground">
               <li>• A correction — something on a page is wrong or outdated.</li>
               <li>• An image takedown — you own an image we show and want it removed.</li>

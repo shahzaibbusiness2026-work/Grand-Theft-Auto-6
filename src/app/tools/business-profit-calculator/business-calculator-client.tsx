@@ -154,9 +154,9 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct === null ? "Not defined" : met
             )}
           >
             <div className="flex items-center justify-between pb-3 border-b border-border">
-              <h3 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2">
+              <h2 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2">
                 <Building2 className="h-4 w-4 text-accent" /> {bizA.name}
-              </h3>
+              </h2>
             </div>
 
             {/* Purchase Price */}
@@ -371,10 +371,10 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct === null ? "Not defined" : met
             {/* Inputs B */}
             <div className="card-surface p-6 rounded-3xl border border-border shadow-xl space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-border">
-                <h3 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2">
+                <h2 className="font-display text-base font-black uppercase text-foreground flex items-center gap-2">
                   <Building2 className="h-4 w-4 text-cyan-700 dark:text-[#00F0FF]" />{" "}
                   {bizB.name}
-                </h3>
+                </h2>
               </div>
 
               <div>
@@ -563,10 +563,10 @@ Estimated Annualized ROI: ${metricsA.annualRoiPct === null ? "Not defined" : met
 
       {/* VERIFIED ASSET NOTE */}
       <div className="card-surface p-6 rounded-3xl border border-border text-xs text-muted-foreground space-y-2">
-        <h4 className="font-display text-sm font-bold text-foreground flex items-center gap-1.5">
+        <h3 className="font-display text-sm font-bold text-foreground flex items-center gap-1.5">
           <Info className="h-4 w-4 text-cyan-700 dark:text-[#00F0FF]" />{" "}
           Scenario assumptions
-        </h4>
+        </h3>
         <p className="leading-relaxed text-muted-foreground">
           These are editable example inputs, not verified GTA VI businesses,
           prices or earnings. Operating time and costs affect the result. A
