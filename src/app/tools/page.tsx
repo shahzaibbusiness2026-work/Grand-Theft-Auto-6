@@ -158,7 +158,7 @@ export default function ToolsPage() {
                 Need a Custom Leonida Tool?
               </h3>
               <p className="text-xs text-muted-foreground mt-0.5">
-                Our suite is updated as new information becomes available; figures are pre-release estimates unless stated otherwise.
+                Our suite is updated as new information becomes available; figures are estimates unless stated otherwise.
               </p>
             </div>
           </div>

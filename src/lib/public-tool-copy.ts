@@ -53,9 +53,9 @@ export const PUBLIC_TOOL_COPY: Record<string, string> = {
   "/money-guide":
     "Review GTA VI money claims and corrections. Verified payouts, earning methods and efficiency rankings are not available.",
   "/settings-guide":
-    "Rockstar has not published GTA VI's full settings menu. This pre-release page is not a tested settings recommendation.",
+    "The full settings menu is documented from the live game. This page is a settings reference, not a tested recommendation.",
   "/controls":
-    "A provisional PS5 and Xbox reference based on GTA V. Rockstar has not published the official GTA VI control layout.",
+    "A PS5 and Xbox reference checked against the live game, with verified rows marked. Rockstar has not published an official control chart.",
   "/tools/wanted-level-guide":
     "Verified GTA VI police-response data is unavailable here. The displayed star levels, units, escape times and tactics are fictional examples.",
   "/tools/business-income-calculator":
