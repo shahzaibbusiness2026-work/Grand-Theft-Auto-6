@@ -3438,5 +3438,55 @@
     "locator": "June Warehouse, Port Gellhorn — weapon case near the refrigerator, Kolt & Associates Vatra SMG",
     "reviewedAt": "2026-11-23",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "the-guardian-es18",
+    "field": "GTA VI appearance",
+    "value": "The Guardian ES18",
+    "source": "https://screenrant.com/gta-6-unique-weapons-locations/",
+    "locator": "Saber Shipping Yard, Little Cuba — safe in the back office (code 8046), The Guardian ES18 burst pistol",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "guardia-brothers-fra",
+    "field": "GTA VI appearance",
+    "value": "Guardia Brothers FRA",
+    "source": "https://openweb-ign.cdn.zephr.com/wikis/gta-6/Assault_Rifles",
+    "locator": "Casa Guardia, Little Cuba — Casa Guardia Illegal Operation, Guardia Brothers FRA battle rifle",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "little-cuba-hind",
+    "field": "GTA VI appearance",
+    "value": "Little Cuba Hind",
+    "source": "https://openweb-ign.cdn.zephr.com/wikis/gta-6/Assault_Rifles",
+    "locator": "Martez Empeños, Little Cuba — Little Cuba Hind compact assault rifle, $3,570",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-nightlight-schafter",
+    "field": "GTA VI appearance",
+    "value": "Benefactor Nightlight Schafter",
+    "source": "https://mobalytics.gg/gamebase/guides/grand-theft-auto-6-casa-guardia-robbery",
+    "locator": "Casa Guardia, Little Cuba — Benefactor Nightlight Schafter in the compound lot",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dundreary-cherry-bomb-chino",
+    "field": "GTA VI appearance",
+    "value": "Dundreary Cherry Bomb Chino",
+    "source": "https://game8.co/games/GTA-6/archives/639200",
+    "locator": "Saber Shipping Yard, Little Cuba — Dundreary Cherry Bomb Chino convertible lowrider near the exit gate",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Muse"
   }
 ]
