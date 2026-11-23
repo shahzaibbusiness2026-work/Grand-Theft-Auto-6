@@ -3,6 +3,11 @@ const rockstarAlbumRelease =
   "https://www.rockstargames.com/it/newswire/article/k4a8955a93o747/grand-theft-auto-vi-the-album-now-available";
 const playstationListing = "https://www.playstation.com/en-us/games/grand-theft-auto-vi/";
 const xboxListing = "https://www.xbox.com/en-us/games/store/grand-theft-auto-vi/9NP019G7NZXT";
+const ignFirstMission = "https://www.youtube.com/watch?v=3PiR0G3rVw8";
+const gameInformerWildlife =
+  "https://gameinformer.com/exclusive/2026/09/28/exclusive-grand-theft-auto-vi-includes-over-170-animal-species";
+const gamesRadarStatement =
+  "https://www.gamesradar.com/games/grand-theft-auto/as-gta-6-finally-releases-rockstar-boss-sam-houser-issues-rare-statement-we-are-incredibly-grateful-and-look-forward-to-many-more-years-of-sharing-these-experiences-with-you/";
 
 export function correctPublishedGuideContent(slug: string, content: string) {
   if (slug !== "gta-6-planes-helicopters-locations") return content;
@@ -29,7 +34,13 @@ export function correctPublishedArticle<
 
   if (slug === "gta-6-watercraft-aircraft-guide") {
     const sentence = "Our vehicle catalog lists each entry with its evidence status.";
-    const result = { ...article, content: content.replace(sentence + " " + sentence, sentence) };
+    const result = {
+      ...article,
+      content: content
+        .replace(sentence + " " + sentence, sentence)
+        .replace("IGN's PS5 Pro launch gameplay, with", `[IGN's PS5 Pro launch gameplay](${ignFirstMission}), with`)
+        .replace("IGN's PS5 Pro gameplay shows it in the first mission:", `[IGN's PS5 Pro gameplay](${ignFirstMission}) shows it in the first mission after the prologue:`),
+    };
     if (article.title === "From Airboats to Executive Jets: Every GTA 6 Boat, Plane & Helicopter Spotted So Far") {
       result.title = "GTA 6 Seaplanes, Boats and Aircraft: Where They’ve Been Seen";
     }
@@ -83,6 +94,48 @@ export function correctPublishedArticle<
         "Those names establish destinations in the setting; they do not establish the area of a playable map.",
         "The [official printable Leonida map](https://www.rockstargames.com/VI/media) shows where those destinations sit. Rockstar has published no playable area in square kilometres.",
       ),
+    };
+  }
+
+  if (slug === "vice-city-wildlife-ecosystem") {
+    return {
+      ...article,
+      title: article.title === "The Living State: Alligators, Everglades & Dynamic Ecosystems"
+        ? "Are There Alligators in GTA 6? Sightings and Wildlife"
+        : article.title,
+      excerpt: article.excerpt === "Game Informer confirms 170+ animal species in GTA 6 — from alligators in convenience stores to rhesus monkeys. Here's every confirmed creature and what the wildlife system means for gameplay."
+        ? "Yes. Alligators appear in footage from Leonida, including the Grassrivers wetlands. This guide covers documented sightings and explains where repeatable spawn locations remain unverified."
+        : article.excerpt,
+      content: content
+        .replace("Yes — alligators are in GTA 6. They prowl the Grassrivers swamps, turn up in suburban swimming pools, and star in one famous Trailer 1 shot walking through a convenience store.", `Yes. Alligators appear in [Rockstar’s first trailer](https://www.rockstargames.com/VI/trailer-1), including the pool and convenience store scenes. [Game Informer’s wildlife report](${gameInformerWildlife}) also shows an alligator in the Grassrivers wetlands. These sightings establish where alligators were shown. A repeatable free-roam spawn at those locations remains unverified.`)
+        .replace("The headline number comes from Game Informer:", `The headline number comes from [Game Informer’s wildlife report](${gameInformerWildlife}):`),
+    };
+  }
+
+  if (slug === "confirmed-vehicle-list-leonida") {
+    return {
+      ...article,
+      seo_title: article.seo_title === "GTA 6 Vehicles List: Trailer Sightings"
+        ? "GTA 6 Vehicle Sightings: What Footage Shows"
+        : article.seo_title,
+      seo_description: article.seo_description === "GTA 6 vehicles list: trailer sightings with evidence labels, provisional names separated from reviewed claims. No speeds or prices claimed."
+        ? "Learn which GTA 6 vehicle details footage can verify, what remains provisional, and where to browse the vehicle database."
+        : article.seo_description,
+    };
+  }
+
+  if (slug === "gta-6-sam-houser-statement-launch") {
+    return {
+      ...article,
+      content: content
+        .replace(
+          "Houser's full statement, as published by RockstarINTEL from the text provided to GamesRadar, reads:",
+          `Houser provided his statement to [GamesRadar+ on November 18, 2026](${gamesRadarStatement}). Here is the version published by RockstarINTEL:`,
+        )
+        .replace(
+          /^### What did Sam Houser say about GTA 6\?[ \t]*\r?\n(?:[ \t]*\r?\n)*In a statement provided to GamesRadar on launch day,[^\r\n]*/m,
+          "### What did Houser thank players for?\n\nHe thanked players for the ways they celebrate games and for joining Rockstar as it returned to Vice City.",
+        ),
     };
   }
 

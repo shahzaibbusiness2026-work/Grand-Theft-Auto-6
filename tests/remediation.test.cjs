@@ -94,7 +94,7 @@ test("the seaplane roundup keeps its URL and distinguishes a mission sighting fr
     title: "From Airboats to Executive Jets: Every GTA 6 Boat, Plane & Helicopter Spotted So Far",
     excerpt: "Leonida is ocean, swamp, and open sky — so boats and aircraft matter as much as supercars in GTA 6. Here's the full watercraft and aircraft rundown from both trailers and the Extended Look, from the Airgator to the Mammoth Dodo.",
     subtitle: "Airboats, executive jets, and the Sea Sparrow on the cover",
-    content: "Our vehicle catalog lists each entry with its evidence status. Our vehicle catalog lists each entry with its evidence status.",
+    content: "IGN's PS5 Pro launch gameplay, with a mission objective. Our vehicle catalog lists each entry with its evidence status. Our vehicle catalog lists each entry with its evidence status.",
     seo_title: "GTA 6 Seaplane Locations & Water Planes",
     seo_description: "Where to find seaplanes and water planes in GTA 6 — every boat, plane and helicopter spotted so far, with the scene each one appears in.",
   });
@@ -102,7 +102,22 @@ test("the seaplane roundup keeps its URL and distinguishes a mission sighting fr
   assert.match(article.title, /^GTA 6 Seaplanes/);
   assert.match(article.excerpt, /fixed free-roam spawn is still unverified/);
   assert.match(article.seo_description, /fixed Dodo spawn is unverified/);
-  assert.equal(article.content, "Our vehicle catalog lists each entry with its evidence status.");
+  assert.match(article.content, /youtube\.com\/watch\?v=3PiR0G3rVw8/);
+  assert.equal(article.content.match(/Our vehicle catalog lists each entry/g).length, 1);
+  assert.deepEqual(correctPublishedArticle(article), article);
+});
+
+test("the wildlife article cites the source of a sighting and qualifies repeatable spawns", () => {
+  const article = correctPublishedArticle({
+    slug: "vice-city-wildlife-ecosystem",
+    title: "The Living State: Alligators, Everglades & Dynamic Ecosystems",
+    excerpt: "An edited summary that should remain.",
+    content: "Yes — alligators are in GTA 6. They prowl the Grassrivers swamps, turn up in suburban swimming pools, and star in one famous Trailer 1 shot walking through a convenience store.",
+  });
+  assert.match(article.title, /^Are There Alligators in GTA 6/);
+  assert.equal(article.excerpt, "An edited summary that should remain.");
+  assert.match(article.content, /gameinformer\.com\/exclusive/);
+  assert.match(article.content, /repeatable free-roam spawn .* remains unverified/);
   assert.deepEqual(correctPublishedArticle(article), article);
 });
 
