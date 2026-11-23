@@ -1,5 +1,4 @@
 import { catalogArtwork } from "@/lib/catalog-artwork";
-import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from "@/lib/page-metadata";
 import { notFound, permanentRedirect } from "next/navigation";
 import { SiteShell } from "@/components/shells";
 import { EvidenceDetail } from "@/components/evidence-detail";
@@ -25,12 +24,11 @@ export async function generateMetadata({
   const e = await resolve((await params).slug);
   if (!e) notFound();
   const artwork = catalogArtwork("weapons", e);
-  // Text-only entries (no verified image) share the neutral skyline og
-  // image instead of a generic scene that does not show the weapon.
-  const ogImage = artwork ?? {
-    src: DEFAULT_OG_IMAGE,
-    alt: DEFAULT_OG_IMAGE_ALT,
-  };
+  // Exact image or none: entries with no verified artwork get NO og/twitter
+  // image at all. The skyline is not a picture of this weapon, so it must
+  // not stand in for one. (ogImage is null; the metadata below omits images
+  // and downgrades the Twitter card to "summary".)
+  const ogImage = artwork ?? null;
   // The layout appends " | Taish Gaming" (15 chars). Names that would push
   // the rendered title past 60 chars use an absolute title instead, so the
   // full catalog name is kept without truncation.
@@ -55,12 +53,14 @@ export async function generateMetadata({
       type: "website",
       title: baseTitle,
       description,
-      images: [{ url: ogImage.src, alt: ogImage.alt }],
+      ...(ogImage
+        ? { images: [{ url: ogImage.src, alt: ogImage.alt }] }
+        : { images: [] }),
     },
     twitter: {
-      card: "summary_large_image",
+      card: ogImage ? "summary_large_image" : "summary",
       title: e.name + " — GTA VI",
-      images: [ogImage.src],
+      ...(ogImage ? { images: [ogImage.src] } : { images: [] }),
     },
     robots: {
       // Indexed only when the entry has reviewed "GTA VI appearance"
