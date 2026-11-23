@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 import {
   CatalogPageHeader,
@@ -7,33 +6,23 @@ import {
 import { EvidenceCatalog } from "@/components/evidence-catalog";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import styles from "@/components/catalog-ui.module.css";
+import { catalogComparisonMetadata } from "@/lib/catalog-metadata";
+import {
+  COMPARE_PAGE_SIZE,
+  catalogSearchParams,
+  readCatalogState,
+  type CatalogSearchParams,
+} from "@/lib/catalog-url-state";
+import { selectionFromParams } from "@/lib/catalog-selection";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: "GTA 6 Vehicle Comparison Tool | Compare Cars & Evidence",
-  },
-  description:
-    "Compare up to four editorial vehicle identifications with reviewed field-specific evidence. Missing statistics remain unverified.",
-  alternates: { canonical: "/compare/vehicles" },
-  openGraph: { type: "website",
-    url: "/compare/vehicles",
-    title: "GTA 6 Vehicle Comparison Tool | Compare Cars & Evidence",
-    description:
-      "Compare up to four editorial vehicle identifications with reviewed field-specific evidence. Missing statistics remain unverified.",
-    images: ["/img/hero-dark.jpg"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "GTA 6 Vehicle Comparison Tool | Compare Cars & Evidence",
-    description:
-      "Compare up to four editorial vehicle identifications with reviewed field-specific evidence. Missing statistics remain unverified.",
-    images: ["/img/hero-dark.jpg"],
-  },
-};
+type PageProps = { searchParams: Promise<CatalogSearchParams> };
 
-export const revalidate = 3600;
+export async function generateMetadata({ searchParams }: PageProps) {
+  return catalogComparisonMetadata("vehicles", catalogSearchParams(await searchParams));
+}
 
-export default async function ComparisonPage() {
+export default async function ComparisonPage({ searchParams }: PageProps) {
+  const params = catalogSearchParams(await searchParams);
   const entries = await getEvidenceCatalog("vehicles");
   return (
     <SiteShell>
@@ -45,7 +34,13 @@ export default async function ComparisonPage() {
       />
       <div className={styles.area}>
         <CatalogSwitcher kind="vehicles" compare />
-        <EvidenceCatalog kind="vehicles" entries={entries} compare />
+        <EvidenceCatalog
+          kind="vehicles"
+          entries={entries}
+          compare
+          initialState={readCatalogState(params, entries, COMPARE_PAGE_SIZE)}
+          initialSelection={selectionFromParams(params, "vehicles", entries)}
+        />
       </div>
     </SiteShell>
   );

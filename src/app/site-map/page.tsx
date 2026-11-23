@@ -94,9 +94,9 @@ export default function SiteMapPage() {
           desc: "Alternate map view",
         },
         {
-          label: "100% Completion Tracker",
-          href: "/tracker",
-          desc: "Checklist & progress",
+          label: "100% Completion Guide",
+          href: "/guides/100-percent-completion-guide",
+          desc: "Story, exploration and discovery checklist",
         },
       ],
     },

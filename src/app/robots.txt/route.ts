@@ -1,4 +1,5 @@
 import { getSeoSettings } from "@/lib/services/seo";
+import { canonicalOrigin } from "@/lib/site-identity";
 
 export const dynamic = "force-dynamic";
 
@@ -10,12 +11,7 @@ export const dynamic = "force-dynamic";
  */
 export async function GET() {
   const seo = await getSeoSettings();
-  // Same stale-domain guard as sitemap.ts: a saved gta6atlas.com canonical
-  // must never leak into robots.txt again.
-  const adminUrl = seo.canonicalBaseUrl?.startsWith("http") && !seo.canonicalBaseUrl.includes("gta6atlas.com")
-    ? seo.canonicalBaseUrl
-    : null;
-  const baseUrl = adminUrl || process.env.NEXT_PUBLIC_SITE_URL || "https://www.taishgaming.com";
+  const baseUrl = canonicalOrigin(seo.canonicalBaseUrl);
 
   const body =
     seo.robotsTxt && seo.robotsTxt.trim().length > 0

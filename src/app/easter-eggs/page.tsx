@@ -44,7 +44,7 @@ export default function EasterEggsPage() {
           </p>
         </div>
         <div className="mb-8">
-          <WorldMediaFigure path="/easter-eggs" priority />
+          <WorldMediaFigure path="/guides/gta-6-easter-eggs-found-first-24-hours" priority />
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {EGGS.map((egg) => (

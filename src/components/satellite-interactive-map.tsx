@@ -69,6 +69,7 @@ import {
 } from "@/lib/community-map";
 import { CommunityMapTiles } from "./community-map-tiles";
 import { getMapMarkers } from "@/lib/services/map";
+import { parseCanvasPosition } from "@/lib/map-position";
 import { AdminMapMarker } from "@/lib/admin-store";
 
 export interface MapPOI {
@@ -308,7 +309,7 @@ const DISTRICTS = [
     in-panel switcher (panel open) so the two never drift apart. */
 const MAP_STYLE_OPTIONS = [
   { id: "community", label: "Community", icon: Satellite },
-  { id: "official", label: "In-game", icon: MapIcon },
+  { id: "official", label: "Official reference", icon: MapIcon },
   { id: "streets", label: "Streets", icon: Moon },
 ] as const;
 
@@ -416,7 +417,7 @@ const PHOTO_SPOTS: MapPOI[] = [
     subcategoryLabel: "Photo spot",
     type: "Photo spot",
     district: "Vice Beach",
-    desc: "Daytime aerial of Vice Beach — white sand, turquoise water and the Ocean Drive hotels with the Downtown skyline behind. Open photo mode on the sand for the same framing.",
+    desc: "Daytime aerial in Rockstar's trailer showing beachfront hotels and the skyline. The pin marks a suggested area on the community reconstruction.",
     img: "/img/gta-6-vice-city-aerial-trailer.jpg",
     hours: "Day",
     top: "46.5%",
@@ -492,7 +493,7 @@ const PHOTO_SPOTS: MapPOI[] = [
     subcategoryLabel: "Photo spot",
     type: "Photo spot",
     district: "Downtown, Vice City",
-    desc: "A car meet on the waterfront promenade — the classic Snapmatic selfie spot, skyline behind. Official Rockstar Launch Gallery image.",
+    desc: "Cars on a waterfront promenade with the skyline behind, shown in a Rockstar gallery image. The pin marks a suggested area on the community reconstruction.",
     img: "/img/vice-city-24.jpg",
     hours: "Day",
     top: "50.5%",
@@ -645,7 +646,7 @@ export function SatelliteInteractiveMap({
   const allPOIs = useMemo(
     () => [
       ...editorialPOIs,
-      ...PHOTO_SPOTS,
+      ...(edition === "community" ? PHOTO_SPOTS : []),
       ...personalMarkers
         .filter((marker) =>
           edition === "community"
@@ -676,7 +677,7 @@ export function SatelliteInteractiveMap({
     async function loadLiveMapMarkers() {
       try {
         const markers = await getMapMarkers();
-        if (markers && markers.length > 0) {
+        if (markers) {
           const livePois = markers
             .filter((m) => m.visible !== false && !m.id.startsWith("gtadb-"))
             .map(adminMarkerToPoi)
@@ -705,10 +706,10 @@ export function SatelliteInteractiveMap({
               deepLinkTimeoutsRef.current.push(
                 window.setTimeout(() => focusOnPOI(matched), 250),
               );
-            } else if (pending.top && pending.left) {
-              setTimeout(
-                () => panToCanvasPoint(pending.top!, pending.left!),
-                250,
+            } else if (edition === "legacy" && pending.top && pending.left) {
+              const { top, left } = pending;
+              deepLinkTimeoutsRef.current.push(
+                window.setTimeout(() => panToCanvasPoint(top, left), 250),
               );
             }
           }
@@ -806,17 +807,19 @@ export function SatelliteInteractiveMap({
   // (dark). Kept in the URL (?style=) like gtamap.io keeps layer state.
   const [mapStyle, setMapStyle] = useState<MapBaseStyle>("community");
   useEffect(() => {
+    if (edition !== "community") return;
     const params = new URLSearchParams(location.search);
     const style = params.get("style");
     if (style === "official" || style === "streets" || style === "community")
       setMapStyle(style);
-  }, []);
-  useEffect(() => {
+  }, [edition]);
+  const chooseMapStyle = useCallback((style: MapBaseStyle) => {
+    setMapStyle(style);
     const url = new URL(location.href);
-    if (mapStyle === "community") url.searchParams.delete("style");
-    else url.searchParams.set("style", mapStyle);
+    if (style === "community") url.searchParams.delete("style");
+    else url.searchParams.set("style", style);
     history.replaceState(null, "", url.toString());
-  }, [mapStyle]);
+  }, []);
 
   // Switching base style closes an open cluster list (its pins are not on
   // the official map, and the panel would otherwise linger over it).
@@ -1284,14 +1287,15 @@ export function SatelliteInteractiveMap({
   // used by deep links that carry &top=&left= for entities with no marker.
   const panToCanvasPoint = useCallback(
     (topPct: string, leftPct: string) => {
-      if (!viewportRef.current) return;
+      const point = parseCanvasPosition(topPct, leftPct);
+      if (!point || edition !== "legacy" || !viewportRef.current) return;
       hasInteractedRef.current = true;
       const { clientWidth, clientHeight } = viewportRef.current;
-      const targetZoom = Math.max(zoom, edition === "community" ? 3.0 : 1.65);
+      const targetZoom = Math.max(zoom, 1.65);
       setZoom(targetZoom);
 
-      const px = (parseFloat(leftPct) / 100) * CANVAS_W;
-      const py = (parseFloat(topPct) / 100) * CANVAS_H;
+      const px = (point.left / 100) * CANVAS_W;
+      const py = (point.top / 100) * CANVAS_H;
       const offsetX = rightDrawerOpen && clientWidth > 1024 ? -120 : 0;
       const rect = visibleMapRect();
       const centerX = rect ? (rect.left + rect.right) / 2 : clientWidth / 2;
@@ -1311,6 +1315,8 @@ export function SatelliteInteractiveMap({
   const focusOnPOI = useCallback(
     (poi: MapPOI) => {
       if (!viewportRef.current) return;
+      if (edition === "community" && new URLSearchParams(location.search).get("style") === "official")
+        chooseMapStyle("community");
       hasInteractedRef.current = true;
       trackPublicEvent("map_pin_open");
       returnFocusRef.current = document.activeElement as HTMLElement;
@@ -1364,7 +1370,7 @@ export function SatelliteInteractiveMap({
 
       setPan({ x: newPanX, y: newPanY });
     },
-    [zoom, rightDrawerOpen, edition, CANVAS_H, visibleMapRect],
+    [zoom, rightDrawerOpen, edition, CANVAS_H, visibleMapRect, chooseMapStyle],
   );
 
   // Center the map BEFORE first paint (layout effect, not a passive effect):
@@ -1423,7 +1429,11 @@ export function SatelliteInteractiveMap({
             p.id === targetPoiId || p.id === targetPoiId.replace(/^poi-/, ""),
         );
         if (matched) {
-          setTimeout(() => focusOnPOI(matched), 250);
+          deepLinkTimeoutsRef.current.push(window.setTimeout(() => focusOnPOI(matched), 250));
+        } else if (initialMarkers && edition === "legacy" && targetTop && targetLeft) {
+          deepLinkTimeoutsRef.current.push(
+            window.setTimeout(() => panToCanvasPoint(targetTop, targetLeft), 250),
+          );
         } else {
           // Not a bundled marker — likely a CMS marker that loads async, or an
           // entity with only canvas coordinates (collectibles/properties).
@@ -1433,7 +1443,7 @@ export function SatelliteInteractiveMap({
             left: targetLeft,
           };
         }
-      } else if (targetTop && targetLeft) {
+      } else if (edition === "legacy" && targetTop && targetLeft) {
         deepLinkTimeoutsRef.current.push(
           window.setTimeout(() => panToCanvasPoint(targetTop, targetLeft), 250),
         );
@@ -1497,6 +1507,7 @@ export function SatelliteInteractiveMap({
       centerMap();
       return;
     }
+    if (mapStyle === "official") chooseMapStyle("community");
     hasInteractedRef.current = true;
     const targetZoom = edition === "community" ? 1.8 : d.zoom;
     setZoom(targetZoom);
@@ -1912,6 +1923,7 @@ export function SatelliteInteractiveMap({
             <button
               type="button"
               className="player-button"
+              disabled={mapStyle === "official"}
               onClick={() => setPinFormOpen((value) => !value)}
             >
               + Private pin
@@ -2189,7 +2201,7 @@ export function SatelliteInteractiveMap({
           </div>
         )}
       </div>
-      {pinFormOpen && (
+      {pinFormOpen && mapStyle !== "official" && (
         <form
           className="player-panel my-3 space-y-3"
           onSubmit={(event) => {
@@ -2357,7 +2369,7 @@ export function SatelliteInteractiveMap({
                         key={s.id}
                         type="button"
                         aria-pressed={active}
-                        onClick={() => setMapStyle(s.id)}
+                        onClick={() => chooseMapStyle(s.id)}
                         className={cn(
                           "flex flex-col items-center gap-1 rounded-lg px-1 py-2 text-[11px] font-bold transition-all",
                           active
@@ -2666,7 +2678,7 @@ export function SatelliteInteractiveMap({
                   height="72"
                   viewBox="0 0 72 72"
                   role="img"
-                  aria-label={`You have explored ${leonidaPctLabel}% of Leonida`}
+                  aria-label={`${leonidaPctLabel}% of atlas pins marked`}
                   className="shrink-0"
                 >
                   <defs>
@@ -2721,7 +2733,7 @@ export function SatelliteInteractiveMap({
                     My Leonida
                   </p>
                   <p className="mt-0.5 text-xs font-semibold text-slate-200">
-                    You have explored {leonidaPctLabel}% of Leonida
+                    {leonidaPctLabel}% of atlas pins marked
                   </p>
                   <p className="text-xs text-muted-foreground">
                     {verifiedTotal.toLocaleString("en-US")} of{" "}
@@ -2751,16 +2763,15 @@ export function SatelliteInteractiveMap({
                 <span>Next unvisited</span>
               </button>
               <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">
-                The map tracks the places you have visited. The full
-                checklist — 35 requirements across story, exploration and
-                discovery — is in the guide.
+                Marks record your progress on this atlas. See the completion
+                guide for the evidence available about in-game requirements.
               </p>
               <Link
                 href="/guides/100-percent-completion-guide"
                 className="mt-1.5 flex min-h-[44px] items-center gap-2 rounded-xl border border-[#FF2E9A]/30 bg-[#FF2E9A]/10 px-3 py-2 text-xs font-bold text-white hover:bg-[#FF2E9A]/20 transition-colors"
               >
                 <FileText className="h-3.5 w-3.5 shrink-0 text-[#FF2E9A]" />
-                <span>Full 100% checklist · 35 requirements</span>
+                <span>GTA 6 completion guide</span>
               </Link>
               <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
                 {loggedIn
@@ -3092,7 +3103,7 @@ export function SatelliteInteractiveMap({
                   key={s.id}
                   type="button"
                   aria-pressed={active}
-                  onClick={() => setMapStyle(s.id)}
+                  onClick={() => chooseMapStyle(s.id)}
                   className={cn(
                     "flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-bold transition-all",
                     active
@@ -3115,8 +3126,8 @@ export function SatelliteInteractiveMap({
             leftSidebarOpen && "lg:left-[300px]",
           )}>
             <p className="rounded-xl border border-border bg-black/80 px-3 py-1.5 text-xs font-bold text-[#FF2E9A] shadow-2xl backdrop-blur-md">
-              Official Rockstar map — pins are positioned on the Community
-              map, so they are hidden here.
+              Rockstar map reference. Open a pin to return to the community
+              map and see its provisional position.
             </p>
           </div>
         )}
@@ -3127,11 +3138,12 @@ export function SatelliteInteractiveMap({
           <div className="pointer-events-auto flex max-w-full items-center gap-2 whitespace-nowrap rounded-2xl border border-border bg-black/80 px-3.5 py-1.5 shadow-2xl backdrop-blur-md">
             <span className="flex h-2 w-2 shrink-0 rounded-full bg-[#FF2E9A] " />
             <span className="text-xs font-mono text-muted-foreground font-bold">
-              Fan map
-              <span className="hidden min-[420px]:inline">
-                {" "}
-                · coordinates unverified
-              </span>
+              {mapStyle === "official" ? "Official reference" : "Fan map"}
+              {mapStyle !== "official" && (
+                <span className="hidden min-[420px]:inline">
+                  {" "}· coordinates unverified
+                </span>
+              )}
             </span>
             <span className="h-3 w-px bg-muted/60" />
             <span className="text-xs font-mono text-white font-bold">

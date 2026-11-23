@@ -46,8 +46,6 @@ export const PUBLIC_TOOL_COPY: Record<string, string> = {
     "Use a fan-made achievement checklist concept. Rockstar has not published GTA VI trophies or achievements; entries are fictional examples.",
   "/activities":
     "Save fan activity ideas on this device. Playable GTA VI activities, rewards and locations have not been verified.",
-  "/easter-eggs":
-    "Review fan-submitted Easter egg hypotheses. Interpretations and references are not official confirmations unless directly sourced.",
   "/businesses":
     "Fan-made business ideas for GTA VI. Purchasable businesses, income and operating mechanics have not been confirmed.",
   "/money-guide":

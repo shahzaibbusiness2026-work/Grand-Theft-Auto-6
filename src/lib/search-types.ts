@@ -37,11 +37,10 @@ export const TOOL_SEARCH_ITEMS: SearchItem[] = (
     },
     {
       id: "tool-tracker",
-      title: "100% Completion Tracker",
-      subtitle:
-        "Verified GTA VI checklist not yet available; readiness and evidence status",
+      title: "100% Completion Guide",
+      subtitle: "Checklist for GTA VI story, exploration and discovery requirements",
       category: "Tool",
-      href: "/tracker",
+      href: "/guides/100-percent-completion-guide",
     },
     {
       id: "tool-compare-vehicles",

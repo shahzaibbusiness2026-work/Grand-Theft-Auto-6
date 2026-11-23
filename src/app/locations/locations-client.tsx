@@ -17,6 +17,7 @@ import { type CanonicalLocation } from "@/lib/canonical-data";
 import { canonicalLocations as locationsFallback } from "@/lib/canonical-data";
 import { ConfidenceBadge } from "@/components/confidence-badge";
 import { FavoriteButton } from "@/components/favorite-button";
+import { planningLocationHref } from "@/lib/map-position";
 import { cn } from "@/lib/utils";
 
 const LOCATION_CATEGORIES = [
@@ -96,13 +97,13 @@ export function LocationsClient({
   return (
     <div className="space-y-8">
       {/* Top Banner Quick Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         <div className="card-carbon p-4 text-center">
           <span className="font-display text-2xl sm:text-3xl font-black text-foreground">
             {locations.length}
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mt-1">
-            Points of Interest
+            Directory Entries
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-accent/20 bg-accent/10">
@@ -110,7 +111,7 @@ export function LocationsClient({
             {districts.length - 1}
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-accent/80 block mt-1">
-            Major Districts
+            Area Labels
           </span>
         </div>
         <div className="card-carbon p-4 text-center border-emerald-500/20 bg-emerald-950/10">
@@ -120,14 +121,6 @@ export function LocationsClient({
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-400/80 block mt-1">
             Source-reviewed records
 
-          </span>
-        </div>
-        <div className="card-carbon p-4 text-center border-primary/20 bg-primary/10">
-          <span className="font-display text-2xl sm:text-3xl font-black text-primary">
-            100%
-          </span>
-          <span className="text-xs font-bold uppercase tracking-wider text-primary/80 block mt-1">
-            Interactive Map Sync
           </span>
         </div>
       </div>
@@ -217,6 +210,7 @@ export function LocationsClient({
           </div>
         ) : (
           filteredLocations.map((item) => {
+            const planningHref = planningLocationHref(item);
             return (
               <div
                 key={item.id}
@@ -298,12 +292,16 @@ export function LocationsClient({
 
                 {/* Card Footer Actions */}
                 <div className="p-4 pt-0 flex items-center justify-between gap-2 border-t border-border/60 mt-3">
-                  <Link
-                    href={`/map?poi=${item.id}&top=${item.top}&left=${item.left}`}
-                    className="text-xs font-semibold text-accent hover:underline flex items-center gap-1 py-2"
-                  >
-                    <Navigation className="h-3.5 w-3.5" /> Locate On Map
-                  </Link>
+                  {planningHref ? (
+                    <Link
+                      href={planningHref}
+                      className="text-xs font-semibold text-accent hover:underline flex items-center gap-1 py-2"
+                    >
+                      <Navigation className="h-3.5 w-3.5" /> View planning position
+                    </Link>
+                  ) : (
+                    <span className="py-2 text-xs text-muted-foreground">Position unknown</span>
+                  )}
 
                   <span className="text-xs px-3 py-2.5 inline-flex items-center gap-1 font-semibold text-muted-foreground">
                     Fan concept — no dossier yet

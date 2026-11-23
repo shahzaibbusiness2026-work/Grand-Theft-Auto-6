@@ -1,5 +1,6 @@
 import { SiteShell } from "@/components/shells";
 import { serializeJsonLd } from "@/lib/utils";
+import { pageOpenGraph } from "@/lib/page-metadata";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import { LoadoutClient } from "./loadout-client";
 export const revalidate = 3600;
@@ -8,6 +9,7 @@ export const metadata = {
   description:
     "Save personal equipment plans in your workspace and sync them when signed in. Weapon identifications and loadout rules remain subject to source review.",
   alternates: { canonical: "/tools/loadout-builder" },
+  openGraph: pageOpenGraph("/tools/loadout-builder"),
   robots: { index: true, follow: true },
 };
 export default async function Page() {

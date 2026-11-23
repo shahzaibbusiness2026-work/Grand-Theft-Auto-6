@@ -765,6 +765,41 @@ test("map source preserves unknown positions and viewport clusters keep every vi
   );
 });
 
+test("deep community zoom renders only tiles bundled with the current snapshot", () => {
+  const { CommunityMapTiles } = load("src/components/community-map-tiles.tsx");
+  const tileLayer = CommunityMapTiles({
+    zoom: 24,
+    pan: { x: -5400, y: -5400 },
+    viewport: { width: 1000, height: 650 },
+    mode: "satellite",
+  });
+  const html = require("react-dom/server").renderToStaticMarkup(tileLayer);
+  const tiles = [...new Set(html.match(/\/maps\/gtadb-yanis17\/tiles\/5\/[^" ]+\.jpg/g))];
+  assert.ok(tiles.length > 0, "the edge viewport must contain z5 tiles");
+  for (const tile of tiles) {
+    assert.ok(fs.existsSync(path.join(root, "public", tile)), `Missing tile ${tile}`);
+  }
+});
+
+test("location directory uses the legacy canvas only when both coordinates are usable", () => {
+  const { planningLocationHref, parseCanvasPosition } = loader({}, { URLSearchParams })(
+    "src/lib/map-position.ts",
+  );
+  const url = new URL(planningLocationHref({ id: "label+space", top: " 45.5%", left: "0" }), "https://www.taishgaming.com");
+  assert.equal(url.pathname, "/map");
+  assert.equal(url.searchParams.get("edition"), "legacy");
+  assert.equal(url.searchParams.get("poi"), "label+space");
+  assert.equal(url.searchParams.get("top"), "45.5");
+  assert.equal(url.searchParams.get("left"), "0");
+  for (const top of ["", "Unknown", "101%", "2%extra", "-1%", "0xA"]) {
+    assert.equal(planningLocationHref({ id: "legacy", top, left: "40%" }), null);
+  }
+  assert.equal(parseCanvasPosition(null, 40), null);
+  assert.equal(parseCanvasPosition(101, 40), null);
+  assert.equal(parseCanvasPosition(40, Infinity), null);
+  assert.equal(parseCanvasPosition(0, 100).left, 100);
+});
+
 test("a missing cloud revision requests resolution instead of erasing a synced local collection", () => {
   const local=schema.emptyWorkspace();local.portfolio.assets=[collectionAsset()];
   assert.equal(schema.workspaceNeedsResolution("2026-11-02T00:00:00Z",null,false,local),true);

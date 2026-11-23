@@ -5,29 +5,36 @@ export const revalidate = 3600;
 
 
 import Link from "next/link";
-import { ArrowRight, Clock, Flame, Gamepad2 } from "lucide-react";
+import { ArrowRight, Clock, Gamepad2 } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import { SafeImage } from "@/components/safe-image";
-import { CategoryList } from "@/components/article-card";
-import { getPublicArticles } from "@/lib/services/queries";
-import { getCategories } from "@/lib/services/categories";
-import { serializeJsonLd, toIsoDate } from "@/lib/utils";
-import { itemListJsonLd } from "@/lib/page-metadata";
-import { NewsArticleGrid, NewsSidebarNewsletter } from "./news-client";
+import type { Article } from "@/lib/data";
+import { authorIdentity } from "@/lib/editorial-authors";
+import { getPublicArticles } from "@/lib/services/articles";
+import { serializeJsonLd } from "@/lib/utils";
+import { absoluteUrl, itemListJsonLd } from "@/lib/page-metadata";
+import { NewsArticleList } from "./news-article-list";
+import { NewsSidebarNewsletter } from "./news-client";
 import styles from "./news.module.css";
 
 
 export default async function NewsPage() {
-  const [liveArticles, categoriesData] = await Promise.all([
-    getPublicArticles(),
-    getCategories(),
-  ]);
+  const liveArticles = (await getPublicArticles()).filter(
+    (article): article is Article & { slug: string } => Boolean(article.slug),
+  );
   const heroArticle = liveArticles[0];
-  const heroHref = heroArticle?.slug ? `/news/${heroArticle.slug}` : "/news";
   const listArticles = liveArticles.slice(1);
-  const categories = categoriesData.map((c) => ({ label: c.name, count: c.count }));
-  // Trending sidebar reflects live content only — no static filler.
-  const popular = listArticles.slice(0, 4);
+  const categoryCounts = new Map<string, { label: string; count: number }>();
+  for (const article of liveArticles) {
+    const label = article.category?.trim() || "News";
+    const key = label.toLowerCase();
+    const category = categoryCounts.get(key);
+    if (category) category.count += 1;
+    else categoryCounts.set(key, { label, count: 1 });
+  }
+  const categories = [...categoryCounts.values()].sort(
+    (a, b) => b.count - a.count || a.label.localeCompare(b.label),
+  );
 
   return (
     <SiteShell footerVariant="news">
@@ -38,19 +45,15 @@ export default async function NewsPage() {
             itemListJsonLd(
               "GTA 6 News & Articles",
               "Published GTA 6 news and articles from Taish Gaming.",
-              liveArticles
-                .filter((a) => a.slug)
-                .map((a) => ({
-                  name: a.title,
-                  url: `https://www.taishgaming.com/news/${a.slug}`,
-                })),
+              liveArticles.map((article) => ({
+                name: article.title,
+                url: absoluteUrl(`/news/${article.slug}`),
+              })),
             ),
           ),
         }}
       />
-      <h1 className="sr-only">GTA 6 News &amp; Articles</h1>
-
-      {heroArticle && (
+      {heroArticle ? (
         <section className={styles.hero} aria-labelledby="news-featured-title">
           <div className={styles.heroArtwork}>
             <SafeImage
@@ -64,7 +67,7 @@ export default async function NewsPage() {
           </div>
           <div className={`container-site ${styles.heroInner}`}>
             <div className={styles.heroStory}>
-              <p className={styles.heroLabel}>Featured story</p>
+              <h1 className={styles.heroLabel}>GTA 6 News &amp; Articles</h1>
               <h2 id="news-featured-title" className={`font-display ${styles.heroTitle}`}>
                 {heroArticle.title}
               </h2>
@@ -76,21 +79,29 @@ export default async function NewsPage() {
               <p className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-100 sm:text-sm">
                 <span className="flex items-center gap-1.5 font-semibold text-white">
                   <Gamepad2 className="h-4 w-4 text-pink-300" aria-hidden="true" />
-                  Taish Gaming
+                  {authorIdentity(heroArticle.authorName).name}
                 </span>
-                <span aria-hidden="true">·</span>
-                <time dateTime={toIsoDate(heroArticle.date)}>{heroArticle.date}</time>
+                {heroArticle.publishedAt && (
+                  <>
+                    <span aria-hidden="true">·</span>
+                    <time dateTime={heroArticle.publishedAt}>{heroArticle.date}</time>
+                  </>
+                )}
                 <span aria-hidden="true">·</span>
                 <span className="flex items-center gap-1">
                   <Clock className="h-3.5 w-3.5" aria-hidden="true" /> {heroArticle.read}
                 </span>
               </p>
-              <Link href={heroHref} className={styles.heroAction}>
+              <Link href={`/news/${heroArticle.slug}`} className={styles.heroAction}>
                 Read the featured story <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>
         </section>
+      ) : (
+        <h1 className="container-site pt-8 font-display text-3xl font-extrabold">
+          GTA 6 News &amp; Articles
+        </h1>
       )}
 
       {/* LATEST + SIDEBAR */}
@@ -103,49 +114,33 @@ export default async function NewsPage() {
             />
             <div>
               <h2 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
-                Latest Gaming News
+                Latest GTA 6 News
               </h2>
             </div>
           </div>
-          <NewsArticleGrid articles={listArticles} />
+          <NewsArticleList articles={listArticles} />
         </div>
 
         <aside className="space-y-5 lg:self-start">
-          {popular.length > 0 && (
-            <div className="overflow-hidden rounded-xl border border-border bg-card text-card-foreground">
-              <h3 className="flex items-center gap-2 bg-pink-50 px-4 py-3 font-display text-lg font-extrabold dark:bg-pink-950/40">
-                <Flame className="h-5 w-5 text-[#ff2e9a]" aria-hidden="true" />
-                Trending Now
-              </h3>
-              <div className="space-y-3 p-4">
-                {popular.map((p) => (
-                  <Link
-                    key={p.slug || p.title}
-                    href={p.slug ? `/news/${p.slug}` : "/news"}
-                    className="group flex items-center gap-3"
-                  >
-                    <span className="relative h-12 w-16 shrink-0 overflow-hidden rounded-lg">
-                      <SafeImage
-                        src={p.img}
-                        alt=""
-                        fill
-                        sizes="64px"
-                        className="object-cover"
-                        loading="lazy"
-                      />
+          {categories.length > 0 && (
+            <section className="card-surface p-4" aria-labelledby="news-categories">
+              <h2 id="news-categories" className="mb-3 font-display text-lg font-extrabold">
+                Article categories
+              </h2>
+              <div className="grid gap-x-4 gap-y-2 sm:grid-cols-2">
+                {categories.map(({ label, count }) => (
+                  <div key={label} className="flex justify-between gap-2 text-sm">
+                    <span>{label}</span>
+                    <span className="text-muted-foreground" aria-label={`${count} articles`}>
+                      {count}
                     </span>
-                    <span className="line-clamp-2 text-[13px] font-semibold leading-snug group-hover:text-primary">
-                      {p.title}
-                    </span>
-                  </Link>
+                  </div>
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
           <NewsSidebarNewsletter />
-
-          {categories.length > 0 && <CategoryList categories={categories} />}
         </aside>
       </section>
     </SiteShell>

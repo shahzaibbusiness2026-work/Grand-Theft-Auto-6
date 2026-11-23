@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { REGION_PAGES, getRegionPage } from "@/lib/regions";
+import { REGION_PAGES, ROCKSTAR_LEONIDA_MAP_URL, ROCKSTAR_LEONIDA_PLACES_URL, ROCKSTAR_LEONIDA_SCREENSHOTS_URL, getRegionPage } from "@/lib/regions";
 import { serializeJsonLd } from "@/lib/utils";
 import { articleJsonLd } from "@/lib/page-metadata";
 

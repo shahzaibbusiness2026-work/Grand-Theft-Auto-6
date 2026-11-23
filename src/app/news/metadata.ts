@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+const title = "GTA 6 News, Updates & Analysis";
+const description = "Read the latest GTA 6 news, Rockstar announcements, gameplay analysis and Leonida guides from the independent Taish Gaming editorial team.";
 export const metadata: Metadata = {
-  title: "GTA 6 News: Official Updates & Analysis",
-  description: "GTA 6 release updates, trailer analysis and Leonida guides. Read linked sources, editorial corrections and clear notes on what remains unverified.",
+  title,
+  description,
   openGraph: { type: "website", url: "/news",
-    title: "GTA 6 News: Official Updates & Analysis",
-    description: "GTA 6 release updates, trailer analysis and Leonida guides, with linked sources and uncertainty notes.",
+    title,
+    description,
     images: [{ url: "/img/hero-vice-skyline-hd.jpg", width: 1200, height: 630, alt: "GTA 6 news" }],
   },
   alternates: { canonical: "/news" },

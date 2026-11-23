@@ -64,7 +64,7 @@ export async function generateMetadata(): Promise<Metadata> {
         { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
       ],
     },
-    robots: { index: true, follow: true, "max-image-preview": "large" },
+    robots: { "max-image-preview": "large" },
     // NOTE: no openGraph.url/title/description here — those are per-page.
     // A layout-level og:url leaked the homepage URL onto every child page
     // that did not set its own. Each page now sets openGraph.url equal to

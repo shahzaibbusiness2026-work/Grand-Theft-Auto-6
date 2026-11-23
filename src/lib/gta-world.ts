@@ -183,7 +183,7 @@ const WORLD_SECTION_CONTENT: WorldSection[] = [
       {
         title: "Easter Eggs & Secrets",
         subtitle: "Hidden details, references and mysteries",
-        href: "/easter-eggs",
+        href: "/guides/gta-6-easter-eggs-found-first-24-hours",
         image: "/img/world/easter-eggs-car-interior.jpg",
         imageAlt: "Trailer still: inside a car in Leonida",
       },
@@ -347,7 +347,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
       { label: "Locations & POIs", href: "/locations" },
       { label: "Interactive Map", href: "/map" },
       { label: "Activities", href: "/activities" },
-      { label: "Easter Eggs", href: "/easter-eggs" },
+      { label: "Easter Eggs", href: "/guides/gta-6-easter-eggs-found-first-24-hours" },
     ],
   },
   {
@@ -785,7 +785,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     ],
     related: [
       { label: "News", href: "/news" },
-      { label: "Easter Eggs", href: "/easter-eggs" },
+      { label: "Easter Eggs", href: "/guides/gta-6-easter-eggs-found-first-24-hours" },
     ],
   },
   {

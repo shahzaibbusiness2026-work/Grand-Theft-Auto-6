@@ -5,6 +5,7 @@ import { MapClient } from "./map-client";
 import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
 import { getMapMarkers } from "@/lib/services/map";
+import { REGION_PAGES, ROCKSTAR_LEONIDA_PLACES_URL } from "@/lib/regions";
 
 const title = "GTA 6 Interactive Map: Explore Leonida Regions & Locations";
 const description =
@@ -55,6 +56,26 @@ export default async function MapPage() {
         fetchPriority="high"
       />
       <MapClient markers={await getMapMarkers()} />
+      <section className="container-site space-y-4 pb-6" aria-labelledby="map-evidence-heading">
+        <h2 id="map-evidence-heading" className="font-display text-2xl font-bold">
+          Leonida regions and locations
+        </h2>
+        <p className="max-w-3xl text-sm text-muted-foreground">
+          Rockstar introduces six featured destinations in <a href={ROCKSTAR_LEONIDA_PLACES_URL} className="font-semibold text-primary underline">Only in Leonida</a>.
+        </p>
+        <ul className="grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2 lg:grid-cols-3">
+          {REGION_PAGES.map((region) => (
+            <li key={region.slug}>
+              <Link href={`/regions/${region.slug}`} className="font-semibold text-primary underline">
+                {region.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="max-w-3xl text-sm text-muted-foreground">
+          Browse the <Link href="/locations" className="font-semibold text-primary underline">Leonida location directory</Link> for editorial entries and planning positions.
+        </p>
+      </section>
       <p className="container-site py-6 text-sm text-muted-foreground">
         Plan with the{" "}
         <Link href="/guides/vice-city-map-guide" className="font-semibold text-primary underline">

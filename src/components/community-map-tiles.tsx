@@ -9,7 +9,7 @@ const YANIS_RANGES: Record<number, [number, number, number, number]> = {
   2: [2, 2, 12, 12],
   3: [5, 5, 25, 24],
   4: [10, 10, 51, 49],
-  5: [20, 20, 103, 99],
+  5: [21, 21, 103, 99],
 };
 const OFFICIAL_RANGES: Record<number, [number, number, number, number]> = {
   0: [0, 0, 3, 3],
@@ -46,6 +46,7 @@ export function CommunityMapTiles({
   );
   const size = 1400 / (4 * 2 ** z);
   const [x0, y0, x1, y1] = ranges[z];
+  const showOverview = zoom < 2.5;
   const tiles = [];
   for (let y = y0; y <= y1; y++)
     for (let x = x0; x <= x1; x++) {
@@ -63,6 +64,7 @@ export function CommunityMapTiles({
           alt=""
           draggable={false}
           decoding="async"
+          fetchPriority={showOverview ? "low" : undefined}
           className="absolute pointer-events-none"
           style={{
             left: x * size,
@@ -81,7 +83,6 @@ export function CommunityMapTiles({
         : mode === "radar"
           ? "sepia(0.8) hue-rotate(90deg)"
           : undefined;
-  const showOverview = zoom < 2.5;
   return (
     <div className="absolute inset-0 pointer-events-none" style={{ filter }}>
       {showOverview && (

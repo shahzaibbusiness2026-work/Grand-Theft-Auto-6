@@ -2,9 +2,37 @@
 export function hasGuideBody(guide: {
   content?: string | null;
   description?: string | null;
+  title?: string | null;
 }) {
-  const body = guide.content?.trim() || "";
-  return body.length > 0 && body !== guide.description?.trim();
+  return hasArticleBody({ ...guide, excerpt: guide.description });
+}
+
+function comparableEditorialText(value: string) {
+  return value
+    .replace(/<!--[\s\S]*?-->/g, " ")
+    .replace(/^ {0,3}#{1,6}[ \t]+[^\r\n]*$/gm, " ")
+    .replace(/!\[[^\]]*\]\([^)\n]*\)/g, " ")
+    .replace(/\[([^\]]+)\]\([^)\n]*\)/g, "$1")
+    .replace(/https?:\/\/[^\s<>]+/g, " ")
+    .normalize("NFC")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
+}
+
+export function hasArticleBody(article: {
+  content?: string | null;
+  excerpt?: string | null;
+  title?: string | null;
+}) {
+  const body = comparableEditorialText(articleBodyMarkdown(article.content ?? "", article.title ?? ""));
+  const placeholder = /^(?:coming soon|article coming soon|guide coming soon|under construction|to be (?:added|announced|completed)|tbd|tba|todo|placeholder|lorem ipsum(?: dolor sit amet)?|read more)$/;
+  return Boolean(
+    body &&
+    !placeholder.test(body) &&
+    body !== comparableEditorialText(article.excerpt ?? "") &&
+    body !== comparableEditorialText(article.title ?? ""),
+  );
 }
 
 export function readingTime(body: string): string {
@@ -13,6 +41,25 @@ export function readingTime(body: string): string {
     .split(/\s+/)
     .filter(Boolean).length;
   return `${Math.max(1, Math.ceil(words / 220))} min read`;
+}
+
+export function articlePublicationDates(published?: string | null, updated?: string | null) {
+  const publishedTime = Date.parse(published || "");
+  const updatedTime = Date.parse(updated || "");
+  return {
+    published: Number.isFinite(publishedTime) ? published! : undefined,
+    modified: updatedTime > publishedTime ? updated! : undefined,
+  };
+}
+
+export function formatArticleDate(value: string, includeTime = false): string {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+    ...(includeTime ? { hour: "numeric", minute: "2-digit", timeZoneName: "short" } : {}),
+  }).format(new Date(value));
 }
 
 /** A source-attributed local copy avoids a tiny placeholder or remote LCP fetch. */

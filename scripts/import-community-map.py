@@ -5,11 +5,8 @@ Tiles are the Yanis Community Map via GTADB (CC BY 4.0), self-hosted.
 Set MAP_IMPORT_TILES_ONLY=1 to refresh tiles only and leave the landmark
 data file (src/lib/community-map-data.json) untouched.
 
-v18 note: the upstream z5 grid starts at (21,21), not (20,20) — the
-renderer ranges still list (20,20,103,99), so 163 edge tiles 404.
-download() treats a 404 as "tile does not exist upstream" and skips it;
-those edge tiles are ocean, and a missing ocean tile shows the viewport's
-ocean background, so the gap is invisible.
+The v18 z5 grid starts at (21,21). Outside the tile ranges the renderer
+shows the ocean background.
 """
 import os,urllib.request,urllib.error,json,pathlib,concurrent.futures
 from PIL import Image
@@ -49,7 +46,7 @@ else:
 # Bounds match the renderer's YANIS_RANGES in src/components/community-map-tiles.tsx.
 # z4/z5 are REAL v18 tiles now (2026-11-20); the old z4/z5 were Lanczos
 # upscales of z3 made by ~/workspace/your_files/gta6-map-rebuild/generate_tiles.py.
-bounds={0:(0,0,3,3),1:(1,1,6,6),2:(2,2,12,12),3:(5,5,25,24),4:(10,10,51,49),5:(20,20,103,99)}
+bounds={0:(0,0,3,3),1:(1,1,6,6),2:(2,2,12,12),3:(5,5,25,24),4:(10,10,51,49),5:(21,21,103,99)}
 jobs=[(z,x,y) for z,(x0,y0,x1,y1) in bounds.items() for x in range(x0,x1+1) for y in range(y0,y1+1)]
 def download(job):
  z,x,y=job;relative=f'maps/tiles/6/yanis,18/{z}/{z},{y},{x}.jpg';dest=out/f'tiles/{z}/{z},{y},{x}.jpg';dest.parent.mkdir(parents=True,exist_ok=True)

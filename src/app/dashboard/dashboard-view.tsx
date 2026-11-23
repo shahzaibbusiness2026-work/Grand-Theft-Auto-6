@@ -180,9 +180,9 @@ export function DashboardView({
           </p>
           <Link
             className="mt-2 inline-block text-sm text-gold-light"
-            href="/tracker"
+            href="/dashboard/progress"
           >
-            Open completion tracker →
+            View your progress →
           </Link>
         </section>
       </div>

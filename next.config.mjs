@@ -1,8 +1,15 @@
+import htmlBots from "next/dist/shared/lib/router/utils/html-bots.js";
+
+const defaultHtmlLimitedBots = htmlBots.HTML_LIMITED_BOT_UA_RE;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
+  // Send canonicals in the initial head to Googlebot and keep Next's other
+  // crawler and social preview defaults. Human browsers still stream metadata.
+  htmlLimitedBots: new RegExp(`${defaultHtmlLimitedBots.source}|Googlebot`, defaultHtmlLimitedBots.flags),
   devIndicators: false,
   compiler: {
     removeConsole:
@@ -150,7 +157,7 @@ const nextConfig = {
       { source: "/rankings/best-weapons-overall", destination: "/weapons", permanent: true },
       // Easter Eggs: withdrawn list replaced by the published launch-day guide (21 Nov 2026).
       { source: "/easter-eggs", destination: "/guides/gta-6-easter-eggs-found-first-24-hours", permanent: true },
-      { source: "/tracker", destination: "/tools", permanent: true },
+      { source: "/tracker", destination: "/guides/100-percent-completion-guide", permanent: true },
       // Weapon renames (20 Nov 2026): contradicted-identity slugs -> real in-game names.
       { source: "/weapons/glock-21", destination: "/weapons/capo-pistol", permanent: true },
       { source: "/weapons/m4-carbine", destination: "/weapons/duke-556", permanent: true },

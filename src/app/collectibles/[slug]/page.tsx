@@ -209,13 +209,13 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
                 Atlas Status
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Track this collectible along with all other 100% completion milestones across Leonida.
+                Check whether this collectible counts toward GTA VI completion.
               </p>
               <Link
-                href="/tracker"
+                href="/guides/100-percent-completion-guide"
                 className="btn-primary w-full py-2.5 text-xs flex items-center justify-center gap-2 font-bold uppercase tracking-wider"
               >
-                <CheckCircle2 className="h-4 w-4" /> Open 100% Tracker
+                <CheckCircle2 className="h-4 w-4" /> Open 100% Completion Guide
               </Link>
               <Link
                 href="/map"
