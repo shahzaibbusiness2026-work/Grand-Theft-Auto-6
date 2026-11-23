@@ -8,25 +8,24 @@ import { EvidenceCatalog } from "@/components/evidence-catalog";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import styles from "@/components/catalog-ui.module.css";
 
+const title = "GTA 6 Weapon Comparison Tool | Compare Guns & Evidence";
+const description =
+  "Compare GTA 6 weapons side by side. See which weapons appear in official footage and which stats and availability details are still unverified.";
+
 export const metadata: Metadata = {
-  title: {
-    absolute: "GTA 6 Weapon Comparison Tool | Compare Guns & Evidence",
-  },
-  description:
-    "Compare GTA 6 weapons side by side — every weapon spotted in official footage, with evidence labels. No stats are claimed before launch.",
+  title: { absolute: title },
+  description,
   alternates: { canonical: "/compare/weapons" },
   openGraph: { type: "website",
     url: "/compare/weapons",
-    title: "GTA 6 Weapon Comparison Tool | Compare Guns & Evidence",
-    description:
-      "Compare GTA 6 weapons side by side — every weapon spotted in official footage, with evidence labels. No stats are claimed before launch.",
+    title,
+    description,
     images: ["/img/world-evidence/gta-6-handgun-robbery-scene-trailer-1.webp"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GTA 6 Weapon Comparison Tool | Compare Guns & Evidence",
-    description:
-      "Compare GTA 6 weapons side by side — every weapon spotted in official footage, with evidence labels. No stats are claimed before launch.",
+    title,
+    description,
     images: ["/img/world-evidence/gta-6-handgun-robbery-scene-trailer-1.webp"],
   },
 };

@@ -7,8 +7,8 @@ import { ControlsClient } from "./controls-client";
 
 export const metadata: Metadata = {
   openGraph: pageOpenGraph("/controls"),
-  title: "GTA 6 Controls: Every PS5 & Xbox Button",
-  description: "Every GTA 6 button on PS5 and Xbox — driving, shooting, flying, swimming — with verified rows marked. Rockstar has not published an official layout.",
+  title: "GTA 6 Controls Guide: PS5 & Xbox Button Layout",
+  description: "Check the GTA 6 controller layout for PS5 and Xbox, from driving to combat. Verified in-game inputs are marked alongside provisional controls.",
   alternates: { canonical: "/controls" },
 };
 

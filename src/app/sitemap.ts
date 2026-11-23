@@ -39,6 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/characters",
     "/radio",
     "/controls",
+    "/settings-guide",
     "/money-guide",
     "/guides",
     "/gta-6-world",
@@ -164,14 +165,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: base + "/characters/" + slug,
     lastModified: characterReviewed,
   }));
-  // Static routes: lastModified is the sitemap regeneration date
-  // (15 Nov 2026). These pages are served from the current build and are
-  // under active pre-launch review; the date marks the last sitemap
-  // verification, not a per-page content edit.
-  const staticLastModified = new Date("2026-11-15T00:00:00Z");
+  // Static routes have no per-page record of their last substantive edit.
   const result: MetadataRoute.Sitemap = paths.map((path) => ({
     url: base + path,
-    lastModified: staticLastModified,
   }));
   result.push(...articleEntries, ...guideEntries, ...characterEntries, ...detailEntries);
   return Array.from(new Map(result.map((e) => [e.url, e])).values());
