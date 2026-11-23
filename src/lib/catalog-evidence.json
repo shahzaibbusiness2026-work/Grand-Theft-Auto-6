@@ -998,5 +998,15 @@
     "locator": "Brooks Boatworks, Port Gellhorn — Clunker 556 stockless assault rifle in the small building, one of the operation's Key Valuables",
     "reviewedAt": "2026-11-22",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "rauls-cqb-556",
+    "field": "GTA VI appearance",
+    "value": "Raul's CQB 556",
+    "source": "https://www.youtube.com/watch?v=fX4PR3a47hQ",
+    "locator": "First Impressions (Chapter 3), weapon wheel 05:30 — Raul's CQB 556, Longarm",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Muse"
   }
 ]
