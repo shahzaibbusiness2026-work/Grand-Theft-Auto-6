@@ -3408,5 +3408,35 @@
     "locator": "GTA6DATA launch-game screenshot — the silver pickup's HUD in Hey Arnold! identifies VAPID / BRIAN’S CARACARA 4×4. This is Brian’s named version.",
     "reviewedAt": "2026-11-23",
     "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hellspawn-comshot-12",
+    "field": "GTA VI appearance",
+    "value": "Hellspawn Comshot 12",
+    "source": "https://gamerant.com/gta-6-satan-location-hellspawn-shotgun/",
+    "locator": "Circles of Hell House, northern Port Gellhorn, 12 AM-4 AM in-game — Satan boss fight; Hellspawn Comshot 12 under the throne",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "guardia-brothers-vf5",
+    "field": "GTA VI appearance",
+    "value": "Guardia Brothers VF5",
+    "source": "https://gamerant.com/gta-6-saber-shipping-facility-robbery-key-valuables-locations/",
+    "locator": "Saber Shipping Facility, Balsero — weapon case downstairs, Guardia Brothers VF5 Unique Military SMG",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "kolt-associates-vatra",
+    "field": "GTA VI appearance",
+    "value": "Kolt & Associates Vatra",
+    "source": "https://www.stack-archive.com/blog/gta-6-hideout-robberies-unique-weapons-safe-codes-2026/",
+    "locator": "June Warehouse, Port Gellhorn — weapon case near the refrigerator, Kolt & Associates Vatra SMG",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Muse"
   }
 ]
