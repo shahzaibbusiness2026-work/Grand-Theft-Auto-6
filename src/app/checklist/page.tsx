@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default function ChecklistAliasPage() {
-  redirect("/tracker");
+  permanentRedirect("/guides/100-percent-completion-guide");
 }

@@ -92,6 +92,7 @@ test("catalogs resolve missing imagery without inventing an exact model photo or
   ]) {
     for (const entry of rows) {
       const artwork = catalogArtwork(kind, entry);
+      if (!artwork) continue;
       assert.ok(
         artwork.src &&
           fs.existsSync(path.join(__dirname, "../public", artwork.src)),
@@ -109,7 +110,12 @@ test("catalogs resolve missing imagery without inventing an exact model photo or
     img: "",
     claims: [],
   };
-  assert.ok(catalogArtwork("weapons", original).contextual);
+  assert.equal(catalogArtwork("vehicles", original), null);
+  assert.equal(catalogArtwork("weapons", original), null);
+  assert.equal(
+    catalogArtwork("weapons", { ...original, id: "unarmed-combat" }).contextual,
+    true,
+  );
   assert.deepEqual(original.claims, []);
   assert.equal(
     relatedCatalogScene("vehicles").sourceUrl,

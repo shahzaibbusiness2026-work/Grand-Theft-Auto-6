@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/shells";
 import {
   CatalogPageHeader,
@@ -7,32 +6,23 @@ import {
 import { EvidenceCatalog } from "@/components/evidence-catalog";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import styles from "@/components/catalog-ui.module.css";
+import { catalogComparisonMetadata } from "@/lib/catalog-metadata";
+import {
+  COMPARE_PAGE_SIZE,
+  catalogSearchParams,
+  readCatalogState,
+  type CatalogSearchParams,
+} from "@/lib/catalog-url-state";
+import { selectionFromParams } from "@/lib/catalog-selection";
 
-const title = "GTA 6 Weapon Comparison Tool | Compare Guns & Evidence";
-const description =
-  "Compare GTA 6 weapons side by side. See which weapons appear in official footage and which stats and availability details are still unverified.";
+type PageProps = { searchParams: Promise<CatalogSearchParams> };
 
-export const metadata: Metadata = {
-  title: { absolute: title },
-  description,
-  alternates: { canonical: "/compare/weapons" },
-  openGraph: { type: "website",
-    url: "/compare/weapons",
-    title,
-    description,
-    images: ["/img/world-evidence/gta-6-handgun-robbery-scene-trailer-1.webp"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: ["/img/world-evidence/gta-6-handgun-robbery-scene-trailer-1.webp"],
-  },
-};
+export async function generateMetadata({ searchParams }: PageProps) {
+  return catalogComparisonMetadata("weapons", catalogSearchParams(await searchParams));
+}
 
-export const revalidate = 3600;
-
-export default async function ComparisonPage() {
+export default async function ComparisonPage({ searchParams }: PageProps) {
+  const params = catalogSearchParams(await searchParams);
   const entries = await getEvidenceCatalog("weapons");
   return (
     <SiteShell>
@@ -44,7 +34,13 @@ export default async function ComparisonPage() {
       />
       <div className={styles.area}>
         <CatalogSwitcher kind="weapons" compare />
-        <EvidenceCatalog kind="weapons" entries={entries} compare />
+        <EvidenceCatalog
+          kind="weapons"
+          entries={entries}
+          compare
+          initialState={readCatalogState(params, entries, COMPARE_PAGE_SIZE)}
+          initialSelection={selectionFromParams(params, "weapons", entries)}
+        />
       </div>
     </SiteShell>
   );

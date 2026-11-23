@@ -150,7 +150,7 @@ const nextConfig = {
       { source: "/rankings/best-weapons-overall", destination: "/weapons", permanent: true },
       // Easter Eggs: withdrawn list replaced by the published launch-day guide (21 Nov 2026).
       { source: "/easter-eggs", destination: "/guides/gta-6-easter-eggs-found-first-24-hours", permanent: true },
-      { source: "/tracker", destination: "/tools", permanent: true },
+      { source: "/tracker", destination: "/guides/100-percent-completion-guide", permanent: true },
       // Weapon renames (20 Nov 2026): contradicted-identity slugs -> real in-game names.
       { source: "/weapons/glock-21", destination: "/weapons/capo-pistol", permanent: true },
       { source: "/weapons/m4-carbine", destination: "/weapons/duke-556", permanent: true },

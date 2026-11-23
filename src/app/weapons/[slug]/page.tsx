@@ -1,4 +1,5 @@
-import { catalogArtwork } from "@/lib/catalog-artwork";
+import { catalogDetailMetadata } from "@/lib/catalog-metadata";
+import { matchingCatalogEntries } from "@/lib/catalog-url-state";
 import { notFound, permanentRedirect } from "next/navigation";
 import { SiteShell } from "@/components/shells";
 import { EvidenceDetail } from "@/components/evidence-detail";
@@ -23,54 +24,7 @@ export async function generateMetadata({
 }) {
   const e = await resolve((await params).slug);
   if (!e) notFound();
-  const artwork = catalogArtwork("weapons", e);
-  // Exact image or none: entries with no verified artwork get NO og/twitter
-  // image at all. The skyline is not a picture of this weapon, so it must
-  // not stand in for one. (ogImage is null; the metadata below omits images
-  // and downgrades the Twitter card to "summary".)
-  const ogImage = artwork ?? null;
-  // The layout appends " | Taish Gaming" (15 chars). Names that would push
-  // the rendered title past 60 chars use an absolute title instead, so the
-  // full catalog name is kept without truncation.
-  const baseTitle = e.name + " — GTA VI";
-  const title =
-    baseTitle.length + 15 > 60 ? { absolute: baseTitle } : baseTitle;
-  // The compare link is rendered on every detail page (see EvidenceDetail),
-  // so the closing sentence is true for all entries. It is appended only
-  // when the templated description would otherwise fall under 120 chars;
-  // long names already land in the 120–155 range without it.
-  const baseDescription = `${e.name} — GTA VI evidence review: what official footage shows, and which statistics are still unverified.`;
-  const description =
-    baseDescription.length < 120
-      ? baseDescription + " Compare with other GTA VI entries."
-      : baseDescription;
-  return {
-    title,
-    description,
-    alternates: { canonical: "/weapons/" + e.slug },
-    openGraph: {
-      url: "/weapons/" + e.slug,
-      type: "website",
-      title: baseTitle,
-      description,
-      ...(ogImage
-        ? { images: [{ url: ogImage.src, alt: ogImage.alt }] }
-        : { images: [] }),
-    },
-    twitter: {
-      card: ogImage ? "summary_large_image" : "summary",
-      title: e.name + " — GTA VI",
-      ...(ogImage ? { images: [ogImage.src] } : { images: [] }),
-    },
-    robots: {
-      // Indexed only when the entry has reviewed "GTA VI appearance"
-      // evidence (15 Nov 2026, reversing the 8 Nov 2026 blanket index).
-      // Provisional entries with no evidence stay noindex, follow.
-      index: e.claims.some((c) => c.field === "GTA VI appearance"),
-      follow: true,
-      googleBot: { "max-image-preview": "large" as const },
-    },
-  };
+  return catalogDetailMetadata("weapons", e);
 }
 export default async function Detail({
   params,
@@ -81,13 +35,11 @@ export default async function Detail({
   const entry = await resolve(slug);
   if (!entry) notFound();
   if (slug !== entry.slug) permanentRedirect("/weapons/" + entry.slug);
-  // Plain-HTML prev/next links: the catalog hub only server-renders the
-  // first 24 cards (the rest expand client-side), so without these, 96
-  // detail pages had zero inlinks in crawler-visible HTML (audit 12 Nov
-  // 2026). Neighbours follow the hub's default name sort (localeCompare).
-  const sorted = [...(await getEvidenceCatalog("weapons"))].sort((a, b) =>
-    a.name.localeCompare(b.name),
-  );
+  const sorted = matchingCatalogEntries(await getEvidenceCatalog("weapons"), {
+    q: "",
+    category: "",
+    sort: "name",
+  });
   const index = sorted.findIndex((e) => e.slug === entry.slug);
   const prev = index > 0 ? sorted[index - 1] : null;
   const next =

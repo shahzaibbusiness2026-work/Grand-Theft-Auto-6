@@ -17,12 +17,17 @@ const { publicLocation, asConcept } = require("../src/lib/world-evidence.ts");
 const {
   readCatalogState,
   catalogStateUrl,
+  catalogPageEntries,
+  catalogSearchParams,
+  catalogCanonicalPath,
+  isCatalogVariant,
 } = require("../src/lib/catalog-url-state.ts");
 const { catalogSchema } = require("../src/lib/catalog-schema.ts");
 const {
   normalizeEditorialMarkdown,
   editorialProblems,
   articleBodyMarkdown,
+  articlePublicationDates,
 } = require("../src/lib/editorial-quality.ts");
 const entries = Array.from({ length: 60 }, (_, i) => ({
   id: "entry-" + i,
@@ -61,7 +66,7 @@ test("draft location confidence cannot publish unsupported mechanics or spawn as
   );
 });
 test("public catalog URL round-trips filters and cumulative page without exposing collections", () => {
-  const state = { q: "Entry", category: "Boat", sort: "reverse", page: 2 };
+  const state = { q: "Entry", category: "Boat", sort: "reverse", page: 2, from: 1 };
   const url = catalogStateUrl(
     new URL(
       "https://www.taishgaming.com/vehicles?ids=entry-1&saved=1&recent=1",
@@ -94,13 +99,39 @@ test("tampered catalog filters and unbounded pagination are normalized", () => {
   assert.equal(state.q.length, 120);
   assert.equal(state.category, "");
   assert.equal(state.sort, "name");
-  assert.equal(state.page, 3);
-  for (const page of ["NaN", "Infinity", "0", "-1", "1.5"]) {
+  assert.equal(state.page, 1);
+  for (const page of ["NaN", "Infinity", "0", "-1", "1.5", "2abc", "0x2"]) {
     assert.equal(
       readCatalogState(new URLSearchParams({ page }), entries, 24).page,
       1,
     );
   }
+});
+test("numbered pages are distinct, while Show more can share the expanded range", () => {
+  const first = readCatalogState(new URLSearchParams(), entries, 24);
+  const next = readCatalogState(new URLSearchParams("page=2"), entries, 24);
+  const last = readCatalogState(new URLSearchParams("page=99999"), entries, 24);
+  const names = (state) => catalogPageEntries(entries, state, 24).map((e) => e.name);
+  assert.deepEqual([first.page, next.page, last.page], [1, 2, 3]);
+  assert.deepEqual([names(first).length, names(next).length, names(last).length], [24, 24, 12]);
+  assert.equal(new Set([...names(first), ...names(next), ...names(last)]).size, 60);
+  const expanded = readCatalogState(new URLSearchParams("page=2&from=1"), entries, 24);
+  assert.deepEqual(names(expanded), [...names(first), ...names(next)]);
+  assert.equal(readCatalogState(new URLSearchParams("page=2&from=3"), entries, 24).from, undefined);
+});
+
+test("clean pagination canonicals exclude filters, selections and expanded ranges", () => {
+  const plain = catalogSearchParams({ page: ["2", "3"], utm_source: "test" });
+  assert.equal(catalogCanonicalPath("vehicles", plain, entries), "/vehicles?page=2");
+  assert.equal(isCatalogVariant(plain), false);
+  for (const query of ["q=Entry&page=2", "category=Boat", "sort=reverse", "ids=entry-1", "page=2&from=1"]) {
+    const params = new URLSearchParams(query);
+    assert.equal(isCatalogVariant(params), true, query);
+    assert.equal(catalogCanonicalPath("weapons", params, entries), "/weapons");
+  }
+  const filtered = readCatalogState(new URLSearchParams("category=Boat&sort=reverse&page=2"), entries, 24);
+  assert.equal(catalogPageEntries(entries, filtered, 24).length, 6);
+  assert.ok(catalogPageEntries(entries, filtered, 24).every((entry) => entry.category === "Boat"));
 });
 test("entity graph has stable page/entity/breadcrumb references and no fabricated offers or ratings", () => {
   const graph = catalogSchema(
@@ -132,6 +163,21 @@ test("both imported trailer heading patterns are repaired while valid links rema
     normalizeEditorialMarkdown("[Link](https://example.com/path)"),
     "[Link](https://example.com/path)",
   );
+});
+test("publish dates preserve timezone information and discard a pre-publication edit", () => {
+  const published = "2026-11-19T05:00:00+05:00";
+  assert.deepEqual(articlePublicationDates(published, "2026-11-18T23:00:00Z"), {
+    published,
+    modified: undefined,
+  });
+  assert.deepEqual(articlePublicationDates(published, "2026-11-19T01:00:00Z"), {
+    published,
+    modified: "2026-11-19T01:00:00Z",
+  });
+  assert.deepEqual(articlePublicationDates("invalid", "2026-11-19T01:00:00Z"), {
+    published: undefined,
+    modified: undefined,
+  });
 });
 test("the actual Markdown renderer emits semantic table cells and escapes raw HTML", async () => {
   const React = require("react");

@@ -140,6 +140,8 @@ export interface Article {
   title: string;
   excerpt: string;
   date: string;
+  publishedAt?: string;
+  authorName?: string;
   read: string;
   img: string;
   filter?: string;

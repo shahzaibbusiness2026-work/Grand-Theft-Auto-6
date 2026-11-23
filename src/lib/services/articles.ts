@@ -3,6 +3,8 @@ import {
   readingTime,
   publicationImage,
   editorialProblems,
+  articlePublicationDates,
+  formatArticleDate,
 } from "@/lib/editorial-quality";
 
 import { cache } from "react";
@@ -69,16 +71,13 @@ function isSafeHttpUrl(value: string): boolean {
 }
 
 function rowToArticle(row: DatabaseArticleRow): Article {
+  const { published } = articlePublicationDates(row.published_at);
   return {
     title: row.title,
     excerpt: row.excerpt,
-    date: row.published_at
-      ? new Date(row.published_at).toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        })
-      : "Recent",
+    date: published ? formatArticleDate(published) : "Recent",
+    publishedAt: published,
+    authorName: row.author_name,
     read: readingTime(row.content || row.excerpt || ""),
     img: publicationImage(row.cover_image, row.slug),
     tag: row.tag || row.category || "News",

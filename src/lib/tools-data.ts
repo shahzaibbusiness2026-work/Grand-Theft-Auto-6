@@ -95,10 +95,10 @@ export const ALL_TOOLS: ToolItem[] = (
     {
       id: "tool-tracker",
       status: "postlaunch",
-      name: "100% Completion Tracker",
+      name: "100% Completion Guide",
       category: "Maps & Exploration",
-      desc: "The verified completion checklist is not yet published. Check readiness without treating example tasks as official requirements.",
-      href: "/tracker",
+      desc: "Browse the GTA 6 completion checklist and see which requirements belong to the main story, exploration and discovery.",
+      href: "/guides/100-percent-completion-guide",
       badge: "Tool 09",
       icon: Trophy,
       highlight: true,

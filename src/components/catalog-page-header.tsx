@@ -27,8 +27,8 @@ export function CatalogPageHeader({
   return (
     <header className={styles.hero}>
       <SafeImage
-        src={vehicles ? "/img/car-purple.jpg" : "/img/hero-vice-skyline-hd.jpg"}
-        alt={vehicles ? "GTA 6 vehicle showcase" : "Vice City skyline, GTA 6 artwork"}
+        src={vehicles ? "/img/car-purple.jpg" : "/img/world-evidence/gta-6-handgun-robbery-scene-trailer-1.webp"}
+        alt=""
         fill
         sizes="100vw"
         className={styles.heroImage}
@@ -52,27 +52,20 @@ export function CatalogPageHeader({
         </nav>
         <p className={styles.eyebrow}>
           <Icon size={15} aria-hidden="true" />
-          {compare ? "Side by side. Every detail." : "The Leonida collection"}
+          {compare ? "Compare evidence" : "Field-specific evidence"}
         </p>
         <h1 className={styles.title}>
-          {compare ? (
-            <>
-              {label === "Vehicles" ? "Vehicle" : "Weapon"}{" "}
-              <span className={styles.titleAccent}>comparison.</span>
-            </>
-          ) : (
-            <>
-              Explore the{" "}
-              <span className={styles.titleAccent}>
-                {vehicles ? "garage." : "armory."}
-              </span>
-            </>
-          )}
+          GTA 6{" "}
+          <span className={styles.titleAccent}>
+            {compare ? `${vehicles ? "Vehicle" : "Weapon"} Comparison` : `${label} Database`}
+          </span>
         </h1>
         <p className={styles.heroDescription}>
           {compare
-            ? `Build your ${vehicles ? "garage" : "loadout"} shortlist. Compare up to four ${kind}, explore every field, and check the evidence behind each detail.`
-            : `Discover the GTA VI ${vehicles ? "vehicle" : "weapon"} catalog. Find your favorites, inspect source reviews, and bring your picks into a detailed comparison.`}
+            ? `Compare up to four ${kind} side by side. Open a source review to see which GTA 6 details each source supports.`
+            : vehicles
+              ? "Browse GTA 6 cars, motorcycles, boats and aircraft. See source reviews for reported appearances and compare your picks."
+              : "Browse the GTA 6 weapon catalog, from handguns to melee items. See source reviews for reported appearances and compare your picks."}
         </p>
         <div className={styles.heroActions}>
           <Link

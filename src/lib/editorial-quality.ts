@@ -15,6 +15,25 @@ export function readingTime(body: string): string {
   return `${Math.max(1, Math.ceil(words / 220))} min read`;
 }
 
+export function articlePublicationDates(published?: string | null, updated?: string | null) {
+  const publishedTime = Date.parse(published || "");
+  const updatedTime = Date.parse(updated || "");
+  return {
+    published: Number.isFinite(publishedTime) ? published! : undefined,
+    modified: updatedTime > publishedTime ? updated! : undefined,
+  };
+}
+
+export function formatArticleDate(value: string, includeTime = false): string {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+    ...(includeTime ? { hour: "numeric", minute: "2-digit", timeZoneName: "short" } : {}),
+  }).format(new Date(value));
+}
+
 /** A source-attributed local copy avoids a tiny placeholder or remote LCP fetch. */
 export function publicationImage(src?: string | null, slug?: string): string {
   if (

@@ -19,6 +19,8 @@ import { getSeoSettings } from "@/lib/services/seo";
 import { serializeJsonLd } from "@/lib/utils";
 import {
   articleBodyMarkdown,
+  articlePublicationDates,
+  formatArticleDate,
   readingTime,
   publicationImage,
 } from "@/lib/editorial-quality";
@@ -35,14 +37,16 @@ type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article: any = await getPublicArticleBySlug(slug);
+  const article = await getPublicArticleBySlug(slug);
   if (!article) {
     notFound();
   }
 
   const seo = await getSeoSettings();
   const base = canonicalOrigin(seo.canonicalBaseUrl);
-  const canonical = article.canonical_url || `${base}/news/${article.slug}`;
+  const canonical = article.canonical_url?.trim() || `${base}/news/${article.slug}`;
+  const { published, modified } = articlePublicationDates(article.published_at, article.updated_at);
+  const byline = authorIdentity(article.author_name);
   const rawOgImage = publicationImage(
     article.og_image || article.cover_image || seo.socialPreviewImage,
     article.slug,
@@ -57,14 +61,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
+    authors: [{ name: byline.name, url: `${base}${byline.path}` }],
     alternates: { canonical },
     openGraph: {
       title,
       description,
       url: canonical,
       type: "article",
-      publishedTime: article.published_at || undefined,
-      authors: [authorIdentity(article.author_name).name],
+      publishedTime: published,
+      modifiedTime: modified,
+      authors: [`${base}${byline.path}`],
+      section: article.category,
       images: [
         {
           url: ogImage,
@@ -81,15 +88,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [ogImage],
     },
   };
-}
-
-function formatDate(value?: string | null): string {
-  if (!value) return "Recent";
-  return new Date(value).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
 }
 
 export default async function ArticleDetailPage({ params }: Props) {
@@ -152,7 +150,11 @@ export default async function ArticleDetailPage({ params }: Props) {
 
   const seo = await getSeoSettings();
   const base = canonicalOrigin(seo.canonicalBaseUrl);
+  const canonical = article.canonical_url?.trim() || `${base}/news/${article.slug}`;
   const byline = authorIdentity(article.author_name);
+  const { published, modified } = articlePublicationDates(article.published_at, article.updated_at);
+  const showBylineTimes = Boolean(published && modified && formatArticleDate(published) === formatArticleDate(modified));
+  const cover = publicationImage(article.cover_image, article.slug);
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -170,26 +172,18 @@ export default async function ArticleDetailPage({ params }: Props) {
             "@type": "ListItem",
             position: 3,
             name: article.title,
-            item: `${base}/news/${article.slug}`,
+            item: canonical,
           },
         ],
       },
       {
-        "@type": "Article",
-        headline: article.seo_title || article.title,
+        "@type": article.category?.trim().toLowerCase() === "news" ? "NewsArticle" : "Article",
+        headline: article.title,
         description: article.seo_description || article.excerpt,
-        image: [
-          new URL(
-            publicationImage(
-              article.og_image || article.cover_image,
-              article.slug,
-            ),
-            base,
-          ).href,
-        ],
-        datePublished: article.published_at || undefined,
-        dateModified: article.updated_at || article.published_at || undefined,
-        "@id": `${base}/news/${article.slug}#article`,
+        image: [new URL(cover, base).href],
+        datePublished: published,
+        dateModified: modified,
+        "@id": `${canonical}#article`,
         isPartOf: { "@id": `${base}/#website` },
         author: {
           "@type": byline.collective ? "Organization" : "Person",
@@ -203,7 +197,7 @@ export default async function ArticleDetailPage({ params }: Props) {
           "@id": `${base}/#organization`,
           logo: { "@type": "ImageObject", url: `${base}${PUBLICATION.logo}` },
         },
-        mainEntityOfPage: `${base}/news/${article.slug}`,
+        mainEntityOfPage: canonical,
         articleSection: article.category,
         keywords: Array.isArray(article.tags)
           ? article.tags.join(", ")
@@ -239,8 +233,8 @@ export default async function ArticleDetailPage({ params }: Props) {
         <header className="card-surface mt-4 overflow-hidden bg-gradient-to-br from-card via-card/85 to-primary/5">
           <div className="relative min-h-56 sm:min-h-72">
             <SafeImage
-              src={publicationImage(article.cover_image, article.slug)}
-              alt={article.seo_title || article.title}
+              src={cover}
+              alt=""
               fill
               priority
               sizes="(max-width: 768px) 100vw, 900px"
@@ -270,24 +264,18 @@ export default async function ArticleDetailPage({ params }: Props) {
               {byline.name}
             </Link>
             <span>• {byline.role}</span>
-            <span className="text-border">•</span>
-            <time dateTime={article.published_at || undefined}>
-              {formatDate(article.published_at)}
-            </time>
-            {article.updated_at &&
-              article.published_at &&
-              article.updated_at.slice(0, 10) !==
-                article.published_at.slice(0, 10) && (
-                <>
-                  <span className="text-border">•</span>
-                  <span>
-                    Updated{" "}
-                    <time dateTime={article.updated_at}>
-                      {formatDate(article.updated_at)}
-                    </time>
-                  </span>
-                </>
-              )}
+            {published && (
+              <>
+                <span className="text-border">•</span>
+                <span>Published{" "}<time dateTime={published}>{formatArticleDate(published, showBylineTimes)}</time></span>
+              </>
+            )}
+            {modified && (
+              <>
+                <span className="text-border">•</span>
+                <span>Updated{" "}<time dateTime={modified}>{formatArticleDate(modified, showBylineTimes)}</time></span>
+              </>
+            )}
             <span className="text-border">•</span>
             <span className="flex items-center gap-1">
               <Clock className="h-3 w-3" aria-hidden="true" />{" "}

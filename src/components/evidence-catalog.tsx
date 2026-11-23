@@ -26,7 +26,15 @@ import {
 import { selectionFromParams, selectionUrl } from "@/lib/catalog-selection";
 import type { CatalogKind, EvidenceEntry } from "@/lib/catalog-evidence";
 import styles from "./catalog-ui.module.css";
-import { readCatalogState, catalogStateUrl } from "@/lib/catalog-url-state";
+import {
+  CATALOG_PAGE_SIZE,
+  COMPARE_PAGE_SIZE,
+  catalogPageCount,
+  catalogStateUrl,
+  matchingCatalogEntries,
+  readCatalogState,
+  type PublicCatalogState,
+} from "@/lib/catalog-url-state";
 
 type FiltersProps = {
   entries: EvidenceEntry[];
@@ -117,42 +125,30 @@ export function EvidenceCatalog({
   kind,
   entries,
   compare = false,
-  initialLimit,
+  initialState = { q: "", category: "", sort: "name", page: 1 },
+  initialSelection = [],
 }: {
   kind: CatalogKind;
   entries: EvidenceEntry[];
   compare?: boolean;
-  // Server-rendered initial card count, from ?page=N (see the listing
-  // pages). Without it every ?page=N serves the first-page HTML and only
-  // the client expands after hydration.
-  initialLimit?: number;
+  initialState?: PublicCatalogState;
+  initialSelection?: string[];
 }) {
-  const [query, setQueryState] = useState("");
-  const [category, setCategoryState] = useState("");
+  const [state, setState] = useState(initialState);
+  const { q: query, category, sort } = state;
   const [saved, setSaved] = useState(false);
   const [favorites, setFavorites] = useState<string[]>([]);
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected, setSelected] = useState(initialSelection);
   const [recent, setRecent] = useState<string[]>([]);
   const [recentOnly, setRecentOnly] = useState(false);
-  const [sort, setSortState] = useState("name");
-  // First page by default; CatalogUrlSync expands this from ?page=N
-  // client-side after hydration (and on pagination navigation).
-  // When the server already read ?page=N it passes initialLimit, so the
-  // first render matches the requested page instead of always page 1.
-  const [limit, setLimitState] = useState(
-    initialLimit ?? (compare ? 8 : 24),
-  );
   const [pickerOpen, setPickerOpen] = useState(false);
   const picker = useRef<HTMLDialogElement>(null);
   // Slots shown in the comparison workspace. Two by default; picking more
   // vehicles than there are slots grows them automatically, up to four.
-  const [slotCount, setSlotCount] = useState(2);
+  const [slotCount, setSlotCount] = useState(Math.max(2, initialSelection.length));
   const label = kind === "vehicles" ? "vehicle" : "weapon";
-  const pageSize = compare ? 8 : 24;
-  const writeState = (
-    patch: Partial<{ q: string; category: string; sort: string; page: number }>,
-    push = true,
-  ) => {
+  const pageSize = compare ? COMPARE_PAGE_SIZE : CATALOG_PAGE_SIZE;
+  const writeState = (patch: Partial<PublicCatalogState>, push = true) => {
     trackPublicEvent("catalog_filter_used", {
       kind,
       filter:
@@ -160,17 +156,8 @@ export function EvidenceCatalog({
           .filter((key) => key !== "q")
           .join(",") || "search",
     });
-    const next = {
-      q: query,
-      category,
-      sort,
-      page: Math.ceil(limit / pageSize),
-      ...patch,
-    };
-    setQueryState(next.q);
-    setCategoryState(next.category);
-    setSortState(next.sort);
-    setLimitState(next.page * pageSize);
+    const next = { ...state, ...patch };
+    setState(next);
     const url = catalogStateUrl(new URL(window.location.href), next);
     if (url.href !== window.location.href)
       window.history[push ? "pushState" : "replaceState"](
@@ -179,31 +166,25 @@ export function EvidenceCatalog({
         url,
       );
   };
-  const setQuery = (q: string) => writeState({ q, page: 1 }, false);
-  const setCategory = (category: string) => writeState({ category, page: 1 });
-  const setSort = (sort: string) => writeState({ sort, page: 1 });
-  const setLimit = (limit: number) =>
-    writeState({ page: Math.ceil(limit / pageSize) });
-  // Sync catalog state from the URL (?q, ?category, ?sort, ?page, ?ids).
-  // Runs on mount and whenever the search params change — pagination
-  // <Link> clicks, back/forward, and shared deep links. The hub pages are
-  // static (no server-side searchParams), so this client-side sync is what
-  // makes ?page=N work. It lives in a suspended child (CatalogUrlSync
-  // below) so the catalog itself still prerenders fully on the server.
+  const firstPage = { page: 1, from: undefined };
+  const setQuery = (q: string) => writeState({ ...firstPage, q }, false);
+  const setCategory = (category: string) => writeState({ ...firstPage, category });
+  const setSort = (sort: string) => writeState({ ...firstPage, sort });
   const syncFromParams = useCallback(
     (params: URLSearchParams) => {
-      const state = readCatalogState(params, entries, compare ? 8 : 24);
-      setQueryState(state.q);
-      setCategoryState(state.category);
-      setSortState(state.sort);
-      setLimitState(state.page * (compare ? 8 : 24));
+      const next = readCatalogState(params, entries, pageSize);
+      setState((previous) => ({
+        ...next,
+        q: next.q === previous.q.trim() ? previous.q : next.q,
+        sort: previous.sort === "recent" && next.sort === "name" ? previous.sort : next.sort,
+      }));
       const initialSelected = selectionFromParams(params, kind, entries);
       setSelected(initialSelected);
       // Slots follow the selection: never fewer than two, never more than
       // four, and never fewer than the picks the URL already carries.
       setSlotCount(Math.max(2, Math.min(4, initialSelected.length)));
     },
-    [entries, kind, compare],
+    [entries, kind, pageSize],
   );
   useEffect(() => {
     const update = () => {
@@ -256,50 +237,32 @@ export function EvidenceCatalog({
         : [...selected, id].slice(0, 4),
     );
   const clear = () => {
-    writeState({ q: "", category: "", sort: "name", page: 1 });
+    writeState({ ...firstPage, q: "", category: "", sort: "name" });
     setSaved(false);
     setRecentOnly(false);
   };
   const recentRank = (id: string) =>
     recent.includes(id) ? recent.indexOf(id) : Number.MAX_SAFE_INTEGER;
-  const shown = entries
+  const shown = matchingCatalogEntries(entries, state)
     .filter(
       (e) =>
-        (!category || e.category === category) &&
         (!saved || favorites.includes(e.id)) &&
-        (!recentOnly || recent.includes(e.id)) &&
-        [e.name, e.category]
-          .join(" ")
-          .toLowerCase()
-          .includes(query.trim().toLowerCase()),
-    )
-    .sort((a, b) =>
-      sort === "recent"
-        ? recentRank(a.id) - recentRank(b.id)
-        : (sort === "reverse" ? -1 : 1) * a.name.localeCompare(b.name),
+        (!recentOnly || recent.includes(e.id)),
     );
-  // Pagination links to every ?page=N exist, and each ?page=N now renders
-  // its own cards server-side (initialLimit, from the listing page's
-  // searchParams). Before the 15 Nov 2026 fix every ?page=N served the
-  // same first-page HTML and the catalog only expanded client-side, so a
-  // non-JS crawler never saw links to items past the first 24. Detail
-  // pages also carry plain prev/next links (EvidenceDetail), and the
-  // sitemap lists the indexable detail pages.
-  // Mirrors catalogStateUrl: defaults (page 1, sort name) stay out of the URL.
+  if (sort === "recent") shown.sort((a, b) => recentRank(a.id) - recentRank(b.id));
   const pathname = usePathname();
-  const totalPages = Math.max(1, Math.ceil(shown.length / pageSize));
-  const currentPage = Math.min(
-    totalPages,
-    Math.max(1, Math.ceil(limit / pageSize)),
-  );
-  const pageHref = (n: number) => {
-    const params = new URLSearchParams();
-    if (query) params.set("q", query);
-    if (category) params.set("category", category);
-    if (sort === "reverse") params.set("sort", "reverse");
-    if (n > 1) params.set("page", String(n));
-    const qs = params.toString();
-    return qs ? `${pathname}?${qs}` : pathname;
+  const totalPages = catalogPageCount(shown.length, pageSize);
+  const currentPage = Math.min(state.page, totalPages);
+  const firstVisiblePage = compare ? 1 : Math.min(state.from ?? currentPage, currentPage);
+  const cards = shown.slice((firstVisiblePage - 1) * pageSize, currentPage * pageSize);
+  const pageHref = (page: number) => {
+    const url = catalogStateUrl(new URL(pathname, "https://www.taishgaming.com"), {
+      ...state,
+      page,
+      from: undefined,
+    });
+    if (selected.length) url.searchParams.set("ids", selected.join(","));
+    return url.pathname + url.search;
   };
   const comparison = selected
     .map((id) => entries.find((e) => e.id === id))
@@ -337,6 +300,7 @@ export function EvidenceCatalog({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               type="search"
+              maxLength={120}
               placeholder={`Search ${kind} or categories…`}
             />
           </label>
@@ -368,7 +332,7 @@ export function EvidenceCatalog({
           <span>{selected.length}/4 selected</span>
         </div>
         <div className={styles.grid}>
-          {shown.slice(0, limit).map((e) => {
+          {cards.map((e) => {
             const picked = selected.includes(e.id);
             const favorite = favorites.includes(e.id);
             // Text-only entries have no verified image: hide the image
@@ -487,14 +451,17 @@ export function EvidenceCatalog({
             </button>
           </div>
         )}
-        {shown.length > limit && (
+        {currentPage < totalPages && (
           <div className={styles.loadMore}>
             <button
               className={styles.secondary}
               type="button"
-              onClick={() => setLimit(limit + (compare ? 8 : 24))}
+              onClick={() => writeState({
+                page: currentPage + 1,
+                from: compare ? undefined : firstVisiblePage,
+              })}
             >
-              Show more · {Math.min(limit, shown.length)} of {shown.length}
+              Show more · {cards.length} of {shown.length} shown
               <ChevronDown size={15} aria-hidden="true" />
             </button>
           </div>
@@ -505,6 +472,13 @@ export function EvidenceCatalog({
               <Link
                 key={n}
                 href={pageHref(n)}
+                scroll={false}
+                onClick={(event) => {
+                  if ((!saved && !recentOnly && sort !== "recent") || event.button || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+                  event.preventDefault();
+                  writeState({ page: n, from: undefined });
+                }}
+                aria-label={`Page ${n}`}
                 aria-current={n === currentPage ? "page" : undefined}
                 className={`${styles.secondary} ${n === currentPage ? styles.pageCurrent : ""}`}
               >
