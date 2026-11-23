@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CommunityMapWorkspace } from "@/components/community-map-workspace";
 import { applyCommunityOverrides } from "@/lib/community-map";
 import type { AdminMapMarker } from "@/lib/admin-store";
+import { ROCKSTAR_LEONIDA_MAP_URL } from "@/lib/regions";
 export function MapClient({ markers = [] }: { markers?: AdminMapMarker[] }) {
   const current = applyCommunityOverrides(markers);
   const positioned = current.filter((item) => item.position);
@@ -31,6 +32,9 @@ export function MapClient({ markers = [] }: { markers?: AdminMapMarker[] }) {
           own notes and planning marks. This reconstruction is unofficial:
           positions, identities and boundaries can change.
         </p>
+        <a href={ROCKSTAR_LEONIDA_MAP_URL} className="inline-block text-sm font-semibold text-primary underline">
+          Rockstar’s official printable map
+        </a>
         <div className="hidden sm:flex flex-wrap gap-x-5 gap-y-2 text-sm">
           <span>
             <strong>{positioned.length.toLocaleString("en-US")}</strong>{" "}

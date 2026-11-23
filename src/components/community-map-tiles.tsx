@@ -9,7 +9,7 @@ const YANIS_RANGES: Record<number, [number, number, number, number]> = {
   2: [2, 2, 12, 12],
   3: [5, 5, 25, 24],
   4: [10, 10, 51, 49],
-  5: [20, 20, 103, 99],
+  5: [21, 21, 103, 99],
 };
 const OFFICIAL_RANGES: Record<number, [number, number, number, number]> = {
   0: [0, 0, 3, 3],

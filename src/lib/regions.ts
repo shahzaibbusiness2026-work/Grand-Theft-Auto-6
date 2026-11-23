@@ -4,6 +4,10 @@ export type RegionImage = {
   caption: string;
 };
 
+export const ROCKSTAR_LEONIDA_MAP_URL = "https://www.rockstargames.com/VI/media";
+export const ROCKSTAR_LEONIDA_PLACES_URL = "https://www.rockstargames.com/VI/only-in-leonida";
+export const ROCKSTAR_LEONIDA_SCREENSHOTS_URL = "https://www.rockstargames.com/VI/media/screenshots";
+
 export type RegionPage = {
   slug: string;
   name: string;
@@ -49,7 +53,7 @@ export const REGION_PAGES: RegionPage[] = [
       "County names and road numbers — community-mapped from signage, not Rockstar text.",
       "Fan-mapped venues from real-Miami counterparts (e.g. Sahara Arena, Galina Ballet Opera House) — not Rockstar names.",
       "Malibu Club — explicitly not confirmed for GTA VI.",
-      "Exact district borders — Rockstar has published no official map.",
+      "Exact district boundaries and the coordinates of community pins remain unverified here.",
     ],
     related: [
       { label: "All six regions", href: "/regions" },
@@ -89,7 +93,7 @@ export const REGION_PAGES: RegionPage[] = [
     ],
     notConfirmed: [
       "“Key Lento” — tracker naming for the Keys base where Trailer 2 opens, not Rockstar text.",
-      "Exact island positions and which island is which — no official map.",
+      "Community pin coordinates and proposed identifications for islands remain unverified here.",
       "Individual named Keys bars — none named by Rockstar.",
     ],
     related: [
@@ -123,7 +127,7 @@ export const REGION_PAGES: RegionPage[] = [
     ],
     notConfirmed: [
       "“Everglades” — a fan and press comparison; Rockstar's word is “wetlands.”",
-      "Exact geography: where Grassrivers ends and Port Gellhorn begins — no official map.",
+      "The exact boundary between Grassrivers and Port Gellhorn remains unverified here.",
       "Watson Bay as a Grassrivers stilt settlement — community placement from trailer geography, not Rockstar text.",
     ],
     related: [
@@ -219,15 +223,14 @@ export const REGION_PAGES: RegionPage[] = [
     ],
     images: [],
     confirmed: [
-      "National landmark on the state's northern border — Rockstar, Only in Leonida. (Outlets append “National Park”; Rockstar's wording is “Mount Kalaga.”)",
+      "National landmark on the state's northern border — Rockstar, Only in Leonida. Rockstar's media gallery also uses the name Mount Kalaga National Park.",
       "Prime hunting, fishing, and off-road trails — Rockstar, Only in Leonida.",
       "Pine forests, winding rivers clear enough for kayaking, a canyon, off-road trails — Rockstar description and official screenshots.",
       "Backwoods residents described by Rockstar as hillbilly mystics and paranoid radicals living far from government eyes.",
     ],
     notConfirmed: [
-      "“Mount Kalaga National Park” as Rockstar wording — outlets add “National Park”; Rockstar says “Mount Kalaga.”",
       "Real-world parallels (Providence Canyon, Suwannee River, Table Rock) — press and fan comparisons, not Rockstar statements.",
-      "Exact position relative to other regions — no official map.",
+      "The exact boundaries and coordinates of community pins remain unverified here.",
     ],
     related: [
       { label: "All six regions", href: "/regions" },

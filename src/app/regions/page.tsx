@@ -2,7 +2,7 @@ import { SiteShell } from "@/components/shells";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { REGION_PAGES } from "@/lib/regions";
+import { REGION_PAGES, ROCKSTAR_LEONIDA_MAP_URL, ROCKSTAR_LEONIDA_PLACES_URL } from "@/lib/regions";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/regions" },
@@ -24,11 +24,10 @@ export default function RegionsHubPage() {
             GTA 6 Regions
           </h1>
           <p className="mt-3 max-w-3xl text-white/70">
-            Rockstar describes Leonida as a state of six regions — from Vice
-            City’s excess to Mount Kalaga’s backwoods. Each page below quotes
-            Rockstar’s own region description, lists what is confirmed, and
-            says plainly what is not. Rockstar has published no official map,
-            so borders and positions are left unconfirmed throughout.
+            Rockstar highlights six Leonida destinations, from Vice City to
+            Mount Kalaga, in <a href={ROCKSTAR_LEONIDA_PLACES_URL} className="underline text-white">Only in Leonida</a>.
+            Rockstar also offers an <a href={ROCKSTAR_LEONIDA_MAP_URL} className="underline text-white">official printable Leonida map</a>.
+            Our fan-map positions and detailed boundaries remain provisional.
           </p>
           <p className="mt-3 max-w-3xl text-white/70">
             The six regions are Vice City — Rockstar&apos;s sun and fun capital

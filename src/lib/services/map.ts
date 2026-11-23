@@ -6,6 +6,7 @@ import { createPublicClient } from "@/lib/supabase/public";
 
 import { AdminMapMarker } from "@/lib/admin-store";
 import { assertAdmin } from "@/lib/auth/assert-admin";
+import { parseCanvasPosition } from "@/lib/map-position";
 import { logActivity } from "./activity";
 
 export interface DatabaseMapMarkerRow {
@@ -26,6 +27,7 @@ export interface DatabaseMapMarkerRow {
 }
 
 function rowToMarker(row: DatabaseMapMarkerRow): AdminMapMarker {
+  const position = parseCanvasPosition(row.coord_y, row.coord_x);
   return {
     id: row.id,
     name: row.name,
@@ -34,12 +36,12 @@ function rowToMarker(row: DatabaseMapMarkerRow): AdminMapMarker {
     visible: row.visible ?? true,
     icon: (row.icon as AdminMapMarker["icon"]) || "pin",
     coordinates: {
-      x: Number.isFinite(Number(row.coord_x)) ? Number(row.coord_x) : 50,
-      y: Number.isFinite(Number(row.coord_y)) ? Number(row.coord_y) : 50,
+      x: position?.left ?? 50,
+      y: position?.top ?? 50,
     },
     description: row.description || "",
     verification:
-      (row.verification as AdminMapMarker["verification"]) || "verified",
+      (row.verification as AdminMapMarker["verification"]) || "unverified",
     source: row.source || undefined,
     linkedRecord: row.linked_record || undefined,
     createdAt: row.created_at || undefined,
@@ -61,7 +63,7 @@ export async function getMapMarkers(): Promise<AdminMapMarker[]> {
 
     if (!error && data) {
       const publicRows = (data as DatabaseMapMarkerRow[]).filter(
-        (row) => !row.id.startsWith("gtadb-"),
+        (row) => !row.id.startsWith("gtadb-") && parseCanvasPosition(row.coord_y, row.coord_x),
       );
       // Only public community-source IDs can have overrides. Hidden overrides
       // expose an ID and visibility flag, never unpublished names or notes.
@@ -78,13 +80,17 @@ export async function getMapMarkers(): Promise<AdminMapMarker[]> {
           throw new Error("Community map overrides are unavailable.");
         const batch = result.data as DatabaseMapMarkerRow[];
         overrides.push(
-          ...batch.map((row) =>
+          ...batch
+            .filter((row) => !row.visible || parseCanvasPosition(row.coord_y, row.coord_x))
+            .map((row) =>
             rowToMarker(
               row.visible
                 ? row
                 : {
                     ...row,
                     name: "",
+                    coord_x: 0,
+                    coord_y: 0,
                     description: "",
                     source: null,
                     linked_record: null,
@@ -156,7 +162,7 @@ export async function saveMapMarker(
       coord_x: marker.coordinates?.x ?? 50,
       coord_y: marker.coordinates?.y ?? 50,
       description: marker.description || "",
-      verification: marker.verification || "verified",
+      verification: marker.verification || "unverified",
       source: marker.source || null,
       linked_record: marker.linkedRecord || null,
       updated_at: new Date().toISOString(),
