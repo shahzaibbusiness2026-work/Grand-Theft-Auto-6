@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getMergedVehicles, getMergedWeapons } from "@/lib/services/catalog";
+import { indexReady } from "@/lib/catalog-evidence";
+import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import { getPublicArticles } from "@/lib/services/articles";
 import { getPublicGuides } from "@/lib/services/guides";
 import {
@@ -23,13 +24,15 @@ export async function GET() {
   const items: SearchItem[] = [...TOOL_SEARCH_ITEMS];
 
   try {
-    // Vehicles (DB wins over canonical via the shared merge)
-    const vehicles = await getMergedVehicles();
+    const [vehicles, weapons] = await Promise.all([
+      getEvidenceCatalog("vehicles"),
+      getEvidenceCatalog("weapons"),
+    ]);
     vehicles.forEach((v) => {
       items.push({
         id: `veh-${v.id}`,
         title: v.name,
-        subtitle: `${v.klass} • Identification awaiting review`,
+        subtitle: `${v.category} • ${indexReady(v) ? "Reviewed appearance" : "Provisional identification"}`,
         category: "Vehicle",
         href: `/vehicles/${v.slug}`,
         img: v.img,
@@ -37,12 +40,11 @@ export async function GET() {
     });
 
     // Weapons
-    const weapons = await getMergedWeapons();
     weapons.forEach((w) => {
       items.push({
         id: `wep-${w.id}`,
         title: w.name,
-        subtitle: `${w.klass} • Identification awaiting review`,
+        subtitle: `${w.category} • ${indexReady(w) ? "Reviewed appearance" : "Provisional identification"}`,
         category: "Weapon",
         href: `/weapons/${w.slug}`,
         img: w.img,

@@ -22,8 +22,9 @@ export function catalogSchema(
         "@type": "Thing",
         "@id": page + "#entity",
         name: entry.name,
-        description:
-          "Provisional editorial catalog identification. Only the visible reviewed claims carry evidence; other GTA VI attributes remain unverified.",
+        description: entry.claims.some((claim) => claim.field === "Official name")
+          ? "Source-reviewed GTA VI identification. Each documented detail is linked to its evidence."
+          : "Editorial GTA VI catalog identification. The page lists the evidence and its scope.",
         subjectOf: { "@id": page + "#webpage" },
       },
       {

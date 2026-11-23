@@ -4,250 +4,190 @@
     "id": "girardi-es9",
     "field": "GTA VI appearance",
     "value": "Girardi ES9",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Ultimate Edition contents — Jason's Girardi ES9",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Girardi ES9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "klose-k17",
     "field": "GTA VI appearance",
     "value": "Klose K17",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Ultimate Edition contents — Lucia's Klose K17",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Klose K17 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "hawk-little-morgan-revolvers",
     "field": "GTA VI appearance",
     "value": "Hawk & Little Morgan Revolvers",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Ultimate Edition contents — matching revolver pair",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Official Ultimate Edition Upgrade product listing under ‘HAWK & LITTLE MORGAN REVOLVERS’.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "mustang-357",
     "field": "GTA VI appearance",
-    "value": "Mustang .357",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "official screenshot: Ambrosia — name engraved on barrel next to Duke Arms logo",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "weapons",
-    "id": "combat-mg-lmg",
-    "field": "GTA VI appearance",
-    "value": "Combat MG (LMG)",
-    "source": "https://www.youtube.com/embed/VQRLujxTm3c",
-    "locator": "Trailer 2, 2:09 — Phil's Ammu-Nation commercial, Phil fires LMG from rooftop",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "Duke Mustang .357",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots revolver menu, November 19 (open the Duke Mustang .357 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "baseball-bat",
     "field": "GTA VI appearance",
-    "value": "Baseball Bat",
-    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
-    "locator": "Trailer 1, liquor-store robbery sequence",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "A baseball bat is shown equipped during Lab Fees.",
+    "source": "https://nerdschalk.com/moonstone-boutique-baseball-bat-gta-6/",
+    "locator": "The original Lab Fees gameplay screenshots show the bat before and after pickup.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "unarmed-combat",
     "field": "GTA VI appearance",
-    "value": "Unarmed Combat",
-    "source": "https://www.youtube.com/embed/VQRLujxTm3c",
-    "locator": "Trailer 2, fist-fight scenes",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "weapons",
-    "id": "springfield-m1a-style-rifle",
-    "field": "GTA VI appearance",
-    "value": "Springfield M1A-Style Rifle",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "official screenshot: Grassrivers — mud-covered hunter carrying M1A-pattern rifle (also Extended Look)",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "weapons",
-    "id": "scoped-hunting-rifles",
-    "field": "GTA VI appearance",
-    "value": "Scoped Bolt-Action Hunting Rifles",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "official promotional image: Mount Kalaga forest — poachers/hunters with scoped rifles",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "Unarmed",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c",
+    "locator": "Rockstar Trailer 2 cargo-plane fist fight.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "schyster-deviant",
     "field": "GTA VI appearance",
-    "value": "Schyster Deviant",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Ultimate Edition contents (also Wyman's Classic Car Collection)",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "’72 Deviant",
+    "source": "https://www.powerpyx.com/gta-6-how-to-get-ultimate-edition-rewards/",
+    "locator": "‘Find Cars for Wyman’ section names the ’72 Deviant rebuild. Rockstar’s Classic Car Collection 06 press still shows DEVIANT script on the rear flank.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "vapid-dominator-buggy-67",
     "field": "GTA VI appearance",
-    "value": "'67 Vapid Dominator Buggy",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Ultimate Edition contents",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "’67 Vapid Dominator Buggy",
+    "source": "https://www.rockstargames.com/VI/add-ons/ultimate-edition",
+    "locator": "Ultimate Edition Upgrade add-on contents name the ’67 Vapid Dominator Buggy.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "dinka-enduro",
     "field": "GTA VI appearance",
-    "value": "Dinka Enduro",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Ultimate Edition contents",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "Dinka ’72 Enduro",
+    "source": "https://gta6data.com/gta-6-vehicle-names-and-evidence/",
+    "locator": "‘Vehicle Names Shown in Captured Gameplay’ displays the HUD screenshot identifying Dinka ’72 Enduro on the motorcycle by the exterior stairs.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "crest-kayak",
     "field": "GTA VI appearance",
     "value": "Crest Kayak",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Ultimate Edition contents",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Ultimate Edition gallery, named Crest Kayak screenshot in Jason’s Safehouse Vehicles.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "shitzu-squalo",
     "field": "GTA VI appearance",
     "value": "Shitzu Squalo",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Ultimate Edition contents",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "source": "https://www.rockstargames.com/VI/add-ons/ultimate-edition",
+    "locator": "Ultimate Edition Upgrade add-on contents name the Shitzu Squalo.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "vapid-stanier-55",
     "field": "GTA VI appearance",
-    "value": "'55 Vapid Stanier",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Vintage Vice City Pack contents (pre-order)",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "’55 Vapid Stanier",
+    "source": "https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions",
+    "locator": "Digital versions and physical pre-order sections name the ’55 Vapid Stanier Sedan and Garage.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "vapid-ganado",
     "field": "GTA VI appearance",
-    "value": "Vapid Ganado",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Ultimate Edition contents — customized Vapid Ganado pickup (also Jason's daily driver in Trailer 2/Extended Look)",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "Vapid ’70 Ganado",
+    "source": "https://www.gamesradar.com/games/grand-theft-auto/120-hours-in-gta-6-whats-it-really-like-to-review-the-biggest-entertainment-event-of-the-decade/",
+    "locator": "GamesRadar+ reviewer recounts personally repainting and modifying Jason’s Vapid ’70 Ganado in the released game.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "vapid-riata",
     "field": "GTA VI appearance",
-    "value": "Vapid Riata",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "Ultimate Edition contents — Wyman's Classic Car Collection (Vapid Riata)",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "Vapid ’70 Riata",
+    "source": "https://www.pushsquare.com/guides/gta-6-wymans-classic-car-locations",
+    "locator": "The Riata section shows the ’70 Riata scan. The Vapid badge is also visible in the game’s vehicle card.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "tulip",
     "field": "GTA VI appearance",
-    "value": "Declasse Tulip",
-    "source": "https://www.youtube.com/embed/VQRLujxTm3c",
-    "locator": "Trailer 2, 2:33 — final shot, driving into sunset",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "Declasse ’72 Tulip",
+    "source": "https://www.youtube.com/watch?v=Bhwj-_9Xz6M&t=1206s",
+    "locator": "GamersPrey Part 6 at 20:06. The vehicle HUD names the Declasse ’72 Tulip.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "airboat",
     "field": "GTA VI appearance",
-    "value": "Airboat",
-    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
-    "locator": "Trailer 1, 0:19 — airboat cutting through flooded Grassrivers (also official Grassrivers screenshots)",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "value": "Airgator Airboat 09",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-capture-airgator-09.jpg",
+    "locator": "GTA6DATA launch-game screenshot — the named vehicle panel confirms Airgator Airboat 09 in the marsh.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "564440dd-70ac-4ea1-9ae4-0349be2aeb4b",
     "field": "GTA VI appearance",
     "value": "Principe Alvino V1",
-    "source": "https://www.rockstargames.com/VI",
-    "locator": "official cover art — wheelie on Ocean Drive (also Extended Look dirt-track scenes)",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "vehicles",
-    "id": "vapid-caracara-4x4",
-    "field": "GTA VI appearance",
-    "value": "Vapid Caracara 4x4",
-    "source": "https://www.youtube.com/embed/VQRLujxTm3c",
-    "locator": "Trailer 2, lifeguard-beach cutscenes (Brian Heder's vehicle)",
-    "reviewedAt": "2026-10-28",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/vehicles/principe-alvino-v1/",
+    "locator": "Rockstar press-pack still, race bike no. 76. PRINCIPE is on the tank, ALVINO V1 is on the fairing. The page reproduces and measures the original lettering.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "grotti-furia",
     "field": "GTA VI appearance",
-    "value": "Grotti Furia",
-    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
-    "locator": "Trailer 1, 0:25 — Vice City freeway at night; silver-grey, passenger leaning out photographing Lucia in the trailing red Zorrusso. Identification unverified — community-identified, Rockstar has not named this model.",
-    "reviewedAt": "2026-11-08",
-    "reviewer": "Muse"
+    "value": "Piccia Furia",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Piccia Furia.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "pegassi-zorrusso",
     "field": "GTA VI appearance",
-    "value": "Pegassi Zorrusso",
-    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
-    "locator": "Trailer 1, 0:25 — red roadster on the Vice City freeway at night; Lucia standing in the passenger seat, Jason driving. Identification unverified — community-identified, Rockstar has not named this model.",
-    "reviewedAt": "2026-11-08",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "vehicles",
-    "id": "cheetah-classic",
-    "field": "Unverified appearance",
-    "value": "Grotti Cheetah Classic",
-    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
-    "locator": "Trailer 1, 0:34 — white, parked on Ocean Drive at dusk; louvered rear deck, plate CH33TAH. Identification unverified — community-identified, Rockstar has not named this model.",
-    "reviewedAt": "2026-11-08",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "vehicles",
-    "id": "bravado-buffalo-stx",
-    "field": "GTA VI appearance",
-    "value": "Bravado Buffalo STX",
-    "source": "https://www.youtube.com/embed/QdBZY2fkU-0",
-    "locator": "Trailer 1, 0:46 — street takeover in Crosstown at night, seen from above among the takeover cars. Identification unverified — community identification from the takeover scene, Rockstar has not named this model.",
-    "reviewedAt": "2026-11-08",
-    "reviewer": "Muse"
+    "value": "Granforma Zorrusso",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Granforma Zorrusso.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -264,30 +204,10 @@
     "id": "m4-carbine",
     "field": "GTA VI appearance",
     "value": "Duke 556",
-    "source": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
-    "locator": "Extended Look (Rockstar, 27 Aug 2026) — the in-game pickup prompt names this AR-pattern rifle 'Duke 556'. The same rifle appears in the Launch Trailer at 1:12 (Lucia aiming during a street shootout) and at 0:52. Renamed from 'M4 Carbine' 20 Nov 2026; the old slug /weapons/m4-carbine 301s to /weapons/duke-556.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "vehicles",
-    "id": "ford-explorer-style-police-suv",
-    "field": "GTA VI appearance",
-    "value": "Ford Explorer-style police SUV",
-    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
-    "locator": "Launch Trailer, 0:46 — white Explorer-style police SUV with light bar pursuing a hypercar on Ocean Drive; second police SUV on a dirt road at night, 1:10. Identification unverified — community-identified, Rockstar has not named this model.",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "vehicles",
-    "id": "vapid-police-cruiser-interceptor",
-    "field": "GTA VI appearance",
-    "value": "Vapid Police Cruiser Interceptor",
-    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
-    "locator": "Launch Trailer, 0:47 — white modern police sedan with blue stripe sliding through an intersection. Identification unverified — community-identified, Rockstar has not named this model.",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "source": "https://www.youtube.com/watch?v=tJbzMqJGH4k&t=1507s",
+    "locator": "Rockstar An Extended Look, 25:07.13 pickup prompt ‘DUKE 556 ASSAULT RIFLE’.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -303,21 +223,11 @@
     "kind": "weapons",
     "id": "moreland-850-shotgun",
     "field": "GTA VI appearance",
-    "value": "Moreland 850 Shotgun",
-    "source": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
-    "locator": "An Extended Look, ~04:27 — on-screen pickup label 'MORELAND 850 SHOTGUN' during the opening-job firefight (per GTA Boss scene breakdown; frame verification pending)",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "vehicles",
-    "id": "495bea62-7865-439c-b1d1-055715aea811",
-    "field": "GTA VI appearance",
-    "value": "Shasa",
-    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
-    "locator": "Launch Trailer, 0:06–0:10 — white boat Jason polishes at Brian's Marina. Name 'Shasa' reported by IGN; Rockstar has not confirmed the name on screen.",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "value": "Fortune & Son Moreland 850",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 shop capture. Rockstar Extended Look pickup is ‘MORELAND 850 SHOTGUN’ (open the Fortune & Son Moreland 850 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -333,131 +243,111 @@
     "kind": "vehicles",
     "id": "seaplane-dodo",
     "field": "GTA VI appearance",
-    "value": "Mammoth Dodo Seaplane",
-    "source": "https://www.youtube.com/watch?v=3PiR0G3rVw8",
-    "locator": "IGN '15 Minutes of GTA 6 PS5 Pro Gameplay (First Mission)', 12:35-14:40 — white/blue 'Brian's' livery seaplane; 'Get in the sea plane' objective; Jason flies it over the Leonida Keys in the storm",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "value": "Mammoth Dodo",
+    "source": "https://gtaplaybook.com/wp-content/uploads/2026/11/gtap-player-capture-zqtmspjtxii-52320.jpg",
+    "locator": "WillMacGTA launch gameplay still, 0:52 — the vehicle name panel identifies MAMMOTH / DODO.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "imponte-phoenix",
     "field": "GTA VI appearance",
-    "value": "Imponte Phoenix",
-    "source": "https://www.youtube.com/watch?v=Vc5-wQ2Igr0",
-    "locator": "Sirloin GTA 6 Walkthrough Part 02, 44:00",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "weapons",
-    "id": "fortune-and-son-corse-425",
-    "field": "GTA VI appearance",
-    "value": "Fortune & Son Corse 425",
-    "source": "https://www.youtube.com/watch?v=Vc5-wQ2Igr0",
-    "locator": "Sirloin 'GTA 6 - Walkthrough Part 02 (No Commentary) 4K', ~26:00 — Chuck's Tackle & Shot shop menu, LONGARMS / SHOTGUNS, $950",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "value": "Imponte ’77 Phoenix",
+    "source": "https://gta6data.com/gta-6-vehicle-names-and-evidence/",
+    "locator": "‘Vehicle Names Shown in Captured Gameplay’ displays a named Pay ’n’ Spray menu for the red ’77 Phoenix during Unwanted Attention.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "hawk-and-little-mediator",
     "field": "GTA VI appearance",
     "value": "Hawk & Little Mediator",
-    "source": "https://www.youtube.com/watch?v=Vc5-wQ2Igr0",
-    "locator": "Sirloin 'GTA 6 - Walkthrough Part 02 (No Commentary) 4K', ~26:00 — Chuck's Tackle & Shot shop menu, $450 (discounted from $900)",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture shows Tactical Rifle and $900 on shop menu (open the Hawk & Little Mediator row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "lurepredator-l35p",
     "field": "GTA VI appearance",
-    "value": "Lurepredator L35P",
-    "source": "https://www.youtube.com/watch?v=RVpApoEkOao",
-    "locator": "TmarTn2 'GTA 6 - Part 1 - The Beginning', ~24:10 — white centre-console boat, name shown on screen",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "vehicles",
-    "id": "banshee-gts",
-    "field": "Unverified appearance",
-    "value": "Bravado Banshee",
-    "source": "https://kotaku.com/we-tested-how-long-it-takes-to-run-out-of-gas-in-gta-6-2000755601",
-    "locator": "Kotaku fuel test, 18 Nov 2026 — reviewer drove a Banshee sports car on a highway loop south of Vice City; 'it took 18 minutes and 31 seconds to drain my tank entirely.' Kotaku calls it 'Banshee' — the GTS suffix is not confirmed in GTA VI.",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "value": "Lure Predator L35P",
+    "source": "https://www.youtube.com/watch?v=RVpApoEkOao&t=1450s",
+    "locator": "TmarTn2’s opening walkthrough at about 24:10 shows the name on the center-console boat.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "seashark",
     "field": "GTA VI appearance",
-    "value": "Seashark",
-    "source": "https://www.instagram.com/reel/Df4sBvIu0Uy/",
-    "locator": "Launch-gameplay clip, 18 Nov 2026 — Lucia swims to a blue jet ski, mounts it, and rides away from the harbor; clip description names it a 'Seashark Hydroblast' jet ski. Corroborated by COMPLEX and Culture Crave clips of the same jet ski in Leonida Bay.",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "value": "Seashark Hydroblast",
+    "source": "https://gta6data.com/gta-6-vehicle-names-and-evidence/",
+    "locator": "‘Vehicle Names Shown in Captured Gameplay’ reproduces the name panel for the Seashark Hydroblast ridden by Lucia during Day Release.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "b48ea1a4-c274-4c1e-a152-8de650300daa",
     "field": "GTA VI appearance",
     "value": "Invetero Coquette",
-    "source": "https://www.instagram.com/reel/Df4xB9FBXT-/",
-    "locator": "Launch-gameplay clip, 18 Nov 2026 (TypicalGamer launch stream footage) — player's 'first stolen car': bright blue-to-purple Corvette-style car with 'COQUETTE' badging on the rear, doing burnouts in Vice City, 2-star wanted level.",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "source": "https://hypebeast.com/2026/11/grand-theft-auto-vi-gta6-real-in-game-cars",
+    "locator": "Slide 5 of the Rockstar-supplied gallery identifies the Invetero Coquette.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "claw-hammers",
     "field": "GTA VI appearance",
-    "value": "Claw Hammers (Pair)",
+    "value": "One hammer pickup is documented",
     "source": "https://www.videogameschronicle.com/guide/gta-6-gone-fishing-mission-walkthrough/",
-    "locator": "VGC Gone Fishing walkthrough, 18 Nov 2026 — 'If you want an extra melee weapon for this section, there's a hammer behind the building.' Only one hammer was found — the 'pair' part is unconfirmed.",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "locator": "First-hand VGC mission walkthrough reports one pick-up behind the building, beside the back corner.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "scorpio-nipper-38",
     "field": "GTA VI appearance",
     "value": "Scorpio Nipper .38",
-    "source": "https://www.facebook.com/reel/1160820563581382/",
-    "locator": "Chuck's Tackle & Shot shop menu, 18 Nov 2026 — Pistols/Sidearms lists 'Scorpio Nipper .38' at $550. Corroborated by @gta6detail, @fnl.clips and @gta.mallu clips showing the same menu.",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Chuck's Tackle & Shot (open the Scorpio Nipper .38 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "duke-1922",
     "field": "GTA VI appearance",
     "value": "Duke 1922",
-    "source": "https://www.facebook.com/reel/1160820563581382/",
-    "locator": "Chuck's Tackle & Shot shop menu, 18 Nov 2026 — Pistols lists 'Duke 1922' at $1,050. Corroborated by @gta6detail carousel showing the same menu.",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Duke 1922 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "arras-bullhead-harpoon-gun",
     "field": "GTA VI appearance",
-    "value": "Arras Bullhead Harpoon Gun",
-    "source": "https://www.vice-atlas.com/briefings/gta6-first-missions-walkthrough/",
-    "locator": "Mission 9 'Island Dreams' (Chapter 1), 18 Nov 2026 — 'two hits with the Arras Bullhead harpoon gun drive it off' (shark circling the wreck). Mission gear: scuba diving, metal detector, Arras Bullhead harpoon.",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "value": "Arras Bullhead",
+    "source": "https://www.youtube.com/watch?v=nYRNnw0kke0&t=612s",
+    "locator": "GamersPrey original PS5 launch gameplay Part 2 at 10:12; weapon wheel reads ARRAS BULLHEAD, LONGARM.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "combat-knife",
     "field": "GTA VI appearance",
-    "value": "Tactical Bowie Hunting Knife",
-    "source": "https://www.youtube.com/watch?v=E8ODxo9vbs0",
-    "locator": "Vice City Standard 'GTA 6 - Inside the Gun Store', 05:06 — Jason's Weapon Locker, MELEE tab: 'JASON'S HUNTING KNIFE', equipped",
-    "reviewedAt": "2026-11-18",
-    "reviewer": "Muse"
+    "value": "Hunting Knife",
+    "source": "https://www.youtube.com/watch?v=qrNuL-B_iXk&t=158s",
+    "locator": "EenGamer original release gameplay, Big Shots Ammo & Equipment > Melee Weapons at 2:38.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -474,10 +364,10 @@
     "id": "pfister-growler",
     "field": "GTA VI appearance",
     "value": "Pfister Growler",
-    "source": "https://www.youtube.com/watch?v=pTtymg2_mpw",
-    "locator": "TheBurntPeanut 'Peanut's First Look At Vice City | GTA 6', 56:58 — HUD card 'PFISTER / GROWLER' with 'Growler' script on the door, Lucia driving to 'Artist's Garden'; 'Growler' badging also visible 39:02, 52:02 and 55:02 (Joey's mod shop)",
-    "reviewedAt": "2026-11-19",
-    "reviewer": "Muse"
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/growler-scan.webp",
+    "locator": "MonkeyKingHero launch gameplay still, WAiNK identifies the white parked car as Pfister Growler.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -494,20 +384,20 @@
     "id": "gauntlet-hellfire",
     "field": "GTA VI appearance",
     "value": "Bravado Gauntlet Hellfire",
-    "source": "https://www.pushsquare.com/guides/gta-6-randys-wish-list-vehicle-locations",
-    "locator": "Push Square Randy's Wish List guide (in-game feature): Gauntlet Hellfire pictured parked at the back of the M7 junkyard east of Boone Speedway, Hamlet. Radio Times lists the same Wish List entry.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Bravado Gauntlet Hellfire.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "maverick",
     "field": "GTA VI appearance",
     "value": "Buckingham Maverick",
-    "source": "https://www.instagram.com/reel/Df5-m1QIR7D/",
-    "locator": "Launch-gameplay reel: on-screen text identifies the yellow/black/white helicopter as 'BUCKINGHAM MAVERICK' on the Southwind dock; launch guides place it at the Marque Hoppers gate, Southwind.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-first-plane-and-helicopter/",
+    "locator": "PC Gamer’s helicopter section names and shows the Maverick at a Southwind dock.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -524,20 +414,20 @@
     "id": "invetero-coquette-d10",
     "field": "GTA VI appearance",
     "value": "Invetero Coquette D10",
-    "source": "https://www.youtube.com/watch?v=IuHt5BkE7TA",
-    "locator": "Launch-gameplay video, ~19:45: green mid-engine C8-style car, rear lettering reads COQUETTE; the video chapter names it 'Corvette C8 (Invetero Coquette D10)' and LeonidaRacing lists it as read in-game on PS5. The frame alone does not distinguish the D10 from the base Coquette.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/vehicles/invetero-coquette-d10/",
+    "locator": "Own PS5 screenshot, bottom-right vehicle panel on the black car reads INVETERO / COQUETTE D10.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "dundreary-landstalker-xl",
     "field": "GTA VI appearance",
     "value": "Dundreary Landstalker XL",
-    "source": "https://www.instagram.com/reel/Df8X5pjBt3P/",
-    "locator": "Launch-gameplay reel, ~0:12: HUD card reads DUNDREARY / LANDSTALKER XL beside a dark gray SUV.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/answers/car-brands/",
+    "locator": "Original PS5 screenshots in ‘Which car brands does the game itself name?’, Dundreary link opens the Landstalker XL scan panel.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -553,31 +443,21 @@
     "kind": "vehicles",
     "id": "declasse-vamos",
     "field": "GTA VI appearance",
-    "value": "Declasse Vamos",
-    "source": "https://www.powerpyx.com/gta-6-steal-vehicles-for-moses-walkthrough/",
-    "locator": "PowerPyx Moses walkthrough: objective 5, 'souped up Declasse Vamos in Grayson', $4,200, shed keypad code 2727.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "value": "Declasse ’74 Vamos",
+    "source": "https://howtovideogame.com/gta-6-moses-cars/",
+    "locator": "‘The Declasse ’74 Vamos’ and the Moses jobs table identify the car. PowerPyx’s walkthrough also quotes the in-game Vamos job.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "grotti-carbonizzare",
     "field": "GTA VI appearance",
     "value": "Grotti Carbonizzare",
-    "source": "https://www.sportskeeda.com/esports/7-best-early-game-cars-gta-6-get",
-    "locator": "Sportskeeda (19 Nov): #1 early-game car, 'often spotted cruising the streets of Vice City'; a dedicated launch-gameplay showcase video drives the Carbonizzare. No HUD-name frame was personally viewed.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "vehicles",
-    "id": "imponte-ruiner",
-    "field": "GTA VI appearance",
-    "value": "Imponte Ruiner",
-    "source": "https://www.facebook.com/reel/2045317262799822/",
-    "locator": "Launch-day gameplay reels (19-20 Nov): the silver flame-decal supercharged Ruiner is stolen in Key Lento and registered at the Port Gellhorn garage menu. One reel calls it the '82 Ruiner, so the exact in-game variant name is still unclear.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Grotti Carbonizzare.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -593,21 +473,21 @@
     "kind": "vehicles",
     "id": "vapid-stanier",
     "field": "GTA VI appearance",
-    "value": "Vapid Stanier",
-    "source": "https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions",
-    "locator": "Rockstar Support: the Vintage Vice City Pack includes the ''55 Vapid Stanier Sedan and Garage'; Dexerto's launch guide says collect it at the Ocean View Hotel in Chapter 3.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "value": "Vapid Stanier G2",
+    "source": "https://gtaplaybook.com/gta6/vehicles/vapid-stanier-g2/",
+    "locator": "Own PS5 screenshot snt-00487, bottom-right vehicle panel reads VAPID / STANIER G2.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "declasse-rancher",
     "field": "GTA VI appearance",
-    "value": "Declasse Rancher",
-    "source": "https://www.youtube.com/watch?v=Mhd9VvZxVu0",
-    "locator": "Launch-gameplay video, 0:36: WAiNK phone panel reads 'DECLASSE / '86 RANCHER' beside a white pickup (Access Locked, Security Alarmed, Tracker None). Frame personally viewed.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "value": "Declasse ’86 Rancher",
+    "source": "https://www.youtube.com/watch?v=Mhd9VvZxVu0&t=36s",
+    "locator": "At 0:36 the WAiNK panel shows the Declasse ’86 Rancher.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -624,10 +504,10 @@
     "id": "maibatsu-penumbra",
     "field": "GTA VI appearance",
     "value": "Maibatsu Penumbra",
-    "source": "https://www.youtube.com/watch?v=Ubp-TANAQ7c",
-    "locator": "Launch-gameplay video, 0:55: HUD card reads 'MAIBATSU / '97 PENUMBRA FF' as the lime-green Eclipse-style car with blue graphics drives out of the Vespucci Island villa garage. Frame personally viewed; Jalopnik and SlashGear corroborate the tribute car.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-capture-maibatsu-penumbra.jpg",
+    "locator": "Launch gameplay vehicle HUD reads MAIBATSU / PENUMBRA on a light car with a roof box by the waterfront.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -643,41 +523,41 @@
     "kind": "vehicles",
     "id": "western-sovereign",
     "field": "GTA VI appearance",
-    "value": "Western Sovereign",
+    "value": "Western Sovereign 107",
     "source": "https://www.instagram.com/reel/Df5R8M3TonV/",
-    "locator": "Launch-gameplay reel, ~0:30: HUD card reads 'WESTERN SOVEREIGN 107' as Jason rides the white cruiser down the runway in the Donnie mission. Frame personally viewed.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "locator": "At about 0:30 the vehicle card reads Western Sovereign 107.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "buzzard",
     "field": "GTA VI appearance",
-    "value": "Buzzard",
-    "source": "https://www.youtube.com/watch?v=upcl34cTuGc",
-    "locator": "Launch-gameplay video, ~4:30: HUD card reads 'BOTTCHER BUZZARD' over the attack helicopter on the Mile Zero Air Station apron. Frame personally viewed.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "value": "Bottcher Buzzard",
+    "source": "https://gta6info.app/vehicles/bottcher-buzzard",
+    "locator": "The record contains original game captures of the named helicopter.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "sea-sparrow",
     "field": "GTA VI appearance",
-    "value": "Sea Sparrow",
-    "source": "https://www.polygon.com/gta-6-cheat-codes-list-unlock/",
-    "locator": "The shipped game's in-game Cheats menu lists 'Nagasaki Sea Sparrow - Spawns a Nagasaki Sea Sparrow - Complete 5 exploration challenges' (Polygon, Destructoid, Insider Gaming, PSU, Pure Xbox, TrueAchievements agree).",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "value": "Nagasaki Sea Sparrow",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-capture-nagasaki-sea-sparrow.jpg",
+    "locator": "GTA6DATA launch-game screenshot — vehicle HUD names the float-equipped Nagasaki Sea Sparrow during Rescue Lori.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "cargo-ship",
     "field": "GTA VI appearance",
-    "value": "Cargo ship",
+    "value": "A docked container ship is shown",
     "source": "https://www.instagram.com/reel/Df9BKl4CM2P/",
-    "locator": "Launch-gameplay reel, ~0:00-0:04: Jason climbing the gangway of a large green-hulled container ship at port, then on its red deck among stacked containers. Present in-game as a docked freighter; the bridge is locked and the ship is undriveable.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "locator": "At 0:00–0:04 the character boards a docked container ship and walks along its deck.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -694,20 +574,20 @@
     "id": "sanchez",
     "field": "GTA VI appearance",
     "value": "Maibatsu Sanchez",
-    "source": "https://www.destructoid.com/all-gta-6-cheat-codes-and-how-to-unlock-them/",
-    "locator": "The shipped game's in-game Cheats menu lists 'Maibatsu Sanchez - Spawns a Maibatsu Sanchez, complete 5 criminal challenges' (Destructoid, Insider Gaming, AltChar, TrueAchievements, GameRant, The Hook agree).",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-cheats-list/",
+    "locator": "The post-story vehicle-spawn table identifies the Sanchez by make and model.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "cruise-ship",
     "field": "GTA VI appearance",
-    "value": "Cruise ship",
+    "value": "A cruise ship is shown",
     "source": "https://www.youtube.com/watch?v=OnWC__OxyTk",
-    "locator": "Launch-gameplay video, 0:40 and 1:40: hull with red lifeboats and gangway, aerial shows pool deck and helicopter on the bow helipad. CruiseHive names the ship Reef Clipper II (hull lettering REEF CLIPPER visible in launch clips).",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "locator": "At 0:40 and 1:40 the ship’s deck, lifeboats and helipad are visible.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -723,31 +603,31 @@
     "kind": "vehicles",
     "id": "karin-futo",
     "field": "GTA VI appearance",
-    "value": "Karin Futo",
-    "source": "https://www.youtube.com/watch?v=tgOiVDnA4p8",
-    "locator": "Launch-gameplay video, 0:35: HUD card reads 'KARIN '85 FUTO' as Lucia enters the red coupe; PowerPyx lists Karin Futo as a Moses steal target at Draper Island Docks.",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "value": "Karin ’85 Futo",
+    "source": "https://howtovideogame.com/gta-6-futo-location/",
+    "locator": "‘How We Got the Futo Out’ documents the authors’ PS5 run. The parked red car is named Karin ’85 Futo by the game after entry.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "pfister-neon",
     "field": "GTA VI appearance",
     "value": "Pfister Neon",
-    "source": "https://www.youtube.com/watch?v=ekMSlCuS-sY",
-    "locator": "DubStepZz 'GTA 6 - Shopping Mall Open World Map Exploration!', 20:03 — in-game HUD name card 'PFISTER / NEON', red sports car Jason enters/drives",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Pfister Neon.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "vapid-dominator-65",
     "field": "GTA VI appearance",
-    "value": "Vicki's '65 Dominator",
-    "source": "https://www.youtube.com/watch?v=-D_wt4GXmNw",
-    "locator": "MKIceAndFire 'GTA 6 Gameplay Walkthrough Part 3 FULL GAME [4K PS5 PRO] - No Commentary', 52:00 — in-game radio-screen HUD card 'VAPID / VICKI'S '65 DOMINATOR', ACCESS: UNLOCKED, SECURITY: NONE, TRACKER: NONE; Lucia drives the cream/black-roof coupe 52:00-59:00",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "value": "Vicki’s ’65 Dominator",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-delights-car.jpg",
+    "locator": "GTA6DATA launch-game screenshot — vehicle HUD shows VAPID / VICKI’S ’65 DOMINATOR with the Drive to town objective.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -764,30 +644,30 @@
     "id": "fortune-and-son-laird-350",
     "field": "GTA VI appearance",
     "value": "Fortune & Son Laird 350",
-    "source": "https://www.youtube.com/watch?v=r56889wEQ0Q",
-    "locator": "DomTheBomb walkthrough, 06:59 — Chuck's Tackle & Shot shop menu (LONGARMS / SNIPER RIFLES), $404; in-game shop stats Damage 6.5 / Accuracy 8.8 / Handling 3.6 / Range 8.4",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots Longarms > Sniper Rifles (open the Fortune & Son Laird 350 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "diving-knife",
     "field": "GTA VI appearance",
     "value": "Diving Knife",
-    "source": "https://www.youtube.com/watch?v=r56889wEQ0Q",
-    "locator": "DomTheBomb walkthrough, 03:42 — Chuck's Tackle & Shot shop menu (AMMO & EQUIPMENT / MELEE WEAPONS), $270 (was $300), 'Currently sold out'",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "source": "https://www.youtube.com/watch?v=r56889wEQ0Q&t=222s",
+    "locator": "DomTheBomb original walkthrough, 3:42, Chuck’s Melee Weapons shop; $300 crossed out, $270 listed, currently sold out.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "deever-tech-dsg-smg",
     "field": "GTA VI appearance",
-    "value": "Deever Tech DSG SMG",
-    "source": "https://www.youtube.com/watch?v=1Ist5EPl1Aw",
-    "locator": "GamersPrey 'GTA 6 Full Gameplay Walkthrough Part 11', 01:46:00 — weapon HUD reads 'DEEVER TECH DSG SMG' during the Dre'Quan shootout under the bridge",
-    "reviewedAt": "2026-11-20",
-    "reviewer": "Muse"
+    "value": "Deever Tech DSG",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shows model and Tactical SMG (open the Deever Tech DSG row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -823,21 +703,21 @@
     "kind": "vehicles",
     "id": "canis-crawler",
     "field": "GTA VI appearance",
-    "value": "Canis Crawler",
-    "source": "https://www.youtube.com/watch?v=VddjFHhO5eY",
-    "locator": "GameRiot 'GTA 6 Gameplay Walkthrough Part 12 - FIRST STORE ROBBERY', 27:27 — beige/white Jeep-style pickup tailgate reads 'CRAWLER' + 'CANIS'; 29:00 on-screen text \"'82 Crawler -> Moses\" at Moses' garage.",
-    "reviewedAt": "2026-11-21",
-    "reviewer": "Muse"
+    "value": "Canis ’82 Crawler",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-crawler-scan-b.jpg",
+    "locator": "GTA6DATA’s launch-game capture — WAiNK vehicle card names Canis ’82 Crawler on the cream truck.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "pegassi-toros",
     "field": "GTA VI appearance",
     "value": "Pegassi Toros",
-    "source": "https://www.youtube.com/watch?v=yN6IhaZltkI",
-    "locator": "GamersPrey 'GTA 6 Full Gameplay Walkthrough Part 13 | FULL GAME 4K No Commentary', 36:00 — red performance SUV with black tribal livery at a gated entrance; fender badge reads 'TOROS' (verified by clean-file crop). Corroborated by gta6db.io and overgear.",
-    "reviewedAt": "2026-11-21",
-    "reviewer": "Muse"
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Pegassi Toros.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -864,20 +744,10 @@
     "id": "fortune-and-son-gorse-425",
     "field": "GTA VI appearance",
     "value": "Fortune & Son Gorse 425",
-    "source": "https://www.youtube.com/watch?v=1He0X_LaM4U",
-    "locator": "GameRiot 'GTA 6 Gameplay Walkthrough Part 14', 45:00 — weapon HUD reads 'GORSE 425 SHOTGUN' while Lucia stands over a downed NPC in a trailer-park yard. Corroborated by Dexerto wiki ($850, 5 rounds 12-Gauge, pump-action, Big Shots and Chuck's Tackle & Shot), IGN, thegameswiki and gta6info.",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "weapons",
-    "id": "scrapper-vf5c-smg",
-    "field": "GTA VI appearance",
-    "value": "Scrapper VF5C",
-    "source": "https://www.youtube.com/watch?v=BXYQWf0bhtY",
-    "locator": "Kuvani 'GTA VI - Drug Gang Hideout with Legendary Weapon (Scrapper VF5C SMG)', 09:45–11:00 — Lucia loots the fourth-floor weapon case in the La Cascara Motel Illegal Operation, Port Gellhorn ('+ SMG Ammo' and '+ Frag Grenade' notifications; SMG with suppressor-shaped barrel carried out). Name not shown in frame; location match exact per IGN, thegameswiki, GameRant, showgamer and gta6info, all placing the Scrapper VF5C SMG in that case.",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu names GORSE 425 (open the Fortune & Son Gorse 425 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
@@ -900,113 +770,2643 @@
     "reviewer": "Muse"
   },
   {
-    "kind": "weapons",
-    "id": "crabshack-vf5-smg",
-    "field": "GTA VI appearance",
-    "value": "Crabshack VF5",
-    "source": "https://www.polygon.com/gta-6-giant-crab-safe-code-crabshack-vf5-smg-how-to-get-pelican-valley-outpost/",
-    "locator": "Polygon guide (21 Nov 2026) — Pelican Valley Outpost: computer password CLEAVES, safe code 0072, boathouse code 0212; SMG picked up from the caretaker's corpse in the boathouse. Corroborated by YouTube 'Free Legendary SMG Hidden in GTA 6' (same location + codes).",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
-  },
-  {
     "kind": "vehicles",
     "id": "purple-drank-emerus",
     "field": "GTA VI appearance",
-    "value": "Purple Drank Emerus",
-    "source": "https://gamerant.com/gta-6-nitrous-emerus-supercar-location-waxman-island-robbery/",
-    "locator": "GameRant guide (21 Nov 2026) — Waxman Island Robbery Opportunity: Purple Drank Emerus in a shipping container at Chatfield Storage and Logistics; same shack holds a safe (code 5800); register $29,000 at Pay 'n' Spray per GameRant (other guides $28,000-$29,900, price stays TBA). Corroborated by Game8 dedicated page, Deltias, gta6gps, ggwtb and video guides; spelling Emerus settled.",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
+    "value": "Progen Purple Drank Emerus",
+    "source": "https://meowdb.com/gta6/media/footage/nov20-progen-purple-drank-emerus.webp",
+    "locator": "WiLLiSGaming launch footage at 2:07. The vehicle access card identifies the Purple Drank variant.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "royal-ruby-emerus",
     "field": "GTA VI appearance",
-    "value": "Royal Ruby Emerus",
-    "source": "https://gamerant.com/gta-6-vespucci-mansion-kingpin-heathen-rifle-ar-progen-royal-ruby-emerus-super-car/",
-    "locator": "GameRant guide (21 Nov 2026) — Vespucci Mansion Robbery: Progen Royal Ruby Emerus outside the mansion on Vespucci Island, no lock or tracker; sell ~$30,000, register ~$30,000 (igamepost $33,000/$29,900, figures stay TBA). Corroborated by Game8 dedicated page, FandomWire, Sportskeeda, gta6gps and video guides.",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "weapons",
-    "id": "kingpin-heathen",
-    "field": "GTA VI appearance",
-    "value": "Kingpin Heathen",
-    "source": "https://gamerant.com/gta-6-vespucci-mansion-kingpin-heathen-rifle-ar-progen-royal-ruby-emerus-super-car/",
-    "locator": "GameRant Vespucci Mansion guide (21 Nov 2026) — legendary Kingpin Heathen assault rifle among the mansion's four Key Valuables, alongside the Royal Ruby Emerus and two safes (~$9,000). Corroborated by Sportskeeda (same location + $9,000 safes). No stats published yet — all null/TBA.",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "weapons",
-    "id": "quarter-mile-es9",
-    "field": "GTA VI appearance",
-    "value": "Quarter Mile ES9",
-    "source": "https://gamerant.com/gta-6-nitrous-emerus-supercar-location-waxman-island-robbery/",
-    "locator": "Waxman Island Robbery Opportunity #1 — Quarter Mile ES9 Pistol, upstairs shack table, Chatfield Storage & Logistics",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
+    "value": "Progen Royal Ruby Emerus",
+    "source": "https://meowdb.com/gta6/media/footage/nov20-progen-royal-ruby-emerus.webp",
+    "locator": "WiLLiSGaming launch footage at 1:25. The vehicle access card identifies the Royal Ruby variant.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "zhang-wu-type-9",
     "field": "GTA VI appearance",
     "value": "Zhang Wu Type 9",
-    "source": "https://www.youtube.com/watch?v=ECk0VuRa7p0",
-    "locator": "GameRiot Part 18, 39:00",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Zhang Wu Type 9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "hauners-rhino",
     "field": "GTA VI appearance",
-    "value": "Hauners Rhino",
-    "source": "https://www.marinecorpstimes.com/off-duty/military-culture/2026/11/19/how-to-steal-a-fighter-jet-and-battle-tank-in-gta-6/",
-    "locator": "Mile Zero Air Station, Goose Key — Hauners Rhino parked at the south end of the base, near the hangars",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "weapons",
-    "id": "black-eagle-import-m306-tmr",
-    "field": "GTA VI appearance",
-    "value": "Black Eagle Import M306 TMR",
-    "source": "https://detonated.com/all-gta-6-unique-weapon-variant-locations/",
-    "locator": "Black Eagle warehouse, Balsero — Lucia only; weapon case past the barred door behind the cargo truck",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
+    "value": "Hauners Rhino Tank",
+    "source": "https://www.youtube.com/watch?v=1nU2s9w60pM&t=1261s",
+    "locator": "Vadact launch gameplay, 21:01 — the vehicle name panel identifies HAUNERS / RHINO TANK. Timestamp and corroborating still catalogued by GTA Playbook.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "vehicles",
     "id": "vapid-smuggler-caracara",
     "field": "GTA VI appearance",
-    "value": "Vapid Smuggler Caracara",
-    "source": "https://insider-gaming.com/gta-6-brooks-boatworks-location-and-safe-code/",
-    "locator": "Brooks Boatworks, Port Gellhorn — Smuggler Caracara parked out front, yellow car icon; getaway vehicle for the robbery",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
-  },
-  {
-    "kind": "weapons",
-    "id": "clunker-556",
-    "field": "GTA VI appearance",
-    "value": "Clunker 556",
-    "source": "https://insider-gaming.com/gta-6-brooks-boatworks-location-and-safe-code/",
-    "locator": "Brooks Boatworks, Port Gellhorn — Clunker 556 stockless assault rifle in the small building, one of the operation's Key Valuables",
-    "reviewedAt": "2026-11-22",
-    "reviewer": "Muse"
+    "value": "Vapid Smuggler Caracara 4×4",
+    "source": "https://playtheorymedia.com/wp-content/uploads/2026/11/gta6-brooks-boatworks-04-caracara.jpg",
+    "locator": "PlayTheory’s launch-game screenshot at Brooks Boatworks shows the named 4×4.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "rauls-cqb-556",
     "field": "GTA VI appearance",
     "value": "Raul's CQB 556",
-    "source": "https://www.youtube.com/watch?v=fX4PR3a47hQ",
-    "locator": "First Impressions (Chapter 3), weapon wheel 05:30 — Raul's CQB 556, Longarm",
+    "source": "https://www.youtube.com/watch?v=fX4PR3a47hQ&t=330s",
+    "locator": "LaazrGaming First Impressions (Chapter 3), 5:30 weapon wheel RAUL'S CQB 556 / LONGARM per existing reviewed evidence.",
     "reviewedAt": "2026-11-23",
-    "reviewer": "Muse"
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier-55",
+    "field": "Official name",
+    "value": "’55 Vapid Stanier",
+    "source": "https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions",
+    "locator": "Digital versions and physical pre-order sections name the ’55 Vapid Stanier Sedan and Garage.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier-55",
+    "field": "Edition availability",
+    "value": "Included with the Vintage Vice City Pack",
+    "source": "https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions",
+    "locator": "Rockstar Support names the sedan and garage in the Vintage Vice City Pack for qualifying launch purchases.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-buggy-67",
+    "field": "Official name",
+    "value": "’67 Vapid Dominator Buggy",
+    "source": "https://www.rockstargames.com/VI/add-ons/ultimate-edition",
+    "locator": "Ultimate Edition Upgrade add-on contents name the ’67 Vapid Dominator Buggy.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-buggy-67",
+    "field": "Edition availability",
+    "value": "Ultimate Edition or Ultimate Edition Upgrade",
+    "source": "https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions",
+    "locator": "The Ultimate Edition contents list the buggy and the Upgrade grants the Ultimate Edition content.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dinka-enduro",
+    "field": "Official name",
+    "value": "Dinka ’72 Enduro",
+    "source": "https://gta6data.com/gta-6-vehicle-names-and-evidence/",
+    "locator": "‘Vehicle Names Shown in Captured Gameplay’ displays the HUD screenshot identifying Dinka ’72 Enduro on the motorcycle by the exterior stairs.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "crest-kayak",
+    "field": "Official name",
+    "value": "Crest Kayak",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Ultimate Edition gallery, named Crest Kayak screenshot in Jason’s Safehouse Vehicles.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "shitzu-squalo",
+    "field": "Official name",
+    "value": "Shitzu Squalo",
+    "source": "https://www.rockstargames.com/VI/add-ons/ultimate-edition",
+    "locator": "Ultimate Edition Upgrade add-on contents name the Shitzu Squalo.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "shitzu-squalo",
+    "field": "Edition availability",
+    "value": "Shitzu Squalo bonus is included in Ultimate Edition or the Upgrade",
+    "source": "https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions",
+    "locator": "The Ultimate Edition contents list the Squalo and the Upgrade grants the Ultimate Edition content.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cheetah-classic",
+    "field": "GTA VI appearance",
+    "value": "’95 Grotti Cheetah",
+    "source": "https://www.rockstargames.com/VI/add-ons/ultimate-edition",
+    "locator": "’95 Grotti Cheetah section names the vehicle and shows the white car, open headlamps and badge close-up.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cheetah-classic",
+    "field": "Official name",
+    "value": "’95 Grotti Cheetah",
+    "source": "https://www.rockstargames.com/VI/add-ons/ultimate-edition",
+    "locator": "’95 Grotti Cheetah section names the vehicle and shows the white car, open headlamps and badge close-up.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cheetah-classic",
+    "field": "Edition availability",
+    "value": "Ultimate Edition or Ultimate Edition Upgrade",
+    "source": "https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions",
+    "locator": "The Ultimate Edition contents list the ’95 Grotti Cheetah and the Upgrade grants the Ultimate Edition content.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-ganado",
+    "field": "Official name",
+    "value": "Vapid ’70 Ganado",
+    "source": "https://www.gamesradar.com/games/grand-theft-auto/120-hours-in-gta-6-whats-it-really-like-to-review-the-biggest-entertainment-event-of-the-decade/",
+    "locator": "GamesRadar+ reviewer recounts personally repainting and modifying Jason’s Vapid ’70 Ganado in the released game.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-ganado",
+    "field": "Edition availability",
+    "value": "Ganado Retro Build",
+    "source": "https://www.rockstargames.com/VI/add-ons/ultimate-edition",
+    "locator": "Ultimate Edition Upgrade add-on contents list the Ganado Retro Build.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier",
+    "field": "Official name",
+    "value": "Vapid Stanier G2",
+    "source": "https://gtaplaybook.com/gta6/vehicles/vapid-stanier-g2/",
+    "locator": "Own PS5 screenshot snt-00487, bottom-right vehicle panel reads VAPID / STANIER G2.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "albany-emperor",
+    "field": "GTA VI appearance",
+    "value": "Albany ’85 Emperor",
+    "source": "https://gtaplaybook.com/gta6/vehicles/albany-85-emperor/",
+    "locator": "Own PS5 screenshot snt-00490, bottom-right vehicle panel reads ALBANY / ’85 EMPEROR.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "albany-emperor",
+    "field": "Official name",
+    "value": "Albany ’85 Emperor",
+    "source": "https://gtaplaybook.com/gta6/vehicles/albany-85-emperor/",
+    "locator": "Own PS5 screenshot snt-00490, bottom-right vehicle panel reads ALBANY / ’85 EMPEROR.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "invetero-coquette-d10",
+    "field": "Official name",
+    "value": "Invetero Coquette D10",
+    "source": "https://gtaplaybook.com/gta6/vehicles/invetero-coquette-d10/",
+    "locator": "Own PS5 screenshot, bottom-right vehicle panel on the black car reads INVETERO / COQUETTE D10.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "imponte-phoenix",
+    "field": "Official name",
+    "value": "Imponte ’77 Phoenix",
+    "source": "https://gta6data.com/gta-6-vehicle-names-and-evidence/",
+    "locator": "‘Vehicle Names Shown in Captured Gameplay’ displays a named Pay ’n’ Spray menu for the red ’77 Phoenix during Unwanted Attention.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dundreary-landstalker-xl",
+    "field": "Official name",
+    "value": "Dundreary Landstalker XL",
+    "source": "https://gtaplaybook.com/gta6/answers/car-brands/",
+    "locator": "Original PS5 screenshots in ‘Which car brands does the game itself name?’, Dundreary link opens the Landstalker XL scan panel.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "564440dd-70ac-4ea1-9ae4-0349be2aeb4b",
+    "field": "Official name",
+    "value": "Principe Alvino V1",
+    "source": "https://gtaplaybook.com/gta6/vehicles/principe-alvino-v1/",
+    "locator": "Rockstar press-pack still, race bike no. 76. PRINCIPE is on the tank, ALVINO V1 is on the fairing. The page reproduces and measures the original lettering.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-riata",
+    "field": "Edition availability",
+    "value": "Ultimate Edition, Wyman’s Classic Car Collection",
+    "source": "https://www.pushsquare.com/guides/gta-6-wymans-classic-car-locations",
+    "locator": "‘Riata’ and ‘How to Start Collecting Wyman’s Classic Cars’ sections show the in-game quest. Collect the ’67 Vapid Dominator Buggy to begin.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-riata",
+    "field": "Restoration fee",
+    "value": "$1,500 restoration fee",
+    "source": "https://www.pushsquare.com/guides/gta-6-wymans-classic-car-locations",
+    "locator": "‘Riata’ section, Wyman’s payment via the BuckMe app after scanning three ’70 Riatas. The guide distinguishes it from the optional $100 registration charge.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "schyster-deviant",
+    "field": "Official name",
+    "value": "’72 Deviant",
+    "source": "https://www.powerpyx.com/gta-6-how-to-get-ultimate-edition-rewards/",
+    "locator": "‘Find Cars for Wyman’ section names the ’72 Deviant rebuild. Rockstar’s Classic Car Collection 06 press still shows DEVIANT script on the rear flank.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "sirius",
+    "field": "GTA VI appearance",
+    "value": "’67 Sirius Transgressor",
+    "source": "https://www.pushsquare.com/guides/gta-6-wymans-classic-car-locations",
+    "locator": "‘Transgressor’ section shows Wyman’s in-game text naming the ’67 Transgressor. Rockstar’s Classic Car Collection 02 press still shows SIRIUS on its turquoise rear quarter.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "sirius",
+    "field": "Official name",
+    "value": "’67 Sirius Transgressor",
+    "source": "https://www.pushsquare.com/guides/gta-6-wymans-classic-car-locations",
+    "locator": "‘Transgressor’ section shows Wyman’s in-game text naming the ’67 Transgressor. Rockstar’s Classic Car Collection 02 press still shows SIRIUS on its turquoise rear quarter.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-furia",
+    "field": "Official name",
+    "value": "Piccia Furia",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Piccia Furia.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-zorrusso",
+    "field": "Official name",
+    "value": "Granforma Zorrusso",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Granforma Zorrusso.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "enus-jubilee",
+    "field": "GTA VI appearance",
+    "value": "Buckingham Jubilee",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Buckingham Jubilee.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "enus-jubilee",
+    "field": "Official name",
+    "value": "Buckingham Jubilee",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Buckingham Jubilee.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "enus-windsor-drop",
+    "field": "GTA VI appearance",
+    "value": "Buckingham Windsor Drop",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/map-unknown-location.webp",
+    "locator": "Sirloin launch gameplay still, Randy’s Wish List card names the Buckingham Windsor Drop.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "enus-windsor-drop",
+    "field": "Official name",
+    "value": "Buckingham Windsor Drop",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/map-unknown-location.webp",
+    "locator": "Sirloin launch gameplay still, Randy’s Wish List card names the Buckingham Windsor Drop.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-tempesta",
+    "field": "GTA VI appearance",
+    "value": "Pegassi Tempesta",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Pegassi Tempesta.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-tempesta",
+    "field": "Official name",
+    "value": "Pegassi Tempesta",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Pegassi Tempesta.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "banshee-gts",
+    "field": "GTA VI appearance",
+    "value": "Bravado Banshee",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Bravado Banshee.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "banshee-gts",
+    "field": "Official name",
+    "value": "Bravado Banshee",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Bravado Banshee.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gauntlet-hellfire",
+    "field": "Official name",
+    "value": "Bravado Gauntlet Hellfire",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Bravado Gauntlet Hellfire.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-carbonizzare",
+    "field": "Official name",
+    "value": "Grotti Carbonizzare",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Grotti Carbonizzare.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-neon",
+    "field": "Official name",
+    "value": "Pfister Neon",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Pfister Neon.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-toros",
+    "field": "Official name",
+    "value": "Pegassi Toros",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
+    "locator": "Trophygamers launch gameplay still — Randy’s in-game WANTED whiteboard lists Pegassi Toros.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Official name",
+    "value": "Pfister Growler",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/growler-scan.webp",
+    "locator": "MonkeyKingHero launch gameplay still, WAiNK identifies the white parked car as Pfister Growler.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Registration cost",
+    "value": "$29,450 in the recorded WAiNK scan",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/growler-scan.webp",
+    "locator": "The WAiNK scan on Thompson Avenue shows this car’s registration fee, separate from sale value.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Scanned sell value",
+    "value": "$12,100 in the recorded WAiNK scan",
+    "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/growler-scan.webp",
+    "locator": "The WAiNK scan on Thompson Avenue shows sell value for this sample. The damaged car later sold for a lower amount.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Observed location",
+    "value": "Thompson Avenue, Vice Beach (recorded sighting)",
+    "source": "https://clutchbase.app/gta6/guides/gta-6-randys-wish-list",
+    "locator": "‘Pfister Growler: Thompson Avenue’ section shows MonkeyKingHero’s scan outside the Lewinsky hotel. Treat it as a sighting because traffic and spawns vary.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-rhino",
+    "field": "Official name",
+    "value": "Hauners Rhino Tank",
+    "source": "https://www.youtube.com/watch?v=1nU2s9w60pM&t=1261s",
+    "locator": "Vadact launch gameplay, 21:01 — the vehicle name panel identifies HAUNERS / RHINO TANK. Timestamp and corroborating still catalogued by GTA Playbook.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "seaplane-dodo",
+    "field": "Official name",
+    "value": "Mammoth Dodo",
+    "source": "https://gtaplaybook.com/wp-content/uploads/2026/11/gtap-player-capture-zqtmspjtxii-52320.jpg",
+    "locator": "WillMacGTA launch gameplay still, 0:52 — the vehicle name panel identifies MAMMOTH / DODO.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-riata",
+    "field": "Official name",
+    "value": "Vapid ’70 Riata",
+    "source": "https://www.pushsquare.com/guides/gta-6-wymans-classic-car-locations",
+    "locator": "The Riata section shows the ’70 Riata scan. The Vapid badge is also visible in the game’s vehicle card.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "tulip",
+    "field": "Official name",
+    "value": "Declasse ’72 Tulip",
+    "source": "https://www.youtube.com/watch?v=Bhwj-_9Xz6M&t=1206s",
+    "locator": "GamersPrey Part 6 at 20:06. The vehicle HUD names the Declasse ’72 Tulip.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Official name",
+    "value": "Vapid Smuggler Caracara 4×4",
+    "source": "https://playtheorymedia.com/wp-content/uploads/2026/11/gta6-brooks-boatworks-04-caracara.jpg",
+    "locator": "PlayTheory’s launch-game screenshot at Brooks Boatworks shows the named 4×4.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Observed location",
+    "value": "Brooks Boatworks, during the robbery opportunity",
+    "source": "https://playtheorymedia.com/wp-content/uploads/2026/11/gta6-brooks-boatworks-04-caracara.jpg",
+    "locator": "PlayTheory’s screenshot shows the pickup during the Brooks Boatworks opportunity.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maverick",
+    "field": "Official name",
+    "value": "Buckingham Maverick",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-first-plane-and-helicopter/",
+    "locator": "PC Gamer’s helicopter section names and shows the Maverick at a Southwind dock.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maverick",
+    "field": "Observed location",
+    "value": "Southwind dock east of the Sherwin Boatworks parking lot",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-first-plane-and-helicopter/",
+    "locator": "Helicopter section and annotated route screenshots.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "seaplane-dodo",
+    "field": "Observed location",
+    "value": "Sherwin Boatworks hangar and dock, Southwind",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-first-plane-and-helicopter/",
+    "locator": "Aircraft section shows where the reviewer found and flew the Dodo.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "seaplane-dodo",
+    "field": "Features",
+    "value": "Lands on water and land",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-first-plane-and-helicopter/",
+    "locator": "PC Gamer’s first-airplane guide documents both landing surfaces.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "sea-sparrow",
+    "field": "Official name",
+    "value": "Nagasaki Sea Sparrow",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-capture-nagasaki-sea-sparrow.jpg",
+    "locator": "GTA6DATA launch-game screenshot — vehicle HUD names the float-equipped Nagasaki Sea Sparrow during Rescue Lori.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "sea-sparrow",
+    "field": "Spawn cheat requirement",
+    "value": "Complete 5 exploration challenges after the story",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-cheats-list/",
+    "locator": "The Nagasaki Sea Sparrow row gives its challenge requirement.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buzzard",
+    "field": "Official name",
+    "value": "Bottcher Buzzard",
+    "source": "https://gta6info.app/vehicles/bottcher-buzzard",
+    "locator": "The record contains original game captures of the named helicopter.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buzzard",
+    "field": "Observed location",
+    "value": "Wild Hog Airfield helipad, Kelly County",
+    "source": "https://gta6info.app/vehicles/bottcher-buzzard",
+    "locator": "The in-game map and helipad capture show this sighting.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-rhino",
+    "field": "Observed location",
+    "value": "South end of Mile Zero Air Station, near the hangars",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-military-base-location/",
+    "locator": "PC Gamer’s own annotated map of the base marks the tank.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "seashark",
+    "field": "Official name",
+    "value": "Seashark Hydroblast",
+    "source": "https://gta6data.com/gta-6-vehicle-names-and-evidence/",
+    "locator": "‘Vehicle Names Shown in Captured Gameplay’ reproduces the name panel for the Seashark Hydroblast ridden by Lucia during Day Release.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "seashark",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://gta6info.app/vehicles/seashark-hydroblast",
+    "locator": "The author’s in-game vehicle check lists two seats for the Hydroblast.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "seashark",
+    "field": "Observed location",
+    "value": "Near the water in Pelican Valley",
+    "source": "https://gta6info.app/vehicles/seashark-hydroblast",
+    "locator": "The author’s game capture records a Pelican Valley sighting.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "crest-kayak",
+    "field": "Observed location",
+    "value": "Jason’s house, Chapter 1 Ultimate Edition reward",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-ultimate-edition-bonuses/",
+    "locator": "The Chapter 1 walkthrough identifies the kayak among Jason’s vehicles.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dinka-enduro",
+    "field": "Edition availability",
+    "value": "Included among Jason’s Ultimate Edition safehouse vehicles",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "The Ultimate Edition gallery identifies the Dinka Enduro motorcycle.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "shitzu-squalo",
+    "field": "Observed location",
+    "value": "Washington Beach Canal dock, Chapter 4 Ultimate Edition reward",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-ultimate-edition-bonuses/",
+    "locator": "The Chapter 4 Squalo section includes a game screenshot and dock location.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-buggy-67",
+    "field": "Acquisition method",
+    "value": "Chapter 2 after visiting the Mud Club with Wyman",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-ultimate-edition-bonuses/",
+    "locator": "The Dominator Buggy section documents the Ultimate Edition reward in the Exploration map index.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cheetah-classic",
+    "field": "Acquisition method",
+    "value": "Pegassi Residences, Chapter 5 Ultimate Edition reward",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-ultimate-edition-bonuses/",
+    "locator": "The Chapter 5 Cheetah section documents where to collect it.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "sanchez",
+    "field": "Official name",
+    "value": "Maibatsu Sanchez",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-cheats-list/",
+    "locator": "The post-story vehicle-spawn table identifies the Sanchez by make and model.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "sanchez",
+    "field": "Spawn cheat requirement",
+    "value": "Complete 5 criminal challenges after the story",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-cheats-list/",
+    "locator": "The Maibatsu Sanchez row records the challenge requirement.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gauntlet-hellfire",
+    "field": "Mission location",
+    "value": "Randy’s Wish List: M7 junkyard east of Boone Speedway, Hamlet",
+    "source": "https://www.pushsquare.com/guides/gta-6-randys-wish-list-vehicle-locations",
+    "locator": "The guide’s Hellfire section shows the mission vehicle and map location.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-furia",
+    "field": "Mission location",
+    "value": "Randy’s Wish List: Palladia Lane, Peacock Estates garage",
+    "source": "https://www.pushsquare.com/guides/gta-6-randys-wish-list-vehicle-locations",
+    "locator": "The Piccia Furia section documents the mission garage with in-game captures.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mer-can-outlaw",
+    "field": "Off-road rating",
+    "value": "8.4/10 in the recorded Pay ’N’ Spray panel",
+    "source": "https://www.youtube.com/watch?v=VddjFHhO5eY&t=900s",
+    "locator": "GameRiot Part 12 at 15:00, the stats panel for the identified Mer-Can Outlaw.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-montagne-pickup",
+    "field": "Registration cost",
+    "value": "$5,000 in the recorded scan",
+    "source": "https://www.youtube.com/watch?v=YzoV-bJCkKU&t=3600s",
+    "locator": "GameRiot Part 16 at 1:00:00, the WAiNK panel for this pickup shows registration cost.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-police-cruiser-interceptor",
+    "field": "Visual evidence",
+    "value": "A marked police sedan appears; the model is unresolved.",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY&t=47s",
+    "locator": "Rockstar launch trailer, 0:47.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-police-cruiser-interceptor",
+    "field": "Editorial label",
+    "value": "Marked police sedan",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY&t=47s",
+    "locator": "Rockstar launch trailer, 0:47.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ford-explorer-style-police-suv",
+    "field": "Visual evidence",
+    "value": "A marked police SUV appears; the model is unresolved.",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY&t=46s",
+    "locator": "Rockstar launch trailer, 0:46.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ford-explorer-style-police-suv",
+    "field": "Editorial label",
+    "value": "Marked police SUV",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY&t=46s",
+    "locator": "Rockstar launch trailer, 0:46.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "police-helicopter",
+    "field": "Visual evidence",
+    "value": "Police and Vice-Dale markings are visible.",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c&t=147s",
+    "locator": "Rockstar Trailer 2, 2:27.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "police-helicopter",
+    "field": "Editorial label",
+    "value": "Vice-Dale police helicopter",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c&t=147s",
+    "locator": "Rockstar Trailer 2, 2:27.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "brute-police-riot",
+    "field": "Visual evidence",
+    "value": "The trailer shows an armored response vehicle; manufacturer is unresolved.",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c&t=118s",
+    "locator": "Rockstar Trailer 2, 1:58.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "brute-police-riot",
+    "field": "Editorial label",
+    "value": "Armored police response vehicle",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c&t=118s",
+    "locator": "Rockstar Trailer 2, 1:58.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-buffalo-stx",
+    "field": "Visual evidence",
+    "value": "A similar vehicle appears in the takeover scene; STX variant is unresolved.",
+    "source": "https://www.youtube.com/watch?v=QdBZY2fkU-0&t=46s",
+    "locator": "Rockstar Trailer 1, 0:46.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "495bea62-7865-439c-b1d1-055715aea811",
+    "field": "Visual evidence",
+    "value": "Shasa lettering appears on the hull.",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY&t=10s",
+    "locator": "Rockstar launch trailer at about 0:10. The hull badge does not establish the in-game model or playability.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "495bea62-7865-439c-b1d1-055715aea811",
+    "field": "Editorial label",
+    "value": "Shasa-marked boat",
+    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY&t=10s",
+    "locator": "Rockstar launch trailer at about 0:10. The hull badge does not establish the in-game model or playability.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-rancher",
+    "field": "Official name",
+    "value": "Declasse ’86 Rancher",
+    "source": "https://www.youtube.com/watch?v=Mhd9VvZxVu0&t=36s",
+    "locator": "At 0:36 the WAiNK panel shows the Declasse ’86 Rancher.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-penumbra",
+    "field": "Official name",
+    "value": "Maibatsu Penumbra",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-capture-maibatsu-penumbra.jpg",
+    "locator": "Launch gameplay vehicle HUD reads MAIBATSU / PENUMBRA on a light car with a roof box by the waterfront.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-futo",
+    "field": "Official name",
+    "value": "Karin ’85 Futo",
+    "source": "https://howtovideogame.com/gta-6-futo-location/",
+    "locator": "‘How We Got the Futo Out’ documents the authors’ PS5 run. The parked red car is named Karin ’85 Futo by the game after entry.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "western-sovereign",
+    "field": "Official name",
+    "value": "Western Sovereign 107",
+    "source": "https://www.instagram.com/reel/Df5R8M3TonV/",
+    "locator": "At about 0:30 the vehicle card reads Western Sovereign 107.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lurepredator-l35p",
+    "field": "Official name",
+    "value": "Lure Predator L35P",
+    "source": "https://www.youtube.com/watch?v=RVpApoEkOao&t=1450s",
+    "locator": "TmarTn2’s opening walkthrough at about 24:10 shows the name on the center-console boat.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "imponte-ruiner",
+    "field": "Reported identification",
+    "value": "A Ruiner is reported; model year remains unresolved.",
+    "source": "https://www.facebook.com/reel/2045317262799822/",
+    "locator": "The launch clip shows a modified car from Key Lento. A readable exact variant card is needed.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "m4-carbine",
+    "field": "Official name",
+    "value": "Duke 556",
+    "source": "https://www.youtube.com/watch?v=tJbzMqJGH4k&t=1507s",
+    "locator": "Rockstar An Extended Look, 25:07.13 pickup prompt ‘DUKE 556 ASSAULT RIFLE’.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "m4-carbine",
+    "field": "Weapon class",
+    "value": "Carbine Rifle",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original PS5 Big Shots shop screenshot of the Duke 556 (open the Duke 556 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "m4-carbine",
+    "field": "Price shown",
+    "value": "$1,450 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original PS5 Big Shots shop screenshot of the Duke 556 (open the Duke 556 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "m4-carbine",
+    "field": "Damage",
+    "value": "5.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original PS5 Big Shots shop screenshot of the Duke 556 (open the Duke 556 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "m4-carbine",
+    "field": "Accuracy",
+    "value": "6.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original PS5 Big Shots shop screenshot of the Duke 556 (open the Duke 556 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "m4-carbine",
+    "field": "Handling",
+    "value": "5.8/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original PS5 Big Shots shop screenshot of the Duke 556 (open the Duke 556 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "m4-carbine",
+    "field": "Range",
+    "value": "6.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original PS5 Big Shots shop screenshot of the Duke 556 (open the Duke 556 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "glock-21",
+    "field": "Visual evidence",
+    "value": "Capo pistol",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Raul Bautista still inside a car with a bag of cash. The pistol carries a CAPO slide marking.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "glock-21",
+    "field": "Manufacturer marking",
+    "value": "Capo",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Raul Bautista still inside a car with a bag of cash. The pistol carries a CAPO slide marking.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "rpg-7",
+    "field": "Visual evidence",
+    "value": "Rotary grenade launcher",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c",
+    "locator": "Trailer 2, Lucia fires a rotary launcher from the vehicle.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "rpg-7",
+    "field": "Editorial label",
+    "value": "Rotary grenade launcher",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c",
+    "locator": "Trailer 2, Lucia fires a rotary launcher from the vehicle.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "combat-knife",
+    "field": "Official name",
+    "value": "Hunting Knife",
+    "source": "https://www.youtube.com/watch?v=qrNuL-B_iXk&t=158s",
+    "locator": "EenGamer original release gameplay, Big Shots Ammo & Equipment > Melee Weapons at 2:38.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "combat-knife",
+    "field": "Weapon class",
+    "value": "Melee",
+    "source": "https://www.youtube.com/watch?v=qrNuL-B_iXk&t=158s",
+    "locator": "EenGamer original release gameplay, Big Shots Ammo & Equipment > Melee Weapons at 2:38.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "ak-74",
+    "field": "Visual evidence",
+    "value": "AK-pattern rifle",
+    "source": "https://www.youtube.com/watch?v=tJbzMqJGH4k&t=1398s",
+    "locator": "Extended Look at 23:18; crew in white coveralls and a Kalashnikov-pattern rifle.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "ak-74",
+    "field": "Editorial label",
+    "value": "AK-pattern rifle",
+    "source": "https://www.youtube.com/watch?v=tJbzMqJGH4k&t=1398s",
+    "locator": "Extended Look at 23:18; crew in white coveralls and a Kalashnikov-pattern rifle.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Official name",
+    "value": "Girardi ES9",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Girardi ES9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Weapon class",
+    "value": "Military Pistol",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Girardi ES9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Damage",
+    "value": "4.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Girardi ES9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Accuracy",
+    "value": "5.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Girardi ES9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Handling",
+    "value": "8.4/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Girardi ES9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Range",
+    "value": "4.4/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Girardi ES9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "quarter-mile-es9",
+    "field": "Reported identification",
+    "value": "Quarter Mile ES9",
+    "source": "https://www.youtube.com/watch?v=PH-KkLXeC9Q&t=526s",
+    "locator": "RageGamingVideos original release guide with chapter ‘Purple Drank Emerus (Easy Nitrous Supercar) & Quarter Mile ES9 Pistol’ at 8:46.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Official name",
+    "value": "Klose K17",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Klose K17 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Weapon class",
+    "value": "Service Pistol",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Klose K17 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Price shown",
+    "value": "$975 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Klose K17 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Damage",
+    "value": "4.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Klose K17 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Accuracy",
+    "value": "4.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Klose K17 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Handling",
+    "value": "8.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Klose K17 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Range",
+    "value": "3.8/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots pistol menu, November 19 (open the Klose K17 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-little-morgan-revolvers",
+    "field": "Official name",
+    "value": "Hawk & Little Morgan Revolvers",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Official Ultimate Edition Upgrade product listing under ‘HAWK & LITTLE MORGAN REVOLVERS’.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-little-morgan-revolvers",
+    "field": "Availability",
+    "value": "Ultimate Edition Upgrade",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Official Ultimate Edition Upgrade product listing under ‘HAWK & LITTLE MORGAN REVOLVERS’.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-little-morgan-revolvers",
+    "field": "Variants",
+    "value": "Jason's and Lucia's versions",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Official Ultimate Edition Upgrade product listing under ‘HAWK & LITTLE MORGAN REVOLVERS’.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mustang-357",
+    "field": "Official name",
+    "value": "Duke Mustang .357",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots revolver menu, November 19 (open the Duke Mustang .357 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mustang-357",
+    "field": "Weapon class",
+    "value": "Magnum Revolver",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots revolver menu, November 19 (open the Duke Mustang .357 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mustang-357",
+    "field": "Price shown",
+    "value": "$1,800 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots revolver menu, November 19 (open the Duke Mustang .357 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mustang-357",
+    "field": "Damage",
+    "value": "5.7/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots revolver menu, November 19 (open the Duke Mustang .357 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mustang-357",
+    "field": "Accuracy",
+    "value": "4.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots revolver menu, November 19 (open the Duke Mustang .357 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mustang-357",
+    "field": "Handling",
+    "value": "8.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots revolver menu, November 19 (open the Duke Mustang .357 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mustang-357",
+    "field": "Range",
+    "value": "5.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots revolver menu, November 19 (open the Duke Mustang .357 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mp5-40-style-smg",
+    "field": "Visual evidence",
+    "value": "MP5-style SMG",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c&t=75s",
+    "locator": "Trailer 2, approximately 1:15, Jason and Lucia urban robbery sequence.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mp5-40-style-smg",
+    "field": "Editorial label",
+    "value": "MP5-style SMG",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c&t=75s",
+    "locator": "Trailer 2, approximately 1:15, Jason and Lucia urban robbery sequence.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "micro-smg",
+    "field": "GTA VI appearance",
+    "value": "Wortham W-10",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots lists ‘WORTHAM W-10’ and type ‘MICRO SMG’ (open the Wortham W-10 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "micro-smg",
+    "field": "Official name",
+    "value": "Wortham W-10",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots lists ‘WORTHAM W-10’ and type ‘MICRO SMG’ (open the Wortham W-10 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "micro-smg",
+    "field": "Weapon class",
+    "value": "Micro SMG",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots lists ‘WORTHAM W-10’ and type ‘MICRO SMG’ (open the Wortham W-10 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "micro-smg",
+    "field": "Price shown",
+    "value": "$825 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots lists ‘WORTHAM W-10’ and type ‘MICRO SMG’ (open the Wortham W-10 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "micro-smg",
+    "field": "Damage",
+    "value": "4.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots lists ‘WORTHAM W-10’ and type ‘MICRO SMG’ (open the Wortham W-10 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "micro-smg",
+    "field": "Accuracy",
+    "value": "3.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots lists ‘WORTHAM W-10’ and type ‘MICRO SMG’ (open the Wortham W-10 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "micro-smg",
+    "field": "Handling",
+    "value": "7.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots lists ‘WORTHAM W-10’ and type ‘MICRO SMG’ (open the Wortham W-10 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "micro-smg",
+    "field": "Range",
+    "value": "3.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots lists ‘WORTHAM W-10’ and type ‘MICRO SMG’ (open the Wortham W-10 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-arms-special-ops-carbine",
+    "field": "Visual evidence",
+    "value": "Raul's carbine",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Raul Bautista street standoff promotional screenshot.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-arms-special-ops-carbine",
+    "field": "Editorial label",
+    "value": "Raul's carbine",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Raul Bautista street standoff promotional screenshot.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "springfield-m1a-style-rifle",
+    "field": "Visual evidence",
+    "value": "M1A-style rifle",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Grassrivers hunter visual used in existing evidence.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "springfield-m1a-style-rifle",
+    "field": "Editorial label",
+    "value": "M1A-style rifle",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Grassrivers hunter visual used in existing evidence.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-arms-assault-sniper",
+    "field": "Visual evidence",
+    "value": "Duke-marked rifle",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Grassrivers promotional still of a seated poacher with rifle.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-arms-assault-sniper",
+    "field": "Editorial label",
+    "value": "Duke-marked rifle",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Grassrivers promotional still of a seated poacher with rifle.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "remington-700-style-rifle",
+    "field": "Visual evidence",
+    "value": "Bolt-action hunting rifle",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Mount Kalaga National Park hunter still.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "remington-700-style-rifle",
+    "field": "Editorial label",
+    "value": "Bolt-action hunting rifle",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Mount Kalaga National Park hunter still.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scoped-hunting-rifles",
+    "field": "Visual evidence",
+    "value": "Scoped hunting rifle",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Mount Kalaga National Park promotional forest/hunter screenshot.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scoped-hunting-rifles",
+    "field": "Editorial label",
+    "value": "Scoped hunting rifle",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Mount Kalaga National Park promotional forest/hunter screenshot.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "long-barrel-double-shotgun",
+    "field": "Visual evidence",
+    "value": "Break-action shotgun",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Grassrivers promotional shed still, bearded man holds break-action shotgun.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "long-barrel-double-shotgun",
+    "field": "Editorial label",
+    "value": "Break-action shotgun",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Grassrivers promotional shed still, bearded man holds break-action shotgun.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "claw-hammers",
+    "field": "Editorial label",
+    "value": "Claw Hammer",
+    "source": "https://www.videogameschronicle.com/guide/gta-6-gone-fishing-mission-walkthrough/",
+    "locator": "First-hand VGC mission walkthrough reports one pick-up behind the building, beside the back corner.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "claw-hammers",
+    "field": "Weapon class",
+    "value": "Melee",
+    "source": "https://www.videogameschronicle.com/guide/gta-6-gone-fishing-mission-walkthrough/",
+    "locator": "First-hand VGC mission walkthrough reports one pick-up behind the building, beside the back corner.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "minigolf-club",
+    "field": "Visual evidence",
+    "value": "Minigolf Club",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Official Cal Hampton mini-golf image.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "baseball-bat",
+    "field": "Official name",
+    "value": "Baseball Bat",
+    "source": "https://nerdschalk.com/moonstone-boutique-baseball-bat-gta-6/",
+    "locator": "First-hand Lab Fees walkthrough includes own equipped-bat screenshot after Jason takes the bat from the Moonstone Boutique counter.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "baseball-bat",
+    "field": "Weapon class",
+    "value": "Melee",
+    "source": "https://nerdschalk.com/moonstone-boutique-baseball-bat-gta-6/",
+    "locator": "First-hand Lab Fees walkthrough includes own equipped-bat screenshot after Jason takes the bat from the Moonstone Boutique counter.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "baseball-bat",
+    "field": "Acquisition",
+    "value": "Take the bat from the Moonstone Boutique clerk during Lab Fees.",
+    "source": "https://nerdschalk.com/moonstone-boutique-baseball-bat-gta-6/",
+    "locator": "First-hand Lab Fees walkthrough includes own equipped-bat screenshot after Jason takes the bat from the Moonstone Boutique counter.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "switchblade-knife",
+    "field": "GTA VI appearance",
+    "value": "Switchblade",
+    "source": "https://www.youtube.com/watch?v=qrNuL-B_iXk&t=169s",
+    "locator": "EenGamer original release footage, Big Shots > Ammo & Equipment > Melee Weapons, 2:49.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "switchblade-knife",
+    "field": "Official name",
+    "value": "Switchblade",
+    "source": "https://www.youtube.com/watch?v=qrNuL-B_iXk&t=169s",
+    "locator": "EenGamer original release footage, Big Shots > Ammo & Equipment > Melee Weapons, 2:49.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "switchblade-knife",
+    "field": "Weapon class",
+    "value": "Melee",
+    "source": "https://www.youtube.com/watch?v=qrNuL-B_iXk&t=169s",
+    "locator": "EenGamer original release footage, Big Shots > Ammo & Equipment > Melee Weapons, 2:49.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "switchblade-knife",
+    "field": "Price shown",
+    "value": "$290 at Big Shots",
+    "source": "https://www.youtube.com/watch?v=qrNuL-B_iXk&t=169s",
+    "locator": "EenGamer original release footage, Big Shots > Ammo & Equipment > Melee Weapons, 2:49.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "unarmed-combat",
+    "field": "Official name",
+    "value": "Unarmed",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c",
+    "locator": "Rockstar Trailer 2 cargo-plane fist fight.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "unarmed-combat",
+    "field": "Weapon class",
+    "value": "Unarmed combat",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c",
+    "locator": "Rockstar Trailer 2 cargo-plane fist fight.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "Official name",
+    "value": "Fortune & Son Moreland 850",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 shop capture. Rockstar Extended Look pickup is ‘MORELAND 850 SHOTGUN’ (open the Fortune & Son Moreland 850 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "Weapon class",
+    "value": "Pump Action Shotgun",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 shop capture. Rockstar Extended Look pickup is ‘MORELAND 850 SHOTGUN’ (open the Fortune & Son Moreland 850 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "Price shown",
+    "value": "$700 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 shop capture. Rockstar Extended Look pickup is ‘MORELAND 850 SHOTGUN’ (open the Fortune & Son Moreland 850 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "Damage",
+    "value": "7.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 shop capture. Rockstar Extended Look pickup is ‘MORELAND 850 SHOTGUN’ (open the Fortune & Son Moreland 850 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "Accuracy",
+    "value": "4.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 shop capture. Rockstar Extended Look pickup is ‘MORELAND 850 SHOTGUN’ (open the Fortune & Son Moreland 850 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "Handling",
+    "value": "5.6/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 shop capture. Rockstar Extended Look pickup is ‘MORELAND 850 SHOTGUN’ (open the Fortune & Son Moreland 850 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "Range",
+    "value": "2.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 shop capture. Rockstar Extended Look pickup is ‘MORELAND 850 SHOTGUN’ (open the Fortune & Son Moreland 850 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-corse-425",
+    "field": "Conflicting evidence",
+    "value": "The launch shop screenshot spells the documented weapon Gorse 425. A separate Corse 425 model remains unverified.",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "The published PS5 shop screenshot shows Gorse 425 (open the Fortune & Son Gorse 425 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-mediator",
+    "field": "Official name",
+    "value": "Hawk & Little Mediator",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture shows Tactical Rifle and $900 on shop menu (open the Hawk & Little Mediator row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-mediator",
+    "field": "Weapon class",
+    "value": "Tactical Rifle",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture shows Tactical Rifle and $900 on shop menu (open the Hawk & Little Mediator row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-mediator",
+    "field": "Price shown",
+    "value": "$900 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture shows Tactical Rifle and $900 on shop menu (open the Hawk & Little Mediator row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-mediator",
+    "field": "Damage",
+    "value": "4.8/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture shows Tactical Rifle and $900 on shop menu (open the Hawk & Little Mediator row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-mediator",
+    "field": "Accuracy",
+    "value": "7.8/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture shows Tactical Rifle and $900 on shop menu (open the Hawk & Little Mediator row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-mediator",
+    "field": "Handling",
+    "value": "5.6/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture shows Tactical Rifle and $900 on shop menu (open the Hawk & Little Mediator row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-mediator",
+    "field": "Range",
+    "value": "7.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture shows Tactical Rifle and $900 on shop menu (open the Hawk & Little Mediator row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "Official name",
+    "value": "Scorpio Nipper .38",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Chuck's Tackle & Shot (open the Scorpio Nipper .38 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "Weapon class",
+    "value": "Compact Pistol",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Chuck's Tackle & Shot (open the Scorpio Nipper .38 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "Price shown",
+    "value": "$550 at Chuck’s Tackle & Shot",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Chuck's Tackle & Shot (open the Scorpio Nipper .38 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "Damage",
+    "value": "2.8/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Chuck's Tackle & Shot (open the Scorpio Nipper .38 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "Accuracy",
+    "value": "3.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Chuck's Tackle & Shot (open the Scorpio Nipper .38 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "Handling",
+    "value": "9.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Chuck's Tackle & Shot (open the Scorpio Nipper .38 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "Range",
+    "value": "3.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Chuck's Tackle & Shot (open the Scorpio Nipper .38 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Official name",
+    "value": "Duke 1922",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Duke 1922 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Weapon class",
+    "value": "Heavy Pistol",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Duke 1922 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Price shown",
+    "value": "$1,050 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Duke 1922 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Damage",
+    "value": "5.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Duke 1922 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Accuracy",
+    "value": "4.8/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Duke 1922 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Handling",
+    "value": "8.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Duke 1922 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Range",
+    "value": "4.6/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Duke 1922 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "arras-bullhead-harpoon-gun",
+    "field": "Official name",
+    "value": "Arras Bullhead",
+    "source": "https://www.youtube.com/watch?v=nYRNnw0kke0&t=612s",
+    "locator": "GamersPrey original PS5 launch gameplay Part 2 at 10:12; weapon wheel reads ARRAS BULLHEAD, LONGARM.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "arras-bullhead-harpoon-gun",
+    "field": "Slot",
+    "value": "Longarm",
+    "source": "https://www.youtube.com/watch?v=nYRNnw0kke0&t=612s",
+    "locator": "GamersPrey original PS5 launch gameplay Part 2 at 10:12; weapon wheel reads ARRAS BULLHEAD, LONGARM.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-laird-350",
+    "field": "Official name",
+    "value": "Fortune & Son Laird 350",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots Longarms > Sniper Rifles (open the Fortune & Son Laird 350 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-laird-350",
+    "field": "Weapon class",
+    "value": "Sporting Sniper Rifle",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots Longarms > Sniper Rifles (open the Fortune & Son Laird 350 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-laird-350",
+    "field": "Price shown",
+    "value": "$950 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots Longarms > Sniper Rifles (open the Fortune & Son Laird 350 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-laird-350",
+    "field": "Damage",
+    "value": "6.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots Longarms > Sniper Rifles (open the Fortune & Son Laird 350 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-laird-350",
+    "field": "Accuracy",
+    "value": "8.8/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots Longarms > Sniper Rifles (open the Fortune & Son Laird 350 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-laird-350",
+    "field": "Handling",
+    "value": "3.6/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots Longarms > Sniper Rifles (open the Fortune & Son Laird 350 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-laird-350",
+    "field": "Range",
+    "value": "8.4/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots Longarms > Sniper Rifles (open the Fortune & Son Laird 350 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "diving-knife",
+    "field": "Official name",
+    "value": "Diving Knife",
+    "source": "https://www.youtube.com/watch?v=r56889wEQ0Q&t=222s",
+    "locator": "DomTheBomb original walkthrough, 3:42, Chuck’s Melee Weapons shop; $300 crossed out, $270 listed, currently sold out.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "diving-knife",
+    "field": "Weapon class",
+    "value": "Melee",
+    "source": "https://www.youtube.com/watch?v=r56889wEQ0Q&t=222s",
+    "locator": "DomTheBomb original walkthrough, 3:42, Chuck’s Melee Weapons shop; $300 crossed out, $270 listed, currently sold out.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "diving-knife",
+    "field": "Price shown",
+    "value": "$300 regular; $270 shown in Chuck's capture",
+    "source": "https://www.youtube.com/watch?v=r56889wEQ0Q&t=222s",
+    "locator": "DomTheBomb original walkthrough, 3:42, Chuck’s Melee Weapons shop; $300 crossed out, $270 listed, currently sold out.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-dsg-smg",
+    "field": "Official name",
+    "value": "Deever Tech DSG",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shows model and Tactical SMG (open the Deever Tech DSG row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-dsg-smg",
+    "field": "Weapon class",
+    "value": "Tactical SMG",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shows model and Tactical SMG (open the Deever Tech DSG row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-dsg-smg",
+    "field": "Price shown",
+    "value": "$1,350 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shows model and Tactical SMG (open the Deever Tech DSG row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-dsg-smg",
+    "field": "Damage",
+    "value": "4.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shows model and Tactical SMG (open the Deever Tech DSG row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-dsg-smg",
+    "field": "Accuracy",
+    "value": "4.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shows model and Tactical SMG (open the Deever Tech DSG row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-dsg-smg",
+    "field": "Handling",
+    "value": "6.9/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shows model and Tactical SMG (open the Deever Tech DSG row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-dsg-smg",
+    "field": "Range",
+    "value": "4.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shows model and Tactical SMG (open the Deever Tech DSG row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-gorse-425",
+    "field": "Official name",
+    "value": "Fortune & Son Gorse 425",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu names GORSE 425 (open the Fortune & Son Gorse 425 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-gorse-425",
+    "field": "Weapon class",
+    "value": "Stubby Shotgun",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu names GORSE 425 (open the Fortune & Son Gorse 425 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-gorse-425",
+    "field": "Price shown",
+    "value": "$850 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu names GORSE 425 (open the Fortune & Son Gorse 425 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-gorse-425",
+    "field": "Damage",
+    "value": "7.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu names GORSE 425 (open the Fortune & Son Gorse 425 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-gorse-425",
+    "field": "Accuracy",
+    "value": "3.8/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu names GORSE 425 (open the Fortune & Son Gorse 425 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-gorse-425",
+    "field": "Handling",
+    "value": "6.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu names GORSE 425 (open the Fortune & Son Gorse 425 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-gorse-425",
+    "field": "Range",
+    "value": "2.0/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu names GORSE 425 (open the Fortune & Son Gorse 425 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scrapper-vf5c-smg",
+    "field": "Reported identification",
+    "value": "Scrapper VF5C",
+    "source": "https://www.youtube.com/watch?v=BXYQWf0bhtY&t=585s",
+    "locator": "Kuvani original launch gameplay from 9:45; loot case visible at La Cascara Motel, title names Scrapper VF5C, name not visible in checked description/locator.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "crabshack-vf5-smg",
+    "field": "Reported identification",
+    "value": "Crabshack VF5",
+    "source": "https://cutscenewire.com/games/gta-6/weapon-list/",
+    "locator": "Cutscene Wire Crabshack VF5 row includes linked in-game clip under ‘See it in the game’.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kingpin-heathen",
+    "field": "Reported identification",
+    "value": "Kingpin Heathen",
+    "source": "https://www.youtube.com/watch?v=PH-KkLXeC9Q&t=418s",
+    "locator": "RageGamingVideos original release guide chapter ‘Kingpin Heathen & Early Supercar’ at 6:58.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "zhang-wu-type-9",
+    "field": "Official name",
+    "value": "Zhang Wu Type 9",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Zhang Wu Type 9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "zhang-wu-type-9",
+    "field": "Weapon class",
+    "value": "Machine Pistol",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Zhang Wu Type 9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "zhang-wu-type-9",
+    "field": "Price shown",
+    "value": "$1,100 at Big Shots",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Zhang Wu Type 9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "zhang-wu-type-9",
+    "field": "Damage",
+    "value": "4.2/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Zhang Wu Type 9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "zhang-wu-type-9",
+    "field": "Accuracy",
+    "value": "3.8/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Zhang Wu Type 9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "zhang-wu-type-9",
+    "field": "Handling",
+    "value": "7.8/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Zhang Wu Type 9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "zhang-wu-type-9",
+    "field": "Range",
+    "value": "3.5/10 (shop rating)",
+    "source": "https://gtaplaybook.com/gta6/weapons/",
+    "locator": "Original GTA Playbook PS5 capture, Big Shots shop menu (open the Zhang Wu Type 9 row for the original PS5 capture).",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "black-eagle-import-m306-tmr",
+    "field": "Reported identification",
+    "value": "Black Eagle Import M306 TMR",
+    "source": "https://cutscenewire.com/games/gta-6/weapon-list/",
+    "locator": "Black Eagle Import M306 TMR entry contains original HadesPlays locker screenshot and clip.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "clunker-556",
+    "field": "Reported identification",
+    "value": "Clunker 556",
+    "source": "https://cutscenewire.com/games/gta-6/weapon-list/",
+    "locator": "Clunker 556 row contains original HadesPlays locker screenshot and clip.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "rauls-cqb-556",
+    "field": "Official name",
+    "value": "Raul's CQB 556",
+    "source": "https://www.youtube.com/watch?v=fX4PR3a47hQ&t=330s",
+    "locator": "LaazrGaming First Impressions (Chapter 3), 5:30 weapon wheel RAUL'S CQB 556 / LONGARM per existing reviewed evidence.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "rauls-cqb-556",
+    "field": "Slot",
+    "value": "Longarm",
+    "source": "https://www.youtube.com/watch?v=fX4PR3a47hQ&t=330s",
+    "locator": "LaazrGaming First Impressions (Chapter 3), 5:30 weapon wheel RAUL'S CQB 556 / LONGARM per existing reviewed evidence.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "combat-mg-lmg",
+    "field": "Visual evidence",
+    "value": "A light machine gun appears in the Ammu-Nation ad.",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c&t=129s",
+    "locator": "Rockstar Trailer 2, Phil’s Ammu-Nation sequence. A model label is not visible.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "combat-mg-lmg",
+    "field": "Editorial label",
+    "value": "Trailer light machine gun",
+    "source": "https://www.youtube.com/watch?v=VQRLujxTm3c&t=129s",
+    "locator": "Rockstar Trailer 2, Phil’s Ammu-Nation sequence. A model label is not visible.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "tropical-finish-smg",
+    "field": "Cosmetic pattern",
+    "value": "The Vintage Vice City weapon pattern can be applied to most guns.",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-CONTENTPACK00001",
+    "locator": "Publisher’s Vintage Vice City Pack product listing, Weapon Pattern section.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "tropical-finish-smg",
+    "field": "Editorial label",
+    "value": "Vintage Vice City Weapon Pattern",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-CONTENTPACK00001",
+    "locator": "Publisher’s Vintage Vice City Pack product listing, Weapon Pattern section.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "minigun",
+    "field": "Visual evidence",
+    "value": "A helicopter-mounted weapon is visible. Its model and availability are unresolved.",
+    "source": "https://www.rockstargames.com/VI/launch-trailer",
+    "locator": "Rockstar launch trailer, helicopter sequence.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "minigun",
+    "field": "Editorial label",
+    "value": "Unidentified helicopter-mounted weapon",
+    "source": "https://www.rockstargames.com/VI/launch-trailer",
+    "locator": "Rockstar launch trailer, helicopter sequence.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "silenced-rifle",
+    "field": "Visual evidence",
+    "value": "An apparent suppressor is visible on a rifle in the night-vision scene.",
+    "source": "https://www.rockstargames.com/VI/launch-trailer",
+    "locator": "Rockstar launch trailer, night-vision footage.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "silenced-rifle",
+    "field": "Editorial label",
+    "value": "Unidentified suppressed rifle",
+    "source": "https://www.rockstargames.com/VI/launch-trailer",
+    "locator": "Rockstar launch trailer, night-vision footage.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Edition content",
+    "value": "An engraved Girardi ES9 variant",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Publisher’s Ultimate Edition Upgrade listing, under personalized weapon variants.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Edition content",
+    "value": "An engraved Klose K17 variant",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Publisher’s Ultimate Edition Upgrade listing, under personalized weapon variants.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-crawler",
+    "field": "Official name",
+    "value": "Canis ’82 Crawler",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-crawler-scan-b.jpg",
+    "locator": "GTA6DATA’s launch-game capture — WAiNK vehicle card names Canis ’82 Crawler on the cream truck.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-crawler",
+    "field": "Observed location",
+    "value": "Yard by the old Trader’s Union building, Gellhorn Avenue, Port Gellhorn (Daily Driver mission)",
+    "source": "https://howtovideogame.com/gta-6-crawler-moses/",
+    "locator": "The authors’ own PS5 captures show Moses’ in-game instruction and the WAiNK scan in the mission yard.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-crawler",
+    "field": "Scanned sell value",
+    "value": "$1,250 in the recorded WAiNK scan",
+    "source": "https://howtovideogame.com/gta-6-crawler-moses/",
+    "locator": "‘What Moses Pays for the Crawler’ reports the $1,250 WAiNK sell quote from the authors’ PS5 run. Actual payout after delivery was $1,085 on that run.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-futo",
+    "field": "Observed location",
+    "value": "Leonida Customs storage unit, south side of Draper Island (Moses job)",
+    "source": "https://howtovideogame.com/gta-6-futo-location/",
+    "locator": "Original PS5 walkthrough of the Moses Futo job. The game text gives the storage unit’s location.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-yosemite-1500",
+    "field": "Observed location",
+    "value": "Bastion Street, Port Gellhorn (Moses job)",
+    "source": "https://howtovideogame.com/gta-6-yosemite-1500/",
+    "locator": "Original PS5 gameplay capture during the Moses job shows the yellow Yosemite already being towed at the marked Bastion Street location.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-vamos",
+    "field": "Official name",
+    "value": "Declasse ’74 Vamos",
+    "source": "https://howtovideogame.com/gta-6-moses-cars/",
+    "locator": "‘The Declasse ’74 Vamos’ and the Moses jobs table identify the car. PowerPyx’s walkthrough also quotes the in-game Vamos job.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "annis-hellion",
+    "field": "Observed location",
+    "value": "Orchard Avenue, southern Port Gellhorn (Moses job)",
+    "source": "https://www.powerpyx.com/gta-6-steal-vehicles-for-moses-walkthrough/",
+    "locator": "‘Annis Hellion’ section quotes Moses’ objective text naming the Hellion and Orchard Avenue, and records the driveway sighting.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-ganado",
+    "field": "Documented variant",
+    "value": "Jason’s ’70 Ganado",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-capture-70-ganado.jpg",
+    "locator": "GTA6DATA launch-game screenshot — the vehicle panel names Vapid Jason’s ’70 Ganado on Jason’s blue-green pickup.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-65",
+    "field": "Official name",
+    "value": "Vicki’s ’65 Dominator",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-delights-car.jpg",
+    "locator": "GTA6DATA launch-game screenshot — vehicle HUD shows VAPID / VICKI’S ’65 DOMINATOR with the Drive to town objective.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "airboat",
+    "field": "Official name",
+    "value": "Airgator Airboat 09",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-capture-airgator-09.jpg",
+    "locator": "GTA6DATA launch-game screenshot — the named vehicle panel confirms Airgator Airboat 09 in the marsh.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "albany-buccaneer-custom",
+    "field": "GTA VI appearance",
+    "value": "Albany Buccaneer",
+    "source": "https://hypebeast.com/2026/11/grand-theft-auto-vi-gta6-real-in-game-cars",
+    "locator": "Slide 3 of the Rockstar-supplied gallery names the modified lowrider Albany Buccaneer.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "albany-buccaneer-custom",
+    "field": "Official name",
+    "value": "Albany Buccaneer",
+    "source": "https://hypebeast.com/2026/11/grand-theft-auto-vi-gta6-real-in-game-cars",
+    "locator": "Slide 3 of the Rockstar-supplied gallery names the modified lowrider Albany Buccaneer.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "b48ea1a4-c274-4c1e-a152-8de650300daa",
+    "field": "Official name",
+    "value": "Invetero Coquette",
+    "source": "https://hypebeast.com/2026/11/grand-theft-auto-vi-gta6-real-in-game-cars",
+    "locator": "Slide 5 of the Rockstar-supplied gallery identifies the Invetero Coquette.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "royal-ruby-emerus",
+    "field": "Official name",
+    "value": "Progen Royal Ruby Emerus",
+    "source": "https://meowdb.com/gta6/media/footage/nov20-progen-royal-ruby-emerus.webp",
+    "locator": "WiLLiSGaming launch footage at 1:25. The vehicle access card identifies the Royal Ruby variant.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "purple-drank-emerus",
+    "field": "Official name",
+    "value": "Progen Purple Drank Emerus",
+    "source": "https://meowdb.com/gta6/media/footage/nov20-progen-purple-drank-emerus.webp",
+    "locator": "WiLLiSGaming launch footage at 2:07. The vehicle access card identifies the Purple Drank variant.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-caracara-4x4",
+    "field": "GTA VI appearance",
+    "value": "Vapid Brian’s Caracara 4×4",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-hey-arnold-brians-caracara.jpg",
+    "locator": "GTA6DATA launch-game screenshot — the silver pickup's HUD in Hey Arnold! identifies VAPID / BRIAN’S CARACARA 4×4. This is Brian’s named version.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-caracara-4x4",
+    "field": "Official name",
+    "value": "Vapid Brian’s Caracara 4×4",
+    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-hey-arnold-brians-caracara.jpg",
+    "locator": "GTA6DATA launch-game screenshot — the silver pickup's HUD in Hey Arnold! identifies VAPID / BRIAN’S CARACARA 4×4. This is Brian’s named version.",
+    "reviewedAt": "2026-11-23",
+    "reviewer": "Taish Gaming source review"
   }
 ]

@@ -20,6 +20,14 @@ export function EvidenceDetail({
   next?: { name: string; slug: string } | null;
 }) {
   const artwork = catalogArtwork(kind, entry);
+  const nameClaim = entry.claims.find((claim) => claim.field === "Official name");
+  const seen = entry.claims.some((claim) => claim.field === "GTA VI appearance");
+  const fields = entry.claims.filter((claim) =>
+    !(claim.field === "GTA VI appearance" &&
+      claim.source === nameClaim?.source &&
+      claim.locator === nameClaim.locator &&
+      claim.value === nameClaim.value),
+  );
   return (
     <article className="container-site max-w-4xl py-10 space-y-6">
       <script
@@ -44,7 +52,7 @@ export function EvidenceDetail({
         All {kind}
       </Link>
       <p className="text-sm text-muted-foreground">
-        Editorial identification · {entry.category}
+        {nameClaim ? "Source-reviewed name" : "Editorial identification"} · {entry.category}
       </p>
       <h1 className="font-display text-4xl font-bold">{entry.name}</h1>
       {artwork && (
@@ -77,21 +85,15 @@ export function EvidenceDetail({
         </figure>
       )}
       <p>
-        {entry.claims.some((c) => c.field === "GTA VI appearance")
-          ? "A GTA VI appearance claim has been reviewed below. Its source and scope apply only to that claim; the catalog identification does not verify performance, price or availability."
-          : "This entry is awaiting field-by-field evidence review. The catalog name is a provisional identification and does not establish that this model appears in GTA VI."}
+        {seen
+          ? "Sources below show which details have been documented in GTA VI. Shop prices, mission locations and menu ratings describe the context shown by each source."
+          : "The exact GTA VI identification is still provisional. Any footage or reported sightings are listed with their limits below."}
       </p>
-      {entry.notes && (
-        <section className="space-y-2">
-          <h2 className="text-2xl font-bold">What was spotted</h2>
-          <p>{entry.notes}</p>
-        </section>
-      )}
       <section className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h2 className="text-2xl font-bold">What is verified?</h2>
-        {entry.claims.length ? (
+        <h2 className="text-2xl font-bold">Evidence and sources</h2>
+        {fields.length ? (
           <dl className="space-y-5">
-            {entry.claims.map((c) => (
+            {fields.map((c) => (
               <div key={c.field}>
                 <dt className="font-bold">{c.field}</dt>
                 <dd>
@@ -106,7 +108,7 @@ export function EvidenceDetail({
                     {c.locator}
                   </EvidenceSourceLink>
                   <p className="text-sm text-muted-foreground">
-                    Reviewed {c.reviewedAt} by {c.reviewer}
+                    Reviewed {c.reviewedAt} · {c.reviewer}
                   </p>
                 </dd>
               </div>
@@ -121,9 +123,7 @@ export function EvidenceDetail({
         )}
       </section>
       <p className="text-sm text-muted-foreground">
-        Evidence reviews are done by Muse, Taish Gaming&apos;s research
-        assistant: it checks each claim against official footage and reporting,
-        and the editor reviews corrections. See the{" "}
+        Each review includes a source and identifies the detail it supports. See the{" "}
         <Link href="/editorial-policy" className="underline">
           editorial policy
         </Link>

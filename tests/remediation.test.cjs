@@ -100,8 +100,8 @@ test("the seaplane roundup keeps its URL and distinguishes a mission sighting fr
   });
   assert.equal(article.slug, "gta-6-watercraft-aircraft-guide");
   assert.match(article.title, /^GTA 6 Seaplanes/);
-  assert.match(article.excerpt, /fixed free-roam spawn is still unverified/);
-  assert.match(article.seo_description, /fixed Dodo spawn is unverified/);
+  assert.match(article.excerpt, /Sherwin Boatworks hangar and docks in Southwind/);
+  assert.match(article.seo_description, /Find the Mammoth Dodo seaplane in Southwind/);
   assert.match(article.content, /youtube\.com\/watch\?v=3PiR0G3rVw8/);
   assert.equal(article.content.match(/Our vehicle catalog lists each entry/g).length, 1);
   assert.deepEqual(correctPublishedArticle(article), article);

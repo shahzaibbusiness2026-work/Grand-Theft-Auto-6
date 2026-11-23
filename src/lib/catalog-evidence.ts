@@ -21,7 +21,6 @@ export interface EvidenceEntry {
   name: string;
   category: string;
   img: string;
-  notes?: string;
   claims: EvidenceClaim[];
 }
 export function validClaim(c: EvidenceClaim): boolean {
@@ -43,10 +42,34 @@ export function validClaim(c: EvidenceClaim): boolean {
     return false;
   }
 }
-export function claimsFor(kind: CatalogKind, id: string): EvidenceClaim[] {
-  return (records as EvidenceClaim[]).filter(
-    (c) => c.kind === kind && c.id === id && validClaim(c),
+export function claimsFor(kind: CatalogKind, id: string, slug = id): EvidenceClaim[] {
+  const claims = (records as EvidenceClaim[]).filter(
+    (c) => c.kind === kind && (c.id === id || c.id === slug) && validClaim(c),
   );
+  const fieldsById = new Set(claims.filter((claim) => claim.id === id).map((claim) => claim.field));
+  return claims.filter((claim) => claim.id === id || !fieldsById.has(claim.field));
+}
+
+export function publicCatalogEntry(
+  kind: CatalogKind,
+  row: { id: string; slug?: string; name: string; klass: string; img?: string },
+): EvidenceEntry {
+  const slug = row.slug || row.id;
+  const claims = claimsFor(kind, row.id, slug);
+  const name =
+    claims.find((claim) => claim.field === "Official name")?.value ??
+    claims.find((claim) => claim.field === "Editorial label")?.value ??
+    row.name;
+  const classField = kind === "vehicles" ? "Vehicle class" : "Weapon class";
+  const category = claims.find((claim) => claim.field === classField)?.value ?? row.klass;
+  return {
+    id: row.id,
+    slug,
+    name,
+    category: editorialCategory(category),
+    img: row.img || "",
+    claims: claims.filter((claim) => claim.field !== "Editorial label"),
+  };
 }
 export function indexReady(entry: EvidenceEntry): boolean {
   return entry.claims.some((c) => c.field === "GTA VI appearance");

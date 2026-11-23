@@ -1,8 +1,7 @@
 import { cache } from "react";
 import { getMergedVehicles, getMergedWeapons } from "./catalog";
 import {
-  claimsFor,
-  editorialCategory,
+  publicCatalogEntry,
   type CatalogKind,
   type EvidenceEntry,
 } from "@/lib/catalog-evidence";
@@ -22,14 +21,6 @@ export const getEvidenceCatalog = cache(
         seen.add(slug);
         return true;
       })
-      .map((row) => ({
-        id: row.id,
-        slug: row.slug || row.id,
-        name: row.name,
-        category: editorialCategory(row.klass),
-        img: row.img || "",
-        notes: row.notes,
-        claims: claimsFor(kind, row.id),
-      }));
+      .map((row) => publicCatalogEntry(kind, row));
   },
 );

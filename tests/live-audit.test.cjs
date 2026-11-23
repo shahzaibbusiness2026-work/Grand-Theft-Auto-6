@@ -23,6 +23,7 @@ const {
   isCatalogVariant,
 } = require("../src/lib/catalog-url-state.ts");
 const { catalogSchema } = require("../src/lib/catalog-schema.ts");
+const { publicCatalogEntry } = require("../src/lib/catalog-evidence.ts");
 const {
   normalizeEditorialMarkdown,
   editorialProblems,
@@ -39,6 +40,38 @@ const entries = Array.from({ length: 60 }, (_, i) => ({
   claims: [],
   img: "/img/hero-dark.jpg",
 }));
+
+test("the catalog uses the sourced vehicle name for a CMS row and excludes legacy estimates", () => {
+  const record = {
+    id: "remote-record-id",
+    slug: "grotti-furia",
+    name: "Grotti Furia",
+    klass: "Super",
+    img: "",
+    notes: "Estimated top speed is 198 mph.",
+    topSpeed: 198,
+  };
+  const entry = publicCatalogEntry("vehicles", record);
+  assert.equal(entry.id, record.id);
+  assert.equal(entry.slug, record.slug);
+  assert.equal(entry.name, "Piccia Furia");
+  assert.equal(entry.category, "Super Car");
+  assert.equal(entry.notes, undefined);
+  assert.equal(entry.topSpeed, undefined);
+  assert.equal(entry.claims.find((claim) => claim.field === "Official name")?.value, "Piccia Furia");
+});
+
+test("a researched weapon name can supersede its provisional label while retaining its route", () => {
+  const entry = publicCatalogEntry("weapons", {
+    id: "m4-carbine",
+    slug: "duke-556",
+    name: "Duke Arms Carbine",
+    klass: "Assault Rifle",
+  });
+  assert.equal(entry.slug, "duke-556");
+  assert.equal(entry.name, "Duke 556");
+  assert.ok(entry.claims.some((claim) => claim.field === "GTA VI appearance"));
+});
 
 test("draft location confidence cannot publish unsupported mechanics or spawn associations", () => {
   const draft = {

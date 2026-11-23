@@ -4,6 +4,7 @@ const rockstarAlbumRelease =
 const playstationListing = "https://www.playstation.com/en-us/games/grand-theft-auto-vi/";
 const xboxListing = "https://www.xbox.com/en-us/games/store/grand-theft-auto-vi/9NP019G7NZXT";
 const ignFirstMission = "https://www.youtube.com/watch?v=3PiR0G3rVw8";
+const dodoLocation = "https://www.pcgamer.com/games/grand-theft-auto/gta-6-first-plane-and-helicopter/";
 const gameInformerWildlife =
   "https://gameinformer.com/exclusive/2026/09/28/exclusive-grand-theft-auto-vi-includes-over-170-animal-species";
 const gamesRadarStatement =
@@ -39,7 +40,19 @@ export function correctPublishedArticle<
       content: content
         .replace(sentence + " " + sentence, sentence)
         .replace("IGN's PS5 Pro launch gameplay, with", `[IGN's PS5 Pro launch gameplay](${ignFirstMission}), with`)
-        .replace("IGN's PS5 Pro gameplay shows it in the first mission:", `[IGN's PS5 Pro gameplay](${ignFirstMission}) shows it in the first mission after the prologue:`),
+        .replace("IGN's PS5 Pro gameplay shows it in the first mission:", `[IGN's PS5 Pro gameplay](${ignFirstMission}) shows it in the first mission after the prologue:`)
+        .replace(
+          "No fixed seaplane spawn is documented yet; this page lists",
+          `[PC Gamer’s launch walkthrough](${dodoLocation}) found Dodos by Sherwin Boatworks in Southwind. This page also lists`,
+        )
+        .replace(
+          "No fixed Dodo spawn location is documented yet — the Leonida Keys are where it was flown on camera, not a confirmed spawn point.",
+          "For free roam, check the small hangar and docks beside Sherwin Boatworks in Southwind. The Leonida Keys footage documents a separate story mission.",
+        )
+        .replace(
+          "No fixed spawn location is documented yet.",
+          "For free roam, check the hangar and docks beside Sherwin Boatworks in Southwind.",
+        ),
     };
     if (article.title === "From Airboats to Executive Jets: Every GTA 6 Boat, Plane & Helicopter Spotted So Far") {
       result.title = "GTA 6 Seaplanes, Boats and Aircraft: Where They’ve Been Seen";
@@ -48,13 +61,13 @@ export function correctPublishedArticle<
       result.subtitle = "The Mammoth Dodo mission sighting and other aircraft and boats documented in Leonida";
     }
     if (article.excerpt === "Leonida is ocean, swamp, and open sky — so boats and aircraft matter as much as supercars in GTA 6. Here's the full watercraft and aircraft rundown from both trailers and the Extended Look, from the Airgator to the Mammoth Dodo.") {
-      result.excerpt = "The Mammoth Dodo seaplane appears in a story mission over the Leonida Keys. A fixed free-roam spawn is still unverified. See where other GTA 6 boats and aircraft have been spotted.";
+      result.excerpt = "The Mammoth Dodo appears in a story mission over the Leonida Keys. In free roam, check the Sherwin Boatworks hangar and docks in Southwind.";
     }
     if (article.seo_title === "GTA 6 Seaplane Locations & Water Planes") {
       result.seo_title = "GTA 6 Seaplanes, Boats and Aircraft";
     }
     if (article.seo_description === "Where to find seaplanes and water planes in GTA 6 — every boat, plane and helicopter spotted so far, with the scene each one appears in.") {
-      result.seo_description = "See the GTA 6 Mammoth Dodo story mission sighting in the Leonida Keys, plus documented boats, planes and helicopters. A fixed Dodo spawn is unverified.";
+      result.seo_description = "Find the Mammoth Dodo seaplane in Southwind, see its story mission sighting in the Leonida Keys, and browse other documented GTA 6 boats and aircraft.";
     }
     return result;
   }
