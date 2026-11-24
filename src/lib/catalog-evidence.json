@@ -8858,5 +8858,25 @@
     "locator": "Unique Weapons table - Nipper .38 \"Mahi\" at Chuck's Tackle & Shot, Key Lento, purchasable for $1,160 after the Gear Up Mission's ambush (23 Nov 2026)",
     "reviewedAt": "2026-11-24",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "GTA VI appearance",
+    "value": "Buckingham Bourbon Windsor",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Bourbon Windsor guide - used in a photoshoot inside the Sound4Sound Studio Illegal Operation, northwest side of Stockyard (21 Nov 2026)",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-charred-toros",
+    "field": "GTA VI appearance",
+    "value": "Pegassi Charred Toros",
+    "source": "https://gta6gps.com/map/game/unique-vehicles",
+    "locator": "Unique vehicles list - Pegassi Charred Toros in the front yard of La Perle Trap House, off NW 10th Ave in La Perle (updated 24 Nov 2026)",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
   }
 ]
