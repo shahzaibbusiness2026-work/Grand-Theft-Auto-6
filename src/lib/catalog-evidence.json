@@ -8818,5 +8818,15 @@
     "locator": "Unique Weapons - Kolt & Associates Vatra (24 Nov 2026)",
     "reviewedAt": "2026-11-24",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-caliente-picador",
+    "field": "GTA VI appearance",
+    "value": "Declasse Caliente Picador",
+    "source": "https://www.hotcars.com/gta-6-caliente-picador-hot-rod/",
+    "locator": "Lunar Gaming video — old trainyard, North Mariana County (HotCars, 23 Nov 2026)",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
   }
 ]
