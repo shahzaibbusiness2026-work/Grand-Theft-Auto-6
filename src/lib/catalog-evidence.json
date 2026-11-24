@@ -3568,5 +3568,75 @@
     "locator": "Leonida Carrier Warehouse, Balsero — Canis Gunrunner Kamacho in the south-eastern garage, Key Valuable",
     "reviewedAt": "2026-11-24",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "donnies-h-and-l-38",
+    "field": "GTA VI appearance",
+    "value": "Donnie's H&L .38",
+    "source": "https://screenrant.com/gta-6-unique-weapons-locations/",
+    "locator": "Don Gone mission — inside the trunk of Donnie's red '85 Dinka Blista; loot before destroying the car",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "swamp-bait-akulus",
+    "field": "GTA VI appearance",
+    "value": "Swamp Bait Akulus",
+    "source": "https://screenrant.com/gta-6-unique-weapons-locations/",
+    "locator": "Hunter's Cabin, Pelican Valley — middle of the cabin, amidst the clutter, a few feet from the body",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "cruel-huntsmans-sm-69",
+    "field": "GTA VI appearance",
+    "value": "Cruel Huntsman's SM-69",
+    "source": "https://screenrant.com/gta-6-unique-weapons-locations/",
+    "locator": "Hunter's Cabin, Pelican Valley — on the boardwalk of the hunter's cabin",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "marabunta-grande-hobo",
+    "field": "GTA VI appearance",
+    "value": "Hobo \"Marabunta Grande\"",
+    "source": "https://screenrant.com/gta-6-unique-weapons-locations/",
+    "locator": "Behind the Hamlet Pawn Shop, inside a storage facility — open weapon crate",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "hunters-laird-350",
+    "field": "GTA VI appearance",
+    "value": "Hunter's Laird 350",
+    "source": "https://www.keengamer.com/articles/guides/gta-6-best-early-game-unique-weapon-locations/",
+    "locator": "Roadside encounter south of Hamlet, near Grassrivers — reward for completing the injured-hunter encounter",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "kingfishers-w-22",
+    "field": "GTA VI appearance",
+    "value": "Kingfishers W-22",
+    "source": "https://screenrant.com/gta-6-unique-weapons-locations/",
+    "locator": "Wetman Bay Fishing Shacks Illegal Operation, Pelican Valley — weapon case in the main shack",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "killtelligence-sm-69",
+    "field": "GTA VI appearance",
+    "value": "Killtelligence SM-69",
+    "source": "https://screenrant.com/gta-6-unique-weapons-locations/",
+    "locator": "Mount Kalaga — complete Bret Vogel's deer-hunting quest to earn the sniper rifle",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
   }
 ]
