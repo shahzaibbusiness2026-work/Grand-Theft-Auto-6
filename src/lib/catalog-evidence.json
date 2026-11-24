@@ -8348,5 +8348,285 @@
     "locator": "GTADB’s own German-language PS5 Ammu-Nation menu under ‘Specification capture’ for the Fortune & Son Moreland 850. These are the specs of the configuration shown.",
     "reviewedAt": "2026-11-24T00:00:00+05:00",
     "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "zodiac-nipper-38",
+    "field": "GTA VI appearance",
+    "value": "Zodiac Nipper .38",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Ocean Beach Lab Illegal Operation; corroborated by ShowGamer, Sportskeeda Hindi, gta6info and gta6bugs",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "ptt-youngin-k17",
+    "field": "GTA VI appearance",
+    "value": "PTT Youngin$ K17",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Kamar Devon Community Center Illegal Operation in Southside, just north of South Vice-Dale County; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "san4san-k17",
+    "field": "GTA VI appearance",
+    "value": "San4San K17",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Sound4Sound Studio Illegal Operation in Stockyard, northern Vice City; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "nite-raptor-k17",
+    "field": "GTA VI appearance",
+    "value": "Nite Raptor K17",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Black Eagle in Balsero for $2,050; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "stoner-k17-mcd",
+    "field": "GTA VI appearance",
+    "value": "Stoner K17 MCD",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: on the nightstand in Room 115 of the Big Day Motel off US-35, just north of Ambrosia; corroborated by ShowGamer, Sportskeeda Hindi and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "the-patriarch-drx",
+    "field": "GTA VI appearance",
+    "value": "The Patriarch DRX",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: underwater next to a sunken car in the southwest part of Kalaga Reservoir; corroborated by ShowGamer, Sportskeeda Hindi, gta6info and gta6bugs",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "rogue-alpha-drx",
+    "field": "GTA VI appearance",
+    "value": "Rogue Alpha DRX",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Quickscope, across from Kensinger Tower in Downtown Vice City, for $4,410; corroborated by ShowGamer, Sportskeeda Hindi, gta6info and gta6bugs",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "black-eagle-import-kalinga",
+    "field": "GTA VI appearance",
+    "value": "Black Eagle Import Kalinga",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: in the safe in the front corner office of the Black Eagle warehouse, Balsero (code on the office computer); corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "marabunta-grande-type-9",
+    "field": "GTA VI appearance",
+    "value": "Marabunta Grande Type 9",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Weed Grow Illegal Operation on the northeast shore of Lake Tallaloko, East Lummox County; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "neon-sunset-type-9",
+    "field": "GTA VI appearance",
+    "value": "Neon Sunset Type 9",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Vice City Firearms in Salton for $2,310; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "eris-fresh-dsg",
+    "field": "GTA VI appearance",
+    "value": "Eris Fresh DSG",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Illegal Goods Store Illegal Operation at the northern end of Southside (Ultimate Edition bonus operation); corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "chronic-vatra",
+    "field": "GTA VI appearance",
+    "value": "Chronic Vatra",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Industrial Weed Grow Illegal Operation in North Mariana County; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "double-cross-vatra",
+    "field": "GTA VI appearance",
+    "value": "Double Cross Vatra",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: on the sandy seabed of Gulf Leonida, west of Bobcat Key — three bodies floating near the surface mark the spot; corroborated by ShowGamer, gta6info and mygamepadtester",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "spangled-vatra",
+    "field": "GTA VI appearance",
+    "value": "Spangled Vatra",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Jackson Firearms in the southeast corner of Balsero for $2,520; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "dazzler-dq-9",
+    "field": "GTA VI appearance",
+    "value": "Dazzler DQ-9",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Iron & Oak in Stockyard for $3,680; corroborated by ShowGamer (gta6info lists it as 'Dazzler DW-9' — DQ-9 used, matching the Schlamm DQ-9 base)",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "watcher-pro-moreland-850",
+    "field": "GTA VI appearance",
+    "value": "Watcher Pro Moreland 850",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Tactical Outlet Guns on the far west side of Belville for $1,470; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "san4san-gorse-425",
+    "field": "GTA VI appearance",
+    "value": "San4San Gorse 425",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Parlor Apartments Illegal Operation in Rockridge; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "basher-gorse-425",
+    "field": "GTA VI appearance",
+    "value": "Basher Gorse 425",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at the Pawn & Gun toward the south side of Port Gellhorn (price not listed); corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "dirty-drifter",
+    "field": "GTA VI appearance",
+    "value": "Dirty Drifter",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: in the trunk of a blue car caught in a mudslide just off the coastal road in Bonanza; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "darknite-drifter",
+    "field": "GTA VI appearance",
+    "value": "Darknite Drifter",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy for $2,420 at the Ammu-Nation on the northwest edge of Port Gellhorn (store name unconfirmed); corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "final-chapter-shortstraw",
+    "field": "GTA VI appearance",
+    "value": "Final Chapter Shortstraw",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Hog Stars Garage Illegal Operation in Ambrosia, near the Pay 'N' Spray; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "woodhatch-longshot",
+    "field": "GTA VI appearance",
+    "value": "Woodhatch Longshot",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Woodhatch in Capri, west of North Mariana County, for $2,990; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "nitepower-az1200",
+    "field": "GTA VI appearance",
+    "value": "Nitepower AZ1200",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Black Eagle, beside the Griffin Shooting Range in Balsero, for $4,830; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "throttler-vero",
+    "field": "GTA VI appearance",
+    "value": "Throttler Vero",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Farm Fix Meth Lab Illegal Operation in the northern half of Belville; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "hostile-super400",
+    "field": "GTA VI appearance",
+    "value": "Hostile Super400",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Mill Station Radar Base Illegal Operation in Grassrivers, north of Watson Bay; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "bruiser-super400",
+    "field": "GTA VI appearance",
+    "value": "Bruiser Super400",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Vice City Gun & Pawn on the south side of Rockridge for $5,930; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "final-chapter-kvga-12",
+    "field": "GTA VI appearance",
+    "value": "Final Chapter KVGA-12",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Irons Building Supply Illegal Operation in Ambrosia; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "unpacked-comshot-12",
+    "field": "GTA VI appearance",
+    "value": "Unpacked Comshot 12",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: in a house on the northwest coast of Key Lento — leans against the wall behind the upstairs bathroom door; corroborated by ShowGamer and gta6info",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
   }
 ]
