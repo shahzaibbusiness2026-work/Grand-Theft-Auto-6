@@ -3508,5 +3508,65 @@
     "locator": "Underground bunker south-west of the Griffin Shooting Range, Balsero — free Hauners H-AT rocket launcher beside the safes, four rockets",
     "reviewedAt": "2026-11-24",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-glr40",
+    "field": "GTA VI appearance",
+    "value": "Deever Tech GLR40",
+    "source": "https://openweb-ign.cdn.zephr.com/wikis/gta-6/Launchers",
+    "locator": "One-car garage in the Sunrise Motel courtyard, Tequesta — Deever Tech GLR40 behind the stack of toilet paper",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "cockroach-xtreme-556",
+    "field": "GTA VI appearance",
+    "value": "Cockroach Xtreme 556",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/cockroach-xtreme-556/",
+    "locator": "One-car garage in the Sunrise Motel courtyard, Tequesta — Cockroach Xtreme 556 behind the stack of toilet paper",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "grx-556",
+    "field": "GTA VI appearance",
+    "value": "GRX 556",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/grx-556/",
+    "locator": "Leonida Carrier Warehouse Illegal Operation, Balsero — GRX 556 in an open weapon case behind the wooden crates",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "russos-1922-pistol",
+    "field": "GTA VI appearance",
+    "value": "Russo's 1922 Pistol",
+    "source": "https://gamerant.com/gta-6-president-bunker-location-all-codes/",
+    "locator": "President's Bunker safe, Sharktooth Island — Russo's 1922 Pistol (door code 010317, safe code 2975)",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "cold-war-556",
+    "field": "GTA VI appearance",
+    "value": "Cold War 556",
+    "source": "https://retrobroker.com/en-US/us/blog/gta-6-cold-war-556-location-guide",
+    "locator": "IAA Black Site hangar, Big Pine — Cold War 556 leaning on the crates (tree keypad code 085355)",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-gunrunner-kamacho",
+    "field": "GTA VI appearance",
+    "value": "Canis Gunrunner Kamacho",
+    "source": "https://gamerant.com/gta-6-leonida-carrier-warehouse-robbery-key-valuables-locations-safe-code-gun-ar-car/",
+    "locator": "Leonida Carrier Warehouse, Balsero — Canis Gunrunner Kamacho in the south-eastern garage, Key Valuable",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
   }
 ]
