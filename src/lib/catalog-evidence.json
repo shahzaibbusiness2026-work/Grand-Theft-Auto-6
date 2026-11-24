@@ -8878,5 +8878,35 @@
     "locator": "Unique vehicles list - Pegassi Charred Toros in the front yard of La Perle Trap House, off NW 10th Ave in La Perle (updated 24 Nov 2026)",
     "reviewedAt": "2026-11-24",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "truffade-thrax",
+    "field": "GTA VI appearance",
+    "value": "Truffade Thrax",
+    "source": "https://www.gamespot.com/articles/dont-blink-these-are-the-fastest-cars-in-gta-6/",
+    "locator": "GameSpot fastest cars ranking, 20 Nov 2026 — #1, stock speed 8.7/10; corroborated by Beebom 21 Nov 2026",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "GTA VI appearance",
+    "value": "Pegassi Vitello",
+    "source": "https://www.gamespot.com/articles/dont-blink-these-are-the-fastest-cars-in-gta-6/",
+    "locator": "GameSpot fastest cars ranking, 20 Nov 2026 — #3, stock speed 8.2/10; corroborated by Beebom 21 Nov 2026",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "progen-emerus",
+    "field": "GTA VI appearance",
+    "value": "Progen Emerus",
+    "source": "https://www.gamespot.com/articles/dont-blink-these-are-the-fastest-cars-in-gta-6/",
+    "locator": "GameSpot fastest cars ranking, 20 Nov 2026 — #2, stock speed 8.3/10; corroborated by Beebom 21 Nov 2026",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
   }
 ]
