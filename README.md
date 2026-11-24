@@ -77,3 +77,24 @@ npm run typecheck # tsc --noEmit
 style. The remaining artwork (island maps, Vice sunset, diamond, portraits,
 rifle, props) is hand-authored inline-SVG art in the same neon language so
 every asset is local, crisp at any DPI, and theme-consistent.
+
+## Newsletter and launch reminders
+
+- Subscriber updates use bounded compare-and-swap retries on the existing
+  `private_settings` row. Both JSON arrays and legacy JSON-string arrays are
+  supported; no database migration is required. A conflict or storage failure
+  that cannot be recovered is reported as a failure, not a successful signup.
+- `/api/launch-reminder` requires `CRON_SECRET` and an exact bearer match before
+  reading private subscriber data. It does not require a browser admin session.
+  It also needs `RESEND_API_KEY`, a working sender (`BROADCAST_FROM_EMAIL`), and
+  a newsletter signing secret (`NEWSLETTER_TOKEN_SECRET`, or the existing user
+  or admin session secret) for unsubscribe links.
+- The daily job uses the site's `targetReleaseDate` and
+  `isReleaseDateConfirmed`. It sends only on that date in **UTC**; it does not
+  backfill a past release date. Email copy uses the same date. This change does
+  not alter the site's configured release date or trigger a mailing.
+- Provider rejections are counted as failures. Stable per-date/per-recipient
+  Resend idempotency keys protect retries within the provider's retention
+  window; they are not a permanent delivery ledger.
+- `npm run test:player` covers concurrent subscriber writes and cron behavior
+  using isolated database and email adapters, without contacting subscribers.
