@@ -9,6 +9,7 @@ import { serializeJsonLd } from "@/lib/utils";
 import { PUBLICATION, canonicalOrigin } from "@/lib/site-identity";
 import "./globals.css";
 import { PlayerSyncProvider } from "@/components/player-sync-provider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Generic system font stacks - clean, familiar, non-robotic
 const fontDisplay = {
@@ -161,6 +162,7 @@ export default function RootLayout({
             adSenseId={process.env.NEXT_PUBLIC_ADSENSE_ID}
           />
           <PlayerSyncProvider>{children}</PlayerSyncProvider>
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
