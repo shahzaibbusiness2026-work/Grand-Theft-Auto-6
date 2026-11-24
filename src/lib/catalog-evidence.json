@@ -3488,5 +3488,25 @@
     "locator": "Saber Shipping Yard, Little Cuba — Dundreary Cherry Bomb Chino convertible lowrider near the exit gate",
     "reviewedAt": "2026-11-23",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "conspiracist-type-9",
+    "field": "GTA VI appearance",
+    "value": "Conspiracist Type 9",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/conspiracist-type-9/",
+    "locator": "Underground armory below a hatch in a mobile home in Balsero, south-west of the Griffin Shooting Range — Conspiracist Type 9 on the workbench",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "hauners-h-at",
+    "field": "GTA VI appearance",
+    "value": "Hauners H-AT",
+    "source": "https://www.sportskeeda.com/esports/gta-6-how-get-rocket-launcher-early",
+    "locator": "Underground bunker south-west of the Griffin Shooting Range, Balsero — free Hauners H-AT rocket launcher beside the safes, four rockets",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
   }
 ]
