@@ -8838,5 +8838,15 @@
     "locator": "VCIA Takedown walkthrough - Francisco's LMG-6 picked up from the ground during the mission (24 Nov 2026)",
     "reviewedAt": "2026-11-24",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "roxys-w-10",
+    "field": "GTA VI appearance",
+    "value": "Roxy's W-10",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "Unique Weapons table - Roxy's W-10 reward for finishing Photo Shoot in Chapter 4, given with Bae-Luxe's W-10 and $6,000 (24 Nov 2026)",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
   }
 ]
