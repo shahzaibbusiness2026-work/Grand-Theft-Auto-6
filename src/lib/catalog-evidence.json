@@ -3638,5 +3638,175 @@
     "locator": "Mount Kalaga — complete Bret Vogel's deer-hunting quest to earn the sniper rifle",
     "reviewedAt": "2026-11-24",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "assassin-nipper-38",
+    "field": "GTA VI appearance",
+    "value": "Assassin Nipper .38",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: in a small hatch in the floor of the shipwrecked spy boat, southeast edge of Permit Keys, east of Mile Zero Air Station; corroborated by KeenGamer, ShowGamer, LibertyCity, 6cheats, digitalnexus.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "smuggler-gorse-425",
+    "field": "GTA VI appearance",
+    "value": "Smuggler Gorse 425",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: in an abandoned smuggler's boat washed up on a small island east of Mile Zero Air Station, Permit Keys; corroborated by KeenGamer, ShowGamer, LibertyCity, 6cheats, digitalnexus.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "petes-kz-59",
+    "field": "GTA VI appearance",
+    "value": "Pete's KZ-59",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: pickup in 'The Last Mile: Passing the Torch' (Ch.4) - through the red door into the back room of the hangar at Sundown Private Airfield, rifle on the table; corroborated by ScreenRant and LibertyCity.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "gutterball-moreland-850",
+    "field": "GTA VI appearance",
+    "value": "Gutterball Moreland 850",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Kingpin Bowling Illegal Operation, abandoned bowling alley south Port Gellhorn, on the pool table in the northeast corner; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "gils-kalinga-50",
+    "field": "GTA VI appearance",
+    "value": "Gil's Kalinga .50",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: reward in Safe Word (Chapter 3) - finish the optional safecracking practice at the end of the mission; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "kingfishers-akulus",
+    "field": "GTA VI appearance",
+    "value": "Kingfishers Akulus",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Sunrise RV Park Illegal Operation, north of Cottonmouth Lake - on the bed in the bedroom behind the left-hand door; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "backdoor-hobo",
+    "field": "GTA VI appearance",
+    "value": "Backdoor Hobo",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Zenon's Pawn Shop in La Perle for $2,502; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "bae-luxes-w-10",
+    "field": "GTA VI appearance",
+    "value": "Bae-Luxe's W-10",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: reward for finishing Photo Shoot in Chapter 4, given with Roxy's W-10 and $6,000; named by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "bae-luxes-bat",
+    "field": "GTA VI appearance",
+    "value": "Bae-Luxe's Bat",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: reward for finishing Cooties in Chapter 3; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "couch-potato-mustang-357",
+    "field": "GTA VI appearance",
+    "value": "Couch Potato Mustang .357",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: hidden in a couch hanging from a tree outside a mobile home off Tanglewood Ln. in Port Gellhorn - shoot the ropes to drop the couch, then sit on it; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "ride-free-h-and-l-38",
+    "field": "GTA VI appearance",
+    "value": "Ride Free H&L .38",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: loot during the Biker Hideout Illegal Operation in Leonard County, small building on the south shore of Lake Leonida; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "lyles-h-and-l-38",
+    "field": "GTA VI appearance",
+    "value": "Lyle's H&L .38",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: in the trunk of a car inside an old barn at the dead end of a road in Bonanza - go in by the side door and open the trunk; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "cargo-h-and-l-38",
+    "field": "GTA VI appearance",
+    "value": "Cargo H&L .38",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: in a yellow 'Scoop' shipping container in the Port Vice City cargo area - climb the short container, jump across to the rust-colored container, cross the black one, break into the yellow container; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "honky-tonk-mustang-357",
+    "field": "GTA VI appearance",
+    "value": "Honky Tonk Mustang .357",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Phil's Ammu-Nation in Southside for $3,780; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "iron-and-oak-wcr-1",
+    "field": "GTA VI appearance",
+    "value": "Iron & Oak WCR-1",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: buy at Iron & Oak in Stockyard for $1,260; corroborated by ScreenRant and thegameswiki Weapon Variants table.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "duval-signature-es9",
+    "field": "GTA VI appearance",
+    "value": "Duval Signature ES9",
+    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+    "locator": "thegameswiki Unique Weapons: Ultimate Edition only - Jason's engraved Girardi ES9, redeem from the Variants section of the weapon locker at an Ammu-Nation from Chapter 1; corroborated by ScreenRant.",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "jack-sheepe-h-and-l-38",
+    "field": "GTA VI appearance",
+    "value": "Jack Sheepe H&L .38",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/revolvers/jack-sheepe-hl-38/",
+    "locator": "Dexerto: sold only at Biff's Gun Supply for $2,260; thegameswiki, ShowGamer, Sportskeeda, gta6info, Exputer and the IGN wiki agree (northwest corner of Ambrosia, Ultimate Edition only).",
+    "reviewedAt": "2026-11-24",
+    "reviewer": "Muse"
   }
 ]
