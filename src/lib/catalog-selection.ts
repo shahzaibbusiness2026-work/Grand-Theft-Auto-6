@@ -1,4 +1,5 @@
 import type { CatalogKind, EvidenceEntry } from "./catalog-evidence";
+import { canonicalCatalogSlug } from "./catalog-url-state";
 
 /** Resolve old shared links and current IDs against the public catalog only. */
 export function selectionFromParams(
@@ -12,7 +13,7 @@ export function selectionFromParams(
     ...new Set(
       raw
         .split(",")
-        .map((id) => entries.find((e) => e.id === id || e.slug === id)?.id)
+        .map((id) => entries.find((e) => e.id === id || e.slug === canonicalCatalogSlug(kind, id))?.id)
         .filter((id): id is string => !!id),
     ),
   ].slice(0, 4);

@@ -2,6 +2,9 @@ import type { CatalogKind, EvidenceEntry } from "./catalog-evidence";
 
 export const CATALOG_PAGE_SIZE = 24;
 export const COMPARE_PAGE_SIZE = 8;
+export function canonicalCatalogSlug(kind: CatalogKind, slug: string) {
+  return kind === "vehicles" && slug === "nagasaki-outlaw" ? "mer-can-outlaw" : slug;
+}
 export type CatalogSearchParams = Record<string, string | string[] | undefined>;
 
 export type PublicCatalogState = {

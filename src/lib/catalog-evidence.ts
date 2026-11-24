@@ -4,6 +4,7 @@
  * never proof. Add records to catalog-evidence.json after reviewing a source.
  */
 import records from "./catalog-evidence.json";
+import { canonicalCatalogSlug } from "./catalog-url-state";
 export type CatalogKind = "vehicles" | "weapons";
 export interface EvidenceClaim {
   kind: CatalogKind;
@@ -54,7 +55,7 @@ export function publicCatalogEntry(
   kind: CatalogKind,
   row: { id: string; slug?: string; name: string; klass: string; img?: string },
 ): EvidenceEntry {
-  const slug = row.slug || row.id;
+  const slug = canonicalCatalogSlug(kind, row.slug || row.id);
   const claims = claimsFor(kind, row.id, slug);
   const name =
     claims.find((claim) => claim.field === "Official name")?.value ??

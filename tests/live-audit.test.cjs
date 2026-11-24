@@ -24,6 +24,7 @@ const {
 } = require("../src/lib/catalog-url-state.ts");
 const { catalogSchema } = require("../src/lib/catalog-schema.ts");
 const { publicCatalogEntry } = require("../src/lib/catalog-evidence.ts");
+const { comparisonGroups, isCatalogStat } = require("../src/lib/comparison-fields.ts");
 const {
   normalizeEditorialMarkdown,
   editorialProblems,
@@ -70,6 +71,28 @@ test("a researched weapon name can supersede its provisional label while retaini
   });
   assert.equal(entry.slug, "duke-556");
   assert.equal(entry.name, "Duke 556");
+  assert.ok(entry.claims.some((claim) => claim.field === "GTA VI appearance"));
+});
+
+test("the comparison distinguishes menu speed and acceleration ratings from physical measurements", () => {
+  const performance = comparisonGroups("vehicles").find((group) => group.name === "Performance");
+  for (const field of ["Speed rating", "Top speed", "Acceleration rating", "Asphalt handling rating", "Strength rating"]) {
+    assert.ok(performance.fields.includes(field), field);
+    assert.equal(isCatalogStat("vehicles", field), true, field);
+  }
+  assert.equal(isCatalogStat("weapons", "Accuracy"), true);
+  assert.equal(isCatalogStat("weapons", "Price shown"), false);
+});
+
+test("a legacy Outlaw row resolves to the canonical vehicle route and identity", () => {
+  const entry = publicCatalogEntry("vehicles", {
+    id: "nagasaki-outlaw",
+    slug: "nagasaki-outlaw",
+    name: "Nagasaki Outlaw",
+    klass: "Off-Road",
+  });
+  assert.equal(entry.slug, "mer-can-outlaw");
+  assert.equal(entry.name, "Mer-Can Outlaw");
   assert.ok(entry.claims.some((claim) => claim.field === "GTA VI appearance"));
 });
 

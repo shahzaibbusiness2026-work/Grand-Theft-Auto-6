@@ -3,6 +3,27 @@ export interface ComparisonGroup {
   name: string;
   fields: string[];
 }
+
+const vehiclePerformance = [
+  "Speed rating", "Top speed", "Acceleration rating", "Acceleration",
+  "Asphalt handling rating", "Off-road handling rating", "Strength rating",
+  "Observed south-to-north flight time",
+  "Braking", "Handling", "Power", "Weight", "Traction", "Cornering", "Launch",
+  "Reverse speed", "Torque",
+];
+const weaponPerformance = [
+  "Damage", "Fire rate", "Accuracy", "Range", "Handling", "Recoil", "Mobility",
+  "Projectile speed", "Headshot multiplier", "Damage falloff",
+];
+const weaponOperation = [
+  "Magazine size", "Ammo capacity", "Held ammo shown", "Ammo type", "Reload time", "Reload speed", "Fire mode",
+];
+
+export function isCatalogStat(kind: CatalogKind, field: string): boolean {
+  return kind === "vehicles"
+    ? vehiclePerformance.includes(field) || field === "Off-road rating"
+    : weaponPerformance.includes(field) || weaponOperation.includes(field);
+}
 export function comparisonGroups(
   kind: CatalogKind,
   entries: EvidenceEntry[] = [],
@@ -18,30 +39,20 @@ export function comparisonGroups(
               "Manufacturer",
               "Vehicle class",
               "Seating",
+              "Storage",
               "Doors",
               "Drivetrain",
             ],
           },
           {
             name: "Performance",
-            fields: [
-              "Top speed",
-              "Acceleration",
-              "Braking",
-              "Handling",
-              "Power",
-              "Weight",
-              "Traction",
-              "Cornering",
-              "Launch",
-              "Reverse speed",
-              "Torque",
-            ],
+            fields: vehiclePerformance,
           },
           {
             name: "Purchase & running costs",
             fields: [
               "Price",
+              "Price shown",
               "Purchase location",
               "Resale price",
               "Insurance cost",
@@ -113,34 +124,17 @@ export function comparisonGroups(
           },
           {
             name: "Combat performance",
-            fields: [
-              "Damage",
-              "Fire rate",
-              "Accuracy",
-              "Range",
-              "Handling",
-              "Recoil",
-              "Mobility",
-              "Projectile speed",
-              "Headshot multiplier",
-              "Damage falloff",
-            ],
+            fields: weaponPerformance,
           },
           {
             name: "Ammunition & operation",
-            fields: [
-              "Magazine size",
-              "Ammo capacity",
-              "Ammo type",
-              "Reload time",
-              "Reload speed",
-              "Fire mode",
-            ],
+            fields: weaponOperation,
           },
           {
             name: "Purchase & availability",
             fields: [
               "Price",
+              "Price shown",
               "Ammo cost",
               "Upgrade cost",
               "Availability",

@@ -5,9 +5,37 @@ import { serializeJsonLd } from "@/lib/utils";
 import Link from "next/link";
 import { FavoriteButton } from "./favorite-button";
 import { CatalogVisit } from "./catalog-visit";
-import type { CatalogKind, EvidenceEntry } from "@/lib/catalog-evidence";
+import type { CatalogKind, EvidenceClaim, EvidenceEntry } from "@/lib/catalog-evidence";
+import { isCatalogStat } from "@/lib/comparison-fields";
 import { CatalogArtwork } from "./catalog-artwork";
 import { catalogArtwork } from "@/lib/catalog-artwork";
+
+function EvidenceFields({ claims }: { claims: EvidenceClaim[] }) {
+  return (
+    <dl className="grid gap-5 sm:grid-cols-2">
+      {claims.map((claim) => (
+        <div key={claim.field}>
+          <dt className="font-bold">{claim.field}</dt>
+          <dd>
+            <p className="mt-1 text-lg tabular-nums">{claim.value}</p>
+            <EvidenceSourceLink
+              className="text-sm underline"
+              href={claim.source}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {claim.locator}
+            </EvidenceSourceLink>
+            <p className="text-sm text-muted-foreground">
+              Reviewed {claim.reviewedAt.slice(0, 10)} · {claim.reviewer}
+            </p>
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 export function EvidenceDetail({
   entry,
   kind,
@@ -28,6 +56,8 @@ export function EvidenceDetail({
       claim.locator === nameClaim.locator &&
       claim.value === nameClaim.value),
   );
+  const stats = fields.filter((claim) => isCatalogStat(kind, claim.field));
+  const details = fields.filter((claim) => !isCatalogStat(kind, claim.field));
   return (
     <article className="container-site max-w-4xl py-10 space-y-6">
       <script
@@ -90,30 +120,24 @@ export function EvidenceDetail({
           : "The exact GTA VI identification is still provisional. Any footage or reported sightings are listed with their limits below."}
       </p>
       <section className="rounded-xl border border-border bg-card p-6 space-y-4">
+        <h2 className="text-2xl font-bold">Verified in-game stats</h2>
+        {stats.length ? (
+          <>
+            <p className="text-sm text-muted-foreground">
+              {kind === "vehicles"
+                ? "Vehicle-menu ratings use a 10-point scale. Measured top speeds are listed separately when verified."
+                : "Weapon-menu ratings use a 10-point scale. Magazine and ammo counts describe the specific item or loadout shown."}
+            </p>
+            <EvidenceFields claims={stats} />
+          </>
+        ) : (
+          <p>Verified performance figures are unavailable for this entry.</p>
+        )}
+      </section>
+      <section className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h2 className="text-2xl font-bold">Evidence and sources</h2>
-        {fields.length ? (
-          <dl className="space-y-5">
-            {fields.map((c) => (
-              <div key={c.field}>
-                <dt className="font-bold">{c.field}</dt>
-                <dd>
-                  {c.value}
-                  <br />
-                  <EvidenceSourceLink
-                    className="underline"
-                    href={c.source}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {c.locator}
-                  </EvidenceSourceLink>
-                  <p className="text-sm text-muted-foreground">
-                    Reviewed {c.reviewedAt} · {c.reviewer}
-                  </p>
-                </dd>
-              </div>
-            ))}
-          </dl>
+        {details.length ? (
+          <EvidenceFields claims={details} />
         ) : (
           <p>
             No field-specific source has been approved for this entry.
