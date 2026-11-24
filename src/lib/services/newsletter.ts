@@ -3,7 +3,7 @@
 import { headers } from "next/headers";
 import { createHash } from "crypto";
 import { assertAdmin } from "@/lib/auth/assert-admin";
-import { getPrivateSetting, setPrivateSetting } from "./private-settings";
+import { getPrivateSetting, setPrivateSetting, updatePrivateSetting } from "./private-settings";
 import { peekRateLimit, recordRateLimitHit } from "@/lib/rate-limit";
 
 export interface NewsletterSubscriber {
@@ -127,24 +127,17 @@ export async function subscribeNewsletter(
       };
     }
 
-    const subscribers =
-      (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || [];
-    if (subscribers.some((s) => s?.email === cleanEmail)) {
-      // Already subscribed — a re-subscribe also lifts any broadcast
-      // suppression from an earlier unsubscribe.
+    const { changed } = await updatePrivateSetting<NewsletterSubscriber[]>(
+      SUBSCRIBERS_KEY,
+      [],
+      (subscribers) => subscribers.some((s) => s.email === cleanEmail)
+        ? subscribers
+        : [...subscribers, { email: cleanEmail, subscribed_at: new Date().toISOString() }],
+    );
+    if (!changed) {
       await removeSuppressedEmail(cleanEmail);
       return { success: true, message: "You're already subscribed." };
     }
-
-    const stored = await setPrivateSetting(SUBSCRIBERS_KEY, [
-      ...subscribers,
-      { email: cleanEmail, subscribed_at: new Date().toISOString() },
-    ]);
-    if (!stored)
-      return {
-        success: false,
-        message: "Subscription storage is unavailable. Please try again later.",
-      };
 
     await removeSuppressedEmail(cleanEmail);
     return { success: true, message: "You're subscribed — see you at launch!" };
@@ -182,20 +175,15 @@ export async function confirmNewsletterSubscription(
       return { result: "expired" };
     }
 
-    // Remove the pending entry (single-use) and add to subscribers.
-    await setPrivateSetting(
-      PENDING_KEY,
-      pending.filter((p) => p.token_hash !== entry.token_hash),
+    await updatePrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY, [], (subscribers) =>
+      subscribers.some((s) => s.email === entry.email)
+        ? subscribers
+        : [...subscribers, { email: entry.email, subscribed_at: new Date().toISOString() }],
     );
-    const subscribers =
-      (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || [];
-    if (!subscribers.some((s) => s?.email === entry.email)) {
-      await setPrivateSetting(SUBSCRIBERS_KEY, [
-        ...subscribers,
-        { email: entry.email, subscribed_at: new Date().toISOString() },
-      ]);
-    }
 
+    await updatePrivateSetting<PendingSubscription[]>(PENDING_KEY, [], (list) =>
+      list.filter((p) => p.token_hash !== entry.token_hash),
+    );
     return { result: "confirmed", email: entry.email };
   } catch (err) {
     console.error("Newsletter confirmation error:", err);
@@ -229,13 +217,12 @@ export async function adminAddSubscriber(
     const clean = (email || "").trim().toLowerCase();
     if (!EMAIL_RE.test(clean))
       return { success: false, error: "Invalid email address" };
-    const list =
-      (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || [];
-    if (list.some((s) => s.email === clean)) {
-      return { success: false, error: "That email is already subscribed" };
-    }
-    list.push({ email: clean, subscribed_at: new Date().toISOString() });
-    await setPrivateSetting(SUBSCRIBERS_KEY, list);
+    const { changed } = await updatePrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY, [], (list) =>
+      list.some((s) => s.email === clean)
+        ? list
+        : [...list, { email: clean, subscribed_at: new Date().toISOString() }],
+    );
+    if (!changed) return { success: false, error: "That email is already subscribed" };
     await removeSuppressedEmail(clean);
     return { success: true };
   } catch (err) {
@@ -250,13 +237,10 @@ export async function adminRemoveSubscriber(
   try {
     await assertAdmin();
     const clean = (email || "").trim().toLowerCase();
-    const list =
-      (await getPrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY)) || [];
-    const next = list.filter((s) => s.email !== clean);
-    if (next.length === list.length) {
-      return { success: false, error: "Subscriber not found" };
-    }
-    await setPrivateSetting(SUBSCRIBERS_KEY, next);
+    const { changed } = await updatePrivateSetting<NewsletterSubscriber[]>(SUBSCRIBERS_KEY, [], (list) =>
+      list.some((s) => s.email === clean) ? list.filter((s) => s.email !== clean) : list,
+    );
+    if (!changed) return { success: false, error: "Subscriber not found" };
     return { success: true };
   } catch (err) {
     return { success: false, error: String(err) };

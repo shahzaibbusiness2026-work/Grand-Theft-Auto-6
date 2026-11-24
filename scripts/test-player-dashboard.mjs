@@ -1063,3 +1063,275 @@ test("unauthorized settings saves never reach privileged database writes", async
   assert.match(result.error, /Unauthorized/);
   assert.doesNotMatch(result.error, /Privileged database/);
 });
+
+// A small PostgREST adapter: snapshots are read before concurrent writes,
+// and updates succeed only when their jsonb equality condition still matches.
+function newsletterDatabase(initial = new Map(), { readError = false, writeError = false, conflictAlways = false, barrierReads = 0 } = {}) {
+  const rows = new Map(initial);
+  let conflicts = 0, subscriberReads = 0, releaseReads;
+  const readBarrier = new Promise(resolve => { releaseReads = resolve; });
+  const client = { from(table) {
+    assert.equal(table, "private_settings");
+    let mode = "read", row;
+    const filters = {};
+    const query = {
+      eq(key, value) { filters[key] = value; return query; },
+      select() {
+        if (mode === "read") return query;
+        if (writeError) return Promise.resolve({ data: null, error: { code: "unavailable" } });
+        if (conflictAlways || JSON.stringify(rows.get(filters.key)) !== filters.value) {
+          conflicts++;
+          return Promise.resolve({ data: [], error: null });
+        }
+        rows.set(row.key, row.value);
+        return Promise.resolve({ data: [{ key: row.key }], error: null });
+      },
+      async maybeSingle() {
+        const snapshot = readError ? { data: null, error: { code: "unavailable" } }
+          : { data: rows.has(filters.key) ? { value: plain(rows.get(filters.key)) } : null, error: null };
+        if (filters.key === "newsletter_subscribers" && subscriberReads < barrierReads) {
+          if (++subscriberReads === barrierReads) releaseReads();
+          await readBarrier;
+        }
+        return snapshot;
+      },
+      update(value) { mode = "update"; row = value; return query; },
+      async insert(value) {
+        if (writeError) return { error: { code: "unavailable" } };
+        if (rows.has(value.key)) { conflicts++; return { error: { code: "23505" } }; }
+        rows.set(value.key, value.value);
+        return { error: null };
+      },
+    };
+    return query;
+  } };
+  return { client, rows, get conflicts() { return conflicts; } };
+}
+function newsletterService(db, authorized = true) {
+  return loader({
+    "next/headers": { headers: async () => new Headers({ "x-real-ip": "unit-test" }) },
+    "@/lib/supabase/admin": { createAdminClient: () => db.client },
+    "@/lib/auth/assert-admin": { assertAdmin: async () => {
+      if (!authorized) throw new Error("Unauthorized");
+      return { authorized: true };
+    } },
+    "@/lib/rate-limit": { peekRateLimit: async () => false, recordRateLimitHit: async () => {} },
+  })("src/lib/services/newsletter.ts");
+}
+const subscribersKey = "newsletter_subscribers";
+const readerOne = { email: "one@example.invalid", subscribed_at: "2026-11-01T00:00:00Z" };
+const subscriberRows = db => {
+  const raw = db.rows.get(subscribersKey);
+  return typeof raw === "string" ? JSON.parse(raw) : raw || [];
+};
+
+for (const format of ["missing", "jsonb", "legacy-string"]) {
+  test(`concurrent public signups both persist with ${format} storage`, async () => {
+    const initial = format === "missing" ? [] : [[subscribersKey, format === "jsonb" ? [] : "[]"]];
+    const db = newsletterDatabase(new Map(initial), { barrierReads: 2 });
+    const service = newsletterService(db);
+    const results = await Promise.all([
+      service.subscribeNewsletter(" One@example.invalid "),
+      service.subscribeNewsletter("two@example.invalid"),
+    ]);
+    assert.equal(results.every(result => result.success), true);
+    assert.deepEqual(subscriberRows(db).map(s => s.email).sort(), ["one@example.invalid", "two@example.invalid"]);
+    assert.ok(db.conflicts > 0, "test must exercise a conflicting write");
+  });
+}
+
+test("concurrent duplicate signups keep one subscription and its original unsubscribe identity", async () => {
+  const db = newsletterDatabase(new Map([[subscribersKey, JSON.stringify([readerOne])]]));
+  const service = newsletterService(db);
+  const results = await Promise.all([service.subscribeNewsletter(readerOne.email), service.subscribeNewsletter(readerOne.email)]);
+  assert.ok(results.every(r => r.success));
+  assert.deepEqual(subscriberRows(db), [readerOne]);
+});
+
+test("an admin removal racing a public signup preserves the new subscriber", async () => {
+  const db = newsletterDatabase(new Map([[subscribersKey, [readerOne]]]), { barrierReads: 2 });
+  const service = newsletterService(db);
+  const results = await Promise.all([service.adminRemoveSubscriber(readerOne.email), service.subscribeNewsletter("two@example.invalid")]);
+  assert.ok(results.every(r => r.success));
+  assert.deepEqual(subscriberRows(db).map(s => s.email), ["two@example.invalid"]);
+  assert.ok(db.conflicts > 0);
+});
+
+test("an admin import racing a public signup preserves both subscribers", async () => {
+  const db = newsletterDatabase(new Map(), { barrierReads: 2 });
+  const service = newsletterService(db);
+  const results = await Promise.all([service.adminAddSubscriber(readerOne.email), service.subscribeNewsletter("two@example.invalid")]);
+  assert.ok(results.every(r => r.success));
+  assert.equal(subscriberRows(db).length, 2);
+});
+
+test("newsletter confirmation cannot overwrite a simultaneous public signup", async () => {
+  const { createHash } = require("node:crypto");
+  const token = "controlled-unit-test-confirmation";
+  const pending = [{ email: readerOne.email, token_hash: createHash("sha256").update(token).digest("hex"), created_at: new Date().toISOString(), expires_at: new Date(Date.now() + 60000).toISOString() }];
+  const db = newsletterDatabase(new Map([["newsletter_pending", JSON.stringify(pending)]]), { barrierReads: 2 });
+  const service = newsletterService(db);
+  const [confirmation, signup] = await Promise.all([service.confirmNewsletterSubscription(token), service.subscribeNewsletter("two@example.invalid")]);
+  assert.equal(confirmation.result, "confirmed");
+  assert.equal(signup.success, true);
+  assert.equal(subscriberRows(db).length, 2);
+  assert.deepEqual(JSON.parse(db.rows.get("newsletter_pending")), []);
+});
+
+for (const failure of ["readError", "writeError", "conflictAlways"]) {
+  test(`subscriber ${failure} is reported as failure, never a successful signup`, async () => {
+    const db = newsletterDatabase(new Map([[subscribersKey, "[]"]]), { [failure]: true });
+    const service = newsletterService(db);
+    assert.equal((await service.subscribeNewsletter(readerOne.email)).success, false);
+    assert.equal((await service.adminAddSubscriber(readerOne.email)).success, false);
+    assert.equal(subscriberRows(db).length, 0);
+  });
+}
+
+test("admin subscriber mutations still require admin authorization", async () => {
+  const db = newsletterDatabase();
+  const service = newsletterService(db, false);
+  assert.equal((await service.adminAddSubscriber(readerOne.email)).success, false);
+  assert.equal((await service.adminRemoveSubscriber(readerOne.email)).success, false);
+  assert.equal(db.rows.size, 0);
+});
+
+// Route tests never call Resend or a live database. The fixed clock makes both
+// the release-day gate and the stable retry idempotency key reproducible.
+async function reminderScenario({ secret = "configured", authorized = true, day = "2026-11-19T08:00:00Z", releaseDate = "2026-11-19T00:00:00Z", confirmed = true, storageError = false, subscribers = [readerOne], providerError = false, mailConfigured = true, repeat = false } = {}) {
+  const previous = { CRON_SECRET: process.env.CRON_SECRET, RESEND_API_KEY: process.env.RESEND_API_KEY };
+  const { randomUUID } = require("node:crypto");
+  const testSecret = randomUUID();
+  if (secret) process.env.CRON_SECRET = testSecret; else delete process.env.CRON_SECRET;
+  if (mailConfigured) process.env.RESEND_API_KEY = randomUUID(); else delete process.env.RESEND_API_KEY;
+  let reads = 0, adminChecks = 0;
+  const deliveries = [];
+  class FixedDate extends Date {
+    constructor(...args) { super(...(args.length ? args : [day])); }
+  }
+  try {
+    const route = loader({
+      "@/lib/services/settings": { getSiteSettings: async () => ({ targetReleaseDate: releaseDate, isReleaseDateConfirmed: confirmed }) },
+      "@/lib/auth/assert-admin": { assertAdmin: async () => { adminChecks++; throw new Error("Cron has no browser cookie"); } },
+      "@/lib/supabase/admin": { createAdminClient: () => ({ from: table => {
+        assert.equal(table, "private_settings");
+        return { select: () => ({ eq: (key, value) => {
+          assert.equal(key, "key"); assert.equal(value, subscribersKey); reads++;
+          return { maybeSingle: async () => storageError ? { data: null, error: { message: "Storage down" } } : { data: { value: JSON.stringify(subscribers) }, error: null } };
+        } }) };
+      } }) },
+      resend: { Resend: class { emails = { send: async (message, options) => {
+        deliveries.push({ message, options });
+        return providerError ? { data: null, error: { message: "Rejected" } } : { data: { id: "accepted-test-message" }, error: null };
+      } }; } },
+    }, { Date: FixedDate })("src/app/api/launch-reminder/route.ts");
+    const request = () => new Request("https://example.invalid/api/launch-reminder", { headers: authorized ? { authorization: `Bearer ${testSecret}` } : {} });
+    const response = await route.GET(request());
+    const body = await response.json();
+    if (repeat) await route.GET(request());
+    return { status: response.status, body, deliveries, reads, adminChecks };
+  } finally {
+    for (const [key, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[key]; else process.env[key] = value;
+    }
+  }
+}
+
+test("authorized launch cron reads private subscribers without a browser admin session", async () => {
+  const result = await reminderScenario({ repeat: true });
+  assert.equal(result.status, 200);
+  assert.equal(result.body.sent, 1);
+  assert.equal(result.adminChecks, 0);
+  assert.equal(result.deliveries.length, 2);
+  assert.equal(result.deliveries[0].message.to, readerOne.email);
+  assert.match(result.deliveries[0].message.html, /November 19, 2026/);
+  assert.match(result.deliveries[0].message.html, /unsubscribe\?token=/);
+  assert.equal(result.deliveries[0].options.idempotencyKey, result.deliveries[1].options.idempotencyKey);
+  assert.doesNotMatch(result.deliveries[0].options.idempotencyKey, /@/);
+});
+
+test("launch cron uses the configured UTC date and matching email copy, not a hardcoded date", async () => {
+  const result = await reminderScenario({ day: "2027-02-03T08:00:00Z", releaseDate: "2027-02-03T00:00:00Z" });
+  assert.equal(result.body.sent, 1);
+  assert.match(result.deliveries[0].message.html, /February 3, 2027/);
+  assert.doesNotMatch(result.deliveries[0].message.html, /November 19, 2026/);
+});
+
+for (const scenario of [
+  { name: "no configured cron secret", secret: null, status: 503 },
+  { name: "no valid bearer authorization", authorized: false, status: 401 },
+  { name: "a past launch date", day: "2026-11-24T08:00:00Z", status: 200 },
+  { name: "a future launch date", day: "2026-11-18T23:59:59Z", status: 200 },
+  { name: "an unconfirmed release date", confirmed: false, status: 200 },
+  { name: "a malformed confirmation flag", confirmed: "false", status: 200 },
+  { name: "an invalid release date", releaseDate: "invalid", status: 200 },
+  { name: "missing mail configuration", mailConfigured: false, status: 503 },
+]) {
+  test(`launch cron sends nothing for ${scenario.name}`, async () => {
+    const result = await reminderScenario(scenario);
+    assert.equal(result.status, scenario.status);
+    assert.equal(result.reads, 0);
+    assert.equal(result.deliveries.length, 0);
+  });
+}
+
+test("launch cron distinguishes storage failure from an empty subscriber list", async () => {
+  const failed = await reminderScenario({ storageError: true });
+  assert.equal(failed.status, 500);
+  assert.equal(failed.deliveries.length, 0);
+  const empty = await reminderScenario({ subscribers: [] });
+  assert.equal(empty.status, 200);
+  assert.match(empty.body.message, /No subscribers/);
+});
+
+test("launch cron reports resolved provider errors as failures, not sent emails", async () => {
+  const result = await reminderScenario({ providerError: true });
+  assert.equal(result.status, 502);
+  assert.equal(result.body.sent, 0);
+  assert.equal(result.body.failed, 1);
+});
+
+test("simultaneous first signups for one address create only one unsubscribe identity", async () => {
+  const db = newsletterDatabase(new Map(), { barrierReads: 2 });
+  const service = newsletterService(db);
+  const results = await Promise.all([service.subscribeNewsletter(readerOne.email), service.subscribeNewsletter(readerOne.email)]);
+  assert.ok(results.every(r => r.success));
+  assert.equal(subscriberRows(db).length, 1);
+  assert.ok(db.conflicts > 0);
+});
+
+test("confirmation storage failure preserves the pending token for retry", async () => {
+  const { createHash } = require("node:crypto");
+  const token = "retryable-unit-test-confirmation";
+  const pending = [{ email: readerOne.email, token_hash: createHash("sha256").update(token).digest("hex"), expires_at: new Date(Date.now() + 60000).toISOString() }];
+  const db = newsletterDatabase(new Map([["newsletter_pending", JSON.stringify(pending)]]), { writeError: true });
+  const result = await newsletterService(db).confirmNewsletterSubscription(token);
+  assert.equal(result.result, "invalid");
+  assert.equal(subscriberRows(db).length, 0);
+  assert.deepEqual(JSON.parse(db.rows.get("newsletter_pending")), pending);
+});
+
+test("real Supabase client serializes the conditional jsonb update for both storage formats", async () => {
+  const { createClient } = require("@supabase/supabase-js");
+  const { randomUUID } = require("node:crypto");
+  for (const raw of [[readerOne], JSON.stringify([readerOne])]) {
+    const requests = [];
+    const client = createClient("https://database.example.invalid", randomUUID(), {
+      auth: { persistSession: false, autoRefreshToken: false },
+      global: { fetch: async (input, options) => {
+        const url = new URL(input);
+        const method = options.method;
+        requests.push({ url, method, body: options.body });
+        return new Response(JSON.stringify(method === "GET" ? [{ value: raw }] : [{ key: subscribersKey }]), { headers: { "content-type": "application/json" } });
+      } },
+    });
+    const { updatePrivateSetting } = loader({ "@/lib/supabase/admin": { createAdminClient: () => client } })("src/lib/services/private-settings.ts");
+    const next = { email: "two@example.invalid", subscribed_at: "2026-11-02T00:00:00Z" };
+    const result = await updatePrivateSetting(subscribersKey, [], list => [...list, next]);
+    assert.equal(result.changed, true);
+    assert.equal(requests.length, 2);
+    assert.equal(requests[1].method, "PATCH");
+    assert.equal(requests[1].url.searchParams.get("value"), `eq.${JSON.stringify(raw)}`);
+    assert.deepEqual(JSON.parse(JSON.parse(requests[1].body).value), [readerOne, next]);
+  }
+});
