@@ -11,6 +11,13 @@
  * verified trailer frames already on the site — exact image or no image.
  * The 39 Launch Gallery screenshots are NOT used here: the user has not
  * approved them for site use yet.
+ *
+ * Ages / dates of birth (Jason, Lucia — added 25 Nov 2026) come from the
+ * protagonists' in-game driver's licences, observed in-game and reported
+ * by Push Square, Beebom, VGTimes and GTA6Hype (all agreeing) — OBSERVED
+ * evidence, not Rockstar bio wording. Heights are NOT added: Jason's
+ * licence says 6'3" but his in-game profile / police description says
+ * 6'1" (Beebom, gta6.house) — unresolved discrepancy, held.
  */
 
 export type CharacterProfileFacts = {
@@ -60,6 +67,8 @@ export const characterProfiles: Record<string, CharacterProfileFacts> = {
     portrait: "/img/char-lucia.jpg",
     info: [
       { label: "Full Name", value: "Lucia Caminos" },
+      { label: "Age", value: "26" },
+      { label: "Date of Birth", value: "20 November 2000" },
       { label: "Role", value: "Main Protagonist" },
       { label: "Status", value: "Alive" },
       { label: "Location", value: "Leonida (Vice City)" },
@@ -110,6 +119,8 @@ export const characterProfiles: Record<string, CharacterProfileFacts> = {
     portrait: "/img/char-jason.jpg",
     info: [
       { label: "Full Name", value: "Jason Duval" },
+      { label: "Age", value: "30" },
+      { label: "Date of Birth", value: "1 May 1996" },
       { label: "Role", value: "Main Protagonist" },
       { label: "Status", value: "Alive" },
       { label: "Location", value: "Leonida Keys" },
