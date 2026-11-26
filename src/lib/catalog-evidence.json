@@ -9518,5 +9518,295 @@
     "locator": "vAnotherLevel's sniper table: Shrewsbury SMS-01 $2,150 \u2014 REPORTED (PowerPyx prices).",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kozlov-kz-59",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (AK-style, militaries and militias)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Kozlov KZ-59 \u2014 AK-style, militaries and militias, Dmg 5.4, Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kozlov-kz-59",
+    "field": "Damage",
+    "value": "5.4/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Kozlov KZ-59 Dmg 5.4, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kozlov-kz-59",
+    "field": "Magazine size",
+    "value": "30 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Kozlov KZ-59 Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kozlov-hind",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Shortened KZ-59)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Kozlov Hind \u2014 Shortened KZ-59, Dmg 5.4, Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kozlov-hind",
+    "field": "Damage",
+    "value": "5.4/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Kozlov Hind Dmg 5.4, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kozlov-hind",
+    "field": "Magazine size",
+    "value": "30 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Kozlov Hind Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "vom-feuer-vf5",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Long favored by SWAT)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: Vom Feuer VF5 \u2014 Long favored by SWAT, Dmg 4.2, Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "vom-feuer-vf5",
+    "field": "Damage",
+    "value": "4.2/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: Vom Feuer VF5 Dmg 4.2, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "vom-feuer-vf5",
+    "field": "Magazine size",
+    "value": "30 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: Vom Feuer VF5 Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-fra",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Battle rifle, heavy recoil)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: ADB FRA \u2014 Battle rifle, heavy recoil, Dmg 5.8, Mag 20, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-fra",
+    "field": "Damage",
+    "value": "5.8/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: ADB FRA Dmg 5.8, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-fra",
+    "field": "Magazine size",
+    "value": "20 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: ADB FRA Mag 20, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-10",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Lightweight)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: Wortham W-10 \u2014 Lightweight, Dmg 4.2, Mag 20, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-10",
+    "field": "Damage",
+    "value": "4.2/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: Wortham W-10 Dmg 4.2, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-10",
+    "field": "Magazine size",
+    "value": "20 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: Wortham W-10 Mag 20, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "bzi-vatra",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Full-auto)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: BZI Vatra \u2014 Full-auto, Dmg 4.2, Mag 20, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "bzi-vatra",
+    "field": "Damage",
+    "value": "4.2/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: BZI Vatra Dmg 4.2, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "bzi-vatra",
+    "field": "Magazine size",
+    "value": "20 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: BZI Vatra Mag 20, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-pd-80",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Personal defense)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: ADB PD-80 \u2014 Personal defense, Dmg 4.2, Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-pd-80",
+    "field": "Damage",
+    "value": "4.2/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: ADB PD-80 Dmg 4.2, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-pd-80",
+    "field": "Magazine size",
+    "value": "30 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: ADB PD-80 Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "schlamm-dw-9",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Tactical full-auto)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: Schlamm DW-9 \u2014 Tactical full-auto, Dmg 4.2, Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "schlamm-dw-9",
+    "field": "Damage",
+    "value": "4.2/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: Schlamm DW-9 Dmg 4.2, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "schlamm-dw-9",
+    "field": "Magazine size",
+    "value": "30 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's SMGs table: Schlamm DW-9 Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-heathen",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (3-round burst)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Hillinger Heathen \u2014 3-round burst, Dmg 5.0, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-heathen",
+    "field": "Damage",
+    "value": "5.0/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Hillinger Heathen Dmg 5.0, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "vom-feuer-vf-g1",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Modern modular rifle)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Vom Feuer VF-G1 \u2014 Modern modular rifle, Dmg 5.0, Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "vom-feuer-vf-g1",
+    "field": "Damage",
+    "value": "5.0/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Vom Feuer VF-G1 Dmg 5.0, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "vom-feuer-vf-g1",
+    "field": "Magazine size",
+    "value": "30 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Assault rifles table: Vom Feuer VF-G1 Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
   }
 ]
