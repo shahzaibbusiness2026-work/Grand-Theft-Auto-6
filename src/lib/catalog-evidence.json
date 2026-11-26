@@ -8918,5 +8918,35 @@
     "locator": "Cultivator Sandking Locations and Stats — parked inside the huge building of the Industrial Weed Grow Illegal Operation at Grassrivers, North Mariana County (standout vehicle, Key Valuable 1)",
     "reviewedAt": "2026-11-24",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-black-moth-kamacho",
+    "field": "GTA VI appearance",
+    "value": "Canis Black Moth Kamacho",
+    "source": "https://www.keengamer.com/articles/guides/gta-6-watson-bay-safehouse-walkthrough-safe-code-vf-g1-and-kamacho/",
+    "locator": "Watson Bay Safehouse guide - Black Moth Kamacho in the downstairs garage, safe code 1819 (25 Nov 2026)",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-ridgway",
+    "field": "GTA VI appearance",
+    "value": "Hauners Ridgway",
+    "source": "https://www.keengamer.com/articles/guides/gta-6-how-to-get-a-tank-secret-bunker-quest/",
+    "locator": "Secret bunker quest - Hauners Ridgway in the IAA Black Site hangar near Big Pine, codes 010317 / 2975 / 085355",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "cursed-knife",
+    "field": "GTA VI appearance",
+    "value": "Cursed Knife",
+    "source": "https://www.dexerto.com/wikis/gta-6/easter-eggs/ghost-ship/",
+    "locator": "Ghost Ship Easter egg - Cursed Knife from the sunken boat off Little Hardin Island (23 Nov 2026)",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
   }
 ]
