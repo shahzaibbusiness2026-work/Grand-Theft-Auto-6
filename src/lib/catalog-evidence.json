@@ -31,7 +31,7 @@
   },
   {
     "kind": "weapons",
-    "id": "mustang-357",
+    "id": "duke-mustang-357",
     "field": "GTA VI appearance",
     "value": "Duke Mustang .357",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1851,7 +1851,7 @@
   },
   {
     "kind": "weapons",
-    "id": "mustang-357",
+    "id": "duke-mustang-357",
     "field": "Official name",
     "value": "Duke Mustang .357",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1861,7 +1861,7 @@
   },
   {
     "kind": "weapons",
-    "id": "mustang-357",
+    "id": "duke-mustang-357",
     "field": "Weapon class",
     "value": "Magnum Revolver",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1871,7 +1871,7 @@
   },
   {
     "kind": "weapons",
-    "id": "mustang-357",
+    "id": "duke-mustang-357",
     "field": "Price shown",
     "value": "$1,800 at Big Shots",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1881,7 +1881,7 @@
   },
   {
     "kind": "weapons",
-    "id": "mustang-357",
+    "id": "duke-mustang-357",
     "field": "Damage",
     "value": "5.7/10 (shop rating)",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1891,7 +1891,7 @@
   },
   {
     "kind": "weapons",
-    "id": "mustang-357",
+    "id": "duke-mustang-357",
     "field": "Accuracy",
     "value": "4.5/10 (shop rating)",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1901,7 +1901,7 @@
   },
   {
     "kind": "weapons",
-    "id": "mustang-357",
+    "id": "duke-mustang-357",
     "field": "Handling",
     "value": "8.0/10 (shop rating)",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1911,7 +1911,7 @@
   },
   {
     "kind": "weapons",
-    "id": "mustang-357",
+    "id": "duke-mustang-357",
     "field": "Range",
     "value": "5.5/10 (shop rating)",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -9986,26 +9986,6 @@
     "value": "6 rounds",
     "source": "https://vanotherlevel.com/gta-6-every-weapon/",
     "locator": "vAnotherLevel's Pistols and revolvers table: Hawk & Little .38 Mag 6, REPORTED (playday.one launch-day stat list).",
-    "reviewedAt": "2026-11-26",
-    "reviewer": "Taish Gaming source review"
-  },
-  {
-    "kind": "weapons",
-    "id": "duke-mustang-357",
-    "field": "GTA VI appearance",
-    "value": "Listed in the launch-day weapon tables (Revolver)",
-    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
-    "locator": "vAnotherLevel's Pistols and revolvers table: Duke Mustang .357 \u2014 Revolver, Dmg 5.7, Mag 6, REPORTED (playday.one launch-day stat list).",
-    "reviewedAt": "2026-11-26",
-    "reviewer": "Taish Gaming source review"
-  },
-  {
-    "kind": "weapons",
-    "id": "duke-mustang-357",
-    "field": "Damage",
-    "value": "5.7/10",
-    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
-    "locator": "vAnotherLevel's Pistols and revolvers table: Duke Mustang .357 Dmg 5.7, REPORTED (playday.one launch-day stat list).",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
   },
