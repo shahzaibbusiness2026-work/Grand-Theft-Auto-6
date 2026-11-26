@@ -153,10 +153,10 @@
     "kind": "vehicles",
     "id": "airboat",
     "field": "GTA VI appearance",
-    "value": "Airgator Airboat 09",
-    "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-capture-airgator-09.jpg",
-    "locator": "GTA6DATA launch-game screenshot \u2014 the named vehicle panel confirms Airgator Airboat 09 in the marsh.",
-    "reviewedAt": "2026-11-23",
+    "value": "Airboat 09",
+    "source": "https://gta.exputer.com/gta-6/vehicles/airboat-09/",
+    "locator": "Exputer detail page: Airboat 09, manufacturer Airgator; tied up at the shack on the Atlee River, Grassrivers.",
+    "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
   },
   {
@@ -193,10 +193,10 @@
     "kind": "vehicles",
     "id": "biplane",
     "field": "GTA VI appearance",
-    "value": "Biplane",
-    "source": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
-    "locator": "Launch Trailer, 0:54 \u2014 vintage biplane over Vice City beach trailing pink smoke, wing-walker on the top wing (DacityCoin livery per IGN)",
-    "reviewedAt": "2026-11-18",
+    "value": "Bottcher Duster",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bottcher-duster/",
+    "locator": "Exputer: the Duster is the game's only biplane (1930s vintage, twin-wing, open cockpit).",
+    "reviewedAt": "2026-11-26",
     "reviewer": "Muse"
   },
   {
@@ -353,10 +353,10 @@
     "kind": "vehicles",
     "id": "commercial-airliner",
     "field": "GTA VI appearance",
-    "value": "Commercial Airliner",
-    "source": "https://www.youtube.com/watch?v=Wd-vKw3XYP0",
-    "locator": "jackfrags GTA 6 Gameplay and Impressions, 04:10",
-    "reviewedAt": "2026-11-19",
+    "value": "Bottcher 015A",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bottcher-015a/",
+    "locator": "Exputer identifies the airliner most often seen around Leonida as the Bottcher 015A.",
+    "reviewedAt": "2026-11-26",
     "reviewer": "Muse"
   },
   {
@@ -553,10 +553,10 @@
     "kind": "vehicles",
     "id": "cargo-ship",
     "field": "GTA VI appearance",
-    "value": "A docked container ship is shown",
-    "source": "https://www.instagram.com/reel/Df9BKl4CM2P/",
-    "locator": "At 0:00\u20130:04 the character boards a docked container ship and walks along its deck.",
-    "reviewedAt": "2026-11-23",
+    "value": "Hulls Flatdeck",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hulls-flatdeck/",
+    "locator": "Exputer's Flatdeck FAQ answers 'Can I drive a cargo ship in GTA 6?' with the Hulls Flatdeck.",
+    "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
   },
   {
@@ -583,10 +583,10 @@
     "kind": "vehicles",
     "id": "cruise-ship",
     "field": "GTA VI appearance",
-    "value": "A cruise ship is shown",
+    "value": "Reef Clipper II",
     "source": "https://www.youtube.com/watch?v=OnWC__OxyTk",
-    "locator": "At 0:40 and 1:40 the ship\u2019s deck, lifeboats and helipad are visible.",
-    "reviewedAt": "2026-11-23",
+    "locator": "Verified as the Reef Clipper II in the 20 Nov 2026 launch sweep; the source video shows the cruise ship.",
+    "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
   },
   {
@@ -20108,5 +20108,745 @@
     "locator": "President's Secret Bunker guide: the correct presidential safe combination is 2975; enter the code and collect Russo's 1922, a unique pistol belonging to the president. Corroborated by Sportskeeda, IntoIndieGames and Nerdsnack.",
     "reviewedAt": "2026-11-26",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "commercial-airliner",
+    "field": "Observed location",
+    "value": "Vice City International Airport runways and Mile Zero Air Station, Goose Key",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bottcher-015a/",
+    "locator": "Exputer: airliners are lined up along both main runways at VCIA and at Mile Zero Air Station round the clock.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "biplane",
+    "field": "Observed location",
+    "value": "Boundary Road airstrip, Key Lento \u2014 four map spots have a Duster",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bottcher-duster/",
+    "locator": "Exputer: the little Boundary Road airstrip is about 1.4 km by road from Jason's Key Lento home; four map spots have a Duster.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "biplane",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bottcher-duster/",
+    "locator": "Exputer detail page: Bottcher Duster seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "airboat",
+    "field": "Observed location",
+    "value": "Shack on the Atlee River, Grassrivers; around the Kingfishers swamp camps",
+    "source": "https://gta.exputer.com/gta-6/vehicles/airboat-09/",
+    "locator": "Exputer: a tied-up Airboat 09 is easy to spot at the shack on the Atlee River, deep in Grassrivers.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cargo-ship",
+    "field": "Observed location",
+    "value": "Five moored at working docks around Leonida",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hulls-flatdeck/",
+    "locator": "Exputer: the map shows just five moored; you have to find a working dock to take one.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-p-996-lazer",
+    "field": "GTA VI appearance",
+    "value": "Hauners P-996 Lazer in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hauners-p-996-lazer/",
+    "locator": "Exputer detail page for the Hauners P-996 Lazer (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-p-996-lazer",
+    "field": "Observed location",
+    "value": "Mile Zero Air Station, Goose Key \u2014 jets stand unlocked in the base's northern half.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hauners-p-996-lazer/",
+    "locator": "Exputer detail page: Mile Zero Air Station, Goose Key \u2014 jets stand unlocked in the base's northern half.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-p-996-lazer",
+    "field": "Seating",
+    "value": "1 seat",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hauners-p-996-lazer/",
+    "locator": "Exputer detail page: Hauners P-996 Lazer seats 1.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bottcher-020",
+    "field": "GTA VI appearance",
+    "value": "Bottcher 020 in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bottcher-020/",
+    "locator": "Exputer detail page for the Bottcher 020 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bottcher-020",
+    "field": "Observed location",
+    "value": "Departure gates E3/E4 at Vice City International Airport \u2014 docked at the jet bridge.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bottcher-020/",
+    "locator": "Exputer detail page: Departure gates E3/E4 at Vice City International Airport \u2014 docked at the jet bridge.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-shamal",
+    "field": "GTA VI appearance",
+    "value": "Buckingham Shamal in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-shamal/",
+    "locator": "Exputer detail page for the Buckingham Shamal (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-shamal",
+    "field": "Observed location",
+    "value": "South Hangars row at Vice City International Airport, next to the GO Postal depot.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-shamal/",
+    "locator": "Exputer detail page: South Hangars row at Vice City International Airport, next to the GO Postal depot.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-shamal",
+    "field": "Seating",
+    "value": "10 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-shamal/",
+    "locator": "Exputer detail page: Buckingham Shamal seats 10.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-supervolito",
+    "field": "GTA VI appearance",
+    "value": "Buckingham SuperVolito in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-supervolito/",
+    "locator": "Exputer detail page for the Buckingham SuperVolito (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-supervolito",
+    "field": "Observed location",
+    "value": "Helipad at the T.H. Power Station, east of Hamlet.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-supervolito/",
+    "locator": "Exputer detail page: Helipad at the T.H. Power Station, east of Hamlet.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-supervolito",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-supervolito/",
+    "locator": "Exputer detail page: Buckingham SuperVolito seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-swift",
+    "field": "GTA VI appearance",
+    "value": "Buckingham Swift in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-swift/",
+    "locator": "Exputer detail page for the Buckingham Swift (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-swift",
+    "field": "Observed location",
+    "value": "Helipad at the bow of the Lazaretto Cruise Ship at Port Vice City; a second pad in Capri.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-swift/",
+    "locator": "Exputer detail page: Helipad at the bow of the Lazaretto Cruise Ship at Port Vice City; a second pad in Capri.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-swift",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-swift/",
+    "locator": "Exputer detail page: Buckingham Swift seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-volatus",
+    "field": "GTA VI appearance",
+    "value": "Buckingham Volatus in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-volatus/",
+    "locator": "Exputer detail page for the Buckingham Volatus (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-volatus",
+    "field": "Observed location",
+    "value": "Tallaloko Clubhouse helipad at Lake Tallaloko, East Lummox County.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-volatus/",
+    "locator": "Exputer detail page: Tallaloko Clubhouse helipad at Lake Tallaloko, East Lummox County.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-volatus",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-volatus/",
+    "locator": "Exputer detail page: Buckingham Volatus seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lapwing-mammatus",
+    "field": "GTA VI appearance",
+    "value": "Lapwing Mammatus in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lapwing-mammatus/",
+    "locator": "Exputer detail page for the Lapwing Mammatus (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lapwing-mammatus",
+    "field": "Observed location",
+    "value": "Fixed spawn in Hamlet, Vice Dale County.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lapwing-mammatus/",
+    "locator": "Exputer detail page: Fixed spawn in Hamlet, Vice Dale County.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lapwing-mammatus",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lapwing-mammatus/",
+    "locator": "Exputer detail page: Lapwing Mammatus seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lapwing-nimbus",
+    "field": "GTA VI appearance",
+    "value": "Lapwing Nimbus in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lapwing-nimbus/",
+    "locator": "Exputer detail page for the Lapwing Nimbus (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lapwing-nimbus",
+    "field": "Observed location",
+    "value": "In front of a hangar at Vice City International Airport.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lapwing-nimbus/",
+    "locator": "Exputer detail page: In front of a hangar at Vice City International Airport.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lapwing-nimbus",
+    "field": "Seating",
+    "value": "8 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lapwing-nimbus/",
+    "locator": "Exputer detail page: Lapwing Nimbus seats 8.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lapwing-streamer-216-c",
+    "field": "GTA VI appearance",
+    "value": "Lapwing Streamer 216-C in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lapwing-streamer-216-c/",
+    "locator": "Exputer detail page for the Lapwing Streamer 216-C (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lapwing-streamer-216-c",
+    "field": "Observed location",
+    "value": "On the apron of Vice City International Airport, among the commercial aircraft.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lapwing-streamer-216-c/",
+    "locator": "Exputer detail page: On the apron of Vice City International Airport, among the commercial aircraft.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-valkyrie",
+    "field": "GTA VI appearance",
+    "value": "Buckingham Valkyrie in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-valkyrie/",
+    "locator": "Exputer detail page for the Buckingham Valkyrie (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-valkyrie",
+    "field": "Observed location",
+    "value": "By the main entrance to Mile Zero Air Station, Goose Key.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-valkyrie/",
+    "locator": "Exputer detail page: By the main entrance to Mile Zero Air Station, Goose Key.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-cargobob",
+    "field": "GTA VI appearance",
+    "value": "Hauners Cargobob in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hauners-cargobob/",
+    "locator": "Exputer detail page for the Hauners Cargobob (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-cargobob",
+    "field": "Observed location",
+    "value": "Parking apron between the runway and the hangars at Mile Zero Air Station, Goose Key.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hauners-cargobob/",
+    "locator": "Exputer detail page: Parking apron between the runway and the hangars at Mile Zero Air Station, Goose Key.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dingus-garda",
+    "field": "GTA VI appearance",
+    "value": "Dingus Garda in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/dingus-garda/",
+    "locator": "Exputer detail page for the Dingus Garda (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dingus-garda",
+    "field": "Observed location",
+    "value": "112 coastal spots \u2014 Coast Guard patrols along Leonida's shore.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/dingus-garda/",
+    "locator": "Exputer detail page: 112 coastal spots \u2014 Coast Guard patrols along Leonida's shore.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "blade-500",
+    "field": "GTA VI appearance",
+    "value": "Blade 500 in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/blade-500/",
+    "locator": "Exputer detail page for the Blade 500 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "blade-500",
+    "field": "Observed location",
+    "value": "Four fixed spots; the marinas at Ocean Beach and Washington Beach hold Vice City's pricier boats.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/blade-500/",
+    "locator": "Exputer detail page: Four fixed spots; the marinas at Ocean Beach and Washington Beach hold Vice City's pricier boats.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bombora-s23-ccs",
+    "field": "GTA VI appearance",
+    "value": "Bombora S23 CCS in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bombora-s23-ccs/",
+    "locator": "Exputer detail page for the Bombora S23 CCS (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bombora-s23-ccs",
+    "field": "Observed location",
+    "value": "Dock north of the Kingfishers' crescent island, Pelican Valley.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bombora-s23-ccs/",
+    "locator": "Exputer detail page: Dock north of the Kingfishers' crescent island, Pelican Valley.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "calder-cb69",
+    "field": "GTA VI appearance",
+    "value": "Calder CB69 in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-cb69/",
+    "locator": "Exputer detail page for the Calder CB69 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "calder-cb69",
+    "field": "Observed location",
+    "value": "Leaf Links country club; marinas at Ocean Beach and Washington Beach.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-cb69/",
+    "locator": "Exputer detail page: Leaf Links country club; marinas at Ocean Beach and Washington Beach.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "calder-dibnah",
+    "field": "GTA VI appearance",
+    "value": "Calder Dibnah in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-dibnah/",
+    "locator": "Exputer detail page for the Calder Dibnah (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "calder-dibnah",
+    "field": "Observed location",
+    "value": "Leaf Links country club and the marinas at Ocean Beach and Washington Beach; 66 spots in all.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-dibnah/",
+    "locator": "Exputer detail page: Leaf Links country club and the marinas at Ocean Beach and Washington Beach; 66 spots in all.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "calder-marquis",
+    "field": "GTA VI appearance",
+    "value": "Calder Marquis in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-marquis/",
+    "locator": "Exputer detail page for the Calder Marquis (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "calder-marquis",
+    "field": "Observed location",
+    "value": "Docked at 98 spots around the map.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-marquis/",
+    "locator": "Exputer detail page: Docked at 98 spots around the map.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "calder-torlan",
+    "field": "GTA VI appearance",
+    "value": "Calder Torlan in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-torlan/",
+    "locator": "Exputer detail page for the Calder Torlan (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "calder-torlan",
+    "field": "Observed location",
+    "value": "Moorings along the coast and marinas; 187 spots in all.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-torlan/",
+    "locator": "Exputer detail page: Moorings along the coast and marinas; 187 spots in all.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "calder-yakuruna",
+    "field": "GTA VI appearance",
+    "value": "Calder Yakuruna in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-yakuruna/",
+    "locator": "Exputer detail page for the Calder Yakuruna (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "calder-yakuruna",
+    "field": "Observed location",
+    "value": "Leaf Links country club and the marinas at Ocean Beach and Washington Beach; 49 spots in all.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-yakuruna/",
+    "locator": "Exputer detail page: Leaf Links country club and the marinas at Ocean Beach and Washington Beach; 49 spots in all.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dingus-como",
+    "field": "GTA VI appearance",
+    "value": "Dingus Como in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/dingus-como/",
+    "locator": "Exputer detail page for the Dingus Como (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dingus-como",
+    "field": "Observed location",
+    "value": "60 moorings along the coast and canals.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/dingus-como/",
+    "locator": "Exputer detail page: 60 moorings along the coast and canals.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dingus-nepa",
+    "field": "GTA VI appearance",
+    "value": "Dingus Nepa in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/dingus-nepa/",
+    "locator": "Exputer detail page for the Dingus Nepa (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dingus-nepa",
+    "field": "Observed location",
+    "value": "24 moorings in the Leonida Keys and around Watson Bay.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/dingus-nepa/",
+    "locator": "Exputer detail page: 24 moorings in the Leonida Keys and around Watson Bay.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hulls-pontoon",
+    "field": "GTA VI appearance",
+    "value": "Hulls Pontoon in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hulls-pontoon/",
+    "locator": "Exputer detail page for the Hulls Pontoon (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hulls-pontoon",
+    "field": "Observed location",
+    "value": "17 moorings around the Leonida Keys.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hulls-pontoon/",
+    "locator": "Exputer detail page: 17 moorings around the Leonida Keys.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hulls-sea-enchantress",
+    "field": "GTA VI appearance",
+    "value": "Hulls Sea Enchantress in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hulls-sea-enchantress/",
+    "locator": "Exputer detail page for the Hulls Sea Enchantress (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hulls-sea-enchantress",
+    "field": "Observed location",
+    "value": "Kenton Rees's story boat \u2014 access through Kenton's Island Dreams store, Key Lento.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hulls-sea-enchantress/",
+    "locator": "Exputer detail page: Kenton Rees's story boat \u2014 access through Kenton's Island Dreams store, Key Lento.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lure-predator-l20s",
+    "field": "GTA VI appearance",
+    "value": "Lure Predator L20S in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lure-predator-l20s/",
+    "locator": "Exputer detail page for the Lure Predator L20S (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "lure-predator-l20s",
+    "field": "Observed location",
+    "value": "Turkey Creek fishing dock in Grassrivers; also the police impound in Hamlet; 272 moorings in all.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lure-predator-l20s/",
+    "locator": "Exputer detail page: Turkey Creek fishing dock in Grassrivers; also the police impound in Hamlet; 272 moorings in all.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "nagasaki-tao",
+    "field": "GTA VI appearance",
+    "value": "Nagasaki Tao in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/nagasaki-tao/",
+    "locator": "Exputer detail page for the Nagasaki Tao (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "nagasaki-tao",
+    "field": "Observed location",
+    "value": "139 marked locations around Leonida.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/nagasaki-tao/",
+    "locator": "Exputer detail page: 139 marked locations around Leonida.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "rugger-cretacean",
+    "field": "GTA VI appearance",
+    "value": "Rugger Cretacean in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/rugger-cretacean/",
+    "locator": "Exputer detail page for the Rugger Cretacean (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "rugger-cretacean",
+    "field": "Observed location",
+    "value": "Eight moorings on the map.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/rugger-cretacean/",
+    "locator": "Exputer detail page: Eight moorings on the map.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "rugger-fortune",
+    "field": "GTA VI appearance",
+    "value": "Rugger Fortune in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/rugger-fortune/",
+    "locator": "Exputer detail page for the Rugger Fortune (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "rugger-fortune",
+    "field": "Observed location",
+    "value": "A single mooring on the map \u2014 the scarcest regular boat.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/rugger-fortune/",
+    "locator": "Exputer detail page: A single mooring on the map \u2014 the scarcest regular boat.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "rugger-hemming",
+    "field": "GTA VI appearance",
+    "value": "Rugger Hemming in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/rugger-hemming/",
+    "locator": "Exputer detail page for the Rugger Hemming (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "rugger-hemming",
+    "field": "Observed location",
+    "value": "18 spots, including a dock at Watson Bay, Grassrivers.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/rugger-hemming/",
+    "locator": "Exputer detail page: 18 spots, including a dock at Watson Bay, Grassrivers.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "rugger-rhode",
+    "field": "GTA VI appearance",
+    "value": "Rugger Rhode in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/rugger-rhode/",
+    "locator": "Exputer detail page for the Rugger Rhode (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "rugger-rhode",
+    "field": "Observed location",
+    "value": "165 spots from the Leonida Keys to the Grassrivers.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/rugger-rhode/",
+    "locator": "Exputer detail page: 165 spots from the Leonida Keys to the Grassrivers.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hulls-seacab",
+    "field": "GTA VI appearance",
+    "value": "Hulls Seacab in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hulls-seacab/",
+    "locator": "Exputer detail page for the Hulls Seacab (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hulls-seacab",
+    "field": "Observed location",
+    "value": "Designated spots on the waterways of downtown Vice City (Aqua Jet Water Taxi).",
+    "source": "https://gta.exputer.com/gta-6/vehicles/hulls-seacab/",
+    "locator": "Exputer detail page: Designated spots on the waterways of downtown Vice City (Aqua Jet Water Taxi).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "clarion",
+    "field": "GTA VI appearance",
+    "value": "Clarion in GTA VI",
+    "source": "https://gta.exputer.com/gta-6/vehicles/clarion/",
+    "locator": "Exputer detail page for the Clarion (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "clarion",
+    "field": "Observed location",
+    "value": "26 moorings at docks and marinas; a Clarion is tied up at a dock in the Leonida Keys in Chapter 1 (Day Release).",
+    "source": "https://gta.exputer.com/gta-6/vehicles/clarion/",
+    "locator": "Exputer detail page: 26 moorings at docks and marinas; a Clarion is tied up at a dock in the Leonida Keys in Chapter 1 (Day Release).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
   }
 ]
