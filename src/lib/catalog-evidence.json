@@ -9728,5 +9728,385 @@
     "locator": "vAnotherLevel's Assault rifles table: Vom Feuer VF-G1 Mag 30, REPORTED (playday.one launch-day stat list).",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "goodwin-lmg-6",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Light machine gun)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMGs and launchers table: Goodwin LMG 6 \u2014 Light machine gun, Dmg 6.8, Mag 100, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "goodwin-lmg-6",
+    "field": "Damage",
+    "value": "6.8/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMGs and launchers table: Goodwin LMG 6 Dmg 6.8, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "goodwin-lmg-6",
+    "field": "Magazine size",
+    "value": "100 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMGs and launchers table: Goodwin LMG 6 Mag 100, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-m350",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Light machine gun)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMGs and launchers table: ADB M350 \u2014 Light machine gun, Dmg 6.5, Mag 100, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-m350",
+    "field": "Damage",
+    "value": "6.5/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMGs and launchers table: ADB M350 Dmg 6.5, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-m350",
+    "field": "Magazine size",
+    "value": "100 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMGs and launchers table: ADB M350 Mag 100, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es18",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (3-round-burst machine pistol)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Girardi ES18 \u2014 3-round-burst machine pistol, Dmg 4.2, Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es18",
+    "field": "Damage",
+    "value": "4.2/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Girardi ES18 Dmg 4.2, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es18",
+    "field": "Magazine size",
+    "value": "30 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Girardi ES18 Mag 30, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-verro",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Short semi-auto, mag 5)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Girardi Verro \u2014 Short semi-auto, mag 5, Dmg 7.4, Mag 5, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-verro",
+    "field": "Damage",
+    "value": "7.4/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Girardi Verro Dmg 7.4, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-verro",
+    "field": "Magazine size",
+    "value": "5 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Girardi Verro Mag 5, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-super400",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Military semi-auto, mag 7)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Girardi Super400 \u2014 Military semi-auto, mag 7, Dmg 7.4, Mag 7, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-super400",
+    "field": "Damage",
+    "value": "7.4/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Girardi Super400 Dmg 7.4, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-super400",
+    "field": "Magazine size",
+    "value": "7 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Girardi Super400 Mag 7, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "goodwin-comshot-12",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Building-clearing semi-auto, mag 7)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Goodwin Comshot 12 \u2014 Building-clearing semi-auto, mag 7, Dmg 7.7, Mag 7, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "goodwin-comshot-12",
+    "field": "Damage",
+    "value": "7.7/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Goodwin Comshot 12 Dmg 7.7, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "goodwin-comshot-12",
+    "field": "Magazine size",
+    "value": "7 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Goodwin Comshot 12 Mag 7, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kozlov-kvga-12",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Full-auto shotgun, mag 8)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Kozlov KVGA-12 \u2014 Full-auto shotgun, mag 8, Dmg 7.2, Mag 8, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kozlov-kvga-12",
+    "field": "Damage",
+    "value": "7.2/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Kozlov KVGA-12 Dmg 7.2, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kozlov-kvga-12",
+    "field": "Magazine size",
+    "value": "8 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Kozlov KVGA-12 Mag 8, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mason-and-keen-shortstraw",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Break-action (explosive version via cheat))",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Mason & Keen Shortstraw \u2014 Break-action (explosive version via cheat), Dmg 8.0, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mason-and-keen-shortstraw",
+    "field": "Damage",
+    "value": "8.0/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Shotguns table: Mason & Keen Shortstraw Dmg 8.0, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-38",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Revolver)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Hawk & Little .38 \u2014 Revolver, Dmg 2.5, Mag 6, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-38",
+    "field": "Damage",
+    "value": "2.5/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Hawk & Little .38 Dmg 2.5, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-38",
+    "field": "Magazine size",
+    "value": "6 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Hawk & Little .38 Mag 6, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-mustang-357",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Revolver)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Duke Mustang .357 \u2014 Revolver, Dmg 5.7, Mag 6, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-mustang-357",
+    "field": "Damage",
+    "value": "5.7/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Duke Mustang .357 Dmg 5.7, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-mustang-357",
+    "field": "Magazine size",
+    "value": "6 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Duke Mustang .357 Mag 6, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-wcr1",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Snub-nose revolver)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Wortham WCR1 \u2014 Snub-nose revolver, Dmg 2.2, Mag 5, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-wcr1",
+    "field": "Damage",
+    "value": "2.2/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Wortham WCR1 Dmg 2.2, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-wcr1",
+    "field": "Magazine size",
+    "value": "5 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Wortham WCR1 Mag 5, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fairview-kalinga-50",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Heavy pistol)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Fairview Kalinga .50 \u2014 Heavy pistol, Dmg 7.0, Mag 7, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fairview-kalinga-50",
+    "field": "Damage",
+    "value": "7.0/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Fairview Kalinga .50 Dmg 7.0, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fairview-kalinga-50",
+    "field": "Magazine size",
+    "value": "7 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Fairview Kalinga .50 Mag 7, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17-mcd",
+    "field": "GTA VI appearance",
+    "value": "Listed in the launch-day weapon tables (Full-auto K17)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Klose K17 MCD \u2014 Full-auto K17, Dmg 4.0, Mag 24, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17-mcd",
+    "field": "Damage",
+    "value": "4.0/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Klose K17 MCD Dmg 4.0, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17-mcd",
+    "field": "Magazine size",
+    "value": "24 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's Pistols and revolvers table: Klose K17 MCD Mag 24, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
   }
 ]
