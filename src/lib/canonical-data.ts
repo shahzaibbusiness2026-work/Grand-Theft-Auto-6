@@ -10792,6 +10792,31 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     notes: "Damage 8.5/10 and magazine 5 rounds are reported figures (playday.one's launch-day stat list via vAnotherLevel; PowerPyx price $3,975) — not yet read on screen. Sold at Expanded Ammu-Nation stores only. The heaviest sniper in the game by damage after the FF-SR's 8.0.",
     manufacturer: "Fairview",
   },
+  {
+    id: "brainwasher-1922",
+    slug: "brainwasher-1922",
+    name: "Brainwasher 1922",
+    klass: "Pistol",
+    damage: null,
+    fireRate: null,
+    accuracy: null,
+    range: null,
+    handling: null,
+    reloadTime: "TBA",
+    magazineSize: null,
+    ammoType: "TBA",
+    price: null,
+    priceDisplay: "TBA",
+    rarity: "Legendary",
+    locations: ["IAA Black Site, Big Pine"],
+    attachments: [],
+    confidence: "REPORTED",
+    source: "GTABase 'Brainwasher 1922' weapon page (Duke Arms unique Handguns variant, found in the old government bunker in Big Pine; stats Damage 5.5 / Accuracy 4.8 / Handling 8.0 / Range 4.6, Ammo Capacity 8) + HoldToReset 'GTA 6 Brainwashed Guide' (complete the TV hypnosis program; pistol beside the TV; permanent Focus boost + Brainwashed tattoo) + GamesFuze, Sportskeeda, vicecitydb, thegameswiki, game-checklists, xboxplay.games",
+    description: "Worn Duke Arms pistol with a trippy custom paint job - the unique 1922 variant earned by completing the Brainwashed hypnosis program in the IAA Black Site bunker, Big Pine.",
+    img: "",
+    notes: "GTABase: 'The Duke Arms Brainwasher 1922 is a Unique Weapon Variant in the Handguns class... variant of the standard 1922 base weapon... cannot be customized. Found in an old government bunker buried in Big Pine: inside the facility, press the button again to open a door, then find the room with a TV showing a hypnosis pattern and complete it.' Description on the page: 'Worn pistol with a trippy custom paint job. Discovered in an old government facility buried in Big Pine.' HoldToReset (Brainwashed guide + IAA Black Site guide): inside the bunker use keypad 090607 and computer password 'President Russo 0612', inspect the Jason photo to open the lab gun case, finish the sequence for a permanent Focus increase and the Brainwashed Right Arm Tattoo, and pick up the Brainwasher 1922 pistol next to the TV. GamesFuze, Sportskeeda ('You can collect the Brainwasher 1922 Pistol beside the TV'), vicecitydb (first reported 22 Nov, 2 confirmations), thegameswiki ('Three unique weapons and an armored vehicle wait inside'), game-checklists and xboxplay.games all agree on the weapon, the bunker and the reward. The other two weapons in the same chain are already on this site: Russo's 1922 (safe code 2975, first bunker) and the Duke 1922 (lab photo case - also sold at Big Shots for $1,050). Stats are GTABase-only, labelled REPORTED in the claims; they match the Duke 1922 base's confirmed shop ratings exactly.",
+    manufacturer: "Duke Arms",
+  }
 ];
 
 /* ------------------------------------------------------------------ */

@@ -20008,5 +20008,105 @@
     "locator": "tracker.gg/gta6/vehicles: '65 Dominator seats 2.",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "brainwasher-1922",
+    "field": "GTA VI appearance",
+    "value": "Brainwasher 1922",
+    "source": "https://thegameswiki.com/gta6/wiki/presidential-bunkers",
+    "locator": "Presidential Bunkers, Television sequence: complete the program to return to the chair, then take the Brainwasher 1922 pistol beside the television.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "brainwasher-1922",
+    "field": "Official name",
+    "value": "Brainwasher 1922",
+    "source": "https://www.gtabase.com/gta-6/weapons/brainwasher-1992",
+    "locator": "GTABase weapon page: 'The Duke Arms Brainwasher 1922 is a Unique Weapon Variant in the Handguns class featured in Grand Theft Auto VI.'",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "brainwasher-1922",
+    "field": "Acquisition method",
+    "value": "Complete the Brainwashed TV-hypnosis program in the IAA Black Site bunker, Big Pine (Tola Bay, North Mariana County); the pistol sits beside the TV afterwards. Also grants a permanent Focus boost and the Brainwashed right-arm tattoo.",
+    "source": "https://holdtoreset.com/gta-6-brainwashed-guide/",
+    "locator": "Brainwashed guide: finishing the sequence gives you a permanent Focus increase; pick up the Brainwasher 1922 pistol next to the TV; you also unlock the Brainwashed Right Arm Tattoo.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "brainwasher-1922",
+    "field": "Damage",
+    "value": "5.5/10",
+    "source": "https://www.gtabase.com/gta-6/weapons/brainwasher-1992",
+    "locator": "GTABase stat list: Damage 5.5, REPORTED (single source; matches the Duke 1922 base confirmed shop ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "brainwasher-1922",
+    "field": "Accuracy",
+    "value": "4.8/10",
+    "source": "https://www.gtabase.com/gta-6/weapons/brainwasher-1992",
+    "locator": "GTABase stat list: Accuracy 4.8, REPORTED (single source; matches the Duke 1922 base confirmed shop ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "brainwasher-1922",
+    "field": "Handling",
+    "value": "8.0/10",
+    "source": "https://www.gtabase.com/gta-6/weapons/brainwasher-1992",
+    "locator": "GTABase stat list: Handling 8.0, REPORTED (single source; matches the Duke 1922 base confirmed shop ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "brainwasher-1922",
+    "field": "Range",
+    "value": "4.6/10",
+    "source": "https://www.gtabase.com/gta-6/weapons/brainwasher-1992",
+    "locator": "GTABase stat list: Range 4.6, REPORTED (single source; matches the Duke 1922 base confirmed shop ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "brainwasher-1922",
+    "field": "Magazine size",
+    "value": "8 rounds",
+    "source": "https://www.gtabase.com/gta-6/weapons/brainwasher-1992",
+    "locator": "GTABase: Ammo Capacity 8, REPORTED (single source).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Acquisition method",
+    "value": "Free from the lab weapon case in the Brainwashed program - inspect the wall photo of Jason (L2, zoom R2 until the screen goes red) and take the pistol from the case; also sold at Big Shots for $1,050.",
+    "source": "https://holdtoreset.com/gta-6-brainwashed-guide/",
+    "locator": "Brainwashed guide, Get the Gun Under the Picture of Yourself: inspect the photo with L2, zoom with R2 to make the screen go red, look down and pick up the pistol from the case. Corroborated by GamesFuze and Sportskeeda.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "russos-1922-pistol",
+    "field": "Acquisition method",
+    "value": "President Russo's safe (code 2975) in the first bunker on Sharktooth Island, north of Waning Sands, Leonard County.",
+    "source": "https://showgamer.com/en/guides/8326-sekretnye-bunkery-prezidenta-v-gta-6-vse-kody-zagadki-i-nagrady",
+    "locator": "President's Secret Bunker guide: the correct presidential safe combination is 2975; enter the code and collect Russo's 1922, a unique pistol belonging to the president. Corroborated by Sportskeeda, IntoIndieGames and Nerdsnack.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
   }
 ]
