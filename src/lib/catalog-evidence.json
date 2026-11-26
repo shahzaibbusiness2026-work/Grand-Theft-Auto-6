@@ -9178,5 +9178,205 @@
     "locator": "Beebom's '7 Fastest Cars in GTA 6, Ranked by Speed' lists the Comet S2 at 7.7/10 stock speed; GameSpot's fastest-cars list agrees (7.7).",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Speed rating",
+    "value": "3.7/10",
+    "source": "https://game8.co/games/gta-6/archives/639156",
+    "locator": "Game8's Cultivator Sandking stats table lists stock Speed 3.7.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Acceleration rating",
+    "value": "4.9/10",
+    "source": "https://game8.co/games/gta-6/archives/639156",
+    "locator": "Game8's Cultivator Sandking stats table lists stock Acceleration 4.9.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Asphalt handling rating",
+    "value": "2.9/10",
+    "source": "https://game8.co/games/gta-6/archives/639156",
+    "locator": "Game8's Cultivator Sandking stats table lists Asphalt Handling 2.9.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Off-road handling rating",
+    "value": "7.2/10",
+    "source": "https://game8.co/games/gta-6/archives/639156",
+    "locator": "Game8's Cultivator Sandking stats table lists Off-Road Handling 7.2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Strength rating",
+    "value": "4.2/10",
+    "source": "https://game8.co/games/gta-6/archives/639156",
+    "locator": "Game8's Cultivator Sandking stats table lists Strength 4.2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://game8.co/games/gta-6/archives/639156",
+    "locator": "Game8's Cultivator Sandking info table lists 4 seats.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Storage",
+    "value": "6",
+    "source": "https://game8.co/games/gta-6/archives/639156",
+    "locator": "Game8's Cultivator Sandking info table lists Storage 6.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Observed location",
+    "value": "Industrial Weed Grow Illegal Operation building, Grassrivers, North Mariana County — ground floor, northwest side (standout vehicle)",
+    "source": "https://game8.co/games/gta-6/archives/639156",
+    "locator": "Game8's Cultivator Sandking guide: parked inside the huge building of the Industrial Weed Grow Illegal Operation at Grassrivers, ground floor, northwest side.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Speed rating",
+    "value": "7.3/10",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Game8's Bourbon Windsor stats table lists stock Speed 7.3.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Acceleration rating",
+    "value": "7.3/10",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Game8's Bourbon Windsor stats table lists stock Acceleration 7.3.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Asphalt handling rating",
+    "value": "4.0/10",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Game8's Bourbon Windsor stats table lists Asphalt Handling 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Off-road handling rating",
+    "value": "4.6/10",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Game8's Bourbon Windsor stats table lists Off-Road Handling 4.6.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Strength rating",
+    "value": "4.8/10",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Game8's Bourbon Windsor stats table lists Strength 4.8.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Game8's Bourbon Windsor info table lists 2 seats.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Storage",
+    "value": "4",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Game8's Bourbon Windsor info table lists Storage 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Observed location",
+    "value": "Sound4Sound Studio Illegal Operation, northwest Stockyard (used in a photoshoot)",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Game8's Bourbon Windsor guide: used in a photoshoot inside the Sound4Sound Studio Illegal Operation at the northwest side of Stockyard.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-gunrunner-kamacho",
+    "field": "Observed location",
+    "value": "Leonida Carrier Warehouse, Balsero — south-eastern garage (Key Valuable)",
+    "source": "https://gamerant.com/gta-6-leonida-carrier-warehouse-robbery-key-valuables-locations-safe-code-gun-ar-car/",
+    "locator": "GameRant's Leonida Carrier Warehouse guide: the Canis Gunrunner Kamacho sits in the south-eastern garage, a Key Valuable.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-caliente-picador",
+    "field": "Observed location",
+    "value": "Old trainyard, North Mariana County — inside an orange-yellow 'Scoop' shipping container",
+    "source": "https://www.hotcars.com/gta-6-caliente-picador-hot-rod/",
+    "locator": "HotCars (23 Nov 2026), citing a Lunar Gaming video: the Caliente Picador is inside an orange-yellow 'Scoop' shipping container at the old trainyard in North Mariana County.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-charred-toros",
+    "field": "Observed location",
+    "value": "Front yard of La Perle Trap House, off NW 10th Ave, La Perle (unique vehicle)",
+    "source": "https://gta6gps.com/map/game/unique-vehicles",
+    "locator": "gta6gps unique-vehicles list: the Charred Toros is in the front yard of La Perle Trap House, off NW 10th Ave in La Perle (updated 24 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-montagne-pickup",
+    "field": "Scanned sell value",
+    "value": "$1,595 in the recorded scan",
+    "source": "https://www.youtube.com/watch?v=YzoV-bJCkKU&t=3600s",
+    "locator": "GameRiot Part 16 at 1:00:00, the WAiNK panel for this pickup shows sell value.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
   }
 ]
