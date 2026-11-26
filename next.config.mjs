@@ -163,6 +163,7 @@ const nextConfig = {
       { source: "/weapons/the-silver-1992", destination: "/weapons/the-silver-1922", permanent: true },
       { source: "/weapons/micro-smg", destination: "/weapons/wortham-w-10", permanent: true },
       { source: "/weapons/mustang-357", destination: "/weapons/duke-mustang-357", permanent: true },
+      { source: "/weapons/hunting-combat-knife", destination: "/weapons/hunting-knife", permanent: true },
       { source: "/weapons/m4-carbine", destination: "/weapons/duke-556", permanent: true },
       { source: "/weapons/rpg-7", destination: "/weapons", permanent: true },
       { source: "/weapons/rpg-7-launcher", destination: "/weapons", permanent: true },

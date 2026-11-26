@@ -341,7 +341,7 @@
   },
   {
     "kind": "weapons",
-    "id": "combat-knife",
+    "id": "hunting-knife",
     "field": "GTA VI appearance",
     "value": "Hunting Knife",
     "source": "https://www.youtube.com/watch?v=qrNuL-B_iXk&t=158s",
@@ -1661,7 +1661,7 @@
   },
   {
     "kind": "weapons",
-    "id": "combat-knife",
+    "id": "hunting-knife",
     "field": "Official name",
     "value": "Hunting Knife",
     "source": "https://www.youtube.com/watch?v=qrNuL-B_iXk&t=158s",
@@ -1671,7 +1671,7 @@
   },
   {
     "kind": "weapons",
-    "id": "combat-knife",
+    "id": "hunting-knife",
     "field": "Weapon class",
     "value": "Melee",
     "source": "https://www.youtube.com/watch?v=qrNuL-B_iXk&t=158s",
@@ -10086,6 +10086,356 @@
     "value": "24 rounds",
     "source": "https://vanotherlevel.com/gta-6-every-weapon/",
     "locator": "vAnotherLevel's Pistols and revolvers table: Klose K17 MCD Mag 24, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "schlamm-drx",
+    "field": "GTA VI appearance",
+    "value": "Listed in the weapon tables",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons: Schlamm DRX, Handgun, $2,100, Mag 10 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "schlamm-drx",
+    "field": "Price shown",
+    "value": "$2,100",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists the Schlamm DRX at $2,100 (store not stated).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "schlamm-drx",
+    "field": "Magazine size",
+    "value": "10 rounds",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists the Schlamm DRX with a 10-round magazine.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-22",
+    "field": "GTA VI appearance",
+    "value": "Listed in the weapon tables",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons: Wortham W-22, Assault Rifle, Mag 20 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-22",
+    "field": "Magazine size",
+    "value": "20 rounds",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists the Wortham W-22 with a 20-round magazine.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-pd-90",
+    "field": "GTA VI appearance",
+    "value": "Listed in the weapon tables",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons: ADB PD-90, Assault Rifle, $3,350, Mag 25 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-pd-90",
+    "field": "Price shown",
+    "value": "$3,350",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists the ADB PD-90 at $3,350 (store not stated).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-pd-90",
+    "field": "Magazine size",
+    "value": "25 rounds",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists the ADB PD-90 with a 25-round magazine.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-m306",
+    "field": "GTA VI appearance",
+    "value": "Listed in the weapon tables",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons: Hillinger M306, Sniper Rifle, $2,375, Mag 5 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-m306",
+    "field": "Price shown",
+    "value": "$2,375",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists the Hillinger M306 at $2,375 (store not stated).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-m306",
+    "field": "Magazine size",
+    "value": "5 rounds",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists the Hillinger M306 with a 5-round magazine.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "bushcraft-knife",
+    "field": "GTA VI appearance",
+    "value": "Sold at Chuck's Tackle & Shot",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Bushcraft Knife $230 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "bushcraft-knife",
+    "field": "Price shown",
+    "value": "$230 at Chuck's Tackle & Shot",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Bushcraft Knife $230.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "bushcraft-knife",
+    "field": "Observed location",
+    "value": "Chuck's Tackle & Shot (Key Lento)",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Bushcraft Knife is sold at Chuck's Tackle & Shot, Key Lento.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "frag-grenade",
+    "field": "GTA VI appearance",
+    "value": "Sold at Chuck's Tackle & Shot",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Frag Grenade $140 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "frag-grenade",
+    "field": "Price shown",
+    "value": "$140 at Chuck's Tackle & Shot",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Frag Grenade $140.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "frag-grenade",
+    "field": "Observed location",
+    "value": "Chuck's Tackle & Shot (Key Lento)",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Frag Grenade is sold at Chuck's Tackle & Shot, Key Lento.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "sticky-bomb",
+    "field": "GTA VI appearance",
+    "value": "Sold at Chuck's Tackle & Shot",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Sticky Bomb $185 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "sticky-bomb",
+    "field": "Price shown",
+    "value": "$185 at Chuck's Tackle & Shot",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Sticky Bomb $185.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "sticky-bomb",
+    "field": "Observed location",
+    "value": "Chuck's Tackle & Shot (Key Lento)",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Sticky Bomb is sold at Chuck's Tackle & Shot, Key Lento.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hunting-knife",
+    "field": "Price shown",
+    "value": "$125 at Chuck's Tackle & Shot",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Hunting Knife $125 (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hunting-knife",
+    "field": "Observed location",
+    "value": "Chuck's Tackle & Shot (Key Lento)",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price list: Hunting Knife is sold at Chuck's Tackle & Shot, Key Lento.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-little-morgan-revolvers",
+    "field": "Magazine size",
+    "value": "6 rounds",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists the Morgan (Hawk & Little Morgan, Ultimate Edition .44) with a 6-round magazine.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es18",
+    "field": "Price shown",
+    "value": "$1,550",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists girardi-es18 at $1,550 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fairview-kalinga-50",
+    "field": "Price shown",
+    "value": "$3,100",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists fairview-kalinga-50 at $3,100 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-super400",
+    "field": "Price shown",
+    "value": "$2,825",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists girardi-super400 at $2,825 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-verro",
+    "field": "Price shown",
+    "value": "$2,700",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists girardi-verro at $2,700 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "goodwin-comshot-12",
+    "field": "Price shown",
+    "value": "$3,825",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists goodwin-comshot-12 at $3,825 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kozlov-kvga-12",
+    "field": "Price shown",
+    "value": "$3,650",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists kozlov-kvga-12 at $3,650 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mason-and-keen-shortstraw",
+    "field": "Price shown",
+    "value": "$1,625",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists mason-and-keen-shortstraw at $1,625 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-38",
+    "field": "Price shown",
+    "value": "$1,075",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists hawk-and-little-38 at $1,075 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-wcr1",
+    "field": "Price shown",
+    "value": "$600",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists wortham-wcr1 at $600 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17-mcd",
+    "field": "Price shown",
+    "value": "$1,700",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists klose-k17-mcd at $1,700 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "adb-m350",
+    "field": "Price shown",
+    "value": "$10,000",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists adb-m350 at $10,000 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-akulus",
+    "field": "Price shown",
+    "value": "$3,000",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "tracker.gg/gta6/weapons lists scorpio-akulus at $3,000 (store not stated, verified 26 Nov 2026).",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
   }
