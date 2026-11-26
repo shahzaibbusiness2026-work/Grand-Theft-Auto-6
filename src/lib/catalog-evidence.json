@@ -1161,7 +1161,7 @@
   },
   {
     "kind": "vehicles",
-    "id": "banshee-gts",
+    "id": "bravado-banshee",
     "field": "GTA VI appearance",
     "value": "Bravado Banshee",
     "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
@@ -1171,7 +1171,7 @@
   },
   {
     "kind": "vehicles",
-    "id": "banshee-gts",
+    "id": "bravado-banshee",
     "field": "Official name",
     "value": "Bravado Banshee",
     "source": "https://clutchbase.app/images/gta6/guides/gta-6-randys-wish-list/wanted-board.webp",
@@ -3601,7 +3601,7 @@
   },
   {
     "kind": "vehicles",
-    "id": "banshee-gts",
+    "id": "bravado-banshee",
     "field": "Speed rating",
     "value": "6.0/10",
     "source": "https://leonidaracing.com/cars/vehicles/bravado-banshee/",
@@ -3611,7 +3611,7 @@
   },
   {
     "kind": "vehicles",
-    "id": "banshee-gts",
+    "id": "bravado-banshee",
     "field": "Acceleration rating",
     "value": "6.3/10",
     "source": "https://leonidaracing.com/cars/vehicles/bravado-banshee/",
@@ -3621,7 +3621,7 @@
   },
   {
     "kind": "vehicles",
-    "id": "banshee-gts",
+    "id": "bravado-banshee",
     "field": "Asphalt handling rating",
     "value": "5.8/10",
     "source": "https://leonidaracing.com/cars/vehicles/bravado-banshee/",
@@ -3631,7 +3631,7 @@
   },
   {
     "kind": "vehicles",
-    "id": "banshee-gts",
+    "id": "bravado-banshee",
     "field": "Off-road handling rating",
     "value": "3.8/10",
     "source": "https://leonidaracing.com/cars/vehicles/bravado-banshee/",
@@ -3641,7 +3641,7 @@
   },
   {
     "kind": "vehicles",
-    "id": "banshee-gts",
+    "id": "bravado-banshee",
     "field": "Strength rating",
     "value": "3.0/10",
     "source": "https://leonidaracing.com/cars/vehicles/bravado-banshee/",
@@ -10436,6 +10436,746 @@
     "value": "$3,000",
     "source": "https://tracker.gg/gta6/weapons",
     "locator": "tracker.gg/gta6/weapons lists scorpio-akulus at $3,000 (store not stated, verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-itali-rsx",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Grotti Itali RSX with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-itali-rsx",
+    "field": "Speed rating",
+    "value": "7.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Grotti Itali RSX Speed 7.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-itali-rsx",
+    "field": "Acceleration rating",
+    "value": "8.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Grotti Itali RSX Acceleration 8.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-itali-rsx",
+    "field": "Asphalt handling rating",
+    "value": "7.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Grotti Itali RSX Asphalt handling 7.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-itali-rsx",
+    "field": "Off-road handling rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Grotti Itali RSX Off-road handling 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-itali-rsx",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Grotti Itali RSX Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-itali-rsx",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Grotti Itali RSX seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Pegassi Infernus with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Speed rating",
+    "value": "7.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pegassi Infernus Speed 7.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Acceleration rating",
+    "value": "7.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pegassi Infernus Acceleration 7.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Asphalt handling rating",
+    "value": "6.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pegassi Infernus Asphalt handling 6.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Off-road handling rating",
+    "value": "4.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pegassi Infernus Off-road handling 4.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pegassi Infernus Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pegassi Infernus seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Pfister Comet '88 with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Speed rating",
+    "value": "6.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pfister Comet '88 Speed 6.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Acceleration rating",
+    "value": "6.4/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pfister Comet '88 Acceleration 6.4 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Asphalt handling rating",
+    "value": "6.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pfister Comet '88 Asphalt handling 6.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Off-road handling rating",
+    "value": "4.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pfister Comet '88 Off-road handling 4.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Strength rating",
+    "value": "3.7/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pfister Comet '88 Strength 3.7 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Pfister Comet '88 seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mamba-gt-64",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the '64 Mamba GT with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mamba-gt-64",
+    "field": "Speed rating",
+    "value": "6.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '64 Mamba GT Speed 6.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mamba-gt-64",
+    "field": "Acceleration rating",
+    "value": "7.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '64 Mamba GT Acceleration 7.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mamba-gt-64",
+    "field": "Asphalt handling rating",
+    "value": "6.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '64 Mamba GT Asphalt handling 6.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mamba-gt-64",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '64 Mamba GT Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mamba-gt-64",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '64 Mamba GT Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mamba-gt-64",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '64 Mamba GT seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-schutzen",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Benefactor Schutzen with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-schutzen",
+    "field": "Speed rating",
+    "value": "6.7/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Schutzen Speed 6.7 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-schutzen",
+    "field": "Acceleration rating",
+    "value": "7.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Schutzen Acceleration 7.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-schutzen",
+    "field": "Asphalt handling rating",
+    "value": "5.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Schutzen Asphalt handling 5.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-schutzen",
+    "field": "Off-road handling rating",
+    "value": "3.6/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Schutzen Off-road handling 3.6 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-schutzen",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Schutzen Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-schutzen",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Schutzen seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-cypher",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the \u00dcbermacht Cypher with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-cypher",
+    "field": "Speed rating",
+    "value": "6.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht Cypher Speed 6.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-cypher",
+    "field": "Acceleration rating",
+    "value": "7.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht Cypher Acceleration 7.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-cypher",
+    "field": "Asphalt handling rating",
+    "value": "4.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht Cypher Asphalt handling 4.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-cypher",
+    "field": "Off-road handling rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht Cypher Off-road handling 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-cypher",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht Cypher Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-cypher",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht Cypher seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Obey 8F Drafter with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Speed rating",
+    "value": "5.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Obey 8F Drafter Speed 5.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Acceleration rating",
+    "value": "6.6/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Obey 8F Drafter Acceleration 6.6 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Asphalt handling rating",
+    "value": "5.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Obey 8F Drafter Asphalt handling 5.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Off-road handling rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Obey 8F Drafter Off-road handling 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Obey 8F Drafter Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Obey 8F Drafter seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-apoc",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the \u00dcbermacht APOC with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-apoc",
+    "field": "Speed rating",
+    "value": "5.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht APOC Speed 5.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-apoc",
+    "field": "Acceleration rating",
+    "value": "6.7/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht APOC Acceleration 6.7 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-apoc",
+    "field": "Asphalt handling rating",
+    "value": "5.6/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht APOC Asphalt handling 5.6 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-apoc",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht APOC Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-apoc",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht APOC Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-apoc",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: \u00dcbermacht APOC seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ascot-paragon",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Ascot Paragon with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ascot-paragon",
+    "field": "Speed rating",
+    "value": "6.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ascot Paragon Speed 6.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ascot-paragon",
+    "field": "Acceleration rating",
+    "value": "7.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ascot Paragon Acceleration 7.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ascot-paragon",
+    "field": "Asphalt handling rating",
+    "value": "5.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ascot Paragon Asphalt handling 5.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ascot-paragon",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ascot Paragon Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ascot-paragon",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ascot Paragon Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ascot-paragon",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ascot Paragon seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-itali-rsx",
+    "field": "Observed location",
+    "value": "Residential garage, Vespucci Island",
+    "source": "https://gta.exputer.com/gta-6/vehicles/grotti-itali-rsx/",
+    "locator": "Exputer detail page: found in a residential garage on Vespucci Island; Randy's Wish List car 10 of 16; the Key Cloner opens it.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Registration cost",
+    "value": "$34,750",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-infernus/",
+    "locator": "Exputer detail page: Registration cost $34,750.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Scanned sell value",
+    "value": "$17,160",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-infernus/",
+    "locator": "Exputer detail page: Sale value (stolen) $17,160.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Observed location",
+    "value": "Crosstown Police Station, NW 9th St, 9th-floor parking (purple); or white house garage, Capri",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-infernus/",
+    "locator": "Exputer detail page: Crosstown Police Station NW 9th St, 9th-floor parking (purple); or white house garage, Capri. Randy's Wish List car 3 of 16.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Registration cost",
+    "value": "$34,250",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-comet-retro-custom/",
+    "locator": "Exputer detail page: Registration cost $34,250.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Scanned sell value",
+    "value": "$17,050",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-comet-retro-custom/",
+    "locator": "Exputer detail page: Sale value (stolen) $17,050.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ubermacht-cypher",
+    "field": "Observed location",
+    "value": "Parked outside Cirque de Cuisine, Ocean Beach",
+    "source": "https://gta.exputer.com/gta-6/vehicles/ubermacht-cypher/",
+    "locator": "Exputer detail page: parked outside Cirque de Cuisine, Ocean Beach (one of 18 parked spots); a Randy's Wish List car.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Registration cost",
+    "value": "$18,650",
+    "source": "https://gta.exputer.com/gta-6/vehicles/obey-8f-drafter/",
+    "locator": "Exputer detail page: Registration cost $18,650 (standard tracker).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Scanned sell value",
+    "value": "$5,555",
+    "source": "https://gta.exputer.com/gta-6/vehicles/obey-8f-drafter/",
+    "locator": "Exputer detail page: Sale value (stolen) $5,555.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Observed location",
+    "value": "Four fixed parking spots around Leonida",
+    "source": "https://gta.exputer.com/gta-6/vehicles/obey-8f-drafter/",
+    "locator": "Exputer detail page: 'Four fixed parking spots exist for the Drafter on the map.'",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-banshee",
+    "field": "Observed location",
+    "value": "Sweetbay Inn, East Buckley Dr, Capri (~3 a.m.); blue showroom car, NE Southside",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bravado-banshee/",
+    "locator": "Exputer detail page: Sweetbay Inn, East Buckley Dr, Capri around 3 a.m.; blue showroom car north-east of Southside (Capital Offense). Randy's Wish List car 15 of 16.",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
   }

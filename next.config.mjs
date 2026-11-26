@@ -164,6 +164,7 @@ const nextConfig = {
       { source: "/weapons/micro-smg", destination: "/weapons/wortham-w-10", permanent: true },
       { source: "/weapons/mustang-357", destination: "/weapons/duke-mustang-357", permanent: true },
       { source: "/weapons/hunting-combat-knife", destination: "/weapons/hunting-knife", permanent: true },
+      { source: "/vehicles/bravado-banshee-gts", destination: "/vehicles/bravado-banshee", permanent: true },
       { source: "/weapons/m4-carbine", destination: "/weapons/duke-556", permanent: true },
       { source: "/weapons/rpg-7", destination: "/weapons", permanent: true },
       { source: "/weapons/rpg-7-launcher", destination: "/weapons", permanent: true },
