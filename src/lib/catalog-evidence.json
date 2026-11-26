@@ -621,7 +621,7 @@
   },
   {
     "kind": "vehicles",
-    "id": "vapid-dominator-65",
+    "id": "vickis-65-dominator",
     "field": "GTA VI appearance",
     "value": "Vicki\u2019s \u201965 Dominator",
     "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-delights-car.jpg",
@@ -2871,7 +2871,7 @@
   },
   {
     "kind": "vehicles",
-    "id": "vapid-dominator-65",
+    "id": "vickis-65-dominator",
     "field": "Official name",
     "value": "Vicki\u2019s \u201965 Dominator",
     "source": "https://gta6data.com/wp-content/uploads/2026/11/gta6-delights-car.jpg",
@@ -19936,6 +19936,76 @@
     "value": "1 seat",
     "source": "https://tracker.gg/gta6/vehicles",
     "locator": "tracker.gg/gta6/vehicles: Walter Lombike seats 1.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-65",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the '65 Dominator with WAiNK scan ratings (verified 26 Nov 2026); Exputer has its own detail page for the '65 Dominator.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-65",
+    "field": "Speed rating",
+    "value": "5.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '65 Dominator Speed 5.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-65",
+    "field": "Acceleration rating",
+    "value": "5.6/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '65 Dominator Acceleration 5.6 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-65",
+    "field": "Asphalt handling rating",
+    "value": "3.7/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '65 Dominator Asphalt handling 3.7 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-65",
+    "field": "Off-road handling rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '65 Dominator Off-road handling 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-65",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '65 Dominator Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-65",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '65 Dominator seats 2.",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
   }

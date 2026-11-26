@@ -1735,8 +1735,8 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     featured: false,
   },
   {
-    id: "vapid-dominator-65",
-    slug: "vapid-dominator-65",
+    id: "vickis-65-dominator",
+    slug: "vickis-65-dominator",
     name: "Vicki's '65 Dominator",
     manufacturer: "Vapid",
     klass: "Muscle Car",
