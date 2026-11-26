@@ -9378,5 +9378,255 @@
     "locator": "GameRiot Part 16 at 1:00:00, the WAiNK panel for this pickup shows sell value.",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Price shown",
+    "value": "$1,150 at Big Shots",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price table lists the Shrewsbury Drifter at $1,150; vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream) agrees: $1,150 bank at Big Shots.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Damage",
+    "value": "8.0/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table reads the Drifter's menu stats ON SCREEN from MELOO's launch stream: Damage 8.0, Accuracy 4.1, Handling 5.0, Range 2.5. gta6gang's weapons table agrees on all four.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Accuracy",
+    "value": "4.1/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Accuracy 4.1. gta6gang's weapons table agrees.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Handling",
+    "value": "5.0/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Handling 5.0. gta6gang's weapons table agrees.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Range",
+    "value": "2.5/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Range 2.5. gta6gang's weapons table agrees.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Magazine size",
+    "value": "2 rounds",
+    "source": "https://gta6gang.com/wiki/weapons.html",
+    "locator": "gta6gang's weapons table lists the Shrewsbury Drifter with a 2-round magazine; the catalog entry's notes record the same 2-round break-action magazine.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-glr40",
+    "field": "Price shown",
+    "value": "$15,500 at Big Shots",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMG/launcher table (REPORTED, PowerPyx prices): Deever Tech GLR40 $15,500. gta6gang's weapons table agrees on $15,500.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-glr40",
+    "field": "Damage",
+    "value": "9.2/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMG/launcher table (playday.one damage): GLR40 Damage 9.2, tied with the Hillinger Boomer. gta6gang's weapons table agrees on 9.2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-glr40",
+    "field": "Magazine size",
+    "value": "6 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMG/launcher table lists the GLR40 as a revolving grenade launcher with a 6-round magazine.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hauners-h-at",
+    "field": "Price shown",
+    "value": "$16,000 at Expanded Ammu-Nation stores",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMG/launcher table (REPORTED, PowerPyx prices): Hauners H-AT $16,000. gta6gang's weapons table agrees on $16,000.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hauners-h-at",
+    "field": "Damage",
+    "value": "9.6/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's LMG/launcher table (playday.one damage): H-AT Damage 9.6, the hardest-hitting gun in the game. gta6gang's weapons table agrees on 9.6.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-14",
+    "field": "GTA VI appearance",
+    "value": "Listed in Chuck's Tackle & Shot stock",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot page lists the Wortham W-14 in the shop's stock, Tactical rifle class, at $1,400; vAnotherLevel's tactical-rifle table also lists it.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-14",
+    "field": "Price shown",
+    "value": "$1,400 at Chuck's Tackle & Shot",
+    "source": "https://gta.exputer.com/gta-6/properties/chucks-tackle-and-shot/",
+    "locator": "Exputer's Chuck's Tackle & Shot price table: Wortham W-14 $1,400 (Tactical rifle class).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-14",
+    "field": "Damage",
+    "value": "5.8/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "Reported damage figure from playday.one's launch-day stat list, via vAnotherLevel's tactical-rifle table — not read on screen.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-boomer",
+    "field": "GTA VI appearance",
+    "value": "Sold at the six Expanded Ammu-Nation stores",
+    "source": "https://gta.exputer.com/gta-6/weapons/hillinger-boomer/",
+    "locator": "Exputer's Hillinger Boomer page: only the six Expanded gun stores carry this launcher, for $12,000. Dexerto, tracker.gg and gta.guide list the same gun.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-boomer",
+    "field": "Price shown",
+    "value": "$12,000 at Big Shots",
+    "source": "https://gta.exputer.com/gta-6/weapons/hillinger-boomer/",
+    "locator": "Exputer's Hillinger Boomer page: $12,000 at Big Shots and the other five Expanded stores. Dexerto, tracker.gg, gta.guide and fpsgen agree on $12,000.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-boomer",
+    "field": "Damage",
+    "value": "9.2/10 (shop rating)",
+    "source": "https://gta.exputer.com/gta-6/weapons/hillinger-boomer/",
+    "locator": "Exputer's Hillinger Boomer page: store card Damage 9.2, Accuracy 5.0, Handling 6.0, Range 4.0. Dexerto and tracker.gg agree on all four.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-boomer",
+    "field": "Accuracy",
+    "value": "5.0/10 (shop rating)",
+    "source": "https://gta.exputer.com/gta-6/weapons/hillinger-boomer/",
+    "locator": "Exputer's Hillinger Boomer page: store card Accuracy 5.0. Dexerto and tracker.gg agree.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-boomer",
+    "field": "Handling",
+    "value": "6.0/10 (shop rating)",
+    "source": "https://gta.exputer.com/gta-6/weapons/hillinger-boomer/",
+    "locator": "Exputer's Hillinger Boomer page: store card Handling 6.0. Dexerto and tracker.gg agree.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-boomer",
+    "field": "Range",
+    "value": "4.0/10 (shop rating)",
+    "source": "https://gta.exputer.com/gta-6/weapons/hillinger-boomer/",
+    "locator": "Exputer's Hillinger Boomer page: store card Range 4.0. Dexerto and tracker.gg agree.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hillinger-boomer",
+    "field": "Magazine size",
+    "value": "1 round",
+    "source": "https://gta.exputer.com/gta-6/weapons/hillinger-boomer/",
+    "locator": "Exputer's Hillinger Boomer page: 1-round magazine, 40mm grenades, single shot. Dexerto and tracker.gg agree on 1 round.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fairview-ff-50",
+    "field": "GTA VI appearance",
+    "value": "Listed among sniper rifles at $3,975",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's sniper-rifle table lists the Fairview FF-50 at $3,975 (PowerPyx price); GTACorner lists 'Fairview FF-50 ($3,975)' among sniper rifles.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fairview-ff-50",
+    "field": "Price shown",
+    "value": "$3,975",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's sniper-rifle table (REPORTED, PowerPyx prices): Fairview FF-50 $3,975. GTACorner agrees on $3,975.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fairview-ff-50",
+    "field": "Damage",
+    "value": "8.5/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "Reported damage figure from playday.one's launch-day stat list, via vAnotherLevel's sniper-rifle table — not read on screen.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "fairview-ff-50",
+    "field": "Magazine size",
+    "value": "5 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "Reported magazine size from playday.one's launch-day stat list, via vAnotherLevel's sniper-rifle table — not read on screen.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
   }
 ]
