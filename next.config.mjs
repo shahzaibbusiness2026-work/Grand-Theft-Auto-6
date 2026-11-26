@@ -161,6 +161,7 @@ const nextConfig = {
       // Weapon renames (20 Nov 2026): contradicted-identity slugs -> real in-game names.
       { source: "/weapons/glock-21", destination: "/weapons", permanent: true },
       { source: "/weapons/the-silver-1992", destination: "/weapons/the-silver-1922", permanent: true },
+      { source: "/weapons/micro-smg", destination: "/weapons/wortham-w-10", permanent: true },
       { source: "/weapons/m4-carbine", destination: "/weapons/duke-556", permanent: true },
       { source: "/weapons/rpg-7", destination: "/weapons", permanent: true },
       { source: "/weapons/rpg-7-launcher", destination: "/weapons", permanent: true },

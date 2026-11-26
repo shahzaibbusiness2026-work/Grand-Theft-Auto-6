@@ -1921,7 +1921,7 @@
   },
   {
     "kind": "weapons",
-    "id": "micro-smg",
+    "id": "wortham-w-10",
     "field": "GTA VI appearance",
     "value": "Wortham W-10",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1931,7 +1931,7 @@
   },
   {
     "kind": "weapons",
-    "id": "micro-smg",
+    "id": "wortham-w-10",
     "field": "Official name",
     "value": "Wortham W-10",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1941,7 +1941,7 @@
   },
   {
     "kind": "weapons",
-    "id": "micro-smg",
+    "id": "wortham-w-10",
     "field": "Weapon class",
     "value": "Micro SMG",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1951,7 +1951,7 @@
   },
   {
     "kind": "weapons",
-    "id": "micro-smg",
+    "id": "wortham-w-10",
     "field": "Price shown",
     "value": "$825 at Big Shots",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1961,7 +1961,7 @@
   },
   {
     "kind": "weapons",
-    "id": "micro-smg",
+    "id": "wortham-w-10",
     "field": "Damage",
     "value": "4.2/10 (shop rating)",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1971,7 +1971,7 @@
   },
   {
     "kind": "weapons",
-    "id": "micro-smg",
+    "id": "wortham-w-10",
     "field": "Accuracy",
     "value": "3.2/10 (shop rating)",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1981,7 +1981,7 @@
   },
   {
     "kind": "weapons",
-    "id": "micro-smg",
+    "id": "wortham-w-10",
     "field": "Handling",
     "value": "7.5/10 (shop rating)",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -1991,7 +1991,7 @@
   },
   {
     "kind": "weapons",
-    "id": "micro-smg",
+    "id": "wortham-w-10",
     "field": "Range",
     "value": "3.5/10 (shop rating)",
     "source": "https://gtaplaybook.com/gta6/weapons/",
@@ -9576,26 +9576,6 @@
     "value": "20 rounds",
     "source": "https://vanotherlevel.com/gta-6-every-weapon/",
     "locator": "vAnotherLevel's Assault rifles table: ADB FRA Mag 20, REPORTED (playday.one launch-day stat list).",
-    "reviewedAt": "2026-11-26",
-    "reviewer": "Taish Gaming source review"
-  },
-  {
-    "kind": "weapons",
-    "id": "wortham-w-10",
-    "field": "GTA VI appearance",
-    "value": "Listed in the launch-day weapon tables (Lightweight)",
-    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
-    "locator": "vAnotherLevel's SMGs table: Wortham W-10 \u2014 Lightweight, Dmg 4.2, Mag 20, REPORTED (playday.one launch-day stat list).",
-    "reviewedAt": "2026-11-26",
-    "reviewer": "Taish Gaming source review"
-  },
-  {
-    "kind": "weapons",
-    "id": "wortham-w-10",
-    "field": "Damage",
-    "value": "4.2/10",
-    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
-    "locator": "vAnotherLevel's SMGs table: Wortham W-10 Dmg 4.2, REPORTED (playday.one launch-day stat list).",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
   },
