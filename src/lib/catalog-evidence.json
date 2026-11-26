@@ -8948,5 +8948,125 @@
     "locator": "Ghost Ship Easter egg - Cursed Knife from the sunken boat off Little Hardin Island (23 Nov 2026)",
     "reviewedAt": "2026-11-26",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "diy-chavos",
+    "field": "GTA VI appearance",
+    "value": "DIY Chavos",
+    "source": "https://tracker.gg/gta6/articles/gta-6-database-changelog",
+    "locator": "GTA 6 Database Changelog, 22 Nov 2026 - DIY Chavos listed",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ghosts-exposed-parkland",
+    "field": "GTA VI appearance",
+    "value": "Ghosts Exposed Parkland",
+    "source": "https://tracker.gg/gta6/articles/gta-6-database-changelog",
+    "locator": "GTA 6 Database Changelog, 22 Nov 2026 - Ghosts Exposed Parkland listed",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "springtime-sungrazer",
+    "field": "GTA VI appearance",
+    "value": "Springtime Sungrazer",
+    "source": "https://tracker.gg/gta6/articles/gta-6-database-changelog",
+    "locator": "GTA 6 Database Changelog, 22 Nov 2026 - Springtime Sungrazer listed",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "willard-transient",
+    "field": "GTA VI appearance",
+    "value": "Willard Transient",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/sedans/willard-transient/",
+    "locator": "Dexerto GTA 6 Wiki - Willard Transient vehicle page",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "drifter-elegy",
+    "field": "GTA VI appearance",
+    "value": "Drifter Elegy",
+    "source": "https://tracker.gg/gta6/articles/gta-6-database-changelog",
+    "locator": "GTA 6 Database Changelog, 22 Nov 2026 - Drifter Elegy listed",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "fathom-fr36",
+    "field": "GTA VI appearance",
+    "value": "Fathom FR36",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/coupes/fathom-fr36/",
+    "locator": "Dexerto GTA 6 Wiki - Fathom FR36 vehicle page",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "red-hot-hustler",
+    "field": "GTA VI appearance",
+    "value": "Red Hot Hustler",
+    "source": "https://tracker.gg/gta6/articles/gta-6-database-changelog",
+    "locator": "GTA 6 Database Changelog, 22 Nov 2026 - Red Hot Hustler listed",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "acid-youga",
+    "field": "GTA VI appearance",
+    "value": "Acid Youga",
+    "source": "https://tracker.gg/gta6/articles/gta-6-database-changelog",
+    "locator": "GTA 6 Database Changelog, 22 Nov 2026 - Acid Youga listed",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bugstars-burrito",
+    "field": "GTA VI appearance",
+    "value": "Bugstars Burrito",
+    "source": "https://tracker.gg/gta6/articles/gta-6-database-changelog",
+    "locator": "GTA 6 Database Changelog, 22 Nov 2026 - Bugstars Burrito listed",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "smush-ganado",
+    "field": "GTA VI appearance",
+    "value": "SMUSH! Ganado",
+    "source": "https://tracker.gg/gta6/articles/gta-6-database-changelog",
+    "locator": "GTA 6 Database Changelog, 22 Nov 2026 - SMUSH! Ganado listed",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "enforcer-coquette",
+    "field": "GTA VI appearance",
+    "value": "Enforcer Coquette",
+    "source": "https://tracker.gg/gta6/articles/gta-6-database-changelog",
+    "locator": "GTA 6 Database Changelog, 22 Nov 2026 - Enforcer Coquette listed",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "GTA VI appearance",
+    "value": "Shrewsbury Drifter Shotgun",
+    "source": "https://gta.guide/gta-6/weapons/shrewsbury-drifter",
+    "locator": "gta.guide - Shrewsbury Drifter weapon page ($1,150, Big Shots / Chuck's Tackle & Shot)",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
   }
 ]
