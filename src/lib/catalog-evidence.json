@@ -13838,5 +13838,3085 @@
     "locator": "tracker.gg/gta6/vehicles: '65 Buccaneer seats 2.",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-apc",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Hauners APC with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-apc",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners APC Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-apc",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners APC Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-apc",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners APC Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-apc",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners APC Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-apc",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners APC Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-apc",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners APC seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-brigade",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Hauners Brigade with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-brigade",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners Brigade Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-brigade",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners Brigade Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-brigade",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners Brigade Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-brigade",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners Brigade Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-brigade",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners Brigade Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hauners-brigade",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Hauners Brigade seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy-82",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the '82 Maibatsu Caddy with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy-82",
+    "field": "Speed rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '82 Maibatsu Caddy Speed 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy-82",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '82 Maibatsu Caddy Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy-82",
+    "field": "Asphalt handling rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '82 Maibatsu Caddy Asphalt handling 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy-82",
+    "field": "Off-road handling rating",
+    "value": "4.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '82 Maibatsu Caddy Off-road handling 4.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy-82",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '82 Maibatsu Caddy Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy-82",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '82 Maibatsu Caddy seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "furrow-tc-2350",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Furrow TC 2350 with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "furrow-tc-2350",
+    "field": "Speed rating",
+    "value": "2.7/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Furrow TC 2350 Speed 2.7 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "furrow-tc-2350",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Furrow TC 2350 Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "furrow-tc-2350",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Furrow TC 2350 Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "furrow-tc-2350",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Furrow TC 2350 Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "furrow-tc-2350",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Furrow TC 2350 Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "furrow-tc-2350",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Furrow TC 2350 seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "fieldmaster-99",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the '99 Fieldmaster with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "fieldmaster-99",
+    "field": "Speed rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Fieldmaster Speed 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "fieldmaster-99",
+    "field": "Acceleration rating",
+    "value": "3.7/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Fieldmaster Acceleration 3.7 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "fieldmaster-99",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Fieldmaster Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "fieldmaster-99",
+    "field": "Off-road handling rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Fieldmaster Off-road handling 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "fieldmaster-99",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Fieldmaster Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "fieldmaster-99",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Fieldmaster seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-th42-telehandler",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the HVY TH42 Telehandler with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-th42-telehandler",
+    "field": "Speed rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY TH42 Telehandler Speed 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-th42-telehandler",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY TH42 Telehandler Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-th42-telehandler",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY TH42 Telehandler Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-th42-telehandler",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY TH42 Telehandler Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-th42-telehandler",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY TH42 Telehandler Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-th42-telehandler",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY TH42 Telehandler seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-airtug",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the HVY Airtug with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-airtug",
+    "field": "Speed rating",
+    "value": "2.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Airtug Speed 2.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-airtug",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Airtug Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-airtug",
+    "field": "Asphalt handling rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Airtug Asphalt handling 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-airtug",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Airtug Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-airtug",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Airtug Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-airtug",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Airtug seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-bulldozer",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the HVY Bulldozer with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-bulldozer",
+    "field": "Speed rating",
+    "value": "2.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Bulldozer Speed 2.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-bulldozer",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Bulldozer Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-bulldozer",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Bulldozer Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-bulldozer",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Bulldozer Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-bulldozer",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Bulldozer Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-bulldozer",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Bulldozer seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-cr5013",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the MTL CR5013 with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-cr5013",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL CR5013 Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-cr5013",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL CR5013 Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-cr5013",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL CR5013 Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-cr5013",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL CR5013 Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-cr5013",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL CR5013 Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-cr5013",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL CR5013 seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-lifta",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the HVY Lifta with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-lifta",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Lifta Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-lifta",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Lifta Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-lifta",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Lifta Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-lifta",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Lifta Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-lifta",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Lifta Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-lifta",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Lifta seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-rubble",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the JoBuilt Rubble with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-rubble",
+    "field": "Speed rating",
+    "value": "2.6/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt Rubble Speed 2.6 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-rubble",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt Rubble Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-rubble",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt Rubble Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-rubble",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt Rubble Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-rubble",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt Rubble Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-rubble",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt Rubble seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-stockade-99",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the '99 Interstate Stockade with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-stockade-99",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Interstate Stockade Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-stockade-99",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Interstate Stockade Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-stockade-99",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Interstate Stockade Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-stockade-99",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Interstate Stockade Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-stockade-99",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Interstate Stockade Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-stockade-99",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '99 Interstate Stockade seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-trotter-95",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the '95 Vapid Trotter with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-trotter-95",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '95 Vapid Trotter Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-trotter-95",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '95 Vapid Trotter Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-trotter-95",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '95 Vapid Trotter Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-trotter-95",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '95 Vapid Trotter Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-trotter-95",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '95 Vapid Trotter Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-trotter-95",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '95 Vapid Trotter seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-spritz",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Benefactor Spritz with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-spritz",
+    "field": "Speed rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Spritz Speed 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-spritz",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Spritz Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-spritz",
+    "field": "Asphalt handling rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Spritz Asphalt handling 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-spritz",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Spritz Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-spritz",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Spritz Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "benefactor-spritz",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Benefactor Spritz seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-biff",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Cartright Biff with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-biff",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Biff Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-biff",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Biff Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-biff",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Biff Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-biff",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Biff Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-biff",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Biff Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-biff",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Biff seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-bus",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Whiffler Bus with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-bus",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Bus Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-bus",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Bus Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-bus",
+    "field": "Asphalt handling rating",
+    "value": "2.4/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Bus Asphalt handling 2.4 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-bus",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Bus Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-bus",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Bus Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-bus",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Bus seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-hauler",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Cartright Hauler with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-hauler",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Hauler Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-hauler",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Hauler Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-hauler",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Hauler Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-hauler",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Hauler Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-hauler",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Hauler Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cartright-hauler",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Cartright Hauler seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "airport-bus",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Airport Bus with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "airport-bus",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Airport Bus Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "airport-bus",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Airport Bus Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "airport-bus",
+    "field": "Asphalt handling rating",
+    "value": "2.4/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Airport Bus Asphalt handling 2.4 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "airport-bus",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Airport Bus Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "airport-bus",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Airport Bus Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "airport-bus",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Airport Bus seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mer-can-blast",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Mer-Can Blast with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mer-can-blast",
+    "field": "Speed rating",
+    "value": "2.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Mer-Can Blast Speed 2.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mer-can-blast",
+    "field": "Acceleration rating",
+    "value": "4.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Mer-Can Blast Acceleration 4.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mer-can-blast",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Mer-Can Blast Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mer-can-blast",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Mer-Can Blast Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mer-can-blast",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Mer-Can Blast Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mer-can-blast",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Mer-Can Blast seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-phantom-custom-81",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the '81 JoBuilt Phantom Custom with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-phantom-custom-81",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '81 JoBuilt Phantom Custom Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-phantom-custom-81",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '81 JoBuilt Phantom Custom Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-phantom-custom-81",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '81 JoBuilt Phantom Custom Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-phantom-custom-81",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '81 JoBuilt Phantom Custom Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-phantom-custom-81",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '81 JoBuilt Phantom Custom Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-phantom-custom-81",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '81 JoBuilt Phantom Custom seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-mb2-10",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the JoBuilt MB2-10 with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-mb2-10",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt MB2-10 Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-mb2-10",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt MB2-10 Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-mb2-10",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt MB2-10 Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-mb2-10",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt MB2-10 Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-mb2-10",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt MB2-10 Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "jobuilt-mb2-10",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: JoBuilt MB2-10 seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-swamp-blaster",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Bravado Swamp Blaster with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-swamp-blaster",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Bravado Swamp Blaster Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-swamp-blaster",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Bravado Swamp Blaster Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-swamp-blaster",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Bravado Swamp Blaster Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-swamp-blaster",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Bravado Swamp Blaster Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-swamp-blaster",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Bravado Swamp Blaster Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bravado-swamp-blaster",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Bravado Swamp Blaster seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-mesa",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Canis Mesa with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-mesa",
+    "field": "Speed rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Mesa Speed 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-mesa",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Mesa Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-mesa",
+    "field": "Asphalt handling rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Mesa Asphalt handling 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-mesa",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Mesa Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-mesa",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Mesa Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-mesa",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Mesa seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-seminole",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Canis Seminole with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-seminole",
+    "field": "Speed rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Seminole Speed 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-seminole",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Seminole Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-seminole",
+    "field": "Asphalt handling rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Seminole Asphalt handling 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-seminole",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Seminole Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-seminole",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Seminole Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "canis-seminole",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Canis Seminole seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-burrito",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Declasse Burrito with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-burrito",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Declasse Burrito Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-burrito",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Declasse Burrito Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-burrito",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Declasse Burrito Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-burrito",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Declasse Burrito Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-burrito",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Declasse Burrito Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-burrito",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Declasse Burrito seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gallivanter-baller-st-d",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Gallivanter Baller ST-D with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gallivanter-baller-st-d",
+    "field": "Speed rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Gallivanter Baller ST-D Speed 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gallivanter-baller-st-d",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Gallivanter Baller ST-D Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gallivanter-baller-st-d",
+    "field": "Asphalt handling rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Gallivanter Baller ST-D Asphalt handling 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gallivanter-baller-st-d",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Gallivanter Baller ST-D Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gallivanter-baller-st-d",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Gallivanter Baller ST-D Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gallivanter-baller-st-d",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Gallivanter Baller ST-D seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-everon",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Karin Everon with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-everon",
+    "field": "Speed rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Everon Speed 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-everon",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Everon Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-everon",
+    "field": "Asphalt handling rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Everon Asphalt handling 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-everon",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Everon Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-everon",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Everon Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-everon",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Everon seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-sultan-rs",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Karin Sultan RS with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-sultan-rs",
+    "field": "Speed rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Sultan RS Speed 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-sultan-rs",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Sultan RS Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-sultan-rs",
+    "field": "Asphalt handling rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Sultan RS Asphalt handling 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-sultan-rs",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Sultan RS Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-sultan-rs",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Sultan RS Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "karin-sultan-rs",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Karin Sultan RS seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-monstrociti",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Maibatsu Monstrociti with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-monstrociti",
+    "field": "Speed rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Monstrociti Speed 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-monstrociti",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Monstrociti Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-monstrociti",
+    "field": "Asphalt handling rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Monstrociti Asphalt handling 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-monstrociti",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Monstrociti Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-monstrociti",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Monstrociti Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-monstrociti",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Monstrociti seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-pumper",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the MTL Pumper with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-pumper",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL Pumper Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-pumper",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL Pumper Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-pumper",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL Pumper Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-pumper",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL Pumper Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-pumper",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL Pumper Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "mtl-pumper",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: MTL Pumper seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-bobcat-xl",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Vapid Bobcat XL with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-bobcat-xl",
+    "field": "Speed rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Bobcat XL Speed 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-bobcat-xl",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Bobcat XL Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-bobcat-xl",
+    "field": "Asphalt handling rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Bobcat XL Asphalt handling 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-bobcat-xl",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Bobcat XL Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-bobcat-xl",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Bobcat XL Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-bobcat-xl",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Bobcat XL seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier-g2-taxi",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Vapid Stanier G2 Taxi with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier-g2-taxi",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Stanier G2 Taxi Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier-g2-taxi",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Stanier G2 Taxi Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier-g2-taxi",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Stanier G2 Taxi Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier-g2-taxi",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Stanier G2 Taxi Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier-g2-taxi",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Stanier G2 Taxi Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-stanier-g2-taxi",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Stanier G2 Taxi seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-taxi",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Vapid Taxi with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-taxi",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Taxi Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-taxi",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Taxi Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-taxi",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Taxi Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-taxi",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Taxi Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-taxi",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Taxi Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-taxi",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Vapid Taxi seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-ambulance",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Interstate Ambulance with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-ambulance",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Interstate Ambulance Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-ambulance",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Interstate Ambulance Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-ambulance",
+    "field": "Asphalt handling rating",
+    "value": "2.4/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Interstate Ambulance Asphalt handling 2.4 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-ambulance",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Interstate Ambulance Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-ambulance",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Interstate Ambulance Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "interstate-ambulance",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Interstate Ambulance seats 4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-wastelander",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the HVY Wastelander with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-wastelander",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Wastelander Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-wastelander",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Wastelander Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-wastelander",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Wastelander Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-wastelander",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Wastelander Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-wastelander",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Wastelander Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-wastelander",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Wastelander seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-mule",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Maibatsu Mule with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-mule",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Mule Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-mule",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Mule Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-mule",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Mule Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-mule",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Mule Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-mule",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Mule Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-mule",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Mule seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Maibatsu Caddy with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy",
+    "field": "Speed rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Caddy Speed 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Caddy Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy",
+    "field": "Asphalt handling rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Caddy Asphalt handling 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy",
+    "field": "Off-road handling rating",
+    "value": "4.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Caddy Off-road handling 4.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Caddy Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maibatsu-caddy",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Maibatsu Caddy seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-dump",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the HVY Dump with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-dump",
+    "field": "Speed rating",
+    "value": "2.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Dump Speed 2.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-dump",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Dump Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-dump",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Dump Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-dump",
+    "field": "Off-road handling rating",
+    "value": "4.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Dump Off-road handling 4.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-dump",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Dump Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "hvy-dump",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: HVY Dump seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "guardian-tx2",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Guardian TX2 with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "guardian-tx2",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Guardian TX2 Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "guardian-tx2",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Guardian TX2 Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "guardian-tx2",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Guardian TX2 Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "guardian-tx2",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Guardian TX2 Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "guardian-tx2",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Guardian TX2 Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "guardian-tx2",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Guardian TX2 seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ripley",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Ripley with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ripley",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ripley Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ripley",
+    "field": "Acceleration rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ripley Acceleration 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ripley",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ripley Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ripley",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ripley Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ripley",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ripley Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ripley",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Ripley seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "taco-van",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Taco Van with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "taco-van",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Taco Van Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "taco-van",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Taco Van Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "taco-van",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Taco Van Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "taco-van",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Taco Van Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "taco-van",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Taco Van Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "taco-van",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Taco Van seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-taxi",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the Whiffler Taxi with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-taxi",
+    "field": "Speed rating",
+    "value": "2.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Taxi Speed 2.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-taxi",
+    "field": "Acceleration rating",
+    "value": "3.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Taxi Acceleration 3.8 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-taxi",
+    "field": "Asphalt handling rating",
+    "value": "2.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Taxi Asphalt handling 2.3 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-taxi",
+    "field": "Off-road handling rating",
+    "value": "4.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Taxi Off-road handling 4.1 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-taxi",
+    "field": "Strength rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Taxi Strength 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "whiffler-taxi",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: Whiffler Taxi seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-injection-73",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the '73 BF Injection with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-injection-73",
+    "field": "Speed rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '73 BF Injection Speed 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-injection-73",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '73 BF Injection Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-injection-73",
+    "field": "Asphalt handling rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '73 BF Injection Asphalt handling 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-injection-73",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '73 BF Injection Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-injection-73",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '73 BF Injection Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-injection-73",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '73 BF Injection seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-bandito-77",
+    "field": "GTA VI appearance",
+    "value": "Listed in the vehicle database",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles lists the '77 BF Bandito with WAiNK scan ratings (verified 26 Nov 2026).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-bandito-77",
+    "field": "Speed rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '77 BF Bandito Speed 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-bandito-77",
+    "field": "Acceleration rating",
+    "value": "4.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '77 BF Bandito Acceleration 4.5 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-bandito-77",
+    "field": "Asphalt handling rating",
+    "value": "3.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '77 BF Bandito Asphalt handling 3.2 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-bandito-77",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '77 BF Bandito Off-road handling 3.9 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-bandito-77",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '77 BF Bandito Strength 3.0 (WAiNK scan ratings).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bf-bandito-77",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "tracker.gg/gta6/vehicles: '77 BF Bandito seats 2.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
   }
 ]
