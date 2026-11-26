@@ -35838,5 +35838,725 @@
     "locator": "WAiNK scan ratings: Dirt Rocket Zombie Bobber",
     "reviewedAt": "2026-11-26",
     "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emerald-zombie-bobber",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Western Zombie Bobber",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "Standout variant row: Emerald Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emerald-zombie-bobber",
+    "field": "Speed rating",
+    "value": "5.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Emerald Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emerald-zombie-bobber",
+    "field": "Acceleration rating",
+    "value": "6.6/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Emerald Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emerald-zombie-bobber",
+    "field": "Asphalt handling rating",
+    "value": "5.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Emerald Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emerald-zombie-bobber",
+    "field": "Off-road handling rating",
+    "value": "3.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Emerald Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emerald-zombie-bobber",
+    "field": "Strength rating",
+    "value": "4.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Emerald Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emerald-zombie-bobber",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Emerald Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "malibu-zombie-bobber",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Western Zombie Bobber",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "Standout variant row: Malibu Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "malibu-zombie-bobber",
+    "field": "Speed rating",
+    "value": "5.7/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Malibu Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "malibu-zombie-bobber",
+    "field": "Acceleration rating",
+    "value": "6.4/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Malibu Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "malibu-zombie-bobber",
+    "field": "Asphalt handling rating",
+    "value": "5.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Malibu Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "malibu-zombie-bobber",
+    "field": "Off-road handling rating",
+    "value": "3.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Malibu Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "malibu-zombie-bobber",
+    "field": "Strength rating",
+    "value": "4.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Malibu Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "malibu-zombie-bobber",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Malibu Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "oxygen-zombie-bobber",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Western Zombie Bobber",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "Standout variant row: Oxygen Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "oxygen-zombie-bobber",
+    "field": "Speed rating",
+    "value": "5.4/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Oxygen Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "oxygen-zombie-bobber",
+    "field": "Acceleration rating",
+    "value": "6.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Oxygen Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "oxygen-zombie-bobber",
+    "field": "Asphalt handling rating",
+    "value": "5.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Oxygen Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "oxygen-zombie-bobber",
+    "field": "Off-road handling rating",
+    "value": "3.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Oxygen Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "oxygen-zombie-bobber",
+    "field": "Strength rating",
+    "value": "4.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Oxygen Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "oxygen-zombie-bobber",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Oxygen Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "searing-zombie-bobber",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Western Zombie Bobber",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "Standout variant row: Searing Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "searing-zombie-bobber",
+    "field": "Speed rating",
+    "value": "5.6/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Searing Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "searing-zombie-bobber",
+    "field": "Acceleration rating",
+    "value": "6.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Searing Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "searing-zombie-bobber",
+    "field": "Asphalt handling rating",
+    "value": "5.5/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Searing Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "searing-zombie-bobber",
+    "field": "Off-road handling rating",
+    "value": "3.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Searing Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "searing-zombie-bobber",
+    "field": "Strength rating",
+    "value": "4.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Searing Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "searing-zombie-bobber",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Searing Zombie Bobber",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bareback-cypher",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Übermacht Cypher",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "Standout variant row: Bareback Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bareback-cypher",
+    "field": "Speed rating",
+    "value": "7.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Bareback Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bareback-cypher",
+    "field": "Acceleration rating",
+    "value": "7.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Bareback Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bareback-cypher",
+    "field": "Asphalt handling rating",
+    "value": "4.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Bareback Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bareback-cypher",
+    "field": "Off-road handling rating",
+    "value": "5.7/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Bareback Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bareback-cypher",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Bareback Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "bareback-cypher",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Bareback Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "burning-cypher",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Übermacht Cypher",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "Standout variant row: Burning Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "burning-cypher",
+    "field": "Speed rating",
+    "value": "8.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Burning Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "burning-cypher",
+    "field": "Acceleration rating",
+    "value": "8.3/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Burning Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "burning-cypher",
+    "field": "Asphalt handling rating",
+    "value": "5.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Burning Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "burning-cypher",
+    "field": "Off-road handling rating",
+    "value": "2.4/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Burning Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "burning-cypher",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Burning Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "burning-cypher",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Burning Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pop-art-cypher",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Übermacht Cypher",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "Standout variant row: Pop Art Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pop-art-cypher",
+    "field": "Speed rating",
+    "value": "7.1/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Pop Art Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pop-art-cypher",
+    "field": "Acceleration rating",
+    "value": "7.8/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Pop Art Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pop-art-cypher",
+    "field": "Asphalt handling rating",
+    "value": "5.2/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Pop Art Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pop-art-cypher",
+    "field": "Off-road handling rating",
+    "value": "3.9/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Pop Art Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pop-art-cypher",
+    "field": "Strength rating",
+    "value": "3.0/10",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Pop Art Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pop-art-cypher",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://tracker.gg/gta6/vehicles",
+    "locator": "WAiNK scan ratings: Pop Art Cypher",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "big-game-airboat",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Airboat 09",
+    "source": "https://gta.exputer.com/gta-6/vehicles/airboat-09/",
+    "locator": "Standout variant row: Big Game Airboat",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "big-game-airboat",
+    "field": "Observed location",
+    "value": "In the water outside Swampy Sal's, piled with alligator carcasses",
+    "source": "https://gta.exputer.com/gta-6/vehicles/airboat-09/",
+    "locator": "Standout variant: Big Game Airboat",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dr-sheehans-airboat",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Airboat 09",
+    "source": "https://gta.exputer.com/gta-6/vehicles/airboat-09/",
+    "locator": "Standout variant row: Dr Sheehan's Airboat",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dr-sheehans-airboat",
+    "field": "Observed location",
+    "value": "At the research outpost in Pelican Valley",
+    "source": "https://gta.exputer.com/gta-6/vehicles/airboat-09/",
+    "locator": "Standout variant: Dr Sheehan's Airboat",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "kowaachobee-airboat",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Airboat 09",
+    "source": "https://gta.exputer.com/gta-6/vehicles/airboat-09/",
+    "locator": "Standout variant row: Kowaachobee Airboat",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "kowaachobee-airboat",
+    "field": "Observed location",
+    "value": "On the viewing platform in Buckskin Swamp",
+    "source": "https://gta.exputer.com/gta-6/vehicles/airboat-09/",
+    "locator": "Standout variant: Kowaachobee Airboat",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "will-o-the-wisp-airboat",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Airboat 09",
+    "source": "https://gta.exputer.com/gta-6/vehicles/airboat-09/",
+    "locator": "Standout variant row: Will O' The Wisp Airboat",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "will-o-the-wisp-airboat",
+    "field": "Observed location",
+    "value": "At the Buckskin Swamp dock, with a flame decoration",
+    "source": "https://gta.exputer.com/gta-6/vehicles/airboat-09/",
+    "locator": "Standout variant: Will O' The Wisp Airboat",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "meteor-duster",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Bottcher Duster",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bottcher-duster/",
+    "locator": "Standout variant row: Meteor Duster",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "meteor-duster",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bottcher-duster/",
+    "locator": "Standout variant: Meteor Duster",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "meteor-duster",
+    "field": "Observed location",
+    "value": "Discovered at an airstrip in North Kelly County.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/bottcher-duster/",
+    "locator": "Standout variant: Meteor Duster",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "avalanche-supervolito",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Buckingham SuperVolito",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-supervolito/",
+    "locator": "Standout variant row: Avalanche Supervolito",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "avalanche-supervolito",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-supervolito/",
+    "locator": "Standout variant: Avalanche Supervolito",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "avalanche-supervolito",
+    "field": "Observed location",
+    "value": "found on the roof of Neo Paloma apartments in Tequesta.",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-supervolito/",
+    "locator": "Standout variant: Avalanche Supervolito",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "atlantic-volatus",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Buckingham Volatus",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-volatus/",
+    "locator": "Standout variant row: Atlantic Volatus",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "atlantic-volatus",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-volatus/",
+    "locator": "Standout variant: Atlantic Volatus",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "atlantic-volatus",
+    "field": "Observed location",
+    "value": "A hangar at VCIA",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-volatus/",
+    "locator": "Standout variant: Atlantic Volatus",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dragonfly-volatus",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Buckingham Volatus",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-volatus/",
+    "locator": "Standout variant row: Dragonfly Volatus",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dragonfly-volatus",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-volatus/",
+    "locator": "Standout variant: Dragonfly Volatus",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dragonfly-volatus",
+    "field": "Observed location",
+    "value": "Top of New Quay Plaza in Downtown",
+    "source": "https://gta.exputer.com/gta-6/vehicles/buckingham-volatus/",
+    "locator": "Standout variant: Dragonfly Volatus",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ambergris-torlan",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Calder Torlan",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-torlan/",
+    "locator": "Standout variant row: Ambergris Torlan",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ambergris-torlan",
+    "field": "Seating",
+    "value": "1 seats",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-torlan/",
+    "locator": "Standout variant: Ambergris Torlan",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "ambergris-torlan",
+    "field": "Observed location",
+    "value": "A boathouse in Waning Sands",
+    "source": "https://gta.exputer.com/gta-6/vehicles/calder-torlan/",
+    "locator": "Standout variant: Ambergris Torlan",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
   }
 ]
