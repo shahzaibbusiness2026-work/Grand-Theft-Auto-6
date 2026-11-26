@@ -9068,5 +9068,25 @@
     "locator": "gta.guide - Shrewsbury Drifter weapon page ($1,150, Big Shots / Chuck's Tackle & Shot)",
     "reviewedAt": "2026-11-26",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "silver-bullet-mallard",
+    "field": "GTA VI appearance",
+    "value": "Lapwing Silver Bullet Mallard",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/retro/silver-bullet-mallard/",
+    "locator": "Dexerto GTA 6 Wiki - Silver Bullet Mallard standout page (hangar at Wild Hog Point)",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "kyles-mallard",
+    "field": "GTA VI appearance",
+    "value": "Lapwing Kyle's Mallard",
+    "source": "https://eso.jffk.org/all-gta-6-standout-vehicles-281-rare-car-locations-by-set/",
+    "locator": "eso.jffk standout list - Lapwing Kyle's Mallard, Ambrosia, at his farm in Frogswater",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Muse"
   }
 ]
