@@ -9188,5 +9188,335 @@
     "locator": "Reported magazine size from playday.one's launch-day stat list, via vAnotherLevel's sniper-rifle table \u2014 not read on screen.",
     "reviewedAt": "2026-11-26",
     "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-hobo",
+    "field": "GTA VI appearance",
+    "value": "Sold at Big Shots (Hamlet)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Shrewsbury Hobo $1,325, 8.0/3.6/6.4/2.0.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-hobo",
+    "field": "Price shown",
+    "value": "$1,325 at Big Shots",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Shrewsbury Hobo $1,325 bank.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-hobo",
+    "field": "Damage",
+    "value": "8.0/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Shrewsbury Hobo Damage 8.0.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-hobo",
+    "field": "Accuracy",
+    "value": "3.6/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Shrewsbury Hobo Accuracy 3.6.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-hobo",
+    "field": "Handling",
+    "value": "6.4/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Shrewsbury Hobo Handling 6.4.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-hobo",
+    "field": "Range",
+    "value": "2.0/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Shrewsbury Hobo Range 2.0.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mason-and-keen-longshot",
+    "field": "GTA VI appearance",
+    "value": "Sold at Big Shots (Hamlet)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Mason & Keen Longshot $1,425, 8.0/4.1/5.0/2.5.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mason-and-keen-longshot",
+    "field": "Price shown",
+    "value": "$1,425 at Big Shots",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Mason & Keen Longshot $1,425 bank, 'Buy 2 more guns to unlock'.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mason-and-keen-longshot",
+    "field": "Damage",
+    "value": "8.0/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Mason & Keen Longshot Damage 8.0.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mason-and-keen-longshot",
+    "field": "Accuracy",
+    "value": "4.1/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Mason & Keen Longshot Accuracy 4.1.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mason-and-keen-longshot",
+    "field": "Handling",
+    "value": "5.0/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Mason & Keen Longshot Handling 5.0.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "mason-and-keen-longshot",
+    "field": "Range",
+    "value": "2.5/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Mason & Keen Longshot Range 2.5.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "GTA VI appearance",
+    "value": "Sold at Big Shots (Hamlet)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Girardi AZ1200 $3,460, 7.4/4.8/5.8/2.5 (with mods).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "Price shown",
+    "value": "$3,460 at Big Shots",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Girardi AZ1200 $3,460 bank, price includes weapon and mods, 'Buy 4 more guns to unlock'.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "Damage",
+    "value": "7.4/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Girardi AZ1200 Damage 7.4 (with mods).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "Accuracy",
+    "value": "4.8/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Girardi AZ1200 Accuracy 4.8 (with mods).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "Handling",
+    "value": "5.8/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Girardi AZ1200 Handling 5.8 (with mods).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "Range",
+    "value": "2.5/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Girardi AZ1200 Range 2.5 (with mods).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "the-silver-1922",
+    "field": "GTA VI appearance",
+    "value": "Sold exclusively at Big Shots (Hamlet)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's pistols table (ON SCREEN, MELOO's launch stream): The Silver 1922, Heavy pistol, Big Shots exclusive, $2,210, 5.5/5.1/8.1/4.6.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "the-silver-1922",
+    "field": "Price shown",
+    "value": "$2,210 at Big Shots",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's pistols table (ON SCREEN, MELOO's launch stream): The Silver 1922 $2,210 bank, Big Shots exclusive.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "the-silver-1922",
+    "field": "Damage",
+    "value": "5.5/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's pistols table (ON SCREEN, MELOO's launch stream): The Silver 1922 Damage 5.5.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "the-silver-1922",
+    "field": "Accuracy",
+    "value": "5.1/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's pistols table (ON SCREEN, MELOO's launch stream): The Silver 1922 Accuracy 5.1.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "the-silver-1922",
+    "field": "Handling",
+    "value": "8.1/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's pistols table (ON SCREEN, MELOO's launch stream): The Silver 1922 Handling 8.1.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "the-silver-1922",
+    "field": "Range",
+    "value": "4.6/10 (shop rating)",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's pistols table (ON SCREEN, MELOO's launch stream): The Silver 1922 Range 4.6.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-akulus",
+    "field": "GTA VI appearance",
+    "value": "Listed as a .44 Magnum revolver",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's pistols table: Scorpio Akulus .44 Magnum revolver, Dmg 7.0, Mag 6, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-akulus",
+    "field": "Damage",
+    "value": "7.0/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's pistols table: Scorpio Akulus Dmg 7.0, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-akulus",
+    "field": "Magazine size",
+    "value": "6 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's pistols table: Scorpio Akulus Mag 6, REPORTED (playday.one launch-day stat list).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sm-69",
+    "field": "GTA VI appearance",
+    "value": "Sold at Expanded Ammu-Nation stores",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's sniper table: Shrewsbury SM-69 $1,850, Dmg 6.8, Mag 5, Expanded stores \u2014 REPORTED (PowerPyx prices, playday.one damage).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sm-69",
+    "field": "Price shown",
+    "value": "$1,850",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's sniper table: Shrewsbury SM-69 $1,850 \u2014 REPORTED (PowerPyx prices).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sm-69",
+    "field": "Damage",
+    "value": "6.8/10",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's sniper table: Shrewsbury SM-69 Dmg 6.8 \u2014 REPORTED (playday.one damage).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sm-69",
+    "field": "Magazine size",
+    "value": "5 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's sniper table: Shrewsbury SM-69 Mag 5 \u2014 REPORTED (playday.one damage).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sms-01",
+    "field": "GTA VI appearance",
+    "value": "Sold at Expanded Ammu-Nation stores; unlocks after Bret Vogel's 9th hunting quest",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's sniper table: Shrewsbury SMS-01 $2,150, unlocks after Bret Vogel's 9th hunting quest \u2014 REPORTED (PowerPyx prices).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sms-01",
+    "field": "Price shown",
+    "value": "$2,150",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "vAnotherLevel's sniper table: Shrewsbury SMS-01 $2,150 \u2014 REPORTED (PowerPyx prices).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
   }
 ]
