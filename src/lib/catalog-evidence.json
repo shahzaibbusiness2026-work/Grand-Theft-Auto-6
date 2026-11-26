@@ -9098,5 +9098,85 @@
     "locator": "Dexerto GTA 6 Wiki - Rainbow Ripple L20S standout page (small island in Gambit Bay, next to Merman Ray)",
     "reviewedAt": "2026-11-26",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "truffade-thrax",
+    "field": "Speed rating",
+    "value": "8.7/10",
+    "source": "https://beebom.com/gta-6-fastest-cars/",
+    "locator": "Beebom's '7 Fastest Cars in GTA 6, Ranked by Speed' lists the Thrax at 8.7/10 stock speed; GameSpot's fastest-cars list agrees (8.7).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "progen-emerus",
+    "field": "Speed rating",
+    "value": "8.3/10",
+    "source": "https://beebom.com/gta-6-fastest-cars/",
+    "locator": "Beebom's '7 Fastest Cars in GTA 6, Ranked by Speed' lists the Emerus at 8.3/10 stock speed; GameSpot's fastest-cars list agrees (8.3).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "progen-emerus",
+    "field": "Acceleration rating",
+    "value": "8.3/10",
+    "source": "https://beebom.com/gta-6-fastest-cars/",
+    "locator": "Beebom's fastest-cars list gives the Emerus 8.3/10 acceleration alongside its 8.3/10 stock speed.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "progen-emerus",
+    "field": "Asphalt handling rating",
+    "value": "8.4/10",
+    "source": "https://beebom.com/gta-6-fastest-cars/",
+    "locator": "Beebom's fastest-cars list gives the Emerus an 8.4 asphalt handling rating alongside its 8.3/10 stock speed.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "Speed rating",
+    "value": "8.2/10",
+    "source": "https://beebom.com/gta-6-fastest-cars/",
+    "locator": "Beebom's '7 Fastest Cars in GTA 6, Ranked by Speed' lists the Vitello at 8.2/10 stock speed; GameSpot's fastest-cars list agrees (8.2).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "Acceleration rating",
+    "value": "8.4/10",
+    "source": "https://beebom.com/gta-6-fastest-cars/",
+    "locator": "Beebom's fastest-cars list gives the Vitello 8.4/10 acceleration alongside its 8.2/10 stock speed.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "Asphalt handling rating",
+    "value": "8.2/10",
+    "source": "https://beebom.com/gta-6-fastest-cars/",
+    "locator": "Beebom's fastest-cars list gives the Vitello an 8.2 asphalt handling rating alongside its 8.2/10 stock speed.",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "comet-s2",
+    "field": "Speed rating",
+    "value": "7.7/10",
+    "source": "https://beebom.com/gta-6-fastest-cars/",
+    "locator": "Beebom's '7 Fastest Cars in GTA 6, Ranked by Speed' lists the Comet S2 at 7.7/10 stock speed; GameSpot's fastest-cars list agrees (7.7).",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Taish Gaming source review"
   }
 ]
