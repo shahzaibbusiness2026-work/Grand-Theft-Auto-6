@@ -11023,11 +11023,11 @@
     "kind": "vehicles",
     "id": "pegassi-infernus",
     "field": "Observed location",
-    "value": "Crosstown Police Station, NW 9th St, 9th-floor parking (purple); or white house garage, Capri",
-    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-infernus/",
-    "locator": "Exputer detail page: Crosstown Police Station NW 9th St, 9th-floor parking (purple); or white house garage, Capri. Randy's Wish List car 3 of 16.",
-    "reviewedAt": "2026-11-26",
-    "reviewer": "Taish Gaming source review"
+    "value": "Crosstown Police Station, NW 9th St, 7th-floor parking (purple); or white house garage, Capri",
+    "source": "https://gamerant.com/gta-6-pegassi-infernus-location-randy-wish-list/",
+    "locator": "7th floor of the Crosstown Police Station car park per Insider Gaming, GameRant, Mobalytics, GamesHorizon, GameTruth, TechWiser, Push Square, GTAVibes. Level 9 is the roof stunt jump (GameRant). Exputer alone says ninth floor.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   },
   {
     "kind": "vehicles",
@@ -37286,6 +37286,356 @@
     "value": "Hamlet Traders (Vice Dale County) and Pawn & Gun (Port Gellhorn) at $850; sold at every Leonida gun store",
     "source": "https://gta.exputer.com/gta-6/weapons/fortune-and-son-gorse-425/",
     "locator": "Exputer: Hamlet Traders and Pawn & Gun stock it at $850; sold at every Leonida gun store; corroborated by Dexerto (sold at Big Shots and Chuck's Tackle & Shot for $850).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-buggy-67",
+    "field": "Acquisition location",
+    "value": "Paradise Garage, Watson Bay, Grassrivers, Mariana County — marker appears ~1 in-game day after Thrillbillies; Wyman WhatUp text; starts Wyman's Classic Car Collection",
+    "source": "https://gtavillage.com/gta-6/vehicles/9551-vapid-dominator-buggy",
+    "locator": "GTAVillage: garage in Grassrivers, Mariana County, marked roughly an in-game day after the Mud Club mission; corroborated by Ultimate Edition Guide (Paradise Garage, Watson Bay, ~1 in-game day after Chapter 2's Thrillbillies) and HowToVideoGame (https://howtovideogame.com/gta-6-dominator-buggy/, own PS5 recordings; Wyman text, Paradise RV Park east of Watson Bay).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-buggy-67",
+    "field": "Asphalt rating (0-1000 scale)",
+    "value": "493",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/off-road-vehicles/67-vapid-dominator-buggy/",
+    "locator": "Dexerto Buggy page: road rating 493; corroborated by Sportskeeda (https://www.sportskeeda.com/esports/best-off-road-vehicles-gta-6-ranked-best-worst) and MeowDB (https://meowdb.com/gta6/vehicles/vapid-dominator-buggy).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-buggy-67",
+    "field": "Off-road rating (0-1000 scale)",
+    "value": "672",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/off-road-vehicles/67-vapid-dominator-buggy/",
+    "locator": "Dexerto Buggy page: off-road rating 672; corroborated by Sportskeeda and MeowDB (same pages as asphalt rating).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Drivetrain",
+    "value": "RWD",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-growler/",
+    "locator": "Exputer Growler page: RWD; corroborated by gameta (https://gameta.gg/gta6/vehicles/pfister-growler/) and GTAScoop (https://gtascoop.com/wiki/vehicles/growler/).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Mass",
+    "value": "1,420 kg",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-growler/",
+    "locator": "Exputer Growler page: mass 1,420 kg; corroborated by gameta, GTAScoop and the GTABase Hornet Growler page base-model block.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Seats",
+    "value": "2",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-growler/",
+    "locator": "Exputer Growler page: 2 seats; corroborated by Dexerto (https://www.dexerto.com/wikis/gta-6/vehicles/cars/sports-cars/pfister-growler/), Game8 (https://game8.co/games/gta-6/archives/639129) and gameta.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Storage slots",
+    "value": "2",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/sports-cars/pfister-growler/",
+    "locator": "Dexerto Growler page: 2 storage slots; corroborated by Game8.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Mod specialist",
+    "value": "Luxury; mod shop Euroform Automotive",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-growler/",
+    "locator": "Exputer Growler page: Luxury specialist; corroborated by Game8 (Luxury) and gameta (Euroform Automotive).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Asphalt rating (0-1000 scale)",
+    "value": "635",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/sports-cars/pfister-growler/",
+    "locator": "Dexerto Growler page: asphalt rating 635; corroborated by Game8 and gameta.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Off-road rating (0-1000 scale)",
+    "value": "280",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/sports-cars/pfister-growler/",
+    "locator": "Dexerto Growler page: off-road rating 280; corroborated by Game8 and gameta.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Model year",
+    "value": "2020 (2020s Current, Luxury style)",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/sports-cars/pfister-growler/",
+    "locator": "Dexerto Growler page: model year 2020, Era 2020s Current, Style Luxury; corroborated by Game8 and gameta.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Spawn locations",
+    "value": "Shore Drive, Ocean Beach beachfront rows; Capri public parking lots; also Southside (10 map spots)",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-growler/",
+    "locator": "Exputer Growler page: Shore Drive, Ocean Beach beachfront rows; corroborated by Insider Gaming (https://insider-gaming.com/where-to-find-the-pfister-growler-in-gta-6/). Capri public parking lots per Game8; gameta adds parked mostly around Southside, 10 map spots.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-growler",
+    "field": "Theft tool",
+    "value": "Key Cloner",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-growler/",
+    "locator": "Exputer Growler page: Key Cloner needed to steal; corroborated by Game8.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Drivetrain",
+    "value": "RWD",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-infernus/",
+    "locator": "Exputer Infernus page: RWD; corroborated by gameta (https://gameta.gg/gta6/vehicles/96-pegassi-infernus/), GTA6Intel (https://gta6intel.com/vehicles/pegassi-infernus-96) and GameTruth (two-seat, rear-wheel-drive car).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Mass",
+    "value": "1,575 kg",
+    "source": "https://gameta.gg/gta6/vehicles/96-pegassi-infernus/",
+    "locator": "gameta Infernus page: mass 1,575 kg; corroborated by the GTABase Gold Rope page base-model block. Exputer says 1,400 kg — that matches the GTA Online Infernus Classic figure and looks like a carry-over error, so it is not used.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Gears",
+    "value": "5",
+    "source": "https://gameta.gg/gta6/vehicles/96-pegassi-infernus/",
+    "locator": "gameta Infernus page: 5 gears; corroborated by the GTABase Gold Rope page base-model block. Exputer says 6 — that matches the GTA Online figure and looks like a carry-over error, so it is not used.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Asphalt rating (0-1000 scale)",
+    "value": "698",
+    "source": "https://gameta.gg/gta6/vehicles/96-pegassi-infernus/",
+    "locator": "gameta Infernus page: asphalt rating 698; corroborated by GTAScoop and HeistAtlas (https://heistatlas.com/en/guide/cars/compare/).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Off-road rating (0-1000 scale)",
+    "value": "328",
+    "source": "https://gameta.gg/gta6/vehicles/96-pegassi-infernus/",
+    "locator": "gameta Infernus page: off-road rating 328; corroborated by GTAScoop and HeistAtlas.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Mod specialist",
+    "value": "Luxury; mod shop Euroform Automotive",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-infernus/",
+    "locator": "Exputer Infernus page: Luxury specialist; corroborated by gameta and allthings.how (https://allthings.how/gta-6-pegassi-infernus-location/).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Model year",
+    "value": "'96 (1990s Classic, Supercars class)",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-infernus/",
+    "locator": "Exputer Infernus page: model year '96, Era 1990s Classic, Class Supercars; corroborated by gameta, GTABase and allthings.how.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-infernus",
+    "field": "Tracker",
+    "value": "Advanced",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-infernus/",
+    "locator": "Exputer Infernus page: Tracker Advanced; corroborated by gameta, GTABase and GTA6Intel.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Drivetrain",
+    "value": "AWD",
+    "source": "https://gta.exputer.com/gta-6/vehicles/obey-8f-drafter/",
+    "locator": "Exputer Drafter page: AWD; corroborated by GTA6Intel (https://gta6intel.com/vehicles/obey-8f-drafter), grandtheft.gg (https://grandtheft.gg/gta-6-cars/) and LeonidaRacing (https://leonidaracing.com/cars/vehicles/obey-8f-drafter/).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Mass",
+    "value": "1,650 kg",
+    "source": "https://gta.exputer.com/gta-6/vehicles/obey-8f-drafter/",
+    "locator": "Exputer Drafter page: mass 1,650 kg; corroborated by grandtheft.gg.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Storage slots",
+    "value": "2",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/coupes/obey-8f-drafter/",
+    "locator": "Dexerto Drafter page: 2 storage slots; corroborated by LeonidaRacing.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Mod specialist",
+    "value": "Tuner",
+    "source": "https://gta.exputer.com/gta-6/vehicles/obey-8f-drafter/",
+    "locator": "Exputer Drafter page: Tuner specialist; corroborated by Dexerto and LeonidaRacing.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Asphalt rating (0-1000 scale)",
+    "value": "576",
+    "source": "https://gta.exputer.com/gta-6/vehicles/obey-8f-drafter/",
+    "locator": "Exputer Drafter page: asphalt rating 576; corroborated by Dexerto, LeonidaRacing and GamesFuze (https://gamesfuze.com/gta-6-wiki/cars/).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Off-road rating (0-1000 scale)",
+    "value": "370",
+    "source": "https://gta.exputer.com/gta-6/vehicles/obey-8f-drafter/",
+    "locator": "Exputer Drafter page: off-road rating 370 — best off-road rating of any coupe; corroborated by Dexerto, LeonidaRacing and GamesFuze.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Era",
+    "value": "2010s Modern (Sports style)",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/coupes/obey-8f-drafter/",
+    "locator": "Dexerto Drafter page: Era 2010s Modern, Style Sports; corroborated by Exputer.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "obey-8f-drafter",
+    "field": "Tracker",
+    "value": "Standard (Key Cloner needed to steal)",
+    "source": "https://gta.exputer.com/gta-6/vehicles/obey-8f-drafter/",
+    "locator": "Exputer Drafter page: Tracker Standard, Key Cloner needed to steal; corroborated by Dexerto, GTA6Intel and LeonidaRacing.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "devils-rope-gauntlet",
+    "field": "Standout set",
+    "value": "Ripped & Shredded",
+    "source": "https://insider-gaming.com/bravado-devils-rope-gauntlet-gta-6/",
+    "locator": "Insider Gaming: Devil's Rope Gauntlet is in the Ripped & Shredded standout set; corroborated by Dexerto (https://www.dexerto.com/wikis/gta-6/vehicles/standout/ripped-shredded/devils-rope-gauntlet/), GTABase (https://www.gtabase.com/gta-6/vehicles/devils-rope-gauntlet) and Exputer.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "devils-rope-gauntlet",
+    "field": "Asphalt rating (0-1000 scale)",
+    "value": "761",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/ripped-shredded/devils-rope-gauntlet/",
+    "locator": "Dexerto Devil's Rope page: asphalt rating 761; corroborated by GTABase and GamesFuze.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "devils-rope-gauntlet",
+    "field": "Off-road rating (0-1000 scale)",
+    "value": "169",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/ripped-shredded/devils-rope-gauntlet/",
+    "locator": "Dexerto Devil's Rope page: off-road rating 169; corroborated by GTABase and GamesFuze.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "devils-rope-gauntlet",
+    "field": "Tracker",
+    "value": "None",
+    "source": "https://insider-gaming.com/bravado-devils-rope-gauntlet-gta-6/",
+    "locator": "Insider Gaming: Tracker None; corroborated by GTABase, LeonidaHub (https://leonidahub.org/en/news/gta-6-unique-cars-the-best-standout-vehicles-where-to-find-them-and-how-to-keep-them) and TheBestMods (https://www.thebestmods.com/gta-6/best-muscle-car/).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "devils-rope-gauntlet",
+    "field": "Access",
+    "value": "Unlocked, no security features",
+    "source": "https://insider-gaming.com/bravado-devils-rope-gauntlet-gta-6/",
+    "locator": "Insider Gaming: Security Deactivated, Access Unlocked; corroborated by Turtleback (https://turtleback.hk/2026/11/21/gta-6-secret-cars-10-rare-vehicles-and-where-to-find-them/, unlocked and has no security features). GTABase lists Security Modern / Access Key — guide consensus says unlocked, so GTABase is not used.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "devils-rope-gauntlet",
+    "field": "Location detail",
+    "value": "Hog Stars Garage, Acacia Street, Ambrosia",
+    "source": "https://screenrant.com/gta-6-fastest-cars-locations/",
+    "locator": "ScreenRant: Hog Stars Garage, Acacia Street, Ambrosia; corroborated by Retrogems (https://retrogems.fr/en/gta-6-rarest-cars-locations-guide/) and FandomWire (https://fandomwire.com/rarest-cars-in-gta-6-you-can-get-for-free-ranked/).",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
   }
