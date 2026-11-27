@@ -40178,5 +40178,25 @@
     "locator": "Sportskeeda 'All hidden cars in shipping containers in GTA 6': 'Blue Drake Penumbra ... stored inside a yellow shipping container outside the raceway building. It comes equipped with nitrous' — Port Gellhorn Raceway, South Kelly County. Corroborated by allthings.how rare-cars guide (Blue Drake Penumbra, discovered at Ambrosia Raceway) and the SCOOP-containers YouTube guide (https://www.youtube.com/watch?v=IT0SWlJRm7M) listing it among container loot; container colour differs between sources and is not claimed.",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "purple-drank-emerus",
+    "field": "Observed location",
+    "value": "Chatfield Storage & Logistics yard, Waxman Island — inside a ground-level shipping container. No tracker and no alarm; the yard office upstairs holds the Quarter Mile ES9 pistol and a safe (code 5800).",
+    "source": "https://radarleonida.com/en/article/where-to-find-the-purple-drank-emerus-container-in-gta-6/",
+    "locator": "Radareleonida (27 Nov 2026): 'The Progen Purple Drank Emerus is inside a shipping container at Chatfield Storage & Logistics on Waxman Island'; safe code 5800 from the container laptop, Quarter Mile ES9 in the office case. Corroborated by the YouTube short (https://www.youtube.com/shorts/G5oJt9GKF60) — same yard, same container, same pistol and $10,000 safe — and by GameRant (21 Nov 2026, cited in the canonical source): the Emerus is the prize of the Waxman Island Robbery Opportunity at Chatfield Storage and Logistics.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "western-nightblade",
+    "field": "Observed location",
+    "value": "Final Chapter compound (Irons Building Supply), Birch Street, Ambrosia, Kelly County — the orange bike on the ground floor of the central garage/warehouse. Moses' sixth vehicle request; $6,310 base payout on delivery to Port Gellhorn.",
+    "source": "https://www.keengamer.com/articles/guides/gta-6-all-7-moses-vehicle-drop-off-locations/",
+    "locator": "KeenGamer 'All 7 Moses Vehicle Drop-Off Locations': 'Western Nightblade | Birch St, Ambrosia | Final Chapter clubhouse' — 'the orange motorcycle at the back of the ground floor' of the central warehouse; open the compound gate before riding out. Corroborated by Destructoid (motorcycle club on Birch St, Kelly County; ladder/roof route into the compound), thegameswiki Motorcycle Clubs (Irons Building Supply holds 'a club-owned Western Nightblade motorcycle that Moses asks you to steal'), magicgameworld, heistatlas, playermanual, finalboss and gta6info, plus the no-commentary playthrough (https://www.youtube.com/watch?v=URJ8TKAmoYI) showing the same compound, bike and a $6,330 delivered payout (condition bonus over the $6,310 base).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   }
 ]
