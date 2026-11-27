@@ -319,7 +319,7 @@ export function MapDistanceCalculatorClient() {
             "From",
             fromId,
             setFromId,
-            <MapPin className="h-3.5 w-3.5" style={{ color: "#C9A86A" }} />,
+            <MapPin className="h-3.5 w-3.5" style={{ color: "#FF2E9A" }} />,
           )}
 
           <div className="flex justify-center">
@@ -336,7 +336,7 @@ export function MapDistanceCalculatorClient() {
             "To",
             toId,
             setToId,
-            <MapPin className="h-3.5 w-3.5" style={{ color: "#C9A86A" }} />,
+            <MapPin className="h-3.5 w-3.5" style={{ color: "#FF2E9A" }} />,
           )}
 
           <p className="text-xs leading-relaxed text-muted-foreground flex gap-1.5">
@@ -406,7 +406,7 @@ export function MapDistanceCalculatorClient() {
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
                 <Timer
                   className="h-4 w-4 mx-auto mb-1"
-                  style={{ color: "#C9A86A" }}
+                  style={{ color: "#FF2E9A" }}
                 />
                 <span className="font-mono text-lg font-black text-foreground block">
                   {formatTime(
@@ -493,7 +493,7 @@ export function MapDistanceCalculatorClient() {
                       className={isEndpoint ? "h-5 w-5" : "h-3 w-3 opacity-50"}
                       style={
                         isEndpoint
-                          ? { color: "#C9A86A" }
+                          ? { color: "#FF2E9A" }
                           : { color: "var(--muted-foreground)" }
                       }
                     />

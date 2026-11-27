@@ -50,7 +50,7 @@ export default async function NewsletterConfirmPage({
       <p className="mt-3 text-muted-foreground">{state.body}</p>
       <Link
         href="/"
-        className="mt-8 inline-flex items-center rounded-xl bg-[#C9A86A] px-6 py-3 text-sm font-bold uppercase tracking-wider text-black transition hover:brightness-110"
+        className="mt-8 inline-flex items-center rounded-xl bg-[#FF2E9A] px-6 py-3 text-sm font-bold uppercase tracking-wider text-black transition hover:brightness-110"
       >
         Back to the Atlas
       </Link>

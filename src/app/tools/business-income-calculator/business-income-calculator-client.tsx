@@ -153,7 +153,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
                   className={cn(
                     "rounded-xl border p-2.5 text-center transition-all",
                     upgradeIdx === i
-                      ? "border-[#C9A86A] bg-[#C9A86A]/10 shadow-sm"
+                      ? "border-[#FF2E9A] bg-[#FF2E9A]/10 shadow-sm"
                       : "border-border bg-muted/60 hover:border-border hover:text-foreground"
                   )}
                 >
@@ -166,7 +166,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
                   <span className="block text-[10px] font-semibold text-muted-foreground mt-0.5">
                     {u.benefit}
                   </span>
-                  <span className="block text-[10px] font-mono font-bold text-[#C9A86A] mt-0.5">
+                  <span className="block text-[10px] font-mono font-bold text-[#FF2E9A] mt-0.5">
                     {money(u.cost)}
                   </span>
                 </button>
@@ -178,7 +178,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
           <div>
             <label className="block text-xs font-bold text-muted-foreground mb-1.5 flex justify-between">
               <span>Hours Played Per Day</span>
-              <span className="font-mono text-[#C9A86A] font-bold">{hoursPerDay} hrs/day</span>
+              <span className="font-mono text-[#FF2E9A] font-bold">{hoursPerDay} hrs/day</span>
             </label>
             <input
               type="range"
@@ -187,7 +187,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
               step={0.5}
               value={hoursPerDay}
               onChange={(e) => setHoursPerDay(Number(e.target.value))}
-              className="w-full accent-[#C9A86A] py-3"
+              className="w-full accent-[#FF2E9A] py-3"
             />
             <div className="flex justify-between text-xs text-muted-foreground mt-1 font-mono">
               <span>0.5h</span>
@@ -203,7 +203,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
           {/* Selected summary */}
           <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-xs leading-relaxed text-muted-foreground">
             <span className="font-bold text-foreground">{selected.name}</span> — purchase{" "}
-            <span className="font-mono font-bold text-[#C9A86A]">{money(selected.purchase)}</span>, base{" "}
+            <span className="font-mono font-bold text-[#FF2E9A]">{money(selected.purchase)}</span>, base{" "}
             <span className="font-mono font-bold text-foreground">{money(selected.daily)}/day</span>{" "}
             (est.) + <span className="font-bold text-foreground">{upgrade.name}</span> upgrades{" "}
             <span className="font-mono font-bold text-foreground">{money(upgrade.cost)}</span>.
@@ -222,7 +222,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
                 </div>
               </div>
               <div className="text-right">
-                <span className="font-mono text-2xl font-black text-[#C9A86A]">
+                <span className="font-mono text-2xl font-black text-[#FF2E9A]">
                   ~{calculations.breakEvenDays.toFixed(1)}
                 </span>
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Days to Break-Even</span>
@@ -237,7 +237,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
               </div>
               <div className="h-2.5 w-full overflow-hidden rounded-full bg-muted border border-border">
                 <div
-                  className="h-full rounded-full bg-[#C9A86A] transition-all duration-500"
+                  className="h-full rounded-full bg-[#FF2E9A] transition-all duration-500"
                   style={{ width: `${calculations.breakEvenProgress}%` }}
                 />
               </div>
@@ -251,7 +251,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
             {/* 5 Output Metrics */}
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                <DollarSign className="h-4 w-4 text-[#C9A86A] mx-auto mb-1" />
+                <DollarSign className="h-4 w-4 text-[#FF2E9A] mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-foreground">{money(calculations.effectiveDaily)}</span>
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Daily Income (est.)</span>
               </div>
@@ -263,7 +263,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
               </div>
 
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                <Briefcase className="h-4 w-4 text-[#C9A86A] mx-auto mb-1" />
+                <Briefcase className="h-4 w-4 text-[#FF2E9A] mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-foreground">{money(calculations.totalInvestment)}</span>
                 <span className="block text-xs uppercase font-bold text-muted-foreground">Total Investment</span>
               </div>
@@ -275,7 +275,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
               </div>
 
               <div className="rounded-2xl border border-border bg-muted/60 p-3.5 text-center">
-                <TrendingUp className="h-4 w-4 text-[#C9A86A] mx-auto mb-1" />
+                <TrendingUp className="h-4 w-4 text-[#FF2E9A] mx-auto mb-1" />
                 <span className="font-mono text-lg font-black text-foreground">{calculations.roi30.toFixed(1)}%</span>
                 <span className="block text-xs uppercase font-bold text-muted-foreground">ROI After 30 Days</span>
               </div>
@@ -308,7 +308,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
           {/* Best ROI comparison */}
           <div className="card-surface p-6 rounded-3xl border border-border">
             <h3 className="font-display text-base font-bold uppercase tracking-wider text-foreground mb-1 flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-[#C9A86A]" /> Best ROI at Your Settings
+              <TrendingUp className="h-4 w-4 text-[#FF2E9A]" /> Best ROI at Your Settings
             </h3>
             <p className="text-xs text-muted-foreground mb-4">
               All businesses ranked by 30-day ROI with {upgrade.name} upgrades at {hoursPerDay}h/day.
@@ -323,7 +323,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
                     className={cn(
                       "rounded-2xl border p-3.5 flex items-center justify-between gap-3",
                       isBest
-                        ? "border-[#C9A86A] bg-[#C9A86A]/10"
+                        ? "border-[#FF2E9A] bg-[#FF2E9A]/10"
                         : "border-border bg-muted/60"
                     )}
                   >
@@ -331,7 +331,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
                       <div className="flex items-center gap-2 flex-wrap">
                         <h4 className="font-display text-sm font-bold text-foreground">{c.name}</h4>
                         {isBest && (
-                          <span className="rounded-full bg-[#C9A86A]/20 border border-[#C9A86A]/50 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#C9A86A]">
+                          <span className="rounded-full bg-[#FF2E9A]/20 border border-[#FF2E9A]/50 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#FF2E9A]">
                             Best ROI
                           </span>
                         )}
@@ -358,7 +358,7 @@ Note: all figures are estimates based on GTA Online patterns; actual GTA 6 econo
           {/* Disclaimer */}
           <div className="card-surface p-6 rounded-3xl border border-border">
             <h3 className="font-display text-base font-bold uppercase tracking-wider text-foreground mb-2 flex items-center gap-2">
-              <DollarSign className="h-4 w-4 text-[#C9A86A]" /> Estimate Disclaimer
+              <DollarSign className="h-4 w-4 text-[#FF2E9A]" /> Estimate Disclaimer
             </h3>
             <p className="text-xs leading-relaxed text-muted-foreground">
               All purchase prices, daily incomes, and upgrade effects are <strong>estimates</strong> based on

@@ -32,9 +32,9 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
     --elevated-foreground: 227 43% 97%;
     --popover: 221 40% 13%;
     --popover-foreground: 227 43% 97%;
-    --primary: 38 42% 60%; /* #C9A86A Champagne gold */
-    --primary-foreground: 38 30% 12%; /* #241C0E Dark text for contrast */
-    --primary-hover: 38 45% 66%; /* #D4B981 Lighter champagne */
+    --primary: 327 100% 59%; /* #FF2E9A Taish red */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF White text for contrast */
+    --primary-hover: 327 100% 68%; /* #FF5CAD Lighter red */
     --secondary: 221 39% 18%; /* #1C2740 */
     --secondary-foreground: 218 27% 77%; /* #B5C0D4 */
     --muted: 221 40% 13%; /* #141C2E */
@@ -46,7 +46,7 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
     --destructive-foreground: 0 0% 100%;
     --border: 219 29% 28%; /* #33415C */
     --input: 219 17% 48%; /* #66748F */
-    --ring: 38 42% 60%; /* #C9A86A */
+    --ring: 327 100% 59%; /* #FF2E9A */
     --radius: 0.75rem;
     --color-surface: 223 48% 8%;
     --color-neon-magenta: 250 100% 83%;
@@ -80,9 +80,9 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
     --elevated-foreground: 222 37% 15%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 37% 15%;
-    --primary: 38 55% 29%; /* Deep gold with normal-text contrast on light surfaces. */
+    --primary: 327 87% 41%; /* Deep red with normal-text contrast on light surfaces. */
     --primary-foreground: 0 0% 100%; /* #FFFFFF */
-    --primary-hover: 255 56% 45%; /* #5232B3 */
+    --primary-hover: 327 100% 59%; /* #FF2E9A */
     --secondary: 223 30% 95%; /* #EEF1F7 */
     --secondary-foreground: 218 19% 40%; /* #536179 */
     --muted: 223 30% 95%; /* #EEF1F7 */
@@ -94,7 +94,7 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
     --destructive-foreground: 0 0% 100%;
     --border: 220 29% 88%; /* #D8DEEA */
     --input: 219 14% 55%; /* #7B879C */
-    --ring: 38 38% 48%; /* #A98850 */
+    --ring: 327 87% 41%; /* #C40E6E */
 
     /* Taish Gaming Admin Design System Tokens (Light Mode) */
     --admin-bg: #f8fafc;
@@ -1031,17 +1031,17 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
 }
 
 /* --------------------------------------------------------------------
-   Champagne-gold text legibility in bright mode.
-   Bare `text-gold` (#C9A86A) and `text-gold-light` (#E3CFA3) are legible
+   Red text legibility in bright mode.
+   Bare `text-gold` (#FF2E9A) and `text-gold-light` (#FFB3D9) are legible
    only on dark surfaces; on light surfaces they drop to ~1.2-2.4:1
    contrast (warning icons, threat badges, stat cards, price text,
-   eyebrow labels). Flip them to the deep bronze-gold (#A98850, the
+   eyebrow labels). Flip them to the deep red (#9D0C52, the
    light theme's --primary) everywhere except permanent dark surfaces:
-   .dark-panel cards and from-slate-950 image scrims keep the light gold.
+   .dark-panel cards and from-slate-950 image scrims keep the light red.
    -------------------------------------------------------------------- */
 .light .text-gold,
 .light .text-gold-light {
-  color: #6c4918 !important;
+  color: #9d0c52 !important;
 }
 .light .text-gold-light\/80 {
   color: rgba(108, 73, 24, 0.9) !important;
@@ -1052,10 +1052,10 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
 /* Permanent dark surfaces keep the light champagne gold */
 .light .dark-panel .text-gold,
 .light .dark-panel .text-gold-light {
-  color: #e3cfa3 !important;
+  color: #FFB3D9 !important;
 }
 .light [class*="from-slate-950"] .text-gold-light {
-  color: #e3cfa3 !important;
+  color: #FFB3D9 !important;
 }
 
 /* Daily hero background: one-time fade-in when the scene changes.
@@ -1211,9 +1211,9 @@ body[data-player-reduced-motion="true"] *, body[data-player-reduced-motion="true
   line-height: 1.4;
 }
 
-/* Deep gold on light badge fills; dark theme retains champagne. */
+/* Deep red on light badge fills; dark theme retains the light red. */
 .light .text-gold-dark {
-  color: #6c4918 !important;
+  color: #9d0c52 !important;
 }
 
 /* Player workspace surfaces must remain legible under the marketing site's

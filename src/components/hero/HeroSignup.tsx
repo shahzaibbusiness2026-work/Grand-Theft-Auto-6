@@ -57,7 +57,7 @@ export function HeroSignup() {
       <form
         onSubmit={handleSubmit}
         aria-label="Get notified about GTA VI news and updates"
-        className="flex items-center gap-2 rounded-2xl border border-white/20 bg-[#0a0f1e]/90 p-2 pl-4 shadow-lg backdrop-blur-xl transition-shadow focus-within:shadow-md focus-within:border-[#C9A86A]/50"
+        className="flex items-center gap-2 rounded-2xl border border-white/20 bg-[#0a0f1e]/90 p-2 pl-4 shadow-lg backdrop-blur-xl transition-shadow focus-within:shadow-md focus-within:border-[#FF2E9A]/50"
       >
         <Mail className="h-4 w-4 shrink-0 text-white/50" aria-hidden="true" />
         <label htmlFor="hero-signup-email" className="sr-only">
