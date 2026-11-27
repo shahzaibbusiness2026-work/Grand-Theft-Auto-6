@@ -38578,5 +38578,695 @@
     "locator": "Game8: 'orange truck parked inside the Brooks Boatworks Illegal Operations' at the north side of Port Gellhorn — also GTABase and gameta.gg ('Brooks Boatworks docks')",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
+  },
+  {
+    "field": "Mod specialist",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "Game8: 'Mod Specialist | Tuner'; corroborated by GTAScoop (gtascoop.com/wiki/vehicles/cypher/) and gta6.house (citing GTABase)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/gta-6/archives/639111",
+    "value": "Tuner"
+  },
+  {
+    "field": "Base handling rating (asphalt)",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "Game8 base rating 622 asphalt; corroborated by GTAScoop and meowdb (622 road / 369 off-road)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/gta-6/archives/639111",
+    "value": "622"
+  },
+  {
+    "field": "Base handling rating (off-road)",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "Game8 base rating 369 off-road; corroborated by GTAScoop and meowdb",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/gta-6/archives/639111",
+    "value": "369"
+  },
+  {
+    "field": "Drivetrain",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "GTAScoop: RWD; corroborated by gta6.house (gta6.house/library/vehicles/ubermacht-cypher)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gtascoop.com/wiki/vehicles/cypher/",
+    "value": "RWD"
+  },
+  {
+    "field": "Gears",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "GTAScoop: 6 gears; corroborated by gta6.house",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gtascoop.com/wiki/vehicles/cypher/",
+    "value": "6"
+  },
+  {
+    "field": "Weight",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "GTAScoop: 1,625 kg; corroborated by gta6.house",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gtascoop.com/wiki/vehicles/cypher/",
+    "value": "1,625 kg"
+  },
+  {
+    "field": "Registration cost",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "Five Star Intel WAiNK scan (PS5): Register $23,000; corroborated by YouTube youtube.com/watch?v=R7Uy7XZPIvA at 7:50 ('Register $23,000')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://fivestarintel.com/vehicles/ubermacht-cypher/",
+    "value": "$23,000"
+  },
+  {
+    "field": "Access",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "Five Star Intel: 'cannot be driven until you unlock the Key Cloner… Chapter 3'; corroborated by Game8",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://fivestarintel.com/vehicles/ubermacht-cypher/",
+    "value": "Key Cloner required (Chapter 3) — cannot be driven until the Key Cloner is unlocked"
+  },
+  {
+    "field": "Tracker",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "Five Star Intel: standard tracker; corroborated by gta-xtreme (gta-xtreme.com/en/gta-6-ubermacht-cypher-location)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://fivestarintel.com/vehicles/ubermacht-cypher/",
+    "value": "Standard"
+  },
+  {
+    "field": "Wish List",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "Exputer: Randy's Wish List car; corroborated by GamingBolt and gta6.house",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/ubermacht-cypher/",
+    "value": "On Randy's Wish List"
+  },
+  {
+    "field": "Spawn location",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "Game8 spawn: Shore Drive, Vice Beach (across Dominion Hotel al fresco dining); corroborated by gta-xtreme and GamingBolt. Adds to the existing Cirque de Cuisine spawn claim.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/gta-6/archives/639111",
+    "value": "Shore Drive, Vice Beach — across the Dominion Hotel al fresco dining"
+  },
+  {
+    "field": "Era",
+    "id": "ubermacht-cypher",
+    "kind": "vehicles",
+    "locator": "Game8: Era 2020s (Current); corroborated by GTAScoop",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/gta-6/archives/639111",
+    "value": "2020s (Current)"
+  },
+  {
+    "field": "Base handling rating (asphalt)",
+    "id": "truther-burrito",
+    "kind": "vehicles",
+    "locator": "Dexerto base rating 361 asphalt; corroborated by GTAScoop (gtascoop.com/wiki/vehicles/burrito/) and gameta.gg (gameta.gg/gta6/vehicles/truther-burrito/)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/leonida-man/truther-burrito/",
+    "value": "361"
+  },
+  {
+    "field": "Base handling rating (off-road)",
+    "id": "truther-burrito",
+    "kind": "vehicles",
+    "locator": "Dexerto base rating 203 off-road; corroborated by GTAScoop and gameta.gg",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/leonida-man/truther-burrito/",
+    "value": "203"
+  },
+  {
+    "field": "Drivetrain",
+    "id": "truther-burrito",
+    "kind": "vehicles",
+    "locator": "Exputer base page: rear-wheel drive; corroborated by the gameta.gg variant page",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/98-declasse-burrito/",
+    "value": "RWD"
+  },
+  {
+    "field": "Gears",
+    "id": "truther-burrito",
+    "kind": "vehicles",
+    "locator": "Exputer base: five gears; gameta.gg variant page: 5 forward",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/98-declasse-burrito/",
+    "value": "5"
+  },
+  {
+    "field": "Standout set",
+    "id": "truther-burrito",
+    "kind": "vehicles",
+    "locator": "Dexerto: Leonida Man; corroborated by Exputer, gameta.gg and GTAScoop",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/leonida-man/truther-burrito/",
+    "value": "Leonida Man"
+  },
+  {
+    "field": "Description",
+    "id": "truther-burrito",
+    "kind": "vehicles",
+    "locator": "Exputer card text; corroborated by Dexerto and gameta.gg",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/98-declasse-burrito/",
+    "value": "'98 Declasse Burrito owned by a conspiracy theorist with suspicions about the true intentions of SERA"
+  },
+  {
+    "field": "Base handling rating (asphalt)",
+    "id": "truth-justice-caracara",
+    "kind": "vehicles",
+    "locator": "Game8 base rating 467 asphalt; corroborated by Dexerto, gameta.gg and GamesFuze",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/gta-6/archives/639208",
+    "value": "467"
+  },
+  {
+    "field": "Base handling rating (off-road)",
+    "id": "truth-justice-caracara",
+    "kind": "vehicles",
+    "locator": "Game8 base rating 777 off-road; corroborated by Dexerto, gameta.gg and GamesFuze",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/gta-6/archives/639208",
+    "value": "777"
+  },
+  {
+    "field": "Mod specialist",
+    "id": "truth-justice-caracara",
+    "kind": "vehicles",
+    "locator": "Game8: 'Mod Specialist | Off-Road'; corroborated by Exputer base (gta.exputer.com/gta-6/vehicles/vapid-caracara-4x4/)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/gta-6/archives/639208",
+    "value": "Off-Road"
+  },
+  {
+    "field": "Drivetrain",
+    "id": "truth-justice-caracara",
+    "kind": "vehicles",
+    "locator": "Exputer base: all-wheel drive; gameta.gg variant page: AWD (all-wheel)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/vapid-caracara-4x4/",
+    "value": "AWD"
+  },
+  {
+    "field": "Gears",
+    "id": "truth-justice-caracara",
+    "kind": "vehicles",
+    "locator": "Exputer base: six gears; gameta.gg variant page: 6 forward",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/vapid-caracara-4x4/",
+    "value": "6"
+  },
+  {
+    "field": "Standout set",
+    "id": "truth-justice-caracara",
+    "kind": "vehicles",
+    "locator": "Dexerto: Patriot; corroborated by Exputer and gameta.gg",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/patriot/truth-justice-caracara/",
+    "value": "Patriot"
+  },
+  {
+    "field": "Observed location",
+    "id": "truth-justice-caracara",
+    "kind": "vehicles",
+    "locator": "Game8: 'parked at the backyard of the June Warehouse Illegal Operations'; corroborated by timesaver.gg ('Parked outside the east side of June Warehouse, off US-9 and Glenwood Ave'). Same site as the existing Kolt & Associates garage claim, more precise.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/gta-6/archives/639208",
+    "value": "Parked at the backyard/east side of the June Warehouse (Kolt & Associates), Port Gellhorn, off US-9 and Glenwood Ave"
+  },
+  {
+    "field": "Base handling rating (asphalt)",
+    "id": "tropic-dawn-youga",
+    "kind": "vehicles",
+    "locator": "Game8 base rating 321 asphalt; corroborated by Dexerto, gameta.gg and GTAScoop",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/GTA-6/archives/638917",
+    "value": "321"
+  },
+  {
+    "field": "Base handling rating (off-road)",
+    "id": "tropic-dawn-youga",
+    "kind": "vehicles",
+    "locator": "Game8 base rating 194 off-road; corroborated by Dexerto, gameta.gg and GTAScoop",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/GTA-6/archives/638917",
+    "value": "194"
+  },
+  {
+    "field": "Mod specialist",
+    "id": "tropic-dawn-youga",
+    "kind": "vehicles",
+    "locator": "Game8: 'Mod Specialist | None'; corroborated by Exputer base comparison table (Specialist: None)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/GTA-6/archives/638917",
+    "value": "None"
+  },
+  {
+    "field": "Drivetrain",
+    "id": "tropic-dawn-youga",
+    "kind": "vehicles",
+    "locator": "Exputer base: rear-wheel drive; corroborated by the gameta.gg variant page",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/79-bravado-youga-xl/",
+    "value": "RWD"
+  },
+  {
+    "field": "Storage slots",
+    "id": "tropic-dawn-youga",
+    "kind": "vehicles",
+    "locator": "Game8: Storage 10; corroborated by Exputer base ('ten storage slots')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/GTA-6/archives/638917",
+    "value": "10"
+  },
+  {
+    "field": "Standout set",
+    "id": "tropic-dawn-youga",
+    "kind": "vehicles",
+    "locator": "Game8: Fine Art; corroborated by Dexerto, gameta.gg and Exputer",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/GTA-6/archives/638917",
+    "value": "Fine Art"
+  },
+  {
+    "field": "Observed location",
+    "id": "tropic-dawn-youga",
+    "kind": "vehicles",
+    "locator": "Game8: 'parked inside a private warehouse at the east side of Key Lento. Opening the warehouse will trigger an alarm'; corroborated by Polygon ('Inside a boat repair business warehouse in north Key Lento') and gta6info ('New Wave Custom & Repairs warehouse, near where Dolphin Dr meets Sunbelt Hwy'). Refines the existing eastern Key Lento warehouse claim.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://game8.co/games/GTA-6/archives/638917",
+    "value": "Parked inside the New Wave Customs boat-repair warehouse in Key Lento, near where Dolphin Dr meets Sunbelt Hwy; opening the warehouse triggers an alarm"
+  },
+  {
+    "field": "Base handling rating (asphalt)",
+    "id": "trash-rebel",
+    "kind": "vehicles",
+    "locator": "GamesFuze base rating 489 asphalt; corroborated by GTAScoop (gtascoop.com/wiki/vehicles/rebel-84/) and gameta.gg (gameta.gg/gta6/vehicles/trash-rebel/)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gamesfuze.com/gta-6-wiki/cars/",
+    "value": "489"
+  },
+  {
+    "field": "Base handling rating (off-road)",
+    "id": "trash-rebel",
+    "kind": "vehicles",
+    "locator": "GamesFuze base rating 389 off-road; corroborated by GTAScoop and gameta.gg",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gamesfuze.com/gta-6-wiki/cars/",
+    "value": "389"
+  },
+  {
+    "field": "Drivetrain",
+    "id": "trash-rebel",
+    "kind": "vehicles",
+    "locator": "Exputer base: all-wheel drive; corroborated by the gameta.gg variant page",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/84-karin-rebel/",
+    "value": "AWD"
+  },
+  {
+    "field": "Gears",
+    "id": "trash-rebel",
+    "kind": "vehicles",
+    "locator": "Exputer base: five gears; gameta.gg variant page: 5 forward",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/84-karin-rebel/",
+    "value": "5"
+  },
+  {
+    "field": "Standout set",
+    "id": "trash-rebel",
+    "kind": "vehicles",
+    "locator": "Exputer: Demolition Derby; corroborated by gameta.gg and GTAScoop",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/84-karin-rebel/",
+    "value": "Demolition Derby"
+  },
+  {
+    "field": "Description",
+    "id": "trash-rebel",
+    "kind": "vehicles",
+    "locator": "Exputer card text; corroborated by gameta.gg",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/vehicles/84-karin-rebel/",
+    "value": "'84 Karin Rebel reinforced to withstand more punishment, discovered by a trailer in Ambrosia"
+  },
+  {
+    "field": "Magazine size",
+    "id": "russos-1922-pistol",
+    "kind": "weapons",
+    "locator": "thegameswiki Russo's 1922 page: 'Magazine capacity: 8'; corroborated by Exputer's Duke 1922 page ('8-round magazine', comparison table 8) and thegameswiki Unique Weapons index (Mag Size 8)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/russos-1922",
+    "value": "8 rounds"
+  },
+  {
+    "field": "Caliber",
+    "id": "russos-1922-pistol",
+    "kind": "weapons",
+    "locator": "thegameswiki Unique Weapons index: 'heavy pistol, semi-auto, .45 Cal'; corroborated by Exputer Duke 1922 ('feeds .45 ammunition')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/russos-1922",
+    "value": ".45 Cal"
+  },
+  {
+    "field": "Fire mode",
+    "id": "russos-1922-pistol",
+    "kind": "weapons",
+    "locator": "thegameswiki Russo's page: 'Firing mode: Semi-Auto'; corroborated by Exputer Duke 1922",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/russos-1922",
+    "value": "Semi-auto"
+  },
+  {
+    "field": "Manufacturer",
+    "id": "russos-1922-pistol",
+    "kind": "weapons",
+    "locator": "thegameswiki Russo's page: 'Manufacturer: Duke'; corroborated by Exputer ('Duke makes the Duke 1922')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/russos-1922",
+    "value": "Duke (Duke Arms)"
+  },
+  {
+    "field": "Base weapon",
+    "id": "russos-1922-pistol",
+    "kind": "weapons",
+    "locator": "thegameswiki Russo's page: 'named variant of the Duke 1922 pistol'; corroborated by Exputer ('Unique Variants… Russo's 1922')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/russos-1922",
+    "value": "Variant of the Duke 1922"
+  },
+  {
+    "field": "Modifications",
+    "id": "russos-1922-pistol",
+    "kind": "weapons",
+    "locator": "Exputer Duke 1922: 'Attachments cannot be fitted to them'; corroborated by thegameswiki Unique Weapons index ('A unique variant cannot take attachments')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/russos-1922",
+    "value": "None — unique variants cannot be fitted with attachments"
+  },
+  {
+    "field": "Fire mode",
+    "id": "hillinger-boomer",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Fire Style: Single Shot'; corroborated by Exputer (gta.exputer.com/gta-6/weapons/hillinger-boomer/ — 'fires 40mm grenade ammunition in single shots') and guiasgta6",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/launchers/hillinger-boomer/",
+    "value": "Single shot"
+  },
+  {
+    "field": "Caliber",
+    "id": "hillinger-boomer",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Caliber: 40mm Grenade'; corroborated by Exputer ('Caliber: 40mm grenade') and guiasgta6 ('chambered in 40mm')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/launchers/hillinger-boomer/",
+    "value": "40mm grenade"
+  },
+  {
+    "field": "Purchase locations",
+    "id": "hillinger-boomer",
+    "kind": "weapons",
+    "locator": "Exputer: 'Only the six Expanded gun stores sell the Hillinger Boomer for $12,000: Big Shots, Woodhatch, Phil's Ammu-Nation, Black Eagle, Iron & Oak and Prestige Firearms'; corroborated by thegameswiki (same six with towns) and guiasgta6 (same six with towns)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/weapons/hillinger-boomer/",
+    "value": "Big Shots, Woodhatch, Phil's Ammu-Nation, Black Eagle, Iron & Oak, Prestige Firearms (six Expanded Ammu-Nations)"
+  },
+  {
+    "field": "Manufacturer",
+    "id": "hillinger-boomer",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Brand: Hillinger'; corroborated by Exputer ('Manufacturer: Hillinger')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/launchers/hillinger-boomer/",
+    "value": "Hillinger"
+  },
+  {
+    "field": "Acquisition method",
+    "id": "hillinger-boomer",
+    "kind": "weapons",
+    "locator": "GameTrek step-by-step (refinery area near SR-45, red boxcar, open wooden crate); corroborated by nowgame.eu (nowgame.eu/guides/1093-how-to-get-the-hillinger-boomer-for-free-in-gta-6 — same method, same location)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gmtreks.com/gta6/page/01M870VTN9ZBHDAPX9XTFSACCW",
+    "value": "Free copy in a red boxcar on a freight train near the oil refinery/rail yard along SR-45 — board a flatcar, move toward the rear, enter through the boxcar door; the Boomer is in an open wooden crate"
+  },
+  {
+    "field": "Magazine size",
+    "id": "gutterball-moreland-850",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Mag Size: 8'; corroborated by Exputer Moreland 850 ('Its magazine holds 8 shells') and thegameswiki ('Magazine: 8')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/weapons/moreland-850-shotgun/",
+    "value": "8 rounds"
+  },
+  {
+    "field": "Caliber",
+    "id": "gutterball-moreland-850",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Caliber: 12-Gauge'; corroborated by Exputer ('5-shell magazine of 12-gauge' for the base; variant table 8 shells) and thegameswiki ('fires 12-gauge shells from an 8-round magazine')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/weapons/moreland-850-shotgun/",
+    "value": "12-Gauge"
+  },
+  {
+    "field": "Fire mode",
+    "id": "gutterball-moreland-850",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Fire Style: Pump Action'; corroborated by Exputer ('pump-action shotgun') and thegameswiki ('pump-action shotgun')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/weapons/moreland-850-shotgun/",
+    "value": "Pump action"
+  },
+  {
+    "field": "Base weapon",
+    "id": "gutterball-moreland-850",
+    "kind": "weapons",
+    "locator": "Exputer Unique Variants table; corroborated by thegameswiki ('based on the Fortune & Son Moreland 850')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/weapons/moreland-850-shotgun/",
+    "value": "Variant of the Fortune & Son Moreland 850"
+  },
+  {
+    "field": "Appearance",
+    "id": "gutterball-moreland-850",
+    "kind": "weapons",
+    "locator": "thegameswiki look description; corroborated by the verified Space4Games locker screenshot, which visibly shows the blue/black ombre finish and the bowling-pin decal",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://space4games.com/en/games-en/gta-6-unique-weapons-locations-stats/",
+    "value": "Blue and black ombre finish with a bowling-pin decal on the stock"
+  },
+  {
+    "field": "Modifications",
+    "id": "gutterball-moreland-850",
+    "kind": "weapons",
+    "locator": "thegameswiki: 'the shotgun cannot be modified'; corroborated by Exputer Moreland 850 ('Unique variants cannot use attachments')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/weapons/moreland-850-shotgun/",
+    "value": "Cannot be modified"
+  },
+  {
+    "field": "Availability",
+    "id": "gutterball-moreland-850",
+    "kind": "weapons",
+    "locator": "KeenGamer: 'If you leave without the shotgun, Kingpin Bowling returns as a robbery target in Chapter 3'; corroborated by thegameswiki ('the operation respawns much later, in Chapter 3… Neither the shotgun nor the trophy is missable')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.keengamer.com/articles/guides/gta-6-all-8-legendary-weapon-locations-in-port-gellhorn/",
+    "value": "Not missable — if missed, the Kingpin Bowling operation respawns in Chapter 3 and the shotgun can be collected then"
+  },
+  {
+    "field": "Magazine size",
+    "id": "fairview-ff-sr",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Mag Size: 10'; corroborated by Exputer ('holds 10 rounds') and thegameswiki ('10-round magazine')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/sniper-rifles/fairview-ff-sr/",
+    "value": "10 rounds"
+  },
+  {
+    "field": "Caliber",
+    "id": "fairview-ff-sr",
+    "kind": "weapons",
+    "locator": "Dexerto: '.338 Magnum'; corroborated by Exputer ('fires .338 Magnum') and thegameswiki",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/sniper-rifles/fairview-ff-sr/",
+    "value": ".338 Magnum"
+  },
+  {
+    "field": "Fire mode",
+    "id": "fairview-ff-sr",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Fire Style: Bolt Action'; corroborated by Exputer ('fires .338 Magnum through a bolt action') and thegameswiki",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/sniper-rifles/fairview-ff-sr/",
+    "value": "Bolt action"
+  },
+  {
+    "field": "Purchase locations",
+    "id": "fairview-ff-sr",
+    "kind": "weapons",
+    "locator": "Exputer: 'sells for $2,950 exclusively at the six Expanded stores: Big Shots, Woodhatch, Phil's Ammu-Nation, Black Eagle, Iron & Oak and Prestige Firearms'; corroborated by thegameswiki (same six) and Dexerto (Big Shots)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/weapons/fairview-ff-sr/",
+    "value": "Big Shots, Woodhatch, Phil's Ammu-Nation, Black Eagle, Iron & Oak, Prestige Firearms (six Expanded Ammu-Nations)"
+  },
+  {
+    "field": "Acquisition method",
+    "id": "fairview-ff-sr",
+    "kind": "weapons",
+    "locator": "thegameswiki: 'A free FF-SR can be found in the coastal compound near Watson Bay. Land on the beach and enter through the gap in the fence.'; corroborated by Beebom (beebom.com/gta-6-fairview-ff-sr/ — gang hideout near the docks along Ockola Way, enter through the chain-link fence), LibertyCity (per canonical notes) and aiarenapro (wooden crate, Ockola Way, Watson Bay)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/fairview-ff-sr",
+    "value": "Free copy in the fenced coastal gang compound near Watson Bay — land on the beach, enter through the gap in the fence"
+  },
+  {
+    "field": "Modifications",
+    "id": "fairview-ff-sr",
+    "kind": "weapons",
+    "locator": "Exputer: 'Barrels, Foregrips, Muzzles & Suppressors and Optics; its 10-round magazine cannot be changed'; corroborated by thegameswiki ('mod slots for its barrel, grip, suppressor and sight; no flashlight, magazine or stock slot')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gta.exputer.com/gta-6/weapons/fairview-ff-sr/",
+    "value": "Mod slots: barrel, foregrip/grip, muzzle/suppressor, optics; 10-round magazine cannot be changed; no flashlight or stock slot"
+  },
+  {
+    "field": "Magazine size",
+    "id": "donnies-h-and-l-38",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Mag Size: 6'; corroborated by thegameswiki ('Magazine capacity: 6') and GTABase via gta6gang ('with six rounds')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/donnies-hl-38",
+    "value": "6 rounds"
+  },
+  {
+    "field": "Caliber",
+    "id": "donnies-h-and-l-38",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Caliber: .38 Special'; corroborated by thegameswiki Unique Weapons index ('double action revolver, semi-auto, .38 Special')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/donnies-hl-38",
+    "value": ".38 Special"
+  },
+  {
+    "field": "Fire mode",
+    "id": "donnies-h-and-l-38",
+    "kind": "weapons",
+    "locator": "Dexerto class: 'Double Action Revolver'; corroborated by thegameswiki Unique Weapons index ('double action revolver'). The 'semi-auto' label carried by Dexerto, thegameswiki and GTA6Bible on this revolver is a template artifact — a revolver is definitionally not semi-automatic — and is NOT recorded as a fact.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/donnies-hl-38",
+    "value": "Double action"
+  },
+  {
+    "field": "Base weapon",
+    "id": "donnies-h-and-l-38",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Unique Variant of the Hawk & Little .38'; corroborated by thegameswiki ('named variant of the Hawk & Little .38 revolver') and gta.guide",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/donnies-hl-38",
+    "value": "Variant of the Hawk & Little .38"
+  },
+  {
+    "field": "Manufacturer",
+    "id": "donnies-h-and-l-38",
+    "kind": "weapons",
+    "locator": "Dexerto: 'Brand: Hawk & Little'; corroborated by thegameswiki ('Manufacturer: Hawk & Little')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/donnies-hl-38",
+    "value": "Hawk & Little"
+  },
+  {
+    "field": "Modifications",
+    "id": "donnies-h-and-l-38",
+    "kind": "weapons",
+    "locator": "GTABase via gta6gang: 'cannot be customized'; corroborated by thegameswiki Unique Weapons index ('A unique variant cannot take attachments') and GTA6Bible ('inability to be further modified')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://thegameswiki.com/gta6/wiki/donnies-hl-38",
+    "value": "Cannot be customized/modified"
+  },
+  {
+    "field": "Base weapon price",
+    "id": "donnies-h-and-l-38",
+    "kind": "weapons",
+    "locator": "GamesFuze: $1,075; corroborated by fpsgen ('$1,075') and gta6gang/GTABase ('costs $1,075 at Big Shots'). GTA6Bible lists $1,057 — 3v1, $1,075 kept; the $1,057 may be a discounted or stale figure.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse",
+    "source": "https://gamesfuze.com/gta-6-wiki/weapons/",
+    "value": "$1,075 — store version of the base Hawk & Little .38 (Donnie's variant itself is found, not bought)"
   }
 ]
