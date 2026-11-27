@@ -163,6 +163,7 @@ const nextConfig = {
       { source: "/weapons/the-silver-1992", destination: "/weapons/the-silver-1922", permanent: true },
       { source: "/weapons/micro-smg", destination: "/weapons", permanent: true },
       { source: "/weapons/kolt-and-associates-vatra", destination: "/weapons/kolt-associates-vatra", permanent: true },
+      { source: "/vehicles/vapid-stanier", destination: "/vehicles/stanier-g2", permanent: true },
       { source: "/weapons/mustang-357", destination: "/weapons/duke-mustang-357", permanent: true },
       { source: "/weapons/hunting-combat-knife", destination: "/weapons/hunting-knife", permanent: true },
       { source: "/vehicles/bravado-banshee-gts", destination: "/vehicles/bravado-banshee", permanent: true },
