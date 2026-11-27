@@ -40209,4 +40209,25 @@
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
   }
+,
+  {
+    "kind": "weapons",
+    "id": "marabunta-grande-kz-59",
+    "field": "Observed location",
+    "value": "Nova Auto Junkyard (M7 gang Illegal Operation), northeast Hamlet, Vice-Dale County — golden rifle on a workbench under the metal awning beside the large blue shipping container, northern section of the yard. The office safe in the southeast building opens with code 7777; the Albany Teniente Manana is in the adjoining garage.",
+    "source": "https://radarleonida.com/en/article/where-to-get-the-teniente-manana-and-golden-rifle-at-gta-6-s-hamlet-scrapyard/",
+    "locator": "RadarLeonida (27 Nov 2026, Anubis_RD footage): golden Marabunta Grande KZ-59 at the Hamlet scrapyard, Teniente Manana in the workshop garage. Corroborated by ShowGamer Nova Auto Junkyard guide (rifle on the workbench beside the large blue container under the metal awning, northern section; safe code 7777; Teniente in the garage), Heistbook ('Table under central canopy at Nova Auto Junkyard'), thegameswiki Nova Auto Junkyard page, Insider Gaming illegal-operations table (Nova Auto Junkyard, Hamlet - KZ-59 + Teniente Manana), GameRant M7 Compound guide and LibertyCity. Note: RadarLeonida words the rifle as 'inside the blue container'; the majority of sources place it on the workbench beside the container, which is what this claim states.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "sirius",
+    "field": "Observed location",
+    "value": "Three wrecked Transgressors to scan for Wyman's collection quest, all in Port Gellhorn — trailer park centre, blue-house garage across the street from the Kolt & Associates robbery, and the backyard behind Dunk's drug robbery. After all three scans, Wyman texts; pay $1,500 via Buck Me to claim the restored '67 Transgressor.",
+    "source": "https://www.sportskeeda.com/gta/how-get-67-transgressor-gta-6",
+    "locator": "Sportskeeda (27 Nov 2026): all three wreck spots in Port Gellhorn (trailer park centre; blue-house garage across from Kolt & Associates; backyard behind Dunk's drug robbery) + $1,500 Buck Me payment to claim the restored car; quest triggers after picking up the '67 Vapid Dominator (Ultimate Edition). Corroborated by GameRant (same three spots, same $1,500, same Wyman quest flow) and Push Square Wyman's Classic Car Locations guide (already cited in the entry's claims).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  }
 ]

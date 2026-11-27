@@ -667,11 +667,11 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     price: null,
     priceDisplay: "TBA",
     purchaseLocation: "TBA",
-    spawnLocations: [],
+    spawnLocations: ["Port Gellhorn (three wreck sites \u2014 Wyman collection quest)"],
     customizationOptions: [],
     confidence: "REPORTED",
     source: "GTA 6 Classic Car Collection promotion",
-    description: "Named as part of the Classic Car Collection; detailed specifications are not published.",
+    description: "Classic muscle car restored through Wyman's collection quest in Chapter 2: scan three wrecked Transgressors around Port Gellhorn, then pay $1,500 to claim the restored '67 car.",
     featured: false,
   },
   {
