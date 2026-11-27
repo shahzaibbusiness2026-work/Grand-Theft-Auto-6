@@ -86,7 +86,7 @@ export default function SiteMapPage() {
         {
           label: "Interactive Satellite Map",
           href: "/map",
-          desc: "Full Leonida atlas",
+          desc: "Full Leonida map",
         },
         {
           label: "Map Explorer",
@@ -186,7 +186,7 @@ export default function SiteMapPage() {
     {
       title: "Account & More",
       links: [
-        { label: "Sign in", href: "/login", desc: "Your Atlas HQ" },
+        { label: "Sign in", href: "/login", desc: "Your Leonida HQ" },
         {
           label: "Membership",
           href: "/pricing",

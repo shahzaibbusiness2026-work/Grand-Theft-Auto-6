@@ -258,7 +258,7 @@ export default function AdminSeoPage() {
             </div>
 
             <p className="text-xs text-[#64748B] leading-relaxed">
-              Real-time representation of how search engines like Google and Bing present Atlas pages in public search results.
+              Real-time representation of how search engines like Google and Bing present Leonida pages in public search results.
             </p>
           </div>
         </div>

@@ -64,7 +64,7 @@ export async function GET(request: Request) {
         await resend.emails.send({
           from,
           to: sub.email,
-          subject: "🎮 GTA 6 is OUT NOW — Your Atlas Awaits!",
+          subject: "🎮 GTA 6 is OUT NOW — Your Leonida Awaits!",
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
               <h1 style="color: #FF2E9A; text-align: center;">GTA 6 IS HERE!</h1>
@@ -79,7 +79,7 @@ export async function GET(request: Request) {
                 <li>🎯 Tracker preview</li>
               </ul>
               <p style="text-align: center; margin: 30px 0;">
-                <a href="https://www.taishgaming.com" style="background: #FF2E9A; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;">Explore the Atlas →</a>
+                <a href="https://www.taishgaming.com" style="background: #FF2E9A; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;">Explore Leonida →</a>
               </p>
               <p>Welcome to Leonida!</p>
               <p style="color: #888; font-size: 12px;">You're receiving this because you signed up for Taish Gaming updates. <a href="${newsletterUnsubscribeUrl(sub.email, sub.subscribed_at)}">Unsubscribe</a></p>

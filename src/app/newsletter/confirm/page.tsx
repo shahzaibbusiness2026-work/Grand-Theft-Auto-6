@@ -52,7 +52,7 @@ export default async function NewsletterConfirmPage({
         href="/"
         className="mt-8 inline-flex items-center rounded-xl bg-[#FF2E9A] px-6 py-3 text-sm font-bold uppercase tracking-wider text-black transition hover:brightness-110"
       >
-        Back to the Atlas
+        Back to Leonida
       </Link>
     </main>
   );

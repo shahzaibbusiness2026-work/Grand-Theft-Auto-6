@@ -84,7 +84,7 @@ export default function AdminSubscribersPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `gta6-atlas-subscribers-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `gta6-leonida-subscribers-${new Date().toISOString().slice(0, 10)}.csv`;
     document.body.appendChild(a);
     a.click();
     a.remove();

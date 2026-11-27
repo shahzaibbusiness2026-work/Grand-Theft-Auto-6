@@ -235,7 +235,7 @@ export function CommandPaletteContent({
               setSelectedIndex(0);
             }}
             placeholder="Search tools, catalogs, characters and articles..."
-            aria-label="Search the Atlas"
+            aria-label="Search Leonida"
             className="w-full bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
           {query && (

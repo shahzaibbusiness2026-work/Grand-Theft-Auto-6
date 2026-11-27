@@ -51,7 +51,7 @@ function dbToCanonical(
       (p.confidence as CanonicalProperty["confidence"]) ||
       match?.confidence ||
       "REPORTED",
-    source: p.source || match?.source || "Atlas Admin",
+    source: p.source || match?.source || "Leonida Admin",
     desc: p.description || match?.desc || "",
     img: p.img || match?.img || "",
     mapCoords: match?.mapCoords || { top: "", left: "" },

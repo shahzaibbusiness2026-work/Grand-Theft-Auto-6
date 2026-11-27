@@ -190,7 +190,7 @@ export default async function HomePage() {
         markers={mapMarkers}
       />
       <div className="hidden sm:block" data-desktop-home>
-        {/* QUICK STATS ATLAS STRIP */}
+        {/* QUICK STATS LEONIDA STRIP */}
         <section className="container-site pt-1 sm:pt-2">
           <FloatingStats stats={stats} />
         </section>

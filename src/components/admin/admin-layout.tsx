@@ -43,7 +43,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
 
   // Restore sidebar collapsed preference
   useEffect(() => {
-    const stored = localStorage.getItem("atlas_admin_sidebar_collapsed");
+    const stored = localStorage.getItem("leonida_admin_sidebar_collapsed");
     if (stored) {
       setIsSidebarCollapsed(stored === "true");
     }
@@ -52,7 +52,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
   const toggleSidebarCollapse = () => {
     setIsSidebarCollapsed((prev) => {
       const next = !prev;
-      localStorage.setItem("atlas_admin_sidebar_collapsed", String(next));
+      localStorage.setItem("leonida_admin_sidebar_collapsed", String(next));
       return next;
     });
   };

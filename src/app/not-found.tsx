@@ -41,9 +41,9 @@ export default function NotFound() {
             The page you&apos;re looking for doesn&apos;t exist or has been moved.
           </p>
 
-          <form action="/news" method="GET" className="mt-8 flex w-full max-w-lg gap-2" role="search" aria-label="Search Atlas">
+          <form action="/news" method="GET" className="mt-8 flex w-full max-w-lg gap-2" role="search" aria-label="Search Leonida">
             <label htmlFor="search-404" className="sr-only">
-              Search Atlas
+              Search Leonida
             </label>
             <Input
               id="search-404"

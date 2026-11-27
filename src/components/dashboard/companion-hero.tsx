@@ -23,7 +23,7 @@ export function CompanionHero({ userName = "Player", siteStats }: { userName?: s
       <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-200">Pick up your plans, explore the community map and keep your collection in one place.</p>
       </div>
     </div>
-    <div className="grid grid-cols-2 divide-x divide-border sm:grid-cols-4" aria-label="Published atlas records">
+    <div className="grid grid-cols-2 divide-x divide-border sm:grid-cols-4" aria-label="Published Leonida records">
       {stats.map(({ label, value, icon: Icon }) => <div key={label} className="flex min-w-0 items-center gap-3 border-t border-border px-4 py-4 sm:px-5">
         <Icon aria-hidden="true" className="h-4 w-4 shrink-0 text-pink-700 dark:text-pink-300" />
         <div><strong className="block text-lg tabular-nums text-foreground">{siteStats?.dataAvailable === false ? "—" : value ?? "—"}</strong><span className="text-xs text-muted-foreground">{label}</span></div>

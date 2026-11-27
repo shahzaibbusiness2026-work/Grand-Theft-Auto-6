@@ -358,7 +358,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               Select with <kbd className="font-mono bg-[var(--admin-elevated)] px-1.5 py-0.5 rounded border border-[var(--admin-border)]">↵</kbd>
             </span>
           </div>
-          <span>Leonida Atlas Engine v1.4.2</span>
+          <span>Leonida Engine v1.4.2</span>
         </div>
       </div>
     </div>
