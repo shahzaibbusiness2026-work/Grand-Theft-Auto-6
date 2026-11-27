@@ -4833,51 +4833,51 @@
     "kind": "vehicles",
     "id": "vapid-riata",
     "field": "Speed rating",
-    "value": "4.4/10",
-    "source": "https://tracker.gg/gta6/vehicles",
-    "locator": "WAiNK scan ratings: Riata",
+    "value": "2.8/10",
+    "source": "https://gta.exputer.com/gta-6/vehicles/70-riata/",
+    "locator": "WAiNK scan ratings: '70 Riata — also listed by gameta.gg/gta6/vehicles/70-vapid-riata/ with the same five figures",
     "reviewedAt": "2026-11-27",
-    "reviewer": "Taish Gaming source review"
+    "reviewer": "Muse"
   },
   {
     "kind": "vehicles",
     "id": "vapid-riata",
     "field": "Acceleration rating",
-    "value": "5.7/10",
-    "source": "https://tracker.gg/gta6/vehicles",
-    "locator": "WAiNK scan ratings: Riata",
+    "value": "2.6/10",
+    "source": "https://gta.exputer.com/gta-6/vehicles/70-riata/",
+    "locator": "WAiNK scan ratings: '70 Riata — also listed by gameta.gg/gta6/vehicles/70-vapid-riata/ with the same five figures",
     "reviewedAt": "2026-11-27",
-    "reviewer": "Taish Gaming source review"
+    "reviewer": "Muse"
   },
   {
     "kind": "vehicles",
     "id": "vapid-riata",
     "field": "Asphalt handling rating",
-    "value": "3.8/10",
-    "source": "https://tracker.gg/gta6/vehicles",
-    "locator": "WAiNK scan ratings: Riata",
+    "value": "3.2/10",
+    "source": "https://gta.exputer.com/gta-6/vehicles/70-riata/",
+    "locator": "WAiNK scan ratings: '70 Riata — also listed by gameta.gg/gta6/vehicles/70-vapid-riata/ with the same five figures",
     "reviewedAt": "2026-11-27",
-    "reviewer": "Taish Gaming source review"
+    "reviewer": "Muse"
   },
   {
     "kind": "vehicles",
     "id": "vapid-riata",
     "field": "Off-road handling rating",
     "value": "6.6/10",
-    "source": "https://tracker.gg/gta6/vehicles",
-    "locator": "WAiNK scan ratings: Riata",
+    "source": "https://gta.exputer.com/gta-6/vehicles/70-riata/",
+    "locator": "WAiNK scan ratings: '70 Riata — also listed by gameta.gg/gta6/vehicles/70-vapid-riata/ with the same five figures",
     "reviewedAt": "2026-11-27",
-    "reviewer": "Taish Gaming source review"
+    "reviewer": "Muse"
   },
   {
     "kind": "vehicles",
     "id": "vapid-riata",
     "field": "Strength rating",
     "value": "3.0/10",
-    "source": "https://tracker.gg/gta6/vehicles",
-    "locator": "WAiNK scan ratings: Riata",
+    "source": "https://gta.exputer.com/gta-6/vehicles/70-riata/",
+    "locator": "WAiNK scan ratings: '70 Riata — also listed by gameta.gg/gta6/vehicles/70-vapid-riata/ with the same five figures",
     "reviewedAt": "2026-11-27",
-    "reviewer": "Taish Gaming source review"
+    "reviewer": "Muse"
   },
   {
     "kind": "vehicles",
@@ -37756,6 +37756,236 @@
     "value": "Locked at first; unlocks after buying other guns from the shop",
     "source": "https://www.dexerto.com/wikis/gta-6/weapons/revolvers/duke-mustang-357/",
     "locator": "Dexerto: locked at first and unlocks after buying other guns from the shop; corroborated by gta.guide (https://gta.guide/gta-6/weapons/duke-mustang-357) and Exputer.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-ganado",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://gameta.gg/gta6/vehicles/vapid-ganado/",
+    "locator": "Seats: 2 — also listed by fivestarintel.com/vehicles/vapid-ganado/ ('Seats, 2')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-ganado",
+    "field": "Vehicle class",
+    "value": "Muscle Car",
+    "source": "https://gameta.gg/gta6/vehicles/vapid-ganado/",
+    "locator": "Class: Muscle Cars — also listed by fivestarintel.com/vehicles/vapid-ganado/ ('Type, Muscle')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-riata",
+    "field": "Seating",
+    "value": "2 seats",
+    "source": "https://gameta.gg/gta6/vehicles/70-vapid-riata/",
+    "locator": "Seats: 2 — also Exputer ('Seats | 2') and gta6intel.com/vehicles/vapid-riata-classic ('seats two')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-riata",
+    "field": "Drivetrain",
+    "value": "AWD (all-wheel drive)",
+    "source": "https://gameta.gg/gta6/vehicles/70-vapid-riata/",
+    "locator": "AWD (all-wheel) — also Exputer ('All-wheel drive')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-riata",
+    "field": "Vehicle class",
+    "value": "SUV",
+    "source": "https://gameta.gg/gta6/vehicles/70-vapid-riata/",
+    "locator": "Class: SUV — also Exputer and gta6intel.com/vehicles/vapid-riata-classic",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-riata",
+    "field": "Wreck scan locations",
+    "value": "Southwind, end of Cangrejo St (carport); Key Lento, Sunset Dr, across from the police impound; Shoeless Keys, behind the ruined gas station north of Grassrivers Cafe & Deli",
+    "source": "https://www.pushsquare.com/guides/gta-6-wymans-classic-car-locations",
+    "locator": "Wyman's classic car locations — also Destructoid ('All Riata locations in GTA 6') and GamesFuze ('All classic vehicle parts for Wyman locations')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Scanned sell value",
+    "value": "$24,365",
+    "source": "https://www.instagram.com/reel/DgLxnbrBihT/",
+    "locator": "In-game menu read, sixstarzclipz reel — also Millzaa reel DgBKDaTqxA6, gtavicegrid reel DgA5R0WzzWN and the Wiildey infographic (all $24,365; the $24,000 figure in some clips is the same number rounded)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Registration cost",
+    "value": "$9,500",
+    "source": "https://www.instagram.com/reel/DgLxnbrBihT/",
+    "locator": "In-game menu read, sixstarzclipz reel — also thegatorium reel DgEgbhixhoi and the Wiildey infographic",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Base handling rating (asphalt)",
+    "value": "607",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Base ratings 607 asphalt / 389 off-road — also gameta.gg/gta6/vehicles/bourbon-windsor/ and Dexerto (dexerto.com/wikis/gta-6/vehicles/standout/donks/bourbon-windsor/)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Base handling rating (off-road)",
+    "value": "389",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Base ratings 607 asphalt / 389 off-road — also gameta.gg/gta6/vehicles/bourbon-windsor/ and Dexerto (dexerto.com/wikis/gta-6/vehicles/standout/donks/bourbon-windsor/)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Mod specialist",
+    "value": "Luxury",
+    "source": "https://game8.co/games/GTA-6/archives/639340",
+    "locator": "Mod specialist: Luxury — also gameta.gg/gta6/vehicles/bourbon-windsor/",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Drivetrain",
+    "value": "RWD",
+    "source": "https://gameta.gg/gta6/vehicles/bourbon-windsor/",
+    "locator": "Drivetrain RWD, gears 8, weight 2,380 kg — same figures on the sibling GILF Windsor (gtabase.com/gta-6/vehicles/gilf-windsor, same Windsor Drop base)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Gears",
+    "value": "8",
+    "source": "https://gameta.gg/gta6/vehicles/bourbon-windsor/",
+    "locator": "Drivetrain RWD, gears 8, weight 2,380 kg — same figures on the sibling GILF Windsor (gtabase.com/gta-6/vehicles/gilf-windsor, same Windsor Drop base)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "buckingham-bourbon-windsor",
+    "field": "Weight",
+    "value": "2,380 kg",
+    "source": "https://gameta.gg/gta6/vehicles/bourbon-windsor/",
+    "locator": "Drivetrain RWD, gears 8, weight 2,380 kg — same figures on the sibling GILF Windsor (gtabase.com/gta-6/vehicles/gilf-windsor, same Windsor Drop base)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Registration cost",
+    "value": "$6,300",
+    "source": "https://thegameswiki.com/gta6/wiki/industrial-weed-grow",
+    "locator": "Costs $6,300 to register — also showgamer.com guide, the sixstarzclipz Instagram reel DgLjwcat9vh (in-game UI) and the India Times Industrial Weed Grow guide",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Scanned sell value",
+    "value": "$16,170",
+    "source": "https://thegameswiki.com/gta6/wiki/industrial-weed-grow",
+    "locator": "Sell value $16,170 — also showgamer.com, the sixstarzclipz reel DgLjwcat9vh and the India Times guide ($14,645 Facebook-reel figure is a damaged-condition outlier)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Tracker",
+    "value": "None",
+    "source": "https://www.instagram.com/reel/DgLjwcat9vh/",
+    "locator": "In-game UI shows no tracker — also Threads/MillzaaTV footage",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Mod specialist",
+    "value": "Off-Road",
+    "source": "https://game8.co/games/gta-6/archives/639156",
+    "locator": "Mod specialist: Off-Road — also gameta.gg/gta6/vehicles/cultivator-sandking/",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Base handling rating (asphalt)",
+    "value": "391",
+    "source": "https://gameta.gg/gta6/vehicles/cultivator-sandking/",
+    "locator": "Base asphalt rating 391 — also Dexerto (dexerto.com/wikis/gta-6/vehicles/standout/all-terrain/cultivator-sandking/); Game8 lists 349",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-cultivator-sandking",
+    "field": "Base handling rating (off-road)",
+    "value": "645",
+    "source": "https://gameta.gg/gta6/vehicles/cultivator-sandking/",
+    "locator": "Base off-road rating 645 — agrees across gameta.gg, Dexerto and Game8",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Drivetrain",
+    "value": "RWD",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-comet-retro-custom/",
+    "locator": "Rear-wheel drive — also gtatracker.gg/vi/db/vehicles/pfister-comet-88 and gameta.gg/gta6/vehicles/88-pfister-comet/",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Tracker",
+    "value": "Advanced",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-comet-retro-custom/",
+    "locator": "Advanced tracker — also HeistAtlas (heistatlas.com/en/guide/cars/) and gameta.gg ('Advanced on some copies')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pfister-comet-88",
+    "field": "Mod specialist",
+    "value": "Tuner (Vice Auto Customs)",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pfister-comet-retro-custom/",
+    "locator": "Mod specialist: Tuner — also gtatracker.gg/vi/db/vehicles/pfister-comet-88 and gameta.gg/gta6/vehicles/88-pfister-comet/",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
   }
