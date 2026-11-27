@@ -26763,11 +26763,11 @@
     "kind": "vehicles",
     "id": "lustrous-toros",
     "field": "Observed location",
-    "value": "A home in Rialto Islands, gold finish",
-    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-toros/",
-    "locator": "Standout variant: Lustrous Toros",
-    "reviewedAt": "2026-11-26",
-    "reviewer": "Atlas Team"
+    "value": "Mansion garage on Casanova Island, the easternmost of the Rialto Islands, Vice-Dale County — lift the white garage door by hand to find the gold Lustrous Toros inside. Gold chrome finish with matching rims and a custom CASHTLKS plate; alarm and Advanced Tracker fitted; Key Cloner (Chapter 3) required to steal; register $29,900.",
+    "source": "https://beebom.com/gta-6-pegassi-toros/",
+    "locator": "Beebom: the Lustrous Toros \u2018is parked inside a private mansion garage on Casanova Island\u2019 \u2014 \u2018set a waypoint to Casanova Island, the easternmost island in the Rialto Islands\u2019 \u2014 \u2018manually lift the garage door to find the gold Lustrous Toros inside\u2019; alarm + Advanced Tracker, Key Cloner needed, $29,900 to register. Corroborated by KeenGamer (same mansion garage on Casanova Island, easternmost Rialto Island, CASHTLKS plate, $29,900 register), Sportskeeda, ShowGamer, gta6motors, TheBestMods and GTA-Xtreme. Consistent with the earlier Exputer claim (\u2018A home in Rialto Islands, gold finish\u2019), now pinned to the exact garage.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   },
   {
     "kind": "vehicles",
@@ -40196,6 +40196,16 @@
     "value": "Final Chapter compound (Irons Building Supply), Birch Street, Ambrosia, Kelly County — the orange bike on the ground floor of the central garage/warehouse. Moses' sixth vehicle request; $6,310 base payout on delivery to Port Gellhorn.",
     "source": "https://www.keengamer.com/articles/guides/gta-6-all-7-moses-vehicle-drop-off-locations/",
     "locator": "KeenGamer 'All 7 Moses Vehicle Drop-Off Locations': 'Western Nightblade | Birch St, Ambrosia | Final Chapter clubhouse' — 'the orange motorcycle at the back of the ground floor' of the central warehouse; open the compound gate before riding out. Corroborated by Destructoid (motorcycle club on Birch St, Kelly County; ladder/roof route into the compound), thegameswiki Motorcycle Clubs (Irons Building Supply holds 'a club-owned Western Nightblade motorcycle that Moses asks you to steal'), magicgameworld, heistatlas, playermanual, finalboss and gta6info, plus the no-commentary playthrough (https://www.youtube.com/watch?v=URJ8TKAmoYI) showing the same compound, bike and a $6,330 delivered payout (condition bonus over the $6,310 base).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gold-rush-tempesta",
+    "field": "Observed location",
+    "value": "Crimson Palms Condominiums parking area, Washington Beach, Vice Beach — the gold Tempesta is parked in the condo parking (take the ramp on the right from the main gate). A second reported spot is outside the Cirque de Cuisine restaurant in Ocean Beach. Key Cloner (Chapter 3) required to steal.",
+    "source": "https://www.keengamer.com/articles/guides/gta-6-gold-lamborghini-urus-and-huracan-locations/",
+    "locator": "KeenGamer: 'The golden Huracan is known as the Pegassi Gold Rush Tempesta. You can find this supercar at Crimson Palms Condominiums in Washington Beach or outside the Cirque de Cuisine restaurant in Ocean Beach.' Corroborated by Sportskeeda ('tall high-rise complex named Crimson Palms... take the ramp on your right to the parking area') and Beebom (same two spots). KeenGamer: 'You’ll need to unlock the Key Cloner during Chapter 3 before you can steal either vehicle.'",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
   }
