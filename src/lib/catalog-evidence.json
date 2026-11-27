@@ -37988,5 +37988,185 @@
     "locator": "Mod specialist: Tuner — also gtatracker.gg/vi/db/vehicles/pfister-comet-88 and gameta.gg/gta6/vehicles/88-pfister-comet/",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "sand-storm-es9",
+    "field": "Fire mode",
+    "value": "Semi-Auto",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/sand-storm-es9/",
+    "locator": "Specs table: Fire style Semi-Auto — also thegameswiki (thegameswiki.com/gta6/wiki/sand-storm-es9, 'Fire style | Semi-auto'), IGN unique-variants table and allthings.how",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "sand-storm-es9",
+    "field": "Availability",
+    "value": "Sold only at Big Shots",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/sand-storm-es9/",
+    "locator": "Sold only at Big Shots — also the in-game shop card in the meowdb frame (meowdb.com/gta6/media/footage/sand-storm-es9.webp, 'A unique variant exclusive to Big Shots')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "sand-storm-es9",
+    "field": "Payment",
+    "value": "Requires a bank account",
+    "source": "https://meowdb.com/gta6/media/footage/sand-storm-es9.webp",
+    "locator": "Shop card footer: 'Requires a bank account' — also allthings.how (allthings.how/gta-6-big-shots-gun-store/)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "backdoor-hobo",
+    "field": "Fire mode",
+    "value": "Break Action",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/backdoor-hobo/",
+    "locator": "Specs: 'Fire Style, Break Action' — also thegameswiki (thegameswiki.com/gta6/wiki/backdoor-hobo, Details table 'Firing mode | Break Action')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "backdoor-hobo",
+    "field": "Availability",
+    "value": "Sold only at Zenon's Pawn Shop",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/backdoor-hobo/",
+    "locator": "Sold only at Zenon's Pawn Shop — also the in-game shop card in the meowdb frame (meowdb.com/gta6/media/footage/backdoor-hobo.webp, 'A unique variant exclusive to Zenon's Pawn Shop')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "backdoor-hobo",
+    "field": "Payment",
+    "value": "Requires a bank account",
+    "source": "https://meowdb.com/gta6/media/footage/backdoor-hobo.webp",
+    "locator": "Shop card footer: 'Requires a bank account' — also Game8 (game8.co/games/GTA-6/archives/638894)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "backdoor-hobo",
+    "field": "Unlock",
+    "value": "Available after completing the 'Gear Up' mission (Chapter 1)",
+    "source": "https://thegameswiki.com/gta6/wiki/backdoor-hobo",
+    "locator": "Buy it from Zenon's Pawn Shop in La Perle after Gear Up — also Game8 (game8.co/games/GTA-6/archives/638894)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "brainwasher-1922",
+    "field": "Modifications",
+    "value": "Cannot be modified",
+    "source": "https://www.gtabase.com/gta-6/weapons/brainwasher-1992",
+    "locator": "'Modifications: Cannot be modified' — also District VI (districtvi.games/c/weapons, 'Like other unique variants, it cannot be customised')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "brainwasher-1922",
+    "field": "Appearance",
+    "value": "Pink psychedelic frame with a checkered grip",
+    "source": "https://www.districtvi.games/c/weapons",
+    "locator": "District VI: 'pink psychedelic frame, checkered grip' — visually confirmed by the filed GTABase image",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "turnt-nipper-38",
+    "field": "Magazine size",
+    "value": "8 rounds",
+    "source": "https://gta.exputer.com/gta-6/weapons/scorpio-nipper-38/",
+    "locator": "Variant table: Turnt Nipper .38 mag 8 — also thegameswiki unique-weapons table, prospective-gg and eso-ui",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "turnt-nipper-38",
+    "field": "Ammo type",
+    "value": ".380",
+    "source": "https://gta.exputer.com/gta-6/weapons/scorpio-nipper-38/",
+    "locator": "Semi-auto action fires .380 rounds from an 8-round magazine — also gtasixlnsider, prospective-gg ('Calibre, .380 cal') and gta6bible. Note: the '.38' in the name invites the wrong caliber guess.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "turnt-nipper-38",
+    "field": "Fire mode",
+    "value": "Semi-Auto",
+    "source": "https://gta.exputer.com/gta-6/weapons/scorpio-nipper-38/",
+    "locator": "Variant table: 'compact pistol, semi-auto, .380 Cal' — also thegameswiki variant table",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "turnt-nipper-38",
+    "field": "Modifications",
+    "value": "Cannot be modified (takes no attachments)",
+    "source": "https://gta.exputer.com/gta-6/weapons/scorpio-nipper-38/",
+    "locator": "'Unique Scorpio Nipper .38 variants do not accept attachments' — also eso-ui ('Unique weapon variants … cannot be modified')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Ammo type",
+    "value": "12-Gauge",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/shrewsbury-drifter/",
+    "locator": "'holds 2 rounds of 12-Gauge'; Specs: Caliber 12-Gauge — also Exputer, Beebom and gta.guide",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Fire mode",
+    "value": "Break Action",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/shrewsbury-drifter/",
+    "locator": "'is break-action' — also Exputer ('double-barrel shotgun with a break action'), Beebom and mygamepadtester",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Payment",
+    "value": "Requires a bank account",
+    "source": "https://thegameswiki.com/gta6/wiki/shrewsbury-drifter",
+    "locator": "Shop listing: 'Payment | Bank account' — also Exputer ('the $1,150 shotgun requires an account'), gta6gang and mygamepadtester",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Damage rank",
+    "value": "Highest-damage shotgun (damage rating 8.0/10)",
+    "source": "https://www.gtasixclub.com/weapons/double-barrel-shotgun",
+    "locator": "'the hardest-hitting shotgun in the shops — the game's own stat card rates its damage 8.0 out of 10, the highest of any shotgun' — also Exputer ('damage rating of 8.0, the highest among shotguns')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-drifter-shotgun",
+    "field": "Appearance",
+    "value": "Side-by-side double-barrel with long blued barrels and a checkered walnut stock",
+    "source": "https://beebom.com/gta-6-best-weapons/",
+    "locator": "Beebom: 'side-by-side double-barrel shotgun with long blued barrels and a checkered walnut stock' — also thegameswiki ('side-by-side double-barrel shotgun with a wooden stock')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   }
 ]
