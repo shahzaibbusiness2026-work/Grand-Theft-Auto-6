@@ -36598,5 +36598,65 @@
     "locator": "Standout variant: Cold Case L35P",
     "reviewedAt": "2026-11-26",
     "reviewer": "Atlas Team"
-  }
+  },
+{
+  "kind": "weapons",
+  "id": "convict-kalinga-50",
+  "field": "GTA VI appearance",
+  "value": "Fairview Convict Kalinga .50",
+  "source": "https://game8.co/games/gta-6/archives/639176",
+  "locator": "Unique pistol in the Leonida State Prison escape tunnel. Game8 gives the full route; 5+ gameplay reels show the same path; Exputer lists the Convict as a unique variant of the Fairview Kalinga .50.",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse"
+},
+{
+  "kind": "weapons",
+  "id": "convict-kalinga-50",
+  "field": "Official name",
+  "value": "Fairview Convict Kalinga .50",
+  "source": "https://game8.co/games/gta-6/archives/639176",
+  "locator": "Game8 page title 'How to Get the Convict Kalinga .50 and Stats'; Exputer lists the same name.",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse"
+},
+{
+  "kind": "weapons",
+  "id": "convict-kalinga-50",
+  "field": "Acquisition method",
+  "value": "Enter the shed/shack north of Leonida State Prison, side door, hatch and generator wire down into a mining tunnel; the pistol is on a dead convict's body at the end, with an 'Anthony's Auto Repair' business card carrying code 120113. Built-in flashlight.",
+  "source": "https://game8.co/games/gta-6/archives/639176",
+  "locator": "Game8 full route; 5+ gameplay reels show the same path (e.g. YouTube short HkHdwdmEpIo). County wording differs between sources (Game8: Gellhorn; earlier notes: Kelly County) — no county claimed.",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse"
+},
+{
+  "kind": "vehicles",
+  "id": "emancipator-stallion",
+  "field": "Acquisition method",
+  "value": "Detached garage behind a run-down house just west of Ambrosia (Frogwater area, Kelly County); keypad code 120113 — the same code found on the card with the Convict Kalinga .50; alarmed, no tracker; plate S33 Y4 (Talladega Nights reference).",
+  "source": "https://gameta.gg/gta6/vehicles/emancipator-stallion/",
+  "locator": "GamerHour, ViceCityDB, gta6gps and Gameta list the garage and code 120113; reels tie it to the pistol via the S33 Y4 plate.",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse"
+},
+{
+  "kind": "vehicles",
+  "id": "devils-rope-gauntlet",
+  "field": "Acquisition method",
+  "value": "Hog Stars Garage, northern Ambrosia — rescue the captured Final Chapter enforcer from the barn, then clear the gang's car wash/clubhouse; the car is parked in the garage. Enter via the roof skylight; guard dogs inside. The Final Chapter Shortstraw Shotgun is on a table in the same room.",
+  "source": "https://www.sportskeeda.com/esports/gta-6-how-get-bravado-devil-s-rope-gauntlet-fastest-muscle-car-location",
+  "locator": "Sportskeeda + Insider Gaming + GameRant agree on Hog Stars Garage; LeonidaHub corroborates the $8,500 register figure.",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse"
+},
+{
+  "kind": "vehicles",
+  "id": "devils-rope-gauntlet",
+  "field": "Registration cost",
+  "value": "$8,500 to register",
+  "source": "https://www.sportskeeda.com/esports/gta-6-how-get-bravado-devil-s-rope-gauntlet-fastest-muscle-car-location",
+  "locator": "Sportskeeda: 'claim the vehicle for $8,500'; Insider Gaming table agrees ($8,500 register, $21,890 sell value). Sell value carried here, not as a separate claim: $21,890 (Sportskeeda + Insider Gaming).",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse"
+}
 ]
