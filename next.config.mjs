@@ -161,7 +161,8 @@ const nextConfig = {
       // Weapon renames (20 Nov 2026): contradicted-identity slugs -> real in-game names.
       { source: "/weapons/glock-21", destination: "/weapons", permanent: true },
       { source: "/weapons/the-silver-1992", destination: "/weapons/the-silver-1922", permanent: true },
-      { source: "/weapons/micro-smg", destination: "/weapons/wortham-w-10", permanent: true },
+      { source: "/weapons/micro-smg", destination: "/weapons", permanent: true },
+      { source: "/weapons/kolt-and-associates-vatra", destination: "/weapons/kolt-associates-vatra", permanent: true },
       { source: "/weapons/mustang-357", destination: "/weapons/duke-mustang-357", permanent: true },
       { source: "/weapons/hunting-combat-knife", destination: "/weapons/hunting-knife", permanent: true },
       { source: "/vehicles/bravado-banshee-gts", destination: "/vehicles/bravado-banshee", permanent: true },

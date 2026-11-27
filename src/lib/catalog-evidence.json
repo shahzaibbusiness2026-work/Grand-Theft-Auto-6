@@ -8370,16 +8370,6 @@
     "reviewer": "Muse"
   },
   {
-    "kind": "weapons",
-    "id": "kolt-and-associates-vatra",
-    "field": "GTA VI appearance",
-    "value": "Kolt & Associates Vatra",
-    "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
-    "locator": "Unique Weapons - Kolt & Associates Vatra (24 Nov 2026)",
-    "reviewedAt": "2026-11-24",
-    "reviewer": "Muse"
-  },
-  {
     "kind": "vehicles",
     "id": "declasse-caliente-picador",
     "field": "GTA VI appearance",
@@ -36588,5 +36578,25 @@
     "locator": "GameSpot: Miramar Drive, Crosstown, midnight-4 AM, after Chapter 3; lift Chase, 3-star wanted level, parking garage, Starfish Island, choose the Furry DW-9 or cash. LeonidaHub (9 PM-4 AM window; Gfinity: driving past loses the encounter) + GTAVIInsider ('No Paws Clause') + GameTrek + GTAScoop corroborate. Cash figure NOT claimed: $15,000 (GameSpot) vs $12,500 (most other guides).",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cold-case-l35p",
+    "field": "GTA VI appearance",
+    "value": "Standout variant of the Lure Predator L35P",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lure-predator-l35p/",
+    "locator": "Standout variant row: Cold Case L35P",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cold-case-l35p",
+    "field": "Observed location",
+    "value": "Swampland in Watson Bay",
+    "source": "https://gta.exputer.com/gta-6/vehicles/lure-predator-l35p/",
+    "locator": "Standout variant: Cold Case L35P",
+    "reviewedAt": "2026-11-26",
+    "reviewer": "Atlas Team"
   }
 ]
