@@ -28,11 +28,14 @@ import type { CatalogKind, EvidenceEntry } from "@/lib/catalog-evidence";
 import styles from "./catalog-ui.module.css";
 import {
   CATALOG_PAGE_SIZE,
+  CATALOG_TABS,
   COMPARE_PAGE_SIZE,
   catalogPageCount,
   catalogStateUrl,
+  catalogTabFor,
   matchingCatalogEntries,
   readCatalogState,
+  tabFilteredEntries,
   type PublicCatalogState,
 } from "@/lib/catalog-url-state";
 
@@ -125,7 +128,7 @@ export function EvidenceCatalog({
   kind,
   entries,
   compare = false,
-  initialState = { q: "", category: "", sort: "name", page: 1 },
+  initialState = { q: "", category: "", tab: "", sort: "name", page: 1 },
   initialSelection = [],
 }: {
   kind: CatalogKind;
@@ -135,7 +138,8 @@ export function EvidenceCatalog({
   initialSelection?: string[];
 }) {
   const [state, setState] = useState(initialState);
-  const { q: query, category, sort } = state;
+  const { q: query, category, tab, sort } = state;
+  const activeTab = catalogTabFor(kind, tab);
   const [saved, setSaved] = useState(false);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [selected, setSelected] = useState(initialSelection);
@@ -170,9 +174,12 @@ export function EvidenceCatalog({
   const setQuery = (q: string) => writeState({ ...firstPage, q }, false);
   const setCategory = (category: string) => writeState({ ...firstPage, category });
   const setSort = (sort: string) => writeState({ ...firstPage, sort });
+  // Switching tabs clears the category filter; tapping the active tab goes back to All.
+  const setTab = (nextTab: string) =>
+    writeState({ ...firstPage, tab: nextTab === tab ? "" : nextTab, category: "" });
   const syncFromParams = useCallback(
     (params: URLSearchParams) => {
-      const next = readCatalogState(params, entries, pageSize);
+      const next = readCatalogState(params, entries, pageSize, kind);
       setState((previous) => ({
         ...next,
         q: next.q === previous.q.trim() ? previous.q : next.q,
@@ -237,13 +244,13 @@ export function EvidenceCatalog({
         : [...selected, id].slice(0, 4),
     );
   const clear = () => {
-    writeState({ ...firstPage, q: "", category: "", sort: "name" });
+    writeState({ ...firstPage, q: "", category: "", tab: "", sort: "name" });
     setSaved(false);
     setRecentOnly(false);
   };
   const recentRank = (id: string) =>
     recent.includes(id) ? recent.indexOf(id) : Number.MAX_SAFE_INTEGER;
-  const shown = matchingCatalogEntries(entries, state)
+  const shown = matchingCatalogEntries(entries, state, kind)
     .filter(
       (e) =>
         (!saved || favorites.includes(e.id)) &&
@@ -291,6 +298,25 @@ export function EvidenceCatalog({
         <Filters {...filters} />
       </aside>
       <div className="min-w-0">
+        <nav aria-label={`${kind} categories`} className={styles.tabList}>
+          {CATALOG_TABS[kind].map((tabDef) => {
+            const active = (tab || "all") === tabDef.key;
+            return (
+              <button
+                type="button"
+                key={tabDef.key}
+                className={styles.tabButton}
+                aria-pressed={active}
+                onClick={() => setTab(tabDef.key === "all" ? "" : tabDef.key)}
+              >
+                <span>{tabDef.label}</span>
+                <span className={styles.categoryCount}>
+                  {tabFilteredEntries(entries, kind, tabDef.key).length}
+                </span>
+              </button>
+            );
+          })}
+        </nav>
         <div className={styles.toolbar}>
           <label className={styles.search}>
             <span className="sr-only">Search {kind}</span>
@@ -304,18 +330,24 @@ export function EvidenceCatalog({
               placeholder={`Search ${kind} or categories…`}
             />
           </label>
-          <label className={styles.sortLabel}>
-            Sort by
-            <select
-              className={styles.select}
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-            >
-              <option value="name">Name A–Z</option>
-              <option value="reverse">Name Z–A</option>
-              <option value="recent">Recently viewed first</option>
-            </select>
-          </label>
+          {activeTab?.stat ? (
+            <span className={styles.sortNote}>
+              Sorted by {activeTab.stat === "Speed rating" ? "speed" : "damage"}, highest first
+            </span>
+          ) : (
+            <label className={styles.sortLabel}>
+              Sort by
+              <select
+                className={styles.select}
+                value={sort}
+                onChange={(e) => setSort(e.target.value)}
+              >
+                <option value="name">Name A–Z</option>
+                <option value="reverse">Name Z–A</option>
+                <option value="recent">Recently viewed first</option>
+              </select>
+            </label>
+          )}
         </div>
         <details className={styles.mobileFilter}>
           <summary>
@@ -327,7 +359,11 @@ export function EvidenceCatalog({
         <div className={styles.results}>
           <p role="status">
             <strong>{shown.length}</strong> {kind}
-            {category ? ` / ${category}` : " in the catalog"}
+            {activeTab && activeTab.key !== "all"
+              ? ` / ${activeTab.label}`
+              : category
+                ? ` / ${category}`
+                : " in the catalog"}
           </p>
           <span>{selected.length}/4 selected</span>
         </div>

@@ -38,7 +38,7 @@ export default async function ComparisonPage({ searchParams }: PageProps) {
           kind="weapons"
           entries={entries}
           compare
-          initialState={readCatalogState(params, entries, COMPARE_PAGE_SIZE)}
+          initialState={readCatalogState(params, entries, COMPARE_PAGE_SIZE, "weapons")}
           initialSelection={selectionFromParams(params, "weapons", entries)}
         />
       </div>

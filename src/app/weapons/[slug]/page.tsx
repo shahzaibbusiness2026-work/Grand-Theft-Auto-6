@@ -38,6 +38,7 @@ export default async function Detail({
   const sorted = matchingCatalogEntries(await getEvidenceCatalog("weapons"), {
     q: "",
     category: "",
+    tab: "",
     sort: "name",
   });
   const index = sorted.findIndex((e) => e.slug === entry.slug);

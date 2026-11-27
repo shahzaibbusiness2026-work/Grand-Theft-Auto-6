@@ -32,7 +32,7 @@ export async function generateMetadata({ searchParams }: PageProps) {
 export default async function CatalogPage({ searchParams }: PageProps) {
   const params = catalogSearchParams(await searchParams);
   const entries = await getEvidenceCatalog("vehicles");
-  const state = readCatalogState(params, entries, CATALOG_PAGE_SIZE);
+  const state = readCatalogState(params, entries, CATALOG_PAGE_SIZE, "vehicles");
   return (
     <SiteShell>
       {!isCatalogVariant(params) && (
@@ -43,7 +43,7 @@ export default async function CatalogPage({ searchParams }: PageProps) {
               itemListJsonLd(
                 `GTA 6 Vehicles Catalog${state.page > 1 ? ` – Page ${state.page}` : ""}`,
                 "Editorial GTA 6 vehicle identifications and field-specific evidence.",
-                catalogPageEntries(entries, state, CATALOG_PAGE_SIZE).map((entry) => ({
+                catalogPageEntries(entries, state, CATALOG_PAGE_SIZE, "vehicles").map((entry) => ({
                   name: entry.name,
                   url: absoluteUrl(`/vehicles/${entry.slug}`),
                 })),
