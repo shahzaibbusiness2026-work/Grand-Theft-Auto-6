@@ -36558,5 +36558,35 @@
     "locator": "Standout variant: Ambergris Torlan",
     "reviewedAt": "2026-11-26",
     "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "weapons",
+    "id": "furry-dw-9",
+    "field": "GTA VI appearance",
+    "value": "Furry DW-9",
+    "source": "https://www.gamespot.com/articles/gta-6-furry-rescue-mission-is-a-little-weird-but-the-rewards-are-worth-it/",
+    "locator": "GameSpot furry rescue guide (26 Nov 2026): completing the encounter offers 'one of two rewards: $15,000 in cash or the unique Furry DW-9 submachine gun.'",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "furry-dw-9",
+    "field": "Official name",
+    "value": "Furry DW-9",
+    "source": "https://leonidahub.org/en/news/gta-6-furry-chase-where-he-appears-how-to-help-him-and-what-the-reward-is",
+    "locator": "LeonidaHub: 'a unique SMG (the DW-9 with furry art)' - the Furry DW-9. Corroborated by GameSpot ('the unique Furry DW-9 submachine gun'), GTAVIInsider ('Furry DW-9 SMG') and GTAScoop ('a custom SMG').",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "furry-dw-9",
+    "field": "Acquisition method",
+    "value": "Random night encounter 'No Paws Clause' after Chapter 3: on Miramar Drive, Crosstown, Vice City, at night (guides report 9 PM-4 AM, most commonly midnight-4 AM), police have cornered Chase, a man in a fox suit. Offer him a ride, lose the 3-star wanted level at the parking garage, drive the Furverts to their Starfish Island hideout, then choose the Furry DW-9 SMG or a cash reward. One-time: if you drive past, police kill Chase and the encounter is lost.",
+    "source": "https://www.gamespot.com/articles/gta-6-furry-rescue-mission-is-a-little-weird-but-the-rewards-are-worth-it/",
+    "locator": "GameSpot: Miramar Drive, Crosstown, midnight-4 AM, after Chapter 3; lift Chase, 3-star wanted level, parking garage, Starfish Island, choose the Furry DW-9 or cash. LeonidaHub (9 PM-4 AM window; Gfinity: driving past loses the encounter) + GTAVIInsider ('No Paws Clause') + GameTrek + GTAScoop corroborate. Cash figure NOT claimed: $15,000 (GameSpot) vs $12,500 (most other guides).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   }
 ]
