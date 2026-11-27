@@ -38168,5 +38168,415 @@
     "locator": "Beebom: 'side-by-side double-barrel shotgun with long blued barrels and a checkered walnut stock' — also thegameswiki ('side-by-side double-barrel shotgun with a wooden stock')",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emancipator-stallion",
+    "field": "Base handling rating (asphalt)",
+    "value": "541",
+    "source": "https://gta.exputer.com/gta-6/vehicles/68-classique-stallion/",
+    "locator": "Emancipator Stallion … 541 / 364 — also gameta.gg/gta6/vehicles/emancipator-stallion/, GTABase and Dexerto (dexerto.com/wikis/gta-6/vehicles/standout/ripped-shredded/emancipator-stallion/, 'Asphalt Rating 541, Off-Road Rating 364')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emancipator-stallion",
+    "field": "Base handling rating (off-road)",
+    "value": "364",
+    "source": "https://gta.exputer.com/gta-6/vehicles/68-classique-stallion/",
+    "locator": "Emancipator Stallion … 541 / 364 — also gameta.gg/gta6/vehicles/emancipator-stallion/, GTABase and Dexerto (dexerto.com/wikis/gta-6/vehicles/standout/ripped-shredded/emancipator-stallion/, 'Asphalt Rating 541, Off-Road Rating 364')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emancipator-stallion",
+    "field": "Weight",
+    "value": "1,560 kg",
+    "source": "https://gameta.gg/gta6/vehicles/emancipator-stallion/",
+    "locator": "Weight, 1,560 kg — also GTABase (base-model block: 'Mass / Weight 1,560 KG')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emancipator-stallion",
+    "field": "Drivetrain",
+    "value": "RWD",
+    "source": "https://gameta.gg/gta6/vehicles/emancipator-stallion/",
+    "locator": "Drive train, RWD — also GTABase (base-model block: 'Drive Train RWD')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emancipator-stallion",
+    "field": "Gears",
+    "value": "3",
+    "source": "https://gameta.gg/gta6/vehicles/emancipator-stallion/",
+    "locator": "Gears, 3 forward — also GTABase (base-model block: 'Gears 3')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emancipator-stallion",
+    "field": "Model year",
+    "value": "1968 (1960s Antique)",
+    "source": "https://gameta.gg/gta6/vehicles/emancipator-stallion/",
+    "locator": "Model year 1968, era 1960s Antique — also GTABase and Exputer",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emancipator-stallion",
+    "field": "Standout set",
+    "value": "Ripped & Shredded",
+    "source": "https://gameta.gg/gta6/vehicles/emancipator-stallion/",
+    "locator": "Standout set: Ripped & Shredded — also GTABase and Exputer",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emancipator-stallion",
+    "field": "Mod specialist",
+    "value": "Muscle (Capri Classic)",
+    "source": "https://www.gtabase.com/gta-6/vehicles/emancipator-stallion",
+    "locator": "Specialist Muscle — also Exputer (\"WAiNK gives the '68 Stallion a Muscle specialty, its specialist shop is Capri Classic\")",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "emancipator-stallion",
+    "field": "Registration",
+    "value": "Can be registered: Yes",
+    "source": "https://www.gtabase.com/gta-6/vehicles/emancipator-stallion",
+    "locator": "Can be registered: Yes — also GamesFuze (gamesfuze.com/gta-6-wiki/cars/, 'Emancipator Stallion … 2 seats Registrable')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-bobcat-xl-84",
+    "field": "Base handling rating (asphalt)",
+    "value": "406",
+    "source": "https://gta.exputer.com/gta-6/vehicles/84-declasse-bobcat-xl",
+    "locator": "Road rating 406 / Off-road 368 — also Dexerto ('Asphalt Rating, 406, Off-Road Rating, 368') and gtascoop",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-bobcat-xl-84",
+    "field": "Base handling rating (off-road)",
+    "value": "368",
+    "source": "https://gta.exputer.com/gta-6/vehicles/84-declasse-bobcat-xl",
+    "locator": "Road rating 406 / Off-road 368 — also Dexerto ('Asphalt Rating, 406, Off-Road Rating, 368') and gtascoop",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-bobcat-xl-84",
+    "field": "Mod specialist",
+    "value": "Off-Road (Wasteland Off-Road, Kelly County)",
+    "source": "https://gta.exputer.com/gta-6/vehicles/84-declasse-bobcat-xl",
+    "locator": "Mod specialist Off-Road — also Dexerto ('Mod Shop Specialist, Off-Road')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-bobcat-xl-84",
+    "field": "Model year",
+    "value": "'84 (1980s Classic)",
+    "source": "https://gta.exputer.com/gta-6/vehicles/84-declasse-bobcat-xl",
+    "locator": "Model year '84, era 1980s Classic — also Dexerto ('Era, 1980s Classic')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "declasse-bobcat-xl-84",
+    "field": "Documented variant",
+    "value": "Beach Candy Bobcat (Girlypop set, car park on Bobcat Key, needs Key Cloner Ch. 3); Flamingo Bobcat (Leonida Man set, ranger station in Belpoint)",
+    "source": "https://gta.exputer.com/gta-6/vehicles/84-declasse-bobcat-xl",
+    "locator": "Standout variants confirmed — also vicenox and Dexerto",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "verdant-buccaneer",
+    "field": "Base handling rating (asphalt)",
+    "value": "501",
+    "source": "https://gta.exputer.com/gta-6/vehicles/65-albany-buccaneer/",
+    "locator": "Verdant Buccaneer … Street score 501 — also gameta.gg/gta6/vehicles/verdant-buccaneer/ (501/360) and GTABase (501/360)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "verdant-buccaneer",
+    "field": "Base handling rating (off-road)",
+    "value": "360",
+    "source": "https://gta.exputer.com/gta-6/vehicles/65-albany-buccaneer/",
+    "locator": "Verdant Buccaneer … Street score 501 — also gameta.gg/gta6/vehicles/verdant-buccaneer/ (501/360) and GTABase (501/360)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "verdant-buccaneer",
+    "field": "Weight",
+    "value": "1,910 kg",
+    "source": "https://gameta.gg/gta6/vehicles/verdant-buccaneer/",
+    "locator": "Weight 1,910 kg — also GTABase (both list 1,910 kg; heavier than the stock '65 Buccaneer's 1,600 kg per Exputer — variant build, not a conflict)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "verdant-buccaneer",
+    "field": "Model year",
+    "value": "1965 (1960s Antique)",
+    "source": "https://gameta.gg/gta6/vehicles/verdant-buccaneer/",
+    "locator": "Model year 1965, era 1960s Antique — also GTABase and Exputer",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "verdant-buccaneer",
+    "field": "Standout set",
+    "value": "Lowriders",
+    "source": "https://www.gtabase.com/gta-6/vehicles/verdant-buccaneer",
+    "locator": "Standout set: Lowriders — also gameta.gg and Exputer",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "verdant-buccaneer",
+    "field": "Mod specialist",
+    "value": "Muscle (Capri Classic)",
+    "source": "https://www.gtabase.com/gta-6/vehicles/verdant-buccaneer",
+    "locator": "Specialist Muscle — also Exputer (base page: Muscle specialty, Capri Classic)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "verdant-buccaneer",
+    "field": "Drivetrain",
+    "value": "RWD",
+    "source": "https://gameta.gg/gta6/vehicles/verdant-buccaneer/",
+    "locator": "Drivetrain RWD — also GTABase",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "venomous-marshall",
+    "field": "Base handling rating (asphalt)",
+    "value": "344",
+    "source": "https://gta.exputer.com/gta-6/vehicles/vapid-marshall/",
+    "locator": "Venomous Marshall … 600 off-road — also gameta.gg/gta6/vehicles/venomous-marshall/ (344/600) and GTABase (600/344)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "venomous-marshall",
+    "field": "Base handling rating (off-road)",
+    "value": "600",
+    "source": "https://gta.exputer.com/gta-6/vehicles/vapid-marshall/",
+    "locator": "Venomous Marshall … 600 off-road — also gameta.gg/gta6/vehicles/venomous-marshall/ (344/600) and GTABase (600/344)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "venomous-marshall",
+    "field": "Weight",
+    "value": "5,000 kg",
+    "source": "https://gameta.gg/gta6/vehicles/venomous-marshall/",
+    "locator": "Weight 5,000 kg — also GTABase (both list 5,000 kg)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "venomous-marshall",
+    "field": "Drivetrain",
+    "value": "AWD",
+    "source": "https://gameta.gg/gta6/vehicles/venomous-marshall/",
+    "locator": "Drivetrain AWD — also GTABase; Exputer base page independently confirms AWD",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "venomous-marshall",
+    "field": "Gears",
+    "value": "4",
+    "source": "https://gameta.gg/gta6/vehicles/venomous-marshall/",
+    "locator": "Gears 4 — also GTABase",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "venomous-marshall",
+    "field": "Model year",
+    "value": "2021 (2020s Current)",
+    "source": "https://gameta.gg/gta6/vehicles/venomous-marshall/",
+    "locator": "Model year 2021, era 2020s Current, Standout set Mudder — also GTABase and Exputer",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "venomous-marshall",
+    "field": "Standout set",
+    "value": "Mudder",
+    "source": "https://www.gtabase.com/gta-6/vehicles/venomous-marshall",
+    "locator": "Standout set: Mudder — also gameta.gg and Exputer",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Registration cost",
+    "value": "$5,550",
+    "source": "https://gameta.gg/gta6/vehicles/smuggler-caracara/",
+    "locator": "Registration fee $5,550 — also GTABase ('Story Mode Price $5,550'). Upgrades the canonical note's 'reported, not verified' status.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Seating",
+    "value": "4 seats",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Seating 4 — also gameta.gg and Game8",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Weight",
+    "value": "2,340 kg",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Weight 2,340 kg — also gameta.gg; Exputer base Caracara page lists 2,480 kg for the stock truck (variant is 140 kg lighter, not a conflict)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Drivetrain",
+    "value": "AWD",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Drivetrain AWD — also gameta.gg; Exputer base Caracara page independently confirms AWD",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Gears",
+    "value": "6",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Gears 6 — also gameta.gg; Exputer base page confirms 6 gears",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Model year",
+    "value": "2017 (2010s Modern)",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Model year 2017, era 2010s Modern, Standout set All-Terrain — also gameta.gg and Game8",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Standout set",
+    "value": "All-Terrain",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Standout set: All-Terrain — also gameta.gg and Game8",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Mod specialist",
+    "value": "Off-Road",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Mod specialist: Off-Road — also Game8 and Exputer base page",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Base handling rating (asphalt)",
+    "value": "537",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Asphalt Rating 537 / Off-Road Rating 814 — also gameta.gg, Dexerto and Game8",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Base handling rating (off-road)",
+    "value": "814",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Asphalt Rating 537 / Off-Road Rating 814 — also gameta.gg, Dexerto and Game8",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Description",
+    "value": "One-off Vapid Caracara 4x4, modded by the Kolts for off-roading. Discovered at some docks in Port Gellhorn.",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Description quote — also gameta.gg, Game8 and Dexerto",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Real-life basis",
+    "value": "2nd gen Ford F-150 Raptor (P552)",
+    "source": "https://www.gtabase.com/gta-6/vehicles/smuggler-caracara",
+    "locator": "Real-life basis: 2nd gen Ford F-150 Raptor (P552) — also GamesFuze",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-smuggler-caracara",
+    "field": "Observed location",
+    "value": "Brooks Boatworks Illegal Operations, north side of Port Gellhorn — parked inside, during the robbery opportunity",
+    "source": "https://game8.co/games/gta-6/archives/639205",
+    "locator": "Game8: 'orange truck parked inside the Brooks Boatworks Illegal Operations' at the north side of Port Gellhorn — also GTABase and gameta.gg ('Brooks Boatworks docks')",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   }
 ]
