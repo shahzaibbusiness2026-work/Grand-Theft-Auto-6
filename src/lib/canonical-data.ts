@@ -12062,7 +12062,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "REPORTED",
     source: "tracker.gg GTA 6 vehicles table (WAiNK scan ratings)",
     description: "Standout variant of the Pfister Growler.",
-    notes: "Standout variant of the Pfister Growler. Tracker.gg WAiNK scan ratings: Speed 5.4, Acceleration 6.1, Asphalt Handling 6.5, Off-Road Handling 3.8, Strength 3.0; 2 seats. Location not yet confirmed.",
+    notes: "Standout variant of the Pfister Growler. Tracker.gg WAiNK scan ratings: Speed 5.4, Acceleration 6.1, Asphalt Handling 6.5, Off-Road Handling 3.8, Strength 3.0; 2 seats. Free in the Del Rio Boulevard Garage, La Perle (code 92665 from the Chapter 3 apartment laptop, password Muffins / Queen / 15); missable after Chapter 3.",
     featured: false,
   },
   {
