@@ -39268,5 +39268,905 @@
     "reviewer": "Muse",
     "source": "https://gamesfuze.com/gta-6-wiki/weapons/",
     "value": "$1,075 — store version of the base Hawk & Little .38 (Donnie's variant itself is found, not bought)"
-  }
+  },
+{
+  "field": "Magazine size",
+  "id": "quarter-mile-es9",
+  "kind": "weapons",
+  "locator": "thegameswiki Unique Weapons table: Mag Size 15; corroborated by wiki.eso-ui.com weapons table, IGN unique-variants table, and GTABase ('Ammo Capacity 15')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+  "value": "15 rounds"
+},
+{
+  "field": "Fire mode",
+  "id": "quarter-mile-es9",
+  "kind": "weapons",
+  "locator": "thegameswiki: 'military pistol, semi-auto, 9MM'; corroborated by IGN unique-variants table ('Semi-Auto')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+  "value": "Semi-Auto"
+},
+{
+  "field": "Caliber",
+  "id": "quarter-mile-es9",
+  "kind": "weapons",
+  "locator": "thegameswiki: 'semi-auto, 9MM'; corroborated by IGN unique-variants table",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+  "value": "9mm"
+},
+{
+  "field": "Modifications",
+  "id": "quarter-mile-es9",
+  "kind": "weapons",
+  "locator": "GTABase: 'One-off suppressed pistol'; corroborated by gta6.house ('a suppressed Quarter Mile ES9'), game-checklists ('Suppressed with a silver frame and wood grip') and FandomWire ('silenced pistol')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.gtabase.com/gta-6/weapons/quarter-mile-es9",
+  "value": "Suppressor fitted"
+},
+{
+  "field": "Availability",
+  "id": "quarter-mile-es9",
+  "kind": "weapons",
+  "locator": "eso-ui price '–'; IGN 'Purchasable?' blank; acquisition is Illegal Operation loot (Chatfield Storage & Logistics, Waxman Island) per thegameswiki, gta6.house, gtaboom and RetroBroker",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.gtabase.com/gta-6/weapons/quarter-mile-es9",
+  "value": "Not for sale — world find only"
+},
+{
+  "field": "Magazine size",
+  "id": "crabshack-vf5-smg",
+  "kind": "weapons",
+  "locator": "Dexerto: Mag Size 30; corroborated by Exputer VF5, eso-ui SMG table, games.gg and GTABase ('Ammo Capacity 30')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/crabshack-vf5/",
+  "value": "30 rounds"
+},
+{
+  "field": "Fire mode",
+  "id": "crabshack-vf5-smg",
+  "kind": "weapons",
+  "locator": "Dexerto: Full Auto; corroborated by Exputer VF5 ('full-auto fire… 30-round magazine of 9mm')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/crabshack-vf5/",
+  "value": "Full Auto"
+},
+{
+  "field": "Caliber",
+  "id": "crabshack-vf5-smg",
+  "kind": "weapons",
+  "locator": "Dexerto: 9mm; corroborated by Exputer VF5 and eso-ui",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/crabshack-vf5/",
+  "value": "9mm"
+},
+{
+  "field": "Modifications",
+  "id": "crabshack-vf5-smg",
+  "kind": "weapons",
+  "locator": "games.gg: 'The Crabshack cannot be customized'; corroborated by GTABase ('This weapon cannot be customized' / 'Modifications Cannot be modified')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://games.gg/grand-theft-auto-vi/guides/grand-theft-auto-6-crabshack-vf5-location-how-to-get-smg-variant/",
+  "value": "Cannot be customized"
+},
+{
+  "field": "Unlock",
+  "id": "crabshack-vf5-smg",
+  "kind": "weapons",
+  "locator": "thegameswiki step-by-step: CLEAVES, safe 0072 (double 36), keypad 0212; corroborated by Polygon (polygon.com/gta-6-giant-crab-safe-code-crabshack-vf5-smg-how-to-get-pelican-valley-outpost/), Dexerto easter-egg page and Exputer VF5",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://thegameswiki.com/gta6/wiki/crabshack-vf5",
+  "value": "Computer password CLEAVES → safe 0072 → boathouse keypad 0212"
+},
+{
+  "field": "Availability",
+  "id": "crabshack-vf5-smg",
+  "kind": "weapons",
+  "locator": "eso-ui price '–'; Dexerto 'How to Get' is the boathouse loot, no price",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/crabshack-vf5/",
+  "value": "Not for sale — world find only"
+},
+{
+  "field": "Magazine size",
+  "id": "black-eagle-import-m306-tmr",
+  "kind": "weapons",
+  "locator": "Dexerto: Mag Size 20; corroborated by Exputer TMR, GTA6Direct and GTABase ('Ammo Capacity 20')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/tactical-rifles/black-eagle-import-m306-tmr/",
+  "value": "20 rounds"
+},
+{
+  "field": "Fire mode",
+  "id": "black-eagle-import-m306-tmr",
+  "kind": "weapons",
+  "locator": "Dexerto: Semi-Auto; corroborated by Exputer TMR",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/tactical-rifles/black-eagle-import-m306-tmr/",
+  "value": "Semi-Auto"
+},
+{
+  "field": "Caliber",
+  "id": "black-eagle-import-m306-tmr",
+  "kind": "weapons",
+  "locator": "Dexerto: 7.62×51mm; corroborated by Exputer TMR and GTA6Direct",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/tactical-rifles/black-eagle-import-m306-tmr/",
+  "value": "7.62×51mm"
+},
+{
+  "field": "Modifications",
+  "id": "black-eagle-import-m306-tmr",
+  "kind": "weapons",
+  "locator": "GTA6Direct: 'unique M306 TMR with a built-in suppressor and scope'; corroborated by the verified Dexerto cutout itself, which visibly shows both",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta6direct.com/weapons",
+  "value": "Suppressor and scope fitted as found"
+},
+{
+  "field": "Availability",
+  "id": "black-eagle-import-m306-tmr",
+  "kind": "weapons",
+  "locator": "World-find location per Detonated / thegameswiki / GTA6Direct; no price listed in any source (prospective-gg variant table lists it as 'World pickup')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta6direct.com/weapons",
+  "value": "Not for sale — world find only"
+},
+{
+  "field": "Magazine size",
+  "id": "clunker-556",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Mag Size 30; corroborated by thegameswiki, IGN weapons table, Exputer Duke 556 variant table and GTABase ('Ammo Capacity 30')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/clunker-556/",
+  "value": "30 rounds"
+},
+{
+  "field": "Fire mode",
+  "id": "clunker-556",
+  "kind": "weapons",
+  "locator": "Dexerto: Full Auto; corroborated by thegameswiki and IGN",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/clunker-556/",
+  "value": "Full Auto"
+},
+{
+  "field": "Caliber",
+  "id": "clunker-556",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: 5.56×45mm; corroborated by thegameswiki and IGN",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/clunker-556/",
+  "value": "5.56×45mm"
+},
+{
+  "field": "Modifications",
+  "id": "clunker-556",
+  "kind": "weapons",
+  "locator": "guslok: 'It has a 30-round magazine and cannot be customized'; corroborated by GTABase (explicit) and Exputer Duke 556 page ('Attachments cannot be fitted to them' — unique 556 variants)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://guslok.com/en/clunker-556-gta-vi/",
+  "value": "Cannot be customized"
+},
+{
+  "field": "Availability",
+  "id": "clunker-556",
+  "kind": "weapons",
+  "locator": "eso-ui price '–'; loot location Brooks Boatworks per Insider Gaming / ShowGamer",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/clunker-556/",
+  "value": "Not for sale — world find only"
+},
+{
+  "field": "Magazine size",
+  "id": "rauls-cqb-556",
+  "kind": "weapons",
+  "locator": "GTABase: 'Ammo Capacity 40'; corroborated by IGN unique-variants table (40, Full Auto, Duke, 5.56x45MM), thegameswiki, Exputer Duke 556 variant table and District VI. Supersedes the old wheel screenshot showing 33 live rounds — that was never capacity, as the existing claim already notes.",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.gtabase.com/gta-6/weapons/rauls-cqb-556",
+  "value": "40 rounds"
+},
+{
+  "field": "Fire mode",
+  "id": "rauls-cqb-556",
+  "kind": "weapons",
+  "locator": "IGN unique-variants table: Full Auto; corroborated by thegameswiki (base field 'carbine, full auto, 5.56x45MM')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.gtabase.com/gta-6/weapons/rauls-cqb-556",
+  "value": "Full Auto"
+},
+{
+  "field": "Caliber",
+  "id": "rauls-cqb-556",
+  "kind": "weapons",
+  "locator": "IGN unique-variants table: 5.56x45MM; corroborated by thegameswiki",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.gtabase.com/gta-6/weapons/rauls-cqb-556",
+  "value": "5.56×45mm"
+},
+{
+  "field": "Modifications",
+  "id": "rauls-cqb-556",
+  "kind": "weapons",
+  "locator": "GTABase explicit; corroborated by District VI ('Like other unique variants, it cannot be customised')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.gtabase.com/gta-6/weapons/rauls-cqb-556",
+  "value": "Cannot be customized"
+},
+{
+  "field": "Registration cost",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "tracker.gg Banshee page: 'Story Mode price $24,500'; corroborated by meowdb phone-scan table ('Registration $24,500') and Beebom ('Cost to Register: $24,500')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/banshee",
+  "value": "$24,500"
+},
+{
+  "field": "Scanned sell value",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "tracker.gg Banshee page: 'Sell price $3,950'; corroborated by meowdb phone-scan table ('Sell value $3,950')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/banshee",
+  "value": "$3,950"
+},
+{
+  "field": "Sell value (Randy's offer)",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "meowdb: 'RK-marked sell offer $6,650'; Beebom: 'Sell Value: Around $6,650' (Beebom labels it plain sell value; meowdb distinguishes it as the RK-marked offer)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://meowdb.com/gta6/vehicles/bravado-banshee",
+  "value": "$6,650"
+},
+{
+  "field": "Drivetrain",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "tracker.gg Banshee page; Exputer: 'drive the rear wheels'; gtatracker: 'Drivetrain RWD'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/bravado-banshee/",
+  "value": "RWD"
+},
+{
+  "field": "Gears",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "Exputer: 'uses five gears'; gtatracker: 'Gears 5'; gta6gang: 'Gears 5' (citing GTABase). Note: GTABase's DriveShaft Banshee variant page lists 6 gears for the variant",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/bravado-banshee/",
+  "value": "5"
+},
+{
+  "field": "Weight",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "Exputer: 'weighs just 1,200 kg'; gtatracker: 'Mass 1,200 kg'; grandtheft.gg: '1,200 KG'. Note: GTABase's DriveShaft Banshee variant page lists 1,565 kg for the variant",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/bravado-banshee/",
+  "value": "1,200 kg"
+},
+{
+  "field": "Mod specialist",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "Exputer: 'Euroform Automotive in Vice Dale County'; Dexerto: 'Mod Shop Specialist, Luxury'; Game8: 'Mod Specialist Luxury'; tracker.gg: 'Mod Shop Specialist Luxury'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/bravado-banshee/",
+  "value": "Luxury; mod shop Euroform Automotive"
+},
+{
+  "field": "Seating",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "tracker.gg (Seats 2); Exputer: 'two-seat sports car'; Game8 (Seats 2)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/banshee",
+  "value": "2 seats"
+},
+{
+  "field": "Base handling rating (asphalt)",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "tracker.gg Banshee page: '611/1000'; Dexerto: '611'; meowdb: '611 Road'; Game8: '611 (Asphalt)'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/banshee",
+  "value": "611"
+},
+{
+  "field": "Base handling rating (off-road)",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "tracker.gg Banshee page: '279/1000'; Dexerto: '279'; meowdb: '279'; Game8: '279'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/banshee",
+  "value": "279"
+},
+{
+  "field": "Wish List",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "Exputer at-a-glance; mygamepadtester Randy's Wish List table: '#15 Bravado Banshee'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/bravado-banshee/",
+  "value": "Number 15 of 16 cars on Randy's Wish List"
+},
+{
+  "field": "Spawn cheat requirement",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "Exputer; meowdb: 'cheat unlocks once you complete all combat challenges'; gta6values: 'finishing all 10 Combat challenges unlocks its spawn cheat'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/bravado-banshee/",
+  "value": "Complete all combat challenges"
+},
+{
+  "field": "Observed location",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "Game8 Banshee guide; Beebom: 'cream-colored mansion… driveways of the larger mansions', Capri",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://www.beebom.com/gta-6-bravado-banshee/",
+  "value": "Cream-colored mansion driveway, northern Capri residential area"
+},
+{
+  "field": "Era",
+  "id": "bravado-banshee",
+  "kind": "vehicles",
+  "locator": "tracker.gg; Dexerto; Game8: 'Era 2000s (Modern)'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/banshee",
+  "value": "2000s Modern"
+},
+{
+  "field": "Registration cost",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "tracker.gg Hellion page: 'Story Mode price $4,400'; Exputer WAiNK readout: 'Registration cost $4,400'; Dexerto: 'Cost to Register, $4,400'; gta6intel",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "$4,400"
+},
+{
+  "field": "Scanned sell value",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "tracker.gg Hellion page: 'Sell price $1,320'; Exputer: 'Sale value if stolen $1,320'; gta6everything: \"IGN's official guide lists… sell value $1,320\"; gta6intel: 'Sells for, $1,320'. Note: Dexerto Hellion specs list $550 — outlier against four sources",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "$1,320"
+},
+{
+  "field": "Drivetrain",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "tracker.gg Hellion page; Exputer: 'all-wheel drive'; gta6intel: 'Drivetrain AWD'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "AWD"
+},
+{
+  "field": "Gears",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "Exputer: 'all-wheel drive and five gears'; gtatracker: 'Gears 5'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "5"
+},
+{
+  "field": "Weight",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "Exputer WAiNK readout: 'Weight 1,900 kg'; gtatracker: 'Mass 1,900 kg'; grandtheft.gg: '1,900 KG'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "1,900 kg"
+},
+{
+  "field": "Mod specialist",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "Exputer: 'Parts can be fitted at Wasteland Off-Road', specialist Off-Road; Dexerto: 'Mod Shop Specialist, Off-Road'; tracker.gg: 'Mod Shop Specialist Off Road'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "Off-Road; mod shop Wasteland Off-Road"
+},
+{
+  "field": "Seating",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "tracker.gg (Seats 2); Exputer; Dexerto; gta6intel",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "2 seats"
+},
+{
+  "field": "Base handling rating (asphalt)",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "tracker.gg Hellion page: '326/1000'; Dexerto: '326'; HeistAtlas: 'Road rating: 326'; gmtreks: 'Road Rating: 326'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "326"
+},
+{
+  "field": "Base handling rating (off-road)",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "tracker.gg Hellion page: '506/1000'; Dexerto: '506'; HeistAtlas: 'Off-road rating: 506'; gmtreks: 'Off-Road Rating: 506'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "506"
+},
+{
+  "field": "Tracker",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "Exputer: 'Tracker None'; gta6intel: 'No tracker is fitted'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "None"
+},
+{
+  "field": "Moses job payout",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "Exputer: '$1,400 is the pay, and a SUV in good shape on arrival adds a bonus'; HeistAtlas: 'Payout, $1,400'; GameTrek: 'Base Payout $1,400 / Condition Bonus Up to $500'. Request 3 of 6 (Exputer; HeistAtlas)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "$1,400 + condition bonus (up to $500)"
+},
+{
+  "field": "Era",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "Exputer; Dexerto; tracker.gg",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "1990s Classic"
+},
+{
+  "field": "Model year",
+  "id": "annis-hellion",
+  "kind": "vehicles",
+  "locator": "Exputer: \"Model year '95\"; tracker.gg page title: \"'95 Hellion\"",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/hellion",
+  "value": "'95"
+},
+{
+  "field": "Registration cost",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "tracker.gg Futo page: 'Story Mode price $4,750'; Exputer: 'Registration cost $4,750'; gta6everything: \"IGN's official guide… $4,750 to register\"; GTABase: 'Story Mode Price $4,750'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/futo",
+  "value": "$4,750"
+},
+{
+  "field": "Scanned sell value",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "tracker.gg Futo page: 'Sell price $1,430'; Exputer: 'Sale value if stolen $1,430'; IGN via gta6everything: '$1,430'; GTABase: 'Sell Value (Stolen) $1,430'; op.gg: 'Sells for $1,430'. Note: meowdb's single scanned instance showed $1,500 — sell values vary per car instance",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/futo",
+  "value": "$1,430"
+},
+{
+  "field": "Drivetrain",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "tracker.gg; Exputer; GTABase: 'Drive Train RWD'; RetroBroker: '900 kg RWD'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/karin-futo/",
+  "value": "RWD"
+},
+{
+  "field": "Gears",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "Exputer: 'five gears'; GTABase: 'Gears 5'; RetroBroker: '5-speed'; gtascoop: 'Gears 5'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/karin-futo/",
+  "value": "5"
+},
+{
+  "field": "Weight",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "Exputer: 'weighs about 900 kg'; gtascoop: 'Weight (kg) 900'. Note: GTABase lists 1,000 kg",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/karin-futo/",
+  "value": "900 kg"
+},
+{
+  "field": "Mod specialist",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "Exputer (Tuner); Dexerto: 'Mod Shop Specialist, Tuner'; tracker.gg: 'Mod Shop Specialist Tuner'; damnmodz: 'Mod shop Vice Auto Customs, the tuner specialist'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/karin-futo/",
+  "value": "Tuner; mod shop Vice Auto Customs"
+},
+{
+  "field": "Seating",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "tracker.gg; Exputer; GTABase; Dexerto",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/futo",
+  "value": "2 seats"
+},
+{
+  "field": "Storage slots",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Storage 2'; tracker.gg: 'Storage 2'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/futo",
+  "value": "2"
+},
+{
+  "field": "Base handling rating (asphalt)",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "tracker.gg Futo page: '412/1000'; Dexerto: '412'; meowdb: '412 Road'; gtascoop: '412'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/futo",
+  "value": "412"
+},
+{
+  "field": "Base handling rating (off-road)",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "tracker.gg Futo page: '287/1000'; Dexerto: '287'; meowdb: '287'; gtascoop: '287'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/futo",
+  "value": "287"
+},
+{
+  "field": "Tracker",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "Exputer: 'Tracker None'; GTABase: 'Tracker None'; meowdb scan: 'Tracker None'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/karin-futo/",
+  "value": "None"
+},
+{
+  "field": "Moses job payout",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "Exputer: 'The request pays $1,500, with a bonus for condition'; gtaboss.gg money guide: 'Karin Futo… ($1,500)'; gta6everything: 'Moses paying $1,500, plus a bonus'; damnmodz: 'Deliver it to Moses… for a $1,500 reward'. Request 2 of 6 (Exputer; HeistAtlas; damnmodz)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/vehicles/karin-futo/",
+  "value": "$1,500 + condition bonus"
+},
+{
+  "field": "Era",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "GTABase; Dexerto; tracker.gg (meowdb writes '1980s Restored' — wording variant)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/futo",
+  "value": "1980s Classic"
+},
+{
+  "field": "Model year",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Model Year 1985'; meowdb: 'Model year 1985'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/futo",
+  "value": "1985"
+},
+{
+  "field": "Observed location",
+  "id": "karin-futo",
+  "kind": "vehicles",
+  "locator": "GTABase Futo page map: \"Karin Futo '85 (collector condition) location on the GTA 6 map\"; RetroBroker: 'Key Lento Collector Spawn'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://retrobroker.com/en-AU/us/blog/paul-walkers-eclipse-karin-futo-gta-6-locations",
+  "value": "Key Lento, Leonida Keys — collector-condition spawn"
+},
+{
+  "field": "Registration cost",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "tracker.gg Emperor page: 'Story Mode price $5,650'; Exputer: 'Registration cost $5,650'; gta6info: \"GTABase's record… cost to register $5,650\"; howtovideogame own scan: '$5,650'; gta6intel",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "$5,650"
+},
+{
+  "field": "Scanned sell value",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "tracker.gg Emperor page: 'Sell price $1,705'; Exputer: 'Sale value when stolen $1,705'; GTABase via gta6info: '$1,705'; gta6intel: 'Sells for, $1,705'. Note: individual scans showed $450 (howtovideogame) and $615 (SidequestClips video, 22 Nov) — sell values vary per car instance and condition",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "$1,705"
+},
+{
+  "field": "Drivetrain",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "tracker.gg Emperor page; Exputer: 'Rear-wheel drive'; gta6intel: 'Drivetrain RWD'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "RWD"
+},
+{
+  "field": "Gears",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "Exputer: 'Rear-wheel drive with 5 gears'; gtatracker: 'Gears 5'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "5"
+},
+{
+  "field": "Weight",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "gtatracker: 'Mass 1,900 kg'; grandtheft.gg: '1,900 KG' (Exputer's Emperor page does not list weight)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "1,900 kg"
+},
+{
+  "field": "Mod specialist",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "Exputer: 'The lowrider garage Lowballers Customs handles its specialist work'; Dexerto: 'Mod Shop Specialist, Lowrider'; tracker.gg: 'Mod shop Lowrider'; fivestarintel: 'Specialist, Lowrider'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "Lowrider; mod shop Lowballers Customs"
+},
+{
+  "field": "Storage slots",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "tracker.gg Emperor page: 'Storage 4'; Exputer: 'With four seats and four trunk slots'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "4"
+},
+{
+  "field": "Base handling rating (asphalt)",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "Dexerto: '305'; Exputer: '305'; meowdb: '305 Road'; gtatracker: 'Road Rating 305'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "305"
+},
+{
+  "field": "Base handling rating (off-road)",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "Dexerto: '191'; Exputer: '191'; meowdb: '191'; gtatracker: 'Road Rating 191'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "191"
+},
+{
+  "field": "Tracker",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "Exputer: 'Tracker None'; gta6intel: 'no tracker fitted'; GTABase via gta6info: 'tracker None'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "None"
+},
+{
+  "field": "Era",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "tracker.gg; Dexerto; Exputer; fivestarintel",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "1980s Classic"
+},
+{
+  "field": "Model year",
+  "id": "albany-emperor",
+  "kind": "vehicles",
+  "locator": "Exputer: \"Model year '85\"; tracker.gg page title: \"'85 Emperor\"; gta6intel",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/emperor",
+  "value": "'85"
+},
+{
+  "field": "Registration cost",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "tracker.gg Yosemite 1500 page: 'Story Mode price $5,750' and 'Cost to register $5,750'; howtovideogame: 3 scans, all $5,750; meowdb owning-cars table: '$5,750'; GTABase: 'Story Mode Price $5,750'; gta6bible: 'Cost to Register $5,750'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
+  "value": "$5,750"
+},
+{
+  "field": "Drivetrain",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "tracker.gg Yosemite page; GTABase: 'Drive Train AWD'; gta6intel: 'Drivetrain AWD'; gta6bible: 'Drivetrain AWD'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
+  "value": "AWD"
+},
+{
+  "field": "Mod specialist",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Specialist Off-Road'; Dexerto: 'Mod Shop Specialist, Off-Road'; tracker.gg: 'Mod Shop Specialist Off Road'; gta6bible: 'Specialist Off-Road'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
+  "value": "Off-Road"
+},
+{
+  "field": "Seating",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "tracker.gg (Seats 2); GTABase (Seats 2); gta6intel: 'seats two'; gtascoop: '2 seats'; gta6bible (Seats 2)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
+  "value": "2 seats"
+},
+{
+  "field": "Storage slots",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Storage 6'; tracker.gg: 'Storage 6'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
+  "value": "6"
+},
+{
+  "field": "Base handling rating (asphalt)",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "tracker.gg: '423/1000'; Dexerto: '423'; gtascoop: '423'; gamesfuze: 'Asphalt, 423'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
+  "value": "423"
+},
+{
+  "field": "Base handling rating (off-road)",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "Dexerto: '323'; gtascoop: '323'; GTABase: 'Rating 323'. Note: tracker.gg detail page reads 324",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
+  "value": "323"
+},
+{
+  "field": "Tracker",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Tracker None'; howtovideogame: 3 scans, 'Tracker None'; gta6bible: 'Tracker None'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
+  "value": "None"
+},
+{
+  "field": "Moses job payout",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "gta6heists: 'Payout seen $1,850', map card 'sell value of $1,850'; Exputer sell-cars-to-Moses guide: Yosemite 1500 '$1,850'; gtaboss.gg money guide: '($1,850)'; clutchbase: 'Yosemite 1500… $1,850'. Note: actual BuckMe received varies with condition — $1,690 (howtovideogame, 'Little wear and tear'), $1,685 (nerdschalk). First Moses job; the Futo request follows it (HeistAtlas Futo page: request 2 'comes after the Declasse Yosemite 1500')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://gta.exputer.com/gta-6/guides/sell-cars-to-moses/",
+  "value": "$1,850 (job-card value)"
+},
+{
+  "field": "Era",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "GTABase; Dexerto; gta6bible. Note: tracker.gg detail page writes \"2020's Modern\"",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
+  "value": "2000s Modern"
+},
+{
+  "field": "Observed location",
+  "id": "declasse-yosemite-1500",
+  "kind": "vehicles",
+  "locator": "gtascoop: 'Where: Leonida Keys, Ambrosia and Port Gellhorn'; GTA Wiki Yosemite VI section — truck 'parked in a screenshot in the Leonida Keys, as well as in the Port Gellhorn and Ambrosia postcards' (pre-launch promo, corroborating the areas)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Muse",
+  "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
+  "value": "Street spawns: Leonida Keys, Ambrosia, Port Gellhorn"
+}
 ]
