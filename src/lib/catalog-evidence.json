@@ -41079,5 +41079,75 @@
   "reviewer": "Taish Gaming source review",
   "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/conspiracist-type-9/",
   "value": "Not for sale — world find only"
-}
+},
+  {
+    "kind": "weapons",
+    "id": "island-poacher-ff-50",
+    "field": "GTA VI appearance",
+    "value": "Island Poacher FF-50",
+    "source": "https://www.gamespot.com/articles/gta-6-has-a-secret-mission-that-feels-like-hard-target-meets-saw/",
+    "locator": "Hyde Island hunt guide - Island Poacher FF-50 looted from the hunter's body (25 Nov 2026)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "island-poacher-ff-50",
+    "field": "Acquisition method",
+    "value": "Reward for surviving the Hyde Island hunt: kill the hunter and his dog Caesar, then search the hunter's body; reclaim your belongings and cash at the boathouse to the west",
+    "source": "https://www.gamespot.com/articles/gta-6-has-a-secret-mission-that-feels-like-hard-target-meets-saw/",
+    "locator": "Hyde Island hunt guide - 'Collect your rewards' section (25 Nov 2026); corroborated by Dexerto GTA 6 Wiki + esports.gg",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "shirleys-penumbra",
+    "field": "GTA VI appearance",
+    "value": "Shirley's Penumbra",
+    "source": "https://showgamer.com/en/guides/7940-kak-ukrast-skuter-peggi-v-gta-6-i-ne-popastsya-policii-zadanie-shirli",
+    "locator": "How to Get Shirley's Car for Free - white Maibatsu Penumbra with paw-print decals, Shirley's carport, Key Lento",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "shirleys-penumbra",
+    "field": "Acquisition method",
+    "value": "Borrow after completing Shirley's two Chapter 1 side missions in Key Lento (Get Shirley's Rum, then Steal the Scooter); missable once Tourist Trap starts; not a registered personal vehicle",
+    "source": "https://thegameswiki.com/gta6/wiki/steal-the-scooter",
+    "locator": "Steal the Scooter - Reward: permission to borrow Shirley's Penumbra; corroborated by ShowGamer + MetaForge + Clutchbase",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "firebug-dominator",
+    "field": "Observed location",
+    "value": "Guaranteed spawn: red Firebug Dominator by the torn-down hotel near Gellhorn Outfitters, Port Gellhorn; register with Moses at Watkins Auto Parts for $2,950",
+    "source": "https://vicepulse.org/gta-6/vehicles/rare-cars",
+    "locator": "Trick 6: Firebug Dominator, Port Gellhorn torn-down hotel - 7 videos (TGG, Arekkz, RageGamingVideos)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "drifter-elegy",
+    "field": "Observed location",
+    "value": "Inside the Qwick-Fix Autocare garage by the Gellhorn Raceway grandstands, Port Gellhorn - lift the left roller door by hand, Slim Jim to unlock",
+    "source": "https://vicepulse.org/gta-6/vehicles/rare-cars",
+    "locator": "Trick 5: Drifter Elegy, Qwick-Fix Autocare - 21 videos (Arekkz, WiLLiSGaming, StevieWunderKid)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "tallaloko-knife",
+    "field": "Acquisition method",
+    "value": "Enter code 7304 on the upstairs keypad in the Evergreen cabin, Lake Tallaloko (after reading the Marcus Fielding email on the Poppers Convenience computer); Tallaloko Knife on the table beside a lockbox holding $67,200 in jewelry",
+    "source": "https://gamerant.com/gta-6-four-horsemen-ritual-room-code-location/",
+    "locator": "Lake Tallaloko Door Code Solution - keypad code 7304, $67,200 lockbox, Tallaloko Knife (26 Nov 2026); corroborated by npcwire + GTA Series Videos",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  }
 ]
