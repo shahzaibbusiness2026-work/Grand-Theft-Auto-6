@@ -9235,19 +9235,19 @@
     "field": "GTA VI appearance",
     "value": "Sold at Big Shots (Hamlet)",
     "source": "https://vanotherlevel.com/gta-6-every-weapon/",
-    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Girardi AZ1200 $3,460, 7.4/4.8/5.8/2.5 (with mods).",
-    "reviewedAt": "2026-11-26",
-    "reviewer": "Taish Gaming source review"
+    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Girardi AZ1200 $3,460, 7.4/4.8/5.8/2.5 (with mods). Base price $2,300 / accuracy 4.5 per Dexerto, Exputer, HeistAtlas, Prospective, MeowDB.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   },
   {
     "kind": "weapons",
     "id": "girardi-az1200",
     "field": "Price shown",
-    "value": "$3,460 at Big Shots",
-    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
-    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Girardi AZ1200 $3,460 bank, price includes weapon and mods, 'Buy 4 more guns to unlock'.",
-    "reviewedAt": "2026-11-26",
-    "reviewer": "Taish Gaming source review"
+    "value": "$2,300 at Big Shots (base price; $3,460 with mods)",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/girardi-az1200/",
+    "locator": "Base price $2,300 (Dexerto; corroborated by Exputer, HeistAtlas, Prospective, MeowDB). vAnotherLevel's table shows $3,460 with weapon and mods.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   },
   {
     "kind": "weapons",
@@ -9263,11 +9263,11 @@
     "kind": "weapons",
     "id": "girardi-az1200",
     "field": "Accuracy",
-    "value": "4.8/10 (shop rating)",
-    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
-    "locator": "vAnotherLevel's shotgun table (ON SCREEN, MELOO's launch stream): Girardi AZ1200 Accuracy 4.8 (with mods).",
-    "reviewedAt": "2026-11-26",
-    "reviewer": "Taish Gaming source review"
+    "value": "4.5/10 (shop rating, base; 4.8 with mods)",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/girardi-az1200/",
+    "locator": "Base accuracy 4.5 (Dexerto; corroborated by Exputer, HeistAtlas, Prospective, MeowDB). vAnotherLevel's table shows 4.8 with mods.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   },
   {
     "kind": "weapons",
@@ -36678,5 +36678,225 @@
     "locator": "WAiNK scan ratings: Thrax",
     "reviewedAt": "2026-11-27",
     "reviewer": "Atlas Team"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-10",
+    "field": "Caliber",
+    "value": "9mm",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/wortham-w-10/",
+    "locator": "Dexerto lists 9mm; corroborated by Exputer (feeds 9mm ammunition at full-auto).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-10",
+    "field": "Fire style",
+    "value": "Full auto",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/wortham-w-10/",
+    "locator": "Dexerto: full-auto; corroborated by gta6info Weapons_List table (https://gta6info.com/wiki/Weapons_List) and guiasgta6.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-10",
+    "field": "Purchase locations",
+    "value": "Also sold at Ammu-Nation ($825), Hamlet Traders and Port Gellhorn Pawn & Gun",
+    "source": "https://gta.exputer.com/gta-6/weapons/wortham-w-10/",
+    "locator": "Exputer: Ammu-Nation sells the Wortham W-10 for $825; Hamlet Traders and the Pawn & Gun branch in Port Gellhorn also stock it. Corroborated by HeistAtlas (https://heistatlas.com/en/database/weapons/wortham-w-10/).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "wortham-w-10",
+    "field": "Carry slot",
+    "value": "Sidearm",
+    "source": "https://prospective-gg.com/gta-vi/database/weapons/wortham-w-10",
+    "locator": "Prospective: carry slot Sidearm; corroborated by Vice City Tracker (https://www.vicecitytracker.com/weapons) — the W-10 counts as a sidearm.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Magazine size",
+    "value": "8 rounds",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/duke-1922/",
+    "locator": "Dexerto: 8-round magazine; corroborated by Exputer (8-round magazine feeds .45 ammunition in semi-auto), gta6info and guiasgta6.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Caliber",
+    "value": ".45",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/duke-1922/",
+    "locator": "Dexerto: .45; corroborated by Exputer.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Fire style",
+    "value": "Semi-auto",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/duke-1922/",
+    "locator": "Dexerto: semi-auto; corroborated by Exputer.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-1922",
+    "field": "Purchase locations",
+    "value": "Also sold at Chuck's Tackle & Shot; BuckMe bank account required",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/duke-1922/",
+    "locator": "Dexerto: sold at Big Shots and Chuck's Tackle & Shot, requires a bank account; corroborated by Exputer and mapdex (https://mapdex.io/gta-6/weapons).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-hobo",
+    "field": "Magazine size",
+    "value": "2 rounds",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/shrewsbury-hobo/",
+    "locator": "Dexerto: holds 2 rounds of 12-gauge; corroborated by Exputer (2-shell magazine uses 12-gauge shells), gta6info and mapdex.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-hobo",
+    "field": "Caliber",
+    "value": "12-gauge",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/shrewsbury-hobo/",
+    "locator": "Dexerto: 12-gauge; corroborated by Exputer.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-hobo",
+    "field": "Fire style",
+    "value": "Break action",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/shrewsbury-hobo/",
+    "locator": "Dexerto: break-action; corroborated by Exputer.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-hobo",
+    "field": "Purchase locations",
+    "value": "All Leonida gun stores incl. Chuck's Tackle & Shot; BuckMe bank account required",
+    "source": "https://gta.exputer.com/gta-6/weapons/shrewsbury-hobo/",
+    "locator": "Exputer: all Leonida gun stores stock the $1,325 Hobo, including Chuck's Tackle & Shot; BuckMe bank account required. Corroborated by mapdex.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "Magazine size",
+    "value": "5 shells",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/girardi-az1200/",
+    "locator": "Dexerto: 5-shell magazine; corroborated by Exputer, HeistAtlas, Prospective and MeowDB.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "Caliber",
+    "value": "12-gauge",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/girardi-az1200/",
+    "locator": "Dexerto: 12-gauge; corroborated by Exputer.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "Fire style",
+    "value": "Semi-auto",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/girardi-az1200/",
+    "locator": "Dexerto: semi-auto; corroborated by Exputer.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "Unlock",
+    "value": "Locked at first; unlocks after buying 4 guns",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/girardi-az1200/",
+    "locator": "Dexerto: locked at first, unlocks after buying other guns; Exputer: unlocks once four guns have been bought.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-az1200",
+    "field": "Purchase locations",
+    "value": "Standard + Expanded gun stores; Big Shots (Hamlet)",
+    "source": "https://gta.exputer.com/gta-6/weapons/girardi-az1200/",
+    "locator": "Exputer: Standard and Expanded gun stores sell the AZ1200 for $2,300; Dexerto and HeistAtlas also list Big Shots in Hamlet.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sm-69",
+    "field": "Weapon class",
+    "value": "Hunting Sniper Rifle",
+    "source": "https://gta.exputer.com/gta-6/weapons/shrewsbury-sm-69/",
+    "locator": "Exputer: bolt-action hunting sniper rifle; corroborated by thegameswiki (https://thegameswiki.com/gta6/wiki/shrewsbury-sm-69).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sm-69",
+    "field": "Caliber",
+    "value": "7.62×51mm",
+    "source": "https://gta.exputer.com/gta-6/weapons/shrewsbury-sm-69/",
+    "locator": "Exputer: 5 rounds of 7.62x51mm; corroborated by thegameswiki (chambered in 7.62x51MM).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sm-69",
+    "field": "Fire style",
+    "value": "Bolt-action",
+    "source": "https://gta.exputer.com/gta-6/weapons/shrewsbury-sm-69/",
+    "locator": "Exputer: bolt-action; corroborated by thegameswiki.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sm-69",
+    "field": "Acquisition method",
+    "value": "Free pickup atop the Key Lento radio tower balcony (above Nifty Threads Island Wear; climb the fence, enter the Badger building, up to the control room)",
+    "source": "https://gta.exputer.com/gta-6/weapons/shrewsbury-sm-69/",
+    "locator": "Exputer: free SM-69 on the Key Lento radio tower balcony; corroborated by ShowGamer (https://showgamer.com/en/guides/8066-gde-nayti-besplatnuyu-snayperskuyu-vintovku-shrewsbury-sm-69-v-gta-6) and games.gg (https://games.gg/grand-theft-auto-vi/guides/grand-theft-auto-6-secret-sniper-location/).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "shrewsbury-sm-69",
+    "field": "Unlock",
+    "value": "Unlocks at Ammu-Nation as you buy more guns there",
+    "source": "https://gta.exputer.com/gta-6/weapons/shrewsbury-sm-69/",
+    "locator": "Exputer: most stores initially lock it; each Ammu-Nation purchase expands that store's stock.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   }
 ]
