@@ -13052,7 +13052,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     description:
       "Jason's signature handgun with personalized engraved detailing, seen firing from the passenger window of a Bravado Gauntlet Hellfire in Trailer 2. Officially named by Rockstar; damage, capacity and upgrade path are unpublished.",
     notes: "Rockstar\'s official Ultimate Edition contents list the Girardi ES9 as Jason\'s weapon, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so damage, fire rate, price and unlock all stay unverified until the game is out.",
-    img: "",
+    img: "/img/catalog/girardi-es9.jpg",
     manufacturer: "Girardi",
   },
   {
@@ -13103,7 +13103,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     description:
       "Promoted as Lucia's preferred handgun. The personalized promotional version uses rose and signature decoration. No verified combat values have been published.",
     notes: "Rockstar\'s official Ultimate Edition contents list the Klose K17 as Lucia\'s weapon, so this appearance is officially confirmed by the product listing — not a rumour. The listing gives no gameplay detail beyond the name, so damage, fire rate, price and unlock all stay unverified until the game is out.",
-    img: "",
+    img: "/img/catalog/klose-k17.jpg",
     manufacturer: "Klose",
   },
   {
@@ -13301,7 +13301,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "REPORTED",
     source: "GTA 6 Extended Look (27 Aug 2026) — on-screen pickup label 'MORELAND 850 SHOTGUN' at ~04:27, per GTA Boss scene breakdown; frame verification pending",
     description: "Pump shotgun shown in the Extended Look opening-job firefight. The name appears as an on-screen weapon pickup label.",
-    img: "",
+    img: "/img/catalog/moreland-850-shotgun.jpg",
     notes: "Spotted in An Extended Look at ~04:27 — on-screen pickup label reads 'MORELAND 850 SHOTGUN'. The name is Rockstar's on-screen label, reported via published breakdown; frame verification pending. In-game menu stats as displayed (0–10 scale): Damage 7.5, Accuracy 4.2, Handling 5.6, Range 2.5 (nerdschalk, Pro Game Guides, Clutchbase). $350 during the Gear Up mission — Andrew's half-price first-longarm discount; normally $700 (nerdschalk, showgamer, Clutchbase). 5-round magazine, 12-gauge, pump action. Also listed at Phil's Ammu-Nation and Hamlet Traders and Pawn & Gun (exputer), and at Big Shots in Hamlet (Pro Game Guides).",
   },
   {
@@ -13325,7 +13325,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "REPORTED",
     source: "GTA 6 launch gameplay — Sirloin 'GTA 6 - Walkthrough Part 02 (No Commentary) 4K', ~26:00 — shown in the Chuck's Tackle & Shot shop menu, $450 (discounted from $900)",
     description: "Tactical rifle sold at Chuck's Tackle & Shot in GTA VI. The name and price appear in the in-game shop menu.",
-    img: "",
+    img: "/img/catalog/hawk-and-little-mediator.jpg",
     notes: "Spotted in Sirloin's launch-gameplay walkthrough (Part 02, ~26:00) — the shop menu lists 'Hawk & Little Mediator' at $450, discounted from $900. In-game shop stats as displayed (0–10 scale, not catalog 0–100 scores): Damage 4.8, Accuracy 7.8, Handling 5.6, Range 7.0. Magazine 24 rounds (store menu, Dalek's stream; tracker.gg lists 17, which matches playday.one's figure — the on-screen menu read is the one to trust).",
   },
   {
@@ -13493,7 +13493,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     confidence: "REPORTED",
     source: "GTA 6 launch gameplay — GameRiot 'GTA 6 Gameplay Walkthrough Part 14', 45:00 — weapon HUD reads 'GORSE 425 SHOTGUN'",
     description: "Stubby pump-action shotgun seen in launch gameplay. The weapon HUD reads 'GORSE 425 SHOTGUN'. Sold at Chuck's Tackle & Shot for $850.",
-    img: "",
+    img: "/img/catalog/fortune-and-son-gorse-425.jpg",
     notes: "Spotted in GameRiot's launch-gameplay walkthrough (Part 14, 45:00) — the weapon HUD reads 'GORSE 425 SHOTGUN'. Corroborated by Dexerto wiki, IGN, thegameswiki and gta6info. In-game menu stats as displayed (0–10 scale): Damage 7.5, Accuracy 3.8, Handling 6.2, Range 2.0; 5-round magazine, 12-gauge, pump action. Sold at Chuck's Tackle & Shot for $850 (also listed at Big Shots and Ammu-Nation by other guides). Unique variants exist separately: San4San, Smuggler and Basher Gorse 425.",
   },
   {

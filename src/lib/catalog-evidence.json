@@ -5463,11 +5463,11 @@
     "kind": "weapons",
     "id": "hawk-and-little-mediator",
     "field": "Magazine size",
-    "value": "24 rounds",
-    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
-    "locator": "ON SCREEN (Dalek) — store menu reads Mag Size 24, Held Ammo 120",
+    "value": "17 rounds (base; 24 with the $110 extended magazine attachment)",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/tactical-rifles/hawk-little-mediator/",
+    "locator": "Base magazine is 17 rounds (Dexerto; corroborated by GTA6Info https://gta6info.com/wiki/Hawk_and_Little_Mediator and gta6intel https://gta6intel.com/weapons/mediator). The on-screen store-menu read of 24 (Dalek) is the extended-magazine configuration: the 24-round magazine is a $110 attachment (+7 rounds) per Exputer (https://gta.exputer.com/gta-6/weapons/hawk-and-little-mediator/).",
     "reviewedAt": "2026-11-27",
-    "reviewer": "Taish Gaming source review"
+    "reviewer": "Muse"
   },
   {
     "kind": "weapons",
@@ -37146,6 +37146,146 @@
     "value": "NE 3rd St tow-truck event, ~1 PM (Randy's Wish List spot)",
     "source": "http://gtasixlnsider.com/gta-6-pegassi-tempesta/",
     "locator": "gtasixlnsider Tempesta guide: the spot Randy's Wish List points to, NE 3rd St tow-truck event; corroborated by HeistAtlas (https://heistatlas.com/en/guide/cars/, on a tow truck on NE 3rd St, around 1 PM).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Fire mode",
+    "value": "Semi-Auto",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/klose-k17/",
+    "locator": "Dexerto: semi-auto; corroborated by Exputer (https://gta.exputer.com/gta-6/weapons/klose-k17/, semi-auto action fires 9mm) and Game8 (https://game8.co/games/GTA-6/archives/638773, Firing Mode: Semi-Auto).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Purchase locations",
+    "value": "Also sold at Phil's Ammu-Nation, Hamlet Traders, and Pawn & Gun (Port Gellhorn) at $975, no unlock; also Big Shots and Chuck's Tackle & Shot",
+    "source": "https://gta.exputer.com/gta-6/weapons/klose-k17/",
+    "locator": "Exputer: also sold at Phil's Ammu-Nation, Hamlet Traders and Pawn & Gun (Port Gellhorn) at $975; corroborated by Dexerto (sold at Big Shots and Chuck's Tackle & Shot) and Exputer's every-Leonida-gun-store line.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Price shown",
+    "value": "$700",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/girardi-es9/",
+    "locator": "Dexerto specs: $700; corroborated by Exputer (https://gta.exputer.com/gta-6/weapons/girardi-es9/, $700 without an extra unlock condition) and MapDex (https://mapdex.io/gta-6/weapons, Ammu-Nation sells it for $700).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Fire mode",
+    "value": "Semi-Auto",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/girardi-es9/",
+    "locator": "Dexerto: semi-auto; corroborated by Exputer (semi-auto action feeds from a 15-round magazine) and Game8 (https://game8.co/games/GTA-6/archives/638722, Firing Mode: Semi-Auto).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Purchase locations",
+    "value": "Big Shots and Chuck's Tackle & Shot; also Hamlet Traders and Pawn & Gun (Port Gellhorn)",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/girardi-es9/",
+    "locator": "Dexerto: sold at Big Shots and Chuck's Tackle & Shot; corroborated by Exputer (also Hamlet Traders, Pawn & Gun Port Gellhorn, same price).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Acquisition method",
+    "value": "Jason's starting sidearm (carried from the start of 'Gone Fishing')",
+    "source": "https://gta.exputer.com/gta-6/weapons/girardi-es9/",
+    "locator": "Exputer: Jason's starting sidearm; corroborated by MapDex (Jason's starting sidearm; Ammu-Nation $700 cash).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-mediator",
+    "field": "Mission discount",
+    "value": "$450 during the Gear Up mission at Chuck's Tackle & Shot (half price)",
+    "source": "https://gta.exputer.com/gta-6/weapons/hawk-and-little-mediator/",
+    "locator": "Exputer: $450 during the Gear Up mission at Chuck's Tackle & Shot (half of $900; the alternative longarm to the Moreland 850); corroborated by Sirloin's launch-gameplay walkthrough Part 02 (~26:00), shop menu lists the Mediator at $450, discounted from $900.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-mediator",
+    "field": "Purchase locations",
+    "value": "Also stocked at Martez Empeños, Big Shots, and Gellhorn Outfitters at $900",
+    "source": "https://gta.exputer.com/gta-6/weapons/hawk-and-little-mediator/",
+    "locator": "Exputer: also stocked at Martez Empeños, Big Shots and Gellhorn Outfitters; corroborated by MeowDB (http://meowdb.com/gta6/weapons/hawk-and-little-mediator).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-and-little-mediator",
+    "field": "Extended magazine",
+    "value": "24 rounds, $110 attachment (+7 rounds)",
+    "source": "https://gta.exputer.com/gta-6/weapons/hawk-and-little-mediator/",
+    "locator": "Exputer: the 24-round magazine is a $110 attachment that adds +7 rounds. This reconciles the on-screen store-menu read of 24 with the base 17-round magazine (Dexerto, GTA6Info, gta6intel).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "Fire mode",
+    "value": "Pump Action",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/fortune-son-moreland-850/",
+    "locator": "Dexerto: pump action; corroborated by Exputer (https://gta.exputer.com/gta-6/weapons/moreland-850-shotgun/, pump-action shotgun, 5-shell magazine) and gta6map (https://www.gta6map.net/wiki/gta-6/weapons/fortune-and-son-moreland-850, Fire style: Pump action).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "Mission discount",
+    "value": "$350 during the Gear Up mission at Chuck's Tackle & Shot (half price)",
+    "source": "https://gta.exputer.com/gta-6/weapons/moreland-850-shotgun/",
+    "locator": "Exputer: $350 during the Gear Up mission at Chuck's Tackle & Shot (half price; Jason's first longarm for most players); corroborated by digitalnexus (https://digitalnexus.pl/en/gta-6/best-weapons-tier-list/, $350 normally $700, Gear Up mission) and the site's notes (nerdschalk, showgamer, Clutchbase).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "moreland-850-shotgun",
+    "field": "Purchase locations",
+    "value": "Hamlet Traders (Vice Dale County) and Pawn & Gun (Port Gellhorn) at $700",
+    "source": "https://gta.exputer.com/gta-6/weapons/moreland-850-shotgun/",
+    "locator": "Exputer: Hamlet Traders (Vice Dale County) and Pawn & Gun (Port Gellhorn) stock it at $700.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-gorse-425",
+    "field": "Fire mode",
+    "value": "Pump Action",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/shotguns/fortune-son-gorse-425/",
+    "locator": "Dexerto: pump action; corroborated by Exputer (https://gta.exputer.com/gta-6/weapons/fortune-and-son-gorse-425/, short pump-action shotgun, 5 12-gauge shells) and Game8 (https://game8.co/games/GTA-6/archives/639503, Firing Mode: Pump Action).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-gorse-425",
+    "field": "Purchase locations",
+    "value": "Hamlet Traders (Vice Dale County) and Pawn & Gun (Port Gellhorn) at $850; sold at every Leonida gun store",
+    "source": "https://gta.exputer.com/gta-6/weapons/fortune-and-son-gorse-425/",
+    "locator": "Exputer: Hamlet Traders and Pawn & Gun stock it at $850; sold at every Leonida gun store; corroborated by Dexerto (sold at Big Shots and Chuck's Tackle & Shot for $850).",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
   }
