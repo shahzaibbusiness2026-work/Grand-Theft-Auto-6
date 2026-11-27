@@ -4,6 +4,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { SiteShell } from "@/components/shells";
 import { EvidenceDetail } from "@/components/evidence-detail";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
+import { catalogEntryPath, indexReady } from "@/lib/catalog-detail-availability";
 export const revalidate = 3600;
 // An explicit runtime path list enables ISR for newly published CMS slugs.
 export function generateStaticParams() {
@@ -34,8 +35,8 @@ export default async function Detail({
   const { slug } = await params;
   const entry = await resolve(slug);
   if (!entry) notFound();
-  if (slug !== entry.slug) permanentRedirect("/weapons/" + entry.slug);
-  const sorted = matchingCatalogEntries(await getEvidenceCatalog("weapons"), {
+  if (slug !== entry.slug || !indexReady(entry)) permanentRedirect(catalogEntryPath("weapons", entry));
+  const sorted = matchingCatalogEntries((await getEvidenceCatalog("weapons")).filter(indexReady), {
     q: "",
     category: "",
     tab: "",

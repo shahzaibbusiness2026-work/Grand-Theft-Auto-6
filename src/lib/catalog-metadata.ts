@@ -96,7 +96,7 @@ function detailDescription(kind: CatalogKind, entry: EvidenceEntry): string {
     const acquisition = claimValue(entry, "Acquisition method");
     if (acquisition) facts.push(cleanValue(acquisition));
   }
-  const tail = " Verified evidence and sources.";
+  const tail = " See the sources and context.";
   const head = (useFacts: string[]) =>
     useFacts.length
       ? `${entry.name} in GTA 6: ${useFacts.join("; ")}.`

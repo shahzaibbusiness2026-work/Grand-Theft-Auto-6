@@ -101,7 +101,7 @@ export const characterEvidence: Record<
     related: [
       { label: "Jason Duval: central character background", href: "/characters/jason" },
       { label: "Lucia Caminos: central character background", href: "/characters/lucia" },
-      { label: "Money guide: verified context and open questions", href: "/money-guide" },
+      { label: "GTA 6 economy guide", href: "/guides/make-money-fast" },
     ],
   },
   "brian-heder": {

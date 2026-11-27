@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { indexReady } from "@/lib/catalog-evidence";
+import { catalogEntryPath, indexReady } from "@/lib/catalog-detail-availability";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import { getPublicArticles } from "@/lib/services/articles";
 import { getPublicGuides } from "@/lib/services/guides";
@@ -34,7 +34,7 @@ export async function GET() {
         title: v.name,
         subtitle: `${v.category} • ${indexReady(v) ? "Reviewed appearance" : "Provisional identification"}`,
         category: "Vehicle",
-        href: `/vehicles/${v.slug}`,
+        href: catalogEntryPath("vehicles", v),
         img: v.img,
       });
     });
@@ -46,7 +46,7 @@ export async function GET() {
         title: w.name,
         subtitle: `${w.category} • ${indexReady(w) ? "Reviewed appearance" : "Provisional identification"}`,
         category: "Weapon",
-        href: `/weapons/${w.slug}`,
+        href: catalogEntryPath("weapons", w),
         img: w.img,
       });
     });

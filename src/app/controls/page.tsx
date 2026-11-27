@@ -144,15 +144,11 @@ export default function ControlsPage() {
               <Link href="/settings-guide" className="font-bold text-[#FF2E9A] underline">
                 settings guide
               </Link>{" "}
-              for sensitivity and aim-assist recommendations, the{" "}
+              for display, audio and controller options, and the{" "}
               <Link href="/weapons" className="font-bold text-[#FF2E9A] underline">
                 weapons database
               </Link>{" "}
-              for what each gun does, and the{" "}
-              <Link href="/tools/wanted-level-guide" className="font-bold text-[#FF2E9A] underline">
-                wanted-level guide
-              </Link>{" "}
-              for escaping the police once the shooting starts.
+              for source-backed weapon information.
             </p>
 
             <section className="mt-8 flex flex-col gap-4 rounded-2xl bg-gradient-to-r from-[#FF2E9A] to-violet-600 p-6 sm:flex-row sm:items-center sm:justify-between">

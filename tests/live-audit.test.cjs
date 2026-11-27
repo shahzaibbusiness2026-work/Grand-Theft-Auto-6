@@ -23,7 +23,7 @@ const {
   isCatalogVariant,
 } = require("../src/lib/catalog-url-state.ts");
 const { catalogSchema } = require("../src/lib/catalog-schema.ts");
-const { publicCatalogEntry } = require("../src/lib/catalog-evidence.ts");
+const { indexReady, publicCatalogEntry } = require("../src/lib/catalog-evidence.ts");
 const { comparisonGroups, isCatalogStat } = require("../src/lib/comparison-fields.ts");
 const {
   normalizeEditorialMarkdown,
@@ -41,6 +41,27 @@ const entries = Array.from({ length: 60 }, (_, i) => ({
   claims: [],
   img: "/img/hero-dark.jpg",
 }));
+
+test("a name-only catalog listing stays out of search until it has an entry-specific detail", () => {
+  const appearance = {
+    field: "GTA VI appearance",
+    value: "Listed in the vehicle database",
+    locator: "Vehicle database, Example model",
+    source: "https://tracker.gg/example",
+  };
+  const entry = { ...entries[0], claims: [appearance, { field: "Official name", value: "Example model" }] };
+  assert.equal(indexReady(entry), false);
+  assert.equal(indexReady({ ...entry, claims: [...entry.claims, { field: "Observed location", value: "Draper Island" }] }), true);
+  assert.equal(indexReady({ ...entry, claims: [{ ...appearance, source: "https://www.rockstargames.com/VI/trailer-2" }] }), true);
+});
+
+test("an explicitly reported launch table does not supply public weapon facts", () => {
+  const entry = publicCatalogEntry("weapons", {
+    id: "adb-fra", slug: "adb-fra", name: "ADB FRA", klass: "Assault Rifle",
+  });
+  assert.equal(entry.claims.some((claim) => claim.field === "Damage"), false);
+  assert.equal(indexReady(entry), false);
+});
 
 test("the catalog uses the sourced vehicle name for a CMS row and excludes legacy estimates", () => {
   const record = {
@@ -65,7 +86,7 @@ test("the catalog uses the sourced vehicle name for a CMS row and excludes legac
 test("a researched weapon name can supersede its provisional label while retaining its route", () => {
   const entry = publicCatalogEntry("weapons", {
     id: "m4-carbine",
-    slug: "duke-556",
+    slug: "m4-carbine",
     name: "Duke Arms Carbine",
     klass: "Assault Rifle",
   });
@@ -124,7 +145,7 @@ test("draft location confidence cannot publish unsupported mechanics or spawn as
   );
 });
 test("public catalog URL round-trips filters and cumulative page without exposing collections", () => {
-  const state = { q: "Entry", category: "Boat", sort: "reverse", page: 2, from: 1 };
+  const state = { q: "Entry", category: "Boat", tab: "", sort: "reverse", page: 2, from: 1 };
   const url = catalogStateUrl(
     new URL(
       "https://www.taishgaming.com/vehicles?ids=entry-1&saved=1&recent=1",

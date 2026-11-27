@@ -40198,5 +40198,175 @@
     "locator": "KeenGamer 'All 7 Moses Vehicle Drop-Off Locations': 'Western Nightblade | Birch St, Ambrosia | Final Chapter clubhouse' — 'the orange motorcycle at the back of the ground floor' of the central warehouse; open the compound gate before riding out. Corroborated by Destructoid (motorcycle club on Birch St, Kelly County; ladder/roof route into the compound), thegameswiki Motorcycle Clubs (Irons Building Supply holds 'a club-owned Western Nightblade motorcycle that Moses asks you to steal'), magicgameworld, heistatlas, playermanual, finalboss and gta6info, plus the no-commentary playthrough (https://www.youtube.com/watch?v=URJ8TKAmoYI) showing the same compound, bike and a $6,330 delivered payout (condition bonus over the $6,310 base).",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "cheetah-classic",
+    "field": "Description",
+    "value": "The Ultimate Edition version is shown in white with pop-up headlamps and a retro livery.",
+    "source": "https://www.rockstargames.com/VI/add-ons/ultimate-edition",
+    "locator": "’95 Grotti Cheetah, first two official images.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "crest-kayak",
+    "field": "Edition availability",
+    "value": "Included among Jason’s safehouse vehicles with the Ultimate Edition Upgrade.",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Jason’s Safehouse Vehicles, in the publisher’s product description.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "dinka-enduro",
+    "field": "Publisher identification",
+    "value": "Rockstar labels the Ultimate Edition screenshot Dinka Enduro Motorcycle.",
+    "source": "https://www.rockstargames.com/VI/media/screenshots",
+    "locator": "Ultimate Edition Benefits gallery, screenshot labelled Dinka Enduro Motorcycle.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-ganado",
+    "field": "Customization",
+    "value": "Ganado Retro Build adds edition-exclusive modifications for Jason’s Vapid Ganado pickup.",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Ganado Retro Build section of the publisher’s product description.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "shitzu-squalo",
+    "field": "Acquisition location",
+    "value": "Washington Beach dock for the Ultimate Edition version.",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Shitzu Squalo section of the publisher’s product description.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "shitzu-squalo",
+    "field": "Description",
+    "value": "The Ultimate Edition boat has a pink-to-blue finish.",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Shitzu Squalo section of the publisher’s product description.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vapid-dominator-buggy-67",
+    "field": "Garage",
+    "value": "Paradise Garage in Watson Bay is listed as storage for the Ultimate Edition buggy.",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "’67 Vapid Dominator Buggy & Garage section of the publisher’s product description.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "seaplane-dodo",
+    "field": "Route landmark",
+    "value": "Follow Sunbelt Highway (Route 1) to Southwind and turn in at the Sherwin Boatworks and Chicki’s Tiki Bar sign. The hangar is on the south side of the lot.",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-first-plane-and-helicopter/",
+    "locator": "PC Gamer’s original playthrough and map screenshots under Where to find your first plane.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "vehicles",
+    "id": "maverick",
+    "field": "Route landmark",
+    "value": "From the Sherwin Boatworks parking lot entrance, look east for the gate to the dock.",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-first-plane-and-helicopter/",
+    "locator": "PC Gamer’s original playthrough and dock screenshot under Where to find your first helicopter.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "hawk-little-morgan-revolvers",
+    "field": "Edition content",
+    "value": "Jason and Lucia each get a decorated revolver variant with an engraved grip and a scope.",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Hawk & Little Morgan Revolvers section of the publisher’s product description.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "girardi-es9",
+    "field": "Publisher identification",
+    "value": "The Ultimate Edition Upgrade lists an engraved variant of Jason’s Girardi ES9 pistol.",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Personalized Weapon Variants section of the publisher’s product description.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "klose-k17",
+    "field": "Publisher identification",
+    "value": "The Ultimate Edition Upgrade lists an engraved variant of Lucia’s Klose K17 pistol.",
+    "source": "https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/",
+    "locator": "Personalized Weapon Variants section of the publisher’s product description.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "m4-carbine",
+    "field": "Observed gameplay",
+    "value": "The pickup prompt names the Duke 556 at 25:07. Jason fires it in the office encounter that follows.",
+    "source": "https://www.youtube.com/watch?v=tJbzMqJGH4k&t=1507s",
+    "locator": "Rockstar’s An Extended Look, pickup prompt at 25:07 and office encounter at 25:10. GTADB publishes stills of both frames.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kolt-and-associates-556",
+    "field": "Acquisition method",
+    "value": "Look in the weapon case on the kitchen table at the Kolt stash house, next to the safe.",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-unique-weapons/",
+    "locator": "Kolt & Associates 556 section. PC Gamer shows the weapon and a map capture of the stash house.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "kingfishers-laird-350",
+    "field": "Acquisition method",
+    "value": "PC Gamer documented an early Chapter 1 pickup at a Kingfisher hideout.",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-unique-weapons/",
+    "locator": "Kingfishers Laird 350 section, including the pickup and map screenshots.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "assassin-nipper-38",
+    "field": "Observed attachment",
+    "value": "Suppressor fitted to the Assassin variant in the Chapter 1 pickup.",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-silenced-pistol-assassin-nipper/",
+    "locator": "PC Gamer’s first-hand guide shows the pistol, wreck and map location.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
+  },
+  {
+    "kind": "weapons",
+    "id": "gutterball-moreland-850",
+    "field": "Observed location",
+    "value": "On the pool table in the main room during Hit Kingpin Bowling.",
+    "source": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-bowling-alley-safe-code-location/",
+    "locator": "PC Gamer’s original Chapter 2 walkthrough, overview of the bowling alley pickup.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Taish Gaming source review"
   }
 ]

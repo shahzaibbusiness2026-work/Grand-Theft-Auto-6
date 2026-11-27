@@ -1,4 +1,5 @@
 "use client";
+import { indexReady } from "@/lib/catalog-detail-availability";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "@/components/player-tool-link";
@@ -371,6 +372,7 @@ export function EvidenceCatalog({
           {cards.map((e) => {
             const picked = selected.includes(e.id);
             const favorite = favorites.includes(e.id);
+            const hasDetail = indexReady(e);
             // Text-only entries have no verified image: hide the image
             // area entirely instead of showing an empty box.
             const hasArtwork = !!catalogArtwork(kind, e);
@@ -396,7 +398,7 @@ export function EvidenceCatalog({
                         sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
                       />
                     </button>
-                  ) : (
+                  ) : hasDetail ? (
                     <Link
                       href={`/${kind}/${e.slug}`}
                       onClick={() => visit(e.id)}
@@ -409,6 +411,10 @@ export function EvidenceCatalog({
                         sizes="(max-width:359px) 100vw, (max-width:767px) 50vw, 30vw"
                       />
                     </Link>
+                  ) : (
+                    <div className={styles.cardImage}>
+                      <CatalogArtwork kind={kind} entry={e} sizes="(max-width:767px) 50vw, 30vw" />
+                    </div>
                   ))}
                 <div className={styles.cardBody}>
                   <p className={styles.cardCategory}>{e.category}</p>
@@ -424,20 +430,18 @@ export function EvidenceCatalog({
                       >
                         {e.name}
                       </button>
-                    ) : (
+                    ) : hasDetail ? (
                       <Link
                         href={`/${kind}/${e.slug}`}
                         onClick={() => visit(e.id)}
                       >
                         {e.name}
                       </Link>
-                    )}
+                    ) : e.name}
                   </h2>
                   <p className={styles.cardEvidence}>
                     <span className={styles.dot} />
-                    {e.claims.some((c) => c.field === "GTA VI appearance")
-                      ? "Appearance evidence reviewed"
-                      : "Identification awaiting review"}
+                    {hasDetail ? "Source-backed detail page" : "Catalog listing"}
                   </p>
                   <div className={styles.cardActions}>
                     <button

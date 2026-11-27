@@ -1,7 +1,13 @@
 export const RADIO_SOURCE = "https://www.rockstargames.com/VI/music";
-export const RADIO_REVIEWED_AT = "2026-10-27";
+export const RADIO_REVIEWED_AT = "2026-11-27";
 /** Reviewed on Rockstar's public page; no inferred tracks or frequencies. */
 export const officialRadioStations = [
+  {
+    id: "circoloco-records",
+    name: "CircoLoco Records",
+    genre: "Underground house and techno",
+    host: "DJ Seth and DJ Antonio",
+  },
   {
     id: "cocoteo",
     name: "Cocoteo",

@@ -7,6 +7,7 @@ import {
   type SavedLoadout,
 } from "@/lib/user-store";
 import type { EvidenceEntry } from "@/lib/catalog-evidence";
+import { catalogEntryPath } from "@/lib/catalog-detail-availability";
 const SLOTS = [
   "primaryWeaponId",
   "secondaryWeaponId",
@@ -74,37 +75,33 @@ export function LoadoutClient({ entries }: { entries: EvidenceEntry[] }) {
         />
       </label>
       <div className="grid gap-5 sm:grid-cols-2">
-        {SLOTS.map((slot) => (
-          <div key={slot}>
-            <label className="block">
-              {slot.replace("WeaponId", "") + " weapon"}
-              <select
-                value={slots[slot] || ""}
-                onChange={(e) => setSlots({ ...slots, [slot]: e.target.value })}
-                className="block w-full rounded-xl border border-border bg-background p-3"
-              >
-                <option value="">No selection</option>
-                {entries.map((e) => (
-                  <option value={e.id} key={e.id}>
-                    {e.name} · {e.category}
-                  </option>
-                ))}
-              </select>
-            </label>
-            {slots[slot] && (
-              <Link
-                className="underline text-sm"
-                href={
-                  "/weapons/" +
-                  (entries.find((e) => e.id === slots[slot])?.slug ||
-                    slots[slot])
-                }
-              >
-                Review this identification
-              </Link>
-            )}
-          </div>
-        ))}
+        {SLOTS.map((slot) => {
+          const entry = entries.find((item) => item.id === slots[slot]);
+          return (
+            <div key={slot}>
+              <label className="block">
+                {slot.replace("WeaponId", "") + " weapon"}
+                <select
+                  value={slots[slot] || ""}
+                  onChange={(e) => setSlots({ ...slots, [slot]: e.target.value })}
+                  className="block w-full rounded-xl border border-border bg-background p-3"
+                >
+                  <option value="">No selection</option>
+                  {entries.map((e) => (
+                    <option value={e.id} key={e.id}>
+                      {e.name} · {e.category}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              {entry && (
+                <Link className="underline text-sm" href={catalogEntryPath("weapons", entry)}>
+                  View catalog entry
+                </Link>
+              )}
+            </div>
+          );
+        })}
       </div>
       <label className="block">
         Your notes

@@ -10,9 +10,9 @@ import { ToolStatusBanner } from "@/components/tool-status-banner";
 export const metadata: Metadata = {
   openGraph: pageOpenGraph("/tools/money-maker"),
   robots: { index: true, follow: true },
-  title: "Illustrative Money-Making Scenario Comparator",
+  title: "GTA 6 Earnings Calculator: Compare Profit per Hour",
   description:
-    "Compare net hourly returns using your own payout, cost and duration assumptions. No verified GTA VI economy data is supplied.",
+    "Compare two GTA 6 earning runs using your own payouts, costs and time. See how travel and setup affect your net profit per hour.",
 
   alternates: { canonical: "/tools/money-maker" },
 };
@@ -45,7 +45,7 @@ export default function MoneyMakerPage() {
                   {
                     "@type": "ListItem",
                     position: 3,
-                    name: "Money-Making Method Finder & Grinding Strategies \u2014 Taish Gaming",
+                    name: "GTA 6 Earnings Calculator",
                     item: "https://www.taishgaming.com/tools/money-maker",
                   },
                 ],
@@ -66,7 +66,7 @@ export default function MoneyMakerPage() {
           </Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-foreground font-bold">
-            Money-Making Method Finder
+            Earnings Calculator
           </span>
         </nav>
 
@@ -76,15 +76,20 @@ export default function MoneyMakerPage() {
             <DollarSign className="h-3 w-3" /> Illustrative arithmetic
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">
-            MONEY-MAKING <span className="text-primary">METHOD FINDER</span>
+            GTA 6 <span className="text-primary">Earnings Calculator</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-            Compare two editable scenarios using payout, costs and total run
-            time. The examples do not represent confirmed GTA VI activities. Build two earning scenarios side by side — payout, costs and total run time for each — and compare the results to see which one earns more per hour. The scenarios are fan-made examples with editable inputs; no verified GTA VI money-making method or payout ranking exists.
+            Enter the payout, costs and total time for two runs. The calculator shows which one earns more per hour using your numbers.
           </p>
         </div>
 
         <MoneyMakerClient />
+        <section className="mt-8 max-w-3xl space-y-3">
+          <h2 className="text-xl font-bold">How to compare two GTA 6 earning runs</h2>
+          <p>Time the full run, including preparation, travel and any wait before you can start again. Subtract what you spent during the run. If the payout varies, record a few runs and use their average rather than your best result.</p>
+          <p>With the example inputs, a $30,000 payout minus $5,000 in costs over 30 minutes comes to $50,000 per hour. A $50,000 payout minus $10,000 in costs over 60 minutes comes to $40,000 per hour. The smaller payout wins here because the run takes half as long.</p>
+          <p>For ideas to measure, see the <Link href="/guides/make-money-fast" className="underline">GTA 6 economy guide</Link>. To see how many runs you need to reach a target, use the <Link href="/tools/money-calculator" className="underline">money and savings calculator</Link>.</p>
+        </section>
       </div>
     </SiteShell>
   );

@@ -1,4 +1,5 @@
 "use client";
+import { indexReady } from "@/lib/catalog-detail-availability";
 import { useEffect, useMemo, useState } from "react";
 import Link from "@/components/player-tool-link";
 import {
@@ -274,7 +275,7 @@ export function EvidenceComparison({
                   <th scope="col">Detail</th>
                   {entries.map((e) => (
                     <th scope="col" key={e.id}>
-                      <Link href={`/${kind}/${e.slug}`}>{e.name}</Link>
+                      {indexReady(e) ? <Link href={`/${kind}/${e.slug}`}>{e.name}</Link> : e.name}
                       <button
                         type="button"
                         className={styles.textButton}

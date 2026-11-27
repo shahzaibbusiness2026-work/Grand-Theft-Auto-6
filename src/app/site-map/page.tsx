@@ -43,14 +43,9 @@ export default function SiteMapPage() {
           desc: "Side-by-side comparison",
         },
         {
-          label: "Vehicle Rankings",
-          href: "/rankings",
-          desc: "Fastest, best overall & more",
-        },
-        {
           label: "Weapon Database & Armory",
           href: "/weapons",
-          desc: "DPS, recoil, attachments",
+          desc: "Weapon names, sources and in-game observations",
         },
         {
           label: "Weapon Comparison Duel",
@@ -62,7 +57,7 @@ export default function SiteMapPage() {
           href: "/characters",
           desc: "Lucia, Jason & the Leonida cast",
         },
-        { label: "Missions", href: "/missions", desc: "Mission guides" },
+        { label: "GTA 6 beginner guide", href: "/guides/gta-6-beginners-guide", desc: "What to know before you start the story" },
         {
           label: "Properties & Real Estate",
           href: "/properties",

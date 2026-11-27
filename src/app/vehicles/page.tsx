@@ -11,6 +11,7 @@ import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import { serializeJsonLd } from "@/lib/utils";
 import { absoluteUrl, itemListJsonLd } from "@/lib/page-metadata";
 import { catalogListingMetadata } from "@/lib/catalog-metadata";
+import { indexReady } from "@/lib/catalog-detail-availability";
 import {
   CATALOG_PAGE_SIZE,
   catalogPageEntries,
@@ -43,7 +44,7 @@ export default async function CatalogPage({ searchParams }: PageProps) {
               itemListJsonLd(
                 `GTA 6 Vehicles Catalog${state.page > 1 ? ` – Page ${state.page}` : ""}`,
                 "Editorial GTA 6 vehicle identifications and field-specific evidence.",
-                catalogPageEntries(entries, state, CATALOG_PAGE_SIZE, "vehicles").map((entry) => ({
+                catalogPageEntries(entries, state, CATALOG_PAGE_SIZE, "vehicles").filter(indexReady).map((entry) => ({
                   name: entry.name,
                   url: absoluteUrl(`/vehicles/${entry.slug}`),
                 })),
@@ -57,6 +58,14 @@ export default async function CatalogPage({ searchParams }: PageProps) {
         count={entries.length}
         categories={new Set(entries.map((e) => e.category)).size}
       />
+      {state.page === 1 && !isCatalogVariant(params) && (
+        <section className="container-site max-w-5xl space-y-3 py-8">
+          <h2 className="text-2xl font-bold">GTA 6 vehicles confirmed by Rockstar</h2>
+          <p>Looking for an edition bonus? Rockstar lists the <Link className="underline" href="/vehicles/grotti-cheetah-classic">’95 Grotti Cheetah</Link>, <Link className="underline" href="/vehicles/crest-kayak">Crest Kayak</Link> and <Link className="underline" href="/vehicles/dinka-enduro">Dinka Enduro</Link> among its Ultimate Edition extras. It also names the <Link className="underline" href="/vehicles/shitzu-squalo">Shitzu Squalo</Link> and <Link className="underline" href="/vehicles/vapid-dominator-buggy-67">’67 Vapid Dominator Buggy</Link>. The <Link className="underline" href="/vehicles/vapid-stanier-55">’55 Vapid Stanier</Link> is part of the Vintage Vice City Pack.</p>
+          <p>For vehicles you can find in the story, start with the <Link className="underline" href="/guides/gta-6-planes-helicopters-locations">aircraft location guide</Link> or open a catalog entry and look for its documented pickup, shop or mission. The catalog distinguishes a source&apos;s menu rating from a measured top speed.</p>
+          <p className="text-sm"><a className="underline" href="https://www.rockstargames.com/VI/add-ons/ultimate-edition">Rockstar&apos;s add-on listings</a>{" · "}<a className="underline" href="https://www.rockstargames.com/VI/media/screenshots">Official screenshot gallery</a></p>
+        </section>
+      )}
       <section className={styles.area} aria-label="Vehicles catalog">
         <CatalogSwitcher kind="vehicles" />
         <SectionErrorBoundary fallbackTitle="Could not load vehicles. Please try refreshing.">

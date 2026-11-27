@@ -10,7 +10,27 @@ const gameInformerWildlife =
 const gamesRadarStatement =
   "https://www.gamesradar.com/games/grand-theft-auto/as-gta-6-finally-releases-rockstar-boss-sam-houser-issues-rare-statement-we-are-incredibly-grateful-and-look-forward-to-many-more-years-of-sharing-these-experiences-with-you/";
 
+const editorialDestinations = [
+  ["/news/gta-6-robberies-heists-money-guide", "/news/gta-6-money-guide-robberies-fences-economy"],
+  ["/news/gta-6-fps-30-fps-ps5-xbox-ps5-pro", "/news/gta-6-fps-performance"],
+  ["/weapons/moreland-850", "/weapons/moreland-850-shotgun"],
+  ["/weapons/drug-mule-kz-59", "/weapons?q=Drug%20Mule%20KZ-59"],
+  ["/money-guide", "/guides/make-money-fast"],
+  ["/tools/wanted-level-guide", "/news/gta-6-gameplay-confirmed-features-mechanics"],
+  ["/tools/photo-spot-finder", "/regions"],
+] as const;
+
+function updateEditorialLinks(content: string) {
+  return editorialDestinations.reduce((result, [from, to]) => result
+    .replaceAll(`](${from})`, `](${to})`)
+    .replaceAll(`](https://www.taishgaming.com${from})`, `](${to})`), content)
+    .replace(/\[photo spot finder\]\(\/regions\)/gi, "[Leonida region guides](/regions)")
+    .replace(/\[wanted.level guide\]\(\/news\/gta-6-gameplay-confirmed-features-mechanics\)/gi,
+      "[GTA 6 gameplay evidence guide](/news/gta-6-gameplay-confirmed-features-mechanics)");
+}
+
 export function correctPublishedGuideContent(slug: string, content: string) {
+  content = updateEditorialLinks(content);
   if (slug !== "gta-6-planes-helicopters-locations") return content;
   return content.replace(
     / Our \[stunt jumps guide\]\((?:https:\/\/www\.taishgaming\.com)?\/guides\/best-stunt-jumps-locations\/?\) has more on how these jumps work\./,
@@ -30,8 +50,16 @@ export function correctPublishedArticle<
     seo_description?: string | null;
   },
 >(article: T): T {
-  const { slug, content } = article;
-  if (!content) return article;
+  if (!article.content) return article;
+  const { slug } = article;
+  let content = updateEditorialLinks(article.content).replace(
+    /\[GTA 6 missions series\]\((?:https:\/\/www\.taishgaming\.com)?\/guides\/gta-6-missions-series\)/i,
+    "[GTA 6 beginner’s guide](/guides/gta-6-beginners-guide)",
+  );
+  if (slug === "gta-6-missables-guide") {
+    content = content.replace("](/weapons/moreland-850-shotgun)", "](/weapons/gutterball-moreland-850)");
+  }
+  if (content !== article.content) article = { ...article, content };
 
   if (slug === "gta-6-watercraft-aircraft-guide") {
     const sentence = "Our vehicle catalog lists each entry with its evidence status.";

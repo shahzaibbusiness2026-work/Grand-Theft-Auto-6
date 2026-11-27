@@ -19,13 +19,13 @@ export const CATALOG_TABS: Record<CatalogKind, CatalogTabDef[]> = {
     { key: "all", label: "All vehicles", categories: [] },
     {
       key: "fastest-cars",
-      label: "Fastest cars",
+      label: "Car speed ratings",
       categories: ["Sports Car", "Super Car", "Muscle Car", "Muscle", "Classic sedan"],
       stat: "Speed rating",
     },
     {
       key: "fastest-bikes",
-      label: "Fastest bikes",
+      label: "Bike speed ratings",
       categories: ["Motorcycle", "Dirt Bike"],
       stat: "Speed rating",
     },
@@ -34,7 +34,7 @@ export const CATALOG_TABS: Record<CatalogKind, CatalogTabDef[]> = {
   ],
   weapons: [
     { key: "all", label: "All weapons", categories: [] },
-    { key: "highest-damage", label: "Highest damage", categories: [], stat: "Damage" },
+    { key: "highest-damage", label: "Damage ratings", categories: [], stat: "Damage" },
     { key: "pistols", label: "Pistols", categories: ["Pistol"], stat: "Damage" },
     { key: "revolvers", label: "Revolvers", categories: ["Revolver"], stat: "Damage" },
     { key: "smgs", label: "SMGs", categories: ["SMG"], stat: "Damage" },
@@ -68,6 +68,8 @@ export function statClaimValue(entry: EvidenceEntry, field: string): number | nu
   return match ? Number(match[1]) : null;
 }
 export function canonicalCatalogSlug(kind: CatalogKind, slug: string) {
+  if (kind === "weapons" && slug === "m4-carbine") return "duke-556";
+  if (kind === "vehicles" && slug === "vapid-stanier") return "stanier-g2";
   return kind === "vehicles" && slug === "nagasaki-outlaw" ? "mer-can-outlaw" : slug;
 }
 export type CatalogSearchParams = Record<string, string | string[] | undefined>;

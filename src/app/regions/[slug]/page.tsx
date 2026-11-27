@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { REGION_PAGES, ROCKSTAR_LEONIDA_MAP_URL, ROCKSTAR_LEONIDA_PLACES_URL, ROCKSTAR_LEONIDA_SCREENSHOTS_URL, getRegionPage } from "@/lib/regions";
+import { REGION_PAGES, REGION_VISIT_NOTES, ROCKSTAR_LEONIDA_MAP_URL, ROCKSTAR_LEONIDA_PLACES_URL, ROCKSTAR_LEONIDA_SCREENSHOTS_URL, getRegionPage } from "@/lib/regions";
 import { serializeJsonLd } from "@/lib/utils";
 import { articleJsonLd } from "@/lib/page-metadata";
 
@@ -84,7 +84,7 @@ export default async function RegionPage({
           ),
         }}
       />
-      <main className="min-h-screen bg-[#000713] text-white">
+      <article className="min-h-screen bg-[#000713] text-white">
         <section className="container-site px-4 pt-10 pb-6">
           <p className="text-sm text-white/50">
             <Link href="/regions" className="hover:text-white">
@@ -126,6 +126,18 @@ export default async function RegionPage({
           </div>
         </section>
 
+        {REGION_VISIT_NOTES[page.slug] && (
+          <section className="container-site px-4 pb-10">
+            <h2 className="text-2xl font-bold">How to get your bearings in {page.name}</h2>
+            <p className="mt-3 max-w-3xl text-white/80">{REGION_VISIT_NOTES[page.slug]}</p>
+            <p className="mt-3 text-sm text-white/75">
+              <Link href="/map" className="underline">Open the interactive Leonida map</Link>{" · "}
+              <a href={ROCKSTAR_LEONIDA_MAP_URL} className="underline">Get Rockstar&apos;s printable map</a>{" · "}
+              <a href={ROCKSTAR_LEONIDA_SCREENSHOTS_URL} className="underline">Browse official screenshots</a>
+            </p>
+          </section>
+        )}
+
         {page.images.length > 0 && (
           <section className="container-site px-4 pb-10">
             <h2 className="text-2xl font-bold">In the region</h2>
@@ -160,6 +172,7 @@ export default async function RegionPage({
               <li key={i}>{item}</li>
             ))}
           </ul>
+          <p className="mt-4 text-sm text-white/75"><a href={ROCKSTAR_LEONIDA_PLACES_URL} className="underline">Rockstar&apos;s Only in Leonida region profiles</a></p>
         </section>
 
         <section className="container-site px-4 pb-10">
@@ -189,7 +202,7 @@ export default async function RegionPage({
             ))}
           </div>
         </section>
-      </main>
+      </article>
     </SiteShell>
   );
 }

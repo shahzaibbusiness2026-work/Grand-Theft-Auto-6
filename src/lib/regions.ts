@@ -8,6 +8,15 @@ export const ROCKSTAR_LEONIDA_MAP_URL = "https://www.rockstargames.com/VI/media"
 export const ROCKSTAR_LEONIDA_PLACES_URL = "https://www.rockstargames.com/VI/only-in-leonida";
 export const ROCKSTAR_LEONIDA_SCREENSHOTS_URL = "https://www.rockstargames.com/VI/media/screenshots";
 
+export const REGION_VISIT_NOTES: Record<string, string> = {
+  "vice-city": "Use Ocean Beach as your reference for the beachfront hotels. Little Cuba and VC Port make useful map searches if you are trying to place the storefront or industrial scenes from Rockstar’s gallery.",
+  "leonida-keys": "Start with the coastal roads and islands on the map. If you are looking for the underwater wreck, open the Leonida Keys 04 screenshot in the official gallery. It gives you a visual reference for the wreck and the surrounding reef.",
+  grassrivers: "Look for waterways through the mangroves when comparing this area with nearby Port Gellhorn. The airboat scenes are a good visual reference for the open channels. Check the wildlife guide for the footage that shows alligators rather than relying on a species icon to find one.",
+  "port-gellhorn": "The older motels and commercial strips are useful landmarks when matching the area to Rockstar’s screenshots. If you are coming from the city, use the official map to place the town before following a location-specific walkthrough.",
+  ambrosia: "Use the heavy industrial buildings as your starting landmark. Rockstar identifies the Allied Crystal refinery in its description. The gallery can help you recognise the industrial part of town before you use a more precise map pin.",
+  "mount-kalaga": "Compare the forest roads and ridgelines in the gallery to orient yourself in northern Leonida. If you came for wildlife, start with the labelled deer image in the Mount Kalaga set. A single screenshot gives you an environment to look for, while a repeatable spawn needs a separate source.",
+};
+
 export type RegionPage = {
   slug: string;
   name: string;

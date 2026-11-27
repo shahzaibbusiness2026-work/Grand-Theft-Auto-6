@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FavoriteButton } from "./favorite-button";
 import { CatalogVisit } from "./catalog-visit";
 import type { CatalogKind, EvidenceClaim, EvidenceEntry } from "@/lib/catalog-evidence";
+import { hasSpecificAppearance, isPublisherEvidence } from "@/lib/catalog-detail-availability";
 import { isCatalogStat } from "@/lib/comparison-fields";
 import { CatalogArtwork } from "./catalog-artwork";
 import { catalogArtwork } from "@/lib/catalog-artwork";
@@ -14,7 +15,7 @@ function EvidenceFields({ claims }: { claims: EvidenceClaim[] }) {
   return (
     <dl className="grid gap-5 sm:grid-cols-2">
       {claims.map((claim) => (
-        <div key={claim.field}>
+        <div key={`${claim.field}-${claim.source}-${claim.locator}`}>
           <dt className="font-bold">{claim.field}</dt>
           <dd>
             <p className="mt-1 text-lg tabular-nums">{claim.value}</p>
@@ -27,7 +28,7 @@ function EvidenceFields({ claims }: { claims: EvidenceClaim[] }) {
               {claim.locator}
             </EvidenceSourceLink>
             <p className="text-sm text-muted-foreground">
-              Reviewed {claim.reviewedAt.slice(0, 10)} · {claim.reviewer}
+              {isPublisherEvidence(claim) ? "Publisher or platform source" : "Third-party evidence"} · Reviewed {claim.reviewedAt.slice(0, 10)}
             </p>
           </dd>
         </div>
@@ -49,15 +50,26 @@ export function EvidenceDetail({
 }) {
   const artwork = catalogArtwork(kind, entry);
   const nameClaim = entry.claims.find((claim) => claim.field === "Official name");
-  const seen = entry.claims.some((claim) => claim.field === "GTA VI appearance");
+  const appearance = entry.claims.find((claim) => claim.field === "GTA VI appearance");
   const fields = entry.claims.filter((claim) =>
     !(claim.field === "GTA VI appearance" &&
       claim.source === nameClaim?.source &&
       claim.locator === nameClaim.locator &&
       claim.value === nameClaim.value),
   );
-  const stats = fields.filter((claim) => isCatalogStat(kind, claim.field));
-  const details = fields.filter((claim) => !isCatalogStat(kind, claim.field));
+  const startingDetails = [
+    "Acquisition method", "Acquisition location", "Observed gameplay", "Route landmark", "Purchase locations",
+    "Spawn location", "Spawn locations", "Observed location", "Mission location",
+    "Availability", "Edition availability", "Edition content", "Publisher identification", "Price shown", "Registration cost", "Speed rating",
+    "Magazine size", "Damage",
+  ].flatMap((field) => {
+    const claim = fields.find((item) => item.field === field);
+    return claim ? [claim] : [];
+  }).slice(0, 3);
+  const remaining = fields.filter((claim) => !startingDetails.includes(claim));
+  const stats = remaining.filter((claim) => isCatalogStat(kind, claim.field));
+  const details = remaining.filter((claim) => !isCatalogStat(kind, claim.field));
+  const hasSourceContext = appearance && !startingDetails.length && hasSpecificAppearance(appearance);
   return (
     <article className="container-site max-w-4xl py-10 space-y-6">
       <script
@@ -82,10 +94,29 @@ export function EvidenceDetail({
         All {kind}
       </Link>
       <p className="text-sm text-muted-foreground">
-        {nameClaim ? "Source-reviewed name" : "Editorial identification"} · {entry.category}
+        {nameClaim ? "Source-backed name" : "Catalog name"} · {entry.category}
       </p>
       <h1 className="font-display text-4xl font-bold">{entry.name}</h1>
-      {artwork && (
+      {startingDetails.length > 0 && (
+        <section className="rounded-xl border border-border bg-card p-5">
+          <h2 className="text-xl font-bold">{entry.name} at a glance</h2>
+          <ul className="mt-3 space-y-2 text-sm">
+            {startingDetails.map((claim) => (
+              <li key={claim.field} className="space-y-1">
+                <p className="font-bold">{claim.field}</p>
+                <p>{claim.value}</p>
+                <EvidenceSourceLink href={claim.source} className="underline">
+                  {isPublisherEvidence(claim) ? "Official source" : "Third-party source"} · {claim.locator}
+                </EvidenceSourceLink>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {hasSourceContext && (
+        <p><strong>Where it was documented</strong>{" "}{appearance.locator}</p>
+      )}
+      {artwork && !artwork.contextual && (
         <figure className="overflow-hidden rounded-2xl border border-border bg-card">
           <div className="relative aspect-video">
             <CatalogArtwork
@@ -114,50 +145,23 @@ export function EvidenceDetail({
           </figcaption>
         </figure>
       )}
-      <p>
-        {seen
-          ? "Sources below show which details have been documented in GTA VI. Shop prices, mission locations and menu ratings describe the context shown by each source."
-          : "The exact GTA VI identification is still provisional. Any footage or reported sightings are listed with their limits below."}
-      </p>
-      <section className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h2 className="text-2xl font-bold">Verified in-game stats</h2>
-        {stats.length ? (
-          <>
-            <p className="text-sm text-muted-foreground">
-              {kind === "vehicles"
-                ? "Vehicle-menu ratings use a 10-point scale. Measured top speeds are listed separately when verified."
-                : "Weapon-menu ratings use a 10-point scale. Magazine and ammo counts describe the specific item or loadout shown."}
-            </p>
-            <EvidenceFields claims={stats} />
-          </>
-        ) : (
-          <p>Verified performance figures are unavailable for this entry.</p>
-        )}
-      </section>
-      <section className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h2 className="text-2xl font-bold">Evidence and sources</h2>
-        {details.length ? (
-          <EvidenceFields claims={details} />
-        ) : (
-          <p>
-            No field-specific source has been approved for this entry.
-            Performance, price, unlock conditions, spawn locations and
-            customization remain unverified.
+      {stats.length > 0 && (
+        <section className="rounded-xl border border-border bg-card p-6 space-y-4">
+          <h2 className="text-2xl font-bold">Stats and menu ratings</h2>
+          <p className="text-sm text-muted-foreground">
+            {kind === "vehicles"
+              ? "A speed rating out of 10 is a menu score. Look for a separate top speed measurement in mph or km/h when available."
+              : "Damage scores out of 10 are menu ratings. Magazine and ammo counts apply to the specific item or loadout shown."}
           </p>
-        )}
-      </section>
-      <p className="text-sm text-muted-foreground">
-        Each review includes a source and identifies the detail it supports. See the{" "}
-        <Link href="/editorial-policy" className="underline">
-          editorial policy
-        </Link>
-        .
-      </p>
-      <p>
-        We do not substitute GTA V statistics or class averages for missing GTA
-        VI data. Official footage may establish an appearance without proving
-        speed, damage or purchase price.
-      </p>
+          <EvidenceFields claims={stats} />
+        </section>
+      )}
+      {details.length > 0 && (
+        <section className="rounded-xl border border-border bg-card p-6 space-y-4">
+          <h2 className="text-2xl font-bold">Evidence and sources</h2>
+          <EvidenceFields claims={details} />
+        </section>
+      )}
       <div className="flex flex-wrap gap-5 items-center">
         <FavoriteButton type={kind} id={entry.id} />
         <Link
@@ -170,9 +174,6 @@ export function EvidenceDetail({
           Submit a source or correction
         </Link>
       </div>
-      <Link className="block underline" href="/editorial-policy">
-        Read our evidence policy
-      </Link>
       {(prev || next) && (
         <nav
           aria-label="More in this catalog"

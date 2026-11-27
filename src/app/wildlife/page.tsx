@@ -60,15 +60,14 @@ export default function WildlifeHubPage() {
               GTA 6 Wildlife
             </h1>
             <p className="mt-3 text-base leading-relaxed text-white/75">
-              Animals in GTA VI, shown only where the official trailers actually
-              show them. Every frame below is a real trailer still, and every
-              species claim carries its evidence level. Nothing here is guessed,
-              and no species gets a page without a real frame.
+              See which animals appear in GTA 6 trailers and screenshots. Open
+              a profile to find the scene or image where the animal was seen
+              and how confidently it can be identified.
             </p>
           </header>
 
           <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            {WILDLIFE_PAGES.map((page) => (
+            {WILDLIFE_PAGES.filter((page) => page.slug !== "eel").map((page) => (
               <Link
                 key={page.slug}
                 href={`/wildlife/${page.slug}`}
@@ -108,8 +107,8 @@ export default function WildlifeHubPage() {
                 Animals &amp; Wildlife
               </Link>{" "}
               and{" "}
-              <Link href="/gta-6-world/birds-marine-life" className="font-bold text-white underline">
-                Birds &amp; Marine Life
+              <Link href="/gta-6-world/marine-life" className="font-bold text-white underline">
+                Marine Life in the Leonida Keys
               </Link>{" "}
               in GTA VI World.
             </p>

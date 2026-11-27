@@ -5,6 +5,7 @@
  */
 import records from "./catalog-evidence.json";
 import { canonicalCatalogSlug } from "./catalog-url-state";
+export { indexReady } from "./catalog-detail-availability";
 export type CatalogKind = "vehicles" | "weapons";
 export interface EvidenceClaim {
   kind: CatalogKind;
@@ -45,7 +46,8 @@ export function validClaim(c: EvidenceClaim): boolean {
 }
 export function claimsFor(kind: CatalogKind, id: string, slug = id): EvidenceClaim[] {
   const claims = (records as EvidenceClaim[]).filter(
-    (c) => c.kind === kind && (c.id === id || c.id === slug) && validClaim(c),
+    (c) => c.kind === kind && (c.id === id || c.id === slug) && validClaim(c) &&
+      !/\bREPORTED\b/.test(c.locator),
   );
   const fieldsById = new Set(claims.filter((claim) => claim.id === id).map((claim) => claim.field));
   return claims.filter((claim) => claim.id === id || !fieldsById.has(claim.field));
@@ -71,9 +73,6 @@ export function publicCatalogEntry(
     img: row.img || "",
     claims: claims.filter((claim) => claim.field !== "Editorial label"),
   };
-}
-export function indexReady(entry: EvidenceEntry): boolean {
-  return entry.claims.some((c) => c.field === "GTA VI appearance");
 }
 export function editorialCategory(value: string): string {
   const aliases: Record<string, string> = {

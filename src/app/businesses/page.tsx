@@ -45,7 +45,7 @@ export default function BusinessesPage() {
         <div className="flex flex-wrap gap-3 mt-8">
           <Link href="/tools/business-income-calculator" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white">Business Income Calculator</Link>
           <Link href="/tools/business-profit-calculator" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold">Business Profit Calculator</Link>
-          <Link href="/money-guide" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold">Money Guide</Link>
+          <Link href="/guides/make-money-fast" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold">Money Guide</Link>
         </div>
       </div>
     </SiteShell>

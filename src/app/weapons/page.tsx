@@ -11,6 +11,7 @@ import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import { serializeJsonLd } from "@/lib/utils";
 import { absoluteUrl, itemListJsonLd } from "@/lib/page-metadata";
 import { catalogListingMetadata } from "@/lib/catalog-metadata";
+import { indexReady } from "@/lib/catalog-detail-availability";
 import {
   CATALOG_PAGE_SIZE,
   catalogPageEntries,
@@ -43,7 +44,7 @@ export default async function CatalogPage({ searchParams }: PageProps) {
               itemListJsonLd(
                 `GTA 6 Weapons Catalog${state.page > 1 ? ` – Page ${state.page}` : ""}`,
                 "Editorial GTA 6 weapon identifications and field-specific evidence.",
-                catalogPageEntries(entries, state, CATALOG_PAGE_SIZE, "weapons").map((entry) => ({
+                catalogPageEntries(entries, state, CATALOG_PAGE_SIZE, "weapons").filter(indexReady).map((entry) => ({
                   name: entry.name,
                   url: absoluteUrl(`/weapons/${entry.slug}`),
                 })),
@@ -57,6 +58,14 @@ export default async function CatalogPage({ searchParams }: PageProps) {
         count={entries.length}
         categories={new Set(entries.map((e) => e.category)).size}
       />
+      {state.page === 1 && !isCatalogVariant(params) && (
+        <section className="container-site max-w-5xl space-y-3 py-8">
+          <h2 className="text-2xl font-bold">GTA 6 weapons named in official material</h2>
+          <p>Rockstar&apos;s gameplay video shows the <Link className="underline" href="/weapons/duke-556">Duke 556</Link> by name in a pickup prompt around 25:07. The publisher&apos;s store listing names Jason&apos;s <Link className="underline" href="/weapons/girardi-es9">Girardi ES9</Link>, Lucia&apos;s <Link className="underline" href="/weapons/klose-k17">Klose K17</Link> and the two <Link className="underline" href="/weapons/hawk-little-morgan-revolvers">Hawk &amp; Little Morgan Revolvers</Link> as weapons with Ultimate Edition versions.</p>
+          <p>Search the exact name from the game&apos;s menu when you can. A named variant can have a different unlock, magazine or shop price from its base weapon. Check the source for those details before comparing two entries.</p>
+          <p className="text-sm"><a className="underline" href="https://www.youtube.com/watch?v=tJbzMqJGH4k&amp;t=1507s">Rockstar gameplay at 25:07</a>{" · "}<a className="underline" href="https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/">Ultimate Edition listing on PlayStation</a></p>
+        </section>
+      )}
       <section className={styles.area} aria-label="Weapons catalog">
         <CatalogSwitcher kind="weapons" />
         <SectionErrorBoundary fallbackTitle="Could not load weapons. Please try refreshing.">

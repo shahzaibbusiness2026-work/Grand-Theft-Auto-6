@@ -108,7 +108,7 @@ const POPULAR_PAGES = [
   {
     href: "/controls",
     title: "GTA 6 controls",
-    desc: "Provisional PS5 and Xbox controller layout.",
+    desc: "PS5 and Xbox controller inputs with documented bindings marked.",
     img: "/img/hero-artwork-right.jpg",
     tag: "Guide",
   },
@@ -439,10 +439,10 @@ export default async function HomePage() {
       </div>
       <section className="container-site py-6 sm:py-8" aria-labelledby="popular-heading">
         <h2 id="popular-heading" className="font-display text-2xl font-bold">
-          Popular on Taish Gaming
+          What to look up in GTA 6
         </h2>
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-          The pages readers open most: the map, the size comparison, the tools and the controls.
+          Use the map to get your bearings in Leonida, check the controller guide when a button prompt is unclear, or open a catalog entry to see where a vehicle or weapon was documented.
         </p>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {POPULAR_PAGES.map((p) => (

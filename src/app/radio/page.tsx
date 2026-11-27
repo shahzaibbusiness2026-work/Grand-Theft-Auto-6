@@ -4,9 +4,9 @@ import { RadioClient } from "./radio-client";
 import { getWorldMedia } from "@/lib/world-media";
 const radioImage = getWorldMedia("/radio")!;
 export const metadata: Metadata = {
-  title: "GTA 6 Radio Stations: Official Reveals",
+  title: "GTA 6 Radio Stations, Hosts and Official Previews",
   description:
-    "Six GTA VI radio stations and hosts listed by Rockstar, with direct sources. Official reveals separated from trailer music and legacy stations.",
+    "Find GTA 6 radio stations by genre or host, listen to Rockstar's seven station previews, and find the soundtrack or original score.",
   alternates: { canonical: "/radio" },
   openGraph: { type: "website",
     url: "/radio",

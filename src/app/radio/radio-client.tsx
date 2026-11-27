@@ -23,9 +23,10 @@ export function RadioClient() {
           GTA 6 radio stations
         </h1>
         <p className="leading-relaxed text-muted-foreground">
-          These six stations and their hosts are listed on Rockstar&apos;s GTA
-          VI music page. This is a source-checked preview, not the complete
-          in-game station or track list.
+          Rockstar offers previews of seven GTA 6 radio stations, from Flash FM&apos;s
+          pop to the underground house and techno of CircoLoco Records. Search by
+          genre, station or host below. The game also has stations beyond these
+          seven previews.
         </p>
         <p className="text-sm">
           Source:{" "}
@@ -37,7 +38,7 @@ export function RadioClient() {
           >
             Rockstar Games: GTA VI music
           </a>
-          . Reviewed <time dateTime={RADIO_REVIEWED_AT}>27 October 2026</time>.
+          . Reviewed <time dateTime={RADIO_REVIEWED_AT}>27 November 2026</time>.
         </p>
       </header>
       <WorldMediaFigure path="/radio" priority />
@@ -71,7 +72,7 @@ export function RadioClient() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Verify {s.name} at Rockstar
+              Preview {s.name} at Rockstar
             </a>
           </article>
         ))}
@@ -88,20 +89,22 @@ export function RadioClient() {
         </p>
       )}
       <section className="card-surface space-y-3 p-6">
-        <h2 className="text-xl font-bold">
-          Trailer music and legacy stations are different
-        </h2>
-        <p>
-          Music in a trailer does not establish an in-game radio playlist.
-          Stations and presenters from GTA: Vice City are not automatically
-          returning in GTA VI. We do not assign unverified FM frequencies or
-          fill track lists with legacy songs.
-        </p>
+        <h2 className="text-xl font-bold">How to listen to the previews</h2>
+        <p>Open <a href={RADIO_SOURCE} className="underline">Rockstar&apos;s music page</a>,
+          scroll to “Broadcasting Live Across Leonida” and choose Preview Station.
+          Start with Afro Bank FM for amapiano, Back Country for country or
+          Dirty South Classics for Southern rap.</p>
+        <h2 className="text-xl font-bold">Where to look for a specific GTA 6 song</h2>
+        <p>The station previews are a starting point if you heard a DJ or an in-game
+          broadcast. If you heard a song in a trailer, check the trailer credits
+          and the <Link href="/news/gta-6-soundtrack-the-album-out-now" className="underline">GTA 6 soundtrack tracklist</Link>.
+          Justice&apos;s original score has its own section on Rockstar&apos;s music page,
+          with tracks written for the game&apos;s story and action.</p>
         <Link
           href="/news/gta-6-radio-stations-podcasts-revealed"
           className="inline-flex min-h-11 items-center font-semibold text-accent underline"
         >
-          Read the dated radio announcement coverage
+          See more GTA 6 radio and podcast coverage
         </Link>
       </section>
     </div>

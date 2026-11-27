@@ -42,14 +42,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/radio",
     "/controls",
     "/settings-guide",
-    "/money-guide",
     "/guides",
     "/gta-6-world",
     "/gta-6-world/animals-wildlife",
     "/gta-6-world/birds",
     "/gta-6-world/mammals",
     "/gta-6-world/marine-life",
-    "/gta-6-world/birds-marine-life",
     "/gta-6-world/nature-environment",
     "/gta-6-world/weather-climate",
     "/gta-6-world/in-game-brands-ads",
@@ -72,7 +70,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/wildlife/green-iguana",
     "/wildlife/birds-marine-life",
     "/wildlife/sea-turtle",
-    "/wildlife/eel",
     "/wildlife/poach",
     "/news",
     "/about",
@@ -86,13 +83,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/disclaimer",
     "/cookies",
     "/tools/character-quiz",
-    // Indexed 12 Nov 2026 (commit 39baaa3): these four were flipped to
-    // index,follow but left out of the sitemap. A sitemap must list every
-    // indexable URL, so they belong here now that they are indexable.
     "/tools/loadout-builder",
     "/tools/money-maker",
-    "/tools/photo-spot-finder",
-    "/tools/wanted-level-guide",
   ];
   // Detail URLs use their own recorded update dates. Unrelated article edits
   // do not establish when static pages were substantively changed.
@@ -129,16 +121,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: lm,
       });
     }
-  // Detail URLs: only entries with reviewed "GTA VI appearance" evidence
-  // belong in the sitemap (15 Nov 2026, reversing the 8 Nov 2026 blanket
-  // index). Provisional entries are noindex and must not be listed.
-  // lastModified is the evidence claim's reviewedAt — the last date the
-  // entry's evidence was actually reviewed, not an invented date.
+  // Detail URLs share the same evidence rule as the public catalog routes.
+  // The newest recorded field review captures additions beyond first appearance.
   const evidenceLastModified = (e: {
-    claims?: { field?: string; reviewedAt?: string }[];
+    claims?: { reviewedAt?: string }[];
   }) => {
     const dates = (e.claims || [])
-      .filter((c) => c.field === "GTA VI appearance")
       .map((c) => realDate(c.reviewedAt))
       .filter((d): d is Date => !!d);
     return dates.length

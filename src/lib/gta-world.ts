@@ -540,7 +540,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     related: [
       { label: "Interactive Map", href: "/map" },
       { label: "Locations & POIs", href: "/locations" },
-      { label: "Photo Spot Finder", href: "/tools/photo-spot-finder" },
+      { label: "Leonida region guides", href: "/regions" },
     ],
   },
   {
@@ -559,7 +559,7 @@ const WORLD_CATEGORY_CONTENT: WorldCategory[] = [
     ],
     related: [
       { label: "Day-Night Converter", href: "/tools/day-night-converter" },
-      { label: "Photo Spot Finder", href: "/tools/photo-spot-finder" },
+      { label: "Leonida region guides", href: "/regions" },
     ],
   },
   {

@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
-import { pageOpenGraph } from "@/lib/page-metadata";
+
+const title = "GTA 6 Console Settings for PS5, PS5 Pro and Xbox";
+const description = "Check which GTA 6 settings you can adjust on PS5 and Xbox, what PS5 Pro adds, and how to read the game's 30 FPS target.";
+const rockstarPerformance = "https://www.rockstargames.com/newswire/article/89834o94713o21/pre-load-grand-theft-auto-vi-now";
+const consoleTesting = "https://www.youtube.com/watch?v=lhx-NZmGAdQ";
 
 export const metadata: Metadata = {
-  openGraph: pageOpenGraph("/settings-guide"),
-  title: "GTA 6 Settings: What Is Known So Far",
-  description: "GTA VI's settings, documented from the live game: the 30 FPS target, no performance mode, PS5 Pro PSSR and ray-traced shadows, plus per-platform guides.",
+  openGraph: { type: "website", url: "/settings-guide", title, description },
+  title,
+  description,
   alternates: { canonical: "/settings-guide" },
   robots: { index: true, follow: true },
 };
@@ -25,24 +29,25 @@ export default function SettingsGuidePage() {
     <SiteShell>
       <div className="container-site py-8">
         <div className="max-w-3xl mb-8">
-          <p className="text-xs font-black uppercase tracking-[0.25em] text-primary">Guides</p>
-          <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground mt-2">Settings Guide</h1>
-          <p className="text-foreground/70 mt-3">GTA VI launched on 19 November 2026, and the in-game settings menu is now documented from the live game. Rockstar targets 30 FPS on all consoles — there is no performance/fidelity mode and no 60 FPS option. This page summarises what is known; the per-platform guides below carry the detail. Nothing here recommends untested settings.</p>
+          <h1 className="font-display text-4xl sm:text-5xl font-black leading-tight tracking-tight text-foreground">GTA 6 console settings</h1>
+          <p className="text-foreground/70 mt-3">If you are looking for a 60 FPS toggle, the retail console versions reviewed at launch target 30 FPS. Start with your display, audio and controller settings, then use the guide for your console to see which options apply.</p>
         </div>
         <div className="grid gap-4">
-          <Section title="What is known">
-            <p>Rockstar targets 30 FPS on PlayStation 5, PS5 Pro and Xbox Series X|S, with no performance mode and no 60 FPS option (Rockstar, 10 November 2026; confirmed in practice by Digital Foundry&apos;s retail-code testing).</p>
-            <p>PS5 Pro adds PSSR upscaling and ray-traced shadows, which are Pro-only (Rockstar). DualSense haptics and Tempest 3D Audio are supported.</p>
-            <p>The game&apos;s internal resolution and detailed PSSR options have not been published.</p>
+          <Section title="Which GTA 6 settings should you check first?">
+            <ol className="list-decimal space-y-3 pl-5">
+              <li><strong>Display.</strong> If you use HDR, start with your console&apos;s HDR calibration and follow the game&apos;s on-screen prompts. Compare a bright street and a dark interior before changing the settings again. The right result depends on your display and room lighting.</li>
+              <li><strong>Audio and dialogue.</strong> Check the output for your headphones or speakers first. Then use a dialogue scene with music in the background to decide whether you want subtitles or a different mix. On PlayStation, Rockstar lists Tempest 3D Audio support.</li>
+              <li><strong>Controller comfort.</strong> Check the <Link href="/controls" className="underline">GTA 6 controls reference</Link> before revisiting sensitivity or accessibility options. On PS5, Rockstar says you can adjust DualSense haptics through accessibility settings.</li>
+            </ol>
           </Section>
-          <Section title="Per-platform guides">
-            <p><Link href="/guides/best-gta-6-settings-ps5" className="text-primary font-bold underline">Best GTA 6 Settings for PS5</Link> — HDR, audio and DualSense options.</p>
-            <p><Link href="/guides/best-gta-6-settings-ps5-pro" className="text-primary font-bold underline">GTA 6 PS5 Pro Settings</Link> — PSSR, ray tracing and FPS.</p>
-            <p><Link href="/guides/best-gta-6-settings-xbox-series-x" className="text-primary font-bold underline">Best GTA 6 Xbox Settings</Link> — Series X|S and cloud play.</p>
+          <Section title="Choose your console">
+            <p><Link href="/guides/best-gta-6-settings-ps5" className="text-primary font-bold underline">PS5 settings</Link> covers HDR, audio and DualSense controls on the standard console.</p>
+            <p><Link href="/guides/best-gta-6-settings-ps5-pro" className="text-primary font-bold underline">PS5 Pro settings</Link> explains the two Pro enhancements Rockstar lists, PlayStation Spectral Super Resolution (PSSR) upscaling and ray-traced shadows.</p>
+            <p><Link href="/guides/best-gta-6-settings-xbox-series-x" className="text-primary font-bold underline">Xbox Series X and Series S settings</Link> covers the Xbox versions and cloud play. Check local gameplay first if you are diagnosing streaming stutter.</p>
           </Section>
-          <Section title="Sources and updates">
-            <p>Check Rockstar&apos;s official announcements for confirmed platform and release information. Do not treat expectations based on earlier GTA titles as GTA VI settings advice.</p>
-            <p>For known controller limitations, see our <Link href="/controls" className="text-primary font-bold underline">controls reference</Link>.</p>
+          <Section title="What the 30 FPS target means">
+            <p>Rockstar lists a 30 FPS target across the console versions. A target describes the intended frame rate, and actual performance can dip in demanding scenes. For a side-by-side comparison, see <a href={consoleTesting} className="underline">Digital Foundry&apos;s retail console tests</a> and our <Link href="/news/gta-6-fps-performance" className="underline">GTA 6 performance guide</Link>.</p>
+            <p>See <a href={rockstarPerformance} className="underline">Rockstar&apos;s console feature announcement</a> for the publisher&apos;s confirmation of the frame-rate target, PS5 Pro features and DualSense options.</p>
           </Section>
         </div>
       </div>

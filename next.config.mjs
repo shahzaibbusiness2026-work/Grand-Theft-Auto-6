@@ -59,6 +59,14 @@ const nextConfig = {
       { source: "/vehicle", destination: "/vehicles", permanent: true },
       { source: "/maps", destination: "/map", permanent: true },
       { source: "/cheats", destination: "/guides", permanent: true },
+      { source: "/money-guide", destination: "/guides/make-money-fast", permanent: true },
+      { source: "/tools/wanted-level-guide", destination: "/news/gta-6-gameplay-confirmed-features-mechanics", permanent: true },
+      { source: "/tools/photo-spot-finder", destination: "/regions", permanent: true },
+      { source: "/gta-6-world/birds-marine-life", destination: "/wildlife/birds-marine-life", permanent: true },
+      { source: "/wildlife/eel", destination: "/gta-6-world/marine-life", permanent: true },
+      { source: "/guides/gta-6-missions-series", destination: "/guides/gta-6-beginners-guide", permanent: true },
+      { source: "/news/gta-6-robberies-heists-money-guide", destination: "/news/gta-6-money-guide-robberies-fences-economy", permanent: true },
+      { source: "/weapons/moreland-850", destination: "/weapons/moreland-850-shotgun", permanent: true },
       // Trailer 2 consolidation: also mirrored here (not only the CMS rule)
       // because the middleware CMS fetch can time out and drop the 301.
       { source: "/news/gta-6-trailer-2-breakdown", destination: "/news/trailer-2-breakdown-analysis", permanent: true },

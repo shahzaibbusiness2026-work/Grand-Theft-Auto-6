@@ -64,7 +64,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     related: [
       { label: "American Alligator", href: "/wildlife/american-alligator" },
       { label: "Birds & Marine Life in the Trailers", href: "/wildlife/birds-marine-life" },
-      { label: "GTA VI World: Birds & Marine Life", href: "/gta-6-world/birds-marine-life" },
+      { label: "Marine life in the Leonida Keys", href: "/gta-6-world/marine-life" },
       { label: "GTA VI World: Animals & Wildlife", href: "/gta-6-world/animals-wildlife" },
     ],
   },
@@ -222,7 +222,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     ],
     related: [
       { label: "American Flamingo", href: "/wildlife/american-flamingo" },
-      { label: "GTA VI World: Birds & Marine Life", href: "/gta-6-world/birds-marine-life" },
+      { label: "Marine life in the Leonida Keys", href: "/gta-6-world/marine-life" },
       { label: "GTA VI World: Animals & Wildlife", href: "/gta-6-world/animals-wildlife" },
     ],
   },
@@ -263,7 +263,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     ],
     related: [
       { label: "Birds & Marine Life in the Trailers", href: "/wildlife/birds-marine-life" },
-      { label: "GTA VI World: Birds & Marine Life", href: "/gta-6-world/birds-marine-life" },
+      { label: "Marine life in the Leonida Keys", href: "/gta-6-world/marine-life" },
       { label: "GTA VI World: Animals & Wildlife", href: "/gta-6-world/animals-wildlife" },
     ],
   },
@@ -303,7 +303,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     related: [
       { label: "Sea Turtle", href: "/wildlife/sea-turtle" },
       { label: "Birds & Marine Life in the Trailers", href: "/wildlife/birds-marine-life" },
-      { label: "GTA VI World: Birds & Marine Life", href: "/gta-6-world/birds-marine-life" },
+      { label: "Marine life in the Leonida Keys", href: "/gta-6-world/marine-life" },
     ],
   },
   {
@@ -344,7 +344,7 @@ export const WILDLIFE_PAGES: WildlifePage[] = [
     related: [
       { label: "American Alligator", href: "/wildlife/american-alligator" },
       { label: "GTA VI World: Animals & Wildlife", href: "/gta-6-world/animals-wildlife" },
-      { label: "GTA VI World: Birds & Marine Life", href: "/gta-6-world/birds-marine-life" },
+      { label: "Marine life in the Leonida Keys", href: "/gta-6-world/marine-life" },
     ],
   }
 ];
