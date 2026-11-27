@@ -36898,5 +36898,255 @@
     "locator": "Exputer: most stores initially lock it; each Ammu-Nation purchase expands that store's stock.",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "truffade-thrax",
+    "field": "Price shown",
+    "value": "$100,000 (Story Mode price)",
+    "source": "https://tracker.gg/gta6/vehicles/thrax",
+    "locator": "tracker.gg Thrax page: Story Mode price $100,000; corroborated by GTABase.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "truffade-thrax",
+    "field": "Seats",
+    "value": "2",
+    "source": "https://tracker.gg/gta6/vehicles/thrax",
+    "locator": "tracker.gg Thrax page: 2 seats; corroborated by GTABase and Beebom (https://beebom.com/gta-6-fastest-cars/, 2-seater coupe).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "truffade-thrax",
+    "field": "Drivetrain",
+    "value": "AWD",
+    "source": "https://tracker.gg/gta6/vehicles/thrax",
+    "locator": "tracker.gg Thrax page: AWD; corroborated by GTABase and Beebom (all-wheel drive).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "truffade-thrax",
+    "field": "Gears",
+    "value": "7",
+    "source": "https://www.gtabase.com/vehicles/gta-6/thrax",
+    "locator": "GTABase Thrax page: 7 gears; corroborated by Beebom (7-gear transmission).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "progen-emerus",
+    "field": "Seats",
+    "value": "2",
+    "source": "https://tracker.gg/gta6/vehicles/emerus",
+    "locator": "tracker.gg Emerus page: 2 seats; corroborated by GTABase and gtatracker (https://gtatracker.gg/vi/db/vehicles/progen-emerus).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "progen-emerus",
+    "field": "Drivetrain",
+    "value": "RWD",
+    "source": "https://tracker.gg/gta6/vehicles/emerus",
+    "locator": "tracker.gg Emerus page: RWD; corroborated by GTABase and gtatracker.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "progen-emerus",
+    "field": "Gears",
+    "value": "7",
+    "source": "https://www.gtabase.com/vehicles/gta-6/emerus",
+    "locator": "GTABase Emerus page: 7 gears; corroborated by gtatracker (Gears 7).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "Price shown",
+    "value": "$43,750 (Story Mode price)",
+    "source": "https://tracker.gg/gta6/vehicles/vitello",
+    "locator": "tracker.gg Vitello page: Story Mode price $43,750; corroborated by GTABase.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "Sell value",
+    "value": "$18,865 (stolen sell value)",
+    "source": "https://tracker.gg/gta6/vehicles/vitello",
+    "locator": "tracker.gg Vitello page: sell value $18,865; corroborated by GTABase (Sell Value (Stolen) $18,865).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "Cost to register",
+    "value": "$43,750",
+    "source": "https://tracker.gg/gta6/vehicles/vitello",
+    "locator": "tracker.gg Vitello page: cost to register $43,750; corroborated by gtafinder launch scan (https://www.gtafinder.com/gta-6/guides/supercar-locations, $43,750 registration quote).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "Seats",
+    "value": "2",
+    "source": "https://tracker.gg/gta6/vehicles/vitello",
+    "locator": "tracker.gg Vitello page: 2 seats; corroborated by GTABase and Game8 (https://game8.co/games/gta-6/archives/639128).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "Storage slots",
+    "value": "2",
+    "source": "https://game8.co/games/gta-6/archives/639128",
+    "locator": "Game8 Vitello guide: 2 storage slots; corroborated by GTABase.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "Drivetrain",
+    "value": "AWD",
+    "source": "https://tracker.gg/gta6/vehicles/vitello",
+    "locator": "tracker.gg Vitello page: AWD; corroborated by GTABase.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-vitello",
+    "field": "Spawn location",
+    "value": "Villa garage, Flamingo Pkwy, Waning Sands; also a pale-green mansion driveway on Capri",
+    "source": "https://insider-gaming.com/where-to-find-the-pegassi-vitello-gta-6/",
+    "locator": "Insider Gaming Vitello location guide (villa garage, Flamingo Pkwy, Waning Sands); corroborated by GamingBolt Randy's Wish List guide (https://gamingbolt.com/gta-6-guide-all-22-randys-wish-list-cars-and-where-to-find-them). Capri pale-green mansion driveway per Game8 and GamingBolt.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-furia",
+    "field": "Seats",
+    "value": "2",
+    "source": "https://tracker.gg/gta6/vehicles/furia",
+    "locator": "tracker.gg Furia page: 2 seats; corroborated by GTABase and ViceHustle (https://vicehustle.com/vehicles/piccia-furia/).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-furia",
+    "field": "Drivetrain",
+    "value": "RWD",
+    "source": "https://tracker.gg/gta6/vehicles/furia",
+    "locator": "tracker.gg Furia page: RWD; corroborated by GTABase.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "grotti-furia",
+    "field": "Randy's Wish List payout",
+    "value": "$30,000 + $10,000 condition bonus (clean car)",
+    "source": "https://clutchbase.app/gta6/guides/gta-6-randys-wish-list",
+    "locator": "ClutchBase Randy's Wish List guide: $30,000, then the $10,000 condition bonus for a clean car (footage: Sirloin); corroborated by MeowDB (https://meowdb.com/gta6/owning-cars, $30,000 for a Piccia Furia).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-tempesta",
+    "field": "Cost to register",
+    "value": "$38,750",
+    "source": "https://www.gtabase.com/vehicles/gta-6/tempesta",
+    "locator": "GTABase Tempesta page: Story Mode Price $38,750; corroborated by Dexerto (https://www.dexerto.com/wikis/gta-6/vehicles/cars/supercars/pegassi-tempesta/), HowToVideoGame (https://howtovideogame.com/gta-6-tempesta-location/, own PS5 WAiNK scan), MeowDB and gtasixlnsider.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-tempesta",
+    "field": "Sell value (WAiNK card)",
+    "value": "$7,650",
+    "source": "https://www.gtabase.com/vehicles/gta-6/tempesta",
+    "locator": "GTABase Tempesta page: Sell Value (Stolen) $7,650; corroborated by gtasixlnsider (http://gtasixlnsider.com/gta-6-pegassi-tempesta/) and MeowDB (same WAiNK-card figure).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-tempesta",
+    "field": "Sell value (Randy's offer)",
+    "value": "$16,300",
+    "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/supercars/pegassi-tempesta/",
+    "locator": "Dexerto Tempesta wiki: Randy's offer $16,300; corroborated by HowToVideoGame (PS5 scan) and MeowDB (RK-marked sell offer $16,300). Distinct from the $7,650 WAiNK card sell value.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-tempesta",
+    "field": "Seats",
+    "value": "2",
+    "source": "https://www.gtabase.com/vehicles/gta-6/tempesta",
+    "locator": "GTABase Tempesta page: 2 seats; corroborated by Dexerto Tempesta wiki, Exputer (https://gta.exputer.com/gta-6/vehicles/pegassi-tempesta/) and gtasixlnsider.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-tempesta",
+    "field": "Storage slots",
+    "value": "2",
+    "source": "https://www.gtabase.com/vehicles/gta-6/tempesta",
+    "locator": "GTABase Tempesta page: 2 storage slots; corroborated by Dexerto Tempesta wiki.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-tempesta",
+    "field": "Drivetrain",
+    "value": "AWD",
+    "source": "https://www.gtabase.com/vehicles/gta-6/tempesta",
+    "locator": "GTABase Tempesta page: AWD; corroborated by Exputer and gtasixlnsider (sends power to all four wheels).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-tempesta",
+    "field": "Spawn location",
+    "value": "Eden Grove Marina Hotels, Vice Beach (regular spawn)",
+    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-tempesta/",
+    "locator": "Exputer Tempesta guide: regular spawn at Eden Grove Marina Hotels, Vice Beach; corroborated by HowToVideoGame and GamingBolt (https://gamingbolt.com/gta-6-guide-the-10-fastest-cars-and-where-to-find-them).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "pegassi-tempesta",
+    "field": "Spawn location",
+    "value": "NE 3rd St tow-truck event, ~1 PM (Randy's Wish List spot)",
+    "source": "http://gtasixlnsider.com/gta-6-pegassi-tempesta/",
+    "locator": "gtasixlnsider Tempesta guide: the spot Randy's Wish List points to, NE 3rd St tow-truck event; corroborated by HeistAtlas (https://heistatlas.com/en/guide/cars/, on a tow truck on NE 3rd St, around 1 PM).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   }
 ]
