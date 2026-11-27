@@ -13326,7 +13326,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "GTA 6 launch gameplay — Sirloin 'GTA 6 - Walkthrough Part 02 (No Commentary) 4K', ~26:00 — shown in the Chuck's Tackle & Shot shop menu, $450 (discounted from $900)",
     description: "Tactical rifle sold at Chuck's Tackle & Shot in GTA VI. The name and price appear in the in-game shop menu.",
     img: "",
-    notes: "Spotted in Sirloin's launch-gameplay walkthrough (Part 02, ~26:00) — the shop menu lists 'Hawk & Little Mediator' at $450, discounted from $900. In-game shop stats as displayed (0–10 scale, not catalog 0–100 scores): Damage 4.8, Accuracy 7.8, Handling 5.6, Range 7.0.",
+    notes: "Spotted in Sirloin's launch-gameplay walkthrough (Part 02, ~26:00) — the shop menu lists 'Hawk & Little Mediator' at $450, discounted from $900. In-game shop stats as displayed (0–10 scale, not catalog 0–100 scores): Damage 4.8, Accuracy 7.8, Handling 5.6, Range 7.0. Magazine 24 rounds (store menu, Dalek's stream; tracker.gg lists 17, which matches playday.one's figure — the on-screen menu read is the one to trust).",
   },
   {
     id: "scorpio-nipper-38",
@@ -17064,7 +17064,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "tracker.gg — GTA 6 Weapons (verified 2026-11-26); Exputer — Chuck's Tackle & Shot (not sold there)",
     description: "Assault rifle in GTA VI.",
     img: "",
-    notes: "20-round magazine (tracker.gg, 26 Nov 2026). Price not confirmed yet. Not sold at Chuck's Tackle & Shot — the store stocks small-game ammo but not the rifle (Exputer). tracker.gg also lists damage/accuracy/handling/range figures, but they do not match the in-game shop cards, so they are not shown here.",
+    notes: "15-round magazine (vAnotherLevel, REPORTED — tracker.gg listed 20 on 26 Nov but no longer lists the W-22). Price not confirmed yet. Not sold at Chuck's Tackle & Shot — the store stocks small-game ammo but not the rifle (Exputer). tracker.gg also lists damage/accuracy/handling/range figures, but they do not match the in-game shop cards, so they are not shown here.",
     manufacturer: "Wortham",
   },
   {
@@ -17089,7 +17089,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "tracker.gg — GTA 6 Weapons (verified 2026-11-26)",
     description: "Assault rifle in GTA VI.",
     img: "",
-    notes: "Price $3,350 and a 25-round magazine (tracker.gg, 26 Nov 2026). tracker.gg also lists damage/accuracy/handling/range figures, but they do not match the in-game shop cards, so they are not shown here.",
+    notes: "Price $3,350 and a 30-round magazine (tracker.gg, 27 Nov 2026). tracker.gg also lists damage/accuracy/handling/range figures, but they do not match the in-game shop cards, so they are not shown here.",
     manufacturer: "ADB",
   },
   {
@@ -17114,7 +17114,7 @@ export const canonicalWeapons: CanonicalWeapon[] = [
     source: "tracker.gg — GTA 6 Weapons (verified 2026-11-26)",
     description: "Sniper rifle in GTA VI.",
     img: "",
-    notes: "Price $2,375 and a 5-round magazine (tracker.gg, 26 Nov 2026). tracker.gg also lists damage/accuracy/handling/range figures, but they do not match the in-game shop cards, so they are not shown here.",
+    notes: "Price $2,375 and a 20-round magazine (tracker.gg, 27 Nov 2026). tracker.gg also lists damage/accuracy/handling/range figures, but they do not match the in-game shop cards, so they are not shown here.",
     manufacturer: "Hillinger",
   },
   {

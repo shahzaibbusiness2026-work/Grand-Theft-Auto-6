@@ -5463,10 +5463,10 @@
     "kind": "weapons",
     "id": "hawk-and-little-mediator",
     "field": "Magazine size",
-    "value": "17 rounds (recorded configuration)",
-    "source": "https://gtadb.net/gta-6/weapons/mediator-gta-6/",
-    "locator": "GTADB’s own German-language PS5 Ammu-Nation menu under ‘Specification capture’ for the Hawk & Little Mediator. These are the specs of the configuration shown.",
-    "reviewedAt": "2026-11-24T00:00:00+05:00",
+    "value": "24 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "ON SCREEN (Dalek) — store menu reads Mag Size 24, Held Ammo 120",
+    "reviewedAt": "2026-11-27",
     "reviewer": "Taish Gaming source review"
   },
   {
@@ -10053,10 +10053,10 @@
     "kind": "weapons",
     "id": "wortham-w-22",
     "field": "Magazine size",
-    "value": "20 rounds",
-    "source": "https://tracker.gg/gta6/weapons",
-    "locator": "tracker.gg/gta6/weapons lists the Wortham W-22 with a 20-round magazine.",
-    "reviewedAt": "2026-11-26",
+    "value": "15 rounds",
+    "source": "https://vanotherlevel.com/gta-6-every-weapon/",
+    "locator": "REPORTED (playday.one) — W-22 mag 15; tracker.gg no longer lists the W-22",
+    "reviewedAt": "2026-11-27",
     "reviewer": "Taish Gaming source review"
   },
   {
@@ -10083,10 +10083,10 @@
     "kind": "weapons",
     "id": "adb-pd-90",
     "field": "Magazine size",
-    "value": "25 rounds",
+    "value": "30 rounds",
     "source": "https://tracker.gg/gta6/weapons",
-    "locator": "tracker.gg/gta6/weapons lists the ADB PD-90 with a 25-round magazine.",
-    "reviewedAt": "2026-11-26",
+    "locator": "ADB PD-90 row — magazine 30",
+    "reviewedAt": "2026-11-27",
     "reviewer": "Taish Gaming source review"
   },
   {
@@ -10113,10 +10113,10 @@
     "kind": "weapons",
     "id": "hillinger-m306",
     "field": "Magazine size",
-    "value": "5 rounds",
+    "value": "20 rounds",
     "source": "https://tracker.gg/gta6/weapons",
-    "locator": "tracker.gg/gta6/weapons lists the Hillinger M306 with a 5-round magazine.",
-    "reviewedAt": "2026-11-26",
+    "locator": "Hillinger M306 row — magazine 20",
+    "reviewedAt": "2026-11-27",
     "reviewer": "Taish Gaming source review"
   },
   {
