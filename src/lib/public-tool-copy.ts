@@ -53,7 +53,7 @@ export const PUBLIC_TOOL_COPY: Record<string, string> = {
   "/settings-guide":
     "The full settings menu is documented from the live game. This page is a settings reference, not a tested recommendation.",
   "/controls":
-    "A PS5 and Xbox reference checked against the live game, with verified rows marked. Rockstar has not published an official control chart.",
+    "Look up default GTA 6 inputs on PS5 and Xbox using the retail game’s control scheme screens.",
   "/tools/wanted-level-guide":
     "Verified GTA VI police-response data is unavailable here. The displayed star levels, units, escape times and tactics are fictional examples.",
   "/tools/business-income-calculator":

@@ -7,244 +7,121 @@ import {
   ChevronDown,
   CircleHelp,
   Gamepad2,
-  Crosshair,
   Footprints,
   LayoutGrid,
   Plane,
   Settings,
   Smartphone,
   Swords,
-  Target,
   Umbrella,
   Waves,
   type LucideIcon,
 } from "lucide-react";
 
-type ControlRow = { action: string; note?: string; ps5: string; xbox: string; verified?: boolean };
-type Section = {
-  id: string;
-  group: string;
-  title: string;
-  icon: LucideIcon;
-  iconClass?: string;
-  rows: ControlRow[];
-  footnote?: string;
-};
+type ControlRow = { action: string; ps5: string; xbox: string };
+type Section = { id: string; title: string; icon: LucideIcon; rows: ControlRow[] };
 
-/**
- * Button values are the compact pill labels. Face buttons use the
- * PlayStation glyphs (△ ○ □ ✕) the way the design shows them;
- * Xbox keeps its A / B / X / Y letters. Longer detail lives in `note`.
- */
+// Default inputs from the published retail game control scheme screens.
 const SECTIONS: Section[] = [
   {
-    id: "general",
-    group: "general",
-    title: "General & Menus",
-    icon: Settings,
-    iconClass: "text-violet-500 dark:text-[#FF2E9A]",
+    id: "general", title: "Menus and Map", icon: Settings,
     rows: [
-      { action: "Pause menu", ps5: "Options", xbox: "Menu" },
-      { action: "Change camera", note: "cycles to first-person in GTA V", ps5: "Touchpad (press)", xbox: "View (press)" },
-      { action: "Open map", ps5: "Options → Map", xbox: "Menu → Map" },
+      { action: "Pause", ps5: "Options", xbox: "Menu" },
+      { action: "Open map", ps5: "Touchpad", xbox: "View" },
+      { action: "Show objective", ps5: "D-pad Down", xbox: "D-pad Down" },
+      { action: "Activate Focus", ps5: "L3 + R3", xbox: "Click both sticks" },
     ],
   },
   {
-    id: "on-foot",
-    group: "on-foot",
-    title: "On Foot",
-    icon: Footprints,
+    id: "on-foot", title: "On Foot", icon: Footprints,
     rows: [
-      { action: "Move", ps5: "L Stick", xbox: "L Stick" },
-      { action: "Look / camera", ps5: "R Stick", xbox: "R Stick" },
-      { action: "Sprint", note: "tap repeatedly, or hold — depends on Sprint Mode", ps5: "✕", xbox: "A", verified: true },
-      { action: "Jump / Climb", ps5: "□", xbox: "X" },
-      { action: "Stealth mode", ps5: "L3", xbox: "L Stick" },
-      { action: "Look behind", ps5: "R3", xbox: "R Stick" },
-      { action: "Enter / exit vehicle", ps5: "△", xbox: "Y", verified: true },
-      { action: "Take cover", ps5: "R1", xbox: "RB", verified: true },
-      { action: "Contextual interaction", note: "talk, pick up, open doors", ps5: "D-Pad Right", xbox: "D-Pad Right", verified: true },
+      { action: "Run on foot", ps5: "Click L3", xbox: "Click left stick" },
+      { action: "Jump or climb", ps5: "✕", xbox: "A" },
+      { action: "Crouch", ps5: "○", xbox: "B" },
+      { action: "Interact or get in a vehicle", ps5: "△", xbox: "Y" },
+      { action: "Enter or leave cover", ps5: "R1", xbox: "RB" },
+      { action: "Switch character when available", ps5: "Hold D-pad Right + R1", xbox: "Hold D-pad Right + RB" },
     ],
   },
   {
-    id: "combat",
-    group: "combat",
-    title: "Combat",
-    icon: Swords,
+    id: "combat", title: "Combat", icon: Swords,
     rows: [
-      { action: "Aim weapon", ps5: "L2", xbox: "LT" },
-      { action: "Fire weapon", ps5: "R2", xbox: "RT" },
-      { action: "Reload", ps5: "○", xbox: "B" },
-      { action: "Melee attack", note: "close to a target", ps5: "○", xbox: "B", verified: true },
-      { action: "Dodge / combat roll", note: "while aiming", ps5: "□", xbox: "X" },
-      { action: "Weapon wheel", ps5: "L1 (hold)", xbox: "LB (hold)" },
-      { action: "Quick weapon cycle", ps5: "L1 (tap)", xbox: "LB (tap)" },
-      { action: "Switch weapon within a category", note: "while wheel open", ps5: "D-Pad L / R", xbox: "D-Pad L / R" },
-      { action: "Throw equipped explosive", note: "with a throwable equipped", ps5: "R2", xbox: "RT" },
-      { action: "Throw explosive while aiming a gun", ps5: "D-Pad Left", xbox: "D-Pad Left" },
-      { action: "Weapon flashlight", note: "while aiming", ps5: "D-Pad Right", xbox: "D-Pad Right" },
-      { action: "Sniper scope zoom in / out", note: "while aiming", ps5: "D-Pad ↑ / ↓", xbox: "D-Pad ↑ / ↓" },
-      { action: "Drop weapon / drop ammo", note: "while wheel open", ps5: "△ / □", xbox: "Y / X" },
-      { action: "Special ability — GTA V protagonists only", ps5: "L3 + R3", xbox: "L + R Stick" },
+      { action: "Aim", ps5: "Hold L2", xbox: "Hold LT" },
+      { action: "Fire on foot", ps5: "R2", xbox: "RT" },
+      { action: "Melee", ps5: "□", xbox: "X" },
+      { action: "Open loadout", ps5: "Hold L1", xbox: "Hold LB" },
     ],
-    footnote: "Lucia and Jason's abilities, if any, are unconfirmed — the special-ability row is GTA V only.",
   },
   {
-    id: "driving",
-    group: "driving",
-    title: "Driving",
-    icon: Car,
+    id: "driving", title: "Driving", icon: Car,
     rows: [
-      { action: "Steer", ps5: "L Stick", xbox: "L Stick" },
+      { action: "Steer", ps5: "Left stick", xbox: "Left stick" },
       { action: "Accelerate", ps5: "R2", xbox: "RT" },
-      { action: "Brake / Reverse", ps5: "L2", xbox: "LT" },
-      { action: "Handbrake", ps5: "R1", xbox: "RB" },
-      { action: "Horn", ps5: "L3", xbox: "L Stick" },
-      { action: "Look behind", ps5: "R3 (hold)", xbox: "R Stick (hold)" },
-      { action: "Change camera", ps5: "R3 (tap)", xbox: "R Stick (tap)" },
-      { action: "Duck inside vehicle", ps5: "✕", xbox: "A" },
-      { action: "Headlights", ps5: "D-Pad Right", xbox: "D-Pad Right" },
-      { action: "Radio — next / previous station", note: "tap to change station", ps5: "D-Pad L / R", xbox: "D-Pad L / R" },
-      { action: "Radio wheel", ps5: "D-Pad L (hold)", xbox: "D-Pad L (hold)" },
-      { action: "Cinematic camera", note: "while driving", ps5: "○", xbox: "B" },
-      { action: "Phone", ps5: "D-Pad Up", xbox: "D-Pad Up", verified: true },
+      { action: "Brake or reverse", ps5: "L2", xbox: "LT" },
+      { action: "Handbrake", ps5: "✕", xbox: "A" },
+      { action: "Open vehicle menu", ps5: "Hold D-pad Left", xbox: "Hold D-pad Left" },
       { action: "Exit vehicle", ps5: "△", xbox: "Y" },
     ],
   },
   {
-    id: "drive-by",
-    group: "drive-by",
-    title: "Drive-By & Vehicle Weapons",
-    icon: Crosshair,
+    id: "flying", title: "Aircraft", icon: Plane,
     rows: [
-      { action: "Aim drive-by weapon", ps5: "L1", xbox: "LB" },
-      { action: "Fire drive-by weapon", ps5: "R1", xbox: "RB" },
-      { action: "Fire mounted vehicle weapon", ps5: "✕", xbox: "A" },
-      { action: "Switch vehicle weapon", ps5: "□", xbox: "X" },
-      { action: "Aim mounted weapon", ps5: "R Stick", xbox: "R Stick" },
-      { action: "Drop mine / secondary weapon", ps5: "D-Pad Right", xbox: "D-Pad Right" },
-      { action: "Vehicle boost", note: "where equipped", ps5: "L3", xbox: "L Stick" },
+      { action: "Increase throttle or gain altitude", ps5: "R2", xbox: "RT" },
+      { action: "Reduce throttle or descend", ps5: "L2", xbox: "LT" },
+      { action: "Turn left or right", ps5: "□ / ○", xbox: "X / B" },
+      { action: "Toggle plane landing gear", ps5: "Click L3", xbox: "Click left stick" },
     ],
   },
   {
-    id: "motorcycles",
-    group: "motorcycles",
-    title: "Motorcycles & Bicycles",
-    icon: Bike,
+    id: "bicycles", title: "Bicycles", icon: Bike,
     rows: [
-      { action: "Lean forward / back (wheelie)", ps5: "L Stick ↑ / ↓", xbox: "L Stick ↑ / ↓" },
-      { action: "Bicycle sprint", note: "tap repeatedly", ps5: "✕", xbox: "A" },
-      { action: "Bicycle jump", ps5: "R1", xbox: "RB" },
-    ],
-    footnote: "All other motorcycle inputs match the driving table.",
-  },
-  {
-    id: "planes",
-    group: "flying",
-    title: "Flying — Planes",
-    icon: Plane,
-    rows: [
-      { action: "Throttle up / down", ps5: "R2 / L2", xbox: "RT / LT" },
-      { action: "Pitch & roll", ps5: "L Stick", xbox: "L Stick" },
-      { action: "Yaw left / right", ps5: "L1 / R1", xbox: "LB / RB" },
-      { action: "Landing gear", ps5: "D-Pad Right", xbox: "D-Pad Right" },
-      { action: "Fire aircraft weapon", ps5: "✕", xbox: "A" },
-      { action: "Next aircraft weapon", ps5: "□", xbox: "X" },
-      { action: "Change camera / look behind", ps5: "R3", xbox: "R Stick" },
-      { action: "Exit aircraft", ps5: "△", xbox: "Y" },
+      { action: "Pedal", ps5: "R2", xbox: "RT" },
+      { action: "Sprint on a bicycle", ps5: "✕", xbox: "A" },
+      { action: "Bunnyhop", ps5: "○", xbox: "B" },
     ],
   },
   {
-    id: "helicopters",
-    group: "flying",
-    title: "Flying — Helicopters",
-    icon: Plane,
+    id: "swimming", title: "Swimming", icon: Waves,
     rows: [
-      { action: "Ascend / descend", ps5: "R2 / L2", xbox: "RT / LT" },
-      { action: "Pitch & roll", ps5: "L Stick", xbox: "L Stick" },
-      { action: "Yaw left / right", ps5: "L1 / R1", xbox: "LB / RB" },
-      { action: "Fire weapon", ps5: "✕", xbox: "A" },
-      { action: "Switch weapon", ps5: "□", xbox: "X" },
-      { action: "Exit helicopter", ps5: "△", xbox: "Y" },
+      { action: "Swim faster", ps5: "L3", xbox: "Left stick click" },
+      { action: "Dive deeper", ps5: "Hold R1", xbox: "Hold RB" },
+      { action: "Surface", ps5: "✕", xbox: "A" },
     ],
   },
   {
-    id: "swimming",
-    group: "swimming",
-    title: "Swimming & Diving",
-    icon: Waves,
-    iconClass: "text-violet-500 dark:text-[#FF2E9A]",
-    rows: [
-      { action: "Swim (direction)", ps5: "L Stick", xbox: "L Stick" },
-      { action: "Swim faster", note: "tap repeatedly", ps5: "✕", xbox: "A" },
-      { action: "Ascend / surface", ps5: "L Stick Up / ✕", xbox: "L Stick Up / A" },
-      { action: "Descend / dive", ps5: "L Stick Down", xbox: "L Stick Down" },
-    ],
-  },
-  {
-    id: "parachute",
-    group: "parachute",
-    title: "Parachute",
-    icon: Umbrella,
+    id: "parachute", title: "Parachuting", icon: Umbrella,
     rows: [
       { action: "Deploy parachute", ps5: "✕", xbox: "A" },
-      { action: "Steer", ps5: "L Stick", xbox: "L Stick" },
-      { action: "Sharp turn left / right", ps5: "L1 / R1", xbox: "LB / RB" },
-      { action: "Precision landing brake", ps5: "L1 + R1", xbox: "LB + RB" },
-      { action: "Detach parachute", ps5: "△", xbox: "Y" },
-      { action: "Smoke trail", ps5: "✕", xbox: "A" },
+      { action: "Steer", ps5: "Left stick", xbox: "Left stick" },
+      { action: "Brake left or right", ps5: "L2 / R2", xbox: "LT / RT" },
     ],
   },
   {
-    id: "phone",
-    group: "phone",
-    title: "Phone",
-    icon: Smartphone,
+    id: "phone", title: "Phone", icon: Smartphone,
     rows: [
-      { action: "Open phone", ps5: "D-Pad Up", xbox: "D-Pad Up", verified: true },
-      { action: "Navigate phone", ps5: "D-Pad", xbox: "D-Pad" },
-      { action: "Select", ps5: "✕", xbox: "A" },
-      { action: "Back / hang up", ps5: "○", xbox: "B" },
-      { action: "Answer call", ps5: "✕", xbox: "A" },
-      { action: "Decline call", ps5: "○", xbox: "B" },
+      { action: "Open phone", ps5: "D-pad Up", xbox: "D-pad Up" },
+      { action: "Open the WAiNK app", ps5: "Hold D-pad Up", xbox: "Hold D-pad Up" },
     ],
   },
 ];
 
-const FILTERS: { id: string; label: string; icon: LucideIcon }[] = [
-  { id: "all", label: "All Sections", icon: LayoutGrid },
-  { id: "general", label: "General & Menus", icon: Settings },
-  { id: "on-foot", label: "On Foot", icon: Footprints },
-  { id: "combat", label: "Combat", icon: Swords },
-  { id: "driving", label: "Driving", icon: Car },
-  { id: "drive-by", label: "Drive-By", icon: Target },
-  { id: "motorcycles", label: "Motorcycles", icon: Bike },
-  { id: "flying", label: "Flying", icon: Plane },
-  { id: "swimming", label: "Swimming", icon: Waves },
-  { id: "parachute", label: "Parachute", icon: Umbrella },
-  { id: "phone", label: "Phone", icon: Smartphone },
+const FILTERS = [
+  { id: "all", title: "All Controls", icon: LayoutGrid },
+  ...SECTIONS,
 ];
 
 const FAQS = [
   {
-    q: "Is this the official GTA 6 control layout?",
-    a: "No. Rockstar has not published one. This page starts from GTA 5's default layout, which Rockstar has kept consistent for a decade. Rows marked Verified have been checked against the game since launch on 19 November 2026; the rest are still provisional.",
+    q: "How do I run in GTA 6?",
+    a: "With Default controls, click L3 on PS5 or the left stick on Xbox. Cross or A is the input for jumping on foot and sprinting on a bicycle.",
   },
   {
-    q: "How do you switch between Lucia and Jason?",
-    a: "Switching is shown in Trailer 2, mid-mission — but the button is not confirmed. The GTA V method, holding Down on the D-Pad and picking with the right stick, is the provisional guess.",
+    q: "Where can I check my controller preset?",
+    a: "Pause the game and open Settings → Control Scheme. The preview shows the bindings for the selected preset and activity.",
   },
   {
-    q: "Does GTA 6 have first-person mode?",
-    a: "Yes — players found a first-person mode in the game at launch, and you can save while using it. It is not an official setting: it works through a glitch, you leave it only by reloading a save, and a future patch may remove it.",
-  },
-  {
-    q: "Can I remap controls on PS5 or Xbox?",
-    a: "Only through presets and settings (targeting mode, sprint mode, sensitivity, adaptive triggers). Full button-by-button remapping needs the console's accessibility controller settings.",
-  },
-  {
-    q: "Which controls are verified?",
-    a: "Melee (Circle / B), interaction (D-Pad Right), take cover (R1 / RB), entering and exiting vehicles (Triangle / Y), sprint (tap or hold) and opening the phone (D-Pad Up). The rest of the table still follows GTA V's layout and is provisional until it is checked against the game.",
+    q: "How do I switch between Jason and Lucia?",
+    a: "When character switching is available, hold Right on the D-pad and press R1 on PS5 or RB on Xbox.",
   },
 ];
 
@@ -259,12 +136,12 @@ function ButtonPill({ label }: { label: string }) {
 function SectionCard({ section }: { section: Section }) {
   const Icon = section.icon;
   return (
-    <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none">
+    <section id={section.id} className="relative scroll-mt-24 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-[#10102a]/90 dark:shadow-none">
       <span aria-hidden className="absolute inset-y-0 left-0 hidden w-1 bg-gradient-to-b from-[#FF2E9A] to-violet-500 dark:block" />
       <div className="p-5 pl-6">
         <div className="grid grid-cols-[minmax(0,1fr)_120px_120px] items-center gap-2 sm:grid-cols-[minmax(0,1fr)_140px_140px]">
           <h2 className="flex min-w-0 items-center gap-2 text-xl font-bold text-slate-900 dark:text-slate-100">
-            <Icon className={`h-5 w-5 shrink-0 ${section.iconClass ?? "text-[#FF2E9A]"}`} aria-hidden />
+            <Icon className="h-5 w-5 shrink-0 text-[#FF2E9A]" aria-hidden />
             <span className="leading-tight">{section.title}</span>
           </h2>
           <span className="text-center text-xs font-extrabold tracking-wider text-slate-500 dark:text-slate-400">PS5</span>
@@ -279,13 +156,7 @@ function SectionCard({ section }: { section: Section }) {
               <div className="min-w-0">
                 <p className="text-[15px] font-semibold text-slate-800 dark:text-slate-200">
                   {r.action}
-                  {r.verified ? (
-                    <span className="ml-2 inline-flex items-center rounded-full bg-emerald-500/15 px-2 py-0.5 align-middle text-[11px] font-bold text-emerald-600 dark:text-emerald-300">
-                      Verified
-                    </span>
-                  ) : null}
                 </p>
-                {r.note ? <p className="text-[13px] leading-snug text-slate-500">{r.note}</p> : null}
               </div>
               <div className="flex justify-center">
                 <ButtonPill label={r.ps5} />
@@ -296,9 +167,6 @@ function SectionCard({ section }: { section: Section }) {
             </div>
           ))}
         </div>
-        {section.footnote ? (
-          <p className="mt-3 text-xs text-slate-500">{section.footnote}</p>
-        ) : null}
       </div>
     </section>
   );
@@ -308,7 +176,7 @@ export function ControlsClient() {
   const [filter, setFilter] = useState("all");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const visible =
-    filter === "all" ? SECTIONS : SECTIONS.filter((s) => s.group === filter);
+    filter === "all" ? SECTIONS : SECTIONS.filter((s) => s.id === filter);
 
   return (
     <>
@@ -319,8 +187,7 @@ export function ControlsClient() {
         </h2>
         <div className="mt-2 h-[3px] w-10 rounded-full bg-gradient-to-r from-[#FF2E9A] to-violet-500" aria-hidden />
         <p className="mt-2 text-base text-slate-600 dark:text-slate-400">
-          Rows marked Verified match GTA VI&apos;s in-game layout as confirmed since launch. Unmarked rows follow
-          GTA V&apos;s default layout and are provisional — Rockstar has not published an official layout.
+          Select the activity you’re doing. These are the Default PS5 and Xbox inputs shown in the game’s control scheme screens.
         </p>
       </div>
 
@@ -341,7 +208,7 @@ export function ControlsClient() {
               }
             >
               <Icon className="h-4 w-4" aria-hidden />
-              {f.label}
+              {f.title}
             </button>
           );
         })}

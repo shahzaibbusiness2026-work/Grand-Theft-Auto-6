@@ -108,7 +108,7 @@ const POPULAR_PAGES = [
   {
     href: "/controls",
     title: "GTA 6 controls",
-    desc: "PS5 and Xbox controller inputs with documented bindings marked.",
+    desc: "Default GTA 6 controls for PS5 and Xbox.",
     img: "/img/hero-artwork-right.jpg",
     tag: "Guide",
   },

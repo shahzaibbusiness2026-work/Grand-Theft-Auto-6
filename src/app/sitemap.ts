@@ -5,6 +5,7 @@ import { createPublicClient } from "@/lib/supabase/public";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import { canonicalOrigin } from "@/lib/site-identity";
 import { articlePublicationDates, hasArticleBody } from "@/lib/editorial-quality";
+import { correctPublishedArticle } from "@/lib/published-editorial-corrections";
 import { indexReady } from "@/lib/catalog-evidence";
 import { characterEvidence, CHARACTER_REVIEWED_AT } from "@/lib/character-evidence";
 export const revalidate = 3600;
@@ -95,7 +96,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .select("slug,title,excerpt,content,published_at,updated_at")
       .eq("status", "published");
     if (error) throw error;
-    for (const a of data || [])
+    for (const a of (data || []).map(correctPublishedArticle))
       if (a.slug && hasArticleBody(a)) {
         const { published, modified } = articlePublicationDates(a.published_at, a.updated_at);
         const lm = realDate(modified) || realDate(published);

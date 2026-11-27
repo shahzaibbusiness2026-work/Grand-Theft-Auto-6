@@ -122,6 +122,15 @@ export default async function NewsPage() {
         </div>
 
         <aside className="space-y-5 lg:self-start">
+          <section className="card-surface space-y-3 p-4" aria-labelledby="news-reference-heading">
+            <h2 id="news-reference-heading" className="font-display text-lg font-extrabold">GTA 6 essentials</h2>
+            <ul className="space-y-2 text-sm">
+              <li><Link className="underline" href="/news/gta-6-release-date-pre-order-editions">Release date, platforms and editions</Link></li>
+              <li><Link className="underline" href="/news/gta-6-fps-performance">Console performance comparison</Link></li>
+              <li><Link className="underline" href="/news/gta-6-file-size-210-gb-ps5-storage-guide">Download size and storage</Link></li>
+              <li><Link className="underline" href="/guides">Walkthroughs and controls guides</Link></li>
+            </ul>
+          </section>
           {categories.length > 0 && (
             <section className="card-surface p-4" aria-labelledby="news-categories">
               <h2 id="news-categories" className="mb-3 font-display text-lg font-extrabold">

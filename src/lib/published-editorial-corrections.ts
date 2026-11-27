@@ -1,3 +1,10 @@
+import { CONTROL_SCREEN_SOURCE, publishedGuideRevisions } from "./published-guide-revisions";
+import { articleBodyMarkdown } from "./editorial-quality";
+
+const editorialRefresh = "2026-11-27T17:57:21.000Z";
+const rockstarLaunch = "https://www.rockstargames.com/newswire/article/39akk424a9oo53/grand-theft-auto-vi-now-available";
+const rockstarInstall = "https://support.rockstargames.com/articles/M6h7B5fJZMwG1dnzQkt4Z/grand-theft-auto-vi-installation-requirements";
+const rockstarEditions = "https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions";
 const rockstarMusic = "https://www.rockstargames.com/VI/music";
 const rockstarAlbumRelease =
   "https://www.rockstargames.com/it/newswire/article/k4a8955a93o747/grand-theft-auto-vi-the-album-now-available";
@@ -31,11 +38,34 @@ function updateEditorialLinks(content: string) {
 
 export function correctPublishedGuideContent(slug: string, content: string) {
   content = updateEditorialLinks(content);
+  const revision = publishedGuideRevisions[slug];
+  if (revision && content.replace(/[*_`]/g, "").replace(/\s+/g, " ").includes(revision.marker)) {
+    return revision.content;
+  }
   if (slug !== "gta-6-planes-helicopters-locations") return content;
   return content.replace(
     / Our \[stunt jumps guide\]\((?:https:\/\/www\.taishgaming\.com)?\/guides\/best-stunt-jumps-locations\/?\) has more on how these jumps work\./,
     "",
   );
+}
+
+export function correctPublishedGuide<T extends {
+  slug?: string;
+  title: string;
+  description?: string;
+  content?: string;
+  updated_at?: string;
+}>(guide: T): T {
+  if (!guide.slug || !guide.content) return guide;
+  const revision = publishedGuideRevisions[guide.slug];
+  const content = revision && (
+    guide.title !== revision.originalTitle ||
+    Date.parse(guide.updated_at || "") > Date.parse(editorialRefresh)
+  ) ? updateEditorialLinks(guide.content) : correctPublishedGuideContent(guide.slug, guide.content);
+  if (revision && content === revision.content && guide.title === revision.originalTitle) {
+    return { ...guide, title: revision.title, description: revision.description, content, updated_at: editorialRefresh };
+  }
+  return content === guide.content ? guide : { ...guide, content };
 }
 
 // These corrections match the audited copy so later CMS edits take precedence.
@@ -46,6 +76,7 @@ export function correctPublishedArticle<
     excerpt: string;
     subtitle?: string | null;
     content?: string | null;
+    updated_at?: string | null;
     seo_title?: string | null;
     seo_description?: string | null;
   },
@@ -60,6 +91,114 @@ export function correctPublishedArticle<
     content = content.replace("](/weapons/moreland-850-shotgun)", "](/weapons/gutterball-moreland-850)");
   }
   if (content !== article.content) article = { ...article, content };
+
+  if (Date.parse(article.updated_at || "") <= Date.parse(editorialRefresh) || !article.updated_at) {
+    if (slug === "gta-6-release-date-pre-order-editions" &&
+        article.title === "GTA 6 Release Date, Platforms and Pre-Order Checks" &&
+        content.includes("When Is GTA VI Coming Out?")) {
+      const summary = "GTA 6 released November 19, 2026 for PlayStation 5 and Xbox Series X|S. Check the platforms, editions and installation requirements.";
+      return {
+        ...article,
+        title: "GTA 6 Release Date, Platforms and Editions",
+        seo_title: "GTA 6 Release Date, Platforms & Editions",
+        excerpt: summary,
+        seo_description: summary,
+        subtitle: null,
+        updated_at: editorialRefresh,
+        content: `Grand Theft Auto VI released worldwide on **November 19, 2026** for **PlayStation 5** and **Xbox Series X|S**. [Rockstar’s launch announcement](${rockstarLaunch}) names both console platforms. A PC release date is still unannounced in Rockstar’s current listings.
+
+## Which version should you look for?
+
+Choose a listing for your console and check whether it says Standard Edition, Ultimate Edition or Ultimate Edition Upgrade. The Upgrade is for players who already own the base game. Rockstar’s [edition reference](${rockstarEditions}) also explains that the launch code-in-box version uses a download code. Check the specific listing before relying on a disc or a bonus listed in old preorder coverage.
+
+See the [Standard vs Ultimate Edition guide](/guides/gta-6-standard-vs-ultimate-edition) for the content differences and the [Ultimate Edition bonus locations](/guides/gta-6-ultimate-edition-bonus-locations) if you already own those extras.
+
+## How much room should you leave for GTA 6?
+
+Rockstar’s [installation requirements](${rockstarInstall}) say to allow up to 212 GB, depending on the device. Look at the download queue and the console’s available storage before moving other games. Our [GTA 6 storage guide](/news/gta-6-file-size-210-gb-ps5-storage-guide) explains what to compare, and the [download time calculator](/tools/download-time-calculator) estimates the wait at your connection speed.
+
+## The original launch schedule
+
+Rockstar opened digital preloads on November 10, 2026. The game unlocked at local midnight on November 19. Those were launch dates. If you’re installing the game today, check the current queue for the game and any updates, then use the [first-session checklist](/guides/gta-6-beginners-guide).`,
+      };
+    }
+    if (slug === "gta-6-file-size-210-gb-ps5-storage-guide" &&
+        article.title === "GTA 6 Download Size: Up to 212 GB, Official Preload Dates & PS5/Xbox Guide" &&
+        content.includes("Is GTA 6 Really 212 GB?")) {
+      const summary = "Rockstar says to allow up to 212 GB for GTA 6. Check free space on PS5 or Xbox and estimate your download time.";
+      return {
+        ...article,
+        title: "GTA 6 Download Size and Storage on PS5 and Xbox",
+        seo_title: "GTA 6 Download Size & Storage Requirements",
+        excerpt: summary,
+        seo_description: summary,
+        subtitle: null,
+        updated_at: editorialRefresh,
+        content: `Rockstar’s [installation requirements](${rockstarInstall}) say Grand Theft Auto VI can require **up to 212 GB of available space**. Check the size in your own download queue when you install it. Rockstar’s figure is an upper allowance across supported devices and the amount can differ by console.
+
+## What to check before freeing space
+
+1. **Available storage.** Open the console’s storage screen and check the free space on the drive you’ll use to play the game.
+2. **Queued download.** Check what the store or console asks you to download. The game and updates can appear as separate entries.
+3. **Installation space.** Use Rockstar’s 212 GB allowance when planning. Recheck free space if the console reports an installation or update error even after the download finishes.
+
+On PlayStation, see [Sony’s storage instructions](https://www.playstation.com/en-us/support/hardware/ps5-manage-storage-space/). On Xbox, open My games & apps and look at the installation queue and available storage.
+
+## How long will the download take?
+
+Use the [GTA 6 download time calculator](/tools/download-time-calculator) with the size shown in your queue and the speed the console is actually getting. For example, 212 GB at a sustained 100 Mb/s works out to about **4 hours 43 minutes** before network overhead or installation. While the speed stays the same, a smaller download takes proportionally less time. Include extra time for unpacking and later patches.
+
+## Which platforms does this apply to?
+
+The official figure is for PlayStation 5 and Xbox Series X|S. See the [release and editions guide](/news/gta-6-release-date-pre-order-editions) for console availability. Rockstar’s November 10 preload schedule is useful as launch history. For a new install, start with the current size shown by your console.`,
+      };
+    }
+    if (slug === "gta-6-60-fps-patch-jailbroken-ps5" &&
+        article.title === "GTA 6 60 FPS Patch: Unofficial Mod Unlocks Higher Frame Rates on PS5") {
+      const summary = "An unofficial GTA 6 test lifted the PS5 frame-rate cap. Analysis of the shared PS5 Pro footage found about 45 FPS on average.";
+      return {
+        ...article,
+        title: "GTA 6 Unofficial PS5 Frame-Rate Patch Averaged About 45 FPS on Pro",
+        seo_title: "GTA 6 PS5 FPS Patch: What the 45 FPS Test Shows",
+        excerpt: summary,
+        seo_description: summary,
+        subtitle: null,
+        updated_at: editorialRefresh,
+        content: `An unofficial experiment lifted GTA 6’s frame-rate ceiling on modified PS5 hardware. [Twisted Voxel measured the published PS5 Pro footage](https://twistedvoxel.com/gta-vi-60-fps-patch-ps5-pro/) at roughly **45 FPS on average**. That result describes the shared clip. The retail console game targets 30 FPS.
+
+## What the footage tells us
+
+A higher ceiling gives the game room to render faster during a lighter scene. The clip shows that it sometimes does. A sustained 60 FPS result would need repeated measurements across different areas and situations, with the console model, game build and test route documented. The reported average alone cannot tell you how smoothly a busy scene plays.
+
+## Does a 120 Hz display change GTA 6’s frame rate?
+
+The screen’s refresh rate and the game’s frame rate describe different things. A 120 Hz display can refresh 120 times a second. How many new frames it receives still depends on the game and its available modes.
+
+Rockstar’s [console announcement](https://www.rockstargames.com/newswire/article/89834o94713o21/pre-load-grand-theft-auto-vi-now) identifies the 30 FPS target. If you’re choosing a console or changing settings, use the [retail performance comparison](/news/gta-6-fps-performance) and [console settings guide](/settings-guide) for the versions most players use.`,
+      };
+    }
+    if (slug === "gta-6-gameplay-confirmed-features-mechanics" &&
+        article.title === "GTA 6 Gameplay Claims: Evidence Review and Corrections" &&
+        content.includes("What Rockstar has confirmed") &&
+        !content.includes("Start with the retail gameplay evidence")) {
+      const summary = "See what Rockstar’s footage and retail control screens establish about GTA 6, with links to the controls, vehicles and story-job guides.";
+      return {
+        ...article,
+        excerpt: summary,
+        seo_description: summary,
+        updated_at: editorialRefresh,
+        content: `## Start with the retail gameplay evidence
+
+Looking for a control or a feature you can use? [GTA Base’s guide drawn from the retail control menus](${CONTROL_SCREEN_SOURCE}) shows how to run, change characters when switching is available, and open the in-game phone. The [controls reference](/controls) gives the PS5 and Xbox buttons side by side.
+
+For vehicles and weapons, the [vehicle catalog](/vehicles) and [weapon catalog](/weapons) link the footage, product listing or menu capture to the specific claim it supports. For optional robberies, start with the [story jobs, safes and vaults guide](/guides/heists-big-score-guide).
+
+The notes below record which earlier claims we withdrew and explain what the official footage supports.
+
+${articleBodyMarkdown(content, article.title)}`,
+      };
+    }
+  }
 
   if (slug === "gta-6-watercraft-aircraft-guide") {
     const sentence = "Our vehicle catalog lists each entry with its evidence status.";

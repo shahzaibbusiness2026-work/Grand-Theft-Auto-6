@@ -28,11 +28,11 @@ const {
 } = require("../src/lib/editorial-quality.ts");
 const {
   extractHeadings,
-  createHeadingIdAllocator,
 } = require("../src/lib/toc.ts");
 const { validClaim, claimsFor } = require("../src/lib/catalog-evidence.ts");
 const {
   correctPublishedArticle,
+  correctPublishedGuide,
   correctPublishedGuideContent,
 } = require("../src/lib/published-editorial-corrections.ts");
 
@@ -43,6 +43,46 @@ test("the aircraft guide drops the dead reference and retains the route instruct
   assert.equal(correctPublishedGuideContent(slug, original), instruction);
   assert.equal(correctPublishedGuideContent("unrelated-guide", original), original);
   assert.equal(correctPublishedGuideContent(slug, instruction), instruction);
+});
+
+test("the audited weapons guide gives a sourced acquisition example and newer copy takes precedence", () => {
+  const legacy = "## Which weapons are confirmed for GTA 6?\n\nRockstar has officially named the **Hawk & Little Morgan Revolvers** as part of the GTA VI Ultimate Edition Upgrade.";
+  const corrected = correctPublishedGuideContent("best-weapons-tier-list", legacy);
+  assert.match(corrected, /\/weapons\/kolt-and-associates-556/);
+  assert.match(corrected, /pcgamer\.com\/games\/grand-theft-auto\/gta-6-unique-weapons/);
+  assert.equal(correctPublishedGuideContent("best-weapons-tier-list", corrected), corrected);
+  assert.equal(correctPublishedGuideContent("best-weapons-tier-list", "A newer first-hand guide."), "A newer first-hand guide.");
+});
+
+test("release reporting answers the post-launch availability question and preserves the story URL", () => {
+  const story = {
+    slug: "gta-6-release-date-pre-order-editions",
+    title: "GTA 6 Release Date, Platforms and Pre-Order Checks",
+    excerpt: "GTA 6 releases November 19, 2026 on PlayStation 5 and Xbox Series X|S.",
+    content: "## When Is GTA VI Coming Out?\n\nOriginal launch coverage.",
+  };
+  const corrected = correctPublishedArticle(story);
+  assert.equal(corrected.slug, story.slug);
+  assert.match(corrected.excerpt, /released November 19, 2026/);
+  assert.match(corrected.content, /grand-theft-auto-vi-now-available/);
+});
+
+test("guide title, description and body refresh together while later CMS saves win", () => {
+  const original = {
+    slug: "heists-big-score-guide",
+    title: "GTA 6 Heists and Robberies: Details and Questions",
+    description: "A pre-launch guide.",
+    content: "GTA VI plainly revolves around criminal jobs.",
+    updated_at: "2026-11-25T09:00:00Z",
+  };
+  const revised = correctPublishedGuide(original);
+  assert.match(revised.title, /Story Jobs, Safes and Vaults/);
+  assert.match(revised.description, /Chapter 2 example/);
+  assert.match(revised.content, /Hit Kingpin Bowling/);
+  assert.notEqual(revised.updated_at, original.updated_at);
+  assert.deepEqual(correctPublishedGuide(revised), revised);
+  const newer = { ...original, updated_at: "2026-11-28T09:00:00Z" };
+  assert.equal(correctPublishedGuide(newer), newer);
 });
 
 test("public editorial corrections retain the album table and respect newer CMS copy", () => {
@@ -231,12 +271,25 @@ test("the imported malformed heading yields readable, matching navigation ids", 
   const body = normalizeEditorialMarkdown(input);
   const headings = extractHeadings(body);
   assert.equal(headings[0].text, "GTA 6 Launch Trailer: The Main Takeaways");
-  const allocate = createHeadingIdAllocator();
-  assert.equal(
-    headings[0].id,
-    allocate("GTA 6 Launch Trailer: The Main Takeaways"),
-  );
+  assert.equal(headings[0].id, "gta-6-launch-trailer-the-main-takeaways");
   assert.equal(normalizeEditorialMarkdown(body), body);
+});
+test("guide jump links match rendered headings with entities, indentation and fenced code", async () => {
+  const React = require("react");
+  const { renderToStaticMarkup } = require("react-dom/server");
+  const { default: Markdown } = await import("react-markdown");
+  const { default: gfm } = await import("remark-gfm");
+  const input = "## GTA &amp; Xbox\n\n```\n## Driving\n```\n\n## Driving\n\n   ## Aiming";
+  const headings = extractHeadings(input);
+  assert.deepEqual(headings.map(({ id }) => id), ["gta-xbox", "driving", "aiming"]);
+  const ids = new Map(headings.map(({ offset, id }) => [offset, id]));
+  const html = renderToStaticMarkup(React.createElement(Markdown, {
+    remarkPlugins: [gfm],
+    components: {
+      h2: ({ node, children }) => React.createElement("h2", { id: ids.get(node.position.start.offset) }, children),
+    },
+  }, input));
+  for (const { id } of headings) assert.ok(html.includes(`id="${id}"`), id);
 });
 test("a source URL alone cannot verify a whole entity or a field", () => {
   const c = {
