@@ -40168,5 +40168,15 @@
   "reviewer": "Muse",
   "source": "https://tracker.gg/gta6/vehicles/yosemite-1500",
   "value": "Street spawns: Leonida Keys, Ambrosia, Port Gellhorn"
-}
+},
+  {
+    "kind": "vehicles",
+    "id": "blue-drake-penumbra",
+    "field": "Observed location",
+    "value": "Port Gellhorn Raceway, South Kelly County — inside a SCOOP shipping container outside the raceway building; Cut-Off Tool required (Chapter 3, Meet the Heders). Comes with nitrous; one-time pickup, does not respawn.",
+    "source": "https://hindi3.sportskeeda.com/gta/all-hidden-cars-shipping-containers-gta-6-find",
+    "locator": "Sportskeeda 'All hidden cars in shipping containers in GTA 6': 'Blue Drake Penumbra ... stored inside a yellow shipping container outside the raceway building. It comes equipped with nitrous' — Port Gellhorn Raceway, South Kelly County. Corroborated by allthings.how rare-cars guide (Blue Drake Penumbra, discovered at Ambrosia Raceway) and the SCOOP-containers YouTube guide (https://www.youtube.com/watch?v=IT0SWlJRm7M) listing it among container loot; container colour differs between sources and is not claimed.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  }
 ]

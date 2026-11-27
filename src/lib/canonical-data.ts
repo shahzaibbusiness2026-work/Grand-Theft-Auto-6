@@ -9722,7 +9722,7 @@ export const canonicalVehicles: CanonicalVehicle[] = [
     confidence: "REPORTED",
     source: "tracker.gg GTA 6 vehicles table (WAiNK scan ratings)",
     description: "Standout variant of the '07 Bravado Buffalo.",
-    notes: "Standout variant of the '07 Bravado Buffalo. Tracker.gg WAiNK scan ratings: Speed 5.5, Acceleration 6.4, Asphalt Handling 4.7, Off-Road Handling 4.4, Strength 3.0; 4 seats. Location not yet confirmed.",
+    notes: "Standout variant of the '07 Bravado Buffalo. Tracker.gg WAiNK scan ratings: Speed 5.5, Acceleration 6.4, Asphalt Handling 4.7, Off-Road Handling 4.4, Strength 3.0; 4 seats. Found in a SCOOP shipping container at Port Gellhorn Raceway, South Kelly County; Cut-Off Tool required (Chapter 3, Meet the Heders). Comes with nitrous; one-time pickup, does not respawn.",
     featured: false,
   },
   {
