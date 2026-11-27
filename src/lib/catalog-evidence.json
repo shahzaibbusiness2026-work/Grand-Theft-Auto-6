@@ -37638,5 +37638,125 @@
     "locator": "ScreenRant: Hog Stars Garage, Acacia Street, Ambrosia; corroborated by Retrogems (https://retrogems.fr/en/gta-6-rarest-cars-locations-guide/) and FandomWire (https://fandomwire.com/rarest-cars-in-gta-6-you-can-get-for-free-ranked/).",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "the-silver-1922",
+    "field": "Unlock",
+    "value": "Unlocks after finishing the Chapter 1 mission 'Gear Up'; requires a bank account",
+    "source": "https://game8.co/games/GTA-6/archives/638934",
+    "locator": "Game8: unlocks after finishing the Chapter 1 mission Gear Up; requires a bank account; corroborated by gtasixlnsider (https://gtasixlnsider.com/gta-6-duke-1922/).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "Magazine size",
+    "value": "8 rounds",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/scorpio-nipper-38/",
+    "locator": "Dexerto: holds 8 rounds of .380 Cal; corroborated by Exputer (https://gta.exputer.com/gta-6/weapons/scorpio-nipper-38/, 8-round magazine) and gta6info (https://gta6info.com/wiki/Weapons_List, mag 8).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "Ammo type",
+    "value": ".380 Cal",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/scorpio-nipper-38/",
+    "locator": "Dexerto: .380 Cal; corroborated by Exputer and gta6info (same pages as magazine size).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "scorpio-nipper-38",
+    "field": "Fire mode",
+    "value": "Semi-auto",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/scorpio-nipper-38/",
+    "locator": "Dexerto: semi-automatic; corroborated by Exputer and gta6info (same pages as magazine size).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-laird-350",
+    "field": "Magazine size",
+    "value": "5 rounds",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/sniper-rifles/fortune-son-laird-350/",
+    "locator": "Dexerto: 5-round magazine; corroborated by Exputer (https://gta.exputer.com/gta-6/weapons/fortune-and-son-laird-350/) and gta6info (https://gta6info.com/wiki/Fortune_and_Son_Laird_350).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-laird-350",
+    "field": "Ammo type",
+    "value": "6.5mm",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/sniper-rifles/fortune-son-laird-350/",
+    "locator": "Dexerto: 6.5mm; corroborated by Exputer and gta6info (same pages as magazine size).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "fortune-and-son-laird-350",
+    "field": "Fire mode",
+    "value": "Bolt action",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/sniper-rifles/fortune-son-laird-350/",
+    "locator": "Dexerto: bolt action; corroborated by Exputer and gta6info (same pages as magazine size).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-dsg-smg",
+    "field": "Magazine size",
+    "value": "30 rounds",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/deever-tech-dsg/",
+    "locator": "Dexerto: 30-round magazine; corroborated by Exputer (https://gta.exputer.com/gta-6/weapons/deever-tech-dsg/), guiasgta6 (https://www.guiasgta6.com/en/weapons/deever-tech-dsg-gta-6/) and gta6info (https://gta6info.com/wiki/Weapons_List).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-dsg-smg",
+    "field": "Ammo type",
+    "value": "9mm",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/deever-tech-dsg/",
+    "locator": "Dexerto: 9mm; corroborated by Exputer, guiasgta6 and gta6info (same pages as magazine size).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "deever-tech-dsg-smg",
+    "field": "Fire mode",
+    "value": "3-round burst",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/deever-tech-dsg/",
+    "locator": "Dexerto: 3-round burst; corroborated by Exputer, guiasgta6 and gta6info (same pages as magazine size).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-mustang-357",
+    "field": "Ammo type",
+    "value": ".357 Magnum",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/revolvers/duke-mustang-357/",
+    "locator": "Dexerto: .357 Magnum; corroborated by Exputer (https://gta.exputer.com/gta-6/weapons/mustang-357/) and gta6info (https://gta6info.com/wiki/Weapons_List).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "duke-mustang-357",
+    "field": "Unlock",
+    "value": "Locked at first; unlocks after buying other guns from the shop",
+    "source": "https://www.dexerto.com/wikis/gta-6/weapons/revolvers/duke-mustang-357/",
+    "locator": "Dexerto: locked at first and unlocks after buying other guns from the shop; corroborated by gta.guide (https://gta.guide/gta-6/weapons/duke-mustang-357) and Exputer.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   }
 ]
