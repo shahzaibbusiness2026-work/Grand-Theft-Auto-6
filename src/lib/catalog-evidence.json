@@ -5193,20 +5193,20 @@
     "kind": "weapons",
     "id": "black-eagle-import-m306-tmr",
     "field": "Accuracy",
-    "value": "9.5/10 (weapon menu rating)",
-    "source": "https://meowdb.com/gta6/media/footage/nov20-black-eagle-import-m306-tmr.webp",
-    "locator": "Arekkz Gaming launch gameplay 0:22. Lucia's weapon locker shows the named variant with four modifications fitted.",
-    "reviewedAt": "2026-11-24T00:00:00+05:00",
+    "value": "7.8/10",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "Hillinger M306 TMR row — accuracy 7.8, handling 5.5 (base stats)",
+    "reviewedAt": "2026-11-27",
     "reviewer": "Taish Gaming source review"
   },
   {
     "kind": "weapons",
     "id": "black-eagle-import-m306-tmr",
     "field": "Handling",
-    "value": "4.1/10 (weapon menu rating)",
-    "source": "https://meowdb.com/gta6/media/footage/nov20-black-eagle-import-m306-tmr.webp",
-    "locator": "Arekkz Gaming launch gameplay 0:22. Lucia's weapon locker shows the named variant with four modifications fitted.",
-    "reviewedAt": "2026-11-24T00:00:00+05:00",
+    "value": "5.5/10",
+    "source": "https://tracker.gg/gta6/weapons",
+    "locator": "Hillinger M306 TMR row — accuracy 7.8, handling 5.5 (base stats)",
+    "reviewedAt": "2026-11-27",
     "reviewer": "Taish Gaming source review"
   },
   {
