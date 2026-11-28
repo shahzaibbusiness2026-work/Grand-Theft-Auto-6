@@ -6,7 +6,8 @@ import { AppShell } from "@/components/app-shell";
 import { Badge } from "@/components/ui/badge";
 import { getPublicGuideBySlug, getPublicGuides } from "@/lib/services/guides";
 import ReactMarkdown from "react-markdown";
-import { hasGuideBody, readingTime } from "@/lib/editorial-quality";
+import { articleBodyMarkdown, formatArticleDate, hasGuideBody, readingTime } from "@/lib/editorial-quality";
+import { extractHeadings } from "@/lib/toc";
 import { absoluteUrl } from "@/lib/page-metadata";
 import { serializeJsonLd } from "@/lib/utils";
 import { PlayerBookmarkButton } from "@/components/player-bookmark-button";
@@ -25,9 +26,9 @@ const GUIDE_SEO_TITLES: Record<string, string> = {
   "best-gta-6-settings-ps5": "Best GTA 6 Settings for PS5",
   "best-gta-6-settings-ps5-pro": "GTA 6 PS5 Pro Settings Guide",
   "best-gta-6-settings-xbox-series-x": "Best GTA 6 Settings for Xbox",
-  "best-weapons-tier-list": "GTA 6 Weapons Guide & Tier List",
-  "complete-beginner-guide": "GTA 6 Story, Map & Characters Guide",
-  "gta-6-beginners-guide": "GTA 6 Beginner's Guide: 10 Things to Do",
+  "best-weapons-tier-list": "GTA 6 Weapons Guide & Early Pickups",
+  "complete-beginner-guide": "GTA 6 Story & Map: Spoiler-Free Guide",
+  "gta-6-beginners-guide": "GTA 6 Beginner’s Guide: What to Do First",
   "gta-6-best-early-cars-steal-keep-guide": "GTA 6 Best Early Cars to Steal and Keep",
   "gta-6-easter-eggs-found-first-24-hours": "GTA 6 Easter Egg Locations: 7 Found",
   "gta-6-planes-helicopters-locations": "GTA 6 Planes & Helicopters: Locations",
@@ -37,6 +38,7 @@ const GUIDE_SEO_TITLES: Record<string, string> = {
   "gta-6-xbox-controls": "GTA 6 Xbox Controls: Button Guide",
   "heists-big-score-guide": "GTA 6 Heists & Robberies Guide",
   "make-money-fast": "How to Make Money in GTA 6",
+  "vice-city-map-guide": "GTA 6 Map Guide: Navigate Vice City & Leonida",
 };
 
 function guideSeoTitle(guide: { slug?: string | null; title: string }) {
@@ -104,6 +106,13 @@ export default async function GuideDetailPage({
       : all.filter((g) => g.slug !== guide.slug)
   ).slice(0, 4);
   const ready = hasGuideBody(guide);
+  const body = articleBodyMarkdown(guide.content || "", guide.title);
+  const headings = extractHeadings(body);
+  const sections = headings.filter((heading) => heading.level === 2);
+  const headingIds = new Map(headings.map(({ offset, id }) => [offset, id]));
+  const revisedDate = guide.updated_at && Number.isFinite(Date.parse(guide.updated_at))
+    ? guide.updated_at
+    : undefined;
 
   return (
     <AppShell>
@@ -194,6 +203,11 @@ export default async function GuideDetailPage({
                 {readingTime(guide.content || "")}
               </span>
             )}
+            {ready && revisedDate && (
+              <span className="text-xs text-muted-foreground">
+                Updated <time dateTime={revisedDate}>{formatArticleDate(revisedDate)}</time>
+              </span>
+            )}
           </div>
           <h1 className="mt-3 font-display text-4xl font-black leading-[1.1] tracking-tight text-foreground sm:text-5xl">
             {guide.title}
@@ -212,11 +226,23 @@ export default async function GuideDetailPage({
         )}
 
         <div className="mt-6 space-y-4">
+          {ready && sections.length >= 3 && (
+            <nav aria-label="On this page" className="rounded-xl border border-border bg-card p-5">
+              <h2 className="text-lg font-bold">On this page</h2>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
+                {sections.map((section) => (
+                  <li key={section.id}><a className="underline" href={"#" + section.id}>{section.text}</a></li>
+                ))}
+              </ul>
+            </nav>
+          )}
           {ready ? (
             <div className="article-body">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
+                  h2: ({ children, node }) => <h2 id={headingIds.get(node?.position?.start.offset ?? -1)} className="scroll-mt-24">{children}</h2>,
+                  h3: ({ children, node }) => <h3 id={headingIds.get(node?.position?.start.offset ?? -1)} className="scroll-mt-24">{children}</h3>,
                   table: ({ children }) => (
                     <div
                       role="region"
@@ -231,7 +257,7 @@ export default async function GuideDetailPage({
                   ),
                 }}
               >
-                {guide.content || ""}
+                {body}
               </ReactMarkdown>
             </div>
           ) : (

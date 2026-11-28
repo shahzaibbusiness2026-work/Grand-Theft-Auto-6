@@ -5,7 +5,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
 import { assertAdmin } from "@/lib/auth/assert-admin";
 import { logActivity } from "./activity";
-import { correctPublishedGuideContent } from "@/lib/published-editorial-corrections";
+import { correctPublishedGuide } from "@/lib/published-editorial-corrections";
 import {
   hasGuideBody,
   readingTime,
@@ -40,6 +40,7 @@ export async function getPublicGuides(): Promise<GuideRecord[]> {
       .order("views", { ascending: false });
     if (!error && data)
       return (data as GuideRecord[])
+        .map(correctPublishedGuide)
         .filter(hasGuideBody)
         .map((g) => ({ ...g, read_time: readingTime(g.content || "") }));
   } catch {
@@ -60,10 +61,7 @@ export async function getPublicGuideBySlug(
       .eq("status", "published")
       .maybeSingle();
     if (!error && data) {
-      const guide = data as GuideRecord;
-      return guide.content
-        ? { ...guide, content: correctPublishedGuideContent(slug, guide.content) }
-        : guide;
+      return correctPublishedGuide(data as GuideRecord);
     }
   } catch {
     // Guide detail falls back to a 404 below

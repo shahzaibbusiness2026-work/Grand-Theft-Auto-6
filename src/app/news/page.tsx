@@ -17,6 +17,15 @@ import { NewsArticleList } from "./news-article-list";
 import { NewsSidebarNewsletter } from "./news-client";
 import styles from "./news.module.css";
 
+const featuredReading = [
+  ["gta-6-watercraft-aircraft-guide", "Dodo seaplane location"],
+  ["vice-city-wildlife-ecosystem", "Alligators and other wildlife"],
+  ["gta-6-port-gellhorn-forgotten-coast-guide", "Port Gellhorn map and Chapter 2 landmarks"],
+  ["gta-6-map-guide-leonida-regions-size", "Official Leonida map download"],
+  ["gta-6-release-date-pre-order-editions", "GTA 6 release date, platforms and editions"],
+  ["gta-6-fps-performance", "PS5 and Xbox performance comparison"],
+  ["gta-6-file-size-210-gb-ps5-storage-guide", "Download size and storage requirements"],
+] as const;
 
 export default async function NewsPage() {
   const liveArticles = (await getPublicArticles()).filter(
@@ -24,6 +33,7 @@ export default async function NewsPage() {
   );
   const heroArticle = liveArticles[0];
   const listArticles = liveArticles.slice(1);
+  const liveSlugs = new Set(liveArticles.map(({ slug }) => slug));
   const categoryCounts = new Map<string, { label: string; count: number }>();
   for (const article of liveArticles) {
     const label = article.category?.trim() || "News";
@@ -122,6 +132,15 @@ export default async function NewsPage() {
         </div>
 
         <aside className="space-y-5 lg:self-start">
+          <section className="card-surface space-y-3 p-4" aria-labelledby="news-reference-heading">
+            <h2 id="news-reference-heading" className="font-display text-lg font-extrabold">GTA 6 essentials</h2>
+            <ul className="space-y-2 text-sm">
+              {featuredReading.filter(([slug]) => liveSlugs.has(slug)).map(([slug, label]) => (
+                <li key={slug}><Link className="underline" href={`/news/${slug}`}>{label}</Link></li>
+              ))}
+              <li><Link className="underline" href="/guides">Walkthroughs and controls guides</Link></li>
+            </ul>
+          </section>
           {categories.length > 0 && (
             <section className="card-surface p-4" aria-labelledby="news-categories">
               <h2 id="news-categories" className="mb-3 font-display text-lg font-extrabold">

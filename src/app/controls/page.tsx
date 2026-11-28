@@ -1,14 +1,15 @@
 import Link from "next/link";
-import { ArrowRight, Rocket, TriangleAlert } from "lucide-react";
+import { ArrowRight, Rocket } from "lucide-react";
 import { SiteShell } from "@/components/shells";
 import type { Metadata } from "next";
 import { pageOpenGraph } from "@/lib/page-metadata";
 import { ControlsClient } from "./controls-client";
+import { CONTROL_SCREEN_SOURCE, ROCKSTAR_ACCESSIBILITY } from "@/lib/published-guide-revisions";
 
 export const metadata: Metadata = {
   openGraph: pageOpenGraph("/controls"),
   title: "GTA 6 Controls Guide: PS5 & Xbox Button Layout",
-  description: "Check the GTA 6 controller layout for PS5 and Xbox, from driving to combat. Verified in-game inputs are marked alongside provisional controls.",
+  description: "Find the default GTA 6 controls on PS5 and Xbox, including how to run, change characters, drive, fly and open the phone.",
   alternates: { canonical: "/controls" },
 };
 
@@ -46,97 +47,27 @@ export default function ControlsPage() {
               </span>
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300/90">
-              Rockstar has not published GTA 6&apos;s official control layout. This reference starts from GTA 5&apos;s
-              default layout — the scheme Rockstar has kept consistent for a decade. Rows marked Verified match the
-              in-game layout as confirmed since launch on 19 November 2026; everything else is still the GTA V
-              layout, provisionally. First-person mode exists in the game, but it is not an official setting — see
-              below.
+              Click the left stick to run on foot with the Default layout. Use Cross on PS5 or A on Xbox to jump or climb. The same button applies the handbrake in a car.
             </p>
-
-            <section className="mt-8 rounded-2xl border border-amber-300 bg-amber-50 p-5 dark:border-amber-400/40 dark:bg-amber-400/10 sm:p-6">
-              <h2 className="flex items-center gap-2 font-bold text-xl text-amber-700 dark:text-amber-300">
-                <TriangleAlert className="h-5 w-5 shrink-0" aria-hidden />
-                What GTA VI has actually shown
-              </h2>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-[15px] leading-relaxed text-amber-900/80 marker:text-amber-600 dark:text-amber-100/85 dark:marker:text-amber-400">
-                <li>
-                  <strong className="text-amber-800 dark:text-amber-200">Character switching is shown.</strong> Trailer 2 switches
-                  between Lucia and Jason mid-mission. The button to switch is not confirmed — the GTA V method (hold
-                  Down D-Pad) is our provisional guess.
-                </li>
-                <li>
-                  <strong className="text-amber-800 dark:text-amber-200">The weapon wheel is shown</strong> in the trailers. Its exact
-                  layout is unconfirmed.
-                </li>
-                <li>
-                  <strong className="text-amber-800 dark:text-amber-200">The phone opens with D-Pad Up</strong> — the same as GTA V,
-                  and how cheat codes are entered. See the{" "}
-                  <Link href="/news/gta-6-cheat-codes" className="font-bold underline">cheat codes guide</Link>.
-                </li>
-                <li>
-                  <strong className="text-amber-800 dark:text-amber-200">First-person mode exists in GTA VI</strong> — players found
-                  it in the game at launch. It is not an official setting: it works through a glitch, you leave it
-                  only by reloading a save, and a patch may remove it. See{" "}
-                  <Link href="/news/gta-6-first-person-mode" className="font-bold underline">first-person mode</Link>.
-                  Special abilities for Lucia or Jason are still unconfirmed.
-                </li>
-                <li>
-                  <strong className="text-amber-800 dark:text-amber-200">Melee, interaction, take cover and sprint are verified.</strong>{" "}
-                  Melee is Circle / B, interaction is D-Pad Right, take cover is R1 / RB, and sprint is tap or hold
-                  depending on Sprint Mode. These rows are marked Verified below.
-                </li>
-              </ul>
-            </section>
+            <p className="mt-3 max-w-3xl text-sm text-slate-600 dark:text-slate-300/90">
+              Compare the game’s Default layout below, based on the{" "}
+              <a href={CONTROL_SCREEN_SOURCE} className="font-bold underline">GTA Base guide drawn from the retail control menus</a>.
+            </p>
 
             <ControlsClient />
 
             <section className="mt-8">
-              <h2 className="font-bold text-2xl text-slate-900 dark:text-slate-100">How to change controls</h2>
+              <h2 className="text-2xl font-bold">Change your control scheme</h2>
               <p className="mt-2 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
-                Pause the game and open <strong className="text-slate-900 dark:text-slate-200">Settings → Controls</strong>. On PS5 and
-                Xbox you can change targeting mode, sprint behaviour (tap vs hold), aiming sensitivity, vibration,
-                adaptive trigger strength (PS5 DualSense) and aircraft control type. Consoles do not offer full
-                button-by-button remapping — for that, use your console&apos;s accessibility controller remapping.
-                For the full button-by-button tables per platform, see the{" "}
+                Pause and open <strong>Settings → Control Scheme</strong> to preview Default, Classic or Left-Handed. Rockstar also lists settings for stick deadzones, look and aim sensitivity and PS5 adaptive trigger effects.
+                See <a href={ROCKSTAR_ACCESSIBILITY} className="font-bold underline">Rockstar&apos;s accessibility reference</a>.
+              </p>
+              <p className="mt-2 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+                If you&apos;re looking for one console, open the{" "}
                 <Link href="/guides/gta-6-ps5-controls" className="font-bold underline">PS5 controls guide</Link>{" "}
-                and the{" "}
+                or the{" "}
                 <Link href="/guides/gta-6-xbox-controls" className="font-bold underline">Xbox controls guide</Link>.
               </p>
-            </section>
-
-            <section className="mt-8">
-              <h2 className="font-bold text-2xl text-slate-900 dark:text-slate-100">Controls FAQ</h2>
-              <div className="mt-4 space-y-4">
-                <div>
-                  <h3 className="font-bold text-[17px] text-slate-900 dark:text-slate-100">Can I remap buttons on PS5 or Xbox?</h3>
-                  <p className="mt-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
-                    Consoles do not offer full button-by-button remapping. You can change targeting mode, sprint
-                    behaviour, aiming sensitivity, vibration, adaptive trigger strength (PS5 DualSense) and aircraft
-                    control type in Settings → Controls — for full remapping, use your console&apos;s accessibility
-                    controller remapping.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-bold text-[17px] text-slate-900 dark:text-slate-100">How do I open the phone in GTA 6?</h3>
-                  <p className="mt-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
-                    Press D-Pad Up — the same as GTA V. The phone is also how cheat codes are entered.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-bold text-[17px] text-slate-900 dark:text-slate-100">How do I sprint?</h3>
-                  <p className="mt-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
-                    Sprint is tap or hold, depending on your Sprint Mode setting. The sprint row is marked Verified in
-                    the table above.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-bold text-[17px] text-slate-900 dark:text-slate-100">Is there a first-person mode?</h3>
-                  <p className="mt-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
-                    First-person mode exists in the game, but it is not an official setting — players found it through
-                    a glitch, you leave it only by reloading a save, and a patch may remove it.
-                  </p>
-                </div>
-              </div>
             </section>
 
             <p className="mt-8 text-sm text-slate-500">
@@ -144,15 +75,11 @@ export default function ControlsPage() {
               <Link href="/settings-guide" className="font-bold text-[#FF2E9A] underline">
                 settings guide
               </Link>{" "}
-              for sensitivity and aim-assist recommendations, the{" "}
+              for display, audio and controller options, and the{" "}
               <Link href="/weapons" className="font-bold text-[#FF2E9A] underline">
                 weapons database
               </Link>{" "}
-              for what each gun does, and the{" "}
-              <Link href="/tools/wanted-level-guide" className="font-bold text-[#FF2E9A] underline">
-                wanted-level guide
-              </Link>{" "}
-              for escaping the police once the shooting starts.
+              for source-backed weapon information.
             </p>
 
             <section className="mt-8 flex flex-col gap-4 rounded-2xl bg-gradient-to-r from-[#FF2E9A] to-violet-600 p-6 sm:flex-row sm:items-center sm:justify-between">

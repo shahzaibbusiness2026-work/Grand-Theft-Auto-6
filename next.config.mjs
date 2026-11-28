@@ -67,6 +67,7 @@ const nextConfig = {
       // Unique facts were folded into the performance article first.
       { source: "/news/gta-6-fps-30-fps-ps5-xbox-ps5-pro", destination: "/news/gta-6-fps-performance", permanent: true },
       { source: "/articles", destination: "/news", permanent: true },
+      { source: "/news/gta-6-robberies-heists-money-guide", destination: "/news/gta-6-money-guide-robberies-fences-economy", permanent: true },
       // Editorial consolidation (P0 SEO fix): /blog duplicates the /news
       // hub around the same articles. /news is canonical; /blog 301s to it.
       { source: "/blog", destination: "/news", permanent: true },

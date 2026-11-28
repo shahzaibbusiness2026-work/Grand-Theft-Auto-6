@@ -56,15 +56,14 @@ const resources: GuideCard[] = [
   { title: "GTA 6 release date, preload and editions", desc: "The console release, official preload information and what to check before buying.", href: "/news/gta-6-release-date-pre-order-editions", category: "Getting Started", read: "", img: "/img/gta6-official-logo.png" },
   { title: "Leonida's six named destinations", desc: "Source-linked destination profiles, with confirmed place names separated from fan-map positions.", href: "/regions", category: "Locations", read: "", img: "/img/leonida-map-v2.jpg" },
   { title: "GTA 6 character backgrounds and relationships", desc: "Meet Jason, Lucia and the supporting cast through Rockstar's published character backgrounds.", href: "/characters", category: "Characters", read: "", img: "/img/char-jason.jpg" },
-  { title: "GTA 6 money: what pays and when", desc: "Bank vaults up to $200,000, Randy's cars $30,000+, jewelry $10,000–$25,000 — verified payouts and unlocks.", href: "/money-guide", category: "Money & Economy", read: "", img: "/img/cache-chest.jpg" },
 ];
 
 const quickLinks = [
   // /map is the indexed map hub; /map-explorer is a noindex duplicate
   // (fan map, unverified pins) and must not be promoted from here.
   { label: "Interactive Map", icon: MapPin, href: "/map" },
-  { label: "Mission List", icon: List, href: "/missions" },
-  { label: "Collectible Tracker", icon: Package, href: "/collectibles" },
+  { label: "First-Session Guide", icon: List, href: "/guides/gta-6-beginners-guide" },
+  { label: "Completion Checklist", icon: Package, href: "/guides/100-percent-completion-guide" },
   { label: "Vehicle Database", icon: Car, href: "/vehicles" },
   { label: "Weapon Compare", icon: Crosshair, href: "/compare/weapons" },
   { label: "Money Calculator", icon: DollarSign, href: "/tools/money-calculator" },
@@ -137,7 +136,12 @@ export function GuidesClient({ guides }: { guides?: GuideRecord[] }) {
           <div className="pointer-events-none absolute left-1/3 bottom-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
           <div className="relative p-6">
             <h1 className="font-display text-4xl sm:text-5xl font-black uppercase leading-tight tracking-tight text-foreground">GTA 6 Guides</h1>
-            <p className="mt-1 text-sm text-muted-foreground">Start with Leonida&apos;s destinations, character backgrounds or money-making methods. These guides distinguish confirmed in-game information from unverified claims and fan-map estimates. Every guide is built the same way: first-hand gameplay and official Rockstar information first, clearly labelled analysis second, and speculation kept out of the facts. Some guides are short on purpose — where the game hasn&apos;t confirmed something yet, we say so rather than filling the gap with guesses. Guides are updated in place as more is confirmed, with the update date shown on the page.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Find the right guide for what you&apos;re doing in GTA 6. Start with setup and controls, look up a weapon or vehicle pickup, or see what counts toward 100% completion.</p>
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
+              <Link className="underline" href="/guides/gta-6-beginners-guide">Start your first session</Link>
+              <Link className="underline" href="/controls">Look up PS5 and Xbox controls</Link>
+              <Link className="underline" href="/guides/100-percent-completion-guide">See the 100% checklist</Link>
+            </div>
             <div className="relative mt-5 max-w-md">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input aria-label="Search guides" placeholder="Search guides..." className="pl-9" value={search} onChange={(e) => setSearch(e.target.value)} />

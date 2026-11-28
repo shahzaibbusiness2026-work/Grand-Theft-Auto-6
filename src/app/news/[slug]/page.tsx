@@ -7,7 +7,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Clock, ArrowLeft, ListOrdered } from "lucide-react";
-import { extractHeadings, createHeadingIdAllocator } from "@/lib/toc";
+import { extractHeadings } from "@/lib/toc";
 import { SiteShell } from "@/components/shells";
 import { ArticleCard } from "@/components/article-card";
 import { NewsletterBar } from "@/components/newsletter-bar";
@@ -104,8 +104,7 @@ export default async function ArticleDetailPage({ params }: Props) {
     article.title,
   );
   const toc = extractHeadings(bodyMarkdown);
-  // Shared per-render allocator so rendered heading ids match the TOC exactly
-  const allocateHeadingId = createHeadingIdAllocator();
+  const headingIds = new Map(toc.map(({ offset, id }) => [offset, id]));
   const markdownComponents = {
     table: ({ children }: any) => (
       <div
@@ -128,7 +127,7 @@ export default async function ArticleDetailPage({ params }: Props) {
     h2: ({ node, children, ...props }: any) => (
       <h2
         {...props}
-        id={allocateHeadingId(children)}
+        id={headingIds.get(node?.position?.start.offset)}
         className="scroll-mt-24 text-2xl font-bold mt-8 text-foreground"
       >
         {children}
@@ -137,7 +136,7 @@ export default async function ArticleDetailPage({ params }: Props) {
     h3: ({ node, children, ...props }: any) => (
       <h3
         {...props}
-        id={allocateHeadingId(children)}
+        id={headingIds.get(node?.position?.start.offset)}
         className="scroll-mt-24 text-xl font-bold mt-6 text-foreground"
       >
         {children}

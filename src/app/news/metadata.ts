@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-const title = "GTA 6 News, Updates & Analysis";
-const description = "Read the latest GTA 6 news, Rockstar announcements, gameplay analysis and Leonida guides from the independent Taish Gaming editorial team.";
+const title = "GTA 6 News & Updates: Rockstar, PS5 and Xbox";
+const description = "Follow GTA 6 news, Rockstar announcements, console performance, map updates and documented locations in Leonida.";
 export const metadata: Metadata = {
   title,
   description,
