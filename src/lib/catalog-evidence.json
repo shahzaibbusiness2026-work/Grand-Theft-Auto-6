@@ -41139,5 +41139,75 @@
     "locator": "Laptop Puzzle guide - WhatUp Unknown message gives garage code 92665, Del Rio Boulevard Garage, La Perle; corroborated by KeenGamer + gta.guide + Beebom Ch3 missables + G2A + YouTube walkthrough FYgHNdb2Ak8",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
-  }
+  },
+{
+  "kind": "weapons",
+  "id": "quarter-mile-es9",
+  "field": "Observed location",
+  "value": "Site Office upstairs room, Chatfield Storage & Logistics, Waxman Island",
+  "source": "https://showgamer.com/en/guides/8186-gta-6-kod-seyfa-chatfield-storage-logistics-i-vse-cennye-predmety",
+  "locator": "Showgamer Chatfield Storage & Logistics guide",
+  "reviewedAt": "2026-11-28",
+  "reviewer": "Muse"
+},
+{
+  "kind": "weapons",
+  "id": "quarter-mile-es9",
+  "field": "Safe code",
+  "value": "5800 — office safe, Chatfield Storage & Logistics, Waxman Island (code on a laptop email in an open container; a Sticky Bomb also opens it)",
+  "source": "https://showgamer.com/en/guides/8186-gta-6-kod-seyfa-chatfield-storage-logistics-i-vse-cennye-predmety",
+  "locator": "Showgamer Chatfield Storage & Logistics guide",
+  "reviewedAt": "2026-11-28",
+  "reviewer": "Muse"
+},
+{
+  "kind": "weapons",
+  "id": "ride-free-h-and-l-38",
+  "field": "Observed location",
+  "value": "Weapon case on a table under the black Final Chapter flag, back room of The Thirsty Wolf (Biker Hideout), east of Ambrosia",
+  "source": "https://gamerant.com/gta-6-biker-hideout-robbery-safe-code-key-valuable-locations/",
+  "locator": "GameRant Biker Hideout guide",
+  "reviewedAt": "2026-11-28",
+  "reviewer": "Muse"
+},
+{
+  "kind": "weapons",
+  "id": "ride-free-h-and-l-38",
+  "field": "Safe code",
+  "value": "1982 — back-room safe, The Thirsty Wolf (Biker Hideout), east of Ambrosia (the Final Chapter founding year, on the black flag)",
+  "source": "https://gamerant.com/gta-6-biker-hideout-robbery-safe-code-key-valuable-locations/",
+  "locator": "GameRant Biker Hideout guide",
+  "reviewedAt": "2026-11-28",
+  "reviewer": "Muse"
+},
+{
+  "kind": "vehicles",
+  "id": "monarch-avarus",
+  "field": "Observed location",
+  "value": "Rear courtyard workshop area of The Thirsty Wolf (Biker Hideout), east of Ambrosia",
+  "source": "https://gamerant.com/gta-6-biker-hideout-robbery-safe-code-key-valuable-locations/",
+  "locator": "GameRant Biker Hideout guide",
+  "reviewedAt": "2026-11-28",
+  "reviewer": "Muse"
+},
+{
+  "kind": "weapons",
+  "id": "eris-fresh-dsg",
+  "field": "Observed location",
+  "value": "Office table under a desk lamp, Illegal Goods Store (PTT Youngin$), northern Southside, Vice City — Ultimate Edition operation",
+  "source": "https://gamerant.com/gta-6-illegal-goods-store-key-valuable-locations/",
+  "locator": "GameRant Illegal Goods Store guide",
+  "reviewedAt": "2026-11-28",
+  "reviewer": "Muse"
+},
+{
+  "kind": "vehicles",
+  "id": "tropical-manchez",
+  "field": "Observed location",
+  "value": "Beside the warehouse shutters near the office, Illegal Goods Store, northern Southside, Vice City — Ultimate Edition operation",
+  "source": "https://gamerant.com/gta-6-illegal-goods-store-key-valuable-locations/",
+  "locator": "GameRant Illegal Goods Store guide",
+  "reviewedAt": "2026-11-28",
+  "reviewer": "Muse"
+}
 ]
