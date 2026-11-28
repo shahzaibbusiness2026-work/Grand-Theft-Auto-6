@@ -38,8 +38,18 @@ export function relatedCatalogScene(kind: CatalogKind, entry?: { id: string }) {
 
 export function catalogArtwork(
   kind: CatalogKind,
-  entry: { id: string; name: string; img: string },
+  entry: { id: string; name: string; img: string; verifiedImage?: string },
 ) {
+  if (entry.verifiedImage) {
+    return {
+      src: entry.verifiedImage,
+      alt: `${entry.name} in Grand Theft Auto VI`,
+      label: "GTA VI image",
+      caption: "",
+      sourceUrl: "",
+      contextual: false,
+    };
+  }
   const image =
     entry.img?.trim() || (kind === "weapons" ? references[entry.id] : "");
   if (!image) {

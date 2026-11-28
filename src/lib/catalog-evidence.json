@@ -26763,11 +26763,11 @@
     "kind": "vehicles",
     "id": "lustrous-toros",
     "field": "Observed location",
-    "value": "A home in Rialto Islands, gold finish",
-    "source": "https://gta.exputer.com/gta-6/vehicles/pegassi-toros/",
-    "locator": "Standout variant: Lustrous Toros",
-    "reviewedAt": "2026-11-26",
-    "reviewer": "Atlas Team"
+    "value": "Mansion garage on Casanova Island, the easternmost of the Rialto Islands, Vice-Dale County — lift the white garage door by hand to find the gold Lustrous Toros inside. Gold chrome finish with matching rims and a custom CASHTLKS plate; alarm and Advanced Tracker fitted; Key Cloner (Chapter 3) required to steal; register $29,900.",
+    "source": "https://beebom.com/gta-6-pegassi-toros/",
+    "locator": "Beebom: the Lustrous Toros \u2018is parked inside a private mansion garage on Casanova Island\u2019 \u2014 \u2018set a waypoint to Casanova Island, the easternmost island in the Rialto Islands\u2019 \u2014 \u2018manually lift the garage door to find the gold Lustrous Toros inside\u2019; alarm + Advanced Tracker, Key Cloner needed, $29,900 to register. Corroborated by KeenGamer (same mansion garage on Casanova Island, easternmost Rialto Island, CASHTLKS plate, $29,900 register), Sportskeeda, ShowGamer, gta6motors, TheBestMods and GTA-Xtreme. Consistent with the earlier Exputer claim (\u2018A home in Rialto Islands, gold finish\u2019), now pinned to the exact garage.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
   },
   {
     "kind": "vehicles",
@@ -40196,6 +40196,947 @@
     "value": "Final Chapter compound (Irons Building Supply), Birch Street, Ambrosia, Kelly County — the orange bike on the ground floor of the central garage/warehouse. Moses' sixth vehicle request; $6,310 base payout on delivery to Port Gellhorn.",
     "source": "https://www.keengamer.com/articles/guides/gta-6-all-7-moses-vehicle-drop-off-locations/",
     "locator": "KeenGamer 'All 7 Moses Vehicle Drop-Off Locations': 'Western Nightblade | Birch St, Ambrosia | Final Chapter clubhouse' — 'the orange motorcycle at the back of the ground floor' of the central warehouse; open the compound gate before riding out. Corroborated by Destructoid (motorcycle club on Birch St, Kelly County; ladder/roof route into the compound), thegameswiki Motorcycle Clubs (Irons Building Supply holds 'a club-owned Western Nightblade motorcycle that Moses asks you to steal'), magicgameworld, heistatlas, playermanual, finalboss and gta6info, plus the no-commentary playthrough (https://www.youtube.com/watch?v=URJ8TKAmoYI) showing the same compound, bike and a $6,330 delivered payout (condition bonus over the $6,310 base).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "gold-rush-tempesta",
+    "field": "Observed location",
+    "value": "Crimson Palms Condominiums parking area, Washington Beach, Vice Beach — the gold Tempesta is parked in the condo parking (take the ramp on the right from the main gate). A second reported spot is outside the Cirque de Cuisine restaurant in Ocean Beach. Key Cloner (Chapter 3) required to steal.",
+    "source": "https://www.keengamer.com/articles/guides/gta-6-gold-lamborghini-urus-and-huracan-locations/",
+    "locator": "KeenGamer: 'The golden Huracan is known as the Pegassi Gold Rush Tempesta. You can find this supercar at Crimson Palms Condominiums in Washington Beach or outside the Cirque de Cuisine restaurant in Ocean Beach.' Corroborated by Sportskeeda ('tall high-rise complex named Crimson Palms... take the ramp on your right to the parking area') and Beebom (same two spots). KeenGamer: 'You’ll need to unlock the Key Cloner during Chapter 3 before you can steal either vehicle.'",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  }
+,
+  {
+    "kind": "weapons",
+    "id": "marabunta-grande-kz-59",
+    "field": "Observed location",
+    "value": "Nova Auto Junkyard (M7 gang Illegal Operation), northeast Hamlet, Vice-Dale County — golden rifle on a workbench under the metal awning beside the large blue shipping container, northern section of the yard. The office safe in the southeast building opens with code 7777; the Albany Teniente Manana is in the adjoining garage.",
+    "source": "https://radarleonida.com/en/article/where-to-get-the-teniente-manana-and-golden-rifle-at-gta-6-s-hamlet-scrapyard/",
+    "locator": "RadarLeonida (27 Nov 2026, Anubis_RD footage): golden Marabunta Grande KZ-59 at the Hamlet scrapyard, Teniente Manana in the workshop garage. Corroborated by ShowGamer Nova Auto Junkyard guide (rifle on the workbench beside the large blue container under the metal awning, northern section; safe code 7777; Teniente in the garage), Heistbook ('Table under central canopy at Nova Auto Junkyard'), thegameswiki Nova Auto Junkyard page, Insider Gaming illegal-operations table (Nova Auto Junkyard, Hamlet - KZ-59 + Teniente Manana), GameRant M7 Compound guide and LibertyCity. Note: RadarLeonida words the rifle as 'inside the blue container'; the majority of sources place it on the workbench beside the container, which is what this claim states.",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "sirius",
+    "field": "Observed location",
+    "value": "Three wrecked Transgressors to scan for Wyman's collection quest, all in Port Gellhorn — trailer park centre, blue-house garage across the street from the Kolt & Associates robbery, and the backyard behind Dunk's drug robbery. After all three scans, Wyman texts; pay $1,500 via Buck Me to claim the restored '67 Transgressor.",
+    "source": "https://www.sportskeeda.com/gta/how-get-67-transgressor-gta-6",
+    "locator": "Sportskeeda (27 Nov 2026): all three wreck spots in Port Gellhorn (trailer park centre; blue-house garage across from Kolt & Associates; backyard behind Dunk's drug robbery) + $1,500 Buck Me payment to claim the restored car; quest triggers after picking up the '67 Vapid Dominator (Ultimate Edition). Corroborated by GameRant (same three spots, same $1,500, same Wyman quest flow) and Push Square Wyman's Classic Car Locations guide (already cited in the entry's claims).",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+{
+  "field": "Base handling rating (asphalt)",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "Dexerto Itali RSX specs: 'Asphalt Rating, 762'; Game8: 'Base Rating 762 (Asphalt)'; gtatracker: 'Road Rating 762'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/supercars/grotti-itali-rsx/",
+  "value": "762"
+},
+{
+  "field": "Base handling rating (off-road)",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "Dexerto Itali RSX specs: 'Off-Road Rating, 270'; Game8: 'Base Rating 270 (Off-Road)'; gtatracker: 'Off-Road Rating 270'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/supercars/grotti-itali-rsx/",
+  "value": "270"
+},
+{
+  "field": "Registration cost",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "GTA BOOM Starfish Island WAiNK scan table: 'Grotti Itali RSX | Advanced | GTA$40,650'; space4games own scan: 'Sale value $18,260, registration $40,650'; gamemapa citing GTA BOOM: 'Grotti Itali RSX | advanced | GTA$40,650'; gameplay screenshot (Instagram) shows 'Cost to Register $40,650'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtaboom.com/gta-6-starfish-island-mansion-garage-4cf3",
+  "value": "$40,650"
+},
+{
+  "field": "Tracker",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "GTABase GTA 6 Itali RSX page: 'Tracker Advanced'; GTA BOOM WAiNK scan table: tracker Advanced; space4games own scan: 'enhanced tracker'; allthings.how: every Randy's Wish List car carries an advanced tracker",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/vehicles/gta-6/itali-rsx",
+  "value": "Advanced"
+},
+{
+  "field": "Weight",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "GTABase GTA 6 Itali RSX page: 'Mass / Weight 1,770 KG'; Insider Gaming Status RSX (same base model) lists the identical 'Mass / Weight 1770 KG'. Note: the 1,600 kg figure on gtatracker/grandtheft.gg matches the GTA Online spec (GTA Wiki documents the Online car with an 8-speed gearbox) and is not the GTA VI figure",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/vehicles/gta-6/itali-rsx",
+  "value": "1,770 kg"
+},
+{
+  "field": "Drivetrain",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "GTABase GTA 6 Itali RSX page: 'Drive Train AWD'; gtatracker: 'Drivetrain AWD'; grandtheft.gg: 'AWD'; Insider Gaming Status RSX: 'Drive Chain AWD'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/vehicles/gta-6/itali-rsx",
+  "value": "AWD"
+},
+{
+  "field": "Gears",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "GTABase GTA 6 Itali RSX page: 'Gears 7'; Insider Gaming Status RSX (same base model) lists 'Gears 7'. Note: the 8-gear figure on gtatracker/grandtheft.gg matches the GTA Online spec (GTA Wiki: Online car powers all four wheels 'through an 8-speed gearbox') and is not the GTA VI figure",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/vehicles/gta-6/itali-rsx",
+  "value": "7"
+},
+{
+  "field": "Model year",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "GTABase GTA 6 Itali RSX page: 'Model Year 2020'; Insider Gaming Status RSX: 'Model Year 2020'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/vehicles/gta-6/itali-rsx",
+  "value": "2020"
+},
+{
+  "field": "Era",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "Dexerto: 'Era, 2020s Current'; Game8: 'Era 2020s (Current)'; GTABase: 'Era 2020s Current'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/supercars/grotti-itali-rsx/",
+  "value": "2020s Current"
+},
+{
+  "field": "Mod specialist",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "Dexerto: 'Mod Shop Specialist, Luxury'; Game8: 'Mod Specialist Luxury'; GTABase: 'Specialist Luxury'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/supercars/grotti-itali-rsx/",
+  "value": "Luxury"
+},
+{
+  "field": "Wish List",
+  "id": "grotti-itali-rsx",
+  "kind": "vehicles",
+  "locator": "gta6info: \"It's one of the cars on Randy's Wish List (number 10 in PowerPyx's list of 16)\"; Insider Gaming and allthings.how confirm Randy's Wish List membership; allthings.how: the Wish List card reads 'Steal a Grotti Itali RSX and sell it to Randy at Leonida Auto World'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://gta6info.com/wiki/Grotti_Itali_RSX",
+  "value": "Number 10 of 16 cars on Randy's Wish List"
+},
+{
+  "field": "Base handling rating (asphalt)",
+  "id": "purple-drank-emerus",
+  "kind": "vehicles",
+  "locator": "Dexerto Purple Drank Emerus specs: 'Asphalt Rating 862'; Game8: 'Base Rating 862 (Asphalt)'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/ultra-luxe/purple-drank-emerus/",
+  "value": "862"
+},
+{
+  "field": "Base handling rating (off-road)",
+  "id": "purple-drank-emerus",
+  "kind": "vehicles",
+  "locator": "Dexerto Purple Drank Emerus specs: 'Off-Road Rating 157'; Game8: 'Base Rating 157 (Off-Road)'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/ultra-luxe/purple-drank-emerus/",
+  "value": "157"
+},
+{
+  "field": "Registration cost",
+  "id": "purple-drank-emerus",
+  "kind": "vehicles",
+  "locator": "Insider Gaming stats table: 'Cost to Register $29,900'; Sportskeeda: 'Registration ... costs around $29,900 to $30,000'; GTABase: 'Story Mode Price $29,900'; RetroBroker: 'scanned $29,900 registration fee'; meowdb: three phone scans all show Registration $29,900",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://insider-gaming.com/progen-purple-drank-emerus-gta-6/",
+  "value": "$29,900"
+},
+{
+  "field": "Scanned sell value",
+  "id": "purple-drank-emerus",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Sell Value (Stolen) $32,635'. Sell values vary per car instance and condition: meowdb phone scans show $33,000, $32,205 and $27,620 for this car; RetroBroker cites a $33,000 top-condition fence value; Insider Gaming lists $30,000 and Sportskeeda $24,000-$25,000. GTABase figure used as the database value; the spread above is the observed per-instance variation",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/purple-drank-emerus",
+  "value": "$32,635"
+},
+{
+  "field": "Drivetrain",
+  "id": "purple-drank-emerus",
+  "kind": "vehicles",
+  "locator": "GTABase Purple Drank Emerus page (base Emerus specs): 'Drive Train RWD'; vgnw Emerus family: 'this car is rear-wheel drive'; gta6intel Progen Emerus: 'uses rear-wheel drive'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/purple-drank-emerus",
+  "value": "RWD"
+},
+{
+  "field": "Tracker",
+  "id": "purple-drank-emerus",
+  "kind": "vehicles",
+  "locator": "Insider Gaming stats table: 'Tracker None'; Sportskeeda: 'Tracker: None'; GTABase: 'Tracker None'; meowdb: three phone scans all show Tracker None",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://insider-gaming.com/progen-purple-drank-emerus-gta-6/",
+  "value": "None"
+},
+{
+  "field": "Seating",
+  "id": "purple-drank-emerus",
+  "kind": "vehicles",
+  "locator": "Game8: 'Seats 2'; Sportskeeda: 'Era and seats: 2010s Current, with 2 seats'; GTABase: 'Seats 2'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://game8.co/games/gta-6/archives/639160",
+  "value": "2 seats"
+},
+{
+  "field": "Mod specialist",
+  "id": "purple-drank-emerus",
+  "kind": "vehicles",
+  "locator": "Game8: 'Mod Specialist Luxury'; GTABase: 'Specialist Luxury'; Exputer base Emerus page: 'Luxury is the specialist type for the Emerus, which is handled by Euroform Automotive'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://gta.exputer.com/gta-6/vehicles/progen-emerus/",
+  "value": "Luxury; mod shop Euroform Automotive"
+},
+{
+  "field": "Era",
+  "id": "purple-drank-emerus",
+  "kind": "vehicles",
+  "locator": "Game8: 'Era 2010s (Current)'; Sportskeeda: 'Era and seats: 2010s Current'; GTABase: 'Era 2010s Current'; Dexerto base Emerus: 'Era, 2010s Current'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://game8.co/games/gta-6/archives/639160",
+  "value": "2010s Current"
+},
+{
+  "field": "Standout set",
+  "id": "purple-drank-emerus",
+  "kind": "vehicles",
+  "locator": "Insider Gaming stats table: 'Standout Set Ultra-Luxe'; Sportskeeda: 'Set: Standout, Ultra-Luxe'; GTABase: 'Standout Set Ultra-Luxe'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://insider-gaming.com/progen-purple-drank-emerus-gta-6/",
+  "value": "Ultra-Luxe"
+},
+{
+  "field": "Base handling rating (asphalt)",
+  "id": "western-nightblade",
+  "kind": "vehicles",
+  "locator": "Dexerto Nightblade specs: 'Asphalt Rating, 560'; Exputer: 'Street rating 560'; gtascoop: 'Rating (asphalt) 560'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/bikes/western-nightblade/",
+  "value": "560"
+},
+{
+  "field": "Base handling rating (off-road)",
+  "id": "western-nightblade",
+  "kind": "vehicles",
+  "locator": "Dexerto Nightblade specs: 'Off-Road Rating, 176'; Exputer: 'Off-road rating 176'; gtascoop: 'Rating (off-road) 176'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/bikes/western-nightblade/",
+  "value": "176"
+},
+{
+  "field": "Drivetrain",
+  "id": "western-nightblade",
+  "kind": "vehicles",
+  "locator": "Exputer: 'Drivetrain Rear-wheel drive'; GTABase: 'Drive Train RWD'; gtascoop: 'Drivetrain RWD'; gta6intel: 'Drivetrain RWD'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://gta.exputer.com/gta-6/vehicles/western-nightblade/",
+  "value": "RWD"
+},
+{
+  "field": "Gears",
+  "id": "western-nightblade",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Gears 5'; gtascoop: 'Gears 5'; six.mics.dev GTA VI game-files data: 'Gears 5 forward'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/nightblade",
+  "value": "5"
+},
+{
+  "field": "Weight",
+  "id": "western-nightblade",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Mass / Weight 300 KG'; six.mics.dev GTA VI game-files data (v1.0.2.1, Xbox Series): 'Mass, 300 kg'. Note: gtascoop's 205 kg matches the GTA Online Nightblade mass (gtaboss GTA Online page: 'Mass, 205 kg') and is not the GTA VI figure",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/nightblade",
+  "value": "300 kg"
+},
+{
+  "field": "Model year",
+  "id": "western-nightblade",
+  "kind": "vehicles",
+  "locator": "Exputer: 'Model year 2012'; GTABase: 'Model Year 2012'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://gta.exputer.com/gta-6/vehicles/western-nightblade/",
+  "value": "2012"
+},
+{
+  "field": "Era",
+  "id": "western-nightblade",
+  "kind": "vehicles",
+  "locator": "Dexerto: 'Era, 2010s Modern'; Exputer: 'Era 2010s Modern'; GTABase: 'Era 2010s Modern'; gtascoop: 'Era 2010s Modern'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/bikes/western-nightblade/",
+  "value": "2010s Modern"
+},
+{
+  "field": "Mod specialist",
+  "id": "western-nightblade",
+  "kind": "vehicles",
+  "locator": "Exputer: 'Mod shop specialist Chopper (Ledford Motorcycle Workshop)'; Dexerto: 'Mod Shop Specialist, Chopper'; GTABase: 'Specialist Chopper'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://gta.exputer.com/gta-6/vehicles/western-nightblade/",
+  "value": "Chopper; mod shop Ledford Motorcycle Workshop"
+},
+{
+  "field": "Tracker",
+  "id": "western-nightblade",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Tracker None'; HeistAtlas: 'The Nightblade opens with a plain key and has no tracker'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/nightblade",
+  "value": "None"
+},
+{
+  "field": "Moses job payout",
+  "id": "western-nightblade",
+  "kind": "vehicles",
+  "locator": "Exputer sell-cars-to-Moses guide: 'Western Nightblade | Garage of a motorcycle club in Ambrosia | $6,310'; Exputer Nightblade page: 'this delivery pays the most, at $6,310'; HeistAtlas: 'Payout, $6,310' and '$6,310 plus a condition bonus'; thebestmods, gtaboss and playermanual all list $6,310. Request 6 of 6",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://gta.exputer.com/gta-6/guides/sell-cars-to-moses/",
+  "value": "$6,310 + condition bonus"
+},
+{
+  "field": "Base handling rating (asphalt)",
+  "id": "driveshaft-hustler",
+  "kind": "vehicles",
+  "locator": "Dexerto Driveshaft Hustler specs: 'Asphalt Rating 447'; GTABase: 'Rating 447'; gamesdb.gg: 'Rating 447'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/driveshaft-famous/driveshaft-hustler/",
+  "value": "447"
+},
+{
+  "field": "Base handling rating (off-road)",
+  "id": "driveshaft-hustler",
+  "kind": "vehicles",
+  "locator": "Dexerto Driveshaft Hustler specs: 'Off-Road Rating 258'; GTABase: 'Rating 258'; gamesdb.gg: 'Off-road rating 258'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/standout/driveshaft-famous/driveshaft-hustler/",
+  "value": "258"
+},
+{
+  "field": "Standout set",
+  "id": "driveshaft-hustler",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Standout Set DriveShaft Famous'; Dexerto Driveshaft Famous set page lists the Driveshaft Hustler; gamesdb.gg: 'Standout set, DriveShaft Famous'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/driveshaft-hustler",
+  "value": "DriveShaft Famous"
+},
+{
+  "field": "Model year",
+  "id": "driveshaft-hustler",
+  "kind": "vehicles",
+  "locator": "GTABase DriveShaft Hustler page: 'Model Year 1932'; Dexerto and gamesdb.gg both name the base model the '32 Vapid Hustler",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/driveshaft-hustler",
+  "value": "1932"
+},
+{
+  "field": "Era",
+  "id": "driveshaft-hustler",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Era 1930s Vintage'; gamesdb.gg: 'Era, 1930s Vintage'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/driveshaft-hustler",
+  "value": "1930s Vintage"
+},
+{
+  "field": "Mod specialist",
+  "id": "driveshaft-hustler",
+  "kind": "vehicles",
+  "locator": "GTABase: 'Specialist Hot Rods'; gamesdb.gg: 'Mod shop, Hot Rod'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/driveshaft-hustler",
+  "value": "Hot Rod"
+},
+{
+  "field": "Base handling rating (asphalt)",
+  "id": "cuban-hermes",
+  "kind": "vehicles",
+  "locator": "Dexerto '50 Albany Hermes specs: 'Asphalt Rating, 515'; gtascoop Cuban Hermes row: 'Rating (asphalt / off-road) 515 / 347'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/muscle-cars/50-albany-hermes/",
+  "value": "515"
+},
+{
+  "field": "Registration cost",
+  "id": "cuban-hermes",
+  "kind": "vehicles",
+  "locator": "GTABase Cuban Hermes page: 'Story Mode Price $21,650'; Dexerto '50 Albany Hermes specs: 'Cost to Register, $21,650'; IGN official guide via gta6everything: 'costs $21,650 to register'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/cuban-hermes",
+  "value": "$21,650"
+},
+{
+  "field": "Weight",
+  "id": "cuban-hermes",
+  "kind": "vehicles",
+  "locator": "GTABase Cuban Hermes page: 'Mass / Weight 1,900 KG'; six.mics.dev GTA VI game-files data (v1.0.2.1, Xbox Series) for the '50 Hermes: 'Mass, 1,900 kg'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/cuban-hermes",
+  "value": "1,900 kg"
+},
+{
+  "field": "Gears",
+  "id": "cuban-hermes",
+  "kind": "vehicles",
+  "locator": "GTABase Cuban Hermes page: 'Gears 4'; six.mics.dev GTA VI game-files data for the '50 Hermes: 'Gears 4 forward, 1 reverse'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/cuban-hermes",
+  "value": "4"
+},
+{
+  "field": "Tracker",
+  "id": "cuban-hermes",
+  "kind": "vehicles",
+  "locator": "GTABase Cuban Hermes page: 'Tracker Standard'; IGN official guide via gta6everything on the '50 Hermes: 'has a standard tracker'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/cuban-hermes",
+  "value": "Standard"
+},
+{
+  "field": "Model year",
+  "id": "cuban-hermes",
+  "kind": "vehicles",
+  "locator": "GTABase Cuban Hermes page: 'Model Year 1950'; Dexerto base page is titled '50 Albany Hermes",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/cuban-hermes",
+  "value": "1950"
+},
+{
+  "field": "Era",
+  "id": "cuban-hermes",
+  "kind": "vehicles",
+  "locator": "GTABase Cuban Hermes page: 'Era 1950s Antique'; Dexerto '50 Albany Hermes specs: 'Era, 1950s Antique'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/muscle-cars/50-albany-hermes/",
+  "value": "1950s Antique"
+},
+{
+  "field": "Mod specialist",
+  "id": "cuban-hermes",
+  "kind": "vehicles",
+  "locator": "GTABase Cuban Hermes page: 'Specialist Hot Rods'; Dexerto '50 Albany Hermes specs: 'Mod Shop Specialist, Hot Rod'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/vehicles/cars/muscle-cars/50-albany-hermes/",
+  "value": "Hot Rod"
+},
+{
+  "field": "Standout set",
+  "id": "cuban-hermes",
+  "kind": "vehicles",
+  "locator": "GTABase Cuban Hermes page: 'Standout Set Throwback'; gtascoop Hermes '50 Standout table: 'Cuban Hermes | Throwback'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/vehicles/cuban-hermes",
+  "value": "Throwback"
+},
+{
+  "field": "Magazine size",
+  "id": "cold-war-556",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Mag Size 30; corroborated by IGN Weapons table (30, Full Auto, Duke, 5.56x45MM) and Exputer Duke 556 variant table (30)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/cold-war-556/",
+  "value": "30 rounds"
+},
+{
+  "field": "Fire mode",
+  "id": "cold-war-556",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Fire Style Full Auto; corroborated by IGN Weapons table and Exputer Duke 556 page ('full-auto 5.56x45mm carbine')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/cold-war-556/",
+  "value": "Full Auto"
+},
+{
+  "field": "Caliber",
+  "id": "cold-war-556",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Caliber 5.56×45mm; corroborated by IGN Weapons table (5.56x45MM) and Exputer Duke 556 variant table",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/cold-war-556/",
+  "value": "5.56×45mm"
+},
+{
+  "field": "Manufacturer",
+  "id": "cold-war-556",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Brand Duke; corroborated by IGN Weapons table (Brand Duke) and GTABase ('Duke Arms')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/cold-war-556/",
+  "value": "Duke"
+},
+{
+  "field": "Base weapon",
+  "id": "cold-war-556",
+  "kind": "weapons",
+  "locator": "Dexerto: 'a Unique Variant of the Duke 556'; corroborated by Exputer Duke 556 variant table (Cold War 556 listed as a Duke 556 variant)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/cold-war-556/",
+  "value": "Duke 556"
+},
+{
+  "field": "Can be modified",
+  "id": "cold-war-556",
+  "kind": "weapons",
+  "locator": "Exputer Duke 556 page: 'Unique Duke 556 variants cannot accept attachments' and 'Attachments cannot be fitted to them'; corroborated by IGN unique-variants intro ('Unlike standard weapons, Unique Weapon Variants cannot be modified or customized cosmetically')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://gta.exputer.com/gta-6/weapons/duke-556/",
+  "value": "Cannot be customized"
+},
+{
+  "field": "Availability",
+  "id": "cold-war-556",
+  "kind": "weapons",
+  "locator": "Dexerto How to Get is bunker loot only, no price listed; corroborated by IGN Weapons table (Inventory N/A, Purchasable blank) and Exputer variant table (bunker loot, no price)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/assault-rifles/cold-war-556/",
+  "value": "Not for sale — world find only"
+},
+{
+  "field": "Magazine size",
+  "id": "assassin-nipper-38",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Mag Size 8; corroborated by IGN unique-variants table (8, Semi-Auto, Scorpio, .380 Cal) and esports.gg (Mag Size 8)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/assassin-nipper-38/",
+  "value": "8 rounds"
+},
+{
+  "field": "Fire mode",
+  "id": "assassin-nipper-38",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Fire Style Semi-Auto; corroborated by IGN unique-variants table and esports.gg (Fire Style Semi-Auto)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/assassin-nipper-38/",
+  "value": "Semi-Auto"
+},
+{
+  "field": "Caliber",
+  "id": "assassin-nipper-38",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Caliber .380 Cal — .380, not .38, despite the name; corroborated by IGN unique-variants table (.380 Cal) and esports.gg (Caliber .380 Cal)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/assassin-nipper-38/",
+  "value": ".380 Cal"
+},
+{
+  "field": "Manufacturer",
+  "id": "assassin-nipper-38",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Brand Scorpio; corroborated by IGN unique-variants table (Brand Scorpio), esports.gg (Brand Scorpio) and Beebom (Manufacturer Scorpio)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/assassin-nipper-38/",
+  "value": "Scorpio"
+},
+{
+  "field": "Base weapon",
+  "id": "assassin-nipper-38",
+  "kind": "weapons",
+  "locator": "Dexerto: 'a Unique Variant of the Scorpio Nipper .38'; corroborated by Beebom ('the standard Scorpio Nipper .38')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/pistols/assassin-nipper-38/",
+  "value": "Scorpio Nipper .38"
+},
+{
+  "field": "Attachments",
+  "id": "assassin-nipper-38",
+  "kind": "weapons",
+  "locator": "Beebom table: 'Built-in Suppressor (Cannot be customized)'; corroborated by ShowGamer ('suppressed version of the standard Scorpio Nipper .38... its suppressor is already part of the weapon') and the verified Dexerto cutout, which visibly shows the suppressor fitted",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://beebom.com/gta-6-secret-silenced-pistol-location/",
+  "value": "Suppressor fitted"
+},
+{
+  "field": "Can be modified",
+  "id": "assassin-nipper-38",
+  "kind": "weapons",
+  "locator": "Beebom table: 'Built-in Suppressor (Cannot be customized)'; corroborated by ShowGamer ('Like other unique weapon variants in GTA 6, the Assassin Nipper .38 cannot be customized further')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://beebom.com/gta-6-secret-silenced-pistol-location/",
+  "value": "Cannot be customized"
+},
+{
+  "field": "Availability",
+  "id": "assassin-nipper-38",
+  "kind": "weapons",
+  "locator": "Beebom: 'Price: Free (Loot only)' and 'you cannot buy the Assassin Nipper .38 silenced pistol at an Ammu Nation store'; corroborated by Dexerto How to Get (floor-hatch loot, no price) and IGN Inventory N/A",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://beebom.com/gta-6-secret-silenced-pistol-location/",
+  "value": "Not for sale — world find only"
+},
+{
+  "field": "Magazine size",
+  "id": "kolt-associates-vatra",
+  "kind": "weapons",
+  "locator": "IGN unique-variants table: Mag Size 50; corroborated by thegameswiki unique-weapons table (50), eso-ui weapons table (Magazine 50) and ShowGamer June Warehouse guide ('50-round ammunition capacity')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://kraken.ignimgs.com/wikis/gta-6/Unique_Weapon_Variants",
+  "value": "50 rounds"
+},
+{
+  "field": "Fire mode",
+  "id": "kolt-associates-vatra",
+  "kind": "weapons",
+  "locator": "IGN unique-variants table: Fire Style Full Auto; corroborated by thegameswiki unique-weapons table ('BZI Vatra (heavy SMG, full auto, 9MM)')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://kraken.ignimgs.com/wikis/gta-6/Unique_Weapon_Variants",
+  "value": "Full Auto"
+},
+{
+  "field": "Caliber",
+  "id": "kolt-associates-vatra",
+  "kind": "weapons",
+  "locator": "IGN unique-variants table: Caliber 9MM; corroborated by eso-ui weapons table (Calibre 9mm) and thegameswiki (9MM)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://kraken.ignimgs.com/wikis/gta-6/Unique_Weapon_Variants",
+  "value": "9mm"
+},
+{
+  "field": "Manufacturer",
+  "id": "kolt-associates-vatra",
+  "kind": "weapons",
+  "locator": "IGN unique-variants table: Brand Bohemia Zbran Industries; corroborated by eso-ui weapons table (Maker: Bohemia Zbran Industries) and thegameswiki base 'BZI Vatra'",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://kraken.ignimgs.com/wikis/gta-6/Unique_Weapon_Variants",
+  "value": "Bohemia Zbran Industries"
+},
+{
+  "field": "Base weapon",
+  "id": "kolt-associates-vatra",
+  "kind": "weapons",
+  "locator": "thegameswiki unique-weapons table: 'BZI Vatra (heavy SMG, full auto, 9MM; longarm)'; corroborated by ShowGamer ('a unique version of the standard Vatra submachine gun')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+  "value": "BZI Vatra"
+},
+{
+  "field": "Can be modified",
+  "id": "kolt-associates-vatra",
+  "kind": "weapons",
+  "locator": "ShowGamer June Warehouse guide: 'It has a 50-round ammunition capacity and cannot be customized like ordinary weapons'; corroborated by IGN unique-variants intro (unique variants cannot be modified) and meowdb ('Four modifications fitted')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://showgamer.com/en/guides/8121-ograblenie-sklada-dzhun-v-gta-6-vsya-dobycha-oruzhie-i-redkaya-mashina",
+  "value": "Cannot be customized"
+},
+{
+  "field": "Acquisition method",
+  "id": "kolt-associates-vatra",
+  "kind": "weapons",
+  "locator": "thegameswiki unique-weapons table: loot during the June Warehouse Illegal Operation in Port Gellhorn, in a weapon case along the back wall of the main garage building, next to the safe; corroborated by ShowGamer June Warehouse guide (open weapons case beside the safe) and IGN Unlocked column (June Warehouse Illegal Operation)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://thegameswiki.com/gta6/wiki/unique-weapons",
+  "value": "June Warehouse Illegal Operation, Port Gellhorn — weapon case on the back wall of the main garage building, next to the safe"
+},
+{
+  "field": "Availability",
+  "id": "kolt-associates-vatra",
+  "kind": "weapons",
+  "locator": "eso-ui weapons table: Price '–', Where to Buy 'June Warehouse (Illegal Operation)'; corroborated by IGN Inventory N/A / Purchasable blank",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://wiki.eso-ui.com/index.php/Category:GTA_6_-_Weapons",
+  "value": "Not for sale — world find only"
+},
+{
+  "field": "Magazine size",
+  "id": "the-guardian-es18",
+  "kind": "weapons",
+  "locator": "IGN unique-variants table: Mag Size 30; corroborated by GTABase (Ammo Capacity 30) and thegameswiki unique-weapons table (30)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://kraken.ignimgs.com/wikis/gta-6/Unique_Weapon_Variants",
+  "value": "30 rounds"
+},
+{
+  "field": "Fire mode",
+  "id": "the-guardian-es18",
+  "kind": "weapons",
+  "locator": "IGN unique-variants table: Fire Style 3-Round Burst; corroborated by Exputer Girardi ES18 ('Extended-magazine three-round bursts'; 'fires three 9mm rounds per trigger pull') and thegameswiki ('burst pistol, 3-round burst, 9MM')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://kraken.ignimgs.com/wikis/gta-6/Unique_Weapon_Variants",
+  "value": "3-Round Burst"
+},
+{
+  "field": "Caliber",
+  "id": "the-guardian-es18",
+  "kind": "weapons",
+  "locator": "IGN unique-variants table: Caliber 9MM; corroborated by Exputer Girardi ES18 (9mm) and thegameswiki (9MM)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://kraken.ignimgs.com/wikis/gta-6/Unique_Weapon_Variants",
+  "value": "9mm"
+},
+{
+  "field": "Manufacturer",
+  "id": "the-guardian-es18",
+  "kind": "weapons",
+  "locator": "GTABase: 'Manufacturer Girardi'; corroborated by IGN unique-variants table (Brand Girardi) and Exputer (Manufacturer Girardi)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/weapons/the-guardian-es18",
+  "value": "Girardi"
+},
+{
+  "field": "Base weapon",
+  "id": "the-guardian-es18",
+  "kind": "weapons",
+  "locator": "GTABase: 'The Guardian ES18 is a variant of the standard ES18 base weapon' (Manufacturer Girardi); corroborated by IGN and Exputer (Guardian listed as the ES18 unique variant)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/weapons/the-guardian-es18",
+  "value": "Girardi ES18"
+},
+{
+  "field": "Can be modified",
+  "id": "the-guardian-es18",
+  "kind": "weapons",
+  "locator": "GTABase: 'Modifications: Cannot be modified'; corroborated by Exputer Girardi ES18 ('Unique ES18 variants cannot accept attachments' / 'Unique variants cannot be modified')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/weapons/the-guardian-es18",
+  "value": "Cannot be customized"
+},
+{
+  "field": "Acquisition method",
+  "id": "the-guardian-es18",
+  "kind": "weapons",
+  "locator": "GTABase: 'Looted during the Saber Shipping Yard Illegal Operation in Little Cuba, Vice City'; workbench + body-armor detail per ShowGamer Saber Shipping Yard guide ('A weapon case on the bench contains the Guardian ES18 pistol, with a body armor pickup located nearby') and IGN Unlocked column (Saber Shipping Yard Illegal Operation)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/weapons/the-guardian-es18",
+  "value": "Saber Shipping Yard Illegal Operation, Little Cuba — open weapon case on a warehouse workbench, beside body armor"
+},
+{
+  "field": "Availability",
+  "id": "the-guardian-es18",
+  "kind": "weapons",
+  "locator": "GTABase How to Get is loot-only, no price listed; corroborated by IGN Inventory N/A / Purchasable blank",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.gtabase.com/gta-6/weapons/the-guardian-es18",
+  "value": "Not for sale — world find only"
+},
+{
+  "field": "Magazine size",
+  "id": "conspiracist-type-9",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Mag Size 21; corroborated by IGN unique-variants table (21), thegameswiki (Magazine 21) and GTABase (Ammo Capacity 21). Dissent noted: Game8 lists 20 and Exputer hedges 'about 20' / 'roughly twice the standard 10' — 21 wins 4 firm sources to 1",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/conspiracist-type-9/",
+  "value": "21 rounds"
+},
+{
+  "field": "Fire mode",
+  "id": "conspiracist-type-9",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Fire Style Full Auto; corroborated by IGN unique-variants table (Full Auto), Game8 (Firing Mode Full Auto) and thegameswiki (Full auto)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/conspiracist-type-9/",
+  "value": "Full Auto"
+},
+{
+  "field": "Caliber",
+  "id": "conspiracist-type-9",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Caliber 9mm; corroborated by IGN unique-variants table (9MM), thegameswiki (9MM) and Exputer ('fires 9MM')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/conspiracist-type-9/",
+  "value": "9mm"
+},
+{
+  "field": "Manufacturer",
+  "id": "conspiracist-type-9",
+  "kind": "weapons",
+  "locator": "Dexerto Specs: Brand Zhang Wu; corroborated by IGN unique-variants table (Brand Zhang Wu) and Game8 (Brand Zhang Wu)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/conspiracist-type-9/",
+  "value": "Zhang Wu"
+},
+{
+  "field": "Base weapon",
+  "id": "conspiracist-type-9",
+  "kind": "weapons",
+  "locator": "Dexerto: 'a Unique Variant of the Zhang Wu Type 9'; corroborated by Game8 (Base Weapon Type 9, Brand Zhang Wu) and thegameswiki Conspiracist page",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/conspiracist-type-9/",
+  "value": "Zhang Wu Type 9"
+},
+{
+  "field": "Can be modified",
+  "id": "conspiracist-type-9",
+  "kind": "weapons",
+  "locator": "thegameswiki Conspiracist Type 9 page: 'Like other unique variants, it cannot be modified'; corroborated by Exputer Zhang Wu Type 9 ('Unique Zhang Wu Type 9 variants cannot accept attachments' / 'Unique variants cannot be modified')",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://thegameswiki.com/gta6/wiki/conspiracist-type9-smg",
+  "value": "Cannot be customized"
+},
+{
+  "field": "Acquisition method",
+  "id": "conspiracist-type-9",
+  "kind": "weapons",
+  "locator": "Dexerto How to Get: 'In an underground armory below a hatch inside a mobile home in Balsero, south-west of the Griffin Shooting Range'; corroborated by thegameswiki Conspiracist page, Game8 and Exputer (on a table in the underground armory; a free Hauners H-AT is also in the room)",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/conspiracist-type-9/",
+  "value": "Underground armory below a mobile home in Balsero, south-west of Griffin Shooting Range — on a table, through a floor hatch at the back of the mobile home"
+},
+{
+  "field": "Availability",
+  "id": "conspiracist-type-9",
+  "kind": "weapons",
+  "locator": "Dexerto How to Get is bunker loot only, no price listed; corroborated by IGN Inventory N/A / Purchasable blank",
+  "reviewedAt": "2026-11-27",
+  "reviewer": "Taish Gaming source review",
+  "source": "https://www.dexerto.com/wikis/gta-6/weapons/submachine-guns/conspiracist-type-9/",
+  "value": "Not for sale — world find only"
+},
+  {
+    "kind": "weapons",
+    "id": "island-poacher-ff-50",
+    "field": "Acquisition method",
+    "value": "Reward for surviving the Hyde Island hunt: kill the hunter and his dog Caesar, then search the hunter's body; reclaim your belongings and cash at the boathouse to the west",
+    "source": "https://www.gamespot.com/articles/gta-6-has-a-secret-mission-that-feels-like-hard-target-meets-saw/",
+    "locator": "Hyde Island hunt guide - 'Collect your rewards' section (25 Nov 2026); corroborated by Dexerto GTA 6 Wiki + esports.gg",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "shirleys-penumbra",
+    "field": "Acquisition method",
+    "value": "Borrow after completing Shirley's two Chapter 1 side missions in Key Lento (Get Shirley's Rum, then Steal the Scooter); missable once Tourist Trap starts; not a registered personal vehicle",
+    "source": "https://thegameswiki.com/gta6/wiki/steal-the-scooter",
+    "locator": "Steal the Scooter - Reward: permission to borrow Shirley's Penumbra; corroborated by ShowGamer + MetaForge + Clutchbase",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "firebug-dominator",
+    "field": "Observed location",
+    "value": "Guaranteed spawn: red Firebug Dominator by the torn-down hotel near Gellhorn Outfitters, Port Gellhorn; register with Moses at Watkins Auto Parts for $2,950",
+    "source": "https://vicepulse.org/gta-6/vehicles/rare-cars",
+    "locator": "Trick 6: Firebug Dominator, Port Gellhorn torn-down hotel - 7 videos (TGG, Arekkz, RageGamingVideos)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "drifter-elegy",
+    "field": "Observed location",
+    "value": "Inside the Qwick-Fix Autocare garage by the Gellhorn Raceway grandstands, Port Gellhorn - lift the left roller door by hand, Slim Jim to unlock",
+    "source": "https://vicepulse.org/gta-6/vehicles/rare-cars",
+    "locator": "Trick 5: Drifter Elegy, Qwick-Fix Autocare - 21 videos (Arekkz, WiLLiSGaming, StevieWunderKid)",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "weapons",
+    "id": "tallaloko-knife",
+    "field": "Acquisition method",
+    "value": "Enter code 7304 on the upstairs keypad in the Evergreen cabin, Lake Tallaloko (after reading the Marcus Fielding email on the Poppers Convenience computer); Tallaloko Knife on the table beside a lockbox holding $67,200 in jewelry",
+    "source": "https://gamerant.com/gta-6-four-horsemen-ritual-room-code-location/",
+    "locator": "Lake Tallaloko Door Code Solution - keypad code 7304, $67,200 lockbox, Tallaloko Knife (26 Nov 2026); corroborated by npcwire + GTA Series Videos",
+    "reviewedAt": "2026-11-27",
+    "reviewer": "Muse"
+  },
+  {
+    "kind": "vehicles",
+    "id": "vanessas-growler",
+    "field": "Acquisition method",
+    "value": "Del Rio Boulevard Garage, La Perle — enter code 92665 on the garage keypad (code from the Unknown contact's WhatUp message on the Chapter 3 apartment laptop; laptop password Muffins / Queen / 15); pink Pfister Growler inside is free, and the garage is yours to keep. Missable: claim before finishing Chapter 3 (The Cartel Heist).",
+    "source": "https://www.gamespot.com/articles/gta-6-laptop-password-puzzle-guide/",
+    "locator": "Laptop Puzzle guide - WhatUp Unknown message gives garage code 92665, Del Rio Boulevard Garage, La Perle; corroborated by KeenGamer + gta.guide + Beebom Ch3 missables + G2A + YouTube walkthrough FYgHNdb2Ak8",
     "reviewedAt": "2026-11-27",
     "reviewer": "Muse"
   },

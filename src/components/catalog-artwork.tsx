@@ -13,7 +13,7 @@ export function CatalogArtwork({
   showLabel = true,
 }: {
   kind: CatalogKind;
-  entry: { id: string; name: string; img: string };
+  entry: { id: string; name: string; img: string; verifiedImage?: string };
   sizes: string;
   priority?: boolean;
   showLabel?: boolean;
@@ -40,7 +40,7 @@ export function CatalogArtwork({
             kind === "weapons" && !art.contextual ? "contain" : "cover",
         }}
         onError={() => {
-          if (art.contextual) setUnavailableSrc(initial.src);
+          if (art.contextual || entry.verifiedImage) setUnavailableSrc(initial.src);
           else setFailedSrc(initial.src);
         }}
       />

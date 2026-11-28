@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
   shortName: "TG",
   tagline: "Your Guide to Vice City — A new city. Every detail.",
   description:
-    "The definitive independent companion, database, and interactive satellite atlas for Grand Theft Auto VI in the State of Leonida.",
+    "The definitive independent companion, database, and interactive satellite map for Grand Theft Auto VI in the State of Leonida.",
   url: "https://www.taishgaming.com",
   ogImage: "https://www.taishgaming.com/img/hero-vice-skyline-hd.jpg",
   disclaimer:

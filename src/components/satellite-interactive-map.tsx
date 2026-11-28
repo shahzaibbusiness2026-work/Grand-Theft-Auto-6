@@ -1885,7 +1885,7 @@ export function SatelliteInteractiveMap({
             <div className="flex items-center gap-2">
               <span className="font-display text-sm font-black uppercase tracking-wider text-white">
                 {edition === "community"
-                  ? "LEONIDA COMMUNITY ATLAS"
+                  ? "LEONIDA COMMUNITY MAP"
                   : "ORIGINAL PLANNING MAP"}
               </span>
               <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-[#FF2E9A]/30 bg-[#FF2E9A]/10 px-2 py-0.5 text-xs font-black uppercase text-[#FF2E9A]">
@@ -1894,7 +1894,7 @@ export function SatelliteInteractiveMap({
               </span>
             </div>
             <p className="text-xs text-muted-foreground">
-              Fan-made Leonida Atlas • {visiblePOIs.length} provisional pins
+              Fan-made Leonida Map • {visiblePOIs.length} provisional pins
             </p>
           </div>
         </div>
@@ -2678,7 +2678,7 @@ export function SatelliteInteractiveMap({
                   height="72"
                   viewBox="0 0 72 72"
                   role="img"
-                  aria-label={`${leonidaPctLabel}% of atlas pins marked`}
+                  aria-label={`${leonidaPctLabel}% of Leonida pins marked`}
                   className="shrink-0"
                 >
                   <defs>
@@ -2733,7 +2733,7 @@ export function SatelliteInteractiveMap({
                     My Leonida
                   </p>
                   <p className="mt-0.5 text-xs font-semibold text-slate-200">
-                    {leonidaPctLabel}% of atlas pins marked
+                    {leonidaPctLabel}% of Leonida pins marked
                   </p>
                   <p className="text-xs text-muted-foreground">
                     {verifiedTotal.toLocaleString("en-US")} of{" "}
@@ -2763,7 +2763,7 @@ export function SatelliteInteractiveMap({
                 <span>Next unvisited</span>
               </button>
               <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">
-                Marks record your progress on this atlas. See the completion
+                Marks record your progress on this map. See the completion
                 guide for the evidence available about in-game requirements.
               </p>
               <Link

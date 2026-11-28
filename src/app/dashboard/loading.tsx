@@ -2,7 +2,7 @@ export default function DashboardLoading() {
   return (
     <div
       className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6 animate-pulse"
-      aria-label="Loading Leonida Atlas System..."
+      aria-label="Loading Leonida System..."
     >
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
         {/* Left Column: Sidebar Skeleton */}

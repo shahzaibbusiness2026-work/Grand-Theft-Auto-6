@@ -44,7 +44,7 @@ export async function sendWelcomeEmail(
   const text =
     `${greeting}\n\n` +
     `You have successfully registered on Taish Gaming. Welcome aboard!\n\n` +
-    `Your account is ready. You can now sign in and explore the GTA 6 Atlas — ` +
+    `Your account is ready. You can now sign in and explore Leonida in GTA 6 — ` +
     `vehicles, weapons, map, tools and guides — ahead of the expected November 19, 2026 launch.\n\n` +
     `Sign in here: https://www.taishgaming.com/login\n\n` +
     `See you in Leonida,\nTeam Taish Gaming`;
@@ -52,7 +52,7 @@ export async function sendWelcomeEmail(
     `<!DOCTYPE html><html><body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">` +
     `<p>${escapeHtml(greeting)}</p>` +
     `<p><strong>You have successfully registered on Taish Gaming.</strong> Welcome aboard!</p>` +
-    `<p>Your account is ready. You can now sign in and explore the GTA 6 Atlas — ` +
+    `<p>Your account is ready. You can now sign in and explore Leonida in GTA 6 — ` +
     `vehicles, weapons, map, tools and guides — ahead of the expected November 19, 2026 launch.</p>` +
     `<p><a href="https://www.taishgaming.com/login">Sign in to Taish Gaming</a></p>` +
     `<p>See you in Leonida,<br>Team Taish Gaming</p>` +

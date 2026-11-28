@@ -57,9 +57,9 @@ const config: Config = {
           accent: "#F3A398",
         },
         gold: {
-          DEFAULT: "#C9A86A",
-          light: "#E3CFA3",
-          dark: "#A98850",
+          DEFAULT: "#FF2E9A",
+          light: "#FFB3D9",
+          dark: "#C40E6E",
         },
         neon: {
           cyan: "#00F0FF",

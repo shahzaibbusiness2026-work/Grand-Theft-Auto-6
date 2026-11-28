@@ -263,7 +263,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `gta6-atlas-tracker-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `gta6-leonida-tracker-backup-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -432,7 +432,7 @@ export function TrackerClient({ config }: TrackerClientProps) {
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Many checklist items feature direct pins on the high-res Leonida
-              satellite atlas with live coordinate waypoints.
+              satellite map with live coordinate waypoints.
             </p>
           </div>
           <Link

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { catalogEntryPath, indexReady } from "@/lib/catalog-detail-availability";
+import { catalogEntryPath } from "@/lib/catalog-detail-availability";
 import { getEvidenceCatalog } from "@/lib/services/evidence-catalog";
 import { getPublicArticles } from "@/lib/services/articles";
 import { getPublicGuides } from "@/lib/services/guides";
@@ -32,7 +32,7 @@ export async function GET() {
       items.push({
         id: `veh-${v.id}`,
         title: v.name,
-        subtitle: `${v.category} • ${indexReady(v) ? "Reviewed appearance" : "Provisional identification"}`,
+        subtitle: v.category,
         category: "Vehicle",
         href: catalogEntryPath("vehicles", v),
         img: v.img,
@@ -44,7 +44,7 @@ export async function GET() {
       items.push({
         id: `wep-${w.id}`,
         title: w.name,
-        subtitle: `${w.category} • ${indexReady(w) ? "Reviewed appearance" : "Provisional identification"}`,
+        subtitle: w.category,
         category: "Weapon",
         href: catalogEntryPath("weapons", w),
         img: w.img,

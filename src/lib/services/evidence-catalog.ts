@@ -1,11 +1,26 @@
 import { cache } from "react";
 import { getMergedVehicles, getMergedWeapons } from "./catalog";
 import { canonicalCatalogSlug } from "@/lib/catalog-url-state";
+import { canonicalVehicles, canonicalWeapons } from "@/lib/canonical-data";
 import {
   publicCatalogEntry,
   type CatalogKind,
   type EvidenceEntry,
 } from "@/lib/catalog-evidence";
+
+const reviewedImages = {
+  vehicles: catalogImages("vehicles", canonicalVehicles),
+  weapons: catalogImages("weapons", canonicalWeapons),
+};
+
+function catalogImages(kind: CatalogKind, rows: { id: string; slug?: string; img?: string }[]) {
+  const images = new Map<string, string>();
+  for (const row of rows) {
+    if (!row.img || !/^\/img\/(?:catalog|gta6)\//.test(row.img)) continue;
+    images.set(canonicalCatalogSlug(kind, row.slug || row.id), row.img);
+  }
+  return images;
+}
 // Raw CMS/canonical performance values stay server-side. Never send them to
 // a public component until the specific field has supporting evidence.
 export const getEvidenceCatalog = cache(
@@ -25,6 +40,9 @@ export const getEvidenceCatalog = cache(
         seen.add(slug);
         return true;
       })
-      .map((row) => publicCatalogEntry(kind, row));
+      .map((row) => {
+        const slug = canonicalCatalogSlug(kind, row.slug || row.id);
+        return publicCatalogEntry(kind, row, reviewedImages[kind].get(slug));
+      });
   },
 );

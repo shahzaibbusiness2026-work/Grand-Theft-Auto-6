@@ -42,7 +42,7 @@ const entries = Array.from({ length: 60 }, (_, i) => ({
   img: "/img/hero-dark.jpg",
 }));
 
-test("a name-only catalog listing stays out of search until it has an entry-specific detail", () => {
+test("a public catalog detail requires reviewed artwork and an entry-specific fact", () => {
   const appearance = {
     field: "GTA VI appearance",
     value: "Listed in the vehicle database",
@@ -51,8 +51,11 @@ test("a name-only catalog listing stays out of search until it has an entry-spec
   };
   const entry = { ...entries[0], claims: [appearance, { field: "Official name", value: "Example model" }] };
   assert.equal(indexReady(entry), false);
-  assert.equal(indexReady({ ...entry, claims: [...entry.claims, { field: "Observed location", value: "Draper Island" }] }), true);
-  assert.equal(indexReady({ ...entry, claims: [{ ...appearance, source: "https://www.rockstargames.com/VI/trailer-2" }] }), true);
+  const verifiedImage = "/img/catalog/example-model.jpg";
+  const claims = [...entry.claims, { field: "Observed location", value: "Draper Island" }];
+  assert.equal(indexReady({ ...entry, verifiedImage }), false);
+  assert.equal(indexReady({ ...entry, claims }), false);
+  assert.equal(indexReady({ ...entry, verifiedImage, claims }), true);
 });
 
 test("an explicitly reported launch table does not supply public weapon facts", () => {

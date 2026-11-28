@@ -61,7 +61,7 @@ export default async function CatalogPage({ searchParams }: PageProps) {
       {state.page === 1 && !isCatalogVariant(params) && (
         <section className="container-site max-w-5xl space-y-3 py-8">
           <h2 className="text-2xl font-bold">GTA 6 weapons named in official material</h2>
-          <p>Rockstar&apos;s gameplay video shows the <Link className="underline" href="/weapons/duke-556">Duke 556</Link> by name in a pickup prompt around 25:07. The publisher&apos;s store listing names Jason&apos;s <Link className="underline" href="/weapons/girardi-es9">Girardi ES9</Link>, Lucia&apos;s <Link className="underline" href="/weapons/klose-k17">Klose K17</Link> and the two <Link className="underline" href="/weapons/hawk-little-morgan-revolvers">Hawk &amp; Little Morgan Revolvers</Link> as weapons with Ultimate Edition versions.</p>
+          <p>Rockstar&apos;s gameplay video shows the <Link className="underline" href="/weapons?q=Duke%20556">Duke 556</Link> by name in a pickup prompt around 25:07. The publisher&apos;s store listing names Jason&apos;s <Link className="underline" href="/weapons/girardi-es9">Girardi ES9</Link>, Lucia&apos;s <Link className="underline" href="/weapons/klose-k17">Klose K17</Link> and the two <Link className="underline" href="/weapons?q=Hawk%20%26%20Little%20Morgan%20Revolvers">Hawk &amp; Little Morgan Revolvers</Link> as weapons with Ultimate Edition versions.</p>
           <p>Search the exact name from the game&apos;s menu when you can. A named variant can have a different unlock, magazine or shop price from its base weapon. Check the source for those details before comparing two entries.</p>
           <p className="text-sm"><a className="underline" href="https://www.youtube.com/watch?v=tJbzMqJGH4k&amp;t=1507s">Rockstar gameplay at 25:07</a>{" · "}<a className="underline" href="https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/">Ultimate Edition listing on PlayStation</a></p>
         </section>
@@ -81,7 +81,7 @@ export default async function CatalogPage({ searchParams }: PageProps) {
       <p className="container-site pb-10 text-sm text-muted-foreground">
         Related guides:{" "}
         <Link href="/guides/best-weapons-tier-list" className="font-semibold text-primary underline">
-          Weapons guide: names and gameplay footage
+          Weapons guide and early pickup locations
         </Link>
         {" · "}
         <Link href="/guides/heists-big-score-guide" className="font-semibold text-primary underline">

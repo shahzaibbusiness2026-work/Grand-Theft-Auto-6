@@ -616,7 +616,7 @@ export default function AdminSettingsPage() {
       {activeTab === "sections" && (
         <div className="space-y-4">
           <p className="text-xs text-[#94A3B8]">
-            Enable or reorder sections rendered on the public Atlas homepage.
+            Enable or reorder sections rendered on the public Leonida homepage.
           </p>
 
           <div className="space-y-2">

@@ -126,7 +126,7 @@ export function EvidenceDetail({
               sizes="(max-width: 768px) 100vw, 850px"
             />
           </div>
-          <figcaption className="px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+          {(artwork.caption || artwork.sourceUrl) && <figcaption className="px-4 py-3 text-xs leading-relaxed text-muted-foreground">
             {artwork.caption}
             {artwork.sourceUrl && (
               <>
@@ -142,7 +142,7 @@ export function EvidenceDetail({
                 .
               </>
             )}
-          </figcaption>
+          </figcaption>}
         </figure>
       )}
       {stats.length > 0 && (

@@ -33,7 +33,7 @@ export function CountdownEmbed({ size }: { size: "small" | "medium" | "large" })
   return (
     <div className="flex h-full w-full flex-col items-center justify-center bg-[#0B0F1A] px-3 text-white">
       {!compact && (
-        <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.25em] text-[#C9A86A]">
+        <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.25em] text-[#FF2E9A]">
           Grand Theft Auto VI
         </p>
       )}
@@ -49,7 +49,7 @@ export function CountdownEmbed({ size }: { size: "small" | "medium" | "large" })
           ].map((cell) => (
             <div key={cell.label} className="flex flex-col items-center">
               <span className={`${numClass} font-black leading-none tabular-nums`}>{cell.value}</span>
-              <span className={`${labelClass} mt-1 font-bold uppercase tracking-widest text-[#C9A86A]`}>
+              <span className={`${labelClass} mt-1 font-bold uppercase tracking-widest text-[#FF2E9A]`}>
                 {cell.label}
               </span>
             </div>

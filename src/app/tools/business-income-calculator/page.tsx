@@ -52,7 +52,7 @@ export default function BusinessIncomeCalculatorPage() {
 
         {/* Page Header */}
         <div className="mb-8 max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#C9A86A]/40 bg-[#C9A86A]/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-[#C9A86A] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#FF2E9A]/40 bg-[#FF2E9A]/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-[#FF2E9A] mb-3">
             <Briefcase className="h-3 w-3" /> Financial Planning Utility
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground leading-tight">

@@ -48,7 +48,7 @@ test("the aircraft guide drops the dead reference and retains the route instruct
 test("the audited weapons guide gives a sourced acquisition example and newer copy takes precedence", () => {
   const legacy = "## Which weapons are confirmed for GTA 6?\n\nRockstar has officially named the **Hawk & Little Morgan Revolvers** as part of the GTA VI Ultimate Edition Upgrade.";
   const corrected = correctPublishedGuideContent("best-weapons-tier-list", legacy);
-  assert.match(corrected, /\/weapons\/kolt-and-associates-556/);
+  assert.match(corrected, /\/weapons\?q=Kolt%20%26%20Associates%20556/);
   assert.match(corrected, /pcgamer\.com\/games\/grand-theft-auto\/gta-6-unique-weapons/);
   assert.equal(correctPublishedGuideContent("best-weapons-tier-list", corrected), corrected);
   assert.equal(correctPublishedGuideContent("best-weapons-tier-list", "A newer first-hand guide."), "A newer first-hand guide.");

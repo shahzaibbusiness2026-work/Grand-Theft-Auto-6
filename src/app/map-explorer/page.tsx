@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: pageOpenGraph("/map-explorer"),
   title: "Interactive Map Explorer",
   description:
-    "Search the unofficial Leonida atlas, inspect provisional community pins and keep private GTA VI planning notes.",
+    "Search the unofficial Leonida map, inspect provisional community pins and keep private GTA VI planning notes.",
   alternates: { canonical: "/map-explorer" },
 };
 

@@ -20,7 +20,7 @@ export function hasSpecificAppearance(claim: EvidenceClaim) {
 
 export function indexReady(entry: EvidenceEntry): boolean {
   const appearance = entry.claims.find((claim) => claim.field === "GTA VI appearance");
-  if (!appearance) return false;
+  if (!entry.verifiedImage || !appearance) return false;
   // A timestamp, named mission or pickup can answer a reader's question even
   // when it is documented in the citation. A name-only table row cannot.
   return entry.claims.some((claim) => !identityFields.has(claim.field)) ||

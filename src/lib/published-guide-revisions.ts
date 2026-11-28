@@ -47,7 +47,7 @@ The [first-session checklist](/guides/gta-6-beginners-guide) covers installation
     marker: "Rockstar has officially named the Hawk & Little Morgan Revolvers",
     title: "GTA 6 Weapons Guide: Where to Start",
     description: "Find documented GTA 6 weapon pickups, identify the Duke 556, and check which sidearm variants come with the Ultimate Edition.",
-    content: `If you’re looking for an early weapon, check the pickup location before comparing damage scores. The [Assassin Nipper .38](/weapons/assassin-nipper-38) is a documented Chapter 1 pickup. The [Duke 556](/weapons/duke-556) is named on screen in Rockstar’s gameplay, and the [Kolt & Associates 556](/weapons/kolt-and-associates-556) has its own named pickup.
+    content: `If you’re looking for an early weapon, check the pickup location before comparing damage scores. The [Assassin Nipper .38](/weapons/assassin-nipper-38) is a documented Chapter 1 pickup. The [Duke 556](/weapons?q=Duke%20556) is named on screen in Rockstar’s gameplay, and the [Kolt & Associates 556](/weapons?q=Kolt%20%26%20Associates%20556) has its own named pickup.
 
 ## Two weapon pickups to look for
 
@@ -60,7 +60,7 @@ The [early weapon walkthrough and map captures](https://www.pcgamer.com/games/gr
 
 ## What Rockstar has named
 
-Around 25:07 in [Rockstar’s An Extended Look](https://www.youtube.com/watch?v=tJbzMqJGH4k&t=1507s), the pickup prompt identifies the Duke 556. Its catalog page links that scene and the sources for its observed shop details.
+Around 25:07 in [Rockstar’s An Extended Look](https://www.youtube.com/watch?v=tJbzMqJGH4k&t=1507s), the pickup prompt identifies the Duke 556. Search for that name if you’re comparing it with a different 556 variant.
 
 The [Ultimate Edition Upgrade listing](https://store.playstation.com/en-us/product/EP1004-PPSA01547_00-ULTEDTIONUPGRADE/) names Jason’s engraved Girardi ES9, Lucia’s engraved Klose K17 and two editions of the Hawk & Little Morgan revolver. Look for the edition name before assuming a standard shop version gives you the same variant.
 

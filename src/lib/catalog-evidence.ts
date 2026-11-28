@@ -23,6 +23,7 @@ export interface EvidenceEntry {
   name: string;
   category: string;
   img: string;
+  verifiedImage?: string;
   claims: EvidenceClaim[];
 }
 export function validClaim(c: EvidenceClaim): boolean {
@@ -56,6 +57,7 @@ export function claimsFor(kind: CatalogKind, id: string, slug = id): EvidenceCla
 export function publicCatalogEntry(
   kind: CatalogKind,
   row: { id: string; slug?: string; name: string; klass: string; img?: string },
+  verifiedImage?: string,
 ): EvidenceEntry {
   const slug = canonicalCatalogSlug(kind, row.slug || row.id);
   const claims = claimsFor(kind, row.id, slug);
@@ -70,7 +72,8 @@ export function publicCatalogEntry(
     slug,
     name,
     category: editorialCategory(category),
-    img: row.img || "",
+    img: verifiedImage || row.img || "",
+    verifiedImage,
     claims: claims.filter((claim) => claim.field !== "Editorial label"),
   };
 }

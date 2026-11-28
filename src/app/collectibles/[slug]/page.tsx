@@ -206,7 +206,7 @@ export default async function CollectibleDetailPage({ params }: PageProps) {
             {/* Action Box */}
             <div className="card-carbon p-6 space-y-4 border-primary/30">
               <h3 className="font-display text-base font-bold text-foreground uppercase tracking-wider">
-                Atlas Status
+                Leonida Status
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 Check whether this collectible counts toward GTA VI completion.

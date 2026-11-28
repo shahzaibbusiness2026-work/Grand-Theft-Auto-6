@@ -395,8 +395,8 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setPaletteOpen(true)}
-            aria-label="Search the Atlas (⌘K)"
-            title="Search the Atlas (⌘K)"
+            aria-label="Search Leonida (⌘K)"
+            title="Search Leonida (⌘K)"
             className="hidden h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/40 text-muted-foreground transition-all duration-200 hover:border-gold/50 hover:bg-gold/10 hover:text-gold-dark dark:hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95 xl:flex"
           >
             <Search className="h-4 w-4" />
