@@ -6,11 +6,11 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
 import { getMapMarkers } from "@/lib/services/map";
 import { REGION_PAGES, ROCKSTAR_LEONIDA_PLACES_URL } from "@/lib/regions";
-import { mapView } from "@/lib/official-map";
+import { MAP_OVERVIEW, mapView } from "@/lib/map-explorer";
 
 const title = "GTA 6 Interactive Map: Explore Leonida Regions & Locations";
 const description =
-  "Zoom into Rockstar’s GTA 6 map of Leonida. Search official map labels for Vice City, the Keys and other locations, with an image for every result.";
+  "Explore the GTA 6 community map of Leonida. Zoom into Vice City and the Keys, search landmarks with area previews, and share locations.";
 
 export const metadata: Metadata = {
   // Absolute title: the title (58 chars) must render without the
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "/maps/rockstar-official/overview.webp",
-        alt: "Rockstar Games’ printable map of Leonida from GTA 6",
+        url: MAP_OVERVIEW,
+        alt: "Yanis and GTADB community map of Leonida from GTA 6",
       },
     ],
   },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/maps/rockstar-official/overview.webp"],
+    images: [MAP_OVERVIEW],
   },
 };
 
@@ -56,10 +56,10 @@ export default async function MapPage({ searchParams }: MapPageProps) {
       <link
         rel="preload"
         as="image"
-        href={view === "official" ? "/maps/rockstar-official/overview.webp" : "/maps/gtadb-yanis17/overview.webp"}
+        href={MAP_OVERVIEW}
         fetchPriority="high"
       />
-      <MapClient view={view} initialPlace={initialPlace} markers={view === "community" ? await getMapMarkers() : []} />
+      <MapClient view={view} initialPlace={initialPlace} markers={await getMapMarkers()} />
       <section className="container-site space-y-4 pb-6" aria-labelledby="map-evidence-heading">
         <h2 id="map-evidence-heading" className="font-display text-2xl font-bold">
           Leonida regions and locations

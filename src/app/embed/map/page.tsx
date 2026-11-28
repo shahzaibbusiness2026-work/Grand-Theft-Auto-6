@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default async function EmbedMapPage() {
   return (
     <main className="h-screen w-screen overflow-hidden">
-      <MapClient view="community" embedded markers={await getMapMarkers()} />
+      <MapClient view="planner" embedded markers={await getMapMarkers()} />
     </main>
   );
 }

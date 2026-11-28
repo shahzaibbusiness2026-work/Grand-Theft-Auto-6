@@ -4,9 +4,7 @@ GTA VI Map Tiles and GTA VI Landmarks Data — GTADB.ORG and all contributors, i
 
 Data and image license: **Creative Commons Attribution 4.0 International**. License: <https://creativecommons.org/licenses/by/4.0/>. The upstream `LICENSE-DATA` is retained at `/maps/gtadb-yanis17/LICENSE-DATA.txt`. Snapshot and modification details are retained at `/maps/gtadb-yanis17/source.json`.
 
-Changes: filtered public fields, prefixed stable IDs, normalized positions, generated unnamed-record labels, recompressed the overview from local tiles, and mapped contributor categories to Taish filters. Imported places and geography remain community estimates. The original tiles are retained unchanged. No endorsement by GTADB, Rockstar Games or Take-Two Interactive is implied.
-
-The separate Rockstar reference layer uses the [official printable map of Leonida](https://www.rockstargames.com/VI/media/artwork-wallpapers). The map artwork is © Rockstar Games. The site trims the print margin, converts the print colors for the web and serves zoom tiles. The source file hash and tile bounds are in `public/maps/rockstar-official/source.json`. Search positions mark printed labels on this map.
+Changes: filtered public fields, normalized positions and assigned stable IDs. Removed the reference panel with trailer and screenshot thumbnails from the served tiles, regenerated the overview and used crops of the cleaned map for location previews. Community positions are estimates. Taish Gaming is an independent fan site. Rockstar provides the [official printable map](https://www.rockstargames.com/VI/media/artwork-wallpapers) on its own website.
 
 The source projection constants and format were consulted from upstream code released under the following MIT license. Taish's interface and React map controls are implemented in this repository.
 

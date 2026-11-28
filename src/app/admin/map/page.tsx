@@ -35,6 +35,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Modal } from "@/components/admin/modal";
 import { communityLandmarks } from "@/lib/community-map";
+import { MAP_OVERVIEW } from "@/lib/map-explorer";
 
 export default function AdminMapPage() {
   const { showToast } = useToast();
@@ -785,7 +786,7 @@ export default function AdminMapPage() {
             <img
               src={
                 selectedMarker?.id.startsWith("gtadb-")
-                  ? "/maps/gtadb-yanis17/overview.webp"
+                  ? MAP_OVERVIEW
                   : "/img/leonida-map-v2.jpg"
               }
               alt="Planning map background; coordinates are provisional"

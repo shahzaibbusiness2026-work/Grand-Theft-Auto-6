@@ -9,19 +9,13 @@ The v18 z5 grid starts at (21,21). Outside the tile ranges the renderer
 shows the ocean background.
 """
 import os,urllib.request,urllib.error,json,pathlib,concurrent.futures
-from PIL import Image
+from community_map_artwork import CONFIG, render_overview, scrub_tile, update_manifest, visible_width
 root=pathlib.Path.cwd()
 if not (root/'src/lib/player-state.ts').is_file(): raise SystemExit('Run from the Taish Gaming repository root.')
 tiles_only=os.environ.get('MAP_IMPORT_TILES_ONLY')=='1'
 (root/'tmp').mkdir(exist_ok=True)
-# Pinned commit, verified via `git ls-remote https://github.com/rolux/gtadb.org.git HEAD`
-# on 2026-11-20. The unauthenticated GitHub API is rate-limited, so fall
-# back to the pin when the API call fails.
-PINNED_SHA='d406fea099e1df2bce42fd6b87eed04bce646629'
-try:
- meta=json.load(urllib.request.urlopen('https://api.github.com/repos/rolux/gtadb.org/commits/main',timeout=30));sha=meta['sha']
-except Exception:
- sha=PINNED_SHA;print('GitHub API unavailable; using pinned SHA',sha,flush=True)
+# Change this pin only after checking the new artwork and right-side trim.
+sha='d406fea099e1df2bce42fd6b87eed04bce646629'
 base='https://raw.githubusercontent.com/rolux/gtadb.org/'+sha+'/'
 out=root/'public/maps/gtadb-yanis17';out.mkdir(parents=True,exist_ok=True)
 if tiles_only:
@@ -46,13 +40,18 @@ else:
 # Bounds match the renderer's YANIS_RANGES in src/components/community-map-tiles.tsx.
 # z4/z5 are REAL v18 tiles now (2026-11-20); the old z4/z5 were Lanczos
 # upscales of z3 made by ~/workspace/your_files/gta6-map-rebuild/generate_tiles.py.
-bounds={0:(0,0,3,3),1:(1,1,6,6),2:(2,2,12,12),3:(5,5,25,24),4:(10,10,51,49),5:(21,21,103,99)}
-jobs=[(z,x,y) for z,(x0,y0,x1,y1) in bounds.items() for x in range(x0,x1+1) for y in range(y0,y1+1)]
+bounds={int(level):value for level,value in CONFIG["upstreamRanges"].items()}
+jobs=[(z,x,y) for z,(x0,y0,x1,y1) in bounds.items() for x in range(x0,x1+1) if visible_width(z,x) for y in range(y0,y1+1)]
 def download(job):
  z,x,y=job;relative=f'maps/tiles/6/yanis,18/{z}/{z},{y},{x}.jpg';dest=out/f'tiles/{z}/{z},{y},{x}.jpg';dest.parent.mkdir(parents=True,exist_ok=True)
  if dest.exists(): return True
+ staged=root/'tmp'/f'community-tile-{z},{y},{x}.jpg'
  for attempt in range(3):
-  try:dest.write_bytes(urllib.request.urlopen(base+relative,timeout=30).read());return True
+  try:
+   staged.write_bytes(urllib.request.urlopen(base+relative,timeout=30).read())
+   scrub_tile(staged,z,x)
+   staged.replace(dest)
+   return True
   except urllib.error.HTTPError as e:
    if e.code==404: return False
    if attempt==2: raise
@@ -67,11 +66,8 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
   else: skipped+=1
   if count%1000==0: print('Processed',count,'downloaded',downloaded,'skipped',skipped,flush=True)
 print('Tiles downloaded',downloaded,'skipped (404 upstream)',skipped,flush=True)
-canvas=Image.new('RGB',(4096,4096),(99,151,172))
-for z,x,y in jobs:
- if z==2:
-  with Image.open(out/f'tiles/{z}/{z},{y},{x}.jpg') as tile:canvas.paste(tile,(x*256,y*256))
-canvas.resize((1536,1536)).save(out/'overview.webp',quality=75)
-manifest={'sourceRepository':'https://github.com/rolux/gtadb.org','commit':sha,'license':'CC BY 4.0','licenseUrl':'https://creativecommons.org/licenses/by/4.0/','map':'Yanis Community Map v18, via GTADB contributors','landmarks':landmarks_count,'positioned':positioned_count,'importedAt':'2026-11-20','changes':'Real v18 tiles z0-z5 (z4/z5 replace Lanczos-upscaled z3 copies); overview regenerated from v18 z2. Landmarks not refreshed in this run. Community estimates, not official geography.'}
+render_overview()
+manifest={'sourceRepository':'https://github.com/rolux/gtadb.org','commit':sha,'license':'CC BY 4.0','licenseUrl':'https://creativecommons.org/licenses/by/4.0/','map':'Yanis Community Map v18, via GTADB contributors','landmarks':landmarks_count,'positioned':positioned_count,'importedAt':'2026-11-20'}
 (out/'source.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+update_manifest()
 print('Complete. Local map bytes:',sum(p.stat().st_size for p in out.rglob('*') if p.is_file()),flush=True)

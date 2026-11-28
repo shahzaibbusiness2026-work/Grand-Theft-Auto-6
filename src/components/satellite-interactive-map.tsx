@@ -41,10 +41,8 @@ import {
   ShoppingBag,
   Flame,
   ChevronDown,
-  Map as MapIcon,
   Moon,
   Satellite,
-  Camera,
 } from "lucide-react";
 import {
   locationSubcategoryForTypes,
@@ -70,6 +68,7 @@ import {
 import { CommunityMapTiles } from "./community-map-tiles";
 import { getMapMarkers } from "@/lib/services/map";
 import { parseCanvasPosition } from "@/lib/map-position";
+import { MAP_OVERVIEW } from "@/lib/map-explorer";
 import { AdminMapMarker } from "@/lib/admin-store";
 
 export interface MapPOI {
@@ -222,12 +221,6 @@ const CATEGORY_FILTERS = [
     color: "text-slate-200",
   },
   {
-    id: "photo-spots",
-    label: "Photo Spots",
-    icon: Camera,
-    color: "text-slate-200",
-  },
-  {
     id: "properties",
     label: "Real Estate",
     icon: Building2,
@@ -309,7 +302,6 @@ const DISTRICTS = [
     in-panel switcher (panel open) so the two never drift apart. */
 const MAP_STYLE_OPTIONS = [
   { id: "community", label: "Community", icon: Satellite },
-  { id: "official", label: "Official reference", icon: MapIcon },
   { id: "streets", label: "Streets", icon: Moon },
 ] as const;
 
@@ -339,9 +331,7 @@ function publicMapPoi(poi: MapPOI): MapPOI {
       verification flag (see publicMapPoi), so only a field-specific
       in-game source counts — no pin carries one yet, so this is 0 today.
     - "trailer": the pin's source is a Rockstar trailer frame.
-    - "official": the pin's source is an official Rockstar Launch
-      Gallery screenshot — official media, but not a trailer frame and
-      not a player-verified in-game sighting. Only Photo Spots use it.
+    - "official": a source-reviewed Rockstar image, distinct from in-game position evidence.
     - "community-guess": everything else — the default. Never invent
       evidence: an unverified pin stays a community guess, and a private
       planning pin carries no game evidence at all. */
@@ -398,132 +388,6 @@ const COMMUNITY_POIS: MapPOI[] = communityLandmarks
   // mappable location type fall back to the MapPin pictogram, which reads
   // as a checkpoint pin. Only real location pictograms are shown.
   .filter((poi) => poi.subcategory !== "poi");
-
-/** Photo Spots — the best Snapmatic / photo-mode views in Leonida.
-    Every spot has a verified real photo (official Rockstar Launch
-    Gallery screenshot or Trailer 1 frame) that opens in the detail
-    card, with its source labelled. Positions are anchored to real
-    named places on the community map (Vice Beach mural/marina,
-    Bayside marina, Downtown Metro, Little Cuba, Grassrivers Visitor
-    Center). Spots with no verified photo were dropped, never faked:
-    no Keys causeway shot exists (the Keys gallery image is underwater)
-    and the Port Gellhorn gallery image is a strip-club interior. */
-const PHOTO_SPOTS: MapPOI[] = [
-  {
-    id: "photo-vice-beach",
-    title: "Vice Beach",
-    category: "photo-spots",
-    subcategory: "photo-spot",
-    subcategoryLabel: "Photo spot",
-    type: "Photo spot",
-    district: "Vice Beach",
-    desc: "Daytime aerial in Rockstar's trailer showing beachfront hotels and the skyline. The pin marks a suggested area on the community reconstruction.",
-    img: "/img/gta-6-vice-city-aerial-trailer.jpg",
-    hours: "Day",
-    top: "46.5%",
-    left: "55.0%",
-    color: "bg-[#FF2E9A]",
-    icon: Camera,
-    verified: true,
-    source: "Rockstar Games — Trailer 1 frame",
-    sourceUrl: "https://www.youtube.com/watch?v=QdBZY2fkU-0",
-  },
-  {
-    id: "photo-downtown-marina",
-    title: "Downtown Marina",
-    category: "photo-spots",
-    subcategory: "photo-spot",
-    subcategoryLabel: "Photo spot",
-    type: "Photo spot",
-    district: "Downtown, Vice City",
-    desc: "The Downtown marina in daylight — yachts at the docks with the Vice City skyline across the water. Official Rockstar Launch Gallery image.",
-    img: "/img/vice-city-15.jpg",
-    hours: "Day",
-    top: "48.5%",
-    left: "49.5%",
-    color: "bg-[#FF2E9A]",
-    icon: Camera,
-    verified: true,
-    source: "Rockstar Games — official Launch Gallery (Nov 2026)",
-    sourceUrl: "https://www.rockstargames.com/VI",
-  },
-  {
-    id: "photo-downtown-night",
-    title: "Downtown Skyline at Night",
-    category: "photo-spots",
-    subcategory: "photo-spot",
-    subcategoryLabel: "Photo spot",
-    type: "Photo spot",
-    district: "Downtown, Vice City",
-    desc: "The Downtown skyline at night from across the river, drawbridge raised. Best after dark. Official Rockstar Launch Gallery image.",
-    img: "/img/vice-city-27.jpg",
-    hours: "Night",
-    top: "52.0%",
-    left: "48.5%",
-    color: "bg-[#FF2E9A]",
-    icon: Camera,
-    verified: true,
-    source: "Rockstar Games — official Launch Gallery (Nov 2026)",
-    sourceUrl: "https://www.rockstargames.com/VI",
-  },
-  {
-    id: "photo-downtown-dusk",
-    title: "Downtown at Dusk",
-    category: "photo-spots",
-    subcategory: "photo-spot",
-    subcategoryLabel: "Photo spot",
-    type: "Photo spot",
-    district: "Little Cuba, Vice City",
-    desc: "A Vice City street at dusk — neon, palms and the Downtown towers behind. Official Rockstar Launch Gallery image.",
-    img: "/img/vice-city-22.jpg",
-    hours: "Dusk",
-    top: "50.0%",
-    left: "46.3%",
-    color: "bg-[#FF2E9A]",
-    icon: Camera,
-    verified: true,
-    source: "Rockstar Games — official Launch Gallery (Nov 2026)",
-    sourceUrl: "https://www.rockstargames.com/VI",
-  },
-  {
-    id: "photo-waterfront-meet",
-    title: "Waterfront Car Meet",
-    category: "photo-spots",
-    subcategory: "photo-spot",
-    subcategoryLabel: "Photo spot",
-    type: "Photo spot",
-    district: "Downtown, Vice City",
-    desc: "Cars on a waterfront promenade with the skyline behind, shown in a Rockstar gallery image. The pin marks a suggested area on the community reconstruction.",
-    img: "/img/vice-city-24.jpg",
-    hours: "Day",
-    top: "50.5%",
-    left: "51.5%",
-    color: "bg-[#FF2E9A]",
-    icon: Camera,
-    verified: true,
-    source: "Rockstar Games — official Launch Gallery (Nov 2026)",
-    sourceUrl: "https://www.rockstargames.com/VI",
-  },
-  {
-    id: "photo-grassrivers-night",
-    title: "Grassrivers by Moonlight",
-    category: "photo-spots",
-    subcategory: "photo-spot",
-    subcategoryLabel: "Photo spot",
-    type: "Photo spot",
-    district: "Grassrivers, Mariana County",
-    desc: "An airboat in the Grassrivers at night under a crescent moon, alligator in the foreground. Official Rockstar Launch Gallery image.",
-    img: "/img/grassrivers-08.jpg",
-    hours: "Night",
-    top: "63.0%",
-    left: "40.5%",
-    color: "bg-[#FF2E9A]",
-    icon: Camera,
-    verified: true,
-    source: "Rockstar Games — official Launch Gallery (Nov 2026)",
-    sourceUrl: "https://www.rockstargames.com/VI",
-  },
-];
 
 // Bounding box of the bundled community pins, in canvas percent. The
 // landmass occupies only the left ~40% of the square canvas (left
@@ -646,7 +510,6 @@ export function SatelliteInteractiveMap({
   const allPOIs = useMemo(
     () => [
       ...editorialPOIs,
-      ...(edition === "community" ? PHOTO_SPOTS : []),
       ...personalMarkers
         .filter((marker) =>
           edition === "community"
@@ -803,14 +666,13 @@ export function SatelliteInteractiveMap({
     return grouped;
   }, [allPOIs]);
 
-  // Map base style: community (YANIS) | official (Rockstar map) | streets
-  // (dark). Kept in the URL (?style=) like gtamap.io keeps layer state.
+  // Preserve the planner style in its shareable URL.
   const [mapStyle, setMapStyle] = useState<MapBaseStyle>("community");
   useEffect(() => {
     if (edition !== "community") return;
     const params = new URLSearchParams(location.search);
     const style = params.get("style");
-    if (style === "official" || style === "streets" || style === "community")
+    if (style === "streets" || style === "community")
       setMapStyle(style);
   }, [edition]);
   const chooseMapStyle = useCallback((style: MapBaseStyle) => {
@@ -821,8 +683,7 @@ export function SatelliteInteractiveMap({
     history.replaceState(null, "", url.toString());
   }, []);
 
-  // Switching base style closes an open cluster list (its pins are not on
-  // the official map, and the panel would otherwise linger over it).
+  // Close any open cluster list when the viewer changes styles.
   useEffect(() => {
     setClusterMembers([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1315,8 +1176,6 @@ export function SatelliteInteractiveMap({
   const focusOnPOI = useCallback(
     (poi: MapPOI) => {
       if (!viewportRef.current) return;
-      if (edition === "community" && new URLSearchParams(location.search).get("style") === "official")
-        chooseMapStyle("community");
       hasInteractedRef.current = true;
       trackPublicEvent("map_pin_open");
       returnFocusRef.current = document.activeElement as HTMLElement;
@@ -1370,7 +1229,7 @@ export function SatelliteInteractiveMap({
 
       setPan({ x: newPanX, y: newPanY });
     },
-    [zoom, rightDrawerOpen, edition, CANVAS_H, visibleMapRect, chooseMapStyle],
+    [zoom, rightDrawerOpen, edition, CANVAS_H, visibleMapRect],
   );
 
   // Center the map BEFORE first paint (layout effect, not a passive effect):
@@ -1507,7 +1366,6 @@ export function SatelliteInteractiveMap({
       centerMap();
       return;
     }
-    if (mapStyle === "official") chooseMapStyle("community");
     hasInteractedRef.current = true;
     const targetZoom = edition === "community" ? 1.8 : d.zoom;
     setZoom(targetZoom);
@@ -1834,7 +1692,7 @@ export function SatelliteInteractiveMap({
   const leonidaPctLabel =
     leonidaPct < 10 ? leonidaPct.toFixed(1) : String(Math.round(leonidaPct));
   // Evidence totals over the public pins (private planning pins and the
-  // curated Photo Spots layer excluded — they carry no game evidence).
+  // private pins excluded).
   // Honest numbers: today every public pin is a community guess, because
   // no pin carries a field-specific in-game or trailer source yet.
   const evidenceCounts = useMemo(() => {
@@ -1845,7 +1703,7 @@ export function SatelliteInteractiveMap({
       "community-guess": 0,
     };
     for (const poi of allPOIs) {
-      if (poi.personal || poi.category === "photo-spots") continue;
+      if (poi.personal) continue;
       counts[evidenceLevel(poi)] += 1;
     }
     return counts;
@@ -1923,7 +1781,6 @@ export function SatelliteInteractiveMap({
             <button
               type="button"
               className="player-button"
-              disabled={mapStyle === "official"}
               onClick={() => setPinFormOpen((value) => !value)}
             >
               + Private pin
@@ -2201,7 +2058,7 @@ export function SatelliteInteractiveMap({
           </div>
         )}
       </div>
-      {pinFormOpen && mapStyle !== "official" && (
+      {pinFormOpen && (
         <form
           className="player-panel my-3 space-y-3"
           onSubmit={(event) => {
@@ -2298,7 +2155,7 @@ export function SatelliteInteractiveMap({
             uses a different base image. */}
         {edition === "community" && (
           <img
-            src="/maps/gtadb-yanis17/overview.webp"
+            src={MAP_OVERVIEW}
             alt="Community reconstruction of Leonida by GTADB contributors, not official game geography"
             width={1536}
             height={1536}
@@ -3120,17 +2977,6 @@ export function SatelliteInteractiveMap({
         )}
 
         {/* ==================== 3. FLOATING TOP HUD CONTROLS ==================== */}
-        {edition === "community" && mapStyle === "official" && (
-          <div className={cn(
-            "pointer-events-none absolute left-0 right-0 top-14 z-20 flex justify-center px-4",
-            leftSidebarOpen && "lg:left-[300px]",
-          )}>
-            <p className="rounded-xl border border-border bg-black/80 px-3 py-1.5 text-xs font-bold text-[#FF2E9A] shadow-2xl backdrop-blur-md">
-              Rockstar map reference. Open a pin to return to the community
-              map and see its provisional position.
-            </p>
-          </div>
-        )}
         <div className={cn(
           "pointer-events-none absolute left-0 right-0 top-3 z-20 flex justify-center px-4",
           leftSidebarOpen && "lg:left-[300px]",
@@ -3138,12 +2984,8 @@ export function SatelliteInteractiveMap({
           <div className="pointer-events-auto flex max-w-full items-center gap-2 whitespace-nowrap rounded-2xl border border-border bg-black/80 px-3.5 py-1.5 shadow-2xl backdrop-blur-md">
             <span className="flex h-2 w-2 shrink-0 rounded-full bg-[#FF2E9A] " />
             <span className="text-xs font-mono text-muted-foreground font-bold">
-              {mapStyle === "official" ? "Official reference" : "Fan map"}
-              {mapStyle !== "official" && (
-                <span className="hidden min-[420px]:inline">
-                  {" "}· coordinates unverified
-                </span>
-              )}
+              Community map
+              <span className="hidden min-[420px]:inline">{" "}· estimated coordinates</span>
             </span>
             <span className="h-3 w-px bg-muted/60" />
             <span className="text-xs font-mono text-white font-bold">
@@ -3284,11 +3126,8 @@ export function SatelliteInteractiveMap({
               />
             )}
 
-            {/* Interactive POI Pins — hidden on the official base: Rockstar's
-                map does not align with the community pin coordinates, so
-                showing pins there would place them in the wrong place. */}
-            {mapStyle !== "official" &&
-              clusters.map((cluster) => {
+            {/* Interactive community POI pins. */}
+            {clusters.map((cluster) => {
               const m = cluster.members[0];
               if (cluster.members.length > 1)
                 return (

@@ -1,0 +1,15 @@
+{
+  "directory": "/maps/gtadb-yanis17",
+  "artworkVersion": "clean-v1",
+  "artworkRight": 0.61,
+  "oceanColor": "#2C66A5",
+  "tileSize": 256,
+  "upstreamRanges": {
+    "0": [0, 0, 3, 3],
+    "1": [1, 1, 6, 6],
+    "2": [2, 2, 12, 12],
+    "3": [5, 5, 25, 24],
+    "4": [10, 10, 51, 49],
+    "5": [21, 21, 103, 99]
+  }
+}

@@ -7,5 +7,6 @@
   "landmarks": 3401,
   "positioned": 3307,
   "importedAt": "2026-11-20",
-  "changes": "Real v18 tiles z0-z5 (z4/z5 replace Lanczos-upscaled z3 copies); overview regenerated from v18 z2. Landmarks not refreshed in this run. Community estimates, not official geography."
+  "changes": "Yanis v18 map tiles at zoom levels 0–5. Removed the side panel, including trailer and screenshot thumbnails, from the served artwork and regenerated the overview. Positions are community estimates.",
+  "cleanArtworkVersion": "clean-v1"
 }

@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { CommunityMapWorkspace } from "@/components/community-map-workspace";
-import { OfficialMapWorkspace } from "@/components/official-map-workspace";
+import { MapExplorerWorkspace } from "@/components/map-explorer-workspace";
 import { applyCommunityOverrides } from "@/lib/community-map";
+import { explorerPlaces } from "@/lib/map-explorer";
 import type { AdminMapMarker } from "@/lib/admin-store";
 import { ROCKSTAR_LEONIDA_MAP_URL } from "@/lib/regions";
 export function MapClient({ view, initialPlace, markers = [], embedded = false }: {
-  view: "official" | "community";
+  view: "explore" | "planner";
   initialPlace?: string;
   markers?: AdminMapMarker[];
   embedded?: boolean;
 }) {
-  const current = view === "community" ? applyCommunityOverrides(markers) : [];
+  const current = applyCommunityOverrides(markers);
   const positioned = current.filter((item) => item.position);
   const named = positioned.filter((item) => !item.name.startsWith("Unnamed "));
   return (
@@ -29,9 +30,9 @@ export function MapClient({ view, initialPlace, markers = [], embedded = false }
         <h1 className="font-display text-2xl sm:text-4xl font-black">
           GTA 6 Interactive Map: Leonida & Vice City
         </h1>
-        {view === "official" ? (
+        {view === "explore" ? (
           <p className="max-w-3xl text-sm text-muted-foreground">
-            Explore the roads, towns and islands shown on <a href={ROCKSTAR_LEONIDA_MAP_URL} className="font-semibold text-primary underline">Rockstar’s printable map of Leonida</a>.
+            Explore Leonida’s community-mapped roads, towns and islands. <a href={ROCKSTAR_LEONIDA_MAP_URL} className="font-semibold text-primary underline">Get Rockstar’s official printable map</a>.
           </p>
         ) : (
           <p className="max-w-3xl text-sm text-muted-foreground">
@@ -39,18 +40,18 @@ export function MapClient({ view, initialPlace, markers = [], embedded = false }
           </p>
         )}
         {!embedded && <nav aria-label="Leonida map sources" className="flex flex-wrap gap-2">
-          <Link href="/map" scroll={false} aria-current={view === "official" ? "page" : undefined}
-            className="rounded-lg border border-border px-3 py-2 text-sm font-semibold aria-[current=page]:border-primary aria-[current=page]:bg-primary aria-[current=page]:text-primary-foreground">Rockstar map</Link>
-          <Link href="/map?view=community" scroll={false} aria-current={view === "community" ? "page" : undefined}
-            className="rounded-lg border border-border px-3 py-2 text-sm font-semibold aria-[current=page]:border-primary aria-[current=page]:bg-primary aria-[current=page]:text-primary-foreground">Community map</Link>
+          <Link href="/map" scroll={false} aria-current={view === "explore" ? "page" : undefined}
+            className="rounded-lg border border-border px-3 py-2 text-sm font-semibold aria-[current=page]:border-primary aria-[current=page]:bg-primary aria-[current=page]:text-primary-foreground">Explore map</Link>
+          <Link href="/map?view=community" scroll={false} aria-current={view === "planner" ? "page" : undefined}
+            className="rounded-lg border border-border px-3 py-2 text-sm font-semibold aria-[current=page]:border-primary aria-[current=page]:bg-primary aria-[current=page]:text-primary-foreground">Map planner</Link>
         </nav>}
       </header>
       <section
         className="container-site pb-8"
         aria-label="Interactive Leonida map"
       >
-        {view === "official" ? (
-          <OfficialMapWorkspace key={initialPlace || "poster"} initialPlace={initialPlace} />
+        {view === "explore" ? (
+          <MapExplorerWorkspace key={initialPlace || "explore"} initialPlace={initialPlace} places={explorerPlaces(current)} />
         ) : <CommunityMapWorkspace markers={markers} />}
       </section>
       
