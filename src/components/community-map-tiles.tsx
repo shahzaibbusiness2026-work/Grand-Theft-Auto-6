@@ -1,5 +1,7 @@
 "use client";
 
+import officialMapSource from "../../public/maps/rockstar-official/source.json";
+
 export type MapBaseStyle = "community" | "official" | "streets";
 
 /** [x0, y0, x1, y1] of tiles that exist per level. */
@@ -11,17 +13,11 @@ const YANIS_RANGES: Record<number, [number, number, number, number]> = {
   4: [10, 10, 51, 49],
   5: [21, 21, 103, 99],
 };
-const OFFICIAL_RANGES: Record<number, [number, number, number, number]> = {
-  0: [0, 0, 3, 3],
-  1: [1, 1, 6, 6],
-  2: [2, 2, 12, 12],
-  3: [5, 5, 25, 24],
-};
+const OFFICIAL_RANGES: Record<number, number[]> = officialMapSource.ranges;
 
 /**
- * Only the visible local tiles load. The overview stays underneath at low
- * zoom only — at deep zoom it would be a blurry upscale, so it is hidden
- * there and uncovered sea simply shows the dark canvas behind the tiles.
+ * Only visible local tiles load. The official overview stays beneath the
+ * tiles so the poster remains visible while a higher level loads.
  */
 export function CommunityMapTiles({
   zoom,
@@ -46,7 +42,7 @@ export function CommunityMapTiles({
   );
   const size = 1400 / (4 * 2 ** z);
   const [x0, y0, x1, y1] = ranges[z];
-  const showOverview = zoom < 2.5;
+  const showOverview = base === "official" || zoom < 2.5;
   const tiles = [];
   for (let y = y0; y <= y1; y++)
     for (let x = x0; x <= x1; x++) {
@@ -64,7 +60,7 @@ export function CommunityMapTiles({
           alt=""
           draggable={false}
           decoding="async"
-          fetchPriority={showOverview ? "low" : undefined}
+          fetchPriority={zoom < 2.5 ? "low" : undefined}
           className="absolute pointer-events-none"
           style={{
             left: x * size,

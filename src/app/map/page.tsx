@@ -6,16 +6,16 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { FeatureDisabled } from "@/components/feature-disabled";
 import { getMapMarkers } from "@/lib/services/map";
 import { REGION_PAGES, ROCKSTAR_LEONIDA_PLACES_URL } from "@/lib/regions";
+import { mapView } from "@/lib/official-map";
 
 const title = "GTA 6 Interactive Map: Explore Leonida Regions & Locations";
 const description =
-  "Explore the fan-made GTA 6 Leonida map with our interactive tool. Browse regions, cities and landmarks, zoom in and plan your routes across Leonida.";
+  "Zoom into Rockstar’s GTA 6 map of Leonida. Search official map labels for Vice City, the Keys and other locations, with an image for every result.";
 
 export const metadata: Metadata = {
   // Absolute title: the title (58 chars) must render without the
   // " | Taish Gaming" suffix, which would push it to 73 chars and truncate.
-  // og/twitter titles keep the same string. The description keeps the
-  // "fan-made" label.
+  // og/twitter titles keep the same string.
   title: { absolute: title },
   description,
   alternates: { canonical: "/map" },
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "/img/leonida-map-v2.jpg",
-        alt: "Fan-made satellite-style preview of the Leonida map for GTA 6",
+        url: "/maps/rockstar-official/overview.webp",
+        alt: "Rockstar Games’ printable map of Leonida from GTA 6",
       },
     ],
   },
@@ -34,12 +34,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/img/leonida-map-v2.jpg"],
+    images: ["/maps/rockstar-official/overview.webp"],
   },
 };
 
-export default async function MapPage() {
-  const settings = await getSiteSettings();
+type MapPageProps = { searchParams: Promise<Record<string, string | string[] | undefined>> };
+
+export default async function MapPage({ searchParams }: MapPageProps) {
+  const [settings, params] = await Promise.all([getSiteSettings(), searchParams]);
   if (!(settings.publicToolToggles ?? []).includes("map_tool")) {
     return (
       <SiteShell>
@@ -47,15 +49,17 @@ export default async function MapPage() {
       </SiteShell>
     );
   }
+  const view = mapView(params);
+  const initialPlace = typeof params.place === "string" ? params.place : undefined;
   return (
     <SiteShell>
       <link
         rel="preload"
         as="image"
-        href="/maps/gtadb-yanis17/overview.webp"
+        href={view === "official" ? "/maps/rockstar-official/overview.webp" : "/maps/gtadb-yanis17/overview.webp"}
         fetchPriority="high"
       />
-      <MapClient markers={await getMapMarkers()} />
+      <MapClient view={view} initialPlace={initialPlace} markers={view === "community" ? await getMapMarkers() : []} />
       <section className="container-site space-y-4 pb-6" aria-labelledby="map-evidence-heading">
         <h2 id="map-evidence-heading" className="font-display text-2xl font-bold">
           Leonida regions and locations

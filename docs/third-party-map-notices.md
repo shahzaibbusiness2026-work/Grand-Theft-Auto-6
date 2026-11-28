@@ -6,6 +6,8 @@ Data and image license: **Creative Commons Attribution 4.0 International**. Lice
 
 Changes: filtered public fields, prefixed stable IDs, normalized positions, generated unnamed-record labels, recompressed the overview from local tiles, and mapped contributor categories to Taish filters. Imported places and geography remain community estimates. The original tiles are retained unchanged. No endorsement by GTADB, Rockstar Games or Take-Two Interactive is implied.
 
+The separate Rockstar reference layer uses the [official printable map of Leonida](https://www.rockstargames.com/VI/media/artwork-wallpapers). The map artwork is © Rockstar Games. The site trims the print margin, converts the print colors for the web and serves zoom tiles. The source file hash and tile bounds are in `public/maps/rockstar-official/source.json`. Search positions mark printed labels on this map.
+
 The source projection constants and format were consulted from upstream code released under the following MIT license. Taish's interface and React map controls are implemented in this repository.
 
 MIT License
