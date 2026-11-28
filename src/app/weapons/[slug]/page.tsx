@@ -1,5 +1,5 @@
 import { catalogDetailMetadata } from "@/lib/catalog-metadata";
-import { matchingCatalogEntries } from "@/lib/catalog-url-state";
+import { canonicalCatalogSlug, matchingCatalogEntries } from "@/lib/catalog-url-state";
 import { notFound, permanentRedirect } from "next/navigation";
 import { SiteShell } from "@/components/shells";
 import { EvidenceDetail } from "@/components/evidence-detail";
@@ -11,9 +11,10 @@ export function generateStaticParams() {
   return [];
 }
 async function resolve(slug: string) {
+  const canonicalSlug = canonicalCatalogSlug("weapons", slug);
   return (await getEvidenceCatalog("weapons")).find(
     (e) =>
-      e.slug === slug ||
+      e.slug === canonicalSlug ||
       e.id === slug ||
       e.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug,
   );

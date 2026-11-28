@@ -181,7 +181,6 @@ const nextConfig = {
       { source: "/vehicles/airboat", destination: "/vehicles/airboat-09", permanent: true },
       { source: "/vehicles/cargo-ship", destination: "/vehicles/hulls-flatdeck", permanent: true },
       { source: "/vehicles/cruise-ship", destination: "/vehicles/reef-clipper-ii", permanent: true },
-      { source: "/weapons/m4-carbine", destination: "/weapons/duke-556", permanent: true },
       { source: "/weapons/rpg-7", destination: "/weapons", permanent: true },
       { source: "/weapons/rpg-7-launcher", destination: "/weapons", permanent: true },
       // Remington Pump Shotgun was a fan-guess name for the Fortune & Son Moreland (Moreland 850).
